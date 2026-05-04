@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 259729 - COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. STANDARD INSURANCE CO., INC., RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70327' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 259729, November 17, 2025 ]</H2>
+			<H3>COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. STANDARD INSURANCE CO., INC., RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by the Commissioner of Internal Revenue (<b>CIR</b>) assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated June 21, 2021, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated March 18, 2022, of the Court of Tax Appeals (<b>CTA</b>) <i>En Banc</i> in CTA E.B. No. 2090. The CTA <i>En Banc</i> affirmed the CTA Second Division's Decision,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated March 25, 2019, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated June 4, 2019, in CTA Case No. 9550, which cancelled the deficiency Documentary Stamp Tax (<b>DST</b>) assessment issued against respondent Standard Insurance Co., Inc. (<b>Standard Insurance</b>) for taxable year 2001 on the ground of prescription. The CIR now seeks to reinstate the assessment, raising issues regarding the CTA's consideration of a new issue on the validity of the Letter of Authority (<b>LOA</b>), the existence of a valid LOA for the revenue officers who conducted the audit, and the timeliness of the government's collection efforts.<br><br><center><b><i>The Facts</i></b></center><br>On December 5, 2002, the Bureau of Internal Revenue (<b>BIR</b>) issued LOA No. 19283 authorizing Revenue Officers (<b>ROs</b>) Jocelyn Quevedo and Gemma Aguila, under Group Supervisor Carolina Realin, to examine the books of accounts and other accounting records of Standard Insurance for all internal revenue taxes for the taxable year 2001. Pursuant to this LOA, the designated ROs conducted an audit and, on June 2, 2003, submitted a Memorandum finding Standard Insurance liable for certain deficiency taxes, including a deficiency DST of PHP 1,531,864.15, among others. Standard Insurance promptly paid all the deficiency amounts identified in this report. Consequently, on June 26, 2003, the Regional Director issued a Letter of Termination declaring the case under LOA No. 19283 closed and terminated.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>However, only a few weeks later, by Letter, dated August 5, 2003, the same Regional Director recalled and set aside the Letter of Termination. It was discovered on August 4, 2003 that the BIR National Office had earlier issued a computerized Letter Notice (<b>LN</b>) No. 067-021 to Standard Insurance flagging a discrepancy in its DST payments for 2001. To reconcile the findings in the LN with the previous audit, the BIR reopened the investigation, specifically with respect to DST on Standard Insurance's 2001 transactions.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>After the recall of the Letter of Termination, a further DST audit was conducted, this time by revenue officers who were not named in the original LOA. ROs Nina Espiritu and Roberto Libardo submitted separate Audit Reports indicating a basic deficiency DST of PHP 109,109,067.70, which became the basis for the issuance of corresponding Preliminary Assessment Notices (<b>PANs</b>), dated October 7, 2003. Thereafter, RO Gloria Maliwanag prepared another DST Audit Report finding a basic deficiency DST of PHP 111,464,773.88. This report in turn led to an Amended PAN, dated March 24, 2004, and a Final Assessment Notice (<b>FAN</b>) No. 34-2001, dated May 5, 2004, assessing Standard Insurance a total deficiency DST liability of PHP 218,904,053.18 for the year 2001. The PANs and FAN themselves bore the names and signatures of ROs Espiritu, Libardo, and Maliwanagânone of whom were among those originally authorized under LOA No. 19283.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Standard Insurance protested the DST assessments in accordance with Section 228<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> of the National Internal Revenue Code (<b>NIRC</b>) and applicable regulations. Between October 2003 and May 2004, it filed a series of protest letters and supplemental protests, challenging the findings and providing explanations, but these protests did not explicitly raise any issue regarding the authority of the revenue officers. Notably, the protest letters merely sought a re-evaluation of the assessment based on existing records, without offering new evidence, thus indicating they were in the nature of requests for reconsideration rather than reinvestigation.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>For an extended period, the CIR did not act decisively on the protest. The next significant action came years later. On January 31, 2017, nearly 13 years after the FAN, the CIR issued a Final Decision on Disputed Assessment (<b>Final Decision</b>) denying Standard Insurance's protest and reiterating the demand for payment of the deficiency DST amount of PHP 218,904,053.18. Standard Insurance received the Final Decision and, within the reglementary period, filed a Petition for Review with the CTA and an urgent motion to dispense with the surety bond requirement. The case was raffled to the CTA Second Division.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On March 25, 2019, the CTA Second Division rendered its Decision<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> granting Standard Insurance's Petition. The CTA Second Division found that the government's right to collect the deficiency DST had prescribed by operation of law, given the inaction and delay of the BIR. It ruled that the FAN was issued on May 5, 2004, and the BIR had five years from that date, or until May 4, 2009, to collect the assessed tax through judicial action or summary remedies, pursuant to Section 222(c)<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> of the NIRC. Since the BIR's first unequivocal attempt to enforce collection through the Final Decision in 2017 came long after the lapse of the five-year period, the government's right to collect was time-barred. Accordingly, the CTA Division declared the assessment and the CIR's final demand void and of no effect, and it ordered the cancellation of FAN No. 34-2001 for DST.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The CIR's Motion for Reconsideration was denied on June 4, 2019.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>The CIR elevated the matter to the CTA <i>En Banc</i>, principally arguing that the CTA Division erred in ruling that prescription had set in.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> On June 21, 2021, the CTA <i>En Banc</i> rendered the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> denying the CIR's Petition and affirming the CTA Division's ruling. Notably â and central to an issue now before the Courtâthe CTA <i>En Banc</i>, on its own initiative, addressed an issue that had not been explicitly raised by either party: <i>whether the revenue officers who continued the DST audit and whose findings led to the DST assessment in question were duly authorized by a valid LOA</i>. The CTA <i>En Banc</i> answered this in the negative, holding that the absence of an LOA covering the ROs who issued the PAN, Amended PAN, and FAN rendered the assessment <i>void ab initio</i>. The CTA <i>En Banc</i> cited Section 13<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> of the NIRC and BIR administrative issuances requiring a separate LOA for any reassigned examination, and it concluded that the failure to issue a new LOA when new officers took over the audit was fatal to the assessment's validity.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The CTA <i>En Banc</i> went on to affirm that, in any event, the right to collect had prescribed, as earlier held by the CTA Second Division.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> The CIR's Motion for Reconsideration was denied on March 18, 2022.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Hence, the CIR filed the present Petition.<br><br><i>Arguments of the Petitioner</i><br><br>The CIR contends that the CTA <i>En Banc</i> acted beyond its authority and violated the CIR's right to due process when it considered and ruled upon the issue of the lack of a proper LOA for the revenue officers who conducted the DST audit, an issue allegedly never raised by the parties in their pleadings or during trial. The CIR argues that granting relief on a ground not raised by respondent or not put in issue during the proceedings is improper and violative of the basic tenets of fair play.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>The CIR argues that, in any case, the requirement of an LOA for the revenue officers was substantially complied with. It asserts that the original LOA was valid and that the subsequent audit by different examiners was authorized through an LN or internal memoranda. The CIR maintains that the absence of a new LOA did not invalidate the assessment, implying that the LN and the sign-offs by superior officers sufficed to clothe the subsequent examiners with authority to examine respondent's books.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>The CIR further contends that the five-year prescriptive period to collect the assessed DST did not lapse, because the running of the period was suspended by certain acts attributable to Standard Insurance. In particular, the CIR points to: (1) a Letter, dated January 21, 2005 from Standard Insurance requesting the BIR to hold in abeyance any collection or enforcement of the assessment while the protest was pending, which request the BIR allegedly granted; and (2) the pendency of Standard Insurance's administrative motion for reconsideration of the assessment, which the CIR treats as having tolled the prescriptive period. The CIR posits that these actions interrupted or extended the period to collect, and the Final Decision issued in 2017 was therefore timely and enforceable.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br><i>Arguments of the Respondent</i><br><br>Standard Insurance maintains that the entire DST assessment is void because the revenue officers who handled the investigation after August 2003 had no valid LOA specifically authorizing them to examine its records. This, according to Standard Insurance, violated the clear mandate of law that no examination of a taxpayer may be conducted without an LOA, as well as BIR's own regulations, specifically Revenue Memorandum Order (<b>RMO</b>) No. 43-90,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> which require the issuance of a new LOA whenever a case is reassigned to a new examiner. Since the FAN was issued by unauthorized officers, Standard Insurance asserts that it is null and void, and any proceeding to enforce it is necessarily without legal basis.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Standard Insurance also echoes the CTA's ruling that the government's right to collect the 2001 deficiency DST is barred by prescription. It argues that the BIR had only until May 2009 to collect from it, but failed to do so. Standard Insurance denies that any valid suspension of the prescriptive period occurred. It emphasizes that it never executed any waiver of the statute of limitations, and that its requests were for reconsideration and not reinvestigation of the assessmentâwhich, by jurisprudence and regulation, do not suspend the running of the period to collect. Standard Insurance further contends that its January 21, 2005 letter cannot be deemed a waiver or a legal prohibition that would halt the running of prescription, but was merely a plea for temporary forbearance that does not fall under any of the exceptions in the NIRC. Finally, Standard Insurance underscores the inequity of the CIR's inaction for over a decade, arguing that the Final Decision in 2017, issued more than 13 years after the assessment, is not only time-barred but also unjust and oppressive, amounting to a denial of due process.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br><center><b><i>The Issues</i></b></center><br><i>First</i>, did the CTA <i>En Banc</i> commit reversible error in considering the LOA issue on its own initiative, thereby depriving the CIR of due process?<br><br><i>Second</i>, is the deficiency DST assessment for taxable year 2001 valid despite the absence of a specific LOA authorizing the examiners who continued the audit after the original LOA had been closed or terminated?<br><br><i>Finally</i>, has the government's right to collect the assessed DST prescribed, or was the running of the prescriptive period effectively suspended by the taxpayer's own acts?<br><br><center><b><i>The Ruling of the Court</i></b>&nbsp;</center>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>CTA's authority to consider related issues on its own initiative</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The CIR's first assignment of error concerns the CTA <i>En Banc's</i> consideration of the LOA issue even though it was not expressly raised by the parties at the Division or in the appeal. The CIR argues that this amounted to adjudicating a question outside the scope of the pleadings, thereby depriving the tax authority of the opportunity to be heard on that point.<br><br>The Court is not persuaded.<br><br>The Court has had occasion to uphold the authority of the CTAâa specialized courtâto consider, on its own initiative, matters necessary for the complete adjudication of the case, even if not specifically raised by the parties, so long as these are closely related to the issues presented. This authority finds explicit support in the CTA's Revised Rules.<br><br>Rule 14, Section 1<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> of the Revised Rules of the Court of Tax Appeals<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (<b>RRCTA</b>) provides in no uncertain terms that: "In deciding the case, the Court may not limit itself to the issues stipulated by the parties but may also rule upon related issues necessary to achieve an orderly disposition of the case."<br><br>In <i>Commissioner of Internal Revenue v. Lancaster Philippines, Inc.</i><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> and <i>Commissioner of Internal Revenue v. Yumex Philippines Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the Court sustained the CTA's power to resolve even those matters not raised by the parties if they are material to the final determination of the case. In particular, in <i>Lancaster</i>, the taxpayer similarly did not question the authority of the revenue officers during the trial, yet the CTA Division and <i>En Banc</i> considered that issue because it went to the very validity of the assessment. The Court categorically ruled that the CTA was "well within its authority to consider in its decision the question on the scope of authority of the revenue officers who were named in the LOA even though the parties had not raised the same in their pleadings or memoranda,"<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> and that the CTA <i>En Banc</i> was correct in sustaining such a ruling.<br><br>Likewise, in <i>Yumex</i>, the Court approved the CTA Division's action in ruling on a due process issue (denial of due process in the issuance of the assessment) even if it was not expressly raised in the petition, because the validity of the assessment "necessarily requires the determination of the matter of the proper issuance of said assessment in accordance with the requirements of due process."<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Stated otherwise, issues regarding whether an assessment was made in the manner prescribed by law, for example, whether the requisite authority was obtained or whether due process notice requirements were observed, are inextricably intertwined with the very question of the validity and enforceability of the assessment. The CTA does not err when it considers such related questions, as they are often necessary to achieve an orderly and complete disposition of the case.<br><br>Here, the issue of the ROs' authority to conduct the DST audit is patently a related issue to the main questions of the validity of the tax assessment and the enforceability of the tax collection. The CTA <i>En Banc</i> explained that it raised the LOA question in order to fulfill its duty to decide the case on the correct legal grounds. The Court finds no fault in this approach. While it is indeed a general rule in ordinary civil proceedings that a court should refrain from granting relief not prayed for or beyond the issues presented, that principle is not absolute. The RRCTA explicitly carves out an exception for the CTA to address related issues as justice and completeness may require. Tax cases often involve public interest and the observance of strict procedural requirements imposed on the taxing authority; the CTA is mandated by its rulesâand by sound adjudicative policyâto consider such matters to ensure that a taxpayer is not made to suffer a void or unjust assessment by technical waiver or omission.<br><br>Moreover, the Court does not regard the CIR as having been denied due process by the CTA <i>En Banc</i>'s resolution of the LOA issue. The essence of due process is simply the opportunity to be heard. In the proceedings below, especially at the CTA <i>En Banc</i> stage, the CIR was afforded the chance to comment on or rebut respondent's arguments and the Division's findings. The absence of prior pleading on the LOA issue did not prejudice the CIR's ability to argue its stanceâindeed, the CIR thoroughly addressed the point in its Motion for Reconsideration before the CTA <i>En Banc</i>, albeit unsuccessfully. In any event, the question of whether the assessment was issued by duly authorized examiners is a legal one, determined on the face of the records (i.e., the existence or non-existence of a pertinent LOA). The CIR cannot plausibly claim unfair surprise by the CTA <i>En Banc's</i> consideration of what is fundamentally a matter of law and record. Courts are not hidebound by the parties' blind spots; if the proceedings reveal a fundamental issue that could dispose of the case, the court is entitled to consider itâespecially in tax cases, where officials must demonstrate scrupulous compliance with legal requirements in depriving a citizen of their property.<br><br>In sum, the CTA <i>En Banc</i> acted within its authority under Rule 14, Section 1 of the RRCTA when it ruled on the LOA issue, and no violation of the CIR's right to due process occurred thereby.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Validity of the DST assessment in the absence of a proper LOA</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>It is a fundamental rule in Philippine tax law that no revenue officer has the power to examine a taxpayer's books or recommend the assessment of deficiency taxes without proper authority. The NIRC itself, in Section 6(A),<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> vests the power to examine taxpayers in the CIR and his duly authorized representatives. Section 13 of the NIRC further specifies that a revenue officer may perform an examination of a taxpayer's books of accounts "pursuant to a Letter of Authority issued by the Revenue Regional Director" having jurisdiction. Jurisprudence has consistently held that an LOA is the formal instrument by which the Commissioner or his or her delegate empowers named revenue officers to conduct an audit of a particular taxpayer for a particular period and purpose. Absent such authority, any examination of the taxpayer is a usurpation of power and any assessment arising from it is a nullity.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>In <i>Medicard Philippines, Inc. v. Commissioner of Internal Revenue</i>,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> the Court underscored the importance of the LOA and pronounced in no uncertain terms that "there must be a grant of authority before any revenue officer can conduct an examination or assessment. Equally important is that the revenue officer so authorized must not go beyond the authority given. In the absence of such an authority, the assessment or examination is a nullity."<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> The Court rebuked the notion that an LOA could be dispensed with merely because the examiners did not physically examine the taxpayer's own books on-site; even if the assessment was done by examining third-party records or through correspondence, the requirement of prior authority still applies. The lack of an LOA was held to violate the taxpayer's right to due process and rendered the assessment <i>void ab initio</i>.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Similarly, in <i>Commissioner of Internal Revenue v. Sony Philippines, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> the Court declared that examinations by officers acting without an LOA or beyond the scope of an LOA are unauthorized and the resulting assessments are invalid.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>Equally pertinent is the internal rule of the BIR found in RMO No. 43-90, which lays down the procedures and policies for issuing Letters of Authority. Notably, paragraph C(5) of the RMO provides that "[a]ny re-assignment/transfer of cases to another revenue officer(s) ... shall require the issuance of a new [LOA]," with a notation of the previous LOA number and date of issue. This means that if the originally assigned examiner is replaced by another, the new examiner must be clothed with an LOA of his or her own before continuing the audit. The obvious purpose of this requirement is to prevent "hidden" or unauthorized examinations by officers who have not been specifically named by the issuing authority. It ensures that the taxpayer knows who exactly is examining him or her and that each examining officer is accountable under a formal mandate.<br><br>In the present case, it is undisputed that the DST assessment was the result of audit work undertaken by ROs Espiritu, Libardo, and Maliwanagânone of whom were listed in LOA No. 19283 that had been issued for Standard Insurance's 2001 taxable year. The original LOA named only ROs Quevedo and Aguila (with their supervisor), and that audit was concludedâeven to the point of a Letter of Terminationâbefore being reopened for the DST discrepancy. Yet when the case was effectively re-assigned to the new set of ROs for further DST investigation, no new LOA was ever issued to cover their authority. The records are bare of any LOA naming ROs Espiritu, Libardo or Maliwanag, and the CIR has not produced any document to prove that such an LOA exists. Instead, the CIR banked on the fact that an LN was issued by the Commissioner and on the subsequent internal communications, such as the audit reports and the approval by higher officials, to justify the new examiners' actions.<br><br>Unfortunately for the CIR, an LN is not a substitute for an LOA. The Court has held that a computerized LN merely informs a taxpayer of a discrepancy and urges voluntary compliance; it is not an authority to examine and does not empower an RO to conduct an audit without an LOA.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> The BIR's own issuances, RMO 30-2003<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> and RMO 42-2003,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> distinguish an LN from a fonnal LOA. Thus, the LN in this case could not and did not authorize ROs Espiritu, et al., to investigate Standard Insurance's DST liabilities. Likewise, internal BIR memoranda or audit workload assignments cannot take the place of the statutorily required LOA. An LOA is issued to the taxpayer and gives notice of who will examine its books; a mere office memo reassigning a case to a different officer, without the taxpayer's knowledge or a corresponding LOA, is ineffectual as to the taxpayer's obligation to comply.<br><br>The absence of a new LOA upon the re-assignment of the DST audit to the new revenue officers is a clear violation of Section 13 of the NIRC and of RMO 43-90. The Court agrees with the CTA <i>En Banc</i> that this defect is fatal to the assessment. The law and regulations contemplate no room for substantial compliance in this regard. Compliance in form (i.e., the issuance of a written authority) and in substance (authorization of the specific individuals conducting the audit) is mandatory. As the CTA <i>En Banc</i> aptly observed, "all audit investigations must be conducted by a duly designated RO authorized ... pursuant to an LOA. In case of re-assignment or transfer of cases to another RO, it is mandatory that a new LOA shall be issued ... In the absence of such authority, the assessment or examination is a nullity."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> The Court cannot tum a blind eye to the BIR's own disregard of its rules designed to ensure regularity and fairness in tax assessments.<br><br>The CIR's arguments attempting to excuse the lack of an LOA are unavailing. That the original audit was covered by an LOA does not save the subsequent one; each audit assignment must stand on its own authority. The CIR's suggestion that the outcome would have been the same or that the new examiners were merely finishing what the original examiners started is immaterialâtax audits are person-specific, as well as taxpayer and period-specific. It is the grant of authority to a named officer that defines the legitimacy of the audit, not the abstract existence of an investigation. The Court has emphasized that the LOA requirement is not a mere technicality but a basic procedural requirement, the non-observance of which invalidates the assessment.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> In this case, the ROs who carried out the critical portion of the examination leading to the huge DST deficiency assessment had no authority to do so. Accordingly, the assessment they issued bears no legal fruit.<br><br>It is well to recall that an invalid assessment bears no valid fruit.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> All proceedings predicated on a void assessment, including the Final Decision of the CIR dated January 31, 2017, are likewise void and of no effect. The BIR cannot legally collect on an assessment that has no valid basis in the first place. To allow the enforcement of a void assessment would violate the cardinal principle of administrative due process that taxpayers should only be made to pay what is legally and properly due, pursuant to assessments issued in strict compliance with the law.<br><br>For the above reasons, the Court upholds the CTA <i>En Banc</i>'s ruling that the deficiency DST assessment against Standard Insurance is null and void for want of a valid LOA authorizing the examiners who made the assessment. This alone is sufficient to strike down the assessment. However, even assuming <i>arguendo</i> that the assessment was not void on that ground, the government's case would still falter because the right to collect the assessed tax had already prescribed.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Prescription of the government's right to collect the deficiency DST</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The CTA Second Division and <i>En Banc</i> both held that the government's right to collect the assessed DST for 2001 is barred by the statute of limitations. The CIR disputes this conclusion, insisting that prescription was tolled or interrupted. It is therefore necessary to review the applicable prescriptive periods and whether any suspension of the period to collect occurred under the facts of this case.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>a. Prescriptive periods for assessment and collection under the NIRC</em><br>&nbsp; </div></td><td width="70%">&nbsp;</td></tr></tbody></table>The NIRC of 1997, as amended, provides in general that internal revenue taxes must be assessed within three years from the last day prescribed by law for the filing of the return or from the actual date of filing, if later,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> except in cases of false or fraudulent returns or failure to file a return where a 10-year period applies.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> In other words, the BIR normally has three years to assess a tax, unless exceptional circumstances justify a longer period. When an assessment is issued within this ordinary three-year period, the government is not given an indefinite time to collect the tax. Rather, the CIR has a correspondingly limited period of three years from the date of assessment to collect the tax by distraint, levy, or court proceeding.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> In <i>Commissioner of Internal Revenue v. Court of Tax Appeals Second Division</i>,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> the Court clarified that the five-year collection period provided in Section 222(c) of the NIRC applies only to assessments issued under the extraordinary 10-year prescriptive period, such as in cases of a false or fraudulent return or a failure to file a return, or when the normal period is extended by a valid waiver. For assessments made within the standard three-year period, the proper period for the BIR to initiate collection is three years from the time the assessment notice is released, mailed, or sent to the taxpayer.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>In the present case, the FAN for the 2001 deficiency DST was released and mailed on May 5, 2004, well within the three-year period from the filing of Standard Insurance's 2001 tax return. Accordingly, the BIR had only until May 5, 2007 to initiate collection of the assessed tax, absent any circumstance that validly suspended or extended the prescriptive period. Even assuming <i>arguendo</i> that the longer five-year period were applicable, as in an extraordinary case under Section 222, that period would have expired on May 5, 2009. Thus, under either computation, the deadline for the government to collect from Standard Insurance had long lapsed.<br><br>It is undisputed that the BIR did not initiate any such collection action within that period. The record shows no warrant of distraint or levy was served on Standard Insurance by May 2007, nor was any collection case filed in court. In fact, after the FAN was issued in 2004, the next concrete action by the BIR to enforce collection was the Final Decision dated January 31, 2017, which was a letter denying the protest and demanding payment. By that time, more than twelve years had elapsed since the assessment, and the government's right to collect was unquestionably barred by prescription.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>b. No suspension of the period occurred: the taxpayer's acts did not toll prescription.</em><br>&nbsp; </div></td><td width="70%">&nbsp;</td></tr></tbody></table>The CIR invokes two circumstances to avoid the bar of prescription: (1) Standard Insurance's letter dated January 21, 2005, which requested the BIR to hold any enforcement of collection in abeyance pending administrative review; and (2) Standard Insurance's filing of a motion for reconsideration of the assessment (i.e., its administrative protest and subsequent communications), which the CIR appears to equate with a request for reinvestigation. The CIR argues that these actions fall under the exceptions in Section 223 of the NIRC which suspend the running of prescription.<br><br>The Court has examined the cited provision and the record, and the Court finds the CIR's position untenable. Section 223 of the NIRC enumerates specific instances when the running of the statute of limitations on assessment and on collection is suspended. Pertinently, the law provides that the prescriptive period for making a collection by distraint or court proceeding shall be suspended: (a) for the period during which the Commissioner is prohibited from making the assessment or beginning distraint or levy or a proceeding in court, and for 60 days thereafter; (b) when the taxpayer requests for a reinvestigation which is granted by the Commissioner; (c) when the taxpayer cannot be located in the address given; (d) when the warrant of distraint or levy is served upon the taxpayer, his or her authorized representative, or a member of his or her household with sufficient discretion, and no property is found; and (e) when the taxpayer is out of the Philippines.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> These grounds are limitative and must be strictly construed, as they provide exceptions to the statute of limitations which is designed to protect taxpayers from stale claims.<br><br>Standard Insurance's polite request to "hold in abeyance" collection clearly does not fall under any of the above-quoted scenarios. There was no injunction or court order prohibiting the BIR from collecting. Indeed, nothing legally prevented the CIR from issuing a warrant of distraint or levy during the period allowed, except perhaps its own consideration of the taxpayer's plea. The word "prohibited" in Section 223 connotes a legal prohibition, such as an injunction or a statutory bar. A mere letter from the taxpayer, lacking any force of law, did not forbid the BIR from initiating collection remedies. At most, the BIR acceded to the request as a matter of grace or convenience; but such forbearance is voluntary and not under compulsion of law. Thus, where the Commissioner was not legally prevented or enjoined from collecting, the first ground for suspension does not apply. If the CIR chooses not to act, that is the CIR's prerogative, but the prescriptive period continues to run in the meantime.<br><br>Likewise, Standard Insurance's letter cannot be treated as a waiver of the statute of limitations. A waiver of prescription under the NIRC must be embodied in a written agreement between the taxpayer and the BIR, expressly extending the period to assess or collect to a definite date.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> It is not simply a request or an expression of willingness to pay later; it is a formal renunciation of the taxpayer's right to invoke prescription as of an agreed extension period. The Court strictly construes such waivers against the BIR, and any ambiguity is taken against the government.<br><br>Here, the January 21, 2005 letter of Standard Insurance does not contain any statement waiving prescription or agreeing to extend the period. It merely asked the BIR not to enforce collection measures while the protest was unresolved. That is not equivalent to an agreement to extend the period to collect. As the CTA <i>En Banc</i> correctly noted, there was no categorical nor unequivocal statement in the letter that Standard Insurance was waiving the statute of limitations.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Therefore, the letter cannot be deemed a waiver that stopped the clock.<br><br>The second ground invoked by the CIRâa supposed request for reinvestigationâis equally without merit. Section 223 suspends prescription when "the taxpayer requests for a reinvestigation which is granted by the Commissioner." Jurisprudence draws a crucial distinction between a request for reinvestigation and a request for reconsideration. A reinvestigation involves the presentation of newly discovered or additional evidence, requiring a fresh examination of the issues of fact; it naturally tolls prescription because it leads the Commissioner to hold the case in abeyance while new information is gathered and evaluated. A reconsideration, on the other hand, is merely a plea to re-evaluate the assessment based on existing records or on issues of law, and does not entail the delay inherent in gathering new evidence. Thus, only a request for reinvestigation has the effect of suspending the period for collection, whereas a request for reconsideration does not.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>In this case, Standard Insurance's administrative protests were, by their nature and the evidence on record, requests for reconsideration, not reinvestigation. The CTA found, and the CIR's own witness admitted, that Standard Insurance did not submit any newly discovered evidence in support of its protests.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> The various protest letters in 2003 to 2004 were appeals to review or cancel the assessment on legal and factual grounds already known, such as the alleged denial of due process and substantive arguments on the taxability of certain items. There was no indication that Standard Insurance sought a reopening of the case to present additional evidence that would necessitate a reinvestigation by the BIR. Indeed, the CIR's Final Decision itself explicitly referred to Standard's submissions as a request for reconsideration of the denial of its protest.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> This characterization by the CIR is binding on it. Since there was no reinvestigation request granted by the CIR, the ground for suspension under Section 223 does not apply. Accordingly, the running of the prescriptive period for collection was not tolled by the pendency of the protest or by the motion for reconsideration filed by the taxpayer.<br><br>The other grounds for suspension (taxpayer cannot be located; service of warrant with no distrainable assets; taxpayer's absence from the Philippines)<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> are admittedly not applicable here. Standard Insurance was at all times available at its given address, and the BIR never attempted to serve a warrant until it was too late.<br><br>In fine, none of the conditions for suspending the prescriptive period to collect is present in this case. The three-year clock ran uninterrupted from the time the FAN was issued in May 2004. When no collection was initiated by May 2007, the government's right to collect the alleged deficiency DST effectively expired. By the time the CIR issued the Final Decision in January 2017, essentially a renewed demand for payment, that right had long been extinguished by prescription. The belated demand could not resurrect a dead tax claim.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>c. Effect of prescription: the tax obligation is extinguished</em><br>&nbsp; </div></td><td width="70%">&nbsp;</td></tr></tbody></table>The statute of limitations on the collection of taxes is not a mere technical defense but a substantial right, legislatively designed to afford protection to the taxpayer against unreasonable and stale claims. When the government sleeps on its right and lets the prescribed period elapse, it loses the remedy and the taxpayer gains a right to finality. In <i>Bank of the Philippine Islands v. CIR</i>,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> the Court stressed that the law on prescription should be liberally construed in favor of the taxpayer, and that the exceptions or grounds for suspension should be strictly construed.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> The inaction of the BIR for an inordinate length of time, to the prejudice of the taxpayer who is entitled to certainty and repose, cannot be simply brushed aside.<br><br>Furthermore, as elucidated by the Court in <i>Republic of the Philippines v. Ablaza</i>:<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><blockquote>The law prescribing a limitation of actions for the collection of the income tax is beneficial both to the Government and to its citizens; to the Government because tax officers would be obliged to act promptly in the making of assessment, and to citizens because after the lapse of the period of prescription citizens would have a feeling of security against unscrupulous tax agents who will always find an excuse to inspect the books of taxpayers, not to determine the latter's real liability, but to take advantage of every opportunity to molest peaceful, law-abiding citizens. Without such legal defense[,] taxpayers would furthermore be under obligation to always keep their books and keep them open for inspection subject to harassment by unscrupulous tax agents. <i>The law on prescription being a remedial measure should be interpreted in a way conducive to bringing about the beneficient purpose of affording protection to the taxpayer within the contemplation of the Commission which recommend the approval of the law.</i><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> (Emphasis supplied)</blockquote>The present case exemplifies why the statutes of limitation are in place. The deficiency DST assessment was issued in 2004, and Standard Insurance promptly challenged it. The BIR then let more than a decade pass without taking action to enforce collection or to finally resolve the protest. It was only in 2017, by which time key officers may have changed and documents could have been lost or faded, that the CIR decided to issue a final demand. By then, the taxpayer had been lulled into a false sense of security that perhaps the BIR had dropped its claim. To permit the BIR to revive the assessment after such a long silence would be fundamentally unfair. The right of the BIR to collect is never endless, inexhaustible, nor absolute. It does not have an indefinite period of time within which to collect taxes, considering that from the date of receipt of the FAN issued, the prescriptive period within which it could exercise its right to collect began to set in. The BIR had its chance and it blew it. The law then steps in to declare the tax obligation extinguished due to the government's inaction.<br><br>It is worth noting that in <i>BPI</i>, which involved a DST assessment as well, the Court found the government's right to collect prescribed when the BIR's warrant of distraint was served four days beyond the three-year period then applicable. The Court enunciated:<blockquote>In the present Petition, there is no controversy on the timeliness of the issuance of the Assessment, only on the prescription of the period to collect the deficiency DST following its Assessment. While Assessment No. FAS-5-85-89-002054 and its corresponding Assessment Notice were both dated 10 October 1989 and were received by petitioner BPI on [October 20,] 1989, there was no showing as to when the said Assessment and Assessment Notice were released, mailed or sent by the BIR. Still, it can be granted that the latest date the BIR could have released, mailed or sent the Assessment and Assessment Notice to petitioner BPI was on the same date they were received by the latter, on [October 20,] 1989. Counting the three-year prescriptive period, for a total of 1,095 days, from [October 20,] 1989, then the BIR only had until [October 19,] 1992 within which to collect the assessed deficiency DST.<br><br><i>The earliest attempt of the BIR to collect on Assessment No. FAS-5-85-89-002054 was its issuance and service of a Warrant of Distraint and/or Levy on petitioner BPI Although the Warrant was issued on [October 15,] 1992, previous to the expiration of the period for collection on [October 19,] 1992, the same was served on petitioner BPI only on [October 23,] 1992.</i><br><br>Under Section 223(c) of the Tax Code of 1977, as amended, it is not essential that the Warrant of Distraint and/or Levy be fully executed so that it can suspend the running of the statute of limitations on the collection of the tax. It is enough that the proceedings have validly began or commenced and that their execution has not been suspended by reason of the voluntary desistance of the respondent BIR Commissioner. Existing jurisprudence establishes that distraint and levy proceedings are validly begun or commenced by the issuance of the Warrant and service thereof on the taxpayer. It is only logical to require that the Warrant of Distraint and/or Levy be, at the very least, served upon the taxpayer in order to suspend the running of the prescriptive period for collection of an assessed tax, because it may only be upon the service of the Warrant that the taxpayer is informed of the denial by the BIR of any pending protest of the said taxpayer, and the resolute intention of the BIR to collect the tax assessed.<br><br><i>If the service of the Warrant of Distraint and/or Levy on petitioner BPI on [October 23,] 1992 was already beyond the prescriptive period/or collection of the deficiency DST, which had expired on [October 19,] 1992, then what more the letter of respondent BIR Commissioner, dated [August 13,] 1997 and received by the counsel of the petitioner BPI only on [September 11,] 1997, denying the protest of petitioner BPI and requesting payment of the deficiency DST? Even later and more unequivocally barred by prescription on collection was the demand made by respondent BIR Commissioner for payment of the deficiency DST in her Answer to the Petition for Review of petitioner BPI before the CTA, filed on [December 8,] 1997.</i><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> (Emphasis supplied)</blockquote>In the present case, the delay is not a matter of days but years; the final demand came almost 10 years past the three-year deadline. If prescription could operate to bar collection in <i>BPI</i>, despite the taxpayer's protest and even waivers executed, all the more should it bar the CIR here. The government's neglect materially and substantially violated rights vested by our taxation laws on a taxpayer by virtue of extinctive prescription. To rule otherwise would undermine the very purpose of having prescriptive periods, and would countenance bureaucratic sloth to the detriment of citizens.<br><br>Finally, the CIR's citation of <i>Collector v. Suyoc Consolidated Mining</i>,<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> an old case on estoppel due to the taxpayer's requests, is misplaced. Standard Insurance's conduct cannot be seen as inducing the BIR to delay collection. On the contrary, Standard consistently pressed for resolution, albeit asking that actual collection be deferred until the protest was decided. The CTA found no evidence that Standard Insurance did anything to mislead the BIR or cause it to refrain from collecting, aside from legitimately pursuing its administrative remedies. Indeed, after the protest in 2004, the CIR was free to act, either to deny it promptly, or to partially grant it, or even to garnish assets subject to the protest. The prolonged delay was solely of the BIR's choosing or neglect. Under these circumstances, there is no equitable reason to prevent Standard Insurance from invoking prescription. Estoppel against a taxpayer's assertion of prescription can arise only in clear cases of the taxpayer's bad faith, which are not present here.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>On the CIR's Final Decision and alleged delay amounting to denial of due process</em><br>&nbsp; </div></td><td width="70%">&nbsp;</td></tr></tbody></table>Standard Insurance additionally argues that the Final Decision issued in 2017, coming after an unreasonable delay, was oppressive and should be struck down on that account alone. While the Court has resolved the enforceability of that decision on the legal ground of prescription, the Court deems it proper to make a brief observation on the issue of administrative delay.<br><br>Revenue officers and the Commissioner would do well to heed that justice delayed is justice denied, even in taxation. The CIR sat on Standard Insurance's case for over a decade, leaving the taxpayer in limbo. Such inaction is not only detrimental to the public treasury, as the government's chance to timely collect was lost, but also inconsiderate of the taxpayer's right to a prompt disposition of its protest. The Regulations implementing the NIRC, specifically, Revenue Regulation No. 12-99,<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> prescribe periods for the Commissioner to act on protests (180 days from submission of documents, under Section 228 of the NIRC). These were ignored. The Court echoes the CTA <i>En Banc's</i> sentiment that the BIR's 13-year delay in finally disposing of Standard Insurance's protest is deplorable. It offends the basic tenets of fairness and due process. One cannot simply wait out the taxpayer and then demand payment when memory of the facts has gone stale. This is precisely why the law imposes prescriptive periods. While tax collection is vital to government, it must be accomplished with regard for lawful procedure and basic fairness. The State must observe not only the power to tax, but the duty to do so with reasonable dispatch.<br><br>In sum, even if the DST assessment were not void for want of authority, the government's right to collect on it had already prescribed long before the CIR's belated final action. On either groundânullity of assessment or prescriptionâStandard Insurance was entitled to the cancellation of the assessment. The CTA Second Division and <i>En Banc</i> committed no reversible error in so ruling.<br><br>Before closing, the Court emphasizes that the findings of the CTA on these matters, being supported by substantial evidence and in accord with law and jurisprudence, deserve great weight. The CTA's factual finding of the absence of a new LOA, as well as the factual timeline underpinning the prescription ruling, are upheld. The legal conclusions drawn by the CTA are consistent with prevailing jurisprudence. Hence, the denial of the CIR's Petition is in order.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision, dated June 21, 2021, and the Resolution, dated March 18, 2022, of the Court of Tax Appeals <i>En Banc</i> in CTA EB No. 2090 are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 13-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 40-71. The June 21, 2021 Decision in CTA E.B. No. 2090 was penned by Associate Justice Erlinda P. Uy and concurred in by Presiding Justice Roman G. Del Rosario and Associate Justices Juanito C. Castaneda, Jr., Ma. Belen M. Ringpis-Liban, Catherine T. Manahan, Jean Marie A. Bacorro-Villena, and Maria Rowena Modesto-San Pedro of the Court of Tax Appeals, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 158-167. The March 18, 2022 Resolution in CTA E.B. No. 2090 was penned by Associate Justice Erlinda P. Uy and concurred in by Presiding Justice Roman G. Del Rosario and Associate Justices Juanito C. Castaneda, Jr., Ma. Belen M. Ringpis-Liban, Catherine T. Manahan, Jean Marie A. Bacorro-Villena, Maria Rowena Modesto-San Pedro, Marian Ivy F. Reyes-Fajardo, and Lanee S. Cui-David of the Court of Tax Appeals, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 169-208. The March 25, 2019 Decision in CTA Case No. 9550 was penned by Associate Justice Cielito N. Mindaro-Grulla and concurred in by Associate Justice Juanito C. Castaneda, Jr., of the Second Division, Court of Tax Appeals, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 260-266. The June 4, 2019 Resolution in CTA Case No. 9550 was penned by Associate Justice Cielito N. Mindaro-Grulla and concurred in by Associate Justice Juanito C. Castaneda, Jr., of the Second Division, Court of Tax Appeals, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 41-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 143-144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Sec. 228. <i>Protesting of Assessment</i>. â When the Commissioner or his duly authorized representative finds that proper taxes should be assessed, he shall first notify the taxpayer of his findings: <i>Provided, however</i>, That a pre-assessment notice shall not be required in the following cases:<blockquote>(a) When the finding for any deficiency tax is the result of mathematical error in the computation of the tax as appearing on the face of the return; or<br><br>(b) When a discrepancy has been determined between the tax withheld and the amount actually remitted<br>by the withholding agent; or<br><br>(c) When a taxpayer who opted to claim a refund or tax credit of excess creditable withholding tax for a taxable period was determined to have carried over and automatically applied the same amount claimed against the estimated tax liabilities for the taxable quarter or quarters of the succeeding taxable year; or<br><br>(d) When the excise tax due on excisable articles has not been paid; or<br><br>(e) When the article locally purchased or imported by an exempt person, such as, but not limited to, vehicles, capital equipment, machineries and spare parts, has been sold, traded or transferred to non-exempt persons.</blockquote>The taxpayers shall be informed in writing of the law and the facts on which the assessment is made; otherwise, the assessment shall be void.<br><br>Within a period to be prescribed by implementing rules and regulations, the taxpayer shall be required to respond to said notice. If the taxpayer fails to respond, the Commissioner or his duly authorized representative shall issue an assessment based on his findings.<br><br>Such assessment may be protested administratively by filing a request for reconsideration or reinvestigation within thirty (30) days from receipt of the assessment in such form and manner as may be prescribed by implementing rules and regulations. Within sixty (60) days from filing of the protest, all relevant supporting documents shall have been submitted; otherwise, the assessment shall become final.<br><br>If the protest is denied in whole or in part, or is not acted upon within one hundred eighty (180) days from submission of documents, the taxpayer adversely affected by the decision or inaction may appeal to the Court of Tax Appeals within thirty (30) days from receipt of the said decision, or from the lapse of one hundred eighty (180)-day period; otherwise, the decision shall become final, executory and demandable.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, pp. 42-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 43-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 169-208.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Sec. 222. <i>Exceptions as to Period of limitation of Assessment and Collection of Taxes</i>. â<blockquote>(a) In the case of a false or fraudulent return with intent to evade tax or of failure to file a return, the tax may be assessed, or a proceeding in court for the collection of such tax may be filed without assessment, at any time within [10] years after the discovery of the falsity, fraud or omission: Provided, That in a fraud assessment which has become final and executory, the fact of fraud shall be judicially taken cognizance of in the civil or criminal action for the collection thereof.<br><br>(b) If before the expiration of the time prescribed in Section 203 for the assessment of the tax, both the Commissioner and the taxpayer have agreed in writing to its assessment after such time, the tax may be assessed within the period agreed upon. The period so agreed upon may be extended by subsequent written agreement made before the expiration of the period previously agreed upon.<br><br><i>(c) Any internal revenue tax which has been assessed within the period of limitation as prescribed in paragraph (a) hereof may be collected by distraint or levy or by a proceeding in court within five [] years following the assessment of the tax.</i><br><br><i>(d) Any internal revenue tax, which has been assessed within the period agreed upon as provided in paragraph (b) hereinabove, may be collected by distraint or levy or by a proceeding in court within the period agreed upon in writing before the expiration of the five []-year period. The period so agreed upon may be extended by subsequent written agreements made before the expiration of the period previously agreed upon.</i><br><br>(e) Provided, however, That nothing in the immediately preceding and paragraph (a) hereof shall be construed to authorize the examination and investigation or inquiry into any tax return filed in accordance with the provisions of any tax amnesty law or decree. (Emphasis supplied)</blockquote><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Rollo</i>, pp. 198-207.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 213-215.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Sec. 13. <i>Authority of a Revenue Officer</i>. â Subject to the rules and regulations to be prescribed by the Secretary of Finance, upon recommendation of the Commissioner, a Revenue Officer assigned to perform assessment functions in any district may, pursuant to a Letter of Authority issued by the Revenue Regional Director, examine taxpayers within the jurisdiction of the district in order to collect the correct amount of tax, or to recommend the assessment of any deficiency tax due in the same manner that the said acts could have been performed by the Revenue Regional Director himself.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, pp. 139-145.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 145-155.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 22-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 27-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Amendment of Revenue Memorandum Order No. 37-90 (1990), Prescribing Revised Policy Guidelines for Examination of Returns and Issuance of Letters of Authority to Audit.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Rollo</i>, pp. 51-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 367-385.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Sec. 1 <i>Rendition of judgment</i>. â The Court shall decide the cases brought before it in accordance with [] Article VIII[, Section 15, paragraph (1)] of the 1987 Constitution. The conclusions of the Court shall be reached in consultation by the Members on the merits of the case before its assignment to a Member for the writing of the decision. The presiding justice or chairman of the Division shall include the case in an agenda for a meeting of the Court <i>en banc</i> or in Division, as the case may be, for its deliberation. If a majority of the justices of the Court <i>en banc</i> or in Division agree on the draft decision, the <i>ponente</i> shall finalize the decision for the signature of the concurring justices and its immediate promulgation. Any justice of the Court <i>en banc</i> or in Division may submit a separate written concurring or dissenting opinion within twenty days from the date of the voting on the case. The concurring and dissenting opinions, together with the majority opinion, shall be jointly promulgated and attached to the <i>rollo</i>.<br><br><i>In deciding the case, the Court may not limit itself to the issues stipulated by the parties but may also rule upon related issues necessary to achieve an orderly disposition of the case.</i> (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> A.M. No. 05-11-07-CTA, November 22, 2005.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> 813 Phil. 622 (2017) [Per J. Martires, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 902 Phil. 87 (2021) [Per C.J. Gesmundo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Commissioner of Internal Revenue v. Lancaster Philippines, Inc.</b>, 813 Phil. 622, 639 (2017) [Per J. Martires, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>Commissioner of Internal Revenue v. Yumex Philippines Corporation</b>, 902 Phil. 87, 95 (2021) [Per C.J. Gesmundo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Sec. 6. <i>Power of the Commissioner to Make Assessments and Prescribe Additional Requirements for Tax Administration and Enforcement</i>. â<br><br>(a) <i>Examination of Return and Determination of Tax Due</i>. After a return has been filed as required under the provisions of this Code, <i>the Commissioner or his duly authorized representative may authorize the examination of any taxpayer and the assessment of the correct amount of tax</i>, notwithstanding any law requiring the prior authorization of any government agency or instrumentality: Provided, however, That failure to file a return shall not prevent the Commissioner from authorizing the examination of any taxpayer.<br><br>The tax or any deficiency tax so assessed shall be paid upon notice and demand from the Commissioner or from his duly authorized representative.<br><br>Any return, statement of declaration filed in any office authorized to receive the same shall not be withdrawn: Provided, That within three [] years from the date of such filing, the same may be modified, changed, or amended: Provided, further, That no notice for audit or investigation of such return, statement or declaration has in the meantime been actually served upon the taxpayer. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>See</i> <b>Republic v. Robiegie Corporation</b>, 930 Phil. 497 (2022) [Per J. Gaerlan, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 808 Phil. 528 (2017) [Per J. Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 544.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 545-546.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> 649 Phil. 519 (2010) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 529-531.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Medicard Philippines, Inc. v. Commissioner of Internal Revenue</b>, 808 Phil. 528, 540-545 (2017) [Per J. Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Guidelines and Procedures in the Extraction, Analysis, Disclosure/Dissemination, Utilization, and Monitoring of RELIEF data for Audit and Enforcement Purposes, September 18, 2003.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Prescribing Additional Guidelines Governing the Rules on Assessment of National Internal Revenue Taxes covered by a Letter Notice (LN) issued under the RELIEF System as defined in Revenue Memorandum Order (RMO) No. 30-2003 and other data matching processes, October 23, 2003.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, p. 59. <i>See also</i> <b>Commissioner of Internal Revenue v. Sony Philippines, Inc.</b>, 649 Phil. 519, 530 (2010) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Commissioner of Internal Revenue v. McDonald's Philippines Realty Corp.</b>, 902 Phil. 473, 482 (2021) [Per J. Lopez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Commissioner of Internal Revenue v. Reyes</b>, 516 Phil. 176, 189 (2006) [Per C.J. Panganiban, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> TAX CODE, sec. 203 provides:<blockquote>"Sec. 203. <i>Period of limitation Upon Assessment and Collection</i>. â Except as provided in Section 222, internal revenue taxes shall be assessed within three [] years after the last day prescribed by law for the filing of the return, and no proceeding in court without assessment for the collection of such taxes shall be begun after the expiration of such period: Provided, That in a case where a return is filed beyond the period prescribed by law, the three []-year period shall be counted from the day the return was filed. For purposes of this Section, a return filed before the last day prescribed by law for the filing thereof shall be considered as filed on such last day."</blockquote><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> TAX CODE, sec. 222.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Commissioner of Internal Revenue v. United Salvage and Towage Phils. Inc.</b>, 738 Phil. 335, 354 (2014) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> 921 Phil. 1090 (2022) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 1098-1099.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> TAX CODE, sec. 223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> TAX CODE, sec. 222(b) provides:<blockquote>"(b) If before the expiration of the time prescribed in Section 203 for the assessment of the tax, both the Commissioner and the taxpayer have agreed in writing to its assessment after such time, the tax may be assessed within the period agreed upon. The period so agreed upon may be extended by subsequent written agreement made before the expiration of the period previously agreed upon."</blockquote><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, p. 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>Bank of the Philippine Islands v. CIR</b>, 510 Phil. 1 (2005) [Per J. Chico-Nazario, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Rollo</i>, p. 66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 67-68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> TAXCODE, sec. 223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> 510 Phil. 1 (2005) [Per J. Chico-Nazario, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> 108 Phil. 1105 (1960) [Per J. Labrador, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>Bank of the Philippine Islands v. CIR</b>, 510 Phil. 1, 17-18 (2005) [Per J. Chico-Nazario, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> 104 Phil. 819 (1958) [Per J. Bautista Angelo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Implementing the Provisions of the National Internal Revenue Code of 1997 Governing the Rules on Assessment of National Internal Revenue Taxes, Civil Penalties and Interest and the Extra-judicial Settlement of a Taxpayer's Criminal Violation of the Code through Payment of a Suggested Compromise Penalty, September 6, 1999.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 279464 - XXX279464, PETITIONER, VS. PEOPLE OF THE PHILIPPINES,* RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70315' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 279464, January 20, 2026 ]</H2>
+			<H3>XXX279464, PETITIONER, VS. PEOPLE OF THE PHILIPPINES,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Court resolves the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals (CA) which affirmed the ruling of the Regional Trial Court (RTC) that found XXX279464 guilty beyond reasonable doubt of acts of lasciviousness under Article 336 of the Revised Penal Code (RPC) in relation Section 5(b) of Republic Act No. 7610 or the Special Protection of Children Against Abuse, Exploitation and Discrimination Act.<br><br><center><b>Antecedents</b></center><br>XXX279464 was charged with acts of lasciviousness under Article 336 of the RPC in relation Section 5(b) of Republic Act No. 7610. The accusatory portion of the Information<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> reads:<blockquote>That on the 2<sup>nd</sup> February, 2021, at <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Municipality of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Province of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, motivated by lust and lewd designs, with intent to gratify his sexual desires and taking advantage of his influence as an adult, did then and there willfully, unlawfully and feloniously abused [AAA279464], a girl who was then eight (8) years of age, by committing against her person the following lascivious acts: he removed her pants and rubbed his penis on her buttocks, he lifted her shirt exposing her back and held his penis while at the same time holding and caressing her legs, thereby subjecting her to sexual abuse, to her great damage, prejudice and mental anguish.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></blockquote>On September 24, 2021, XXX279464 was arraigned and pleaded not guilty to the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Trial then ensued.<br><br>The prosecution presented the following witnesses: (1) AAA279464, BBB279464; and (3) Melita Fowaya (Fowaya).<br><br>AAA279464 testified that she filed the case against XXX279464 because "he did something wrong to her]."<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> She narrated that when she was at the house of XXX279464 in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> and playing with his children,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> XXX279464 directed his children to wash the dishes and told AAA279464 to come near him so that he can remove lice from her head.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> XXX279464 then made her sit on his lap and then covered them both with a blanket.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> XXX279464 pulled down his and AAA279464's pants and then rubbed his penis against her buttocks.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> XXX279464 eventually stopped and gave AAA279464 and his children money to buy candy.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>AAA279464 told her father what happened on the evening of the same day.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Although her father got angry, he was unable to confront XXX279464 because he was nursing an injured hand.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> A few days later, AAA279464's mother learned what happened from a relative of her father.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>BBB279464 is AAA279464's mother.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> She testified that she and AAA279464's biological father were formerly common law partners but are already separated.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> BBB279464 narrated that she received a hint that XXX279464 did something to her daughter from a relative of AAA279464's father.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> When she asked her daughter about it, AAA279464 told her that XXX279464 rubbed his penis against her buttocks.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> BBB279464 confronted XXX279464, who initially denied everything but eventually asked for her forgiveness.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> BBB279464 then filed a criminal complaint against XXX279464.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Fowaya, a psychologjst,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> testified that she conducted a psychological evaluation of AAA279464 to assess her intellectual and social adaptability and emotional functions in relation to her experience of sexual abuse.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Fowaya narrated that based on her evaluation, AAA279464 has a mental age of 5 years old and 7 months and that she exhibits negative emotions such as fear, avoidance, apprehension, and social inhibition which was caused by the alleged incident.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>For its part, the defense presented XXX279464 and CCC279464 as witnesses.<br><br>XXX279464 testified that AAA279464 is his wife's niece, since AAA279464's father is his wife's brother.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> XXX279464 narrated that AAA279464 lives with her mother in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, but he occasionally stays with her father who was his neighbor in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> XXX279464 has two children who were playmates of AAA279464.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>XXX279464 recounted that AAA279464 goes to his house almost every day and eats and sleeps there because her parents were usually out.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Thus, he usually takes care of AAA279464.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> He admitted that he cut AAA279464's hair but clarified that AAA279464's father asked him to cut it because of lice.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The following day, AAA279464 returned to his house and he checked her hair for lice.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>Later, XXX279464 learned that AAA279464's father was spreading rumors that he raped AAA279464.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> XXX279464 confronted AAA279464's father but he refused to talk to him.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> As for AAA279464, she still returned to his house even after the incident.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> XXX279464 also recounted that he had a previous argument with AAA279464's father.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>CCC279464 is the daughter of XXX279464.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> She testified that AAA279464 is her cousin and AAA279464 visits their house to play with her and her other sibling.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> She confirmed that XXX279464 cut AAA279464's hair, that she still visited their house even after her father already cut her hair, and that it was her father who takes care of AAA279464 when she visits their house.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>On August 25, 2022, the RTC promulgated its Judgment,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> the dispositive portion of which reads:<blockquote>WHEREFORE, from the foregoing, there being proof beyond reasonable doubt that accused committed Acts of Lasciviousness under Article 336 of the Revised Penal Code[,] in relation to Section 5(b) of Republic Act No. 7610, [XXX279464] is found GUILTY thereof.<br><br>There being no aggravating or mitigating circumstances attendant, he is hereby imposed the indeterminate penalty of twelve (12) years and one (1) day of Reclusion Temporal, minimum, as minimum to fourteen (14) years, eight (8) months and one (1) day of <i>Reclusion Temporal</i>, medium, as maximum.<br><br>He is likewise directed to pay the fine of [PHP] 15,000.00. In the event that accused will not be able to pay the fine, he is directed to serve the same through subsidiary imprisonment.<br><br>He is further directed to indemnify private complainant [AAA279464] the separate amounts of [PHP] 50,000.00 each for civil indemnity, moral damages, and exemplary damages.<br><br>All monetary award for damages are subject to an interest of 6% per annum reckoned from finality of this Judgment until fully paid.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></blockquote>The RTC ruled that the prosecution was able to prove the elements of the crime charged against XXX279464 beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> It found AAA279464's testimony that XXX279464 made her sit on his lap and rubbed his penis against her buttocks straightforward, categorical, and convincing.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> On the other hand, the RTC found XXX279464's defense of denial insufficient to overcome the positive and categorical testimony of AAA279464.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>XXX279464 appealed to the CA.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> He argued that the RTC erred when it convicted him of acts of lasciviousness in relation to Section 5(b) of Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> XXX279464 pointed out that AAA279464's failure to immediately report what happened to her parents, her seeming lack of any fear of him, and her cairn demeanor when she was interviewed by Fowaya casted doubt on the veracity of her testimony and her credibility as a witness.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Finally, XXX279464 asserted that it was impossible for him to molest AAA279464 at his home in broad daylight and with other people present.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>The Office of the Solicitor General (OSG) opposed XXX279464's appeal. It argued that the RTC was correct when it found XXX279464 guilty of acts of lasciviousness in relation to Section 5(b) of Republic Act No. i7610.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> The OSG asserted that the prosecution was able to prove all the elements of acts of lasciviousness under the RPC and sexual abuse under Section 5(b) of Republic Act No. 7610 against XXX279464.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> It also averred that AAA279464 is a credible witness and the aspersions cast by XXX279464 against her have neither factual nor legal bases.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>On February 17, 2025, the CA promulgated the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> which denied XXX279464's appeal. Its dispositive portion reads:<blockquote>WHEREFORE, the appeal is DENIED. The Judgment dated August 25, 2022 of the Regional Trial Court of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, in Criminal Case No. 21H-CR-13843, finding accused-appellant [XXX279464], guilty of Acts of Lasciviousness under Article 336 of the Revised Penal Code, in relation to Section 5 (b) of [Republic Act] No. 7610, is AFFIRMED with MODIFICATION. As modified, accused-appellant is meted the indeterminate penalty of twelve (12) years and one (1) day of <i>reclusion temporal</i> minimum, as minimum, to fifteen (15) years, six (6) months[,] and twenty (20) days of <i>reclusion temporal</i> medium, as maximum.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></blockquote>The CA concurred with the RTC's evaluation that AAA279464 is a credible witness<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> and ruled that XXX279464's act of intentionally rubbing his penis against AAA279464's buttocks is lascivious conduct.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> The CA dismissed XXX279464's attacks on AAA279464's credibility and held that the inconsistencies between her affidavit and her testimony pertain to minor details and in fact bolster the reliability of her testimony.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> It likewise held that the fact that XXX279464's children were at the <i>locus criminis</i> does not render its commission impossible.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> More, the delay in reporting the incident to the police was not attributable to AAA279464 but to her father.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>Hence, XXX279464 filed the present Petition.<br><br>XXX279464 claims that the CA erred when it denied his appeal.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> He insists that the prosecution was unable to prove that he used force or intimidation against AAA279464.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> XXX279464 asserts that AAA279464 is not a credible witness as there are inconsistencies between her affidavit and her testimony in court.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> He argues that AAA279464's testimony is "too unsophisticated" and devoid of necessary details.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> XXX279464 points out that AAA279464's actions after she was supposedly molested, i.e.; (1) failure to immediately inform her parents what happened; (2) riding the vehicle that he was driving after he supposedly molested her; and (3) her calmness when she was interviewed by Fowaya, all cast doubt regarding the veracity of her testimony.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Finally, XXX279464 insists that the prosecution should have presented his other daughter as witness<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> as it was impossible for him to molest AAA279464 at the time and place that she claimed considering that it was broad daylight and other people were present.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup><br><br>On July 28, 2025, this Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> directing the OSG to file its comment to the present Petition.<br><br>On October 14, 2025, the OSG filed its Comment (Re: Petition for Review on <i>Certiorari</i> dated April 24, 2025)<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> which prayed for the denial of the Petition.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> The OSG argued that the Petition should be denied for raising questions of fact<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> and XXX279464's failure to serve a copy of the Petition to the CA.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> It avers that the CA did not err when it affirmed XXX279464's conviction as all the elements of the crime were duly proven by the prosecution.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> The OSG insists that AAA279464 is credible and any inconsistency in her testimony refer to minor matters and should not affect her integrity as a witness.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> It likewise asserts that AAA279464's actions after she was molested cannot be taken against her since there is no standard reaction from victims of abuse.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> The OSG also points out XXX279464's claim that it was impossible for him to molest AAA279464 in a public setting is without any merit as it is settled that lust is no respecter of time or place.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> Finally, it asserts that the RTC and CA's evaluation of AAA279464's credibility should be given credence by this Court.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup><br><br><center><b>Issue</b></center><br>Whether the CA erred when it ruled that petitioner XXX279464 is guilty beyond reasonable doubt of acts of lasciviousness under Article 336 of the Revised Penal Code in relation to Section 5(b) of Republic Act No. 7610.<br><br><center><b>This Court's Ruling</b></center><br>The Petition is denied.<br><br><i>The Petition is fatally defective</i><br><br>The Petition should be denied for its patent procedural defects.<br><br><i>First</i>, the CA was not served with a copy of the Petition. Rule 45, Sections 3 and 5 of the Rules of Court relevantly provide:<blockquote>Section 3. <i>Docket and other lawful fees; proof of service of petition</i>. â Unless he has theretofore clone so, the petitioner shall pay the corresponding docket and other lawful fees to the clerk of court of the Supreme Court and deposit the amount of [PHP] 500.00 for costs at the time of the filing of the petition. <i>Proof of service of a copy, thereof on the lower court concerned and on the adverse party shall be submitted together with the petition.</i><br><br>. . . .<br><br>Section 5. <i>Dismissal or denial of petition</i>. â <i>The failure of the petitioner to comply with any of the foregoing requirements regarding the payment of the docket and other lawful fees, deposit for costs, proof of service of the petition, and the contents of and the documents which should accompany the petition shall be sufficient ground for the dismissal thereof.</i><br><br>The Supreme Court may on its own initiative deny the petition on the ground that the appeal is without merit, or is prosecuted manifestly for delay, or that the questions raised therein are too unsubstantial to require consideration. (Emphasis supplied)</blockquote>Here, a cursory review of the proof of service appended to the Petition shows that only the OSG was served with a copy of it.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> On this score alone the Petition can already be denied outright.<br><br><i>Second</i>, a review of the Petition shows that it failed to present any new pr novel question of law or present an opportunity to review and expound on, rectify, modify or clarify existing legal policy. Verily, this Court may decline to review cases when all that are involved are settled rules for which nothing remains but their application.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br><i>Third</i>, petitioner failed to exclusively raise questions of law in the Petition. Generally, the jurisdiction of this Court in an appeal by <i>certiorari</i> is limited to resolving questions of law and does not extend to questions of fact since We are not a trier of facts.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Failure to exclusively raise questions of law in a Rule 45 petition is a ground for its outright denial.</i><sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>In <i>Republic v. Malabanan</i>,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> We expounded on the difference between at question of law and a question of fact, as well as the test to distinguish one from the other:<blockquote>A question of law arises when there is doubt as to what the law is on a certain state of facts, while there is a question of fact when the doubt arises as to the truth or falsity of the alleged facts. For a question to be one of law, the same must not involve an examination of the probative value of the evidence presented by the litigants or any of them. The resolution of the issue must rest solely on what the law provides on the given set of circumstances. Once it is clear that the issue invites a review of the evidence presented, the question posed is one of fact. Thus, the test of whether a question is one of law or of fact is not the appellation given to such question by the party raising the same; rather, it is whether the appellate court can determine the issue raised without reviewing or evaluating the evidence, in which case, it is a question of law; otherwise it is a question of fact.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> (Citation omitted)</blockquote>Here, the central issue raised by petitioner, i.e., whether his guilt was proven beyond reasonable doubt, is a factual issue as this Court would have to evaluate the evidence on record to resolve it. While there are settled exceptions that would allow Us to resolve questions of fact in a Rule 45 petition,<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> We find that none are extant here.<br><br>Verily, the Petition is fatally defective and should be denied outright. However, recent developments in relevant jurisprudence compel Us to take cognizance of the Petition and reconsider the crime petitioner should be held liable for, as well as the corresponding penalties to be imposed on him.<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Petitioner should be held liable for statutory acts of lasciviousness under Article 336 of the RPC</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>In <i>Tulagan v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> We provided the following guidelines in determining the proper designation of the crime as well as the imposable penalty for the crimes of acts of lasciviousness or lascivious conduct and rape by carnal knowledge or sexual assault, depending on the age of the victim, in view of the provisions in paragraphs 1 and 2 of Article 266-A and Article 336 of the RPC, as amended by Republic Act No. 8353, and Section 5(b) of Republic Act No. 7610:<blockquote><table width="100%" border="1" cellpadding="3" cellspacing="0"><tbody><tr valign="top"><td width="25%"><div align="justify"><strong>Age of Victim</strong></div></td><td width="25%" rowspan="2"><div align="justify"><strong>Under 12 years old or demented</strong></div></td><td width="25%" rowspan="2"><div align="justify"><strong>12 years old or below 18, or 18 under special circumstances</strong></div></td><td width="25%" rowspan="2"><div align="justify"><strong>18 years old and above</strong></div></td></tr><tr valign="top"><td><div align="justify">Crime committed</div></td></tr><tr valign="top"><td><div align="justify">Acts of Lasciviousness committed against children exploited in prostitution or other sexual abuse</div></td><td><div align="justify">Acts of Lasciviousness under Article 336 of the RPC in relation to Section 5(b) of Republic Act No. 7610: <i>reclusion temporal</i> in its medium period</div></td><td><div align="justify">Lascivious conduct under Section 5(b) of Republic Act No. 7610: <i>reclusion temporal</i> in its medium period to <i>reclusion perpetua</i></div></td><td><div align="justify">Not applicable</div></td></tr><tr valign="top"><td><div align="justify">Sexual Assault committed against children exploited in prostitution or other sexual abuse</div></td><td><div align="justify">Sexual Assault under Article 266-A(2) of the RPC in relation to Section 5(b) of Republic Act No. 7610: <i>reclusion temporal</i> in its medium period</div></td><td><div align="justify">Lascivious Conduct under Section 5(b) of Republic Act No. 7610: <i>reclusion temporal</i> in its medium period to <i>reclusion perpetua</i></div></td><td><div align="justify">Not applicable</div></td></tr><tr valign="top"><td><div align="justify">Sexual Intercourse committed against children exploited in prostitution or other sexual abuse</div></td><td><div align="justify">Rape under Article 266-A(1) of the RPC: <i>reclusion perpetua</i>, except when the victim is below 7 years old in which case death penalty shall be imposed</div></td><td><div align="justify">Sexual Abuse under Section 5(b) of Republic Act No. 7610: <i>reclusion temporal</i> in its medium period to <i>reclusion perpetua</i> </div></td><td><div align="justify">Not applicable</div></td></tr><tr valign="top"><td><div align="justify">Rape by carnal knowledge</div></td><td><div align="justify">Rape under Article 266-A(1) in relation to Art. 266-B of the RPC: <i>reclusion perpetua</i>, except when the victim is below 7 years old in which case death penalty shall be imposed</div></td><td><div align="justify">Rape under Article 266-A(1) in relation to Art. 266-B of the RPC: <i>reclusion perpetua</i></div></td><td><div align="justify">Rape under Article 266-A(1) of the RPC: <i>reclusion perpetua</i></div></td></tr><tr valign="top"><td><div align="justify">Rape by Sexual Assault</div></td><td><div align="justify">Sexual Assault under Article 266-A(2) of the RPC in relation to Section 5(b) of Republic Act No. 7610: <i>reclusion temporal</i> in its medium period</div></td><td><div align="justify">Lascivious Conduct under Section 5(b) of Republic Act No. 7610: <i>reclusion temporal</i> in its medium period to <i>reclusion perpetua</i></div></td><td><div align="justify">Sexual Assault under Article 266-A(2) of the RPC: <i>prison mayor</i></div></td></tr></tbody></table></blockquote>Here, petitioner was charged with acts of lasciviousness under Article 336 of the RPC in relation to Section 5(b) of Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> Notably, to convict an accused of such crime, the elements of both acts of lasciviousness under the RPC and sexual abuse under Section 5(b) of Republic Act No. 7610 must be proven to the point of moral certainty.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup><br><br>To convict an accused of acts of lasciviousness, the following elements must be proven beyond reasonable doubt: (1) that the offender commits any act of lasciviousness or lewdness; (2) that the act of lasciviousness is committed against a person of either sex; and (3) that it is done under any of the following circumstances: (a) by using force or intimidation; (b) when the offended party is deprived of reason or otherwise unconscious; (c) by means of fraudulent machination or grave abuse of authority; or (d) when the offended party is under 12 years of age or is "demented."<sup style="COLOR: RGB(255, 0, 0);">[84]</sup><br><br>On the other hand, the elements of sexual abuse under Section 5(b) of Republic Act No. 7610 are: (1) the accused commits the act of sexual intercourse or lascivious conduct; (2) such act is performed with a child exploited in prostitution or subjected to other sexual abuse; and (3) the child, whether male or female, is under 18 years of age.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup><br><br>However, in <i>Gramatica v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> this Court took the opportunity to clarify the relationship between the RPC, Republic Act No. 7610, and Republic Act No. 8353 and provided the guidelines regarding the proper application of Section 5(b) of Republic Act No. 7610 in relation to acts of lasciviousness involving minors:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The provisions of Republic Act No. 7610 did not repeal the Revised Penal Code</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br><i>Tulagan</i> discussed the effects of repeal, specifically in relation to Republic Act No. 8353 and the Revised Penal Code, noting that the former did not repeal the latter. From this fact, the Court concluded that acts of lasciviousness which do not amount to rape by sexual assault and do not fall under Republic Act No. 7610 may still be prosecuted under the Revised Penal Code:<blockquote>We further note that <i>[Republic Act] No. 8353 did not expressly repeal Article 336 of the RPC</i>, as amended. Section 4 of [Republic Act] No. 8353 only states that Article 336 of the RPC, as amended, and all laws, rules and regulations inconsistent with or contrary to the provisions thereof are deemed amended, modified or repealed, accordingly. There is nothing inconsistent between the provisions of Article 336 of the RPC, as amended, and [Republic Act] No. 8353, except in sexual assault as a form of rape. To recall, [Republic Act] No. 8353 only modified Article 336 of the RPC, as follows: (1) by carrying over to acts of lasciviousness the additional circumstances applicable to rape, <i>viz.</i>: threat and fraudulent machinations or grave abuse of authority; (2) by retaining the circumstance that the offended party is under 12 years old, and including dementia as another one, in order for acts of lasciviousness to be considered as statutory, wherein evidence of force or intimidation is immaterial because the offended party who is under 12 years old or demented, is presumed incapable of giving rational consent; and (3) by removing from the scope of acts of lasciviousness and placing under the crime of rape by sexual assault the specific lewd act of inserting the offender's penis into another person's mouth or anal orifice, or any instrument or object into the genital or anal orifice of another person. Hence, Article 336 of the RPC, as amended, is still a good law despite the enactment of [Republic Act] No. 8353 for there. is no irreconcilable inconsistency between their provisions. When the lascivious act is not covered by [Republic Act] No. 8353, then Article 336 of the RPC is applicable, except when the lascivious conduct is covered by [Republic Act] No. 7610.</blockquote>A thorough reading of <i>Tulagan</i> shows that it did not discuss the effect of Republic Act No. 7610 on the provisions of the Revised Penal Code; it merely held that "when the lascivious act is not covered by Republic Act No. 8353, then Article 336 of the Revised Penal Code is applicable, except when the lascivious conduct is covered by Republic Act No. 7610." Nevertheless, the issue of when acts of lasciviousness to a child must be prosecuted under the Revised Penal Code or under Republic Act No. 7610 remains unresolved.<br><br><i>Tulagan</i> acknowledged that existing legislations, particularly Republic Act No. 8353 or the Anti-Rape Law, and Republic Act No. 7610, are silent and do not address sexual intercourse or lascivious conduct involving minors who are 12 years old but less than 18, thus:<blockquote>Records of committee and plenary deliberations of the House of Representative and of the deliberations of the Senate, as well as the records of bicameral conference committee meetings, further reveal no legislative intent for [Republic Act] No. 8353 to supersede Section 5(b) of [Republic Act] No. 7610. The only contentious provisions during the bicameral conference committee meetings to reconcile the bills of the Senate and House of Representatives which led to the enactment of [Republic Act] No. 8353, deal with the nature of and distinction between rape by carnal knowledge and rape by sexual assault; the threshold age to be considered in statutory rape [whether Twelve (12) or Fourteen (14)], the provisions on marital rape and effect of pardon, and the presumptions of vitiation or lack of consent in rape cases. While [Republic Act] No. 8353 contains a generic repealing and amendatory clause, the records of the deliberation of the legislature are silent with respect to sexual intercourse or lascivious conduct against children under [Republic Act] No. 7610, particularly those who are 12 years old or below 18, or above 18 but are unable to fully take care or protect themselves from abuse, neglect, cruelty, exploitation or discrimination because of a physical or mental disability or condition.</blockquote>Despite the silence and gap, the Court in <i>Tulagan</i> proceeded to rule that acts of lasciviousness committed against minors must be prosecuted in accordance with Republic Act No. 7610. At this juncture, the Court considers it imperative to address the gap by undertaking the task which <i>Tulagan</i> seemingly left unresolved: to determine whether Republic Act No. 7610 has repealed the provisions on acts of lasciviousness under the Revised Penal Code.<br><br>The answer is in the negative.<br><br>Section 35 of Republic Act No. 7610 specifies that all laws, decrees, or rules inconsistent with its provisions are repealed or modified accordingly. <i>On the other hand, the law explicitly mentions that the Revised Penal Code applies when the victim of rape or lascivious conduct is below 12 years old.</i><br><br><i>Therefore, it is clear that Republic Act No. 7610 did not repeal the provisions of the Revised Penal Code. Although Tulagan referred to the Revised Penal Code as being applicable lo cases involving minors below 12 years old</i>, and recognized the absence of explicit legal provisions for those 12 years old and above but below 18 years old, it merely concluded that all other acts of lasciviousness committed against children subjected to sexual abuse shall fall under Republic Act No. 7610.<br><br>Considering the previous points and noting that there has been no repeal between Republic Act No. 7610 and the Revised Penal Code, the Court concludes that not all cases of acts of lasciviousness committed against minors aged 12 years old and above but below 18 years old should be prosecuted under Republic Act No. 7610. The application of this law should be confined to cases where minors are subjected to sexual abuse.<br><br>The Court now rules that based on the explicit wording of Section 2(g) of the IRR of Republic Act No. 7610 and the preceding discussion, minors subjected to sexual abuse are those who indulge or engage in, or, in other words, consent, albeit such consent being defective under the law, or are those who are convinced, cajoled, prevailed upon, to participate and engage in lascivious conduct, due to the "employment, use, persuasion, inducement, enticement or coercion" conducted by the adult.<br><br>. . . .&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Guidelines on the proper application of Section 5(b), Republic Act No. 7610, in relation to acts of lasciviousness involving minors</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>In clarifying the proper application of Section 5(b) of Republic Act No. 7610, particularly in relation to acts of lasciviousness involving minors, the Court finds it necessary to delineate the scope of this provision and distinguish it from the related crimes under the Revised Penal Code. The following guidelines are thus issued to aid in the uniform and consistent prosecution of such cases, especially in the light of the amendments introduced by Republic Act No. 11648 and the relevant jurisprudence.<br><br>First, Section 5(b) of Republic Act No. 7610, as amended by Republic Act No. 11648 (which raised the age of sexual consent to 16), applies to minors aged 16 and above but below 18 years old who are subjected to other forms of sexual abuse. This provision specifically covers situations where a minor engages in sexual intercourse or lascivious conduct due to the coercion or influence of an adult, even when the minor appears to "consent" to the act.<br><br>Second, the provision contemplates a semblance of consent that is defective or vitiatedâwhere the minor allows, yields, or participates in the act not through free will but because of the coercion or influence exerted by an adult. Such coercion or influence is distinct from the concepts of force or intimidation under the Revised Penal Code. Therefore, when the minor's participation is induced by pressure, manipulation, or abuse of authority that does not rise to the level of force or intimidation, Section 5(b) properly<br>applies.<br><br>Third, Section 5(b) does not apply when the lascivious conduct is committed through force or intimidation, or when the victim is deprived of reason, unconscious, or otherwise subjected to fraudulent machination or grave abuse of authority. In such cases, the proper charge is acts of lasciviousness under Article 336 of the Revised Penal Code, and Republic Act No. 7610 does not find application.<br><br><i>Fourth, suppose the victim is below 12 years old, or below 16 years old, and the case does not fall under the specific conditions of Section 5(b). In that case, the offense should be prosecuted as either rape or acts of lasciviousness, as the case may be, under the provisions of the Revised Penal Code, as amended.</i><br><br>The rules are summarized as follows:<br><br><table width="100%" border="1" cellpadding="3" cellspacing="0"><tbody><tr valign="top"><td width="34%"><div align="justify">&nbsp;</div></td><td width="33%"><div align="justify">Lascivious conduct committed through force, threat, or intimidation, or where the victim is deprived of reason or otherwise unconscious, or by fraudulent machination or grave abuse of authority</div></td><td width="33%"><div align="justify">Where the child <i>indulges and engages</i> in lascivious conduct, thus subjected to sexual abuse, through the adult's employment of coercion and influence, or in other words, when the child gives defective "consent"</div></td></tr><tr valign="top"><td><div align="justify">A child below 12 years old</div></td><td><div align="justify">Statutory acts of lasciviousnes under Article 336 of the Revised Penal Code</div></td><td><div align="justify">Statutory acts of lasciviousness under Article 336 of the Revised Penal Code</div></td></tr><tr valign="top"><td><div align="justify">A child 12 years old or above but below 18 years old</div></td><td><div align="justify">Acts of lasciviousnes under Article 336 of the Revised Penal Code</div></td><td><div align="justify">Sexual abuse under Section 5(b) of Republic Act No. 7610</div></td></tr></tbody></table><br>These principles on the delineation of the elements of force and intimidation on one hand, and coercion and influence on the other, and the applicability of Republic Act No. 7610 <i>only</i> as to minors who are EPSOSA, shall also apply to other similar crimes sexual in nature, including rape by carnal knowledge and rape by sexual assault.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> (Emphasis supplied, citations omitted)</blockquote>Applying the guidelines set in <i>Gramatica</i> and taking into consideration AAA279464's age at the time the crime was committed and her concomitant lack of capacity to give consent whatsoever, petitioner should be held liable for statutory acts of lasciviousness under Article 336 of the RPC instead of acts of lasciviousness under Article 336 of the RPC in relation to Section 5(b) of Republic Act No. 7610.<br><br>Notably, the prosecution was able to prove all the elements of statutory acts of lasciviousness during trial:<br><br><i>Petitioner committed lewd acts against AAA279464.</i> AAA279464 testified during trial that petitioner sat her on his lap, pulled down both of their pants, and then rubbed his penis against her buttocks:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="2"><div align="justify">PROS. PATARAS:</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="95%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">You filed this case against [petitioner], [AAA279464)?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes, sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Why did you file a case against [petitioner]? </div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He did something wrong to me.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And where did he do that something wrong to you?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">At <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">In your house?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">No, sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Whose house?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">[His], sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">PROS. PATARAS:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And can you recall the date when he did something to you in his house?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">No more.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And how come you were in h.is house when he did that to you?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td> <div align="justify">I was playing with his children.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">So what is the name of his child that you were playing with?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td> <div align="justify">[CCC279464] and I forgot the name of the other one.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">While you were playing with his children, what did [the petitioner] do?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He let his children wash the dishes and then he called me and he said he will remove [lice] from my head.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Did you go to him when he called for you telling you that he will remove your [lice]?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes, sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And did he remove your [lice]?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He was reasoning that my [lice] were falling from my hair to my back.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">After he told you that, what did he do next?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He covered both of us with a blanket and he said that he was feeling cold.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">PROS. PATARAS:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify"> Where were you both when he covered you and himself with a blanket?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Here (Interpreter: witness pointing to her lap).</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Lap of whom?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Him (Interpreter: witness looking at the witness).</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify"> How come you are in his lap?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He let me sit on his lap.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And after he let you sit on his lap and covered you and him with a blanket, what else happened, [AAA279464]?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He pulled down my pants.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Was he able to pull down your pants?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes, sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And after he pulled down your pants, what did he do next, if any?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He also pulled his pants down.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">and after he pulled his pants down, what happened next?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">"<i>Insagidsagid na jay buto na idiay obet ko</i>" (he let his penis touch my buttocks)</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And what were you doing while he was doing that?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">I wanted to cry and I told him "why is that, Uncle [petitioner][?"]</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Did you cry?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">No[,] only at night when I cried.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">PROS. PATARAS</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Did he do any other things aside from letting his penis touch your buttocks?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td> <div align="justify">No more.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">&nbsp;</div></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">So he stopped?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes, sir.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup></div></td></tr></tbody></table></blockquote>In <i>Barona v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> We defined "lewd" as "obscene, lustful, indecent or lecherous" and that it includes "acts of making physical contact with the body of another person for the purpose of obtaining sexual gratification other than, or without intention of, sexual intercourse.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> In <i>Amployo v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> We explained that "[t]he presence or absence of lewd designs is inferred from the nature of the acts themselves and the environmental circumstances. What is or what is not lewd conduct, by its very nature, cannot be pigeonholed into a precise definition."<sup style="COLOR: RGB(255, 0, 0);">[92]</sup><br><br>In this case, considering the time and the place where it occurred, petitioner's act of rubbing his penis against AAA279464's buttocks clearly falls within the definition of lewd conduct.<br><br><i>AAA279464 is a female and was below the statutory age when the crime occurred.</i> According to her birth certificate,<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> AAA279464 was born <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>. Thus, she was only eight years old when the crime occurred.<br><br>Notably, while the Information<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> in this case charged petitioner with acts of lasciviousness under Article 336 of the RPC in relation to Section 5(6) of Republic Act No. 7610, that does not bar his conviction for statutory acts pf lasciviousness considering that the latter is necessarily included in the former in view of their shared elements.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The defenses raised by petitioner have no merit</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Petitioner claims that AAA279464 is not a credible witness.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> He argues that the RTC and the CA erred when it gave credence to her testimony considering that: (1) there are inconsistences between the affidavit that AAA279464 executed prior to trial and her testimony in court;<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> (2) the veracity of AAA279464's account is belied by her actions after she was supposedly molested;<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> and (3) AAA279464's testimony in court was "unsophisticated" and bereft of any details.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup><br><br>We are not convinced.<br><br>It is settled that in prosecutions for acts of lasciviousness, the lone testimony of the offended party, if credible, is sufficient to establish the guilt of the accused.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> In this case, both the RTC<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> and the CA<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> found AAA279464's testimony credible and worthy of belief. Settled is the rule that factual findings of the trial court regarding the credibility of witnesses is accorded great respect by this Court:<blockquote>Now, the Court reiterates and adheres to the settled rule that the factual findings of the trial court, its calibration of the testimonies of the witnesses, and its assessment of the probative weight thereof, as well as its conclusions anchored on said findings are accorded respect, if not conclusive effect. This is truer if such findings were affirmed by the appellate court. When the trial court's findings have been affirmed by the appellate court, said findings are generally binding upon the Court. But where some facts are misinterpreted or some details overlooked, the Supreme Court may overturn the erroneous conclusions drawn by the courts a quo. As this Court has stated in a plethora of cases, "in exceptional circumstances, such as when the trial court overlooked material and relevant matters x x x this Court will re-calibrate and evaluate the factual findings of the [lower courts]."<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> (Citations omitted)</blockquote>Here, We find that neither the RTC nor the CA overlooked or misinterpreted facts that would have led to petitioner's acquittal.<br><br><i>One</i>, that AAA279464's testimony does not perfectly mirror the contents of her affidavit does not diminish her credibility as a witness. In <i>Kummer v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> We ruled that inconsistencies between a witness' affidavit and testimony in court when it only pertains to minor and collateral matters do not affect the witness' credibility:<blockquote>We find these claims far from convincing. The Court has consistently held that inc.onsis1encies between the testimony of a witness in open court, on one hand, and the statements in his sworn affidavit, on the other hand, referring only to minor and collateral matters, do not affect his credibility and the veracity and weight of his testimony as they do not touch upon the commission of the crime itself. Slight contradictions, in fact, even serve to strengthen the credibility of the witnesses, as these may be considered as badges of truth rather than indicia of bad faith; they tend to prove that their testimonies have not been rehearsed. Nor are such inconsistencies, and even improbabilities, unusual, for no person has perfect faculties of senses or recall.<br><br>. . . .<br><br>It is oft repeated that affidavits are usually abbreviated and inaccurate. Oftentimes, an affidavit is incomplete, resulting in its seeming contradiction with the declarant's testimony in court. Generally, the affiant is asked standard questions, coupled with ready suggestions intended to elicit answers, that later turn out not to be wholly descriptive of the series of events as the affiant knows them. Worse, the process of affidavit-taking may sometimes amount to putting words into the affiant's mouth, thus allowing the whole statement to be taken out of context.<br><br>The court is not unmindful of these on-the-ground realities. In fact, we have ruled that the discrepancies between the statements of the affiant in his affidavit and those made by him on the witness stand do not necessarily discredit him since <i>ex parte</i> affidavits are generally incomplete. As between the joint affidavit and the testimony given in open court, the latter prevails because affidavits taken ex-parte are generally considered to be inferior to the testimony given in court.<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> (Citations omitted)</blockquote>Here, the details that AAA279464 failed to mention during her testimony, i.e., that petitioner held his penis and that he touched her legs,<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> refer to minor and collateral matters and therefore do not affect AAA279464's credibility. Significantly, AAA279464 was consistent in her allegation regarding the <i>corpus delicti</i> of the crime, i.e., that petitioner made her sit on his lap, took off both their lower garments, and proceeded to rub her penis against her buttocks.<br><br><i>Two</i>, AAA279464's actions and omissions after she was molested, i.e.; (1) her supposed failure to immediately inform her parents what happened; (2) riding the vehicle that petitioner was driving after the incident of molestation; and (3) her calm demeanor when she was interviewed by Fowaya, does not suffice to cast doubt on the truthfulness of her testimony. It is settled that there is no standard reaction that can be expected from victims of sexual abuse and that victims deal with the traumatic experience in different ways:<blockquote>The behavior and reaction of every person cannot be predicated with accuracy. It is an accepted maxim that different people react differently to a given situation or type of situation, and there is no standard form of behavioral response when one is confronted with a strange or startling experience. Not every rape victim can be expected to act conformably to the usual expectations of everyone. Some may shout; some may faint; and some be shocked into insensibility, while others may openly welcome the intrusion. Behavioral psychology teaches us that people react to similar situations dissimilarly. There is no standard form of behavior when one is confronted by a shocking incident. The workings of the human mind when placed under emotional stress are unpredictable. This is true specially in this case where the victim is a child of tender age under the moral ascendancy of the perpetrator of the crime.<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> (Emphasis supplied, citation omitted)</blockquote>More, contrary to petitioner's claim, AAA279464 immediately told her father that petitioner molested her, but the latter failed to immediately report the incident to the police.<sup style="COLOR: RGB(255, 0, 0);">[107]</sup><br><br><i>Three</i>, contrary to petitioner's claim, AAA279464's testimony was sufficiently detailed to convict petitioner as it is a credible account of petitioner committing a lewd act against her.<br><br>As for petitioner's claim that the prosecution failed to prove the element of force or intimidation in the case, it is irrelevant. In <i>Tulagan</i>, We ruled that when the victim is below 12 years old, the lascivious conduct is the sole element of the crime considering that "in statutory acts of lasciviousness, as in statutory rape, the minor is presumed incapable of giving consent; hence, the other circumstances pertaining to [acts of lasciviousness]âforce, threat, intimidation, etc.âare immaterial."<sup style="COLOR: RGB(255, 0, 0);">[108]</sup><br><br>Similarly irrelevant is petitioner's contention that it was impossible for him to molest AAA279464 at the place and during the time that she claimed since it was broad daylight and there were other people present.<sup style="COLOR: RGB(255, 0, 0);">[109]</sup> It is recognized that lust is no respecter of time and place and that sexual abuse can be committed even: (1) in places where people congregate; (2) in parks; (3) inside a house where there are other occupants; and (4) even in the same room where other members of the family are also sleeping.<sup style="COLOR: RGB(255, 0, 0);">[110]</sup><br><br>Regarding petitioner's defense of denial, it is without any merit. Denial is an intrinsically weak defense and will crumble in the face of the positive identification and straightforward narration of the prosecution witnesses.<sup style="COLOR: RGB(255, 0, 0);">[111]</sup> "Between an affirmative assertion which has a ring of truth to it and a general denial, the former generally prevails."<sup style="COLOR: RGB(255, 0, 0);">[112]</sup> More, denial cannot prevail over the positive testimony of witnesses who were not shown to have any ill motive to testify against the accused.<sup style="COLOR: RGB(255, 0, 0);">[113]</sup> Here, no proof was adduced by petitioner that AAA279464 was impelled by any ill motive to testify against him. Therefore, between petitioner's general denial and AAA279464's clear and positive testimony, the CA correctly gave credence to the latter.<br><br>Finally, petitioner's claim that the prosecution should have presented his other child as a witness deserves scant consideration. "[T]he prosecution is imbued with the discretion to choose who to present as witnesses."<sup style="COLOR: RGB(255, 0, 0);">[114]</sup> Here, AAA279464's testimony is sufficient to convict petitioner and the testimony of any additional witnesses presented by the prosecution would be merely corroborative. If petitioner.is of the opinion that the testimony of his other child would contradict AAA279464's testimony and exonerate him from any liability, then petitioner should have been the one to present her as a witness.<br><br>In fine, there is no reason to reverse petitioner's conviction considering that the prosecution was able to prove his guilt beyond reasonable doubt.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The appropriate penalty to be imposed on petitioner</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Article 336 of the RPC provides that acts of lasciviousness is punishable with <i>prision correccional</i> or imprisonment for six months to six years. Considering the provisions of the Indeterminate Sentence Law<sup style="COLOR: RGB(255, 0, 0);">[115]</sup> and the absence of any modifying circumstance in this case,<sup style="COLOR: RGB(255, 0, 0);">[116]</sup> the minimum term of the imposable penalty shall be taken from the penalty next lower in degree to that prescribed by the law or <i>arresto mayor</i>, i.e., one month and one day to six months, while the maximum term of the imposable penalty shall be taken from the medium period of the prescribed penalty which has a range of two years, four months, and one day to four years and two months. Accordingly, petitioner should be sentenced to the indeterminate penalty of imprisonment for six months to four years and two months.<br><br>Petitioner is likewise liable to pay AAA279464: (1) PHP 50,000.00 as civil indemnity; (2) PHP 50,000.00 as moral damages; and (3) PHP 50,000.00 as exemplary damages.<sup style="COLOR: RGB(255, 0, 0);">[117]</sup> The foregoing awards shall earn interest at the rate of 6% per annum, which shall commence from the finality of this Resolution until full payment.<sup style="COLOR: RGB(255, 0, 0);">[118]</sup><br><br><b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The February 17, 2025 Decision of the Court of Appeals in CA-G.R. CR No. 48113 is <b>AFFIRMED with MODIFICATION</b>. Petitioner XXX279464 is <b>GUILTY</b> beyond reasonable doubt of statutory acts of lasciviousness under Article 336 of the Revised Penal Code. He is <b>SENTENCED</b> to suffer the penalty of imprisonment for an indeterminate period of six months of <i>arresto mayor</i>, as minimum, to four years and two months of <i>prision correccional</i>, as maximum.<br><br>Petitioner is likewise <b>ORDERED to PAY</b> AAA279464: (1) PHP 50,000.00 as civil indemnity; (2) PHP 50,000.00 as moral damages; and (3) PHP 50,000.00 as exemplary damages. The foregoing awards shall earn interest at the rate of 6% per annum from the date of finality of this Decision until full payment.<br><br><b>SO ORDERED.</b><br><br><i>Leonen, SAJ. (Chairperson), Lazaro-Javier, Kho, Jr.</i>, and <i>Villanueva, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015, as mandated by Republic Act No. 7610 of the Revised Penal Code, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 34-48. The February 17, 2025 Decision in CA-G.R. CR No. 48113 was penned by Associate Justice Gabriel T. Robeniol and concurred in by Presiding Justice Fernanda Lampas Peralta and Associate Justice Maximo M. De Leon of the First Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> RTC records, pp. 1-2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 105.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 105-106.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 106.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 107.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 136.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 137.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 138.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 142.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 128-129.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 156-166. The August 25, 2022 Judgment in Criminal Case No. 21H-CR-13843 was penned by Judge Marietta S. Brawner-Cualing of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 166.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 165.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 161-164.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 164-165.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 167-168.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> CA <i>rollo</i>, p. 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 23-27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 91-94.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 94-98.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, pp. 34-47; CA <i>rollo</i>, pp. 116-129.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Rollo</i>, p. 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 43-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 15-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 21-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 25-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 66-67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 76-97.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 80-81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 82-86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 88-89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 89-90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>Kumar v. People</b>, 874 Phil. 214, 223 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>Lopez v. Saludo, Jr.</b>, 910 Phil. 600, 605 (2021) [Per J. Hernando, Second Division]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Kumar v. People</b>, 874 Phil. 214, 223 (2020) [Per J. Leonen, Third Division]. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> 646 Phil. 631 (2010) [Per J. Villarama, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 637-638.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <b>Spouses Miano v. Manila Electric Company</b>, 800 Phil. 118, 123 (2016) [Per J. Leonen, Second Division]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> 849 Phil. 197, 248-249 (2019) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> RTC records, p. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>Capueta v. People</b>, Phil. 883 Phil. 502, 510-511 (2020) [Per J. Delos Santos, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <b>Carbonell v. People</b>, 901 Phil. 501, 506-507 (2021) [Per J. Delos Santos, Third Division]. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> at 507-508.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <b>G.R. No. 260233 &amp; 266039</b>, August 12, 2025 [Per J. Inting, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> at 38-54. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> RTC records, pp. 104-107.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup>917 Phil. 677 (2021) [Per J. Carandang, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id.</i> at 689. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> 496 Phil. 747 (2005) [Per J. Chico-Nazario, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Id.</i> at 756. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> RTC records, p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>Id.</i> at 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Rollo</i>, p. 17<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Id.</i> at 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Id.</i> at 18, 20-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Id.</i> at 19-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <b>Garingarao v. People</b>, 669 Phil. 512, 522 (2011) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> RTC records, pp. 164-165.<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Rollo</i>, p. 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <b>Balina v. People</b>, 893 Phil. 342, 347 (2021) [Per J. Gaerlan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> 717 Phil. 670 (2013) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <i>Id.</i> at 678-679.<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Rollo</i>, pp. 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <b>People v. Dalaguet</b>, 926 Phil. 713, 724 (2022) [Per J. J. Lopez, Second Division]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <i>Rollo</i>, p. 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> 849 Phil. 197. 257 (2019) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Rollo</i>, p. 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <b>People v. Ladra</b>, 813 Phil. 862, 872 (2017) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> <b>Gumawid v. People</b>, 921 Phil. 742, 754-755 (2022) [Per J. Inting, First Division). (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> <b>People v. Serafin</b>, 879 Phil. 65, 72 (2020) [Per J. Delos Santos, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[113]</sup> <b>People v. Ampo</b>, 848 Phil. 97, 109 (2019) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[114]</sup> <b>People v. Gomez</b>, 388 Phil. 462, 471 (2000) [Per J. Gonzaga-Reyes, Third Division]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[115]</sup> ACT NO. 4103, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[116]</sup> REV. PEN. CODE, art. 64(1).<br><br><sup style="COLOR: RGB(255, 0, 0);">[117]</sup> <b>Tulagan v. People</b>, 849 Phil. 197, 290-91 (2019) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[118]</sup> <b>Nacar v. Gallery Frames</b>, 716 Phil. 267, 283 (2013) [Per J. Peralta, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

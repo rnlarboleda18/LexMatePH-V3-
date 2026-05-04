@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 272354 - LEVEL UP, INC., PETITIONER, VS. COMMISSIONER OF INTERNAL REVENUE, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70267' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 272354, September 29, 2025 ]</H2>
+			<H3>LEVEL UP, INC., PETITIONER, VS. COMMISSIONER OF INTERNAL REVENUE, RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING,<SUP STYLE="COLOR: RGB(255, 0, 0);">**</SUP> J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review on <i>Certiorari</i><sup style="color: rgb(255, 0, 0);">[1]</sup> (Petition) under Rule 45 of the Rules of Court assailing the Decision<sup style="color: rgb(255, 0, 0);">[2]</sup> dated January 6, 2021, and the Resolution<sup style="color: rgb(255, 0, 0);">[3]</sup> dated February 21, 2024, of the Court of Tax Appeals (CTA) <i>En Banc</i> in CTA <i>EB</i> Nos. 2069 and 2070, which affirmed the Decision<sup style="color: rgb(255, 0, 0);">[4]</sup> dated December 6, 2018 of the CTA Special Second Division (CTA Division) in CTA Case No. 9424. Previously, the CTA Division found petitioner Level Up, Inc. (Level Up) liable for deficiency value-added tax (VAT) with surcharges and deficiency interest in the total amount of PHP 23,473,511.49, as well as delinquency interest due thereon.</p><p align="center"><i>The Antecedents</i> </p><p> On May 14, 2014, Level Up received a Letter of Authority,<sup style="color: rgb(255, 0, 0);">[5]</sup> authorizing a revenue officer of the Bureau of Internal Revenue (BIR) Revenue Region No. 8 (BIR Makati) to examine Level Up's books and accounting records for VAT for the taxable period of January 1, 2013, to June 30, 2013. </p><p> On November 5, 2015, the Commissioner of Internal Revenue (CIR), through the Regional Director,<sup style="color: rgb(255, 0, 0);">[6]</sup> issued a Preliminary Assessment Notice (PAN),<sup style="color: rgb(255, 0, 0);">[7]</sup> stating that Level Up was liable for deficiency VAT for the taxable period of January 1, 2013, to June 30, 2013, in the total amount of PHP 14,963,601.23. Level Up received a copy of the PAN on November 10, 2015.<sup style="color: rgb(255, 0, 0);">[8]</sup></p><p> In the Details of Discrepancies<sup style="color: rgb(255, 0, 0);">[9]</sup> attached to the PAN, the CIR explained that the deficiency VAT assessment was due to the following: </p><p><i>First</i>, based on third-party information, e.g., Summary List of Purchases (SLP) submitted by Uniwiz Trade Sales, Inc. (Uniwiz), Power House Distribution (Power House), and Veritas Systems Solutions, Inc. (Veritas), Level Up had <i>undeclared receipts</i> amounting to PHP 44,463,331.43. Level Up appeared to have provided services to these entities yet failed to declare or report such supply of services in its VAT returns and Summary List of Sales (SLS).<sup style="color: rgb(255, 0, 0);">[10]</sup> </p><p><i>Second</i>, in its return, Level Up claimed input taxes amounting to PHP 4,804,976.63 as reductions to output taxes. However, the input taxes were <i>not supported</i> by VAT invoices or official receipts issued in accordance with the invoicing requirements under Section 113<sup style="color: rgb(255, 0, 0);">[11]</sup> of the National Internal Revenue Code (NIRC).<sup style="color: rgb(255, 0, 0);">[12]</sup> </p><p><i>Third</i>, excess input tax amounting to PHP 1,264,233.93 was not regarded as credits for the subject period because Level Up was required to carry this over to the succeeding taxable quarter. </p><p> Level Up responded to the PAN through a letter<sup style="color: rgb(255, 0, 0);">[13]</sup> (Reply to the PAN), which was filed on December 17, 2015.<sup style="color: rgb(255, 0, 0);">[14]</sup> It argued that the undeclared receipts noted pertained to services rendered by a separate entity, Playweb Games, Inc. (Playweb), only that Uniwiz, Veritas, and Power House (collectively, customers) declared the supply of services in their respective SLPs using Level Up's tax identification number (TIN) i.e., TIN No. 219-367-877-000, instead of Playweb's, i.e., TIN No. 008-061053-000.<sup style="color: rgb(255, 0, 0);">[15]</sup> As proof thereof, Level Up submitted the Affidavit<sup style="color: rgb(255, 0, 0);">[16]</sup> of a certain Richel Carlos, Playweb's Finance Department head, stating under oath that the transactions were only between it and the customers, without the participation of Level Up. Attached thereto were several sales invoices and official receipts issued by Playweb to the customers. <sup style="color: rgb(255, 0, 0);">[17]</sup> </p><p> On December 16, 2015, the BIR Makati issued a Formal Assessment Notice (FAN),<sup style="color: rgb(255, 0, 0);">[18]</sup> finding Level Up liable for deficiency VAT in the total amount of PHP15,213,642.84. The attached Details of Discrepancies<sup style="color: rgb(255, 0, 0);">[19]</sup> was substantially identical to the Details of Discrepancies<sup style="color: rgb(255, 0, 0);">[20]</sup> attached to the PAN, particularly with regard to the findings on undeclared receipts and unsupported input tax. </p><p> Level Up thus instituted an administrative protest by filing a request for reinvestigation. BIR Makati granted this request and directed Level Up to submit additional documents in supporting its protest.<sup style="color: rgb(255, 0, 0);">[21]</sup> </p><p> Through a letter<sup style="color: rgb(255, 0, 0);">[22]</sup> dated March 15, 2016, Level Up submitted additional evidence, as directed by the BIR. It reiterated that it did not have undeclared receipts; rather, the discrepancies noted arose from the clerical error of Playweb's customers. It also attached the Certification<sup style="color: rgb(255, 0, 0);">[23]</sup> of Uniwiz's accountant, Lilibeth A. Abanilla, who stated under oath that the sales invoices that Uniwiz submitted in connection with the disputed assessment pertained to Playweb and not Level Up, and that the placement of Level Up's TIN in the invoices was a mere clerical error on the part of Uniwiz. </p><p> On July 12, 2016, the CIR issued the Final Decision on Disputed Assessment<sup style="color: rgb(255, 0, 0);">[24]</sup> (FDDA) denying Level Up's administrative protest. Level Up was found to still be liable for deficiency VAT in the total amount of PHP 16,324,938.89, inclusive of interests. In the Details of Discrepancies<sup style="color: rgb(255, 0, 0);">[25]</sup> attached to the FDDA, the CIR evaluated Level Up's additional evidence and discussed the reasons for its ruling. </p><p> This prompted Level Up to file a Petition for Review<sup style="color: rgb(255, 0, 0);">[26]</sup> with the CTA Division to contest the deficiency VAT assessment.<sup style="color: rgb(255, 0, 0);">[27]</sup></p><p align="center"><i>Ruling of the CTA Division</i> </p><p> In the Decision<sup style="color: rgb(255, 0, 0);">[28]</sup> dated December 6, 2018, the CTA Division found Level Up liable for deficiency VAT, with surcharges, deficiency interest, and delinquency interest, in the aggregate amount of PHP 23,473,511.49, to wit: </p><blockquote><p><b>WHEREFORE</b>, the instant Petition for Review is hereby <b>PARTIALLY GRANTED</b>. Accordingly, petitioner is <b>ORDERED TO PAY</b> respondent the amount of <b>TWENTY-THREE MILLION FOUR HUNDRED SEVENTY-THREE THOUSAND FIVE HUNDRED ELEVEN PESOS AND FORTY-NINE CENTAVOS ([PHP] 23,473,511.49)</b>, inclusive of the 25% surcharge imposed under Section 248(A)(3) of the NIRC, and deficiency and delinquency interests imposed under Sections 249(8) and (C) of the same Code, until December 31, 2017, computed as follows: </p><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td valign="top" colspan="2"><div align="left">Basic Deficiency VAT</div></td><td valign="top"><div align="right">[PHP] 8,846,280.86</div></td><td width="7%">&nbsp;</td></tr><tr><td width="8%" valign="top"><div align="justify">Add: </div></td><td width="46%" valign="top"><div align="justify">25% Surcharge</div></td><td width="39%" valign="top"><div align="right">2,211,570.22</div></td><td>&nbsp;</td></tr><tr><td valign="top"><div align="justify"></div><br></td><td valign="top"><div align="justify">20% Deficiency Interest from July 26, 2013 to August 12, 2016 <em></em></div></td><td valign="top"><div align="right"></div><br></td><td>&nbsp;</td></tr><tr><td valign="top"><div align="justify"></div><br></td><td valign="top"><div align="justify"><em>[PHP 8,846,280.86 X 20% x 1,114/365 days]</em></div></td><td valign="top"><div align="right">5,399,866.79</div></td><td>&nbsp;</td></tr><tr><td valign="top" colspan="2"><div align="justify"><strong>Total Amount Due, August 12, 2016</strong> </div></td><td valign="top"><div align="right"><strong>[PHP] 16,457,717.87</strong></div></td><td>&nbsp;</td></tr><tr><td valign="top"><div align="justify"></div><br></td><td valign="top"><div align="justify">20% Deficiency Interest from August 13, 2016 to December 31, 2017</div></td><td valign="top"><div align="right"></div><br></td><td>&nbsp;</td></tr><tr><td valign="top"><div align="justify"></div><br></td><td valign="top"><div align="justify"><em>[PHP 8,846,280.86 X 20% x 506/365 days]</em> </div></td><td valign="top"><div align="right">2,452, 722.25 </div></td><td>&nbsp;</td></tr><tr><td valign="top"><div align="justify"></div><br></td><td valign="top"><div align="justify">20% Delinquency Interest from August 13, 2016 to December 31, 2017 </div></td><td valign="top"><div align="right"></div><br></td><td>&nbsp;</td></tr><tr><td valign="top"><div align="justify"></div><br></td><td valign="top"><div align="justify"><em>[PHP 16,457,717.87 x 20% X 506/365 days] </em></div></td><td valign="top"><div align="right">4,563,071.37 </div></td><td>&nbsp;</td></tr><tr><td valign="top" colspan="2"><div align="justify"><strong>Total Amount Due, December 31, 2017</strong></div></td><td valign="top"><div align="right"><b>[PHP] 23,473,511.49</b><sup style="color: rgb(255, 0, 0);">[29]</sup> </div></td><td>&nbsp;</td></tr><tr><td valign="top"><div align="justify"></div><br></td><td valign="top"><div align="justify"></div><br></td><td valign="top"><div align="right"></div><br></td><td>&nbsp;</td></tr></tbody></table><p>In addition, petitioner is <b>ORDERED TO PAY</b> respondent delinquency interest at the rate of twelve percent (12%), which is double the legal interest rate for loans or forbearance of any money, on the Php16,457,717.87 total amount due as of August 12, 2016, as determined above, computed from January 1, 2018 until full payment thereof pursuant to Section 249(c) of the NIRC, as amended by Republic Act No. 10963, also known as Tax Reform for Acceleration and Inclusion (TRAIN), as implemented by Revenue Regulation No. 21-2018. </p></blockquote><p> Level Up moved for reconsideration but the CTA Division denied it in the Resolution dated April 16, 2019.<sup style="color: rgb(255, 0, 0);">[30]</sup> </p><p> Thus, Level Up elevated<sup style="color: rgb(255, 0, 0);">[31]</sup> the case to the CTA <i>En Banc</i>.<sup style="color: rgb(255, 0, 0);">[32]</sup> In addition to the arguments it already raised at the administrative level, Level Up asserted that it was deprived of due process because the FAN did not address the defenses and evidence presented by Level Up in the Reply to the PAN. As basis,<sup style="color: rgb(255, 0, 0);">[33]</sup> Level Up cited <i>Commissioner of Internal Revenue v. Avon Products Manufacturing, Inc</i>.<sup style="color: rgb(255, 0, 0);">[34]</sup> </p><p align="center"><i>Ruling of the CTA En Banc</i> </p><p> In the assailed Decision<sup style="color: rgb(255, 0, 0);">[35]</sup> dated January 6, 2021, the CTA <i>En Banc</i> affirmed the findings of the CTA Division on the deficiency VAT due from Level Up, viz.: </p><blockquote><p><b>WHEREFORE</b>, all the foregoing considered, the consolidated Petitions for Review are hereby <b>DENIED</b> for lack of merit. Accordingly, the Court in Division's Decision dated 6 December 2018 and [R]esolution dated 16 April 2019 are hereby <b>AFFIRMED</b>.<sup style="color: rgb(255, 0, 0);">[36]</sup> (Emphasis in the original) </p></blockquote><p> The CTA <i>En Banc</i> found that Level Up was not deprived of due process because it was given the opportunity to be heard. Particularly, after the FAN was issued, Level Up requested the reinvestigation of the assessment. This request was granted by the BIR Makati, which directed Level Up to submit its evidence in support of its defenses against the deficiency VAT assessment in question. Level Up was thus able to submit evidence in its favor in disputing the deficiency VAT assessment.<sup style="color: rgb(255, 0, 0);">[37]</sup> </p><p> The CTA <i>En Banc</i> explained that the ruling in <i>Avon Products</i> cannot be applied against the subject assessment because the CIR duly considered Level Up's evidence when it rendered the FDDA. It noted that the FDDA appropriately provided the factual and legal bases for the deficiency VAT assessment and clearly stated that despite Level Up's evidence, further verification revealed that Playweb's invoices and returns do not match the transactions with its customers who allegedly erroneously placed the TIN of Level Up instead of Playweb's.<sup style="color: rgb(255, 0, 0);">[38]</sup> </p><p> The CTA En Banc further discussed that Level Up's Reply to the PAN was filed beyond the 15-day reglementary period set forth in Section 3.1.2<sup style="color: rgb(255, 0, 0);">[39]</sup> of Revenue Regulations No. 12-99.<sup style="color: rgb(255, 0, 0);">[40]</sup> It noted that Level Up received a copy of the PAN on November 10, 2015, yet it filed the Reply to the PAN only on December 17, 2015, after 37 days had already lapsed from the date of its receipt of the PAN. This notwithstanding, the defenses raised in the Reply to the PAN were sufficiently considered in the FDDA.<sup style="color: rgb(255, 0, 0);">[41]</sup> </p><p> Level Up filed a motion for reconsideration<sup style="color: rgb(255, 0, 0);">[42]</sup> of the CTA <i>En Banc</i> Decision, but it was denied by the CTA <i>En Banc</i> in the assailed Resolution<sup style="color: rgb(255, 0, 0);">[43]</sup> dated February 21, 2024. </p><p> Thus, Level Up filed the present Petition. </p><p align="center"><i>Petitioner Level Up's Arguments</i> </p><p> Level Up insists that it was denied due process thus rendering the subject assessment void. It asserts that pursuant to the ruling in <i>Avon Products</i>, a final assessment is a total nullity if the BIR failed to acknowledge and consider the evidence submitted by the taxpayer in relation to the disputed assessment. Level Up points out that the assessment in the FAN was an exact copy of the PAN, which supposedly proves that the BIR Makati did not at all consider the evidence that Level Up submitted in the Reply to the PAN.<sup style="color: rgb(255, 0, 0);">[44]</sup> </p><p> Level Up further contends that the discussion in the FDDA cannot cure a void FAN because Section 228 of the NIRC clearly states that "[t]he taxpayers shall be informed in writing of the law and the facts on which the assessment is made; otherwise, the assessment shall be void." It thus concludes that the assessment must be set aside, notwithstanding the FDDA's consideration of the evidence that Level Up submitted.<sup style="color: rgb(255, 0, 0);">[45]</sup> </p><p> Level Up adds that it cannot be made liable for deficiency VAT because the assessment is based on undeclared receipts that supposedly pertain to transactions between Playweb and its customers. It insists that it is a stranger to the transactions upon which it is being erroneously assessed deficiency VAT.<sup style="color: rgb(255, 0, 0);">[46]</sup></p><p> Finally, Level Up imputes error to the CTA <i>En Banc</i> in failing to consider the SLPs that it submitted in support of the alleged input tax that it claimed but later disallowed by the CIR for lack of substantiation.<sup style="color: rgb(255, 0, 0);">[47]</sup> </p><p align="center"><i>Respondent CIR's Arguments</i> </p><p> In its Comment,<sup style="color: rgb(255, 0, 0);">[48]</sup> the CIR, through the Office of the Solicitor General, asserts that Level Up was not deprived of due process because it failed to timely file its Reply to the PAN within the 15-day reglementary period under Section 3.1.2 of Revenue Regulations No. 12-99. Thus, no fault may be attributed to the BIR in issuing the FAN in the absence of a timely filed reply to the PAN.<sup style="color: rgb(255, 0, 0);">[49]</sup> </p><p> The CIR further avers that the doctrine in <i>Avon Products</i> cannot apply to this case because unlike the taxpayer therein, Level Up's arguments and evidence were duly considered by the CIR when it rendered the FDDA.<sup style="color: rgb(255, 0, 0);">[50]</sup> The CIR thus concludes that the subject FAN is valid because Level Up was sufficiently informed in writing of the facts and law upon which the assailed assessment is based.<sup style="color: rgb(255, 0, 0);">[51]</sup> </p><p> Moreover, the CIR contends that Level Up failed to establish that the undeclared receipts subject of the case pertained to Playweb's transactions with its customers and not to the sales by Level Up. It asserts that the undeclared sales of Level Up do not match the sales invoices that Playweb issued to Veritas and Uniwiz. The CIR further insists that tax assessments are presumed correct and it is the taxpayer who bears the burden to prove that the assessment is erroneous, which Level Up failed to do.<sup style="color: rgb(255, 0, 0);">[52]</sup> </p><p> Likewise, the CIR argues that Level Up failed to present adequate proof that it is entitled to the input tax credits disallowed due to lack of substantiation. It contends that input taxes must be supported by a VAT invoice or receipt, issued in accordance with the format prescribed in Section 110(A)(1),<sup style="color: rgb(255, 0, 0);">[53]</sup> in relation to Section 113<sup style="color: rgb(255, 0, 0);">[54]</sup> of the NIRC. Hence, credit of input taxes cannot be allowed based only on the summary list of purchases that Level Up submitted.<sup style="color: rgb(255, 0, 0);">[55]</sup> </p><p align="center"><i>The Issue</i> </p><p> The issue before the Court is whether the CTA <i>En Banc</i> erred in finding Level Up liable for deficiency VAT arising from undeclared receipts and unsupported input tax, and the CIR, in issuing the assessment, did not violate Level Up's right to due process. </p><p align="center"><i>The Ruling of the Court</i> </p><p> The Petition is denied. The subject deficiency VAT assessment against Level Up is not violative of the latter's right to due process. Hence, Level Up is liable for deficiency VAT and the interests and surcharges arising therefrom. </p><p> Preliminarily, it must be emphasized that the factual findings and legal conclusions of the CTA are accorded with the highest respect and will not be lightly set aside "because by the very nature of the CTA, it is dedicated exclusively to the resolution of tax problems and has accordingly developed an expertise on the subject."<sup style="color: rgb(255, 0, 0);">[56]</sup> While CTA decisions may be set aside if there has been an abuse or improvident exercise of its authority, or when its findings are unsupported by substantial evidence,<sup style="color: rgb(255, 0, 0);">[57]</sup> such is not the case here. </p><p> Level Up primarily relies on <i>Commissioner of Internal Revenue v. Avon Products Manufacturing, Inc</i>.,<sup style="color: rgb(255, 0, 0);">[58]</sup> where the Court held that a tax assessment must be issued by the CIR with due consideration and evaluation of all the evidence submitted by the affected party; otherwise, the assessment is violative of the taxpayer's due process rights, rendering the assessment null and void. Supposedly, the doctrine in <i>Avon Products</i> applies to the present case because in the FAN, the BIR did not consider the defenses raised by Level Up in the Reply to the PAN. </p><p> This argument fails to persuade the Court. </p><p> The present factual circumstances differ from <i>Avon Products</i>. In <i>Avon Products</i>, the Court set aside the tax assessment on account of lapses committed by the tax authorities, which were regarded as violative of the taxpayer's due process rights. <i>First</i>, the CIR denied the protest due to the taxpayer's failure to submit supporting documents, when in truth, the taxpayer made two separate submissionsâin the reply to the PAN and in the protest against the FAN. <i>Second</i>, the Formal Letter of Demand (FLD) and FAN were issued only three days before the expiration of the prescriptive period for assessment.<sup style="color: rgb(255, 0, 0);">[59]</sup> <i>Third</i>, the PAN, FLD/FAN, and Collection Letter in <i>Avon Products</i> contained identical assessments, with no reference to, comment on, or, much less, explanation of the merits of the taxpayer's explanations. </p><p> From this factual backdrop, it was obvious that the CIR in <i>Avon Products </i>did not at all consider the defenses and evidence of the taxpayer at <i>all</i> stages of the administrative tax assessment process because the assessment period was about to expire and the FLD/FAN was issued ostensibly to beat the prescriptive period. Such circumstance is not present here. Nothing in the records show that the subject assessment against Level Up was issued only to preclude prescription. </p><p> An assessment is not violative of the taxpayer's right to due process if they are afforded a reasonable opportunity to be heard and to submit any evidence that they may have in support of their claims or defenses.<sup style="color: rgb(255, 0, 0);">[60]</sup> In administrative proceedings, due process refers to "a fair and reasonable opportunity to explain one's side, or an opportunity to seek a reconsideration of the action or ruling complained of."<sup style="color: rgb(255, 0, 0);">[61]</sup> Particularly with regard to deficiency tax assessments, the Court has repeatedly held that the BIR must strictly comply with the due process requirements set forth in Section 228 of the NIRC and Revenue Regulations No. 12-99.<sup style="color: rgb(255, 0, 0);">[62]</sup> </p><p> Unlike in <i>Avon Products</i>, the records of the present case show that the BIR/CIR issued the subject assessment in compliance with Section 228 of the NIRC and Revenue Regulations No. 12-99.<sup style="color: rgb(255, 0, 0);">[63]</sup> It was Level Up that failed to observe the applicable reglementary period set forth in Revenue Regulations No. 12-99.</p><p> Under Section 3.1.2 of Revenue Regulations No. 12-99, there is a <i>mandatory</i> 15-day period counted from the receipt of the PAN within which the taxpayer may reply thereto; when there is no response within the given period, the taxpayer may be deemed in default, and a FAN will be issued thereafter.<sup style="color: rgb(255, 0, 0);">[64]</sup> Section 3.1.2 reads: </p><blockquote><p> 3.1.2 <i>Preliminary Assessment Notice (PAN)</i>. â If after review and evaluation by the Assessment Division or by the Commissioner or his duly authorized representative, as the case may be, it is determined that there exists sufficient basis to assess the taxpayer for any deficiency tax or taxes, the said Office shall issue to the taxpayer, at least by registered mail, a Preliminary Assessment Notice (PAN) for the proposed assessment, showing in detail, the facts and the law, rules and regulations, or jurisprudence on which the proposed assessment is based (see illustration in ANNEX A hereof). <i>If the taxpayer fails to respond within fifteen (15) days from date of receipt of the PAN, he shall be considered in default, in which case, a formal letter of demand and assessment notice shall be caused to be issued by the said Office</i>, calling for payment of the taxpayer's deficiency tax liability, inclusive of the applicable penalties. (Emphasis supplied) </p></blockquote><p> As aptly pointed out by the CTA <i>En Banc</i>, Level Up filed its Reply to the PAN only on <b>December 17, 2015</b>, or after 37 days had already lapsed after receiving the PAN on <b>November 10, 2015</b>. By then, the mandatory 15-day period for the taxpayer to respond to the PAN had already expired; Level Up was already<i> in default</i> within the context of Section 3.1.2 of Revenue Regulations No. 12-99. The BIR may accordingly issue a FAN in the absence of a reply from the taxpayer. </p><p> That the PAN and FAN contained identical findings does not automatically warrant the conclusion that the BIR failed to consider Level Up's defenses and evidence. It must be pointed out that the FAN had already been issued on December 16, 2015 and it was only on December 17, 2015 when Level Up filed its Reply to the PAN. </p><p> It is therefore absurd to hold that the tax authorities deliberately failed to consider the evidence submitted by Level Up, when such evidence had not been submitted to them when they prepared the FAN. Simply, in issuing the FAN, the BIR Makati could not have reviewed the evidence attached to the Reply because it was belatedly filed. To the mind of the Court, the identity between the PAN and the FAN is <i>not</i> a product of due process violation but simply a consequence of Level Up's failure to observe the reglementary period to file the Reply to the PAN. </p><p> Again, the essence of due process is the <i>opportunity</i> to be heard.<sup style="color: rgb(255, 0, 0);">[65]</sup> Thus, where a party is not heard because they have chosen, for whatever reason, not to be heard despite the opportunity granted to them, there is no due process violation.<sup style="color: rgb(255, 0, 0);">[66]</sup> Due process does not require the BIR to await the taxpayer's reply or protest beyond the periods set forth in Revenue Regulations No. 12-99; otherwise, the taxpayer could hold hostage the tax assessment process by simply delaying the submission of the reply or protest. </p><p> To stress, all that due process mandates is an ample opportunity for the taxpayer to respond to the PAN and the FAN, which was fully granted to Level Up. Accordingly, Level Up cannot now complain of deprivation of due process when it was given the full 15-day period under Section 3.1.2 of Revenue Regulations No. 12-99 to respond to the PAN, yet it inexplicably failed to file its Reply within the reglementary period. </p><p> It should also be emphasized that the "protest" to which the relevant supporting documents may be submitted by the taxpayer is the protest to the FLD/FAN.<sup style="color: rgb(255, 0, 0);">[67]</sup> It is from the taxpayer's receipt of the FLD/FAN that the 60-day period under Section 3.1.5 of Revenue Regulations No. 12-99 begins to run, to wit: </p><blockquote><p> 3.1.5 <i>Disputed Assessment</i>. â <i>The taxpayer or his duly authorized representative may protest administratively against the aforesaid formal letter of demand and assessment notice within thirty (30) days from date of receipt thereof</i>. If there are several issues involved in the formal letter of demand and assessment notice but the taxpayer only disputes or protests against the validity of some of the issues raised, the taxpayer shall be required to pay the deficiency tax or taxes attributable to the undisputed issues, in which case, a collection letter shall be issued to the taxpayer calling for payment of the said deficiency tax, inclusive of the applicable surcharge and/or interest. No action shall be taken on the taxpayer's disputed issues until the taxpayer has paid the deficiency tax or taxes attributable to the said undisputed issues. The prescriptive period for assessment or collection of the tax or taxes attributable to the disputed issues shall be suspended. </p><p> . . . . </p><p><i>The taxpayer shall submit the required documents in support of his protest within sixty (60) days from date of filing of his letter of protest</i>, otherwise, the assessment shall become final, executory and demandable. The phrase "submit the required documents" includes submission or presentation of the pertinent documents for scrutiny and evaluation by the Revenue Officer conducting the audit. The said Revenue Officer shall state this fact in his report of investigation. </p><p> If the taxpayer fails to file a valid protest against the formal letter of demand and assessment notice within thirty (30) days from date of receipt thereof, the assessment shall become final, executory and demandable. </p></blockquote><p> Here, the foregoing provision was observed. Verily, Level Up does not dispute that it was afforded the opportunity to protest the FAN through a request for reinvestigation;<sup style="color: rgb(255, 0, 0);">[68]</sup> that this request was granted by the BIR Makati; that the BIR Makati then directed it to submit its supporting documents and evidence; and that Level Up submitted its evidence through its letter dated March 15, 2016. Further, as aptly pointed out by the CTA <i>En Banc</i>, the CIR gave due consideration to Level Up's evidence and supporting documents, which were discussed in the Details of Discrepancies<sup style="color: rgb(255, 0, 0);">[69]</sup> attached to the FDDA, to wit: </p><blockquote><p><b><u>Undeclared Receipts, P44,463,331.43</u>.</b> â Verification disclosed . . . </p><p> In the above-mentioned letters, it was mentioned that <i>"The undeclared receipts which were included in the FAN are not sales of LUI but sales of Playweb Games, Inc., a corporation that is separate and distinct from LUI"</i> and details of which are discussed as follows: </p><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="5%"><div align="justify">a.</div></td><td width="95%"><div align="justify">An affidavit of Ms. Richel Carlos from the finance department of Playweb Games, Inc. was submitted including copies of several sales invoices and official receipts issued by Playweb Games, Inc. to support the said contention. </div></td></tr><tr valign="top"><td>&nbsp;</td><td>&nbsp;</td></tr><tr valign="top"><td><div align="justify">b.</div></td><td><div align="justify">Further, an affidavit of Ms. Lilibeth A. Abanilla of Uniwiz Trade Sales, Inc. was also submitted as an additional support to the same contention as far as the purchase of Uniwiz Trade Sales, Inc.'s is concerned.</div></td></tr><tr valign="top"><td>&nbsp;</td><td>&nbsp;</td></tr><tr valign="top"><td><div align="justify">c.</div></td><td><div align="justify">It was also noted in the letter dated March 15, 2016 that: "<i>A. Uniwiz has admitted to its mistake in using [p]laywebâs TIN to BIR during a previous assessment</i> . . . "Furthermore, it was also mentioned in the same l[e]tter that: "<i>Level Up, Inc. was assessed for its income and other revenue taxes for the year 2012. Part of the assessment was for VAT deficiencies owing to undeclared transactions which involved Uniwiz as one of the supposed customers of Level Up, Inc.</i>" In view of this, a letter from Uniwiz December 5, 2014 states that: "<i>This is to certify that we inadvertently used Level Up, Inc.âs TIN No. 219-367-877-000, instead of Playweb, Inc.âs TIN No. 008-061-053-000, in submitting the summary list of purchases from Playweb Games, Inc. for the calendar year 2012 as our company used to purchase the foods and merchandise prior to September 1, 2011 from Level Up, Inc</i>."</div></td></tr><tr valign="top"><td>&nbsp;</td><td>&nbsp;</td></tr><tr valign="top"><td><div align="justify">d.</div></td><td><div align="justify">In the same letter dated March 15, 2016 it was mentioned that: "<i>Veritas has not been transacting with LUI since 2011 and the transactions imputed to LUI</i>" which was substantiated with a letter dated September 6, 2011 which states that: "<i>In view of the transfer of ownership as well as by reason of LUIâs corporate restructuring we would like to inform you that Playweb Games, Inc. (Playweb) will take over all existing contracts with distributors and key accounts like your company. Accordingly, effective September 1, 2011, LUI is hereby formally terminating the distributorship contract dated September 1, 2011 executed between LUI and your company. Further, effective also on September 1, 2011, Playweb will execute a new distributorship contract under its name with your company[.]</i>"</div></td></tr></tbody></table><p><b><u>Re-investigation</u> disclosed the following <u>results</u>:</b> </p><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="5%"><div align="justify">a.</div></td><td width="95%"><div align="justify">The BIR has not seen any reason for the use of the TIN of Level Up, Inc. in place of the TIN of Playweb Games, Inc. since upon scrutiny of the invoices and official[s] receipts issued by the latter to Uniwiz Trade Sales disclosed that the said documents clearly states the TIN 008-061-053-000 which is of Playweb Games, Inc.'s. Further, as previously mentioned, that the same issue has already been raised in previous assessment for the taxable year 2012 however, no corrective measure has been done on the part of Uniwiz therefore, there is reason to believe that your contention with regard to the purchases of Uniwiz Trade Sales from Level Up as discussed in letter a.), b.) and c.) above, [Inc.] is not valid. Moreover, total of the vatable sales on the sales invoices issued by Playweb Games, Inc. to Uniwiz Trade sales amounting to [PHP] 28,553,069.54 does not tally with the purchases claimed by Uniwiz Trade Sale amounting to [PHP] 43,548,175.37. </div></td></tr><tr valign="top"><td>&nbsp;</td><td>&nbsp;</td></tr><tr valign="top"><td><div align="justify">b.</div></td><td><div align="justify">Moreover, with regard to the transactions with Veritas System Solution, Inc., Level Up! International Holdings PTE. LTD., Playweb Games, Inc., Power House Distributor, Inc., and SM Mart, Inc., the company <b><u>failed to provide proof that would warrant the reversal of our assessment</u></b>. </div></td></tr></tbody></table><p>In view of the foregoing, our assessment on undeclared sales amounting to [PHP] 44,463,331.43 is herewith reiterated. </p><p><b><u>Unsupported Input Tax, [PHP] 4,804,976.63</u>.</b> â Verification disclosed . . . </p><p> . . . . </p><p> During re-investigation, you failed to provide proof that would warrant the reversal of our assessment hence, therefore, our assessment on unsupported input tax amounting to P4,804,976 is herewith reiterated. </p><p><b><u>Excess Input Tax Carried-Over to Succeeding Quarter/Period, [PHP] 1,264,233.93</u></b>. â The excess input tax amounting to [PHP] 1,264,233.93 was not applied against the allowable input tax in computing deficiency value added tax since this shall be carried over to the next succeeding quarter(s)/year as provided under Section 110(B) of the Tax Code, as amended.<sup style="color: rgb(255, 0, 0);">[70]</sup> (Emphases and underscoring in the original) </p></blockquote><p> Clearly, the jurisprudential standard in <i>Avon Products</i> requiring the tax authorities to observe the taxpayer's due process rights under Section 228 of the NIRC and Revenue Regulations No. 12-99 at all stages of the administrative tax assessment, was fully observed in this case. Thus, the subject assessment cannot be invalidated on the ground of a due process violation. </p><p> Level Up maintains that the FDDA cannot cure a "void" assessment, but the premise of this theory is flawed. Again, the subject FAN is not void simply because it is identical to the PAN. In context, the similarity between the PAN and the FAN was <i>not</i> due to a deliberate disregard of evidence and violation of due process. Rather, Level Up's defenses and supporting documents were raised only after the FAN had been issuedâwell beyond the period allowed. These could not have been considered in the FAN, but were still considered in the FDDA. </p><p> Level Up also questions the CIR's findings. Particularly, it denies having undeclared receipts in the amount of PHP 44,463,331.43, reiterating that the discrepancies noted by the tax authorities based on third-party SLPs could not be attributed to it, as these were services supplied by Playweb to its customers. However, this is a finding of fact that may only be reversed by the Court upon a showing of abuse of authority by the CTA or lack of supporting evidence, which have not been established by Level Up. Hence, the Court has no basis to reverse them. </p><p> In the assailed Decision, the CTA <i>En Banc</i> aptly explained that Level Up failed to demonstrate that the discrepancies noted were actually services rendered by Playweb, not Level Up. While it submitted invoices issued by Playweb to a customer (e.g., Uniwiz) tending to show that Playweb was the supplier of services and not Level Up, the aggregate amount of these invoices (PHP 29,496,337.40) did not tally with the purchases reported by said customer in its SLP (PHP 43,548,175.37). </p><p> Lastly, Level Up asserts that its input taxes were sufficiently supported by its SLPs; thus, they cannot be disallowed on the ground of lack of substantiation. However, SLPs cannot be regarded as sufficient substantiation in this case. It is settled that input taxes may be allowed as credits against output taxes only if these are supported by invoices and/or receipts which meet the applicable VAT invoicing requirements. In particular, under Section 110(A)(1)<sup style="color: rgb(255, 0, 0);">[71]</sup> of the NIRC, a creditable input tax must be evidenced by a VAT invoice or official receipt.<sup style="color: rgb(255, 0, 0);">[72]</sup> Section 4.113-1 of Revenue Regulations No. 16-05<sup style="color: rgb(255, 0, 0);">[73]</sup> further provides that "[a]ll purchases covered by invoices/receipts other than VAT Invoice/VAT Official Receipt shall <i>not</i> give rise to any input tax," viz.: </p><blockquote><p> SECTION 4.113-1. <i>Invoicing Requirements</i>. â</p><p>(A) <i>A VAT-registered person shall issue</i>: â</p><blockquote><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(1)</div></td><td width="95%"><div align="justify">A VAT invoice for every sale, barter or exchange of goods or properties; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(2)</div></td><td><div align="justify">A VAT official receipt for every lease of goods or properties, and for every sale, barter or exchange of services.</div></td></tr></tbody></table></blockquote><p>Only VAT-registered persons are required to print their TIN followed by the word "VAT" in their invoice or official receipts. Said documents shall be considered as a "VAT Invoice" or VAT official receipt. <i>All purchases covered by invoices/receipts other than VAT Invoice/VAT Official Receipt shall not give rise to any input tax</i>. </p><p> VAT invoice/official receipt shall be prepared at least in duplicate, the original to be given to the buyer and the duplicate to be retained by the seller as part of his accounting records. (Emphasis supplied) </p></blockquote><p> Precisely, an SLP merely provides a summary of vatable transactions; it does not dispense with the need to verify the SLP's authenticity and veracity by comparing it with the sales invoices or official receipts that are required to be issued for vatable sales or services.<sup style="color: rgb(255, 0, 0);">[74]</sup> The CIR cannot therefore be faulted for disallowing the input taxes claimed by Level Up that are unsupported by the appropriate VAT invoices or official receipts, notwithstanding Level Up's submission of SLPs in reference to the claimed input tax. </p><p> The Court finds it proper to emphasize that a tax assessment is <i>prima facie</i> valid and lawful where it does not appear to have been arrived at arbitrarily or capriciously.<sup style="color: rgb(255, 0, 0);">[75]</sup> As correctly pointed out by the CIR, it is the affected taxpayer who bears the burden to prove that the questioned assessment is erroneous or invalid.<sup style="color: rgb(255, 0, 0);">[76]</sup> Level Up failed to discharge this burden. Verily, the records before the Court do not sufficiently establish that the subject deficiency assessment was made arbitrarily or capriciously. Hence, there is no basis to declare the assessment null and void, especially given that both the CTA Division and CTA <i>En Banc</i> affirmed its validity. </p><p> All told, no error may be imputed to the CTA <i>En Banc</i> in upholding the subject deficiency VAT assessment against Level Up. Contrary to Level Up's assertions, there was no violation of Level Up's due process rights and the assailed CTA rulings were supported by substantial evidence. </p><p><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision dated January 6, 2021, and the Resolution dated February 21, 2024, of the Court of Tax Appeals <i>En Banc</i> in CTA EB Nos. 2069 and 2070 are <b>AFFIRMED</b>. </p><p><b>SO ORDEED.</b> </p><p><i>Gaerlan, Dimaampao</i>, and <em>Singh, JJ.</em>, concur. <i><br> Caguioa<sup style="color: rgb(255, 0, 0);">*</sup> (Chairperson), J</i>., on official business. <br><br></p><hr width="60%" size="1" align="LEFT" noshade=""><sup style="color: rgb(255, 0, 0);">*</sup> On official business. <p><sup style="color: rgb(255, 0, 0);">*</sup><sup style="color: rgb(255, 0, 0);">* </sup>Acting Chairperson per S.O. No. 3227 dated September 23, 2025. </p><p><sup style="color: rgb(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 9-37. </p><p><sup style="color: rgb(255, 0, 0);">[2]</sup> <i>Id.</i> at 44-64. Penned by Associate Justice Maria Rowena Modesto-San Pedro and concurred in by Presiding Justice Roman G. Del Rosario, Associate Justices Juanito C. CastaÃ±eda, Jr., Erlinda P. Uy, Ma. Belen M. Ringpis-Liban, Catherine T. Manahan and Jean Marie A. Bacorro-Villena of the Court of Tax Appeals <i>En Banc</i>, Quezon City. </p><p><sup style="color: rgb(255, 0, 0);">[3]</sup> <i>Id.</i> at 65-70. Penned by Associate Justice Maria Rowena Modesto-San Pedro and concurred in by Presiding Justice Roman G. Del Rosario, Associate Justices Ma. Belen M. Ringpis-Liban, Catherine T. Manahan, Jean Marie A. Bacorro-Villena, Marian Ivy F. Reyes-Fajardo, Lanee S. Cui-David, Corazon G. Ferrer Flores and Henry S. Angeles of the Court of Tax Appeals <i>En Banc</i>, Quezon City.</p><p><sup style="color: rgb(255, 0, 0);">[4]</sup> <i>Id.</i> at 48, CTA <i>En Banc</i> Decision.</p><p><sup style="color: rgb(255, 0, 0);">[5]</sup> <i>Rollo</i>, p. 86.</p><p><sup style="color: rgb(255, 0, 0);">[6]</sup> BIR Revenue Region No. 8, Makati. </p><p><sup style="color: rgb(255, 0, 0);">[7]</sup> <i>Rollo</i>, pp. 88-89. </p><p><sup style="color: rgb(255, 0, 0);">[8]</sup> <i>Id.</i> at 45, CTA <i>En Banc</i> Decision. </p><p><sup style="color: rgb(255, 0, 0);">[9]</sup> <i>Id.</i> at 90. </p><p><sup style="color: rgb(255, 0, 0);">[10]</sup> <i>Id.</i></p><p><sup style="color: rgb(255, 0, 0);">[11]</sup> SECTION 113. <i>Invoicing and Accounting Requirements for VAT-Registered Persons</i>. â</p><blockquote><p>(A) <i>Invoicing Requirements</i>. â A VAT-registered person shall, for every sale, issue an invoice or receipt. In addition to the information required under Section 237. the following information shall be indicated in the invoice or receipt: </p><blockquote><p>(1) A statement that the seller is a VAT-registered person, followed by his taxpayer's identification number (TIN); and<br> (2) The total amount which the purchaser pays or is obligated to pay to the seller with the indication that such amount includes the value-added tax. </p></blockquote><p>(B) <i>Accounting Requirements</i>. â Notwithstanding the provisions of Section 233, all persons subject to the value-added tax under Sections 106 and 108 shall, in addition to the regular accounting records required, maintain a subsidiary sales journal and subsidiary purchase journal on which the daily sales and purchases are recorded. The subsidiary journals shall contain such information as may be required by the Secretary of Finance. </p></blockquote><p><sup style="color: rgb(255, 0, 0);">[12]</sup> <i>Rollo</i>, p. 90. </p><p><sup style="color: rgb(255, 0, 0);">[13]</sup> <i>Id.</i> at 92-98. </p><p><sup style="color: rgb(255, 0, 0);">[14]</sup> <i>Id.</i> at 92. </p><p><sup style="color: rgb(255, 0, 0);">[15]</sup> <i>Id.</i> at 94.</p><p><sup style="color: rgb(255, 0, 0);">[16]</sup> <i>Id.</i> at 97.</p><p><sup style="color: rgb(255, 0, 0);">[17]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[18]</sup> <i>Id.</i> at 99.</p><p><sup style="color: rgb(255, 0, 0);">[19]</sup> <i>Id.</i> at 100. </p><p><sup style="color: rgb(255, 0, 0);">[20]</sup> <i>Id.</i> at 90. </p><p><sup style="color: rgb(255, 0, 0);">[21]</sup> <i>Id.</i> at 117, letter dated February 12, 2016 from BIR Region No. 8-Makati Regional Director Jonas DP. Amora. </p><p><sup style="color: rgb(255, 0, 0);">[22]</sup> <i>Id.</i> at 109-116. </p><p><sup style="color: rgb(255, 0, 0);">[23]</sup> <i>Id.</i> at 118. </p><p><sup style="color: rgb(255, 0, 0);">[24]</sup> <i>Id.</i> at 133-134. </p><p><sup style="color: rgb(255, 0, 0);">[25]</sup> <i>Id.</i> at 1277-1278. </p><p><sup style="color: rgb(255, 0, 0);">[26]</sup> A copy is not attached to the records. </p><p><sup style="color: rgb(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 13, Petition. </p><p><sup style="color: rgb(255, 0, 0);">[28]</sup> <i>Id.</i> at 48, CTA <i>En Banc</i> Decision. </p><p><sup style="color: rgb(255, 0, 0);">[29]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[30]</sup> <i>Id.</i> at 14, Petition. </p><p><sup style="color: rgb(255, 0, 0);">[31]</sup> <i>Via</i> Petition for Review, <i>id.</i> at 135-170. </p><p><sup style="color: rgb(255, 0, 0);">[32]</sup> <i>Id.</i> at 14. </p><p><sup style="color: rgb(255, 0, 0);">[33]</sup> <i>Id.</i> at 142. </p><p><sup style="color: rgb(255, 0, 0);">[34]</sup> 841 Phil. 114 (2018). </p><p><sup style="color: rgb(255, 0, 0);">[35]</sup> <i>Rollo</i>, pp. 44-64. </p><p><sup style="color: rgb(255, 0, 0);">[36]</sup> <i>Id.</i> at 62. </p><p><sup style="color: rgb(255, 0, 0);">[37]</sup> <i>Id.</i> at 54-55. </p><p><sup style="color: rgb(255, 0, 0);">[38]</sup> <i>Id.</i> at 55-57. </p><p><sup style="color: rgb(255, 0, 0);">[39]</sup> 3.1.2 <i>Preliminary Assessment Notice (PAN)</i>. â If after review and evaluation by the Assessment Division or by the Commissioner or his duly authorized representative, as the case may be, it is determined that there exists sufficient basis to assess the taxpayer for any deficiency tax or taxes, the said Office shall issue to the taxpayer, at least by registered mail, a Preliminary Assessment Notice (PAN) for the proposed assessment, showing in detail, the facts and the law, rules and regulations, or jurisprudence on which the proposed assessment is based (see illustration in ANNEX A hereof). If the taxpayer fails to respond within fifteen (15) days from date of receipt of the PAN, he shall be considered in default. in which case, a formal letter of demand and assessment notice shall be caused to be issued by the said Office, calling for payment of the taxpayer's deficiency tax liability, inclusive of the applicable penalties. </p><p><sup style="color: rgb(255, 0, 0);">[40]</sup> Titled, "IMPLEMENTING THE PROVISIONS OF THE NATIONAL INTERNAL REVENUE CODE OF 1997 GOVERNING THE RULES ON ASSESSMENT OF NATIONAL INTERNAL REVENUE TAXES, CIVIL PENALTIES AND INTEREST AND THE EXTRA-JUDICIAL SETTLEMENT OF A TAXPAYER'S CRIMINAL VIOLATION OF THE CODE THROUGH PAYMENT OF A SUGGESTED COMPROMISE PENALTY," adopted on September 6, 1999. </p><p><sup style="color: rgb(255, 0, 0);">[41]</sup> <i>Rollo</i>, pp. 57-58. </p><p><sup style="color: rgb(255, 0, 0);">[42]</sup> <i>Id.</i> at 71-82. <i>See</i> Motion for Reconsideration dated January 25, 2021. </p><p><sup style="color: rgb(255, 0, 0);">[43]</sup> <i>Id.</i> at 65-70. </p><p><sup style="color: rgb(255, 0, 0);">[44]</sup> <i>Id.</i> at 23-24. </p><p><sup style="color: rgb(255, 0, 0);">[45]</sup> <i>Id.</i> at 25-28. </p><p><sup style="color: rgb(255, 0, 0);">[46]</sup> <i>Id.</i> at 28-33. </p><p><sup style="color: rgb(255, 0, 0);">[47]</sup> <i>Id.</i> at 33-35. </p><p><sup style="color: rgb(255, 0, 0);">[48]</sup> <i>Id.</i> at 1254-1274. </p><p><sup style="color: rgb(255, 0, 0);">[49]</sup> <i>Id.</i> at 1261-1262. </p><p><sup style="color: rgb(255, 0, 0);">[50]</sup> <i>Id.</i> at 1262-1265. </p><p><sup style="color: rgb(255, 0, 0);">[51]</sup> <i>Id.</i> at 1265-1266. </p><p><sup style="color: rgb(255, 0, 0);">[52]</sup> <i>Id.</i> at 1266-1268. </p><p><sup style="color: rgb(255, 0, 0);">[53]</sup> SECTION 110. <i>Tax Credits</i>. â </p><blockquote><p>(A) <i>Creditable Input Tax</i>. â</p><blockquote><p>(1) Any input tax evidenced by a VAT invoice or official receipt issued in accordance with Section 113 hereof on the following transactions shall be creditable against the output tax: <br> . . . . </p></blockquote></blockquote><p><sup style="color: rgb(255, 0, 0);">[54]</sup> SECTION 113. <i>Invoicing and Accounting Requirements for VAT-Registered Persons</i>. â </p><blockquote><p>(A) <i>Invoicing Requirements</i>. â A VAT-registered person shall, for every sale, issue an invoice or receipt. In addition to the information required under Section 237, the following information shall be indicated in the invoice or receipt: </p><blockquote><p> (1) A statement that the seller is a VAT-registered person, followed by his taxpayer's identification number (TIN); and<br> (2) The total amount which the purchaser pays or is obligated to pay to the seller with the indication that such amount includes the value-added tax.</p></blockquote><p> (B) <i>Accounting Requirements</i>. â Notwithstanding the provisions of Section 233, all persons subject to the value-added tax under Sections 106 and 108 shall, in addition to the regular accounting records required, maintain a subsidiary sales journal and subsidiary purchase journal on which the daily sales and purchases are recorded. The subsidiary journals shall contain such information as may be required by the Secretary of Finance.</p></blockquote><p><sup style="color: rgb(255, 0, 0);">[55]</sup> <i>Rollo</i>, pp. 1272-1273. </p><p><sup style="color: rgb(255, 0, 0);">[56]</sup> <b>Commissioner of Internal Revenue v. Liquigaz Philippines Corp.</b>, 784 Phil. 874, 898 (2016); <b>CIR v. Mirant (Philippines) Operations, Corporation</b>, 667 Phil. 208, 222 (2011). </p><p><sup style="color: rgb(255, 0, 0);">[57]</sup> <b>Commissioner of Internal Revenue v. Philippine Daily Inquirer, Inc.</b>, 807 Phil. 912, 932 (2017); <b>Commissioner of Internal Revenue v. Team Sual Corp.</b>, 739 Phil. 215, 227 (2014); <b>Panasonic Communications Imaging Corporation of the Philippines v. Commissioner of Internal Revenue</b>, 625 Phil. 631, 643 (2010); <b>Commissioner of Internal Revenue v. Cebu Toyo Corporation</b>, 491 Phil. 625, 640 (2005); <b>Sea-Land Service, Inc. v. Court of Appeals</b>, 409 Phil. 508, 514 (2001). </p><p><sup style="color: rgb(255, 0, 0);">[58]</sup> <i>Supra</i> note 34, at 132. </p><p><sup style="color: rgb(255, 0, 0);">[59]</sup> The Waiver in <i>Avon</i>, had it been upheld, would have extended the assessment period to April 14, 2003. On the other hand, the FAN/FLD was issued and served upon Avon on February 28, 2003 and April 11, 2003, respectively. <i>Id.</i> at 125. </p><p><sup style="color: rgb(255, 0, 0);">[60]</sup> <strong>Favila v. National Labor Relations Commission</strong>, 367 Phil. 584, 595 (1999); <strong>PMI Colleges v. National Labor Relations Commission</strong>, 343 Phil. 237, 253 (1997). </p><p><sup style="color: rgb(255, 0, 0);">[61]</sup> <b>Disciplinary Board, Land Transportation Office v. Gutierrez</b>, 812 Phil. 148, 154 (2017), <i>citing</i> <b>Vivo v. Philippine Amusement and Gaming Corp.</b>, 721 Phil. 34, 39 (2013); <b>Office of the Ombudsman v. Reyes</b>, 674 Phil. 416, 432 (2011); <b>Ledesma v. Court of Appeals</b>, 565 Phil. 731, 740 (2007); <b>Libres v. NLRC</b>, 367 Phil. 181, 190 (1999). </p><p><sup style="color: rgb(255, 0, 0);">[62]</sup> <b>Mannasoft Technology Corp. v. Commissioner of Internal Revenue</b>, 943 Phil. 633, 647 (2023); <b>Prime Steel Mill, Inc. v. Commissioner of Internal Revenue</b>, 929 Phil. 644, 654 (2022). </p><p><sup style="color: rgb(255, 0, 0);">[63]</sup> Titled, "IMPLEMENTING THE PROVISIONS OF THE NATIONAL INTERNAL REVENUE CODE OF 1997 GOVERNING THE RULES ON ASSESSMENT OF NATIONAL INTERNAL REVENUE TAXES, CIVIL PENALTIES AND INTEREST AND THE EXTRA-JUDICIAL SETTLEMENT OF A TAXPAYER'S CRIMINAL VIOLATION OF THE CODE THROUGH PAYMENT OF A SUGGESTED COMPROMISE PENALTY." </p><p><sup style="color: rgb(255, 0, 0);">[64]</sup> <b>Prime Steel Mill, Inc. v. Commissioner of Internal Revenue</b>, <i>supra</i> note 62, at 653, <i>citing</i> <b>Commissioner of Internal Revenue v. Yumex Philippines Corp.</b>, 902 Phil. 87, 99 (2021). </p><p><sup style="color: rgb(255, 0, 0);">[65]</sup> <b>Rizal Commercial Banking v. Commissioner of Internal Revenue</b>, 524 Phil. 524, 579 (2006); <b>Spouses Estares v. Court of Appeals</b>, 498 Phil. 640, 658 (2005). </p><p><sup style="color: rgb(255, 0, 0);">[66]</sup> <b>Imperial, Jr. v. Government Service Insurance System</b>, 674 Phil. 286, 295 (2011); <b>Trans Middle East (Phils.) Equities, Inc. v. Sandiganbayan</b>, 530 Phil. 705, 715 (2006); <b>Herrera-Felix v. Court of Appeals</b>, 479 Phil. 727, 736 (2004); <b>Stronghold Insurance Co., Inc. v. Court of Appeals</b>, 282 Phil. 624, 630 (1992); <b>Bautista v. Secretary of Labor and Employment</b>, 273 Phil. 715, 722 (1991). </p><p><sup style="color: rgb(255, 0, 0);">[67]</sup> <b>Commissioner of Internal Revenue v. Maxicare Healthcare Corp.</b>, 943 Phil. 768, 781 (2023). </p><p><sup style="color: rgb(255, 0, 0);">[68]</sup> TAX CODE, sec. 228, which relevantly states: </p><blockquote><p> SECTION 228. <i>Protesting of Assessment</i>. - When the Commissioner or his duly authorized representative finds that proper taxes should be assessed, he shall first notify the taxpayer of his findings: <i>Provided, however</i>, That a preassessment notice shall not be required in the following cases: <br> . . . . </p><p> Within a period to be prescribed by implementing rules and regulations, the taxpayer shall be required to respond to said notice. If the taxpayer fails to respond, the Commissioner or his duly authorized representative shall issue an assessment based on his findings.</p><p> Such assessment may be protested administratively by filing a request for reconsideration or reinvestigation within thirty (30) days from receipt of the assessment in such form and manner as may be prescribed by implementing rules and regulations. </p><p>Within sixty (60) days from filing of the protest, all relevant supporting documents shall have been submitted; otherwise, the assessment shall become final. </p></blockquote><p><sup style="color: rgb(255, 0, 0);">[69]</sup> <i>Rollo</i>, pp. 1277-1278. </p><p><sup style="color: rgb(255, 0, 0);">[70]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[71]</sup> SECTION 110. <i>Tax Credits</i>. â </p><blockquote><p>(A) <i>Creditable Input Tax</i>. â</p><blockquote><p>(1) Any input tax evidenced by a VAT invoice or official receipt issued in accordance with Section 113 hereof on the following transactions shall be creditable against the output tax: . . . </p></blockquote></blockquote><p><sup style="color: rgb(255, 0, 0);">[72]</sup> <b>Commissioner of Internal Revenue v. Manila Mining Corp.</b>, 505 Phil. 650, 665 (2005). </p><p><sup style="color: rgb(255, 0, 0);">[73]</sup> Consolidated Value-Added Tax Regulations of 2005 issued on September 1, 2005. </p><p><sup style="color: rgb(255, 0, 0);">[74]</sup> <b>Commissioner of Internal Revenue v. Manila Mining Corp.</b>,<i> supra</i> note 72, at 667-668. </p><p><sup style="color: rgb(255, 0, 0);">[75]</sup> <b>Commissioner of Internal Revenue v. Traders Royal Bank</b>, 756 Phil. 175, 200-201 (2015); <b>Commissioner of Internal Revenue v. Hon. Gonzalez</b>, 647 Phil. 462, 492 (2010). </p><p><sup style="color: rgb(255, 0, 0);">[76]</sup> <i>Id.</i> </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

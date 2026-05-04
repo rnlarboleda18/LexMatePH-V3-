@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 278408 - REPUBLIC OF THE PHILIPPINES, PETITIONER, VS. PHILIPPINE SAVINGS BANK, RESPONDENT.R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70329' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 278408, November 10, 2025 ]</H2>
+			<H3>REPUBLIC OF THE PHILIPPINES, PETITIONER, VS. PHILIPPINE SAVINGS BANK, RESPONDENT.<br><br>R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This is a Petition for Review on <i>Certiorari</i> under Rule 45 of the Rules of Court filed by the Republic of the Philippines, through the Office of the Solicitor General (<b>OSG</b>), assailing the Court of Appeals' (<b>CA</b>) Decision,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> dated January 31, 2025, in CA-G.R. CV No. 121126. The CA upheld the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of Branch 217, Regional Trial Court (<b>RTC</b>) of Quezon City in LRC Case No. R-QZN-18-06517-LR, which granted respondent Philippine Savings Bank's (<b>PSB</b>) Petition for Cancellation of Encumbrance on the statutory lien annotated at the back of Transfer Certificate of Title (<b>TCT</b>) No. 004-2017004229, pursuant to Section 7 of Republic Act No. 26.<br><br><center><b><i>The Facts</i></b></center><br>PSB is a thrift banking institution organized and existing under the laws of the Republic of the Philippines, with principal office at PSBANK Center, 777 Paseo de Roxas comer Sedefio Street, Makati City.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> It owns a parcel of land (<b>subject property</b>) measuring 48.30 square meters located at Kaligayahan, Novaliches, Quezon City and covered by TCT No. 004-2017004229.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>By way of background, TCT No. 004-2017004229 contained an annotation of the statutory lien under Section 7 of Republic Act No. 26, as the certificate of title previously covering the subject property was administratively reconstituted on August 12, 2003.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> The subject property was previously registered in the name of Herald Gallano (<b>Gallano</b>) under TCT No. 004-2012001726.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Sometime in 2012, Gallano mortgaged the subject property to secure his loan with PSB in the amount of PHP 1,536,000.00. As Gallano failed to pay the loan, PSB foreclosed the mortgage on the subject property. When it was sold at a public auction, PSB emerged as the highest bidder. Thereafter, the corresponding certificate of sale was issued by the Ex-Officio Sheriff of Quezon City and registered with the Registry of Deeds of Quezon City.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Gallano failed to redeem the property within the one-year redemption period. Thus, PSB consolidated its ownership over the property, after which the Register of Deeds of Quezon City cancelled TCT No. 004-2012001726 in the name of Gallano and, in lieu thereof, issued TCT No. 004-2017004229 in the name of PSB on March 16, 2017. The statutory lien under Section 7 of Republic Act No. 26 that was annotated on TCT No. 004-2012001726 in the name of Gallano was carried over as an annotation on TCT No. 004-2017004229 of PSB, thus:<blockquote>: PE-6760<br><br>PURSUANT TO SEC. 7 OF REP. ACT NO. 26, THIS CERTIFICATE OF TITLE IS WITHOUT PREJUDICE TO ANY PARTY WHOSE RIGHT OR INTEREST IN THE PROPERTY WAS DULY NOTED ON THE ORIGINAL OR RECONSTITUTED CERTIFICATE OF TITLE NO. RT-114554 AT THE TIME IT WAS LOST OR DESTROYED. DATED 8/12/03.<br><br>(SGD) CONSTANTE P. CALUYA, JR.,<br><br>DEP. REGISTER OF DEEDS<br><br>COPIED FROM TCT NO. 2010003776.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></blockquote>As the statutory lien under Section 7 of Republic Act No. 26 was annotated on Reconstituted Certificate of Title No. RT-114554 (<b>TCT No. RT-114554</b>) on August 12, 2003, the two-year lien expired on August 12, 2005. Hence, on March 1, 2018, the Register of Deeds of Quezon City issued a Certification stating that the two-year lien under Section 7 of Republic Act No. 26 had expired:<blockquote>This is to certify that the two (2)-year lien provided under Sec. 7 of Republic Act No. 26 annotated at the back of TCT No. 004-2017004229 has already expired on 8-12-05, without anybody laying claim or interest</blockquote>On June 25, 2018, PSB, represented by its Assistant Vice President Atty. Jose M. Manuel, Jr., filed with the RTC a Petition for Cancellation of Encumbrance,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> praying for the cancellation of the encumbrance under Section 7 of Republic Act No. 26 annotated on TCT No. 004-2017004229.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>On June 19, 2018, the RTC issued an Order setting the case for initial hearing on August 31, 2018 at 8:30 a.m., and directing PSB to have the Order (i) posted, at least, 30 days before the hearing at the entrance of the Quezon City Hall and the bulletin boards of the Office of the Clerk of Court, RTC, Quezon City and the Barangay Hall of the barangay where the property is situated, and (ii) served, together with the Petition and its annexes upon the Register of Deeds of Quezon City, OSG, Office of the City Prosecutor of Quezon City and Land Registration Authority.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On July 26, 2018, the OSG entered its appearance as counsel for the Republic of the Philippines and deputized the Office of the City Prosecutor of Quezon City to appear on behalf of the State.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Neither the OSG nor the Office of the City Prosecutor of Quezon City filed an Opposition to PSB's Petition for Cancellation of Encumbrance.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>On August 31, 2018, the RTC issued an Order dismissing the Petition for failure of PSB to appear and comply with the jurisdictional requirements.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>PSB then filed a Motion for Reconsideration of the RTC's Order, dated August 31, 2018, which was granted by the RTC in an Order, dated November 23, 2018. On the same day, the RTC issued an Amended Order resetting the initial hearing on February 15, 2019 at 8:30 a.m. and directing PSB to have the Amended Order posted and served in accordance with the Order, dated June 19, 2018.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>On February 15, 2019, upon motion of counsel for PSB, the RTC issued an Order granting the resetting of the initial hearing to April 26, 2019. Thus, the RTC issued a Second Amended Order resetting anew the initial hearing to April 26, 2018 at 8:30 a.m., and directing PSB to have the Second Amended Order posted and served in accordance with the Order, dated June 19, 2018.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>On April 16, 2019, the RTC issued an Order resetting the initial hearing to May 10, 2019 due to the absence of the Presiding Judge.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>During the initial hearing on May 10, 2019, PSB presented and marked documentary evidence to prove compliance with the jurisdictional requirements. On May 24, 2019, PSB was allowed to present <i>ex parte</i> before the Branch Clerk of Court as no party opposed the Petition for Cancellation of Encumbrance.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>During the <i>ex parte</i> hearing before the Branch Clerk of Court on May 24, 2019, PSB presented as witness its attorney-in-fact, Nheslyn Estenor (<b>Estenor</b>), a Legal Assistant under its Legal Services Division.<br><br><center><b><i>The Ruling of the RTC</i></b></center><br>On January 31, 2020, the RTC rendered a Decision ordering the Register of Deeds of Quezon City to cancel the lien under Section 7 of Republic Act No. 26 annotated on TCT No.004-2017004229. The dispositive portion of the Decision reads:<blockquote>WHEREFORE, the petition is hereby GRANTED. The Register of Deeds of Quezon City is directed to cancel and discharge the statutory lien pertaining to Section 7 of Republic Act No. 26 annotated at the back of TCT No. 004-2017004229 in the name of "PHILIPPINE SAVINGS BANK, A THRIFT BANKING INSTITUTION DULY ORGANIZED AND EXISTING UNDER AND VIRTUE OF THE LAWS OF THE PHILIPPINES" and to make the same ineffective and without force, upon payment of the prescribed fees.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup></blockquote>On August 27, 2020, the OSG, on behalf of the Republic of the Philippines, filed by registered mail a Notice of Appeal. However, in an Order, dated September 15, 2020, the appeal was denied due course for the reason that the Notice of Appeal was filed out of time.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>On February 19, 2021, the OSG on behalf of the Republic of the Philippines, filed a Motion for Reconsideration of the RTC Decision, dated January 31, 2020, alleging that the reglementary period to file pleadings and other court submissions before Metro Manila courts was suspended from August 4, 2020 to August 18, 2020 under Administrative Circular No. 43A-2020, dated August 3, 2020.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>On February 6, 2023, the RTC issued an Order which granted the Motion for Reconsideration and gave due course to the Republic's appeal.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br><center><b><i>The Ruling of the CA</i></b></center><br>In its Decision, dated January 31, 2025, the CA dismissed the Republic's appeal and affirmed the Decision of the RTC.<br><br>At the outset, the CA recognized that in order for the trial court to validly acquire jurisdiction to hear and decide a Petition for Cancellation of Encumbrance, the law requires the registered owner, mortgagee, lessee or other lien holder whose interest is annotated on the reconstituted certificate of title, to have the notice of the petition published in two successive issues in the Official Gazette at their expense 30 days before the date of the hearing, among other requirements.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>However, the CA underscored that under the last sentence of Section 9 of Republic Act No. 26, if no petition for cancellation of encumbrance was filed within two years after the issuance of the reconstituted title, the trial court may order the Register of Deeds to cancel the encumbrance under Section 7 of Republic Act No. 26 on mere motion <i>ex parte</i> filed by the registered owner, mortgagee, lessee or other lien holder whose interest is annotated on the reconstituted certificate of title.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Thus, the CA held that PSB was not bound by the publication requirement as more than two years had already elapsed since the issuance of reconstituted title TCT No. RT-114554 on August 12, 2003 up to the filing of the Petition for Cancellation of Encumbrance on June 25, 2018.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Hence, the present Petition.<br><br><center><b><i>The Issue</i></b></center><br>Is publication an indispensable requirement before the RTC can acquire jurisdiction over a Petition for Cancellation of Encumbrance under Section 9 of Republic Act No. 26 filed more than two years after the administrative reconstitution of a title?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Petition lacks merit.<br><br>The OSG points out that PSB failed to have the Petition for Cancellation of Encumbrance published twice in successive issues in the Official Gazette. This is purportedly a fatal omission because any action taken under Section 9 of Republic Act No. 26 is allegedly a proceeding <i>in rem</i>. Hence, it is the whole world which is the party to the case. The publication of PSB's Petition for Cancellation of Encumbrance then becomes an indispensable requirement to bring notice to the whole world and vest the RTC with jurisdiction to hear and decide on the said petition.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>In supporting its claim, the OSG invites attention to the dispositive portion of the RTC Second Amended Order in which the RTC did not direct the publication of the notice of PSB's Petition for Cancellation of Encumbrance:<blockquote>WHEREFORE, let this petition be set for hearing anew before this Court located at Room 238, Second Floor, Hall of Justice, Diliman, Quezon City on April 26, 2019 at 8:30 in the morning at which place and on which date and time, all interested persons must appear and file their opposition/s to the petition.<br><br>Let copies of this second amended order be posted at the entrance of Quezon City Hall, at the bulletin boards of the Office of the Clerk of Court, Regional Trial Court, Quezon City of this Branch and in the Barangay Hall of the Barangay where the property is situated at least thirty (30) days before the date of hearing at petitioner's expense.<br><br>Further, let copies of the Second Amended Order, together with the petition and its annexes be served upon the Registry of Deeds of Quezon City, Office of the Solicitor General, Office of the City Prosecutor of Quezon City and the Land Registration Authority Quezon City.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></blockquote>The OSG thus concludes that the RTC lacked authority to hear the case.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>The argument is baseless.<br><br>Section 7 of Republic Act No. 26 provides:<blockquote>Section 7. Reconstituted certificates of title shall have the same validity and legal effect as the originals thereof: Provided, however, That certificates of title reconstituted extrajudicially, in the manner stated in sections five and six hereof, shall be without prejudice to any party whose right or interest in the property was duly noted in the original, at the time it was lost or destroyed, but entry or notation of which has not been made on the reconstituted certificate of title. This reservation shall be noted as an encumbrance on the reconstituted certificate of title.</blockquote>The above-quoted provision mandates that any reconstituted certificate of title should bear an annotation as an encumbrance, serving as a protective measure for individuals whose rights or interests were duly noted on the original title but not reflected on the reconstituted certificate. This reservation acts as a safeguard, putting interested parties on notice that they may have a claim that needs to be re-annotated on the reconstituted title.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>On the other hand, Section 9 of Republic Act No. 26 lays down the procedure to be observed by a party seeking to have his administratively reconstituted certificate of title freed from the encumbrance specified in Section 7. The provision reads:<blockquote>Section 9. A registered owner desiring to have his reconstituted certificate of title freed from the encumbrance mentioned in section seven of this Act, may file a petition to that end with the proper Court of First Instance, giving his reason or reasons therefor. A similar petition may, likewise, be filed by a mortgagee, lessees or other lien holder whose interest is annotated in the reconstituted certificate of title. Thereupon, the court shall cause a notice of the petition to be published, at the expense of the petitioner, twice in successive issues of the Official Gazette, and to be posted on the main entrance of the provincial building and of the municipal building of the municipality or city in which the land lies, at least thirty days prior to the date of hearing, and after hearing, shall determine the petition and render such judgment as justice and equity may require. The notice shall specify, among other things, the number of the certificate of title, the name of the registered owner, the names of the interested parties appearing in the reconstituted certificate of title, the location of the property, and the date on which all persons having an interest in the property must appear and file such claim as they may have. The petitioner shall, at the hearing, submit proof of the publication and posting of the notice: <i>Provided, however, that after the expiration of two years from the date of the reconstitution of a certificate of title, if no petition has been filed within that period under the preceding section, the court shall, on motion ex parte by the registered owner or other person having registered interest in the reconstituted certificate of title, order the register of deeds to cancel, proper annotation, the incumbrance mentioned in section seven hereof</i>. (Emphasis supplied)</blockquote>Clearly, the law allows individuals with rights or interests noted on the original certificate but missing from the reconstituted title to file a petition with the Court of First Instance [now the RTC]. This petition must be filed within the two-year period from the date of reconstitution established by Section 9. If no such petition is filed, Section 9 authorizes the registered owner to request the cancellation of the annotation, providing certainty and finality in the title.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>The OSG, however, submits that irrespective of the period of the filing of a Petition for Cancellation of Encumbrance in a reconstituted title under Section 9 of Republic Act No. 26, that is, whether within two years or after two years from the date of the reconstitution of the title, publication is mandatory to vest the court with jurisdiction to try the case.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>The OSG misreads the evident import of the said legal provision.<br><br>Section 9, as fully quoted above, outlines the general rule and the exception as to how a reservation under Section 7 of Republic Act No. 26 may be removed from the reconstituted title:<blockquote>(i) as a general rule, a petition must be filed with the trial court, the notice of which must be published twice in the Official Gazette and posted at the provincial and municipal buildings of the municipality or city in which the land lies, after which a hearing on the petition shall be conducted to ascertain the propriety of cancelling the reservation; and<br><br>(ii) as an exception, if two years have already lapsed since the date of the reconstitution of the title, and no petition under Section 8 has been filed, the court shall, only upon an ex parte motion, order the register of deeds to cancel the reservation.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></blockquote>Relatedly, Section 8 of Republic Act No. 26 provides that:<blockquote>Section 8. Any person whose right or interest was duly noted in the original of a certificate of title, at the time it was lost or destroyed, but does not appear so noted on the reconstituted certificate of title, which is subject to the reservation provided in the preceding section, may, while such reservation subsists, file a petition with the proper Court of First Instance for the annotation of such right or interest on said reconstituted certificate of title, and the court, after notice and hearing, shall determine the merits of the petition and render such judgment as justice and equity may require. The petition shall state the number of the reconstituted certificate of title and the nature, as well as a description, of the right or interest claimed.</blockquote>In the present case, the two requisites for the proper application of the exception under Section 9 of Republic Act No. 26 are present. More than two years had elapsed since TCT No. RT-114554 was reconstituted on August 12, 2003. During the span of such period, no petition was filed by any party claiming that they had an interest annotated in the lost or destroyed TCT which was not carried over to TCT No. RT-114554.<br><br>Consequently, there being no petition filed within the two-year period, Section 9 permits the registered owner, in this case, PBS, to request the cancellation of the Section 7 annotation by filing an <i>ex parte</i> motion. This is in alignment with the legislative intent to clear titles of provisional encumbrances after affected parties have had ample time to assert their claims.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>The period covered under Section 9 of Republic Act No. 26 urges interested and affected parties to assert their claims expeditiously. It also safeguards titled property from the perpetual threat of litigation.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> The CA is thus correct in ruling that the encumbrance annotated on TCT No. RT-114554 and on certificates of titles issued subsequently for the same property had expired on August 12, 2005, considering that TCT No. RT-114554 was reconstituted on August 12, 2003. Consequently, PSB was not bound by the stringent requirement of publication as its Petition for Cancellation of Encumbrance was filed on June 25, 2018, or almost 13 years after the issuance of TCT No. RT-114554.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision of the Court of Appeals in CA-G.R. CV. No. 121126, dated January 31, 2025, is <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 42-60. Penned by Presiding Justice Fernanda Lampas Peralta, and concurred in by Associate Justices Gabriel T. Robeniol and Maximo M. De Leon of the First Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 112-114. Penned by Judge Santiago M. Arenas.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 43-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 61-64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 47-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 23-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>Republic v. Bella, G.R. No. 260831</b>, February 26, 2025 [Per J. Singh, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i>, p. 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> J. Caguioa, Separate Concurring Opinion in <b>Republic v. Bella, G.R. No. 260831</b>, February 26, 2025 [Per J. Singh, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See</i> <b>Republic v. Bella, G.R. No. 260831</b>, February 26, 2025 [Per J. Singh, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>See</i> J. Caguioa, Separate Concurring Opinion in <b>Republic v. Bella, G.R. No. 260831</b>, February 26, 2025 [Per J. Singh, Third Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

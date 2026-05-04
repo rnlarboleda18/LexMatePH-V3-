@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 273882 - HERWIN ESTRADA ALEA, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70310' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 273882, November 19, 2025 ]</H2>
+			<H3>HERWIN ESTRADA ALEA, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on<i> Certiorari</i> under Rule 45 of the Rules of Court,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> dated July 4, 2024, filed by petitioner Herwin Estrada Alea<b> (Alea)</b>, seeking to reverse the April 12, 2024 Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals<b> (CA)</b> in CA-G.R. SP No. 180500. The CA dismissed the Petition for <i>Certiorari</i> (with the Application for a Writ of Preliminary Injunction and Urgent Prayer for Issuance of Temporary Restraining Order) filed by Alea, which sought to nullify and set aside the Resolutions, dated March 27, 2023,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> and June 27, 2023,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of Branch 295, Regional Trial Court of ParaÃ±aque City <b>(RTC)</b> in Criminal Case Nos. 2023-0226 and 2023-0227, which denied the motion of Alea to plead to a lesser offense.<br><br><center><b><i>The Facts</i></b></center><br>Alea was apprehended during a buy-bust operation. He was charged in two separate Informations for violation of Article II, Sections 5 and 11 of Republic Act No. 9165, the accusatory portions of the two Informations read:<br><blockquote><center><u>Criminal Case No. 2023-0226</u><br>For Illegal Sale of Dangerous Drugs</center><br>That on or about the [February 5,] 2023, in the City of ParaÃ±aque, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, not being lawfully authorized by law, did then and there willingly, unlawfully and feloniously sell one [] heat-sealed transparent plastic sachet containing white crystalline substance with marking and net weight 'A(EGE(SUBJECT OF SALE) 5:00 p.m. 02-05-2013 San Juan De Coastal Brgy. San Dionisio, ParaÃ±aque City with signature 0.35 grams to poseur buyer PCPL EUCLYPE EDUARTE for and in consideration of P[HP] 500.00, which contents when tested were found positive for the presence of Methamphetamine Hydrochloride, a dangerous drug.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center><u>Criminal Case No. 2023-0227</u><br>For Illegal Possession of Dangerous Drugs</center><br>That on or about the [February 5,] 2023, in the City of ParaÃ±aque, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, not being authorized by law to possess, did then and there willingly, unlawfully and feloniously have in his possession and under his control and custody three [] heat-sealed transparent plastic sachets each containing white crystalline substance with the markings and net weights B(EGE-1 5:00 p.m. 02-05-2023 San Juan De Coastal Brgy. San Dionisio, ParaÃ±aque City with signature)- 0.87 grams; C(EGE-2 5:00 p.m. 02-05Â­2023 San Juan De Coastal Brgy. San Dionisio, ParaÃ±aque City with signature)- 0.91 grams and D(EGE-3 5:00 p.m. 02-05-2023 San Juan De Coastal Brgy. San Dionisio, ParaÃ±aque City with signature) â 0.45 grams or a total of 2.23 grams which contents, when tested, were found positive for the presence of Methamphetamine Hydrochloride, a dangerous drug.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </blockquote>Before the trial, Alea manifested his willingness to enter into a plea-bargaining agreement. Accordingly, on March 20, 2023, Alea, through the Public Attorney's Office<b> (PAO)</b>, filed a Motion to Enter Into Plea Bargaining Agreement, with a prayer that he be allowed to withdraw his prior plea of "not guilty" and instead enter a plea to the lesser offense of Article II, Section 12 of Republic Act No. 9165 for both charges, pursuant to Administrative Matter No. 18-03-16-SC <b>(A.M. No. 18-03-16-SC)</b>.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>The RTC, in a Resolution, dated March 27, 2023, denied Alea's motion to plead guilty to a lesser offense, the dispositive portion of which reads:<br><blockquote>Considering that court's discretion to act on plea bargaining proposals is independent from the requirement of mutual agreement of the parties, and after assiduously considering the records of the above-entitled cases, as well as the qualification/criminal propensity/character of the accused (being charged under [Article II, Sections 5 and 11], of Republic Act No. 9165), this Court, pursuant to the mandate of OCA Circular No. 102-2023-AA (Guidelines on Plea-Bargaining in Drugs Cases),<b> DENIES </b>the accused's motion to enter into plea bargaining agreement.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> (Emphasis in the original) </blockquote>Citing OCA Circular No. 102-2023-AA, the RTC held that regardless of the mutual agreement of the parties, the acceptance of the offer to plead guilty to a lesser offense is not demandable by the accused as a matter of right, but is a matter addressed entirely to the sound discretion of the court. It further highlighted that the court shall not allow plea bargaining since the accused "has been charged many times" under Article II, Sections 5 and 11 of Republic Act No. 9165.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Aggrieved, Alea filed a Motion for Reconsideration arguing that the RTC's interpretation of the phrase "has been charged many times" is misplaced as the phrase should refer to past incidents, not applicable to the present case where the two charges arose from the same incident.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Further, Alea cited the Letter of Referral from the Southern Police District-ParaÃ±aque City Police Station to the Office of the City Prosecutor-ParaÃ±aque City, the Joint Affidavit of Arrest, the Affidavit of Arrest by the Poseur-Buyer, the Spot Report, and the Booking and Arrest Report, to state the relevant circumstances surrounding Alea's arrest:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">[H]erein cases of Violations of Sections 5 and 11, [Republic Act No.] 9165 arose from one [] incident that transpired at about 5:00 p.m. of February 5, 2023; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY">NO OTHER CASES arising from acts antecedent or subsequent to the Violations of Sections 5 and 11, [Republic Act No.] 9165 were filed against herein accused, and an inquiry with the RTC-OCC, ParaÃ±aque City yielded negative results for any other case falling under herein accused's name; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(c) </div></td> <td valign="top"> <div align="JUSTIFY">NO RESISTANCE came from the accused at any time during the entire operation, and is NEITHER "WATCH LISTED" nor "TARGET LISTED"; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(d) </div></td> <td valign="top"> <div align="JUSTIFY">The buy-bust operation conducted is NOT A "SIGNIFICANT OPERATION," and the methamphetamine-positive urine samples were from "Joseph Tripolca y Sumaylo" and "Harry Mariano y Copada;" </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(e) </div></td> <td valign="top"> <div align="JUSTIFY">Accused was gainfully employed as a construction worker with monthly income of P[HP] 16,500.00; [and] </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(f) </div></td> <td valign="top"> <div align="JUSTIFY">The quantities of the dangerous drugs involved in the cases for Violation of Section 5, [Republic Act No.] 9165 and Violation of Section 11, [Republic Act No.] 9165 are considered diminutive, as discussed in the Letter of Justice Peralta, and are within the permissible amounts of dangerous drugs that may be subject to plea bargaining under A.M. No. 18-03-16-SC.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (Citations omitted) </div></td> </tr> </tbody></table></blockquote>Subsequently, the People of the Philippines, through the public prosecutor, submitted a Manifestation identifying individuals with previous charges and Alea was not included among those listed.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On June 27, 2023, the RTC denied Alea's Motion for Reconsideration, reiterating that being charged for two offenses, taking into consideration the nature of the charges and amount of drugs seized from him, defined the character and criminal propensity of Alea.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Undeterred, Alea filed before the CA a Petition for<i> Certiorari</i> (With Urgent Prayer for Temporary Restraining Order and/or Writ of Preliminary Injunction) alleging that the RTC acted with grave abuse of discretion amounting to lack or excess of jurisdiction in denying the motion to enter into a plea bargaining agreement despite the fact that Alea possesses all the qualifications and none of the disqualifications under OCA Circular No. 102-2023-AA.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The Office of the Solicitor General filed its Comment, dated November 24, 2023, asserting that the RTC correctly exercised its discretion in denying Alea's motion.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br><center><b><i>The Ruling of the CA</i></b></center><br>In the assailed Decision, the CA dismissed the Petition for<i> Certiorari</i>. The dispositive portion of the Decision reads:<br><blockquote><b>WHEREFORE</b>, premises considered, the instant Petition for Certiorari with the Application for a Writ of Preliminary Injunction and Urgent Prayer for Issuance of Temporary Restraining Order is <b>DISMISSED</b>.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Emphasis in the original) </blockquote>The CA held that the RTC did not act with grave abuse of discretion as it rightfully performed its duty in assessing Alea's motion. The reasons for its denial were not unfounded or speculative and the RTC assessed the nature of the offenses and Alea's involvement therein. Thus, the RTC's conclusion is a result of a careful consideration of the facts, evidence, and law.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Hence, this Petition.<br><br><center><b><i>The Issue</i></b></center><br>Did the RTC act with grave abuse of discretion when it denied Alea's motion to plea to a lesser offense?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Court finds the Petition impressed with merit.<br><br>Indeed, the Court, in<i> People v. Montierro</i><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <b>(<i>Montierro</i>)</b>, emphasized that the approval or denial of the plea bargaining, regardless of the mutual consent of the parties, is strictly within the sole power and discretion of the court. However, it also underscored the duty of the trial court to independently evaluate the qualifications of the accused and the circumstances of the case regardless of whether the prosecution is for or against the accused's proposal to plead guilty to a lesser offense.<br><br>In the present case, the RTC denied Alea's motion on the ground that Alea "has been charged many times," having been charged under both Article II, Sections 5 and 11 of Republic Act No. 9165, which, according to the RTC, is indicative of his criminal propensity:<br><blockquote>Nos. 4 and 5 of OCA Circular No. 102-2023-AA (Guidelines on Plea-Bargaining in Drug Cases), [] states:<br><br>"4. As a rule, plea bargaining requires the mutual agreement of the parties and remains subject to the approval of the court.<b> <u>Regardless of the mutual agreement of the parties, the acceptance of the offer to plead guilty to a lesser offense is not a demandable by the accused as a matter of right but is a matter addressed entirely to the sound discretion of the court. </u></b><br><blockquote><ol type="a"><li>Though the prosecution and the defense may agree to enter into a plea bargain,&nbsp;<b><u>it does not follow that the courts will automatically approve the proposal. Judges must still exercise sound discretion in granting or denying plea bargaining,</u></b> taking into account the relevant circumstances, <b><u>including the character of the accused. </u></b></li></ol></blockquote>5. The court<b>&nbsp;<u>shall not allow plea bargaining</u></b> if the objection to the plea bargaining is valid and supported by evidence to the effect that:<ol type="a"><li>the offender is a recidivist, habitual offender, known in the community as a drug addict and a troublemaker, has undergone rehabilitation but had a relapse, <u>or&nbsp;</u><b><u>has been charged many times</u></b><b>;</b> or<br><br></li><li>when the evidence of guilt is strong.</li></ol>The Court will now resolve.<br><br>Considering that court's discretion to act on plea bargaining proposals is independent from the requirement of mutual agreement of the parties, and after assiduously considering the records of the above-entitled cases, as well as the qualification/criminal propensity/character of the accused (being charged under [Article II, Sections 5 and 11] of Republic Act No. 9165), this Court, pursuant to the mandate of OCA Circular No. 102-2023-AA (Guidelines on Plea-Bargaining in Drugs Cases),<b> DENIES </b>the accused's motion to enter into plea bargaining agreement.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis and underscoring in the original; citations omitted) </blockquote>Moreover, in its Resolution denying the Motion for Reconsideration, the RTC further elaborated its reason for denying Alea's motion:<br><blockquote>Indeed, paragraph 5(a) of OCA Circular No. 102-2023-AA cites the phrase "has been charged many times" and it appears that the circumstances enumerated therein has reference to "past incidents." To the mind of this Court, however,<i> this paragraph pertains to the accused's character and criminal propensity</i>. Hence, regardless of the accused being charged "many times" â whether the same arise from past incidents or from a "single and present" incident- it cannot be denied that<i> these charges define the character and criminal propensity of the accused</i>. These will ultimately determine his/her qualification to claim the benefits of plea bargaining agreement.<br><br>. . . .<br><br>To emphasize, the accused was charged under [Article II, Section 5] of [Republic Act No.] 9165 for illegally selling one [] piece of heat-sealed transparent plastic sachet containing<i> 0.35g</i> of Methamphetamine hydrochloride and under Section 11,<i> supra</i>, for illegally possessing<i> three</i> [] <i>pieces</i> of heat-sealed transparent plastic sachets containing a total of<i> 2.23g </i>of Methamphetamine hydrochloride in these cases. Considering the nature and number of charges, and the number of plastic sachets with dangerous drugs seized from the accused, it cannot be said that these drugs are for personal use of the accused, but already intended for distribution. The proliferation of dangerous drugs to the public and the youth is a serious social menace that endangers not only the present life but also the future of the country.<i> The fact that the accused was involved in the proliferation/distribution of dangerous drugs shows his character/criminal propensity which, to the mind of the Court, is worse than being a recidivist, habitual offender, drug addict and troublemaker</i>. Thus, the accused is disqualified from availing the benefits of plea bargaining agreement. To allow the accused to claim the benefits of plea bargaining<i> despite the number and nature of the charges filed against him/her and the number of sachets with dangerous drugs seized</i>, will simply reduce this procedural mechanism as a "tool for compromise" for his/her convenience.<i> This will certainly weaken the campaign of the government against illegal drugs and will not help keep law and order in the community and society</i>.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis supplied; citations omitted) </blockquote>In this case, Alea, in his submissions before the RTC, the CA, and this Court, has repeatedly contended that the phrase "has been charged many times" was erroneously construed by the RTC and, in denying the motion without taking into account the other relevant circumstances of the case, the RTC acted with grave abuse of discretion.<br><br>The Court agrees.<br><br>The recent case of<i> Aquino v. People</i><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>(<i>Aquino</i>)</b> supplemented the guidelines laid down in<i> Montierro</i> for plea bargaining in drug cases and emphasized the duty of the trial courts in granting or denying plea bargaining:<br><blockquote>4. As a rule, plea bargaining requires the mutual agreement of the parties and remains subject to the approval of the court. Regardless of the mutual agreement of the parties, the acceptance of the offer to plead guilty to a lesser offense is not demandable by the accused as a matter of right, but is a matter addressed entirely to the sound discretion of the court. Although the prosecution and the defense may agree to enter into a plea bargain, it does not follow that the courts will automatically approve the proposal. <i>Judges must still exercise sound discretion in granting or denying plea bargaining, taking into account the objections raised by the prosecution and other relevant circumstances, including the character of the accused</i>.<br><br>. . . .<br><br>6. The court shall not allow plea bargaining if the objection to the plea bargaining is valid and supported by evidence to the effect that:<br><blockquote>a. the offender is a recidivist, habitual offender, known in the community as a drug addict and a troublemaker, has undergone rehabilitation but had a relapse, or<i> has been charged many times</i>; or<br><br>b. when the evidence of guilt is strong.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> (Emphasis supplied) </blockquote></blockquote>Contrary to the averments of the RTC, the fact that Alea was charged with two offenses stemming from a single incident does not fall within the circumstance contemplated by the Court in disqualifying an accused who "has been charged many times" from availing of plea bargaining.<br><br>As amply discussed by the PAO, the phrase "has been charged many times" refers to past incidents where an accused had prior charges different from the incident presently contemplated, which would tend to show an accused's criminal propensity that would disqualify him from availing of the benefits of plea bargaining. This interpretation aligns with the context in which the other enumerated disqualified individuals are categorized, such as recidivists, habitual offenders, those known in the community as drug addicts or troublemakers, or individuals who have undergone rehabilitation but relapsed, applying the principle of<i> ejusdem generis</i>.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>In fact, the Court, in<i> Aquino</i>, allowed plea bargaining to the lesser offense of Article II, Section 12 of Republic Act No. 9165 even when the accused in that case was also charged under Article II, Sections 5 and 11 of Republic Act No. 9165.<br><br>Further, the RTC denied the plea bargaining proposal since to its mind, the fact that Alea was involved in the distribution of dangerous drugs shows his criminal propensity considering the nature of charges against Alea and the amount of drugs seized from him.<br><br>However, as aptly pointed out by Alea, the charges against him and the amount of drugs seized from him were among those cases where plea bargaining cases in drugs cases is allowed, in accordance with Administrative Matter No. 18-03-16-SC (Adoption of the Plea Bargaining Framework in Drugs Cases). The Court enumerated the drug-related offenses eligible for plea bargaining, with the pertinent portions stating as follows:<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br><table width="100%" border="1" cellpadding="3" cellspacing="0"> <tbody><tr> <td colspan="3" valign="top"> <div align="CENTER"><b>Offense Charged</b> </div></td> <td colspan="2" valign="top"> <div align="CENTER"><b>Acceptable Plea Bargain</b> </div></td> </tr> <tr> <td width="25%" valign="top"> <div align="CENTER"><b>Section</b> </div></td> <td width="20%" valign="top"> <div align="CENTER"><b>Penalty</b> </div></td> <td width="18%" valign="top"> <div align="CENTER"><b>Quantity</b> </div></td> <td width="20%" valign="top"> <div align="CENTER"><b>Section</b> </div></td> <td width="17%" valign="top"> <div align="CENTER"><b>Penalty</b> </div></td> </tr> <tr> <td rowspan="11" valign="top"> <div align="JUSTIFY"><i>Section 11, par. 3. Possession of Dangerous Drugs (Where quantity of shabu, opium, morphine, heroin, cocaine is less than [five] grams)</i> </div></td> <td rowspan="11" valign="top"> <div align="JUSTIFY">12 years &amp; 1 day to 20 years and fine ranging from [PHP]&nbsp; 300,000[.00] to [PHP]&nbsp; 400,000[.00] </div></td> <td rowspan="11" valign="top"> <div align="JUSTIFY">.01 gram to 4.99 grams </div></td> <td rowspan="11" valign="top"> <div align="JUSTIFY"><i>Section 12. Possession of Equipment, Instrument, Apparatus and Other Paraphernalia for Dangerous Drugs</i> </div></td> <td rowspan="11" valign="top"> <div align="JUSTIFY">[Six]&nbsp; months and [one] day to [four] years and a fine&nbsp; ranging from [PHP] 10,000[.00] to [PHP] 50,000[.00] </div></td> </tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr> <td rowspan="11" valign="top"> <div align="JUSTIFY"><i>Section 5. Sale, Trading, etc. of Dangerous Drugs (Methamphetamine hydrochloride or shabu only)</i> </div></td> <td rowspan="11" valign="top"> <div align="JUSTIFY">Life&nbsp; Imprisonment to Death and fine ranging from [PHP] 500,000[.00] to [PHP] 10,000,000[.00] </div></td> <td rowspan="11" valign="top"> <div align="JUSTIFY"><i>.01 gram to .99 grams&nbsp; </i>(methamphetamine hydrochloride or shabu only) </div></td> <td rowspan="11" valign="top"> <div align="JUSTIFY"><i>Section 12. Possession of Equipment, Instrument, Apparatus and Other Paraphernalia for Dangerous Drugs</i> </div></td> <td rowspan="11" valign="top"> <div align="JUSTIFY">[Six]&nbsp; months and [one] day to [four] years and a fine ranging from [PHP] 10,000[.00] to [PHP] 50,000[.00] </div></td> </tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> <tr></tr> </tbody></table><br>To recall, the RTC, in its Resolution denying the Motion for Reconsideration, held that:<br><blockquote><i>The fact that the accused was involved in the proliferation/distribution of dangerous drugs shows his character/criminal propensity which, to the mind of the Court, is worse than being a recidivist, habitual offender, drug addict and troublemaker</i>. Thus, the accused is disqualified from availing the benefits of plea bargaining agreement. To allow the accused to claim the benefits of plea bargaining<i> despite the number and nature of the charges filed against him/her and the number of sachets with dangerous drugs seized</i>, will simply reduce this procedural mechanism as a "tool for compromise" for his/her convenience.<i> This will certainly weaken the campaign of the government against illegal drugs and will not help keep law and order in the community and society</i>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Emphasis supplied; citations omitted) </blockquote>Stated differently, the RTC disallowed Alea's motion by inferring his "criminal propensity" solely from the nature of the charges, specifically the sale and distribution of dangerous drugs, and the quantity of drugs confiscated from him. It bears stressing, however, that the Court's own Plea Bargaining Framework expressly permits plea bargaining in drug-related cases, including those prosecuted under Article II, Section 5 of Republic Act No. 9165, provided that the quantity of shabu involved falls within the range of 0.1 to 0.99 gram, as in the present case.<br><br>Thus, contrary to the findings of the CA, the Court holds that the RTC failed to conduct an impartial and fair evaluation of Alea's qualifications considering the attendant circumstances of the case, as required under the Court's ruling in<i> Montierro</i> and by the Constitution no less. Rather, the RTC's denial of Alea's motion was solely predicated on the fact that he was charged with two offenses arising from a single incident, and it relied on the nature of the offense and the quantity of drugs recovered to infer his character and criminal inclination.<br><br>While the RTC stated in the dispositive portion of the assailed Resolution that it assiduously considered the records, it failed to specify the particular circumstances in the case records that would disqualify Alea from benefiting from plea bargaining, apart from the nature of the charges filed against him.<br><br>At this juncture, it is pertinent to state that in the grant or denial of plea bargaining, the exercise of the RTC's sound discretion should entail carefully reviewing the records of the case, considering all relevant circumstances and the character of the accused as shown by the available evidence on record, to determine whether the accused should be disqualified from receiving the benefits of plea bargaining.<br><br>Verily, the mere nature of the offense and the quantity of drugs confiscated do not, in themselves, constitute sufficient grounds to deny a motion for plea bargaining, so long as such plea is allowed under A.M. No. 18-03-16-SC. To rule otherwise would be to undermine the Court's Plea Bargaining Framework.<br><br>The trial court's exercise of its discretion should neither be arbitrary nor should it amount to a capricious and whimsical exercise of discretion as is equivalent to lack of jurisdiction. The abuse of discretion must be grave as where the power is exercised in an arbitrary or despotic manner by reason of passion or personal hostility and must be so patent and gross as to amount to an evasion of positive duty or to a virtual refusal to perform the duty enjoined by or to act at all in contemplation of law.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Grave abuse of discretion attends when the trial court manifestly acted with obstinate disregard of well-established rule of law or procedure.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Thus, by denying Alea's motion based only on the fact that he faced two charges stemming from the same incident, along with the nature of the charges and quantity of drugs seized, the RTC was remiss in its duty to thoroughly evaluate the accused's qualifications and the circumstances of the case. This amounts to grave abuse of discretion.<br><br>Considering that Alea's proposed plea bargain conforms with the Court-issued Plea Bargaining Framework and absent any finding of the RTC that he is a recidivist, habitual offender, known in the community as a drug addict and a troublemaker, has undergone rehabilitation but had a relapse, or has been charged many times, or that the evidence of Alea's guilt is strong, the grant of the proposed plea bargain must follow.<br><br>Pursuant to<i> Aquino</i>, in instances where both the trial court and the appellate court have erroneously ruled on the matter, failing to adhere to the guidelines established in<i> Montierro</i>, the Court shall render a new judgment directing the trial court to permit plea bargaining in the accused's case and, thereafter, issue a judgment of conviction in accordance therewith.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><b>ACCORDINGLY</b>, the Petition for Review on<i> Certiorari</i> is <b>GRANTED</b>. The April 12, 2024 Decision of the Court of Appeals in CA-G.R. SP No. 180500 is<b> REVERSED</b>. Branch 295, Regional Trial Court of ParaÃ±aque City is<b> DIRECTED</b> to allow the motion of herein petitioner Herwin Estrada Alea to enter a plea to a lesser offense and to render a guilty verdict accordingly.<br><br><b>SO ORDERED. </b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan,</i> and <i>Dimaampao, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 11-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 36-43. Penned by Associate Justice Maximo M. De Leon and concurred in by Associate Justices Perpetua Susana T. Atal-PaÃ±o and Bonifacio S. Pascua of the Special Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 74-76. Penned by Presiding Judge Xerxes U. Garcia.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 77-79. Penned by Presiding Judge Xerxes U. Garcia.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 75-76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 92-93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 91-92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 96-99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 77-79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 44-69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 106-118.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 38-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 926 Phil. 430 (2022) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, pp. 75-76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 77-79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>G.R. No. 259094</b>, January 28, 2025 [Per J. Dimaampao, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 6-7. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>See</i> <b>Alta Vista Golf and Country Club v. The City of Cebu</b>, 778 Phil. 685, 704 (2016) [Per J. Leonardo-De Castro, First Division]. "Under the principle of <i>ejusdem generis</i>, 'where a general word or phrase follows an enumeration of particular and specific words of the same class or where the latter follow the former, the general word or phrase is to be construed to include, or to be restricted to persons, things or cases akin to, resembling, or of the same kind or class as those specifically mentioned.'"<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> A.M. No. 18-03-16-SC (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, pp. 78-79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>See</i> <b>UCPB v. Looyuko</b>, 560 Phil. 581, 591 (2007) [Per J. Austria-Martinez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>Spouses Crisologo v. JEWM Agro-Industrial Corp.</b>, 728 Phil. 315, 328 (2014) [Per J. Mendoza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Aquino v. People, G.R. No. 259094</b>, January 28, 2025 [Per J. Dimaampao, <i>En Banc</i>]. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

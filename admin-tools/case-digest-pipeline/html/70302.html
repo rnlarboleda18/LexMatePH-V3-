@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 278483 - ORTIZ MEMORIAL CHAPEL INC., REPRESENTED BY RONALD ORTIZ, PETITIONER, VS. COMMISSIONER OF INTERNAL REVENUE, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70302' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 278483, December 03, 2025 ]</H2>
+			<H3>ORTIZ MEMORIAL CHAPEL INC., REPRESENTED BY RONALD ORTIZ, PETITIONER, VS. COMMISSIONER OF INTERNAL REVENUE, RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review on <i>Certiorari</i> under Rule 45 of the Rules of Court from the Decision,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> dated December 6, 2024, of the Court of Tax Appeals (<b>CTA</b>) <i>En Banc</i> in CTA EB No. 2651. The CTA <i>En Banc</i> affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated March 10, 2022 and June 8, 2022, respectively, of the Second Division of the CTA, in CTA Case No. 9805, declaring that it had no jurisdiction over the Petition, as the tax assessment had already become final and executory.</p><p align="center"> <b><i>The Facts</i></b> </p><p> Petitioner Ortiz Memorial Chapel, Inc. (<b>OMCI</b>) is a domestic corporation organized and existing under the laws of the Philippines, with office address at Balzain Highway, Balzain, Tuguegarao City, Cagayan, represented by its President, Mr. Ronald Ortiz.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p><p> On July 24, 2013, the Bureau of Internal Revenue (<b>BIR</b>) issued a Letter of Authority (<b>LOA</b>) authorizing Revenue Officer Hanilaine Pe (<b>Ms. Pe</b>) and Group Supervisor Elda Bernadette Calimag of Revenue District No. 013 - Tuguegarao, Cagayan, to examine OMCI's books of accounts and other accounting records for all internal revenue taxes, including Documentary Stamp Tax (<b>DST</b>), and other taxes for the period January 1 to December 31, 2011, pursuant to Sections 6(A) and 10(C) of the National Internal Revenue Code (<b>NIRC</b>) of 1997, as amended.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p><p> On August 19, 2013, the BIR issued a Second Notice, requesting the submission of pertinent records and documents for the proper determination of OMCI's tax liabilities for taxable year 2011.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p><p> On September 4, 2013, OMCI sent a Letter of Extension requesting an additional 15 days to provide the necessary documents.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> On October 1, 2013, OMCI sent another Letter informing the BIR that the relevant documents were in the possession of Mr. Dominador Furigay, its former Secretary, and requested another 10 days to submit them.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> On October 11, 2013, the BIR issued a Final Notice, directing OMCI to submit its books of accounts necessary for the conduct of audit.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> <i>Assessment proceedings</i></p><p> On September 11, 2014, the BIR issued a Letter of Results of Investigation, informing OMCI of its 2011 internal revenue tax deficiencies amounting to PHP 2,919,432.79, representing deficiencies in income tax, VAT, withholding tax, and registration fee, inclusive of legal interest.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> On October 29, 2014, OMCI executed a Waiver of the Defense of Prescription under the Statute of Limitations of the NIRC, which the BIR duly accepted.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> On January 28, 2015, the BIR issued another Letter of Results of Investigation, assessing OMCI a proposed deficiency VAT liability of PHP 3,604,875.19, inclusive of legal interest.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> On July 30, 2015, the BIR issued a Preliminary Assessment Notice (<b>PAN</b>) with Details of Discrepancies, stating that OMCI was liable for PHP 6,784,128.85 as deficiency income tax, VAT, DST, and registration fee, inclusive of surcharge and interest.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> Thereafter, on October 30, 2015, the BIR issued a Formal Letter of Demand (<b>FLD</b>) with Details of Discrepancies, assessing OMCI a total of PHP 6,939,944.15 as deficiency taxes, inclusive of legal interest.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> On February 4, 2016, the BIR issued a Preliminary Collection Letter, followed by a Final Notice Before Seizure on February 23, 2016, giving OMCI the last opportunity to make the necessary settlement of its tax liabilities; otherwise, the BIR shall serve and execute the Warrant of Distraint and/or Levy (<b>WDL</b>).<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> On April 15, 2016, the BIR issued the WDL, which OMCI received on April 19, 2016.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> <i>Administrative protests</i></p><p> On February 7, 2017, OMCI sent a Letter-Protest to the BIR. Another one, dated February 23, 2018, was sent on March 2, 2018.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> On March 12, 2018, OMCI received a Letter, dated March 3, 2018, signed by Regional Director Thelma S. Milabao, declaring that OMCI failed to protest within the reglementary period. Hence, the assessment had become final, executory, and demandable.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> <i>Proceedings Before the CTA Division</i></p><p> OMCI filed a Petition for Review before the CTA Division on April 11, 2018, praying that the assessments issued by the BIR, which found OMCI liable for deficiency income tax, VAT, DST, registration fee, in the amount of PHP 6,939,944.15 be declared void.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The Petition was initially raffled to the CTA First Division.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> On August 2, 2018, the BIR filed an Answer raising the following special and affirmative defenses:<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><ol><li> the CTA Division has no jurisdiction, as the assessment had already become final and executory;</li><li>due process requirements were observed;</li><li> the imposition of a 50% surcharge was proper; </li><li> the assessment had not prescribed due to a valid waiver; </li><li> the assessment had factual and legal bases; </li><li>OMCI is liable for surcharge and interest; and </li><li>the assessment is valid and lawful.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </li></ol> <p> The Pre-Trial Conference was initially set for October 4, 2018. OMCI filed its Pre-Trial Brief on September 24, 2018, while the BIR filed its own on December 5, 2018.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> Pursuant to an Order, dated September 26, 2018, the case was transferred to the CTA Second Division, and the Pre-Trial was reset to December 6, 2018, and later to January 31, 2019.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> At the January 31, 2019 hearing, the CTA Division referred the case to mediation before the Philippine Mediation Center-CTA, which mediation, however, failed.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> The Pre-Trial Conference was finally held on May 23, 2019. The parties submitted their Joint Stipulation of Facts and Issues on June 6, 2019, which was adopted in a Pre-Trial Order dated June 14, 2019.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> During trial, OMCI presented documentary and testimonial evidence through:<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><ul><li> Mr. Ronald Ortiz, President and Director; and</li><li> Mr. Nelson Ortiz, Corporate Secretary and Director. </li></ul> <p> In a Resolution, dated December 11, 2019, the CTA Division admitted certain exhibits of the OMCI but denied others for lack of identification or originals for comparison. OMCI sought reconsideration on January 29, 2020, which was partially granted in the Resolution, dated June 8, 2020, admitting some additional exhibits.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </p><p> During the hearing held on October 5, 2020, the BIR manifested that the intended witness, Ms. Pe, was in Nueva Vizcaya and could not attend the hearing due to travel restrictions resulting from the COVID-19 pandemic. Consequently, the BIR dispensed with the presentation of Ms. Pe. In lieu thereof, both counsels agreed to stipulate on the documents that Ms. Pe were supposed to identify.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> OMCI's counsel, on the other hand, moved for the reconsideration of the denied Exhibits. However, considering the objection interposed by the BIRâmanifesting that while the documents were marked as certified true copies, no signature was appended to attest to their authenticityâthe CTA Division denied the oral motion for reconsideration for OMCI's failure to properly identify the exhibits.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> The BIR's Formal Offer of Evidence was filed on October 15, 2020, to which OMCI filed a Comment on October 22, 2020. The CTA Division admitted Exhibits R-1 to R-10 in its Resolution, dated December 21, 2020, but denied admission of Exhibit R-11 for failure to present the original for comparison.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> The BIR filed its Memorandum on February 9, 2021, while OMCI filed the same on March 25, 2021. The case was submitted for decision on June 7, 2021.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p align="center"> <b><i>The Ruling of the CTA Division</i></b> </p><p> The CTA Division denied the Petition in a Decision, dated March 10, 2022. The dispositive portion of the Decision reads: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the present <i>Petition for Review</i> is <b>DISMISSED</b> for this Court's lack of jurisdiction. </p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Emphasis in the original) </p> </blockquote> <p> The CTA Division ruled that it had no jurisdiction over the Petition as the same was prematurely filed. OMCI's Letters of Protest, dated February 7, 2017 and February 23, 2018, failed to comply with Revenue Regulations (<b>RR</b>) No. 12-99, as amended by RR No. 18-2013, rendering them void. Consequently, no valid disputed assessment existed, and the Letter, dated March 8, 2018, could not be deemed a final decision on a disputed assessment.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p> OMCI filed a Motion for Reconsideration on March 25, 2022, which was denied in the Resolution, dated June 8, 2022.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p><p align="center"> <b><i>The Ruling of the CTA <i>En Banc</i></i></b> </p><p> The CTA <i>En Banc</i> ruled that the CTA Division did not err in dismissing the Petition. Once an assessment becomes final, the CTA Division's only authority is to dismiss the action. The dispositive portion of the Decision reads:<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, petitioner Ortiz Memorial Chapel, Inc.'s [Petition for Review] is <b>DENIED</b> for lack of merit. The assailed [Decision,] dated March 10, 2022[,] and [Resolution,] dated June 8, 2022[,] rendered by the Second Division of this Court in CTA Case No. 9805 are <b>AFFIRMED.</b> </p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> (Emphasis in the original) </p> </blockquote> <p> The CTA <i>En Banc</i> upheld the finding that the BIR's FLD and FAN, dated October 30, 2015, were duly received by OMCI. However, OMCI failed to file an administrative protest within the 30-day reglementary period prescribed under Section 228 of the NIRC and RR No. 12-1999.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></p><p> OMCI filed its first Letter-Protest only on February 7, 2017, more than a year after receiving the FLD. Even if reckoned from the later Final Notice Before Seizure received on February 26, 2016, the protest was filed out of time. As such, the assessment had already become final and unappealable, leaving no disputed assessment for the CTA Division to review. Consequently, the CTA Division correctly held that it had no jurisdiction over the original Petition for Review.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> OMCI argued that the assessment was void <i>ab initio</i> for lack of compliance with due process requirements under Section 228 of the NIRC, claiming that the PAN and FLD failed to specify the factual and legal bases of the deficiency assessments. The CTA <i>En Banc</i> rejected this contention, finding that both notices substantially complied with due process as they contained the relevant factual (e.g., financial statements, property holdings) and legal (e.g., Section 32 of the NIRC, RAMO No. 1-2000) bases of the assessment.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> Justice Maria Rowena Modesto-San Pedro registered a Dissenting Opinion,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> stating that the CTA always has the authority to rule on the validity of an assessment.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> She opined that the CTA Division erred in dismissing the case outright by the mere fact that no timely and valid protest was filed, without considering OMCI's arguments on the violation of the right to due process.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup></p><p align="center"> <b><i>The Issue</i></b> </p><p> Did the CTA <i>En Banc</i> commit a reversible error in its Decision, affirming the validity of the BIR's assessment against OMCI? </p><p align="center"> <b><i>The Ruling of the Court</i></b> </p><p> The Court finds merit in the Petition. </p><p> In its Petition, OMCI contends that the BIR's assessment is void as it failed to provide both factual and legal bases, contrary to Section 228 of the NIRC.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></p><p> The BIR is the principal agency mandated to assess and collect taxes and to administer and enforce the provisions of the NIRC. In carrying out its functions of tax assessment and collection, the BIR is vested with broad powers under the NIRC. Nonetheless, these powers must be exercised reasonably and in accordance with the prescribed procedures, and more importantly, the constitutional rights of the taxpayers.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> The general rule is that a tax assessment becomes final, executory, and demandable if the taxpayer fails to file a protest within the reglementary period. Once final, the assessment attains the character of a judgment that is final, immutable and enforceable. Thus, the CTA can no longer exercise jurisdiction because there is no "disputed assessment" to speak of. The CTA, being a court of limited jurisdiction, can only hear cases and matters that are specifically and exclusively granted to it by law. Accordingly, it is want of jurisdiction over final and executory assessments. </p><p> The principle, however, is not absolute. When the assessment is void <i>ab initio</i> for want of due process, it produces no legal effect and may be assailed at any time, even if no protest was filed. A void assessment, being a nullity, cannot attain finality. </p><p> This exception has long been recognized in the Court's jurisprudence. As correctly observed in the Dissenting Opinion, the Court has set aside tax assessments despite the taxpayer's failure to comply with protest requirements whenever the defect went into the very validity of the assessment itself. </p><p> In <i>Himlayang Pilipino Plans, Inc. v. Commissioner of Internal Revenue</i>,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> the Court granted a Petition to nullify and cancel an FLD, despite having been denied by the CTA Division and agreed to by the CTA <i>En Banc</i>, for lack of jurisdiction due to the failure to file a timely protest to the FAN. According to the CTA Division, there was no disputed assessment because the taxpayer's protest against the FAN and FLD were filed out of time.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> The CTA <i>En Banc</i> affirmed the denial.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> </p><p> In <i>Commissioner of Internal Revenue v. Metro Star Superama, Inc</i>.,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> the Court upheld the grant of the Petition by the CTA despite the failure to file a timely protest against the FAN. In fact, the Court ruled that it need not belabor to discuss the failure to file protest since it is well settled that a void assessment bears no fruit.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> At the core of the controversy is the validity of the BIR assessment and its conformity with the due process requirements under Section 228 of the NIRC. </p><p> <i> The assessment is void for lack of <br> factual and legal bases</i> </p><p> Taxation is the lifeblood of the government, however, the power of the State to collect tax must be balanced with the taxpayer's right to substantial and procedural due process. Between the power of the State to tax and an individual's right to due process, the scale favors the right of the taxpayer to due process.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> </p><p> The rule is that a taxpayer must be informed in writing of the law and facts on which the assessment against him is made. The NIRC is clear: </p><blockquote> <p align="center"> <b>PROTESTING AN ASSESSMENT, REFUND, ETC. </b></p> <p> <b>Section 228. <i>Protesting of Assessment</i>.</b> â When the Commissioner or his duly authorized representative finds that proper taxes should be assessed, he shall first notify the taxpayer of his findings[.]</p> <p> . . . .</p> <p> <i>The taxpayers shall be informed in writing of the law and the facts on which the assessment is made; otherwise, the assessment shall be void</i>. </p> <p> Within a period to be prescribed by implementing rules and regulations, the taxpayer shall be required to respond to said notice. If the taxpayer fails to respond, the Commissioner or his duly authorized representative shall issue an assessment based on his findings. </p> <p> Such assessment may be protested administratively by filing a request for reconsideration or reinvestigation within [30] days from receipt of the assessment in such form and manner as may be prescribed by implementing rules and regulations. Within [60] days from filing of the protest, all relevant supporting documents shall have been submitted; otherwise, the assessment shall become final. </p> <p> If the protest is denied in whole or in part, or is not acted upon within [180] days from submission of documents, the taxpayer adversely affected by the decision or inaction may appeal to the Court of Tax Appeals within [30] days from receipt of the said decision, or from the lapse of [180]-day period; otherwise, the decision shall become final, executory and demandable. (Emphasis supplied) </p> </blockquote> <p> In relation to the requirement to state the law and facts on which the assessment is made, RR No. 12-99, as amended, which implements such statutory requirement, mandates that the PAN shall <i>detail</i> the facts, law, rules, regulations or jurisprudence. To be clear, it provides: </p><blockquote> <p> SECTION 3. <i>Due Process Requirement in the Issuance of a Deficiency Tax Assessment</i>. â </p> <blockquote> <p> 3.1 Mode of procedure in the issuance of a deficiency tax assessment: </p> <p> . . . .</p> <p> 3.1.2 <i>Preliminary Assessment Notice (PAN)</i>. â If after review and evaluation by the Commissioner or his duly authorized representative, as the case may be, it is determined that there exists sufficient basis to assess the taxpayer for any deficiency tax or taxes, the said Office shall issue to the taxpayer a Preliminary Assessment Notice (PAN) for the proposed assessment. <i>It shall show in detail the facts and the law, rules and regulations, or jurisprudence on which the proposed assessment is based</i> (see illustration in ANNEX "A" hereof). If the taxpayer fails to respond within [15] days from date of receipt of the PAN, he shall be considered in default, in which case, a Formal Letter of Demand and Final Assessment Notice (FLD/FAN) shall be issued calling for payment of the taxpayer's deficiency tax liability, inclusive of the applicable penalties. </p> <p> . . . .</p> <p> 3.1.4 <i>Formal Letter of Demand and Assessment Notice</i>. â The formal letter of demand and assessment notice shall be issued by the Commissioner or his duly authorized representative. <i>The letter of demand calling for payment of the taxpayer's deficiency tax or taxes shall state the facts, the law, rules and regulations, or jurisprudence on which the assessment is based, <b>otherwise, the formal letter of demand and assessment notice shall be void[.]</b></i> (Emphasis supplied) </p> </blockquote> </blockquote> <p> To this end, the Court has ruled that </p><blockquote> <p> The importance of providing the taxpayer with adequate written notice of his or her tax liability is undeniable. Under Section 228, it is explicitly required that the taxpayer [must] be informed in writing of the law and of the facts on which the assessment is made; otherwise, the assessment shall be void. Section 3.1.2 of Revenue Regulations No. 12-99 requires the Preliminary Assessment Notice to show in detail the facts and law, rules and regulations, or jurisprudence on which the proposed assessment is based. Further, Section 3.1.4 requires that the Final Letter of Demand must state the facts and law on which it is based; otherwise, the Final Letter of Demand and Final Assessment Notices themselves shall be void.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></p> </blockquote> <p> In sum, Section 228 of the NIRC and its implementing rules under RR No. 12-99 unequivocally require that the taxpayer be informed in writing of the specific <i>facts</i> and <i>law</i> on which the assessment is based; otherwise, the assessment is void. This due process requirement is mandatory and goes into the very validity of the assessment itself. </p><p> The requirement is not a mere procedural formality but a substantive safeguard designed to protect the taxpayer's right to due process, which is guaranteed by no less than the Constitution. The fundamental law itself commands that "no one shall be deprived of life, liberty, or property without due process of law." This constitutional guarantee anchors the statutory mandate that taxpayers be duly informed of the factual and legal bases of any assessment. Due process demands that the taxpayer be apprised, with reasonable clarity, of the specific facts and legal provisions forming the basis of the government's claim, so that an intelligent and meaningful response or protest may be made. Without such notice, the taxpayer is left to mere conjecture as to how the assessment was reached, reducing the process to an empty ritual and eroding the very fairness that the lawâand the Constitutionâseek to uphold. </p><p> Consistent with the Constitutional mandate, the Court has ruled: </p><blockquote> <p> It is an elementary rule enshrined in the 1987 Constitution that no person shall be deprived of property without due process of law. In balancing the scales between the power of the State to tax and its inherent right to prosecute perceived transgressors of the law on one side, and the constitutional rights of a citizen to due process of law and the equal protection of the laws on the other, the scales must tilt in favor of the individual, for a citizen's right is amply protected by the Bill of Rights under the Constitution[.]</p> <p> Taxes are the lifeblood of the government and so should be collected without unnecessary hindrance. On the other hand, such collection should be made in accordance with law as any arbitrariness will negate the very reason for government itself[.]<sup style="COLOR: RGB(255, 0, 0);">[53]</sup></p> </blockquote> <p> Having laid down these governing principles, the Court now examines whether the assessment issued by the BIR satisfied these constitutional and statutory due process requirements. </p><p> For clarity, a reproduction of the relevant portions of the PAN follows:<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </p><blockquote> <p align="center"> <b><u>Assessment No. R3-AD-eLA-2011-043</u></b></p> <p align="center"> <b><u>Deficiency Income Tax</u></b></p> <table width="100%" border="1" cellspacing="0" cellpadding="3"> <tbody><tr> <td>Taxable Income</td> <td> <div align="right">[PHP] 431,333.02</div></td> </tr> <tr> <td>Add: Undeclared Income </td> <td><div align="right">6,833,750.06</div></td> </tr> <tr> <td><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="8%">&nbsp;</td> <td width="92%">Disallowed Expenses </td> </tr> </tbody></table></td> <td><div align="right"><u>423,659.73</u> </div></td> </tr> <tr> <td>Taxable Income per audit </td> <td><div align="right">[<u>PHP] 7,688,742.81</u></div></td> </tr> <tr> <td>Income Tax Due Thereon </td> <td><div align="right">[PHP] 2,425,398.00</div></td> </tr> <tr> <td>Less: Income tax [p]aid </td> <td><div align="right"><u>129,399.91</u></div></td> </tr> <tr> <td>Deficiency Income Tax</td> <td><div align="right"> [PHP] 2,295,998.09</div></td> </tr> <tr> <td><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td>Add: 50% Surcharge</td> <td><div align="right">[PHP] 1,147,999.05</div></td> </tr> </tbody></table></td> <td>&nbsp;</td> </tr> <tr> <td><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="8%">&nbsp; </td> <td width="56%">20% Interest p.a. [...] </td> <td width="36%"><div align="right">1,510,256.52 </div></td> </tr> </tbody></table></td> <td><div align="right">2,658,255.57</div></td> </tr> <tr> <td><strong>Amount Due / Collectible</strong></td> <td><div align="right"><strong><u>[PHP] 4,954,253.66</u> </strong></div></td> </tr> </tbody></table> <p align="center"><b><u>Deficiency Value-Added Tax (VAT)</u></b> </p> <table width="100%" border="1" cellspacing="0" cellpadding="3"> <tbody><tr valign="top"> <td>Undeclared Income, Annex A</td> <td> <div align="right"><u>[PHP] 6,833,750.06</u></div></td> </tr> <tr valign="top"> <td>VAT [d]ue thereon (12%)</td> <td><div align="right">[PHP] 820,050.00 </div></td> </tr> <tr valign="top"> <td><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="13%">Add: </td> <td width="87%">50% Surcharge</td> </tr> </tbody></table></td> <td><div align="right">410,025.00 </div></td> </tr> <tr valign="top"> <td><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="13%">&nbsp;</td> <td width="87%">20% Interest p.a. [...] </td> </tr> </tbody></table></td> <td><div align="right"><u>575,857.33</u></div></td> </tr> <tr valign="top"> <td><strong>Amount Due / Collectible</strong></td> <td><div align="right"><u>[PHP] 1,805,932.33</u> </div></td> </tr> </tbody></table> </blockquote> <p>It further provides that the complete details covering the discrepancies are shown in Annex A, or the Details of Discrepancies.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> The relevant portion of the same provides: </p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td colspan="3"><u>INCOME TAX</u></td> </tr> <tr> <td width="4%">&nbsp;</td> <td width="4%">&nbsp;</td> <td width="92%">&nbsp;</td> </tr> <tr> <td>-</td> <td colspan="2">Undeclared [i]ncome totaling[] [PHP] 6,833,750.06 arising from the following pursuant to RAMO-1-2000 and Section 32 of the [NIRC], to wit: </td> </tr> <tr> <td>&nbsp;</td> <td valign="top"><div align="center">o</div></td> <td>Unreported Professional Fees (PF) and Security Services expense amounting to [PHP] 72,000.00 and [PHP] 6,000.00. </td> </tr> <tr> <td>&nbsp;</td> <td valign="top"><div align="center">o</div></td> <td>Undervaluation of reported properties amounting to [PHP] 6,755,750.06 computed as follows: </td> </tr> <tr> <td>&nbsp;</td> <td valign="top">&nbsp;</td> <td>&nbsp;</td> </tr> <tr> <td>&nbsp;</td> <td>&nbsp;</td> <td><table width="100%" border="1" cellspacing="0" cellpadding="3"> <tbody><tr valign="top"> <td width="63%">Total FMV of the declared properties per Certificate of Property Holdings</td> <td width="37%"><div align="right">[PHP] 10,507,970.00 </div></td> </tr> <tr valign="top"> <td><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="11%">Less: </td> <td width="89%">Reported/Financial Statements</td> </tr> </tbody></table></td> <td><div align="right"></div><br></td> </tr> <tr valign="top"> <td><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="11%">&nbsp;</td> <td width="89%">Land</td> </tr> </tbody></table></td> <td><div align="right">(200,000.00)</div></td> </tr> <tr valign="top"> <td><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="11%">&nbsp;</td> <td width="89%">Property, Plant &amp; Equipment </td> </tr> </tbody></table></td> <td><div align="right">(3,552,219.94)</div></td> </tr> <tr valign="top"> <td>Undervaluation of Properties </td> <td><div align="right"><u>PHP 6,755,750.06</u></div></td> </tr> </tbody></table></td> </tr> <tr> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td>-</td> <td colspan="2"><div align="justify">Unsupported expenses determined per audit in the aggregate amount of [PHP] 423,659.73, hence disallowed pursuant to Section 34(A)(1)(b) of the [NIRC]. </div></td> </tr> <tr> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr> <td>&nbsp;</td> <td>&nbsp;</td> <td><table width="100%" border="1" cellspacing="0" cellpadding="3"> <tbody><tr valign="top"> <td width="63%">Taxes/ Licenses </td> <td width="37%"><div align="right">[PHP] 34,377.89 </div></td> </tr> <tr valign="top"> <td>Light/ Water</td> <td><div align="right">57,099.97<br> </div></td> </tr> <tr valign="top"> <td> Fuel / Transportation </td> <td><div align="right"> 146,549.87 </div></td> </tr> <tr valign="top"> <td>Communication </td> <td><div align="right">108,452.00 </div></td> </tr> <tr valign="top"> <td>Miscellaneous Expenses </td> <td><div align="right"><u>77,180.00</u></div></td> </tr> <tr valign="top"> <td>Total</td> <td><div align="right"> <u>[PHP] 423,659.73</u></div></td> </tr> </tbody></table></td> </tr> </tbody></table> <p><u>VALUE-ADDED TAX</u></p> <p> Undeclared Income totaling to [PHP] 6,833,750.06, as explained above. </p> <p> <u>DOCUMENTARY STAMP TAX</u></p> <p> Failure to impose the corresponding DST on the Due to Officers account, treated as payable amounting to [PHP] 505,200.00 [in violation] of Section 179 of the same Code.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></p> </blockquote> <p> The FLD reiterated the same computation in its Details of Discrepancies.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> </p><p> The CTA <i>En Banc</i> held that a reading of the PAN and FLD would show that the factual bases for the amounts and the legal bases were stated in the Details of Discrepancies.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> </p><p> On the other hand, OMCI claims that the provisions of the Details of Discrepancies lack comprehensive explanations. <i>First</i>, the BIR cites BIR Revenue Audit Memorandum Order (<b>RAMO</b>) No. 1-2000, which is the Updated Handbook on Audit Procedures and Techniques Volume 1. However, such RAMO merely contains guidelines and methods in auditing a taxpayer. OMCI also cites the Dissenting Opinion, stating that out of all the methods stated in the RAMO, both the PAN and the FLD are silent as to which particular method was used in the audit of OMCI's books and the justification or explanation as to why the BIR resorted to such method.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p><blockquote> <p> It must be noted that the methods prescribed in RAMO No. 1-2000 provide various grounds for usage and uses different data base points and computations in order to arrive at a particular assessment finding. In order to obtain a proper understanding of the nature of the finding, it is imperative that [the BIR] explain which method was used and why it was resorted to. It cannot be merely inferred from a mere showing of the computation of the assessment.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> </p> </blockquote> <p> <i>Second</i>, the BIR also cites Section 32 of NIRC. However, such section is vast and encompasses (A) the general definition of gross income and its inclusions, consisting of 11 items; and (B) exclusions from gross income, consisting of nine items. Further, there is nothing in the provision that mandates the taxpayer to record its property at fair market value, as the NIRC recognizes various accounting methods and does not prohibit a taxpayer from recording its properties at historical cost or book value. Thus, there is nothing therein that justifies the BIR's assessment.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Moreover, the properties referred to by the BIR were not specified.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> </p><p> <i>Third</i>, under the VAT assessment, the BIR imposed VAT on the undeclared income, without any explanation of why the same is subject to VAT.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> </p><p> <i>Lastly</i>, OMCI invokes the Dissenting Opinion, which states that the computation details of the other assessment items such as the unsupported expenses and DST were unexplained, except only that these were "per audit," without laying down, even in brief, how the amounts were arrived at (i.e., what documents were examined).<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> </p><p> These arguments are well taken. </p><p> Indeed, RAMO No. 1-2000 is not a substantive basis for assessment but merely an internal manual that prescribes audit procedures and documentation standards for revenue officers. Spanning more than one hundred pages, it outlines the step-by-step process for the proper examination of tax liabilities, specifies the reports to be prepared after audit, and identifies the minimum procedural requirements to be observed. <i>It is essentially a guide for revenue officers â not a source of tax liability</i>. Thus, a mere citation of RAMO No. 1-2000, without indicating which audit method was used, how it was applied, or why it was resorted to, does not satisfy the requirement that the taxpayer be informed of the factual and legal basis of the assessment. </p><p> Likewise, the BIR's reliance on Section 32<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> of the NIRC is equally unavailing. Section 32 is a comprehensive provision defining "gross income" and listing a broad range of taxable and exempt items. Under paragraph (A), gross income "means all income derived from whatever source," and includes eleven categories such as compensation, business income, gains from property dealings, interests, rents, royalties, dividends, annuities, and others. Paragraph (B), on the other hand, enumerates exclusions from gross income, such as life insurance proceeds, gifts, compensation for injuries, retirement benefits, and treaty-exempt income, among others. The sheer breadth of this provision underscores that it provides general definitions and classifications; it does not, by itself, specify what constitutes undeclared income in a particular case. </p><p> Without any indication of which specific subsection of Section 32 was invoked or how it was applied to OMCI's transactions, the citation of this provision is too general to inform the taxpayer of the legal bases of the assessment. A taxpayer confronted with such a vague reference cannot reasonably discern the nature of the supposed violation or determine how to effectively respond. The right to protest presupposes knowledge of what is being contested. Without such clarity, the taxpayer is deprived of a meaningful opportunity to be heard â an outcome the Constitution itself forbids. </p><p> As to the deficiency VAT assessment, the BIR merely imposed 12% VAT, together with corresponding surcharges and interest, on the supposed undeclared income, without any explanation as to why such income was subject to VAT. This omission is fatal. Not all income is subject to VAT, for the tax is imposed only on transactions that fall within the scope of Section 105 of the NIRC â that is, on the sale, barter, exchange, or lease of goods or properties, or the performance of services in the course of trade or business. In the absence of any showing that the undeclared income arose from VAT-taxable transactions, the assessment rests on mere assumption and cannot be sustained. </p><p> It has been consistently held that while tax assessments are presumed correct, the assessment itself, should, however, not be based on mere presumptions no matter how reasonable or logical the presumption may be. The assessment must be based on actual facts.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> </p><p> The computation details of the other assessment items, such as the unsupported expenses and DST, were likewise unexplained. The BIR merely indicated that these were determined "per audit," without laying down, even in summary form, how the figures were computed or what records or documents were examined to substantiate the findings. There was no indication of the nature of the supposed disallowances, the specific transactions involved, or the evidentiary basis for the alleged DST deficiency. This lack of explanation renders the assessments mere conclusions devoid of factual foundation. The taxpayer cannot be expected to refute or protest figures that are presented without any discernible basis. </p><p> These deficiencies mirror those that the Court found fatal in <i>Commissioner of Internal Revenue v. Spouses Magaan</i>.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> In that case, the Court invalidated a Final Assessment Notice for lack of factual and legal bases. It held that a mere tabulation of alleged deficiency taxes, without accompanying explanation as to how the amounts were computed, falls short of due process requirements. The Court emphasized: </p><blockquote> <p> [A] mere perusal of the [Final Assessment Notice] for the deficiency EWT for taxable year 1994 will show that other than a tabulation of the alleged deficiency taxes due, no further detail regarding the assessment was provided by [OMCI]. Only the resulting interest, surcharge and penalty were anchored with legal basis. [The BIR] should have at least attached a detailed notice of discrepancy or stated an explanation why the amount of [PHP] 48,461.76 is collectible against [the taxpayer] and how the same was arrived at. </p> <p> . . . .</p> <p> The law requires that the legal and factual bases of the assessment be stated in the formal letter of demand and assessment notice. Thus, such cannot be presumed. Otherwise, the express provisions of Article 228 of the [NIRC] and [RR] No. 12-99 would be rendered nugatory. The alleged "factual bases" in the advice, preliminary letter and "audit working papers" did not suffice. There was no going around the mandate of the law that the legal and factual bases of the assessment be stated in writing in the formal letter of demand accompanying the assessment notice[.]</p> <p> . . . .</p> <p> The Formal Letter of Demand with Audit Result/Assessment Notices states that the complete details of the deficiency assessments can be found in Schedules 1 and 2 of the letter. However, an examination of the records reveals that these schedules do not show the factual basis of the assessments. These schedules merely contain tabular summaries of the allegedly undeclared taxable income and deficiency taxation of respondents. They only mentioned "payments received per information" but have no other details stating the information received, or any other explanation that would enable the taxpayer to make an effective protest.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> (Citations omitted) </p> </blockquote> <p> In <i>Spouses Magaan</i>, even though the BIR claimed that the details of the deficiency could be found in attached schedules, the Court found that these attachments merely contained tabular summaries devoid of factual explanation. The same defect is evident in this case. The <i>Details of Discrepancies</i> attached to OMCI's PAN and FLD merely list undeclared income and disallowed expenses in tabular form, without explaining the underlying computations or identifying the supporting documents. As in <i>Spouses Magaan</i>, these omissions render the assessments void for failure to comply with the due process requirement. </p><p> Accordingly, the Court finds that the BIR's general references to RAMO No. 1-2000, Section 32 of the NIRC, and its unexplained imposition of VAT, unsupported expenses, and DST deficiencies fail to meet the statutory and constitutional requirements of due process in tax assessment. </p><p> <i>The waiver of prescription is <br> invalid</i></p><p> The rule is that the BIR has a limited time of three years to conclude their investigation and issue a formal assessment based on the audit findings. </p><blockquote> <p> SEC. 203. <i>Period of Limitation Upon Assessment and Collection.</i> â Except as provided in Section 222, <i>internal revenue taxes shall be assessed within three[] years after the last day prescribed by law for the filing of the return</i>, and no proceeding in court without assessment for the collection of such taxes shall be begun after the expiration of such period: Provided, That in a case where a return is filed beyond the period prescribed by law, the three []-year period shall be counted from the day the return was filed. For purposes of this Section, a return filed before the last day prescribed by law for the filing thereof shall be considered as filed on such last day. (Emphasis supplied) </p> </blockquote> <p> Thus, the BIR only had three years, counted from the date of actual filing of the return, or from the last date prescribed by law for the filing of such return, whichever comes later, to assess tax or to begin a court proceeding for the collection thereof without an assessment. However, one of the exceptions to the three-year prescriptive period on the assessment of taxes is that provided for under Section 222(b) of the NIRC: </p><blockquote> <p> SEC. 222. <i>Exceptions as to Period of Limitation of Assessment and Collection of Taxes</i>. â </p> <p> . . . .</p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(b)</div></td> <td width="95%"><div align="justify">If before the expiration of the time prescribed in Section 203 for the assessment of the tax, both the Commissioner and the taxpayer have agreed in writing to its assessment after such time, the tax may be assessed within the period agreed upon. </div></td> </tr> </tbody></table> <p>The period so agreed upon may be extended by subsequent written agreement made before the expiration of the period previously agreed upon. </p> </blockquote> <p> From the foregoing, the above provision authorizes the extension of the original three-year prescriptive period by the execution of a valid waiver, where the taxpayer and the BIR may stipulate to extend the period of assessment by a written agreement executed prior to the lapse of the period prescribed by law, and by subsequent written agreements before the expiration of the period previously agreed upon. </p><p> Here, as correctly observed in the Dissenting Opinion, the assessment for certain items in the PAN, which were retained in the FLD, were issued beyond the three-year prescriptive period under Section 203 of the NIRC: </p><ol><li> Penalties for late filing of VAT Refunds for the months of January and May 2011, and for the 1<sup>st</sup> and 2<sup>nd</sup> quarters; and&nbsp;<br><br> </li><li>Registration fee amounting to PHP 500.00.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> </li></ol> <p> Notably, the following shows the prescriptive periods within which to assess the same:<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> </p><blockquote> <table width="100%" border="1" cellspacing="0" cellpadding="3"> <tbody><tr valign="top"> <td width="42%">&nbsp;</td> <td width="29%"><div align="center">Due Date for<br> Filing/ Payment</div></td> <td width="29%"> <div align="center">End of Three- Year <br> Period to Assess</div></td> </tr> <tr valign="top"> <td>Monthly VAT Return for January 2011</td> <td> <div align="center">February 21, 2011</div></td> <td> <div align="center">February 20, 2014</div></td> </tr> <tr valign="top"> <td>Monthly VAT Return for May 2011</td> <td> <div align="center">June 20, 2011</div></td> <td> <div align="center">June 20, 2014</div></td> </tr> <tr valign="top"> <td>1<sup>st</sup> Quarter VAT Return ending March 2011 </td> <td><div align="center">April 25, 2011 </div></td> <td><div align="center">April 25, 2014</div></td> </tr> <tr valign="top"> <td>2<sup>nd</sup> Quarter VAT Return ending June 2011</td> <td><div align="center">July 25, 2011</div></td> <td><div align="center"> July 25, 2014</div></td> </tr> <tr valign="top"> <td>Registration fee </td> <td><div align="center"> January 31, 2011 </div></td> <td><div align="center">January 31, 2014</div></td> </tr> </tbody></table> </blockquote> <p> The FLD was issued only in October 30, 2015, which is evidently beyond the three-year period to assess the foregoing items. Further, even without belaboring the validity of the Waiver of the Defense of Prescription under the Statute of Limitation of the NIRC, such Waiver has been filed out of time. It is notable that it was executed only on October 29, 2014,<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> which is already beyond the foregoing three-year period. Consequently, no period to assess was effectively extended with respect to the foregoing items, as the NIRC is clear that <i>both</i> the date of execution by the taxpayer and date of acceptance by the BIR should be <i>before</i> the expiration of the period of prescription or <i>before</i> the lapse of the period agreed upon in case a subsequent agreement is executed.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> </p> <p> In a string of cases, the Court underscored that a waiver of the statute of limitations under the NIRC must be strictly construed against the BIR and carefully executed to protect the taxpayer from protracted and arbitrary investigations. The waiver is not an unconditional surrender of the right to invoke prescription but a mutual agreement to extend the period for assessment or collection to a definite date. For the waiver to be valid, both its execution by the taxpayer and acceptance by the BIR must occur before the expiration of the original prescriptive period or any previously extended period. Being an exception to the rule on prescriptionâwhich exists to shield taxpayers from unreasonable and endless auditsâsuch waivers must comply strictly with the law's procedural safeguards and be construed narrowly in favor of the taxpayer.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> </p><p> Thus, the Court finds sufficient ground to grant the Rule 45 Petition for Review on <i>Certiorari</i> filed by OMCI. The Decision, dated December 6, 2024, of the CTA <i>En Banc</i> in CTA EB No. 2651, is reversed. </p><p> <b>ACCORDINGLY,</b> the Petition for Review on <i>Certiorari </i>is <b>GRANTED</b>. The Decision, dated December 6, 2024, of the CTA <i>En Banc</i> is <b>REVERSED</b>. </p><p> Thus, the deficiency income tax, value-added tax, and documentary stamp tax assessments issued against petitioner Ortiz Memorial Chapel, Inc. represented by Ronald Ortiz are <b>DECLARED VOID</b> for lack of factual and legal bases, in violation of Section 228 of the National Internal Revenue Code as amended. </p><p> <b>SO ORDERED.</b> </p><p> <i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ</i>., concur.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 40-57. Penned by Associate Justice Corazon G. Ferrer-Flores, concurred in by Presiding Justice Roman G. Del Rosario and Associate Justices Ma. Belen M. Ringpis-Liban, Catherine T. Manahan, Marian Ivy F. Reyes-Fajardo and Henry S. Angeles, and dissented from by Associate Justice Maria Rowena Modesto-San Pedro of the Court of Tax Appeals, <i>En Banc</i>, Quezon City. Associate Justices Jean Marie A. Bacorro-Villena and Lanee S. Cui-David were on official business. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 135-153. Penned by Associate Justice Juanito C. CastaÃ±eda, Jr. and concurred in by Associate Justices Jean Marie A. Bacorro-Villena and Lanee S. Cui-David of the Second Division, Court of Tax Appeals, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 182-185. Penned by Associate Justice Juanito C. CastaÃ±eda, Jr. and concurred in by Associate Justices Jean Marie A. Bacorro-Villena and Lanee S. Cui-David of the Second Division, Court of Tax Appeals, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 135. </p><p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 136. </p><p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 137. </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 138. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 135. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 138. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 139. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 140. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 141. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 141-142. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 142. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 152-153. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 152. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 182-185. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 55. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 51-53. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 54. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 58-65. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 58. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 59. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 14-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Commissioner of Internal Revenue v. Avon Products Manufacturing, Inc.</b>, 841 Phil. 114, 133 (2018) [Per J. Leonen, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 903 Phil. 419 (2021) [Per J. Carandang, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 421. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 422. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 652 Phil. 172 (2010) [Per J. Mendoza, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 187. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Commissioner of Internal Revenue v. Manila Medical Services, Inc.</b>, 935 Phil. 1007, 1013 (2023) [Per J. Singh, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>Commissioner of Internal Revenue v. Avon Products Manufacturing, Inc.</b>, 841 Phil. 114, 145 (2018) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>Commissioner of Internal Revenue v. Metro Star Superama, Inc.</b>, 652 Phil. 172, 187-188 (2010) [Per J. Mendoza, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, p. 88. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 89. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 95-96. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 16, 92-96. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 17. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 17-18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 19-20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> </p><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="3%"><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b></b></td> <td colspan="5"><b>CHAPTER VI</b></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="5"><b>COMPUTATION OF GROSS INCOME</b> </td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="5">&nbsp;</td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="5"><div align="justify"><b>Section 32. <i>Gross Income</i>. </b>â</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="5"><div align="justify">(A) <i>General Definition</i>. â Except when otherwise provided in this Title, gross income means all income derived from whatever source, including (but not limited to) the following items:</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td width="4%"><div align="justify"></div><br></td> <td colspan="4"><div align="justify">(1) Compensation for services in whatever form paid, including, but not limited to fees, salaries, wages, commissions, and similar items;<br> (2) Gross income derived from the conduct of trade or business or the exercise of a profession;<br> (3) Gains derived from dealings in property; <br> (4) Interests; <br> (5) Rents; <br> (6) Royalties;<br> (7) Dividends; <br> (8) Annuities; <br> (9) Prizes and winnings;<br> (10) Pensions; and<br> (11) Partner's distributive share from the net income of the general professional partnership.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="5"><div align="justify">(B) <i>Exclusions from Gross Income</i>. â The following items shall not be included in gross income and shall be exempt from taxation under this Title:</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="4"><div align="justify">(1) <i>Life Insurance</i>. â The proceeds of life insurance policies paid to the heirs or beneficiaries upon the death of the insured, whether in a single sum or otherwise, but if such amounts are held by the insurer under an agreement to pay interest thereon, the interest payments shall be included in gross income.<br> (2) <i>Amount Received by Insured as Return of Premium</i>. â The amount received by the insured, as a return of premiums paid by him under life insurance, endowment, or annuity contracts, either during the term or at the maturity of the term mentioned in the contract or upon surrender of the contract.<br> (3) <i>Gifts, Bequests, and Devises</i>. â The value of property acquired by gift, bequest, devise, or descent: Provided, however, [t]hat income from such property, as well as gift, bequest, devise or descent of income from any property, in cases of transfers of divided interest, shall be included in gross income. <br> (4) <i>Compensation for Injuries or Sickness</i>. â amounts received, through Accident or Health Insurance or under Workmen's Compensation Acts, as compensation for personal injuries or sickness, plus the amounts of any damages received, whether by suit or agreement, on account of such injuries or sickness.<br> (5) <i>Income Exempt under Treaty</i>. â Income of any kind, to the extent required by any treaty obligation, including agreements entered into by the President with economies and administrative regions, subject to the concurrence of the Senate, binding upon the Government of the Philippines. <br> (6) <i>Retirement Benefits, Pensions, Gratuities, etc</i>. â</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td width="4%">&nbsp;</td> <td colspan="3"><div align="justify">(a) Retirement benefits received under Republic Act No. 7641 and those received by officials and employees of private firms, whether individual or corporate, in accordance with a reasonable private benefit plan maintained by the employer: Provided, That the retiring official or employee has been in the service of the same employer for at least [10] years and is not less than [50] years of age at the time of his retirement: <i>Provided, further</i>, [t]hat the benefits granted under this subparagraph shall be availed of by an official or employee only once. For purposes of this Subsection, the term <b>'reasonable private benefit plan'</b> means a pension, gratuity, stock bonus or profit-sharing plan maintained by an employer for the benefit of some or all of his officials or employees, wherein contributions are made by such employer for the officials or employees, or both, for the purpose of distributing to such officials and employees the earnings and principal of the fund thus accumulated, and wherein it is provided in said plan that at no time shall any part of the corpus or income of the fund be used for, or be diverted to, any purpose other than for the exclusive benefit of the said officials and employees.<br> (b) Any amount received by an official or employee or by his heirs from the employer as a consequence of separation of such official or employee from the service of the employer because of death sickness or other physical disability or for any cause beyond the control of the said official or employee.<br> (c) The provisions of any existing law to the contrary notwithstanding, social security benefits, retirement gratuities, pensions and other similar benefits received by resident or nonresident citizens of the Philippines or aliens who come to reside permanently in the Philippines from foreign government agencies and other institutions, private or public.<br> (d) Payments of benefits due or to become due to any person residing in the Philippines under the laws of the United States administered by the United States Veterans Administration.<br> (e) Benefits received from or enjoyed under the Social Security System in accordance with the provisions of Republic Act No. 8282.<br> (f) Benefits received from the GSIS under Republic Act No. 8291, including retirement gratuity received by government officials and employees.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="4"> (7) <i>Miscellaneous Items</i>. â</td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="3"><div align="justify">(a) <i>Income Derived by Foreign Government.</i> - Income derived from investments in the Philippines in loans, stocks, bonds or other domestic securities, or from interest on deposits in banks in the Philippines by (i) foreign governments, (ii) financing institutions owned, controlled, or enjoying refinancing from foreign governments, and (iii) international or regional financial institutions established by foreign governments.<br> (b) <i>Income Derived by the Government or its Political Subdivisions</i>. - Income derived from any public utility or from the exercise of any essential governmental function accruing to the Government of the Philippines or to any political subdivision thereof.<br> (c) <i>Prizes and Awards</i>. - Prizes and awards made primarily in recognition of religious, charitable, scientific, educational, artistic, literary, or civic achievement but only if:</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td><div align="justify"></div><br></td> <td width="1%"><div align="justify"></div><br></td> <td colspan="2"><div align="justify">(i) The recipient was selected without any action on his part to enter the contest or proceeding; and<br> (ii) The recipient is not required to render substantial future services as a condition to receiving the prize or award. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="4"><div align="justify"> (d) <i>Prizes and Awards in Sports Competition.</i> - All prizes and awards granted to athletes in local and international sports competitions and tournaments whether held in the Philippines or abroad and sanctioned by their national sports associations.<br> (e) <i>13th Month Pay and Other Benefits</i>. - Gross benefits received by officials and employees of public and private entities: Provided, however, That the total exclusion under this subparagraph shall not exceed [PHP 90,000] which shall cover: </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> <td colspan="2"><div align="justify">(i) Benefits received by officials and employees of the national and local government pursuant to Republic Act No. 6686;<br> (ii) Benefits received by employees pursuant to Presidential Decree No. 851, as amended by Memorandum Order No. 28, dated August 13, 1986;<br> (iii) Benefits received by officials and employees not covered by Presidential Decree No. 851, as amended by Memorandum Order No. 28, dated August 13, 1986; and<br> (iv) Other benefits such as productivity incentives and Christmas bonus. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="4"><div align="justify">(f) <i>GSIS, SSS, Medicare and Other Contributions</i>. - GSIS, SSS, Medicare and Pag-Ibig contributions, and union dues of individuals.<br> (g) <i>Gains from the Sale of Bonds, Debentures or other Certificate of indebtedness</i>. - Gains realized from the same or exchange or retirement of bonds, debentures or other certificate of indebtedness with a maturity of more than five [] years.<br> (h) <i>Gains from Redemption of Shares in Mutual Fund</i>. - Gains realized by the investor upon redemption of shares of stock in a mutual fund company as defined in Section 22 (BB) of this Code.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2"><div align="justify"></div><br></td> <td colspan="2"><div align="justify"> (i) <i>Income Derived from the Sale of Gold Pursuant to Republic Act No. 7076</i>. - Income derived from the following transactions pursuant to Republic Act No. 7076, otherwise known as the "People's Small-scale Mining Act of 1991":</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td><div align="justify"></div><br></td> <td colspan="2"><div align="justify"></div><br></td> <td width="4%">&nbsp;</td> <td width="83%"><div align="justify">(1) The sale of gold to the Bangko Sentral ng Pilipinas by registered small-scale miners, as defined under Republic Act No. 7076, and accredited traders; and<br> (2) The sale of gold by registered small-scale miners to accredited traders for eventual sale to the Bangko Sentral ng Pilipinas. </div></td> </tr> </tbody></table> <p><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Commissioner of Internal Revenue v. Spouses Magaan</b>, 901 Phil. 745, 766 (2021) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 762. </p><p><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 762-764. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Rollo</i>, p. 64. </p><p><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 64-65. </p><p><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 83. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 65. </p><p><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>See</i> <b>Commissioner of Internal Revenue v. Standard Chartered Bank</b>, 765 Phil. 102, 114-115 (2015) [Per J. Perez, First Division]. <i>See also</i> <b>Philippine Journalists, Inc. v. Commissioner of Internal Revenue</b>, 488 Phil. 218, 231-232 (2004) [Per J. Ynares-Santiago, First Division].&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

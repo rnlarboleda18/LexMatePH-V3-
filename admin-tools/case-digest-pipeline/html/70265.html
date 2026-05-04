@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. Nos. 262551, 266971, and 275314 - STARWOOD HOTELS & RESORTS WORLDWIDE, LLC (FORMERLY STARWOOD HOTELS & RESORTS WORLDWIDE INC.), PETITIONER, VS. OCEANIC EMPIRE LIMITED, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70265' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. Nos. 262551, 266971, and 275314, January 28, 2026 ]</H2>
+			<H3>STARWOOD HOTELS & RESORTS WORLDWIDE, LLC (FORMERLY STARWOOD HOTELS & RESORTS WORLDWIDE INC.), PETITIONER, VS. OCEANIC EMPIRE LIMITED, RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>HERNANDO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court are the consolidated Petitions for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by petitioner Starwood Hotels &amp; Resorts Worldwide, LLC (Starwood) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated April 29, 2022, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 5, 2022, of the Court of Appeals (CA) in CA-G.R. SP No. 169799; the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated September 15, 2022, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated April 11, 2023, of the CA in CA-G.R. SP No. 169798; and the Decision<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> dated August 8, 2024 of the CA in CA-G.R. SP No. 181664.</p><p align="center"> <i>Antecedents</i> </p><p> Respondent Oceanic Empire Limited (Oceanic) filed applications for registration of the following trademarks before the Intellectual Property Office (IPO) of the Philippines (IPOPHL): </p><table width="100%" border="1" cellspacing="0" cellpadding="3"> <tbody><tr valign="top"> <td width="14%"><div align="center"><strong>G.R. No. </strong></div></td> <td width="36%"><div align="center"><strong>Mark</strong></div></td> <td width="25%"><div align="center"></div><br></td> <td width="25%"><div align="center"><strong>Nice<br> Classification </strong></div></td> </tr> <tr> <td valign="top"><div align="center">262551</div></td> <td valign="top"><div align="center"><strong>W</strong> GLOBALCENTER</div></td> <td valign="top"><div align="center">Filing Date: <br> June 19, 2015 </div></td> <td rowspan="3" valign="top"><div align="center">Class 36 - Real Estate Affairs </div></td> </tr> <tr> <td valign="top"><div align="center">266971</div></td> <td valign="top"><div align="center"><strong>W</strong> FIFTHAVENUE </div></td> <td valign="top"><div align="center">Filing Date: <br> June 19, 2015 </div></td> </tr> <tr> <td valign="top"><div align="center">275314</div></td> <td valign="top"><div align="center"><strong>W</strong> TOWER </div></td> <td valign="top"><div align="center">Registration Date: November 19, 2015 </div></td> </tr> </tbody></table> <p>On April 18, 2016, Starwood filed an Opposition<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> to Oceanic's application for registration of <strong>W</strong>GLOBALCENTER. On March 2, 2016, it also filed an Opposition<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> for <strong>W</strong>FIFTHAVENUE. It likewise filed a Petition for Cancellation<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> with the IPO Bureau of Legal Affairs (IPO-BLA) for <strong>W</strong>TOWER on December 5, 2016. On all three accounts, Starwood contended that Oceanic's marks are not registerable as they are confusingly similar to its own marks. Starwood claimed that Oceanic's marks intend to ride on the former's popularity or goodwill, and that they confuse, deceive, and mislead the purchasing public. </p><p> Starwood is the owner of the following registered marks: </p><table width="100%" border="1" cellspacing="0" cellpadding="3"> <tbody><tr valign="top"> <td width="31%"><div align="center"><strong>Trademark</strong></div></td> <td width="29%"><div align="center"><strong>Certificate of<br> Registration </strong></div></td> <td width="40%"><div align="center"><strong>Nice Classification </strong></div></td> </tr> <tr valign="top"> <td valign="middle"><div align="center">(image supposed to be here)<br> (Word mark) </div></td> <td valign="middle"><div align="center">Date of Registration: February 26 and July 23, 2007</div></td> <td rowspan="2"><div align="justify">Class 37 - Building construction, repair, installation services; <p></p> </div> <p align="justify">Class 41 - Entertainment services including live entertainment services; </p> <p align="justify">Class 43 - Hotel, motel, resort hotel, and motor inn services; hotel reservation services; services providing food and drink; provision of information relating to holidays; provision of conference, meeting and social function facilities; and </p> <p align="justify">Class 44 - Beauty salon and hair dressing services. </p></td> </tr> <tr valign="top"> <td valign="middle"><div align="center">(image supposed to be here)<br> (Stylized mark) </div></td> <td valign="middle"><div align="center">Date of Registration: March 10, 2008</div></td> </tr> </tbody></table> <p><i>Ruling of the IPO-BLA Adjudication Officer</i> </p><p> G.R. No. 262551</p><p> In its February 14, 2018 Decision,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> the IPO-BLA Adjudication Officer (AO) dismissed Starwood's opposition and ruled in favor of Oceanic. The dispositive portion of the ruling reads: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the instant opposition is hereby <b>DISMISSED</b>. Let the filewrapper of Trademark Application Serial No. 4-2015-006821 be returned, together with a copy of this Decision, to the Bureau of Trademarks for information and appropriate action.</p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (Emphasis in the original)</p> </blockquote> <p> G.R. No. 266971</p><p> In its Decision<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated February 20, 2018, the IPO-BLA AO dismissed Starwood's opposition as follows: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the instant opposition is hereby <b><i>DISMISSED</i></b>. Let the filewrapper of Trademark Application Serial No. 4-2015-006820, together with a copy of this Decision, be returned to the Bureau of Trademarks for information and appropriate action. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> (Emphasis in the original) </p> </blockquote> <p> G.R. No. 275314</p><p> In its Decision<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated September 20, 2019, the AO dismissed Starwood's petition for cancellation and likewise ruled in favor of Oceanic. The dispositive portion states: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the instant petition for cancellation is hereby <b>DISMISSED</b>. Let the filewrapper of Trademark Registration No. 4-2015-006819, together with a copy of this Decision, be returned to the Bureau of Trademarks for information and appropriate action. </p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis in the original) </p> </blockquote> <p> In all three cases, the AO concluded that there was no confusing similarity between the trademarks of Oceanic and Starwood.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> Although it was undeniable that both parties used the letter "W", the AO in the three instances held that a mark's registration cannot be cancelled based solely on the use of an identical letter. In light of stark differences and the unrelated character of the overall appearance of the marks, Starwood cannot have a monopoly on the use of the letter "W", to the exclusion of others. This is bolstered by the fact that the IPOPHL Trademark Registry has allowed the registration of at least 14 other marks which used the same letter on goods under different classes of goods. The AO held that the addition of the word "TOWER" "GLOBALCENTER," and "FIFTH AVENUE", in uppercase letters to Oceanic's marks sufficiently distinguished them from Starwood's.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> The AO also noted that the marks covered are unrelated and non-competing, as they did not belong to the same classification of goods.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Oceanic's mark is used on real estate affairs under Class 36, while Starwood's is registered for hotel and resort businesses under Classes 43 and 44. Considering that real estate clients are not ordinary purchasers and are more discerning given the amount of money they need to dispense to acquire, then confusion and deception are less likely to occur. Surely, one desirous of buying real estate would not go to a hotel just because the hotel's name has a "W" on it.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> Finally, the AO found that Starwood failed to prove that it owns a famous or well-known mark; thus, it cannot invoke trademark dilution under the "expansion of business" doctrine.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></p><p> Dissatisfied, Starwood elevated an appeal before the IPO-BLA Director.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></p><p> <i>Ruling of the IPO-BLA Director</i></p><p> G.R. No. 262551</p><p> In a Decision<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> dated December 20, 2019, the Director of the IPO-BLA set aside the AO's ruling in favor of Starwood. The dispositive portion states: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the instant Appeal is hereby <b>GRANTED</b>. Accordingly, Decision No. 2018-17 dated [February 14, 2018] is hereby <b>REVERSED AND SET ASIDE</b>.</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Emphasis in the original)</p> </blockquote> <p> G.R. No. 266971</p><p> In its Decision<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated December 20, 2019, the IPO-BLA Director granted Starwood's appeal as follows: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the instant Appeal is hereby <b>GRANTED.</b> Accordingly, Decision No. 2018-21 dated [February 20, 2018] is hereby <b>REVERSED and SET ASIDE</b>.</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Emphasis in the original) </p> </blockquote> <p> G.R. No. 275314</p><p> In a Decision<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> dated September 19, 2022, the IPO-BLA Director likewise reversed the AO and ruled for Starwood. The dispositive portion of the ruling reads: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the instant Appeal is hereby <b>GRANTED</b>. Accordingly, Decision No. 2019-125 is hereby <b>REVERSED</b> and <b>SET ASIDE</b>. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> (Emphasis in the original) </p> </blockquote> <p> Applying the Dominancy Test, the IPO-BLA Director found that confusion will likely occur between the two marks where it is evident that the distinguishing element of both marks is the immediately apparent, stylized "W", depicted in bold font. It held that "W" was still the dominant and prevalent feature of the marks. The addition of other terms such as "TOWER", "FIFTHAVENUE", or "GLOBALCENTER" were insufficient to distinguish the marks as these terms were merely descriptive of the nature or geographic location of the business or service involved; thus, they cannot be exclusively appropriated by anyone.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The IPO-BLA Director also noted that "GLOBALCENTER" and "FIFTHAVENUE" were expressly disclaimed by Oceanic in its trademark applications.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> Moreover, the IPO-BLA Director also found that it was of no moment that the marks belonged to different classifications, given that Oceanic's real estate affairs were closely related to and were broad enough to encompass Starwood's hotel and motel services, and building construction and installation services. Since both have references to real estate or property, the IPO-BLA Director held that it was not impossible for ordinary purchasers to associate or affiliate one mark with the other, even when in fact, there is no connection between them.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></p><p> Aggrieved, Oceanic lodged an appeal to the IPO Director General.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></p><p> <i>Ruling of the IPO Director General</i></p><p> G.R. No. 262551</p><p> In a Decision<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> dated June 22, 2021, the IPO Director General set aside the IPO-BLA Director's ruling in favor of Oceanic. </p><p> G.R. No. 266971</p><p> In Decision<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated its June 22, 2021, the IPO Director General reversed the IPO-BLA Director as follows: </p><blockquote> <p> WHEREFORE, premises considered, the appeal is hereby GRANTED and the Decision of the Director of the Bureau of Legal Affairs is hereby SET ASIDE. Let a copy of this Decision and the records of this case be furnished and returned to the Director of the Bureau of Legal Affairs for appropriate action and information. Further, let a copy of this Decision be furnished also the Director of Bureau of Trademarks and the library of the Documentation, Information, and Technology Transfer Bureau for information and records purposes. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p> </blockquote> <p> G.R. No. 275314</p><p> In the same vein, the IPO Director General in a Decision<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> dated October 16, 2023, also reversed the IPO-BLA Director's ruling in favor of Oceanic. Its dispositive portion states: </p><blockquote> <p> WHEREFORE, premises considered, the appeal is hereby granted. Let a copy of this Decision and the records of this case be furnished and returned to the Director of Bureau of Legal Affairs for appropriate action and information. Further, let a copy of this Decision be furnished also the Director of Bureau of Trademarks and the library of the Documentation, Information, and Technology Transfer Bureau for information and records purposes. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p> </blockquote> <p> In all three cases, the IPO Director General ruled that no one had a right to exclusively appropriate any of the letters in the English alphabet, i.e., the letter "W", with respect to all goods and services, especially considering the difference in fonts.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </p><p> Moreover, the IPO Director General held that the subject marks cannot be considered related, just because they both refer to real estate or property.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Where Oceanic offers high-end real estate development services while Starwood offers hotels and resorts consisting of temporary accommodation and social functions, then what is involved are not ordinary consumable household items. The IPO Director General found that confusion is unlikely because the casual buyer is predisposed to be more cautious and discriminating as to his or her purchase. The purchasing public should, therefore, be given more credit in having at least a modicum of intelligence to see the clear difference between these subject trademarks.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> Consequently, Starwood elevated the cases to the CA.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> <i>Ruling of the Court of Appeals</i></p><p> G.R. No. 262551</p><p> In the assailed Decision dated April 29, 2022, the CA dismissed Starwood's appeal and ruled in favor of Oceanic. The dispositive portion of the ruling reads: </p><blockquote> <p> <b>WHEREFORE</b>, the petition for review is <b>DISMISSED</b>. The assailed Decision of the Director General, Intellectual Property Office, is <b>AFFIRMED</b>. </p> <p> <b>IT IS SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> (Emphasis in the original) </p> </blockquote> <p> G.R. No. 266971</p><p> In the assailed Decision of September 15, 2022, the CA dismissed Starwood's appeal and ruled in favor of Oceanic. The dispositive portion of the ruling reads: </p><blockquote> <p> <b>ACCORDINGLY</b>, the petition of Starwood Hotels and Resorts Worldwide, Inc., is <b>DENIED.</b> </p> <p> The Decision dated [June 22, 2021] of the Director General of the Intellectual Property Office of the Philippines in Appeal No. 14-2020-0005 (IPC No. 14-2015-00597) is <b>AFFIRMED.</b> </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> (Emphasis in the original) </p> </blockquote> <p> G.R. No. 275314</p><p> Similarly, the CA's assailed Decision of August 8, 2024, also affirmed the rulings of the IPO Director General and the AO. Its dispositive portion reads as follows: </p><blockquote> <p> <b>WHEREFORE,</b> the Petition for Review is <b>DENIED.</b> The Decision dated October 16, 2023 of the Director General of the Intellectual Property Office of the Philippines in Appeal No. 14-2022-0053 (IPC No. 14-2016-00743) is <b>AFFIRMED</b>. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (Emphasis in the original) </p> </blockquote> <p> In all three cases, the CA held that where there was no visual or aural resemblance between the subject marks, then there cannot be a finding of confusing similarity between them.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p> Anent <strong>W</strong> GLOBALCENTER, the CA found that Oceanic's mark included the stylized phrase "GLOBALCENTER" alongside the letter "W," whereas Starwood's "W" was a simple word mark with no special design features. It further observed that single-letter marks such as Starwood's "W" lacked distinctiveness and was thus generally incapable of indicating a unique commercial origin.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> Moreover, Starwood's letter "W" was prominently featured in a bold, larger font above the smaller, narrower "HOTELS." On the other hand, Oceanic's <strong>W</strong> GLOBALCENTER is a stylized, single-line mark with one letter positioned after the other in the same size. It thus concluded that these visual differences ensured that Oceanic's use of the letter "W" does not suggest an association with Starwood's services.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> Anent <strong>W</strong> FIFTHAVENUE, the CA also found that the difference in the placement of the letters distinguished the marks from one another. Starwood's mark was composed of two lines with the letters other than "W" placed below it, while Oceanic's mark was an entire line constituting "W" and several other letters. The CA also emphasized the fact that the marks belonged to different categories under the Nice Classification; thus, there can be no legal presumption of a likelihood of confusion because the marks are not used for identical services. Finally, the CA noted Oceanic's third Declaration of Actual Use as further proof of distinctiveness as well as its other division's ruling regarding <strong>W </strong>GLOBAL CENTER, in support of its conclusion.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> </p><p> Meanwhile for W TOWER, the CA held that the dominant feature in Oceanic's mark was the entire <strong>W</strong> TOWER with all six letters positioned one after another in one line and in similar sizes and fonts. Indeed, the "W" in Oceanic's mark is bolder than the rest of the letters in it, but the word component of the mark cannot be isolated from its other elements. Where the dominant feature of Starwood's mark is the letter "W" in two different fonts and styles, the addition by Oceanic of the individual letters of the word "TOWER" created a mark visually distinct from Starwood's which had the word "HOTEL" in small letters vis- (image supposed to be here) Ã -vis the much larger "W" on top of it.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> </p><p> For <strong>W</strong> TOWER, the CA also took judicial notice of its two decisions<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> where Oceanic's marks of <strong>W</strong> GLOBALCENTER and <strong>W</strong> FIFTHAVENUE were already previously found by its divisions as being not visually, phonetically, and connotatively identical.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> In addition, the appellate court made findings that Starwood's mark involves luxury hotel operations, which is distinct from Oceanic's mark that is involved in real estate development and leasing. Oceanic's services target business owners seeking office and retail spaces instead of short-term accommodations; hence, Starwood can only claim exclusivity of its marks for the services listed in its registration.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Even if the services may be regarded related, the CA in the <strong>W</strong> TOWER case found that the fact that their businesses do not constitute ordinary household items of minimal cost, clearly suggests that these expensive and valuable items are purchased only after deliberate, comparative, and analytical investigation.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> Finally, the CA rejected Starwood's claim of malice and bad faith. Starwood's assertion that Oceanic only intended to "ride on its coattails" was held as without basis, as it failed to adduce evidence that Oceanic applied for the registration of its mark, despite knowing that someone else had created, used, or registered such mark.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup></p><p> Starwood moved for reconsideration in the cases of <strong>W</strong> GLOBALCENTER and <strong>W</strong> FIFTHAVENUE, which were denied in the assailed Resolutions dated August 5, 2022 and April 11, 2023, respectively. Undeterred, Starwood elevated separate appeals for all three cases before this Court.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </p><p> Consequently, this Court issued Minute Resolutions dated February 27, 2023<sup style="COLOR: RGB(255, 0, 0);">[55]</sup>, January 29, 2024,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> and January 15, 2025,<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> requiring Oceanic to respond. Oceanic complied and filed its Comments on May 17, 2023<sup style="COLOR: RGB(255, 0, 0);">[58]</sup>, July 8, 2024<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> and April 7, 2025,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> respectively. </p><p> Pursuant to the recommendations of the March 26, 2025<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> and March 28, 2025 Memorandum Reports of the Offices of the Division Clerks of Court, the cases are herein consolidated, as they involve the exact same parties as well as the interrelated issue of whether there exists confusing similarity between their trademarks.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> </p><p align="center"> <i>Issue</i> </p><p> The main issue for this Court's resolution is whether there is confusing similarity between Starwood's and Oceanic's marks that would warrant the cancellation of the latter's <strong>W</strong> TOWER and the non-registration of its <b>W</b> FIFTHAVENUE and <strong>W</strong> GLOBALCENTER marks. </p><p align="center"> <i>Our Ruling</i> </p><p> The Petitions are impressed with merit. </p><p> Section 121.1 of Republic Act No. 8293 or the Intellectual Property Code of the Philippines (IP Code) defines a "mark" as any visible sign capable of distinguishing goods or services,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> the main purpose of which is to distinctly identify the origin or ownership of such goods or services, ensure the public receives the genuine product, and protect manufacturers against fraud, substitution, or the sale of inferior goods as their own.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> </p><p> The IP Code does not explicitly define how exactly a mark becomes capable of distinguishing the goods or services of an enterprise; rather, it identifies what marks are incapable of registration:<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> </p><blockquote> <p> Section 123. <i>Registrability</i>. - 123.1. A mark cannot be registered if it:</p> <p> ....</p> <p> (d) Is identical with a registered mark belonging to a different proprietor or a mark with an earlier filing or priority date, in respect of:</p> <blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="5%"><div align="justify">(i)</div></td> <td width="95%"> <div align="justify">The same goods or services, or</div></td> </tr> <tr> <td><div align="justify">(ii)</div></td> <td><div align="justify">Closely related goods or services, or</div></td> </tr> <tr> <td><div align="justify">(iii)</div></td> <td><div align="justify">If it nearly resembles such a mark as to be likely to deceive or cause confusion.</div></td> </tr> </tbody></table> </blockquote> </blockquote> <p>Under Sections 134<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> and 151.1<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> of the IP Code, a party who stands to suffer damage from the registration of a mark that is contrary to the provisions of the IP Code, may either file for opposition or cancellation, respectively, depending on the stage of the proceedings for such registration. </p> <p> In the three petitions before Us, Starwood objects to the registration of Oceanic's marks on the ground that these create a confusing similarity with its own marks. </p><p> Relative to the issue on confusion of marks and trade names, jurisprudence has noted two types of confusion: (1) confusion of goods (product confusion), where the ordinarily prudent purchaser would be induced to purchase one product in the belief that he or she was purchasing the other; or (2) confusion of business (source or origin confusion), where, although the goods of the parties are different, the product, the mark of which registration is applied for by one party, is such as <i>might reasonably be assumed to originate with the registrant of an earlier product</i>; and the public would then be deceived either into that belief or <i>into the belief that there is some connection between the two parties, though inexistent</i>. Thus, while there is confusion of goods when the products are competing, confusion of business nonetheless exists when the products or services are non-competing but related enough to produce <i>confusion of affiliation</i>.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup></p><p> At this juncture, it should likewise be emphasized that absolute certainty of confusion or even actual confusion is not necessary to be afforded protection as a registered trademark.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Therefore, the <i>likelihood</i> of confusion of goods or business is a relative concept, to be determined only according to the particular and peculiar circumstances of each case.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Jurisprudence has recognized a multifactor criteria<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> in examining each relevant factual landscape. Nonetheless, it has uniformly deemed two factors especially significant in such evaluation: (1) the resemblance of marks, i.e., the degree of similarity between the parties' respective marks; and (2) the relatedness or proximity of their goods and services.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> </p><p> <i>A. Resemblance of the Marks</i></p><p> In <i>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc</i>.,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> the Dominancy Test has unequivocally been determined as the controlling test to determine the resemblance of marks.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup></p><p> This resemblance or similarity does not require the marks to be identical. It is sufficient for the prospective mark to be a colorable imitation of the earlier mark.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> Colorable imitation refers to a likeness in form, content, wording, sound, meaning, arrangement, or overall appearance that could likely mislead an average buyer.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup></p><p> The Dominancy Test requires courts to give greater weight to the similarity of the appearance of the product or service arising from the adoption of the main, essential, and dominant features of the mark, disregarding minor differences. Thus, more consideration is accorded to the aural and visual impressions created by the marks in the public mind, giving little weight to factors like prices, quality, sales outlets, or market segments.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup></p><p> While there are no exact rules in determining what constitutes as the dominant feature of the marks, courts can consider the signs, color, design, peculiar shape or name, or some special, easily remembered earmarks of the brand that readily attract and catch the attention of such ordinary consumer.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> </p><blockquote> <table width="60%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify"><em>i.</em></div></td> <td width="95%"><div align="justify"><i>There is no confusing similarity between Starwood's </i><strong>W</strong><i> mark and Oceanic's subject marks</i></div></td> </tr> </tbody></table> </blockquote> <p>The IPO-BLA AO, IPO Director General, and the CA all ruled against Starwood holding that there was no confusing similarity because the letter "W" was the dominant feature in Starwood's mark and no one can claim monopoly over a letter of the alphabet.</p> <p> We note that Starwood registered its <strong>W</strong> mark as a <i>word mark</i>. In <i>Kolin</i>, the Court had occasion to describe what a word mark is: </p><blockquote> <p> Notably, the IP Code and the current Trademark Regulations do not define these terms and how they impact the finding of resemblance between marks. However, IPOPHL Memorandum Circular No. 17-010, <i>Rules and Regulations on Trademarks, Service Marks, Trade names and Marked or Stamped Containers</i> makes an explicit reference to "word marks," as follows: </p> <p> RULE 402. <i>Reproduction of the Mark</i>. â [. . .]</p> <p> In the case of <i>word marks</i> or if no special characteristics have to be shown, such as design, style of lettering, color, diacritical marks, or unusual forms of punctuation, the mark must be represented in standard characters. The specification of the mark to be reproduced will be indicated in the application form and/or published on the website.</p> </blockquote> <p align="center"> [. . . .] </p><blockquote> <p> That word marks protect the word itself stands to reason. Since there are no special characteristics to be shown in the reproduction of the mark in the application, the word itself is the subject of protection. This understanding of the protection given to word marks is also consistent with trademark jurisprudence in the United States, where most of our intellectual property laws were patterned from.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> (Emphasis in the original) </p> </blockquote> <p> Based on the above definition, it can reasonably be inferred that word marks are registered <i>irrespective</i> of their design, representation, and any special characteristics. Following this logic, Starwood's <strong>W</strong> mark must simply be examined based on it being a standalone letter and removed from whatever differentiation in style and format it may possess. To this extent, We echo the finding of the tribunals below that this cannot be the basis for Starwood to claim distinction in business, such that it can consequently claim exclusivity in the use of a plain letter of the alphabet. </p><p> As properly observed by the CA in G.R. No. 262551: </p><blockquote> <p> Being a single letter and presented in standard character, the <strong>W</strong> word mark of the petitioner clearly lacks distinctiveness. The use of the <strong>W</strong> word mark can hardly be considered as highly identifiable with the products and services of petitioners alone. To consider otherwise would be to grant the petitioner a monopoly over the letter W. In fact, under the ASEAN Common Guidelines for Substantive Examination of Trademarks, which serves as a reference to guide and focus the practices of the ASEAN IP Offices (of which the Philippines is a part), single letters are regarded as <i>prima facie</i> incapable of being recognized by consumers as marks that indicate a commercial origin.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> </p> </blockquote> <p> Moreover, We note the findings of the lower tribunals regarding the existence of several other trademark registrations which similarly adopted the letter "W", either as standalone or composite marks and in various styles and representations from other registrants under different classes of goods and services.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup></p><p> Based on the foregoing, it becomes apparent that Starwood's <strong>W</strong> mark, as a wordmark, is not sufficiently distinctive to identify Starwood as its single source or origin of business. </p><blockquote> <table width="70%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify"><em>ii.</em></div></td> <td width="95%"><div align="justify"><em>There is confusing similarity between </em>(image supposed to be here) <em> as Starwood's mark and Oceanic's subject marks</em></div></td> </tr> </tbody></table> </blockquote> <p>Notwithstanding the preceding discussion, this Court finds that a confusing similarity likely exists between Oceanic's marks and Starwood's other mark: </p> <p> Oceanic insists that Starwood cannot appropriate a single letter in standard, black-and-white character that is commonly available in Microsoft Word documents.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> In its latest petition, Starwood however clarifies once and for all that it does not lay claim <i>over any and all configurations</i> of the letter "W"; rather, it defends its ownership over a unique and particular stylized <strong>W</strong> â one that is in bold typeface, in sans-serif font style, in uppercase letters, with slightly-wide arms or slightly-apart stems, in solid, straight, and sharp design.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> </p><p> Starwood further contends that it is this stylized <strong>W</strong> which constitutes the dominant feature of the (image supposed to be here) mark and is confusingly similar to Oceanic's marks, because the words "TOWER", "FIFTHAVENUE" and "GLOBAL CENTER" are merely descriptive terms.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> </p><p> To this, Oceanic replies that the dominant feature of its marks is not the letter "W" but precisely, the entirety of the indivisible composite mark: "W" <i>plus</i> "GLOBALCENTER", "TOWER", and/or "FIFTHAVENUE".<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> </p><p> In <i>McDonald's Corporation v. Macjoy Fastfood Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> the Court applied the dominancy test in holding that "MACJOY" is confusingly similar to "MCDONALD'S." The Court therein observed how both marks used the corporate "M" design logo as their dominant feature, and how such marks were similarly depicted i.e., in an arch-like, capitalized, and stylized manner.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> </p><p> In <i>Societe Des Produits Nestle, S.A. v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> the Court also applied the dominancy test in holding that "FLAVOR MASTER" is confusingly similar to "MASTER ROAST" and "MASTER BLEND." The Court therein found that from the evidence at hand, it was sufficiently established that the word "MASTER" is the dominant feature as it was <i>printed across the middle portion of the label in bold letters</i> almost twice the size of the printed word "ROAST." Further, the word "MASTER" has <i>always been given emphasis</i> in the TV and radio commercials <i>and other advertisements made in promoting the product</i>.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> </p><p> In <i>Skechers, U.S.A., Inc. v. Inter Pacific Industrial Trading Corp</i>.,<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> the Court, on reconsideration, also applied the dominancy test for a stylized letter, viz.: </p><blockquote> <p> Applying the Dominancy Test to the case at bar, this Court finds that the use of the stylized "S" by respondent in its Strong rubber shoes infringes on the mark already registered by petitioner with the IPO. While it is undisputed that petitioner's stylized "S" is within an oval design, to this Court's mind, <i>the dominant feature of the trademark is the stylized "S", as it is precisely the stylized "S" which catches the eye of the purchaser</i>. Thus, even if respondent did not use an oval design, the mere fact that it used the same stylized "S", the same being the dominant feature of petitioner's trademark, already constitutes infringement under the Dominancy Test. </p> <p> This Court cannot agree with the observation of the CA that the use of the letter "S" could hardly be considered as highly identifiable to the products of petitioner alone. The CA even supported its conclusion by stating that the letter "S" has been used in so many existing trademarks, the most popular of which is the trademark "S" enclosed by an inverted triangle, which the CA says is identifiable to Superman. Such reasoning, however, misses the entire point, which is that respondent had used a stylized "S", which is the same stylized "S", which petitioner has a registered trademark for. The letter "S", used in the Superman logo, on the other hand, has a block-like tip on the upper portion and a round elongated tip on the lower portion. Accordingly, the comparison made by the CA of the letter "S" used in the Superman trademark with petitioner's stylized "S", is not appropriate to the case at bar. </p> <p> Furthermore, respondent did not simply use the [stylized] "S", but it appears to this Court that <i>based on the font and the size of the lettering</i>, the stylized "S" utilized by respondent is the very same stylized "S", used by petitioner; a stylized "S" which is unique and distinguishes petitioner's trademark. Indubitably, the likelihood of confusion is present as purchasers will associate the respondent's use of the stylized "S" as having been authorized by petitioner or that respondent's product is connected with petitioner's business.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> (Emphasis supplied) </p> </blockquote> <p> We agree with the IPO-BLA Director's finding that it is the stylized <strong>W</strong> that is the dominant or prevalent feature of both Starwood's and Oceanic's marks. </p><p> For ease of reference, a side-by-side comparison of the parties' marks is presented below: </p><table width="100%" border="1" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="50%"><div align="center"><b>Starwood</b></div></td> <td width="50%"><div align="center"><b>Oceanic</b></div></td> </tr> <tr> <td><div align="center"><br>(Image supposed to be here) </div></td> <td><div align="center"><br>(Image supposed to be here) </div></td> </tr> </tbody></table> <p>At first glance, the resemblance between the parties' representations of the stylized <strong>W</strong> is already made apparent to the ordinary person. Whatever actual variance exists in the exact typography used, it can still be readily deduced that to the average eye's immediate impression, the stylized <strong>W</strong> of both marks resemble each other, in that they have a sans-serif font and are depicted in boldface and uppercase with slightly wide arms in solid design. </p><p> Even a perusal of the comparative table<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> submitted by Oceanic of at least 11 other trademark registrations using the letter "W" for similar and related services would show that there are still nuances to such marks as compared to Starwood's stylized <strong>W</strong>. Although some of them are also using sans serif font, there are noticeable differences therein in thickness, shading or shadows, angles, as well as additional accompanying shapes and textures, etc. We also observe that Oceanic was not even able to readily name the font Starwood employs, despite its allegation that the same is standard in all Word documents.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> </p><p> Meanwhile, the word "HOTELS" is obviously placed below the letter "W" for Starwood's mark, whereas the words "TOWER", "FIFTHAVENUE", and "GLOBALCENTER" are placed parallel to or right beside the letter "W" for Oceanic's mark. However, contrary to the conclusions of the lower tribunals, such relative placement of these additional terms does not spell the difference in defining what is the dominant feature of the subject marks. Just because the additional terms in Oceanic's marks are beside the "W", it does not unequivocally transform the dominant feature of its marks to the entire and indivisible composite term, given the reasons discussed below: </p><p> <i>First</i>, and consistent with the cited rulings above, emphasis has been clearly and deliberately placed on such stylized <strong>W</strong> by printing it <b><i>in bold typeface</i></b>, thus isolating the same from the additional terms but qualifying them, akin to Starwood's mark. The additional terms of "TOWER", "FIFTH AVENUE", and "GLOBAL CENTER" stand in stark contrast to the <strong>W</strong> as they are likewise represented in non-bolded, thin, solid, sans serif font and uppercase , format, like the "HOTELS" in Starwood's mark. Regardless of whether located beside or below the "W", such additional terms appear subordinated to the stylized <strong>W</strong> in thickness, arrangement, and overall visual impact. </p><p> <i>Second</i>, the additional terms included in Oceanic's marks cannot be classified as fanciful or arbitrary to be distinctive but may properly be regarded as generic and/or descriptive terms. </p><p> The Court has reiterated that there are four different categories of marks vis-Ã -vis the strength of protection accorded to them. Arbitrary or fanciful marks and suggestive marks are the strongest trademarks. On the other hand, descriptive and generic terms entail weaker trademark protection.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> In fact, under Section 123 of the IP Code, these latter marks are not registerable, viz.: </p><blockquote> <p> Section 123. <i>Registrability</i>. - 123.1. A mark cannot be registered if it: </p> <p> . . . .</p> <p> (h) Consists exclusively of signs that are generic for the goods or services that they seek to identify;</p> <p> . . . .</p> <p> (j) Consists exclusively of signs or of indications that may serve in trade to designate the <i>kind, quality</i>, quantity, <i>intended purpose</i>, value, <i>geographical origin</i>, time or production of the goods or rendering of the services, or other characteristics of the goods or services;<br> (k) Consists of shapes that may be necessitated by technical factors or by the nature of the goods themselves or factors that affect their intrinsic value. (Emphasis supplied) </p> </blockquote> <p> Unless otherwise shown to have acquired a secondary meaning, descriptive terms refer to character, qualities, composition or place of production and manufacture.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> Meanwhile, generic marks involve names by which a class of products or services is commonly known. These constitute words or signs that name the species or object to which they apply.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> As, underscored in <i>Ginebra v. Director of the Bureau of Trademarks</i>,<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> such marks are not eligible for registration and are not entitled to protection, thus: </p><blockquote> <p> Generic terms are those which constitute "the common descriptive name of an article or substance," or comprise the "genus of which the particular product is a species," or are "commonly used as the name or description of a kind of goods", or "imply reference to every member of a genus and the exclusion of individuating characters", or "refer to the basic nature of the wares or services provided rather than to the more idiosyncratic characteristics of a particular product," and are not legally protectable. </p> <p> . . . .</p> <p> An example of a generic mark would be "COFFEE" for a product of coffee. Thus, a generic word alone is not subject to exclusive appropriation because it does not distinguish itself from the genus of which the particular product is a species. Stated differently, a generic term names a "class" of goods or services; rather than any particular feature or exemplification of the class.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> (Citations omitted) </p> </blockquote> <p> In this light, We agree with the IPO-BLA Director's findings that the inclusion of the additional terms "TOWER", "FIFTHAVENUE" and "GLOBALCENTER," does not diminish the fact that the stylized <strong>W</strong> remains the dominant feature of both Oceanic's and Starwood's marks.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> The words "TOWER" and "HOTELS" are merely generic as they commonly pertain to building establishments and describe the nature of the service being offered by the respective business covered by each mark. Whether for long-term real estate services or short-term luxury accommodations, it cannot be gainsaid that these terms merely reference the nature of the business they apply to. Absent proof of acquisition of secondary meaning, the terms "GLOBALCENTER" and "FIFTHAVENUE" may also only be considered as descriptive marks, referring merely to the geographic location of the building, i.e., in Bonifacio Global City, and the intended commercial purpose the mark pertains to.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> </p><p> We note that as early as the July 13, 2015 Registrability Report<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> for <strong>W</strong> GLOBAL CENTER, the IPO Examiner already flagged the term "GLOBAL CENTER" for being descriptive of the kind, quality, and other characteristics of the services covered by the application. Oceanic eventually agreed to disclaim the term "GLOBALCENTER" from the subject mark.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> Such disclaimer allowed the mark to be registered in its entirety, albeit without acquiring exclusive rights to the disclaimed matter. It also essentially recognizes that the mark includes an unregistrable component.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> Indeed, the IP Code acknowledges that disclaimers shall not prejudice an applicant or owner's rights. However, this cannot be taken to mean that the disclaimed matter, when joined with the rest of the parts of the mark, has somehow automatically converted it into an indivisible mark and that its entirety has now become the dominant feature, as Oceanic would imply.<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> </p><p> Despite the negligible differences created by the inclusion of such additional terms and their placement, both Oceanic's and Starwood's marks utilize the same modern, bold, and minimalistic presentation of the stylized <strong>W</strong>. This shared visual characteristic reinforces the likelihood that consumers may mistake one mark for the other or assume an association between them. </p><p> <i>Third</i>, that it is this stylized <strong>W</strong> â in its bold and sans serif typeface â that catches the immediate attention and can therefore likely confuse the consuming public, is further strengthened by the analogous way the subject marks have actually been used in commerce, i.e., through the <i>prominent display of the marks in their respective buildings</i>. </p><p> Rule 18, Section 5 of the Revised IP Rules<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> reminds that in the determination of likelihood of confusion, consideration must be given based on the visual comparisons and overall impressions of the marks <i>as they are encountered in the realities of the marketplace</i>.<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> </p><p> As demonstrated by Starwood in its present petition<sup style="COLOR: RGB(255, 0, 0);">[107]</sup> and as can be gleaned from a quick Internet search, Starwood has exhibited the stylized <strong>W</strong> of the mark (image supposed to be here) at the faÃ§ade of its building structures as follows: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="50%"><div align="center">(image supposed to be here)<br> Hotels Bangkok<sup style="COLOR: RGB(255, 0, 0);">[108]</sup></div></td> <td width="50%"><div align="center">(image supposed to be here) <br> W Hotels Kuala Lumpur<sup style="COLOR: RGB(255, 0, 0);">[109]</sup></div></td> </tr> <tr> <td colspan="2">&nbsp;</td> </tr> <tr> <td colspan="2"><div align="center"></div> <div align="center">(image supposed to be here)<br> W Hotels Barcelona<sup style="COLOR: RGB(255, 0, 0);">[110]</sup></div></td> </tr> </tbody></table> </blockquote> <p>On the other hand, Oceanic's marks are likewise primarily displayed in their buildings.<sup style="COLOR: RGB(255, 0, 0);">[111]</sup> A cursory Internet search would also show that Oceanic's marks, as actually used and advertised, either (1) only exhibit the stylized <strong>W</strong> on the faÃ§ade, or (2) have such additional terms originally invoked to supposedly distinguish their marks, even resembling the placement in Starwood's mark, i.e., <i>below</i> the stylized <strong>W</strong>, viz: </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="50%"><div align="center">(image supposed to be here)<br> W Global Center<sup style="COLOR: RGB(255, 0, 0);">[112]</sup></div></td> <td width="50%"><div align="center">(image supposed to be here)<br> W Fifth Avenue<sup style="COLOR: RGB(255, 0, 0);">[113]</sup></div></td> </tr> <tr> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr> <td><div align="center">(image supposed to be here)</div></td> <td><div align="center">(image supposed to be here)</div></td> </tr> <tr> <td colspan="2"><div align="center">W Tower<sup style="COLOR: RGB(255, 0, 0);">[114]</sup></div></td> </tr> </tbody></table> <p>These further belie Oceanic's adamant assertion that their marks are set apart by the addition of several other letters after "W."<sup style="COLOR: RGB(255, 0, 0);">[115]</sup> Applying the Dominancy Test, the foregoing circumstances lead this Court to no other conclusion than that a visual and connotative resemblance exists between the parties' use of the stylized <strong>W</strong> in their respective marks. </p> <p> <i>B. Relatedness of Services</i> </p><p> In <i>Mighty Corporation v. E. &amp; J. Gallo Winery</i>,<sup style="COLOR: RGB(255, 0, 0);">[116]</sup> the Court has identified several factors to help resolve whether goods are related: (a) the business (and its location); (b) the class of product to which the goods belong; (c) the product's quality, quantity, or size, including the nature of the package, wrapper or container; (d) the nature and cost of the articles; (e) the descriptive properties, physical attributes or essential characteristics with reference to their form, composition, texture or quality; (f) the purpose of the goods; (g) whether the article is bought for immediate consumption, that is, day-to-day household items; (h) the fields of manufacture; (i) the conditions under which the article is usually purchased; and (j) the channels of trade through which the goods flow, how they are distributed, marketed, displayed, and sold.<sup style="COLOR: RGB(255, 0, 0);">[117]</sup> </p><p> To recall, Oceanic's marks are registered under Class 36 or real estate affairs. On the other hand, Starwood's marks are registered under Classes 37, 41, 43, and 44 for entertainment services, resort hotel, hotel reservation services, etc. The AO and the CA referenced this classification of products to conclude that Oceanic's real estate development obviously belonged to a different class of services vis-Ã -vis Starwood's luxury hotel enterprise.<sup style="COLOR: RGB(255, 0, 0);">[118]</sup></p><p> At this juncture, it must be reiterated that such primary reliance on the classification of goods and services can no longer be upheld. In <i>Kolin</i>, the Court has likewise abandoned the use of product or service classification as a factor in determining relatedness,<sup style="COLOR: RGB(255, 0, 0);">[119]</sup> since this is without legal basis and contrary to the express mandate of Rule 18, Section 6 of the Revised IP Rules.<sup style="COLOR: RGB(255, 0, 0);">[120]</sup> The Court therein held that substantive rights cannot be based on a constantly changing list such as the classes in the Nice Classification system.<sup style="COLOR: RGB(255, 0, 0);">[121]</sup> </p><p> On the other hand, adherence to other factors for evaluation identified in <i>Kolin</i>, directs this Court to instead find that the subject marks involve related services: </p><blockquote> <table width="60%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify"><em>i.</em></div></td> <td width="95%"><div align="justify"><em>Nature and cost of the articles; Purpose of the goods</em></div></td> </tr> </tbody></table> </blockquote> <p>We agree with Starwood that the three marks cover businesses that are inherently involved in the development of real property.<sup style="COLOR: RGB(255, 0, 0);">[122]</sup></p> <p> Notwithstanding perceived distinctions as to duration of use, i.e., long-term leases for residential or commercial purposes for Oceanic vis-Ã -vis shorter-term hotel stays for Starwood, both marks nonetheless cover services that involve the use and occupation of spaces. The marks are similar in that they also involve services that are relatively expensive. Purchases are seldom, or at least spaced out, and not necessarily repetitive. </p><blockquote> <table width="60%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify"><em>ii.</em></div></td> <td width="95%"><div align="justify"><em>Descriptive Properties, Physical Attributes, Quality; Channels of trade through which the services are distributed, marketed, or sold</em></div></td> </tr> </tbody></table> </blockquote> <p>We also find merit in Starwood's argument that the brand value and prestige of both their businesses heavily rely on the consuming public's recognition, assessment, and appreciation of their respective <i>buildings</i>, especially their locations and aesthetic quality.<sup style="COLOR: RGB(255, 0, 0);">[123]</sup></p> <p> Such is all the more reinforced by the fact that bothÂ· businesses deliberately market their services through the prominent display of their subject marks at the facades of such buildings, as discussed above. Interestingly, while the services are already expensive by their inherent nature as involving real estate, both target or appeal to the more luxurious or high-end market segments of such respective services.<sup style="COLOR: RGB(255, 0, 0);">[124]</sup></p><p> Contrary to Oceanic's position,<sup style="COLOR: RGB(255, 0, 0);">[125]</sup> it is of no moment that Starwood does not currently have a physical hotel operating in the Philippines.</p><p> In <i>W Land Holdings Inc. v. Starwood</i>,<sup style="COLOR: RGB(255, 0, 0);">[126]</sup> the Court has acknowledged the actual use of a trademark within this jurisdiction, where it was established that the registered trademark owner was able to produce discernable commercial activity within the Philippines, or at the very least, create commercial interaction with local consumers who are able to avail and book amenities and other services in any of its hotels worldwide through its interactive website.<sup style="COLOR: RGB(255, 0, 0);">[127]</sup></p><p> Although <i>W Land</i> cannot amount to <i>res judicata</i> in this case for lack of identity of parties, the finding therein about Starwood's commercial activity in the Philippines through its website allows Us to consider the three marks of the herein parties' online presence and advertisements about their buildings as part of their channels of trade. The discussion in <i>W Land</i> is illuminating: </p><blockquote> <p> In <i>Mirpuri v. CA</i>, this Court noted that "[a]dvertising on the Net and cybershopping are turning the Internet into a commercial marketplace:"</p> <blockquote> <p> The Internet is a decentralized computer network linked together through routers and communications protocols that enable anyone connected to it to communicate with others likewise connected, regardless of physical location. Users of the Internet have a wide variety of communication methods available to them and a tremendous wealth of information that they may access. The growing popularity of the Net has been driven in large part by the World Wide Web, i.e., a system that facilitates use of the Net by sorting through the great mass of information available on it. Advertising on the Net and cybershopping are turning the Internet into a commercial marketplace.</p> </blockquote> <p> Thus, as modes of advertising and acquisition have now permeated into virtual zones over cyberspace, the concept of commercial goodwill has indeed evolved:</p> <blockquote> <p> In the last half century, the unparalleled growth of industry and the rapid development of communications technology have enabled trademarks, tradenames and other distinctive signs of a product to penetrate regions where the owner does not actually manufacture or sell the product itself. <i>Goodwill is no longer confined to the territory of actual market penetration; it extends to zones where the marked article has been fixed in the public mind through advertising. Whether in the print, broadcast or electronic communications medium, particularly on the Internet, advertising has paved the way for growth and expansion of the product by creating and earning a reputation that crosses over borders, virtually turning the whole world into one vast marketplace</i>.<sup style="COLOR: RGB(255, 0, 0);">[128]</sup> (Emphasis supplied, citations omitted)</p> </blockquote> </blockquote> <p> In parallel, We note that Oceanic's <strong>W </strong>GLOBALCENTER, <strong>W</strong> TOWER, and <strong>W </strong>FIFTH AVENUE are likewise being advertised online in their very own website as belonging to "several iconic premium Grade A buildings that are strategically located in one of the busiest, most sustainable, and thriving [central business district] in the Philippines ... "<sup style="COLOR: RGB(255, 0, 0);">[129]</sup> </p><p> Through the cybermarketplace, Filipino customers are able to acquaint themselves with Starwood's hotels and avail their services abroad. <i>Notwithstanding Starwood's lack of a physical hotel in the Philippines, it is likely that patrons familiar with Starwood's line of international hotels confuse Oceanic's high-end commercial spaces as being associated with the former's brand.</i> </p><p> Given the foregoing, the evidence on record and reasonable inferences in accord with common experience yield the conclusion that the services covered by Oceanic and Starwood's marks are related. </p><p> In this regard, jurisprudence has likewise recognized that every registered trademark owner enjoys protection in product and market areas that are the normal potential expansion of its business. In <i>Dermaline, Inc. v. Myra Pharmaceuticals, Inc</i>.,<sup style="COLOR: RGB(255, 0, 0);">[130]</sup> We explained: </p><blockquote> <p> Modern law recognizes that the protection to which the owner of a trademark is entitled is not limited to guarding his goods or business from <i>actual</i> market competition with identical or similar products of the parties, but extends to all cases in which the use by a junior appropriator of a trade-mark or trade-name is <i>likely to lead to a confusion of source, as where prospective purchasers would be misled into thinking that the complaining party has extended his business into the field</i> . . . or is in <i>any way connected with the activities of the infringer</i>; or <i>when it forestalls the normal potential expansion of his business</i>[.]<sup style="COLOR: RGB(255, 0, 0);">[131]</sup> (Emphasis supplied, citations omitted) </p> </blockquote> <p> As in <i>Kolin</i>, it reasonably follows from a finding of relatedness that the services of the other may possibly fall within the normal business expansion of the registered trademark owner.<sup style="COLOR: RGB(255, 0, 0);">[132]</sup> </p><p> In the present case, it is not difficult to imagine how the services covered by both marks can operate within the overlapping industries of real estate, hospitality and lifestyle. It is also no longer uncommon for hotel brands to branch out and extend their luxurious or aesthetic branding to residential, commercial, or other spaces to broaden their reputation in property management.<sup style="COLOR: RGB(255, 0, 0);">[133]</sup> With these considerations, it is therefore entirely possible that even ordinarily intelligent and sophisticated buyers<sup style="COLOR: RGB(255, 0, 0);">[134]</sup> of real property will associate Oceanic's services as being connected with Starwood's brand and whatever goodwill the latter has created, notwithstanding the relatively expensive nature of these services. </p><p> As seen above, the existence of the likelihood of confusion is already considered as damage that would be sufficient to sustain the oppositions of Oceanic's trademark application for <strong>W</strong> GLOBALCENTER and <strong>W</strong> FIFTH AVENUE, as well as to grant the cancellation of its registration for <strong>W</strong> TOWER. </p><p> <b>ACCORDINGLY</b>, the instant Petitions for Review are <b>GRANTED</b>. The Decision dated April 29, 2022, and the Resolution dated August 5, 2022, in CA-G.R. SP No. 169799; the Decision dated September 15, 2022, and the Resolution dated April 11, 2023, in CA-G.R. SP No. 169798; and the Decision dated August 8, 2024, in CA-G.R. SP No. 181664 of the Court of Appeals, are <b>REVERSED</b> and <b>SET ASIDE</b>. </p><p> In G.R. No. 262551 and G.R. No. 266971, the Director of the Bureau of Trademarks is <b>DIRECTED</b> to <b>DENY</b> Oceanic Empire Limited's Application Nos. 4-2015-006821 and 4-2015-006820 for <strong>W</strong> GLOBALCENTER and <strong>W</strong> FIFTHAVENUE, respectively. </p><p> In G.R. No. 275314, the Director of the Bureau of Trademarks is <b>DIRECTED</b> to <b>GRANT</b> Starwood Hotels &amp; Resorts Worldwide, LLC's Petition for Cancellation of Registration No. 6819 for <strong>W</strong> TOWER. </p><p> <b>SO ORDERED.</b></p><p> <i>Gesmundo, C.J. (Chairperson), Zalameda, Rosario</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i> (<b>G.R. No. 262551</b>), pp. 11-50; <i>Rollo</i> (<b>G.R. No. 266971</b>), pp. 13-52; <i>Rollo</i> (<b>G.R. No. 275314</b>), pp. 13-53. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 64-78. The April 29, 2022 Decision in CA-G.R. SP No. 169799 was penned by Associate Justice Apolinario D. Bruselas, Jr., and concurred in by Associate Justices Germano Francisco D. Legaspi and Roberto P. Quiroz of the Fifth Division, Court of Appeals, City of Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 61-62. The August 5, 2022 Resolution in CA-G.R. SP No. 169799 was penned by Associate Justice Apolinario D. Bruselas, Jr., and concurred in by Associate Justices Germano Francisco D. Legaspi and Roberto P. Quiroz of the Former Fifth Division, Court of Appeals, City of Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i> (<strong>G.R. No. 266971</strong>), pp. 57-68. The September 15, 2022 Decision in CA-G.R. SP No. 169798 was penned by Associate Justice Louis P. Acosta and concurred in by Associate Justices Ramon A. Cruz and Jaime Fortunato A. Caringal of the Tenth Division, Court of Appeals, City of Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 70-73. The April 11, 2023 Resolution in CA-G.R. SP No. 169798 was penned by Associate Justice Louis P. Acosta and concurred in by Associate Justices Ramon A. Cruz and Jaime Fortunato A. Caringal of the Former Tenth Division, Court of Appeals, City of Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo </i>(<strong>G.R. No. 275314</strong>), pp. 55-73. The August 8, 2024 Decision in CA-G.R. SP No. 181664 was penned by Associate Justice Zenaida T. Galapate-Laguilles and concurred in by Associate Justices Carlito B. Calpatura and Selma Palacio Alaras of the Eleventh Division, Court of Appeals, City of Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i> (<b>G.R. No. 262551</b>), pp. 80-91.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i> (<b>G.R. No. 266971</b>), pp. 75-85.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i> (<b>G.R. No. 275314</b>), pp. 120-136. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i> (<b>G.R. No. 262551</b>), pp. 293-299. The February 14, 2018 Decision in Decision No. 2018-17 of IPC No. 14-2016-00084 was penned by Atty. Ginalyn S. Badiola, LL.M., Adjudication Officer, Bureau of Legal Affairs, Intellectual Property Office of the Philippines, Taguig City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 299.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Rollo</i> (<b>G.R. No. 266971</b>), pp. 129-136. The February 20, 2018 Decision in Decision No. 2018-21 was penned by Marlita V. Dagsa, Adjudication Officer, Bureau of Legal Affairs, Intellectual Property Office of the Philippines, Taguig City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Rollo</i> (<b>G.R. No. 275314</b>), pp. 514-525. The September 20, 2019 Decision in Decision No. 2019-125 of IPC No. 14-2016-00743 was penned by Marlita V. Dagsa, Adjudication Officer, Bureau of Legal Affairs, Intellectual Property Office of the Philippines, Taguig City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 525.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Rollo</i> (<b>G.R. No. 262551</b>), pp. 297-298; <i>rollo</i> (<b>G.R. No. 266971</b>), pp. 133-136; <i>rollo</i> (<b>G.R. No. 275314</b>), pp. 520-521.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Rollo</i> (<b>G.R. No. 262551</b>), pp. 297-298; <i>rollo</i> (<b>G.R. No. 266971</b>), p. 133; <i>rollo</i> (<b>G.R. No. 275314</b>), pp. 520-521.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Rollo</i> (<b>G.R. No. 262551</b>), pp. 297-298; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 133-135; <i>rollo</i> (<strong>G.R. No. 275314</strong>), pp. 521-522. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 297-298; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 133-135; <i>rollo</i> (<strong>G.R. No. 275314</strong>), pp. 521-522. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 298-299; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 135-136; <i>rollo</i> (G.R.No. 275314), p. 523. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong> ), pp. 300-313; <i>rollo</i> (<strong>G.R. No. 275314</strong>), pp. 526-548. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong> ), pp. 342-352. The December 20, 2019 Decision in Decision No. 2019-059 was penned by Atty. Nathaniel S. Arevalo, Director IV, Bureau of Legal Affairs, Intellectual Property Office of the Philippines, Taguig City. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 352. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Rollo</i> (<strong>G.R. No. 266971</strong> ), p. 60. The December 20, 2019 Decision in Decision No. 2019-060 was penned by Atty. Nathaniel S. Arevalo, LL.M., Bureau of Legal Affairs, Intellectual Property Office of the Philippines, Taguig City. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 649-651. The September 19, 2022 Decision in Case No. C/2016/743 of Decision No. AD-2022/10871 was penned by Atty. Nathaniel S. Arevalo, Director IV, Bureau of Legal Affairs, Intellectual Property Office of the Philippines, Taguig City. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 651. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 348-349; <i>rollo</i> (<strong>G.R. No. 275314</strong>), p. 650. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 348-349; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 140-141. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 349-350; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 140-141. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 353-393; <i>rollo</i> (<strong>G.R. No. 275314</strong>), pp. 654-692. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 68-69. A copy of the decision was not attached to the <i>rollo</i>. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Rollo</i> (<strong>G.R. No. 266971</strong>), pp. 138-145. The June 22, 2021 Decision in Appeal No. 14-2020-0005 was penned by Director General Rowel S. Barba of the Intellectual Property Office of the Philippines, Taguig City. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 145. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 963-968. The October 16, 2023 Decision in Appeal No. 14-2022-0053 was penned by Director General Rowel S. Barba of the Intellectual Property Office of the Philippines, Taguig City. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 968. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), p. 68; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 142-143; <i>rollo</i> (<strong>G.R. No. 275314</strong>), p. 967. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i> (<b>G.R. No. 262551</b>), p. 68; <i>rollo</i> (<b>G.R. No. 266971</b>), p. 144. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Rollo</i> (<b>G.R. No. 275314</b>), p. 968. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 75-118. A copy of Starwood's Petition for Review in G.R. No. 262551 was not attached to the <i>rollo</i>. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 78. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Rollo</i> (<b>G.R. No. 266971</b>), p. 67. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), p. 72. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 70-73; <i>rollo</i> (<strong>G.R. No. 275314</strong>), pp. 64-67. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 73-74. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 75. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i> (<strong>G.R. No. 266971</strong>), pp. 64-67. </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 64-67. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> CA-G.R. SP No. 169799, April 9, 2022 (Fifth Division, Court of Appeals, Manila); CA-G.R. SP No. 169798, September 15, 2022 (Tenth Division, Court of Appeals, Manila) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 67-69. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), p. 76; <i>rollo</i> (<strong>G.R. No. 275314</strong>), p. 70. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 70-72. </p><p><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 72. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 11-50; <i>rollo</i>, (<strong>G.R. No. 266971</strong>), pp. 13-52; <i>rollo</i> (<strong>G.R. No. 275314</strong>), pp. 13-53. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), p. 521. </p><p><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Rollo</i> (<strong>G.R. No. 266971</strong>), p. 146. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 1128-1129. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 564-602. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Rollo</i> (<strong>G.R. No. 266971</strong>), pp. 154-189. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 1134-1187. </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 681-683; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 212-214; <i>rollo</i> (<strong>G.R. No. 275314</strong>), pp. 1131-1133. </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> INTELL. PROP. CODE, sec. 121.1. </p><p><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>Lacoste S.A. v. Crocodile International PTE LTD.</b>, 948 Phil. 751, 759-760 (2023) [Per J. Kho, Jr., Second Division], <i>citing</i> <b>Ecole De Cuisine Manille, Inc. v. Renaud Cointreau &amp; Cie</b>, 710 Phil. 305, 316 (2013) [Per J. Perlas-Bernabe, Second Division], <i>citing</i> <b>Mirpuri v. Court of Appeals</b>, 376 Phil. 628, 645 (1999) [Per J. Puno, First Division). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Ginebra San Miguel, Inc. v. Director of the Bureau of Trademarks</b>, 927 Phil. 355, 383 (2022) [Per C.J. Gesmundo, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> INTELL. PROP. CODE, sec. 134. </p><blockquote> <p> Section 134. <em>Opposition</em>. â Any person who believes that he would be damaged by the registration of a mark may, upon payment of the required fee and within thirty (30) days after the publication referred to in Subsection 133.2, file with the Office an opposition to the application. Such opposition shall be in writing and verified by the oppositor or by any person on his behalf who knows the facts and shall specify the grounds on which it is based and include a statement of the facts relied upon. Copies of certificates of registration of marks registered in other countries or other supporting documents mentioned in the opposition shall be filed therewith, together with the translation in English, if not in the English language. For good cause shown and upon payment of the required surcharge, the time for filing an opposition may be extended by the Director of Legal Affairs, who shall notify the applicant of such extension. The Regulations shall fix the maximum period of time within which to file the opposition.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> INTELL. PROP. CODE, sec. 151.1. </p><blockquote> <p> Section 151. <i>Cancellation</i>. â 151.1. A petition to cancel a registration of a mark under this Act may be filed with the Bureau of Legal Affairs by any person who believes that he is or will be damaged by the registration of a mark under this Act as follows:</p> <p> (a) ...<br> (b) At any time, if the registered mark becomes the generic name for the goods or services, or a portion thereof, for which it is registered, or has been abandoned, or its registration was obtained fraudulently or contrary to the provisions of this Act, or if the registered mark is being used by, or with the permission of, the registrant so as to misrepresent the source of the goods or services on or in connection with which the mark is used. . .</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <b>Asia Pacific Resources International Holdings, Ltd. v. Paperone, Inc.</b>, 845 Phil. 85, 97 (2018) [Per J. Gesmundo, Third Division]. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> SC A.M. No. 10-3-10-SC, October 6, 2020, 2020 Revised Rules of Procedure on Intellectual Property Rights Cases (Revised IP Rules), Rule 18, sec. 5. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Canon Kabushiki Kaisha v. Court of Appeals</b>, 391 Phil. 154, 162 (2000) [Per J. Gonzaga-Reyes, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 215 (2021) [Per J. Caguioa, <i>En Banc</i>]. <i>See</i> Revised IP Rules, Rule 18, sec. 5. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 215-216. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 190. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 216-220. </p><p><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>Mang Inasal Philippines, Inc. v. IFP Manufacturing Corporation</b>, 811 Phil. 261, 272 (2017) [Per J. Velasco, Jr., Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 218-219 (2021) [Per J. Caguioa, <i>En Banc</i>], <i>citing</i> <b>McDonald's Corp. v. L.C. Big Mak Burger, Inc.</b>, 480 Phil. 402, 443 (2004) [Per J. Carpio, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <b>Lacoste S.A. v. Crocodile International PTE LTD.</b>, 948 Phil. 751, 761 (2023) [Per J. Kho, Jr., Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 221-222 (2021) [Per J. Caguioa, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), p. 74. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 74-75. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), p. 1149. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), p. 22; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 35-36. </p><p><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 20-43; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 29-31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 1150-1152. </p><p><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> 543 Phil. 90 (2007) [Per J. Garcia, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> at 102. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[88]</sup> 408 Phil. 307 (2001) [Per J. Ynares-Santiago, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id.</i> at 325. (Emphasis supplied) </p><p><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> 662 Phil. 11 (2011) [Per J. Peralta, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id.</i> at 20-21. </p><p><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 1158-1162; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 154-158. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Rollo</i> (<strong>G.R. No. 266971</strong>), p. 154. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <b>Ginebra San Miguel, Inc. v. Director of the Bureau of Trademarks</b>, 927 Phil. 355, 384-386 (2022) [Per C.J. Gesmundo, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id.</i> at 386. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Id.</i> at 387. </p><p><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Id.</i> at 387-388. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), pp. 348-349; <i>rollo</i> (<strong>G.R. No. 275314</strong>), p. 650. </p><p><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>See</i> <i>rollo</i> (<strong>G.R. No. 266971</strong>), p. 30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), p. 266. </p><p><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>Id.</i> at 269-270. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[103]</sup> INTELL. PROP. CODE, sec. 126. </p><blockquote> <p> Section 126. <i>Disclaimers</i>. â The Office may allow or require the applicant to disclaim an unregistrable component of an otherwise registrable mark but such disclaimer shall not prejudice or affect the applicant's or owner's rights then existing or thereafter arising in the disclaimed matter, nor such shall disclaimer prejudice or affect the applicant's or owner's right on another application of later date if the disclaimed matter became distinctive of the applicant's or owner's goods, business or services. (Sec. 13, R.A. No. 166a)</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <i>Rollo</i> (<strong>G.R. No. 266971</strong>), p. 159. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[105]</sup> Revised IP Rules, Rule 18, sec. 5. </p><blockquote> <p> Section 5. <i>Likelihood of confusion in other cases.</i> â In determining whether one trademark is confusingly similar to or is a colorable imitation of another, the court must consider the general impression of the ordinary purchaser, buying under the normally prevalent conditions in trade, and giving the attention such purchasers usually give in buying that class of goods. Visual, aural, connotative comparisons and overall impressions engendered by the marks in controversy as they are encountered in the realities of the marketplace must be taken into account. Where there are both similarities and differences in the marks, these must be weighed against one another to determine which predominates. </p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[106]</sup> Emphasis supplied. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), p. 42; <i>rollo</i> (<strong>G.R. No. 275314</strong>), p. 45; <i>rollo</i> (<strong>G.R. No. 266971</strong>), p. 38. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[108]</sup> <i>Available at</i> <a href="https://www marriott.com/en-us/hotels/bkkwb-w-bangkok/overview/">https://www marriott.com/en-us/hotels/bkkwb-w-bangkok/overview/</a> (last accessed on July 21, 2025). </p><p><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Available at</i> <a href="https://www.marriott.com/en-us/hotels/kulwh-w-kuala-lumpur/overview/">https://www.marriott.com/en-us/hotels/kulwh-w-kuala-lumpur/overview/</a> (last accessed on July 21, 2025). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <i>Available at</i> <a href="https://www.marriott.com/en-us/hotels/bcnwh-w-barcelona/overview/">https://www.marriott.com/en-us/hotels/bcnwh-w-barcelona/overview/</a> (last accessed on July 21, 2025). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[111]</sup> <i>Rollo</i> (<strong>G.R. No. 262551</strong>), p. 42; <i>rollo</i> (<strong>G.R. No. 275314</strong>), pp. 32-34; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 32-34. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[112]</sup> <i>Available at</i> <a href="https://wgroup.com.ph/projects/w-global-center-3/">https://wgroup.com.ph/projects/w-global-center-3/</a> (last accessed on July 21, 2025). </p><p><sup style="COLOR: RGB(255, 0, 0);">[113]</sup> Available at <a href="https://wgroup.com.ph/projects/w-fifth-avenue/">https://wgroup.com.ph/projects/w-fifth-avenue/</a> (last accessed on December 17, 2025) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[114]</sup> <i>Available at</i> <a href="https://wgroup.com.ph/projects/w-tower-2/">https://wgroup.com.ph/projects/w-tower-2/</a>;&nbsp;<a href="https://www.lamudi.com.ph/projects/w-tower-residences/">https://www.lamudi.com.ph/projects/w-tower-residences/</a> (last accessed on July 21, 2025). </p><p><sup style="COLOR: RGB(255, 0, 0);">[115]</sup> <i>Rollo</i> (<strong>G.R. No. 266971</strong>), pp. 167-169. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[116]</sup> 478 Phil. 615 (2004) [Per J. Corona, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[117]</sup> <i>Id.</i> at 662-663. (Emphasis supplied) </p><p><sup style="COLOR: RGB(255, 0, 0);">[118]</sup> <i>Rollo</i> (<strong>G.R. No. 275314</strong>), pp. 69-72; <i>rollo</i> (<strong>G.R. No. 266971</strong>), pp. 64-66. </p><p><sup style="COLOR: RGB(255, 0, 0);">[119]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 225-227 (2021) [Per J. Caguioa, <em>En Banc</em>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[120]</sup> Revised IP Rules, Rule 18, sec. 6 </p><blockquote> <p> Section 6. <i>Likelihood of confusion; Determination of related goods or services</i>. â Goods or services may not be considered as being similar or dissimilar to each other on the ground that, in any registration or publication by the Office, they appear in same or different classes of the Nice Classification. </p> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[121]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 227 (2021) [Per J. Caguioa, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[122]</sup> <i>Rollo</i> (<b>G.R. No. 275314</b>), pp. 45-47. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[123]</sup> <i>Rollo</i> (<b>G.R. No. 275314</b>), pp. 45-47, <i>rollo</i> (<b>G.R. No. 266971</b>), p. 40. </p><p><sup style="COLOR: RGB(255, 0, 0);">[124]</sup> <em>See</em> <a href="https://wgroup.com.ph/">https://wgroup.com.ph/</a> (last accessed on December 17, 2025) where the subject marks are marketed as belonging to the "premier developer of boutique office buildings," that successfully fuse "visual appeal" and maximum efficiency. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[125]</sup> <i>Rollo</i> (<b>G.R. No. 275314</b>), pp. 1175-1179. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[126]</sup> 822 Phil. 23 (2017) [Per J. Perlas-Bernabe, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[127]</sup> <i>Id.</i> at 47-49. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[128]</sup> <i>Id.</i> at 41-42. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[129]</sup> <i>Available at</i> <a href="https://wgroup.com.ph/">https://wgroup.com.ph/</a> (Last accessed on July 21, 2025). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[130]</sup> 642 Phil. 503 (2010) [Per J. Nachura, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[131]</sup> <i>Id.</i> at 514. </p><p><sup style="COLOR: RGB(255, 0, 0);">[132]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 230-231 (2021) [Per J. Caguioa, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[133]</sup> <i>See</i> Claudia Hilmbauer, <i>Branded Residences: Living in your Favorite Brand</i>, <i>available at</i> <a href="https://www.falstaff.com/en/news/branded-residences-living-in-your-favorite-brand">https://www.falstaff.com/en/news/branded-residences-living-in-your-favorite-brand</a>; Stephanie Chen, <i>Why the Branded Residences Market is Surging</i>, <i>available at </i><a href="https://hospitalitydesign.com/news/business-people/branded-residences-market-demand-booming/">https://hospitalitydesign.com/news/business-people/branded-residences-market-demand-booming/</a>; Proven Partners, <i>From Hotel Room to Luxury Homes: Rise of Branded Residences, available at</i> <a href="https://www.proven.partners/blog/hotel-branded-residences">https://www.proven.partners/blog/hotel-branded-residences</a>; LX Collection; <i>The Perfect Pairing: Exclusive Residences and Luxury Hotel Brands, available at</i> <a href="https://www.lxcollection.com/article/the-perfect-pairing-exclusive-residences-and-luxury-hotel-brands/">https://www.lxcollection.com/article/the-perfect-pairing-exclusive-residences-and-luxury-hotel-brands/</a> (last accessed on July 21, 2025). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[134]</sup> <i>See</i> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 231-232 (2021) [Per J. Caguioa, <i>En Banc</i>]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 264862 - REPUBLIC OF THE PHILIPPINES, PETITIONER, VS. ANTONIO V. MITRA, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70312' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 264862, January 28, 2026 ]</H2>
+			<H3>REPUBLIC OF THE PHILIPPINES, PETITIONER, VS. ANTONIO V. MITRA, RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J., J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Court resolves a Petition for Review on <i>Certiorari</i><sup style="color: rgb(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assailing the Decision<sup style="color: rgb(255, 0, 0);">[2]</sup> and Resolution<sup style="color: rgb(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) which denied the appeal filed by the Republic of the Philippines (Republic) and affirmed the Decision<sup style="color: rgb(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC) granting the petition filed by Antonio V. Mitra (Mitra) for cancellation of entry in his transfer certificate of title (TCT) and ordered the cancellation of the encumbrance appearing on TCT No. N-141429 which was annotated pursuant to Section 7 of Republic Act No. 26.</p><p align="center"><b>Antecedents</b> </p><p> Mitra is the registered owner of a parcel of land with an area of 209.5 square meters located in Bago Bantay, Quezon City and covered by TCT No. N-141429.<sup style="color: rgb(255, 0, 0);">[5]</sup> </p><p> Presumably due to loss or destruction of the TCT covering the subject property, Mitra had it extrajudicially reconstituted pursuant to Republic Act No. 26.<sup style="color: rgb(255, 0, 0);">[6]</sup> In conformity with Section 7 of the law, the following was annotated on Mitra's reconstituted title: </p><blockquote><p> PS-8004-05 </p><p> Pursuant to Sec. 7 of Rep. Act No. 26. This Certificate of Title having been administratively reconstituted is without prejudice to any party whose right or interest in the property was duly noted on said original copy at the time it was lost or destroyed.<sup style="color: rgb(255, 0, 0);">[7]</sup> </p></blockquote><p> Mitra then mortgaged the subject property in favor of Allied Banking Corporation.<sup style="color: rgb(255, 0, 0);">[8]</sup> </p><p> On December 6, 2018, Mitra filed a Petition for cancellation of entry in the TCT against the Registry of Deeds of Quezon City, Land Registration Authority with the RTC.<sup style="color: rgb(255, 0, 0);">[9]</sup> He claimed that from 1991 until 2018 or for more than 27 years, no interested party has filed an adverse claim over the subject property. Thus, he prayed for the cancellation of the annotation in his TCT.<sup style="color: rgb(255, 0, 0);">[10]</sup> </p><p> On January 7, 2019, the RTC issued an Order and Notice of Hearing<sup style="color: rgb(255, 0, 0);">[11]</sup> which set the next hearing date for Mitra's Petition and directed that the same Order and Notice of Hearing be posted for three consecutive weeks prior to the scheduled hearing date in: (1) the main entrance of the Quezon City Hall; (2) bulletin board of the court; and (3) the Office of the Clerk of Court.<sup style="color: rgb(255, 0, 0);">[12]</sup> </p><p> During the hearing, no one opposed Mitra's Petition when it was read in open court.<sup style="color: rgb(255, 0, 0);">[13]</sup> Upon motion, the RTC issued an Order of General Default with the exception of the government and its instrumentalities.<sup style="color: rgb(255, 0, 0);">[14]</sup> Mitra then presented evidence <i>ex parte</i> where he stressed that he has the right to have the reservation lien annotated in his TCT cancelled as no person was prejudiced by the reconstitution of his title and no one has filed an opposition or petition within two years from the date of reconstitution of his title.<sup style="color: rgb(255, 0, 0);">[15]</sup> </p><p> The RTC promulgated a Decision, which granted Mitra's Petition. The dispositive portion of the Decision reads: </p><blockquote><p> WHEREFORE, the petition is hereby granted. </p><p> The Registry of Deeds for Quezon City is ordered to cancel the encumbrance appearing in TCT No. N-141429, annotated pursuant to Section 7 of Republic Act No. 26. </p><p> SO ORDERED.<sup style="color: rgb(255, 0, 0);">[16]</sup> </p></blockquote><p> The RTC ruled that Mitra was able to comply with the procedure provided in Section 9 of Republic Act No. 26 for the removal of the reservation lien prescribed in Section 7 of the same law.<sup style="color: rgb(255, 0, 0);">[17]</sup> The RTC also gave credence to a Certification dated May 23, 2019 issued by the Land Registration Authority which stated that no person has laid claim or interest over the subject property within the two-year lien period.<sup style="color: rgb(255, 0, 0);">[18]</sup> </p><p> The Republic, as represented by the Office of the Solicitor General, appealed the ruling of the trial court.<sup style="color: rgb(255, 0, 0);">[19]</sup> It argued that the RTC erred when it ordered the cancellation of the reservation lien in Mitra's reconstituted title considering that, among others, Mitra was not able to comply with the publication and posting requirement stated in Section 9 of Republic Act No. 26 which are jurisdictional requirements and thus, necessary for the trial court to exercise jurisdiction over his petition.<sup style="color: rgb(255, 0, 0);">[20]</sup> </p><p> On April 28, 2022, the CA promulgated the assailed Decision, the pertinent portions of which states: </p><blockquote><p> A close reading of Section 9 of the law discloses that the jurisdictional requirements on the publication of the notice is only required when (1) a registered owner files a petition for the cancellation of the encumbrance within the two-year prescriptive period or (2) a person has filed a petition for annotation of his/her interest in the reconstituted title. Similarly, the said notice must specify, among other things, the names of the interested parties appearing in the reconstituted certificate of title. These requirements, however, are not necessary when a registered owner files a motion <i>ex parte</i> or a petition for cancellation of the encumbrance after the expiration of the two-year prescriptive period, as in this case. Clearly, the court a quo cannot be faulted for not ordering the petitioner-appellee to cause the publication of the notice as the petition for cancellation was filed long after the prescriptive period has lapsed. In fact, the petition was filed 27 years after the certificate of title was reconstituted. </p><p> ....</p><p> PREMISES CONSIDERED, the Appeal is DENIED, for lack of merit. </p><p> SO ORDERED.<sup style="color: rgb(255, 0, 0);">[21]</sup></p></blockquote><p> The CA held that no error was committed by the RTC when it granted Mitra's Petition considering that the procedure adopted by the trial court in granting it was in accord with what was stated in Section 9 of Republic Act No. 26.<sup style="color: rgb(255, 0, 0);">[22]</sup> The CA explained that the requirement of publication and posting set forth in Section 9 of Republic Act No. 26 is only applicable when the registered owner files a petition for cancellation of encumbrance in their reconstituted title within two years from its reconstitution or when a person has filed a petition to have their interest annotated in the reconstituted title.<sup style="color: rgb(255, 0, 0);">[23]</sup> Since it has been 27 years since the subject TCT was reconstituted and no petition has been filed to annotate any other interest, publication and posting of a notice of Mitra's Petition is no longer required.<sup style="color: rgb(255, 0, 0);">[24]</sup> </p><p> The Republic moved for reconsideration<sup style="color: rgb(255, 0, 0);">[25]</sup> of the assailed Decision, but it was denied in the assailed Resolution, the relevant portion reads as follows: </p><blockquote><p> The Motion for Reconsideration lacks merit.</p><p> The core of the oppositor-appellant's averment is mere rehash of its previous arguments that were already explained in this Court's Decision dated April 28, 2022.</p><p> ....</p><p> Hence, the Court finds no basis in discussing the same issues anew. </p><p> WHEREFORE, the Motion for Reconsideration is DENIED.</p><p> SO ORDERED.<sup style="color: rgb(255, 0, 0);">[26]</sup> (Citations omitted)</p></blockquote><p> Hence, the instant Petition.</p><p> The Republic claims that the CA's interpretation of the procedure set forth in Section 9 of Republic Act No. 26 is erroneous.<sup style="color: rgb(255, 0, 0);">[27]</sup> It argues that posting and publication, as stated in Section 9 of Republic Act No. 26, is one of the requirements for a trial court to acquire jurisdiction over a petition to have the Section 7 reservation annotated in a reconstituted title cancelled.<sup style="color: rgb(255, 0, 0);">[28]</sup> The Republic further states that the final proviso in Section 9 only allows the petition to file an <i>ex parte</i> motion after compliance with the posting and publication requirement.<sup style="color: rgb(255, 0, 0);">[29]</sup> </p><p> On June 26, 2023, this Court issued a Resolution<sup style="color: rgb(255, 0, 0);">[30]</sup> directing Mitra to file his comment on the instant Petition. </p><p> On September 12, 2023, Mitra filed his Comment<sup style="color: rgb(255, 0, 0);">[31]</sup> which prayed for the dismissal of the present Petition.<sup style="color: rgb(255, 0, 0);">[32]</sup> Mitra argues that the CA did not err when it dismissed the Republic's appeal considering that he was able to comply with the procedure set forth with respect to the cancellation of encumbrances as stated in Section 9 of Republic Act No. 26.<sup style="color: rgb(255, 0, 0);">[33]</sup> </p><p align="center"><b>Issue</b> </p><p> Whether the CA erred when it denied the Republic's appeal. </p><p align="center"><b>This Court's Ruling</b> </p><p> The Petition is denied. </p><p> Republic Act No. 26 provides for mechanisms by which a lost or destroyed Torrens title can either be judicially or extrajudicially reconstituted. Regarding the reconstitution- of liens and other encumbrances annotated on a certificate of title subject of reconstitution, Sections 4, and 7 to 9 are the relevant provisions of the aforesaid law, to wit: </p><blockquote><p> Section 4. Liens and other encumbrances affecting a destroyed or lost certificate of title shall be reconstituted from such of the sources hereunder enumerated as may be available, in the following order: </p><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">Annotations or memoranda appearing on the owner's, co-owner's, mortgagee's or lessee's duplicate; </div></td></tr><tr valign="top"><td>&nbsp;</td><td>&nbsp;</td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">Registered documents on file in the registry of deeds, or authenticated copies thereof showing that the originals thereof had been registered; and</div></td></tr><tr valign="top"><td>&nbsp;</td><td>&nbsp;</td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify">Any other document which, in the judgment of the court, is sufficient and proper basis for reconstituting the liens or encumbrances affecting the property covered by the lost or destroyed certificate of title.</div></td></tr><tr valign="top"><td colspan="2">&nbsp;</td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr></tbody></table><p>Section 7. Reconstituted certificates of title shall have the same validity and legal effect as the originals thereof: <i>Provided, however</i>, That certificates of title reconstituted extrajudicially, in the manner stated in sections five and six hereof, shall be without prejudice to any party whose right or interest in the property was duly noted in the original, at the time it was lost or destroyed, but entry or notation of which has not been made on the reconstituted certificate of title. This reservation shall be noted as an encumbrance on the reconstituted certificate of title. </p><p> Section 8. Any person whose right or interest was duly noted in the original of a certificate of title, at the time it was lost or destroyed, but does not appear so noted on the reconstituted certificate of title, which is subject to the reservation provided in the preceding section, may, while such reservation subsists, file a petition with the proper Court of First Instance for the annotation of such right or interest on said reconstituted certificate of title, and the court, after notice and hearing, shall determine the merits of the petition and render such judgment as justice and equity may require. The petition shall state the number of the reconstituted certificate of title and the nature, as well as a description, of the right or interest claimed. </p><p> Section 9. A registered owner desiring to have his reconstituted certificate of title freed from the encumbrance mentioned in section seven of this Act, may file a petition to that end with the proper Court of First Instance, giving his reason or reasons therefore. A similar petition may, likewise, be filed by a mortgagee, lessees or other lien holder whose interest is annotated in the reconstituted certificate of title. Thereupon, the court shall cause a notice of the petition to be published, at the expense of the petitioner, twice in successive issues of the Official Gazette, and to be posted on the main entrance of the provincial building and of the municipal building of the municipality or city in which the land lies, at least thirty days prior to the date of hearing, and after hearing, shall determine the petition and render such judgment as justice and equity may require. The notice shall specify, among other things, the number of the certificate of title, the name of the registered owner, the names of the interested parties appearing in the reconstituted certificate of title, the location of the property, and the date on which all persons having an interest in the property must appear and file such claim as they may have. The petitioner shall, at the hearing, submit proof of the publication and posting of the notice. Provided, however, That after the expiration of two years from the date of the reconstitution of a certificate of title, if no petition has been filed within that period under the preceding section, the court shall, on motion <i>ex parte</i> by the. registered owner or other person having registered interest in the reconstituted certificate of title, order the register of deeds to cancel, proper annotation, the encumbrance mentioned in section seven hereof. </p></blockquote><p> In <i>Republic v. Bella</i>,<sup style="color: rgb(255, 0, 0);">[34]</sup> this Court ruled on the correct interpretation of Section 9, in relation to the removal of encumbrances annotated pursuant to Section 7 of the same law, stating as follows: </p><blockquote><p> The Petition filed by Bella before the RTC concerns the removal of two annotations on TCT No. 057-2011014198. The first annotation was placed as mandated by Section 7 of Republic Act No. 26 upon the administrative reconstitution of a lost or destroyed original Torrens title, while the second annotation pertains to an affidavit of adverse claim covered by Section 70 of Presidential Decree No. 1529.</p><table width="40%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><i>The First Annotation may already be cancelled following the express language of Republic Act No. 26</i>. </div></td></tr></tbody></table><p>As regards the first annotation, Section 7 of Republic Act No. 26 provides: </p><blockquote><p> Section 7. Reconstituted certificates of title shall have the same validity and legal effect as the originals thereof: <i>Provided, however</i>, That certificates of title reconstituted extrajudicially, in the manner stated in sections five and six hereof, shall be without prejudice to any party whose right or interest in the property was duly noted in the original, at the time it was lost or destroyed, but entry or notation of which has not been made on the reconstituted certificate of title. This reservation shall be noted as an encumbrance on the reconstituted certificate of title. </p></blockquote><p>The above-quoted provision mandates that any reconstituted certificate of title should bear an annotation as an encumbrance, serving as a protective measure for individuals whose rights or interests were duly noted on the original title but not reflected on the reconstituted certificate. This reservation acts as a safeguard, putting interested parties on notice that they may have a claim that needs to be re-annotated on the reconstituted title. </p><p>With this reservation in place, Section 8 outlines the process by which omitted interests can be reflected on the reconstituted title.</p><blockquote><p> Section 8. Any person whose right or interest was duly noted in the original of a certificate of title, at the time it was lost or destroyed, but does not appear so noted on the reconstituted certificate of title, which is subject to the reservation provided in the preceding section, may, while such reservation subsists, file a petition with the proper Court of First Instance for the annotation of such right or interest on said reconstituted certificate of title, and the court, after notice and hearing, shall determine the merits of the petition and render such judgment as justice and equity may require. The petition shall state the number of the reconstituted certificate of title and the nature, as well as a description, of the right or interest claimed.</p></blockquote><p> In line with this, Section 9 outlines the procedure for a party seeking to have his reconstituted certificate of title freed from the encumbrance specified in Section 7:</p><blockquote><p> Section 9. A registered owner desiring to have his reconstituted certificate of title freed from the encumbrance mentioned in section seven of this Act, may file a petition to that end with the proper Court of First Instance, giving his reason or reasons therefor. A similar petition may, likewise, be filed by a mortgagee, lessees or other lien holder whose interest is annotated in the reconstituted certificate of title. Thereupon, the court shall cause a notice of the petition to be published, at the expense of the petitioner, twice in successive issues of the Official Gazette, and to be posted on the main entrance of the provincial building and of the municipal building of the municipality or city in which the land lies, at least thirty days prior to the date of hearing, and after hearing, shall determine the petition and render such judgment as justice and equity may require. The notice shall specify, among other things, the number of the certificate of title, the name of the registered owner, the names of the interested parties appearing in the reconstituted certificate of title, the location of the property, and the date on which all persons having an interest in the property must appear and file such claim as they may have. The petitioner shall, at the hearing, submit proof of the publication and posting of the notice: <i>Provided, however</i>, That after the expiration of two years from the date of the reconstitution of a certificate of title, if no petition has been filed within that period under the preceding section, the court shall, on motion <i>ex parte</i> by the registered owner or other person having registered interest in the reconstituted certificate of title, order the register of deeds to cancel, proper annotation, the incumbrance mentioned in section seven hereof.</p></blockquote><p> Clearly, the law allows individuals with rights or interests noted on the original certificate but missing from the reconstituted title to file a petition with the Court of First Instance. This petition must be filed within the two-year period from the date of reconstitution established by Section 9. If no such petition is filed, Section 9 authorizes the registered owner to request the cancellation of the annotation, providing certainty and finality in the title.</p><p> As correctly argued by Bella, the two-year period had long lapsed since the subject TCT was reconstituted on October 18, 1960 and since then, no petition has been filed by any party claiming that they had an interest annotated in the lost or destroyed TCT which was not carried over to the reconstituted TCT.</p><p> Since no petition was filed within the two-year period, Section 9 permits the registered owner, in this case, Bella, to request the cancellation of the Section 7 annotation by filing an <i>ex parte</i> motion. This is in alignment with the legislative intent to clear titles of provisional encumbrances after affected parties have had ample time to assert their claims.<sup style="color: rgb(255, 0, 0);">[35]</sup> (Citations omitted)</p></blockquote><p> The foregoing ruling was reiterated by this Court in <i>Republic v. St. Augustine Realty and Development Corporation</i>:<sup style="color: rgb(255, 0, 0);">[36]</sup> </p><blockquote><p> A thorough reading of Section 9 shows that, as a general rule, a registered owner who seeks to remove the encumbrance made on their administratively reconstituted title pursuant to Section 7 of Republic Act No. 26 must submit a petition to the RTC. To initiate this, the registered owner must comply with the mandatory jurisdictional requirements outlined in the first part of Section 9 of Republic Act No. 26. However, if the petition is filed more than two years after the administrative reconstitution of the title, and no claim or interests have been made by other parties, the mandatory jurisdictional requirements of posting and publication provided for in Section 9 are no longer necessary. In fact, the law provides that "the court shall, on motion <i>ex parte</i> by the registered owner or other person having registered interest in the reconstituted certificate of title, order the register of deeds to cancel, proper annotation, the encumbrance mentioned in section seven hereof." Therefore, after the lapse of the two-year period, only an <i>ex parte</i> motion is necessary to cancel an encumbrance under Section 9. Publication and posting are no longer required. The reason for this distinction is clear: the law already gave sufficient time and opportunity for anyone with a claim to raise the same during the two-year period. There must be finality and stability in our titles at some point. That is the whole essence of the Torrens System.<sup style="color: rgb(255, 0, 0);">[37]</sup> </p></blockquote><p> To be sure, a holistic reading of Section 9 shows that it bifurcates the procedure after the filing of the petition for cancellation of the reservation under Section 7. The foregoing is evident from the wording used in the last sentence of the provision, i.e., "[p]rovided, however...", which serves to qualify compliance with the posting and publication requirement depending on: (1) whether two years have passed from the administrative reconstitution of the subject certificate of title; and (2) no Section 8 petition has been filed within such period. </p><p> The posting and publication of the notice of the petition as outlined in Section 9 is mandatory if the petition for cancellation was filed within two years from the date of the administrative reconstitution of the subject certificate of title and no Section 8 petition was filed within such period. In such case, petitioners are required to submit evidence to prove compliance with the posting and publication requirement and the trial court will only hear the merits of the petition after it is satisfied that the posting and publication requirements have been complied with.</p><p> However, if two years have passed from the administrative reconstitution of the certificate of title and no Section 8 petition was filed within the same period, posting and publication is no longer necessary. Instead, the petitioner would file an <i>ex parte</i> motion informing the RTC of the foregoing circumstances and appending the relevant evidence. If the <i>ex parte</i> motion is meritorious, the RTC will issue an order addressed to the Register of Deeds directing it to cancel the Section 7 reservation with proper annotation. </p><p> As for petitioner's contention that posting and publication is jurisdictional in a petition for cancellation under Section 9 of Republic Act No. 26 regardless of the circumstances when such petition was filed,<sup style="color: rgb(255, 0, 0);">[38]</sup> it is without merit. </p><p> A petition for cancellation under Section 9 of Republic Act No. 26 is an action<i> in rem</i>, i.e., an action directed against the thing or property or status of a person and seek judgments with respect thereto as against the whole world.<sup style="color: rgb(255, 0, 0);">[39]</sup> In proceedings <i>in rem</i>, jurisdiction over the person of the defendant is not a prerequisite to confer jurisdiction on the court, provided that the latter has jurisdiction over the <i>res</i>.<sup style="color: rgb(255, 0, 0);">[40]</sup> In <i>Alba v. Court of Appeals</i>,<sup style="color: rgb(255, 0, 0);">[41]</sup> We ruled that courts in actions <i>in rem</i> acquire jurisdiction over the <i>res</i> either (1) by the seizure of the property under legal process, whereby it is brought into actual custody of the law; or (2) <i>as a result of the institution of legal proceedings, in which the power of the court is recognized and made effective</i>.<sup style="color: rgb(255, 0, 0);">[42]</sup> </p><p>Here, the institution of legal proceedings in a petition for cancellation of a Section 7 reservation and the consequent acquisition of jurisdiction by the trial court over the <i>res</i> would depend <i>on when the petition was filed</i>. If filed within two years from the date of the administrative reconstitution of the subject certificate of title, legal proceeding is deemed instituted upon filing of the petition <em>and</em> compliance with the posting and publication requirement outlined in Section 9 of Republic Act No. 26. However, if the petition for cancellation was filed after two years from the administrative reconstitution of title and no Section 8 petition was filed within such period, courts acquire jurisdiction over the <i>res</i> upon filing of the petition and the establishment of such circumstance. </p><p> We are aware that this Court have previously declared that the posting and publication requirement outlined in Section 9 of Republic Act No. 26 is jurisdictional.<sup style="color: rgb(255, 0, 0);">[43]</sup> However, such characterization is only applicable to judicial reconstitution of titles under Section 10 of Republic Act No. 26<sup style="color: rgb(255, 0, 0);">[44]</sup> and not to petitions for cancellation of reservation annotated in certificates of title that are administratively reconstituted as required under Section 7. Such is evident from the fact that the final proviso in Section 9, which provides the exception to the posting and publication requirement, does not apply to judicial reconstitution of titles under Section 10. </p><p> In fine, no error was committed by the CA when it denied the Republic's appeal as the interpretation of Section 9 that it forwarded is without merit. Finally, this Court, adopting the suggestions of Associate Justice Alfredo Benjamin S. Caguioa, lays down the following guidelines for the cancellation of the reservation under Section 7 annotated on an administratively reconstituted certificate of title: </p><blockquote><p> (1) An interested party, i.e., the registered owner or a lien holder whose interest is already annotated in the title, must file a petition before the RTC praying for the cancellation of the aforementioned annotation and providing the reasons for it. The petition shall clearly state whether the Section 9 conditions are present, particularly: (i) whether two years have passed from the date the certificate of title was administratively reconstituted; and (ii) whether no petition to annotate an omitted interest under Section 8 was filed within such period. Evidence of these allegations, including a certified true copy of the subject reconstituted title, must be attached to the petition. </p><p> (2) The RTC shall determine from the face of the petition and its annexes whether the Section 9 conditions are present and proceed to act as follows:</p><blockquote><p> (a) If it is evident that the petition is filed more than 2 years from the date of reconstitution and that no petition under Section 8 has been filed during that period as is evident from the lack of annotation in the reconstituted title made pursuant thereto, then the RTC shall treat the petition as the <i>ex parte</i> motion required by Section 9 and proceed to set the case for reception of petitioner's evidence. </p><p> If, however, an annotation m the reconstituted title pursuant to Section 8 exists, then the RTC shall set the case for hearing and direct the petitioner to comply with the publication and posting requirements and prove such compliance at the said hearing as provided below. </p><p> (b) If it is evident that the petition is filed within 2 years from the date of reconstitution, regardless of whether a petition under Section 8 has been filed, then the RTC shall issue an order (i) setting the next hearing date; (ii) directing the petitioner to cause the publication of a notice of the petition in two successive issues of the Official Gazette at least 30 days prior to the hearing date; (iii) directing the petitioner to cause the posting of the notice of the petition at the main entrance of the provincial or municipal building of the province or municipality is located at least 30 days prior to the hearing date. </p></blockquote><p> The notice of the petition shall at least contain the following information: (i) the number of the certificate of title; (ii) the name of the registered owner; (iii) the names of the interested parties appearing in the reconstituted certificate of title; (iv) the location of the subject property; and (v) the date on which all persons having interest in the subject property must appear and file such claim as they may have. </p><p> During the scheduled hearing, the RTC will determine compliance with the posting and publication of the notice of the petition. If the RTC finds that the petitioner was able to comply with the posting and publication requirements, it will then proceed with the determination of the merits of the petition. If the petitioner was unable to comply with the posting and publication requirement, the RTC will, in its discretion, either dismiss the petition due to lack of jurisdiction or order posting and publication anew. </p></blockquote><p><b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The Decision dated April 28, 2022 and the Resolution dated December 2, 2022 of the Court of Appeals in C.A.-G.R. CV No. 114563 are <b>AFFIRMED</b>. The Registry of Deeds of Quezon City is <b>ORDERED</b> to cancel the encumbrance appearing in TCT No. N-141429, annotated pursuant to Section 7 of Republic Act No. 26.&nbsp;</p><p><b>SO ORDERED.</b></p><p><i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, Gaerlan, Rosario, Dimaampao, Marquez, Kho, Jr</i>., and <i>Villanueva, JJ</i>., concur. <i><br> Singh,<sup style="color: rgb(255, 0, 0);">*</sup> J</i>., on leave.<br><br></p><hr width="60%" size="1" align="LEFT" noshade=""><sup style="color: rgb(255, 0, 0);">*</sup> On leave <p><sup style="color: rgb(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 10-45.</p><p><sup style="color: rgb(255, 0, 0);">[2]</sup> <i>Id.</i> at 46-55. The April 28, 2022 Decision in C.A.-G.R. CV No. 114563 was penned by Associate Justice Geraldine C. Fiel-Macaraig and concurred in by Associate Justices Ruben Reynaldo G. Roxas and Jennifer Joy C. Ong, Special Seventh Division, Court of Appeals, Manila.</p><p><sup style="color: rgb(255, 0, 0);">[3]</sup> <i>Id.</i> at 56-58. The December 2, 2022 Resolution in C.A.-G.R. CV No. 114563 was penned by Associate Justice Geraldine C. Fiel-Macaraig and concurred in by Associate Justices Ruben Reynaldo G. Roxas and Jennifer Joy C. Ong, Former Special Seventh Division, Court of Appeals, Manila.</p><p><sup style="color: rgb(255, 0, 0);">[4]</sup> <i>Id.</i> at 59-64. The September 16, 2019 Decision in LRC No. R-QZN-18-15604-LR was penned by Presiding Judge Janet Abergos-Samar, Branch 219, Regional Trial Court, Quezon City.</p><p><sup style="color: rgb(255, 0, 0);">[5]</sup> <i>Id.</i> at 59.</p><p><sup style="color: rgb(255, 0, 0);">[6]</sup> <i>Id.</i> at 47.</p><p><sup style="color: rgb(255, 0, 0);">[7]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[8]</sup> <i>Id.</i></p><p><sup style="color: rgb(255, 0, 0);">[9]</sup> <i>Id.</i> at 65-67. </p><p><sup style="color: rgb(255, 0, 0);">[10]</sup> <i>Id.</i></p><p><sup style="color: rgb(255, 0, 0);">[11]</sup> <i>Id.</i> at 72-73. </p><p><sup style="color: rgb(255, 0, 0);">[12]</sup> <i>Id.</i> at 72. </p><p><sup style="color: rgb(255, 0, 0);">[13]</sup> <i>Id.</i> at 60. </p><p><sup style="color: rgb(255, 0, 0);">[14]</sup> <i>Id.</i> at 60-61. </p><p><sup style="color: rgb(255, 0, 0);">[15]</sup> <i>Id.</i> at 49. </p><p><sup style="color: rgb(255, 0, 0);">[16]</sup> <i>Id.</i> at 64. </p><p><sup style="color: rgb(255, 0, 0);">[17]</sup> <i>Id.</i> at 63. </p><p><sup style="color: rgb(255, 0, 0);">[18]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[19]</sup> <i>Id.</i> at 50. </p><p><sup style="color: rgb(255, 0, 0);">[20]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[21]</sup> <i>Id.</i> at 53-54. </p><p><sup style="color: rgb(255, 0, 0);">[22]</sup> <i>Id.</i> at 52-53. </p><p><sup style="color: rgb(255, 0, 0);">[23]</sup> <i>Id.</i> at 53. </p><p><sup style="color: rgb(255, 0, 0);">[24]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[25]</sup> <i>Id.</i> at 56. </p><p><sup style="color: rgb(255, 0, 0);">[26]</sup> <i>Id.</i> at 57-58. </p><p><sup style="color: rgb(255, 0, 0);">[27]</sup> <i>Id.</i> at 20. </p><p><sup style="color: rgb(255, 0, 0);">[28]</sup> <i>Id.</i> at 32-35. </p><p><sup style="color: rgb(255, 0, 0);">[29]</sup> <i>Id.</i> at 35-36. </p><p><sup style="color: rgb(255, 0, 0);">[30]</sup> <i>Id.</i> at 88-89. </p><p><sup style="color: rgb(255, 0, 0);">[31]</sup> <i>Id.</i> at 109-113. </p><p><sup style="color: rgb(255, 0, 0);">[32]</sup> <i>Id.</i> at 112. </p><p><sup style="color: rgb(255, 0, 0);">[33]</sup> <i>Id.</i> at 111-112. </p><p><sup style="color: rgb(255, 0, 0);">[34]</sup> <b>G.R. No. 260831</b>, February 26, 2025 [Per J. Singh, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[35]</sup> <b>Republic v. Bella, G.R. No. 260831</b>, February 26, 2025 [Per J. Singh, Third Division]. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p><sup style="color: rgb(255, 0, 0);">[36]</sup> <b>G.R. No. 268461</b>, April 7, 2025 [Per J. Singh, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[37]</sup> <i>Id.</i> at 6-7. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p><sup style="color: rgb(255, 0, 0);">[38]</sup> <i>Rollo</i>, pp. 32-34. </p><p><sup style="color: rgb(255, 0, 0);">[39]</sup> <b>Solis v. Solis-Laynes</b>, 939 Phil. 161, 171 (2023) [Per J. Gaerlan, Third Division]. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[40]</sup> <b>San Pedro v. Ong</b>, 590 Phil. 781, 795 (2008) [Per J. Chico-Nazario, Third Division]. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[41]</sup> 503 Phil. 451 (2005) [Per J. Ynares-Santiago, First Division]. </p><p><sup style="color: rgb(255, 0, 0);">[42]</sup> <i>Id.</i> at 459. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[43]</sup> <b>Republic v. Manansala</b>, 901 Phil. 794, 812 (2021) [Per J. Caguioa, First Division]. </p><p><sup style="color: rgb(255, 0, 0);">[44]</sup> Section 10. Nothing herein before provided shall prevent any registered owner or person in interest from filing the petition mentioned in section five of this Act directly with the proper Court of First Instance, based on sources enumerated in sections 2(a), 2(b), 3(a), 3(b), and/or 4(a) of this Act: <em>Provided, however</em>, That the court shall cause a notice of the petition, before hearing and granting the same, to be published in the manner stated in section nine hereof: And provided, further, That certificates of title reconstituted pursuant to this section shall not be subject to the encumbrance referred to in section seven of this Act. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

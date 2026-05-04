@@ -834,19 +834,29 @@ def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
                 link_row = cur.fetchone()
                 n_linked = int(link_row["linked_cases"] or 0)
                 n_links  = int(link_row["total_links"]  or 0)
-                # Per-statute breakdown
+                # Per-statute breakdown — total links and distinct linked cases
                 cur.execute(
                     """
-                    SELECT statute_id, COUNT(*) AS n
+                    SELECT
+                        statute_id,
+                        COUNT(*)                AS total_links,
+                        COUNT(DISTINCT case_id) AS linked_cases
                     FROM codal_case_links
                     GROUP BY statute_id
                     ORDER BY statute_id
                     """
                 )
-                links_by_statute = {r["statute_id"]: int(r["n"]) for r in cur.fetchall()}
-            except Exception:
+                links_by_statute        = {}
+                linked_cases_by_statute = {}
+                for r in cur.fetchall():
+                    sid = r["statute_id"]
+                    links_by_statute[sid]        = int(r["total_links"])
+                    linked_cases_by_statute[sid] = int(r["linked_cases"])
+            except Exception as _link_exc:
+                logging.warning("pipeline-stats: codal_case_links query failed: %s", _link_exc)
                 n_linked = n_links = 0
-                links_by_statute = {}
+                links_by_statute        = {}
+                linked_cases_by_statute = {}
 
             # ── Last eLib case in DB — the scan anchor ────────────────────────
             # The scan script probes from (elib_id + 1) onwards. Surfaced in the
@@ -895,10 +905,11 @@ def admin_pipeline_stats(req: func.HttpRequest) -> func.HttpResponse:
             "digest_coverage_pct": round(100 * with_digest / max(total, 1), 1),
             "md_coverage_pct":     round(100 * with_md / max(total, 1), 1),
             # Codal linking metrics
-            "linked_cases":        n_linked,
-            "total_links":         n_links,
-            "link_coverage_pct":   round(100 * n_linked / max(total, 1), 1),
-            "links_by_statute":    links_by_statute,
+            "linked_cases":             n_linked,
+            "total_links":              n_links,
+            "link_coverage_pct":        round(100 * n_linked / max(total, 1), 1),
+            "links_by_statute":         links_by_statute,
+            "linked_cases_by_statute":  linked_cases_by_statute,
             # eLib scan anchor — where the next scan starts from
             "last_elib_case":      last_elib_case,
         })

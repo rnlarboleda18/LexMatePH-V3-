@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 266431 - PEDRO P. ISICAN, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70321' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 266431, January 29, 2026 ]</H2>
+			<H3>PEDRO P. ISICAN, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>While violation of Section 78 of Presidential Decree No. 705 is <em>malum prohibitum</em>, this classification does not dilute the State's burden to prove beyond reasonable doubt that an accused consciously and voluntarily performed a prohibited act on a charged forest land, without authority. </p><p> The instant Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> remonstrates against the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA), affirming the conviction of petitioner Pedro P. Isican (Isican) for violation of Section 78<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of Presidential Decree No. 705,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> as amended by Presidential Decree No. 1559,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> and denying his Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> respectively, in CA-G.R. SP No. 166827. In a Judgment<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> rendered by the Municipal Trial Court of La Trinidad, Benguet (MTC), and affirmed by Branch 62, Regional Trial Court, La Trinidad, Benguet (RTC), Isican was found guilty of violating the said law. </p><p align="center"> <b>Antecedents</b> </p><p> An Information<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> was filed before the MTC inculpating Isican, Norman Hogan (Hogan), Aboli Ginsa-at, Robert dela Cruz, and Jun Balbuena for violation of Section 78 of Presidential Decree No. 705, as amended, committed as follows: </p><blockquote> <p> That on or about the 9th day of October[] 2016 at [sic] Puguis, Municipality of La Trinidad, Province of Benguet, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, conspiring, confederating[,] and mutually aiding one another, without any lawful permit or authority issued to them, did then and there willfully, unlawfully, and knowingly enter, occupy, possess, appropriate, use, and claim a portion of the Puguis Community Forest with an area of 4,175.322 [sqm] more or less, with a zonal value of Two Thousand ([PHP] 2,000.00) per square meter, for a total of EIGHT MILLION THREE HUNDRED FIFTY THOUSAND SIX HUNDRED FORTY FOUR [PESOS] ([PHP] 8,350,644.00), by entering and clearing the area; constructing a tree house and installing a water tank thereon, thereby causing damage to the forest land and other products and forest growth found therein, to the detriment and prejudice of the <b>REPUBLIC OF THE PHILIPPINES</b>, in violation of the said law. </p> <p><b>CONTRARY TO LAW</b>.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> (Emphasis in the original)</p> </blockquote> <p> Warrants of arrest were issued against the accused; however, only Isican and Hogan were apprehended. During arraignment, both Isican and Hogan pled not guilty to the charge against them.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> At the pre-trial proceedings, the parties stipulated that Transfer Certificate of Title (TCT) No. 016-2012001296 traces its origin to Original Certificate of Title (OCT) No. P-451, issued to Evaristo Tiotioen by virtue of a free patent. From OCT P-451, TCT No. T-18487 was issued, covering 92,757 square meters. In subsequent reversion proceedings, TCT T-18487 was cancelled, and TCT No. 016-2012001296 was then issued in the name of the Republic of the Philippines.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> During trial, the prosecution presented forest protection officers Clent Tayab, Walter Pedro, and Alones Along-a, who testified that they were dispatched to investigate alleged illegal squatting and occupation of the Puguis Communal Forest. Their team found clearing activities on site and observed that tanks and a canvas shelter were built on the subject land. They estimated the cleared area at 4,175.322 sqm and referenced agency issuances for consequential government charges.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> The prosecution further presented Marcial Aloda to explain geotagging, and Engr. Mauricio Nead of the Joint Relocation Survey Committee.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> In his defense, Isican avouched that he acted on behalf of the heirs of Evaristo Tiotioen (heirs of Tiotioen) and did not personally occupy the area. He intended to protect the growing plants and improvements introduced by the heirs. In the judicial affidavit of Gretchen Tiotioen Fagyan (Fagyan), she attested that Isican was the attorney-in-fact of the heirs of Tiotioen, and the improvements were meant to assert their claims over the property.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> Engr. Menhart Bayawa (Engr. Bayawa), the defense surveyor, testified that Isican engaged him to survey the land claims of the heirs of Tiotioen in relation to the Puguis Communal Forest reserve. According to Engr. Bayawa, the area coverage of the Puguis Communal Forest reserve did not affect the titles of the heirs of Tiotioen. Due to disagreements between him and the other surveyors on certain technical points, no joint survey report was submitted. The same dispute also happened during the joint relocation survey conducted in relation to this case. As such, Engr. Bayawa submitted his separate geodetic report saying that TCT No. 016-2012001296 covering the Puguis Communal Forest reserve overlapped with several titles, proving that the land was alienable and disposable.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> The defense also submitted the judicial affidavit of Fagyan, affirming Isican as the attorney-in-fact of the heirs of Tiotioen, and stating that the improvements belonged to the heirs and lay within their titled property, not within the communal forest.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> As it happened, the MTC convicted Isican but acquitted Hogan for lack of evidence. It held that criminal intent is immaterial in a special-law offense; what is punishable under Presidential Decree No. 705, a special law, is the occupation of any forestland. The MTC disposed in this prose: </p><blockquote> <p> <b>WHEREFORE</b>, with the prosecution having proven the elements of the offense charged as regards <b>[ISICAN], the Court hereby finds him GUILTY of violating Section 78 of [Presidential Decree No.] 705, as amended, and hereby sentences him to pay a fine of TEN THOUSAND PESOS ([PHP] 10,000.00), with subsidiary imprisonment in case of insolvency, and to suffer a penalty of imprisonment for ONE (1) YEAR</b>. NORMAN HOGAN is hereby acquitted of the charge for lack of evidence. No rental is awarded for lack of basis. Meanwhile, let the case be archived for [a]ccused Aboli Ginsa-at, Robert Dela Cruz[,] and Jun Balbuena, to be revived as soon as they have been apprehended. The La Trinidad Municipal Station is directed to report, within fifteen days from notice, on the warrants of arrest that were issued against Ginsa-at, Dela Cruz, and Balbuena. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> (Emphasis in the original) </p> </blockquote> <p> Isican appealed to the RTC, which affirmed his conviction. The RTC was convinced that the prosecution sufficiently established his guilt beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> Unflustered, Isican sought recourse before the CA, which likewise sustained his conviction. According to the CA, since violation of Section 78 of Presidential Decree No. 705, as amended, is<i> malum prohibitum</i>, intent is not a defense. The CA concurred with the trial courts that Isican entered the forest land and built structures thereon, thereby violating Section 78 of Presidential Decree No. 705, as amended.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p>His motion for reconsideration<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> having been denied by the CA, Isican is now before this Court asserting his innocence. Once more, he insists that he merely acted at the behest of the heirs of Tiotioen, and that his occupation and possession of the forestland was not in the concept of an owner.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> Contrariwise, respondent People of the Philippines, through the Office of the Solicitor General, asserts that the CA did not err in concluding that Isican was guilty beyond reasonable doubt of the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p align="center"> <b>Issue</b> </p><p> Was the CA correct in affirming Isican 's guilt beyond reasonable doubt? </p><p align="center"> <b>Ruling of the Court</b> </p><p> <i>The Court acquits Isican.</i> </p><p> In recent past, this Court had ruled that "all criminal prosecutions are governed by the constitutional precept that a person is innocent until proven guilty beyond reasonable doubt" and in relation to this, "the prosecution bears the <i>onus probandi</i> of establishing the guilt of the accused." Thus, "every conviction must rest on the strength of the prosecution's evidence and not on the weakness of the defense."<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> Rule 133, Section 2 of the Rules of Court sets the standard of proof beyond reasonable doubt, viz.: </p><blockquote> <p> <b>SEC. 2</b>. <i>Proof Beyond Reasonable Doubt</i>. â In a criminal case, the accused is entitled to an acquittal, unless his or her guilt is shown beyond a reasonable doubt. Proof beyond a reasonable doubt does not mean such a degree of proof as, excluding possibility of error, produces absolute certainty. Moral certainty only is required, or that degree of proof which produces conviction in an unprejudiced mind. </p> </blockquote> <p> There is proof beyond a reasonable doubt where the judge can conclude: "All the above, <b>as established during trial, lead to no other conclusion than the commission of the crime</b> as prescribed in the law."<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> Section 78 of Presidential Decree No. 705, as amended, penalizes the unlawful occupation or destruction of forest and grazing lands. As can be distilled from this provision, the elements of this crime are: <i>(1)</i> that a person enters and occupies or possesses, or makes <i>kaingin</i> for their own private use or for others, any forest land or grazing land or in any manner destroys such forest land or grazing land or part thereof, or causes any damage to the timber stand and other products and forest growth found therein; and <i>(2)</i> that the person does this without authority under a license agreement, lease, license or permit. </p><p> In the case at bench, the Court agrees with the declarations of the trial courts, as well as the CA, that violation of Section 78 of Presidential Decree No. 705, as amended, is <i>malum prohibitum</i>. In the case of <i>Sama v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> this Court categorized violation of Section 77<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> of Presidential Decree No. 705, as amended, as <i>malum prohibitum</i>, since it punishes cutting, collecting, or removing of timber or other forest products when any of these acts are done without lawful authority from the State. </p><p> In the same vein, Section 78 punishes entering and occupying or possessing, or making <i>kaingin</i>, or causing any damage to the timber stand and other products and forest growth found in the forest land or grazing land, when these acts are not sanctioned by the State. </p><p> It is a general principle in law that in <i>malum prohibitum</i> offenses, good faith or motive is not a defense because the law punishes the prohibited act itself. In offenses of this kind, the law treats the prohibited act itself as the completed crime; intent is immaterial. </p><p> The Court explained the relationship between crimes <i>mala in se</i> and <i>mala prohibita</i> as well as intent to commit the crime and intent to perpetrate the act: </p><blockquote> <p> That said, dispensing with proof of criminal intent for crimes <em>mala prohibita</em> does not, in any way, discharge the prosecution of its burden to show that the prohibited act was done intentionally by the accused. On this note, it is important to distinguish between<i> intent to commit the crime</i> and <i>intent to perpetrate the act</i> â while a person may not have consciously intended to commit a crime regarded as <i>malum prohibitum</i>, he or she may still be held liable if he or she did intend to commit an act that is, by the very nature of things, the crime itself. Thus, for acts that are <i>mala prohibita</i>, the intent to perpetrate the prohibited act under the special law must nevertheless be shown. </p> <p> In contrast to crimes <i>mala in se</i>, which presuppose that the person who did the felonious act had criminal intent in doing so, crimes <i>mala prohibita</i> do not require such knowledge or criminal intent; rather, what is crucial is <i>volition</i> or the intent to commit the act. While volition or voluntariness refers to knowledge of the act being done (as opposed to knowledge of the nature of the act), criminal intent is the state of mind that goes beyond voluntariness, and it is this intent which is punished by crimes <i>mala in se</i>. To hold an offender liable for an offense that is <i>malum prohibitum</i>, it is sufficient that there is a conscious intent to perpetrate the act prohibited by the special law, for the essence of <i>mala prohibita</i> is voluntariness in the commission of the act constitutive of the crime. </p> <p> Succinctly put, for crimes <i>mala in se</i>, there must be proof of criminal intent, while for crimes <i>mala prohibita</i>, it is sufficient that the prohibited act is done freely and consciously. As applied here, even if a violation of P.D. 957 is <i>malum prohibitum</i>, it must still be established that the accused had the volition or intent to commit the prohibited act, which is the non-registration of the subject contracts.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (Emphasis in the original, citations omitted) </p> </blockquote> <p> Based on these jurisprudential polestars, the fact that a violation of Section 78 of Presidential Decree No. 705 is <i>malum prohibitum</i> does not dilute the State's burden of proof. After a judicious rumination of the records of the case, the Court finds that the evidence presented by the prosecution was insufficient to establish Isican's guilt beyond reasonable doubt. <i>First</i>, the prosecution did not dispel the reasonable possibility that Isican was merely acting for the heirs of Tiotioen and did not himself perpetrate the prohibited acts. The record evinces that Isican consistently asserted he did not personally occupy or cultivate the area and acted only in representation of the heirs of Tiotioen to safeguard their plants and improvements. This claim was affirmed in a judicial affidavit executed by Fagyan, stating that Isican was the heirs' attorney-in-fact, that the improvements belonged to the heirs, and that these were within their titled property rather than the communal forest. </p><p> <i>Second</i>, it is crucial that no witness saw Isican personally install the structures. The MTC even mentioned this fact. Nevertheless, it filled that evidentiary gap by relying on supposed "admissions" in Isican's counter-affidavit. Against that showing, the prosecution offered no clear proof that Isican himself performed the prohibited acts. Presence at the site and a role consistent with representation do not amount to the personal and voluntary commission of entering, occupying, or possessing forest land without authority. </p><p> <i>Third</i>, the prosecution was not able to fix with certainty that the place where Isican was seen is within the Puguis Communal Forest. Its proof relied mainly on geotagging and references to monuments, while Engr. Bayawa, the licensed surveyor of the defense, flagged overlaps between TCT No. 016-2012001296 in the name of the Republic and several private titles. This underscores that title boundaries and classification were contested. Thus, it is critical that the parties' technical disagreement resulted in no joint relocation survey report to settle the actual metes and bounds. </p><p> In sum, the State failed to fix the fact that the site lay within the Puguis Communal Forest because of the survey conflict, and the absence of a joint relocation survey left the location element unresolved. Equally, the record discloses that Isican acted only as the attorney-in-fact of the heirs of Tiotioen, a role consistent with representation rather than personal commission. Finally, no witness saw him build or install the structures, and the reliance on an equivocal, unoffered counter-affidavit cannot cure that gap. Since reasonable doubt persists, acquittal is ineluctably in order. </p><p> <b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari </i>is <b>GRANTED</b>. The July 22, 2022 Decision and the February 17, 2023 Resolution of the Court of Appeals in CA-G.R. SP No. 166827 are <b>REVERSED</b> and <strong>SET</strong> <b>ASIDE</b>. Petitioner Pedro P. Isican is <b>ACQUITTED</b> of the crime of violation of Section 78 of Presidential Decree No. 705 or the Revised Forestry Code of the Philippines owing to the prosecution's failure to prove his guilt beyond reasonable doubt. </p><p> Let entry of judgment be <b>ISSUED IMMEDIATELY</b>. </p><p> <b>SO ORDERED</b>. </p><p> <i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Singh, JJ</i>., concur.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 16-30. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> CA <i>rollo</i>, pp. 227-240. The July 22, 2022 Decision was penned by Associate Justice Louis P. Acosta, with the concurrence of Associate Justices Ramon A. Cruz and Jaime Fortunato A. Caringal. <i>See also</i> <i>rollo</i>, pp. 33-46.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> CA <i>rollo</i>, pp. 227-240. Dated February 17, 2023. <i>See also</i> <i>rollo</i>, pp. 31-32. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> SECTION 78. Unlawful Occupation or Destruction of Forest Lands and Grazing Lands. - Any person who enters and occupies or possesses, or makes kaingin for his own private use or for others, any forest land or grazing land without authority under a license agreement, lease, license or permit, or in any manner destroys such forest land or grazing land or part thereof, or causes any damage to the timber stand and other products and forest growth found therein, or who assists, aids or abets any other person to do so, or sets a fire, or negligently permits a fire to be set in any forest land or grazing land, or refuses to vacate the area when ordered to do so, pursuant to the provisions of Section 53 hereof shall, upon conviction, be fined in an amount of not less than five hundred pesos (P500.00), nor more than twenty thousand pesos (P20,000.00) and imprisoned for not less than six (6) months nor more than two (2) years for each such offense, and be liable to the payment to ten (10) times the rental fees and other charges which would have accrued has the occupational and use of the land been authorized under a license agreement, lease, license or permit: Provided, That in the case of an offender found guilty of making kaingin, the penalty shall be imprisonment for not less than two (2) nor more than four (4) years and a fine equal to eight (8) times the regular forest charges due on the forest products destroyed, without prejudice to the payment of the full cost of production of the occupied area as determined by the Bureau: Provided, further, That the maximum of the penalty prescribed herein shall be imposed upon the offender who repeats the same offense and who commits the same offense and double the maximum of the penalty upon the offender who commits the same offense for the third time.</p> <p> In all cases the Court shall further order the eviction of the offender from the land and the forfeiture to the government of all improvements made and all vehicles, domestic animals and equipment of any kind used in the commission of the offense. If not suitable for use by the Bureau, said vehicles, domestic animals, equipment and improvements shall be sold at public auction, the proceeds of which shall accrue to the Development Fund of the Bureau. </p><p> In case the offender is a government official or employee, he shall, in addition to the above penalties be deemed automatically dismissed from office and permanently disqualified from holding any elective or appointive position. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Presidential Decree No. 705 (1975), Revising Presidential Decree No. 389, Otherwise Known As The Forestry Reform Code of The Philippines. Section 78 was renumbered pursuant to Republic Act No. 7161 (1991), An Act Incorporating Certain Sections of the National Internal Revenue Code of 1977, As Amended, to Presidential Decree No. 705, As Amended, Otherwise Known as the "Revised Forestry Code of the Philippines", and Providing Amendments Thereto by Increasing the Forest Charges on [T]imber and Other Forest Products. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Presidential Decree No. 1559 (1978), Further Amending Presidential Decree No. 705, Otherwise Known As The "Forestry Reform Code of The Philippines." </p><p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> CA <i>rollo</i>, pp. 248-257. </p><p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 58-70. The November 11, 2019 Judgment in Crim. Case No. 17919 was rendered by Acting Presiding Judge Melita Amy Lesha G. Delson-Macaraeg. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 41-42. </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 58-59. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 63-64. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 59-61. </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 61. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 62. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 62-63. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 63. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 70. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 21-31. The September 17, 2020 Decision in Criminal Case No. 20C-CR-13172 was penned by Judge Danilo P. Camacho. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 236-238. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 248-257. </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Rollo</i>, pp. 19-21. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 82-93, Comment ([o]n the Petition for Review on [<i>Certiorari</i>] dated May 2, 2023. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>See</i> <b>Valenzona v. People of the Philippines</b>, 946 Phil. 629, 637 (2023) [Per J. Caguioa, Third Division]. (Citations omitted) </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>See</i> <b>Sama v. People</b>, 892 Phil. 614, 622 (2021) [Per Lazaro-Javier, <i>En Banc</i>]. (Emphasis in the original) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> 892 Phil. 614 (2021) [Per Lazaro-Javier, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> SECTION 77. Cutting, Gathering and/or Collecting Timber, or Other Forest Products Without License. â Any person who shall cut, gather, collect, removed timber or other forest products from any forest land, or timber from alienable or disposable public land, or from private land, without any authority, or possess timber or other forest products without the legal documents as required under existing forest laws and regulations, shall be punished with the penalties imposed under Articles 309 and 310 of the Revised Penal Code: <i>Provided</i>, That in the case of partnerships, associations, or corporations, the officers who ordered the cutting, gathering, collection or possession shall be liable, and if such officers are aliens, they shall, in addition to the penalty, be deported without further proceedings on the part of the Commission on Immigration and Deportation. </p><p> The Court shall further order the confiscation in favor of the government of the timber or any forest products cut, gathered, collected, removed, or possessed as well as the machinery, equipment, implements and tools illegally used in the area where the timber or forest products are found.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Valenzona v. People of the Philippines</b>, 946 Phil. 629, 640-641 (2023) [Per J. Caguioa, Third Division].&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

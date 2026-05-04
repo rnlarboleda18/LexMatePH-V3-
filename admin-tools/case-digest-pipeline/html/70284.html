@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 258481 - RICHARD HUNA DELERA AND DIONEL BANDILLON QUILING, PETITIONERS, VS. PHILIPPINE FOREMOST MILLING, CORP., AMIGO LOGISTICS CORP. (ALC), MMA COMPETENT MANPOWER & GENERAL SERVICES, INC., RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70284' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 258481, November 10, 2025 ]</H2>
+			<H3>RICHARD HUNA DELERA AND DIONEL BANDILLON QUILING, PETITIONERS, VS. PHILIPPINE FOREMOST MILLING, CORP., AMIGO LOGISTICS CORP. (ALC), MMA COMPETENT MANPOWER & GENERAL SERVICES, INC., RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Richard Hana Delera (Delera) and Dionel Bandillon Quiling (Quiling) (petitioners, collectively) which assails the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 18, 2021, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated December 6, 2021, of the Court of Appeals (CA) in CA-G.R. SP No. 160271. The CA affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated November 19, 2018, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated December 28, 2018 of the National Labor Relations Commission (NLRC) in NLRC LAC CN. 08-003176-18(4) (NLRC NCR CN. 04-06315-18) which held that respondent MMA Competent Manpower &amp; General Services, Inc. (MMA) is an independent contractor, and thus, it is the employer of petitioners. Likewise, the CA agreed with the ruling of the NLRC that MMA did not illegally dismiss petitioners from work and that the latter are not entitled to their money claims.</p><p align="center"> <i>Antecedents</i> </p><p> MMA is a domestic corporation engaged in the industry of providing human resource and various services to its clients. Two of its clients are respondent Philippine Foremost Milling, Corp. (PFMC) and respondent Amigo Logistics Corp. (Amigo). PFMC is a company engaged in the business of flour milling and the production of various types of flour and flour-related by-products for bakeries, food manufacturers, and households nationwide;<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> while Amigo is a company engaged in the management and operations of logistical support to its clients, such as warehousing operations, trucking and ship operations, and stock planning.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Both have similar business addresses and are under the La Filipina Uy Gongco Group of Companies.</p><p> In July 2003, MMA assigned petitioner Richard Huna Delera (Delera) at PFMC and Amigo to work as a feed mill bagger.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Thereafter, in January 2017, MMA also assigned petitioner Dionell Bandilon Quiling (Quiling) at both companies as a pollard stacker.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> In a Spot Report<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> dated August 24, 2017, PFMC reported to MMA that Quiling committed the offense of "unsafe act or sabotage of company property" by intentionally hitting and moving the CCTV camera in the pollard loading area of the company. Thereafter, in an Information Report<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> dated October 5, 2017, PFMC also reported to MMA that Delera threatened the Shift-In-Charge Security Officer, who was assigned at the feed mill of the company.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> For this, MMA issued notices to explain to petitioners and preventively suspended them from work.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> On November 27, 2017, for insufficiency of evidence, MMA absolved petitioners of the accusations against them. However, on November 28, 2017, PFMC and Amigo requested MMA to relocate petitioners to its other clients.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> On November 30, 2017, MMA served Notices of Finished Contract<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> to petitioners with respect to their assignment at PFMC and Amigo, and it stated that their Project Employment Contracts would expire on December 1, 2017. Due to the unavailability of positions within Metro Manila, MMA temporarily placed petitioners on floating status. Meanwhile, MMA provided financial assistance to petitioners which comprised of their unpaid income and average two-month wage.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> On January 11, 2018, MMA and petitioners underwent conciliation before the Regional Conciliation and Mediation Board of the Department of Labor and Employment (DOLE). During the mediation, petitioners requested for a re-computation of the financial assistance provided to them by MMA. In response, MMA offered petitioners work assignments in Cavite or Bataan. Although petitioners initially stated that they would consider the offer,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> they ultimately failed to report for their reassigned posts. Thus, the parties did not reach any settlement.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> On April 13, 2018, petitioners filed a Complaint<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> against PFMC, Amigo, and MMA before the Labor Arbiter (LA) for illegal dismissal, with money claims, and damages. </p><p align="center"> <i>Ruling of the LA</i> </p><p> In a Decision<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated July 30, 2018, the LA ruled in favor of petitioners and held that MMA and PFMC were engaged in the prohibited arrangement of labor-only contracting with regard to petitioners' employment. According to the LA, while MMA appeared to have substantial paid-up capital, there was no indication that it had sufficient capital or investment in relation to the work of petitioners at the feed mill factory of the respondents. Likewise, the LA found that the tasks of petitioners were directly related to the main business of PFMC. Thus, the LA concluded that petitioners were deemed regular employees of PFMC.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> On the question of whether petitioners were illegally dismissed from work, the LA ruled that the notice of finished contract issued to them by MMA constituted a termination of their employment without just or authorized cause. Thus, the LA ordered PFMC to reinstate petitioners to their former positions without loss of seniority rights and held that they were entitled to full backwages from December 1, 2017, up to their actual reinstatement.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> The dispositive portion of the LA Decision reads: </p><blockquote> <p> WHEREFORE, premises considered, judgment is hereby rendered declaring complainants as regular employees of respondent Philippine Foremost Milling Corporation and holding the same respondent company liable to reinstate complainants to their former positions without loss of seniority rights effective immediately upon receipt of this Decision and to pay each of the complainants full back wages from December 1, 2017 up to their actual reinstatement which, as of July 30, 2018, already amount to [PHP] 115,370.67 each, plus ten percent (10%) thereof as attorney's fees.</p> <p> Other claims are dismissed for lack of merit. </p> <p>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></p> </blockquote> <p> Aggrieved, the respondents appealed the case to the NLRC.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p align="center"> <i>Ruling of the NLRC</i> </p><p> In the Decision<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> dated November 19, 2018, the NLRC reversed the ruling of the LA and ruled in favor of PFMC and Amigo. The NLRC concluded that as petitioners failed to prove that PFMC or Amigo exercised the power of control over them, they could not have been regular employees of either company.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> Likewise, the NLRC found that MMA did not illegally dismiss petitioners from work. The NLRC considered the Notices of Preventive Suspension and the Notices of Finished Contract which MMA issued to petitioners. Moreover, the NLRC gave due regard to the minutes of the conciliation conference before the Regional Conciliation and Mediation Board of the Department of Labor and Employment (DOLE) which showed that MMA actually requested petitioners to report for work for reassignment to Cavite or Bataan, but petitioners rejected the offer.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></p><p> However, as MMA failed to compensate petitioners during the period of extension of their preventive suspension, the NLRC held MMA liable to pay their wages corresponding to such period.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </p><p> Nevertheless, the NLRC agreed with the LA in ruling that petitioners were not entitled to their claim for underpaid wages, 13<sup>th</sup> month payment, overtime pay, holiday pay, premium pay, service incentive leave pay, and night shift differential as they were workers paid by results pursuant to Article 82 of the Labor Code, or those who receive a fixed amount of wage after completion of a task.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The dispositive portion of the assailed Decision reads: </p><blockquote> <p> WHEREFORE, premises considered, judgment is hereby rendered REVERSING the [D]ecision of Labor Arbiter Alberto S. Abalayan. </p> <p> A new one is issued declaring the absence of any illegal dismissal and absolving respondents PFMC and AMIGO from any liability, there being no employer-employee relationship between them and the complainants. </p> <p> However, respondent MMA, being an independent contractor who failed to compensate complainants during the period of their extended preventive suspension, is ordered to pay them their wages corresponding to the period of extended preventive suspension. </p> <p> All other money claims are dismissed for lack of merit. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p> </blockquote> <p> Aggrieved, petitioners filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> of the NLRC Decision, reiterating in verbatim their assertions in the earlier proceedings. Likewise, MMA filed a Partial Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> of the NLRC Decision insofar as it ordered MMA to pay the wages of petitioners corresponding to the period of extension of their preventive suspension. </p><p> However, in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated December 28, 2018, the NLRC denied the respective motions of the parties. </p><p> Thus, petitioners filed a Petition for <i>Certiorari</i> under Rule 65 before the CA. </p><p align="center"> <i>The Ruling of the CA</i> </p><p> In the Decision<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> dated May 18, 2021, the CA found no grave abuse of discretion on the part of the NLRC in holding that MMA is an independent contractor and the true employer of petitioners. Likewise, the CA agreed with the ruling of the NLRC that MMA did not illegally dismiss petitioners from work, and that they were piece rate workers; thus, not entitled to their money claims. The dispositive portion of the CA Decision reads: </p><blockquote> <p> WHEREFORE, premises considered, the instant petition for certiorari is hereby DISMISSED for lack of merit. The November 19, 2018 Decision and the December 28, 2018 Resolution of the NLRC in NLRC LAC Case No. 08-003176-18(4) [NLRC NCR Case No. 04- 06315-18] are AFFIRMED.</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p> </blockquote> <p> Hence, the instant Petition.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p> Petitioners argue that they were regular employees of PFMC and Amigo because their jobs thereat as a Feed Mill Bagger and Pollard Stacker were usually necessary or desirable in the business of both companies.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Moreover, in an effort to demonstrate that PFMC and Amigo exercised control over the means and methods of their work, petitioners aver that they attended the regular meetings conducted by the companies; and that the actual areas of their assignment and performance of tasks were dependent on the instructions given by their superiors at the premises of PFMC and Amigo.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p><p> In further insisting that they were regular employees of PFMC and Amigo, petitioners allege that MMA continuously reassigned them at the premises of both companies and had continuously worked thereat for several years.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p align="center"> <i>The Issue</i> </p><p> The issues for resolution in the case are: (1) whether the CA erred in affirming the finding of the NLRC that MMA is an independent contractor and the true employer of petitioners; and (2) whether petitioners were illegally dismissed from work and entitled to their money claims. </p><p align="center"> <i>The Ruling of the Court</i> </p><p> The Petition is devoid of merit. </p><p> While it is well-settled that in petitions for review on certiorari under Rule 45, only questions of law may be raised by the parties, the Court may resolve a question of fact when the findings of the lower tribunals are conflicting, such as at bar. Here, the LA ruled in favor of petitioners and held that MMA and the respondents were engaged in the prohibited arrangement of labor-only contracting with regard to petitioners' employment. Based on its finding that the tasks of petitioners were directly related to the main business of the respondents PFMC and Amigo, the LA also concluded that petitioners were deemed their regular employees, who were illegally dismissed from employment. However, the NLRC and the CA ruled otherwise. The NLRC and the CA held that MMA is an independent contractor and the true employer of petitioners. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>All the elements of the four-fold test of an employer-employee relationship are present between MMA and petitioners</i> </div></td> </tr> </tbody></table> <p>To determine whether an employer-employee relationship exists, the Court applies the four-fold test of employment which consists of the following elements: (a) the employer's selection and engagement of the employee; (b) the payment of wages; (c) the power to dismiss; and (d) the power to control the employee's conduct, which extends over the means and methods by which the employee must accomplish the work.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> As to the <i>first element</i>, i.e., <i>the employer's selection and engagement of the employee</i>, both the NLRC and the CA aptly found that the petitioners' work as a feed Mill Bagger and Pollard Stacker in the premises of the respondents stemmed from the duly executed Service Agreements between MMA, as the contractor, and PFMC and Amigo as principal. The job titles of petitioners were explicitly provided in the Service Agreements. It bears noting that the provisions of the Service Agreements confirm that the employer-employee relationship was between MMA and petitioners.</p><p> On the element of <i>payment of wages</i>, the numerous payrolls and contribution/remittance forms which MMA attached to the records of the case establish that it was the one that paid the wages of petitioners. The NLRC and the CA observed that petitioners did not rebut the authenticity of the payslips and contributions submitted by the respondents.</p><p> Anent the element of <i>the power to dismiss</i>, petitioners failed to adduce any evidence that it was PFMC or Amigo which exercised such power on them. In contrast, the evidence attached to the records which relate to the element of <i>the power to dismiss</i> are the documents issued by MMA, <i>i.e</i>., the Notice of Preventive Suspension issued against petitioners and the Notice of Finished Contract with respect to their assignment at PFMC and Amigo. Moreover, the fact that petitioners executed their quitclaim and release documents in favor of MMA, rather than PFMC or Amigo, indicates that MMA was the one that exercised the power of dismissal over them. By directing the quitclaims specifically to MMA, petitioners effectively recognized MMA as their employer and the party responsible for terminating their employment. This act underscores that it was MMA, not PFMC or Amigo, that had the authority and control to end their employment, thereby affirming that MMA exercised the power of dismissal over them.</p><p> With regard to the element of <i>the power to control the employees conduct</i>, Section 5 (b) of Department Order No. 174 Series of 2017 (DO 174) is relevant. The provision states that "<i>[t]he contractor or subcontractor who does not exercise the right [of] control over the performance of the work of the employee</i>" is deemed a labor-only contractor.</p><p> Labor-only contracting exists where the person supplying workers to an employer does not have substantial capital or investment in the form of tools, equipment, machineries, work premises, among others, <i>and</i> the workers recruited and placed by such person are performing activities which are directly related to the principal business of such employer. In such cases, the person or intermediary shall be considered merely as an agent of the employer who shall be responsible to the workers in the same manner and extent as if the latter were directly employed by him.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup></p><p> In the case, petitioners failed to support their allegation that it was PFMC or Amigo which exercised the power of control over the means and method of their work. Set against the baseless allegation of petitioners, the supervisor and coordinator of MMA who were assigned at the premises of PFMC and Amigo executed separate affidavits which detailed the nature of their work and relationship with petitioners, specifically on how they supervised petitioners. To illustrate, the Court cites the relevant portion of the Affidavit<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> executed by Jason Collado Magharing, the coordinator of MMA assigned at the respondents' premises, viz.: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">3.</div></td> <td width="95%"><div align="justify">THAT, on December 01, 2016 . . . two (2) agreements were entered by and between MMA COMPETENT MANPOWER &amp; GENERAL SERVICES, INC. (Contractor) and PHILIPPINE FOREMOST MILLING, CORP. (Principal) and three (3) agreement[s] by and between MMA COMPETENT MANPOWER &amp; GENERAL SERVICES, INC. (Contractor) and AMIGO LOGISTICS CORP. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">4.</div></td> <td><div align="justify">THAT, the aforementioned services for both agreements will be rendered by the Contractor at the Principal's premises located at Lots 2 and 3, Block 1, B.V. Romero Blvd., Manila Harbour Centre, Radial Road-10, Vitas, Tondo, </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">5.</div></td> <td><div align="justify">THAT, in the performance of the said services for both agreements, the Contractor shall employ Utility Aides, [Feed Mill] Loader, Feed Mill Raw Material Tipper, [Feed Mill] On-call, Flourmill Loader, Flourmill On-Call, Flour Stacker, Feeds Bagger/Stacker, Line leaders, Shift Supervisors and HR and Admin Coordinator, and other related positions as maybe required from time to time. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">6.</div></td> <td><div align="justify">THAT, I was hired on July 18, 2012 as HR Coordinator and since then was assigned to numerous top Clients of MMA Competent Manpower and General Services, Inc.[;] and on April 20, 2018[,] I had volunteered to be assigned in the aforementioned projects.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">8.</div></td> <td><div align="justify">THAT, as the HR and Admin Coordinator of MMA Competent Manpower and General Services, Inc., [i]t is my duty and responsibility to hire and recruit workers, promote and ensure employees' adherence with company policies, rules and procedures, imposed disciplinary actions, terminate employment if necessarily needed, doing the daily attendance summary, computing workers' salary and disbursement and immediate superior to the two supervisors assigned in the aforementioned projects, official representative of the company to the Clients and directly reporting to our HRD and Operations Head[.]<sup style="COLOR: RGB(255, 0, 0);">[43]</sup></div></td> </tr> </tbody></table> </blockquote> <p>As the NLRC and the CA aptly observed, petitioners failed to present any substantial evidence to controvert the testimony of the supervisor and coordinator of MMA assigned at PFMC and Amigo. Thus, there is nothing on record to suggest that the affidavits were false, borne out of ill will or reprisal toward petitioners, or that MMA procured the affidavits through coercion or influence.</p> <p> It bears noting that the argument of petitioners, even before the lower tribunals, have revolved on the contention that <i>because their tasks as a Feed Mill Bagger and Pollard Stacker directly related to the trade of the respondents, MMA is deemed a labor-only contractor and they were deemed the regular employees of the respondents PFMC and Amigo</i>.</p><p> At this point, the Court underscores that outsourcing of services is not prohibited in all instances. In fact, Article 106 of the Labor Code of the Philippines provides the legal basis for legitimate labor contracting.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> This provision is further implemented by DO 174.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> Under Section 3(c) of DO 174, legitimate labor contracting or subcontracting "refers to an arrangement whereby a principal agrees to farm out with a contractor the performance or completion of a specific job or work within a definite or predetermined period, regardless of whether such job or work is to be performed or completed within or outside the premises of the principal." The principal refers to any employer who puts out or farms out a job, service or work to a contractor or subcontractor.</p><p> To recall, the LA considered MMA's lack of investment in tools, equipment, and machineries, as a ground for declaring it as a labor-only contractor. The NLRC and the CA, however, did not address this point and instead anchored their rulings on the finding that MMA was the employer of petitioners by virtue of its established exercise of the four-fold test of employment.</p><p> This, now, poses the issue on the legal status of MMA which, while exercising the four-fold test of employment over petitioners and having a substantial paid-up capital of PHP 27,000,000.00, is shown to have no substantial investment in tools, equipment, or machineries, and whose workers performed tasks directly related to the principal's business.</p><p> The Court takes note of the divergence between its ruling in the earlier case of <i>Conqueror Industrial Peace Management Cooperative v. Balingbing</i><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> and its subsequent pronouncement in <i>Nozomi Fortune Services v. Naredo</i>.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p><p> In <i>Conqueror</i>, the Court pronounced that the law does not require a contractor to possess both substantial capital and investment in the form of tools, equipment, or machineries. In so ruling, the Court ratiocinated: </p><blockquote> <p> Besides, to require a contractor to have both substantial capitalization and investment in the form of tools, equipment, machineries, etc. would be to overlook the accustomed system in different industries where contractors are merely outsourced to provide ancillary or logistic services to the principal. These services range from janitorial services, security, housekeeping, creatives, and other non-core services similar to those performed by respondents. Notably, Conqueror deployed them to Sagara to perform the following: (1) manually transport materials from the storage warehouse to the work station; (2) load finished goods to the delivery trucks; (3) label products; and (4) recycle waste materials. <i>Given the type of services Conqueror provides Sagara under their Contract of Service, there is no need for it to invest in any equipment or machineries in the plant of Sagara</i>.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> (Emphasis supplied.)</p> </blockquote> <p> In <i>Conqueror</i>, the Court recognized that to require both substantial capitalization and investment in equipment for all forms of contracting would be impractical and inconsistent with industry practice, particularly where the services contracted are non-core and do not customarily necessitate the use of significant tools or machineries.</p><p> However, in <i>Nozomi</i>, the Court held a different view. The Court explained that it is not enough for a contractor to merely possess substantial capital, as it must likewise demonstrate investment in tools, equipment, or machineries actually and directly used in the performance of the contracted work or service.</p><p> In <i>Nozomi</i>, the Court observed that Samsung engaged the contractor therein to provide the following works: </p><blockquote> <p> 6. [Samsung] shall engage the services of [Nozomi] for works or services temporarily or occasionally needed to meet other than the normal or increase in production; works or services temporarily occasionally needed by (Samsung] for undertakings requiring expert or highly technical personnel; services temporarily needed for the introduction of new production line; specialized works involving the use of some particular or specific skills, expertise, tools or equipment; substitute services for absent regular employees; and all other works or services that are beyond the capacity of [Samsung]'s current regular workforce[.]</p> </blockquote> <p> By Nozomi's own representation, it assigned Naredo at Samsung to work on a specific production line as a production operator to address a growing demand for certain products which cannot be met by Samsung's regular work force. However, the Court observed that Nozomi did not provide the necessary tools and equipment to enable Naredo to perform his tasks as a production operator in furtherance of its service agreement with Samsung. The equipment used in the job assignment of Naredo were actually owned by Samsung. </p><p> In <i>Nozomi</i>, as the contracted service of Samsung from Nozomi necessarily required the use of equipment or machinery for the fulfillment of their service agreement, the Court held: </p><blockquote> <p> [A]n entity is engaged in prohibited labor-only contracting when the following are present: "(1) a person who supplies workers to an employer does not possess substantial capital or investment in the form of tools, pieces of equipment or machinery, work premises, among others; and (2) the workers are made to perform tasks which are directly related to the employer's principal business." </p> <p> In gauging the first standard, it is not enough that the contractor possesses substantial capital. In fact, it is undeniable that Nozomi has sufficient capitalization as evinced by its audited financial statements. However, the contractor must also show that it has the equipment and machinery "<i>actually and directly used in the performance of the work or service</i>" it is contracted to do." Indeed, it is more in keeping with the spirit of Article 106 of the <b><i>Labor Code</i></b> if the tools, pieces of equipment, or machinery possessed by the contractor are actually and directly used in the performance of the work or service it is contracted for as this would be more in line with the concept of permissible job contracting which involves the contracting out of a specific work, job, or service and not just labor. (Emphasis supplied)</p> </blockquote> <table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Nozomi then poses the question: should the Court's pronouncement in Conqueror be abandoned?</i> </div></td> </tr> </tbody></table> <p>The Court answers in the negative. </p><p> The differing factual milieus of <i>Nozomi</i> and <i>Conqueror</i> demonstrate that the two cases are reconcilable. <i>Nozomi</i> requires <b>substantial investment</b> in the form tools or equipment when the contracted job ordinarily requires it, to prevent mere manpower supply in core functions. On the other hand, <i>Conqueror</i> clarifies that <b>lack of investment in equipment does not automatically make a contractor labor-only</b> if, by the very nature of the work, no such equipment is reasonably necessary. Otherwise put, if the contracted service is one that ordinarily requires equipment/machinery, then Nozomi controlsâthe lack of investment means labor-only contracting. If the contracted service is ancillary, simple, or manual work that customarily does not require equipment, then Conqueror appliesâsubstantial capital and independence of a legitimate business suffice.</p><p> Thus, <i>Conqueror</i> should not be abandoned, but rather <b><i>read narrowly</i></b>: it carves out a practical exception for industries where the contracted work is ancillary and does not involve tools, machineries, or equipment. </p><p> Judicial interpretation often goes beyond literal reading to harmonize text with practical application. If taken in its strict sense, DO 174, Sec. 5(a) could disqualify contractors in <i>service-oriented industries</i> simply because they do not require machinery or equipment, effectively outlawing otherwise legitimate industries. </p><p><i>The pronouncement in Conqueror<br> applies at bar</i> </p><p> In the case, it is noteworthy that MMA assigned petitioners at PFMC and Amigo to perform the functions of a Feed Mill Bagger and a Pollard Stacker. The Court observes that the functions of a Feed Mill Bagger and a Pollard Stacker, while useful to the overall operations of PFMC and Amigo, are merely ancillary and inherently manual in character. </p><p> Flour milling and the production of various types of flour and flour-related by-products are the core business of PFMC. It is this process of transforming wheat into flour and its by-products that characterizes the very nature of PFMC's business. This demands the operation of milling plants and heavy equipment by trained milling engineers or technicians, the expertise of wheat and grain cleaners, the knowledge of quality control analysts, and the skill of maintenance and production personnel. The work of bagging flour and stacking pollard involves <i>manual labor that does not require specialized machinery or technical knowledge</i>. These are <i>post-production handling functions</i>, comparable to packaging, warehousing, or material handling, that can exist independently of the actual milling process. Such tasks, being incidental or supportive in nature, may be contracted out. Moreover, in relation to Amigo, which is engaged in warehousing, trucking, and shipping, the tasks of bagging and stacking fall squarely within the realm of logistical support services. </p><p> In this regard, the Court finds instructive its ruling in <i>Conqueror</i>, where it recognized that certain forms of contracted workâsuch as janitorial, security, logistics, and other ancillary servicesâare by their very nature manual and do not customarily necessitate significant investment in equipment or machineries. By parity of reasoning, the Court holds that substantial investment in equipment is not indispensable for the performance of the tasks of a Feed Mill Bagger and a Pollard Stacker. </p><p> What is determinative is that MMA has substantial capital, operates as an independent contractor. and the one that exercised the four-fold test of employment over petitioners, thereby meeting the requisites of legitimate job contracting under the law. Afterall, MMA is presumed to have complied with all the requirements of a legitimate job contractor considering the Certificate of Registration<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> issued to it by the DOLE. All told, MMA is considered a legitimate job contractor and the true employer of petitioners. </p><p> <i>Petitioners were not illegally <br> dismissed from work</i> </p><p> Having established that MMA was the true employer of petitioners, it is necessary to set forth the relevant facts to provide context on the issue of whether petitioners were illegally dismissed from work. </p><p> To recall, PFMC reported to MMA on August 24, 2017 that Quiling committed the offense of "<i>Unsafe act or sabotage of company property</i>" by intentionally hitting and moving the CCTV camera in the pollard loading area of the company. On October 5, 2017, PFMC also reported to MMA that Delera committed the offense of "<i>Inflicting or attempting to inflict bodily injury upon another during company time or in company premises</i>,"<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> as he threatened to stab the Shift-In-Charge Security Officer in the side with a knife. Notably, after investigation and accordance of due process, MMA absolved petitioners of the charges against them for insufficiency of evidence. However, PFMC and Amigo invoked paragraph 12.2<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> of its Service Agreement with MMA, which granted them the right to require MMA to replace the employees deployed at their premises, viz.: </p><blockquote> <p> 12. SELECTION, ENGAGEMENT, DISCHARGE. The CONTRACTOR shall have the exclusive discretion in the acceptance, engagement, investigation, discipline and removal of its employees[.]</p> <p> 12.2. <i>The Client shall, however, have the right to report to the CONTRACTOR any untoward act, negligence, misconduct, or malfeasance of the latter's employees, and/or the right to require the CONTRACTOR to replace/substitute its employee[.]</i> (Emphasis supplied.) </p> </blockquote> <p> In view of the request of PFMC and Amigo to replace petitioners with different workers, MMA served a Notice of Finished Contract to petitioners with respect to their assignment at PFMC and Amigo. Due to the unavailability of positions within Metro Manila, MMA placed petitioners on floating status. Meanwhile, MMA provided financial assistance to petitioners which comprised of their unpaid wages and average two-month worth of wage.</p><p> On January 11, 2018, the parties underwent conciliation before the Regional Conciliation and Mediation Board of the DOLE. During the mediation, MMA offered work assignments to petitioners in Cavite or Bataan. Although petitioners initially stated that they would consider the offer,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> they ultimately failed to report for their reassigned posts.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> </p><p> If MMA had truly intended to terminate petitioners' employment at all costs, it could have used the previous administrative charges against them as grounds for dismissal. The fact that MMA conducted an exhaustive investigation on the cases of petitioners, and even absolved them of any administrative liability, supports the conclusion that MMA, in eventually serving the Notices of Finished Contract<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> to petitioners, intended to merely transfer them to another principal pursuant to its Service Agreement with PFMC and Amigo. However, it was petitioners who no longer reported back to work.</p><p> As the CA and the NLRC aptly found, "<i>petitioners were not dismissed by MMA[,] . . . . they had simply rejected the offers for reassignment by MMA</i>." Indubitably, MMA could not have dismissed petitioners from work. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Petitioners not having been dismissed from work, the CA ruling must be modified in that petitioners should be reinstated to their jobs</i> </div></td> </tr> </tbody></table> <p>There being no dismissal to speak of, and MMA having failed to prove or even allege that petitioners were guilty of abandonment, the relationship between them as employer and employees remained. Thus, petitioners may go back to their work, but without entitlement to backwages. <i>[T]he Court has held that where the employees failure to work was occasioned neither by his [or her] abandonment nor by a termination, the burden of economic loss is not rightfully shifted to the employer. Each party must bear his [or her] own loss</i>.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> The employment relationship between the parties not having been severed, MMA must then accept petitioners back to work.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> </p><p><i>Petitioners are not entitled to <br> their money claims</i> </p><p> Anent the money claims of petitioners, the NLRC and the CA are now one with the LA that petitioners were not entitled thereto. It is well-entrenched that factual findings of quasi-judicial agencies, such as the labor tribunals, when affirmed by the CA, are generally conclusive upon this Court.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Although there are exceptions to this rule, none of which are applicable in the case.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup></p><p> The issue of whether petitioners were paid by MMA on a piece rate basis, and that they were not entitled to their money claims are factual matters that are not proper subjects of a Rule 45 petition. Given as well that the labor tribunals and the CA were unanimous in holding that there is no merit in petitioners' money claim,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> the Court adopts the following disquisition of the LA which the NLRC and the CA adopted, viz.: </p><blockquote> <p> There is however no merit in complainants' claim of underpayment of wages and 13<sup>th</sup> month pay. Complainants were paid on piece rate basis. Complainant Quiling himself indicated in his Complaint that he was compensated on piece rate basis. The final pay vouchers signed by the complainants on November 30, 2017 indicate that complainants were paid on piece rate basis (Annexes "1" and "11-A", of Respondent MMA's Position Paper). The minimum basic daily wage and ECOLA apply only to daily wage earners who are compensated based on the time consumed in the performance of work. Besides, complainants themselves indicated that they earned wages ranging from [PHP] 736[.00] to [PHP] 800.00 in a day of work under the piece rate arrangement.</p> </blockquote> <p> There is no merit either in complainants' claim for overtime pay, holiday pay, premium pay, service incentive leave and night shift differential. Complainants performed non-time work, as they were paid by result. Article 82 of the Labor Code and its implementing rules provide that such benefits do not apply to workers who are paid by result.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup></p><p> Nevertheless, the monetary awards due to petitioners, i.e., their average wage as piece rate workers during the period of extension of their preventive suspension, shall be subject to 6% legal interest per annum from the date of the finality of this Resolution until full payment.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> </p><p> <b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision dated May 18, 2021, and the Resolution dated December 6, 2021, of the Court of Appeals in CA-G.R. SP No. 160271 are <b>AFFIRMED with MODIFICATION</b>.</p><p> MMA Competent Manpower &amp; General Services, Inc. is <b>ORDERED</b> to <b>REINSTATE</b> petitioners Richard Huna Delera and Dionell Bandilon Quiling to their former status of employment without payment of backwages, in accordance with this Resolution. </p><p> The total monetary award in favor of petitioners Richard Huna Delera and Dionell Bandilon Quiling shall earn legal interest at the rate of 6% per annum from the date of the finality of this Resolution until full satisfaction. </p><p> The case is referred to the Labor Arbiter for the re-computation of the total monetary awards due to petitioners Richard Huna Delera and Dionell Bandilon Quiling. </p><p> <b>SO ORDERED.</b></p><p> <i>Caguioa (Chairperson), Gaerlan, Dimaampao</i>, and <i>Singh, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-21. <p></p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 789-800. Penned by Associate Justice Emily R. AliÃ±o-Geluz and concurred in by Associate Justices Victoria Isabel A. Paredes and Raymond Reynold R. Lauiagan of the Special Sixteenth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 838-840. Penned by Associate Justice Emily R. AliÃ±o-Geluz and concurred in by Associate Justices Victoria Isabel A. Paredes and Raymond Reynold R. Lauigan of the Former Special Sixteenth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 602-621. Penned by Presiding Commissioner Julia Cecily Coching Sosito and concurred in by Commissioners Erlinda T. Agus and Dominador B. Medroso, Jr. of the Second Division, National Labor Relations Commission, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 652-661. Penned by Presiding Commissioner Julia Cecily Coching Sosito and concurred in by Commissioners Erlinda T. Agus and Dominador B. Medroso, Jr. of the Second Division, National Labor Relations Commission, Quezon City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Available at <a href="https://www.google.com/search?q=what+is+the+main+business+of%C2%A0Philippine+Foremost+Milling+Corporation%3F&amp;client=safari&amp;sca_esv=ce44fb6aa5ce43e4&amp;rls=en&amp;sxsrf=AE3TifNV4-MxVcRIAYy0Yyn7gKJl2g7nrg%3A1755874746354&amp;ei=uoWoaKSpFYO4vr0Ploa92Qg&amp;ved=0ahUKEwik7pqU156PAxUDnK8BHRZDL4sQ4dUDCBA&amp;uact=5&amp;oq=what+is+the-+main+business+of%C2%A0Philippine+Foremost+Milling+Corporation%3F&amp;gs_lp=Egxnd3Mtd216LXNlcnAiRndoYXQgaXMgdGhliGlhaW4gYnVzaW5lc3Mgb2bCoFBoaWxpcHBpbmUgRm9yZW1vc3QgTWlsbGluZyBDb3Jwb3JhdGlvbj9IpUhQAFieRHAAeAGQAQCYAZcBoAGzFqoBBD12LjW4AQPIAQD4AQH4AQKYAh2gAtsWwgIEECMYJ8ICCxAAGIAEGJECGIoFwgIQEAAYgAQYsQMYQxiDARiKBcICCxAAGIAEGLEDGIMBwgIIEAAYgAQYsQPCAgsQLhiABBixAxiDAICDhAAGIAEGLEDGIMBIoFwgIKEAAYgAQYQxiKBcICDRAAGIAEGLEDGEMYigXCAgUQABiABJDAJIHBTE3LjEyoAfE_AGyBwUxNy4MrgH2xbCBwkwLjEuMTUuMTP1B91B&amp;sclient=gws-wiz-serp.">https://www.google.com/search?q=what+is+the+main+business+of%C2%A0Philippine+Foremost+Milling+Corporation%3F&amp;client=safari&amp;sca_esv=ce44fb6aa5ce43e4&amp;rls=en&amp;sxsrf=AE3TifNV4-MxVcRIAYy0Yyn7gKJl2g7nrg%3A1755874746354&amp;ei=uoWoaKSpFYO4vr0Ploa92Qg&amp;ved=0ahUKEwik7pqU156PAxUDnK8BHRZDL4sQ4dUDCBA&amp;uact=5&amp;oq=what+is+the-+main+business+of%C2%A0Philippine+Foremost+Milling+Corporation%3F&amp;gs_lp=Egxnd3Mtd216LXNlcnAiRndoYXQgaXMgdGhliGlhaW4gYnVzaW5lc3Mgb2bCoFBoaWxpcHBpbmUgRm9yZW1vc3QgTWlsbGluZyBDb3Jwb3JhdGlvbj9IpUhQAFieRHAAeAGQAQCYAZcBoAGzFqoBBD12LjW4AQPIAQD4AQH4AQKYAh2gAtsWwgIEECMYJ8ICCxAAGIAEGJECGIoFwgIQEAAYgAQYsQMYQxiDARiKBcICCxAAGIAEGLEDGIMBwgIIEAAYgAQYsQPCAgsQLhiABBixAxiDAICDhAAGIAEGLEDGIMBIoFwgIKEAAYgAQYQxiKBcICDRAAGIAEGLEDGEMYigXCAgUQABiABJDAJIHBTE3LjEyoAfE_AGyBwUxNy4MrgH2xbCBwkwLjEuMTUuMTP1B91B&amp;sclient=gws-wiz-serp.</a> [last accessed on August 22, 2025]</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Available at <a href="https://lafilgroup.com.ph/logistical-suport.">https://lafilgroup.com.ph/logistical-suport.</a> [last accessed on July 8, 2025]</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i>, pp. 5, 604. </p><p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 5, 408, 604, 790. </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 258. </p><p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 235. </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 604, 790. </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 605, 790. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 88, 89. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 605, 791. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 290. <i>See</i> Minutes of Meeting before the Regional Conciliation and Mediation Board. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 291. <i>See</i> Minutes of Meeting before the Regional Conciliation and Mediation Board. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 64-65. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 407-420. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 416-418. </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 418. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 419-420. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 421-429. <i>See</i> Notice of Appeal With Memorandum on Appeal dated August 13, 2018. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 602-621. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 618. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 619. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 619-620. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 620. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 622-624. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 625-630. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 652-655[A]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 789-800. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 799-800. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 3-21. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 6, Petition. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 7-8. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 8. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Mendaros v. Lazada E-Services Phil., Inc.</b>, 958 Phil. 347, 356 (2024). </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Pres. Decree No. 442, Labor Code of the Philippines (1974), as amended, art. 106. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Rollo</i>, p. 386. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Daguinod v. Southgate Foods, Inc.</b>, 847 Phil. 878, 890-891 (2019). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 919 Phil. 170 (2022). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 956 Phil. 1062 (2024). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Conqueror Industrial Peace Management Cooperative v. Balingbing</b>, <i>supra</i> note 46, at 183. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, p. 131. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 79. <i>See</i> Preventive Suspension and Notice of Administrative Hearing dated October 12, 2017. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 160. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 290. <i>See</i> Minutes of Meeting before the Regional Conciliation and Mediation Board. </p><p><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 291. <i>See</i> Minutes of Meeting before the Regional Conciliation and Mediation Board dated May 23, 2018. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 88, 89. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>See</i> <b>Atienza v. Saluta</b>, 853 Phil. 661, 686 (2019); <b>Borja v. MiÃ±oza</b>, 812 Phil. 133, 147 (2017); <b>MZR Industries v. Colambot</b>, 716 Phil. 617, 628 (2013). (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>See</i> <b>Rodriguez v. Sintron Systems, Inc.</b>, 857 Phil. 779, 796 (2019). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Cubilo v Minerva Marine Agency, Inc., G.R. No. 241982</b>, June 3, 2019 [Notice]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 799. <i>See</i> CA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 419. <i>See</i> LA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Lara's Gifts and Decors, Inc. v. Midtown Industrial Sales, Inc.</b>, 860 Phil. 744 (2019). </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

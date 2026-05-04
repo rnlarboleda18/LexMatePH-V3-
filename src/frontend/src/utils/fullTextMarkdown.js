@@ -48,6 +48,17 @@ export function repairFullTextMojibake(mdText) {
     if (!mdText) return mdText;
     return (
         mdText
+            // ISO-8859-1 decoded 3-byte UTF-8: requests uses ISO-8859-1 when the HTTP
+            // Content-Type header has no charset (eLib).  Bytes 0x80-0xBF map to
+            // U+0080-U+00BF in Latin-1, so [E2][80][94] → â + U+0080 + U+0094 (two
+            // invisible C1 controls).  Decode the trio back to the proper Unicode char.
+            .replace(/â([\x80-\x9f])([\x80-\xbf])/g, (m, c1, c2) => {
+                try {
+                    return new TextDecoder('utf-8', { fatal: true }).decode(
+                        new Uint8Array([0xe2, c1.charCodeAt(0), c2.charCodeAt(0)])
+                    );
+                } catch { return m; }
+            })
             .replace(/â€”/g, '—') // em dash (E2 80 94)
             .replace(/â€"/g, '—') // em dash when third byte misread as ASCII "
             .replace(/â€“/g, '–') // en dash (E2 80 93)
@@ -81,6 +92,9 @@ export function repairFullTextMojibake(mdText) {
             .replace(/(\w)â(\s+)(?=[a-z])/g, '$1—$2')
             // â + whitespace + uppercase (new sentence / name after word-boundary punctuation)
             .replace(/([\w)])â(\s+)(?=[A-Z])/g, '$1—$2')
+            // â directly preceded by whitespace or ] (mid-text citations, footnote bodies like
+            // "[^1]: â Malcolm X" where ^ is not at true line-start relative to the preceding token).
+            .replace(/([ \t\]])â(\s+)(?=[A-ZÀ-ɏ])/g, '$1—$2')
     );
 }
 
@@ -161,9 +175,12 @@ export function normalizeLooseFootnoteCarets(mdText) {
 
 export function normalizeFullTextMarkdownForGfm(mdText) {
     if (!mdText) return mdText;
-    let s = repairDoubleUtf8Latin1(mdText);
+    // CP1252 patterns (â€" → —) must be fixed before the byte-level Latin-1 decoder
+    // runs, otherwise mixed-encoding documents get partially decoded in a way that
+    // corrupts the CP1252 sequences before repairFullTextMojibake can match them.
+    let s = repairFullTextMojibake(mdText);
+    s = repairDoubleUtf8Latin1(s);
     s = repairUtf8Latin1Mojibake(s);
-    s = repairFullTextMojibake(s);
     s = repairFullTextBracketGlitches(s);
     s = escapeLegalCaptionCommaAsterisks(s);
     s = splitSpacedHeadingFromCaseTitleLines(s);

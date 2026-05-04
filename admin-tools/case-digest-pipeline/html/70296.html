@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 272177 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. KAHAR SUNDANG LANGUIDO ALIAS "SAYDONA", ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70296' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 272177, December 01, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. KAHAR SUNDANG LANGUIDO ALIAS "SAYDONA", ACCUSED-APPELLANT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">An accused's claim of self-defense relieves the prosecution of the burden of demonstrating that the accused committed the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> The accused must now prove by clear and convincing evidence that the justifying circumstance exists.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> If the accused is unable to prove this, a contradiction in the prosecution witness' testimony that has no bearing on any of the elements of the crime will not absolve the accused.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>This Court resolves the ordinary Appeal from the Court of Appeals' Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> which affirmed the Regional Trial Court's Judgment<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> convicting Kahar Sundang Languido alias "Saydona" (Languido) for the crime of murder in Criminal Case No. 15-506.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>In an Information,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Languido was charged with frustrated murder. Later, the victim succumbed to death. Consequently, the Information was amended charging Languido with murder.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> The Information reads:<blockquote>That on or about November 3, 2015, in the Municipality of Pigcawayan, Province of Cotabato, Philippines, and within the jurisdiction of this Honorable Court, the said accused, armed with a hand gun, with intent to kill, did then and there willfully, unlawfully, feloniously, with treachery, evident premeditation, attack, assault, and shoot the person of NASRUDIN BAUDI @ URAK from behind, while the latter was unaware of the impending attack rendering him defenseless, accused especially ensured the manner of attack without risk to himself that the victim might make thereby hitting and inflicting upon said NASRUDIN BAU(D)I [sic] @ URAK multiple gunshot wounds on his chest and head, which caused his death thereafter.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></blockquote>On arraignment, Languido pleaded not guilty to the charge. Pre-trial and trial then ensued.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The prosecution presented four witnesses, namely: (1) Muslima S. Rasam (Rasam); (2) Police Staff Sergeant Kerwin Val M. Antatico (PSSg. Antatico); and (3) Norhani D. Mama (Mama).<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Rasam testified that on the day of the incident, she was at her sister Baididu Unting's (Unting) kiosk in the public market. Unting initially asked Baudi to purchase 50 pesos worth of rubber, but after Baudi left, Unting instructed Rasam to tell Baudi to buy 100 pesos worth instead. Rasam then followed Baudi. When Rasam was about three to four meters away from Baudi, she saw Languido shoot him in the head, fire three more shots into his body, and then kick him before leaving. When Languido left, Rasam ran towards Baudi and screamed for help. When the police arrived, she identified Languido as the shooter and directed them to his store. Afterwards, she went to the hospital with the victim.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>PSSg. Antatico, the police officer on duty, recounted that he was with PSSg. Marlon Warain (PSSg. Warain) when they received a report about a shooting that occurred in the neighborhood. When they arrived at the scene, they saw a bloody body lying on the ground and an unknown man holding a gun. They approached the man who turned out to be Languido. PSSg. Antatico introduced himself as a police officer and directed Languido to drop his gun. When Languido refused, PSSg. Warain managed to grab the gun from him. He then took custody of the same, marking it with "KVA."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Subsequently, they brought Languido and the gun to the police station. After the Request for Ballistic Examination was prepared, the gun was brought to the crime laboratory.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>In addition, the defense stipulated on the offer of testimony of Police Master Sargeant Moises S. Abril (PMSg. Abril) on the following facts:<br><br>On November 14, 2015, PSSg. Antatico delivered a letter-request from the Officer-in-Charge of the Philippine National Police Pigcawayan to their office. This sought an examination of Caliber .45 Remington 1911 pistol with serial number 483915, marked with "KVA," together with one magazine for caliber .45 pistol marked "KVA-1," and two rounds of ammunition for caliber .45 pistol marked "KA-7" and "KA-8."<br><br>After conducting the examination, PMSg. Abril prepared Ballistic Report No. PFAIS-234-2015. He stored the specimens in the Evidence Room and only removed them to present them as evidence in Court. He identified the request by their shared control number. He recognized the markings placed on the specimen, along with those markings already present. He confirmed the fact that the specimens he presented in Court were identical specimens submitted to their office for examination.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Last to testify for the prosecution was Baudi's sister, Mama, who testified about the damages and expenses incurred due to her brother's death. She narrated that Baudi was confined in the community hospital for ten days before being discharged. He continued taking pain medication at home but had to be brought back to the hospital afterward.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> He was taken to Cotabato Regional Medical Center where he died on January 10, 2016.<br><br>The defense offered a different version of the events, with Languido as their lone witness. He asserted that he acted in self-defense, alleging that Baudi was the one who attacked him first. He claimed that on November 3, 2015, after closing his store, Baudi approached and pointed a gun at him. Languido said he managed to grab the gun, and when Baudi tried to take it back, he shot him.<br><br>He further claimed that Baudi was allegedly accompanied by a certain Almin who also tried to shoot Languido. However, Languido was able to evade the bullet by ducking. He then fled while pointing the gun at Almin to prevent being followed.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Afterwards, he proceeded to the police station and admitted that he had accidentally shot Baudi.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> He added that this was the second altercation with Baudi, the first being when Baudi allegedly tried to kill him out of jealousy over Languido's wife.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>In its Judgment, the Regional Trial Court found Languido guilty beyond reasonable doubt of murder.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> The Regional Trial Court noted that although Languido admitted to killing Baudi and claimed self-defense, he failed to provide any evidence proving that Baudi had actually pointed a gun at him with the intent to kill. The trial court found that there was no showing that the victim committed unlawful aggression against the accused.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Thus, the dispositive portion of the Judgment reads:<blockquote>WHEREFORE, finding accused KAHAR SUNDANG LANGUIDO alias <i>SAYDONA</i> guilty by proof beyond reasonable doubt for the offense of <i>Murder</i>, with attendant aggravating circumstances of treachery, he is hereby sentenced to suffer the penalty of <i>reclusion perpetua</i>, without eligibility for parole under RA 9346.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup>&nbsp;<br><br>He is ordered to pay the heirs of Nasrudin Baudi @ Urak, the amount of Php100,000.00 as civil indemnity, of Php100,000.00 as moral damages, Php 100,000.00 as exemplary damages, and Php50,000.00 as temperate damages in lieu of actual damages. He is further ordered to pay interest at the rate of six percent (6%) per annum from the time of finality of this decision until fully paid, on all the damages awarded.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></blockquote>Languido filed a Notice of Appeal with the Regional Trial Court. Consequently, the records of the case were transmitted to the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>In its August 10, 2023 Decision, the Court of Appeals upheld the conviction for murder, finding that Languido failed to prove self-defense. It noted that the number and location of the gunshot wounds showed intent to kill, and that Baudi being shot from behind belies the argument of self-defense.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> The Court of Appeals modified the penalties due to the absence of any mitigating or aggravating circumstance.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Thus, Languido was sentenced to reclusion perpetua and was ordered to pay PHP 75,000.00 each for civil indemnity, moral damages, and exemplary damages, and PHP 50,000.00 as temperate damages.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> The dispositive portion of the Court of Appeals Decision reads:<blockquote>WHEREFORE, premises considered, the appeal is DENIED. The Judgment dated December 7, 2021 of the Regional Trial Court, 12th Judicial Region, Branch 24, Midsayap, Cotabato, in Criminal Case No. 15-506, is AFFIRMED with MODIFICATION in that the appellant is sentenced to suffer the penalty of Reclusion Perpetua and he is ordered to pay P75,000.00 as civil indemnity, P75,000.00 as moral damages, P75,000.00 as exemplary damages and P50,000.00 as temperate damages. All these amounts shall earn six percent (6%) interest per annum from finality of this Decision until fully paid.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></blockquote>Thereafter, Languido filed his Notice of Appeal on September 12, 2023 with the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The Court of Appeals gave due course to Languido's appeal and forwarded the records of the case to this Court.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>In a May 20, 2024 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> this Court noted the records, required the parties to submit supplemental briefs, and required the Bureau of Corrections to confirm to this Court Languido's confinement.<br><br>In an August 9, 2024 Manifestation and Motion in Lieu of Supplemental Brief,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> the Office of the Solicitor General indicated that they had already thoroughly and exhaustively discussed the issues and legal principles involved in the case in the February 7, 2023 Brief for the Plaintiff-Appellee and, thus, will no longer file a supplemental brief.<br><br>In an August 9, 2024 letter, the Bureau of Corrections confirmed that Languido is currently confined at Davao Prison and Penal Farm and was received for confinement on October 6, 2023 by virtue of a Commitment Order issued by the Regional Trial Court, Branch 24, Midsayap, Cotabato in relation to Criminal Case No. 15-506 for Murder.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> On August 29, 2024, Languido filed his Supplemental Brief.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>In his Supplemental Brief,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Languido asserts that the Regional Trial Court and Court of Appeals gravely erred when they based his conviction on the inconsistent testimony of the prosecution witnesses.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> He reiterated that while he indeed killed Baudi, this was done in self-defense, stating that he was held at gun point.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>On the other hand, the People of the Philippines, in its Appellee's Brief<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> filed by the Office of the Solicitor General, argues that the prosecution's evidence proved Languido's guilt beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> It stressed that the eyewitness' testimony coupled with the police investigation were incompatible with the claim of self-defense. It emphasized that the shooting of the victim multiple times, including a shot to the head, demonstrated an intent to kill rather than an act of self-defense.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>For this Court's resolution is the issue of whether the Court of Appeals was correct in finding accused-appellant Kahar Sundang Languido alias "Saydona" guilty beyond reasonable doubt of murder. In doing so, this Court must determine whether there was sufficient evidence to prove that a justifying circumstance existed.<br><br>The appeal lacks merit. We find no reason to deviate from the lower courts' factual findings, conclusions on the credibility and probative weight of the prosecution's evidence, and on the guilt of the accused.<br><br>Accused-appellant denies the accusations, relying primarily on his claim of self-defense. He further attempts to discredit the testimonies of the prosecution's witnesses. His assertions deserve no consideration.<br><br>In admitting that he killed Baudi, accused-appellant invoked self-defense and shifted the burden of proof from the prosecution to himself. In such cases, the first justifying circumstance provided in Article 11 of the Revised Penal Code is relevant:<blockquote>ARTICLE 11. Justifying Circumstances. â The following do not incur any criminal liability:<br><br>1. Anyone who acts in defense of his person or rights, provided that the following circumstances concur:<br><br>First. Unlawful aggression;<br>Second. Reasonable necessity of the means employed to prevent or repel it;<br>Third. Lack of sufficient provocation on the part of the person defending himself.</blockquote>Accused-appellant is now asked to prove that the victim's death or the act of killing was indeed justified.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> The justifying circumstance of self-defense must be proven by competent evidence by that who is claiming it. This Court explained in <i>Galorio v. People</i>:<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><blockquote>It is settled that when an accused admits killing the victim but invokes self-defense to escape criminal liability, the accused assumes the burden to establish his plea by credible, clear and convincing evidence; otherwise, conviction would follow from his admission that he killed the victim. Self-defense cannot be justifiably appreciated when uncorroborated by independent and competent evidence or when it is extremely doubtful by itself. Indeed, in invoking self-defense, the burden of evidence is shifted and the accused claiming self-defense must rely on the strength of his own evidence and not on the weakness of the prosecution.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (Citations omitted)</blockquote>Thus, to be appreciated in the accused's favor, the accused must prove the following by clear and convincing evidence: "(1) unlawful aggression on the part of the victim; (2) reasonable necessity of the means employed to prevent or repel such aggression; and (3) lack of sufficient provocation on the part of the person resorting to self-defense."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>The first requisite, unlawful aggression, is deemed present when there is a showing that the victim posed actual peril on the life or personal safety of the person defending himself.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> In <i>People v. Nugas</i>,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> this Court explained the indispensability of unlawful aggression in self-defense:<blockquote>Unlawful aggression on the part of the victim is the primordial element of the justifying circumstance of self-defense. Without unlawful aggression, there can be no justified killing in defense of oneself. The test for the presence of unlawful aggression under the circumstances is whether the aggression from the victim put in real peril the life or personal safety of the person defending himself; the peril must not be an imagined or imaginary threat. Accordingly, the accused must establish the concurrence of three elements of unlawful aggression, namely: (a) there must be a physical or material attack or assault; (b) the attack or assault must be actual, or, at least, imminent; and (c) the attack or assault must be unlawful.<br><br>Unlawful aggression is of two kinds: (a) actual or material unlawful aggression; and (b) imminent unlawful aggression. Actual or material unlawful aggression means an attack with physical force or with a weapon, an offensive act that positively determines the intent of the aggressor to cause the injury. Imminent unlawful aggression means an attack that is impending or at the point of happening; it must not consist in a mere threatening attitude, nor must it be merely imaginary, but must be offensive and positively strong (like aiming a revolver at another with intent to shoot or opening a knife and making a motion as if to attack). Imminent unlawful aggression must not be a mere threatening attitude of the victim, such as pressing his right hand to his hip where a revolver was holstered, accompanied by an angry countenance, or like aiming to throw a pot.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> (Citations omitted)</blockquote>Here, in claiming self-defense, accused-appellant maintains that Baudi was the initial aggressor. He posits that the altercation began when Baudi pointed a gun at him. He was able to seize the gun, but as Baudi attempted to retrieve it, accused-appellant shot him. Languido added that this was not the first time Baudi tried to kill him and that there has been a simmering dispute between them for some time.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> From his narration, it may seem that Baudi pointed the gun at accused-appellant with the intent of seriously injuring him, if not killing him. Consequently, it is feasible that the first requisite is present.<br><br>However, an examination of the records will show that accused-appellant failed to substantiate the presence of unlawful aggression on the part of the victim. His claim that the victim attempted to shoot him first and that he was only able to wrest the gun away is not supported by physical or testimonial evidence. Moreover, accused-appellant's testimony is in striking contrast to that of eyewitness accounts. Witness Rasam reported that as she was following Baudi from behind, accused-appellant abruptly appeared and shot the victim in the head without provocation. Rasam adds that as the victim fell to the ground, he was shot three more times and even kicked. This demonstrates that the victim did not exhibit aggression towards the accused when accused-appellant shot him. The police report verified Rasam's account when it detected a bullet in Baudi's head and three in his body. Thus, accused-appellant's claim of self-defense necessarily fails.<br><br>Nevertheless, even if we assume that there was indeed unlawful aggression on the part of the victim, the second and third requisites remain absent. In <i>People v. Antonio</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> this Court explained the second and third requisites as:<blockquote>As for the second requisite, "reasonable necessity of means employed to prevent or repel such aggression" envisions a rational equivalence between the perceived danger and the means employed to repel the attack. This Court in <i>People v. Encomienda</i>, recognized that in circumstances that lead to self-defense or defense of a relative, the instinct for self-preservation will outweigh-rational thinking. Thus, "when it is apparent that a person has reasonably acted upon this instinct, it is the duty of the courts to sanction the act and hold the act irresponsible in law for the consequences."<br><br>Finally, the third requisite of lack of sufficient provocation requires the person invoking self-defense to not have antagonized the attacker. This Court explained in <i>People v. Nabora</i>, that a provocation is deemed sufficient if it is "adequate to excite the person to commit the wrong and must accordingly be proportionate to its gravity."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Citations omitted)</blockquote>Here, accused-appellant's actions of shooting the victim first in the head and then three times in the body is disproportionate to the threat that he claims he was faced with. The law requires reasonable necessity of that which is commensurate&nbsp; to the danger being faced.&nbsp; Surely, multiple shotsâespecially that shot done while the victim had fallenâwas excessive. Seeing that all three components of self-defense are absent, accused-appellant's claim of self-defense is untenable.<br><br><center><b>II</b></center><br>Given that accused-appellant's self-defense claim has failed, he can no longer hide behind the contradictions in the prosecution's witnesses' testimonies.<br><br>It is a long standing rule that the factual findings of the trial court, especially when affirmed by the Court of Appeals, deserve great weight and respect.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Appellate courts generally do not disturb the findings of the trial court when no glaring errors, gross misapprehension of facts, and speculative, arbitrary, and unsupported conclusions can be gathered from such findings.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> This extends to the matter of ascribing substance to the testimonies of witnesses, as the trial court is in the best position to ascertain the probative weight of the testimonies, having heard and observed them during trial.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>In this case, accused-appellant argues that this Court cannot rely on the testimonies of the witnesses, given their glaring inconsistencies.<br><br>Rasam, for instance, states that she rushed to Baudi and called for assistance after witnessing accused-apellant shoot him, causing him to fall to the ground. She also claims that she was the one who transported Baudi to the hospital. PSSg. Antatico, on the other hand, claims that upon their arrival at the scene of the incident, he observed accused-appellant still holding the gun, which prompted PSSg. Antatico to request that he surrender the gun. Afterwards, accused-appellant was arrested and Baudi was brought to the hospital.<br><br>While the narrations of both witnesses are not identical, they are not inconsistent or contradictory. These minor discrepancies between two testimonies, such as Rasam's account of calling for aid and bringing Baudi to the hospital, versus PSSg. Antatico's version that accused-appellant was brought to the hospital following his arrest, are typical of differing eyewitness statements. Rasam recounts witnessing the moment the victim was actually shot, while PSSg. Antatico remembers arriving at the site after the incident. The slightly different perspectives on the sequence of events are not enough to overturn a conviction of murder. In <i>People v. Dimapilit</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> this Court enunciated:<blockquote>"A witness' inconsistency on minor details does not affect his or her credibility as long as there are no material contradictions in his or her absolute and clear narration on the central incident and positive identification of the accused as one (1) of the main assailants. Any inconsistency, which is not relevant to the elements of the crime, "is not a ground to reverse a conviction."<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> (1itations omitted)</blockquote>Thus, accused-appellant's argument that he should be acquitted based on the conflicting testimonies has no leg to stand on. Ultimately, the identity of the assailant and the commission of the crime charged are beyond dispute. Accused-appellant's admission of his guilt fortifies the case against him, rendering the conflicting testimonies on minor details irrelevant. Accused-appellant's conviction for the crime of murder is affirmed.<br><br><b>FOR THESE REASONS</b>, the Appeal is <b>DISMISSED</b>. The assailed Court of Appeals August 10, 2023 Decision in CA-G.R. CR HC No. 02946-MIN is <b>AFFIRMED</b>.<br><br>Accused-appellant Kahar Sundang Languido alias "Saydona" is found <b>GUILTY</b> beyond reasonable doubt of murder and is sentenced to suffer the penalty of <i>reclusion perpetua</i> and is ordered to pay the amounts of PHP 75,000.00 as civil indemnity, PHP 75,000.00 as moral damages, PHP 75,000.00 as exemplary damages, and PHP 50,000.00 as temperate damages. All monetary awards are subject to six percent interest per annum from finality of this Decision until fully paid.<br><br><b>SO ORDERED.</b><br><br><i>Lazaro-Javier, J. Lopez</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>Kho, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>People v. Antonio <i>y</i> Pableo</b>, 869 Phil. 773 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <b>People of the Philippines v. Dimapilit</b>, 816 Phil. 523 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, pp. 10-18. The August 10, 2023 Decision in CA-G.R. CR HC No. 02946-MIN was penned by Associate Justice Ana Marie T. Mas and concurred in by Associate Justices Lily V. Biton and John Z. Lee of the Twenty-Third Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 21-34. The December 7, 2021 Judgment in Crim. Case No. 15-506 was penned by Presiding Judge Lily Lydia A. Laquindanum of Branch 24, Regional Trial Court, Midsayap, Cotabato.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 10-11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 10-11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 27-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 33-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> CA <i>rollo</i>, p. 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i>&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 17-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, p. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i>&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 46-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i>&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 73-83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Camillo v. People</b>, 935 Phil. 765 (2023) [Per J.&nbsp; Lopez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 951 Phil. 316 (2024) [Per J. Gaerlan, Third Division]. <i>Citing</i> <b>Belbis, Jr. v. People</b>, 698 Phil. 706 (2012) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 365.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>People v. Antonio <i>y</i> Pableo</b>, 869 Phil. 773 (2020) [Per J. Leonen, Third Division], <i>citing</i> <b>People v. Silvano</b>, 403 Phil. 598, 606 (2001) [Per J. De Leon, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>People v. Escobal</b>, 820 Phil. 92 (2017) [Per J. Bersamin, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 677 Phil. 168 (2011) [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 177-178.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Rollo</i>, p. 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 869 Phil. 773 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 786.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>People v. Ampo</b>, 848 Phil. 97 (2019) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>People v. Talmesa</b>, 890 Phil. 273 (2020) [Per J. Inting, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 816 Phil. 523 (2017) [Per J. Leonen, Second Division].&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 527-528.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

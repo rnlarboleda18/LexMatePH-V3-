@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 256002 - ISCO HOLDING CORPORATION, PETITIONER, VS. NIKON CORPORATION, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70268' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 256002, November 17, 2025 ]</H2>
+			<H3>ISCO HOLDING CORPORATION, PETITIONER, VS. NIKON CORPORATION, RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (<b>Petition</b>) under Rule 45 of the Rules of Court, assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated August 26, 2020, of the Court of Appeals (CA) in CA-G.R. SP No. 154367. The CA reversed the Decision,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated December 20, 2017, of the Office of the Director General (<b>ODG</b>) of the Intellectual Property Office of the Philippines (<b>IPO</b>) in Appeal No. 14-2016-0029, and reinstated the Decision,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated March 1, 2016, of the Bureau of Legal Affairs (<b>BLA</b>) of the IPO in IPC No. 14-2011-0029, which held that petitioner ISCO Holding Corporation's (<b>ISCO</b>) use of the <b><i>NIKON</i></b> trademark is contrary to law.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p><p align="center"><b><i>The Facts</i></b> </p><p> On September 25, 2009, ISCO, a domestic corporation, filed a trademark application for "NIKON &amp; DESIGN" for use on home and household goods. ISCO's mark appears as follows:<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p align="center"> (image supposed to be here)<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> The anchor in ISCO's mark is in blue color, while the word "Nikon" below it is in red.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> The trademark application was then published. Thereafter, on January 24, 2011, respondent Nikon Corporation (<b>Nikon Corp.</b>), a foreign corporation, filed a Verified Notice of Opposition,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> asserting that: (a) it was the true owner, prior registrant, and user of the <b><i>NIKON</i></b> mark; (b) its <b><i>NIKON</i></b> mark is well-known; (c) ISCO's NIKON mark is confusingly similar to its <b><i>NIKON</i></b> mark; and (d) it would be damaged if ISCO's <b><i>NIKON </i></b>mark was registered.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> Nikon Corp.'s <b><i>NIKON</i></b> mark, which is registered in the Philippines,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> appears as follows:<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p align="center">(image supposed to be here)<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> Nikon Corp. likewise argued that its <b><i>NIKON</i></b> mark should be protected because it is also its business name or trade name.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Moreover, the mere use by a third party of the <b><i>NIKON</i></b> mark will cause dilution and/or restrict the expansion of its business.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> ISCO contended that Nikon Corp.'s Opposition should be dismissed on the ground of <i>res judicata</i>. ISCO cited two cases previously decided by the IPO-BLA in 2006, both entitled <i>Nikon Corporation v. Nikon Industrial Corporation,</i> wherein the IPO-BLA ruled that the <b><i>NIKON</i></b> mark can be used for household appliances without infringing Nikon Corp.'s mark, since the latter is used only for cameras.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p align="center"><em> <strong>The Ruling of the IPO-BLA</strong> </em> </p><p> In its Decision, the IPO-BLA ruled in favor of Nikon Corp., sustaining the latter's Opposition, thus: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the instant Opposition to Trademark Application No. 4-2009-009807 is hereby <b>SUSTAINED</b>. Let the filewrapper of the subject trademark application be returned, together with a copy of this Decision, to the Bureau of Trademarks for information and appropriate action. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original) </p> </blockquote> <p> The IPO-BLA found that ISCO's mark is identical with that of Nikon Corp., and that ISCO's use of the mark is likely to cause deception or confusion, would indicate a connection between its goods and that of Nikon Corp., and will mislead the public.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The IPO-BLA likewise sustained Nikon Corp.'s claim that its <b><i>NIKON</i></b> mark is a well-known mark.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p>Moreover, the IPO-BLA found that ISCO's use of the <b><i>NIKON</i></b> mark violates Section 165.3 of Republic Act No. 9283, or the Intellectual Property Code of the Philippines (<b>IP Code</b>), since the said mark is also Nikon Corp.'s trade name.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p>Dissatisfied with the IPO-BLA's ruling, ISCO appealed to the IPO-ODG, reiterating its claim that the principle of <i>res judicata</i> applies in the present case, and that its goods and those of Nikon Corp. are unrelated. According to ISCO, its use of the <b><i>NIKON</i></b> mark will unlikely mislead the public, and thus, it should be allowed to register it, even though it is Nikon Corp.'s trade name.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p align="center"><b><i>The Ruling of the IPO-ODG</i></b> </p><p> In its Decision, the IPO-ODG granted ISCO's appeal, dismissing Nikon Corp.'s Opposition, thus: </p><blockquote> <p> Wherefore, premises considered, the appeal is hereby granted. The opposition must be dismissed. </p> <p> Let a copy of this Decision be furnished the Director of Bureau of Legal Affairs for appropriate action. Further, let also the Director of Bureau of Trademarks and the library of the Documentation, Information[,] and Technology Transfer Bureau be furnished a copy of this [D]ecision for information, guidance, and records purposes. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p> </blockquote> <p> While the IPO-ODG found that the doctrine of <i>res judicata</i> does not apply to the present case, it nonetheless found that there were noticeable differences between the Nikon Corp.'s and ISCO's marks. According to the IPO-ODG, Nikon Corp.'s and ISCO's products are unrelated; thus, Nikon Corp. failed to establish that ISCO's use of the<b><i> NIKON</i></b> mark will likely damage Nikon Corp.'s mark.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p>Aggrieved, Nikon Corp. filed a Petition for Review before the CA.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p align="center"><b><i>The Ruling of the CA</i></b> </p><p>In the assailed Decision, the CA reversed the ruling of the IPO-ODG and reinstated the IPO-BLA ruling, thus: </p><blockquote> <p> <b>WHEREFORE</b>, the petition is <b>GRANTED</b>. The Decision[,] dated [December 20, 2017,] of the [IPO-ODG] in Appeal No. 14-2016-0029 is hereby <b>REVERSED</b> and <b>SET ASIDE</b>. Accordingly, the Decision[,] dated [March 1, 2016,] in IPC No. 14-2011-0029[,] of the [IPO-BLA] is <b>REINSTATED</b>. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Emphasis in the original) </p> </blockquote> <p> The CA found that Nikon Corp. has sufficiently established that ISCO's mark cannot be registered because it is identical with, or confusingly similar to, Nikon Corp.'s registered and well-known mark. Moreover, even assuming that Nikon Corp.'s mark is neither registered nor well-known, ISCO's application must still be denied since the <b><i>NIKON</i></b> mark comprises Nikon Corp.'s trade name.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p align="center"> <b><i>The Issue</i></b> </p><p> Did the CA commit a reversible error in ruling that ISCO cannot validly register the <b><i>NIKON</i></b> trademark for household goods and appliances? </p><p align="center"> <b><i>The Ruling of the Court</i></b> </p><p> Preliminarily, the Court has noted some procedural infirmities in the present Petition. </p><p> <i>First</i>, ISCO filed the present Petition for Review under Rule 43 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> This is patently erroneous as Rule 43 pertains to "Appeals from the Court of Tax Appeals and Quasi-Judicial Agencies to the Court of Appeals." Petitions for review filed before the Court must be filed under Rule 45 of the Rules of Court. </p><p> <i>Second</i>, ISCO filed a Supplement to Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> to further expound on issues already raised in the Petition, and to take up other issues not presented in the Petition due to inadvertence, occasioned by shortness of time available to ISCO's counsel, being a new counsel, to study and prepare the Petition.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> Rule 10, Section 6 of the Rules of Court provides for the rule on supplemental pleadings: </p><blockquote> <p> Section 6. <i>Supplemental pleadings</i>. â Upon motion of a party, the court may, upon reasonable notice and upon such terms as are just, permit him or her to serve a supplemental pleading <i>setting forth transactions, occurrences or events which have happened since the date of the pleading sought to be supplemented</i>. The adverse party may plead thereto within [10] calendar days from notice of the order admitting the supplemental pleading. (Emphasis supplied) </p> </blockquote> <p> In order for a supplemental pleading to be admitted, it must set forth transactions, occurrences, or events which have happened after the date of the pleading sought to be supplemented.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></p><p> In the present case, a careful review of ISCO's Supplement to Petition for Review reveals that it does not set forth any supervening event that occurred after the filing of the Petition. It merely expounds on issues already raised in the Petition. Thus, the Supplement to Petition for Review may not be admitted. </p><p> At any rate, even if the aforementioned procedural infirmities are ignored, the Petition should still be denied for lack of merit. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Trademark owners have the right to exclude others from using their trademark</i> </div></td> </tr> </tbody></table> <p>A trademark is any visible sign capable of distinguishing the goods of an enterprise.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> It is "any distinctive word, name, symbol, emblem, sign, or device, or any combination thereof, adopted and used by a manufacturer or merchant on his goods to identify and distinguish them from those manufactured, sold, or dealt by others."<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p> More importantly, a trademark is an intellectual property protected by law.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> As such, trademark owners are accorded several rights, which are acquired through registration made validly in accordance with the provisions of the IP Code.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p>One of the rights of a trademark owner is the right to exclude others without the owner's consent from using their trademark, or a confusingly similar mark which would result in a likelihood of confusion and financial injury to the trademark owner.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> This right is codified under Section 147 of the IP Code: </p><blockquote> <p> SEC. 147. <i>Rights Conferred</i>. â 1471.1. Except in cases of importation of drugs and medicines allowed under Section 72.1 of this Act and of off-patent drugs and medicines, the owner of a registered mark shall have the exclusive right to prevent all third parties not having the owner's consent from using in the course of trade identical or similar signs or containers for goods or services which are identical or similar to those in respect of which the trademark is registered where such use would result in a likelihood of confusion. In case of the use of an identical sign for identical goods or services, a likelihood of confusion shall be presumed. </p> <p> . . . .</p> <p> 147.2. The exclusive right of the owner of a well-known mark defined in Subsection 123.1(e) which is registered in the Philippines, shall extend to goods and services which are not similar to those in respect of which the mark is registered: <i>Provided</i>, That use of that mark in relation to those goods or services would indicate a connection between those goods or services and the owner of the registered mark: <i>Provided further</i>, That the interests of the owner of the registered mark are likely to be damaged by such use. </p> </blockquote> <p> In recognition of trademark owners' right to exclusive use, the IP Code provides for instances when a trademark cannot be registered, thus: </p><blockquote> <p> SEC. 123. <i>Registrability</i>. â 123.1. A mark cannot be registered if it: </p> <p>. . . .</p> <p> (d) Is identical with a registered mark belonging to a different proprietor or a mark with an earlier filing or priority date, in respect of: </p> <blockquote> <p> (i) The same goods or services, or</p> <p> (ii) Closely related goods or services, or</p> <p> (iii) If it nearly resembles such a mark as to be likely to deceive or cause confusion; </p> </blockquote> <p> (e) Is identical with, or confusingly similar to, or constitutes a translation of a mark which is considered by the competent authority of the Philippines to be well-known internationally and in the Philippines, <i><u>whether or not it is registered here</u></i>, as being already the mark of a person other than the applicant for registration, and used for identical or similar goods or services: <i>Provided</i>, That in determining whether a mark is well-known, account shall be taken of the knowledge of the relevant sector of the public, rather than of the public at large, including knowledge in the Philippines which has been obtained as a result of the promotion of the mark; </p> <p> (f) Is identical with, or confusingly similar to, or constitutes a translation of a mark considered well-known in accordance with the preceding paragraph, <i><u>which is registered in the Philippines</u></i> with respect to goods or services which are not similar to those with respect to which registration is applied for: <i>Provided</i>, That use of the mark in relation to those goods or services would indicate a connection between those goods or services, and the owner of the registered mark: <i>Provided further</i>, That the interests of the owner of the registered mark are likely to be damaged by such use; </p> <p> . . . . (Emphasis supplied) </p> </blockquote> <p> The foregoing provisions under Section 123.1 of the IP Code are the ones that prohibit the registration of a trademark which is identical or confusingly similar to a trademark already belonging to a person other than the applicant for registration (<b>existing trademark</b>). In order to determine the proper basis for resolving the issue in the present case, there is a need to clarify the applicability of Section 123.1 paragraphs (d), (e), and (f), respectively. </p><p> Section 123.1(e) and (f) are specific provisions as they refer to situations wherein the existing trademark is well-known. On the other hand, Section 123.1(d) is a general provision as it does not make any distinction on whether the existing trademark is well-known. </p><p> Thus, Section 123.1(d) applies when the existing trademark is not well-known. If the existing trademark is well-known, Section 123.1(e) and (f) applies. This is consistent with the basic rule in statutory construction that specific provisions prevail over general provisions.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p>The Court will now discuss whether Nikon Corp.'s <b><i>NIKON</i></b> trademark is well-known. </p><p><i>Nikon Corp.'s trademark is well-known</i> </p><p> Under Section 123.1(e), to which Section 123.1(f) makes a reference, the well-known status of a trademark shall be determined by a competent authority of the Philippines. </p><p> Rule 101(d)<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> of IPO Memorandum Circular No. 17-010, or the Rules and Regulations on Trademarks, Service Marks, Trade Names, and Marked or Stamped Containers of 2017 (<b>2017 Rules and Regulations</b>) enumerates the competent authorities that can declare a trademark as well-known, namely: (1) the courts, (2) the Director General, and (3) the Director of the BLA. For a trademark to be declared as well-known, some of the criteria under Rule 103 of the 2017 Rules and Regulations must be met,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> thus: </p><blockquote> <p> RULE 103. <i>Criteria for Determining Whether a Mark is Well-known</i>. â In determining whether a mark is well-known, the following criteria or any combination thereof may be considered: </p> <p> (a) the duration, extent and geographical area of any use of the mark, in particular, the duration, extent and geographical area of any promotion of the mark, including advertising or publicity and the presentation, at fairs or exhibitions, of the goods and/or services to which the mark applies; </p> <p> (b) the market share, in the Philippines and in other countries, of the goods and/or services to which the mark applies; </p> <p> (c) the degree of the inherent or acquired distinction of the mark; </p> <p>(d) the quality, image or reputation acquired by the mark; </p> <p>(e) the extent to which the mark has been registered in the world; </p> <p>(f) the exclusivity of registration attained by the mark in the world;</p> <p> (g) the extent to which the mark has been used in the world;</p> <p> (h) the exclusivity of use attained by the mark in the world;</p> <p> (i) the commercial value attributed to the mark in the world;</p> <p>(j) the record of successful protection of the rights in the mark; </p> <p>(k) the outcome of litigations dealing with the issue of whether the mark is a well-known mark; and</p> <p> (l) the presence or absence of identical or similar marks validly registered for or used on identical or similar goods or services and owned by persons other than the person claiming that the mark is a well-known mark. </p> </blockquote> <p> Similarly, Rule 5 of IPOPHL Memorandum Circular No. 2025-009, or the Rules and Regulations for the Declaration and Creation of the Register of Well-Known Marks (<b>2025 Rules and Regulations</b>), provides for the same criteria for determining whether a trademark is well-known. However, it adds that the foregoing criteria or any combination thereof may be taken into account in determining whether a trademark is well-known, but which must include letters (a), (b), (c), and (d).<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></p><p> Nevertheless, the 2025 Rules and Regulations recognize the well-known status of a trademark previously declared as such by a competent authority.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> In the present case, the IPO-BLA declared Nikon Corp.'s <b><i>NIKON </i></b>trademark as well-known based on the following evidence submitted by Nikon Corp.: copies of certificates of trademark registration in the Philippines, list of registrations of its trademark in different countries, and other pieces of evidence relating to the extent of sales and promotion of <b><i>NIKON</i></b> products.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><p> The foregoing pieces of evidence show that Nikon Corp.'s <b><i>NIKON</i></b> trademark is registered, used, and promoted not only in the Philippines, but also in other countries [criteria (a) â the duration, extent, and geographical area of any use or promotion of the trademark; and criteria (e) â the extent to which the mark has been registered in the world]. They also show the extent of global sales or market share of Nikon Corp.'s goods [criteria (b) â the market share, in the Philippines and in other countries, of the goods to which the trademark applies]. </p><p> With regard to criteria (c), i.e., the degree of inherent or acquired distinction of the trademark, the CA correctly found that the <b><i>NIKON</i></b> trademark is highly distinctive, as it is a coined or fanciful term,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> or that which has no real meaning.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Here, the IPO-BLA found that the word "NIKON" is not an ordinary word in the English and Filipino languages. Moreover, there is no evidence that the word is of common usage in the Philippines aside from it being used as a trademark.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> As such, the word "NIKON" has no real meaning, and is thus a coined or fanciful mark. In <i>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc</i>.,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> the Court held that a coined or fanciful mark is a strong indication of the distinctiveness of the said mark.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> Furthermore, considering the worldwide use and registration of Nikon Corp.'s <b><i>NIKON</i></b> trademark, it has thus acquired some degree of reputation worth protecting [criteria (d) â the quality-image or reputation acquired by the trademark]. In <i>Sehwani, Inc. and/or Benita's Frites, Inc. v. IN-N-OUT Burger, Inc</i>.,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the Court held that the reputation of the "IN-N-OUT" trademark is unmistakable, it being registered and used worldwide, and appearing in magazines, newspapers, and the internet, thus satisfying the criteria of quality-image or reputation acquired by a trademark in determining whether the said trademark is well-known.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup></p><p> Moreover, as provided in Rule 103(k) above, the outcome of litigations dealing with the issue of whether a trademark is well-known may be considered. In two previous cases, namely: (1) <i>Nikon Corporation v. San Mateo Rubber Corporation</i>; and (2) <i>Nikon Corporation v. Alfra Steel Industrial, Inc.</i>, the IPO-BLA has declared that Nikon Corp.'s <b><i>NIKON</i></b> trademark has acquired a well-known status in the Philippines.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p><p> The well-known status of Nikon Corp.'s <b><i>NIKON</i></b> trademark was also affirmed by the CA,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> which is another competent authority in determining whether a trademark is well-known.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> </p><p> Notably, while the IPO-ODG, another competent authority, reversed the Decision of the IPO-BLA, it never made any pronouncement on whether the <b><i>NIKON</i></b> trademark is well-known, much less contradict the finding that it is well-known. The IPO-ODG focused on the alleged visual differences between Nikon Corp. and ISCO's trademarks, and the use of the said trademarks on unrelated goods.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> Finally, Rule 14 of the 2025 Rules and Regulations provides that "[t]he declaration of well-known mark is <i>prima facie</i> evidence of the well-known status of the mark. . . "<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> </p><p> In view of the foregoing, the Court sustains the IPO-BLA's finding, affirmed by the CA, that Nikon Corp.'s <b><i>NIKON</i></b> trademark is well-known, as contemplated in Section 123.1(e) and (f) of the IP Code. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><em>To bar registration, ISCO's NIKON trademark need not be used for goods similar or identical to those of Nikon Corp. </em></div></td> </tr> </tbody></table> <p>In its Petition, ISCO cites Section 123.1(e), arguing that in order for its <em><b>NIKON</b></em> trademark to be barred from registration, it must be used for identical or similar goods as those of Nikon Corp.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </p><p> The Court does not agree. </p><p>Section 123.1(e) pertains to well-known trademarks, <i>whether or not registered in the Philippines</i>. Under Section 123.1(e), a trademark cannot be registered if it is identical or confusingly similar to a well-known existing trademark used for goods which are <i>identical or similar to those with respect to which registration is applied for</i>.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p><p> On the other hand, Section 123.1(f) pertains to well-known trademarks <i>registered in the Philippines</i>. Under Section 123.1(f), a trademark cannot be registered if it is identical or confusingly similar to a well-known existing trademark used for goods which are <i>not similar to those with respect to which registration is applied for</i>.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> </p><p> Both Sections 123.1(e) and (t) cover the situation wherein a well-known existing trademark is registered in the Philippines. Meanwhile, the situation wherein a well-known existing trademark is not registered in the Philippines is only covered under Section 123.1(e). Thus, if a well-known existing trademark is not registered in the Philippines, a trademark which is identical or confusingly similar to it cannot be registered in the Philippines only if both trademarks are used for identical or similar goods. On the other hand, if a well-known existing trademark is registered in the Philippines, a trademark which is identical or confusingly similar to it cannot be registered, whether or not both trademarks are used for identical or similar goods, subject to the qualifications under Section 123.1(f) if the goods are not identical or similar. </p><p> In the present case, there is no dispute that Nikon Corp.'s well-known <b><i>NIKON</i></b> trademark is registered in the Philippines.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Thus, any trademark that is identical or confusingly similar to it cannot be registered, whether or not the trademark sought to be registered is used for goods which are similar or identical to those for which Nikon Corp.'s <b><i>NIKON</i></b> trademark is used. </p><p> Thus, there is no merit to ISCO's argument that its <b><i>NIKON</i></b> trademark must be used for goods which are identical goods to those of Nikon Corp. in order to bar its registration. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>ISCO and Nikon Corp.'s <b>NIKON</b> trademarks are used for goods which are not identical or similar</i> </div></td> </tr> </tbody></table> <p>ISCO filed its trademark application for the <b><i>NIKON</i></b> trademark to be used on home and household goods and appliances,<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> such as electric fans, oven toasters, etc. On the other hand, Nikon Corp.'s <b><i>NIKON</i></b> trademark is used on cameras.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p><p> Clearly, ISCO and Nikon Corp.'s products, for which their respective trademarks are used, are neither identical nor similar. Thus, Section 123.1(f) of the IP Code shall apply. </p><p> Hence, in order to bar ISCO's registration of its <b><i>NIKON</i></b> trademark, it must be identical or confusingly similar to Nikon Corp.'s <b><i>NIKON</i></b> trademark. In addition, the qualifications under Section 123.1(f) must likewise be satisfied, i.e., (1) that use of the trademark in relation to the applicant's goods would indicate a connection between those goods and the owner of the registered trademark; and (2) that the interests of the owner of the registered trademark are likely to be damaged by such use.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> </p><p> As will be discussed below, the foregoing requirements have been sufficiently established. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>ISCO's and Nikon Corp.'s <b>NIKON</b> trademarks are confusingly similar</i> </div></td> </tr> </tbody></table> <p>A side-by-side comparison of ISCO and Nikon Corp.'s <b><i>NIKON</i></b> trademarks is shown below: </p><table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="center">(image supposed to be here)<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> </div></td> <td><div align="center">(image supposed to be here)<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> </div></td> </tr> <tr> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr> <td><div align="center">ISCO </div></td> <td><div align="center">Nikon Corp. </div></td> </tr> </tbody></table> <p>In its Petition, ISCO argues that its <b><i>NIKON</i></b> trademark is not confusingly similar to that of Nikon Corp., citing the IPO-ODG's finding of differences between ISCO's and Nikon Corp.'s <b><i>NIKON</i></b> trademarks, primarily due to the design of an anchor enclosed in a circle that is included in ISCO's <b><i>NIKON</i></b> trademark, thus: </p><blockquote> <p> At a glance[,] one can see the differences in these marks. While they both contain the word "NIKON[,"] the Appellant's [ISCO] mark has noticeable differences from that of the Appellee [Nikon Corp.] The Appellee's [Nikon Corp.] mark is solely the word "NIKON[,"] while the Appellant's [ISCO] mark consists not only of the word "NIKON[,"] but includes the design of an anchor enclosed in a circle. Moreover, the Appellant [ISCO] has also filed color claims of blue and red that further distinguished its mark from that of Appellee [Nikon Corp.] Thus, the presence of the similar term "NIKON" in the parties' respective mark is not sufficient to conclude that the marks of the Appellant [ISCO] and Appellee [Nikon Corp.] are confusingly similar.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup></p> </blockquote> <p> The Court does not agree. </p><p> In <i>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc</i>.,<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> the Court has clarified that the Dominancy Test, which is explicitly incorporated in Section 155.1 of the IP Code, should be used in determining whether two trademarks are confusingly similar.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> </p><p> Section 155.1 of the IP Code provides: </p><blockquote> <p> SECTION 155. Remedies; Infringement. - Any person who shall, without the consent of the owner of the registered mark: </p> <p> 155.1. Use in commerce any reproduction, counterfeit, copy, or colorable imitation of a registered mark or the same container or a dominant feature thereof in connection with the sale, offering for sale, distribution, advertising of any goods or services including other preparatory steps necessary to carry out the sale of any goods or services on or in connection with which such use is likely to cause confusion, or to cause mistake, or to deceive; or</p> <p> . . . .<sup style="COLOR: RGB(255, 0, 0);">[66]</sup></p> </blockquote> <p> Under the Dominancy Test, greater weight is given to the similarity of the appearance of the product arising from the adoption of the dominant features of the registered mark, disregarding minor differences. Courts will consider more the aural and visual impressions created by the marks in the public mind, giving little weight to factors like prices, quality, sales outlets and market segments.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> In determining resemblance of marks, the appearance, sound, meaning, and overall impressions generated by the marks shall be considered.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> </p><p> In <i>Societe Des Produits Nestle, SA. v. Dy, Jr</i>.,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> the Court declared that the subject marks are confusingly similar based on the Dominancy Test because the mark "NANNY" contains the dominant feature "NAN" and because the subject marks are aurally similar, i.e., they sound similar when pronounced, thus: </p><blockquote> <p> Applying the dominancy test in the present case, the Court finds that "NANNY" is confusingly similar to "NAN." "NAN" is the prevalent feature of Nestle's line of infant powdered milk products. It is written in bold letters and used in all products. The line consists of PRE-NAN, NAN-H.A., NAN-1, and NAN-2. Clearly, "NANNY" contains the prevalent feature "NAN." The first three letters of "NANNY" are exactly the same as the letters of "NAN." When "NAN" and "NANNY" are pronounced, the aural effect is confusingly similar.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> </p> </blockquote> <p> In <i>Kolin Electronics Co., Inc</i>., the Court held that Kolin Philippines International, Inc.'s "kol<i>i</i>n" trademark resembles Kolin Electronics Co., Inc.'s <b><i>KOLIN</i></b> trademark because they are phonetically and aurally the same, thus: </p><blockquote> <p> Applying the Dominancy Test here, KPII's mark resembles KECI's KOLIN mark because the word "KOLIN" is the prevalent feature of both marks. Phonetically or aurally, the marks are exactly the same. Surely, the manner of pronouncing the word "KOLIN" does not change just because KPII's mark is in lowercase and contains an italicized orange letter "i". In terms of connotation and overall impression, there seems to be no difference between the two marks.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> </p> </blockquote> <p> In determining the dominant feature of a trademark, the Court may consider the signs, color, design, peculiar shape or name, or some special, easily remembered earmarks of the brand that readily attracts and catches the attention of the ordinary consumer.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> In <i>UFC Philippines, Inc. v. Barrio Fiesta Mfg. Corp</i>.,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> what the Court considered as the dominant feature of the trademark involved was the first word or figure that catches the eyes or that part which appears prominently to the eyes and ears.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> </p><p> In the present case, ISCO and Nikon Corp.'s <b><i>NIKON</i></b> trademarks both include the identical word "NIKON." Obviously, the word "NIKON" in Nikon Corp.'s NIKON trademark is its dominant feature, as it is the only word in the mark. On the other hand, the word "NIKON" in ISCO's <b><i>NIKON</i></b> trademark is its dominant feature as it is also the only word in the mark. Comparing the dominant features of both trademarks, i.e., the word "NIKON," they are spelled exactly the same, only differing on their font styles and sizes. They are both written in bold and capital letters. Moreover, when pronounced, they also sound the same. </p><p> In contrast to the Dominancy Test, the Holistic or Totality Test necessitates a consideration of the entirety of the trademarks as applied to the products, including the labels and packaging, in determining confusing similarity. The discerning eye of the observer must focus not only on the predominant words, but also on the other features appearing on both labels so that the observer may draw conclusion on whether one is confusingly similar to the other.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> </p><p> However, the use of the Holistic or Totality Test in determining the resemblance of trademarks has already been abandoned.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> Thus, ISCO cannot rely on minor dissimilarities between the appearances of its <b><i>NIKON</i></b> trademark and that of Nikon Corp., as such dissimilarities do not outweigh the blatant similarities in their general features.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> </p><p> As correctly found by the IPO-BLA, the design of the blue anchor inside a circle with the word "NIKON" in red ink, found in ISCO's <b><i>NIKON</i></b> trademark, does not provide a distinct feature sufficient to recognize the said trademark independently from that of Nikon Corp.'s trademark.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> Thus, the said design of the anchor inside a circle found in ISCO's <b><i>NIKON</i></b> trademark can be considered as a minor difference which may be disregarded in determining the confusing similarity between ISCO and Nikon Corp.'s <b><i>NIKON</i></b> trademarks, pursuant to the Dominancy Test. </p><p> In view of the foregoing, the Court finds that there is a confusing similarity between ISCO and Nikon Corp.'s <b><i>NIKON</i></b> trademarks. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The use of the <b>NIKON</b> trademark in relation to ISCO's goods would indicate a connection between those goods and Nikon Corp</i>. </div></td> </tr> </tbody></table> <p>Under the circumstances of the present case, it may be reasonably concluded that ISCO's use of its <b><i>NIKON</i></b> trademark on its goods will indicate a connection to Nikon Corp. Due to the well-known status of Nikon Corp.'s <b><i>NIKON</i></b> trademark used for its cameras, consumers, when they hear the word "NIKON," will think about Nikon Corp.'s cameras, and not ISCO's household appliances. </p><p> As correctly held by the CA, if ISCO will be allowed to use its <b><i>NIKON</i></b> trademark, there is a possibility that the purchasing public will attribute ISCO's goods to Nikon Corp., and think that Nikon Corp. has expanded its business into household appliances.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Nikon Corp.'s interests are likely to be damaged by ISCO's use of its <b>NIKON</b> trademark</i> </div></td> </tr> </tbody></table> <p>In <i>Suyen Corporation v. Danjaq LLC</i>,<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> the Court held that damages under Section 123.1(f) of the IP Code is present when there is trademark dilution.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> Trademark dilution is defined as follows: </p><blockquote> <p> Trademark dilution is the lessening of the capacity of a famous mark to identify and distinguish goods or services, regardless of the presence or absence of: (1) competition between the owner of the famous mark and other parties; or (2) likelihood of confusion, mistake or deception. Subject to the principles of equity. the owner of a famous mark is entitled to an injunction "against another person's commercial use in commerce of a mark or trade name, if such use begins after the mark has become famous and causes dilution of the distinctive quality of the mark." This is intended to protect famous marks from subsequent uses that blur distinctiveness of the mark or tarnish or disparage it.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> </p> </blockquote> <p> In <i>Suyen</i>, the Court identified two kinds of trademark dilution, namely: (1) dilution by blurring, and (2) dilution by tarnishment.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> </p><p> Dilution by blurring means "association arising from the similarity between a mark or trade name and a famous mark that impairs the distinctiveness of the famous mark. In determining whether a mark or trade name is likely to cause dilution by blurring, the court may consider all relevant factors, including the following: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(i)</div></td> <td width="95%"><div align="justify">the degree of similarity between the mark or trade name and the famous mark. </div></td> </tr> <tr valign="top"> <td><div align="justify">(ii)</div></td> <td> <div align="justify">the degree of inherent or acquired distinctiveness of the famous mark. </div></td> </tr> <tr valign="top"> <td><div align="justify">(iii)</div></td> <td> <div align="justify">the extent to which the owner of the famous mark is engaging in substantially exclusive use of the mark.</div></td> </tr> <tr valign="top"> <td><div align="justify">(iv)</div></td> <td> <div align="justify">the degree of recognition of the famous mark.</div></td> </tr> <tr valign="top"> <td><div align="justify">(v)</div></td> <td> <div align="justify">whether the user of the mark or trade name intended to create an association with the famous mark. </div></td> </tr> <tr valign="top"> <td><div align="justify">(vi)</div></td> <td><div align="justify">any actual association between the mark or trade name and the famous mark."<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>Dilution by tarnishment, on the other hand, means "association arising from the similarity between a mark or trade name and a famous mark that harms the reputation of the famous mark."<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> </p> <p> In the present case, there is trademark dilution by blurring, as some of the factors enumerated above have been duly established. </p><p> <i>First</i>, with regard to factor (i), the high degree of similarity between ISCO and Nikon Corp.'s <b><i>NIKON</i></b> trademarks, has been established through the Dominancy Test.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup></p><p> <i>Second</i>, factors (ii) and (iv) have been established through the IPO-BLA and CA's pronouncement that Nikon Corp.'s <b><i>NIKON</i></b> trademark is well-known.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> </p><p> In summary, the Court finds that: (1) Nikon Corp.'s <b><i>NIKON</i></b> trademark is well-known and is registered in the Philippines; (2) ISCO and Nikon Corp.'s goods on which their <b><i>NIKON</i></b> trademarks are used are neither identical nor similar; (3) ISCO and Nikon Corp.'s <b><i>NIKON</i></b> trademarks are confusingly similar; (4) ISCO's use of its <b><i>NIKON</i></b> trademark would indicate a connection between its goods and Nikon Corp.; and (5) Nikon Corp.'s interests are likely to be damaged by ISCO's use of its <b><i>NIKON</i></b> trademark. </p><p> Thus, ISCO's <b><i>NIKON</i></b> trademark cannot be registered, pursuant to Section 123.1(f) of the IP Code. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>ISCO's <b>NIKON</b> trademark cannot be registered because it constitutes Nikon Corp.'s trade name</i> </div></td> </tr> </tbody></table> <p>The IP Code protects trade names even if they are not registered. Thus, Section 165.2 of the IP Code provides: </p><blockquote> <p> Section 165. Trade Names or Business Names. â</p> <p> . . . .</p> <p> 165.2. (a) Notwithstanding any laws or regulations providing for any obligation to register trade names, such names shall be protected, even prior to or without registration, against any unlawful act committed by third parties. </p> <p> 165.2. (b) In particular, <i>any subsequent use of the trade name by a third party, whether as a trade name or a mark or collective mark, or any such use of a similar trade name or mark, likely to mislead the public, shall be deemed unlawful</i>.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> (Emphasis supplied) </p> </blockquote> <p> Based on the above-quoted provision, a new trademark cannot be registered if it constitutes an existing trade name belonging to another person or entity, if the use of such new trademark will likely mislead the public. </p><p> Whether a trademark causes confusion and is likely to deceive or mislead the public hinges on "colorable imitation," which has been defined as "such similarity in form, content, words, sound, meaning, special arrangement or general appearance of the trademark or trade name in their overall presentation or in their essential and substantive and distinctive parts as would likely mislead or confuse persons in the ordinary course of purchasing the genuine article."<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> </p><p> In the present case, the word "NIKON," which appears on both ISCO and Nikon Corp.'s trademarks, also constitutes the trade name of Nikon Corp.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> Moreover, through the dominancy test, the Court has established ISCO's colorable imitation of Nikon Corp.'s <b><i>NIKON</i></b> trademark, arising from the opposing trademarks' glaring similarity as to words, sound, and general appearance. </p><p> Thus, ISCO cannot register its <b><i>NIKON</i></b> trademark, which constitutes Nikon Corp.'s trade name, as it would likely mislead the public. </p><p> <b>ACCORDINGLY</b>, the Petition for Review is <b>DENIED</b>. The Decision, dated August 26, 2020, of the Court of Appeals in CA-G.R. SP No. 154367 is <b>AFFIRMED</b>. </p><p> <b>SO ORDERED.</b> </p><p> <i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ</i>., concur. <br><br></p><p> </p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 14-26. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 28-52. Penned by Associate Justice Geraldine C. Fiel-Macaraig and concurred in by Associate Justices Danton Q. Bueser and Alfredo D. Ampuan of the Special fourteenth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 123-129. Rendered by Director General Josephine R. Santiago of the Office of the Director General, Intellectual Property Office of the Philippines, Taguig City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 83-88. Rendered by Director Nathaniel S. Arevalo of the Bureau of Legal Affairs, Intellectual Property Office of the Philippines, Taguig City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 33.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 29. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 295. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 30.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 60-74. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 30. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 38.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 30.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 295.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 31.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 32.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 88. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 32-33. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 33. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 129. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 34. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 51. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 16. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 195-250. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 195-196. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>See</i> <b>Felix Gochan &amp; Sons Realty Corp. v. Commission on Audit</b>, 851 Phil. 923, 937-938 (2019) [Per J. J. Reyes, Jr., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> INTELLECTUAL PROPERTY CODE, sec. 121.1. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Medina/Rackey Crystal Top Corp. v. Global Quest Ventures, Inc.</b>, 896 Phil. 47, 57 (2021) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>See</i> INTELLECTUAL PROPERTY CODE, sec. 122. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Citigroup, Inc. v. Citystate Savings Bank, Inc.</b>, 833 Phil. 168, 182 (2018) [Per J. Leonen, Third Division], <i>citing</i> <b>Mirpuri v. Court of Appeals</b>, 376 Phil. 628 (1999) [Per J. Puno, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Batangas City v. Pilipinas Shell Petroleum Corp.</b>, 763 Phil. 312, 326 (2015) [Per J. Peralta, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Rule 101. Definitions. â </p><blockquote> <p> . . . .</p> <p> (d) "Competent authority" for purposes of determining whether a mark is well-known, means the courts, the Director General[,] and the Director of the Bureau of Legal Affairs.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>Suyen Corporation v. Danjaq LLC</b>, 907 Phil. 269, 286 (2021) [Per J. Carandang, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>See</i> IPOPHL Memorandum Circular No. 2025-009, Rule 5. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>See</i> IPOPHL Memorandum Circular No. 2025-009, Rule 19. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 86. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 41. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Kolin Electronics Ca., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 234 (2021) [Per J. Caguioa, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, p. 87. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> 907 Phil. 124 (2021) [Per J. Caguioa, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 152. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 562 Phil. 217 (2007) [Per J. Ynares-Santiago, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 232-233. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, p. 38. </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>See</i> <b>Suyen Corpormion v. Danjaq LLC</b>, 907 Phil. 269, 286-287 (2021) [Per J. Carandang, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, pp. 125-129. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> IPOPHL Memorandum Circular No. 2025-009, Rule 14. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Rollo</i>, p. 23. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>See</i> INTELLECTUAL PROPERTY CODE, sec. 123.1(e). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>See</i> INTELLECTUAL PROPERTY CODE, sec. 123.1(f). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Rollo</i>, p. 38. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 29. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 39. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>See</i> INTELLECTUAL PROPERTY CODE, sec. 123.1(f). </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i>, p. 295. </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 20-21. </p><p><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> 896 Phil. 190 (2021) [Per J. Caguioa, <i>En Banc</i>], <i>citing</i> <b>McDonald's Corporation v. L.C. Big Mak Burger, Inc.</b>, 480 Phil. 402 (2004) [Per J. Carpio, First Division]. <br></p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 219. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> INTELLECTUAL PROPERTY CODE, sec. 155.1. </p><p><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 2 I 9 (2021) [Per J. Caguioa, <i>En Banc</i>], <i>citing</i> <b>McDonald's Corporation v. L.C. Big Mak Burger, Inc.</b>, 480 Phil. 402 (2004) [Per J. Carpio, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 220. </p><p><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> 641 Phil. 345 (2010) [Per J. Carpio, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 364. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 221 (2021) [Per J. Caguioa, <em>En Banc</em>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Seri Somboonsakdikul v. Orlane S.A.</b>, 805 Phil. 37, 54 (2017) [Per J. Jardeleza, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> 778 Phil. 763 (2016) [Per J. Leonardo-De Castro, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 803. </p><p><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>Skechers, U.S.A., Inc. v. Inter Pacific industrial Trading Corp. and/or Inter Pacific Trading Corp.</b>, 662 Phil. 11, 19 (2011) [Per J. Peralta, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>Kolin Electronics Co., inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 220 (2021) [Per J. Caguioa]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>See</i> <b>Skechers, U.S.A., Inc. v. Inter Pacific Industrial Trading Corp. and/or Inter Pacific Trading Corp.</b>, 662 Phil. 11, 21 (2011) [Per J. Peralta, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Rollo</i>, p. 87. </p><p><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 46. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[80]</sup> 907 Phil. 269 (2021) [Per J. Carandang, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 288. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i>, <i>citing</i> <b>Levi Strauss &amp; Co. v. Clinton Apparelle, Inc.</b>, 507 Phil. 238 (2005) [Per J. Tinga, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>See</i> <b>Suyen Corporation v. Danjaq LLC</b>, 907 Phil. 269, 289 (2021) [Per J. Carandang, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> INTELLECTUAL PROPERTY CODE, sec. 165.2. </p><p><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <b>Seri Somboonsakdikul v. Orlane S.A.</b>, 805 Phil. 37, 52-53 (2017) [Per J. Jardeleza, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Rollo</i>, p. 51. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

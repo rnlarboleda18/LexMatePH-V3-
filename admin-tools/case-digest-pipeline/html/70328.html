@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 243647 - GARRY B.GO, PETITIONER, VS. LYNN Y. CHAN-GO, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70328' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 243647, November 18, 2025 ]</H2>
+			<H3>GARRY B.GO, PETITIONER, VS. LYNN Y. CHAN-GO, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>KHO, JR., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Assailed in this Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> are the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated July 19, 2018 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated November 21, 2018 of the Court of Appeals (CA) in CA-G.R. CV No. 04744, which annulled and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated March 1, 2017 and the Order<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated June 16, 2017 of Branch 33, Regional Trial Court, Davao City (RTC), and accordingly, dismissed the Verified Petition<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> for legal separation with urgent application for visitorial rights filed by petitioner Garry B. Go (Garry) against respondent Lynn Y. Chan-Go (Lynn) for failure to prove the existence of grossly abusive conduct under Article 55(1) of the Family Code of the Philippines (Family Code).<br><br><center><b>The Facts</b></center><br>Sometime in the year 2000, Garry met Lynn while the former was working in his sister's textile store. At that time, Lynn was working as an assistant general manager of the Parts Division of Mitsubishi Mandaue, Cebu. They eventually became lovers and decided to live together. On March 29, 2003, Garry and Lynn were married at Sacred Heart Parish, Cebu City. Their marriage resulted in the birth of their two children, namely: Sofia Trinity Chan Go, born on November 5, 2004; and Samantha Nicole Chan Go, born on March 13, 2007.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>To support their family, Lynn ventured into selling coffee. They still, however, encountered financial problems. This led Garry to take up nursing with the plan to move his family abroad. Accordingly, Garry started his studies in 2004 which ended in 2007. From July 2007 to March 2009, Garry then had his on-the-job training in Butuan City. However, his plans of working abroad fell through. He instead went back to Cebu to work at Mandaue Compressed Gasses Corporation until August 2009. Thereafter, he left for Davao City and worked at the Davao Industrial Compressed Gases Corporation.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>During the marriage, Garry however alleged that he would experience different forms of abusive conduct from Lynn.<br><br>For one, Garry alleged that Lynn oversaw their finances while he was still studying nursing. During this time, Garry suffered a toothache and was thus recommended to have a root canal operation. Despite being in physical pain, Garry alleged that Lynn refused to provide help.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>In another instance, Garry alleged that Lynn told their friends in a party they both attended that she wanted to cut-off Garry's penis since they were no longer having sex. Moreover, Garry stated that Lynn would share their personal problems with his friends and relatives, often twisting the facts to portray him in a negative light.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>To resolve their alleged issues, Garry suggested that they seek marriage counseling, which Lynn allegedly refused. As a result, Garry and Lynn separated in fact around June 2008. However, Garry later decided to return to Cebu to give their relationship another chance. Nonetheless, Garry alleged that Lynn became more difficult to handle and became increasingly selfish. No longer tolerating Lynn's conduct, Garry again requested for a reassignment from work and transferred to Davao sometime in August 2009.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>The foregoing circumstances led Garry to file a petition for legal separation with urgent application for visitorial rights against Lynn on the ground of grossly abusive conduct under Article 55(1) of the Family Code. Aside from the instances stated above, Garry likewise alleged the following: (a) Lynn would do things without his knowledge; (b) she just wanted money; (c) she did not like his friends and prohibited him from seeing them; (d) she did not trust people; (e) she is a closed-minded person and believes that she is always right; and (f) she manipulate her children and used them to compel Garry to provide more support.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>In support of his allegations, Garry presented the testimonies of his brother, Ricky Go (Ricky), and his friend, Ryan Uy (Ryan).<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Ricky testified that he first met Lynn as his brother's girlfriend. At that time, he already did not like Lynn because of her alleged attitude of being selfish, greedy, and scandalous. In one instance during their trip to Hong Kong, Ricky alleged that Lynn was constantly complaining, which led to everyone adjusting to what she wanted. Moreover, Lynn would allegedly ask for monetary assistance from him up o present.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Ryan likewise supported Garry's allegation of Lynn's abusive personality. In one instance, he expefienced how Lynn allegedly got mad at Garry when the latter was unable to get hotdog from Jollibee. In another instance, he alleged that it took their friends almost two hours to mediate between Garry and Lynn at a mall. He further alleged that Lynn refused to listen to what Garry wanted and the latter would just give in to what Lynn wanted.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>In response, Lynn argued that during her pregnancy of their second child, Garry allegedly said to her that they should abort the child in front of her mother and sister. After the birth of their second child, Garry became irritable considering that they were incurring financial problems because it was only Lynn who was earning.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> She further alleged that during the time when she would ask Garry to carry boxes for their business, Garry would grumble and complain that he was not her servant. Aside from being irritable, Garry would likewise spend the most of his time in his study room to do computer works and watch movies.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Moreover, Lynn alleged that Garry started to come home late as he would hang out with his friends at restobars and other entertainment places. She stated that Garry would do this no less than three times in a week.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Furthermore, Lynn stated that Garry left for Davao in 2009 to help his brother where he would be receiving a salary of PHP 30,000.00. He assured her that he would send PHP 20,000.00 back to his family. However, she only received PHP 17,000.00 during the first time he sent them money. The amount he would send would thereafter decrease to PHP 15,000.00 then later to PHP 10,000.00. When Lynn asked Garry about their agreement, Garry told her that he would seek a lawyer to know the maximum amount of money for the support of their children. Thereafter, Lynn alleged that she received a letter from Garry's lawyer requesting he to submit herself to psychological examination.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br><center><b>The RTC Ruling</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated March , 2017, the RTC granted the Verified Petition and accordingly decreed the legal separation of Garry and Lynn.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> In so ruling, the RTC held that the Garry was able to prove the existence of grossly abusive conduct with <i>prima facie</i> evidence based on the aggregate behavior of Lynn. In particular, the RTC observed:<blockquote>It is thus apparent that Garry and Lynn had their frequent quarrels and disagreements over their finances and personality differences which made their relationship miserably unbearable for [Garry]. In the process, abusive words were heaped upon him.<br><br>Indubitably, the demeanor of [Lynn] in humiliating [Garry] in front of other people and in unminding her difficult personality towards [Garry] are <i>prima facie</i> evidence of gross abusive conduct of [Lynn]. The aggregate behavior of [Lynn] warrants legal separation under paragraph 1 of Article 55 of the [Family Code).<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></blockquote>Lynn moved for reconsideration<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> but was denied by the RTC in an Order<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated June 16, 2017. Aggrieved, Lynn filed an appeal before the CA.<br><br><center><b>The CA Ruling</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> dated July 19, 2018, the CA granted Lynn's appeal and accordingly reversed and set aside the RTC's grant of the decree of legal separation.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Contrary to the findings of the RTC, the CA held that the matters raised by Garry and Lynn were frivolous and commonly exist with married couples. It held that the conduct raised by both parties are neither grave nor abusive, and the same was not beyond repair or incurable.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>In particular, the CA held that Garry's contention that Lynn would share their problems with friends is only a normal reaction when a person would face problems. Similarly, the CA took note that the matters raised by Garry's witnesses were too trivial to constitute a <i>prima facie</i> evidence of legal separation.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>Garry moved for reconsideration<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> but was denied in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> dated November 21, 2018.<br><br>Hence, the present Petition.<br><br><center><b>The Issue Before the Court</b></center><br>The issue for the Court's resolution is whether the CA erred in finding that grossly abusive conduct as a ground for legal separation was not present in this case.<br><br><center><b>The Court's Ruling<br><br></b></center>The Petition is meritorious.<br><br>Preliminarily, the Court notes that the issue raised by Garry is mainly factual in nature, particularly, whether the ground of grossly abusive conduct exists. "Under Rule 45 of the Rules of Court, jurisdiction is generally limited to the review of errors of law committed by the appellate court. The Supreme Court is not obliged to review all over again the evidence which the parties adduced in the court <i>a quo</i>."<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> However, there are recognized exceptions to this rule, one of which is when the judgment of the lower courts is based on a misapprehension of facts.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> As will be explained hereunder, this exception is applicable herein.<br><br>A grant of a decree of legal separation under the Family Code does not sever the marriage of the parties, no affect their marital status.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> The same only involves a "bed-and-board separation" of the spouses considering how our jurisdiction does not allow absolute divorce.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> In this relation, a decree of legal separation may be granted base on the following grounds found under Article 55 of the Family Code, which reads:<blockquote>Art. 55. A petition for legal separation may be filed on any of the following grounds:<br><br>(1) Repeated physical violence or grossly abusive conduct directed against the petitioner, a common child, or a child of the petitioner;<br><br>(2) Physical violence or moral pressure to compel the petitioner to change religious or political affiliation;<br><br>(3) Attempt of respondent corrupt or induce the petitioner, a common child, or a child of the petitioner, to engage in prostitution, or connivance in such corruption or inducement;<br><br>(4) Final judgment sentencing the respondent to imprisonment of more than six years, even if pardoned;<br><br>(5) Drug addiction or habitual alcoholism of the respondent;<br><br>(6) Lesbianism or homosexuality of the respondent;<br><br>(7) Contracting by the respondent of a subsequent bigamous marriage, whether in the Philippines or abroad;<br><br>(8) Sexual infidelity or perversion;<br><br>(9) Attempt by the respondent against the life of the petitioner; or<br><br>(10) Abandonment of petitioner by respondent without justifiable cause for more than one year.<br><br>For purposes of this Article, the term "child" shall include a child by nature or by adoption.</blockquote>In the present case, Garry grounds his petition for legal separation on Article 55(1) of the Family Code or the existence of "[r]epeated physical violence or grossly abusive conduct directed against the petitioner, a common child, or a child of the petitioner,"<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> particularly on the ground of "grossly abusive conduct."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> In <i>Ong v. Ong</i>,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> the Court had the first instance of applying Article 55(1) of the Family Code when it affirmed the trial court's grant of decree of legal separation. In affirming, the Court in Ong held that the following acts, when taken together, amounted to the existence of the ground in Article 55(1) of the Family Code, <i>viz</i>.:<blockquote>As correctly observed by the trial court, William himself admitted that there was no day that he did not quarrel with his wife, which made his life miserable, and he blames her for being negligent of her wifely duties and for not reporting to him the wrongdoings of their children.<br><br>Lucita and her sister, Linda Lim, also gave numerous accounts of the instances when William displayed violent temper against Lucita and their children; such as: when William threw a steel chair at Lucita; threw chairs at their children; slapped Lucita and utter insulting words at her; use the buckle of the belt in whipping the children; pinned Lucita against the wall with his strong arms almost strangling her, and smashed the flower vase and brick rocks and moldings leaving the bedroom in disarray; shouted at Lucita and threw a directory at her, in front of Linda and the employees of their business, because he could not find a draft letter on his table; got mad at Charleston for cooking steak with <i>vetchin</i> prompting William to smash the plate with steak and hit Charleston, then slapped Lucita and shouted at her "<i>putang ina mo, gago, wala kang pakialam, tarantado</i>" when she sided with Charleston; and the December 9 and December 14, 1995 incidents which forced Lucita to leave the conjugal dwelling.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (Citations omitted)</blockquote>In a case concerning a petition for declaration of nullity of marriage due to psychological incapacity, particularly <i>Najera v. Najera</i>,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> the Court held that while the following acts complained of by therein petitioner did not prove the existence of psychological incapacity, they nonetheless showed "physical violence or grossly abusive conduct of respondent toward petitioner and respondent's abandonment of petitioner without justifiable cause for more than one year"<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> as grounds of legal separation. These acts were enumerated as follows:<blockquote>(a) At the time of their marriage, petitioner was already employed with the Special Services Division of the Provincial Government of Pangasinan, while respondent was jobless. He did not exert enough effort to find a job and was dependent on petitioner for support. Only with the help of petitioner's elder brother, who was a seaman, was respondent able to land a job as a seaman in 1988 through Intercrew Shipping Agency.<br><br>(b) While employed as a seaman, respondent did not give petitioner sufficient financial support and she had to rely on her own efforts and the help of her parents in order to live.<br><br>(c) As a seaman, respondent was away from home from nine to ten months each year. In May 1989, when he came home from his ship voyage, he started to quarrel with petitioner and falsely accused her of having an affair with another man. He took to smoking marijuana and tried to force petitioner into it. When she refused, he insulted her and uttered "unprintable words" against her. He would go out of the house and when he arrived home, he was always drunk.<br><br>(d) When respondent arrived home from his ship voyage in April 1994, as had been happening every year, he quarreled with petitioner. He continued to be jealous, he arrived Home drunk and he smoked marijuana. On July 3, 1994, while he was quarreling with petitioner, without provocation, he inflicted physical violence upon her and attempted to kill her with a <i>bolo</i>. She was able to parry his attack with her left arm, yet she sustained physical injuries on different parts of her body. She was treated by Dr. Padlan, and the incident was reported at the Bugallon Police Station.<br><br>(e) Respondent left the family home, taking along all their personal belongings. He lived with his mother at Banaga, Bugallon, Pangasinan, and he abandoned petitioner.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup></blockquote>As can be observed in the above-cited acts, the Court in <i>Ong</i> and <i>Najera</i> compounded the acts of "repeated physical violence" and "grossly abusive conduct" in finding the existence of ground for legal separation. However, in comparison to <i>Ong</i> and <i>Najera</i>, Garry in the present case hinges his prayer for legal separation only on the ground of "grossly abusive conduct." Considering the difference in the factual incidents and grounds as cited in <i>Ong</i> and <i>Najera</i>, on one hand, and the present case, on the other, the Court is given the opportune time to answer the question: <b><i>what constitutes as "grossly abusive conduct" in the context of legal separation under the Family Code?</i></b><br><br>The Family Code and present case law do not provide for an exact definition for the term "grossly abusive conduct" under Article 55(1) of the Family Code. Considering how neither statutory nor case law provides guidance in resolving the question, it behooves the Court to look into the Minutes of the Civil Code and Family Law Committees (Code Committee) to shed some light on the matter.<br><br>The ground found under Article 55(1) of the Family Code was originally phrased as "habitual physical violence or habitual grossly abusive conduct directed against the petitioner, a common child, or a child of the petitioner." During the 156<sup>th</sup> Joint Meeting of the Code Committee on September 27, 1986, then Judge Alicia Sempio-Diy (Sempio-Diy) suggested that the term "habitual" before "grossly abusive conduct", be deleted. According to her, removing the term "habitual" allows acts such as "a serious case of squeezing of neck, pulling of hair and the like, without any intention to kill" to constitute as "grossly abusive conduct." The Code Committee approved the suggestion and was thus reflected in our Family Code.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Other than this discussion, there was no further elaboration on the origin or basis of the ground up until the Family Code took effect.<br><br>Considering the lack of discussion on the matter, the Court shall likewise refer to secondary authorities relating to the ground of "grossly abusive conduct." In her contemporary commentary of the Family Code, Judge Sempio-Diy, who by then was already a CA Justice, explained that the ground under Article 55(1) gives "relief to wives who are maltreated or grossly insulted by their husband." She nonetheless stated that "even wives can also be guilty of grossly abusive conduct against their husbands, like constant nagging of the husband."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>On the other hand, Dean Melencio Sta. Maria (Dean Sta. Maria), in his commentary on the Family Code, likewise acknowledged that the term "grossly abusive conduct" does not have an exact definition and should be determined on a <b>case-to-case basis</b>.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Citing the Minutes of the Code Committee as discussed herein, together with American case law on divorce, he suggested different examples of what may constitute as "grossly abusive conduct" in the context of legal separation under our jurisdiction:<blockquote>However, even if the act is not repeated or does not involve physical violence, such act may nevertheless constitute grossly abusive conduct on the part of the respondent which may warrant the issuance of a legal separation decree. "Grossly abusive conduct" has no exact definition and, therefore, is determined on a case to case basis. Hence, a singular but serious act "of squeezing of neck, pulling of hair and the like without the intent to kill" may be included in the phrase (Minutes of the 156<sup>th</sup> joint meeting of the Civil Code and Family Law committees held on September 27, 1986, page 11). Also, the continued manifestation by one spouse of indifference or aversion to the other couple with persistent neglect of the duties incident to the marital relation has been declared by American jurisprudence as cruelty enough to warrant a decree of divorce (Ann Cas 1918B 480). In the same vein, this may be an example of grossly abusive conduct as a ground for legal separation.<br><br>. . . .<br><br>Also, where it appears that a spouse has deliberately adopted, as a course of conduct, the use of offensive language toward the other spouse, continually calling him or her vile and opprobrious names, with the intent and fixed purpose of causing unhappiness, American courts usually consider such conduct to be legal cruelty or abusive treatment which can justify a divorce (Ann. Cas. 1918B 487). Under the Family Code, such a situation can fall under grossly abusive conduct.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></blockquote>Taking a page from Dean Sta. Maria's analysis, the Court likewise takes the opportunity to look at other jurisdictions which acknowledge grossly abusive conduct as a ground for legal separation. In this relation, the State of Maryland, United States of America, provides for the closest ground of the "grossly abusive conduct" in the Family Code, as elaborated in the commentariesâthe ground of "cruelty or excessively vicious conduct." In <i>Das v. Das</i>,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> the Court of Special Appeals of Maryland discussed that "cruelty or excessively vicious conduct"âwhich was previously a ground of divorce <i>a mensa et thoro</i> (i.e., divorce from bed and board)<sup style="COLOR: RGB(255, 0, 0);">[47]</sup>âas a ground of absolute divorce "has never been the stuff of which bright line rules are made[.]"<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Thus, in the fairly recent case of <i>Frazelle-Foster v. Foster</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> the Court of Special Appeals of Maryland observed that the understanding of "cruelty or excessively vicious conduct" has shifted from the understanding of limiting the same to physical violence or the threat thereof and "may [now] be based upon verbal and psychological abuse which 'is calculated to seriously impair the health or permanently destroy the happiness of the other.'"<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Foster</i> presented the following examples of what constitutes as "cruelty or excessively vicious conduct":<blockquote>As the Court of Appeals observed in <i>Scheinin v. Scheinin</i>, "physical violence is no longer essential to constitute cruelty of treatment," and <b>"<i>[i]t is now accepted that cruelty as a cause for divorce includes any conduct on the part of the husband or wife which is calculated to seriously impair the health or permanently destroy the happiness of the other</i>."</b> ... Building on this "more modern" definition of cruelty, this Court, in <i>Das</i>, acknowledged the damaging effects of coercive behaviors when the Court underscored <i>husband's hitting, pinching, and pulling the wife's hair, along with his taunting questions about what wife planned to do when the protective order expired</i>....We also highlighted the husband's <i>controlling behaviors, including isolating the wife from her family and friends and forcing her to account for her time in half-hour increments</i>. . . . We concluded that it was not essential for the wife to "track [the husband's] mistreatment of her in minute detail" as long as "it [was] clear from [her] testimony" that the husband's conduct amounted to cruelty that "in fact threatened [the wife's] physical and motional well-being."<br><br>. . . .<br><br>Although there are no reported cases other than <i>Das v. Das</i> that develop the definition of "cruelty of treatment" under FL Â§ 7-103(a), our decisional law recognizes that domestic abuse includes <b><i>emotional abuse, psychological abuse, and other coercive and controlling behaviors</i></b>. <i>See, e.g.</i>, CJP Â§ 10-916(b)(l) (allowing a court to hear evidence of repeated psychological abuse of a defendant when considering a defense of Battered Spouse Syndrome); <i>State v. Smullen</i>, 380 Md. 233, 253, 844 A.2d 429 (2004) (recognizing the clinical definition that a "battered woman" is one who is repeatedly subjected to physical or psychological behavior by her abuser in order to coerce her to do something he wants); <i>Flanagan v. Flanagan</i>, 181 Md. App. 492, 517-518, 956 A.2d 829 (2008) (acknowledging, in the context of constructive desertion, that a pattern of verbal abuse was behavior so demeaning to a wife's self-respect as to be intolerable). A few years after <i>Das v. Das</i>, in <i>State v. Peterson</i>, this Court affirmed a grant of post-conviction relief to a defendant after the circuit court found that factual evidence originally available to the defense was legally sufficient to "support expert witness opinion testimony that the [defendant] was suffering from battered spouse syndrome at the time of the shooting." 158 Md. App. 558, 591, 57 A.2d 1132 (2004). In considering the sufficiency of the evidence, we emphasized the psychological abuse suffered by the defendant. <b><i>For example, the defendant's husband engaged in controlling behaviors, including regulating her behavior, and was very "possessive and jealous." ... He also engaged in coercive behaviors, including "'play[ing] with her head,' [and] using tactics he had been taught in the military to 'pick on her' and on their children." ... Finally, he regularly used threats and, intimidation, including giving her threatening looks and threatening to kill, harm or rape her...</i></b> We noted that, even though the physical violence appeared to stop for some years after the husband attended an alcohol rehabilitation facility, "[t]he cycle of psychological abuseâconstant criticism, picking on the [defendant], and threatening her with physical harm [ ]âcontinued[.]" ... Although the violence was "at times physical and psychological, and at other times only psychological," we explained that such evidence offered "the requisite factual foundation of a repeated pattern of abuse" and should have been enough to "permit expert witness testimony about battered spouse syndrome." ... We acknowledged that the defendant was for her entire marriage a victim of domestic abuse by [her husband], both physical and psychological...."<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (Emphasis supplied, citations omitted)&nbsp;</blockquote>Taking the Court's discussion in <i>Ong</i> and <i>Najera</i>, the Code Committee's understanding and commentaries on "grossly abusive conduct" referred to Article 55(1) of the Family Code, as well as the observations from other jurisdictions, this Court thus finds that <b><i>acts constituting "grossly abusive conduct" pertain to acts committed by a spouse against the other spouse, the latter's child, or their common child which result in a hostile and intimidating environment for the other spouse, their children, and common children</i></b>. In this relation, the determination of whether "grossly abusive conduct" exists as a ground for legal separation must be determined by the courts on a <b><i>case-to-case basis</i></b>, taking into consideration the facts and evidence in each case. To the Court's mind, the foregoing definition of "grossly abusive conduct" is consistent with the State's constitutional obligation to protect marriages as a basic social institution.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>With the clarified definition of "grossly abusive conduct," the Court now proceeds to determine whether Garry was able to prove such ground to allow his legal separation from Lynn.<br><br>In the present case, Garry hinges the existence of "grossly abusive conduct" on the following: (a) Lynn's refusal to provide help with his toothache; (b) Lynn's alleged acts of maligning Garry's reputation; (c) Lynn's refusal to seek marriage counseling; d) Lynn's acts of doing things without Garry's knowledge; (e) Lynn just wanting money; (f) Lynn not liking his friends and prohibiting him from seeing them; (g) Lynn not trusting people; (h) Lynn being a closed-minded person who believes that she is always right; and (i) Lynn manipulating her children and using them to compel Garry to provide more support.<br><br>To the Court's mind, Garry's allegations against Lynn satisfy the existence of a hostile and intimidating environment for Garry. As can be gleaned from the facts, Lynn's treatment of Garry subjected him from always taking Lynn's lead. Moreover, there were numerous attempts made by Garry to save their marriage through counseling and interventions, which were nonetheless made futile. Furthermore, the testimonies of his witnesses further support the existence of a hostile environment as reflected by Lynn's controlling attitude. Thus, the Court cannot find fault in Garry's decision to be reassigned back to Davao for work to be away from the environment in Cebu.<br><br>Taken together, the Court finds hat Garry was able to prove that Lynn's acts constituted "grossly abusive conduct" under the Family Code. Thus, the Court deems it proper to reverse the findings of the CA and reinstate the RTC Decision granting a decree of legal separation between Garry and Lynn.<br><br>As a consequence of Garry and Lynn's legal separation, there is a need to remand the present case to the court of origin for the dissolution and liquidation of their property regime pursuant to Article 63 of the Family Code. The RTC is further ordered to determine the grant of custody and support of Garry and Lynn's common children pursuant to A.M. No. 02-11-11-SC<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> or the Rule on Legal Separation.<br><br>As a final note, the Court deems it proper to reiterate its final words in the case of <i>Ong</i> which led to the grant of legal separation, to wit:<blockquote>As a final note, we reiterate that our Constitution is committed to the policy of strengthening the family as a basic social institution. The Constitution itself however does riot establish the parameters of state protection to marriage and the family, as it remains the province of the legislature to define all legal aspects of marriage and prescribe the strategy and the modalities to protect it an put into operation the constitutional provisions that protect the same. With the enactment of the Family Code, this has been accomplished as it defines marriage and the family, spells out the corresponding legal effects, imposes the limitations that affect married and family life, as well as prescribe the grounds for declaration of nullity and those for legal separation[.]<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></blockquote><b>ACCORDINGLY</b>, the Petition is <b>GRANTED</b>. The Decision dated July 19, 2018 and the Resolution dated November 21, 2018 of the Court of Appeals in CA-G.R. CV No. 04744 are hereby <b>REVERSED</b> and <b>SET ASIDE</b>. The Decision dated March 1, 2017 and the Order dated June 16, 2017 of Branch 33, Regional Trial Court, Davao City (RTC), are hereby <b>REINSTATED</b>.<br><br>The Court hereby decrees the legal separation of Garry B. Go and Lynn Y. Chan-Go with all the legal effects attendant thereto, particularly the dissolution and liquidation of their property regime. The Court <b>REMANDS</b> the case to the RTC for purposes of the dissolution and liquidation of their property regime and the determination of custody and support of their common children.<br><br><b>SO ORDERRED.</b><br><br><i>Lazaro-Javier, J. Lopez</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>Leonen, SAJ. (Chairperson)</i>, see separate concurring opinion.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 13-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 35-41. The July 19, 2018 Decision was penned by Associate Justice Edgardo T. Lloren and concurred in by Associate Justices Ruben Reynaldo. G. Roxas and Walter S. Ong of the Special Twenty-Third Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 42-44. The November 21, 2018 Resolution was penned by Associate Justice Edgardo T. Lloren and concurred in by Associate Justices Ruben Reynaldo. G. Roxas and Walter S. Ong of the Former Special Twenty-Third Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 59-67. Penned by Presiding Judge Lop L. Calio.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 71. Penned by Presiding Judge Lope L. Calio.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Not attached to the <i>rollo</i>. <i>See rollo</i>, pp. 35, 59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 16, 61-62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 62-63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 112.<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 113.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 113-114.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 115.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 59-67. Penned by Presiding Judge Lope L. Calio.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 66-67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 68-70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 35-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 38-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 53-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 42-44.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Lopez v. Saludo, Jr.</b>, 900 Phil. 600, 607 (2021) [Per J. Hernando, Second Division], <i>citing</i> <b>Miro v. Vda. De Erederos</b>, 721 Phil. 772, 787 (2013) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Joseph v. Spouses Joseph</b>, 900 Phil. 267, 274 (2021) [Per J. J. Lopez, Third Division], <i>citing</i> <b>Spouses Miano v. Manila Electric Company</b>, 800 Phil. 118, 123 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See</i> <b>Laperal v. Republic</b>, 116 Phil. 672 (1962) [Per J. Barrera, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>See</i> <b>Sy v. Eufemio</b>, 150 Phil. 204 (1972) [Per J. J.B.L. Reyes, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> FAMILY CODE, Article 55 (1).<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 535 Phil. 805 (2006) [Per J. Austria-Martinez, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 815.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> 609 Phil. 316 (2009) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 331.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 319-320.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Minutes of 156<sup>th</sup> Meeting of the Civil Code and Family Law Committees, p. 11 (1986).<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> ALICIA V. SEMPIO-DIY, HANDBOOK ON THE FAMILY CODE OF THE PHILIPPINES 76 (1988).<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> MELENCIO S. STA. MARIA, JR., PERSON AND FAMILY RELATIONS LAW 432 (8<sup>th</sup> ed., 2022).<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 432-433.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 133 Md. App. 1, 32 (2000) [Maryland].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> This form of divorce is akin to the Family Code's definition of Legal Separation.<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Das v. Das</i>, 133 Md. App. 1, 32 (2000) [Maryland].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 250 Md. App. 52 (2018) [Maryland].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> CONST., art. XV, sec. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> SC Administrative Matter No. 02-11-11-SC, March 4, 2023, Re: Proposed Rule on Legal Separation.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Ong v. Ong</b>, 535 Phil. 805, 818 (2006) [Per J. Austria-Martinez, First Division].<br>&nbsp;<hr align="center" width="60%" size="1" noshade=""><br><div align="center"><b>SEPARATE CONCURRING OPINION</b><br></div><br><b>LEONEN, <i>SAJ.</i>:</b><br><br>I agree with the ruling as well as the parameters laid down by the <i>ponencia</i> in order to identify what constitutes grossly abusive conduct.<br><br>In arriving at a working definition for grossly abusive conduct, the discussion touched upon how some acts of abuse may be grounds for legal separation but not declaration of nullity based on psychological incapacity under Article 36 of the Family Code. While the two concepts overlap in some aspects and are often discussed together,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> this would be an opportune time to distinguish them in order to prevent conflation.<br><br>Psychological incapacity may manifest in ways that can be considered grounds for legal separationâthe finding of one does not preclude the existence of the other.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> However, the two may be distinguished from each other in terms of two major aspects: (1) their effect on marital bonds; and (2) their time of existence.<br>&nbsp;<br>As to effect, psychological incapacity dissolves marital bonds between spouses who "for reasons independent of their will, are not capacitated to understand or comply with the essential obligations of marriage."<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> A finding of nullity due to psychological incapacity voids a marriage from the beginning, such that there is no marriage to speak of in the first place.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Consequently, an action for declaration of nullity based on it does not prescribe<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> and may be filed by either spouse, even the one who is psychologically incapacitated.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Meanwhile, legal separation is merely a physical or a bed-and-board parting of spouses who are in a valid but dysfunctional marriage. In legal separation, the marital bonds subsist even though the spouses live and manage their finances separately.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Legal separation is a relief provided by law for spouses whose continued cohabitation lead them to suffer from causes which occur after marriage due to the fault of one spouse. Thus, unlike psychological incapacity, legal separation may only be filed by the innocent spouse within 5 years from the time the cause occurs.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>The main difference between psychological incapacity and legal separation, however, lies in their time of existence.<br><br>Article 36 of the Family Code is clear that psychological incapacity should already exist at the time of marriage even if it only manifests itself after the celebration. On the other hand, the grounds for legal separation must occur after the celebration of marriage.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Thus, while physical violence or abusive conduct per se can be grounds for legal separation, they can also indicate psychological incapacity if they are mere manifestations of an enduring personality structure which antedates the marriage.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The requirement for juridical antecedence is what separates psychological incapacity from legal separation. It is also what makes marriages between spouses who are psychologically incapacitated void, as opposed to legal separation which does not have the same effect. Psychological incapacity which is present at the time of the celebration of marriage makes it impossible for a spouse to understand or comply with essential marital obligations,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> and "when a spouse is incapable of assuming the essential marital obligations, there is no viable object in a matrimonial contract, thereby making the marriage null and void."<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>In discussions involving legal separation and psychological incapacity, it is imperative for courts and practitioners alike to maintain a clear conceptual distinction between the two. This ensures that the proper remedy can be invoked given the particular circumstances of each case.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>See</i> <b>Marcos v. Marcos</b>, 397 Phil. 840 (2000) [Per J. Panganiban, Third Division]; <b>Nareja v. Nareja</b>, 609 Phil. 316 (2009) [Per J. Peralta, Third Division]; <b>Republic v. Encelan</b>, 701 Phil. 192 (2013) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <b>Tan-Andal v. Andal</b>, 902 Phil. 558 (2021) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <b>Antonio v. Reyes</b>, 519 Phil. 337,371 (2006)[Per J. Tinga, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <b>Ngo-Te v. Yu Te</b>, 598 Phil. 666 (2009) [Per J. Nachura, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> FAMILY CODE, art. 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> 937 Phil. 488 (2023) [Per C.J. Gesmundo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <b>Sy v. Eufemio</b>, 150 Phil. 204 (1972) [Per J. J.B.L. Reyes, First Division]. <i>See also</i> FAMILY CODE, arts. 61 and 63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> SC Administrative Matter No. 02-11-11-SC, March 4, 2003, Proposed Rule on Legal Separation, sec. 2. <i>See also</i> FAMILY CODE, art. 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <b>Santos v. Court of Appeals</b>, 310 Phil. 21 (1995) Per J. Vitug, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <b>Tan-Andal v. Andal</b>, 902 Phil. 558 (2021) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> J. Perlas-Bernabe, Separate Concurring Opinion in <b>Tan-Andal v. Andal</b>, 902 Phil. 558, 649 (2021) [Per J. Leonen, <i>En Banc</i>].<br></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

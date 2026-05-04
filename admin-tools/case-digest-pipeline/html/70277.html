@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 256870 - XXX256870,* PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70277' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 256870, December 01, 2025 ]</H2>
+			<H3>XXX256870,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated August 28, 2020, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated May 21, 2021, of the Court of Appeals (CA) in CA G.R. CR No. 41837 which affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated February 7, 2018, of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Regional Trial Court (RTC), Makati City that convicted XXX256870 (petitioner) of child abuse in Criminal Case No. 14-215.<br><br><center><i>The Antecedents</i></center><br>In the Information<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated January 14, 2014, petitioner was charged with Violation of Section 10(a) of Republic Act No. 7610, or the "Special Protection of Children Against Abuse, Exploitation and Discrimination Act," the accusatory portion of which states:<blockquote><center><b><i>Criminal Case No. 14-215</i></b></center><br>On the 12<sup>th</sup> day of April 2013, in the [C]ity of Makati, the Philippines, accused did then and there willfully, unlawfully and feloniously commit acts of child abuse upon the person of complainant [AAA256870], 13 years old, a minor, by then and there uttering the following: Lumabas na pala ang galing sa mental' ... 'Palabasin mo ang tatay mong NBI, Putang ina ka, pinalaki kang gago ng mga magulang mo, pok-pok' and "Putang ina kang bata ka pa pinalaki kang gago ng mga magulang at malaki kasalanan mo sa akin', thereby causing complainant to fear for her life, which act being responsible for condition prejudicial to the normal development of [AAA256870].<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></blockquote>In a separate Information,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> EEE256870, petitioner's son, was also charged with the offense of child abuse.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Upon arraignment, both petitioner and EEE256870 entered their separate pleas of "Not Guilty" to the charges.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>A joint trial on the merits then ensued.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br><center><i>The Version of the Prosecution</i></center><br>At around 5:00 p.m. of April 12, 2013, [AAA256870], who was then 13 years old, having been born on December 25, 1999, went out of the house to talk with her cousin, CCC256870. When they were outside, AAA256870 saw petitioner standing in front of the gate of the latter's house. AAA256870 knew petitioner because she was the former live-in partner of DDD256870, the brother of AAA256870's grandfather.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>When petitioner saw AAA256870, she shouted: "<i>Lumabas na pala ang galing sa mental</i>." At first, AAA256870 did not mind petitioner; however, petitioner, while looking at AAA256870, continued to shout: "<i>Gago kang bata ka. Pok-pok ka. Pinalaki kang gaga ng mga magulang mo. Tawagin mo ang tatay mong NBI</i>."<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>CCC256870 then instructed AAA256870 to call her mother, BBB256870. When BBB256870 told petitioner that if she had any problem with AAA256870, she should speak directly to her. In response, petitioner shouted, "<i>Pinalaki mo kasing gaga yang anak mo palibhasa kasi pokpok yan</i>."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Thereafter, AAA256870 and BBB256870 reported the incident to the barangay and then to the Women's Desk of the Makati City Police Station. Consequently, AAA256870 felt unsafe, to the point that she had difficulty sleeping at night.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On July 16, 2013, the National Bureau of Investigation (NBI) referred AAA256870 to the Behavioral Science Division for a mental evaluation. Brenda Tablizo, a psychologist at the NBI Behavioral Science Division, then interviewed AAA256870 and administered a psychological test. The results were subsequently forwarded to Dr. Josephine Gatdula (Dr. Gatdula), a psychiatrist at the same division.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>In her Psychological and Psychiatric Evaluation Report dated July 28, 2013 (Psychological Report), Dr. Gatdula found AAA256870 to be suffering from Post-Traumatic Stress Disorder (PTSD), which was manifested by hyper vigilance, difficulty sleeping, poor concentration, and avoidance behaviors that affected her normal daily functioning.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>The pertinent portion of the Psychological Report reads:<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>VIII. ASSESSMENT/RECOMMENDATIONS:<blockquote>In view of the foregoing History, Psychological Test Results and Mental Status Evaluation, it is evident that [AAA256870] was found to have POST-TRAUMATIC STRESS DISORDER as a direct result of a distressing and traumatic experience caused by her encounters with [EEE256870] and [XXX256870].<br><br>This was manifested with the following symptoms: feelings of distress, recurrent thoughts of the incident despite efforts to avoid it, difficulties sleeping, blank staring and hypervigilance. The said symptoms lasted for a month.<br><br>The impact of the alleged traumatic event may have caused serious consequences with regard to [AAA256870's] perception of herself, his [sic] interpersonal relations and surroundings if not addressed with proper intervention. Other factors such as her young age (still equipped with immature coping skills) and constant exposure to stressful situations which may or may not be related to the event, may also contribute in the overall outcome of her condition.<br><br>Meanwhile, positive factors such as her above average intellectual ability and a good support system (family and friends) would contribute greatly in her eventual improvement.<br><br>It is recommended that [AAA256870] undergo regular counseling or supportive psychotherapy with a specialist to address issues related to the traumatizing event as this would help in emphasizing her strengths and developing more mature coping styles.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></blockquote>After the prosecutor rested its case, the defense filed a Motion for Leave of Court to File Demurrer to Evidence, and subsequently, its Demurrer to Evidence.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>In the Order<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated June 20, 2017, the RTC granted EEE256870's Demurrer to Evidence and dismissed the case against him. However, it denied petitioner's Demurrer to Evidence for lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br><center><i>The Version of the Defense</i></center><br>The petitioner denied the allegations against her and stated that on the day of the incident, she had left her house to go to the market. While passing by AAA256870 and her cousins, someone said, "<i>Lumabas na yung taong galing sa mental hospital</i>." The petitioner believed that the statement was directed at her, as she was the only one who had just left the house. Feeling hurt by what she heard, she returned home to inform DDD256870 about the matter.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Afterwards, the petitioner heard BBB256870 shouting and cursing her. When petitioner went to the barangay to report the incident, AAA256870 and BBB256870 were already there. Petitioner alleged that AAA256870 continued attending school and playing with GGG256870, the grandchild of DDD256870, even after the incident. Hence, petitioner maintained that AAA256870 did not suffer from any PTSD because her behavior remained unchanged.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>In support thereof, the defense presented the testimonies of petitioner and a certain FFF256870. It also offered petitioner's <i>Kontra Salaysay</i> and the Joint Rejoinder Affidavit as documentary evidence.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>In the Decision dated February 7, 2018, the RTC found petitioner guilty beyond reasonable doubt of committing "other acts of abuse" under Section 10(a), Article VI of Republic Act No. 7610, the dispositive portion of which states:<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><blockquote>WHEREFORE, judgment is hereby rendered as follows:<ol><li>The Court finds petitioner GUILTY beyond reasonable doubt of committing the crime of Other Acts of Abuse under Section 10(a) of Article VI of [Republic Act No.] 7610 and applying the Indeterminate Sentence Law, the Court hereby sentences her to suffer imprisonment of four (4) years, nine (9) months and eleven (11) days of <i>prison correctional</i>, as minimum, to six (6) years and one (1) day of <i>prison mayor</i>, as maximum.<br><br></li><li>The same accused is ordered to pay moral damages in the amount of [PHP] 20,000.00 with interest of 6% per annum beginning from the finality of this decision until full payment.</li></ol>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></blockquote>The RTC ruled that the prosecution successfully established all the elements of Section 10(a), Article VI of Republic Act No. 7610, as it was shown that petitioner's cruel utterances caused AAA256870 to suffer from PTSD.<br><br>Petitioner filed a Motion for Reconsideration, but the RTC denied it. Dismayed by the judgment of conviction, petitioner elevated the matter to the CA.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br><center><i>The Ruling of the CA</i></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> dated August 28, 2020, the CA affirmed petitioner's conviction. It ruled that petitioner's act of shouting invectives at AAA256870, without any provocation from AAA256870, demonstrated an intent to degrade, debase, or demean AAA256870's worth and dignity as a child by placing her in a humiliating situation in public, which ultimately caused AAA256870 to suffer from PTSD.<br><br>The CA likewise found no merit in petitioner's denial and declared her witness, FFF256870, to be biased, because he admitted that he regarded the petitioner as his mother and calls her "mom," having lived with her since 2002, thus:<blockquote>[I]n an attempt to support her allegation, the defense presented the testimony of [FFF256870]. However, it bears stressing that her allegation that it was [AAA256870] and her cousins who uttered humiliating statements was not even mentioned in her Kontra Salaysay and in the Joint Rejoinder Affidavit. Further, the accused-appellant did not state in her testimony that [FFF256870] was with her at the time the incident happened. It is also worth noting that [FFF256870's] testimony is highly suspect because he is considered as a biased witness. [FFF256870] admitted that he treats accused-appellant as her mother and calls her "mom" because he is living with her since 2002. As aptly observed by the trial court, the testimony of [FFF256870] is incredible to exonerate the accused-appellant from liability[.]<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></blockquote>However, the CA modified the penalty, increasing the maximum period of imprisonment from six years and one day of <i>prision mayor</i> to six years eight months, and one day of <i>prision mayor</i>, to wit:<blockquote>WHEREFORE, the Appeal is DENIED for lack of merit. The assailed Decision dated February 7, 2018 of the Regional Trial Court of Makati City, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, in Criminal Case No. 14-215 is hereby AFFIRMED with the MODIFICATION that the accused-appellant [XXX256870] shall suffer the indeterminate penalty of imprisonment ranging from four (4) years, nine (9) months[,] and eleven (11) days of <i>prison correccional</i>, as minimum, to six (6) years, eight (8) months[,] and one (1) day of <i>prison mayor</i> as maximum.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></blockquote>Adamant, the petitioner filed a Motion for Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> She argued that she was already 63 years old at the time the alleged crime was committed; hence, she was entitled to a mitigating circumstance.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>In the assailed Resolution<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated May 21, 2021, the CA denied petitioner's Motion for Reconsideration and declared that her age cannot be appreciated as a mitigating circumstance following prevailing jurisprudence,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> to wit:<blockquote>Moreover, the accused-appellant's age cannot be appreciated as a mitigating circumstance in imposing the penalty upon her because, as alleged in her [M]otion, she was only 63 years old at the time of the commission of the offense. In <i>Reyes v. People</i>, the Supreme Court did not consider as a mitigating circumstance the age of the accused even if the latter was 63 years old when he committed the offenses charged against him.<br><br>After a careful study of all the allegations and considering that there are no substantial issues raised in the accused-appellant's [M]otion, We find no cogent or compelling reason to alter, modify or reverse Our Decision.<br><br>WHEREFORE, the Motion for Reconsideration is hereby DENIED for lack of merit.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></blockquote>Hence, the present Petition.<br><br>While petitioner admits to uttering the statements directed at AAA256870, she explained that these remarks were made out of anger and in the heat of emotion because there was an ongoing dispute between her family and that of AAA256870. Petitioner insists that the prosecution failed to prove that there was an intent to debase the intrinsic worth and dignity of AAA256870.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>In its Comment<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> dated May 23, 2022, the Office of the Solicitor General averred that the CA correctly affirmed the finding of petitioner's guilt and that the petitioner is not entitled to a mitigating circumstance on account of her age.<br><br>Subsequently, petitioner submitted a Reply<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> dated March 8, 2024. The petitioner stated that when the CA rendered the assailed Decision, she was already 70 years old. She prayed that her advanced age may now be considered a mitigating circumstance.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br><center><i>The Issue</i></center><br>The issue for the Court's resolution is whether the CA erred in affirming the petitioner's conviction of violation of Section 10(a), Article VI of Republic Act No. 7610.<br><br><center><i>The Ruling of the Court</i></center><br>The Petition is bereft of merit.<br><br>At the outset, it bears stressing that the Supreme Court is not a trier of facts.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> As a rule, the function of the Court in petitions for review on <i>certiorari</i> is limited to reviewing errors of law that may have been committed by the lower courts.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> The findings of the lower court, when affirmed by the CA, are binding and conclusive upon the Supreme Court.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>In the case, the arguments raised in the Petition are a mere rehash of the very same arguments already considered, passed upon, and found unmeritorious by the CA in the assailed Decision and the Resolution.<br><br>Moreover, it is readily apparent that the issues raised by the petitioner, i.e.: (1) whether petitioner intended to demean the intrinsic worth and dignity of AAA256870; (2) whether AAA256870's PTSD had been sufficiently established; and (3) whether petitioner's utterances were the proximate cause of AAA256870's PTSD, are all factual in nature, which are outside the scope of a Rule 45 proceeding. While this rule admits of exceptions,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> none of the exceptions are present in the case. On this score alone, the Petition must be denied.<br><br>At any rate, the Court finds no cogent reason to overturn the uniform findings and conclusions of the RTC and the CA.<br><br>For emphasis, Section 10(a), Article VI of Republic Act No. 7610 penalizes the offense of child abuse as follows:<blockquote>SECTION 10. <i>Other Acts of Neglect, Abuse, Cruelty or Exploitation and Other Conditions Prejudicial to the Child's Development</i>. â<br><br>(a) Any person who shall commit any other acts of child abuse, cruelty or exploitation or be responsible for other conditions prejudicial to the child's development including those covered by Article 59 of Presidential Decree No. 603, as amended, but not covered by the Revised Penal Code, as amended, shall suffer the penalty of <i>prision mayor</i> in its minimum period.</blockquote>In relation thereto, Section 3(b), Article I of the same statute defines the term "child abuse" and enumerates the various acts which falls within its definition, to wit:<blockquote>SECTION 3. <i>Definition of Terms</i>. â<br><br>. . . .<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(b)</div></td><td width="95%"><div align="justify">"Child abuse" refers to the maltreatment, whether habitual or not, of the child which includes any of the following:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(1)</div></td><td><div align="justify">Psychological and physical abuse; neglect, cruelty, sexual abuse and emotional maltreatment;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(2)</div></td><td><div align="justify">Any act by deeds or words which debases, degrades or demeans the intrinsic worth and dignity of a child as a human being;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(3)</div></td><td><div align="justify">Unreasonable deprivation of his [or her] basic needs for survival, such as food and shelter; or</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(4)</div></td><td><div align="justify">Failure to immediately give medical treatment to an injured child resulting in serious impairment of bis [or her] growth and development or in his [or her] permanent incapacity or death[.]</div></td></tr></tbody></table></blockquote>From the foregoing, it is clear that child abuse may be committed through "deeds or words" intended to "debase, degrade, or demean" the intrinsic worth and dignity of a child as a human being.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> The terms "debase", "degrade", and "demean" are defined by jurisprudence, respectively, as "the act of reducing the value, quality, or purity of something;" the "lessening of a person's or thing's character or quality;" and the act of lowering in status, condition, reputation, or character.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>Verily, to be convicted for acts falling under Section 3(b)(2), specific intent to debase, degrade, or demean the intrinsic worth and dignity of a child as a human being must be <i>alleged</i> and <i>proven</i>.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Absent this specific intent, the mere fact that petitioner hurled invectives against the minor victim would not automatically amount to child abuse under Section 3(b)(2).<br><br>Thus, in <i>Escolano v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the Court declared that therein petitioner cannot be held criminally liable for child abuse because, albeit she did shout swear words at minor children, it was only done in the heat of an anger.<br><br>Similarly, petitioner argues that her statements were made out of frustration because there was an ongoing dispute between AAA256870's family and hers.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>The Court, however, is not persuaded.<br><br>Petitioner's intent to debase, degrade, and demean AAA256870's intrinsic worth and dignity as a human being is clear from how she committed the criminal act. The record shows that petitioner, in a public place, uttered the following statements directed at AAA256870: "<i>Lumabas na pala ang galing sa mental</i>","<i>Gago kang bata ka, Pok-pok ka</i>", "<i>Pinalaki kang gago ng mga magulang mo</i>" and "<i>Tawagin mo ang tatay mong NBI</i>."<br><br>Unlike in <i>Escolano</i>, petitioner's verbal attack on AAA256870 was neither provoked nor made in the heat of anger.<br><br>As aptly noted by the CA, petitioner contradicted her bare allegation of a family dispute when she admitted during trial that no such dispute existed prior to the incident. For clarity, the pertinent portion of the CA Decision states:<blockquote>In addition, the accused-appellant failed to cite any plausible reason to establish improper motive on the part of [AAA256870], [BBB256870], and [CCC256870] to falsely accuse her of committing the offense charged. <i>In an attempt to ascribe improper motive, the accused-appellant contends that the case was filed against her because [BBB256870] was mad at her when she refused to give the receipt of the proceeds of the mortgaged property of [BBB256870]'s aunt. However, aside from failure to support her contention, We find the same unworthy of credence. The accused-appellant even admitted that she had a harmonious relationship with [BBB256870] and her family before the incident happened.</i> She also admitted that she was unsure if the charge against her was just pure fabrication[.]<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (Emphasis supplied)</blockquote>As a result of the traumatizing experience, AAA256870 testified that she felt unsafe after the incident and had suffered sleepless nights. Thus, the petitioner's argument that the prosecution was not able to show her intent to debase, degrade, or demean the intrinsic worth and dignity of AAA256870 as a human being is unmeritorious.<br><br>In fact, AAA256870 was found to be suffering from PTSD as a result of her encounters with petitioner and EEE256870, as shown in the Psychological Report prepared by Dr. Gatdula, viz.:<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><blockquote>In view of the foregoing History, Psychological Test Results and Mental Status Evaluation, it is evident that AAA256870 was found to have POST TRAUMATIC STRESS DISORDER as a direct result of a distressing and traumatic experience caused by her encounters with EEE256870 and [XXX256870].<br><br>This was manifested with the following symptoms: feelings of distress, recurrent thoughts of the incident despite efforts to avoid it, difficulties sleeping[.]<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></blockquote>Clutching at straws, the petitioner faults the CA for its failure to appreciate her old age as a mitigating circumstance during the commission of the offense. In her Reply<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> to the OSG's Comment, petitioner points out that she was already over 70 years old when she received the CA Decision.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>Petitioner's contention is without merit.<br><br>The mitigating circumstance under Article 13(2)<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> of the Revised Penal Code applies only if the offender is over 70 years of age <i>at the time of the commission of the offense</i>, and not thereafter. It bears stressing that petitioner was only 63 years old at the time of the subject incident.<br><br>In <i>Reyes v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> the Court held that therein petitioner, who was also 63 years old when he committed the offense, was not entitled to the mitigating circumstance under Article 13(2) of the Revised Penal Code, to wit:<blockquote>The Sandiganbayan appreciated the mitigating circumstance of old age in favor of the petitioner by virtue of his being already over 70 years old.<br><br>The Sandiganbayan thereby erred. The mitigating circumstance of old age under Article 13(2) of the Revised Penal Code applied only when the offender was over 70 years at the time of the commission of the offense. The petitioner, being only 63 years old when he committed the offenses charged, was not entitled to such mitigating circumstance. (Citations omitted)</blockquote>Anent the penalty, Article VI, Section 10(a) of Republic Act No. 7610 provides that child abuse carries the penalty of <i>prision mayor</i> in its minimum period. Applying the Indeterminate Sentence Law and there being no mitigating or aggravating circumstance present, the maximum term to be imposed shall be taken from the medium period of <i>prision mayor</i> minimum or within the range of six years, eight months, and one day to seven years and four months. On the other hand, the minimum term shall be taken from the penalty next lower in degree to <i>prision mayor</i> minimum, that is, <i>prision correccional</i> in its maximum period or within the range of four years, two months, and one day to six years.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>Thus, the indeterminate sentence imposed by the RTC, as modified by the CA, of four years, nine months, and 11 days of <i>prision correccional</i>, as minimum, to six years, eight months, and one day of <i>prision mayor</i>, as maximum, is within the range prescribed by the law.<br><br>The Court likewise upholds the award of moral damages of PHP 20,000.00, in line with prevailing jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> As a rule, moral damages are awarded to assuage the moral and emotional sufferings of the victim. In addition, the Court awards the victim the amount of PHP 20,000.00 as exemplary damages on account of the psychological abuse she suffered, manifesting through PTSD;<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> and imposes a fine of PHP 15,000.00 according to Section 31(f)<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> of Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>Lastly, the Court affirms the imposition of legal interest at the rate of 6% per annum on all damages awarded from the date of the finality of this Decision until full payment.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision dated August 28, 2020, and the Resolution dated May 21, 2021, of the Court of Appeals in CA-G.R. CR No. 41837 are <b>AFFIRMED with MODIFICATION</b>, in that petitioner XXX256870 is found <b>GUILTY</b> of child abuse under Article VI, Section 10(a) of Republic Act No. 7610 in Criminal Case No. 14-215 filed with Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Regional Trial Court, Makati City. She is <b>SENTENCED</b> to suffer the indeterminate penalty of imprisonment ranging from four years, nine months, and 11 days of <i>prision correccional</i>, as minimum, to six years, eight months, and one day of <i>prision mayor</i>, as maximum.<br><br>Petitioner XXX256870 is, likewise, <b>ORDERED</b> to <b>PAY</b> private complainant AAA256870 the following amounts:<blockquote>(a) moral damages in the amount of PHP 20,000.00;<br><br>(b) exemplary damages in the amount of PHP 20,000.00; and<br><br>(c) a fine of PHP 15,000.00.</blockquote>Legal interest at the rate of 6% per annum is imposed on the sums due in letters (a) and (b) from the date of the finality of this Decision until fully paid.<br><br><b>SO ORDERED.</b><br><br><i>Gaerlan, Dimaampao</i>, and <i>Singh, JJ.</i>, concur.<br><i>Caguioa (Chairperson), J.</i>, see concurring opinion.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with the Resolution dated February 4, 2025 in A.M. No. 23-10-18-SC titled "Further Amendments to Supreme Court Amended Administrative Circular No. 83-2015 (Re: Protocols and Procedures in the Promulgation, Publication, and Posting on the websites of the Decisions, Final Resolutions, and Final Orders using Fictitious Names/Personal Circumstances)," the names of the offended parties along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 14-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 45-59. Penned by Associate Justice Ramon M. Bato, Jr. and concurred in by Associate Justices Maria Elisa Sempio Diy and Carlito B. Calpatura of the Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 61-62. Penned by Associate Justice Ramon M. Bato, Jr. and concurred in by Associate Justices Maria Elisa Sempio Diy and Carlito B. Calpatura of the Former Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 49, <i>see</i> CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 45-46, see CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 7.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 46, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 47-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 91-92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 48, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 48-49, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 45-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 61, CA Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i>&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 61-62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Reyes v. People</b>, 641 Phil. 91, 108-109 (2010).<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i>, p. 62, CA Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 28-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 80-100.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 112-134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>See</i> <b>Prescott v. Bureau of Immigration</b>, 949 Phil. 919, 931 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>See</i> <b>Escolano <i>y</i> Ignacio v. People</b>, 845 Phil. 129, 139 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>See</i> <b>Morales v. People</b>, 919 Phil. 86, 114 (2022), <i>citing</i> <b>Mariano v. People</b>, 738 Phil. 448, 457 (2014).<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> The exceptions are as follows: (1) the conclusion is grounded on speculations, surmises or conjectures; (2) the inference is manifestly mistaken, absurd or impossible; (3) there is grave abuse of discretion; (4) the judgment is based on misapprehension of facts; (5) the findings of fact are conflicting; (6) there is no citation of specific evidence on which the factual findings are based; (7) the findings of absence of facts are contradicted by the presence of evidence on record; (8) the findings of the Court of Appeals are contrary to those of the trial court; (9) the Court of Appeals manifestly overlooked ce1tain relevant and undisputed facts that, if properly considered, would justify a different conclusion; (10) the findings of the Court of Appeals are beyond the issues of the case; and (11) such findings are contrary to the admissions of both parties. <i>See</i> <b>Escolano v. People</b>, 845 Phil. 129, 139-140 (2018), <i>citing</i> <b>Carbonell v. Carbonell-Mendes</b>, 762 Phil. 529, 537 (2015).<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>XXX v. People</b>, 956 Phil. 237, 246 (2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>See</i> <b>People v. Calaoagan</b>, 850 Phil. 183, 194 (2019), <i>citing</i> <b>Jabalde v. People</b>, 787 Phil. 255, 270 (2016).<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>See</i> <b>San Juan v. People</b>, 933 Phil. 889, 907 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 845 Phil. 129, 141-142 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Rollo</i>, pp. 26-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 56, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 91, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 112-130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> ARTICLE 13. <i>Mitigating circumstances</i>. â The following are mitigating circumstances:<blockquote>. . . .<br><br>2. That the offender is under eighteen years of age or over seventy years. In the case of the minor, he shall be proceeded against in accordance with the provisions of article 80.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> 641 Phil. 91 (2010).<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>XXX v. People</b>, 956 Phil. 237 (2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>See</i> <b>Rosaldes v. People</b>, 745 Phil. 77, 93 (2014).<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>XXX271940 v. People, G.R. No. 271940</b>, January 22, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> (f) A fine to be determined by the court shall be imposed and administered as a cash fund by the Department of Social Welfare and Development and disbursed for the rehabilitation of each child victim, or any immediate member of his family if the latter is the perpetrator of the offense.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>See</i> <b>Magno v. People</b>, 933 Phil. 674, 693 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>See</i> <b>Lara's Gifts &amp; Decors, Inc. v. Midtown Industrial Sales, Inc.</b>, 929 Phil. 754 (2022).<br><br><hr align="center" width="60%" size="1" noshade=""><b><br>G.R. No. 256870</b> â <b>XXX256870</b>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> Petitioner, v. <b>PEOPLE OF THE PHILIPPINES</b>, Respondent.<br><br><hr align="center" width="60%" size="1" noshade=""><b><br></b><div align="center"><b>CONCURRING OPINION</b><br></div><br><b>CAGUIOA, <i>J.</i>:</b><br><br>The <i>ponencia</i> denies the Petition for Review on <i>Certiorari</i> in this case and affirms with modification the conviction of petitioner XXX256870 for violation of Section 10(a) of Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup><br><br>I agree.<br><br>I write this Opinion, however, only to emphasize that the factual scenario involved in this case is precisely the proper application of Section 10(a) of Republic Act No. 7610 as I argued in the case of <i>San Juan v. People</i><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> (<i>San Juan</i>). To recall, in my Dissenting Opinion in <i>San Juan</i>, I argued that "Section 10(a) of [Republic Act No.] 7610 [punishes] acts not merely because the victim is a child, <b>but because <u><i>the victim was sought out as a victim precisely because he or she is a child</i></u></b>."<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>In this case, XXX256870 admitted to uttering the invectives to the child-victim "because there was an ongoing dispute between her family and that of [the child-victim]."<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Thus, XXX256870's acts here constitute child abuse under Section 10(a) of Republic Act No. 7610, and not any other crime under the Revised Penal Code, not because the victim happened to be a child, but because XXX256870 targeted her for her characteristics as a child. XXX256870's grievances were with the child-victim's family, hence the words she used focused also on the child-victim's family, as she said: "<i>Gago kang bata ka. Pok-pok ka. <b>Pinalaki kang gago ng mga magulang mo. Tawagin mo ang tatay mong NBI.</b></i>"<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>In this connection, I reiterate my point in <i>San Juan</i> that "the dividing line between acts punished under the [Revised Penal Code], on the one hand, and those punished under Section 10(a), on the other, is the intention to commit 'child abuse' which means that, in the first place, the offender committed the acts against the child precisely because the latter is a child."<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Verily, as the facts of this case clearly show that XXX256870 targeted the victim due to her being a child, I fully concur with the affirmance of conviction for violating Section 10(a) of Republic Act No. 7610.<br><br><b>ACCORDINGLY</b>, I vote to <b>DENY</b> the instant Petition for Review on <i>Certiorari</i> and <b>AFFIRM</b> the Decision dated August 28, 2020 and Resolution dated May 21, 2021 of the Court of Appeals in CA-G.R. CR No. 41837.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015 dated September 5, 2017, titled "Protocols and Procedures in the Promulgation, Publication, and Posting on the Websites of Decisions, Final Resolutions, and Final Orders Using Fictitious Names/Personal Circumstances," the names of the private offended patties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Republic Act No. 7610 (1992), Special Protection of Children Against Child Abuse, Exploitation and Discrimination Act.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> 933 Phil. 889 (2023) [Per J. J. Lopez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> J. Caguioa, Dissenting Opinion in <b>San Juan v. People</b>, <i>id.</i> at 952.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Ponencia</i>, p. 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 3. Emphasis supplied.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> J. Caguioa, Dissenting Opinion in <b>San Juan v. People</b>, <i>supra</i> note 2, at 952.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

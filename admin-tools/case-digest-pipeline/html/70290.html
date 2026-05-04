@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 279413 - ERROL B. COMAFAY, JR., PETITIONER, VS. COMMISSION ON ELECTIONS AND PAQUINTO B. SALLAYA, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70290' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 279413, January 14, 2026 ]</H2>
+			<H3>ERROL B. COMAFAY, JR., PETITIONER, VS. COMMISSION ON ELECTIONS AND PAQUINTO B. SALLAYA, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>HERNANDO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for <i>Certiorari</i><sup style="color: rgb(255, 0, 0);">[1]</sup> under Rule 64, in relation to Rule 65, of the Rules of Court assailing the Resolution<sup style="color: rgb(255, 0, 0);">[2]</sup> of the Commission on Elections (COMELEC) Second Division and the Resolution<sup style="color: rgb(255, 0, 0);">[3]</sup> of the COMELEC <i>En Banc</i> in SPA No. 24-076 (DC). In affirming the Second Division, the COMELEC <i>En Banc</i> ruled that petitioner Errol B. Comafay, Jr. (Comafay, Jr.) committed material misrepresentation in his Certificate of Candidacy (COC) for the position of Member, <i>Sangguniang Panlungsod</i> of Tabuk City, Kalinga in the May 12, 2025 National and Local Elections. </p><p align="center"><i>Factual Antecedents</i> </p><p> On October 6, 2024, Comafay, Jr. filed his COC<sup style="color: rgb(255, 0, 0);">[4]</sup> for the position of Member, <i>Sangguniang Panlungsod</i> of Tabuk City, Kalinga in the May 12, 2025 National and Local Elections.<sup style="color: rgb(255, 0, 0);">[5]</sup> </p><p> In Comafay, Jr.'s COC, he indicated the following information as his residence/addressâ Province: "<i>KALINGA</i>"; Municipality: "<i>TABUK</i>"; Barangay: "<i>BULANAO</i>"; and House No./Street/Subdivision: "<i>TARAKI NATIONAL RD PUROK 5</i>".<sup style="color: rgb(255, 0, 0);">[6]</sup> Furthermore, Comafay, Jr. indicated "<i>TARAKI, NATIONAL RD, PUROK 5, BRGY. BULANAO, TABUK CITY, KALINGA</i>" as his address for election purposes.<sup style="color: rgb(255, 0, 0);">[7]</sup></p><p> In Item 5.4 on Residence/ Address, Comafay indicated "TARAKI NATIONAL RD PUROK 5" without a comma. However, in Item 7 on Address for Election Purposes, Comafay indicated his full address with commas, indicating separations on the geographic locations. The pertinent portions of Comafay, Jr.'s COC<sup style="color: rgb(255, 0, 0);">[8]</sup> are reproduced below for ease of reference: </p><p align="center"> (image supposed to be here) </p><p> Ten days later, or on October 16, 2024, Paquinto B. Sallaya (Sallaya) filed a Petition to Deny Due Course and/or Cancel Ce1iificate of Candidacy<sup style="color: rgb(255, 0, 0);">[9]</sup> against Comafay, Jr. for violation of Section 262, in relation to Sections 74 and 78, of the Omnibus Election Code (OEC).<sup style="color: rgb(255, 0, 0);">[10]</sup> </p><p> Sallaya argued that the COC of Comafay, Jr. contained material misrepresentation when the latter indicated "<i>Taraki National Road, Purok 5, Bulanao, Tabuk City, Kalinga</i>" as residence/mailing address, when in fact no "Taraki National Road" exists in Barangay Bulanao or anywhere in Tabuk City, Kalinga.<sup style="color: rgb(255, 0, 0);">[11]</sup> To support his argument, Sallaya attached a Certification<sup style="color: rgb(255, 0, 0);">[12]</sup> from the Office of the Punong Barangay of Barangay Bulanao, Tabuk City, Kalinga certifying that no Taraki National Road existed within their jurisdiction.<sup style="color: rgb(255, 0, 0);">[13]</sup> In other words, Sallaya faulted Comafay, Jr. for omitting a comma in his residence address. </p><p> On November 26, 2024, COMELEC issued Summons<sup style="color: rgb(255, 0, 0);">[14]</sup> to Comafay, Jr. directing him to file a verified Answer <i>Cum</i> Memorandum within a non-extendible period of five days from receipt.<sup style="color: rgb(255, 0, 0);">[15]</sup> </p><p> On November 29, 2024, Comafay, Jr. filed a verified Answer <i>Cum</i> Memorandum<sup style="color: rgb(255, 0, 0);">[16]</sup> dated November 29, 2024, through electronic mail.<sup style="color: rgb(255, 0, 0);">[17]</sup> Comafay, Jr. argued that: (1) his address is "<i>TARAKI, NATIONAL RD, PUROK 5, BRGY. BULANAO, TABUK CITY, KALINGA</i>;"<sup style="color: rgb(255, 0, 0);">[18]</sup> (2) he did not make any material misrepresentation in his COC;<sup style="color: rgb(255, 0, 0);">[19]</sup> (3) he possesses all the qualifications and none of the disqualifications to run as Member of the Sangguniang Panlungsod of Tabuk;<sup style="color: rgb(255, 0, 0);">[20]</sup> and (4) he has no intention to deceive the electorate in indicating that his residence is "<i>Taraki, National Rd, Purok 5, Brgy. Bulanao, Tabuk City, Kalinga</i>."<sup style="color: rgb(255, 0, 0);">[21]</sup> </p><p> In support of his arguments, Comafay, Jr. attached the following pieces of documentary evidence:<sup style="color: rgb(255, 0, 0);">[22]</sup> </p><blockquote><table width="100%" border="1" cellspacing="0" cellpadding="3"><tbody><tr valign="top"><td width="50%"><div align="center"><em>DOCUMENTARY EVIDENCE</em></div></td><td width="50%"><div align="center"><em>INDICATED ADDRESS</em></div></td></tr><tr valign="top"><td><div align="justify"><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td width="6%" valign="top">1.</td><td width="94%" valign="top"><div align="justify">Photocopy of Unified Multi-purpose Identification Card<sup style="color: rgb(255, 0, 0);">[23]</sup> (UMID)<br></div></td></tr></tbody></table></div></td><td><div align="justify">TARAKI NATIONAL RD PRK 5 BRGY. BULANAO KALINGA</div></td></tr><tr valign="top"><td><div align="justify"><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="6%"><div align="justify">2.</div></td><td width="94%"><div align="justify">Photocopy of COC for the 2022 National and Local Elections<sup style="color: rgb(255, 0, 0);">[24]</sup></div></td></tr></tbody></table></div></td><td><div align="justify">TARAKI NATIONAL RD PRK 5 </div></td></tr><tr valign="top"><td><div align="justify"><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="6%"><div align="justify">3.</div></td><td width="94%"><div align="justify">Photocopy of Elective Local Official's Personal Data Sheet<sup style="color: rgb(255, 0, 0);">[25]</sup></div></td></tr></tbody></table></div></td><td><div align="justify">Taraki, National Rd., Purok 5, Brgy. Bulanao, Tabuk City, Kalinga</div></td></tr><tr valign="top"><td><div align="justify"><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="6%"><div align="justify">4.</div></td><td width="94%"><div align="justify">Photocopy of Personal Data Sheet<sup style="color: rgb(255, 0, 0);">[26]</sup> (PDS)</div></td></tr></tbody></table></div></td><td><div align="justify">Taraki, National Rd, Purok 5, Brgy. Bulanao, Tabuk City, Kalinga</div></td></tr><tr valign="top"><td><div align="justify"><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="6%"><div align="justify">5.</div></td><td width="94%"><div align="justify">Photocopy of Statement of Assets, Liabilities, and Net Worth<sup style="color: rgb(255, 0, 0);">[27]</sup> (SALN)</div></td></tr></tbody></table></div></td><td><div align="justify">Taraki, Purok 5, Brgy. Bulanao, Tabuk City, Kalinga</div></td></tr></tbody></table></blockquote><p><i>Ruling of the COMELEC Second Division</i></p><p> In a Resolution<sup style="color: rgb(255, 0, 0);">[28]</sup> dated February 6, 2025, the COMELEC Second Division granted the Petition to Deny Due Course and/or Cancel Certificate of Candidacy.<sup style="color: rgb(255, 0, 0);">[29]</sup> </p><p> To the COMELEC Second Division, Comafay, Jr. "willfully sought to mislead and misinform both [COMELEC] and the electorate by falsely asserting his eligibility for the position sought."<sup style="color: rgb(255, 0, 0);">[30]</sup> The COMELEC Second Division gave more weight to the Barangay Certification obtained by Sallaya over the documentary evidence of Comafay, Jr.<sup style="color: rgb(255, 0, 0);">[31]</sup> </p><p> Thus, the dispositive portion of the said COMELEC Second Division's Resolution reads: </p><blockquote><p><b>WHEREFORE</b>, premises considered, the Commission (Second Division) <b>RESOLVED</b>, as it hereby <b>RESOLVES</b> to <b>GRANT</b> the Petition. </p><p> Let the records of the case be forwarded to the Law Department of this Commission for the conduct of preliminary investigation relative to the election offense aspect of this case. </p><p><b>SO ORDERED.</b><sup style="color: rgb(255, 0, 0);">[32]</sup> (Emphasis in the original) </p></blockquote><p> Thereafter, Comafay, Jr. timely filed a Motion for Reconsideration,<sup style="color: rgb(255, 0, 0);">[33]</sup> and attached, among others, a Certificate of Residency<sup style="color: rgb(255, 0, 0);">[34]</sup> certifying that he is a resident of Taraki Building, Purok 5, Bulanao, Tabuk City, Kalinga. </p><p><i>Ruling of the COMELEC En Banc</i></p><p> In a Resolution<sup style="color: rgb(255, 0, 0);">[35]</sup> promulgated on April 4, 2025, the COMELEC <i>En Banc</i> denied Comafay, Jr.'s Motion for Reconsideration and found no cogent reason to reverse the findings of the COMELEC Second Division.<sup style="color: rgb(255, 0, 0);">[36]</sup> </p><p> Sitting <i>en banc</i>, the Commission ruled that: (1) Comafay, Jr. was unable to overthrow the presumption of regularity in the performance of official duties of the Punong Barangay when he failed to deny the issuance of the Certification presented by Sallaya or provide substantial evidence to refute the same; and (2) Comafay, Jr. should have presented his Certificate of Residency at the earliest opportunity, or when he filed his Answer <i>Cum</i> Memorandum.<sup style="color: rgb(255, 0, 0);">[37]</sup> </p><p> The dispositive portion of the COMELEC <i>En Banc</i> Resolution states: </p><blockquote><p><b>WHEREFORE</b>, in view of the foregoing, the Commission (<i>En Banc</i>) hereby <b>DENIES</b> the <i>Motion for Reconsideration</i> dated [February 12, 2025] filed by Respondent <b>ERROL BANGLOY COMAFAY JR.</b> and <b>AFFIRMS</b> the <i>Resolution</i> of the Commission (Second Division) dated [February 6, 2025]. </p><p><b>SO ORDERED.</b><sup style="color: rgb(255, 0, 0);">[38]</sup> (Emphasis in the original) </p></blockquote><p> Undaunted, petitioner brought the present Petition before Us, and argues that COMELEC erred when: (1) it misapprehended the facts;<sup style="color: rgb(255, 0, 0);">[39]</sup> and (2) it deliberately failed and refused to apply prevailing laws and jurisprudence in the instant case and ruled that the address as indicated in his COC is a material misrepresentation.<sup style="color: rgb(255, 0, 0);">[40]</sup> </p><p align="center"><i>Issue</i> </p><p> The issue is whether the COMELEC gravely abused its discretion when it ruled that petitioner's address as indicated in his COC was a material misrepresentation. </p><p align="center"><i>Our Ruling</i> </p><p> The Petition is meritorious. </p><p> We recognize that the COMELEC "has the expertise in the enforcement and administration of all election laws and regulations."<sup style="color: rgb(255, 0, 0);">[41]</sup> We further recognize â </p><blockquote><p>[t]he rule that factual findings of administrative bodies will not be disturbed by courts of justice except when there is absolutely no evidence or no substantial evidence in support of such findings should be applied with greater force when it concerns the COMELEC, as the framers of the Constitution intended to place the COMELEC - created and explicitly made independent by the Constitution itself - on a level higher than statutory administrative organs."<sup style="color: rgb(255, 0, 0);">[42]</sup></p></blockquote><p> In other words, when the COMELEC's findings of fact are supported by substantial evidence, the COMELEC's decision or resolution is final and non-reviewable even by this Court.<sup style="color: rgb(255, 0, 0);">[43]</sup> </p><p> Grave abuse of discretion is defined in jurisprudence as such a capricious and arbitrary exercise of judgment as equivalent, in the eyes of the law, to lack of jurisdiction.<sup style="color: rgb(255, 0, 0);">[44]</sup> There is grave abuse of discretion where the power is exercised in an arbitrary or despotic manner by reason of passion, prejudice, or personal hostility amounting to an evasion of a positive duty, or a virtual refusal to perform the duty enjoined, or to act at all in contemplation of law.<sup style="color: rgb(255, 0, 0);">[45]</sup> Through time, the meaning of grave abuse of discretion has been expanded to include any action done contrary to the Constitution, the law, or jurisprudence.<sup style="color: rgb(255, 0, 0);">[46]</sup> </p><p> Guided by these principles, We hold that COMELEC gravely abused its discretion when it ruled that petitioner's address as indicated in his COC was a material misrepresentation. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><i>Petitioner did not make a false material representation of his residence in his COC</i> </div></td></tr></tbody></table><p>A petition to deny due course or cancel COC is governed by Section 78, in relation to Section 74, of the OEC. These provisions of law state: </p><blockquote><p> Sec. 78. <i>Petition to deny due course to or cancel a certificate of candidacy</i>. â A verified petition seeking to deny due course or to cancel a certificate of candidacy may be filed by the person <i>exclusively on the ground that any material representation contained therein as required under Section 74 hereof is false</i>. The petition may be filed at any time not later than twenty-five days from the time of the filing of the certificate of candidacy and shall be decided, after due notice and hearing, not later than fifteen days before the election. </p><p> Sec. 74. <i>Contents of certificate of candidacy</i>. â <i>The certificate of candidacy shall state that the person filing it is announcing his[/her] candidacy for the office stated therein and that he[/she] is eligible for said office; if for Member of the Batasang Pambansa, the province</i>, including its component cities, highly urbanized city or district or sector <i>which he[/she] seeks to represent</i>; the political party to which he[/she] belongs; civil status; his[/her] date of birth; <b>residence</b>; his[/her] post office address for all election purposes; his[/her] profession or occupation; that he[/she] will support and defend the Constitution of the Philippines and will maintain true faith and allegiance thereto; that he[/she] will obey the laws, legal orders, and decrees promulgated by the duly constituted authorities; that he[/she] is not a permanent resident or immigrant to a foreign country; that the obligation imposed by his[/her] oath is assumed voluntarily, without mental reservation or purpose of evasion; and that the facts stated in the certificate of candidacy are true to the best of his[/her] knowledge. (Emphasis supplied) </p></blockquote><p> A plain reading of both provisions of law reveals that the cancellation of, or denial of due course to, COCs must be on the ground of false material representation. In <i>Mangudadatu v. The Commission on Elections</i><sup style="color: rgb(255, 0, 0);">[47]</sup>, We explained the concept of "material misrepresentation" as "a candidate's act done with the intention to gain an advantage by deceitfully claiming possession of all the qualifications and none of the disqualifications when, in fact, the contrary is true."<sup style="color: rgb(255, 0, 0);">[48]</sup> </p><p> Thus, in <i>Fr. Buenafe v. Commission on Elections</i>,<sup style="color: rgb(255, 0, 0);">[49]</sup> We explained that representations in the COC must be both false and material to an elective official's qualifications: </p><blockquote><p> As previously mentioned, Sections 74 and 78 of the OEC govern the cancellation of, or denial of due course to, COCs on the ground of false material representation. <i>Under Section 74, a person filing a COC must state therein that "he [or she] is eligible for said office," among other information. On the other hand, Section 78 expressly provides that the denial of due course or cancellation of a COC may be filed exclusively on the ground that the information the candidate provided under Section 74 is false</i>. </p><p><i>Notably, not every false representation warrants the denial of due course to or cancellation of a COC. It must be shown that the false representation pertained to material information and was made with an "intention to deceive the electorate as to one's qualifications for public office."</i> Thus, a candidate's disqualification to run for public office does not, in and of itself, justify the cancellation of his or her COC. <i>The requisites of materiality and intent must be present</i>.<sup style="color: rgb(255, 0, 0);">[50]</sup> (Emphasis supplied citations omitted) </p></blockquote><p> In jurisprudence, We emphasized that a petition filed under Section 78, in relation to Section 74, of the OEC will prosper only when there is "proof of [a] deliberate attempt to mislead, misinform, or hide a fact relating to the candidate's requisite residency, age, citizenship, or any other legal qualification necessary to run for elective office."<sup style="color: rgb(255, 0, 0);">[51]</sup> Thus, the requisites for a petition under Section 78 of the OEC to prosper are: (1) a candidate made a material representation in his or her COC, that is, a representation relating to his or her qualification for the position he or she is vying for; (2) such representation is false; and (3) he or she made the representation with the intent to deceive the electorate that he or she is eligible to run and be voted for.<sup style="color: rgb(255, 0, 0);">[52]</sup> </p><p> In <i>Fr. Buenafe</i>, to determine whether the respondent therein made false material representations in the COC, the Court separately analyzed the materiality and falsity of the alleged misrepresentations. </p><p> With regard to the requisite of materiality, Section 78 does not specify the parameters of a "material representation."<sup style="color: rgb(255, 0, 0);">[53]</sup> Instead, jurisprudence expounded on the concept of material representation as follows: </p><blockquote><p> In <i>Villafuerte v. COMELEC</i>, We held that, for a representation to be material, it must "refer to an eligibility or qualification for the elective office the candidate seeks to hold." Thus, <i>facts pertaining to a candidate's residency, age, citizenship, or any other legal qualification are considered material under Section 78 of the OEC</i>. </p><p> Further, in <i>Salcedo II v. COMELEC</i>, the Court explained the rationale behind the requirement of materiality, and concluded that <i>the law should not be interpreted to cover innocuous mistakes:</i> </p><p>. . . . </p><p> In this case, petitioners Buenafe, <i>et al.</i> assert that respondent Marcos, Jr. made a false material representation when, in his COC, he certified under oath the statement, "I am eligible for the office I seek to be elected to." Respondent Marcos, Jr. also allegedly misrepresented his eligibility when he checked the box "No" in response to the question, "[h]ave you ever been found liable for an offense which carries with it the accessory penalty of perpetual disqualification to hold public office, which has become final and executory?" Petitioners Buenafe, <i>et al</i>. claim that respondent Marcos, Jr.'s conviction for violation of the NIRC carried with it the penalty of perpetual disqualification, thereby rendering the two statements false. </p><p><i>The assailed representations pass the test of materiality because they pertain to respondent Marcos, Jr.'s eligibility to hold elective office. In Dimapilis v. COMELEC (Dimapilis), We ruled that perpetual disqualification is a material fact because it directly affects a person's capacity to be elected and to hold public office</i>[.]<sup style="color: rgb(255, 0, 0);">[54]</sup> (Emphasis supplied, citations omitted) </p></blockquote><p> With regard to the requisite of falsity, it is crucial to determine whether or not the candidate misrepresented himself or herself to be eligible and not disqualified from running for the elective position.<sup style="color: rgb(255, 0, 0);">[55]</sup> In <i>Mayor Hayudini v. Commission on Elections</i>,<sup style="color: rgb(255, 0, 0);">[56]</sup> We explained that the requisite of falsity means that the representation was "made with a malicious intent to deceive the electorate as to the potential candidate's qualifications for public office."<sup style="color: rgb(255, 0, 0);">[57]</sup> </p><p> In <i>Mangudadatu</i>, We ruled that the petitioner made a false material representation in the COC with respect to the qualification of residence, as follows: </p><blockquote><p> In this case, Pax Ali made a false material representation in his COC when he declared that he would be a resident of Lutayan, Sultan Kudarat for one year and eight months immediately before the day of elections. He deliberately misrepresented that he was eligible for Governor of Sultan Kudarat when in fact he was not.<sup style="color: rgb(255, 0, 0);">[58]</sup></p></blockquote><p> In stark contrast to the case at bar, We find that petitioner did not make a false material representation in his COC when he declared "<i>TARAKI, NATIONAL RD, PUROK 5, BRGY. BULANAO, TABUK CITY, KALINGA</i>" as his residence address. Petitioner did not make a false material representation, and did not deliberately attempt to mislead the electorate of Tabuk City, Kalinga and COMELEC as to his qualification. </p><p> Instead, We find that Sallaya deliberately misled COMELEC when he alleged that "<i>Taraki National Road, Purok 5, Bulanao, Tabuk City, Kalinga</i>" was petitioner's residence/mailing address, when in fact no "Taraki National Road" existed in Barangay Bulanao or anywhere in Tabuk City, Kalinga.<sup style="color: rgb(255, 0, 0);">[59]</sup> </p><p> Consequently, COMELEC gravely erred in granting the petition under Section 78, in relation to Section 74, of the OEC against petitioner. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><i>A comma is a punctuation mark used to divide sentences and parts of it. In the present case, the lack of a comma was clearly exploited and manipulated to distort the truth</i> </div></td></tr></tbody></table><p>In jurisprudence, We consistently interpreted the use of a comma as a punctuation mark to divide sentences and parts of sentences, including words, phrases, or clauses.<sup style="color: rgb(255, 0, 0);">[60]</sup> The use of a comma also implies a disassociation or independence.<sup style="color: rgb(255, 0, 0);">[61]</sup> However, a comma does not introduce a new idea.<sup style="color: rgb(255, 0, 0);">[62]</sup> </p><p> Applied to the case at bar, We rule that petitioner intended the comma as a separation between "Taraki" and "National RD".<sup style="color: rgb(255, 0, 0);">[63]</sup> Once again, We reproduce below pertinent portions of petitioner's COC<sup style="color: rgb(255, 0, 0);">[64]</sup> for ease of reference: </p><p align="center"> (image supposed to be here) </p><p></p><p>In Item 5.4 on Residence/Address, petitioner indicated "<i>TARAKI NATIONAL RD PUROK 5</i>" without a comma. However, in Item 7 on Address for Election Purposes, petitioner indicated his full address with commas, indicating separations on the geographic locations. </p><p> We therefore agree with petitioner's opening statement that the power of the comma, and its placement in a phrase or sentence, was manipulated to create a meaning where none was intended and resulted in distorting the truth.<sup style="color: rgb(255, 0, 0);">[65]</sup> The element of deceit was negated by the fact that the address with a comma was clearly indicated on the same document.<sup style="color: rgb(255, 0, 0);">[66]</sup></p><p> Petitioner cannot and should not be faulted for omitting the comma in Item 5.4. If at all, COMELEC should have treated the same as an innocuous mistake<sup style="color: rgb(255, 0, 0);">[67]</sup> and not a false material representation. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><i>COMELEC was unreasonable in its appreciation and evaluation of evidence</i> </div></td></tr></tbody></table><p>COMELEC gave credence to the Barangay Certification obtained by Sallaya in the assailed Resolutions.<sup style="color: rgb(255, 0, 0);">[68]</sup> While it noted petitioner's Certificate of Residency, COMELEC <i>En Banc</i> further faulted petitioner for obtaining it only on February 11, 2025 or a day before petitioner filed his Motion for Reconsideration before COMELEC <i>En Banc</i>.<sup style="color: rgb(255, 0, 0);">[69]</sup> </p><p> In <i>Sibuma v. Commission on Elections</i>,<sup style="color: rgb(255, 0, 0);">[70]</sup> We ruled that COMELEC was grossly unreasonable in its appreciation and evaluation of evidence relating to the residency of petitioner. Among others, and with particular regard to a Barangay Certification, We stated that such piece of evidence is not conclusive: </p><blockquote><p><i>However, while a barangay, through its secretary, is required by the Local Government Code to keep an updated record of all its inhabitants, certifications of residency issued by a punong barangay are not conclusive, as he or she is merely presumed to know who the residents are in his or her own barangay.</i> Needless to state, the Certification issued by Punong Barangay Eriguel, who is the paternal aunt of respondent Eriguel Calongcagon, makes no particular reference to a statement or like certification from the barangay secretary. Indeed, the certification's <i>pro forma</i> statement of <i>no record of residency</i> necessarily yields to Sibuma's positive evidence collectively establishing not only his physical presence but also his domicile in Agoo, La Union.<sup style="color: rgb(255, 0, 0);">[71]</sup> (Emphasis supplied, citations omitted) </p></blockquote><p> The ruling in <i>Sibuma</i> applies to the present case. COMELEC likewise gravely erred in its appreciation of petitioner's evidence. </p><p> To recall, petitioner presented documentary evidence to establish his residence as "<i>TARAKI, NATIONAL RD, BRGY. BULANAO, TABUK CITY, KALINGA</i>".<sup style="color: rgb(255, 0, 0);">[72]</sup> These pieces of documentary evidence were: </p><blockquote><table width="100%" border="1" cellspacing="0" cellpadding="3"><tbody><tr valign="top"><td width="50%"><div align="center"><strong>DOCUMENTARY EVIDENCE</strong></div></td><td width="50%"><div align="center"><strong>INDICATED ADDRESS</strong></div></td></tr><tr valign="top"><td><div align="justify"><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td width="6%" valign="top">1.</td><td width="94%" valign="top"><div align="justify">Photocopy of UMID<sup style="color: rgb(255, 0, 0);">[73]</sup><br></div></td></tr></tbody></table></div></td><td><div align="justify">TARAKI NATIONAL RD PRK 5 BRGY. BULANAO KALINGA</div></td></tr><tr valign="top"><td><div align="justify"><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="6%"><div align="justify">2.</div></td><td width="94%"><div align="justify">Photocopy of COC for the 2022 National and Local Elections<sup style="color: rgb(255, 0, 0);">[74]</sup></div></td></tr></tbody></table></div></td><td><div align="justify">TARAKI NATIONAL RD PRK 5 </div></td></tr><tr valign="top"><td><div align="justify"><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="6%"><div align="justify">3.</div></td><td width="94%"><div align="justify">Photocopy of Elective Local Official's Personal Data Sheet<sup style="color: rgb(255, 0, 0);">[75]</sup></div></td></tr></tbody></table></div></td><td><div align="justify">Taraki, National Rd., Purok 5, Brgy. Bulanao, Tabuk City, Kalinga</div></td></tr><tr valign="top"><td><div align="justify"><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="6%"><div align="justify">4.</div></td><td width="94%"><div align="justify">Photocopy of PDS<sup style="color: rgb(255, 0, 0);">[76]</sup></div></td></tr></tbody></table></div></td><td><div align="justify">Taraki, National Rd, Purok 5, Brgy. Bulanao, Tabuk City, Kalinga</div></td></tr><tr valign="top"><td><div align="justify"><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="6%"><div align="justify">5.</div></td><td width="94%"><div align="justify">Photocopy of SALN<sup style="color: rgb(255, 0, 0);">[77]</sup> </div></td></tr></tbody></table></div></td><td><div align="justify">Taraki, Purok 5, Brgy. Bulanao, Tabuk City, Kalinga</div></td></tr><tr valign="top"><td><table width="100%" align="center" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="6%"><div align="justify">6.</div></td><td width="94%"><div align="justify">Certificate of Residency<sup style="color: rgb(255, 0, 0);">[78]</sup> </div></td></tr></tbody></table></td><td><div align="justify">Taraki Building, Purok 5, Bulanao, Tabuk, City, Kalinga </div></td></tr></tbody></table></blockquote><p> We note that petitioner was consistent in indicating his residential address as "<i>TARAKI, NATIONAL RD, BRGY. BULANAO, TABUK CITY, KALINGA</i>" in nearly all of his transactions, legal documents, and identification cards for over a decade.<sup style="color: rgb(255, 0, 0);">[79]</sup> </p><p> Based on the documents and declarations above, this Court sees petitioner's declaration of residency in his COC as proceeding from good faith and firm belief that he possessed the required residency for the position he vied for.<sup style="color: rgb(255, 0, 0);">[80]</sup> Indeed, COMELEC resorted to an overly literal and narrow interpretation of what constituted material misrepresentation. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><i>Doubts, if at all, should have been resolved in favor of petitioner's residence qualification, in order to give fullest effect to the manifest will of the electorate</i> </div></td></tr></tbody></table><p>Notably, despite ruling that petitioner made a false material representation in his COC, COMELEC, both in division and sitting <i>en banc</i>, did not deny due course to or cancel such certificate. </p><p> In the May 12, 2025 National and Local Elections, petitioner garnered the highest votes for the position of Councilor for the Lone District of Tabuk City, Kalinga with 43,321 votes or 58.09% of the total votes cast. The overwhelming majority is additional reason for this Court to resolve any doubts, if at all, in favor of petitioner's residence qualification.<sup style="color: rgb(255, 0, 0);">[81]</sup> </p><p> In summary, We rule that petitioner did not commit any materially false and deceptive representation in his COC in relation to his residence qualification. COMELEC gravely erred in ruling that the lack of a comma amounted to a false material representation, despite the substantial evidence presented by petitioner showing good faith and consistency as to his declared residence address. </p><p><b>ACCORDINGLY</b>, the Petition for <i>Certiorari</i> is <b>GRANTED</b>. The Commission on Elections Second Division Resolution dated February 6, 2025 and the COMELEC <i>En Banc</i> Resolution dated April 4, 2025 in SPA No. 24-076 (DC) are <b>REVERSED and SET ASIDE.</b> </p><p><b>SO ORDERED.</b></p><p><i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Lazaro-Javier, Inting, Zalameda, Gaerlan, Rosario, J. Lopez, Dimaampao, Marquez, Kho, Jr., Singh</i>, and <i>Villanueva, JJ</i>., concur. <br><br></p><hr width="60%" size="1" align="LEFT" noshade=""><sup style="color: rgb(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-34. <p><sup style="color: rgb(255, 0, 0);">[2]</sup> <i>Id.</i> at 37-43. The February 6, 2025 Resolution in SPA No. 24-076 (DC) was signed by Presiding Commissioner Rey E. Bulay and Commissioner Nelson J. Celis of the Second Division, Commission on Elections, Manila. </p><p><sup style="color: rgb(255, 0, 0);">[3]</sup> <i>Id.</i> at 46-49. The April 4, 2025 Resolution in SPA No. 24-076 (DC) was signed by Chairman George Erwin M. Garcia, and Commissioners Aimee P. Ferolino, Rey E. Bulay, Ernesto Ferdinand P. Maceda, Jr., Nelson J. Celis, Maria Norina S. Tangaro-Casingal, and Noli R. Pipo of the <i>En Banc</i>, Commission on Elections, Manila.</p><p><sup style="color: rgb(255, 0, 0);">[4]</sup> <i>Id.</i> at 50.</p><p><sup style="color: rgb(255, 0, 0);">[5]</sup> <i>Id.</i> at 38.</p><p><sup style="color: rgb(255, 0, 0);">[6]</sup> <i>Id.</i> at 50.</p><p><sup style="color: rgb(255, 0, 0);">[7]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[8]</sup> <i>Id.</i> at 50, 68.</p><p><sup style="color: rgb(255, 0, 0);">[9]</sup> <i>Id.</i> at 51-55.</p><p><sup style="color: rgb(255, 0, 0);">[10]</sup> <i>Id.</i> at 38-39.</p><p><sup style="color: rgb(255, 0, 0);">[11]</sup> <i>Id.</i> at 38.</p><p><sup style="color: rgb(255, 0, 0);">[12]</sup> <i>Id.</i> at 58.</p><p><sup style="color: rgb(255, 0, 0);">[13]</sup> <i>Id.</i> at 38.</p><p><sup style="color: rgb(255, 0, 0);">[14]</sup> <i>Id.</i> at 65-66.</p><p><sup style="color: rgb(255, 0, 0);">[15]</sup> <i>Id.</i> at 38.</p><p><sup style="color: rgb(255, 0, 0);">[16]</sup> <i>Id.</i> at 67-81.</p><p><sup style="color: rgb(255, 0, 0);">[17]</sup> <i>Id.</i> at 38.</p><p><sup style="color: rgb(255, 0, 0);">[18]</sup> <i>Id.</i> at 71-73. </p><p><sup style="color: rgb(255, 0, 0);">[19]</sup> <i>Id.</i> at 73-74.</p><p><sup style="color: rgb(255, 0, 0);">[20]</sup> <i>Id.</i> at 74-75.</p><p><sup style="color: rgb(255, 0, 0);">[21]</sup> <i>Id.</i> at 75-77.</p><p><sup style="color: rgb(255, 0, 0);">[22]</sup> <i>Id.</i> at 77-78.</p><p><sup style="color: rgb(255, 0, 0);">[23]</sup> <i>Id.</i> at 72, 82. </p><p><sup style="color: rgb(255, 0, 0);">[24]</sup> <i>Id.</i> at 72, 83. </p><p><sup style="color: rgb(255, 0, 0);">[25]</sup> <i>Id.</i> at 72, 84-85. </p><p><sup style="color: rgb(255, 0, 0);">[26]</sup> <i>Id.</i> at 72, 86-87. </p><p><sup style="color: rgb(255, 0, 0);">[27]</sup> <i>Id.</i> at 72, 88-89. </p><p><sup style="color: rgb(255, 0, 0);">[28]</sup> <i>Id.</i> at 37-43. </p><p><sup style="color: rgb(255, 0, 0);">[29]</sup> <i>Id.</i> at 42. </p><p><sup style="color: rgb(255, 0, 0);">[30]</sup> <i>Id.</i> at 40. </p><p><sup style="color: rgb(255, 0, 0);">[31]</sup> <i>Id.</i> at 40-41. </p><p><sup style="color: rgb(255, 0, 0);">[32]</sup> <i>Id.</i> at 42. </p><p><sup style="color: rgb(255, 0, 0);">[33]</sup> <i>Id.</i> at 90-101. </p><p><sup style="color: rgb(255, 0, 0);">[34]</sup> <i>Id.</i> at 102. </p><p><sup style="color: rgb(255, 0, 0);">[35]</sup> <i>Id.</i> at 46-49. </p><p><sup style="color: rgb(255, 0, 0);">[36]</sup> <i>Id.</i> at 49. </p><p><sup style="color: rgb(255, 0, 0);">[37]</sup> <i>Id.</i> at 48-49. </p><p><sup style="color: rgb(255, 0, 0);">[38]</sup> <i>Id.</i> at 49. </p><p><sup style="color: rgb(255, 0, 0);">[39]</sup> <i>Id.</i> at 12. </p><p><sup style="color: rgb(255, 0, 0);">[40]</sup> <i>Id.</i> at 12-26. </p><p><sup style="color: rgb(255, 0, 0);">[41]</sup> <b>Tan v. Commission on Elections</b>, 537 Phil. 510, 539 (2006) [Per J. Velasco, Jr., <i>En Banc</i>]. (Citations omitted) </p><p><sup style="color: rgb(255, 0, 0);">[42]</sup> <b>Mastura v. Commission on Elections</b>, 349 Phil. 423, 429 (1998) [Per J. Bellosillo, <i>En Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[43]</sup> <b>Fr. Buenafe v. Commission on Elections</b>, 924 Phil. 201, 269 (2022) [Per J. Zalameda, <i>En Banc</i>]. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[44]</sup> <b>Vda. De Bacaling v. Laguna</b>, 153 Phil. 524, 533-534 (1973) [Per J. Esguerra, First Division]. </p><p><sup style="color: rgb(255, 0, 0);">[45]</sup> <b>Cuison v. Court of Appeals</b>, 351 Phil. 1089, 1102 (1998) [Per J. Panganiban, First Division]. </p><p><sup style="color: rgb(255, 0, 0);">[46]</sup> <b>Republic v. COCOFED</b>, 423 Phil. 735, 774 (2001) [Per J. Panganiban, <i>En Banc</i>]. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[47]</sup> <b>G.R. Nos. 260219 and 260231</b>, April 22, 2025 [Per J. Gaerlan, <i>En Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[48]</sup> <i>Id.</i> at 19. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[49]</sup> 924 Phil. 201 (2022) [Per J. Zalameda, <i>En Banc</i>]. (Citations omitted) </p><p><sup style="color: rgb(255, 0, 0);">[50]</sup> <i>Id.</i> at 269-270. </p><p><sup style="color: rgb(255, 0, 0);">[51]</sup> <i>Id.</i> at 230-231. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[52]</sup> <b>Mangudadatu v. Commission on Elections, G.R. Nos. 260219 and 260231</b>, April 22, 2025 [Per J. Gaerlan, <i>En Banc</i>] at 11. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p><sup style="color: rgb(255, 0, 0);">[53]</sup> <b>Fr. Buenafe v. Commission on Elections</b>, 924 Phil. 201, 270 (2022) [Per J. Zalameda, <i>En Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[54]</sup> <i>Id.</i> at 270-271. </p><p><sup style="color: rgb(255, 0, 0);">[55]</sup> <i>Id.</i> at 274. </p><p><sup style="color: rgb(255, 0, 0);">[56]</sup> 733 Phil. 822 (2014) [Per J. Peralta, <i>En Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[57]</sup> <i>Id.</i> at 845. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[58]</sup> <b>Mangudadatu v. Commission on Elections, G.R. Nos. 260219 and 260231</b>, April 22, 2025 [Per J. Gaerlan, <i>En Banc</i>] at 20. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p><sup style="color: rgb(255, 0, 0);">[59]</sup> <i>Rollo</i>, p. 38. </p><p><sup style="color: rgb(255, 0, 0);">[60]</sup> <i>See</i> <b>Aquino III v. Commission on Elections</b>, 631 Phil. 595, 615 (2010) [Per J. Perez, <i>En Banc</i>]. (Citation omitted); <b>In re: Lim Cho Kuan v. Republic</b>, 122 Phil. 1123, 1126 (1966) [Per J. Bengzon, J. P., <i>En Banc</i>]; <b>Florentino v. Philippine National Bank</b>, 98 Phil. 959, 962 (1956) [Per J. Jugo, First Division]; <b>Agcaoili v. Suguitan</b>, 48 Phil. 676, 695-096 (1926) [Per J. Johnson, <i>En Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[61]</sup> <b>Balbarino v. Pacific Ocean Manning, Inc.</b>, 885 Phil. 847, 871 (2020) [Per J. Gaerlan, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[62]</sup> <b>Partido Demokratiko Pilipino-Lakas ng Bayan v. Commission on Elections <i>En Banc</i></b>, 912 Phil. 110, 118 (2021) [Per J. Lopez, M.V., <i>En Banc</i>]. (Citation omitted) </p><p><sup style="color: rgb(255, 0, 0);">[63]</sup> "National RD" also refers to "National Road" as quoted from the parties' respective pleadings. </p><p><sup style="color: rgb(255, 0, 0);">[64]</sup> <i>Rollo</i>, pp. 50, 68. </p><p><sup style="color: rgb(255, 0, 0);">[65]</sup> <i>Id.</i> at 3. </p><p><sup style="color: rgb(255, 0, 0);">[66]</sup> <i>Id.</i> at 22. </p><p><sup style="color: rgb(255, 0, 0);">[67]</sup> <i>See</i> <b>Salcedo II v. COMELEC</b>, 371 Phil. 377, 389 (1999) [Per J. Gonzaga-Reyes, <i>En Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[68]</sup> <i>Rollo</i>, pp. 40-41, 48-49. </p><p><sup style="color: rgb(255, 0, 0);">[69]</sup> <i>Id.</i> at 48-49. </p><p><sup style="color: rgb(255, 0, 0);">[70]</sup> 934 Phil. 463 (2023) [Per J. Inting, <i>En Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[71]</sup> <i>Id.</i> at 485. </p><p><sup style="color: rgb(255, 0, 0);">[72]</sup> <i>Rollo</i>, pp. 77-78, 187. </p><p><sup style="color: rgb(255, 0, 0);">[73]</sup> <i>Id.</i> at 72, 82. </p><p><sup style="color: rgb(255, 0, 0);">[74]</sup> <i>Id.</i> at 72, 83. </p><p><sup style="color: rgb(255, 0, 0);">[75]</sup> <i>Id.</i> at 72, 84-85. </p><p><sup style="color: rgb(255, 0, 0);">[76]</sup> <i>Id.</i> at 72, 86-87. </p><p><sup style="color: rgb(255, 0, 0);">[77]</sup> <i>Id.</i> at 72, 88-89. </p><p><sup style="color: rgb(255, 0, 0);">[78]</sup> <i>Id.</i> at 187. </p><p><sup style="color: rgb(255, 0, 0);">[79]</sup> <i>Id.</i> at 72-73. </p><p><sup style="color: rgb(255, 0, 0);">[80]</sup> <i>See</i> <b>Sibuma v. Commission on Elections</b>, 934 Phil. 463, 483 (2023) [Per J. Inting, <i>En Banc</i>]. </p><p><sup style="color: rgb(255, 0, 0);">[81]</sup> <i>Id.</i> at 487-488 (2023). (Citations omitted) </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

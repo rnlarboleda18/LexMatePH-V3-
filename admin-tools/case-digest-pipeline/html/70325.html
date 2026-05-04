@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. E-02159 - ADAMA RESORTS AND HOTELS, INC., PETITIONER, VS. PRIME SMARTECH APPLIANCES CORPORATION, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70325' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. E-02159, February 26, 2026 ]</H2>
+			<H3>ADAMA RESORTS AND HOTELS, INC., PETITIONER, VS. PRIME SMARTECH APPLIANCES CORPORATION, RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, as amended, assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated September 12, 2024 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated July 15, 2025 of the Court of Appeals, in CA G.R. SP No. 183286. Said rulings denied the petition for review filed by Adama Resorts and Hotels, Inc. (Adama) against the February 21, 2024 Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Office of the Director General (ODG) of the Intellectual Property Office of the Philippines (IPOPHL) in Appeal No. 14-2023-0033.</p><p> Petitioner Adama and respondent Prime Smartech Appliances Corporation (Prime) are both Philippine corporations. Adama is engaged in the hotel and resort business, while Prime is engaged in the distribution and sale of electric appliances.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p><p> On May 5, 2019, Adama registered the trademarks KURA HOTEL and KURA RESORT with the IPOPHL, under Nice product class 32 (beer and certain non-alcoholic beverages) and Nice service classes 39 (transport, packaging and storage of goods, travel arrangement), 41 (education, training, entertainment, sporting &amp; cultural activities), 43 (provision of food and drink, temporary accommodation), and 45 (personal and social services),<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> as shown below:</p><p align="center"> (image supposed to be here) </p><p>On April 21, 2020, Prime applied for registration of the trademark KURA under product class 11 (air conditioners),<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> as shown below: </p><p align="center"> (image supposed to be here) </p><p>Adama opposed the application,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> arguing that Prime's mark is confusingly similar to its KURA HOTEL and KURA RESORT marks, as they share the same dominant feature (the word "KURA") and use almost identical font styles. The word KURA dominates all marks both visually and aurally, such that they will all look and sound like "KURA" to an ordinary purchaser, moreso since Prime's mark is for a product that is widely used in Adama's business.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Adama further claimed that the registration of Prime's mark will cause both product and source confusion, since air conditioners are related to the hotel and resort business. Ordinary purchasers may mistake Prime's air conditioners as being made by Adama, and Adama's hotels and resorts as being operated by Prime.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> Prime answered that its mark is dissimilar to Adama's marks in terms of appearance, style, and composition. The likelihood of confusion is negligible because air conditioners and hospitality services are sold in different ways.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> On December 21, 2022, the IPOPHL Bureau of Legal Affairs (IPOPHL-BLA) issued a Decision<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> sustaining Adama's opposition and directed the return of Prime's application to the Bureau of Trademarks for appropriate action.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> The IPOPHL-BLA adjudicator sustained Adama's claim of confusing similarity. The KURA element dominates all other elements in the marks and is the one most likely to be processed and retained in the minds of ordinary purchasers.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Confusion is still likely despite the difference in product class, as the word KURA is a coined word with no lexical content, and no other Philippineâregistered mark uses it for any other product class. In fine, Prime's mark fails to sufficiently distinguish its products from Adama's.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> Prime appealed to the IPOPHL-BLA Director,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> arguing that the BLA adjudicator erred in: 1) finding that "KURA" is a coined word with no lexical content, as it has meanings in several languages;<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> 2) disregarding the difference in the overall appearance of the competing marks;<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 3) not applying the holistic test in finding confusing similarity between the marks;<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> 4) finding a likelihood of confusion despite the lack of direct competition and relation between the products covered by the competing marks.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Adama riposted that: 1) its marketing team coined "KURA" with no knowledge of or intent to refer to its meaning in any language, so its marks still fall within the ambit of arbitrary marks, as any of the meanings of the word "KURA" bear no relation to the service for which the mark is used;<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> 2) the holistic test has already been abandoned;<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> 3) there is likelihood of confusion of goods and confusion of business despite the dissimilarities in the main features and product coverage of the competing marks, since air conditioners are a part of the service class covered by Adama's marks, and difference in product coverage does not preclude the existence of confusing similarity between marks.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> On May 30, 2023 the IPOPHL-BLA Director rendered a Decision<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dismissing Prime's appeal. The IPOPHL-BLA Director affirmed the reasoning of the BLA adjudicator, holding that there is a likelihood of confusion between the competing marks since they share the dominant feature "KURA" and pertain to connected products.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> The IPOPHL-BLA Director also upheld the arguments raised by Adama in its comment on Prime's appeal.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></p><p> Prime elevated the matter to the IPOPHL-ODG, still asserting that the holistic test may still be applied and there is no likelihood of confusion since air conditioners are not necessarily related to the hotel and resort business. The IPOPHL-BLA Director's decision even admitted that the products covered by the competing marks are not closely related to each other. Prime also points out the weakness of Adama's marks, claiming that there are 52 active registered marks containing the word "KURA" under Nice class 43 in the World Intellectual Property Organization (WIPO) trademark database, while there are only three such marks under Nice class 11.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> On February 21, 2024, the IPOPHL-ODG rendered a Decision<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> granting Prime's appeal.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The ODG found no likelihood of confusion because air conditioners are not within the normal potential expansion of Adama's business. There can be no confusion of goods or business because Adama and Prime have different product lines and businesses: </p><blockquote> <p> [T]here is a clear disparity of the goods and services offered by [Prime] and [Adama]. It is uncommon for a hotel establishment to expand its business to electronic products or cooling apparatus and incorporate its mark to the latter. Considering the variety and prices of air-conditioning apparatus in the market, an ordinary consumer is more likely to be more cautious in purchasing one. The same could be applied to the services provided by [Adama]. It is unlikely for a casual buyer to associate an air-conditioning apparatus to the services provided by a luxury hotel and resort. The ordinary purchaser must be credited with at least a modicum of intelligence and will most likely be discerning in purchasing or availing goods or services.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></p> </blockquote> <p> Adama filed a Rule 43 petition with the CA, arguing that: 1) the protection afforded by its marks should extend to air conditioners under the normal expansion of business principle because its "<i>business includes the provision of good ventilation and comfort to its clientele, which necessarily includes the usage of air conditioning units</i>" in tropical countries such as the Philippines;<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 2) the ODG failed to consider the fact that Prime's mark shares the same dominant feature as its marks;<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> and 3) there is likelihood of business or source confusion since Adama's marks cover luxury hotels and resorts where air conditioning is a main feature.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p> Commenting on the petition, Prime argued that: 1) the protection afforded by Adama's marks should extend only to the product classes covered by its Certificate of Registration;<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 2) the ODG correctly ruled that the parties' products are unrelated;<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> 3) the marks are not confusingly similar under the holistic test;<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> and 4) the ODG correctly found no likelihood of confusion given the lack of relation between the parties' products,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> the sophistication of the prospective consumers of such products,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> and the existence of marks under the same service classes in other jurisdictions that also use the word KURA.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> The CA denied Adama's petition. It determined the likelihood of confusion based on the factors raised in the parties' pleadings: 1) the resemblance of the parties' marks; 2) the relation of Adama's services with Prime's goods and the normal potential expansion of their respective businesses; 3) the good faith of Prime's application; and 4) the ordinary purchaser's discernment in purchasing or availing of the goods or services.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> Agreeing with Adama, the CA ruled that the sole test for determining similarity of marks under the IP Code is the dominancy test, and that the competing marks at bar share the word KURA as their dominant feature. The CA however ruled that commonality of dominant features is not equivalent to likelihood of confusion, which must be determined using all the factors raised by the parties.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><p> The CA sustained the ODG's findings regarding the relation of the parties' products and the scope of the normal potential expansion of their businesses, finding that "<i>it is uncommon for a hotel business to expand its business to electronic products such as air-conditioners</i>."<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> The CA further held that Adama "<i>unduly conflated</i>" the provision of ventilation with the sale and distribution of air conditioners, finding the supposed link between the two businesses tenuous.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> There was likewise no proof that Prime knew about Adama's marks when it registered its own KURA mark.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p> Finally, the CA sustained the ODG's ruling on the likelihood of confusion between the competing products in the general impression of ordinary buyers. Since air conditioners are relatively expensive goods that are bought infrequently, ordinary purchasers will exercise greater prudence in buying air conditioners. All told, there is there is no likelihood of confusion between the competing marks despite the commonality in their dominant feature.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> Adama thus elevated the matter to this Court, arguing that the CA erred in: 1) not giving due weight to its statutory right as a holder of registered marks; 2) disregarding the identity of the competing marks' dominant features and focusing solely on the differing goods and/or services of the parties; 3) ruling that there is no proximity between the goods or services of the parties and, thus finding no confusion of business or source; 4) disregarding the Doctrine on Natural Expansion of Business; 5) failing to apply totality of circumstances in assessing the likelihood of confusion; and 6) giving credence to Prime's good faith defense.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup></p><p> The errors raised by Adama all boil down to one issue: Is the registration of Prime's KURA mark likely to cause confusion between its air conditioners and the hotel and resort services and products offered by Adama under its KURA HOTEL and KURA RESORT marks? </p><p> Review under Rule 45 is limited to questions of law clearly set forth in the petition.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> The likelihood of confusion between two trademarks is a question of fact, or at the very least, a mixed question of fact and law, as it requires consideration not only of the audiovisual design of the competing marks, but also the economic and operational circumstances of the businesses selling the goods or services covered by said marks.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> This is evinced by the very factors that the CA considered in deciding Adama's petition. </p><p> In any case, We find no reversible error in the CA' s Decision. </p><p> Section 123.1(d)(ii) of the Intellectual Property (IP) Code prohibits the registration of a mark that is identical with a prior mark in respect of closely related goods and services, while Section 123.1(d)(iii) of the same code bars the registration of a mark that nearly resembles a prior mark as to be <b><i>likely to deceive or cause confusion</i></b>. In <i>Kolin Electronics Co., Inc. v. Kolin Phils. Int'l, Inc</i>.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (<i>Kolin 2-2021</i>), the Court employed a <i>multifactor</i> test to determine the registrability of a mark similar to one previously registered. It first referred to the factors expressly mentioned in the IP Code, i.e., the degree of the similarity between the marks, under Section 155.1, and second, the relatedness of the goods and services covered by the marks, as laid down in Section 123.1(d)(ii). </p><p> As regards similarity between marks, Prime's insistence on applying the holistic test is incorrect, <i>Kolin 2-2021</i> having declared such test abandoned in this jurisdiction by its omission in the IP Code and the enshrinement of the dominancy test in Section 155.1 thereof, which defines infringement as the colorable imitation of a registered mark or a <b><i>dominant</i></b> feature thereof.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Here, the three levels of the IPOPHL adjudicative machinery and the CA all agreed that Prime and Adama's marks are visually and aurally similar insofar as they share the word KURA as the dominant feature. The Court is bound by such finding. </p><p> However, in line with the multifactor approach laid down in <i>Kolin 2-2021</i>, the determination of confusing similarity between marks does not stop at a comparison of their aesthetic and semiotic characteristics. The other statutory factorârelatedness of goods or servicesâmust also be considered. </p><p> Goods and services are considered related for purposes of trademark registration when they have some functional or economic relation or similarity to another which is likely to cause confusion as to their source among ordinary purchasers if they were to be covered by the same mark or similar marks.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Case law lists several factors determinative of relatedness, such as the business and the location to which the goods belong; the class of product to which the goods belong; the product's quality, quantity, or size; the nature of the product's packaging, wrapper or container; the nature and cost of the articles; the descriptive properties, physical attributes or essential characteristics with reference to their form, composition, texture or quality; the purpose of the goods; whether the goods are daily household items bought for immediate consumption; the fields of manufacture; the conditions under which the article is usually purchased; the channels of trade through which the goods flow; how they are distributed, marketed, displayed and sold;<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> probable purchaser attitude and habits; retail outlets; and commercial impression likely to be conveyed by the marks if used in conjunction with the respective goods of the parties.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup></p><p> Clearly, the relatedness of products or services covered by competing marks is a question of fact<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> outside the scope of a Rule 45 petition. Nevertheless, in view of the divergence of opinion within the IPO, We find that the hotel and resort services covered by Adama's marks are not so related to Prime's air conditioners as to bar the registration of the latter's KURA mark. There is a fundamental difference between air conditioners and hotel or resort services. The former is a machine; a discrete and tangible commodity which is sold and packaged individually. The latter is a collection of services, i.e., "<i>useful labor that does not produce a tangible commodity</i>,"<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> a set of "<i>particular skills that [a particular set of persons have] and can offer to others," or "a business that offers a particular type of help or work</i>."<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Hotel and resort services include not only the provision of room and board, but also the collection of tasks necessary and auxiliary thereto, including, but not limited to, the furnishing and upkeep of rooms, the "<i>offering and accepting of room reservations or bookings</i>,"<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> and the provision of security to the persons and possessions of their guests.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Air conditioners are semi-permanent fixtures which are usually marketed and sold through physical stores or internet retail platforms.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> They are installed and used not only in hotels and resorts, but in any enclosed structure where electricity may be supplied and ventilation and conditioning of the ambient air is necessary or desirable.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Indeed, space cooling and ventilation is one of the top three primary uses of <b><i>residential</i></b> electricity consumption in the Philippines.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Meanwhile, most hotel and resort services can only be availed of at the hotel or resort itself, usually through prior reservation.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Such services cannot be readily purchased in physical stores in the same way as air conditioners.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Even the internet platforms for the sale of air conditioners and the booking of hotel reservations are usually distinct and separate.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup></p><p> Adama claims that air conditioners are complementary to the services covered by its marks because air conditioners are a "<i>main feature</i>"<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> of its facilities. However, complementarity under the law on trademarks pertains to complementarity or commonality not only of use, but also of marketing channels and appeal to purchasers.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> While both air conditioners and hotel/resort services indeed provide a certain level of comfort to guests, there is also nothing inherent in the nature of hotel and resort operations which precludes other means of space cooling or ventilation. Furthermore, Adama failed to support its claims that its services are bought and sold through the same marketing channels, or cover the same market, as Prime's air conditioners. </p><p> Aside from similarity of marks and proximity of products or services, the other components of the multifactor test as set forth in <i>Kolin 2-2021</i> are: 1) the strength of the plaintiff's mark; 2) the likelihood that the plaintiff will bridge the gap, or the "<i>possibility that the plaintiff will expand its product offerings to cover the product areas of the defendant</i>;" 3) evidence of actual confusion; 4) the defendant's good faith in adopting the mark; 5) the quality of defendant's product or service; and 6) the sophistication of the buyers.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> These are all factual matters outside the scope of a Rule 45 review, and We find no reversible error on the ODG and the CA's part in their consideration of the same. </p><p> First, We find that Adama's marks based on the word KURA should be considered arbitrary marks, since the listed meanings of said word<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> bear little to no relation to hotel and resort services.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Being less distinctive than only coined and fanciful marks, arbitrary marks rank high in the mark strength continuum and therefore enjoy broad protection.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> However, the other factors all militate against Adama. </p><p> Second, the CA found no bad faith in Prime's registration, as it was filed without prior knowledge of Adama's marks.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Bad faith in trademark registration means knowledge of prior creation, use, or registration of an identical or similar mark.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> Here, Adama merely charges Prime with knowledge of the KURA RESORT and KURA HOTEL marks by virtue of their prior registration.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> No other evidence was adduced to prove that Prime deliberately copied Adama's marks. </p><p> Third, Adama likewise submitted no evidence of actual confusion. While not required, proof of actual confusion is nevertheless given great weight as the law uses <i>mere</i> likelihood of confusion as the base parameter for determining trademark similarity.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup></p><p> Fourth, as correctly posited by the ODG and the CA, the natural potential expansion of Adama's business does not cover air conditioners. The normal or natural potential expansion doctrine extends the protection afforded by trademarks "<i>to all cases in which the use... of a</i> [similar] <i>trade-mark or trade-name is likely to lead to a confusion of source, as where prospective purchasers would be misled into thinking that the complaining party has extended his business into the field...; or when it forestalls the normal potential expansion of his business</i>."<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> The field of normal potential of expansion of a business corresponds to the set of goods and services related to those covered by its marks.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> As discussed above, air conditioners are not closely related to hotel and resort services as would be likely to cause source confusion among buyers. More importantly, Adama does not adduce any evidence to prove that it is normal for luxury resorts and hotels to expand into the business of selling air conditioners. </p><p> Lastly, We consider the sophistication of the buyers, specifically "<i>the ordinary purchaser, buying under the normally prevalent conditions in trade and giving the attention such purchasers usually give in buying that class of goods</i>."<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> As explained above, air conditioners and hotel/resort services are purchased and used very differently. Adama's hotel and resort services cannot be bought in the same stores as Prime's air conditioners, and vice versa. Both are expensive and may even be considered luxury goods<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> and therefore command a higher level of care and attention when purchasing. Notably, air conditioners are subject to the Philippine Energy Labeling Program, which requires every air conditioner unit sold in the market to bear a specifically-designed label indicating the brand, product model, and energy efficiency specifications of the unit being sold.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> Furthermore, the parties' competing marks are both composite marks. While they share a common dominant feature, the marks also have distinct ancillary features which ordinary purchasers of air conditioners and hotel/resort services will tend to notice. Prime's KURA mark includes a prominent half-snowflake design which is absent from Adama's marks, while Adama's marks include an emblem showing a geometric pattern of lines enclosed within a circle, which is likewise absent from Prime's mark. The competing marks also use different colors and font styles. All told, the likelihood of ordinary purchasers confusing Prime's KURA brand air conditioners as having been manufactured or sold by Adama's KURA resorts or hotels is not enough to bar the registration of the former's mark. </p><p> <b>ACCORDINGLY</b>, the present Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The September 12, 2024 Decision and the July 15, 2025 Resolution of the Court of Appeals in CA G.R. SP No. 183286 are <strong>AFFIRMED</strong>. </p><p> <b>SO ORDERED.</b></p><p> <i>Caguioa, Acting C.J. (Chairperson), Inting, Dimaampao</i>, and <i>Singh, JJ</i>., concur.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>E-rollo</i>, pp. 36-62. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 65-81. Penned by Associate Justice Emily R. AliÃ±o-Geluz and concurred in by Associate Justices Eduardo B. Peralta, Jr. and Mary Charlene V. Hernandez-Azura of the Ninth Division, Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 27-30. Penned by Associate Justice Emily R. AliÃ±o-Geluz and concurred in by Associate Justices Eduardo B. Peralta, Jr. and Mary Charlene V. Hernandez-Azura of the Former Ninth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Decision in Appeal No. 14-2023-0033, signed by Director General Rowel S. Barba. The <i>e-rollo</i> does not include a copy of the decision; but it is available online at <a href="https://onlineservices.ipophil.gov.ph/ipcaselibrary/ipcasepdf/AP_IPC_14-2023-0033.pdf.">https://onlineservices.ipophil.gov.ph/ipcaselibrary/ipcasepdf/AP_IPC_14-2023-0033.pdf.</a> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>E-rollo</i>, pp. 38, 66, 145-146. Petition for Review, CA Decision, and Memorandum of Appeal.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 132-135. Certificates of Registration. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 92. Petition for Review before the CA. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 120-123. Verified Opposition.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 124-126.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 140, 146-147. BLA-IPO Adjudicator's Decision, Appeal Memorandum. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 139-142. The Decision was signed by Adjudication Officer (now Presiding Judge of Branch 4, Municipal Trial Court in Cities, Antipolo City) Z'sa May B. Subejano-Pe Lim of the IPOPHL-BLA.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 142. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 141-142.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 142.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 144-161. Notice of Appeal with Memorandum of Appeal. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 148-150. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 150-152. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 152-154. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 154-160. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 172-174. Comment/Opposition to Memorandum of Appeal. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 174-175.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 175-178. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 185-190. Decision No. AD-2023/6048 dated May 30, 2023. Signed by Director Nathaniel S. Arevalo of the IPOPHL-BLA. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 187-188. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 188-190. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 196-213. Appeal Memorandum. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Decision in Appeal No. 14-2023-0033, signed by Director General Rowel S. Barba, available from the IPOPHL IP Case Library at <a href="https://onlineservices.ipophil.gov.ph/ipcaselibrary/ipcasepdf/AP_IPC_14-2023-0033.pdf.">https://onlineservices.ipophil.gov.ph/ipcaselibrary/ipcasepdf/AP_IPC_14-2023-0033.pdf.</a> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 4. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>E-rollo</i>, p. 96. Petition for Review before the CA. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 97-99, 102-103. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 99-102. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 252-254. Prime's Comment. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 254-255. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 256-261. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 261-262, 267-271. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 262-263. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 263-264, 266. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 74-75. CA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 75-78. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 78. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 78-79. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 79. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 79-80. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 45-46. Petition for Review. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> RULES OF COURT, Rule 45, sec. 1. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Philip Morris, Inc. v. Fortune Tobacco Corp.</b>, 526 Phil. 300, 319 (2006) [Per J. Garcia, Second Division]; <b>Emerald Garment Mfg. Corp. v. Court of Appeals</b>, 321 Phil. 1001, 1014-1015 (1995) [Per J. Kapunan, First Division]. <i>See also</i> Janet Shiffer Thomas, <i>Likelihood of Confusion Under the Lanham Act: A Question of Fact, a Question of Law, or Both?</i> 73 KY. L.J. 235 (1984). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 896 Phil. 190 (2021) [Per J. Caguioa, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 218-220. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Phil. Refining Co. v. Ng Sam</b>, 201 Phil. 61, 66-67 (1982) [Per J. Escolin, Second Division]; <b>Mighty Corp. v. E. &amp; J. Gallo Winery</b>, 478 Phil. 615, 661-662 (2004) [Per J. Corona, Third Division]; Vicente B. Amador, INTELLECTUAL PROPERTY FUNDAMENTALS 36 (2007). <i>See also</i> United States Patent and Trademark Office, Trademark Manual of Examining Procedure Â§1207.01(a)(i) (November 2025). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>Mighty Corporalion v. E. &amp; J. Gallo Winery</b>, <i>id.</i> at 662-663. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>Phil. Refining Co. v. Ng Sam</b>, 201 Phil. 61, 66-67 (1982) [Per J. Escolin, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Mighty Corp. v. E. &amp; J. Gallo Winery</b>, 478 Phil. 615, 663 (2004) [Per J. Corona, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Merriam-Webster, Inc., <i>SERVICE Definition &amp; Meaning</i> - <i>Merriam-Webster, available at</i> https://www.merriam-webster.com/dictionary/service (last accessed on February 12, 2026). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Cambridge University Press &amp; Assessment, <i>SERVICE definition in the Cambridge English Dictionary, available at</i> <a href="https://dictionary.cambridge.org/us/dictionary/english/service">https://dictionary.cambridge.org/us/dictionary/english/service</a> (last accessed on February 12, 2026). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>W Land Holdings, Inc. v. Starwood Hotels and Resorts, Worldwide, Inc.</b>, 822 Phil. 23, 44 (2017) [Per J. Perlas-Bernabe, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Makati Shangri-La Hotel and Resort, Inc. v. Harper</b>, 693 Phil. 596, 628 (2012) [Per J. Bersamin, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>E-rollo</i>, p. 270. Prime's comment before the CA. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 269-270. </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Philippine Statistics Authority, 2011 HOUSEHOLD ENERGY CONSUMPTION SURVEY FINAL REPORT 22 (2011), available online at <a href="https://library.psa.gov.ph/cgi-bin/koha/opac-retrieve-file.pl?id=d1c4db290049856f85be15cde992dd16">https://library.psa.gov.ph/cgi-bin/koha/opac-retrieve-file.pl?id=d1c4db290049856f85be15cde992dd16</a> (last accessed on February 14, 2026). <i>See also</i> Miwa Nakai, Naonari Yajima &amp; Majah-Leah Ravago, <i>Cooling the tropics sustainably: Evidence from a choice experiment on energy efficient air conditioners in the Philippines</i>, 148 ENERGY ECONOMICS, article no. 108582 (2025), p. 1, available on line at <a href="https://doi.org/10.1016/j.eneco.2025.108582">https://doi.org/10.1016/j.eneco.2025.108582</a> (last accessed on February 13, 2026). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>E-rollo</i>, pp. 203 &amp; 270. Prime's Appeal Memorandum before the IPO-ODG and Comment before the CA; <b>W Land Holdings, Inc. v. Starwood Hotels and Resorts, Worldwide, Inc.</b>, 822 Phil. 23, 44 (2017) [Per J. Perlas-Bernabe, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 214 &amp; 270. Prime's Appeal Memorandum before the IPO-ODG and Comment before the CA; <b>W Land Holdings, Inc. v. Starwood Hotels and Resorts, Worldwide, Inc.</b>, <i>id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 50. Petition for Review. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 229 (2021) [Per J. Caguioa, <i>En Banc</i>], <i>citing Hewlett-Packard Development Company, L.P. v. Vudu, Inc.</i>, Opp. No. 91185393 (T.T.A.B. October 26, 2009). <i>See also</i> United States Patent and Trademark Office, Trademark Manual of Examining Procedure Â§1207.01(a)(vi) (November 2025). </p><p><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 215 &amp; 231 (2021) [Per J. Caguioa, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>E-rollo</i>, pp. 148-149. Prime's Appeal Memorandum before the IPO-BLA Director. </p><p><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>Ginebra San Miguel, Inc. v. Director of the Bureau of Trademarks</b>, 927 Phil. 355, 384-385 (2022) [Per C.J. Gesmundo, <i>En Banc</i>]. <i>See also</i> <b>Romero v. Maiden Form Brasserie Co.</b>, 119 Phil. 829, 832 (1964) [Per J. Barrera, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Ginebra San Miguel, Inc. v. Director of the Bureau of Trademarks</b>, <i>id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>E-rollo</i>, p. 79. CA Decision. </p><p><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Cymar International, Inc. v. Farling Industrial Co., Ltd.</b>, 928 Phil. 498, 554 (2022) [Per J. Gaerlan, Third Division]; <b>Zuneca Pharmaceutical v. Natrapharm, Inc.</b>, 882 Phil. 278, 338-339 (2020) [Per J. Caguioa, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>E-rollo</i>, pp. 53-56. Petition for Review. </p><p><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 230 (2021) [Per J. Caguioa, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>McDonald's Corporation v. LC Big Mak Burger, Inc.</b>, 480 Phil. 402, 432 (2004) [Per J. Carpio, First Division], <i>quoting</i> <b>Sta. Ana v. Maliwat</b>, 133 Phil. 1006, 1013 (1968) [Per J. J.B.L. Reyes, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 230-231 (2021) [Per J. Caguioa, <i>En Banc</i>]."<i>The [expansion-of-trade] doctrine is typically applied in inter partes proceedings where an opposer claims that its priority of use of a mark with respect to its goods/services should be extended to include applicant's goods/services because they are in the natural scope of expansion of opposer's goods/services... [B]ecause "an earlier registration does not establish priority for a later application when the goods or services are different, "the expansion-of-trade doctrine may only be used "to prevent junior users from registering similar marks on goods[/services] in a senior user's zone of natural expansion," but not "to establish priority in different goods or services').</i>" United States Patent and Trademark Office, TRADEMARK MANUAL OF EXAMINING PROCEDURE Â§1207.01(a)(v) (November 2025). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, id at 231-232. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> The 2011 PSA Household Electronics Consumption Survey reported that 12.9% of all households surveyed used air conditioners at home. The percentage of household air conditioner use generally increased with income, with 64.5% of households with income of PHP 100,000 and over reporting air conditioner use, compared to 2.0% of households with income of PHP 10,000 to PHP 29,999. Philippine Statistics Authority, Philippine Statistics Authority. 2011 HOUSEHOLD ENERGY CONSUMPTION SURVEY FINAL REPORT 22 (2011), available online at <a href="https://library.psa.gov.ph/cgi-bin/koha/opac-retrieve-file.pl?id=d1c4db290049856f85be15cde992dd16">https://library.psa.gov.ph/cgi-bin/koha/opac-retrieve-file.pl?id=d1c4db290049856f85be15cde992dd16</a> (last accessed on February 14, 2026). </p><p><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> DOE Circular No. DC2020-060115 (2020), sec. 5; Implementing Guidelines of the Philippine Energy Labeling Program for Air Conditioners.&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

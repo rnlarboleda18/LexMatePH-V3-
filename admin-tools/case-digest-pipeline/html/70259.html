@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 273354 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX ([CA-G.R. CR HC NO. 17123] RTC CRIMINAL CASE NO. 10273483), ACCUSED-APPEllANT.*D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70259' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 273354, October 29, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX ([CA-G.R. CR HC NO. 17123] RTC CRIMINAL CASE NO. 10273483), ACCUSED-APPEllANT.<SUP STYLE="COLOR: RGB(255, 0, 0);">*</sup><br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is the Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> of accused-appellant XXX challenging the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated January 10, 2024 by the Court of Appeals (CA) in CA-G.R. CR HC No. 17123. The CA affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated May 27, 2022 of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> of the Regional Trial Court (RTC) of Manila City which found XXX guilty beyond reasonable doubt of the crime of parricide penalized under Article 246 of the Revised Penal Code and sentenced her to suffer the penalty of <i>reclusion perpetua</i>.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br><center><b>The Facts</b></center><br>The case stemmed from an Information filed before the RTC, charging XXX with parricide defined and penalized under Article 246 of the Revised Penal Code. The accusatory portion of which reads:<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><blockquote>That on or about January 19, 2010, in the City of Manila. Philippines, the said accused, did then and there willfully, unlawfully[,] and feloniously, with intent to kill, assault and use personal violence upon one [AAA (victim)], a minor, 5 years old, her daughter, by then and there carrying her and simultaneously jumping into the river along <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Bridge, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, this City, thereby causing upon the said [victim] asphyxia by drowning, which was the direct and immediate cause of her death thereafter.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></blockquote>Upon arraignment, XXX pleaded not guilty. During the Pre-Trial Conference, the parties stipulated that the accused is the same person changed in the Information.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Thereafter trial ensued.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br><i>Version of the Prosecution</i><br><br>The prosecution presented the following witnesses: (1) Police Officer 1 Gerry Amores (PO1 Amores), one of the apprehending officers; (2) BBB, the father of the victim and the live-in partner of XXX; (3) Senior Police Officer 2 Paul Dennis Javier (SPO2 Javier), also a member of the apprehending team; (4) Emily Gaviola (Gaviola), an eyewitness; and (5) Nancito Moreno (Moreno), also an eyewitnesses to the incident.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>According to BBB, in the morning of January 19, 2010, XXX asked permission from him that she will be going to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> together with their 5-year-old daughter, AAA.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> XXX then left together with AAA. At around 8:30 a.m., Gaviolaâwho was scavenging at the side of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Manila City, saw XXX letting her daughter stand at the side of the bridge. XXX then stood at the top of the bridge, grabbed her daughter and also had her stand on top of the bridge.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Thereafter, Gaviola saw XXX jump off the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> with her daughter. Gaviola described XXX as embracing her daughter when she jumped together with her.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>At the time, Moreno was scavenging along Pasig River, near the area of Fort Santiago on board his styrofoam <i>banca</i>.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> While he was scavenging, Moreno heard shouting coming from people at the top of Delpan Bridge asking for help. Moreno then saw XXX drowning and he immediately went to her. Moreno was able to save XXX from drowning and brought her to the "<i>pantalan</i>."<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Moreno then left XXX to the care of the persons at the "<i>pantalan</i>." Moreno was told that XXX jumped off the Delpan Bridge with her daughter. Thus, while on his way home on his <i>banca</i>, Moreno tried looking for XXX's daughter to no avail.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The following day, he heard people shouting near his house crying out that a child was found in the river.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Moreno saw the lifeless body of the child, which turned out to be XXX's daughter, as it was fetched from the river. Moreno noted that it was very far from where XXX had jumped.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>BBB was informed by a certain Russel Pranada that XXX was saved from Pasig River. BBB then proceeded to the coastguard office and saw XXX but was not able to talk to her properly as she was being assisted to the hospital. BBB did not see his daughter with XXX. It was only the next day that he was informed by the coastguard that the body of her daughter was recovered.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br><i>Version of the Defense</i><br><br>For her part, XXX presented the following witnesses: (1) XXX herself; (2) Dr. Sixto Bravo, Jr. (Dr. Bravo), a licensed physician from the National Center for Mental Health (NCMH) who examined accused XXX; (3) Junior Inspector Joy Manzo (JINSP. Manzo); and (4) Dr. Mary Ann Linn (Dr. Linn).<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The defense likewise offered the following pieces of evidence: (1) Mental Assessment Report dated November 15, 2018; (2) <i>Curriculum Vitae</i> of Dr. Bravo; (3) Initial Report dated May 29, 2013; and (4) Mental Status Examination Report dated March 8, 2013.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>XXX denied that she killed her daughter and that she was not herself at the time of the incident. XXX testified that she remembered walking with her daughter on <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> but that she could not remember anything after. XXX claimed that she only regained consciousness when she was already floating in the water.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> XXX narrated that she only found out that her daughter was dead when she was informed of it by her live-in partner, BBB. XXX emphasized that she was not in her right mind at the time.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>The defense presented Dr. Bravo from the NCMH, who testified that they were directed by the RTC to conduct an examination of accused XXX to determine if she was fit to stand trial. Dr. Bravo recalls that in 2018, he conducted a 30-minute assessment of XXX.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> He stated that based on their records, XXX was brought to the NCMH for consultation as an outpatient as early as August 13, 2010 but that he did not know the reason therefor.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Dr. Bravo narrated that based on the patient's history, XXX was evaluated at the NCMH in 2010 and thereafter, the findings of which were contained in the Mental Status Examination Report dated March 8, 2013 where it stated that XXX was found to be suffering from "schizophrenia."<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Dr. Bravo affirmed that he was not the one who prepared the 2013 report and that he merely identified the findings thereat. Nevertheless, Dr. Bravo confirmed that after his examination, XXX was indeed suffering from schizophrenia which he described in his Mental Assessment Report dated November 15, 2018. However, despite his findings, Dr. Bravo concluded that XXX was competent to stand the rigors of court trial.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>The findings of Dr. Bravo were based on his assessment and the patient's history.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>With respect to JINSP. Manzo and Dr. Linn, the parties stipulated on their testimonies that both were physicians and/or psychologists who conducted mental evaluation on accused.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>In particular, the parties stipulated that if presented, Dr. Linn would testify, among others the following: (1) On August 13, 2010; September 1, 2010; and April 26, 2013, Dr. Linn together with Dr. Zara Espinosa (DR. Espinosa) and Dr. Edison Galindez (Dr. Galindez) conducted a mental status examination and psychiatric evaluation of XXX; (2) pursuant to the mental status examination that they conducted a Report dated May 29, 2013 was prepared; and (3) that the said Report indicated that XXX was found to be suffering from psychosis classified as schizophrenia.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br><center><b>Ruling of the RTC</b></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> dated May 27, 2022 the RTC found XXX guilty beyond reasonable doubt of the crime of parricide under Article 246 of the Revised Penal Code and sentenced to suffer the penalty of <i>reclusion perpetua</i>. The dispositive portion of the RTC Decision reads:<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><blockquote>WHEREFORE, the court finds XXX GUILTY beyond reasonable doubt for the crime of Parricide under Article 246 of the Revised Penal Code and is hereby sentenced to suffer the penalty of <i>reclusion perpetua</i>. The accused is hereby ordered to pay the heirs of minor AAA the amount of [PHP] 75,000.00 as civil indemnity, [PHP] 75,000.00 as moral damages, and [PHP] 75,000.00 as exemplary damages.<br><br>All monetary awards for damages shall earn interest at the legal rate of six percent (6%) <i>per annum</i> from the date of finality of this judgment until fully paid.<br><br>Cost against the accused.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></blockquote>According to the RTC, the prosecution was able to establish all the elements of parricide. In particular, XXX's intent to cause harm to her daughter was demonstrated when she jumped off <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> while she embraced her 5-year-old daughter.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>The RTC brushed aside XXX's claim of insanity as an exempting circumstance.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> The RTC remarked that during arraignment, XXX entered a plea of "not guilty," and that she only raised insanity as a defense only after the prosecution had already rested its case and after the prosecution's formal offer of evidence had been admitted by the RTC.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> It was only then that counsel for accused XXX filed an Urgent Motion for Medical Examination, which was granted by the court.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> In the Urgent Motion, counsel for XXX manifested that "during the arraignment of [XXX] [s]he exhibited obstreperous and disturbed behavior which put to doubt [her] mental capacity to undergo trial."<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>The RTC held that none of the witnesses presented by the defense declared that XXX exhibited any of the symptoms associated with schizophrenia immediately before or simultaneous with the incident on January 19, 2010.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Thus, in the absence of evidence to the contrary, the RTC concluded that XXX was sane when she jumped off Delpan Bridge while she was embracing her 5-year-old daughter.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>Aggrieved, XXX filed a Notice of Appeal<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> dated June 6, 2022 which was given due course by the RTC in its Order<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> dated June 8, 2022.<br><br><center><b>Ruling of the CA</b></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> dated January 10, 2024 the CA denied XXX's appeal and affirmed the RTC's finding of guilt beyond reasonable doubt of the crime of parricide under Article 246 of the Revised Penal Code. The dispositive portion of the CA Decision reads:<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><blockquote>WHEREFORE, the appeal is DENIED. The May 27, 2022 Decision of the Regional Trial Court, National Capital Judicial Region, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Manila, in Criminal Case No. 10273483, finding accused XXX guilty beyond reasonable doubt for the crime of Parricide punishable under Article 246 of the Revised Penal Code.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></blockquote>The CA affirmed the findings of facts and conclusions of the RTC. The CA similarly found that accused failed to present sufficient evidence to establish that she was indeed suffering from insanity at the time of the commission of the felony.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>Thus, accused filed a Notice of Appeal<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> dated February 8, 2024, which was given due course by the CA in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> dated February 26, 2024.<br><br>Upon receipt of the records forwarded by the CA, the Court issued Resolution dated August 19, 2024 notifying the parties that they may file their respective Supplemental Briefs, should they so desire.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>On February 11, 2025, XXX through counsel filed a Manifestation dated February 10, 2025, stating that she will no longer file a supplemental brief considering that her arguments have already been raised in her Appellant's Brief.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> On March 3, 2025, the People of the Philippines, through the Office of the Solicitor General filed a similar manifestation.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br><center><b>Ruling</b></center><br>The Court finds the instant Appeal meritorious.<br><br>Well-settled is the doctrine that the factual findings of the trial court are entitled to great weight and respect, especially when they are affirmed by the appellate court.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> However, the Court has recognized certain exceptions<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> justifying factual review, including when the "judgment of the [CA] is based on a misapprehension of facts." Moreover, an appeal in criminal cases throws the whole case open for review.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Thus, the appellate court has the competence to examine records, revise the judgment appealed from, increase the penalty, and cite the proper provision of the penal law.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>After a judicious review of the case, the Court finds compelling reason to overturn the conviction of XXX.<br><br>In view of XXX's invocation of the exempting circumstance of insanity, the primordial issue before the Court is whether XXX has sufficiently established insanity to exempt her from criminal liability for the crime of parricide.<br><br>Article 12 of the Revised Penal Code provides that one of the circumstances which exempts a person from criminal liability is insanity, unless they have acted during a lucid interval to wit:<blockquote>Article 12. Circumstances which exempt from criminal liability. â The following are exempt from criminal liability:<br><br>1. An imbecile or an insane person, unless the latter has acted during a lucid interval.<br><br>When the imbecile or an insane person has committed an act which the law defines as a felony (delito), the court shall order his confinement in one of the hospitals or asylums established for persons thus afflicted, which he shall not be permitted to leave without first obtaining the permission of the same court.</blockquote>Insanity is defined as "a manifestation in language or conduct of disease or defect of the brain, or a more or less permanently diseased or disordered condition of the mentality, functional or organic, and characterized by perversion, inhibition, or disordered function of the sensory or of the intellective faculties, or by impaired or disordered volition."<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>Since 1950, the Court's ruling in <i>People v. Formigones</i><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> had remained relatively undisturbed which held that insanity as an exempting circumstance should be "deprived completely of reason or discernment and freedom of the will at the time of committing the crime."<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> The <i>Formigones</i> doctrine was further expounded in <i>People v. Rafanan, Jr.</i><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> resulting in the formulation of two distinguishable tests (a) the test of cognitionâ"complete deprivation of intelligence in committing the [criminal] act," and (b) the test of volitionâ"or that there be a total deprivation of freedom of the will."<br><br>However, the Court <i>En Banc</i>, in <i>People v. PaÃ±a</i>,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> revisited <i>Formigones</i> and succeeding cases. Thus, PaÃ±a has set forth new standards in establishing insanity as an exempting circumstance using the three-way test: <i>first</i>, insanity must be present at the time of the commission of the crime; <i>second</i>, insanity, which is the primary cause of the criminal act, must be medically proven; and <i>third</i>, the effect of the insanity is the inability to appreciate the nature and quality or wrongfulness of the act.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>Notably, since the law presumes all persons to be of sound mind, insanity is the exception rather than the general rule.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> In claiming insanity, an accused admits the commission of the criminal act but seeks exemption from criminal liability due to lack of voluntariness or intelligence.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Thus, it is incumbent upon the accused to prove insanity by clear and convincing evidence.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Considering that insanity refers to an individual's state of mind, it can only be proven through overt acts.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Courts, therefore, can only consider evidence relating to the behavioral patterns of the accused to determine whether they are legally insane.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>In order to prove insanity, the same must be shown medically, unless there are extraordinary circumstances and there is no other evidence available. Our procedural rules allow ordinary witnesses to testify on the mental sanity of a person with whom [they are] sufficiently acquainted, but reports and evaluation from medical experts have greater evidentiary value in determining an accused's mental state. The nature and degree of an accused's mental illness can be best identified by medical experts equipped with specialized knowledge to diagnose a person's mental health.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>As astutely pointed out by Associate Justice Alfredo Benjamin S. Caguioa, a reexamination of the rulings of the RTC and the CA in relation to the evidence on record would yield to a different conclusion. <b><i>Thus, after carefully combing through the records and the submission of the parties and applying the standards established in PaÃ±a, the Court finds XXX exempt from criminal liability.</i></b><br><br>XXX was able to medically prove that she was suffering from <i>schizophrenia</i> at the time of the commission of the crime.<br><br>The defense presented Dr. Linn who, together with Dr. Espinosa and Dr. Galindez conducted an examination of XXX in August 13, 2010; September 1, 2010; and April 26, 2013. According to the testimony of Dr. Linn, XXX had been experiencing symptoms as early as 2004:&nbsp;&nbsp;<blockquote><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="2"><div align="justify">Court</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="95%"><div align="justify">&nbsp;</div></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Okay. The court has one question.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Dr. Linn, from your examination of XXX, have you found out since when was she suffered psychosis because she was ...</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">I think it is written in the Report on April 26, 2013, I myself have examined her during that time, <b>that she said those thought disturbances occurred sometimes since 2004</b>, [Y]our Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Since 2004?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">If you will check the court report that we have submitted it is written there, [Y]our Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Would you have any procedure to verify whether she had actually suffered the symptoms since 2004 prior to your examination of XXX?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Your Honor, we have no other way of finding the exact dates except from the patient. However, during the evaluation and prior to giving you the Report[,] three (3) accredited psychiatrists have conducted interview. Likewise, we also have psychologists to do a pen and paper test for her. <b>So, the results came out that she is suffering from psychosis</b>, [Y]our Honor.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup></div></td></tr></tbody></table></blockquote>After the conduct of examination, the examining psychiatrists prepared the Mental Status Examination Report dated March 8, 2013 which contained their findings that XXX was found to be suffering from schizophrenia.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> The foregoing findings were later on confirmed by the examination conducted by Dr. Bravo much later in 2018 wherein he also found that XXX was suffering from Schizophrenia.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>The Court observes that the RTC in denying the claim of insanity made the conclusion that none of the witnesses testified that accused exhibited symptoms immediately before or simultaneous to the incident:<blockquote>In this regard, none of the witnesses presented by the accused declared that she exhibited any of the symptoms associated with schizophrenia immediately before or simultaneous with the incident on January 19, 2010 â jumping off the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> incident. None of the doctors (psychiatrist/psychologist) presented by the defense was able to present evidence that the accused was already suffering from schizophrenia before January 19, 2010 or during January 19, 2010, the time of the subject incident.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup></blockquote>On this score, the Court stressed in <i>Ruiz v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> that having a documented history of a psychiatric condition is not, and should never be, an element required to prove legal insanity. Prior psychiatric records could not establish insanity at the precise time of the commission of the crime because, for obvious reasons, medical reports from doctors prior to the commission of the crime cannot be considered as having been rendered immediately before the commission of the crime, unless the facts clearly establish so.<br><br>Finally, the third requisite of PaÃ±a, states that the effect of the insanity is the inability to appreciate the nature and quality or wrongfulness of the act.<br><br>Schizophrenia has been described as a chronic mental disorder characterized by inability to distinguish between fantasy and reality, and often accompanied by hallucinations and delusions.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> It is a medical condition which deprives a person of discernment.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup><br><br>The observations made by Dr. Linn confirmed that:&nbsp;&nbsp;<blockquote><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">Q:</div></td><td width="95%"><div align="justify">As an expert witness, how would you know the times that she recognized her loved ones in a normal manner and that she recognized her loved ones in her own reality?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Very pronounced po ang different [Y]our Honor. The psychosis itself, the illness, the mental illness itself[,] there is really a change from previous functioning of the patient.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Sorry[,] Doctor[,] but I have to know. Did XXX talk to you about the instance that she has a daughter?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes, [Y]our Honor. Sinabi niya po [na may anak siyang] dalawa.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And did she tell you about the instance that she was with her daughter when she jump-off a river?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes, [Y]our Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Okay. That instances that she told you about, <b>would you know, since she remembered the same that when she was in that instance that she jump-off the river that she was on her normal disposition or that she was having a psychosis attack?</b></div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">According to her responses to us[,] <b>there may be a reason to think that she may be experiencing disturbances at that time</b>. If you will refer back to my Report on April 26[,] <i>nakalagay po kasi doon</i> <b>she demonstrated paranoid ideation. <i>She felt na may nagtatangka, nagbabanta, nagtsitsismis, naiinggit</i>, [Y]our Honor.</b></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And what is the effect to a person who is suffering from psychosis?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Your Honor, psychosis in layman's word means <b>[a] break with reality</b>. So, the <b>judgment of the patient is impaired</b>, likewise the prostration tolerance, social judgment, like those things <i>po</i>.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify"><b>And would she recognize her loved [ones]?</b></div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify"><b>Sometimes they cannot, because they have [a] different way of perceiving their surroundings, or [an] inaccurate way of perceiving their surroundings <i>po</i>.</b><sup style="COLOR: RGB(255, 0, 0);">[74]</sup></div></td></tr></tbody></table></blockquote>Moreover, the testimony of XXX further reveals what her state of mind was at the time of the incident. She testified that she was at the Manila City Jail, Female Dormitory because "<i>Nakagawa ako ng kasalanan</i>[.]" The <i>kasalanan</i> she was referring to was her attempt to commit suicide. She further testified that "she was not herself" and "she was not in her right mind."<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>Accordingly, taking into account the foregoing circumstances, the Court is convinced that at the time of the incident, XXX's mental state deprived her of the ability to appreciate the nature and wrongfulness of her act. Thus, she is exempt from criminal liability under Article 12(1) of the Revised Penal Code.<br><br>Notably, although the Court exempts XXX from criminal liability, she is nevertheless still liable for civil liability and other damages considering that a criminal act was nonetheless committed.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>Consistent with prevailing jurisprudence,<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> the RTC and the CA correctly awarded the amounts of PHP 75,000.00 as civil indemnity, PHP 75,000.00 as moral damages and PHP 75,000.00 as exemplary damages. However, the Court deems it proper to award temperate damages in the amount of PHP 50,000.00. The award of temperate damages is proper when no evidence of actual damages such as burial and funeral expenses are presented in the trial court as it cannot be denied that the heirs of the victims suffered pecuniary loss although the exact amount was not proved.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup><br><br>Finally, the imposition of legal interest at the rate of 6% per annum on all monetary awards for damages from the date of finality of the Court's ruling until full satisfaction is affirmed.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br><b>ACCORDINGLY</b>, the Appeal is <b>GRANTED</b>. The Decision dated January 10, 2024 of the Court of Appeals in CA-G.R. CR HC No. 17123 is <b>REVERSED</b> and <b>SET ASIDE</b>. Accused-appellant XXX is hereby <b>ACQUITTED</b> of the crime of parricide under Article 246 of the Revised Penal Code on the ground of legal insanity as defined under Article 12(1) of the Revised Penal Code. Consequently, the Superintendent of the Correctional Institution for Women, Mandaluyong City is <b>ORDERED to IMMEDIATELY TRANSFER</b> accused-appellant XXX to the National Center for Mental Health, Mandaluyong City. The Medical Center Chief of the National Center for Mental Health is <b>ORDERED</b> to <b>CONFINE</b> accused-appellant XXX for her treatment, and shall be released only upon the order of the Regional Trial Court acting on a recommendation from her attending physician from the hospital.<br><br>Accused-appellant XXX is <b>ORDERED to pay</b> the heirs of AAA the amounts of PHP 75,000.00 as civil indemnity, PHP 75,000.00 as moral damages, PHP 75,000.00 as exemplary damages, and PHP 50,000.00 as temperate damages. Legal interest of 6% per annum is imposed on all damages awarded from the date of finality of this Decision until fully paid.<br><br>Let a copy of this Decision be furnished to the Superintendent of the Correctional Institution for Women and to the Medical Center Chief of the National Center for Mental Health for immediate implementation. The said Superintendent and Medical Center Chief is <b>ORDERED</b> to <b>REPORT</b> to the Court, within five days from receipt of this Decision, of the action taken.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Dimaampao</i>, and <i>Singh, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with the Amended Administrative Circular No. 83-2015 dated September 5, 2017, titled "Protocols and Procedures In The Promulgation, Publication, and Posting On The Websites Of Decisions, Final Resolutions, and Final Orders Using Fictitious Names/Personal Circumstances," the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential io protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-6.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 8-36. Penned by Associate Justice Perpetua Susana T. Atal-PaÃ±o and concurred in by Associate Justices Marlene B. Gonzales-Sison and Maximo M. De Leon of the Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 38-56. Penned by Presiding Judge Mariesther B. VedaÃ±a.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 10.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 10-11.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 15-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 21-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 38-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 52.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> CA <i>rollo</i>, pp. 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Rollo</i>, pp. 8-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 25-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> CA <i>rollo</i>, pp. 133-134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 137.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 59-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 63-64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Villarba v. Court of Appeals</b>, 874 Phil. 84, 108 (2020) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>Concha v. People</b>, 841 Phil. 214, 228 (2018) [Per J. Leonen, Third Division] enumerates the following exceptions:<blockquote>(1) when there is grave abuse of discretion; (2) when the findings are grounded on speculations; (3) when the inference made is manifestly mistaken; (4) when the judgment of the Court of Appeals is based on a misapprehension of facts; (5) when the factual findings are conflicting; (6) when the Court of Appeals went beyond the issues of the case and its findings are contrary' to the admissions of the parties; (7) when the Court of Appeals overlooked undisputed facts which, if properly considered, would justify a different conclusion; (8) when the findings of the Court of Appeals are contrary to those of the trial court; (9) when the facts set forth by the petitioner are not disputed by the respondent; and (10) when the findings of the Court of Appeals are premised on the absence of evidence and are contradicted by the evidence on record.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>People v. Ygoy</b>, 858 Phil. 1026, 1036 (2019) [Per C.J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>People v. Comboy</b>, 782 Phil. 187, 196 (2016) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>People v. Calines</b>, 952 Phil. 576, 587 (2024) [Per J. Kho, Jr., Second Division]; <b>People v. PaÃ±a</b>, 890 Phil. 533, 546-547 (2020) [Per J. Leonen, <i>En Banc</i>]; <b>People v. Ambal</b>, 188 Phil. 372, 377 (1980) [Per J. Aquino, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> 87 Phil. 658 (1950) [Per J. Montemayor, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 660.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> 281 Phil. 66 (1991) [Per J. Feliciano, First Division]; <b>People v. PaÃ±a</b>, 890 Phil. 533 (2020) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 573.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>People v. Aldemita</b>, 229 Phil. 448 (1986) [Per J. Narvasa, <i>En Banc</i>]; <b>People v. PaÃ±a</b>, <i>id.</i> at 546.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>People v. PaÃ±a</b>, <i>id.</i>; <b>People v. Renegado</b>, 156 Phil. 260 (1974) [Per J. MuÃ±oz-Palma, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>Ruiz v. People</b>, 959 Phil. 280, 288 (2024) [Per J. Caguioa, Third Division]; <b>People v. PaÃ±a</b>, <i>id.</i> at 568; <b>People v. Austria</b>, 328 Phil. 1208, 1222 (1996) [Per J. Romero, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>Ruiz v. People</b>, <i>id.</i>; <b>People v. Bonoan</b>, 64 Phil. 87, 91-93 (1937) [Per J. Laurel, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Ruiz v. People</b>, <i>id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>People v. PaÃ±a</b>, 890 Phil. 533, 569 (2020) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> CA <i>rollo</i>, pp. 40-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Rollo</i>, p. 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> 959 Phil. 280, 308 (2024) [Per J. Caguioa, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>People v. Rafanan, Jr.</b>, 281 Phil. 66, 79-80 (1991) [Per J. Feliciano, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>Ruiz v. People</b>, 959 Phil. 280, 305 (2024) [Per J. Caguioa, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> CA <i>rollo</i>, pp. 43-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Rollo</i>, pp. 18-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>Ruiz v. People</b>, 959 Phil. 280, 308 (2024) [Per J. Caguioa, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>People v Jugueta</b>, 783 Phil. 806 (2016) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <b>People v. Bragais</b>, 956 Phil. 694, 724 (2024) [Per J. Leonen, Second Division]; <b>People v. Delos Santos, Jr.</b>, 889 Phil. 482, 490 (2020) [Per J. Lazaro-Javier, Second Division]; <b>People v. Jugueta</b>,<i> id.</i> at 846-847 (2016) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>People v. Jugueta</b>, <i>id.</i> at 848.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 272830 - HERLYN SABAY FERRER, PETITIONER, VS. GENPACT LLC AND TIGER TYAGARAJAN, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70324' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 272830, February 24, 2026 ]</H2>
+			<H3>HERLYN SABAY FERRER, PETITIONER, VS. GENPACT LLC AND TIGER TYAGARAJAN, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>For the resolution of this Court is the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by petitioner Herlyn Sabay Ferrer (Ferrer), assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated October 7, 2023 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated January 25, 2024 of the Court of Appeals (CA) in CA-G.R. SP No. 166118. The CA affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated October 31, 2019 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated February 28, 2020 of the National Labor Relations Commission (NLRC), affirming the Decision<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> dated April 17, 2019 of the Labor Arbiter (LA), dismissing Ferrer's Complaint<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> for Constructive Dismissal.</p><p align="center"> <b>Factual Antecedents</b> </p><p> The instant case stemmed from a complaint filed by Ferrer against respondents Genpact LLC (Genpact) and Tiger Tyagarajan (Tyagarajan) for illegal dismissal; non-payment of salary, overtime pay, holiday pay, holiday premium, rest day premium, service incentive leave, night shift differential, and separate pay, with concomitant claim for damages and attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> Ferrer alleged that she began working for Genpact on September 28, 2016 as a Process Associate, as shown by her Appointment Letter<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> dated September 9, 2016. She claimed that the working environment at Genpact was undesirable, stating that her coworkers bullied, insulted, and humiliated her.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> She further asserted that Genpact assigned her additional tasks outside her regular workload and that her daily reports and office files were hacked, edited, and deleted.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Despite reporting these incidents, Ferrer asserted that no action was taken by Genpact.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> On September 5, 2017, Ferrer submitted a letter<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> informing Genpact of her decision to resign.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Genpact accepted her resignation through a letter<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> dated October 3, 2017.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> On November 26, 2018, Ferrer filed the above complaint before the LA, maintaining that she was illegally dismissed, as her experiences at Genpact rendered continued employment impossible, unreasonable, and unlikely.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> In their Position Paper, Genpact and Tyagarajan confirmed that Ferrer was hired as a Process Associate, through an Appointment Letter.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> They stated that on September 5, 2017, Ferrer submitted a letter to the Human Resources Department of Genpact, informing of her resignation. Genpact accepted her resignation through a letter dated October 3, 2017.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> Genpact and Tyagarajan further claimed that on January 25, 2018, Ferrer received her final pay in the total amount of PHP 20,843.01, through Banco de Oro (BDO) Check No. 0001122813, dated December 8, 2017, and that she executed a quitclaim<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> on the same date.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> According to the Final Pay Computation, dated February 14, 2019,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> the amount paid already covered her unpaid salaries, overtime pay, unused leave benefits, 13th month pay, and tax refund.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> They also alleged that after Ferrer's resignation, and to their surprise, she posted libelous statements against the company on two occasionsâon July 11, 2018<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> and November 6, 2018<sup style="COLOR: RGB(255, 0, 0);">[25]</sup>âthrough the Indian Complaint Board Forum, accusing Genpact of inserting microchips into employees' bodies to control their mental health and work efficiency.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> According to them, Ferrer's filing of her complaint on November 26, 2018, or over a year after her resignation, underscores the baselessness of her claim.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> Genpact and Tyagarajan maintained that Ferrer was not dismissed but voluntarily resigned from her employment, and that she failed to present evidence showing that she was subjected to any pressure, condition, or circumstance that compelled her to resign.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> They argued that both Ferrer's resignation letter and the belated filing of the complaint contradicted her claim of illegal dismissal.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Finally, Genpact and Tyagarajan asserted that Ferrer was not entitled to her monetary claims, as her final pay had already been fully settled and she had executed a quitclaim.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p align="center"> <b>The Ruling of the LA</b> </p><p> In a Decision dated April 17, 2019, the LA dismissed the complaint for lack of merit and ruled that Ferrer did not adduce any evidence to prove that Genpact had terminated Ferrer's employment, or that by Genpact's acts, Ferrer's continued employment had been rendered impossible, unreasonable, or unlikely.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Anent the change in her work assignments, the LA found that it was clearly stated in Ferrer's employment contract that she will be expected to attend office as assigned to her by the supervisors.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> With regard Ferrer's other money claims, the same were likewise dismissed for failure to prove entitlement thereto.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p> Thus, the decretal portion of the ruling states: </p><blockquote> <p> <i><b>IN VIEW OF THE FOREGOING</b>, the instant complaint of Complainant-Herlyn Sabay Ferrer is hereby <b>DISMISSED</b> for lack of merit.</i> </p> <p> <i>Respondents' counterclaim is hereby <b>DENIED for lack of merit</b>. </i></p> <p> <i>Complainant's motion for production, inspection and examination of her 201 File Personnel File, submission of the original notarized copy of quit claim, summary of salaries, and time records in the possession of Respondents is <b>DENIED</b>. Complainant's motion to revive compromise negotiation is also <b>DENIED</b></i>. </p> <p> <b><i>SO ORDERED</i></b>.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> (Emphasis and italics in the original) </p> </blockquote> <p> Consequently, Ferrer appealed to the NLRC, ascribing serious error on the part of the LA in ruling that she was not constructively dismissed and that she was not entitled to her money claims.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> </p><p align="center"> <b>The Ruling of the NLRC</b> </p><p> The NLRC, through its Decision<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> dated October 31, 2019, denied the Appeal, and affirmed the LA's ruling. It emphasized that the records show that Ferrer voluntarily resigned from her employment; therefore, there was no illegal dismissal to speak of.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> The NLRC likewise denied Ferrer's money claims.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p><p> Hence, the dispositive portion so provides: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, complainant's appeal is <b>DENIED</b> for lack of merit. Accordingly, the 17 April 2019 Decision of Labor Arbiter Raphael Kenneth E. YbaÃ±ez is hereby <b>AFFIRMED</b>. </p> <p> Meanwhile, the Formal Notice of Withdrawal of Appearance of the Public Attorney's Office-Field Operations and Statistics Office as counsel for herein complainant is NOTED WITHOUT ACTION, it appearing that the same does not contain the express conformity of the complainant. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Emphasis in the original) </p> </blockquote> <p> The subsequent Motion for Reconsideration filed by Ferrer was denied in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> dated February 28, 2020. Aggrieved, Ferrer filed a petition for <i>certiorari</i> imputing grave abuse of discretion amounting to lack or excess of jurisdiction on the NLRC, when it ruled that Genpact did not illegally dismiss Ferrer. </p><p align="center"> <b>The Ruling of the CA</b> </p><p> In the now assailed Decision,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> the CA dismissed the Petition, holding that there was no illegal dismissal, because Ferrer did not prove that Genpact constructively dismissed her from employment.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> It emphasized that the alleged bullying was committed by her coworkers, and not by Genpact.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Thus the bullying which allegedly led Ferrer to resign from work, was not the act of her employers.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> With respect to Ferrer's monetary claims, the CA ruled that LA and the NLRC correctly dismissed the claims for holiday pay, overtime pay, service incentive leave pay, night shift differential pay, unused leaves benefits, and variable incentive credit.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> The dispositive portion of the Decision<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> dated October 17, 2023 reads: </p><blockquote> <p> <b>ACCORDINGLY</b>, absent grave abuse of discretion on the part of the NLRC, [W]e <b>DISMISS</b> the Petition for Certiorari[.]</p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> (Emphasis in the original) </p> </blockquote> <p> Ferrer's consequent bid for reconsideration was denied m a Resolution<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> dated January 25, 2024. </p><p> Unyielding, Ferrer elevated the case before this Court via Petition for Review on <i>Certiorari</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> alleging that the CA gravely erred in ruling that the NLRC did not commit grave abuse of discretion amounting to lack of or in excess of jurisdiction despite the totality of circumstances showing that Ferrer was constructively dismissed.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> Subsequently, Genpact and Tyagarajan filed a Comment, arguing the following: <i>first</i>, Ferrer's recourse is improper and must be denied; <i>second</i>, there was no grave abuse of discretion on the part of the NLRC; <i>third</i>, the NLRC correctly ruled that Ferrer's voluntary resignation did not amount to constructive dismissal; and <i>fourth</i>, Ferrer is not entitled to any monetary claims. </p><p align="center"> <b>Issue</b> </p><p> For the resolution, this Court is the lone issue of whether Ferrer was constructively dismissed. </p><p align="center"> <b>The Court's Ruling</b> </p><p> The Court rules in the negative. Ferrer failed to adduce any evidence of constructive dismissal, and the records instead show that she voluntarily resigned from employment. </p><p> In the main, Ferrer argues that she was forced to resign from her work due to Genpact's inaction on her complaint of relentless mass bullying perpetrated by her co-workers and supervisors.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></p><p> Constructive dismissal arises "when continued employment is rendered impossible, unreasonable or unlikely; when there is a demotion in rank and/or a diminution in pay; or when a clear discrimination, insensibility or disdain by an employer becomes unbearable to the employee."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> Relevantly, the test of constructive dismissal is whether a reasonable person in the employee's position would have felt compelled to give up his position under the circumstances. It involves an act that amounts to dismissal but is made to appear otherwise. However, bare allegations of constructive dismissal, unsupported by evidence on record, cannot be given credence.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> </p><p> In contrast, resignation contemplates a voluntary severance of employment. </p><p> Resignation is the formal pronouncement or relinquishment of a position or office. It is the voluntary act of an employee, who is in a situation where he or she believes that personal reasons cannot be sacrificed in favor of the exigency of the service, and he or she has then no other choice but to disassociate himself or herself from employment. The intent to relinquish must concur with the overt act of relinquishment; hence, the acts of the employee before and after the alleged resignation must be considered in determining whether, he or she in fact, intended to terminate his or her employment. In illegal dismissal cases, it is a fundamental rule that when an employer interposes the defense of resignation, on them necessarily rests the burden to prove that the employee indeed voluntarily resigned.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></p><p> Guided by the foregoing legal principles, a careful review of the record shows that while Ferrer claimed that the persistent bullying by her coworkers compelled her to resign, she failed to adduce substantial evidence showing that Genpact was informed of the alleged acts and that it neglected or refused to take reasonable measures to address the same. Absent proof of employer's knowledge and inaction, Ferrer's claim of constructive dismissal cannot prosper. </p><p> Conversely, Genpact sufficiently established Ferrer's voluntary resignation. Particularly relevant herein is Ferrer's resignation letter<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> dated September 5, 2017: </p><blockquote> <p> September 5, 2017</p> <p> Human Resources Dept. <br> GENPACT Services LLC <br> Cyberpod 1, Eton Centris <br> Quezon Ave., Quezon City</p> <p> To: HRD Personnel/Managers </p> <p>Sir/Ma'am, </p> <p> Please accept this letter as notification that I, Herlyn S. Ferrer - Process Associate of Foods Service (Tyson/Hillshire) under Ms. Joyce Anne Peregrino (Team Leader) is [sic] resigning from the office effective September 5, 2017. This resignation was tendered due to some integrity and privacy issue between the employees of GENPACT LLC that made me very uncomfortable now to work with. Unfortunately this has been escalated but for the sake of the majority I decided not to continue to aid disputes and leave each and everyone with a peace of mind. </p> <p> On the other hand, I want to thank some person behind GENPACT LLC for the assistance and for being so accommodating to me for my 11 months of stay in the company. Thank you for theÂ· learning, work experiences, challenges and trust that you have given to me even in a short period of time. I will treasure and use all of them for sure as I move in [sic] my next job/career. </p> <p> With regards [sic] to my work assignments, I am willing to assist and rendered [sic] required no. of days or more in case needs arises [sic] to support the transition period of adjustment. </p> <p> To GENPACT LLC and Tyson/Hillshire both the management and company, I'm wishing you all a more fruitful and successful years ahead. </p> <p> Thank you and hoping for your understanding. </p> <p>Yours truly, <br> Herlyn S. Ferrer <br> Process Associate <br> Tyson (Hillshire)<br> ID#740019555</p> </blockquote> <p> It is evident from the above-quoted letter that Ferrer resigned from her employment. As stated therein, "[t]his resignation was tendered due to some integrity and privacy issue between the employees of GENPACT LLC that made me very uncomfortable now to work with. Unfortunately this has been escalated but for the sake of the majority I decided not to continue to aid disputes and leave each and everyone with a peace of mind." </p><p> Moreover, Ferrer's expressions of gratitude toward Genpactâ"[o]n the other hand, I want to thank some person behind GENPACT LLC for the assistance and for being so accommodating to me for my 11 months of stay in the company. Thank you for the learning, work experiences, challenges and trust that you have given to me even in a short period of time. I will treasure and use all of them for sure as I move in [sic] my next job/career,"<sup style="COLOR: RGB(255, 0, 0);">[56]</sup>ânegate any claim of adverse or intolerable working conditions attributable to Genpact. Indeed, an employee's acknowledgment of appreciation and gratitude in a resignation letter is inconsistent with the assertion that the resignation was the product of force or coercion.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> </p><p> Therefore, since Ferrer's voluntary resignation was clearly established by the evidence on record, constructive dismissal cannot be sustained. Necessarily, Ferrer's claim for back wages and separation pay likewise fails. </p><p> With respect to Ferrer's other money claims, the consistent findings of the LA, the NLRC, and the CA must be upheld, as this Court is thus duty-bound to respect such consistent prior findings and must be cautious not to substitute its own appreciation of facts to those of the trial tribunals which have previously weighed the parties' claims and personally assessed the evidence.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Thus, the lower courts' findings, which dismissed her claims for holiday pay, overtime pay, service incentive leave pay, night shift differential pay, unused leave benefits, and variable incentive credit, are in order. </p><p> Moreover, as aptly found by the CA, and consistent with the uniform findings of the LA and the NLRC, Genpact proved payment of Ferrer's overtime pay, unused leave benefits, and service incentive leave pay, as evidenced by BDO Check No. 0001122813 dated December 8, 2017, in the amount of PHP 20,843.01, received by Ferrer on January 25, 2018, and the Final Pay Computation dated February 14, 2019.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p><p> Similarly, as to Ferrer's remaining monetary claimsânamely, holiday pay, night shift differential pay, and variable incentive creditâthe lower tribunals uniformly upheld the validity of Ferrer's Quitclaim<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> dated January 25, 2018. Ferrer did not present evidence that she was coerced into signing the Quitclaim through fraud, deception, or misrepresentation. In the absence of such circumstances, the Quitclaim is valid and binding, and Ferrer is estopped from asserting any monetary claims against Genpact arising from her resignation. </p><p> <b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari </i>is hereby <b>DENIED</b>. The assailed Decision dated October 7, 2023 and the Resolution dated January 25, 2024 of the Court of Appeals in CA-G.R. SP No. 166118 are <b>AFFIRMED</b>. </p><p> <b>SO ORDERED.</b> </p><p> <i>Caguioa, Acting C.J. (Chairperson), Inting, Dimaampao</i>, and <i>Singh, JJ</i>., concur.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, vol. 1, pp. 13-37. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 42-51. Penned by Associate Justice Nina G. Antonio-Valenzuela and concurred in by Associate Justices .lose Lorenzo R. Dela Rosa and Mary Charlene V. Hernandez-Azura of the Special Eleventh Division, Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 53-54. Penned by Associate Justice Nina G. Antonio-Valenzuela and concurred in by Associate Justices Jose Lorenzo R. Dela Rosa and Mary Charlene V. Hernandez-Azura of the Former Special Eleventh Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 123-137. Penned by Commissioner Mary Ann F. Plata-Daytia and concurred in by Presiding Commissioner Grace M. Venus and Commissioner Leonard Vinz O. Ignacio of the Fourth Division, National Labor Relations Commission. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 140-143.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 272-281. Signed by Labor Arbiter Raphael Kenneth E. YbaÃ±ez.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 199. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 43, CA Decision. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 160-165. Appointment Letter. </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 43, CA Decision. </p><p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 192. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 43. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 193. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 43. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 395. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 393. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 396. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 397-401. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 123-124, NLRC Decision. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 128. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 123-137. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 132. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 136. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 136. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 140-143. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 42-51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 47. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 49. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 42-51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 50. </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 53-54. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 13-37. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 22. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 19, Petition for Review on <i>Certiorari</i>. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>Tacis v. Shields Security Services</b>, 907 Phil. 456, 464-465 (2021) [Per J. Hernando, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>Bartolome v. Toyota Quezon Avenue, Inc.</b>, 952 Phil. 539, 552 (2024) [Per J. Lazaro-Javier, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 555. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Rollo</i>, vol. 1, p. 192, Resignation Letter. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Bilbao v. Saudi Arabian Airlines</b>, 678 Phil. 793, 802 (2011) [Per J. Reyes, J., Jr., First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>American Express Transnational, et al. v. Borre</b>, 877 Phil. 651, 663 (2020) [Per J. Reyes, J., Jr., First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Rollo</i>, vol. 1, p. 44, CA Decision. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at 395.&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

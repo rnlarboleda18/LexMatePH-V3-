@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 263779 - XXX263779,* PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70278' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 263779, December 03, 2025 ]</H2>
+			<H3>XXX263779,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated February 8, 2022, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 10, 2022, of the Court of Appeals (CA) in CA-G.R. CR No. 01954-MIN. The CA affirmed the Judgment<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated December 18, 2018 of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Regional Trial Court (RTC), <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> in Criminal Case No. 22591 that found XXX263779 guilty of violation of Section 5(h)<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of Republic Act No. 9262 (Republic Act No. 9262), otherwise known as the Anti-Violence Against Women and Their Children Act.<br><br><center><i>The Antecedents</i></center><br>In the Information filed with the RTC on March 21, 2017 and docketed as Criminal Case No. 22591, XXX263779 was charged with a violation of Section 5(h) of Republic Act No. 9262, as follows:<blockquote>That on or about the 26<sup>th</sup> day of February 2017 at <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Agusan del Norte, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, did then and there wilfully, unlawfully and feloniously commit psychological and emotional abuse against her [<i>sic</i>] sweetheart [AAA] by sending her through cellphone the following text messages, to wit:<blockquote>"Mangamatai pa tana mo hurot (I wish you all dead.)<br>Okay (Okay)<br>Peste ka hap... (You pest hap...)<br>Kasabotka? Paliti kog sinina ugma. Klaro? (Understand me<br>Buy me a piece of shirt. Clear?)<br>Ambi ang sienna ugma ha... klaro na kaau na? gusto pod ko<br>moiyot nimo. (Give me the shirt tomorrow, is that clear? I also wanted to have sex with you.)<br>Amb iang sienna ugma ha... klaro na kaau na? gusto pod ko<br>moiyot nimo. (Give me the shirt tomorrow, is that clear? I also wanted to have sex with you.)<br>Gusto ko moiyot ugma nimo... imng gasto kai wa koi kwarta.&nbsp;<br>(I want to have sex with you tomorrow, you shoulder the expenses, I have no money.)<br>Kalami nalng jod patyon nimo uyy (How I wish I can kill you.)<br>Edi patyon nimo, waman kapugni (So kill us, no one can stop you)<br>Patyonra ta ka (I will kill you soon.)"</blockquote>subjecting his sweetheart [AAA] to suffer psychological and emotional abuse, causing public ridicule and humiliation to the victim, and to suffer mental and emotional anguish to her damage and prejudice that shall be proven in court.<br><br>CONTRARY TO LAW. (Viol. Of Sec. 5(h) of RA 9262)<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></blockquote>Upon arraignment, XXX263779 entered a plea of "Not Guilty" to the charge.<br><br>After the pre-trial, trial on the merits ensued.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br><center><i>Version of the Prosecution</i></center><br>The prosecution established that on February 25, 2017, XXX263779, who was in a relationship with the victim AAA, sent text messages to AAA wherein he demanded that they have sex. The text messages also include threats to kill her.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>According to AAA, she was emotionally abused by XXX263779 throughout their relationship, which lasted for almost four years. XXX263779 would blackmail AAA whenever she would not do his bidding. The blackmail comprised of threats that he would tell her parents about their relationship and that she was pregnant with his child, when she was actually not; threats that XXX263779 would post on Facebook her nude photos and their sex video. XXX263779 made good his blackmails through calls, text messages, and sometimes right in her face when they would see each other.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On February 26, 2017, AAA sought the help of the police authorities in apprehending XXX263779 as the latter demanded money from her in exchange for not uploading their sex video and her nude pictures on her Facebook account.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>In response, the police officers organized an entrapment operation against XXX263779. However, it did not materialize because XXX263779 failed to meet up with AAA. Thus, the police carried out a second entrapment operation (second entrapment). This time, AAA set up to meet XXX263779 in the lodge they usually checked in. She brought with her PHP 2,000.00 to supposedly satisfy XXX263779's demands for money.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> AAA stayed in a room while the police officers waited in an adjacent room. Upon XXX263779's arrival in her room, he took the PHP 2,000.00 from AAA, grabbed her hand, and forced her out of the lodge. He boarded her in his motorcycle.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> They then went to the farm of XXX263779's family. Meanwhile, the police officers followed them. Ultimately, the police officers arrested XXX263779.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Consequently, AAA filed two cases against XXX263779, particularly, Grave Threats under Article 282<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> of the Revised Penal Code; and Violation of Republic Act No. 9262. The Information for Grave Threats was filed with the Municipal Trial Court (MTC), <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Agusan Del Norte and docketed as Criminal Case No. 4193; while the Information for Violation of Republic Act No. 9262 was filed with the RTC and docketed as Criminal Case No. 22591.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>In Criminal Case No. 4193, XXX263779 was charged with Grave Threats in an Information<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> that reads as follows:<blockquote>That on or about the 26th day of February, 2017, at 8:30 o'clock in the morning, more or less, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Agusan del Norte, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, with deliberate intent, did then and there, wilfully, unlawfully and feloniously threat [<i>sic</i>] [AAA] to expose their sex video to the social media should the latter will [sic] not give him money and follow his demands to her, whereby such wrongful act amounted to a crime, to the damage and prejudice of one [AAA].<br><br>CONTRARY TO LAW. Article 282, Revised Penal Code.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></blockquote>Meanwhile, the MTC in Criminal Case No. 4193 acquitted XXX263779 of Grave Threats for insufficiency of evidence. It ruled that AAA failed to testify on the threat, how it was actually told to her, and the circumstances under which the threat was given; she merely stated that a threat was made through phone call;<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> that while AAA presented screenshots of XXX263779's text messages to prove the threats, such threats and the condition of payment of money are not evident.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> It likened the omission to a rape victim who merely alleges that she was raped, without explaining what was done to her or presenting evidence of rape.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> As such, it concluded that AAA's testimony was insufficient to prove beyond reasonable doubt that XXX263779 committed Grave Threats.<br><br><center><i>Version of the Defense</i></center><br>XXX263779 denied the allegations against him.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> He narrated that he met AAA on Facebook. They first met sometime in June 2013 and started a romantic relationship on July 13, 2013.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> However, AAA wanted to keep their relationship a secret from her parents.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Five months later, he left the country to work in Taiwan, but the two of them continued their relationship, and they communicated with each other through Skype, Facebook, and text messages.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>XXX263779 further alleged that while he was in Taiwan, AAA admitted that she had another boyfriend. She apologized to him and promised not to cheat again. Out of love, he decided to forgive AAA and continue their relationship,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> with the condition that AAA would regularly report her activities to him.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> After he returned to the Philippines, they met and had sexual intercourse regularly.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> He would fetch AAA from her home for their romantic trysts.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Not long after, AAA had another boyfriend, prompting him to break up with her. AAA again begged for forgiveness from XXX263779, who again acceded out of love, with the agreement that he would be stricter with her and if that she cheats again, he will report their relationship to her parents.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>XXX263779 furthermore alleged that he never psychologically abused AAA. His alleged threat to disclose their relationship to AAA's parents was merely an agreement that they reached and a condition for him to continue his romantic ties with AAA despite her previous infidelities.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> He also denied that he sent to AAA the text messages alleged in the Information.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> He insisted that just a few days prior to the second entrapment, he and AAA were still romantic to each other. He clarified that in his conversation with AAA through the text messages, he did not mean that he would kill her in the literal sense; instead, they were discussing "<i>iyot</i>," which translates to sexual intercourse, and that he would "<i>kill</i>" AAA with ecstasy and sexual gratification.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>XXX263779 finally averred that the criminal cases against him for Grave Threats and violation of Republic Act No. 9262 were filed only because AAA's parents were being vengeful, as they disapproved<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> of his relationship with AAA.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br><center><i>The RTC Ruling</i></center><br>In the Judgment dated December 18, 2018, the RTC found XXX263779 guilty beyond reasonable doubt of violation of Section 5(h) of Republic Act No. 9262. The dispositive portion of the RTC Judgment states:<blockquote>WHEREFORE, after carefully weighing the evidence at hand, accused [XXX263779] is hereby found guilty beyond reasonable doubt of the crime charged. Accordingly, he is sentenced to an indeterminate penalty of Six (6) months and One (1) day to Six (6) years.<br><br>He is further ordered to pay private complainant the sum of Fifty Thousand Pesos (Php50,000.00) as moral and exemplary damages without subsidiary imprisonment in case of insolvency.<br><br>He shall serve his sentence at Davao Prison and Penal Fanns, Dujali, Davao del Norte.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></blockquote>The RTC held that all the elements of psychological violence are present. <i>First</i>, XXX263779 admitted that he was in a relationship with AAA. <i>Second</i>, XXX263779 admitted to constantly messaging AAA, although he interposed the defense that such messages do not amount to a crime. <i>Third</i>, the acts of XXX263779 caused psychological distress to AAA, whom the RTC noted to be crying during her testimony.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Finally</i>, the RTC held that XXX263779's defense, particularly that AAA's parents would use their own daughter to have revenge against him, was incredible.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Aggrieved, XXX263779 appealed the RTC Judgment to the CA.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br><center><i>The CA Ruling</i></center><br>In the assailed Decision dated February 8, 2022,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> the CA affirmed XXX263779's conviction. The dispositive portion of the Decision reads:<blockquote><b>WHEREFORE</b>, the Appeal is <b>DENIED</b>. The Judgment dated December 18, 2018 of the Regional Trial Court, 10<sup>th</sup> Judicial Region, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, in Criminal Case No. 22591 is hereby <b>AFFIRMED</b> with <b>MODIFICATIONS</b>:&nbsp;<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(1)</div></td><td width="95%"><div align="justify">Appellant [XXX263779] is found GUILTY beyond reasonable doubt for Violation of Section 5(h) of Republic Act No. 9262 and is sentenced to suffer the indeterminate penalty of <b>Six (6) Months and One (1) Day of <i>Prison Correccional</i>, as minimum, to Eight (8) Years and One (1) Day of <i>Prison Mayor</i>, as maximum</b>;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(2)</div></td><td><div align="justify">Appellant is ORDERED to PAY private complainant the sum of Fifty Thousand Pesos (P50,000.00) as moral and exemplary damages without subsidiary imprisonment in case of insolvency;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">&nbsp;</div></td></tr><tr valign="top"><td><div align="justify">(3)</div></td><td><div align="justify">Appellant is ORDERED to PAY a Fine equivalent to One Hundred Thousand Pesos (P100,000.00); and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(4)</div></td><td><div align="justify">Further, appellant is DIRECTED to UNDERGO a mandatory psychological counselling or psychiatric treatment, and to report his compliance therewith to the court of origin within fifteen (15) days after the completion of such counselling or treatment.</div></td></tr></tbody></table></blockquote>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> (Emphasis in the original)</blockquote>The CA gave no merit to XXX263779's contentions that the text messages were not properly authenticated in accordance with the Rules on Electronic Evidence; that AAA was not able to show the source of the text messages; and that she was not able to establish that it was XXX263779 who sent the text messages.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> To the CA, text messages are ephemeral electronic communication and must be authenticated under Section 2,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Rule 5 in relation to Section 2,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Rule 11 of the Rules on Electronic Evidence. Thus, the CA determined that the text messages were properly authenticated by AAA because she was a party to the exchange and had personal knowledge of the text messages.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>XXX263779 moved for the reconsideration of the CA Decision, but the CA denied it in the Resolution dated August 10, 2022.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>Hence, the present Petition.<br><br><center><i>Petitioner's Arguments</i></center><br>In his Petition, XXX263779 maintains that his acquittal is proper because the Information states that he allegedly threatened AAA on February 26, 2017, yet the prosecution's evidence pertained to threats that he allegedly sent to AAA through text messages on February 25, 2017, one day ahead of the incident alleged in the Information. He argues that the date is a material ingredient of the offense.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>XXX263779 also insists that the supposed threat to kill AAA in the text messages was not literal, but was a sexual innuendo referring to their intimacies. What he meant was "he will kill AAA with satisfaction and pleasure during sex". XXX263779 also denies sending the text messages in issue.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>XXX263779 further argues that the screenshots of text messages that the prosecution offered in evidence were not authenthicated in accordance with the Rules on Electronic Evidence; that the cellphone bearing the messages, and not mere screenshots of the text messages, should have been presented;<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> that the prosecution was unable to prove that the messages came from him, considering that the cellphone number was not disclosed in court; instead, the sender in the screenshots was merely identified as, "<i>bft4</i>";<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> and that the prosecution should have presented an affidavit of evidence,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> or proof that he digitally signed the text messages.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>Finally, XXX263779 posits that his acquittal in the grave threats case is the best evidence that the elements of the crime charged in the case at bar are not present.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br><center><i>Respondent's Arguments</i></center><br>On the other hand, the State, through the Office of the Solicitor General (OSG), argues that the specific date when the offense was committed is not relevant in cases of violation of Republic Act No. 9262, and thus, an approximate date of the commission of the offense is sufficient.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> All other arguments of XXX263779 are not relevant to the case at bar, as they pertain to the charge of grave threats filed against him.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> The OSG maintains that the testimony of AAA as a party to the conversation holds significance in determining the authenticity and credibility of the messages.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Finally, XXX263779's acquittal in the grave threats case has no bearing and would not serve to acquit him in his indictment for a violation of Section 5(h) of Republic Act No. 9262.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br><center><i>The Issues</i></center><br>The issue for the Court's resolution is whether the CA erred in sustaining the conviction of XXX263779 for a violation of Section 5(h) of Republic Act No. 9262.<br><br><center><i>The Court's Ruling</i></center><br>The Petition has merit.<br><br>XXX263779 must be acquitted of violation of Section 5(h) of Republic Act No. 9262.<br><br>Section 3(c) of Republic Act No. 9262 defines psychological violence as follows:<blockquote>C. "<i>Psychological violence</i>" refers to <i>acts or omissions causing or likely to cause mental or emotional suffering of the victim</i> such as but not limited to <i>intimidation, harassment</i>, stalking, damage to property, public ridicule or humiliation, <i>repeated verbal abuse</i> and marital infidelity. It includes causing or allowing the victim to witness the physical, sexual[,] or psychological abuse of a member of the family to which the victim belongs, or to witness pornography in any form or to witness abusive injury to pets or to unlawful or unwanted deprivation of the right to custody and/or visitation of common children. (Emphasis supplied)</blockquote>In turn, Section 5(h) of Republic Act No. 9262 punishes harassment or violence that causes emotional or psychological distress to the woman. The provision of law reads:<blockquote>SECTION 5. Acts of Violence Against Women and Their Children.âThe crime of violence against women and their children is committed through any of the following acts:&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="3"><div align="justify">&nbsp; &nbsp; &nbsp; &nbsp;. . . .</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="5%"><div align="justify"></div><br></td><td width="90%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(h)</div></td><td colspan="2"><div align="justify"><i>Engaging in purposeful, knowing, or reckless conduct</i>, personally or through another, that <i>alarms or causes substantial emotional or psychological distress to the woman</i> or her child. This shall include, but not be limited to, the following acts:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">(5)</div></td><td><div align="justify"><i>Engaging in any form of harassment or violence</i>; (Emphasis supplied)</div></td></tr></tbody></table></blockquote>In <i>Ang v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> the Court enumerated the elements of psychological violence committed through harassment as follows:<blockquote>The above provisions, taken together, indicate that the elements of the crime of violence against women through harassment are:<blockquote><ol><li>The offender has or had a sexual or dating relationship with the offended woman;<br><br></li><li>The offender, by himself or through another, commits an act or series of acts of harassment against the woman; and<br><br></li><li><i>The harassment alarms or causes substantial emotional or psychological distress to her.</i><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> (Emphasis supplied)</li></ol></blockquote></blockquote>In addition to the foregoing, the Court adds that <i>based on the language</i> of Section 5(h), Republic Act No. 9262, conviction for violations of the said law requires the prosecution to prove, beyond reasonable doubt, that the accused acted with a <i>culpable mental state</i> through <i>purposeful, knowing, or reckless conduct</i> that causes substantial emotional or psychological distress to the woman.<br><br>The term "<i>purpose</i>" has been defined as "the ends sought, an object to be attained, an intention," or "that which one sets before [them] to accomplish or attain; an end, intention, or aim, object, plan, project."<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Thus, a person acts "<i>purposefully</i>" when he or she acts with a conscious or intentional desire to achieve a particular result. Meanwhile, the term "<i>knowingly</i>" means with awareness or deliberateness that is intentional.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> As to "<i>reckless conduct</i>," the Court in <i>Caminos, Jr. v. People</i><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> borrowed from American jurisprudence<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> and defined it as "a <i>conscious choice</i> of a course of action which injures another, either with knowledge of serious danger to others involved, or with knowledge of facts which would disclose the danger to any reasonable person."<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Reckless conduct, which requires the <i>conscious disregard</i> of a known risk, is not an accident but instead involves a <i>deliberate decision</i> to endanger another.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> It requires a <i>conscious indifference</i> to the consequences of the conduct from the standpoint of the frame of mind of the accused.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>The foregoing hierarchy of culpable mental states has been explained as follows:<blockquote>The law of <i>mens rea</i> offers three basic choices. Purpose is the most culpable level in the standard mental-state hierarchy, and the hardest to prove. A person acts purposefully when he "consciously desires" a result.... Next down, though not often distinguished from purpose, is knowledge. A person acts knowingly when "he is aware that [a] result is practically certain to follow".... A greater gap separates those two from recklessness. A person acts recklessly, in the most common formulation, when he "consciously disregard[s] a substantial [and unjustifiable] risk that the conduct will cause harm to another."....That standard involves insufficient concern with risk, rather than awareness of impending harm.....But still, <i>recklessness is morally culpable conduct</i>, involving a "<u>deliberate decision</u> to endanger another."<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> (Emphasis supplied; citations omitted)</blockquote>From the foregoing, the Court holds that a conviction for a violation of sub-paragraph 5, Section 5(h) of Republic Act No. 9262 requires the presence of the following elements, which must be proven by the prosecution beyond reasonable doubt: <u><i>first</i></u>, the offender has or had a sexual or dating relationship with the offended woman; <u><i>second</i></u>, the offender, by himself or through another, commits an act or series of acts of harassment against the woman; <u><i>third</i></u>, the harassment alarms or causes substantial emotional or psychological distress to the woman; and <u><i>fourth</i></u>, the offender acted for the <i>purpose</i> of alarming or causing substantial emotional or psychological distress to the woman, or <i>knowing</i> that their conduct will alarm or cause substantial emotional or psychological distress to the woman, or the offender acted <i>recklessly</i>, in conscious disregard of the risk that the act or series of acts of harassment will alarm or cause substantial emotional or psychological distress to the woman.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The prosecution's evidence is insufficient to prove, beyond reasonable doubt, that XXX263779 is guilty of the crime charged</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The Court finds that the third and fourth elements of a violation of sub-paragraph 5, Section 5(h) of Republic Act No. 9262 are lacking in the case at bar.<br><br>The <i>first</i> element is present and need not be belabored, given XXX263779's admission that he was in a sexual or dating relationship with AAA, a woman.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>The <i>second</i> element is also presentâby sending the text messages in question, XXX263779 committed an act of harassment against AAA.<br><br>While the term "harassment" is not defined by Republic Act No. 9262, it must be taken in its ordinary meaning so that the general purpose for which the law was enacted may be carried into effect.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> In this regard, the Court has previously defined the term "harassment" as "<i>words, gestures and actions</i> which tend to annoy, alarm and abuse....another person."<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Likewise, in <i>Ang</i>,<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> the Court explained what constitutes "harassment" in the context of sub-paragraph 5, Section 5(h) of Republic Act No. 9262, as follows:<blockquote>Two. Rustan argues that the one act of sending an offensive picture should not be considered a form of harassment. He claims that such would unduly ruin him personally and set a very dangerous precedent. But Section 3(a) of R.A. 9262 <i>punishes</i> "<i>any act or series of acts</i>" <i>that constitutes violence against women</i>. This means that <i>a single act of harassment, which translates into violence, would be enough</i>. The object of the law is to protect women and children. Punishing only violence that is repeatedly committed would license isolated ones.<br><br>. . . .<br><br><i>Secondly, the Court cannot measure the trauma that Irish experienced</i> based on Rustan's low regard for the alleged moral sensibilities of today's youth. <i>What is obscene and injurious to an offended woman can of course only be determined based on the circumstances of each case.</i> Here, the naked woman on the picture, her legs spread open and bearing Irish's head and face, was clearly an obscene picture and, to Irish a revolting and offensive one. Surely, any woman like Irish, who is not in the pornography trade, would be scandalized and pained if she sees herself in such a picture. What makes it further terrifying is that, as Irish testified, Rustan sent the picture with a threat to post it in the internet for all to see. That must have given her a nightmare.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> (Emphasis supplied)</blockquote>Pertinently, in <i>Estacio v. Estacio</i>,<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> the fact that therein defendant threatened to kill the offended woman and sent her demeaning text messages, which were also sent to their children, were considered as acts of psychological violence under Republic Act No. 9262. In <i>Ang</i>, the act of sending a naked photo of a woman through the Short Messaging Service (SMS), with her legs spread open and bearing the offended woman's face, was deemed as an act of harassment under Section 5(h). The Court noted that the photo sent to the offended woman was "clearly an obscene picture and, to [the private complainant] a revolting and offensive one." From these cases, it is clear that the act of sending threatening, demeaning, and offensive messages through SMS may be deemed as acts of harassment in the context of Section 5(h).<br><br>In the case at hand, XXX263779's threat to kill AAA and her family is similar to the act of the defendants in <i>Ang</i> and <i>Estacio</i>. The threat indubitably amounts to the "<i>single act of harassment translating to violence</i>" held by the Court in <i>Ang</i>.<br><br>However, the Court finds that the <i>third</i> element of the offense is not present, contrary to the ruling of the courts <i>a quo</i>.<br><br>Section 5(h) of Republic Act No. 9262 requires that the accused's conduct "alarms" or "causes substantial emotional or psychological distress to the woman or her child." The law does not define these terms, so they should be taken in their ordinary meaning.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> In this regard, "<i>alarm</i>" has been defined as "sudden sharp apprehension and fear resulting from the perception of imminent danger,"<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> "<i>distress</i>" has been defined as "pain or suffering affecting the body, a bodily part, or the mind,"<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> while "<i>substantial</i>" has been defined as "not imaginary or illusory" or "ample to satisfy."<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>Verily, the Court has repeatedly held that in cases involving alleged violations of Section 5(i), Republic Act No. 9262, proof of mental and emotional anguish may consist of the testimony of the offended party because such damage is personal to the victim.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>Nonetheless, while AAA took the witness stand, the Court finds her testimony insufficient to prove <i>substantial</i> emotional or psychological distress she allegedly suffered. To recapitulate, to prove her anguish, she testified on the following matters: that she did not feel loved by him in four years of their relationship,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> that she was blackmailed,<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> that he would not allow her to join activities in school,<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> that he would get mad when she refused to have sex with him,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> that he would threaten to reveal their relationship to her parents, and that he would disturb her by accessing her social media accounts.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup><br><br>Moreover, it is settled that the purpose of an Information is to afford the accused the right to be informed of the nature and cause of accusation.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> Thus, an accused may be convicted only of a charge <i>as alleged</i> in the ultimate facts as stated in the Information.<br><br>As such, the Court shall limit its ruling and focus on the portions of her testimony relating to her receipt of the text messages as quoted in the Information. On this matter, AAA testified as follows:&nbsp;<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">Q:</div></td><td width="95%"><div align="justify">After receiving these text messages, how did that make you feel?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify"><i>I was afraid since there were threats from him that he would kill me..</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">What was your response after receiving those messages?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Despite of all the messages that I have received from him, I still pretended to be strong and fought him.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup></div></td></tr></tbody></table></blockquote>Here, AAA's testimony is patently wanting as to any proof of substantial emotional or psychological distress felt after receiving the text messages.<br><br>On the other hand, her behavior after receiving the text messages does not show that there was substantial distress on her part. For one, AAA even boarded XXX263779's motorcycle shortly after the incident. If indeed AAA was afraid for her life, she would not have boarded the motorcycle, considering that she was already with the police officers during the alleged entrapment operation.<br><br>It is settled in jurisprudence that testimonial evidence, to be believed, must come not only from the mouth of a credible witness, but must also be credible, reasonable, and in accord with human experience. A credible witness must, therefore, be able to narrate a convincing and logical story.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> Here, the foregoing inconsistency heavily detracts from AAA's testimony.<br><br>Finally, as to the fourth element, the Information charges XXX263779 of having "<i>wilfully</i>, unlawfully and feloniously commit[ed] psychological and emotional abuse against [AAA.]" The term, "wilfully" conveys the same meaning as "purposefully" or "knowingly", because the word "willfully" carries the idea, when used in connection with an act forbidden by law, that the act must be done knowingly or intentionally."<sup style="COLOR: RGB(255, 0, 0);">[86]</sup><br><br>The Court finds that the fourth element of the offense charged is also not present because the prosecution failed to establish that XXX263779 acted purposefully or knowingly, with the intent to alarm or to cause substantial emotional or psychological distress to AAA.<br><br>Philippine criminal laws distinguish between general criminal intent and specific intent. The general criminal intent is <i>presumed</i> from the criminal act.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> As stated in Section 3(b),<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> Rule 131 of the Rules on Evidence, it is presumed that an unlawful act is done with unlawful intent, if not contradicted and overcome by other evidence. A presumption of criminal intent may arise from proof of the commission of a criminal act; and the general rule is that if it is proved that the accused committed the criminal act charged, it will be presumed that the act was done with criminal intention.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> Intent is presumed from an unlawful act because the law presumes all persons to be of sound mind and capable of understanding the ordinary and natural consequences of their actions, such that when they commit a crime, they are presumed to have committed it intentionally.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> When the act is unlawful, "the act itself furnishes the evidence, that to its perpetration there was some causes or influences moving the mind."<sup style="COLOR: RGB(255, 0, 0);">[91]</sup><br><br>On the other hand, specific intent is a definite and actual purpose to accomplish a particular thing.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> Generally, specific intent, as an element of a crime, is <i>not presumed</i> but must be proven by the prosecution as a matter of fact like any other essential element by direct or circumstantial evidence.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> As a rule, "specific intent to accomplish a particular purpose is an essential element and for which there can be no conviction upon proof of mere general malice or criminal intent."<sup style="COLOR: RGB(255, 0, 0);">[94]</sup><br><br>The Court finds that the prosecution was not able to prove XXX263779's specific intent to alarm or cause substantial emotional or psychological distress to AAA. Intent is a state of mind that can only be verified through the <i>external acts</i> of the accused and the manner through which they committed the acts complained of.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> To determine specific intent, "it is always proper and necessary to look not merely to the act itself but to all the attendant circumstances so far as they develop in the evidence."<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> It may be proven by the accused's words or conduct before, during, and after the incident subject of the case.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup><br><br>In a criminal case where the intent of the accused to produce a certain effect on the victim's mind is an essential element of the crime charged, the test of <i>mens rea</i> is whether a reasonable person would consider the accused's conduct as alarming, distressing, or threatening by <i>regarding it objectively and reviewing it in light of the circumstances in which the conduct was performed, the manner in which they were executed or uttered, the person to whom they were addressed, the relationship between the accused and the complainant, and the recipient's reaction to the accused's conduct</i>.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup><br><br>In the case at bar, XXX263779's specific intent to alarm or to inflict substantial emotional or psychological distress to AAA was not proven. The Court finds that while the tenor of XXX263779's text messages was in anger, this does not, <i>ipso facto</i>, mean that such were sent to cause emotional or psychological distress to AAA.<br><br>Aside from two text messages sent by XXX263779, the records are <i>bereft</i> of any proof, through the conduct of XXX263779, that he intended to cause emotional or psychological distress to AAA. In fact, in the text conversation of XXX263779 and AAA, XXX263779 was still asking and planning for a sexual tryst with AAA on the day after their text message exchange. He was also asking for a shirt as a gift. These circumstances imply, if not show, that the two were in good terms at the time of the conversation, and lend more credence to the conclusion that the two text messages sent by XXX263779 were made out of anger, and <i>not</i> out of a specific intent to cause distress to AAA.<br><br>If at all, the text messages, which admittedly constitute harassment thus fulfilling the presence of the second element, could <i>not</i> be said to be sent by XXX263779 intentionally to cause emotional or psychological distress to AAA; but a mere outburst which is usual, not new, and not foreign, to fights between lovers.<br><br>On the other hand, XXX263779's testimony revealed that he would even send PHP 5,000.00 monthly to AAA during the time he was working in Taiwan which AAA wrongly reciprocated by having another boyfriend while he was gone. He further testified that AAA admitted such affair to him, and even gloated that if only he had not been calling and texting her, she would have already checked-in in a lodging house with her boyfriend.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup><br><br>Moreover, AAA's posts in her Instagram account support the conclusion that instead of a case of psychological violence and abuse, the case at bar is one of a romantic relationship turned sour. In one post,<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> she posted what appears to be a video game screenshot, with the houses spelling out the statement "<i>Nagmahal Nasaktan Pinakulong</i>", alluding to XXX263779's imprisonment. In another post,<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> she posted a photograph of XXX263779 in his jail cell with the statement "<i>Diba ang saya mo na. Lol</i>."<br><br>To the Court, this is not the normal behavior of a victim of abuse. AAA initially alleged that she was scared for her life because of XXX263779's threats. However, a victim frightened for her and her family's safety would not anymore further agitate her aggressor by retorting and posting his embarrassment online, appearing to even laugh at him through Internet acronyms or lingo.<br><br>Thus, the foregoing circumstances all give rise to the conclusion that the case of AAA and XXX263779 is not one for psychological violence; but merely that of a private quarrel between a couple, not within the ambit of what is sought to be punished by Republic Act No. 9262. As discussed, <i>not all</i> forms of harassing behavior will fall under such law, which was never meant to be used either as a resolution to private romantic relationships. Neither should it be used as a weapon to seek vengeance on a former lover. <i>Only</i> that which is done with specific criminal intent to cause substantial emotional or psychological distress to the woman, may give rise to a conviction under Republic Act No. 9262.<br><br>It is hornbook doctrine<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> that in criminal prosecution, the State must prove beyond reasonable doubt <i>all</i> the elements of the crime charged, which it failed to do in this case. Considering the constitutional right of the accused to be presumed innocent, and the principle<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> that even a scintilla of doubt on the accused's guilt warrants an acquittal, XXX263779's acquittal is in order.<br><br><b>FOR THESE REASONS</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The Decision dated February 8, 2022, and the Resolution dated August 10, 2022, of the Court of Appeals in CA-G.R. CR No. 01954-MIN are <b>REVERSED</b> and <b>SET ASIDE</b>. Petitioner XXX263779 is <b>ACQUITTED</b> of violation of Section 5(h) of Republic Act No. 9262 in Criminal Case No. 22591 filed before Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Regional Trial Court (RTC), <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>.<br><br>Let entry of judgment be <b>ISSUED</b> immediately.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa, (Chairperson)</i> and <i>Gaerlan, JJ.</i>, concur.<br><i>Dimaampao, J.</i>, see dissenting opinion.<br><i>Singh, J.</i>, please see dissenting opinion.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Supreme Court Amended Administrative Circular No. 83-2015 dated September 5, 2017, titled "Protocols and Procedures in the Promulgation, Publication, and Posting on the Websites of Decision, Final Resolutions, and Final Orders Using Fictitious Names/Personal Circumstances," the names of the offended parties along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 13-92, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 235-253. Penned by Associate Justice Evalyn M. Arellano-Morales, and concurred in by Associate Justices Richard D. Mordeno and Alfonso C. Ruiz II of the Twenty-Third Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 280-282. Penned by Associate Justice Evalyn M. Arellano-Morales, and concurred in by Associate Justices Richard D. Mordeno and Jill Rose S. Jaugan-Lo of the Special Former Twenty-Third Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 93-101. Penned by Judge Eduardo S. Casals.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> SECTION 5. Acts of Violence Against Women and Their Children. â The crime of violence against women and their children is committed through any of the following acts:&nbsp;<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="3"><div align="justify">. . . .</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="5%"><div align="justify"></div><br></td><td width="90%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(h)</div></td><td colspan="2"><div align="justify">Engaging in purposeful, knowing, or reckless conduct, personally or through another, that alarms or causes substantial emotional or psychological distress to the woman or her child. This shall include, but not be limited to, the following acts:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">(1)</div></td><td><div align="justify">Stalking or following the woman or her child in public or private places;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">(2)</div></td><td><div align="justify">Peering in the window or lingering outside the residence of the woman or her child;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">(3)</div></td><td><div align="justify">Entering or remaining in the dwelling or on the property of the woman or her child against [their] will;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">(4)</div></td><td><div align="justify">Destroying the property and personal belongings or inflicting harm to animals or pets of the woman or her child; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">(5)</div></td><td><div align="justify">Engaging in any form of harassment or violence;</div></td></tr></tbody></table></blockquote><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i>, pp. 93-94, RTC Judgment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 93-95, RTC Judgment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 194, Appellee's Brief.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 95, RTC Judgment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 42-46, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 179.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Article 282. Grave threats. â Any person who shall threaten another with the infliction upon the person, honor or property of the latter or of his family of any wrong amounting to a crime, shall suffer:<blockquote><ol><li>The penalty next lower in degree than that prescribed by law for the crime be threatened to commit, if the offender shall have made the threat demanding money or imposing any other condition, even though not unlawful, and said offender shall have attained his purpose. If the offender shall not have attained his purpose, the penalty lower by two degrees shall be imposed. If the threat be made in writing or through a middleman, the penalty shall be imposed in its maximum period.<br><br></li><li>The penalty of arresto mayor and a fine not exceeding 500 pesos, if the threat shall not have been made subject to a condition.</li></ol></blockquote><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Rollo</i>, p. 26, Petition; <i>id.</i> at 119, MTC Decision in Criminal Case No. 4193; <i>id.</i> at 93, RTC Judgment in Criminal Case No. 22591.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> A copy of the Information in Criminal Case No. 4193 is not attached to the <i>rollo</i>, but its contents were reproduced in the MTC Decision [<i>See id.</i> at 119-131].<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 119.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 125-126, MTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 128, MTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 126, MTC Decision.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 98, RTC Judgment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 138, Appellant's Brief.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 162, Appellant's Brief.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 138, Appellant's Brief.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> TSN, XXX263779, September 10, 2018, p. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, pp. 138-142, Appellant's Brief.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> TSN, XXX263779, September 10, 2018, p. 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, pp. 162, Appellant's Brief.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 166, Appellant's Brief.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 162-163, Appellant's Brief.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 25, Petition.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 101, RTC Judgment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 100, RTC Judgment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 101, RTC Judgment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 102-103, Notice of Appeal.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 235-253, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 252-253, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 247, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Section 2. Manner of authentication. â Before any private electronic document offered as authentic is received in evidence, its authenticity must be proved by any of the following means:<blockquote>(a) by evidence that it had been digitally signed by the person purported to have signed the same;<br><br>(b) by evidence that other appropriate security procedures or devices as may be authorized by the Supreme Court or by law for authentication of electronic documents were applied to the document; or<br><br>(c) by other evidence showing its integrity and reliability to the satisfaction of the judge.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Section 2. Ephemeral electronic communication. â Ephemeral electronic communications shall be proven by the testimony of a person who was a party to the same or has personal knowledge thereof. In the absence or unavailability of such witnesses, other competent evidence may be admitted. A recording of the telephone conversation or ephemeral electronic communication shall be covered by the immediately preceding section. If the foregoing communications are recorded or embodied in an electronic document, then the provisions of Rule 5 shall apply.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, p. 250, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 280-282, CA Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 35-36, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 38-39, Petition.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 63-64, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 63, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 65, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 68, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 59, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 310, Comment to the Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 314, Comment to the Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 316, Comment to the Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 317, Comment to the Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> 632 Phil. 609 (2010).<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 619.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Republic v. Silim</b>, 408 Phil. 69, 81 (2001).<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Spouses Imbong v. Ochoa, Jr.</b>, 732 Phil. 1, 199 (2014).<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> 605 Phil. 422 (2009).<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> In criminal cases, the Court has borrowed from American jurisprudence in ascertaining the culpable mental state that is required in cases of malversation [<b>Tabuena v. Sandiganbayan</b>, 335 Phil. 795 (1997)) and in copyright infringement [<b>ABS-CBN Corp. v. Gozon</b>, 755 Phil. 709 (2015)). It has also been cited in determining whether an entrapment operation is valid. [<b>People v. Gumba</b>, 942 Phil. 742 (20230)).<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Caminos, Jr. v. People, supra</i>, <i>citing Wofford v. State</i>, 395 S.E.2d 630 (1990), <i>Shorter v. State</i>, 122 N.E.2d 847 (1954), and <i>White v. State</i>, 647 S.W.2d 751 (1983).<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Voisine v. United States</i>, 579 U.S. 686, 687 (2016).<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Cabugao v. People</b>, 740 Phil. 9, 27 (2014).<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Counterman v. Colorado</i>, 600 U.S. 66, 78-79 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Rollo</i>, p. 94, RTC Judgment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>See</i> <b>Acharon v. People</b>, 913 Phil. 731, 737 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>Favor v. Untalan</b>, 611 Phil. 668, 682 (2009), <i>citing</i> Black's Law Dictionary Abridged Fifth Ed., p. 365. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Supra</i> note 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 621-622.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 885 Phil. 157, 178 (2020).<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>See</i> <b>Acharon v. People</b>, <i>supra</i> note 68 at 73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> Merriam-Webster Dictionary. Available at <a href="https://www.merriam-webster.com/dictionary/alarm">https://www.merriam-webster.com/dictionary/alarm</a> [Last accessed on April 26, 2025.]<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i>, available at <a href="https://www.merriam-webster.com/dictionary/distress">https://www.merriam-webster.com/dictionary/distress</a> [Last accessed on April 26, 2025.]<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i>, available at <a href="https://www.merriam-webster.com/dictionary/substantial">https://www.merriam-webster.com/dictionary/substantial</a> [Last accessed on April 26, 2025.]<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Dinamling v. People</b>, 761 Phil. 356, 379-380 (2015); <b>Araza v. People</b>, 882 Phil. 905, 919 (2020); <b>XXX v. People</b>, 893 Phil. 340, 852 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> TSN, AAA, October 9, 2017, p. 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>People v. Sandiganbayan (Fourth Division)</b>, et. al., 769 Phil. 378, 382 (2015).<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Rollo</i>, p. 199, Brief for the Appellee.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <b>People v. Correa</b>, 885 Phil. 662, 677 (2020).<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <b>United States v. Bull</b>, 15 Phil. 7, 18-19 (1910).<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <b>Recuerdo v. People</b>, 526 Phil. 460, 475 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> Section 3. Disputable presumptions. â The following presumptions are satisfactory if uncontradicted, but may be contradicted and overcome by other evidence:<blockquote>. . . .<br><br>(b) That an unlawful act was done with an unlawful intent;</blockquote><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <b>Manzanaris v. People</b>, 212 Phil. 190, 193 (1984).<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <b>People v. Aldemita</b>, 229 Phil. 448, 456 (1986).<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>People v. Delim</b>, 444 Phil. 430, 461 (2003).<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <b>Recuerdo v. People</b>, <i>supra</i> at 475.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id.</i>; <b>Rivera v. People</b>, 515 Phil. 824, 832 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <b>United States v. Estavillo</b>, 19 Phil. 478, 495 (1911).<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <b>De Vera v. People</b>, 948 Phil. 13, 43 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <b>Yapyuco <i>y</i> Enriquez v. Sandiganbayan</b>, 689 Phil. 75, 121 (2012).<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <b>Preferred Home Specialties Inc. v. Court of Appeals</b>, 514 Phil. 574, 598 (2005).<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>See</i> <b>Carma v. People</b>, 921 Phil. 217, 224 (2022).<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> TSN, XXX263779, September 10, 2018, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> Records, p. 83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Id.</i> at 87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <b>People v. Cerezo</b>, 920 Phil. 996, 1019 (2022).<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <b>People v. Lumikid</b>, 875 Phil. 467, 489-490 (2020).<br><br><hr align="center" width="60%" size="1" noshade=""><br><center><b>DISSENTING OPINION</b></center><br><b>DIMAAMPAO, <i>J.</i>:</b><br><br>The <i>ponencia</i> acquitted the accused XXX263779 due to the prosecution's failure to prove all the elements of a violation of Section 5(h), Republic Act No. 9262 beyond reasonable doubt. I humbly offer a divergent position and submit that the third and fourth elements thereof are present in this case.<br><br>Anent the third element,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> the <i>ponencia</i> limited its analysis of the victim AAA's testimonial account to those parts which only directly related to her receipt of the contended text messages, as quoted in the Information, under the justification that the accused may only be convicted of a charge as averred in the ultimate facts therein.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>I respectfully disagree with this conclusion.<br><br><i>For one</i>, in cases involving psychological violence, a singular instance of abuse should not be analyzed in isolation. Instead, I submit that the particular charge must be viewed within the context of the cumulative effect of all related abuses that was established during the trial.<br><br>In this case, XXX263779's text messages and AAA's resulting anguish did not exist in a vacuum. Her testimony describing multifarious blackmails, threats, and invasions of privacy is highly relevant. This broader narration not only highlights the magnitude of the danger and suffering she endured, but also provides the necessary context by the time the death threats were sent.<br><br>As Justice Maria Filomena D. Singh aptly stated during the deliberations of this case, AAA's testimony detailing her emotional ordeal, including threats of blackmail and public exposure, sufficiently proves the element of emotional anguish.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> As held in <i>Ang v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> the trauma suffered by a victim in such circumstances resists precise quantification, yet remains legally cognizable.<br><br><i>For another</i>, the <i>ponencia</i> cannot fault AAA for her behavior after receiving the subject text messages. It is well-settled that victims of psychological and sexual abuse do not have a standard or predictable reaction to shock and trauma. As jurisprudence consistently affirms, "there is no standard form of reaction expected from a victim in such a horrendous event. The human mind, while under emotional stress, is unpredictable."<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>As such, AAA's decision to board XXX263779's motorcycle after the threats cannot, by itself, be read as a negation of her distressâparticularly where she could have reasonably felt safeguarded by the presence of the police officers. This aligns with my earlier point that the accumulation of abusive acts provides the context for the victim's reaction, which case law confirms is never uniform or predictable in cases of shocking or traumatic assault.<br><br>As to the fourth element added by the <i>ponencia</i>,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> intent to cause emotional or psychological harm is present in this case.<br><br>To my mind, the act of transmitting a death threat is neither neutral nor involuntary. One does not inadvertently compose and send another person a text message threatening to kill. This act, therefore, is brought about by a conscious choice, and any criminality associated therewith must be viewed from such lens. This attribution of intent accords with the legal presumption that a person intends the natural and foreseeable consequences of his or her actions.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Given this context, what response does a person expect from someone whose life he or she has threatened? Mental terror and emotional anguish are not merely possible outcomes, they are the most natural and immediate consequences. Accordingly, the knowledge of these consequences, and thereby the intent to cause them, should be attributable to XXX263779.<br><br>This is consistent with the definition of "psychological violence" under Section 3 (c) of the Act, which criminalizes "acts or omissions causing or likely to cause mental or emotional suffering." By including acts "<i>likely to cause</i>" suffering, the law itself recognizes that intent can be deduced from the act's inherent nature and its possible impact on the victim.<br><br>Guided by the Court's instructive disquisition in <i>AAA v. BBB</i>,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Republic Act No. 9262 penalizes not the mere act of sending a message <i>per se</i>, but the commission of psychological violenceâconduct that causes, or is likely to cause, mental or emotional suffering to the woman. Stated otherwise, it is the violent act and its injurious effects in context that the law ultimately proscribes. Thus, the threatening text message is merely one modality by which psychological violence may be perpetuated.<br><br>To be sure, whether XXX263779's conscious choice to send a threatening message was intended to inflict psychological violence is gauged by the totality of circumstances. In this case, the death threats, read against XXX263779's established pattern of prior abuse and harassment of AAA, unequivocally evince the intent to cause harm. The act itself, combined with the surrounding circumstances of sustained psychological torment, render the intent to cause anguish unmistakable.<br><br><b>ACCORDINGLY</b>, I vote to <b>DENY</b> the Petition in G.R. No. 263779.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> "The harassment alarms or causes substantial emotional or psychological distress to her." <i>See</i> <b>Dabalos v. RTC</b>, 701 Phil. 56 (2013) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>See ponencia</i>, p. 15-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup><i>&nbsp;See</i> Dissenting Opinion of J. Singh, p. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <b>G.R. No. 182835</b>, 632 Phil. 609 (2010) [Per J. Abad, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>See</i> <b>People v. Seguisabal, G.R. No. 240424</b>, March 18, 2021 [Per J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> "[T]he accused acted with a culpable mental state through purposeful, knowing, or reckless conduct that causes substantial emotional or psychological distress to the woman." <i>See ponencia</i>, p. 11-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>See</i> <b>Manuel v. People</b>, 512 Phil. 818 (2005) [Per J. Callejo, Sr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <b>G.R. No. 212448</b>, January 11, 2018 [Per J. Tijam, First Division].<br><br><hr align="center" width="60%" size="1" noshade=""><br><center><b>DISSENTING OPINION</b></center><br><b>SINGH, <i>J.</i>:</b><br><br>This case stemmed from an Information charging XXX263779 with violation of Section 5(h) of Republic Act No. 9262 for allegedly causing emotional and psychological distress to his sweetheart, AAA.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Both the Regional Trial Court (<b>RTC</b>) and the Court of Appeals (<b>CA</b>) found XXX263779 guilty beyond reasonable doubt of violation of Section 5(h) of Republic Act No. 9262, holding that all the elements of psychological violence were duly established by the prosecution. However, the <i>ponencia</i> overturned the RTC and the CA, and acquitted XXX263779 on the ground that the third and fourth elements of violation of Section 5(h) of Republic Act No. 9262 were allegedly not established in this case.<br><br>I respectfully disagree with the above ruling. In my view, the third element, i.e., the harassment alarms or causes substantial emotional or psychological distress to the woman, is present in this case, while the fourth element, i.e., the offender acted for the purpose of alarming or causing substantial emotional or psychological distress to the woman, or knowing that their conduct will alarm or cause substantial emotional or psychological distress to the woman, or the offender acted recklessly, in conscious disregard of the risk that the act or series of acts of harassment will alarm or cause substantial emotional or psychological distress to the woman,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> enumerated by the <i>ponencia</i> is extraneous to a violation of Section 5(h) of Republic Act No. 9262.<br><br>In <i>Ang v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> the Court categorically enumerated the elements of the crime of violence against women through harassment under Section 5(h) of Republic Act No. 9262, as follows: 1) the offender has or had a sexual or dating relationship with the offended woman; 2) the offender, by himself or through another, commits an act or series of acts of harassment against the woman; and 3) the harassment alarms or causes substantial emotional or psychological distress to her.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>The first element is present in view of XXX263779's admission that he had a sexual or dating relationship with AAA, a woman.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>The second element is likewise present. By sending the text messages in question, XXX263779 committed an act of harassment against AAA.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> The <i>ponencia</i> correctly cited the cases of <i>Ang</i><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> and <i>Estacio v. Estacio</i>,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> and held that the act of sending threatening, demeaning, and offensive messages through Short Message Service (<b>SMS</b>) may be deemed as acts of harassment in the context of Section 5(h).<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>As to the third element, Section 5(h) of Republic Act No. 9262 requires that the accused's conduct "alarms" or "causes substantial emotional or psychological distress to the woman or her child".<br><br>Contrary to the findings of the <i>ponencia</i>, the third element was sufficiently established.<br><br>In the recent case of <i>XXX270257 v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>citing Labrador v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> the Court categorically held that a violation of Section 5(h) of Republic Act No. 9262 does not require proof that the victim became psychologically ill due to the psychological violence done by her abuser:<blockquote>Moreover, petitioner harps on the absence of a psychological evaluation from an expert witness which would show that CCC had indeed suffered mentally and emotionally as a result of his actions. <i>Ineluctably, the absence of such evaluation is inconsequential since it is not an element of the crime of Violation of Section 5 (h) of [Republic Act]. No. 9262.</i> Nowhere in the law can such a requirement be inferred. <i>In any event, the law does not actually require proof that the victim became psychologically ill due to the psychological violence done by her abuser.</i><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> (Emphasis supplied)</blockquote>Relatedly, in <i>Arupay v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> the Court held that the victim's testimony in Court already suffices to prove the emotional anguish or mental suffering of the victim, as such experiences are personal in nature:<blockquote>Psychological violence is an indispensable element of violation of Section 5(i) of [Republic Act] No. 9262. <i>Equally essential is the element of emotional anguish and mental suffering, which are personal to the complainant.</i> Psychological violence is the means employed by the perpetrator, while <i>emotional anguish or mental suffering are the effects caused to or the damage sustained by the offended party</i>. The law does not require proof that the victim became psychologically ill due to the psychological violence done by her abuser. Rather, <i>the law only requires emotional anguish and mental suffering to be proven. To establish emotional anguish or mental suffering, jurisprudence only requires that the testimony of the victim to be presented in court</i>, as such experiences are personal to this party.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> (Emphasis supplied)</blockquote>In this case, the testimony of AAA detailing her emotional ordeal at the hands of XXX263779 already suffices to prove the element of emotional anguish.<br><br>To prove her anguish, AAA testified on the following points: 1) that she was blackmailed by XXX263779, 2) that XXX263779 would not allow her to join activities in school, 3) that XXX263779 would get mad when AAA refused to have sex with him, 4) that XXX263779 would threaten to reveal their relationship to their parents, and that 5) XXX263779 would disturb her by accessing her social media accounts.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Moreover, AAA testified in open court that she was afraid of XXX263779's threats, as follows:<blockquote>Q: After receiving these text messages, how did that make you feel?<br><br>A: <i>I was afraid</i> since there were threats from him that he would kill me[.]<br><br>. . . .<br><br>Q: What was your response after receiving those messages?<br><br>A: <i>Despite of all the messages that I have received from him, I still pretended to be strong and fought him.</i><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Emphasis supplied)</blockquote>In its Decision, dated December 18, 2018, the RTC also found that the acts of XXX263779 caused psychological distress to AAA, whom the RTC noted to be crying during her testimony in open court.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Taken together, AAA's testimony detailing the blackmail, restrictions on her movements, and the coercive behavior imposed upon her by XXX263779 coupled with the RTC's observation that she was visibly distressed and even cried while testifying in open court, clearly demonstrates that AAA suffered emotional anguish as a result of XXX263779's acts.<br><br>After all, in <i>Ang</i>,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> a case cited by the <i>ponencia</i>, the Court held that it cannot measure the trauma that a victim of a violation of Section 5(h) of Republic Act No. 9262 experienced:<blockquote>Secondly, <i>the Court cannot measure the trauma that Irish experienced based on Rustan's low regard for the alleged moral sensibilities of today's youth. What is obscene and injurious to an offended woman can of course only be determined based on the circumstances of each case.</i> Here, the naked woman on the picture, her legs spread open and bearing Irish's head and face, was clearly an obscene picture and, to Irish a revolting and offensive one. <i>Surely, any woman like Irish, who is not in the pornography trade, would be scandalized and pained if she sees herself in such a picture.</i> What makes it further terrifying is that, as Irish testified, Rustan sent the picture with a threat to post it in the internet for all to see. That must have given her a nightmare.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis supplied)</blockquote>Surely, any woman in AAA's position would inevitably suffer emotional anguish upon the threat of public exposure of her private photos and videos by XXX263779.<br><br>With respect to the fourth element, it is respectfully submitted that the <i>ponencia</i>'s finding of "harassment"<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> cannot logically stand absent an intent to cause emotional or psychological harm. Moreover, intent to cause emotional or psychological harm is not even an element of violation of Section 5(h) of Republic Act No. 9262.<br><br>As cited by the <i>ponencia</i>, in <i>Estacio</i>,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> the Court held that threatening to kill the offended woman and sending her demeaning text messages constitute acts of psychological violence. Further, in <i>Ang</i>,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> the act of sending a naked photo of a woman through SMS, with her legs wide open and bearing the offended woman's face, was deemed as an act of harassment under Section 5(h) of Republic Act No. 9262.<br><br>Following the Court's pronouncements in <i>Ang</i> and <i>Estacio</i>, the <i>ponencia</i> correctly found that XXX263779 committed an act of harassment against AAA by sending her text messages demanding that they have sex, which also included threats to kill her.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> These remarks and threats were contained in the Information, dated March 21, 2017.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Even if the determination was limited to the allegations therein, XXX263779 would still be found liable under Section 5(h) of Republic Act No. 9262.<br><br>Indeed, as affirmed in <i>Ang</i>,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> even a "single act of harassment translating to violence," can produce conviction under Section 5(h), Republic Act No. 9262. The law leaves no room for equivocation: Section 3(a) of the statute defines "violence against women and their children" in the broadest terms, covering not only repeated patterns of abuse but also any actâwhether isolated or continuousâthat results in, or is likely to result in, physical, sexual, psychological harm, or economic abuse. By expressly including threats, battery, assault, coercion, harassment, or even arbitrary deprivation of liberty, the law underscores its intent to cast a wide protective mantle over women and children against all forms of abuse, however subtle or singular the act may be.<br><br>All told, the prosecution clearly established all the elements of a violation of Section 5(h) of Republic Act No. 9262. The evidence on record, i.e., AAA's detailed and credible testimony, the undisputed acts of harassment committed by XXX263779, and the emotional anguish AAA suffered, firmly demonstrates that XXX263779's conduct constitutes psychological violence penalized under Republic Act No. 9262. Accordingly, the RTC and the CA correctly found XXX263779 guilty beyond reasonable doubt of violation of Section 5(h) of Republic Act No. 9262.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Decision, pp. 2-3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> 632 Phil. 609 (2010) [Per J. Abad, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 619.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Decision, p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> 632 Phil. 609 (2010) [Per J. Abad, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> 885 Phil. 157 (2020) [Per SAJ. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Decision, pp. 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <b>G.R. No. 270257</b>, August 12, 2024 [Per J. Inting, Third Division]. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <b>G.R. No. 260275</b>, April 17, 2023 [Unsigned Resolution, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <b>G.R. No. 270257</b>, August 12, 2024 [Per J. Inting, Third Division]. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> 882 Phil. 905 (2020) [Per C.J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 919.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Decision, p. 15-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 632 Phil. 609 (2010) [Per J. Abad, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 622.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Decision, p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> 885 Phil. 157 (2020) [Per SAJ. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> 632 Phil. 609 (2010) [Per J. Abad, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 3. <i>See</i> Decision, p. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Decision</i>, p. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> 632 Phil. 609 (2010) [Per J. Abad, Second Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

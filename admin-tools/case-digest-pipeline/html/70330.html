@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 273877 - NILO S. GALIT, PETITIONER, VS. WILLY TANTONGCO, DOING BUSINESS UNDER THE NAME AND STYLE MWC ENTERPRISES, TREEBOX ENTERPRISES,* CRISTINE N. TANTONGCO, AND LENI CALUMBA, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70330' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 273877, November 18, 2025 ]</H2>
+			<H3>NILO S. GALIT, PETITIONER, VS. WILLY TANTONGCO, DOING BUSINESS UNDER THE NAME AND STYLE MWC ENTERPRISES, TREEBOX ENTERPRISES,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> CRISTINE N. TANTONGCO, AND LENI CALUMBA, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Court resolves the Petitioner for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Nilo S. Galit (Galit) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA), which found no grave abuse of discretion in the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the National Labor Relations Commission (NLRC). The NLRC reversed the Decision<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of the labor arbiter and dismissed the Complaint for illegal dismissal, nonpayment of service incentive leave, 13<sup>th</sup> month pay, separation pay, moral and exemplary damages, and attorney's fees filed by Galit against Willy Tantongco (Willy), doing business under the name and style MWC Enterprises (MWC), Treebox Enterprises (Treebox), Cristine N. Tantongco (Cristine), and Leni Calumba (Calumba) (collectively, MWC et al.) for lack of jurisdiction.<br><br>In 1998, Galit was hired as a helper by MWC, a sole proprietorship providing printing services, owned and operated by Willy. Galit was eventually promoted as printing press operator.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>On June 6, 2016, Galit suffered neck and back injuries and was hospitalized at the Quezon City General Hospital until June 16, 2016. Calumba, MWC's secretary, approved Galit's leave of absence and told him to take his time and return to work wren he has fully recovered.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>In January 2017, Galit reported back to work, although he was still not fully recovered. He begged Calumba to let him work, even as a gate opener, but she refused. Instead, Calumba told him to go home and rest so that he could fully recover.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On January 17, 2018, Willy, MWC's sole proprietor, died.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Then, on April 13, 2018, Cristine, Willy's daughter, filed an Establishment Employment Report<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (Report) with the Department of Labor and Employment (DOLE) of Galit's permanent termination from MWC because he had been absent without official leave (AWOL) for one year and 10 months.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On May 9, 2018, Susan Tantongco, Willy's wife, and Cristine put up Treebox, their own printing business,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> and on May 25, 2018, MWC's business was retired.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On September 10, 2018, Galit fully recovered and reported for work. To his surprise, Calumba, who was already working for Treebox, informed him that he was no longer an MWC employee and that MWC had already closed. However, MWC et al. contended that it was actually on October 4, 2018, when Galit went to the former office of MWC, which was then already occupied by Treebox, and during which time, he was informed that he had been reported as AWOL to the DOLE.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>On October 24, 2018, Galit filed a Complaint for illegal dismissal, claiming that he was illegally dismissed from employment without due process. The Complaint included money claims for nonpayment of 13<sup>th</sup> month pay and separation pay, as well as moral and exemplary damages, and attorney's fees. Galit then amended his Complaint, impleading Treebox, Cristine, and Calumba, and adding service incentive leave pay to his causes of action.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>MWC et al. countered that Galit was not dismissed but that he abandoned his job on account of his unauthorized leave of absence for a protracted period of time, and that he was already reported as AWOL before the DOLE. Willy or MWC cannot b held liable for illegal dismissal since Willy died on January 17, 2018, and MWC formally ceased its operation on May 25, 2018<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> after Galit was reported as AWOL to the DOLE.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Cristine and Treebox were also not made liable for illegal dismissal, as Treebox only came into existence on May 8, 2018, and Galit was not its employee. Additionally, Treebox was a separate and distinct entity from MWC. Since Galit abandoned his work, he is not entitled to his monetary claims. Also, Galit received his 13<sup>th</sup> month pay and service incentive leave pay for the years 2011 to 2016, as evidenced by the cash vouchers.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>In a Decision,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> the labor arbiter found Treebox as the business successor of MWC for the following reasons: (a) both Treebox and MWC were engaged in the business of providing printing services; (b) Treebox was a family business, owned by the members of the same family that owned MWC; (c) both businesses had the same business address; (d) Calumba was retained as a Treebox employee; and (e) Cristine reported Galit to DOLE as AWOL on behalf of MWC.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>The labor arbiter rejected MWC et al.'s argument that Galit abandoned his work. To consider prolonged absence from one's employment as abandonment, there must be a clear and deliberate intent to discontinue one's employment without any intention of returning. In this case, however, it was not shown that Galit intended to sever his employment with MWC, as his failure to report for work was due to his injuries. MWC was aware of his condition, and Galit was even made to believe that he could take as much time as he needed to recover without fear of losing his job. No return-to-work notice, notice to explain, and notice of termination were also issued to Galit. There being no just or authorized cause for his dismissal, it was clear that Galit was illegally dismissed from his employment. As such, the labor arbiter ruled in Galit's favor and awarded him backwages and separation pay. Galit was also awarded a proportionate 13<sup>th</sup> month pay for 2015 and 2016, as well as service incentive leave pay, reckoned from 1998. Since his dismissal was attended by bad faith, compelling him to litigate in order to protect his rights, Galit was also granted moral and exemplary damages, as well as attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> The dispositive portion of the labor arbiter's Decision reads:<blockquote><b>WHEREFORE</b>, upon the premises, judgment is hereby rendered as follows:<br><br>a) Declaring complainant to have been illegally dismissed;<br><br>b) Ordering respondents Tree Box Enterprises and Cristine N. Tantongco to pay <i>in solidum</i> the complainant his full backwages and backwages from September 10, 2018 until the finality of this Decision;<br><br>c) Ordering respondents Tree Box Enterprises and Cristine N. Tantongco, to pay <i>in solidum</i> proportionate 13<sup>th</sup> month pay (2015-2016) and service Incentive leave pay;<br><br>d) Ordering respondents Tree Box Enterprises and Cristine N. Tantongco, to pay <i>in solidum</i> the complainant the sum of [PHP] 50,000.00 as moral and exemplary damages; and<br><br>e) Ordering respondents Tree Box Enterprises and Cristine N. Tantongco, to pay <i>in solidum</i> attorney's fees equivalent to ten (10%) percent of the total judgment award.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Emphasis in the original)</blockquote>On appeal, the NLRC rendered its Decision<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> reversing the ruling of the labor arbiter and dismissing Galit's Complaint. The NLRC found no basis to impute liability upon Treebox as the successor-in-interest of MWC. It explained that as a sole proprietorship, MWC did not possess a juridical personality separate and distinct from that of the sole proprietor's personality. Thus, MWC ceased to exist upon the death of Willy. Hence, Galit's Complaint for illegal dismissal on October 24, 2018 could no longer prosper because his employment with MWC automatically ceased upon Willy's death on January 17, 2018.<br><br>The NLRC added that in the absence of proof that Treebox acquiesced to employ Galit, no liability can attach to Treebox notwithstanding the fact that their businesses were related, their offices were situated in the same address, and that one of MWC's employees was retained by Treebox, since it is settled that unless expressly assumed, labor contracts are not enforceable against the transferee of an enterprise. Absent any employer-employee relationship between Galit and Treebox, Cristine, and Calumba, the labor arbiter had no jurisdiction over Galit's Complaint and money claims. Galit should have filed his claim as a creditor against the estate of Willy as provided under Rule 86, Section 5 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> The dispositive portion of the NLRC decision reads:<blockquote><b>WHEREFORE</b>, the appeal filed by the respondents is hereby <b>GRANTED</b>. The Labor Arbiter's [October 30,] 2019 Decision is hereby <b>REVERSED AND SET ASIDE</b> and a new one rendered <b>DISMlSSING</b> the complaint for lack of jurisdiction.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> (Emphasis in the original)</blockquote>Galit, moved for reconsideration, but the NLRC denied it in its Resolution.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Aggrieved, Galit elevated the tatter before the CA.<br><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> the CA dismissed the Petition and affirmed the ruling of the NLRC for the following reasons: (a) Galit's employment with MWC ceased upon the automatic termination of its business in view of Willy's death considering that as sole proprietorship, MWC did not possess a juridical personality separate and distinct from the owner of the enterprise; (b) the NLRC properly dismissed the complaint for lack of jurisdiction since the existence of employer-employee relationship between Galit and Treebox had not been proved. The labor tribunal cannot simply presume that MWC was the predecessor of Treebox just because both offer printing services and have the same address, absent material proof that Treebox had acquired the assets and liabilities of Treebox as shown by a deed of conveyance or transfer of assets; and (c) pursuant to Rule 86, Section 5 of the Rules of Court, the NLRC correctly ruled that Galit should have filed his claim against the estate of Willy. Even assuming that an intestate or testate proceeding has not begun, Galit could have initiated the proper settlement proceedings under Rule 78, Section 6(b) of the Rules of Court, and then file his claims there to hold the properties of the estate liable for tre settlement of his claims before the distribution of the decedent's assets to his heirs.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The dispositive portion of the CA Decision reads:<blockquote><b>WHEREFORE</b>, the Petition is <b>DENIED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Emphasis in the original)&nbsp;</blockquote>Galit moved for reconsideration, but the CA denied it in its Resolution.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Hence, Galit filed the present Petition.<br><br>Galit contends that the CA erred when it ruled that his employment with MWC ceased upon its sole proprietor's death. He argues that Treebox and MWC must be considered as one and the same, as Treebox, Cristine, and Calumba control and manage both businesses, which are located at the same address. He insists that the following circumstances show that Treebox was the successor of MWC: (a) Cristine's act of reporting him to the DOLE to have been absent without official leave was an admission that he worked for Treebox and Cristine; (b) the June 14, 2018 Certification issued to Willy by the Office of the City Treasurer that MWC terminated its business operations on May 25, 2018, when Willy had already died on January 17, 2018, was secured to mislead and gave the impression that MWC ceased operations after Willy's demise; (c) The fact that Treebox, Cristine, and Calumba submitted cash vouchers to prove that he was given his Christmas bonuses, 13<sup>th</sup> month pay, service incentive leave pay, and other monthly incentives prove that he worked for them; (d) the Report filed with the DOLE shows that it was made only on April 13, 2018, and that it merely informed DOLE that MWC reduced its workforce because he had gone on AWOL, and not because MWC had already ceased its operations; and (e) absent any showing that MWC was under the exclusive control and management of Willy, the fact that Treebox was a partnership does not preclude it from continuing the business of MWC. Galit further argues that before he could file a claim against Willy's estate, the CA should have at least ruled that he is entitled to separation pay.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Galit maintains that, as the successor of MWC, Treebox should be held accountable for all liabilities that arise from his illegal dismissal. Galit maintains that he did not abandon his work. He was prevented from going to work because he suffered from neck and back injuries. Calumba granted his request to go on leave and even told him, "<i>Pumasok ka na lang kapag okay ka na.</i>" When he returned to the office in January 2017 although he was not fully well, he asked to work as a gate opener. Calumba again advised him to rest until he recovered from his injuries. Fully recovered, Galit reported back to work in September 2018. However, he was caught by surprise when Calumba informed him that he was no longer an employee. The circumstances obtaining in this case, as well as his filing of the present Complaint for illegal dismissal, show that he never had any intention of abandoning his employment.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Galit claims that since he was illegally dismissed, he is entitled to separation pay and backwages, service incentive leave pay beginning in 1998, and a proportionate 13<sup>th</sup> month pay for the years 2015 and 2016. The bad faith that attended his illegal dismissal, as fell as the noncompliance with the twin notice requirement prior to his dismissal, entitles him to moral and exemplary damages. Attorney's fees must also be awarded in his favor as he was compelled to litigate in order to protect his rights and interests.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>In their Comment,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> MWC et al. counter that Galit did not raise any novel and valid argument that would justify this Court to overturn the pronouncement of the CA. They insist that Galit's claim that Treebox was a continuation of MWC is bereft of merit because, unlike a partnership or a corporation, there is no succession in sole proprietorship like MWC. Hence, Galit's employment with MWC was terminated the moment Willy died. As such, his illegal dismissal and money claims have no leg to stand on.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br><center><b>Issue</b></center><br>The issue for this Court's resolution is whether the CA erred in affirming the NLRC's ruling, which dismissed petitioner Nila S. Galit's illegal dismissal and money claims.<br><br><center><b>This Court's Ruling</b></center><br>At the outset, this Court must emphasize the distinct approach in reviewing the CA's ruling in a labor case. In a Rule 45 review, this Court examines the correctness of the CA's Decision as opposed to the review of jurisdictional errors under Rule 65. In ruling for legal correctness, this Court assesses the CA's Decision in the same context that the petition for <i>certiorari</i> was presented to the CA. Thus, this Court has to scrutinize the CA's Decision from the prism of whether the correctly determined the presence or absence of grave abuse of discretion in the NLRC decision.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>In <i>Madrio v. Atlas Fertilizer Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> this Court held that:<blockquote>For decisions of the NLRC, there is grave abuse of discretion "when its findings and conclusions are not supported by substantial evidence, which refers to that amount of relevant evidence that a reasonable mind might accept as adequate to justify a conclusion. Thus, if the NLRC's ruling has basis in the evidence and the applicable law and jurisprudence, then no grave abuse of discretion exists and the CA should so declare and accordingly, dismiss the petition."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></blockquote>Guided by the foregoing considerations, this Court rules that the CA gravely abused its discretion when it affirmed the NLRC's dismissal of petitioner's illegal dismissal complaint and money claims against the respondents.<br><br>In affirming the ruling of the NLRC, the CA held that petitioner's employment with MWC ceased upon its sole proprietor's death since a sole proprietorship does not possess a juridical personality separate and distinct from the personality of the enterprise's owner. Treebox could not be presumed to be MWC's successor, as no evidence was presented to support this claim. As such, petitioner could not be regarded as an employee of Treebox, which would make respondents liable for illegal dismissal as well as for the money claims asked for by the petitioner.<br><br>Contrary to the view of the CA, this Court finds it apt to pierce the corporate veil of Treebox and treat it as one and the same as MWC.<br><br>"A corporation is an artificial being created by operation of law. It has a personality separate and distinct from the persons composing it, as well as from any other legal entity to which it may be related."<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> The same is true as regards a partnership, which Article 1768<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> of the Civil Code recognizes as having a juridical personality separate and distinct from that of each of the partners.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>While a corporation or a partnership is regarded as a separate legal entity, this legal fiction is not absolute and may be disregarded under certain well-defined circumstances. In <i>Kaimo Condominium Building Corporation v. Laverne Realty and Development Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> this Court teaches:<blockquote>Well settled is the rule that a corporation has a separate and distinct personality from its stockholders, officers, or any other legal entity to which it is related. It is presumed to be a <i>bona fide</i> legal entity with its own powers and attributes and is liable for its own acts and obligations. However, this legal fiction is not absolutely an if penetrable shield, especially when circumstances warrant a denial of protection under a corporate personality under the doctrine of piercing the veil of corporate fiction. Hence, any application of the doctrine of piercing the corporate veil should be done with caution. A court should be mindful of the obtaining facts where it is to be applied. It must be certain that the corporate fiction was misused to such an extent that injustice, fraud, or crime was committed against another, in disregard of its rights. The wrongdoing must be clearly and convincingly established; it cannot be presumed. Otherwise, it would result in injustice by reason of an erroneous application.<br><br>Case law teaches that the doctrine of piercing the corporate veil applies only in three basic instances, namely: (a) when the separate distinct corporate personality defeats public convenience, as when the corporate fiction is used as a vehicle for the evasion of an existing obligation; (b) in fraud cases, or when the corporate entity is used to justify a wrong, protect a fraud, or defend a crime; or (c) is used in alter ego cases, <i>i.e.</i>, where a corporation is essentially a farce, since it is a mere alter ego or business conduit of a person, or where the corporation is so organized and controlled and its affairs conducted as to make it merely an instrumentality, agency, conduit, or adjunct of another corporation.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Citations omitted)</blockquote>For the piercing doctrine to apply, it is of no consequence if the company is a sole proprietorship. For as long as the separate and distinct personality of such juridical entity is used to perpetuate fraud, commit illegal acts, add evade one's obligations, the equitable doctrine of piercing the veil of corporate fiction will apply, as these are the acts which the doctrine seeks to prevent and remedy.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>A careful scrutiny of the circumstances obtaining in this case indubitably shows that Treebox is nothing more than a mere alter ego of MWC. It is not lost on this Court that Cristine was the one who reported petitioner to the DOLE as AWOL. Additionally, she signed the Report as MWC's owner/company representative.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> If she is truly not privy to the affairs of MWC, it is highly unlikely that she would know that petitioner had not been reporting for work for quite some time, which would necessitate her making the report. Even assuming that her only purpose in filing the Report with DOLE was to help wind up the business of MWC following the demise of its proprietor, her failure to indicate in the Report that the status of the establishment as "permanent closure" instead of "reduction of workforce"<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> betrays Cristine's intent for Treebox to continue MWC's venture and absorb its employees, except petitioner. This is shown by the fact that Calumba is now employed with Treebox, despite no evidence having been presented to show that a Report was submitted to DOLE stating her separation from MWC due to its permanent closure by reason of its proprietor's demise. These circumstances, coupled with the fact that MWC and Treebox are both engaged in the same line of business and have the same office address, give ground to petitioner's asseveration that Treebox is a continuation of MWC's enterprise. Hence, Treebox's separate personality must be disregarded. It must be treated as one and the same as MWC, thus making Treebox liable for illegal dismissal and monetary claims if petitioner duly proves the same. These circumstances justify the application of the piercing doctrine, otherwise, this Court will run afoul of the mandate of the Constitution to secure the workingman's employment and guarantee them full protection in labor.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>In denying liability for illegal dismissal, respondents contend that petitioner was not terminated from employment but instead abandoned his employment.<br><br>This Court is not persuaded.<br><br>Article 297, formerly Article 282, of the Labor Code outlines the just causes for the dismissal of an employee. It provides:<blockquote>Article 297. <i>Termination by Employer</i>. â employer may terminate an employment for any of the following causes:&nbsp;<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">Serious misconduct or willful disobedience by the employee of the lawful orders of his employer or representative in connection with his work;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">Gross and habitual neglect by the employee of his duties;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify">Fraud or willful breach by the employee of the trust reposed in him by his employer or duly authorized representative;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(d)</div></td><td><div align="justify">Commission of a crime or offense by the employee against the person of his employer- or any immediate member of his family or his duly authorized representatives; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(e)</div></td><td><div align="justify">Other Causes analogous to the foregoing.</div></td></tr></tbody></table></blockquote></blockquote>"Although abandonment of work is not expressly enumerated as a just cause under Article 297 of the Labor Code, jurisprudence has recognized it as a form of or akin to neglect of duty."<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>Abandonment is defined as the deliberate and unjustified refusal of an employee to resume their employment.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> For a valid finding of abandonment, two factors must be shown to exist: (1) the failure to report for work or absence without valid or justifiable reason; and (2) a clear intention to sever employer-employee relationship, with the second as the more determinative factor which is manifested by overt acts from which it may be deduced that the employee has no more intention to work. Also, it must be shown by clear proof that the intent to discontinue one's employment was deliberate and unjustified.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>In this case, records show that petitioner's absence from work was caused by his injuries. Respondents could not claim without knowing about his ailment, given that, despite his long absence from work, petitioner was never issued a return-to-work order. He was also not required to explain his long absence. These circumstances lend credence to petitioner's argument that he was permitted to take a leave of absence from work until he gets better. His lack of intention to sever his employment relationship with MWC is clearly shown when he went back to the office in January 2017 and asked to be given a job, even as a gate opener, as he was not fully well, only to be given false assurances to take as much time as he needed to recover fully. It must be emphasized that respondents did not refute petitioner's claim. From this factual backdrop, it clear that the elements of abandonment are lacking. Since respondents failed to substantiate their claim that petitioner abandoned his work, his dismissal from work is unquestionably illegal.<br><br>An employee who has been illegally terminated from employment is entitled to two separate and distinct reliefs of backwages and reinstatement. In the event that reinstatement is no longer feasible due to strained relations between the employee and the employer, separation pay is granted in its stead.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> In short, an illegally terminated employee is entitled to either reinstatement without loss of seniority rights and other privileges, if viable, or separation pay equivalent to one month salary for every year of service, with a fraction of at least six months considered as one whole year, from the time of the illegal dismissal until the finality of the judgment, and full backwages.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>In this case, given that MWC, the true employer of the petitioner, already ceased operating by reason of its proprietor's demise, it is befitting that petitioner be awarded separation pay, in lieu of reinstatement, and full backwages.<br><br>As regards the computation of petitioner's separation pay and backwages, this must be in consonance with this Court's pronouncement in <i>Dumapis v. Lepanto Consolidated Mining Company</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> where We ruled:<blockquote>Verily, the Court now ordains the uniform rule that the award of backwages and/or separation pay due to illegally dismissed employees shall include all salary increases and benefits granted under the law and other government issuances, Collective Bargaining Agreements, employment contracts, established company policies and practices, and analogous sources which the employees would have been entitled to had they not been illegally dismissed. On the other hand, salary increases and other benefits which are contingent or dependent on variables such as an employee's merit increase based on performance or longevity or the company's financial status shall not be included in the award.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></blockquote>Regarding the claim for 13<sup>th</sup> month pay, Presidential Decree No. 851,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Section 1, as modified by Memorandum Order No. 28,<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> mandates that all employers pay their rank-and-file employees 13<sup>th</sup> month pay not later than December 24 of every year. To be entitled to this benefit, Section 4 of the Rules and Regulations Implementing Presidential Decree No. 851 provides that the employee must have worked for at least one month during the calendar year. Also, claims for 13<sup>th</sup> month pay must be filed within three years from the time the cause of action accrues.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Considering that petitioner did not render work in 2017 and 2018 while he was still recuperating from his injury, he is not entitled to receive 13<sup>th</sup> month pay for the said period. This Court must also deny petitioner's claim for the said benefit for the years 2015 to 2016 given that respondents presented proof that they paid petitioner his 13<sup>th</sup> month pay not only for 2015 and 2016, but as far back as 2011.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>Anent the claim for service incentive leave pay, Article 95 of the Labor Code provides that an employee who has rendered at least one year of service shall be entitled to a yearly service incentive leave of five days. The right to claim service incentive leave pay prescribes in three years, reckoned "from the time the employer refuses to pay its monetary equivalent after demand for commutation or upon termination of the employee's services[.]"<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> The prescriptive period with respect to petitioner's claim for his service incentive leave pay commenced only from the time of his separation from employment. Since he filed his Complaint on October 24, 2018, or barely a month after he learned of his termination from employment on September 10, 2018, his claim for service incentive leave pay has not prescribed. Hence, petitioner must be awarded his service incentive leave pay, reckoned from 1998 to 2018, less the service incentive leave pay he already received for the years 2011 to 2016 as shown by the vouchers<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> presented by the respondents.<br><br>To warrant the award of moral damages, "it must be shown that the employer acted (a) in bad faith or fraudulently; (b) in a manner oppressive to labor; or (c) in a manner contrary to morals, good customs, or public policy."<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> On the other hand, "exemplary damages may be awarded if the dismissal was effected in a wanton, oppressive or malevolent manner."<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> In this Court's view, the manner by which the petitioner was terminated from employment, where he was denied both substantive and procedural due process, smacks of bad faith and ill will, thereby entitling him to moral and exemplary damages. However, this Court has always determined the amount of the award based on the circumstances of each case in accordance with Article 2216 of the Civil Code. As such, this Court deems it proper to award moral and exemplary damages in the amount of PHP 50,000.00 each in petitioner's favor, as held by the labor arbiter.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Having been forced to litigate to protect his rights and interests, the award of 10% attorney's fees to petitioner is legally and morally justifiable.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>In line with prevailing jurisprudence, all monetary awards due to respondents shall earn legal interest at the rate of 6% per annum from the finality of this Resolution until fully paid.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>In cases of illegal termination of employees or other unjust acts perpetrated by corporations, partnerships, or associations, their officers are generally not held liable along with the corporation, partnership, or association. However, this rule admits of certain exceptions. In <i>Lambert Pawnbrokers and Jewelry Corporation v. Binamira</i>,<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> this Court ruled:<blockquote>As a general rule, only the employer-corporation, partnership or association or any other entity, and not its offers, which may be held liable for illegal dismissal of employees or for other wrongful acts. This is as it should be because a corporation is a juridical entity with legal personality separate and distinct from those acting for and in its behalf and, in general, from the people comprising it. A corporation, as a juridical entity, may act only through its directors, officers and employees. Obligations incurred as a result of the directors' and officers' acts as corporate agents, are not their personal liability but the direct responsibility of the corporation they represent. It is settled that in the absence of malice and bad faith, a<br><br>stockholder or an officer of a corporation cannot be made personally liable for corporate liabilities. They are only solidarily liable with the corporation for the illegal termination of services of employees if they acted with malice or bad faith. In <i>Philippine American Life and General Insurance v. Gramaje</i>, bad faith is defined as a state of mind affirmatively operating with furtive design or with some motive of self-interest or ill will or for ulterior purpose. It implies a conscious and intentional design to do a wrongful act for a dishonest purpose or moral obliquity.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> (Citations omitted)</blockquote>Here, the unceremonious termination of petitioner without the observance of procedural and substantive due process to ease him out of his employment, even if Cristine intended Treebox to continue MWC's business sufficiently demonstrates that Cristine acted in bad faith, as would make her solidarily liable with Treebox for the illegal dismissal of petitioner and the adjudged money claims in his favor.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The August 10, 2023 Decision and April 19, 2024 Resolution of the Court of Appeals in CA-G.R. SP No. 169285 are <b>REVERSED and SET ASIDE</b>. Petitioner Nilo S. Galit is declared to have been illegally dismissed from employment. Treebox Enterprises and Cristine N. Tantongco are solidarily liable to pay Nilo S. Galit the following:&nbsp;<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">Full backwages from September 10, 2018 until the finality of this Decision;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">Separation pay, in lieu of reinstatement, equivalent to one month salary for every year of service;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify">Service incentive leave pay from 1998 until 2018, less the Service Incentive Leave pay Nilo S. Galit already received for the years 2011 to 2016;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(d)</div></td><td><div align="justify">Moral damages in the amount of PHP 50,000.00; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(e)</div></td><td><div align="justify">Exemplary damages in the amount of PHP 50,000.00.</div></td></tr></tbody></table></blockquote>Both awards of backwages and separation pay shall include all salary increases and benefits granted under the law and other government issuances, Collective Bargaining Agreements, employment contracts, established company policies and practices, and analogous sources which Nilo S. Galit would have been entitled to bad he not been illegally dismissed.<br><br>All monetary awards shall earn interest at the legal rate of 6% per annum from the date of finality of this Decision until fully paid.<br>&nbsp;<br><b>SO ORDERED.</b>&nbsp;<br><br><i>Lazaro-Javier, Kho, Jr.</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>Leonen, SAJ. (Chairperson)</i>, see separate concurring opinion.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to as "Treebox Manila Co." and "Tree Box Enterprises" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 47-58. The August 10, 2023 Decision in CA-G.R. SP Ne. 169285 was penned by Associate Justice Pablito A. Perez and concurred in by Presiding Justice Remedios A. Salazar-Fernando and Associate Justice Raymond Reynold R. Lauigan of the First Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 60-62a. The April 19, 2024 Resolution in CA-G.R. SP No. 169285 was penned by Associate Justice Pablito A. Perez and concurred in by Associate Justices Raymond Reynold R. Lauigan and Roberto P. Quiroz of the Special Former First Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 93-102. The July 31, 2020 Decision in NLRC[-]NCR [Case No.] 10-17714-18/NLRC LAC No. 01-000236-20 was penned by Presiding Commissioner Grace E. Maniquiz-Tan and concurred in by Commissioners Dolores M. Peralta-Beley and Mercedes R. Fosada-Lacap of the Fifth Division, National Labor Relations Commission, Quezon City.<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 104-108. The November 27, 2020 Resolution in NLRC[-]NCR [Case No.] 10-17714-18/NLRC LAC No. 01-000236-20 was penned by Presiding Commissioner Grace E. Maniquiz-Tan and concurred in by Commissioners Dolores M. Peralta-Beley and Mercedes R. Posada-Lacap of the Fifth Division, National Labor Relations Commission, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 185-192. The October 30, 2019 Decision in NLRC-NCR Case No. 10-17714-18 was penned by Labor Arbiter Reynante L. San Gaspar of the National Labor Relations Commission, National Capital Region, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 14, 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 14-15, 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 15, 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 48, 132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 134-135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 48, 136.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 49, 133.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 15, 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 133.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 49, 96-97, 188.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 185-192.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 50, 97-98, 189.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> 189-181.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 191-192.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 93-102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 99-101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 101-102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 104-108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 47-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 54-57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 60-62a.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 21-28<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 29-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> av 33-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 245-246.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 245.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>See</i> <b>Intercrew Shipping Agency, Inc. v. Calantoc</b>, 876 Phil. 869, 878 (2020) [Per J. Inting, Second Division]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> 859 Phil. 960 (2019) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 968.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Kukan International Corp. v. Hon. Judge Reyes</b>, 646 Phil. 210, 236 (2010) [Per J. Velasco, Jr., First Division].&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> CIVIL CODE, art. 1768 states:<blockquote>ARTICLE 1768. The partnership has a juridical personality separate and distinct from that of each of the partners, even in case of failure to comply with the requirements of article 1772, first paragraph.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Commissioner of Internal Revenue v. Spouses Magaan</b>, 901 Phil. 745, 765 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 934 Phil. 186 (2023) [Per J. Singh, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 193-194.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Sarona v. National Labor Relations Commission</b>, 679 Phil. 394, 419 (2012) [Per J. Reyes, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Rollo</i>, p. 134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i>&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>See</i> <b>Rosales v. New A.N.J.H. Enterprises &amp; N H. Oil Mill Corporation</b>, 767 Phil. 34, 50 (2015) [Per J. Velasco, Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Demex Rattancraft, Inc. v. Leron</b>, 820 Phil. 693, 701-702 (2017) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>Samillano v. Valdez Security and Investigation Agency, Inc.</b>, 875 Phil. 440, 450 (2020) [Per J. J. Reyes, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>See</i> <b>Robustan, Inc. v. Court of Appeals</b>, 898 Phil. 288, 301 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>See</i> <b>Aliling v. Feliciano</b>, 686 Phil. 889, 916-917 (2012) [Per J. Velasco, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>See</i> <b>Agapito v. Aeroplus Multi-Services, Inc.</b>, 922 Phil. 619, 631 (2022) [Per J. Lazaro-Javier, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 884 Phil. 156 (2020) [Per J. Lazaro-Javier, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 180.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Presidential Decree No. 851 (l 976), sec. 1 states:<blockquote>SECTION 1. All employers are hereby required to pay all their employees receiving a basic salary of not more than P1,000 a month, regardless of the nature of their employment, a 13th-month pay not later than December 24 of every year.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Modifying Presidential Decree No. 851 (1986). Requiring all employers to pay their employees a 13<sup>th</sup> month pay.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Republic of the Philippines v. National Labor Relations Commission</b> (Third Division), 783 Phil. 62, 87 (2016) [Per J. Leonen, Second Division].<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Rollo</i>, pp. 146-148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Rodriguez v. Park N Ride, Inc.</b>, 807 Phil. 747, 763 (2017) [Per J. Leonen, Second Division].<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i>, pp. 148-151.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>Villafuerte v. Disc Contractors, Builders and General Services, Inc.</b>, 923 Phil. 867, 908 (2022) [Per J. J. Lopez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>Square Meter Trading Construction v. Court of Appeals</b>, 894 Phil. 698, 719 (2021) [Per J. Carandang, First Divison].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>Buenaflor v. Stolt-Nielsen Philippines, Inc.</b>, 923 Phil. 790, 810 (2022) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Agapito v. Aeroplus Multi-Services, Inc.</b>, 922 Phil. 619, 634 (2022) [Per J. Lazaro-Javier, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Lara's Gifts v. Midtown Industrial Sales, Inc.</b>, 929 Phil. 754, 819 (2020) (Resolution) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> 639 Phil. 1 (2010) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 14.<br><br><hr align="center" width="60%" size="1" noshade=""><br><center><b>CONCURRING OPINION</b></center><br><b>LEONEN, <i>SAJ.</i>:</b><br><br>I concur with the <i>ponencia</i>. The present case is an example of hiding behind corporate fiction to evade valid labor obligations. Treebox Enterprises is the alter ego and successor of MWC Enterprises, Nilo S. Galit's (Galit) employer. It does not matter that MWC Enterprises was a sole proprietorship, whereas Treebox Enterprises was formed as a corporation. The corporate veil should be pierced, and Treebox Entewrises should be made solidarily liable with Cristine Tantongco for the payment of full backwages, separation pay, service incentive leave pay, and moral and exemplary damages to Galit.<br><br><center><b>I</b></center><br>The present case is similar tb <i>Sarona v. National Labor Relations Commission</i>,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> a case decided by this Court in 2012 and already cited in the <i>ponencia</i>. I expound on this case, particularly its facts, to illustrate how corporate fiction can be weaponized oy unscrupulous employers; and how this Court in <i>Sarona</i> refused to close its eyes and be complicit to this weaponization.<br><br>The petitioner in <i>Sarona</i> was a security guard first hired by Sceptre Security Agency, a sole proprietorship, in 1976. In 2003, Sceptre's Operation Manager made petitioner Sarona submit a resignation letter. He was then subsequently made to submit an application form to Royale Security Agency, a corporation likewise engaged in providing security services.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>After several weeks of being in floating status, petitioner Sarona was assigned to guard the premises of Highlight Metal Craft, Inc. from July 29, 2003 to August 8, 2003, or for a short period of 11 days. Subsequently, petitioner Sarona was assigned to WWWE, Inc., where he worked until September 17, 2003 because Royale was allegedly replaced by another security agency, a reason which turned out to be false.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>In any case, four days after, or on September 21, 2003, petitioner Sarona was re-assigned to Highlight Metal from September 22 to 30, 2003. On October 1, 2003, petitioner Sarona reported at Royale's office but was told that he would no longer be given any assignments as per the instructions of Sceptre's General Manager. This caused petitioner Sarona to file his illegal dismissal complaint against Sceptre and Royale.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>The Labor Arbiter declared that petitioner Sarona was indeed illegally dismissed but only awarded backwages from October 1, 2003 until the promulgation of the decision on May 11, 2005.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> As for the computation of petitioner Sarona's separation pay, the Labor Arbiter did not count petitioner Sarona's employment with Sceptre since 1976, refusing to pierce Royale's corporate veil.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> On appeal, the National Labor Relations Commission affirmed the Labor Arbiter's Decision but limited the award of full backwages to three months in view of petitioner Sarona's limited service in Royale.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> For its part, the Court of Appeals found no grave abuse of discretion in the National Labor Relations Commission's refusal to pierce Royale's corporate veil and affirmed the monetary awards awarded to petitioner Sarona.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>In its 2012 Decision, this Court reversed and set aside the Court of Appeals' Decision.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> This Court held that Royale was a continuation or successor of Sceptre, as shown by the exercise of control of Sceptre's officers over the business affairs of Sceptre and, after the death of Sceptre's sole proprietor, Royale.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> In particular, petitioner Sarona, who was supposedly employed by Royale, was not given an assignment on the orders of Sceptre's general manager.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Furthermore, the manner by which petitioner Sarona was dismissed from Sceptre was indicative of fraud. He was made to resign from Sceptre then apply to Royale, only to be terminated shortly thereafter. This leads to no conclusion other than there was intent to violate petitioner Sarona's right to security of tenure.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On the issue of piercing the corporate veil, this Court held that the doctrine was applicable. According to this Court, it does not matter that Sceptre was a sole proprietorship, the doctrine of piercing corporate fiction having been designed to prevent "act[s] of hiding behind the separate and distinct personalities of juridical entities to perpetuate fraud, commit illegal acts, [or] evade one's obligations."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> In <i>Sarona</i>, Sceptre's general manager, who happened to be the wife of the sole proprietor, hid behind corporate fiction. That Sceptre and Royal share the same principal place of business; share the same officers and employees; and Sceptre's refusal to release petitioner Sarona's cash bond all show that "Royale was a mere subterfuge for [Sceptre]."<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Consequently, petitioner Sarona was deemed not to have changed employers, Sceptre and Royale being one and the same, and his separation pay was computed from his employment in Sceptre since 1976 until finality of this Court's Decision in that case.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The award of backwages, on the other hand, was computed from the time petitioner Sarona was dismissed on October 1, 2003 until the finality of this Court's Decision.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Attorney's fees, moral damages, and exemplary damages were likewise awarded.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> In all the awards, Sceptre's general manager was made liable with Royale.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Similar to Sceptre and Royale in <i>Sarona</i>, respondents MWC Enterprises and Treebox Enterprises are one and the same. As such, Treebox Enterprises should be made liable for he labor awards due to Galit.<br><br>That Treebox Enterprises is the alter ego of MWC Enterprises is shown by the following. <i>First</i>, Treebox Enterprises engaged in the same business as that of MWC Enterprises, i.e., printing.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Second</i>, MWC Enterprises and Treebox Enterprises share the same office address.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Third</i>, respondent Leni Calumba (Calumba), then employed in MWC Enterprises, was likewise employed by Treebox Enterprises.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Fourth</i>, one of Treebox Enterprises' incorporators, Cristine Tantongco, exercised control over the business affairs of both MWC Enterprises, then owned by her deceased father, and Treebox Enterprises, which was formed by her and her mother.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> To recall, it was Cristine Tantongco who reported petitioner Galit as absent without leave before the Department of Labor and Employment, signing as MWC Enterprises' owner/company representative.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Fifth</i>, Cristine Tantongco signed the establishment employment report and indicated "reduction of workforce" as reason for filing instead of "permanent closure".<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> This indeed betrays her intent to continue MWC Enterprises' business and absorb MWC Enterprises' employees, except Galit. Cristine Tantongco never denied that she still employs Calumba, also an employee of MWC Enterprises. Calumba had made it appear that Galit could take his time recovering from his neck and back injuries.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>In addition, Cristine Tantongco must be made solidarily liable with Treebox Enterprises, not because she is a stockholder of the corporation but because she acted on behalf of MWC Enterprises with malice and in bad faith.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> To repeat, she signed the Establishment Employment Report she submitted to the Department of Labor and Employment as MWC Enterprises' "owner/company representative."<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> She directly participated in the illegal dismissal of Galit by submitting the evaluation report that tagged Galit as absent without leave or "AWOL"<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> before the Department of Labor and Employment, indicating "reduction of workforce"<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> as the false reason for submission.<br><br>It is true that Galit was an employee of MWC Enterprises, a sole proprietorship then owned by Willy Tantongco. It is also true that Galit's labor claims are money claims against the estate of Willy Tantongco, the latter having already died. And considering that a sole proprietorship has no distinct and separate personality from its owner,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Galit's remedy would have been to file his money claims during the settlement of Willy Tantongco' s estate in accordance with Rule 86, Section 5 of the Rules of Court, thus:<blockquote><center><b>RULE 86</b><br><br><i>Claims Against Estate</i></center><br><b>SEC. 5.</b> <i>Claims which must be filed under the notice. If not filed, barred; exceptions</i>. â All claims for money against the decedent, arising from contract, express or implied, Whether the same be due, not due, or contingent, all claims for funeral expenses and expenses for the last sickness of the decedent, and judgment for money against the decent, must be filed within the time limited in the notice; otherwise they are barred forever, except that they may be set forth as counterclaims in any action that the executor or administrator may bring against the claimants. Where an executor or administrator commences an action, or prosecutes an action already commenced by the deceased in his lifetime, the debtor may set forth by answer the claims he has against the decedent, instead of presenting them independently to the court as herein provided, and mutual claims may be set off against each other in such action; and if final judgment is rendered in favor of the defendant, the amount so determined shall be considered the true balance against the estate, as though the claim had been presented directly before the court in the administration proceedings. Claims not yet due, or contingent, may be approved at their present value.</blockquote>Indeed, in the 1994 case of <i>Robledo v. National Labor Relations Commission</i>,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> this Court refused to pierce the corporate veil to allow the petitioners there to claim backwages and separation pay from the corporation that subsequently employed them. In <i>Robledo</i>, the petitioners were security guards formerly employed by Bacani Security and Protective Agency, a sole proprietorship owned and operated by a Felipe Bacani. During his lifetime, Felipe, together with his wife and daughter, formed Bacani Security and Allied Services Co., Inc., a corporation likewise engaged in the business of providing security. After forming the corporation, Bacani retired the business name "Bacani Security and Protective Agency," and the sole proprietorship ceased to operate. Most of the petitioners employed by the sole proprietorship lost their employment, while some were employed by the corporation.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>In the meantime, Bacani died, and an intestate proceeding for the settlement of his estate was instituted.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Subsequently, the petitioners in <i>Robledo</i> filed complaints for underpayment of wages and nonpayment of separation pay, among others, impleading Bacani Security and Protective Agency, Bacani Security and Allied Services Co., Inc., and Alicia Bacani, Felipe Bacani's daughter and the sole proprietorship's former executive directress.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>The Labor Arbiter held Bacani Security and Allied Services Co., Inc., and Alicia Bacani solidarily liable for the labor claims of the petitioners. Reversing the Labor Arbiter's decision, the National Labor Relations Commission held that the Labor Arbiter had no jurisdiction over petitioners' claims. The Commission was of the opinion that the court with jurisdiction over petitioners' labor claims was the Pasig trial court where the action for the settlement of Felipe Bacani's estate was pending.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>This Court affirmed the National Labor Relations Commission's decision, holding that Bacani Security and Allied Services Co., Inc. cannot be made liable for the obligations belo1ging to Bacani Security and Protective Agency. It emphasized that labor contracts are <i>in personam</i>, binding only between the parties, i.e., the employer and the employee. Therefore, being separate and distinct entities, Bacani Security and Allied Services Co., Inc. cannot be made liable for the debts and obligations of petitioners' employer, Bacani Security and Protective Agency, even if it is assumed that the former was the transferee of the latter's enterprise.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>In refusing to pierce the veil of corporate entity, this Court said that the doctrine is only used to hold individual stockholders liable for corporate obligations, not to hold a corporation liable for obligations of an individual stockholder.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Considering that the petitioners' claim in <i>Robledo</i> were personal liabilities of Felipe as owner of Bacani Security and Protective Agency, the corporation, Bacani Security and Allied Services Co., Inc., cannot be made liable for petitioners' labor claims.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> This Court added that petitioners Robledo et al.'s proper remedy was to file their claims against the estate of Felipe in accordance with Rule 86, Section 5 of the Rules of Court, rationalizing thus:<blockquote>The rationale for the rule is that upon the death of the defendant, a testate or intestate proceeding shall be instituted in the proper court wherein all his creditors must appear and file their claims which shall be paid proportionately out of the property left by the deceased. The objective is to avoid duplicity of procedure.<br><br>Hence the ordinary actions must be taken out from the ordinary courts. Under Art. 110 of the Labor Code, money claims of laborers enjoy preference over claims of other creditors in case of bankruptcy or liquidation of the employer's business.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></blockquote>Notwithstanding this Court's ruling in <i>Robledo</i>, Galit must still be allowed to claim backwages, separation pay, service incentive leave pay, and damages from respondent Treebox Enterprises.<br><br><i>Robledo</i>'s formulation of the doctrine of piercing the corporate veilâthat it can only be used to hold individual stockholders liable for corporate obligationsâis inaccurate. As <i>Sarona</i> illustrates, persons other than the individual stockholders of the corporation may be held liable. Especially in alter ego cases, a corporation itself may be held liable for the obligations of another entity, such as a sole proprietorship, so long as it can be shown that the corporate 1fiction was used to defeat public convenience, justify wrong, protect fraud, or defend crime.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> The doctrine of piercing the corporate fiction can also be applied to make other corporations, partnerships, and other entities liable, not just individual stockholders, so long as it is shown that there was abuse of the corporate fiction.<br><br>As illustrated above, the veil of Treebox Enterprises' corporate fiction was abused to evade MWC Enterprises' labor obligations to Galit. Moreover, the facts of the case show that Treebox Enterprises is the alter ego of MWC Enterprises. Both are engaged in printing. Both have the same principal place of business. Both employ the same employees. As alter ego and successor of MWC Enterprises, Treebox Enterprises, therefore, must be held liable.<br><br>All told, the <i>ponencia</i> correct held Treebox Enterprises and Cristine Tantongco liable for payment of full backwages, separation pay, unpaid service incentive leave pay, and damages to Galit, taking into account his employment with MWC Enterprises, which started in 1998, in the computation of the amounts.<br><br><center><b>II</b></center><br>In their Position Paper before the Labor Arbiter, Treebox Enterprises and Cristine Tantongco highlighted that the neck and back injuries that caused Galit to take a leave from work was sustained during a basketball game and, hence, not work related.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> In so emphasizing, Treebox Enterprises and Cristine Tantongco were trying to distance themselves from Galit's injuries so as to not be made liable for them.<br><br>It must be remembered that labor is inherently human, not a mere factor of production. Unlike tools, workers Have lives beyond their economic utility. For these reasons, workers are entitled to the constitutional guarantee of full protection to labor.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> That a worker sustains a non-work related injury does not absolve the employer from paying what is due for the worker's honest work. As was said in <i>Stanley Fine Furniture v. Gallano</i>:<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><blockquote>Gone are the days when workers were reduced to mendicant despondency by their employers. Within our legal order, workers have legal rights and procedures to claim these rights. The only way for employers to avoid legal action from their worker is to give them what they may be due in law and as human beings. Businesses thrive through the acumen of their owners and entrepreneurs. But, none of them will exist without the outcome of the sacrifices and toil of their workers. Our economy thrives through this partnership based upon mutual respect. At the very least, these are the values which are congealed in our present laws.<br><br>[L]abor is not merely a factor of production. It is a human product no matter how modest it may seem to [employers].<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></blockquote><b>ACCORDINGLY</b>, I vote to <b>GRANT</b> the Petition for Review on <i>Certiorari</i>. The Decision and Resolution of the Court of Appeals in CA-G.R. SP No. 169285 must be <b>REVERSED and SET ASIDE</b>. Petitioner Nilo S. Galit must be declared to have been illegally dismissed from employment. Respondents Treebox Enterprises and Cristine N. Tantongco must be held solidarily liable to pay Nilo S. Galit his full backwages, separation pay in lieu of reinstatement, service incentive leave pay, and moral and exemplary damages, all to earn legal interest froth the date of the finality of the Court's Decision in this case until full payment.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> 679 Phil. 394 (2012) [Per J. Reyes, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 400-401.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 401.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 403.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 403-404.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 404-405.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 406-409.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 424.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 417-418.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 418.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 418-419.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 419.<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 420.<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 420-421.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 424.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, p. 189, Labor Arbiter Reynante L. San Gaspar's Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 134, Establishment Employment Report.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 48, Court of Appeals Decision.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>See</i> <b>Lambert Pawnbrokers and Jewelry Corporation v. Binamira</b>, 639 Phil. 1, 14 (2010) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 134 134, Establishment Employment Report.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>See</i> <b>Excellent Quality Apparel, Inc. v. Win Muti Rich Builders, Inc.</b>, 598 Phil. 94, 101 (2009) [Per J. Tinga, Second Division] <i>citing</i> <b>Mangila v. Court of Appeals</b>, 435 Phil. 870, 886 (2002) [Per J. Carpio, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 308 Phil. 51 (1994) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 58-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Sarona v. National labor Relations Commissions</b>, 679 Phil. 394, 417 (2012) [Per J. Reyes, Second Division]. <i>See for instance</i> <b>La Campana Factory, Inc. v. Kaisahan ng Manggagawa sa La Campana</b>, 93 Phil. 160 (1953) [Per J., where this Court pierced the corporate veil and made a corporation liable for the labor claims of the employees of another corporation. In <i>La Campana</i>, this Court found that the corporations, though engaged in the production of different products, i.e., coffee and starch, were alter egos of each other, being owned by the same family and sharing the same employees, office, management, and payroll.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 128, Position Paper.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> CONST., art. XIII, sec. 3 partly provides:<blockquote>SECTION 3. The State shall afford full protection to labor, local and overseas, organized and unorganized, and promote full employment and quality of employment opportunities for all.<br><br>. . . .</blockquote><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 748 Phil. 624 (2014) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 648-649.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

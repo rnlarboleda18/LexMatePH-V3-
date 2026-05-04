@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 272427 - ROSELLO G. AMPONG, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70293' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 272427, December 01, 2025 ]</H2>
+			<H3>ROSELLO G. AMPONG, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Court resolves a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA), which affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC) convicting Rosello Ampong <i>y</i> Gabor (Ampong) of illegal possession of dangerous drugs.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>An Information was filed against Ampong, which states:<blockquote><center>Criminal Case No. 18733<br>Violation of Section 11 of Republic Act No. 9165</center><br>That on or about 6:00 o'clock in the evening of December 12, 2014 at Gaisano Mall, Brgy. 24, Imadejas, Butuan City, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, who is found positive for use of methamphetamine, without authority of law and without the corresponding license or prescription, did then and there willfully, unlawfully and feloniously have in his possession, control and custody fifty (50) pieces heat-sealed transparent plastic sachets of methamphetamine hydrochloride, otherwise known as <i>shabu</i>, with a total net weight of two hundred thirty nine point three two six nine [239.3269] grams, which is a dangerous drug.<br><br>CONTRARY TO LAW. (Violation of Section 11, Article II of R.A. 9165)<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></blockquote>During arraignment, Ampong pleaded not guilty to the charge against him.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Pre-trial commenced, then trial on the merits ensued.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>The prosecution presented Agent Mark Anthony Paler (Agent Paler) and (2) Agent Michael Jay J. Mortel (Agent Mortel) as witnesses.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> The testimonies of Philippine Drug Enforcement Agency (PDEA) Chemist Angeles Alendajao and Department of Justice (DOJ) representative Ronaldo T. Bedrijo<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> (Bedrijo) were dispensed with.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>According to the prosecution, at about 9:00 a.m. on December 11, 2014, PDEA Regional Office XIII received information that Ampong would be receiving a package containing <i>shabu</i> hidden inside an improvised secret compartment in the inner sole of a pair of sandals. The package, sent through LBC, a private courier, was expected to arrive at Gaisano Mall, Butuan City from Laguna.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>To verify the report, Director Erwin S. Ogario (Ogario) of PDEA Regional Office XIII organized an interdiction operation. Agent Christy E. Silvan was assigned as the team leader, Agent Paler was designated as the searcher, and Agent Mortel was tasked to serve as back up. After a briefing, PDEA operatives proceeded to Gaisano Mall and waited for Ampong. However, Ampong did not show up, prompting the team to leave at around 7:30 p.m.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>The next day, at around 8:30 a.m., another briefing was conducted. The operatives waited for Ampong from 9:15 a.m. to 5:15 p.m. Upon his arrival at LBC Gaisano Mall, he claimed the package and placed it inside a red duffle bag. As Ampong was about to leave, Agent Paler walked ahead of him, while the other operatives followed and surrounded him.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>The PDEA agents then introduced themselves and invited Ampong to the Security Office of Gaisano Mall. He was informed of the reason for the invitation and asked if the package could be opened in the presence of witnesses, including Bedrijo. Ampong voluntarily acceded to the request.<br><br>Upon inspection, Agent Paler then made a search on the duffle bag and discovered suspected methamphetamine hydrochloride, otherwise known as <i>shabu</i>, inside the inner soles of the sandals, matching the intelligence report.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Agent Mortel then arrested Ampong, informing him of the cause of his arrest and his constitutional rights.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Agent Paler marked all confiscated dangerous drugs and nondrug evidence in the presence of the witnesses and Ampong.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> These were inventoried and photographed at the scene before being sent to PDEA Regional Office XIII Laboratory Section for confirmatory testing.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Chemistry Report No. PDEA-DD-014-148 confirmed the presence of methamphetamine hydrochloride in the seized items.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Also, Chemistry Report No. DT014-108 verified that the urine specimen taken from Ampong yielded positive for drug use.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>On the other hand, the defense presented Ampong and Johnsam C. Ampong (Johnsam) as witnesses.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Ampong denied the accusations against him, claiming that the search and his arrest were illegal.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> He stated that at 9:30 a.m. on December 11, 2014, he unexpectedly received a text message informing him of a package from Rose Agaton to be claimed at LBC Gaisano Mall branch.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Ampong maintained that though he initially thought it was a "text scam," he proceeded to claim the package the next day as he was curious about it.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Ampong alleged that upon arrival at the branch, he was arrested by PDEA operatives and the package was opened without his permission.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Ampong's son, Johnsam, corroborated his claims.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> the RTC convicted Ampong of illegal possession of dangerous drugs, disposing as follows:<blockquote>PREMISED CONSIDERED, this court finds and so hold that:&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(1)</div></td><td width="95%"><div align="justify">The accused <b>ROSELLO AMPONG <i>y</i> GABOR GUILTY</b> beyond reasonable doubt for violation of Section 11, Article II of Republic Act No. 9165, otherwise known as the Comprehensive Dangerous Drugs Act of 2002 and imposes upon him the penalty of Life Imprisonment and a fine of Five Hundred Thousand Pesos ([PHP] 500,000.00)[.]</div></td></tr></tbody></table><br>Meanwhile, the items listed in the information shall be forfeited in favor of the government and the evidence custodian Court Interpreter Maricris L. Maclang is hereby directed to turn-over to PDEA RO XIII the drug items, drug paraphernalia's[,] and other proceeds of the crime for destruction in acceptance with Section 20 and 21 of [Republic Act No.] 9165.<br><br>The accused shall serve his sentence at Davao Penal Farm, Panabo City. The accused in the service of his sentence shall be credited in his favor the period of the preventive imprisonment that he has already undergone under Article 29, of the Revised Penal Code as amended by [Republic Act No.] 10592 and [Republic Act No.] 6127, as long as he abided by and strictly followed the rules and regulations of the institution where he was detained or confined.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (Emphasis in the original)</blockquote>In convicting Ampong, the RTC found that all the requisites for violation of Section 11 of Republic Act No. 9165 were established.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> It was convinced that after Ampong claimed the package, he was invited by PDEA operatives to the security office where he consented to the search. PDEA operatives then searched his package, and they recovered sachets of crystalline substance that tested positive for <i>shabu</i> from the inner soles of the sandals in the package.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The RTC also held that the <i>corpus delicti</i> was sufficiently established as it was seized, marked, and later identified by Agent Paler during trial.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Further, the RTC held that Agent Paler maintained custody of the seized drugs from the moment of Ampong's arrest until submission to the crime laboratory. It accorded weight to the testimony of Agent Paler who identified the markings made on the seized drugs in the presence of the insulating witnesses.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>The RTC ruled that Ampong failed to rebut the evidence of the prosecution proving his possession of <i>shabu</i>.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> It noted that the defense failed to show any ill motive or odious intent on the part of PDEA operatives.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> It also did not give credence to the testimony of Johnsam as it found nothing in his testimony that would exculpate him from the case.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> It emphasized that mere denial is self-serving negative evidence, which outweigh the affirmative testimonies from credible witnesses.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Aggrieved, Ampong appealed to the CA.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> the CA affirmed the ruling of the RTC convicting Ampong of illegal possession of dangerous drugs. It upheld the validity of the warrantless search on the package that Ampong collected from LBC Gaisano Mall branch.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> The CA explained that the PDEA agents had probable cause to believe based on personal knowledge of the facts and circumstances that an offense had been committed and that Ampong is probably guilty of it.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>The CA noted that while the PDEA agents initially intended to obtain a search warrant, they opted not to apply for it due to time constraints.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> It ruled that the exigency, risks, and quantity of the dangerous drugs involved justified the warrantless search and arrest.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Hence, the CA concluded that the dangerous drugs seized from Ampong are admissible as these were obtained from a valid warrantless search. His arrest was also valid as it was based on personal knowledge that the person arrested has committed an offense.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Ampong moved for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> which was denied by the CA in its Resolution.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>Hence, Ampong filed this Petition.<br><br>Ampong argues that his warrantless arrest was unjustified.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> He insists that the claim of the PDEA agents that he was merely invited to the security office of the mall does not hold water considering that he was not free to leave.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Ampong also points out that PDEA had two days to secure a search warrant but failed to do so.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> He adds that the prosecution did not sufficiently demonstrate that the PDEA agents had probable cause to believe that he was engaged in dangerous drugs to justify the warrantless arrest and search, calling the operation a fishing expedition.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> the Office of the Solicitor General argues that a Petition for Review on <i>Certiorari</i> under Rule 45 of the Rules of Court is limited to questions of law.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> It also asserts that Ampong was lawfully arrested without a warrant, thus, making the ensuing search and seizure valid.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br><center><b>Issues</b></center><br>First, whether the issue of accused-appellant Rosello Ampong <i>y</i> Gabor's alleged illegal arrest and the admissibility of the evidence recovered from him is a proper subject matter in this Petition; and<br><br>Second, whether accused-appellant Rosello Ampong <i>y</i> Gabor is guilty of illegal possession of dangerous drugs.<br><br><center><b>This Court's Ruling</b></center><br>The Petition must be denied.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The issue of petitioner's alleged illegal arrest and the admissibility of the evidence recovered from him is a proper subject matter in this Petition</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>It is settled that an accused submits to the jurisdiction of the trial court upon entering a plea and participating actively in the trial and this precludes the accused from invoking any irregularity that may have attended the arrest.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Any objections to the arrest or the court's acquisition of jurisdiction over the person of the accused must be made before entering a plea; otherwise, the objections are deemed waived.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> The right to question the validity of an arrest may be waived if the accused, assisted by counsel, fails to object to its validity before arraignment.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>However, this Court retains the authority to review the factual findings of the trial courts in criminal cases. As established in <i>People v. Alejandro</i>:<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><blockquote>[A]n appeal throws the entire case wide open for review and the reviewing tribunal can correct errors, though unassigned in the appealed judgment or even reverse the trial court's decision based on grounds other than those that the parties raised as errors. This is also consistent with the constitutional right to be presumed innocent until the contrary is proven. The appeal confers the appellate court full jurisdiction over the case and renders such court competent to examine records, revise the judgment appealed from, increase the penalty, and cite the proper provision of the penal law.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> (Citation omitted)&nbsp;</blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Petitioner is estopped from assailing the court's jurisdiction as he was validly arrested</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>As a rule, no peace officer may arrest a person without a warrant, except in the limited circumstances outlined in Rule 113, Section 5 of the Rules of Court, which include:&nbsp;<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">When, in his presence, the person to be arrested has committed, is actually committing, or is attempting to commit an offense;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">When an offense has just been committed and he has probable cause to believe based on personal knowledge of facts or circumstances that the person to be arrested has committed it; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify">When the person to be arrested is a prisoner who has escaped from a penal establishment or place where he is serving final judgment or is temporarily confined while his case is pending, or has escaped while being transferred from one confinement to another.</div></td></tr></tbody></table></blockquote>For purposes of this case, this Court shall focus on paragraph (b), otherwise known as hot pursuit arrest. The elements of hot pursuit arrest are: (1) an offense has just been committed; and (2) the arresting officer has probable cause to believe based on personal knowledge of facts or circumstances that the person to be arrested has committed it.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> In <i>People v. Yusop</i>,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> this Court emphasized that "the element of personal knowledge must be coupled with the element of immediacy; otherwise, the arrest may be nullified, and resultantly, the items yielded through the search incidental thereto will be rendered inadmissible."<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>In the present case, the PDEA agents had probable cause to effect the warrantless arrest of petitioner. To recall, they received information that petitioner would be claiming a package containing <i>shabu</i> concealed in an improvised compartment within the inner sole of a pair of sandals. The package, sent through LBC, was expected to arrive at Gaisano Mall, Butuan City from Laguna.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> To verify the report, Director Ogario organized an interdiction operation. Agent Christy E. Silvan was assigned as the team leader, Agent Paler as searcher, and Agent Mortel as back up. After a briefing, the operatives proceeded to Gaisano Mall and waited for him.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> The confidential informant also furnished them a copy of his photograph.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> True enough, he arrived at LBC, claimed the package, and placed it inside a red duffle bag.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>This Court is convinced that the foregoing circumstances constitute the PDEA agents' personal observation, perception, and evaluation, which fall within their personal knowledge, thereby justifying the warrantless arrest.<br><br>It must also be noted that there was sufficient justification for the failure to obtain a search warrant. IO1 Mortel testified:&nbsp;&nbsp;<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="2"><div align="justify">Pros. Amador:</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="95%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Mr. Witness, during the cross-examination, would it be correct to say that nobody from your team applied for a search warrant and you said that as far as you know, nobody applied for a search warrant. Why was there no search warrant applied for?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify"><b>Because it was an "on the spot information."</b> Hindi namin alam kung kelan niya kukunin [ang] package niya. Baka kung nag aaply pa kami ng search warrant, baka doon naman niya kukunin [and] package niya kaya Director Ogario made the decision we do not apply for a search warrant. We just interdict the operation.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> (Emphasis in the original)</div></td></tr></tbody></table></blockquote>From the foregoing testimony, it is evident that the PDEA agents were mindful of the requirement to secure a warrant but decided against it because time was of the essence. Any delay could have compromised the operation and the apprehension of petitioner. In <i>Yusop</i>, this Court upheld a warrantless search of the package belonging to the accused, declaring that "the PDEA agents were justified in dispensing with the procurement of a warrant due to the exigency, the risks, and the quantity of the dangerous drugs involved in the operation."<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>Petitioner is now estopped from challenging the validity of his arrest. It is settled that when an accused fails to object to the irregularity of the arrest before arraignment, pleads not guilty, and actively participates during trial, they are considered to have voluntarily submitted to the jurisdiction of the trial court and waived the right to question the validity of the arrest.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> Here, petitioner did not object to the legality of his arrest prior to or even during his arraignment. Assisted by counsel, he pleaded not guilty and actively participated during the trial. His conduct demonstrated voluntary submission to the court's jurisdiction. Hence, he is deemed to have waived his right to contest the validity of his arrest.<br><br>Having established the validity of petitioner's arrest, this Court shall now address the consequence of the ensuing search and seizure. This Court recognizes exceptional instances when warrantless searches and seizures are permissible, namely: (1) warrantless search incident to a lawful arrest; (2) seizure of evidence in "plain view;" (3) search of a moving vehicle; (4) consented warrantless search; (5) customs search; (6) stop and frisk; and (7) exigent and emergency circumstances.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>In this case, two exceptions justify the warrantless search and seizure of the package containing the 239.3269 grams of <i>shabu</i> in petitioner's possession.<br><br>First, the search was justified as an incident to a lawful arrest. Rule 126,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Section 13 of the Rules of Court mandates that the arrest must first be validly effectedâeither by virtue of a warrant or under the exceptions in Rule 113, Section 5 of the Rules of Courtâbefore a warrantless search may be conducted. This sequence cannot be reversed.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> A search cannot precede and justify an arrest; rather, it is the lawful arrest that legitimizes the incidental search. As discussed, petitioner's arrest was valid under the hot pursuit exception in Rule 113, Section 5(b) of the Rules of Court.<br><br>Second, the warrantless search and seizure is also considered consented warrantless search. In <i>People v. O'Cochlain</i>:<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><blockquote>The constitutional immunity against unreasonable searches and seizures is a personal right which may be waived. A person may voluntarily consent to have government officials conduct a search or seizure that would otherwise be barred by the Constitution. Like the Fourth Amendment, Section 2, Article III of the Constitution does not proscribe voluntary cooperation.<br><br>Yet, a person's "consent to a [warrantless] search, in order to be voluntary, must be unequivocal, specific and intelligently given, [and] uncontaminated by any duress or coercion[.]" The question of whether a consent to a search was "voluntary" or was the product of duress or coercion, express or implied, is a question of fact to be determined from the totality of all the circumstances.<br><br>Relevant to this determination are the following characteristics of the person giving consent and the environment in which consent is given: (1) the age of the defendant; (2) whether [he] was in a public or a secluded location; (3) whether [he] objected to the search or passively looked on; (4) the education and intelligence of the defendant; (5) the presence of coercive police procedures; (6) the defendant's belief that no incriminating evidence [will] be found; (7) the nature of the&nbsp; police questioning; (8) the environment in which the questioning took place; and (9) the possibly vulnerable subjective state of the person consenting.<br><br>Consent to a search is not to be lightly inferred, but shown by clear and convincing evidence. The government bears the burden of proving "consent." In the US, it has been held that when the government relies on the "consent" exception to the warrant requirement, two main issues must be litigated: did the defendant indeed consent, and did the defendant do so with the requisite voluntariness? Here, we have ruled that to constitute a waiver, it must first appear that the right exists; secondly, that the person involved had knowledge, actual or constructive, of the existence of such a right; and, lastly, that said person had an actual intention to relinquish the right.<br><br>While knowledge of the right to refuse consent is one factor to be taken into account, the government need not establish such knowledge as the <i>sine qua non</i> of effective consent. On the other hand, lack of objection to the search and seizure is not tantamount to a waiver of constitutional right or a voluntary submission to the warrantless search and seizure. Even when security agents obtain a passenger's express assent to a search, this assent ordinarily will not constitute a valid "consent" if the attendant circumstances will establish nothing more than acquiescence to apparent lawful authority. The Fourth Amendment inquiry of whether a reasonable person would have felt free to decline the officers' requests or otherwise terminate the encounter applies equally to police encounters that take place on trains, planes, and city streets. "Consent" that is the product of official intimidation or harassment is not consent at all.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> (Citations omitted)</blockquote>In <i>People v. Montilla</i>,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> this Court ruled that consent may be presumed from affirmative acts of volition, such as the accused spontaneously opening his bag without coercion, which constituted a clear waiver of his right.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>Although the factual setting in the present case differs from <i>Montilla</i>, the ruling of this Court remains relevant in determining whether petitioner freely consented to the search. In the present case, the search upon petitioner's person, including the package in his immediate possession, was not unreasonable or obtrusive but was an exception to the proscription against warrantless searches and seizures. He was adequately apprised of the reason for the invitation as this was orally articulated to him and he acceded to their request to open the package in the presence of witnesses, including Bedrijo. His conduct demonstrated clear consent to the warrantless search.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>This Court upholds the uniform findings of the RTC and the CA that there was compliance with the chain of custody rule</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>In ascertaining the liability of petitioner for violation of Section 11 of Republic Act No. 9165, it is essential to determine whether the identity of the dangerous drugs allegedly confiscated from him were established with moral certainty. The dangerous drugs form an integral part of the <i>corpus delicti</i> of the crime. Failure to prove the integrity of the <i>corpus delicti</i> renders the drugs seized insufficient to prove his guilt beyond reasonable doubt, thus, warranting his acquittal.<br><br>Notably, the incident transpired after Republic Act No. 10640<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> amended Republic Act No. 9165. The governing provision on the chain of custody in Republic Act No. 10640 states:<blockquote>SECTION 21. <i>Custody and Disposition of Confiscated, Seized, and/or Surrendered Dangerous Drugs, Plant Sources of Dangerous Drugs, Controlled Precursors and Essential Chemicals, Instruments/Paraphernalia[,] and/or Laboratory Equipment</i>. â The PDEA shall take charge and have custody of all dangerous drugs, plant sources of dangerous drugs, controlled precursors[,] and essential chemicals, as well as instruments/paraphernalia and/or laboratory equipment so confiscated, seized and/or surrendered, for proper disposition in the following manner:<blockquote>(1) The apprehending team having initial custody and control of the dangerous drugs, controlled precursors and essential chemicals, instruments/paraphernalia and/or laboratory equipment shall, immediately after seizure and confiscation, conduct a physical inventory of the seized items and photograph the same in the presence of the accused or the person/s from whom such items were confiscated and/or seized, or [their] representative or counsel, with an elected public official and a representative of the National Prosecution Service or the media who shall be required to sign the copies of the inventory and be given a copy thereof: Provided, That the physical inventory and photograph shall be conducted at the place where the search warrant is served; or at the nearest police station or at the nearest office of the apprehending officer/team, whichever is practicable, in case of warrantless seizures: Provided, finally, That noncompliance of these requirements under justifiable grounds, as long as the integrity and the evidentiary value of the seized items are properly preserved by the apprehending officer/team, shall not render void and invalid such seizures and custody over said items[.]</blockquote></blockquote>Based on the quoted provision, the presence of the following insulating witnesses is required during the conduct of physical inventory and photograph: (1) a representative from the media or the DOJ; and (2) any elected public official. The presence of these witnesses during the marking of the seized items is critical in drugs cases and the unjustified absence of any of these witnesses cast serious doubt on the integrity and evidentiary value of the seized items.<br><br>To establish the integrity and evidentiary value of the dangerous drug seized with moral certainty, the prosecution must sufficiently establish the following links in the chain of custody:<blockquote>[<i>F</i>]<i>irst</i>, the seizure and marking of the illegal drug recovered from the accused by the apprehending officer; <i>second</i>, the turnover of the illegal drug seized by the apprehending officer to the investigating officer; <i>third</i>, the [turnover] by the investigating officer of the illegal drug to the forensic chemist for laboratory examination; and <i>fourth</i>, the [turnover] and submission of the marked illegal drug seized by the forensic chemist to the court.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> (Emphasis in the original, citation omitted)</blockquote>In <i>People v. Tomawis</i>:<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><blockquote>[T]he presence of the three witnesses at the time of seizure and confiscation of the drugs must be secured and complied with at the time of the warrantless arrest; such that they are required to be at or near the intended place of the arrest so that they can be ready to witness the inventory and photographing of the seized and confiscated drugs "immediately after seizure and confiscation."<br><br>. . . .<br><br>The presence of the witnesses from the DOJ, media, and from public elective office is necessary to protect against the possibility of planting, contamination, or loss of the seized drug. Using the language of [this] Court in <i>People v. Mendoza</i>, without the <i>insulating presence</i> of the representative from the media or the DOJ and any elected public official during the seizure and marking of the drugs, the evils of switching, "planting[,]" or contamination of the evidence that had tainted the buy-busts conducted under the regime of [Republic Ac No.] 6425 (Dangerous Drugs Act of 1972) again reared their ugly heads as to negate the integrity and credibility of the seizure and confiscation of the subject sachet that was evidence of the <i>corpus delicti</i>, and thus adversely affected the trustworthiness of the incrimination of the accused.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> (Emphasis in the original, citations omitted)</blockquote>In establishing the first link in the chain of custody, the pronouncements of this Court in <i>Tomawis</i> must be read with the case of <i>Nisperos v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> in which this Court underscored the immediacy and proximity factors that are essential in the implementation of the requirements of Section 21 of Republic Act No. 9165, as amended. This Court outlined the guidelines to be observed in buy-bust operations as follows:<blockquote><ol><li>The marking of the seized dangerous drugs must be done:<br><br><ol type="a"><li>Immediately <i>upon</i> confiscation;<br><br></li><li>At the place of confiscation; and<br><br></li><li>In the presence of the offender (unless the offender eluded the arrest);<br><br></li></ol></li><li>The conduct of inventory and taking of photographs of the seized dangerous drugs must be done:<br><br><ol type="a"><li>Immediately <i>after</i> seizure and confiscation;<br><br></li><li>In the presence of the accused, or the person/s from whom such items were confiscated and/or seized, or [their] representative or counsel; and<br><br></li><li>Also in the presence of the insulating witnesses, as follows:<br><br><ol type="i"><li> if the seizure occurred during the effectivity of [Republic Act] No. 9165, or from July 4, 2002 until August 6, 2014, the presence of three (3) witnesses, namely, an elected public official; a Department of Justice representative; and a media representative;<br><br></li><li>if the seizure occurred after the effectivity of [Republic Act] No. 10640, or from August 7, 2014 onward, the presence of two (2) witnesses, namely, an elected public official; and a National Prosecution Service representative or a media representative.</li></ol></li></ol></li><br><li>In case of any deviation from the foregoing, the prosecution must positively acknowledge the same and prove (1) justifiable ground/s for [noncompliance] and (2) the proper preservation of the integrity and evidentiary value of the seized item/s.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> (Emphasis supplied, citations omitted)</li></ol></blockquote>Each link in the chain of custody must be established to preserve the integrity and evidentiary value of the seized items. In this case, records show that only DOJ representative Bedrijo was present to witness the ensuing inventory taking, marking, and photographing of the seized items.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> Nonetheless, the absence of an elected official does not automatically negate the establishment of the first link. The lack of an elected official witness was justified under the circumstances of this case.<br><br>This Court has recognized exceptional circumstances that permit relaxation of the rule on mandatory witnesses. In <i>People v. Sipin</i>:<sup style="COLOR: RGB(255, 0, 0);">[82]</sup><blockquote>(1) <b>[T]heir attendance was impossible because the place of arrest was a remote area</b>; (2) <b>their safety during the inventory and photograph of the seized drugs was threatened by an immediate retaliatory action of the accused or any person/s acting for and in [their] behalf</b>; (3) <b>the elected official themselves were involved in the punishable acts sought to be apprehended</b>; (4) <b>earnest efforts to secure the presence of a DOJ or media representative and an elected public official within the period required under Article 125 of the Revised Penal Code prove futile through no fault of the arresting officers, who face the threat of being charged with arbitrary detention</b>; or (5) <b>time constraints and urgency of the anti-drug operations, which often rely on tips of confidential assets, prevented the law enforcers from obtaining the presence of the required witnesses even before the offenders could escape</b>.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> (Emphasis in the original, citation omitted)</blockquote>As discussed, time constraints and urgency of the anti-drug operations justified the PDEA agents' decision to forego applying for a search warrant to ensure petitioner's successful apprehension.<br><br>The second, third, and fourth links of the chain of custody were also sufficiently established by the prosecution. The evidence demonstrated that from the time the illegal drugs were confiscated from petitioner, turned over to the investigating officer, submitted to the forensic chemist for confirmatory testing, and finally presented in court, the integrity and evidentiary value of the seized drugs were properly preserved.<br><br>To stress, the factual findings of the appellate court, affirming those of the trial court, are binding on this court, unless there is a clear showing that such findings are tainted with arbitrariness, capriciousness, or palpable error,<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> which petitioner failed to establish in his case. Thus, this Court sees no reason to depart from their uniform findings.<br><br><b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The March 10, 2023 Decision and October 24, 2023 Resolution of the Court of Appeals in CA-G.R. CR-HC No. 02507-MIN are <b>AFFIRMED</b>. Petitioner Rosello Ampong <i>y</i> Gabor is <b>GUILTY</b> beyond reasonable doubt of violation of Section 11 of Republic Act No. 9165 in Criminal Case No. 18733. He is sentenced to suffer the penalty of life imprisonment and is <b>ORDERED to PAY</b> a fine of PHP 500,000.00.<br><br><b>SO ORDERED.</b><br><br><i>Leonen, SAJ. (Chairperson), Lazaro-Javier</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>Kho, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 58-80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 25-42. The March 10, 2023 Decision in CA-G.R. CR-HC No. 02507-MIN was penned by Associate Justice Lily V. Biton and concurred in by Associate Justices Ana Marie T. Mas and John Z. Lee of the Twenty-Third Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 51-54. The October 24, 2023 Resolution in CA-G.R. CR-HC No. 02507-MIN was penned by Associate Justice Lily V. Biton and concurred in by Associate Justices Ana Marie T. Mas and John Z. Lee of the Former Twenty-Third Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 13-23. The November 18, 2019 Decision in Criminal Case No. 18733 was penned by Presiding Judge Emmanuel E. Escatron of Branch 2, Regional Trial Court, Butuan City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Also referred to as "Ronald T. Bedrijo" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.<br></i><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 30-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 13-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 25-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 35-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 44-49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id. </i>at 51-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 71-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 185-209.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 192-193.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 193-203.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>People v. Lara</b>, 692 Phil. 469, 483 (2012) [Per J. Reyes, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> RULES OF COURT, Rule 117, sec. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <b>Lapi v. People</b>, 847 Phil. 38, 40 (2019) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>People v. Alejandro</b>, 807 Phil. 221 (2017) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 229.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Pestilos v. Generoso</b>, 746 Phil. 301, 321 (2014) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> 878 Phil. 229 (2020) [Per J. J. Reyes, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 236.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i>, p. 14.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 27.<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> 878 Phil. 229, 238 (2020) [Per J. J. Reyes, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Villanueva v. People</b>, 747 Phil. 40, 46 (2014); <b>Adoma v. People</b>, 940 Phil. 82, 93 (2023) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <b>People v. Yanson</b>, 858 Phil. 642 (2019) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> RULES OF COURT, Rule 126, sec. 13 states:<blockquote>SECTION 13. <i>Search incident to lawful arrest</i>. â A person lawfully arrested may be searched for dangerous weapons or anything which may have been used or constitute proof in the commission of an offense without a search warrant.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Peralta v. People</b>, 817 Phil. 54, 564-565 (2017) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> 845 Phil. 150 (2018) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 189-191.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> 349 Phil. 640 (1998) [Per J. Regalado, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 661.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> Republic Act No. 10640 took effect on August 7, 2014, as clarified in <b>People v. Gutierrez</b>, 842 Phil. 681 (2018) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>People v. Watamama</b>, 692 Phil. 102, 107 (2012) [Per J. Villarama, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> 830 Phil. 385 (2018) [Per J. Caguioa, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> at 408-409.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> 931 Phil. 945 (2022) [Per J. Rosario, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 956-957.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Rollo</i>, pp. 16, 167.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> 833 Phil. 67 (2018) [Per J. Peralta, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id.</i> at 93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <b>People v. Vastine</b>, 931 Phil. 1100, 1113 (2022) [Per J. Zalameda, First Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

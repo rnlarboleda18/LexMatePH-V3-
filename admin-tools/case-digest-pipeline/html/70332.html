@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 279436 - JOHNSON & JOHNSON PHILS., INC. & LA CONCHA LAND DEVELOPMENT, INC., PETITIONERS, VS. EDUARDO ERNESTO A. EVANGELISTA, EDILBERTO ANTONIO A. EVANGELISTA, AND RAFAELITA A. EVANGELISTA, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70332' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 279436, April 06, 2026 ]</H2>
+			<H3>JOHNSON & JOHNSON PHILS., INC. & LA CONCHA LAND DEVELOPMENT, INC., PETITIONERS, VS. EDUARDO ERNESTO A. EVANGELISTA, EDILBERTO ANTONIO A. EVANGELISTA, AND RAFAELITA A. EVANGELISTA, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>HERNANDO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>The Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assails the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 30, 2024 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated March 20, 2025 of the Court of Appeals (CA) in CA-G.R. CV No. 121306, affirming the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated May 16, 2022 and the Order<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated September 22, 2022 of the Regional Trial Court (RTC) which declared that the foreclosure of the properties of respondents Eduardo and Edilberto Evangelista were null and void for having been undertaken without proper basis.</p><p align="center"> <i>The Factual Antecedents</i> </p><p> The siblings Eduardo Ernesto (Eduardo) and Edilberto Antonio (Edilberto), both surnamed Evangelista, were the registered owners of two parcels of land covered by Transfer Certificates of Title (TCT) Nos. 129237 and 74006 (subject properties). Their father was the proprietor of Karahayan Enterprises (Karahayan), a business entity engaged in the sale and distribution of products of petitioner Johnson &amp; Johnson Phils., Inc. (JJPI).<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> On November 9, 1998, Karahayan and JJPI entered into a Distributorship Agreement,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> appointing Karahayan as JJPI's distributor in Naga, Bicol and Puerto Princesa, Palawan for two years. The Agreement required Karahayan to secure its obligations with a collateral, thus Eduardo and Edilberto authorized their father to mortgage the subject properties.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Consequentially, on March 11, 1999, a Deed of Real Estate Mortgage<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> was executed by and between Edilberto, Eduardo, and their father on one side (collectively, the Evangelistas), and JJPI on the other. The Deed provided the grant of a credit facility in the sum of PHP 2,940,000.00 in favor of Karahayan, conditioned upon the mortgage of the subject properties to secure such credit facility.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> Sometime in 2003, Karahayan closed shop.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> Sometime in 2005, JJPI filed a petition for extrajudicial foreclosure of the subject properties to satisfy Karahayan's alleged debt amounting to PHP 2,153,990.31. After notice and public auction, the subject properties were sold to respondent La Concha Land Development, Inc. (La Concha) for PHP 1,500,000.00. The TCTs in the names of Eduardo and Edilberto were cancelled and new TCTs were issued to La Concha.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> The Evangelistas filed a Complaint<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> for the annulment of the extrajudicial sale of the subject properties and the cancellation of the TCTs issued in favor of La Concha.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> They contended that the foreclosure was baseless, since Karahayan had an outstanding obligation to JJPI only in the amount of PHP 578,461.41, and the same had already been paid.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> Rafaelita, Eduardo and Edilberto's mother, testified that the Deed of Real Estate Mortgage was constituted to cover only obligations arising from the distributorship in Puerto Princesa City, and that Karahayan had even paid an amount exceeding its debt to JJPI.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> Marilyn Briz, a former employee of Karahayan, testified that the mortgage indeed did not cover the obligations of distributorship areas other than those in Puerto Princesa City. She contended that JJPI's accounting was defective and echoed the assertion that Karahayan overpaid JJPI.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> For its part, JJPI maintained that the Distributorship Agreement covered both the Puerto Princesa and the Bicol areas. As a result, the Deed of Real Estate Mortgage covered Karahayan's obligations arising from both areas, amounting to PHP 2,153,990.31 as of 2004. Karahayan's failure to pay led JJPI to extrajudicially foreclose the subject properties.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> On rebuttal, Rafaelita theorized that since the Distributorship Agreement had already expired on November 9, 2000 without any extension, the Deed of Real Estate Mortgage had likewise expired.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> JJPI and La Concha did not present sur-rebuttal evidence.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> <i>Ruling of the Regional Trial Court</i></p><p> The RTC ruled for the Evangelistas in its Decision dated May 16, 2022, thus: </p><blockquote> <p> WHEREFORE, premises considered, judgment is hereby rendered:</p> <ol><li> Declaring null and void the foreclosure sale of the properties covered by TCT Nos. 74006 and 129237, held on February 28, 2005; the Certificate of Sale dated February 28, 2005; and the TCT Nos. 176009 and 176010 issued to La Concha; </li><li> Directing the Register of Deeds of Puerto Princesa City to cancel TCT Nos. 176009 and 176010 issued to La Concha, and reinstate TCT Nos. 74006 and 129237 to Edilberto Antonio A. Evangelista Jr. and Eduardo Ernesto A. Evangelista; </li><li> Ordering La Concha Land Development Corporation to surrender the owner's copy of TCT Nos. 176009 and 176010 to the Register of Deeds of Puerto Princesa City for cancellation;</li><li> Ordering Johnson &amp; Johnson Phils. Inc. to pay La Concha Land Development Corporation the amount of One Million Five Hundred Thousand Pesos ([PHP] 1,500,000) with 6% interest per annum from finality of this Decision until fully paid. </li><li> There is no award for damages for lack of proof. The counter-claim is also dismissed. </li></ol> <p> No cost. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p> </blockquote> <p> The RTC preliminarily determined that the central issue to be resolved is whether Karahayan was already in default, properly triggering the foreclosure of the real estate mortgage.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> The first requisite of default, that the obligation is already demandable and liquidated, was found to have been met because JJPI presented a demand letter dated September 3, 2004 with a demand to pay the amount of PHP 2,153,990.31, within seven working days from receipt, failing which would result to foreclosure.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> The second requisite, that the debtor delays in their performance, was also found to exist because nothing in the evidence shows that Karahayan had settled its obligation to JJPI as set out in the demand letter dated September 3, 2004.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> The third requisite, that the creditor judicially or extrajudicially requires the debtor's performance, was likewise found to have been met, since JJPI already demanded payment from Karahayan through a demand letter.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> The trial court ruled that the foreclosure would have been proper if not for the crucial issue raised by the Evangelistas on rebuttal, through Rafaelita's testimony, that the real estate mortgage was defective because the Distributorship Agreement dated November 9, 1998 had already expired on November 9, 2000. The trial court held that the real estate mortgage is only an accessory contract to the Distributorship Agreement, without which there is no principal contract to secure.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> The liabilities owed as set out in the demand letter of September 3, 2004 were found to have been incurred in 2003, a period when the real estate mortgage had already expired.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> Significantly, while the issue on the expiration of the Distributorship Agreement and consequentially, the Deed of Real Estate Mortgage, was not discussed in the complaint nor was it raised at pre-trial, the trial court observed that JJPI failed to object to the contention at the time it was raised, so it shall be treated as if it had been raised in the pleadings<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> and can thus be considered by the court. </p><p> JJPI and La Concha moved for reconsideration, which the trial court denied.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> <i>Ruling of the Court of Appeals</i></p><p> Upon recourse to the CA, the appeal was denied through a Decision dated May 30, 2024, to wit: </p><blockquote> <p> <b>WHEREFORE</b>, the appeal is <b>DENIED.</b> </p> <p> <b>IT IS SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Emphasis in the original) </p> </blockquote> <p> The appellate court observed that the Distributorship Agreement was executed on November 9, 1998, with a specific effectivity period of two years. The Deed of Real Estate Mortgage was contracted as a collateral to obligations that may be or have been incurred in relation to the Distributorship Agreement. Thus, when the Distributorship Agreement expired on November 9, 2000, so too did the Deed of Real Estate Mortgage since it is a mere accessory contract that cannot exist independently of the principal obligation.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> The appellate court examined JJPI and La Concha's assertion on appeal that the Distributorship Agreement was renewed on various occasions, but ultimately found that JJPI and La Concha failed to prove such renewal or extension. JJPI and La Concha submitted copies of the purported extension agreements for the first time on appeal.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Not having been formally offered in the trial court, these alleged extension agreements cannot be considered as evidence.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p> JJPI and La Concha further argued that there was an implied renewal of the Distributorship Agreement by virtue of the continuance of business between Karahayan and JJPI. The CA ruled that the argument was never raised in the trial court and issues raised for the first time on appeal cannot be resolved.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Assuming <i>arguendo</i> there was an implied renewal of the Distributorship Agreement, the CA opined that such implied renewal cannot extend to the Deed of Real Estate Mortgage.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Since dragnet clauses are contracts of adhesion, any ambiguity it may suffer must be construed against the party who caused the ambiguity.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> The dragnet clause will not apply to a mere renewal of the Distributorship Agreement without the corresponding renewal of the agreement to collateralize.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </p><p> Unrelenting, JJPI and La Concha moved for reconsideration, which the CA denied in a Resolution dated March 20, 2025.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p><p align="center"> <i>Issues</i> </p><p> JJPI and La Concha filed the instant Petition for Review on <i>Certiorari</i> insisting that: (1) the Deed of Real Estate Mortgage had a dragnet clause which should apply to all sums of money that are owed or will be owed by Karahayan to JJPI under the credit facility in the Distributorship Agreement and other instruments, including its renewals, amendments, or extensions;<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> and (2) the expiry of the Distributorship Agreement or its non-renewal did not carry with it the extinguishment of the Deed of Real Estate Mortgage, as the credit facility granted by JJPI to Karahayan extended beyond November 2000 considering Karahayan's purchase of JJPI goods on credit in 2003.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p align="center"> <i>Our Ruling</i> </p><p> The Petition must be denied. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Questions of fact cannot be entertained in a Rule 45 petition</i> </div></td> </tr> </tbody></table> <p>Preliminarily, it must be noted that this Court has always accorded great weight and respect to the factual findings of trial courts.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Likewise, when supported by substantial evidence, the factual findings of the CA are conclusive and binding on the parties and are not reviewable by this Court.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> It is oft-repeated that a petition for review under Rule 45 is limited only to questions of law and factual questions are not the proper subject of an appeal by <i>certiorari</i>. This Court's function is not to analyze or weigh all over again evidence already considered by tribunals below.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> This policy is necessary to prevent inordinate demands upon this Court's time and attention that should be devoted to matters within its exclusive jurisdiction, and to prevent overcrowding the Court's docket.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Jurisprudence has provided several exceptions to these rules, but for these to apply, exceptions must be alleged, substantiated, and proved by the parties in order for the Court to fully evaluate and review the facts of the case.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> A question of law arises when there is doubt as to what the law is on a certain statement of fact, while there is a question of fact when doubt arises as to the truth or falsity of the alleged facts.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> On the other hand, a question of law must not involve an examination of the probative value of the evidence presented during trial.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> </p><p> The two arguments presented by petitioners require an examination of the Distributorship Agreement, the Deed of Real Estate Mortgage, and the documents presented to prove the extension or renewal of the Distributorship Agreement. Undoubtedly, the resolution of this case involves an examination of the evidence presented in the tribunals below, thus the petition poses questions of fact that are outside the ambit of a Rule 45 petition. </p><p> However, due to the serious nature of the issue and for the guidance of the parties, We proceed to rule on the substance of the petition. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The renewal or extension of the Distributorship Agreement dated November 8, 1998 was not duly proven by preponderance of evidence</i> </div></td> </tr> </tbody></table> <p>The quantum of proof in civil cases is preponderance of evidence - evidence adduced by one party that is, taken all together, superior to or has greater weight than that of the other.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> It means evidence that is more convincing to the court as worthy of belief than that offered in opposition thereto.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p><p> The subject Distributorship Agreement was effective for a period of two years from the date of execution.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> It expressly provided that the absence of a duly signed agreement extending the term upon expiration shall not trigger automatic renewal of the Distributorship Agreement.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> It is worthy to recall that in the course of the proceedings in the trial court, petitioner JJPI called as witness its Senior Team Lead for Accounts Receivable, Marvin F. OcbeÃ±a<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (OcbeÃ±a) who has custody of the records pertaining to the claims of petitioner JJPI against Karahayan as distributor.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> OcbeÃ±a testified that based on records in his custody, there had been a Distributorship Agreement between petitioner JJPI and Karahayan executed on November 9, 1998, supported by a Real Estate Mortgage.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> When asked whether he had knowledge of other documents executed in connection with the Distributorship Agreement, OcbeÃ±a testified that there was a Real Estate Mortgage executed by Edilberto and Eduardo on behalf of Karahayan and in favor of petitioner JJPI on March 11, 1999.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Other documents presented were the certificate of sale of the foreclosed properties,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> the petition for extrajudicial foreclosure,<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> and the notice of extrajudicial sale.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> OcbeÃ±a further testified that the properties were foreclosed due to the failure of Karahayan to settle its outstanding obligation amounting to PHP 2,153,990.31, as set out in the demand letter dated September 3, 2004.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Notably, a survey of the case records reveal that OcbeÃ±a never mentioned documents executed in connection with the Distributorship Agreement in the form of a renewal or extension agreement. </p><p> OcbeÃ±a was then asked about the specifics surrounding the outstanding obligation. He testified that the outstanding obligation related to transactions made within several periods in 2002 to 2004.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> </p><p> Petitioner JJPI likewise offered the testimony of its National Sales Manager on General Trade, Richard Adarna Serion<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> (Serion) who testified on the process of accreditation as a distributor of JJPI products. Serion narrated that when an area opens for distributorship, entities send in applications, and JJPI selects and appoints authorized distributors after evaluation. A distributorship agreement is drawn and would normally include the term and termination of the contract, prices, terms and conditions, payment terms, collateral, territories assigned to the distributor, list of products, and performance standards.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Serion acknowledged the Real Estate Mortgage entered into between Eduardo and Edilberto on one side, and petitioner JJPI on the other, to fulfill the collateral security requirement of the Distributorship Agreement.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> </p><p> JJPI further presented its manager, Janice Francia,<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> who testified on the specifics of the accounting platform of JJPI<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> and the outstanding balance of Karahayan as of 2019.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> </p><p> On rebuttal at the trial court, respondents contended, among others, that the Karahayan distributorship in Bicol and Palawan were not renewed after the Distributorship Agreement expired on November 9, 2000.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> Respondents presented petitioner JJPI's Letter dated July 1, 2003,<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> extending the contract term from July 1, 2003 to December 31, 2003 pending the execution of another agreement in light of the expiration of a distributorship agreement executed in June 2002.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Notably, neither of the parties presented any evidence of an agreement executed between November 10, 2000 and June 30, 2003 at the trial court. Absent evidence regarding the agreement within the period between the expiration of the November 8, 1998 agreement and the renewal of the June 2002 agreement, the trial court had no way to determine the terms of the alleged extension subject of the July l, 2003 Letter from petitioner JJPI. Relevant to this issue are the following provisions in the July 1, 2003 Letter: </p><blockquote> <p> The Distributorship Agreement/Memorandum of Agreement ("Agreement") between Johnson &amp; Johnson Philippines, Inc. ("J&amp;J") and Karahayan Enterprises ("Distributor") executed [i]n June 2002 has already expired. </p> <p> Pending the execution of a new agreement between the two companies, we are extending the term of the said Agreement from July 1, 2003 until December 31, 2003.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup></p> </blockquote> <p> While the records show that petitioner JJPI attached copies of the alleged renewals to its appeal, the trial court was deprived of the opportunity to authenticate and examine these pieces of evidence, and ultimately consider the same in arriving at its conclusion. </p><p> Petitioners must be reminded that while Batas Pambansa Blg. 129 empowers the CA to receive evidence, this power is not without limits. The CA cannot simply accept additional evidence from the parties, otherwise, there would be no end to litigation. The appellate court may only receive evidence when it grants new trial based on newly discovered evidence.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Even then, the kind of evidence the CA can accept is further qualified to that which could not have been discovered prior to the trial in the court below by exercise of due diligence and which is of a nature that would probably change the result.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The real estate mortgage cannot be foreclosed absent any liability flowing from. the expired, unrenewed, and unextended Distributorship Agreement dated November 9, 1998</i> </div></td> </tr> </tbody></table> <p>Loans or credits are often secured by mortgage constituted upon real or personal property to protect the creditor's interest in case of default. By its nature, a mortgage remains an accessory contract dependent on the principal obligation, such that the enforcement of the mortgage depends on whether there has been a violation of the principal obligation.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> </p><p> A discussion on the dragnet or blanket mortgage clause is relevant here. <i>Prudential Bank v. Alviar</i><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> is instructive: </p><blockquote> <p> A "blanket mortgage clause," also known as a "dragnet clause" in American jurisprudence, is one which is specifically phrased to subsume all debts of past or future origins. <i>Such clauses are "carefully scrutinized and strictly construed."</i> Mortgages of this character enable the parties to provide continuous dealings, the nature or extent of which may not be known or anticipated at the time, and they avoid the expense and inconvenience of executing a new security on each new transaction. A "dragnet clause" operates as a convenience and accommodation to the borrowers as it makes available additional funds without their having to execute additional security documents, thereby saving time, travel, loan closing costs, costs of extra legal services, recording fees, <i>et cetera</i>. Indeed, it has been settled in a long line of decisions that mortgages given to secure future advancements are valid and legal contracts, and the amounts named as consideration in said contracts do not limit the amount for which the mortgage may stand as security <i>if from the four corners of the instrument the intent to secure future and other indebtedness can be gathered</i>.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> (Citations omitted, emphasis supplied) </p> </blockquote> <p> The Court in <i>Prudential Bank</i> opined that when parties conform to a dragnet clause, it is reasonable to conclude that they also agreed to an implied understanding that subsequent loans need not be secured by other securities, as the subsequent loans will be secured by the first mortgage.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup></p><p> To understand the dragnet clause employed in the contract between petitioners and respondent JJPI, We look at the relevant provisions in the Distributorship Agreement,<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> as follows: </p><p align="center"> DISTRIBUTORSHIP AGREEMENT</p><p align="center"> . . . . </p><blockquote> <p> C.1. Collaterals</p> <p> The <b>DISTRIBUTOR</b>, upon signing of the contract shall post a collateral such as land and other types of real property acceptable to the COMPANY where current fair market value shall form the basis for setting the credit limit of the DISTRIBUTOR but shall in no instance be less than 100% of the said credit limit; and in case the collateral is in the form of cash, bank guarantee or irrevocable stand-by letter of credit issued by a banking firm acceptable to the <b>COMPANY</b>, it shall be equivalent to 100% of its credit limit. The collateral shall be to guarantee the faithful performance and payment by the <b>DISTRIBUTOR</b> of its obligations <i>under this Agreement</i> and to answer for any of the <b>DISTRIBUTOR's</b> unpaid amounts and obligations, as well as for damages, injury, costs and expenses that may be incurred by the <b>COMPANY</b> <i>under this Agreement</i>. The <b>DISTRIBUTOR</b> may post other collaterals provided the same are acceptable to the <b>COMPANY</b>. The credit limit provided herein may be revised, amended, increased or decreased by the <b>COMPANY</b> upon written notification to the <b>DISTRIBUTOR</b>. </p> <p> In case of default in the payment of any amounts due <i>under this Agreement</i> by <b>DISTRIBUTOR</b>, the <b>COMPANY</b> is hereby authorized, by mere notice to the <b>DISTRIBUTOR</b>, to foreclose on or draw against the surety or performance bond or collateral aforementioned. <b>DISTRIBUTOR</b> warrants that it has executed all the necessary papers and documents required for the proper implementation of this provision.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> (Emphasis supplied) </p> </blockquote> <p> We consider also the relevant provisions of the Deed of Real Estate Mortgage,<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> thus: </p><p align="center"> REAL ESTATE MORTGAGE</p><p align="center"> . . . . </p><blockquote> <p> WHEREAS, EDILBERTO R. EVANGELISTA as owner of said KARAHAYAN ENTERPRISES applied for and obtained from the MORTGAGEE, a credit facility in the sum of PESOS: TWO MILLION NINE HUNDRED FORTHY THOUSAND ([PHP] 2,940,000.00) Philippine Currency, payable under the terms and conditions set forth in the Distributorship Agreement dated November 9, 1998, which forms an integral part hereof as ANNEX "A".</p> <p> WHEREAS, the MORTGAGORS, as a condition for the grant of the said credit facility by the MORTGAGEE, have agreed to mortgage to the MORTGAGEE the real properties owned by them and described herein to secure the said credit facility. </p> <p> NOW THEREFORE, for an in consideration of the foregoing premises and the terms and conditions hereinafter set forth and <i>as security for the payment on demand or at maturity</i>, as the case may be, of <i>all sums of money now owed by EDILBERTO R. EVANGELISTA or which may hereafter be owing by said EDILBERTO R. EVANGELISTA to the MORTGAGEE under the Distributorship Agreement, credit facility or any other instruments, notes payable or bills of exchange, purchases and advances made in connection with said Distributorship Agreement or credit facility including any renewals, amendments or extension thereof</i>, the MORTGAGORS have transferred and conveyed and by these presents do hereby transfer and convey by way of mortgage unto the MORTGAGEE, its successors-in-interest and assigns, all their rights, title and interest in the parcels of land described below together with all the buildings and improvements now existing or which may thereafter exist thereon.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> (Emphasis supplied) </p> </blockquote> <p> The emphasized portions of the relevant provisions reveal that the real estate mortgage may be foreclosed to answer for liabilities under the Distributorship Agreement of November 9, 1998 and other transactions made in connection with the same, <i>not for liabilities of the debtor to the creditor in separate transactions</i>. </p><p> Unfortunately for petitioners, there was a failure to duly offer evidence showing renewals or extensions of the November 9, 1998 Distributorship Agreement, as discussed above. The financial liability of Karahayan owed to petitioner JJPI are found to have stemmed from purchases outside the contract period of the November 9, 1998 Distributorship Agreement. Thus, there can be no conclusion other than the invalidity of the foreclosure. The remaining liabilities of Karahayan to petitioner JJPI flows from a separate agreement, not from an extension or renewal of the Distributorship Agreement dated November 9, 1998 and not secured by the subject collaterals. </p><p> <b>FOR THESE REASONS,</b> the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision dated May 30, 2024 and the Resolution dated March 20, 2025 of the Court of Appeals in CA-G.R. CV No. 121306 are <b>AFFIRMED</b>. </p><p> <b>SO ORDERED.</b></p><p> <i>Gesmundo, C.J. (Chairperson), Zalameda, Rosario</i>, and <i>Marquez, JJ</i>., concur.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 28-72. <p></p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 11-23. The May 30, 2024 Decision in CA-G.R. CV No. 121306 was penned by Associate Justice Apolinario D. Bruselas, Jr. and concurred in by Associate Justices Gabriel T. Robeniol and Michael P. Ong of the Fourth Division, Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 25-26. The March 20, 2025 Resolution in CA-G.R. CV No. 121306 was penned by Associate Justice Apolinario D. Bruselas, Jr. and concurred in by Associate Justices Gabriel T. Robeniol and Michael P. Ong of the Former Fourth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 290-319. The May 16, 2022 Decision in Civil Case No. 4167 is penned by Presiding Judge Leah E. De Los Reyes-Baguyo of Branch 48, Regional Trial Court, Puerto Princesa City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 320-326. The September 23, 2022 Order in Civil Case No. 4167 is penned by Presiding Judge Leah E. De Los Reyes-Baguyo of Branch 48, Regional Trial Court, Puerto Princesa City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 12.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 101-112.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 13.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 113-118.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 113.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 13. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 136-143.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 141. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 139.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 138-139.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 14.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 15. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 318-319.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 311. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 312.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 314. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 315.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 317.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> RULES OF COURT, Rule 10, sec. 5, as amended by Rule 10 of A.M. No. 19-10-20-SC, May 1, 2020. <i>No amendment necessary to conform to or authorize presentation of evidence</i>. â When issues not raised by the pleadings are tried with the express or implied consent of the parties, they shall be treated in all respects as if they had been raised in the pleadings. No amendment of such pleadings deemed amended is necessary to cause them to conform to the evidence. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, pp. 320-326. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 23. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 16-17. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 19. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 21-22. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 22. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 22-23. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 25-26. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 47-48. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 48. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Gatan v. Vinarao</b>, 820 Phil. 257, 293 (2017) [Per J. Leonardo-De Castro, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Valencia (Bukidnon) Farmers Cooperative Marketing Association, Inc. v. Heirs of Cabotaje</b>, 851 Phil. 95, 102 (2019) [Per J. Caguioa, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Gatan v. Vinarao</b>, 820 Phil. 257, 266 (2017) [Per J. Leonardo-De Castro, First Division], <i>citing</i> <b>Miro v. Vda. de Erederos</b>, 721 Phil. 772, 785-787 (2013) [Per J. Brion, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Candelaria v. Regional Trial Court</b>, 739 Phil. 1, 10-11 (2014) [Per J. Del Castillo, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Pascual v. Burgos</b>, 776 Phil. 167, 169 (2016) [Per J. Leonen, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Far Eastern Surety and Insurance Co., Inc. v. People</b>, 721 Phil. 760, 767 (2013) [Per J. Brion, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Tongonan Holdings and Development Corporation v. Atty. EscaÃ±o</b>, 672 Phil. 747, 756 (2011) [Per J. Mendoza, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Heirs of Magsaysay v. Spouses Perez</b>, 905 Phil. 819, 830 (2021) [Per J. Hernando, Third Division], <i>citing</i> <b>Siao Aba v. De Guzman, Jr.</b>, 678 Phil. 588, 601 (2011) [Per J. Carpio, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, p. 110. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 251-263. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 253. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 254-255. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 255. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 256. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 256-257. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 258-261. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 264-271. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 266. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 267. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 273-278. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 274-276. </p><p><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 276. </p><p><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 284-285. </p><p><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 289. </p><p><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 285. </p><p><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 289. </p><p><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>Crispino v. Tansay</b>, 801 Phil. 711, 730 (2016) [Per J. Leonen, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 729, <i>citing</i> RULES OF COURT, Rule 53, sec. 1. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>Philippine National Bank v. Spouses Tajonera</b>, 744 Phil. 127, 144 (2014) [Per J. Mendoza, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[74]</sup> 502 Phil. 595 (2005) [Per J. Tinga, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 606. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Rollo</i>, pp. 101-112. </p><p><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> at 104. </p><p><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 113-118. </p><p><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 113.&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 255485 - IAN SOLIS Y AQUINO, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70271' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 255485, November 26, 2025 ]</H2>
+			<H3>IAN SOLIS <I>Y</I> AQUINO, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Whether an injury is fatal is a question of fact. Absent testimony from the attending physician that the injury would have caused the victim's demise without timely medical assistance, the Court cannot presume that it is fatal even if the medico-legal certificate shows that vital organs were involved or that significant blood loss occurred since what may be fatal for one person may not be fatal for another.<br><br>This Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assails the Court of Appeals (CA) Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> which affirmed the Regional Trial Court (RTC) Joint Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> convicting Ian Solis <i>y</i> Aquino (Ian) of frustrated homicide.<br><br><center><i>I</i></center><br>Ian and minors XXX,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> YYY, and ZZZ were indicted for the frustrated homicide of Jun Ferriol<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>y</i> Ursabia (Jun) under the Information below in Criminal Case No. 2017-0215-D:<blockquote>That around 1:30 [a.m.] of [March 3,] 2017 in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Pangasinan, and within the jurisdiction of this Honorable Court, the accused IAN SOLIS... [XXX]... [ZZZ]. .. and... [YYY]... conspiring and confederating with each other and with intent to kill, did then and there willfully, unlawfully and feloniously stab JUN FERRIOL... on the different parts of his body... thus performing all the acts of execution which would produce the crime of homicide as a consequence but which, nevertheless, do not produce it by reason of causes independent of the will of the perpetrators, that is, the timely and adequate medical attendance rendered to him, to the damage and prejudice of said Jun Ferriol[.]<br><br>Contrary to Article 249 of the Revised Penal Code in relation to Article 6 and Article 250 thereof.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></blockquote>In the Information in Criminal Case No. 2017-0216-D, the same accused were indicted for theft. All except ZZZ, who escaped pending the proceedings below, were acquitted. When ZZZ surrendered, Jun executed an affidavit of desistance in his favor and the case against him was dismissed.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Meanwhile, Ian pleaded not guilty to the charges against him. Thereafter, pretrial and trial ensued.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The CA summarized the facts as follows:<blockquote>[Jun] and [Ian] had allegedly been friends for two years, such that when [Ian] and three other persons arrived at [Jun's] doorstep on March 2, 2017 around 10:30 p.m., the latter had no issues opening the door for them and letting them in his house. According to [Jun], it was his first time to meet [Ian's] companions: [Ian's] brother [XXX] and [XXX's] peers, [YYY] and [ZZZ]. At [Ian's] behest, [Jun] shelled out money to buy... brandy that the five of them shared while watching a movie.... Later, [Jun] decided to call it a night, but his drinking buddies told him that they will stay and continue drinking. So, [Jun] instructed them to turn the light off, switch on the dim light and lock the door when they leave.<br><br>Lying on his left side, [Jun] was awakened by what he initially thought was a pinch on his right side, but was actually a pair of scissors planted in his body. When he turned to lie on his back, someone allegedly choked him while others were covering his mouth and holding his hands and feet. He admitted that he did not see who his attackers were because the room was dim... [Jun] claimed that when be woke up, there was a stab on his right side and two more on his chest. When he realized that his assailants will not stop stabbing him, [Jun] played dead until they left. Then, he cried for help and went to his mother's house. He allegedly mentioned to his mother that [Ian] went to his house that night. [Jun] was brought to the Medical City Pangasinan where he underwent surgery.<br><br>The incident was reported to the police and recorded in the blotter. [Police Officer II Dexter V. Zarate (PO2 Zarate)] narrated that he received information about the incident around 2:00 a.m. on March 3, 2017. The police was also informed that [Jun's] laptop computer [had] gone missing. From the crime scene, PO2 Zarate was able to recover a white SKK mobile phone... and a blood-stained pair of scissors... PO2 [Ernes Karl Rufino III (PO2 Rufino III)] narrated that upon further checking, they saw a man's picture on the confiscated SKK mobile phone whom the neighbors allegedly identified as [Ian]. The police then proceeded to the hospital to follow up with [Jun] but the latter was already in surgery. Hence, the police went on with the investigation which led them to tricycle driver [Noel] Garcia [(Garcia)], who claimed to have boarded four teenagers around 2:30 a.m. on March 3, 2017. Garcia told the police that he noticed one of the teenagers wearing a blood-stained shirt while another was carrying a black bag. The four alighted at the back of the market of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Pangasinan....<br><br>With the assistance of Mangaldan [Philippine National Police], the investigating policemen found [Ian's] residence. There, the police informed [Ian's] parents that their son is a suspect in a stabbing incident and implored them to surrender their son. [Ian] then allegedly surrendered and mentioned that [ZZZ] and [YYY] were with him at [Jun's] house. Together with [XXX] and their father, [Ian] accompanied the police to [ZZZ's] house. PO2 Rufino III testified that [Ian] did not immediately name his brother [XXX] as one of his companions ... Allegedly, it was only after [YYY] was arrested when the police learned that [XXX] was also at the crime scene.<br><br>At [ZZZ's] house, [ZZZ's] father told the police that he was not at home. Thus, PO2 Rufino III went outside to conduct an ocular inspection using his flashlight. Allegedly, he saw a black bag which, when inspected, contained [Jun's] identification card and an invitation addressed to [Jun]. Thus, the police told [ZZZ' s] parents to surrender their child, at which point, [ZZZ] showed up allegedly from the other house. [ZZZ] hence surrendered [Jun's] laptop.<br><br>After arresting [ZZZ], the police, together with [ZZZ] and [Ian] beaded to [YYY's] house. Since the house is located in the interior of the market, PO2 Rufino III stayed in the vehicle with [Ian] while two other policemen went with [ZZZ] to look for [YYY]. Allegedly, after looking for [YYY] from his father, the latter and [YYY's] sibling went with the police and they found [YYY] in front of the market. It was then that the police learned that [XXX] was also at the crime scene. However, he was already gone. So, the police went back to [Ian's] house and told his mother to surrender [XXX] as well.<br><br>After bringing the three suspects to the police station, the policemen received a call from [Ian's] mother instructing them to fetch her and [XXX]. Come morning, the police invited Garcia to the police station where he identified [Ian], [ZZZ], [XXX] and [YYY] as the teenagers he claimed to have driven to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> earlier.<br><br>As per the billing statement issued by the Medical City Pangasinan, [Jun's] total medical expenses while hospitalized is [PHP] 201,478.65 after deducting from the subtotal of [PHP] 288,993.65... From the amount due, [Jun] was able to pay the hospital a total of [PHP] 92,000.00.<br><br>On cross-examination, PO2 Zarate admitted that he did not submit the pieces of evidence to the crime laboratory for fingerprinting. PO2 Rufino III... admitted that he does not know whether somebody entered [Jun's] house and planted [Ian's] cellphone between the time the incident was reported... and the time of the police's arrival at the crime scene.<br><br>For the defense, [Ian], [XXX], and [YYY]... denied the accusations against them and were one in claiming that they left [Jun's] house at 11:00 p.m. on March 2, 2017 after a drinking spree.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></blockquote>In its Joint Decision, the RTC convicted the three accused of frustrated homicide as follows:<blockquote>WHEREFORE... the Court finds Ian Solis, [XXX,] and [YYY] guilty beyond reasonable doubt for the crime of frustrated homicide... in [C]riminal [C]ase no. 2017-0215-D. The Court hereby imposes upon Ian Solis an indeterminate penalty of imprisonment of [four] years of [<i>prision correccional</i>] as minimum to [seven] years of [<i>prision mayor</i>] as maximum, appreciating his voluntary surrender.<br>. . . .<br><br>Lastly, the [three] accused are ordered to pay jointly Jun Ferriol the sum of [PHP] 282,993.65 as actual damages and [PHP] 20,000.00 as moral damages with interest at the rate of 6% per annum on all damages awarded from the date of finality of this judgment until fully paid.<br><br>. . . .<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></blockquote>Aggrieved, Ian appealed to the CA, which affirmed the RTC Joint Decision with modification. The dispositive portion of the CA Decision reads:&nbsp;<br><blockquote>WHEREFORE, the appeal is DENIED. The assailed... Joint Decision... in Criminal Case No. 2017-0215-D finding accused-appellant Tan Solis... guilty beyond reasonable doubt of the crime of frustrated homicide is AFFIRMED WITH MODIFICATION. Ian Solis... is hereby SENTENCED to suffer [four] years of <i>prision correccional</i> as minimum to [nine] years of <i>prision mayor</i> as maximum. In addition to the pronouncement of the lower court, Ian Solis... is ORDERED to pay Jun Ferriol... [PHP] 30,000.00 as civil indemnity land [PHP] 10,000.00.., representing the increase in moral damages.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></blockquote>Ian filed a Motion for Reconsideration of the assailed Decision, which the CA denied in its assailed Resolution. Hence, this Petition.<br><br>The issues presented for the Court's consideration are whether the CA gravely erred in affirming petitioner's conviction despite the prosecution's alleged failure to prove his identity as one of the perpetrators, and whether it erred in affirming his conviction based purely on circumstantial evidence.<br><br>Petitioner argues that the circumstances relied upon by the lower courts, i.e., that petitioner was with ZZZ, XXX, and YYY at Jun's house on the night of March 2, 2017, their having ridden the tricycle in going to their respective homes, and his cellphone being found at Jun's house, do not constitute an unbroken chain of circumstances which would produce a conviction beyond reasonable doubt that he was one of the four alleged perpetrators. <i>First</i>, he was drunk and could have simply forgotten his phone at Jun's house. <i>Second</i>, the trial court acquitted him of theft, which was the alleged motivation in stabbing Jun. <i>Third</i>, the alleged bloodied scissors were never subjected to fingerprinting and, thus, cannot be directly linked to him or his companions. <i>Fourth</i>, it was not established that he was still at Jun's house at the time of the commission of the crime. Hence, the evidence at hand does not fulfill the test of moral certainty required for conviction.<br><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> the Office of the Solicitor General, representing the People, countered that petitioner raised questions of fact, which are beyond the ambit of a Rule 45 petition, and that he failed to prove that his case falls under any of the exceptions to warrant a factual review by this Court. In particular, the matters raised, i.e., the alleged lack of direct evidence, whether there was an unbroken chain of circumstances, and whether there exist satisfactory circumstances pointing to petitioner as one of the perpetrators, pertain to questions of fact as the same requires the recalibration, review, or examination of the records of the case and the evidence presented.<br>&nbsp;<br>The People also contend that while the victim did not see the suspects during the actual commission of the crime because it was dark, there is adequate circumstantial evidence pointing to petitioner and his co-accused as the perpetrators of the criminal act. <i>First</i>, petitioner and his co-accused went to the nipa hut room of the victim at the time material to the commission of the crime. <i>Second</i>, petitioner and his co-accused had a drinking spree with the victim at his nipa hut room and were watching using the laptop of the victim. <i>Third</i>, when the victim told petitioner and his co-accused that he was already sleepy, petitioner responded that they would just stay in that room and continue drinking. <i>Fourth</i>, the four malefactors performed different tasks during the commission of the crime to accomplish their desired purpose. One was choking the victim, another was holding his hands, another was covering his mouth, while another was holding his feet. <i>Fifth</i>, in another instance, one was holding the victim's feet, the other was covering his mouth, another was holding his head, while another was stabbing him. <i>Sixth</i>, petitioner and his co-accused boarded a tricycle driven by Noel Garcia who described the passengers as rushing towards him and "<i>parang sila ay may kinatatakutan</i>,"<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> and who observed that the clothes of one of the passengers had blood stains. <i>Seventh</i>, the police officers found the bloodied pair of scissors and petitioner's cellphone at the crime scene. Hence, the above circumstances constitute an unbroken chain leading to the conclusion that petitioner and his co-accused were indeed the authors of the crime committed to the exclusion of all others.<br><br>Further, the People posit that the totality test in determining the admissibility of out-of-court identifications, as laid down in <i>People v. Teehankee, Jr.</i><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and cited by petitioner, is inapplicable to the case at bench because Teehankee was based on direct evidence whereas, in this case, the conviction rests on circumstantial evidence.<br><br><center><i>II</i></center><br>The Petition is bereft of merit.<br><br>At the outset, it raises questions of fact which are beyond the ambit of Rule 45, which limits review to questions of law. For a question to be one of law, it must not involve an examination of the probative value of the evidence presented. The resolution of the issue must rest solely on what the law provides on the given set of circumstances. Once the issue invites a review of the evidence, the question posed is one of fact.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Even if We were to admit and review questions of fact, We find that the lower courts correctly ruled, based on circumstantial evidence, that petitioner is the author of the crime.<br>&nbsp;<br>Absent direct evidence, the RTC had to rely entirely on circumstantial evidence as sanctioned by Rule 133, Section 4 of the Rules of Court, viz.:<blockquote>Sec. 4. <i>Circumstantial evidence, when sufficient</i>. â Circumstantial evidence is sufficient for conviction if:&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%" Â ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">There is more than [one] circumstance;</div></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">The facts from which the inferences are derived are proven; and</div></td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify">The combination of all the circumstances is such as to produce a conviction beyond reasonable doubt.</div></td></tr></tbody></table><br>Inferences cannot be based on other inferences.</blockquote>There is no requirement in our jurisdiction that only direct evidence may convict.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The probative value of direct evidence is generally not superior to circumstantial evidence. Under the Rules of Court, there is no distinction between direct evidence of facts and evidence of circumstances from which the existence of a fact may be inferred. Circumstantial evidence may be so credible to establish a fact from which it may be inferred, beyond reasonable doubt, that the elements of a crime exist and that the accused is the perpetrator.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Circumstantial evidence may be resorted to when to insist on direct testimony would ultimately lead to setting felons free.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>To sustain a conviction based on circumstantial evidence, it is essential that the pieces of circumstantial evidence presented constitute an unbroken chain which leads one to a fair and reasonable conclusion pointing to the accused, to the exclusion of all others, as the guilty person. The circumstantial evidence must exclude the possibility that some other person committed the crime.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> The test to determine whether the circumstantial evidence on record is sufficient to convict is that the series of circumstances duly proved must be consistent with one another and that each circumstance must be consistent with the accused's guilt and inconsistent with his innocence.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>The CA found the following circumstantial evidence sufficient to prove beyond reasonable doubt the identity of petitioner as one of Jun's assailants: (1) Petitioner and his three companions were at the crime scene prior to the attack on Jun; (2) All accused went on a drinking spree until Jun decided to sleep ahead of them; (3) Jun woke up to pain on the right side of his body caused by a pair of scissors; (4) Jun recalled that he was attacked by several personsâone holding his feet, another covering his mouth, another holding his head, and another stabbing him; (5) Contrary to petitioner's claim that he and his companions went home at 11 p.m., tricycle driver Garcia testified that he drove them to their destination at around 2:30 a.m. or close to the time that the crime was reported to the authorities; (6) Garcia, in his <i>Sinumpaang Salaysay</i>, observed that petitioner and his companions were in a hurry; (7) Garcia testified that he saw one of the passengers wearing a bloodstained shirt; and (8) Petitioner's cellphone was found at the crime scene.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Aside from there being more than one circumstance, the facts constituting them were duly proven by the prosecution. The first two circumstances were proven by petitioner's admission. The third and fourth were proven by Jun's testimony. The fifth, sixth, and seventh were established by the tricycle driver's testimony. The eighth was duly proven by the testimony of the police who proceeded to the crime scene. More importantly, the series of circumstances duly proved were consistent with one another as well as with the guilt of the accused and inconsistent with his innocence.<br><br>It is also vital to note that Garcia, in open court, identified petitioner, XXX, and YYY as among the four passengers who rushed toward him and boarded his tricycle at around 2:30 a.m. He also identified his <i>Sinumpaang Salaysay</i>, the pertinent portions of which read:<blockquote>Na noong Marso 3, 2017 oras ng [2:30 a.m.] ako po ay nag-aabang ng aking pasahero sa Brgy. Poblacion[,] San Fabian, Pangasinan;<br><br>Na sa oras na iyon... <i>nakita ko ang apat na kabataan na nag-uunahang tumakbo patungo sa aking kinaroroonan</i>;<br><br>Na pag lapit nila sa akin, inalok ko sila [na] sumakay sa aking [t]risikel[.] [A]gad naman silang tumalima at pumasok sa aking sasakyan at sinabihan nila ako na sa <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Pangasinan ko sila ihatid;<br><br>Na habang ako ay nagmamaneho,<i> napansin ko na parang sila ay may kinatatakutan</i> at iyong isa ay may hawak na bag na kulay itim. <i>At iyong isa naman ay duguan ang kanyang damit</i>;<br><br>. . . .<br><br>Nang oras ng 7:20 ng urnaga ng Marso 3, 2017 ako ay inimbitahan ng Pulisya... at pinatukoy sa akin ang apat na kabataan.<br><br><i>Na ng makita ko silang apat, sila nga iyong aking mga naisakay</i> sa oras ng 2:30 ng umaga Marso 3, 2017... <i>Sa katunayan suot pang isa sa kanila ang duguang damit at kinilala na si IAN SOLIS</i>... at ang tatlo pa na kasamahan nito[.]<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> (Emphasis supplied)</blockquote>The fact that only around five hours had elapsed from the time the four accused boarded Garcia's tricycle until the latter identified them at the police station, particularly the one wearing the bloodied shirt who turned out to be petitioner, dispels doubt that Garcia was able to positively and accurately identify them as his passengers that morning. While Garcia himself did not witness the commission of the crime, the circumstantial evidence, as previously discussed, formed an unbroken chain resulting in a fair and reasonable conclusion that petitioner was one of the perpetrators of the crime.<br><br>In <i>People v. Casitas</i>,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> the Court <i>en banc</i> considered the fact that the accused was seen climbing over the fence of the victim's house with his clothes soaked in blood, coupled with the subsequent discovery of the dead body lying in a pool of blood, as circumstantial evidence that leads to the logical conclusion that he was responsible for the killing.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> While the accused in <i>Casitas</i> was the only person seen leaving the house, unlike here where four persons were seen rushing toward the tricycle, the fact that only petitioner was wearing a bloodied shirt impels us to conclude that he is the one who stabbed Jun, to the exclusion of his three companions or any other person. The non-presentation of the bloodstained shirt in evidence, being merely corroborative of other evidence on record, is not fatal to the prosecution's case.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>The stark contrast between Garcia's testimony and those of the accused is also telling. While Garcia testified that the four suspects that he saw at the police station were the ones who rushed to his tricycle at 2:30 a.m., three of them, including petitioner, testified that they left Jun's house together at around 11:00 p.m. the previous night, rode a tricycle home, and did not return. Certainly, only one of these versions could be the truth. Since the RTC had the full opportunity to observe the deportment and demeanor of the witnesses, its assessment of their credibility and the trustworthiness of their testimonies deserves great weight and, when affirmed by the CA, is even conclusive and binding on this Court, unless tainted with arbitrariness or oversight of some fact or circumstance of weight and influence.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Here, the RTC gave credence to the prosecution's version, which was diametrically opposed to that of the defense. Its factual findings having been affirmed and being in accord with the evidence on record, no cogent reason exists to disturb the same.<br><br>The prosecution also established the elements of frustrated homicide: (1) the accused intended to kill the victim, as manifested by the use of a deadly weapon; (2) the victim sustained fatal wounds but did not die due to timely medical assistance; and (3) no qualifying circumstance for murder is present.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Here, intent to kill was properly inferred from the use of scissorsâa deadly weapon<sup style="COLOR: RGB(255, 0, 0);">[30]</sup>âas well as the number and location of stab wounds.<br><br>As regards the second element, the lower courts gave credence to the findings in the Medico-Legal Certificate, the existence of which was stipulated on without testimony from the attending physician. According to said certificate, Jun suffered seven stab wounds which injured his liver and kidney, causing hemorrhage in the amount of nearly half a liter of blood, viz.:<blockquote>Intraoperative findings:<ul><li>(+) Bright red hemoperitoneum, around 400 ml in amount<br></li><li>(+) Stab wound, 7<sup>th</sup> [intercostal space (ICS)], right parasternal area, penetrating, with penetrating liver injury, segment II (approximately 1 .0 cm long) with diaphragmatic perforation<br></li><li>(+) Stab wound 7<sup>th</sup> ICS, right mid clavicular line, penetrating, with penetrating liver injury, segment VIII (approximately 1.0 cm long), with diaphragmatic perforation<br></li><li>(+) Stab wound, right subcostal margin, anterior axillary line, penetrating, with penetrating liver injury, segment VI (approximately 1.0 cm long) with diaphragmatic perforation<br></li><li>(+) Stab wound, right subcostal margin, mid axillary line, penetrating, with through and through perforation of midsection, right colon<br></li><li>(+) Stab wound, penetrating, right lumbar area, posterior axillary line, with penetrating injury, inferior pole, right kidney; with 30 cm oblique linear abrasion commencing from the SW, up to the right inguinal area<br></li><li>(+) Hematoma right lateral compartment, retroperitoneal area, and perinephric space<br></li><li>(+) Stab wound; 8<sup>th</sup> ICS, right midclavicular line, non-penetrating<br></li><li>(+) Stab wound, 8<sup>th</sup> ICS, right midaxillary line, non-penetrating<br></li><li>(+) Linear abrasion, transverse, 9<sup>th</sup> ICS, right MAL<br></li><li>(+) Contusion hematoma, submental area</li></ul>Procedure done:<ol><li> "E" explor-lap, evacuation of hemoperitoneum, phrenorrhap[h]y, multiple packing of liver injury, Cattell man[eu]ver, multiple colorrhap[h]y[,] nephrorrhap[h]y, peritoneal lavage and drainage, ligation of bleeders<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></li></ol></blockquote>Unlike in a prosecution for rape, where medical examination is not indispensable since the lone testimony of the victim is sufficient if credible, it is imperative in la prosecution for frustrated homicide that the victim's wounds be proven beyond reasonable doubt to be fatal through the testimony of the physician who attended to said fatal wounds. Since a medical certificate is merely an opinion of one who must first be established as an expert witness, it could not be given weight or credit unless the doctor who issued it is presented in court to show their qualifications.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Failure to present the physician who attended to the wounds deprives the defense of an opportunity to cross-examine them on the accuracy and veracity of their findings.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>In <i>Etino v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> We had the occasion to discuss the probative value of a medical certificate sans the testimony of the attending physician:<blockquote>It is settled that "where there is nothing in the evidence to show that the wound would be fatal if not medically attended to, <i>the character of the wound is doubtful</i>," <i>and such doubt should be resolved in favor of the accused</i>.<br><br>In this case, we find that the prosecution failed to present evidence to prove that the victim would have died from his wound without timely medical assistance, as his Medical Certificate alone, <i>absent the testimony of the physician who diagnosed and treated him, or any physician for that matter</i>, is insufficient proof of the nature and extent of his injury. This is especially true, given that said Medical Certificate <i>merely stated the victim's period of confinement at the hospital, the location of the gunshot woundsÂ·, the treatments he received, and his period of healing</i>.<br><br>Without such proof, the character of the gunshot wounds that the victim sustained enters the realm of doubt, which the Court must necessarily resolve in favor of petitioner.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> (Emphasis supplied)</blockquote>Our ruling in <i>Oliveros v. People</i><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> is likewise instructive:<blockquote>Circumstances which qualify criminal responsibility cannot rest on mere conjectures, no matter how reasonable or probable, but must be based on facts of unquestionable existence... [T]he uncertainty on the nature of the wounds warrants the appreciation of a lesser gravity of the crime committed as this is in accordance with the fundamental principle in [c]riminal [l]aw that all doubts should be resolved in favor of the accused.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></blockquote>There being no testimony from the attending physician as to the injuries sustained by the victim, there is doubt as to their character, which this Court must resolve in favor of petitioner. At most, he could only be held liable for attempted homicide since it was not established that the wounds were fatal. The Court cannot presume they are fatal even if the medico-legal certificate shows that vital organs were involved or that significant blood loss occurred since what may be fatal for one person may not be fatal for another.<br><br>We also disagree with the ruling of the lower courts that the mitigating circumstance of voluntary surrender may be appreciated in favor of petitioner. To appreciate such mitigating circumstance, the accused must satisfactorily comply with three requisites: (1) the accused must not have been arrested; (2) the accused surrenders to a person in authority or the latter's agent; and (3) the surrender is voluntary. There must be a showing of spontaneity and an intent to surrender unconditionally to the authorities, either because the accused acknowledges guilt or wishes to spare them the trouble and expense concomitant to the capture of the accused.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Here, petitioner only surrendered when the police were already at his house and after having informed him and his family that he had been identified as a suspect. The police even had to implore his parents to surrender him. Voluntary surrender may not be appreciated even if the accused surrenders himself to the authorities who, by their presence in his house, precluded his escape.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>Absent modifying circumstances, the maximum of the indeterminate penalty shall be taken from the medium period of <i>prisiÃ³n correccional</i> or two years, four months, and one day to four years and two months. The minimum shall be taken within the range of <i>arresto mayor</i>. Hence, the penalty for attempted homicide is six months of <i>arresto mayor</i> as minimum to four years and two months of <i>prisiÃ³n correccional</i> as maximum.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> As regards pecuniary liabilities, case law instructs that in cases of attempted homicide, the accused shall pay civil indemnity and moral damages of PHP 20,000.00 each.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> In addition, if an aggravating circumstance was proven during trial although not alleged in the Information, as in this case, exemplary damages of PHP 20,000.00 shall also be awarded.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>Anent actual damages, while the RTC awarded PHP 282,993.65, the CA arrived at PHP 288,993.65,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> based on the total charges in the hospital billing statement,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> but nonetheless upheld the RTC's award. Both the RTC and CA, however, erred in basing said amount on the total hospital charges since the final amount after discount and subsidies was PHP 201,478.65.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> A party is entitled only up to such compensation for the pecuniary loss duly proven.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Actual damages must therefore be reduced to the latter amount.<br><br>As a final note, since Jun was stabbed while asleep, and therefore, not in a position to defend himself, there was treachery,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> which should have qualified the crime to attempted murder, were it not for the failure of the prosecution to allege ultimate facts constituting treachery in the Information. We therefore reiterate our ruling in <i>People v. Solar</i><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> imploring prosecutors to be mindful in crafting the Information by stating with sufficient particularity not only the acts complained of or the acts constituting the offense, but also the aggravating circumstances, whether qualifying or generic, as well as other attendant circumstances that would impact the penalty to be imposed.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br><b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The July 10, 2020 Decision and January 20, 2021 Resolution of the Court of Appeals in CA-G.R. CR No. 41501 are <b>AFFIRMED</b> with <b>MODIFICATION</b>. Petitioner Ian Solis <i>y</i> Aquino is found <b>GUILTY</b> beyond reasonable doubt of attempted homicide and is sentenced to suffer the indeterminate penalty of six months of <i>arresto mayor</i> as minimum to four years and two months of <i>prisiÃ³n correcional</i> as maximum. He is <b>ORDERED</b> to pay the victim actual damages in the amount of PHP 201,478.65 as well as civil indemnity, moral damages, and exemplary damages in the amount of PHP 20,000.00 each, which amounts shall earn interest at the rate of 6% per annum from the date of finality of this Decision until fully paid.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J. (Chairperson), Hernando, Zalameda</i>, and <i>Marquez, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 37-46. The July 10, 2020 Decision in CA-G.R. CR No. 41501 was penned by Associate Justice Germano Francisco D. Legaspi and concurred in by Associate Justices Franchito N. Diamante and Bonifacio S. Pascua of the Fourteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 48-49. The January 20, 2021 Resolution in CA-G.R. CR No. 41501 was penned by Associate Justice Germano Francisco D. Legaspi, with Associate Justices Franchito N. Diamante and Bonifacio S. Pascua of the Fonner Fourteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 66-90. The November 29, 2017 Joint Decision in Criminal Case Nos. 2017-0215-D to 0216-D was penned by Judge Caridad V. Galvez of Branch 43, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Pangasinan.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Pursuant to Sec. 43 of Republic Act No. 9344 in relation to SC Amended Administrative Circular No. 83-2015, fictitious initials are used to preserve the confidentiality of the identity of the accused minors.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Also referred to as "Ferreol" in some parts of the record.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Geographical location is concealed pursuant to SC Amended Administrative Circular No. 83-2015.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> RTC records (Criminal Case No. 2017-0215-D), pp. 1-2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 38-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, pp. 39-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 89-90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 45-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 201-229.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> RTC records (Criminal Case No. 2017-0215-D), p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> 319 Phil. 128, 180-181 (1995) [Per J. Puno, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <b>Republic v. Caraig</b>, 887 Phil. 827, 838 (2020) [Per J. Hernando, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <b>Bacerra v. People</b>, 812 Phil. 25, 35-36 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <b>Planteras, Jr. v. People</b>, 841 Phil. 492, 506 (2018) [Per J. Peralta, Third Division]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <b>Gan v. People</b>, 550 Phil. 133, 153 (2007) [Per J. Chico-Nazario, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>Lozano v. People</b>, 638 Phil. 582, 594 (2010) (Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <b>People v. Canlas</b>, 423 Phil. 665, 681 (2001) [Per J. Carpio, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Rollo</i>, p. 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> RTC records (Criminal Case No. 2017-0215-D), p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> 445 Phil. 407 (2003) [Per J. Panganiban, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 419.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>People v. Gonzales</b>, 393 Phil. 18, 26 (2000) [Per J. Pardo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Galan v. Vinarao</b>, 820 Phil. 257, 273 (2017) [Per J. Leonardo-De Castro, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>People v. Aquino</b>, 829 Phil. 477, 488 (2018) [Per J. Martires, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>People v. Amoto</b>, 197 Phil. 37, 44 (1982) [Per J. Fernandez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> RTC records (Criminal Case No. 2017-0215-D), p. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>People v. Bernaldez</b>, 355 Phil. 740, 757 (1998) [Per J. Davide, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>Dela Llana v. Biong</b>, 722 Phil. 743, 760 (2013) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 826 Phil. 32 (2018) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 897 Phil. 916 (2021) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 937.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>People v. Verceles</b>, 437 Phil. 323, 333-334 (2002) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>People v. Ignacio</b>, 382 Phil. 257, 259 (2000) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>People v. Aquino</b>, 829 Phil. 477, 492 (2018) [Per J. Martires, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>People v. Jugueta</b>, 783 Phil. 806, 852 (2016) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 853.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, p. 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> RTC records (Criminal Case No. 2017-0215-D), p. 94.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Yamauchi v. SuÃ±iga</b>, 830 Phil. 122, 130 (2019) [Per J. Martires, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>People v. Dela PeÃ±a</b>, 870 Phil. 742, 745 (2020) [Per J. Inting, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 858 Phil. 884 (2019) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 929.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

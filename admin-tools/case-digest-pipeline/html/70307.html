@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 265736 - GREGORY ISRAEL, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70307' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 265736, November 19, 2025 ]</H2>
+			<H3>GREGORY ISRAEL, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>CAGUIOA, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (Petition) under Rule 45 of the Rules of Court filed by petitioner Gregory Israel (Israel), assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated December 15, 2021 (CA Decision) and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated December 12, 2022 (CA Resolution) promulgated by the Special Eighteenth Division of the Court of Appeals, Cebu (CA) in CA-G.R. CEB-SP No. 14506. Through the assailed CA Decision and CA Resolution, the CA affirmed the Decision (RTC Decision) dated January 31, 2019 and Order dated May 16, 2019 rendered by Branch 1, Regional Trial Court, Tagbilaran City (RTC) in Criminal Case No. 21465.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> The RTC affirmed with modification the Amended Decision (MCTC Decision) of the Municipal Circuit Trial Court (MCTC) of Dauis-Panglao, Dauis, Bohol in Criminal Case No. P-3223 convicting Israel of Grave Threats under Article 282 of the Revised Penal Code.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center><b>Facts</b></center><br>According to the CA, the facts are as follows:<br><blockquote>Christine Helena Armanda Navez [(Navez)] and Olivier Edmund Denonville [(Denonville)], both Belgian nationals, are business partners engaged in tourism activities. They entrusted the construction of their building to fellow Belgian. Gregory Israel [(Israel)], who claimed to be an architect in Belgium and allowed to practice his profession in the Philippines. [Navez] and [Denonville] averred that there were many construction defects, which defects were confirmed by a civil engineer, Engr. Migelito Galendez. They requested [Israel] to correct the defects, but the latter refused to do so insisting that the building was constructed the way it is being done in the Philippines. Thus, they filed a case for damages against him. That, sometime March and April 2017. they confronted [Israel], but he would make threatening gestures â as if holding a gun and pulling the trigger and drawing a line across his neck with a hand. That, at around [9 a.m.] of 07 June 2017, on their way home from the airport and while in the area of Tawala, Panglao, Bohol, they saw [Israel] driving a motorcycle, with a backrider, ten (10) meters away from them. [Israel], again, made the threatening gestures. They reported the incident to the Panglao Police Station, and filed a complaint against [Israel] for Grave Threats, with the Office of Barangay Chairman of Tawala, Panglao, Bohol. That, no settlement was reached by them, hence, the case for Grave Threats. [Navez] testified that [Israel's] threatening gestures caused her sleepless nights, emotional agony, and untold miseries. That, she lived in constant fear as she was scared of [Israel] whom she heard from his former girlfriend was very dangerous. That, she believed he would really harm her.<br><br>. . . .<br><br>[Israel's] former girlfriend, Cinadia Depypere, was declared [a] hostile witness after she recanted her original testimony saying now that it was not true that [Israel] beat her while they were still living together.<br><br>[Israel] denied the charge against him for how could he when he was in Tagbilaran City during the time and not at the place he was supposed to have made those threatening gestures to [Navez] and [Denonville]. That, he went to Tagbilaran City to receive the summons from Sheriff Jovenal D. Baluma, of RTC, Br. 48, summons in the case filed against him by [Navez] and [Denonville]. That, travel time to Tagbilaran City from Panglao and vice-versa is 30 minutes if with a backrider, otherwise only 25 minutes. That, on the day he allegedly made the threatening gestures he was wearing a helmet. That, he received the summons from Sheriff Baluma at around 10 in the morning.<br><br>Sheriff Baluma testified that at around [8:45 a.m.] he received a text message from an unknown number asking for the exact location of RTC, Br. 48, which he gave. He learned that the person who asked was [Israel]. Around [9 a.m.], he received a text message from his officemate telling him someone was looking for him. That, he arrived at the court around [10 a.m.] in the morning. He talked with [Israel] for a few minutes before he served him a copy of the summons. When asked, he answered that it would take 30 minutes to travel from Tawala, Panglao to Tagbilaran by car; and that it was impossible for [Israel] to be present in Tawala, Panglao at around [9 a.m.] and then be present at the court in Tagbilaran City at around [10 a.m.].<br><br>[Israel's] former girlfriend who was declared a hostile witness executed a third affidavit and was presented as witness for the defense. She alleged that [Navez] and [Denonville] badmouthed [Israel]. That, it is not true [Israel] threatened [Navez] and [Denonville], on the contrary, it was they who wanted to harm [Israel]. That, the statements in her previous affidavit were dictated to her by [Navez].<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </blockquote>In summary, on or about 9:00 a.m. of June 7, 2017 shortly after private complainant, Navez "nearly ran into [Israel's] motorcycle,"<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Israel performed two (2) overt acts (the gestures): (i) pointing his fingers at Navez "as if pulling a trigger of a gun" and (ii) "further cross[ing] his fingers on his neck."<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Israel was then charged under the Information that reads:<br><blockquote>That on or about 7<sup>th</sup> day of June 2017, in the Municipality of Panglao, Province of Bohol, Philippines and within the jurisdiction of this Honorable Court, [Israel] with criminal intent to intimidate and threaten the victim, did then and there willfully, unlawfully, and feloniously confront [Navez], pointed his fingers at her as if pulling a trigger of a gun and further crossed his fingers on his neck, which actions or manner conveyed and demonstrated the said accused intention to threat (sic) or actually threatened the victim to be shot and beheaded, but without imposing a condition thereby creating in the mind of the said private offended party the belief that the threat to harm or injure his [or her] person will be carried to the damage and prejudice of the said offended party in the amount to be proved during the trial.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </blockquote><center><b>Ruling of the MCTC</b></center><br>The MCTC found Israel guilty beyond reasonable doubt of Grave Threats. The dispositive portion of the MCTC's Decision reads:<br><blockquote>WHEREFORE, in the light of the foregoing premises, this Court finds [Israel] guilty beyond reasonable doubt of GRAVE THREATS under Article 282, paragraph 2, of the Revised Penal Code, as amended, for threatening to kill [Navez], and he is hereby penalized with imprisonment for a period of two months and one-day to four months of<i> arresto mayor</i> in its medium period and fine in the amount of five hundred pesos [(PHP 500.00)]. In addition, he is hereby ordered to pay moral damages of [PHP 20,000.00] and temperate damages in the amount of [PHP 40,000.00], with interest of 6% per annum on such awards reckoned from the finality of this decision until full payment, and pay the costs of suit.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </blockquote>Israel appealed to the RTC.<br><br><center><b>Ruling of the RTC</b></center><br>The RTC affirmed the MCTC's Decision, but modified the award of damages as follows:<br><blockquote>WHEREFORE, the instant appeal is DENIED for lack of merit. The Amended Decision dated August 22, 2018 of the Municipal Circuit Trial Court of Dauis-Panglao is AFFIRMED with MODIFICATION as to the penalty imposed. [Israel] is found guilty beyond reasonable doubt of the crime of Grave Threats under Article 282, par. 2 of the Revised Penal Code and sentenced him to suffer the penalty of imprisonment of two (2) months and to pay a fine of Two Hundred Pesos ([PHP 200.00)]. It is also ordered that the award of temperate damages is DELETED for lack of basis.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </blockquote>Israel's motion for reconsideration was denied by the RTC in an Order dated May 16, 2019.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Undaunted, Israel appealed to the CA.<br><br><center><b>Ruling of the CA</b></center><br>The CA denied Israel's appeal and affirmed the RTC Decision<i> in toto</i>. The dispositive portion of the CA Decision dated December 15, 2021 reads:<br><blockquote><b>WHEREFORE</b>, in light of the foregoing premises, the instant petition is<b> DENIED</b>. The Decision dated 31 January 2019, of the Regional Trial Court, Branch 1 of Tagbilaran City, in Crim. Case No. 21465, and its Order dated 16 May 2019, denying reconsideration, are<b> AFFIRMED</b>.<br><br>No costs.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></blockquote>The CA affirmed the factual findings of the MCTC and RTC (i.e., that Israel performed the gestures in the presence Navez on June 7, 2017) and found no merit in Israel's defenses of alibi and denial.<br><br>The CA also considered Israel's gestures as Grave Threats under Article 282 of the Revised Penal Code. The CA ruled that Israel's gestures "could only be interpreted as threat of future bodily harm; and which threats were not subject to any condition."<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The CA considered Navez as "the only competent person who can attest whether such act[s] [i.e., the gestures] can be considered as threatening, as [they were] directed at her."<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>In denying Israel's appeal, the CA agreed with the RTC that the gestures could only be interpreted as threats.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> The CA did not believe: (i) Israel's alibi that he was in Tagbilaran City and not in Tawala, Panglao Bohol at the time he allegedly committed the crime, and (ii) his assertion that he was not the one who made the gestures.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Hence, the instant Petition.<br><br>On April 22, 2024, respondent filed its Comment.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>The prosecution asserts that Israel's two (2) overt acts were grave threats to (i) shoot and (ii) decapitate Navez. In his Petition, Israel only raises the legal question of whether his two (2) overt acts are contemplated as Grave Threats under Article 282 of the Revised Penal Code. Precisely, Israel argues <i>first</i> that Article 282 of the Revised Penal Code does not contemplate pure non-verbal gestures.<i> Second</i>, assuming<i> arguendo</i> that Article 282 contemplates non-verbal gestures, the<i> mens rea</i> is absent since the gestures were expressions of displeasure of the near collision between him and Navez on June 7, 2017.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> In other words, the circumstances show that Israel had no criminal intent when he performed the gestures.<br><br>Israel prays that the Court reverse and set aside his conviction of Grave Threats and to render a new decision acquitting him.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br><center><b>The Court's Ruling</b></center><br>After a careful review of the record and submissions of the parties, the Court grants the Petition and acquits Israel.<br><br>Firstly, it should be noted that in the absence of facts or circumstances of weight and substance that would affect the result of the case, appellate courts will not overturn the factual findings of the trial court.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Thus, when the case pivots on the issue of the credibility of the witnesses, the findings of the trial courts necessarily carry great weight and respect as they are afforded the unique opportunity to ascertain the demeanor and sincerity of witnesses during trial.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Here, Israel has not offered any cogent ground for the Court to review or modify the factual findings of the CA and the lower courts. Accordingly, and consistent with the nature of a Petition for Review on <i>Certiorari</i> under Rule 45, the only issue to be resolved here is a legal one: i.e., whether Israel's gestures of pointing his fingers at Navez "as if pulling a trigger of a gun" and "further crossing] his fingers on his neck" may be considered Grave Threats under Article 282 of the Revised Penal Code, as amended.<br><br>Grave Threats is defined and penalized under Article 282 of the Revised Penal Code as follows:<br><blockquote>Article 282.<i> Grave Threats</i>. â Any person<b> who shall threaten </b>another with the infliction upon the person, honor or property of the latter or of his [or her] family of any wrong amounting to a crime, shall suffer:<br><blockquote><ol><li>The penalty next lower in degree than that prescribed by law for the crime he [or she] threatened to commit, if the offender shall have made the threat demanding money or imposing any other condition, even though not unlawful, and said offender shall have attained his [or her] purpose. If the offender shall not have attained his [or her] purpose, the penalty lower by two degrees shall be imposed.<br><br>If the threat be made in writing or through a middleman, the penalty shall be imposed in its maximum period.<br><br></li><li>The penalty of<i> arresto mayor</i> and a fine not exceeding 500 pesos, if the threat shall not have been made subject to a condition. (Emphasis supplied)</li></ol></blockquote> </blockquote>Petitioner asks the Court to review the origin of the foregoing provision from the 1870 Spanish Penal Code.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Petitioner asserts that grave threats do not contemplate spontaneous gestures or utterances made in the heat of anger. Stated differently, the<i> mens rea</i> in the crime of grave threats entails<i> persistence </i>on the part of the accused. In this connection, prior to Article 282 of the Revised Penal Code, "grave" threats were punished under Article 494 of the Spanish Penal Code, which reads:<br><blockquote>ARTICLE 494. Any person who shall threaten another with the infliction upon the person, honor, or property of the latter or his [or her] family of any wrong amounting to a crime shall suffer:<br><blockquote><ol><li>The penalty next lower in degree than that prescribed by law for the threatened crime, if the threat shall have been made for the purpose of extorting money or imposing any other condition, even though not unlawful, and the offender shall have gained his [or her] purpose; if the defendant shall not have attained his [or her] purpose, the penalty shall be that lower by two degrees.<br><br>The penalty shall be imposed in its maximum degree if the threats be made in writing or by means of an intermediary.<br><br></li><li>The penalty of<i> arresto mayor</i> and a fine of not less than three hundred and twenty-five and not more than three thousand two hundred and fifty<i> pesetas</i>, if the threat shall not have been made subject to a condition. </li></ol></blockquote></blockquote>Other forms of threats were also punished under the Spanish Penal Code and carried over to the Revised Penal Code as follows:<br><br><table width="100%" border="1" cellpadding="3" cellspacing="0"> <tbody><tr> <td width="50%" valign="top"> <div align="CENTER"><b>1870 Spanish Penal Code</b> </div></td> <td width="50%" valign="top"> <div align="CENTER"><b>Revised Penal Code</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"> Article 589. The penalties of <i>arresto</i> for not less than one and not more than five days or a fine of not less than fifteen and not more than one hundred and twenty-five <i> pesetas </i>shall be imposed upon:<br><br></div><div align="JUSTIFY">. . . .</div><div align="JUSTIFY"><br>2. Any person who shall threaten another with a weapon, or draw such weapon in a quarrel, unless it be in lawful self-defense, provided that the offense shall not fall within some other provision of this code.&nbsp; </div></td> <td valign="top"> <div align="JUSTIFY">Article 285. Other Light Threats. â The penalty of <i> arresto menor</i> in its minimum period or a fine not exceeding 200 pesos shall be imposed upon:&nbsp; <br> <br> 1. Any person who, without being included in the provisions of the next preceding article, shall threaten another with a weapon, or draw such weapon in a quarrel, unless it be in lawful self-defense. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">3. Any person who, in the heat of rage, shall orally threaten to do another some harm which, if accomplished, would constitute a felony, and who. by subsequent acts, shows that he [or she] persists in the idea signified by his [or her] t lire at, provided that the offense shall not fall within any of the provisions of Book II of this code. </div></td> <td valign="top"> <div align="JUSTIFY">2. Any person who, in the heat of anger, shall orally threaten another with some harm not constituting a crime, and who by subsequent acts shows that he [or she] did not persist in the idea involved in his [or her] threat, provided that the circumstances of the offense shall not bring it within the provisions of article 282 of this Code. </div></td> </tr> <tr> <td rowspan="2" valign="top"> <div align="JUSTIFY">4. Any person who shall orally threaten to do another any harm not constituting a felony. </div></td> <td valign="top"> <div align="JUSTIFY">3. Any person who shall orally threaten to do another any harm not constituting a felony. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Article 283. Light Threats. â A threat to commit a wrong not constituting a crime, made in the manner expressed in subdivision 1 of the next preceding article, shall be punished by <i> arresto mayor</i>. </div></td> </tr> </tbody></table><br>The Court summarized the various crimes of threats under the new regime provided in the Revised Penal Code as follows: "In grave threats, the wrong threatened<b> amounts to a crime</b> which may or may not be accompanied by a condition. In light threats, the wrong threatened<b> does not amount to a crime</b> but is always accompanied by a condition. In other light threats, the wrong threatened does not amount to a crime and there is no condition."<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Like most other crimes, a conviction for grave threats requires the presence of an<i> actus reus</i> and<i> mens rea</i>. In<i> Garma v. People</i><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (<i>Garma</i>), the Court explained the significance of the union of the<i> actus reus</i> and<i> mens rea</i> as follows:<br><blockquote>Like any other crime defined by The Revised Penal Code, grave threats must have an<i> actus reus</i> and<i> mens rea</i>. The<i> actus reus</i> is the actual speaking or uttering of the threats of, say, death or serious bodily harm. The <i>mens rea</i> is that the accused intends that the recipient of their words to feel intimidated by their words or that the accused intended the words to be taken seriously. The words must be meant by the accused to convey a threat; in other words, the utterance is meant to intimidate or to be taken seriously. It is not necessary that the recipient [himself or herself] actually feels intimidated or actually takes the words seriously. To repeat, all that needs to be proven is that they were intended by the accused to have that effect.<br><br>The test of<i> mens rea</i> is whether a reasonable person would consider the utterance as threats by regarding the utterance objectively and reviewing it in light of the circumstances in which they were uttered, the manner in which they were spoken, the person to whom they were addressed, the relationship between the accused and the complainant, and the recipient's reaction to the accused's words. All these and other factual details form part of the context and circumstances surrounding the crime. But whether the recipient of a threat takes the threat seriously is not, in and of itself, an element of the<i> mens rea</i> of the accused, though it is relevant to the extent that it assists in understanding the accused's intention in speaking the words at issue.<br><br><i>Caluag v. People</i> ruled that in grave threats, the wrong threatened which amounts to a crime may or may not be accompanied by a condition. Hence, under Article 282, there are two (2) forms of committing grave threats: first, when the infliction of the threat upon the person, honor or property, or the family of a person is coupled with condition; and second, when the alleged threatening act or remark is not subject to a condition.<br><br>Here, petitioner was charged with grave threats without a condition, thus, falling under paragraph 2, Article 282 of The Revised Penal Code. To sustain a conviction therefor, the following elements must be present,<i> viz.</i>:<br><br>&nbsp; &nbsp; &nbsp;â¢ <i>actus reus</i><br><br>(1) the offender threatened another person with the infliction upon their person, honor or property, or upon that of the latter's family, of any wrong; (2) such wrong amounted to a crime; and (3) the threat was not subject to a condition.<br><br>&nbsp; &nbsp; &nbsp;â¢ <i>mens rea</i><br><br>The accused intended the utterance to intimidate the complainant or be taken seriously by the latter; whether the complainant was actually intimidated or took the threat seriously is not part of the<i> mens rea</i>.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> (Citations omitted) </blockquote><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>Non-verbal gestures may be considered Grave Threats</i></b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Israel asserts that pure non-verbal gestures are not covered by Article 282 of the Revised Penal Code. Citing<i> Aguilar v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Garma</i>,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>People v. Bueza</i>,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Bating v. Office of the Ombudsman</i>,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Escollano v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Paera v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Caluag v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Alarilla v. Sandiganbayan</i>,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Borromeo v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Reyes v. People</i><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> (<i>Reyes</i>), <i>People v. Mission</i><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> (<i>Mission</i>), <i>U.S. v. Paguirigan</i><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (<i>Paguirigan</i>), <i>U.S. v. Algurra</i>,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> and<i> U.S. v. Sevilla</i>,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Israel asserts that "a pattern becomes apparent" that non-verbal gestures "were merely considered for the purpose of determining whether [statements] were made with the deliberate intent to threaten an individual."<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Thus, Israel advances the argument that non-verbal gestures alone cannot be considered threats under Article 282.<br><br>The Court does not agree.<br><br><i>First</i>, Article 282 does not distinguish between threats performed through verbal and non-verbal gestures, and neither should the Court.<i> Ubi lex non distinguit, nec nos distinguere debemus</i>. Article 282 punishes "[a]ny person<i> who shall threaten</i> another with the infliction upon the person, honor or property of the latter or of his [or her] family of any wrong amounting to a crime." The second paragraph also qualifies the threat if the same was made in writing, to wit: "If the threat be made in writing or through a middleman. . .". At its core, therefore, what Article 282 punishes is the<i> communication</i> of a threat made with the intention of intimidating its recipient. Evidently, there is nothing in Article 282 that distinguishes between verbal and non-verbal threats. While the second paragraph qualifies the mode of performing verbal threats (i.e., those made in writing and those made orally), it is no argument for the exclusion of non-verbal gestures as "threats."<br><br><i>Second</i>, while the cases cited by Israel all pertain to an oral threat allegedly performed by the accused, this cannot be the premise to exclude non-verbal gestures from the scope of Article 282. Threats may be verbal or nonÂ­verbal, whereas verbal threats may be performed orally or in writing. An oral threat is, therefore, a species under the genus of verbal threats as discussed above, which occupy a category distinct from non-verbal threats. For example, in<i> Mission</i>, which was also quoted by Israel, the Court declared in relevant part:<br><blockquote>We believe that when the defendant grasped the handle of his pistol, his purpose was to dissuade the furious and nervous Julian from attacking him with the scythe, a deadly weapon, but not to shoot him nor even to threaten him wantonly, only to protect himself. He, therefore, acted in perfect self-defense.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </blockquote>The non-verbal gesture under consideration by the Court in<i> Mission</i> was the accused's "grasp[ing] of the handle of his pistol." If non-verbal gestures were indeed excluded from the concept of "threats," the Court would have immediately acquitted the accused. However, the Court's analysis impliedly acknowledged that non-verbal gestures could qualify as "threats," but because <i>mens rea</i> is necessary for conviction, the Court needed to first ascertain the accused's intentions. Hence, the Court acquitted the accused<i> not</i> because nonÂ­verbal gestures could not be considered threats, but because the accused's intent was not criminal in character. This reasoning is consistent with other provisions in the Revised Penal Code. Article 285[1], for example, provides that the nonÂ­verbal gesture of "draw[ing] [a] weapon in a quarrel" is considered a threat.<br><br><i>Third</i>, Israel's reliance on the 1870 Spanish Penal Code is misplaced. Article 494 of the 1870 Spanish Penal Code, like Article 282 of the Revised Penal Code, does not make any distinction between verbal and non-verbal gestures when it punishes any person "who shall threaten another." Thus, Article 282 of the Revised Penal Code, like Article 494 of the Spanish Penal Code, embraces the entire range of human interactions whereby a threat is communicated and only qualifies written threats and those made through a middleman with the maximum penalty.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>Threats without "persistence" are not considered Grave Threats under Article 282</i></b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Israel argues that the prosecution failed to prove the existence of the <i>mens rea</i> of the crime charged. He essentially asserts that the gestures were performed in the heat of the moment during a near collision involving his motorcycle and Navez's car and that there is no evidence of Israel persisting in his determination to carry the threat into effect. Consequently, the<i> mens rea</i> of the crime was not proven beyond a reasonable doubt.<br><br>On this point, the Court agrees with Israel.<br><br>It is settled that grave threats must be serious in such a way that it is deliberate, and that the offender "persists" in the idea involved in the threats.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> The element of "persistence" as a manifestation of the<i> mens rea</i> was likewise adopted by the Court in<i> Reyes</i>, to wit:<br><blockquote>The demonstration led by petitioner against Agustin Hallare in front of the main gate of the naval station; the fact that placards with threatening statements were carried by the demonstrators; their persistence in trailing Hallare in a motorcade up to his residence; and the demonstration conducted in front thereof, culminating in repeated threats flung by petitioner in a loud voice, give rise to only one conclusion; that the threats were made "with the deliberate purpose of creating in the mind of the person threatened the belief that the threat would be carried into effect." Indeed, Hallare became so apprehensive of his safety that he sought the protection of Col. Monzon, who had to escort him home, wherein he stayed while the demonstration was going on.<b> It cannot be denied that the threats were made deliberately and not merely in a temporary fit of anger, motivated as they were by the dismissal of petitioner one month before the incident.</b> We, therefore, hold that the appellate court was correct in upholding petitioner's conviction for the offense of grave threats.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Citation omitted, emphasis supplied) </blockquote>In<i> Paguirigan</i>, the Court emphasized that the nature of Grave Threats pertains "precisely [to] the persistence in a threat that gives it the aggravating character so as to amount to a crime," to wit:<br><blockquote>The offense was not a serious one, and there is nothing in the evidence to show that the defendant ever really contemplated carrying his threat into effect. The men were engaged in transplanting rice upon land which was claimed by the defendant. While they were at work the defendant appeared, and flourishing a cane in an excited manner, ordered them to stop their work and leave, at the time threatening to kill them unless they obeyed. They obeyed the order, and the incident was closed. Upon these facts the defendant should have been convicted under the third subdivision of article 589, instead of article 494 of the Penal Code.<b> The threats referred to in article 494 consist in formally threatening a private person with some injury to himself or his family which would amount to a crime.</b> A threat made in jest or in the heat of anger is a misdemeanor only under article 589. Subdivision 3 of article 589 provides that "Those who shall threaten another, by words and in the heat of anger, with an injury that would constitute a crime, and who by their subsequent actions show that they persisted in the intention which they gave utterance to in their threat; provided that, in view of the circumstances of the deed, it should not be included in Book II of this code." shall be punished with the penalty of from one to five days of arrest, or a fine of from 15 to 125 pesetas. The fact that the threat was made in the heat of anger, and that the subsequent actions of the party show that he did not seriously intend to carry the threat into execution, reduce the offense from a crime to a misdemeanor. It is true that the code uses the words "and who by their subsequent actions showed that they persisted in the intention which they gave utterance to in their threat," but a literal adherence to this language would produce the absurd result of making persistence in an illegal purpose operate in mitigation of the offense. The power of a court to supply or omit words from a statute in order to prevent an absurd result which the legislature will not be supposed to have intended, is well established. (State vs. Bates, 96 Minn., 110.) It is evident that words of negation should be inserted between the words "they" and "persisted," thus making the provision read "and who by their subsequent actions showed that they had not persisted in the intention which they gave utterance to in their threat." In commenting upon this section, Viada, volume 3, page 310, says:<br><blockquote>"The article says [. . .] 'that did persist.' This is undoubtedly a mistake, because<b> it is precisely the persistence in a threat that gives it the aggravating character so as to amount to a crime</b>. However, this mistake is not found among the many that were corrected by the decree of January 1, 1870. But the strict moral and juridical sense should supply this omission." </blockquote>That this is understood to be the true meaning of the provision of the code appears from the language used in United States vs. Estrada (10 Phil. Rep., 583). The defendant had taken offense at some words used by one Delgado, and threatened to kill him. While Estrada was searching for a revolver, Delgado concealed himself. On the following day Estrada called at Delgado's house and stated that the threat had been uttered without premeditation, and that it was not seriously made. The court commented upon the fact that it appeared that the defendant had not persisted in carrying out the threat, and held that the offense had only the characteristics of a misdemeanor, and was punishable under article 589, instead of article 494. of the Penal Code. These articles have been construed by this court in several other cases. In United States vs. Sevilla (1 Phil Rep., 143) it appeared that the defendant while beating certain parties said that he would kill them if they did not return his jewels.<b> It was held that the threats dealt with under article 494 are those made with the deliberate purpose of creating in the mind of the person threatened the belief that the threat will be carried into effect, and that under the circumstances of the case the defendant was punishable under article 589, instead of article 494. So in United States vs. Simeon (3 Phil. Rep., 388), a person who raised a bolo as if to strike or stab a night watchman, who thereupon ran away; was held guilty under article 589 of threatening another with weapons.</b><br><br>In United States vs. CastaÃ±ares (8 Phil. Rep., 730), the defendant having taken offense at some remark, drew a revolver and threatened to kill one Yap Gea, who thereupon fled. The trial court held the defendant guilty of<i> amenaza</i> under article 494, but this court was of the opinion that the defendant was guilty only of the offense declared by section 2 of article 589 of the Penal Code. In United States vs. Algurra (9 Phil. Rep., 644),<b> it was held that threats made against another, and in the heat of anger, constituted a misdemeanor only under section 3 of article 589 of the Penal Code. The court there remarked that "it has not been shown [. . .] that he threatened them in earnest with the apparent intent to carry the threat into effect."</b><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> (Emphasis supplied, citations omitted) </blockquote>Consequently, the Court in<i> Paguirigan</i> declared that Grave Threats or <i>amenaza</i> under Article 494 of the Spanish Penal Code (now Article 282 of the Revised Penal Code) pertained to "threats. . . made with the deliberate purpose of creating in the mind of the person who was threatened the belief that the threat will be carried into effect,"<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> but "threats made against another, and in the heat of anger, constituted a misdemeanor only under section 3 of article 589..."<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Hence, under Article 494 of the Spanish Penal Code, a grave threat or <i>amenaza</i> that lacked this element of "persistence" (i.e., one made in jest or in the heat of anger) was downgraded to a misdemeanor (now Other Light Threats under Article 285 of the Revised Penal Code).<br><br>However, in view of the amendment of Article 589 of the Spanish Penal Code, the distinction between threats with "persistence" and those made in jest or in the heat of anger has lost some of its context. Under the Spanish Penal Code, both Article 494 and 589[3] contemplated threats of wrongs that constitute crimes. Under the Revised Penal Code, Article 285 only covers threats of wrongs that<i> do not</i> constitute crimes.<br><br>In any event, and consistent with<i> Garma</i>, the element of "persistence" is necessary and material to determine the<i> mens rea</i> for the crime of<i> amenaza</i> or Grave Threats under Article 282 of the Revised Penal Code, which is substantially the same as Article 494 of the Spanish Penal Code. Without proof that the offender persisted in the idea of the threat, the<i> mens rea</i> for Grave Threats under Article 282 is lacking. Here, the Court finds that the CA erred in finding that the prosecution proved beyond reasonable doubt that Israel persisted in the idea involved in the threats, that is, the gestures of (1) shooting Navez and (2) beheading Navez. Since Israel's overt acts are purely non-verbal gestures and, consequently, subject to many interpretations, context is critical.<br><br>The Court finds that the CA and lower courts precisely failed to fully appreciate the context of Israel's gestures, i.e., the events that transpired before, during and after the gestures were performed. It is not disputed that on the day Israel performed the gestures he was on his way to the RTC of Tagbilaran to receive summons in relation to a civil case between him and Navez. En route to the RTC, Israel and Navez nearly figured in a vehicular collision, and this is where Israel performed the gestures. Afterwards, he went on his way to the RTC-Tagbilaran to receive the summons as what he originally intended to do. Indeed, there is no evidence of Israel's "persistence" in carrying out the threats made by his gestures.<br><br>The reactions of Navez are also telling. Citing portions of Navez's direct and cross-examination, Israel asserts that it was doubtful whether the gestures indeed created fear in the mind of Navez.<br><br>Israel's point is well taken. Notably, Navez admitted that her fears were largely based on rumors by unidentified persons, and not from Israel's gestures:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">You mentioned that you got scared when [Israel] pointed his fingers at you as if pointing a gun at you, what else did he do? </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">There were <b> <u>rumors</u></b> that he will harm me and my children so, I went to the plane to go to Belgium because we were so afraid.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table></blockquote>In all, the Court finds that the prosecution failed to prove beyond reasonable doubt the<i> mens rea</i> in relation to Grave Threats under Article 282 of the Revised Penal Code.<br><br><b>ACCORDINGLY</b>, the Petition for Review on<i> Certiorari</i> is hereby <b>GRANTED</b>. The Decision dated December 15, 2021 and Resolution dated December 12, 2022 of the Court of Appeals in CA-G.R. CEB-SP No. 14506 are hereby<b> REVERSED</b> and<b> SET ASIDE</b>. Accordingly, petitioner Gregory Israel is<b> ACQUITTED</b> of the crime charged. Let entry of judgment be issued immediately.<br><br><b>SO ORDERED. </b><br><br><i>Inting, Gaerlan, Dimaampao,</i> and <i>Singh, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 47-59. Penned by Associate Justice Gabriel T. Ingles with Associate Justices Roberto P. Quiroz and Nancy C. Rivas-Palmones concurring.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 26-29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 47, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 48-49, CA Decision, pp. 2-3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 5-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 5-6, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 50, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 50-51, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 51, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 58, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 28, CA Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 55, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 56-57, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 68-80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 12-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>People v. Gerola</b>, 813 Phil. 1055 (2017) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <b>People v. Aguilar</b>, 565 Phil. 233 (2007) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Rollo</i>, p. 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <b>Caluag v. People</b>, 599 Phil. 717 (2009) [Per J. Quisumbing, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> 921 Phil. 217 (2022) [Per J. Lazaro-Javier, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 224-225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup><b> </b>G.R. No. 260974, October 19, 2022 [Per First Division] (Unsigned Resolution).<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Supra</i> note 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> 890 Phil. 789 (2020) [Per J. Hernando, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> G.R. Nos. 199800-199801, January 22, 2018 [Per Second Division] (Unsigned Resolution).<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 845 Phil. 129 Phil. (2018) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> 664 Phil. 630 (2011) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Supra</i> note 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 393 Phil. 143 (2000) [Per J. Gonzaga-Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> 216 Phil. 291 (1984) [Per J. De La Fuente, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>G.R. Nos. L-21528 &amp; 21529</b>, March 28, 1969, 27 SCRA 686 [Per J. Makalintal, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 87 Phil. 641 (1950) [Per J. Jugo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> 14 Phil. 450 (1909) [Per J. Elliot, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> 9 Phil. 643 (1908) [Per J. Torres, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 1 Phil. 143 (1902) [Per J. Willard, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>People v. Mission</b>, <i>supra</i> note 37 at 645.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Garma v. People</b>, <i>supra</i> note 25, citing <b>Reyes v. People</b>, <i>supra</i> note 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Reyes v. People</b>, <i>id</i>. at 692-693.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>U.S. v. Paguirigan</b>, <i>supra</i> note 38, at 451-453.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>. at 453.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Rollo</i>, p. 15.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

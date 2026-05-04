@@ -52,6 +52,15 @@ function ActionButton({ onClick, disabled, variant = 'default', icon: Icon, chil
 
 // Ordered statute labels for the badge row
 const STATUTE_ORDER = ['RPC', 'CIV', 'LAB', 'CONST', 'FAM', 'ROC', 'RCC'];
+const STATUTE_LABELS = {
+  RPC:   'Revised Penal Code',
+  CIV:   'Civil Code',
+  LAB:   'Labor Code',
+  CONST: 'Constitution',
+  FAM:   'Family Code',
+  ROC:   'Rules of Court',
+  RCC:   'Revised Corporation Code',
+};
 const STATUTE_COLORS = {
   RPC:   'bg-red-100 text-red-700 dark:bg-red-950/40 dark:text-red-400',
   CIV:   'bg-blue-100 text-blue-700 dark:bg-blue-950/40 dark:text-blue-400',
@@ -60,6 +69,15 @@ const STATUTE_COLORS = {
   FAM:   'bg-pink-100 text-pink-700 dark:bg-pink-950/40 dark:text-pink-400',
   ROC:   'bg-emerald-100 text-emerald-700 dark:bg-emerald-950/40 dark:text-emerald-400',
   RCC:   'bg-cyan-100 text-cyan-700 dark:bg-cyan-950/40 dark:text-cyan-400',
+};
+const STATUTE_DOT_COLORS = {
+  RPC:   'bg-red-400',
+  CIV:   'bg-blue-400',
+  LAB:   'bg-amber-400',
+  CONST: 'bg-violet-400',
+  FAM:   'bg-pink-400',
+  ROC:   'bg-emerald-400',
+  RCC:   'bg-cyan-400',
 };
 
 export default function PipelineTab() {
@@ -851,29 +869,78 @@ export default function PipelineTab() {
                 </p>
               </div>
 
-              {/* Per-statute badge row */}
-              {stats.links_by_statute && Object.keys(stats.links_by_statute).length > 0 && (
-                <div>
-                  <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-zinc-500">
-                    Links by Codal
-                  </p>
-                  <div className="flex flex-wrap gap-2">
-                    {STATUTE_ORDER.map((code) => {
-                      const n = stats.links_by_statute[code];
-                      if (n == null) return null;
-                      return (
-                        <span
-                          key={code}
-                          className={`inline-flex items-center gap-1 rounded-full px-2.5 py-0.5 text-[11px] font-semibold ${STATUTE_COLORS[code] ?? 'bg-gray-100 text-gray-600'}`}
-                        >
-                          {code}
-                          <span className="tabular-nums opacity-80">{n.toLocaleString()}</span>
-                        </span>
-                      );
-                    })}
-                  </div>
+              {/* Per-codal breakdown table */}
+              <div>
+                <p className="mb-2 text-[10px] font-semibold uppercase tracking-widest text-gray-400 dark:text-zinc-500">
+                  Cases Linked per Codal
+                </p>
+                <div className="overflow-hidden rounded-lg border border-gray-100 dark:border-zinc-800">
+                  <table className="w-full text-[12px]">
+                    <thead>
+                      <tr className="border-b border-gray-100 bg-gray-50 dark:border-zinc-800 dark:bg-zinc-800/50">
+                        <th className="px-3 py-2 text-left font-semibold text-gray-500 dark:text-zinc-400">Codal</th>
+                        <th className="px-3 py-2 text-right font-semibold text-gray-500 dark:text-zinc-400">Linked Cases</th>
+                        <th className="px-3 py-2 text-right font-semibold text-gray-500 dark:text-zinc-400">Total Links</th>
+                        <th className="px-3 py-2 text-right font-semibold text-gray-500 dark:text-zinc-400">Avg Links/Case</th>
+                        <th className="px-3 py-2 pr-4 text-right font-semibold text-gray-500 dark:text-zinc-400">% of Linked</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {STATUTE_ORDER.map((code, idx) => {
+                        const cases = stats.linked_cases_by_statute?.[code] ?? 0;
+                        const links = stats.links_by_statute?.[code] ?? 0;
+                        const avg   = cases > 0 ? (links / cases).toFixed(1) : '—';
+                        const pct   = stats.linked_cases > 0
+                          ? ((cases / stats.linked_cases) * 100).toFixed(1)
+                          : '0.0';
+                        const barW  = stats.linked_cases > 0
+                          ? Math.round((cases / stats.linked_cases) * 100)
+                          : 0;
+                        return (
+                          <tr
+                            key={code}
+                            className={`border-b border-gray-50 last:border-0 dark:border-zinc-800/60 ${cases === 0 ? 'opacity-40' : ''}`}
+                          >
+                            <td className="px-3 py-2.5">
+                              <div className="flex items-center gap-2">
+                                <span className={`h-2 w-2 flex-shrink-0 rounded-full ${STATUTE_DOT_COLORS[code] ?? 'bg-gray-300'}`} />
+                                <span className={`rounded-full px-2 py-0.5 text-[10px] font-bold ${STATUTE_COLORS[code] ?? 'bg-gray-100 text-gray-600'}`}>
+                                  {code}
+                                </span>
+                                <span className="text-gray-500 dark:text-zinc-400">
+                                  {STATUTE_LABELS[code]}
+                                </span>
+                              </div>
+                            </td>
+                            <td className="px-3 py-2.5 text-right font-semibold tabular-nums text-gray-800 dark:text-zinc-200">
+                              {cases > 0 ? cases.toLocaleString() : '—'}
+                            </td>
+                            <td className="px-3 py-2.5 text-right tabular-nums text-gray-600 dark:text-zinc-400">
+                              {links > 0 ? links.toLocaleString() : '—'}
+                            </td>
+                            <td className="px-3 py-2.5 text-right tabular-nums text-gray-500 dark:text-zinc-500">
+                              {avg}
+                            </td>
+                            <td className="px-3 py-2.5 pr-4 text-right">
+                              <div className="flex items-center justify-end gap-2">
+                                <div className="h-1.5 w-16 overflow-hidden rounded-full bg-gray-100 dark:bg-zinc-800">
+                                  <div
+                                    className={`h-full rounded-full ${STATUTE_DOT_COLORS[code] ?? 'bg-gray-300'}`}
+                                    style={{ width: `${barW}%` }}
+                                  />
+                                </div>
+                                <span className="w-9 text-right tabular-nums text-gray-500 dark:text-zinc-500">
+                                  {pct}%
+                                </span>
+                              </div>
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
-              )}
+              </div>
             </div>
           )}
         </>

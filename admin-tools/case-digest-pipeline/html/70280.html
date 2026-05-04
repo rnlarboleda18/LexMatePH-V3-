@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. Nos. 233924-25 and 236822 - DE LA SALLE LIPA, INC., PETITIONER, VS. COMMISSIONER OF INTERNAL REVENUE, RESPONDENT.[G.R. No. 236822]COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. DE LA SALLE LIPA, INC., RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70280' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. Nos. 233924-25 and 236822, December 01, 2025 ]</H2>
+			<H3>DE LA SALLE LIPA, INC., PETITIONER, VS. COMMISSIONER OF INTERNAL REVENUE, RESPONDENT.<br><br>[G.R. No. 236822]<br><br>COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. DE LA SALLE LIPA, INC., RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>CAGUIOA, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court are the consolidated Petitions for Review on <i>Certiorari</i> (Petitions) filed by De La Salle Lipa, Inc. (DLSLI), in <b>G.R. Nos. 233924-25</b>,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> and the Commissioner of Internal Revenue (CIR), in <b>G.R. No. 236822</b>,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> both assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 17, 2017 (assailed Decision) and in G.R. No. 236822, the Resolution<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated January 4, 2018 (assailed Resolution) of the Court of Tax Appeals <i>En Banc</i> (CTA EB) in CTA EB No. 1424 and CTA EB No. 1430.<br><br>In the assailed Decision, the CTA EB affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated August 24, 2015 of the CTA Third Division in CTA Case No. 8363, which denied the petition filed by DLSLI, cancelled the compromise penalty in the amount of PHP 90,000.00, and directed DLSLI to pay the amount of PHP 6,966,280.73, inclusive of the 25% surcharge imposed under Section 248(A)(3) of the National Internal Revenue Code of 1997, as amended (1997 Tax Code).<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> In the assailed Resolution, the CTA EB denied the motion for reconsideration filed by the CIR.<br><br>In the present consolidated Petitions, the CIR prays that DLSLI be directed to pay the deficiency income tax in the amount of PHP 12,991,018.87 and value-added tax (VAT) in the amount of PHP 4,793,741.51 plus the corresponding surcharges and interest under Sections 248 and 249 of the 1997 Tax Code.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> On the other hand, DLSLI prays that the CIR be ordered to immediately refund the amount of PHP 32,737,917.66.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br><center><b><i>Facts</i></b></center><br>DLSLI is a non-stock, non-profit domestic educational institution and corporation, with principal office located at J.P. Laurel Highway, Barangay Mataas na Lupa, Lipa City.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On April 5, 2006, the Office of the Regional Director, Revenue Region (RR) No. 9, San Pablo City issued Letter of Authority (LOA) No. 2001-00029330, authorizing Revenue Officer Ruby Cacdac and Group Supervisor Thelma Hernandez of the Revenue District Office No. 59 (RDO No. 59) â Lipa City, to examine the books of accounts and other accounting records of DLSLI for all internal revenue taxes for the period June 1, 2004 to May 31, 2005.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>On November 7, 2006, a Preliminary Assessment Notice (PAN) was issued against DLSLI, informing the latter of its unpaid internal revenue tax liabilities in the amount of PHP 17,201,103.67, inclusive of penalties, covering the period June 1, 2004 to May 31, 2005.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> The unpaid internal revenue taxes were based on: (1) the PHP 14,660,000.00 conditional donation received by DLSLI from Vintage Food Service, Inc. (VFSI), which was the subject of a Contract<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated November 11, 2004, effective for 10 years; (2) the PHP 9,500,726.79 rental income received by DLSLI; and (3) DLSLI's failure to withhold 2% contractor's tax from contractors it hired for the construction of its buildings, purchase of school uniforms, and landscaping materials.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>On November 27, 2006, DLSLI wrote to RDO No. 59 requesting a conference and submitted the following documents: (1) contract with VFSI; (2) request for increase in prices from VFSI; (3) sample copy of minutes of canteen committee meeting; (4) BIR Form No. 2000 for the mortgage; and (5) Certificate of Registration as donee institution.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On December 7, 2006, RDO No. 59 informed DLSLI that the documents it submitted had been referred to its Legal Division to determine, among others, whether the amount it received from VFSI in exchange for the exclusive right to operate the canteen could be considered a donation.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>In a letter dated June 13, 2008, RDO No. 59 informed DLSLI that after a review of its documents, they found that DLSLI's contract of donation with VFSI was simulated and was only crafted to fit the actual consideration for the joint operation of the canteen between DLSLI and VFSI, and that the amount received from VFSI was rental for the use of the facility. In other words, RDO No. 59 found the transaction between DLSLI and VFSI to be a contract of lease.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>On July 30, 2008, another PAN was issued against DLSLI, which the latter protested.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>On November 28, 2008, DLSLI wrote RDO No. 59, reiterating that: (1) it manages and operates its canteen jointly with VFSI; (2) it provides VFSI with an adequately equipped kitchen and a storage room; (3) VFSI is not a concessionaire; (4) it never used the phrase 'deferred income' in its protest; and (5) in the event that the subject contract is treated as a contract of lease, the same is still exempt from taxes because the PHP 14,660,000.00 donation is subject to the condition that it will be returned if DLSLI pre-terminates the contract.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>On December 2, 2008, DLSLI submitted building permits of the school buildings and the administrative appointments of a civil engineer to prove that the amount it received from the contract with VFSI was actually, directly, and exclusively used for educational purposes.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>On January 15, 2009, DLSLI received an undated copy of the Formal Letter of Demand (FLD) directing it to pay deficiency income tax in the amount of PHP 12,991,018.17; deficiency VAT amounting to PHP 4,793,741.51; deficiency documentary stamp tax (DST) in the amount of PHP 363,000.36; and deficiency expanded withholding tax (EWT) amounting to PHP 1,848,789.59, inclusive of compromise penalty.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>On February 13, 2009, DLSLI filed its protest to the FLD, stating that as a non-stock, non-profit educational institution that uses all its assets and revenues actually, directly, and exclusively for educational purposes, it is exempt from taxes.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>On September 28, 2011, DLSLI received a letter dated September 12, 2011 from Regional Director Jose N. Tan, informing it that after the re-investigation of its case, only its liability for deficiency DST was cancelled.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>On October 28, 2011, DLSLI filed a petition for review before the CTA Third Division.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>The CIR opposed the petition, raising the following arguments: (1) the income generated by DLSLI from its school canteen, which it jointly operates with VFSI, is not exempt from taxes; (2) the rental income derived by DLSLI is also subject to income tax and VAT because it is an income sourced from other activities; (3) the income arising out of the contract between DLSLI and VFSI is subject to income tax and VAT because the subject "donation" was simulated to fit the actual consideration for the joint operation of the canteen; and (4) DLSLI is liable for EWT because pursuant to Revenue Memorandum Circular No. 76-2003 dated November 14, 2003, the exemption granted to educational institutions does not cover withholding taxes.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br><i>Ruling of the CTA Third Division</i><br><br>In a Decision dated August 24, 2015, the CTA Third Division denied DLSLI's petition for review, the dispositive portion of which reads:<blockquote><b>WHEREFORE</b>, premises considered, the Petition for Review is hereby <b>DENIED</b>. Formal Letter of Demand issued by Revenue Region No. 9, San Pablo City, covering the period June 1, 2004 to May 31, 2005 is hereby <b>AFFIRMED with MODIFICATION</b>. The compromise penalties in the total amount of P90,000 are hereby <b>CANCELLED</b>. Accordingly, [DLSLI] is <b>ORDERED to PAY</b> (CIR] the amount of Php6,966,280.73, inclusive of the 25% surcharge imposed under Section 248(A)(3) of the National Internal Revenue Code of 1997, as amended, broken down as follows:&nbsp;<br>&nbsp;<br><table width="100%" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="25%"><div align="center"><strong>TYPE OF TAX</strong></div></td><td width="25%"><div align="center"><strong>BASIC TAX</strong></div></td><td width="25%"><div align="center"><strong>25% SURCHARGE</strong></div></td><td width="25%"><div align="center"><strong>TOTAL</strong></div></td></tr><tr><td>Income Tax</td><td><div align="right">Php3,539,420.73</div></td><td><div align="right">Php884,855.18</div></td><td><div align="right">Php4,424,275.92</div></td></tr><tr><td>Value-Added Tax</td><td><div align="right">1,106,068.98</div></td><td><div align="right">276,517.24</div></td><td><div align="right">1,382,586.22</div></td></tr><tr><td>Expanded Withholding Tax</td><td><div align="right">927,534.87</div></td><td><div align="right">231,883.72</div></td><td><div align="right">1,159,418.59</div></td></tr><tr><td>Total</td><td><div align="right">Php<strong>5,573,024.58</strong></div></td><td><div align="right">Php<strong>1,393,256.15</strong></div></td><td><div align="right">Php<strong>6,966,280.73</strong></div></td></tr></tbody></table><br>In addition, [DLSLI] shall be liable to pay:<br><br>(a) Deficiency interest at the rate of twenty percent (20%) per annum on the basic deficiency income tax, value-added tax, and expanded withholding tax computed from the dates indicated below until full payment thereof pursuant to Section 249(B) of the NIRC of 1997, as amended;&nbsp;<br>&nbsp;<br><table width="100%" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="34%"><div align="center"><strong>Tax Type</strong></div></td><td width="33%"><div align="center"><strong>Basic Tax</strong></div></td><td width="33%"><div align="center"><strong>Deficiency Interest Computed from</strong></div></td></tr><tr><td>Income Tax </td><td><div align="right">Php3,539,420.73</div></td><td><div align="center">September 15, 2005</div></td></tr><tr><td>Value-Added Tax</td><td><div align="right">1,106,068.98</div></td><td><div align="center">June 27, 2005</div></td></tr><tr><td>Expanded Withholding Tax</td><td><div align="right">927,534.87</div></td><td><div align="center">June 15, 2005</div></td></tr></tbody></table><br>(b) Delinquency interest at the rate of 20% per annum on the total amount of Php6,966,280.73 and on the 20% deficiency interest which have accrued as afore-stated in (a), computed from October 13, 2011 until full payment thereof pursuant to Section 249(C) of the NIRC of 1997, as amended.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[25]</sup></blockquote>The CTA Third Division found that the contract between DLSLI and VFSI was a contract of lease, not a donation. Hence, the CTA Third Division ruled that only a portion, or one-tenth of PHP 14,660,000.00, which was paid within the period covered by the subject LOA, should be taxed.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>The CTA Third Division also found that DLSLI failed to sufficiently prove that the income received from its contract with VFSI, as well as the rental income from the use of its facilities, was actually, directly, and exclusively used for educational purposes. Thus, they are subject to regular income tax.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> As regards VAT, because DLSLI also failed to present its original certificate of registration as a non-VAT taxpayer, the CTA Third Division upheld the CIR's deficiency assessment against DLSLI. The CTA Third Division also upheld the CIR's EWT assessment because DLSLI failed to disprove its correctness and validity.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>Finally, the CTA Third Division cancelled the compromise penalty because the CIR failed to submit any proof that DLSLI acceded to its imposition.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>In the Resolution<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> dated January 21, 2016, the CTA Third Division denied the parties' respective motions for reconsideration.<br><br>Both parties elevated the case to the CTA EB.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> The cases were thereafter consolidated.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br><i>Ruling of the CTA En Banc</i><br><br>During the pendency of the case with the CTA EB, DLSLI filed a motion requesting permission from the court to pay the judgment award based on the Decision of the CTA Third Division and credit the amount paid in case of final judgment affirming said Decision, or to refund the amount paid if the decision is reversed on appeal.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> The CTA EB granted DLSLI's motion.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> DLSLI subsequently filed a Manifestation<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> informing the CTA EB that it paid the amount of PHP 32,737,917.66.<br><br>On August 17, 2017, the CTA EB issued the assailed Decision denying both parties' petitions for review.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> The CTA EB affirmed the CTA Third Division's finding that the contract between DLSLI and VFSI was a contract of lease and that only one-tenth of the PHP 14,660,000.00 should be subject to the tax assessment. Further, the CTA EB ruled that it could not set aside or declare invalid the donation schedule stated in the subject contract since the CIR failed to adduce evidence that the entire amount of PHP 14,660,000.00 was received by DLSLI in 2005.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>The CTA EB held that DLSLI, as a non-stock, non-profit educational institution, is not exempt from the assessed deficiency internal revenue taxes because it failed to prove that the subject income was actually, directly, and exclusively used for educational purposes. It further ruled that DLSLI is liable to pay VAT in view of the latter's failure to submit the original copy of its Registration Certificate as a Non-VAT Taxpayer.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Lastly, the CTA EB found that DLSLI is not entitled to avail of either the 40% standard deduction or the 10% preferential income tax rate being granted to proprietary educational institutions because the 1997 Tax Code is clear that only proprietary educational institutions are entitled to said corporate income tax rate.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>DLSLI filed a Petition with the Court, while the CIR filed first a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> which the CTA EB denied in its Resolution dated January 4, 2018, before filing a Petition with the Court.<br><br>The separate Petitions filed by DLSLI and the CIR were eventually consolidated.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br><center><b><i>Issue</i></b></center><br>Whether DLSLI is liable for the assessed deficiency income tax, VAT, and EWT for taxable year 2005 arising from the consideration received under its contract with VFSI and from the rental income derived from the use of its facilities.<br><br><b><i>G.R. Nos. 233924-25</i></b><br><br>In its Petition, DLSLI raises the following arguments: (1) that, as a non-stock, non-profit educational institution, it is exempt from internal revenue taxes because the subject revenues were actually, directly, and exclusively used for educational purposes; (2) that LOA No. 2001-00029330 does not cover the proceeds of the disputed donation, thus, any assessment pertaining to said donation is invalid; and (3) that, assuming DLSLI is not exempt from income taxes, the CTA EB erred in computing its tax liability because: (a) the 10% preferential income tax on private educational institutions should be applied to DLSLI; or (b) its income tax liability should be computed based on taxable income and not gross income, by allowing a 40% standard deduction.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br><b><i>G.R. No. 236822</i></b><br><br>On the other hand, the CIR insists that the contract between DLSLI and VFSI partakes of a contract of lease and, since said contract was executed in 2004, the computation of the deficiency income tax and VAT should be based on the entire amount of PHP 14,660,000.00 received by DLSLI, and not just one-tenth thereof.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br><center><b>The Court's Ruling</b></center><br>The consolidated Petitions lack merit.<br><br><b><i>Scope and coverage of the LOA</i></b><br><br>Preliminarily, the Court addresses DLSLI's assertion that LOA No. 2001-00029330 dated April 5, 2006, covers only transactions between June 1, 2004 to May 31, 2005. Thus, the consideration for the contract between DLSLI and VFSI, which the former received in tranches from 2000 to 2002, cannot be validly included in the subject assessment. Simply put, DLSLI insists that the subject assessment imposing deficiency taxes on the said consideration should be cancelled as it is outside the scope of the LOA.<br><br>The Court disagrees.<br><br>The audit process normally commences with the issuance by the CIR of an LOA. The LOA gives notice to the taxpayer that it is under investigation for possible deficiency tax assessment; at the same time, it authorizes or empowers a designated revenue officer to examine, verify, and scrutinize a taxpayer's books and records, in relation to internal revenue tax liabilities for a particular period.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>Relevantly, Section C of Revenue Memorandum Order (RMO) No. 43-90<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> prescribes that the LOA specify the taxable period or periods covered by the audit. This is necessary to apprise the taxpayer of the extent of the audit and the scope of the revenue officer's authority. Without this rule, a revenue officer can unduly burden the taxpayer by demanding random accounting records from random <i>unverified years</i>, which may include documents from as far back as 10 years in cases of a <i>fraud</i> audit.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>In this case, it is undisputed that the subject LOA was issued authorizing Revenue Officer Ruby Cacdac and Group Supervisor Thelma Hernandez of RDO No. 59 â Lipa City to examine the books of accounts and other accounting records of DLSLI for all internal revenue taxes specifically for the period June 1, 2004 to May 31, 2005. Notably, as admitted by DLSLI, its contract with VFSI on the use of its facilities was executed only on November 11, 2004. Moreover, while the entire consideration of PHP 14,660,000.00 was received in advance by DLSLI in 2002, the contract itself explicitly provides that said amount pertains to the yearly consideration for the entire 10-year duration of the contract. Thus, the CTA correctly ruled that the subject transaction, including the tax liability arising therefrom, is well within the coverage of the subject LOA.<br><br>With the issue on the LOA settled, the Court proceeds to discuss the merits of the deficiency tax assessment.<br><br><b><i>Contract between DLSLI and VFSI</i></b><br><br>DLSLI was assessed for deficiency income tax, VAT, and EWT arising from: (a) the PHP 14,660,000.00 proceeds from the contract executed between DLSLI and VFSI; and (b) the rental income received from the use of DLSLI's facilities in the total amount of PHP 9,500,726.79.<br><br><i>Foremost</i>, the Court agrees with the CTA's finding that the contract between VFSI and DLSLI partakes of a contract of lease, and not a donation.<br><br>Under Article 1643 of the Civil Code, a contract of lease arises when one of the parties binds himself to give to another the enjoyment or use of a thing for a price certain, and for a given period.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Here, the contract contained the following stipulations: (1) that DLSLI bound itself to grant VFSI possession and exclusive use of the canteen premises, including its existing equipment, fixtures, and furnishings, and the exclusive right to sell meals and other food items, and other needs of students; (2) that the contract is valid for a period of 10 school year terms, from SY 2002-2003 to SY 2011-2012; and (3) that VFSI gave DLSLI PHP 14,660,000.00 in advance, representing yearly consideration for the entire duration of the contract.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>Moreover, considering the stipulation in the contract that the PHP 14,660,000.00 received in advance by DLSLI pertained to and was allocated as yearly consideration, the CTA also correctly ruled that only a portion, or one-tenth, of the said amount was actually earned or realized by DLSLI for taxable year 2005 and is therefore covered by the period of the assessment.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup>&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em><strong>Tax exemption of non-stock, non-profit educational institution</strong></em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>As to the merits of the assessment, DLSLI insists that, as a non-stock, non-profit educational institution, its income is exempt from all duties and taxes.<br><br>Paragraphs 3 and 4, Section 4, Article XIV of the Constitution grants non-stock, non-profit educational institutions exemption from all taxes and duties on donations received and revenues actually, directly, and exclusively used for educational purposes, <i>viz.</i>:<blockquote>SEC. 4....<br><br>. . . .<br><br>(3) <b><i>All revenues and assets of non-stock, non-profit educational institutions used actually, directly, and exclusively for educational purposes shall be exempt from taxes and duties.</i></b> Upon the dissolution or cessation of the corporate existence of such institutions, their assets shall be disposed of in the manner provided by law.<br><br>Proprietary educational institutions, including those cooperatively owned, may likewise be entitled to such exemptions subject to the limitations provided by law including restrictions on dividends and provisions for reinvestment.<br><br>(4) <b><i>Subject to conditions prescribed by law, all grants, endowments, donations, or contributions used actually, directly, and exclusively for educational purposes shall be exempt from tax.</i></b> (Emphasis supplied)</blockquote>On the other hand, Section 30(H) of the 1997 Tax Code provides that, regardless of the income's disposition, the income of non-stock, non-profit educational institutions is exempt from internal revenue taxes:<blockquote>SEC. 30. <i>Exemptions from Tax on Corporations</i>.&nbsp;<br>â The following organizations shall not be taxed under this Title in respect to income received by them as such:<br><br>. . . .<br><br>(H) A nonstock and nonprofit educational institution;<br><br>. . . .<br><br>Notwithstanding the provisions in the preceding paragraphs, the income of whatever kind and character of the foregoing organizations from any of their properties, real or personal, or from any of their activities conducted for profit <b><i>regardless of the disposition made of such income</i></b>, shall be subject to tax imposed under this Code. (Emphasis supplied)</blockquote>Income tax exemption of non-stock, non-profit educational institution under the Constitution is anchored on the usage of the income, while the exemption under Section 30(H) of the 1997 Tax Code is determined by the source of the income. The Court in the case of <i>Commissioner of Internal Revenue v. De La Salle University, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> reconciled these two conflicting provisions in this wise:<blockquote>The addition and express use of the word <i>revenues</i> in Article XIV, Section 4 (3) of the Constitution is not without significance.<br><br>We find that the text demonstrates the policy of the 1987 Constitution, discernible from the records of the 1986 Constitutional Commission to provide broader tax privilege to non-stock, non-profit educational institutions as recognition of their role in assisting the State provide a public good. The tax exemption was seen as beneficial to students who may otherwise be charged unreasonable tuition fees if not for the tax exemption extended to all revenues and assets of non-stock, non-profit educational institutions.<br><br>Further, a plain reading of the Constitution would show that Article XIV, Section 4 (3) does not require that the revenues and income must have also been sourced from educational activities or activities related to the purposes of an educational institution. The phrase <i>all revenues</i> is unqualified by any reference to the source of revenues. Thus, so long as the revenues and income are used actually, directly[,] and exclusively for educational purposes, then said revenues and income shall be exempt from taxes and duties.<br><br>. . . .<br><br><b>Thus, when a non-stock, non-profit educational institution proves that it uses its <i>revenues</i> actually, directly, and exclusively for educational purposes, it shall be exempted from income tax, VAT, and LBT.</b><br><br>. . . .<br><br>. . . <b>[I]f the university <i>actually, directly[,] and exclusively uses for educational purposes</i> the <i>revenues</i> earned from the lease of its school building, such revenues shall be exempt from taxes and duties. The tax exemption no longer hinges on the use of the asset from which the revenues were earned, but on <i>the actual, direct[,] and exclusive use of the revenues for educational purposes</i>.</b><br><br>Parenthetically, income and revenues of non-stock, non-profit educational institution <i>not</i> used actually, directly[,] and exclusively for educational purposes are not exempt from duties and taxes. To avail of the exemption, the taxpayer must <b><i>factually prove</i></b> that it used actually, directly[,] and exclusively for educational purposes the revenues or income sought to be exempted.<br><br>. . . .<br><br>Thus, we declare the last paragraph of Section 30 of the Tax Code without force and effect for being contrary to the Constitution insofar as it subjects to tax the income and revenues of non-stock, non-profit educational institutions used actually, directly[,] and exclusively for educational purpose. We make this declaration in the exercise of and consistent with our duty to uphold the primacy of the Constitution.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (Emphasis supplied)</blockquote>Thus, as it stands, as far as the income and revenues of non-stock, non-profit educational institutions are concerned, their exemption is based on the usage of the income and not on its source. Otherwise stated, the income of non-stock, non-profit educational institutions, regardless of its source, is exempt from duties and taxes, <b><i>provided that</i></b> the same is actually, directly, and exclusively used for educational purposes.<br><br>As applied to this case, to be exempt from the assessed taxes, DLSLI must prove the following requisites:<blockquote><ol><li>it is a non-stock, non-profit educational institution; and<br><br></li><li>the income or grant for which it seeks tax exemption was used actually, directly, and exclusively for educational purposes.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></li></ol></blockquote>The first requisite is undisputed. DLSLI, based on its Amended Articles of Incorporation and New By-Laws, is a non-stock, non-profit educational institution.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>The controversy lies in the second requisite. DLSLI asserts that, based on its Audited Financial Statements (AFS) and the findings of the Independent Certified Public Accountant (ICPA), earnings from donations and rental income were commingled with other sources of revenues to form the General Fund, which were actually, directly, and exclusively used for educational purposes.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>The Court is not persuaded.<br><br>It bears to emphasize that findings of the ICPA, while they may have a persuasive effect, are not binding upon the CTA. Section 3, Rule 13 of the Revised Rules of the Court of Tax Appeals (RRCTA) states:<blockquote>SECTION 3. <i>Findings of independent CPA</i>. â The submission by the independent CPA of pre-marked documentary exhibits shall be subject to verification and comparison with the original documents, the availability of which shall be the primary responsibility of the party possessing such documents and, secondarily, by the independent CPA. <i>The findings and conclusions of the independent CPA may be challenged by the parties and shall not be conclusive upon the Court, which may, in whole or in part, adopt such findings and conclusions subject to verification.</i> (Emphasis supplied)</blockquote>From the plain words of the RRCTA, the CTA may or may not adopt the findings of the ICPA. The tax court is not obliged to blindly adopt the findings and conclusions of the ICPA, which are, at best, merely recommendatory. In determining the merits of the case, the CTA is in fact mandated to make its own independent assessment and arrive at its own conclusions based on the facts and evidence submitted.<br><br>In this case, after a thorough review of the evidence submitted by the parties, including the findings of the ICPA, the CTA found that DLSLI failed to prove that the subject income was actually, directly, and exclusively used for educational purposes.<br><br><i>First</i>, the evidence on record failed to sufficiently establish that the subject income formed part of the so-called General Fund. As aptly observed by the CTA, while DLSLI's AFS mentioned "Donations" and "Rental Income," there is no breakdown of its components. Thus, it cannot be ascertained whether the particular income received from VFSI, and the subject rental income were, indeed, included therein and actually used to defray expenses.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> The CTA further noted that no reconciliation or schedule was presented by DLSLI which could have enlightened on how the foregoing income was pooled into the General Fund.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br><i>Second</i>, there is no evidence supporting DLSLI's claim that the subject income was used actually, directly, and exclusively for educational purposes. The CTA noted that DLSLI's AFS for the years 2004 and 2005 showed expenses not related to educational purposes, such as retirement contribution, entertainment, amusement, and recreation.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> The CTA further observed that while the Judicial Affidavit of DLSLI's Vice President and Chief Operating Officer stated that the rental income from the use of its facilities was used for educational purposes, he also said that the details thereof could be more explained by their finance personnel. Unfortunately, DLSLI failed to present any document or any of its finance personnel that could have clarified the details of such matter.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>In claims for tax exemption, the burden is on the taxpayer to present sufficient evidence to prove its entitlement. The sufficiency of a claimant's evidence is a question of fact that is beyond the purview of a Rule 45 petition. It is not the function of the Court to again analyze or weigh evidence that has already been duly considered and exhaustively examined by lower courts.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Moreover, the findings of facts of the CTA are generally respected by the Court.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Unless it is shown that such factual findings are not supported by substantial evidence or there is a showing of gross error or abuse on the part of the tax court, the CTA's factual findings will not be disturbed on appeal.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Here, the Court finds no gross error on the part of the CTA so as to reverse its factual findings.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><strong><em>Ten percent preferential tax rate for proprietary non-profit educational institutions</em></strong></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>DLSLI nevertheless argues that if the subject income is not exempt from internal revenue taxes, the preferential rate of 10% under Section 27(B) of the 1997 Tax Code, and not the regular tax rate, should be applied.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>Section 27(B) grants proprietary educational institutions and hospitals, a preferential tax rate of 10% on their income from unrelated trade, business, or activity, provided that said income does not exceed 50% of the total gross income derived by such institutions:<blockquote>SEC. 27. <i>Rates of Income Tax on Domestic Corporations</i>. â<br><br>. . . .<br><br>(B) <i>Proprietary Educational Institutions and Hospitals</i>. â Proprietary educational institutions and hospitals which are nonprofit shall pay a tax of ten percent (10%) on their taxable income except those covered by Subsection (D) hereof: <i>Provided</i>, That if the gross income from unrelated trade, business or other activity exceeds fifty percent (50%) of the total gross income derived by such educational institutions or hospitals from all sources, the tax prescribed in Subsection (A) hereof shall be imposed on the entire taxable income. For purposes of this Subsection, the term 'unrelated trade, business or other activity' means any trade, business or other activity, the conduct of which is not substantially related to the exercise or performance by such educational institution or hospital of its primary purpose or function. A 'proprietary educational institution' is any private school maintained and administered by private individuals or groups with an issued permit to operate from the Department of Education, Culture and Sports (DECS), or the Commission on Higher Education (CHED), or the Technical Education and Skills Development Authority (TESDA), as the case may be, in accordance with existing laws and regulations.</blockquote>Proprietary educational institutions and proprietary hospitals may also fall among the institutions covered by the grant of complete income tax exemption under Section 30 of the 1997 Tax Code. To recall, Section 30(H) pertains to non-stock, non-profit educational institutions whose income is actually, directly, and exclusively used for educational purposes is exempt from internal revenue taxes. Section 30(E),<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> on the other hand, pertains to non-stock corporations or associations operated and organized exclusively for charitable purposes, the income of which, if sourced exclusively from non-profit and charitable activities, is likewise exempt from internal revenue taxes.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>In the case of <i>Commissioner of Internal Revenue v. St. Luke's Medical Center, Inc.</i><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> (<i>St. Luke's Medical Center, Inc.</i>), the Court harmonized Section 27(B) and Section 30(E) of the 1997 Tax Code in relation to non-profit hospitals. It ruled that the 10% preferential tax rate and income tax exemption under these provisions are not mutually exclusive. Non-profit hospitals that fail to satisfy the income tax exemption under Section 30(E) are taxable under Section 27(B), subject to the conditions set forth in the latter provision. The Court explained:<blockquote>We hold that Section 27(B) of the NIRC does not remove the income tax exemption of proprietary non-profit hospitals under Section 30(E) and (G). Section 27(B) on one hand, and Section 30(E) and (G) on the other hand, can be construed together without the removal of such tax exemption. <b>The effect of the introduction of Section 27(B) is to subject the taxable income of two specific institutions, namely, proprietary non-profit educational institutions and proprietary non-profit hospitals, among the institutions covered by Section 30, to the 10% preferential rate under Section 27(B) instead of the ordinary 30% corporate rate under the last paragraph of Section 30 in relation to Section 27(A)(l).</b><br><br>Section 27(B) of the NIRC imposes a 10% preferential tax rate on the income of (1) proprietary non-profit educational institutions and (2) proprietary non-profit hospitals. <i>The only qualifications for hospitals are that they must be proprietary and non-profit. "Proprietary" means private, following the definition of a "proprietary educational institution" as "any private school maintained and administered by private individuals or groups" with a government permit. "Non-profit" means no net income or asset accrues to or benefits any member or specific person, with all the net income or asset devoted to the institution's purposes and all its activities conducted not for profit.</i><br><br>"Non-profit" does not necessarily mean "charitable." In <i>Collector of Internal Revenue v. Club Filipino, Inc. de Cebu</i>, this Court considered as non-profit a sports club organized for recreation and entertainment of its stockholders and members. The club was primarily funded by membership fees and dues. If it had profits, they were used for overhead expenses and improving its golf course. The club was non-profit because of its purpose and there was no evidence that it was engaged in a profit-making enterprise.<br><br>. . . .<br><br>St. Luke's fails to meet the requirements under Section 30(E) and (G) of the NIRC to be completely tax exempt from all its income. However, it remains a proprietary non-profit hospital under Section 27(B) of the NIRC as long as it does not distribute any of its profits to its members and such profits are reinvested pursuant to its corporate purposes. St. Luke's, as a proprietary non-profit hospital, is entitled to the preferential tax rate of 10% on its net income from its for-profit activities.<br><br>St. Luke's is therefore liable for deficiency income tax in 1998 under Section 27(B) of the NIRC.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> (Emphasis supplied)</blockquote>Simply put, income of non-profit hospitals that fail to comply for tax exemption under Section 30 may still be covered by the preferential tax rate under Section 27(B), provided that the following conditions are established: (1) the hospital is proprietary and non-profit; and (2) its income from unrelated business or activity does not exceed 50% of its total gross income.<br><br>While <i>St. Luke's Medical Center, Inc.</i> involved a hospital, the same rationale applies to non-stock, non-profit educational institutions. A non-stock, non-profit educational institution which fails to comply with the requirements for tax exemption under Section 30(H), but remains a proprietary non-profit educational institution, may still avail of the preferential tax rate under Section 27(B), as long as the conditions set forth in the latter are satisfied. If the preferential tax rate under Section 27(B) is invoked by the non-stock, non-profit educational institution, as aptly noted by CTA Associate Justice Catherine T. Manahan in her Concurring and Dissenting Opinion,<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> the determining factor is the percentage of the income generated by the institution's unrelated activities on the total gross income.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> In such a case, the lens by which the income is examined shifts from the <b>usage</b> of the income [for complete tax exemption under Section 30(H)] to its <b>source</b> under Section 27(B). It is then incumbent upon the taxpayer, as the one claiming preferential tax rate, to prove by competent evidence that its income from unrelated trade, business, or activity does not exceed 50% of the total gross income. Failing this, the regular corporate income tax rate of 32% applies.<br><br>As applied to this case, while DLSLI, a non-stock, non-profit educational institution, failed to prove its entitlement to income tax exemption under the subject assessment, it remains a proprietary non-profit educational institution. To recall, based on its Amended Articles oflncorporation and New By-Laws, DLSLI is a private educational institution whose profit does not inure to the benefit of its corporate members, trustees, or officers.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>Nevertheless, the Court finds that DLSLI failed to discharge its burden of proving entitlement to the preferential tax rate. DLSLI failed to submit competent evidence proving that the subject income (rental of its canteen and other facilities) did not exceed 50% of its total gross income for the covered taxable year. As observed by CTA Presiding Justice Roman G. Del Rosario in his Concurring and Dissenting Opinion,<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> while DLSLI submitted its AFS for 2004 and 2005, it failed to offer evidence supporting the figures indicated therein. To validate and confirm the contents of the AFS, DLSLI should have at least submitted its books of accounts and other source documents establishing the actual sources of its revenues.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>Accordingly, while the Court finds that DLSLI is not precluded from availing of the 10% preferential tax rate under Section 27(B), it failed to sufficiently prove a requirement set forth therein. Consequently, the imposition of the regular tax rate of 32% is affirmed.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em><strong>Imposition of interest and DLSLI's tax liability</strong></em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Finally, as regards DLSLI's claim that the CTA erred in simultaneously imposing deficiency interest and delinquency interest on the assessed taxes, this issue had long been settled by the Court in the case of <i>Aces Philippines Cellular Satellite Corporation v. The Commissioner of Internal Revenue</i><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> (<i>Aces Philippines</i>). In that case, the Court recognized that simultaneous imposition of deficiency interest and delinquency interest is explicitly provided under the 1997 Tax Code. However, Republic Act No. 10963 or the Tax Reform for Acceleration and Inclusion (TRAIN) Law, which significantly amended the 1997 Tax Code, bars the simultaneous imposition of deficiency interest and delinquency interest. Instead, the TRAIN Law provides that interest equal to the prevailing legal rate as set by the Bangko Sentral ng Pilipinas shall accrue on any amount of unpaid tax until its full payment.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> Thus, the Court ruled that "deficiency and delinquency interests under the 1997 Tax Code shall be imposed simultaneously but only until December 31, 2017. Beginning January 1, 2018 or upon the TRAIN Law's effectivity, only deficiency interest at the prevailing legal rate of 12% shall accrue on the unpaid amount of tax until fully paid."<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>As applied to this case, the CTA was correct in simultaneously imposing delinquency and deficiency interest but only until December 31, 2017. From January 1, 2018 until full payment, only a legal interest of 12% is imposable on the unpaid amount.<br><br>The Court further notes that, while DLSLI's petition with the CTA EB was pending, DLSLI moved to be allowed to pay the judgment award without prejudice to the resolution of its appeal. In a Resolution<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> dated June 16, 2016, the CTA EB granted DLSLI's prayer. In turn, DLSLI filed a Manifestation<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> informing the tax court that on August 24, 2016, it paid the judgment award in accordance with the August 24, 2015 Decision of the CTA Division in the total amount of PHP 32,737,917.66.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> In support of said payment, DLSLI attached BIR payment forms filed and paid through electronic filing and payment system on August 24, 2016.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> In a Resolution<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> dated December 27, 2016, the CTA EB simply noted DLSLI's Manifestation without ruling on the veracity of said payment. As the Court is not a trier of facts, it is only proper that the case be remanded to the CTA for the purpose of verifying the alleged payment made by DLSLI amounting to PHP 32,737,917.66 on August 24, 2016, subject to the modified rules on the computation of interest as discussed above.<br><br><b>ACCORDINGLY</b>, the consolidated Petitions for Review on <i>Certiorari</i> are <b>DENIED</b>. The Decision dated August 17, 2017 and Resolution dated January 4, 2018 of the Court of Tax Appeals <i>En Banc</i> in CTA EB No. 1424 and CTA EB No. 1430 are <b>AFFIRMED WITH MODIFICATION</b> relative to interest computation, as follows:&nbsp;<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">deficiency interest at the rate of 20% per annum on the basic deficiency income tax, value-added tax, and expanded withholding tax computed from the dates indicated below until December 31, 2017 pursuant to Section 249(B) of the National Internal Revenue Code of 1997, as amended:&nbsp;</div></td></tr></tbody></table>&nbsp;<br><table width="100%" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="34%"><div align="center"><strong>Tax Type</strong></div></td><td width="33%"><div align="center"><strong>Basic Tax</strong></div></td><td width="33%"><div align="center"><strong>Deficiency Interest Computed from</strong></div></td></tr><tr><td>Income Tax</td><td><div align="center">PHP 3,539,420.73</div></td><td><div align="center">September 15, 2005</div></td></tr><tr><td>Value-Added Tax </td><td><div align="center">PHP 1,106,068.98</div></td><td><div align="center">June 27, 2005</div></td></tr><tr><td>Expanded Withholding Tax </td><td><div align="center">PHP 927,534.87</div></td><td><div align="center">June 15, 2005</div></td></tr></tbody></table><br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(b)</div></td><td width="95%"><div align="justify">delinquency interest at the rate of 20% per annum on the basic deficiency income tax, value-added tax, and expanded withholding tax and surcharges, or a total of PHP 6,966,280.73, and on the deficiency interest which have accrued as stated in paragraph (a) above computed from October 13, 2011 until December 31, 2017; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify">delinquency interest at the rate of 12% per annum on the unpaid amount [basic tax plus surcharge and interests computed in (a) and (b)] computed from January 1, 2018, until full payment thereof, pursuant to Section 249(C)(3) of the National Internal Revenue Code of 1997, as amended by Republic Act No. 10963.</div></td></tr></tbody></table></blockquote>The cases are <b>REMANDED</b> to the Court of Tax Appeals to determine whether De La Salle Lipa, Inc. has remaining outstanding tax liabilities after ascertaining the alleged payment of PHP 32,737,917.66 on August 24, 2016, and subject to the modified rules on the imposition of interest as discussed above. The Court of Tax Appeals is <b>DIRECTED</b> to dispose of the said cases with dispatch.<br><br><b>SO ORDERED.</b><br><br><i>Inting, Gaerlan, Dimaampao</i>, and <i>Singh, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, pp. 64-100.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i> (<b>G.R. No. 236822</b>), pp. 11-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 45-82; <i>rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, pp. 101-137. Penned by Associate Justice Caesar A. Casanova, with Associate Justices Juanito C. Castaneda, Jr., Lovell R. Bautista, Esperanza R. Fabon-Victorino, Cielito N. Mindaro-Grulla, Ma. Belen M. Ringpis-Liban, concurring; Presiding Justice Roman G. Del Rosario with Concurring and Dissenting Opinion (<i>id.</i> at 83-89; <i>id.</i> at 138-144); Associate Justice Erlinda P. Uy joined in the Concurring and Dissenting Opinion of Presiding Justice Del Rosario; and Associate Justice Catherine T. Manahan with Concurring and Dissenting Opinion (<i>id.</i> at 90-94; <i>id.</i> at 145-149).<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 96-100. Penned by Associate Justice Caesar A. Casanova, with Associate Justices Juanito C. Castaneda, Jr., Lovell R. Bautista, Erlinda P. Uy, Esperanza R. Fabon-Victorino, Cielito N. Mindaro-Grulla, Ma. Belen M. Ringpis-Liban, concurring; Presiding Justice Roman G. Del Rosario maintained his Concurring and Dissenting Opinion; and Associate Justice Catherine T. Manahan maintained her Concurring and Dissenting Opinion.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> CTA <i>rollo</i> (CTA EB No. 1424), vol. I, pp. 20-49. Penned by Associate Justice Lovell R. Bautista, with Associate Justices Esperanza R. Fabon-Victorino and Ma. Belen M. Ringpis-Liban concurring.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i> (<b>G.R. No. 236822</b>), p. 33, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, p. 92, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 104; <i>rollo</i> (<b>G.R. No. 236822</b>), p. 48, CTA EB Decision dated August 17, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.; id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 104-105; <i>id.</i> at 48-49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> CTA <i>rollo</i> (CTA EB No. 1424), vol. I, pp. 434-439.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>See rollo</i> (<b>G.R. No. 236822</b>), pp. 51-52; <i>rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, pp. 107-108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 49; <i>id.</i> at 105.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.; id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.; id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.; id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 50; <i>id.</i> at 106.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>See id.; id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 50-51; <i>id.</i> at 106-107.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 52; <i>id.</i> at 108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.; id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.; id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 52-57; <i>id.</i> at 108-113.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> CTA <i>rollo</i> (CTA EB No. 1424), vol. I, pp. 47-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 38-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 34-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 42-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 50-57. Penned by Associate Justice Lovell R. Bautista, with Associate Justices Esperanza R. Fabon-Victorino and Ma. Belen M. Ringpis-Liban concurring.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>See id.</i> at 1-19, Petition for Review and CTA <i>rollo</i> (CTA EB No. 1430), pp. 1-26, Petition for Review.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>See id.</i> at 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See id.</i> at 75-86, Motion to be Allowed to Pay Judgment Award Without Prejudice to Pending Appeal.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 99-100, CTA EB Resolution dated June 16, 2016.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 138-150, including Annexes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Rollo</i> (<b>G.R. No. 236822</b>), p. 80; <i>rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, p. 135, CTA EB Decision dated August 17, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 62-67; <i>id.</i> 118-122.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 67-74; <i>id.</i> at 122-129.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 74-77; <i>id.</i> at 129-132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> CTA <i>rollo</i> (CTA EB No. 1424), vol. I, pp. 209-215.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i> (<b>G.R. No. 236822</b>), pp. 199-200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, pp. 76-92, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>See rollo</i> (<b>G.R. No. 236822</b>), pp. 21-33, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Commissioner of Internal Revenue v. Lancaster Philippines, Inc.</b>, 813 Phil. 622, 640 (2017) [Per J. Martires, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Amendment of Revenue Memorandum Order No. 37-90 prescribing revised policy guidelines for Examination of Returns and Issuance of Letters of Authority to Audit, September 20, 1990.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Commissioner of Internal Revenue v. De La Salle University, Inc.</b>, 799 Phil. 141, 175 (2016) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>See</i> <b>Roxas v. Court of Appeals</b>, 275 Phil. 589, 595 (1991) [Per J. Paras, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>See rollo</i> (<b>G.R. No. 236822</b>), pp. 62-65; <i>rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, pp. 118-120, CTA EB Decision dated August 17, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>See id.</i> at 66-67; <i>id.</i> at 121-122.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Supra</i> note 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 168-173.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>La Sallian Educational Innovators Foundation, Inc. v. Commissioner of Internal Revenue</b>, 848 Phil. 32, 43-44 (2019) [Per J. A. Reyes, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Rollo</i> (<b>G.R. No. 236822</b>), pp. 117-118, CTA Third Division Decision dated August 24, 2015.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>See rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, pp. 78-80, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Rollo</i> (<b>G.R. No. 236822</b>), p. 69; <i>id.</i> at 124, CTA EB Decision dated August 17, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.; id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 118-119, CTA Third Division Decision dated August 24, 2015.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 70; <i>rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, p. 125, CTA EB Decision dated August 17, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Coral Bay Nickel Corporation v. Commissioner of Internal Revenue, G.R. Nos. 251333-34</b>, March 5, 2025, p. 13 [Per J. Dimaampao, Third Division]. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>See id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>See id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>See rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, pp. 84-86, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> SEC. 30. <i>Exemption from Tax on Corporations</i>. â ...<blockquote>. . . .<br><br>(E) Nonstock corporation or association organized and operated exclusively for religious, charitable, scientific, athletic, or cultural purposes, or for the rehabilitation of veterans, no part of its net income or asset shall belong to or inure to the benefit of any member, organizer, officer or any specific person[.]</blockquote><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>See</i> <b>Commissioner of Internal Revenue v. St. Luke's Medical Center, Inc.</b>, 695 Phil. 867, 886-890 (2012) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 885, 894-895.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Rollo</i> (<b>G.R. No. 238622</b>), pp. 90-94; <i>rollo</i> (<b>G.R. Nos. 233924-25</b>), vol. I, pp. 145-149.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 93-94; <i>id.</i> at 148-149.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>See id.</i> at 69; <i>id.</i> at 124, CTA EB Decision dated August 17, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 83-89; <i>id.</i> at 138-144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 84; <i>id.</i> at 139.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 929 Phil. 118 (2022) [Per J. Inting, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 150-151.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 152.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> CTA <i>rollo</i> (CTA EB No. 1424), vol. I, pp. 99-100.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 138-150, including Annexes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 139. <i>See also</i> Annex "A" of DLSLI's Manifestation dated October 14, 2016, <i>id.</i> at 142-143.<br><br>The amount was computed as follows:&nbsp;<br><blockquote><table width="100%" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="17%"><div align="center"><strong>Tax Type</strong></div></td><td width="17%"><div align="center"><strong>Basic Tax</strong></div></td><td width="17%"><div align="center"><strong>Surcharge</strong></div></td><td width="17%"><div align="center"><strong>Deficiency Interest</strong></div></td><td width="17%"><div align="center"><strong>Delinquency Interest</strong></div></td><td width="17%"><div align="center"><strong>Total</strong></div></td></tr><tr><td>Income Tax</td><td><div align="right">P3,539,420.73</div></td><td><div align="right">P884,855.18</div></td><td><div align="right">P7,749,876.84</div></td><td><div align="right">P8,498,269.92</div></td><td><div align="right">P20,672,422.67</div></td></tr><tr><td>VAT</td><td><div align="right">P1,106,068.98</div></td><td><div align="right">P276,517.25</div></td><td><div align="right">P2,470,321.73</div></td><td><div align="right">P2,702,919.34</div></td><td><div align="right">P6,555,827.30</div></td></tr><tr><td valign="top">Expanded Withholding Tax</td><td valign="top"><div align="right">P927,534.87</div></td><td><div align="right">P231,883.72</div></td><td valign="top"><div align="right">P2,077,678.11</div></td><td valign="top"><div align="right">P2,272,570.99</div></td><td valign="top"><div align="right">P5,509,667.69</div></td></tr><tr><td>TOTAL</td><td><div align="right"></div><br></td><td><div align="right"></div><br></td><td><div align="right"></div><br></td><td><div align="right"></div><br></td><td><div align="right"><strong>P32,737,917.66</strong></div></td></tr></tbody></table></blockquote><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>See</i> Annexes "8-1," "B-2," and "B-3" of DLSLI's Manifestation dated October 14, 2016, <i>id.</i> at 144-149.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 152-153.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

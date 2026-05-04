@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 275477 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. MONICA LABANDELO Y ELAYDA A.K.A. "MONICA CORUM," ACCUSED-APPELLANT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70300' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 275477, July 08, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. MONICA LABANDELO <i>Y</i> ELAYDA A.K.A. "MONICA CORUM," ACCUSED-APPELLANT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LAZARO-JAVIER, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> seeks to reverse the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated April 16, 2024 of the Court of Appeals in CA-G.R. CR-HC No. 17722 affirming the conviction of accused-appellant Monica Labandelo <em>y</em> Elayda (Labandelo) a.k.a. "Monica Corum" in Criminal Case Nos. 2021-567FC and 2021-569FC for violation of Section 4(a), in relation to Section 6(a) of Republic Act No. 9208,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> as amended by Republic Act No. 10364,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and for violation of Section 10(a) of Republic Act No. 7610,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> respectively. </p><p> Labandelo was charged under the following Informations:</p><p align="center"> Criminal Case No. 2021-567FC<br> [For Qualified Trafficking in Persons] </p><blockquote> <p> That on or about the fifteenth (15<sup>th</sup>) day of July 2021, in the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, by means of taking advantage of the vulnerability of "[<b>AAA</b>]," a thirteen [(13)-year-old] girl who was born on <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, 2008, did then and there willfully, unlawfully and feloniously recruit, hire, provide, offer and supply said "[<b>AAA</b>]" for the purpose of prostitution or other forms of sexual exploitation, by acting as her procurer for poseur customers, for money, profit or any other consideration.</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> (Emphasis in the original)</p> <p> Criminal Case No. 2021-569FC [For violation of Section 10(a) of R.A. 7610]</p> <p> That on or about the fifteenth (15<sup>th</sup>) day of July 2021, in the <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxx</span>, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, did then and there knowingly, unlawfully and feloniously commit acts of child abuse and exploitation on "[<b>AAA</b>]," a thirteen [(13)-year-old] girl who was born on <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, 2008, by causing, encouraging, persuading and enticing her to engage in sexual activities or lewd conducts, thus placing said child in a condition and under circumstances which gravely threaten or endanger her normal development. The acts of the above-accused debased, demeaned, and degraded the intrinsic worth and dignity of minor "[<b>AAA</b>]."</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> (Emphasis in the original)</p> </blockquote> <p> On arraignment, Labandelo pleaded not guilty to both charges.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> During the trial, the prosecution presented the testimonies of complainant AAA and Emmanuel C. Drewery (Drewery).<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> The prosecution offered in evidence the Certificate of Live Birth of AAA to confirm her age and establish that she was a minor at the time of the incident. On the other hand, Labandelo testified for the defense.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> <b><i>Version of the Prosecution</i></b> </p><p> AAA testified that on July 15, 2021, while she was only 13 years old, Labandelo texted her, offering PHP 2,000.00 for a sexual encounter with a customer, saying "<i>Mahal[,] gusto mo ng lakad?</i>" Labandelo called her "Mahal" as a term of endearment, while "<i>lakad</i>" means a transaction where she will sell her body to a customer for monetary consideration. Labandelo arranged the meeting, accompanied her to the location, and facilitated the encounter at a hotel. When she got to the bridge where Labandelo, a certain Ate Marie, and KC Bakla were waiting for her, she said she wanted to back out, but Labandelo told her that the customers, Nico Cruz (Nico) and a certain Brian,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> were already on their way to meet them. When the customers arrived, Labandelo told Nico that they need to fetch the other woman, LLL, who also turned out to be a minor. After fetching LLL and having dinner, they all proceeded to <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxx</span> located at the back of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxxxx</span> where the customers took her and LLL to separate rooms, while Labandelo, Ate Marie, and KC Bakla remained inside the car.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> After undressing himself, Nico instructed AAA to undress herself and to lie beside him. He kissed her down to her breasts and inserted his penis inside her vagina. After around 10 minutes of sexual congress, they both went out of the room. LLL and Brian later emerged from the other room. Thereafter, they returned to the car where Nico gave her PHP 2,000.00 for using her, and Labandelo, PHP 1,000.00 for pimping her to him.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p>AAA first met Labandelo in December 2020. Since then, Labandelo had pimped her around 10 times since she was 13 years old, giving her PHP 1,500.00 for each sexual encounter. She accepted Labandelo's offers for sex due to financial need for her mother's medication. When the National Bureau of Investigation agents rescued her during an entrapment operation on August 4, 2021, she filed a case against Labandelo but did not include the July 15, 2021 incident. She disclosed the said incident during a debriefing at the Preda Foundation on August 15, 2021.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> Drewery, a social worker and the Executive Director of the Preda Foundation, testified that he was filing a complaint not only against Labandelo but also against several officers and agents of Destiny Rescue Pilipinas. He said that during the debriefing session with the minors rescued in the August 4, 2021 entrapment operation, AAA and another minor disclosed that they had been trafficked and later sexually abused by the agents who were part of the investigation. He, however, had no personal knowledge of the incident involving AAA on July 15, 2021.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></p><p> <b><i>Version of the Defense</i></b></p><p> Labandelo interposed denial. She testified that on July l5, 2021, she was in <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> Avenue, talking with her cousin RJ Suarez and their friends. During that time, another group including Ate Marie, KC Bakla, Jepoy, her neighbor Tayson, and another girl was also nearby. When a black vehicle suddenly stopped, Jepoy called her over and introduced her to Nico, who was inside the vehicle. Before leaving, Nico gave pizza to Ate Marie and "<i>pang-inom</i>" to KC Bakla. Tayson later introduced AAA to her and her companions as his girlfriend. That was the first time she met AAA and Nico. After chatting with her companions, she went home with her cousins.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> Labandelo denied that she was a pimp, claiming that although she was unemployed, she took care of her nephew and niece. She also recounted meeting AAA on August 4, 2021, when they went swimming together, and added that they call each other "Mahal" as their call sign. She believed that AAA merely fabricated the evidence against her and that she was illegally arrested.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p><p align="center"> <b>Ruling of the Regional Trial Court</b> </p><p> By Decision<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated December 13, 2022 the trial court convicted Labandelo of violation of Section 4(a), in relation to Section 6(a) of Republic Act No. 9208, as amended by Republic Act No. 10364, and of Section 10(a) of Republic Act No. 7610. It ruled that the prosecution has established all the elements of qualified trafficking in persons and child abuse. Labandelo's actions of recruiting, offering, and facilitating the sexual exploitation of a minor for monetary gain constituted the offenses charged. Knowing that AAA needed money for her mother's medical treatment, Labandelo befriended her and called her "Mahal" to gain her trust. She exploited AAA's vulnerability, enticing her to engage in sexual activities or lewd conduct to obtain her consent for involvement in prostitution. It found the testimony of AAA credible and consistent, noting that her account was corroborated by her sworn statement and other evidence. The prosecution's evidence prevailed over Labandelo's weak and unsubstantiated denial.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Thus: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the Court hereby rendered judgment as follows:</p> <blockquote> <p> 1. For Criminal Cases Nos. 2021-567FC (sic): Accused <b>Monica Labandelo <i>y</i> Elayda alias Monica Corum</b> is hereby found <b>GUILTY</b> of [q]ualified trafficking in persons under Section 4(a) in relation to Section 6(a) of R.A. 9208 as amended by R.A. 10364. She is hereby sentenced to suffer life imprisonment and to pay [a] fine of [T]wo [M]illion [P]esos ([PHP] 2,000,000.00) and to pay minor [AAA] the amounts of [PHP] 500,000.00 as moral damages and [PHP] 100,000.00 as exemplary damages with legal interest at the rate of six percent (6%) per annum from finality of this Decision until fully paid; [and]</p> <p> 2. For Criminal Cases Nos. 2021-569FC (sic), Accused is hereby found <b>GUILTY</b> [of] violation of Section 10 (a) of R.A. No. 7610 otherwise known as the "Special Protection of Children Against Child Abuse, Exploitation, and Discrimination Act" and she is sentenced to suffer an imprisonment [of] 4 years, 9 months and 11 days of <em>prision cor[r]eccional</em> as minimum to six (6) years[,] eight months[,] and one day of <em>prision mayor</em> as maximum. </p> </blockquote> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis in the original)</p> </blockquote> <p> In its assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated April 16, 2024, the Court of Appeals affirmed. It found all the elements of the offenses present and upheld the trial court's assessment of the credibility of AAA's testimony. It ruled that AAA's categorical testimony and positive identification outweigh Labandelo's worthless denial, viz.: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the Appeal is <b>DENIED</b>. Accordingly, the December 13, 2022 <i>Decision</i> of the Regional Trial Court of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxx</span>, Zambales, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, in <i>Criminal Case No. 2021-567FC</i> and <i>Criminal Case No. 2021-569FC</i> is hereby <b>AFFIRMED</b> <i>in toto</i>. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> (Emphasis in the original) </p> </blockquote> <p align="center"><b>The Present Appeal</b> </p><p> Labandelo seeks affirmative relief from the Court and pleads anew for her acquittal.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Labandelo<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> and the People,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> through the Office of the Solicitor General, both manifest that in lieu of supplemental briefs, they are adopting their Briefs filed before the Court of Appeals.</p><p align="center"> <b>Our Ruling</b> </p><p> We affirm. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><b><i>Labandelo is guilty of qualified <br> trafficking in persons</i></b> </td> </tr> </tbody></table> <p>The elements of trafficking in persons can be derived from its definition under Section 3(a) of Republic Act No. 9208, as amended,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> thus: (1) the act of "recruitment, transportation, transfer or harbouring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders;" (2) the means used which include "threat or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another;" and (3) the purpose of trafficking is exploitation which includes "exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs."<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> Section 4(a)<sup style="COLOR: RGB(255, 0, 0);">[28]</sup>&nbsp;of Republic Act No. 9208, as amended, enumerates the acts that fall under the term "trafficking" in persons, which include the recruitment of a person by any means for the purpose of prostitution, pornography, or sexual exploitation. Section 6(a) further provides that the offense of trafficking in person is qualified "when the person trafficked is a child."<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> Here, the prosecution satisfactorily established the presence of the elements of qualified trafficking in persons through the testimony of AAA. <i>First</i>. Both the trial court and the Court of Appeals found that Labandelo recruited and offered AAA to Nico for sexual exploitation on July 15, 2021 in exchange for money. Labandelo informed AAA of the date, time, meeting place, and the consideration for the transaction. She even accompanied AAA to the meeting place, the hotel, and stayed inside Nico's car. <i>Second</i>. Labandelo was engaged in the business of providing women to customers for money. She received PHP 1,000.00 as consideration for facilitating the sexual encounter between AAA and Nico. She took advantage of AAA's vulnerability as a minor, who could be easily influenced by adults like herself, capable of asserting ascendancy over AAA. <i>Third</i>. Her actions established beyond reasonable doubt that she recruited AAA for purposes of prostitution. She had previously pimped AAA multiple times for a fee. <i>Finally</i>. AAA was a 13-year-old child at the time of the commission of the offense, having been born on <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxx</span>, 2008. Such minority has been sufficiently alleged in the Information and established through her Certificate of Live Birth. Evidently, Labandelo committed qualified trafficking in persons. </p><p> <b><i>Labandelo is guilty of child abuse</i></b></p><p> Section 10(a) of Republic Act No. 7610 provides that "a person who shall commit any other acts of child abuse, cruelty, or exploitation or be responsible for other conditions prejudicial to the child's development shall suffer the penalty of <i>prision mayor</i> in its minimum period." Under Section 3(b), "child abuse" refers to the maltreatment, whether habitual or not, of the child which includes any act by deeds or words which debases, degrades or demeans the intrinsic worth and dignity of a child as a human being.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> Here, Labandelo enticed AAA to receive money in exchange for her dignity. Labandelo's actions, beginning with her initial conversations with AAA, gaining her trust, then delivering her to Nico, and accepting payment for the sexual intercourse, debased AAA's intrinsic worth and dignity as a child and human being. There was clearly an intent to demean which resulted in AAA's exposure to prostitution. </p><p> AAA positively identified Labandelo as the person who offered to give her PHP 2,000.00 in exchange for having sexual intercourse with Nico on July 15, 2021, while she was then only 13 years old as shown in her Certificate of Live Birth. Both the trial court and the appellate court found her testimony to be straightforward and credible. It is settled that the testimonies of child-victims are given full weight and credit, since youth and immaturity are generally badges of truth. The revelation of innocent children whose chastity has been abused deserves full credit as they could only have been impelled to tell the truth, especially in the absence of proof of ill motive.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></p><p> AAA's categorical testimony and positive identification prevail over Labandelo's unsubstantiated denial. Notably, although Labandelo claimed she first met AAA on July 15, 2021, she had already come up with the call sign "Mahal" for her.</p><p> AAA's supposed delay in reporting the July 15, 2021 incident should not be taken against her. Much like victims of sexual abuse or rape, trafficking victims react differently when confronted with such shocking and traumatizing experiences. A young, innocent, and frail little girl like AAA cannot be expected to act like an adult who would know what to do under such difficult circumstances.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></p><p> The Court respects the trial court's factual determination and conclusion that the testimony of AAA, is credible and convincing<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> since it had the opportunity to observe first hand her conduct and demeanor while testifying. More so because such findings carry the full concurrence of the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> With the credibility of AAA firmly established, the courts below did not err in finding Labandelo guilty beyond reasonable doubt of the charges.</p><p> <b><i>Penalty and Damages </i></b></p><p> For the crime of qualified trafficking in persons under Section 4(a) in relation to Section 6(a) of Republic Act No. 9208, as amended by Republic Act No. 10364, the Court of Appeals correctly imposed the penalty of life imprisonment and a fine of PHP 2,000,000.00 pursuant to Section 10(e) of Republic Act No. 10364. The award of PHP 500,000.00 as moral damages and PHP 100,000.00 as exemplary damages with legal interest of 6% per annum from finality of this Decision until fully paid, in accord with <i>People v. Valencia</i>,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> is likewise proper.</p><p> For other acts of child abuse under Section 10(a) of Republic Act No. 7610, the imposable penalty is<i> prision mayor</i> in its minimum period, or six years, and one day to eight years. In the absence of any modifying circumstances and applying the Indeterminate Sentence Law, the minimum penalty should be within the range of<i> prision correccional</i> in its maximum period, or four years, two months, and one day to six years. While the maximum term should be within the medium period of the imposable penalty of <i>prision mayor</i> in its minimum period, or six years, eight months, and one day to seven years and four months. The penalty of four years, nine months and 11 days of <i>prision correccional</i>, as minimum, to six years, eight months and one day of <i>prision mayor</i>, as maximum, is within the range, hence, proper.</p><p> In addition, the Court imposes a fine in the amount of PHP 15,000.00, in accordance with Section 31(f)<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> of Republic Act No. 7610, in furtherance of the law's objective to provide special protection to children and to assist in the rehabilitation of child victims.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></p><p> <b>ACCORDINGLY</b>, the Appeal is <b>DENIED</b>. The Decision dated April 16, 2024 of the Court of Appeals in CA-G.R. CR-HC No. 17722 is <b>AFFIRMED</b> with <b>MODIFICATION</b>. </p><p> In Criminal Case No. 2021-567FC, accused-appellant Monica Labandelo <i>y</i> Elayda a.k.a. "Monica Corum" is found <b>GUILTY</b> of qualified trafficking in persons under Section 4(a) in relation to Section 6(a) of Republic Act No. 9208, as amended by Republic Act No. 10364. She is sentenced to life imprisonment. She is ordered to <b>PAY</b> a fine of PHP 2,000,000.00. She is further ordered to <b>PAY</b> AAA PHP 500,000.00 as moral damages and PHP 100,000.00 as exemplary damages. These monetary awards shall earn 6% interest per annum from finality of this Decision until fully paid. </p><p> In Criminal Case No. 2041-569FC, accused-appellant Monica Labandelo <i>y</i> Elayda a.k.a. "Monica Corum" is found <b>GUILTY</b> of violation of Section 10(a) of Republic Act No. 7610 and sentenced to imprisonment of four years, nine months and 11 days of <i>prision correccional</i>, as minimum, to six years, eight months, and one day of <i>prision mayor</i>, as maximum, and to pay a PHP 15,000.00 fine. </p><p> <b>SO ORDERED.</b> </p><p><i>Leonen, SAJ. (Chairperson), J. Lopez, Kho, Jr</i>., and <i>Villanueva, JJ</i>., concur.<br><br></p><p> </p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-5. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 10-31. Penned by Associate Justice Edwin D. Sorongon and concurred in by Associate Justices Ruben Reynaldo G. Roxas and Eduardo S. Ramos, Jr., Seventh Division, Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Otherwise known as the "Anti-Trafficking in Persons Act of 2003," approved on May 26, 2003.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> An Act Expanding Republic Act No. 9208, approved on February 6, 2013.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> An Act Providing for Stronger Deterrence and Special Protection Against Child Abuse, Exploitation and Discrimination, Providing Penalties for its Violation, and for Other Purposes, approved on June 17, 1992. In line with Amended Administrative Circular No. 83-2015, as mandated by Section 4(a), in relation to Section 6(a) of Republic Act No. 9208, as amended by Republic Act No. 10364, and of Section 10(a) of Republic Act No. 7610, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i>, p. 11.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 11-12.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 38. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 12-16.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 16. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Spelled as "Bryan" in the records. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Rollo</i>, pp. 12-13.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 13-14. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 14-15. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 15-16. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 16. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 37-50. Penned by Presiding Judge Gemma Theresa B. Hilario-Logronio, Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Zambales. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 45-49. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 49-50. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 10-31.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 3. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 63-67. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 56-61. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Sec. 3. <i>Definition of Terms</i>. - As used in this Act: </p><blockquote> <p> (a) Trafficking in Persons - refers to the recruitment, obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders by means of threat, or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person for the purpose of exploitation which includes at a minimum, the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs. </p> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>People v. San Miguel</b>, 887 Phil. 777, 788-789 (2020) [Per J. Inting, Second Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Sec. 4. <i>Acts of Trafficking in Persons</i>. - It shall be unlawful for any person, natural or juridical, to commit any of the following acts: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">(a)</div></td> <td width="95%"><div align="justify">To recruit, obtain, provide, transport, transfer, harbor, or receive a person by any means, including those done under the pretext of domestic or overseas employment or training or apprenticeship, for the purpose of prostitution, pornography, or sexual exploitation;</div></td> </tr> </tbody></table> <p>. . . .</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Republic Act No. 9208, sec. 3(b), as amended, provides: </p><p> Sec. 3. <i>Definition of Terms</i>. â As used in this Act: </p><p> </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td colspan="2">. . . . </td> </tr> <tr valign="top"> <td width="5%"><div align="justify">(b)</div></td> <td width="95%"><div align="justify"><i>Child</i> - refers to a person below eighteen (18) years of age or one who is over eighteen (18) but is unable to fully take care of or protect himself/herself from abuse, neglect, cruelty, exploitation, or discrimination because of a physical or mental disability or condition. </div></td> </tr> </tbody></table> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Republic Act No. 7610, sec. 3(b), provides:</p> <blockquote> <p> Sec. 3. <i>Definition of Terms</i>. â . . </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td colspan="3">. . . . </td> </tr> <tr valign="top"> <td width="5%"><div align="justify">(b)</div></td> <td colspan="2"><div align="justify">"Child abuse" refers to the maltreatment, whether habitual or not, of the child which includes any of the following: </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td width="4%"><div align="justify">(1)</div></td> <td width="91%"><div align="justify">Psychological and physical abuse, neglect, cruelty, sexual abuse and emotional maltreatment, </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">(2)</div></td> <td><div align="justify"><b>Any act by deeds or words which debases, degrades or demeans the intrinsic worth and dignity of a child as a human being</b>[.] (Emphasis supplied)</div></td> </tr> </tbody></table> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Brozoto v. People</b>, 901 Phil. 265, 78 (2021) [Per J. Lopez, J., Third Division]. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>People v. Sonico</b>, 240 Phil. 398, 403 (1987) [Per J. Padilla, Second Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>People v. Hirang</b>, 803 Phil. 277, 290 (2017) [Per J. Reyes, Third Division]. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Castillano v. People, G.R. No. 222210</b>, June 20, 2016 [Notice, Second Division]; <b>People v. XXX, G.R. No. 252294</b>, May 5, 2021 [Notice, First Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> 904 Phil. 518 (2021) [Per J. Leonen, Third Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Sec. 31. <i>Common Penal Provisions</i>. -</p> <blockquote> <p> . . . .<br> (f) A fine to be determined by the court shall be imposed and administered as a cash fund by the Department of Social Welfare and Development and disbursed for the rehabilitation of each child victim, or any immediate member of his family if the latter is the perpetrator of the offense.</p> </blockquote><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>XXX271940 v. People, G.R. No. 271940</b>, January 22, 2025 [Per J. Lopez, J., Second Division]; <b>Villanueva v. People</b>, 950 Phil. 32, 42 (2024) [Per J. Kho, Jr., Second Division].</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

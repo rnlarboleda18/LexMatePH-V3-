@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 276186 - GDS SECURITY AGENCY, INC. AND MARJORIE ANNE SUN-NG, PETITIONERS, VS. HILDA E. BULIBULI AND MARICEL O. ORTEGA, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70261' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 276186, October 29, 2025 ]</H2>
+			<H3>GDS SECURITY AGENCY, INC. AND MARJORIE ANNE SUN-NG, PETITIONERS, VS. HILDA E. BULIBULI AND MARICEL O. ORTEGA, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by GDS Security Agency, Inc. (<b>GDS Security</b>) and its General Manager, Marjorie Anne Sun-Ng (<b>Marjorie</b>), assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated April 30, 2024, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 12, 2024, of the Court of Appeals (<b>CA</b>) in CA-G.R. SP No. 16305. The CA reversed the National Labor Relations Commission (<b>NLRC</b>) Decision,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated June 23, 2023, and held that Hilda E. Bulibuli (<b>Hilda</b>) and Maricel O. Ortega (<b>Maricel</b>) were constructively dismissed from employment. GDS Security prays for the reversal of the CA ruling, contending that no illegal dismissal took place and that Hilda and Maricel are not entitled to any monetary relief.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center><b><i>The Facts</i></b>&nbsp;&nbsp;</center>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Employment background and the "Chorizo Incident"</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Hilda and Maricel were employed as security guards by GDS Security, a duly licensed security agency. Maricel was hired in March 2015, while Hilda commenced employment in July 2016. Both were assigned as security screening officers at the Cebu Port Authority (<b>CPA</b>) passenger terminal in Cebu City, working the afternoon shift. Their primary duties included screening passengers and baggage and enforcing port security protocols.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>On November 19, 2021, an incident occurred at CPA's Pier 3 terminal involving a shipment of locally made sausages or "chorizo." During the morning shift, Security Guard and X-ray Operator Kent Vinalon (<b>XO Vinalon</b>) intercepted a passenger, Mary Caroline Depositario (<b>Caroline</b>), who was carrying about 12 kilograms of chorizo as <i>pasalubong</i>. Citing CPA regulations, XO Vinalon held the chorizo for improper packaging and lack of a purchase receipt. Caroline would be effectively compelled to leave behind her chorizo to be allowed to travel. However, XO Vinalon and another guard, XO Chud Francis Abadlano, demanded that Caroline "share" six dozen chorizo with them as a condition for clearing the rest. Pressed by circumstances, Caroline acceded and even signed a waiver purporting that she "voluntarily" gave the chorizo. After Caroline's departure for Iloilo, the involved guards proceeded to cook some of the extorted chorizo within the terminal premises, despite a strict prohibition on cooking inside the port.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Although Hilda and Maricel were not among the morning shift guards who extorted the chorizo, they admittedly partook of the chorizo and did nothing to stop or report the cooking of the chorizo by their colleagues during the succeeding shifts. The cooking produced a pungent odor that spread within the passenger terminal, causing a stir among port officials and travelers. This prompted the CPA management to call the attention of GDS Security and demand an investigation, as the incident flagrantly violated port regulations.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup>&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Internal investigation and relief from post</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>GDS Security immediately conducted an inquiry into the "chorizo incident." On the same date, Hilda, Maricel, and the other guards on duty were orally instructed by their detachment-in-charge, Roshen Mae Solatorio, to submit a collective incident report. Hilda and Maricel complied and only then learned from colleagues that the chorizo came from the earlier extortion by the morning shift. The next day, November 20, 2021, GDS Security required the guards to submit individual written explanations. Hilda and Maricel again complied, each handwriting a letter admitting their lapse of judgment in not objecting to the cooking inside the terminal and expressing their remorse.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On November 25, 2021, Marjorie, as GDS General Manager, issued a Memorandum/Investigation Report finding that several security personnel, including Hilda and Maricel, had committed infractions in connection with the incident. The investigation concluded that Hilda and Maricel, while not the original extortionists, were nonetheless culpable as principals for failing to prevent or report the wrongdoing that occurred in their presence. It was noted that cooking inside the terminal was strictly forbidden, and Hilda and Maricel, as seasoned guards, should have taken action to enforce this rule. The report recommended disciplinary measures: the guards directly involved in the extortion were to be terminated, or at least, relieved from their CPA posts, while others who acted as accomplices or accessories, including those who allowed the cooking, would face suspensions or reprimands.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>This internal report was submitted to the CPA's security division for review. On the same date, the CPA's Acting Security Manager, Police Superintendent Arche M. Guinitaran, issued a notice approving the recommended penalties. In compliance, GDS Security immediately relieved Hilda and Maricel from their assignment at the CPA terminal effective November 25, 2021. They were pulled out and placed on "floating status," but notably not terminated from employment. GDS Security management directed Hilda and Maricel to report to its head office for further instructions and "evaluation of their attitude and behavior," indicating that they would be considered for reassignment to a new post after due evaluation.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Hilda and Maricel reported to GDS Security's Cebu office as instructed. However, what transpired is disputed. According to Hilda and Maricel, when they arrived at the office, a certain Major Rindon, a corporate adviser of GDS Security, spoke to them by phone and gave them an ultimatum: either submit a resignation letter or remain on floating status while waiting for a new assignment that "will probably not happen." Hilda and Maricel alleged that a GDS Security staff member even handed them a blank sheet of paper and urged them to write resignation letters, which they refused to do. Instead, they opted to wait for reassignment, insisting that they had done nothing warranting termination. Hilda and Maricel claimed that GDS Security refused to give them any written documentation of their relief or the investigation findings when they did not resign.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On the other hand, GDS Security denied that they ever asked for any resignation. They maintained that Hilda and Maricel were simply on "off-detail" status pending reassignment and that GDS Security had no intent to terminate them. Indeed, GDS Security emphasized that no notice of termination was ever issued to either Hilda or Maricel. The relief from the CPA post was, according to GDS Security, a legitimate exercise of management prerogative in light of Hilda and Maricel's admitted infraction, but it was not a dismissal from employment.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup>&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Reassignment offers and return-to-work orders</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>For a few months after November 2021, Hilda and Maricel remained on floating status (off-detail). During this period, GDS Security sought new postings where Hilda and Maricel's services could be utilized. By early 2022, GDS Security had an available security post at the Civil Aviation Authority of the Philippines (<b>CAAP</b>) facility in Bantayan Island, Cebu.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On February 18, 2022, the parties met at the Regional Arbitration Branch VII of the NLRC for a mandatory conciliation conference under the Single Entry Approach (<b>SEnA</b>), upon a request filed by Hilda and Maricel solely for the release of their 13th month pay for 2021. At that SEnA conference, GDS Security immediately paid Hilda and Maricel's 13th month pay. Both Hilda and Maricel signed a Quitclaim and Release on that date, February 18, 2022, acknowledging receipt of their 13th month pay and releasing GDS Security from further claims with respect to that specific monetary benefit. Notably, the quitclaim did not cover claims for illegal dismissal or other causes of action, as no such claims had yet been made at that time.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>During the same SEnA meeting, GDS Security officials verbally informed Hilda and Maricel that a new assignment was available for them at CAAP Bantayan Island. Hilda and Maricel were instructed to proceed to GDS Security's office after the conference to arrange their deployment to Bantayan Island. According to GDS Security, this constituted their first notice to return to work. However, Hilda and Maricel did not report to the office after the February 18 meeting.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>When Hilda and Maricel failed to appear to process their deployment, GDS Security sent formal Return to Work (<b>RTW</b>) Orders via registered mail. On March 5, 2022, GDS Security mailed individual RTW letters to Hilda and Maricel at their last known addresses on record. These letters directed each of them to report to the GDS Security office on or before March 16, 2022 for reassignment to the CAAP Bantayan Island post. The letters warned that failure to report within the specified period would be taken as lack of interest. GDS Security asserts that these RTW orders, which clearly specified the available client posting at CAAP Bantayan Island, were sent well within six months of Hilda and Maricel's relief from CPA. Copies of the RTW Orders and the registry mailing receipts were later submitted and are part of the record.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>The record shows that Maricel admitted receiving two RTW Order letters by mail, albeit belatedly, sometime in April and May 2022. Maricel claimed that by the time she actually received each letter, the 10-day reporting period mentioned therein had already elapsed. Nonetheless, Maricel said she immediately went to GDS Security's office after receiving the letters. There, however, she was allegedly told that the Bantayan assignment was no longer available because she reported too late. She further alleged that a GDS Security staff even chided her for not immediately receiving the mailed letter, implying it was her fault that the opportunity was missed.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>As for Hilda, the evidence of her receipt of the RTW Order is less direct. GDS Security presented the registry receipt showing that Hilda's RTW letter was mailed to her address, which is the same address Hilda used in all her pleadings. Hilda, however, did not expressly admit in her pleadings that she got the letter. In their Labor Arbiter complaint, Hilda vaguely stated that she "waited for reassignment for more than eight months and made constant follow-ups" but was never given a new post. She neither confirmed nor denied receiving a RTW notice. GDS Security contended that Hilda's silence on whether she received the mailed RTW Order is tellingâhad she truly never received it, she would have explicitly said so, as Maricel did. GDS Security thus surmised that Hilda likely received the letter but chose to ignore it or, at least, did not respond to it.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>From GDS Security's perspective, having heard nothing from Hilda and Maricel by mid-2022 despite the RTW Orders, it appeared that they were uninterested in returning to work. Unbeknownst to GDS Security, Hilda and Maricel during this time secured new jobs elsewhere out of necessity. By the time they later filed their position paper in the illegal dismissal case, Hilda and Maricel admitted they had been constrained to find other employment while awaiting GDS Security's action.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br><i>Complaint for Illegal Dismissal</i><br><br>On August 31, 2022, Hilda and Maricel, through counsel, filed before the NLRC Regional Arbitration Branch VII a Complaint for Illegal Dismissal with money claims against GDS Security and Marjorie. They alleged that GDS Security had effectively terminated them back in late 2021 by not giving them any new posting within a reasonable time. They claimed they were placed on indefinite "floating" status from November 25, 2021 onwards, and since more than six months had passed without an assignment, the law deems them constructively dismissed. In addition, they averred that GDS Security's acts, such as pressuring them to resign and then giving them illusory RTW notices, evinced an intention to dismiss them.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Hilda and Maricel maintained that they never abandoned their jobs, pointing to their repeated inquiries and eventual filing of the complaint as proof of their desire to return to work. They argued that they committed no grave offense to warrant termination. At most, they said, accepting a kilo of chorizo, which they did not solicit, was a minor lapse not equal to a just cause for dismissal. They stressed that the actual extortion was done by other guards without their knowledge. Thus, they prayed to be declared illegally dismissed and sought separation pay in lieu of reinstatement, since they deemed reinstatement impractical due to strained relations and because they had found other work, full backwages, refund of their cash bonds, and attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>GDS Security, in its defense, reiterated that no dismissalâactual or constructiveâever took place. It argued that the relief of respondents from the CPA post was a valid exercise of management prerogative in light of the chorizo incident, a fact even the labor tribunals acknowledged. It pointed out that after pulling Hilda and Maricel out of CPA, they consistently acted in good faith to retain respondents in their employ: paying their accrued benefits, refraining from terminating them, and making genuine efforts to assign them to a new client within the six-month floating period. GDS Security cited the two RTW Orders directing Hilda and Maricel to report for the Bantayan Island posting, claiming that it was Hilda and Maricel who failed to report and thus caused their own prolonged off-detail status. According to GDS Security, the burden is on the employees to prove that they were dismissed, and Hilda and Maricel had not shown any clear act of dismissal by GDS Security â in fact, all evidence showed GDS Security wanted them back to work. GDS Security further contended that even assuming <i>arguendo</i> that Hilda and Maricel were considered terminated, such termination was for just cause given their admitted failure to perform their duties properly during the "chorizo incident," which compromised the client's rules and the agency's reputation. However, GDS Security emphasized that no dismissal was intended or implemented, making any discussion of just cause or due process somewhat moot in its view.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br><center><b><i>The Ruling of the Labor Arbiter</i></b></center><br>In a Decision,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated January 11, 2023, Executive Labor Arbiter Emiliano C. Tiongco, Jr. ruled in favor of Hilda and Maricel. The Labor Arbiter held that Hilda and Maricel had attained regular status and thus enjoyed security of tenure under Article 295<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> of the Labor Code. As such, they could not be terminated without just or authorized cause and without due process.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>The Labor Arbiter recognized that GDS Security had a valid reason to relieve Hilda and Maricel from their post at the CPA terminal, as they indeed committed an infraction by permitting the unauthorized on-site cooking of chorizo. However, the Labor Arbiter stressed that GDS Security thereafter failed to provide Hilda and Maricel with any subsequent work assignment within the allowable six-month floating period. Hilda and Maricel were placed on temporary off-detail status beginning November 25, 2021. Accordingly, GDS Security had until May 25, 2022, to either recall Hilda and Maricel or assign them to new posts. Their continued non-deployment beyond this period thus amounted to constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Although GDS Security submitted the RTW Order dated March 5, 2022, the Labor Arbiter found this insufficient to refute the claim of constructive dismissal. Specifically, the Labor Arbiter observed that GDS Security offered no proof that Hilda actually received any notice instructing her to report for reassignment. While Maricel did receive RTW letters, they arrived after the scheduled reporting dates due to delays attributable to postal delivery rather than her own fault. Furthermore, upon promptly reporting after receiving these delayed notices, Maricel was informed that no assignments were available. GDS Security also failed to substantiate its claim that Hilda had been verbally instructed to report to the office earlier (in February 2022), as no written record of such notice was presented.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>The Labor Arbiter found persuasive Hilda and Maricel's allegation that GDS Security's corporate adviser intimated that a new assignment was unlikely to materialize, effectively pressuring them to resign. This was construed as indicative of GDS Security's intent to terminate Hilda and Maricel's employment without adhering to due process. Hence, the Labor Arbiter concluded that respondents were illegally and constructively dismissed on May 25, 2022, upon expiration of the six-month floating status period, owing exclusively to GDS Security's failure to reassign them to any client.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Further, the Labor Arbiter held that GDS Security violated procedural due process requirements. Hilda and Maricel were not served written notices detailing any formal charges or any decision to terminate their employment. The November 25, 2021 Memorandum, which summarized the investigation results and recommended their relief from duty, lacked proof of proper service to Hilda and Maricel. Although GDS Security produced a copy of this Memorandum marked "refused to sign," no further details were provided regarding who purportedly refused or the circumstances of such refusal. Moreover, no subsequent written termination notice was issued. Consequently, even assuming the existence of a valid cause for dismissal, GDS Security's failure to comply with the mandated twin notice requirement rendered the dismissal procedurally infirm.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>In view of these determinations, the Labor Arbiter adjudged Hilda and Maricel entitled to the statutory remedies for illegal dismissal, namely reinstatement and full backwages under Article 294 of the Labor Code. However, given Hilda and Maricel's express preference against reinstatement, attributable to strained employer-employee relations and their subsequent employment elsewhere, the Labor Arbiter granted separation pay instead of reinstatement. The separation pay was computed at one month's salary for each year of service rendered. Additionally, the Labor Arbiter awarded full backwages from the date of constructive dismissal on May 25, 2022, until the promulgation of its Decision on January 11, 2023, without deductions for interim earnings.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>The Labor Arbiter likewise granted Hilda and Maricel's claim for refund of cash bonds, amounting to PHP 11,000.00 for Hilda and PHP 10,500.00 for Maricel, corresponding to security deposits deducted during their employment. GDS Security did not contest this obligation. Lastly, the Labor Arbiter awarded attorney's fees equivalent to 10% of the total monetary award, recognizing the necessity for Hilda and Maricel to engage counsel to vindicate their employment rights.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>GDS Security appealed to the NLRC.<br><br><center><b><i>The Ruling of the NLRC</i></b></center><br>In a Decision,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated June 23, 2023, the NLRC partially granted the appeal and modified the Labor Arbiter's ruling. It disagreed with the Labor Arbiter's finding of illegal dismissal, holding instead that Hilda and Maricel's termination was justified on the ground of loss of trust and confidence, albeit effected in violation of procedural due process.<br><br>The NLRC anchored its reasoning on Article 297(c) of the Labor Code, which permits an employer to terminate employment on the ground of "fraud or willful breach of the trust reposed in [an employee]." While ordinarily applicable to fiduciary rank-and-file employees handling money or valuable property, the NLRC emphasized that classification of a position as one of trust ultimately depends upon the nature and scope of the employee's duties. Hilda and Maricel, in their capacity as security personnel, were entrusted with securing the CPA terminal, enforcing its security regulations, and maintaining peace and order. Such responsibilities necessarily entailed a high degree of trust and confidence in their integrity and judgment, notwithstanding their status as rank-and-file guards.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>The NLRC found that Hilda and Maricel breached the trust of their employer and the client when they failed to prevent or report their colleagues' blatant violation of CPA regulations, specifically the unauthorized cooking of confiscated chorizo on-site. Worse, Hilda and MariceI partook of the cooked chorizo, thereby demonstrating gross neglect of duty and misconduct. The NLRC underscored that security personnel, by virtue of their role, are duty-bound to immediately intervene or, at least, report such breaches. Hilda and Maricel's omission to perform these basic duties allowed the violation to transpire under their watch, directly undermining the client's established security protocols. The NLRC thus concluded that Hilda and Maricel's actions constituted a valid ground for termination, either as serious misconduct or as willful breach of trust.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Given the presence of a just cause, the NLRC held that there was no illegal dismissal, consequently disqualifying Hilda and Maricel from entitlement to backwages and separation pay. It specifically pointed out that a finding of constructive dismissal is incompatible with the existence of a justifiable cause for termination, criticizing the Labor Arbiter for holding the dismissal unlawful despite clear evidence supporting a legitimate ground.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Nevertheless, the NLRC concurred with the Labor Arbiter in ruling that GDS Security violated procedural due process. The NLRC found that GDS Security failed to issue the mandatory written notices to Hilda and Maricelâthe first notice specifying the charges, and the second notice formally notifying them of termination. GDS Security's manner of handling Hilda and Maricel's employment statusâby removing them from their post and effectively placing them on indefinite floating statusâcircumvented these procedural safeguards. Citing <i>Unilever Philippines, Inc. v. Rivera</i><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> and adhering to the guidelines in <i>Agabon v. NLRC</i>,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> the NLRC underscored that while procedural lapses do not invalidate a dismissal predicated on a just cause, such procedural deficiencies entitle the employees to nominal damages as a corrective measure against the employer's violation of statutory requirements.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>Accordingly, the NLRC deleted the awards for backwages, separation pay, and attorney's fees, given its finding that Hilda and Maricel were not illegally dismissed. It affirmed the refund of Hilda and Maricel's cash bonds, an issue GDS Security neither disputed nor opposed. Additionally, as a consequence of GDS Security's non-compliance with procedural due process requirements, the NLRC awarded nominal damages of PHP 5,000.00 each to Hilda and Maricel.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>The dispositive portion of the NLRC Decision reads:<blockquote>WHEREFORE, the Decision of the Honorable Labor Arbiter Emiliano C. Tiongco, Jr., on 11 January 2023 is MODIFIED, in that We find the complainants were validly terminated without observance of procedural due process, hence, the award of backwages, separation pay, and attorney's fees are DELETED. However, the refund of cash bond is AFFIRMED, and the complainants are AWARDED nominal damages.<br><br>Respondent GDS Security Agency, Inc. is, hereby, ORDERED to pay complainants the total amount of PESO: THIRTY-ONE THOUSAND FIVE HUNDERED xx/xx ([PHP] 31,500.00), representing complainants' cash bond and nominal damages.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup></blockquote>Hilda and Maricel moved for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> which was denied.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> They then elevated the case via a Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> to the CA, arguing that the NLRC committed grave abuse of discretion in ruling that they were validly dismissed for just cause. They contended that the NLRC's finding of just cause was unsupported by evidence and was at odds with GDS Security's own consistent admission that no dismissal took place.<br><br><center><b><i>The Ruling of the CA</i></b></center><br>The CA, in its Decision,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> dated April 30, 2024, granted the Petition for <i>Certiorari</i> filed by Hilda and Maricel, reversing the NLRC's ruling. The CA determined that the NLRC committed grave abuse of discretion in concluding that Hilda and Maricel were validly dismissed on ground of loss of trust and confidence. The CA found this conclusion unsupported by evidence and law, contrary to GDS Security's consistent stance throughout the proceedings.<br><br>Initially, the CA addressed the threshold question of whether an actual dismissal had transpired. Upon review, the CA noted an absence of explicit evidence that GDS Security ever terminated Hilda and Maricel's employment. GDS Security consistently asserted that Hilda and Maricel were only temporarily relieved from their assignments at the CPA terminal, with no indication of a permanent severance of employment. Significantly, the actions undertaken by GDS Securityâdirecting respondents to report for evaluation and subsequently issuing RTW noticesâwere inconsistent with the notion of actual dismissal. The CA emphasized that if GDS Security genuinely intended to terminate respondents over the November 2021 incident, it would not have offered Hilda and Maricel the option to await new assignments nor issued RTW notices in 2022. Furthermore, the conversations between Major Rindon, Hilda, and Maricel, suggesting they could either resign or wait for reassignment, confirmed that the employment relationship remained intact at that time. Consequently, the CA ruled that the NLRC's finding of actual dismissal was unsubstantiated.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>Nevertheless, the CA found that Hilda and Maricel were constructively dismissed due to GDS Security's failure to reassign them within the permissible six-month floating period. Invoking established labor jurisprudence specific to the security industry, the CA reiterated that a floating status exceeding six months constitutes constructive dismissal by analogy under Article 301 of the Labor Code. Given that Hilda and Maricel were placed on floating status on November 25, 2021, the CA held that constructive dismissal took effect by May 25, 2022, in the absence of any effective reassignment or reinstatement by that date. Thus, the Complaint filed on August 31, 2022 was deemed timely, as the constructive dismissal had ripened only a few months prior.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>Regarding GDS Security's contention that it attempted to recall Hilda and Maricel within the six-month window, the CA found Hilda and Maricel's narrative more credible. The CA stressed that GDS Security failed to provide definitive proof that Hilda received the RTW noticeâa mere mailing registry receipt was offered, which did not prove actual delivery. While Maricel did receive RTW letters, her compliance proved futile; she reported as instructed but was refused deployment on the pretext that she reported too late due to delayed mail service. The CA viewed these circumstances as incompatible with a genuine intent to reinstate Hilda and Maricel. Hilda and Maricel's prolonged floating status, their repeated efforts to secure assignments, and GDS Security's failure to demonstrate the genuine availability of alternative postings all reinforced the conclusion of constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>Additionally, the CA rejected GDS Security's defense of abandonment. It underscored that abandonment requires a clear intention to sever the employment relationship, which Hilda and Maricel never exhibited. On the contrary, they refused to resign despite alleged pressure, continually inquired about available postings, and ultimately filed an illegal dismissal complaint. The CA invoked settled jurisprudence that mere absence from work, particularly due to inadequate notice or employer-initiated refusals, does not constitute abandonment. Hilda and Maricel's initial pursuit of reinstatement, before later opting for separation pay, indicated their desire to remain employed, negating any intent to abandon their jobs.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>Accordingly, the CA concluded that GDS Security's conduct, characterized by deliberate inaction and protracted floating status without genuine reassignment efforts, left. Hilda and Maricel with no reasonable choice but to view themselves as terminated. This scenario, the CA held, aligns with the definition of constructive dismissal, where the employer's acts effectively force employees to discontinue employment against their will.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>Finally, the CA explicitly rejected the NLRC's belated theory of "just cause" based on loss of trust, noting that GDS Security had never asserted this argument during the proceedings. GDS Security consistently maintained that no dismissal occurred, rendering the NLRC's introduction of an unpleaded ground of dismissal improper. In any event, assuming <i>arguendo</i> that loss of trust was alleged, the CA reasoned that Hilda and Maricel's singular infractionâallowing the cooking of chorizoâwhile a lapse in judgment, lacked the malicious intent or corruption necessary to constitute loss of trust. The CA observed that there was no sufficient causal link between Hilda and Maricel's duties as security screening officers and the isolated regulatory violation they committed.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>Accordingly, the CA granted full relief to Hilda and Maricel. It awarded backwages from the date of constructive dismissal until finality of judgment, and separation pay in lieu of reinstatement due to strained relations and subsequent employment elsewhere, computed from Hilda and Maricel's respective dates of hiring up to the finality of the Decision. The CA also ordered a refund of the cash bonds amounting to PHP 11,000.00 for Hilda and PHP 10,500.00 for Maricel, and attorney's fees of 10% of the total monetary award, recognizing that Hilda and Maricel were compelled to litigate to seek redress.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>The CA absolved Marjorie of personal liability, for lack of evidence of malice or bad faith on her part, thus holding GDS Security solely liable. Lastly, in accordance with prevailing jurisprudence, the CA imposed legal interest of 6% per annum on all monetary awards from the finality of the Decision until full payment.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>The dispositive portion of the CA Decision reads:<blockquote>ACCORDINGLY, the instant Petition for Certiorari is GRANTED. The Decision[,] dated June 23, 2023[,] and the Resolution[,] dated August 15, 2023[,] of the National Labor Relations Commission in NLRC Case No. VAC-05-000294-2023 are REVERSED and SET ASIDE.&nbsp;<br><br>Petitioners Hilda E. Bulibuli and Maricel Ortega are declared to have been constructively dismissed from employment. Private respondent GDS Security Agency, Inc. is ordered to pay petitioners:<blockquote>1. Full backwages computed from the date of constructive dismissal until finality of this Decision;<br><br>2. Separation pay computed from the dates petitioners commenced employment until the finality of this Decision;<br><br>3. Cash bond in the amount of [PHP] 11,000 for petitioner Hilda E [Bulibuli] and PHP [10,500.00] for petitioner Maricel Ortega; and<br><br>4. Attorney's fees equivalent to [10%] of the total award.</blockquote>The total monetary award shall be subject to interest at the rate of [6%] per annum from the finality of this Decision until full payment.<br><br>Let the record of the case be remanded to the Labor Arbiter for the proper computation of the award in accordance with this Decision.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></blockquote>GDS Security moved for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> which the CA denied in its Resolution,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> dated August 12, 2024, affirming its prior finding of constructive dismissal.<br><br>Hence, GDS Security filed the present Petition before the Court.<br><br><center><b><i>The Issues</i></b></center><br><i>First</i>, were Hilda and Maricel illegally dismissed from employment? Specifically, was GDS Security's act of placing Hilda and Maricel on floating status without reassigning them for over six months constitutive of constructive dismissal? Alternatively, was there neither an actual nor constructive dismissal, and it was Hilda and Maricel who abandoned or otherwise terminated their employment?<br><br><i>Second</i>, did the CA err in reversing the NLRC's finding of just cause?<br><br>a. Did Hilda's and Maricel's actions during the November 19, 2021 incident, constitute a valid ground for termination under Article 297<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> of the Labor Code?<br><br>b. Did GDS Security comply with the due process requirements for termination, and if not, what are the legal consequences thereof?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Court finds the Petition without merit.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Security of tenure and constructive dismissal: the six-month floating rule</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>At the outset, the Court underscores the constitutional guarantee of security of tenure afforded to all workers. Article XIII, Section 3<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> of the 1987 Constitution explicitly mandates that the State shall assure workers of security of tenure. In amplification thereof, Article 294<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> of the Labor Code provides that no regular employee shall be terminated without just or authorized cause, and only upon compliance with due process requirements. Consequently, an employee who is unlawfully dismissed is entitled to reinstatement and backwages. In cases of alleged illegal dismissal, the burden lies with the employer to prove that the termination was valid and procedurally compliant. Nevertheless, before this burden is triggered, the employee must first substantiate, by substantial evidence, the fact of dismissal itself. The presence of an actual or constructive dismissal is thus an essential prerequisiteâindeed, a <i>sine qua non</i>âto the claim of illegal dismissal. Absent proof of dismissal, there can be no valid claim of illegality, and the employer is not obliged to justify a termination that it maintains never occurred.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>Constructive dismissal, as an exception to the requirement of explicit termination, arises from circumstances created by the employer that render continued employment impossible, unreasonable, or unduly difficult, thereby compelling the employee to involuntarily resign or abandon the employment. While the employee in such cases is not explicitly terminated, the actions of the employerâsuch as unwarranted demotion, unjustified diminution of salary, harassment, or indefinite suspensionâmay amount to constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Pertinent jurisprudence consistently recognizes that placing employees on indefinite floating status without pay, or beyond the legally permissible period, may constitute constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> In <i>Reyes v. RP Guardians Security Agency, Inc.</i>:<sup style="COLOR: RGB(255, 0, 0);">[63]</sup><blockquote>Temporary displacement or temporary off-detail of security guard is, generally, allowed in a situation where a security agency's client decided not to renew their service contract with the agency and no post is available for the relieved security guard. Such situation does not normally result in a constructive dismissal. <i>Nonetheless, when the floating status lasts for more than six [] months, the employee may be considered to have been constructively dismissed.</i> No less than the Constitution guarantees the right of workers to security of tenure, thus, employees can only be dismissed for just or authorized causes and after they have been afforded the due process of law.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> (Emphasis supplied; citations omitted)</blockquote>Specifically, within the context of security agencies, the practice of placing security guards on "off-detail" or "floating" status is recognized as lawful, given the unique operational characteristics of the security services industry. The employment status of security guards is inherently dependent upon the agency's client contracts. Thus, when a client contract expires or a guard is requested to be replaced, the security agency may legitimately place the guard on temporary floating status pending reassignment. Jurisprudentially, this arrangement is analogized to a temporary suspension of business operations, permissible under Article 301<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> of the Labor Code for a period not exceeding six months. Provided such status is <i>bona fide</i> and not a subterfuge to circumvent the employee's right to security of tenure, the employee remains employed, albeit generally without pay.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> The Court articulated this principle clearly in <i>Pido v. NLRC</i>:<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><blockquote>Verily, a floating status requires the dire exigency of the employer's bona fide suspension of operation of a business or undertaking. <i>In security services, this happens when the security agency's clients which do not renew their contracts are more than those that do and the new ones that the agency gets. Also, in instances when contracts for security services stipulate that the client may request the agency jar the replacement of the guards assigned to it even for want of cause, the replaced security guard may be placed on temporary "off-detail" if there are no available posts under respondent's existing contracts.</i><br><br><i>When a security guard is placed on a "floating status," he does not receive any salary or financial benefit provided by law.</i> Due to the grim economic consequences to the employee, the employer should bear the burden of proving that there are no posts available to which the employee temporarily out of work can be assigned.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> (Emphasis supplied)</blockquote>However, jurisprudence likewise establishes that failure to recall or reassign the employee within the prescribed six-month period constitutes constructive dismissal, thereby entitling the employee to separation pay and other reliefs mandated by law. The employee need not initiate any action, as the lapse of this period triggers the operation of law and the legal presumption of dismissal arises.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>The Court's pronouncement in <i>Tatel v. JLFP Investigation Security Agency, Inc.</i><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> succinctly illustrates this principle. Therein, the Court clarified that an off-detail security guard who is not reassigned within six months from the date of placement on floating status is considered constructively dismissed.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> The rationale behind this doctrine is clear: employers cannot indefinitely suspend employment relationships under the pretext of awaiting client availability, as doing so effectively undermines workers' constitutional right to security of tenure and to timely severance, should no suitable assignment materialize.<br><br>However, jurisprudence has evolved to balance the interests of both employer and employee, acknowledging that the expiration of the six-month period does not invariably result in automatic constructive dismissal. Instead, factual peculiarities and attendant circumstances must be carefully examined. Crucially, if the employer validly offers a specific reassignment within the six-month period, and the employee unjustifiably refuses to accept or report for such assignment, the prolonged floating status thereafter is no longer attributable to the employer. Simply stated, reasonable and timely efforts exerted by the employer to reassign the security guard absolve it from liability arising from the employee's subsequent inactivity or refusal to work.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>This nuanced doctrine was articulated clearly upon reconsideration in <i>Tatel</i><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> where the Court reversed its earlier finding of constructive dismissal. After reconsideration, the Court held that where the employer demonstrated it had assigned the guard to a specific client within the six-month period, yet the guard declined such assignment in expectation of a different posting, constructive dismissal could not be said to have occurred. Accordingly, two essential requisites were established by jurisprudence to absolve the employer of liability under similar circumstances: <i>first</i>, the employer must assign the security guard to a specific or particular posting within the six-month allowable period; and <i>second</i>, a general or vague RTW notice is insufficient. Compliance with these requisites demonstrates the employer's <i>bona fide</i> intent to preserve the employment relationship.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>In the present case, the timeline is clear. Hilda and Maricel were relieved of their CPA post on November 25, 2021. Under the six-month floating rule, GDS Security had until roughly May 25, 2022 to deploy them to a new assignment or otherwise resume their work. Yet by that date, neither Hilda nor Maricel had been reinstated or given any definitive posting. Indeed, it was only on March 5, 2022, or over three months into the floating period, that GDS Security made its first documented attempt to recall themâby sending out the RTW lettersâand those attempts were highly deficient. The record shows the following with respect to GDS Security's purported reassignment efforts:<ul><li><i>Registered-mail notices with no proof of receipt</i>: GDS Security sent RTW notices, dated March 5, 2022, to Hilda and Maricel via registered mail, giving them 10 days from the letters' date to report for deployment. However, GDS Security presented no registry return card or affidavit of service or other proof that these letters were actually received by the addressees in a timely manner. Absent proper proof of receipt, a notice sent by mail cannot be considered effective communication to the employee, especially for something as urgent as an RTW order.<br><br></li><li><i>Maricel's late receipt and frustrated compliance</i>: Maricel eventually did receive the mailed RTW letters, but only weeks after their issuanceâwell past the 10-day deadline. Despite the delay, through no fault of her own, Maricel acted in good faith: she immediately went to GDS Security's office upon receiving the notice, ready to accept the new assignment. At that point, however, GDS Security refused to deploy her, telling her that the Bantayan Island post was no longer available because she was "too late." In effect, by the time Maricel became aware of the offer, GDS Security had already treated the offer as lapsed. The Court cannot fault Maricel under these circumstancesâthe use of snail mail for an urgent RTW order, without any follow-up call or message, was a set-up doomed to fail. GDS Security did not hold the position open for even a short grace period beyond the arbitrary 1O-day window, thus ensuring that Maricel's attempt to comply would be futile.<br><br></li><li><i>Hilda's complete lack of notice</i>: Hilda, for her part, never received any RTW letter at all. GDS Security claims one was sent, but it offered no acceptable evidence of delivery or receipt. Hilda had been actively following up with the company during this time, yet GDS Security never personally informed her of any opening. Effectively, Hilda was left in the dark for the entire six-month period and beyond.<br><br></li><li><i>No meaningful alternative efforts by GDS Security</i>: Aside from the deficient mailed notices, GDS Security cite a supposed verbal offer made to Hilda and Maricel during a SEnA conference on February 18, 2022 for a posting at the CAAP in Bantayan.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> However, the CA and the Labor Arbiter found this claim dubious. GDS Security produced no written order or memorandum confirming that offer, and Hilda and Maricel deny that a concrete assignment was actually given at that meeting. Even assuming GDS Security mentioned a Bantayan post in February 2022, it admittedly did not deploy the guards at that time; at most, it told them to "wait" for further instructions, which never immediately came. In short, the supposed verbal redeployment remained unsubstantiated and unfulfilled.</li></ul>In light of the above, GDS Security clearly failed to recall or reassign Hilda and Maricel within the six-month floating period in any valid or effective manner. The burden of proof was on GDS Security to show that it made a timely, genuine offer of work within the allowable period, but GDS Security did not discharge that burden. Half-hearted measures, such as sending a letter by registered mail with an unreasonably short deadline and no proof of receipt, do not convince the Court that GDS Security was serious about putting these employees back to work. Indeed, the CA found, and the Court agrees, that GDS Security's actions appeared more aimed at building a defense than actually rehabilitating the employment relationship.<br><br>Accordingly, by May 26, 2022, the day after six months had elapsed with no successful recall, constructive dismissal had arisen by operation of law. At that point, Hilda and Maricel were justified in considering their employment terminated and seeking recourse. Constructive dismissal is "a cessation of work because continued employment is rendered impossible, unreasonable or unlikely," as when a clear discrimination, insensibility, or disdain by the employer has become unbearable to the employee.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> Here, it was not a single affirmative act of hostility by the employer, but rather a continuing neglect or refusal to provide work that forced Hilda and Maricel out. GDS Security's prolonged failure to deploy them, coupled with only token, ineffectual attempts at recall, left the employees with no viable option but to treat their situation as an illegal termination and file a complaint. Indeed, Hilda and Maricel did file a suit promptly after it became evident that no job was forthcoming by the eighth to ninth month of their floating status.<br><br>GDS Security's arguments to avoid this conclusion are unavailing. They insist that they acted in good faith by not immediately dismissing the guards in November 2021, and that they consistently tried to post them elsewhere. The Court appreciates that GDS Security did not summarily fire Hilda and Maricel at the outset. However, simply delaying a formal dismissal while keeping employees in limbo is not a course sanctioned by law. The law's requirement is clear: either reinstate/reassign the employee within six months or formally terminate with cause and due process by the end of that period. GDS Security did neither. It did not put Hilda and Maricel back to work within a reasonable time, nor did it serve notices of termination and grant separation pay after six months. As the CA aptly noted, GDS Security exceeded the allowable bounds of floating statusâkeeping [Hilda and Maricel] unpaid and unassigned well past six months with no clear resolution is not sanctioned by law. If GDS Security truly no longer trusted Hilda and Maricel, the proper course was to terminate them for cause with due process and pay whatever was due. If, on the other hand, GDS Security wanted to retain them, then it should have actually reassigned them or, if no assignment was immediately possible, at least communicated openly and recalled them as soon as possible. GDS Security did neitherâthus the termination is deemed illegal.<br><br>The Court therefore holds that the CA committed no error in ruling that Hilda and Maricel were constructively dismissed due to GDS Security's failure to reassign them within six months. By law, their protracted floating status entitles them to all the reliefs flowing from an unjustified dismissal.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Hilda and Maricel did not abandon their employment</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>GDS Security contends that Hilda and Maricel have only themselves to blame for their job loss, insinuating that Hilda and Maricel did not report as instructed and thereby abandoned their employment. The Court finds this contention devoid of merit, both factually and legally.<br><br>Abandonment of employment is a matter of the employee's intention, a deliberate and unjustified refusal to resume work. It is well-settled that to constitute abandonment, two elements must concur: (a) the employee's failure to report for work or absence for an extended period without valid reason, and (b) a clear intention to sever the employer-employee relationship. The second elementâthe intent to sever tiesâis the "more determinative" factor. Mere absence is not sufficient to prove abandonment; there must be evidence that the employee no longer wishes to work, as manifested by overt acts (e.g. statements or behavior indicating the employee has left the job for good). The burden of proof is on the employer to show the employee's deliberate intent to desert his or her position.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>In the case at bar, GDS Security has shown no proof of a genuine intent to abandon on the part of Hilda and Maricel. On the contrary, all evidence runs counter to any notion that these employees wanted to sever the relationship:<ul><li>When confronted on November 25, 2021 with the choice to resign or wait for a new assignment, both employees refused to resign. They chose to stay with the company and continue working, if work would be given. An employee intent on abandonment would likely have simply walked away or acquiesced to resignation; Hilda and Maricel did neither.<br><br></li><li>Hilda repeatedly contacted GDS Security in the ensuing months inquiring about re-posting opportunities. This persistent follow-up is inconsistent with an intention to abandon. One who has abandoned her job does not continuously ask her employer for an assignment.<br><br></li><li>Maricel took active steps to return to work. As detailed earlier, she went to the GDS Security office immediately upon receiving the RTW notices, albeit late, to try to report for duty. That she traveled a distance to accept a post, even after the lapse of the formal deadline, clearly demonstrates her desire to be employed, not to abandon her job.<br><br></li><li>Most tellingly, Hilda and Maricel filed a complaint for illegal dismissal as soon as it became apparent that GDS Security was not going to take them back. As numerous decisions have held, "an employee who forthwith takes steps to protest his layoff cannot, as a general rule, be said to have abandoned his work."<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> The act of filing a case for reinstatement or backwages is "proof enough of his [or her] desire to return to work, thus negating any suggestion of abandonment."<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> A person who truly intends to abandon employment does not initiate legal action to regain it.</li></ul>In contrast, GDS Security simply assumed abandonment without following through on any formal process. Generally, when an employer considers an employee to have abandoned his or her work, the proper step is to send a notice requiring the employee to explain his or her absence and cautioning that failure to report will be deemed abandonment, and thereafter to issue a notice of termination if the employee does not comply. This two-step notice process for termination applies even to cases of abandonmentâthe employer cannot just silently consider someone resigned; it must notify the employee and formally sever the tie. GDS Security did not send any such notices here.<br><br>The NLRC cited the case of <i>Samillano v. Valdez Security</i><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> where a guard was found to have abandoned his job after refusing a reassignment and ignoring multiple RTW notices. But the contrast with this case is stark. In <i>Samillano</i>, the guard was explicitly offered a new post, he unequivocally refused to report there, and the employer documented the refusal and eventually served a notice of termination for insubordination/abandonment. Here, Hilda and Maricel never willfully rejected a clear posting â no valid posting was effectively communicated to them. Also, GDS Security never issued a final notice terminating them for job abandonment or any cause. Thus, the factual basis and procedural steps that supported a finding of abandonment in <i>Samillano</i> are absent in the present case.<br><br>In sum, GDS Security's abandonment defense fails. It has not proven the essential element of deliberate intent to sever employment. On the contrary, the evidence demonstrates that Hilda and Maricel were holding on to their jobs and endeavoring to return. Moreover, as earlier determined, Hilda and Maricel's loss of work resulted from GDS Security's own failure to provide work, i.e., a constructive dismissal. It is doctrinally recognized that abandonment is incompatible with a claim of constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> One cannot logically argue that an employee both abandoned her job and was constructively pushed out of itâthese are opposite concepts. Here, all indications point to the latter: Hilda and Maricel did not abandon their work; they were left with no work.<br><br>The Court thus concurs with the CA that Hilda and Maricel did not abandon their employment.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>"Chorizo Incident" did not constitute just cause for dismissal under Article 297 of the Labor Code</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>GDS Security alternatively assert that, even if no formal dismissal letter was issued, they had just cause to terminate Hilda and Maricel due to the November 19, 2021 incident. They invoke loss of trust and confidence as the primary justification, and by implication also cite the guards' failure to perform their duty as serious misconduct or gross neglect. The Court notes that GDS Security never actually implemented a dismissal for cause at the time, but is using it as an <i>ex post facto</i> defense.<br><br>Article 297 of the Labor Code enumerates the just causes for an employer to terminate an employee: (a) serious misconduct or willful disobedience of lawful orders, (b) gross and habitual neglect of duties, (c) fraud or willful breach of the employer's trust, (d) commission of a crime against the employer or his family, and (e) other analogous causes.<br><br>The NLRC in this case invoked paragraph (c)âloss of trust and confidence, and to some extent paragraph (a)âserious misconduct, in rationalizing that Hilda and Maricel's actions warranted dismissal. The Court disagrees. The infraction committed by Hilda and Maricel, while certainly a breach of company discipline, did not rise to the level of gravity or willfulness required by Article 297 to justify the ultimate penalty of termination.<br><br>To begin with, Hilda and Maricel were not the principal malefactors in the "chorizo incident." They did not participate in the extortion of the passenger; their lapse was in failing to report or stop the misconduct of their co-guards, and partaking of a portion of the contraband sausage. This is a form of negligence or laxity in the performance of duty, possibly compounded by a minor benefit they improperly received (a share of the chorizo). Such behavior, though inappropriate, was an isolated incident in their years of service. There is no evidence that Hilda or Maricel had a history of similar violations or any record of prior disciplinary infractions. Jurisprudence has long distinguished isolated acts of negligence or minor misconduct from the kind of gross, habitual, or willful violation that merits dismissal.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> The law frowns on the penalty of termination for a first offense unless the employee's act is so egregious that it reflects deliberate malice or betrays a serious breach of trust.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> Here, Hilda and Maricel's actionsâessentially a momentary lapse of judgment under the influence of other guards who actually committed the extortionâcannot be equated with willful malfeasance or gross neglect of such degree that it renders their continued employment untenable.<br><br>Serious Misconduct, as a just cause, connotes an improper or wrongful act that is grave and aggravated in character, not merely trivial or unintentional, and is done with wrongful intent. In <i>G &amp; S Transport Corporation v. Medina</i>,<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> the Court explained:<blockquote>Misconduct is generally defined as "a transgression of some established and definite rule of action, a forbidden act, a dereliction of duty, willful in character, and implies wrongful intent and not mere error in judgment."[...]<br><br>[. . . .]<br><br>In labor cases, misconduct, as a ground for dismissal, must be <i>serious or of such grave and aggravated character and not merely trivial or unimportant</i>. To justify termination on the ground of serious misconduct, the following requisites must concur: <i>(1) the misconduct must be serious; (2) it must relate to the performance of the employee's duties, showing Â£hat the employee has become unfit to continue working/or the employer; and (3) it must have been performed with wrongful intent</i>.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> (Emphasis supplied)</blockquote>Hilda and Maricel's failure to enforce the no-cooking rule was a breach of discipline, but it was borne of acquiescence and passivity rather than active wrongdoing. They expressed remorse immediately and cooperated in the investigation, indicating that their failing was more of error than obstinacy or malicious intent. It lacks the wanton or grossly wrongful character that jurisprudence requires for an act to be "serious misconduct" warranting dismissal.<br><br>Loss of Trust and Confidence, on the other hand, is a cause typically reserved for employees holding positions of trustâsuch as cashiers, auditors, property custodiansâwhose duties involve significant reliance on their integrity.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> While rank-and-file security guards are indeed entrusted with the safety and order of the client's premises, they are not categorized as fiduciary employees handling the employer's funds or property in the manner contemplated by Article 297(c). Even assuming guards can be considered holding a position of trust, which the Court has cautiously recognized in some cases, the breach of trust must still be willful and founded on clearly established facts.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> The employer must show that the employees' conduct has been so inimical to its interest or to the client's interest that it can no longer trust them.<br><br>In the case at bar, GDS Security never claimed to have actually lost trust in Hilda and Maricelâit did not dismiss them, after all. The NLRC's theory of loss of trust was an afterthought, introduced to justify a dismissal that GDS Security itself disavowed. Moreover, the Court finds that the facts do not evince any fraudulent or willful breach of trust by Hilda and Maricel. There was no finding that they colluded in the extortion scheme, planned to benefit from it, or intentionally compromised the client's security for personal gain. Their acceptance of some food and failure to blow the whistle, while wrong, do not bespeak a corrupt intent or sustained untrustworthiness. As the CA noted, there was no showing of a "corrupt motive or gross betrayal" on their part that would destroy the confidence reposed in them. On the contrary, when confronted, they readily admitted their lapse and were willing to be disciplined short of termination.<br><br>It bears emphasis that the Labor Code's just causes for dismissal must be duly proved by substantial evidence and must be cited by the employer at the time of termination, otherwise the dismissal cannot be legally upheld. In this case, GDS Security never served on Hilda or Maricel any notice citing "serious misconduct" or "loss of trust" as grounds, because it never actually terminated them. It is fundamentally unfairâand legally impermissibleâto retroactively attribute a justification for termination that was never even communicated to the employees at the time. The NLRC's resort to a loss-of-trust theory not pleaded by the employer was correctly struck down by the CA as improper. An employee cannot be expected to defend herself from a charge that was not raised, and an employer who insists no dismissal occurred cannot in the same breath claim a dismissal was warranted for cause.<br><br>In sum, had GDS Security chosen to formally terminate Hilda and Maricel over the November 19, 2021 incident, such dismissal would not have been for a just or authorized cause under Article 297. The appropriate disciplinary response to Hilda and Maricel's infraction would have been a reprimand or a suspension. The Court's pronouncement aligns with <i>Samillano</i>, a similar case where a security guard was merely relieved from a post at the client's behestâthe Court found no valid cause to terminate, and ordered the guard's reinstatement since the employer had not actually ended the employment. Thus, the principle holds: a minor single infraction by a security guard, absent malice or repeated neglect, does not justify the drastic measure of dismissal.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Procedural due process: twin-notice requirement and nominal damages</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>It is fundamental in Philippine labor law that when terminating an employee for a just cause, the employer must comply with the twin notice rule. This is both a statutory and jurisprudential mandate. Article 292(b)<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> of the Labor Code, and its implementing rules, mandate that an employer who seeks to dismiss an employee for cause must observe the twin-notice rule: (1) a first written notice apprising the employee of the particular acts or omissions constituting the grounds for possible termination, coupled with an opportunity for the employee to explain and defend himself; and (2) if the employer decides to terminate, a second written notice informing the employee of the decision to dismiss, stating clearly the reasons for the dismissal. Jurisprudence, notably <i>King of Kings Transport, Inc. v. Mamac</i>,<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> has consistently underscored the importance of this two-notice requirement as an element of due process in employee dismissals.<br><br>The Court elucidated:<blockquote>To clarify, the following should be considered in terminating the services of employees:<br><br>(1) The first written notice to be served on the employees should contain the specific causes or grounds for termination against them, and a directive that the employees are given the opportunity to submit their written explanation within a reasonable period. "Reasonable opportunity" under the Omnibus Rules means every kind of assistance that management must accord to the employees to enable them to prepare adequately for their defense. This should be construed as a period of at least five (5) calendar days from receipt of the notice to give the employees an opportunity to study the accusation against them, consult a union official or lawyer, gather data and evidence, and decide on the defenses they will raise against the complaint. Moreover, in order to enable the employees to intelligently prepare their explanation and defenses, the notice should contain a detailed narration of the facts and circumstances that will serve as basis for the charge against the employees. A general description of the charge will not suffice. Lastly, the notice should specifically mention which company rules, if any, are violated and/or which among the grounds under Art. [297] is being charged against the employees.<br><br>(2) After serving the first notice, the employers should schedule and conduct a hearing or conference wherein the employees will be given the opportunity to: (1) explain and clarify their defenses to the charge against them; (2) present evidence in support of their defenses; and (3) rebut the evidence presented against them by the management. During the hearing or conference, the employees are given the chance to defend themselves personally, with the assistance of a representative or counsel of their choice. Moreover, this conference or hearing could be used by the parties as an opportunity to come to an amicable settlement.<br><br>(3) After determining that termination of employment is justified, the employers shall serve the employees a written notice of termination indicating that: (1) all circumstances involving the charge against the employees have been considered; and (2) grounds have been established to justify the severance of their employment.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup></blockquote>Thus, even where the employer has a valid cause, failure to comply with these procedural steps makes the dismissal procedurally infirm and can render the employer liable for damages.<br><br>In the present case, GDS Security admittedly did not comply with the twin-notice requirement. In fact, GDS Security maintains that no dismissal ever occurredâwhich is precisely why no notices were given. GDS Security never served a written notice to Hilda and Maricel charging them with an offense and requiring explanation, nor did it issue any written notice of termination. The only semblance of a notice was the verbal instruction on November 19, 2021 (the day of the incident) for them to submit a written explanation, which they did. After that, there was no formal charge sheet, no formal hearing, and certainly no notice of termination. Instead of the mandated procedure, GDS Security's approach was to give an oral ultimatum (resign or wait) and then unilaterally keep the employees on hold. This does not satisfy due process by any measure; it was essentially an attempt at constructive self-dismissalâforcing the employees to quit on their ownârather than the employer taking responsibility for a decision to terminate.<br><br>Both the Labor Arbiter and the NLRC noted GDS Security's lapse in due process. The NLRC, in particular, awarded nominal damages to Hilda and Maricel for the violation of their statutory rights. Jurisprudence indeed holds that if a dismissal for just cause is done without proper procedure, the dismissal remains valid, if the cause is proven, but the employer must pay an indemnity (nominal damages) to the employee. The usual amounts set by the Court are around PHP 30,000.00 in case of managerial employees and PHP 10,000.00 (or PHP 5,000.00) in case of rank-and-file, depending on the circumstances.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup><br><br>However, in this case, the Court here determined that no just cause was proven, and in fact the employees were unlawfully terminated (constructively). Thus, the appropriate remedy is not merely nominal damages, but the full reliefs for illegal dismissal (backwages, etc.). The absence of due process here serves to further highlight the employer's bad faith and the unfairness to the employees. It does not change the outcome, since the dismissal is already deemed illegal on substantive grounds, but it does underscore that GDS Security failed in both substance and procedure. Even if the Court had found the dismissal justified by loss of trust, the Court would have still imposed nominal damages for the procedural violation. In this case, since Hilda and Maricel are being granted full backwages and other benefits, a separate nominal damage award may be viewed as subsumed. Nevertheless, the Court registers its censure of GDS Security's disregard of due process. Such due process violations warrant indemnity in principle and reflect a corporate indifference to the law that this Court cannot countenance. The Court emphasizes that an employer must not resort to subterfuge in dealing with erring employees.<br><br><i>Conclusion</i><br><br>Security agencies operate under unique circumstancesâthey depend on fluctuating client contracts and sometimes must pull out guards from posts on short notice. The law permits flexibility in these situations, but only within defined limits. The floating status device is not to be abused or used as a subterfuge to evade the obligations that come with a formal termination. In this case, GDS Security unfortunately exceeded those limits. By keeping Hilda and Maricel off-duty and uncompensated well beyond six months, without either reassigning them or officially terminating them, GDS Security violated both the letter and spirit of our labor laws. If GDS Security genuinely lost trust in Hilda and Maricel after the CPA incident, it should have terminated them for cause with proper notice and due process, and paid them whatever separation or accrued benefits were due. If GDS Security wished to retain them, it should have actively facilitated their reassignment or at least communicated candidly and recalled them as soon as an opening arose. GDS Security did neither. It left respondents in a prolonged state of uncertainty, effectively ending their employment without saying so. This amounts to a constructive dismissal in law.<br><br>The Court therefore affirms the CA 's determination that Hilda and Maricel were illegally dismissed. Correspondingly, Hilda and Maricel are entitled to the full reliefs granted by the CA, which the Court finds to be in accord with law and evidence. These include separation pay in lieu of reinstatement, given the time elapsed and likely strained relations, and full backwages. It is doctrinal that the normal consequences of illegal dismissal are reinstatement without loss of seniority rights and payment of backwages from the time of dismissal until reinstatement. Where, as here, reinstatement is no longer feasible, separation pay is awarded in addition to backwages.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> The CA correctly awarded both. The Court additionally upholds the refund of Hilda and Maricel's cash bonds, a clear legal obligation of the employer, and the grant of attorney's fees equivalent to 10% of the total award, since Hilda and Maricel were compelled to litigate to recover what is due them. All monetary awards shall earn legal interest at 6% per annum from finality of this Decision until full satisfaction, pursuant to prevailing jurisprudence.<br><br>Finally, the Court affirms the CA's ruling that Marjorie cannot be held personally liable. There is no evidence that Marjorie acted with malice or bad faith in the transactions in question. The Labor Code holds corporate officers personally liable for labor claims only when they acted in bad faith or with malice in evading their obligations. Absent a showing of malice or ill faith, corporate officers are generally not personally liable for claims of terminated employees.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> Here, Marjorie's involvement was as GDS Security's General Manager who ordered an investigation and relief from post in response to the client's complaintâacts within the scope of her duties and not shown to be animated by malice. Consequently, the liability shall attach to GDS Security alone, and not to Marjorie in her personal capacity.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision, dated April 30, 2024, and the Resolution, dated August 12, 2024, of the Court of Appeals in CA-G.R. SP No. 16305 are <b>AFFIRMED</b>. GDS Security Agency, Inc., is held liable for the constructive dismissal of Hilda E. Bulibuli and Maricel O. Ortega. GDS Security Agency, Inc. is <b>ORDERED</b> to <b>PAY</b> Hilda E. Bulibuli and Maricel O. Ortega the following:<blockquote>1. <b>BACKWAGES</b> computed from the date of constructive dismissal, deemed to be May 26, 2022, i.e., the day after six months from Hilda E. Bulibuli's and Maricel O. Ortega's relief from post on November 25, 2021, up to the date of the finality of this Decision, inclusive of regular allowances and other benefits or their monetary equivalent.<br><br>2. <b>SEPARATION PAY IN LIEU OF REINSTATEMENT</b> at the rate of one month salary for every year of service, with a fraction of at least six months considered as one whole year, computed from the commencement of each respondent's employment (March 2015 for Maricel O. Ortega and July 2016 for Hilda E. Bulibuli) until the date of the finality of this Decision.<br><br>3. <b>REFUND OF CASH BONDS</b> in the amount of PHP 11,000.00 for Hilda E. Bulibuli and PHP 10,500.00 for Maricel O. Ortega.<br><br>4. <b>ATTORNEY'S FEES</b> equivalent to 10% of the total monetary award due to Hilda E. Bulibuli and Maricel O. Ortega.</blockquote>All the amounts shall earn legal interest at the rate of 6% per annum from the finality of this Decision until full payment.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 42-61. Penned by Associate Justice Nancy C. Rivas-Palmones and concurred in by Executive Justice Pamela Ann Abella Maxino and Associate Justice Ronald Suva Tolentino of the Eighteenth Division, Court of Appeals, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 92-95. Penned by Associate Justice Nancy C. Rivas-Palmones and concurred in by Executive Justice Pamela Ann Abella Maxino and Associate Justice Ronald Suva Tolentino of the Eighteenth Division, Court of Appeals, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 189-200. Decision in NLRC Case No. VAC-05-000294-2023 was penned by Commissioner Nendell Hanz L. Abella and concurred in Commissioner Maria Joyce L. Seno-Kho of the Seventh Division, National Labor Relations Commission, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 46-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 140-155. The Decision in RAB VII-08-1318-2022 was issued by Regional Arbitration Branch No. VII, National Labor Relations Commission, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> ART. 295. [280] <i>Regular and Casual Employment</i>. â The provisions of written agreement to the contrary notwithstanding and regardless of the oral agreement of the parties, an employment shall be deemed to be regular where the employee has been engaged to perform activities which are usually necessary or desirable in the usual business or trade of the employer, except where the employment has been fixed for a specific project or undertaking the completion or termination of which has been determined at the time of the engagement of the employee or where the work or service to be performed is seasonal in nature and the employment is for the duration of the season.<br><br>An employment shall be deemed to be casual if it is not covered by the preceding paragraph: Provided, That any employee who has rendered at least one year of service, whether such service is continuous or broken, shall be considered a regular employee with respect to the activity in which he is employed and his employment shall continue while such activity exists.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Rollo</i>, pp. 144-145.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 152-153.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 151-152.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 152-153.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 148-149.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 153.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 153-154.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 189-200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 195-196.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 195-197.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 196.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 710 Phil. 124 (2013) [Per J. Mendoza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> 485 Phil. 248 (2004) [Per J. Ynares-Santiago, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Rollo</i>, pp. 197-198.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 198-199.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 199.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>See</i> Motion for Reconsideration, dated August 3, 2023, <i>id.</i> at 201-205.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>See</i> Resolution, dated August 15, 2023, <i>id.</i> at 207-210.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 211-224.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 42-61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 55-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 54-58.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 58-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 59-60.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 60-61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>See</i> Motion for Reconsideration, dated June 4, 2024, <i>id.</i> at 62-86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 92-95.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> ART. 297. [282]&nbsp;<i>Termination by Employer</i>. â An employer may terminate an employment for any of the following causes:<blockquote>(a) Serious misconduct or willful disobedience by the employee of the lawful orders of his employer or representative in connection with his work;&nbsp;<br><br>(b) Gross and habitual neglect by the employee of his duties;<br><br>(c) Fraud or willful breach by the employee of the trust reposed in him by his employer or duly authorized representative;<br><br>(d) Commission of a crime or offense by the employee against the person of his employer or any immediate member of his family or his duly authorized representatives; and<br><br>(e) Other causes analogous to the foregoing.<br></blockquote><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Sec. 3. The State shall afford full protection to labor, local and overseas, organized and unorganized, and promote full employment and equality of employment opportunities for all.<br><br>It shall guarantee the rights of all workers to self-organization, collective bargaining and negotiations, and peaceful concerted activities, including the right to strike in accordance with law. They shall be entitled to security of tenure, humane conditions of work, and a living wage. They shall also participate in policy and decision-making processes affecting their rights and benefits as may be provided by law.<br><br>The State shall promote the principle of shared responsibility between workers and employers and the preferential use of voluntary modes in settling disputes, including conciliation, and shall enforce their mutual compliance therewith to foster industrial peace.<br><br>The State shall regulate the relations between workers and employers, recognizing the right of labor to its just share in the fruits of production and the right of enterprises to reasonable returns to investments, and to expansion and growth.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> ART. 294. [279]&nbsp;<i>Security of Tenure</i>. â In cases of regular employment, the employer shall not terminate the services of an employee except for a just cause or when authorized by this Title. An employee who is unjustly dismissed from work shall be entitled to reinstatement without loss of seniority rights and other privileges and to his full backwages, inclusive of allowances, and to his other benefits or their monetary equivalent computed from the time his compensation was withheld from him up to the time of his actual reinstatement.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Samillano v. Valdez Security and Investigation Agency, Inc.</b>, 875 Phil. 440, 449-450 (2020) [Per J. J. Reyes, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>See</i> <b>Globe Telecom, Inc. v. Florendo-Flores</b>, 438 Phil. 756, 766 (2002) [Per J. Bellosillo, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>See</i> <b>Padilla v. Airborne Security Service, Inc.</b>, 821 Phil. 482, 488-489 (2017) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> 708 Phil. 598 (2013) [Per J. Mendoza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 603-604.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> ART. 301. [286] <i>When Employment not Deemed Terminated</i>. â The bona fide suspension of the operation of a business or undertaking for a period not exceeding six (6) months, or the fulfillment by the employee of a military or civic duty shall not terminate employment. In all such cases, the employer shall reinstate the employee to his former position without loss of seniority rights if he indicates his desire to resume his work not later than one (1) month from the resumption of operations of his employer or from his relief from the military or civic duty.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Exocet Security and Allied Services Corp. v. Serrano</b>, 744 Phil. 403, 412-414 (2014) [Per J. Velasco, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> 545 Phil. 507 (2007) [Per J. Carpio Morales, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 515-516.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>See</i> <b>Padilla v. Airborne Security Service, Inc.</b>, 821 Phil. 482, 488-489 (2017) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> 755 Phil. 171 (2015) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 183.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>See</i> <b>Spectrum Security Services, Inc. v. Crave</b>, 810 Phil. 590, 600-601 (2017) [Per J. Bersamin, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> 775 Phil. 320 (2015) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>Padilla v. Airborne Security Service, Inc.</b>, 821 PhiI. 482, 489 (2017) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Rollo</i>, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>Tatel vs. JLFP Investigation Security Agency, Inc., et al.</b>, 775 Phil. 320, 183 (2015) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 184.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> at 185.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> 875 Phil. 440 (2020) [Per J. J. Reyes, Jr., First Division].&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <b>Tatel v. JLFP Investigation Security Agency. Inc., et al.</b>, 775 Phil. 320, 184 (2015) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <b>St. Luke's Medical Center, Inc. v. Fadrigo</b>, 620 Phil. 745, 755 (2009) [Per J. Nachura, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>See</i> <b>Pacific Products/Fortuna Employees und Workers Asso.-Tupas v. Pacific Products, Inc.</b>, 238 Phil. 109, 114 (1987) [Per J. Paras, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> 929 Phil. 426 (2022) [Per J. Hernando, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> at 436-437.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <b>P.J. Lhuillier, Inc. v. Velayo</b>, 746 Phil. 781, 792 (2014) [Per J. Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <b>Bristol Myers Squibb (Phils.), Inc., v. Baban</b>, 594 Phil. 620, 628 (2008) [Per J. R.T. Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> ART. 292. [277] Miscellaneous Provisions. â [...]<blockquote>[. . . .]<br><br>(b) Subject to the constitutional right of workers to security of tenure and their right to be protected against dismissal except for a just and authorized cause and without prejudice to the requirement of notice under Article 283 of this Code, 250 the employer shall furnish the worker whose employment is sought to be terminated a written notice containing a statement of the causes for termination and shall afford the latter ample opportunity to be heard and to defend himself with the assistance of his representative if he so desires in accordance with company rules and regulations promulgated pursuant to guidelines set by the Department of Labor and Employment. Any decision taken by the employer shall be without prejudice to the right of the worker to contest the validity or legality of his dismissal by filing a complaint with the regional branch of the National Labor Relations Commission. The burden of proving that the termination was for a valid or authorized cause shall rest on the employer. The Secretary of the Department of Labor and Employment may suspend the effects of the termination pending resolution of the dispute in the event of a prima facie finding by the appropriate official of the Department of Labor and Employment before whom such dispute is pending that the termination may cause a serious labor dispute or is in implementation of a mass layoff.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> 553 Phil. 108 (2007) [Per J. Velasco, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id.</i> at 115-116.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>See</i> <b>Unilever Philippines, Inc. v. Rivera</b>, 710 Phil. 124, 137 (2013) [Per J. Mendoza, Third Division]. <i>See also</i> <b>Agabon v. NLRC</b>, 485 Phil. 248, 287-288 (2004) [Per J. Ynares-Santiago, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <b>Reyes, et al. v. RP Guardians Security Agency, Inc.</b>, 708 Phil. 598, 604 (2013) [Per J. Mendoza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <b>Pido v. NLRC</b>, 545 Phil. 507, 518-519 (2007) [Per J. Carpio Morales, Second Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

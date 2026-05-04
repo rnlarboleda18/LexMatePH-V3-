@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 244585 - CHEN JULONG A.K.A. RICHARD TAN OR RICHARD CHEN, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70305' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 244585, November 19, 2025 ]</H2>
+			<H3>CHEN JULONG A.K.A. RICHARD TAN OR RICHARD CHEN, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, filed by Chen Julong, a.k.a. Richard Tan or Richard Chen<b> (Chen Julong)</b>, of the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated August 31, 2018, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated January 11, 2019 of the Court of Appeals<b> (CA)</b> in CA-G.R. SP No. 154727. The CA affirmed the Order,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated February 22, 2018, of Branch 46, Regional Trial Court, Manila<b> (RTC-Manila)</b>, in Criminal Case No. R-MNL-18-000347-CR, which denied Chen Julong's Motion to Dismiss the criminal case against him for the offense of Importation of Dangerous Drugs punished under Section 4, in relation to Section 26(a) of Republic Act No. 9165.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center><b><i>The Facts</i></b></center><br>Chen Julong is the general manager or chairperson of the Hongfei Logistic Group of Companies<b> (Hongfei Group)</b>, a domestic corporation engaged in the business of international sea and air freight forwarding, non-vessel operating common carrier, and the transporting, receiving and delivering of cargo, among others.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Agents from the National Bureau of Investigation<b> (NBI)</b> and the Bureau of Customs<b> (BOC)</b> went to the warehouse of the Hongfei Group upon receiving information of the activities of a drug syndicate operating in Metro Manila.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Upon the written permission granted by Chen Julong, the agents of the BOC entered the warehouse and found wooden crates that bore the markings:<i> 3050 F. Bautista Street Ugong Valenzuela City; FIDEL ANOCHE DEE; 09073812004</i>. When the crates were opened, the BOC agents found five large metal cylinders which contained hundreds of clear plastic bags with white crystalline substance suspected to be<i> shabu</i>. The NBI agents, in turn, arrived after the last metal cylinder was opened.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Thereafter, the agents of the NBI, BOC and Philippine Drug Enforcement Agency<b> (PDEA)</b> decided to conduct a "controlled delivery" operation to the person and address indicated in the wooden crates. The PDEA took charge of delivering one metal cylinder, which led to the arrest of one Fidel Anoche, the named consignee of the crates.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Upon examination by the Forensic Chemistry Division of the NBI, it was found that the four metal cylinders contained 505 pieces of plastic bags with white crystalline substance having a total weight of 502.098 kilograms. The contents of the plastic bags were found positive for methamphetamine hydrochloride or<i> shabu</i>. With respect to the lone metal cylinder used for "controlled delivery" to Fidel Anoche, the same was also found to contain <i>shabu</i> with a total weight of 100.181 kilograms. All in all, the aggregate weight of the confiscated<i> shabu</i> was 602.279 kilograms.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The NBI's investigation revealed that the dangerous drugs were shipped from China by the Hongfei Group acting as the international freight forwarder. The NBI found that the facilitation of the drugs were made possible by Chen Julong and the following individuals: Li Guang Feng, also known as Manny Li; Kenneth Dong, also known as Yi Shen Yi; customs broker Mark Ruben G. Taguba II; BOC employee Teejay A. Marcellana; and Eirene Mae A. Tatad, the importer or consignee.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Thus, the NBI filed criminal complaints for Importation and Delivery of Dangerous Drugs against Chen Julong, along with Chen I. Min, Jhu Ming Jyun, Fidel Anoche, Guang Feng also known as Manny Li, Dong Yi Shen also known as Kenneth Dong, Mark Ruben G. Taguba II, Teejay A. Marcellana, and Eirene Mae A. Tatad.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>In a Joint Resolution,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> dated November 16, 2017, the Department of Justice's Anti-Organized Crimes Division Task Force on Anti-Illegal Drugs <b>(DOJ Task Force)</b> found probable cause to file criminal charges for Importation of Dangerous Drugs punished under Section 4, in relation to Section 26(a) of Republic Act No. 9165, against the abovementioned individuals.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>The DOJ Task Force filed an Information, dated November 17, 2017, against Chen Julong and his co-accused before the Branch 171, Regional Trial Court of Valenzuela City<b> (RTC-Valenzuela City)</b>. The accusatory portion of the said Information reads, as follows:<br><blockquote>That on or about [May 26, 2017], in the City of Valenzuela and within the jurisdiction of this Honorable Court, the above-named accused, in conspiracy with each other, did then and there jointly, knowingly, willfully and feloniously[,] and without authority of law[,] import or bring into the Philippines 602.279 kilograms of<i> methamphetamine hydrochloride </i>otherwise known as<i> shabu</i>, a dangerous drug.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis in the original) </blockquote>Chen Julong and his co-accused filed their respective Motions to Quash the Information.<br><br>The RTC-Valenzuela City held, in the Order,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> dated December 12, 2017, that it lacked jurisdiction over the offense. It reasoned that the act of importation of the dangerous drugs was already consummated when the shipment containing the said drugs arrived at the Manila International Container Port on May 15, 2017. The transportation of the goods to Valenzuela City was immaterial to the charge of Importation of Dangerous Drugs. The trial court ruled that the law provides for the crime of Delivery of Dangerous Drugs under Section 5 of Republic Act No. 9165, which is separate and distinct from the crime of Importation of Dangerous Drugs under Section 4 of the same statute.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>The prosecution filed its Motion for Reconsideration, but the same was denied in the Order,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated January 22, 2018.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The RTC-Valenzuela City reiterated that since the act of importation was consummated in the Manila International Container Port, the jurisdiction to hear the case belongs to the proper courts of Manila.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Thereafter, the prosecution filed a separate Information,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated January 23, 2018, against Chen Julong and his co-accused for the crime of Importation of Dangerous Drugs with the RTC-Manila. The accusatory portion thereof reads as follows:<br><blockquote>That on or about [May 26, 2017], in the City of Manila and within the jurisdiction of this Honorable Court, the above-named accused, in conspiracy with each [other], did then and there jointly, knowingly, willfully and feloniously[,] and without authority of law[,] import or bring into the Philippines 602.279 kilograms of methamphetamine hydrochloride otherwise known as shabu, a dangerous drug.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> (Emphasis in the original) </blockquote>Chen Julong filed a Motion to Dismiss,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> alleging that the Information filed with the RTC-Manila, is identical to the Information filed with the RTC-Valenzuela City. However, the prosecution filed the second Information without waiting for the Order, dated December 12, 2017, of the RTC-Valenzuela City, to be final and executory. Consequently, the second Information should be dismissed on the ground of forum shopping.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br><center><b><i>Ruling of the RTC-Manila</i></b></center><br>In the Order, dated June February 22, 2018, the RTC-Manila denied Chen Julong's Motion to Dismiss. The dispositive portion of the said Order reads, as follows:<br><blockquote><b>WHEREFORE</b>, in view of the foregoing, the Motion to Dismiss filed by [a]ccused Chen Julong is hereby<b> DENIED</b> for lack of merit.<br><br>Let a<b> WARRANT OF ARREST</b> be issued against Chen Julong a.k.a. Richard Tan or Richard Chen. No bail is fixed.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Emphasis in the original) </blockquote>The RTC-Manila held that Chen Julong's Motion to Dismiss is essentially a motion to quash the Information filed against him. However, the trial court found that the ground being invoked by Chen Julong, i.e., that the prosecution committed forum shopping, is not among the grounds allowed to be raised in a motion to quash, in accordance with the Revised Guidelines for Continuous Trial in Criminal Cases<b> (Continuous Trial Guidelines)</b><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> and Rule 117, Section 3 of the Rules of Court. Thus, Chen Julong filed a prohibited motion which must be denied.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Even if the motion is not a prohibited one, the RTC-Manila ruled that Chen Julong failed to substantiate his claim of forum shopping.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>The RTC-Manila likewise held that under Rule 117, Section 6 of the Rules of Court, an order sustaining a motion to quash on the grounds other than extinction of criminal liability or double jeopardy does not preclude the filing of another Information for a crime constituting the same facts. Since the filing of the second Information in the RTC-Manila does not constitute double jeopardy, the case against Chen Julong may proceed.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Alleging grave abuse of discretion on the part of the RTC-Manila, Chen Julong filed a Petition for<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> with the CA.<br><br><center><b><i>Ruling of the CA</i></b></center><br>In the Decision, dated August 31, 2018, the CA dismissed Chen Julong's Petition for<i> Certiorari</i>. The dispositive portion of the said Decision reads, as follows:<br><blockquote><b>WHEREFORE</b>, premises considered, the instant [P]etition for [C]ertiorari is hereby<b> DISMISSED</b>.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> (Emphasis in the original) </blockquote>At the outset, the CA noted that Chen Julong failed to file a motion for reconsideration of the RTC-Manila's Order, dated February 22, 2018, which denied his Motion to Dismiss. The CA held that the failure to file a motion for reconsideration before resorting to the special civil action for<i> certiorari</i> is a fatal infirmity, as such the Petition should be dismissed. The CA found that Chen Julong's justifications for his failure to file a motion for reconsideration, i.e., the proceedings in the RTC-Manila were a total nullity for lack of due process, and the proceedings were<i> ex parte</i>, were not fully substantiated. The appellate court held that Chen Julong may not arrogate upon himself the determination of whether a motion for reconsideration is necessary or not.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>The CA ruled that Chen Julong's Motion to Dismiss is a prohibited motion under the Continuous Trial Guidelines because it invoked a ground not enumerated under Rule 117, Section 3 of the Rules of Court, i.e., that the prosecution committed forum shopping. And even if such ground is allowed to be invoked, Chen Julong failed to substantiate his allegation. It held that when the elements of<i> litis pendentia</i> or<i> res judicata</i> are present, forum shopping exists. Since there could be no<i> litis pendentia</i> or<i> res judicata</i> as the first Information filed with the RTC-Valenzuela City was dismissed on the ground of lack of jurisdiction, the prosecution did not commit forum shopping. In accordance with Rule 117, Section 6 of the Rules of Court, an order sustaining a motion to quash is not a bar to another prosecution of the same offense.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Notwithstanding the exhortation by the RTC-Valenzuela City that the prosecution should file the Information for Importation of Dangerous Drugs in the appropriate courts of Manila, the CA held that the statement is a mere obiter dictum, as such it is not binding precedent.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Chen Julong asserted that the RTC-Manila committed grave error when it ordered the issuance of a warrant of arrest against him. He claimed that no probable cause exists considering that he had no prior knowledge or information with regard to the shipment of<i> shabu</i>, and that it was he who reported the same to the authorities. The CA ruled, however, that these matters are evidentiary in nature that are best litigated during trial.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>A Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> was filed by Chen Julong, which was denied by the CA in the Resolution, dated January 11, 2019. Thereafter, he filed the present Petition.<br><br><center><b><i>The Issues</i></b></center><br>The Court resolves the following issues:<br><br>First, is the filing of a motion for reconsideration with the RTC-Manila required prior to the filing of the Petition for<i> Certiorari</i> before the CA?<br><br>Second, is forum shopping a valid ground for a motion to quash a criminal Information?<br><br>Finally, did the RTC-Manila commit grave abuse of discretion in finding probable cause for the issuance of a warrant of arrest against Chen Julong?<br><br><center><b><i>Ruling of the Court</i></b></center><br>The Court finds no merit in the Petition.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The filing of a motion for reconsideration is a prerequisite to the filing of a petition for certiorari; Chen Julong failed to comply with this condition precedent</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>The special civil action of<i> certiorari</i> is a limited form of review and is a remedy of last resort.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> The primary purpose for its filing is to correct errors of jurisdiction, and not errors of procedure or mistakes in the findings or conclusions of the lower court.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> The basis for such remedy is found in Rule 65, Section 1 of the Rules of Court, which reads as follows:<br><blockquote>Section 1.<i> Petition for certiorari</i>. â When any tribunal, board or officer exercising judicial or quasi-judicial functions has acted without or in excess of its or his jurisdiction, or with grave abuse of discretion amounting to lack or excess of jurisdiction, and there is no appeal, or any plain, speedy, and adequate remedy in the ordinary course of law, a person aggrieved thereby may file a verified petition in the proper court, alleging the facts with certainty and praying that judgment be rendered annulling or modifying the proceedings of such tribunal, board[,] or officer, and granting such incidental reliefs as law and justice may require. </blockquote>From the foregoing provision, a petition for<i> certiorari</i> must satisfy the following requisites for it prosper: (a) the writ must be directed against a tribunal, a board or any officer exercising judicial or quasi-judicial functions; (b) such tribunal, board, or officer has acted without or in excess of jurisdiction, or with grave abuse of discretion amounting to lack or excess of jurisdiction; and (c) there is no appeal or any plain, speedy, and adequate remedy in the ordinary course of law.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>It is clear that before<i> certiorari</i> may lie, it must be shown that the petitioner was legally precluded from availing any plain, speedy and adequate remedy available in the ordinary course of law. In general, a motion for reconsideration must first be filed in the lower court before there can be resort to the extraordinary writ of<i> certiorari</i> since such motion is considered a plain, speedy and adequate remedy provided for in the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> The reason for the filing of a motion for reconsideration is simpleâit is to give the lower court a chance to correct its own error.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Thus, the filing of a motion for reconsideration is a condition<i> sine qua non</i> for the filing of a petition for <i>certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>The Court has recognized, however, certain exceptions to this rule. In the following circumstances, the filing of a Petition for<i> Certiorari</i> has been allowed notwithstanding the failure to file a motion for reconsideration:<br><blockquote>(a) where the order is a patent nullity, as where the lower court has no jurisdiction;<br><br>(b) where the questions raised in the<i> certiorari</i> proceedings have been duly raised and passed upon by the lower court, or are the same as those raised and passed upon in the lower court;<br><br>(c) where there is an urgent necessity for the resolution of the question and any further delay would prejudice the interests of the Government or of the petitioner or the subject matter of the petition is perishable;<br><br>(d) where, under the circumstances, a motion for reconsideration would be useless;<br><br>(e) where petitioner was deprived of due process and there is extreme urgency for relief;<br><br>(f) where, in a criminal case, relief from an order of arrest is urgent and the granting of such relief by the trial court is improbable;<br><br>(g) where the proceedings in the lower court are a nullity for lack of due process;<br><br>(h) where the proceeding was<i> ex parte</i> or in which the petitioner had no opportunity to object; and<br><br>(i) where the issue raised is one purely of law or public interest is involved.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </blockquote>As the records show, Chen Julong failed to file a motion for reconsideration of the RTC-Manila Order, dated February 22, 2018, which denied his Motion to Dismiss. Indeed, Chen Julong admits that a motion for reconsideration was not filed before the RTC-Manila.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Thus, resort to <i>certiorari</i> was improper considering that a plain, adequate and speedy remedy was available to him under the law.<br><br>Nevertheless, Chen Julong asserts that the non-filing of a motion for reconsideration is justified as it invoked all of the exceptions enumerated above except for (g) and (h).<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Specifically, Chen Julong claims that the RTC-Manila Order is a patent nullity because the trial court lacked jurisdiction over the case. Additionally, Chen Julong alleges that there is an urgent necessity for the resolution of the issues presented inasmuch as an order of arrest has been issued against him, and a relief from the same trial court is highly improbable.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>Mere mention of any of the exceptions to the rule requiring the filing of a motion for reconsideration is not sufficient as to invoke such exception. To dispense with such requirement, the petitioner must show a concrete, compelling, and valid reason for doing so.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> This is because the petitioner may not arrogate upon itself the determination of whether the motion for reconsideration is indispensable or not.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>In the Petition for<i> Certiorari</i> filed before the CA, Chen Julong only mentioned the exceptions to the general rule that a motion for reconsideration is a condition<i> sine qua non</i> in the filing of a Petition for<i> Certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Chen Julong only relied on bare allegations and failed to show sufficient justification for dispensing such requirement. The Court finds no compelling reason to allow a deviation from the general rule. As correctly found by the CA, Chen Julong failed to substantiate his claim. On this ground alone, the present Petition should be denied.<br><br>Even if this procedural defect is brushed aside, the Court still rules in favor of the People.<br><br>In the present Petition, Chen Julong asserts that immediate filing of the Petition for<i> Certiorari</i> with the CA is the proper remedy since: (a) the RTC-Manila Order was issued without or in excess of jurisdiction, or with grave abuse of discretion; and (b) the remedy of appeal would not afford adequate and expeditious relief.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Chen Julong claims that the second Information filed with the RTC-Manila was without authority as it was not the Information that was approved by the DOJ Task Force in its Joint Resolution, dated November 16, 2017. He further asserts that since the change of venue where the Information for Importation of Dangerous Drugs is a material allegation, he should have been granted an opportunity to contest the same during the preliminary investigation stage with the DOJ.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>There is no merit in Chen Julong's assertions.<br><br>A review of the second Information filed with the RTC-Manila shows that it was signed by Associate Prosecution Attorney Joan Carla Guevarra-Garcia and Assistant State Prosecutors Aristotle M. Reyes and Rodan G. Parrocha, with the approval of Acting Prosecutor General George G. Catalan, Jr.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> The DOJ Task Force's Joint Resolution recommending the filing of charges against Chen Julong was likewise signed by the abovenamed individuals.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Thus, the filing of the second Information with the RTC-Manila likewise bore the approval of the DOJ Task Force.<br><br>In criminal cases, the filing of the Information in court commences the criminal action against the accused.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Such act of filing signifies that the handling prosecutor has entered his or her appearance in court, and that he or she is presumably clothed with ample authority from the concerned agency, such as the DOJ, to prosecute the case.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Since the second Information filed with the RTC-Manila bore the signatures of the abovenamed DOJ prosecutors and the approval of the Acting Prosecutor General, there is no question that the Information was, on its face, filed by officers who had ample authority to initiate the criminal case against Chen Julong.<br><br>While the Joint Resolution recommended the approval of the attached Information, i.e., the indictment against Chen Julong for Importation of Dangerous Drugs which will be filed before the relevant court in Valenzuela City, such did not preclude the filing of the second Information in the appropriate court in the City of Manila. What is essential is that the DOJ Task Force found probable cause to indict Chen Julong, and the Information to be filed, wherever the venue is located, should adhere to the factual and legal findings contained in such Joint Resolution. As the CA correctly found, there is nothing in the Joint Resolution which limited the filing of the Information in the RTC-Valenzuela City only. Again, the second Information filed with the RTC-Manila was signed by the same members of the DOJ Task Force and had the approval of the then Acting Prosecutor General. There was authorization by the DOJ Task Force for the filing of the second Information pursuant to the findings in the Joint Resolution. Thus, the claim that the second Information filed with the RTC-Manila lacked legal authority deserves scant consideration.<br><br>With respect to Chen Julong's argument that the filing of the second Information should have restarted the preliminary investigation, it is well to point out that the purpose of preliminary investigation is to "determine whether there is sufficient ground to engender a well-founded belief that a crime has been committed and the respondent is probably guilty thereof, and should be held for trial."<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> The right to preliminary investigation is merely statutory and not guaranteed by the Constitution, as such any alleged irregularity in the conduct of preliminary investigation does not render the Information void nor impair its validity.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> The conduct of preliminary investigation is an executive function, which led the Court to adopt a policy of non-interference in the exercise of the prosecutor's discretion as to what constitutes sufficient evidence to establish probable cause.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>While venue in criminal cases is an important element of the trial court's jurisdiction,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> it does not materially affect the preliminary investigation, which was conducted by the DOJ Task Force prior to the filing of the Information. Knowledge of where the crime was committed is essential as to where the Information will be filed; meanwhile, the determination of probable cause is primarily centered on whether the respondent is "probably guilty" of the alleged crime. Indeed, the determination of where the Information will be filed falls under the discretion of the prosecutor in line with the nature of preliminary investigation as an executive function, which the Court will not interfere with. Only upon the filing of the Information will the trial court be empowered to evaluate, even<i> motu proprio</i>, as to whether it has jurisdiction over the offense.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>At any rate, Chen Julong was not deprived of his right to participate in the preliminary investigation as he was able to file his counter-affidavit before the DOJ Task Force, where he was able to deny the allegations in the NBI's criminal complaint.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Thus, the Court finds no valid reason that would justify Chen Julong's immediate resort to the CA via the special civil action of<i> certiorari</i>.<br><br>It bears to emphasize that Chen Julong's filing of the Petition for <i>Certiorari</i> before the CA is not the proper remedy to assail the denial of his Motion to Dismiss. It is the rule that when a motion to quash is denied, the remedy is not to file a petition for<i> certiorari</i>, but for the accused to go to trial, without prejudice to the defenses invoked in the motion to quash. Remedial measures against such interlocutory order are frowned upon and often dismissed because they breed multiplicity of appeals in a single action.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Since Chen Julong's Motion to Dismiss is essentially a motion to quash the second Information, his recourse from the denial of such Motion should have been to go to trial and set up as defenses the same arguments he raised in the said Motion.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Forum shopping is a civil law concept and is not a valid ground in a motion to quash the Information</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Chen Julong argues that the second Information filed with the RTC-Manila constituted forum shopping on the part of the prosecution and was motivated only after the RTC-Valuenzuela City granted his Motion to Quash. He maintains that the second Information was filed notwithstanding that the RTC-Valenzuela City Order dismissing the first Information has not yet attained finality. Since the second Information filed with the RTC-Manila is identical to the first one filed with the RTC-Valenzuela City, Chen Julong alleges that the RTC-Manila lacked jurisdiction over the case.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup><br><br>The People, through the Office of the Solicitor General<b> (OSG)</b>, asserts that the second Information was filed pursuant to the DOJ Task Force's Joint Resolution and not on the basis of the Orders, dated December 12, 2017 and January 22, 2018, of the RTC-Valenzuela City. The OSG reasoned that one of the supporting documents filed together with the second Information before the RTC-Manila was the Joint Resolution, and not the RTC-Valenzuela City Orders. In any case, the OSG believes that the prosecution cannot be faulted for re-filing the case in the RTC-Manila as it is allowed under Rule 117, Sections 5 and 6 of the Rules of Court. The OSG concludes that there is no forum shopping as the elements of<i> litis pendentia</i> and<i> res judicata</i> are not present.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>While there may be truth to the idea that the prosecution only filed the second Information with the RTC-Manila because the RTC-Valenzuela City dismissed the first Information for lack of jurisdiction, this reasoning will not cause the dismissal of the second Information. It only shows that the prosecution heeded the Orders of the RTC-Valenzuela City to file the criminal charges in the appropriate venue.<br><br>Be that as it may, the act of filing the second Information with the RTC-Manila does not amount to forum shopping.<br><br>There is forum shopping when "a party who institutes two or more suits involving the same parties for the same cause of action, either simultaneously or successively, on the supposition that one or the other court would make a favorable disposition or increase a party's chances of obtaining a favorable decision or action."<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> It is a proscribed and denounced practice by litigants because "it trifles with the courts, abuses their processes, degrades the administration of justice, and adds to the already congested court dockets."<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>The concept of forum shopping traces its roots in private international law, where litigants are able to select the "forum" or court where they can initiate legal proceedings. In<i> First Philippine International Bank v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> the Court had occasion to discuss the concept's history, thus:<br><blockquote>To begin with, forum-shopping originated as a concept in private international law, where non-resident litigants are given the option to choose the forum or place wherein to bring their suit for various reasons or excuses, including to secure procedural advantages, to annoy and harass the defendant, to avoid overcrowded dockets, or to select a more friendly venue. To combat these less than honorable excuses, the principle of<i> forum non conveniens</i> was developed whereby a court, in conflicts of law cases, may refuse impositions on its jurisdiction where it is not the most "convenient" or available forum and the parties are not precluded from seeking remedies elsewhere.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> </blockquote>Soon after, the concept of forum shopping would find its way in Philippine remedial law. In<i> Prubankers Association v. Prudential Bank &amp; Trust Company</i>,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> the Court recalled the procedural history of the rule on forum shopping, as follows:<br><blockquote>The rule on forum-shopping was first included in Section 17 of the Interim Rules and Guidelines issued by this Court on January 11, 1983, which imposed a sanction in this wise: "A violation of the rule shall constitute contempt of court and shall be a cause for the summary dismissal of both petitions, without prejudice to the taking of appropriate action against the counsel or party concerned." Thereafter, the Court restated the rule in Revised Circular No. 28-91 and Administrative Circular No. 04-94. Ultimately, the rule was embodied in the 1997 amendments to the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> </blockquote>The rule was first promulgated by the Court in connection with the implementation of Batas Pambansa Blg. 129,<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> specifically Section 9 thereof, which granted equal original jurisdiction to the then Intermediate Appellate Court (now the CA) to issue writs of<i> mandamus</i>, prohibition,<i> certiorari</i>, <i>habeas corpus</i>, and<i> quo warranto</i>, and other auxiliary writs in aid of its appellate jurisdiction, similar to the original jurisdiction granted to this Court under the Constitution.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> To avoid multiplicity of suits filed with the appellate court and this Court over the same subject matter, the rule on forum shopping was thus introduced.<br><br>The 1997 Rules of Civil Procedure codified the forum shopping rule, which once existed only as a requirement provided for by circulars issued by the Court. Rule 7, Section 5 of the Rules of Court<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> required that a certification against forum shopping be attached to every complaint or initiatory pleading that would attest that the plaintiff or principal party did not commence any action involving the same issues in any court or body, and if there is such pending action, the plaintiff or principal party must inform the court within five days and apprise the court of its status. Failure to comply with the requirement is cause for the dismissal of the complaint or initiatory pleading.<br><br>The 2019 Amendments to the Rules of Civil Procedure<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> did not materially change the forum shopping rule as it only added a paragraph requiring the authorization of the affiant to act on behalf of the plaintiff or the principal party to be attached to the pleading. Thus, at present, the concept of forum shopping is part and parcel of Philippine procedural rules, specifically pertaining to the initiation of<i> civil</i> actions.<br><br>While the present Rules of Court has a standalone provision tackling the requirement of filing a certification against forum shopping, which is "separate from and independent of the avoidance of the act of forum shopping itself[,]"<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> the latter is also present in the Rules as a ground for the dismissal of a complaint.<br><br>Case law has recognized three ways by which forum shopping can be committed: (a) by filing multiple cases based on the same cause of action and with the same prayer, the previous case not having been resolved yet (where the ground for dismissal is<i> litis pendentia</i>); (b) by filing multiple cases based on the same cause of action and the same prayer, the previous case having been finally resolved (where the ground for dismissal is<i> res judicata</i>); and (c) by filing multiple cases based on the same cause of action but with different prayers (splitting of causes of action, where the ground for dismissal is also either<i> litis pendentia</i> or<i> res judicata</i>).<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>Distilled from these is the test for determining the existence of forum shopping, which basically asks "whether the elements of<i> litis pendentia</i> are present, or whether a final judgment in one case will amount to<i> res judicata </i>in another; otherwise stated, the test for determining forum shopping is whether in the two (or more) cases pending, there is identity of parties, rights or causes of action, and reliefs sought."<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>However, even if the test for forum shopping relies on two alternative propositionsâthat of<i> res judicata</i> and<i> litis pendentia</i>âthe Court has held that it is<i> res judicata</i> which is considered as the "conceptual backbone" upon which forum shopping rests since<i> "litis pendentia</i> is itself a concept that merely proceeds from the concept of<i> res judicata</i>."<sup style="COLOR: RGB(255, 0, 0);">[78]</sup><br><br>The reason for this is manifest in the requisites of<i> litis pendentia</i>, which are: (a) the identity of parties, or at least such as representing the same interests in both actions; (b) the identity of rights asserted and relief prayed for, the relief being founded on the same facts; and (c) the identity of the two cases such that judgment in one, regardless of which party is successful, would amount to<i> res judicata</i> in the other.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> For<i> litis pendentia</i> to exist, there must be a determination as to the existence of, or the effects arising from,<i> res judicata</i>.<br><br>On the other hand,<i> res judicata</i> or bar by prior judgment is present upon satisfaction of the following requisites: (a) the former judgment is final; (b) it is rendered by a court having jurisdiction over the subject matter and the parties; (c) it is a judgment or an order on the merits; (d) there isâbetween the first and the second actionsâidentity of parties, of subject matter, and of causes of action.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> With these elements in mind, the Court has declared that "[<i>r</i>]<i>es judicata</i> is a doctrine of civil law and thus has no bearing on criminal proceedings."<sup style="COLOR: RGB(255, 0, 0);">[81]</sup><br><br><i>People v. Escobar</i><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> further elaborates the inapplicability of<i> res judicata </i>to criminal cases, thus:<br><blockquote>Expressly applicable in civil cases,<i> res judicata</i> settles with finality the dispute between the parties or their successors-in-interest.<i> Trinidad v. Marcelo</i> declares that<i> res judicata</i>, as found in Rule 39 of the Rules of Civil Procedure, is a principle in civil law and "has no bearing on criminal proceedings." Rule 124, Section 18 of the Rules of Criminal Procedure states:<br><blockquote>Section 18.<i> Application of certain rides in civil procedure to criminal cases. â</i> The provisions of Rules 42, 44 to 46[,] and 48 to 56 relating to procedure in the Court of Appeals and in the Supreme Court in original and appealed civil cases shall be applied to criminal cases insofar as they are applicable and not inconsistent with the provisions of this Rule. </blockquote>Indeed, while certain provisions of the Rules of Civil Procedure may be applied in criminal cases. Rule 39 of the Rules of Civil Procedure is excluded from the enumeration under Rule 124 of the Rules of Criminal Procedure.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> </blockquote>The presence of either<i> litis pendentia</i> or<i> res judicata</i> is cause for dismissal of a civil action under Rule 15, Section 12(a)(2) and (3) of the Rules of Court, which provides that a motion to dismiss a complaint may be filed on the grounds that "there is another action pending between the same parties for the same cause[,]" and "the cause of action is barred by a prior judgment[.]"<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> These grounds may also be brought up in the Answer by way of affirmative defenses.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup><br><br>Considering the procedural history of the rule on forum shopping as it relates to the initiation of<i> civil</i> actions, and taking into account its conceptual underpinning rooted in<i> res judicata</i>, and to an extent<i> litis pendentia</i>, which are<i> civil</i> law doctrines, the Court finds that forum shopping, as a ground for dismissal of an action, does not find application to<i> criminal</i> proceedings. Thus, Chen Julong's invocation of forum shopping before the RTC-Manila is not a proper ground to dismiss the second Information.<br><br>Even if<i> res judicata</i> is extended to criminal cases through the concept of "<i>res judicata</i> in prison grey,"<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> the filing of the second Information with the RTC-Manila does not violate Chen Julong's right against double jeopardy that would result in the quashal of the second Information.<br><br>The right against double jeopardy has been a part of the criminal justice system even before it was enshrined in the Constitution. It is rooted in the principle of justice and fairness that has always existed as part of black, letter law. As stated by the Court in<i> Melo v. People</i>:<sup style="COLOR: RGB(255, 0, 0);">[87]</sup><br><blockquote>The rule of double jeopardy had a settled meaning in this jurisdiction at the time our Constitution was promulgated. It meant that when a person is charged with an offense and the case is terminated either by acquittal or conviction or in any other manner without the consent of the accused, the latter cannot again be charged with the same or identical offense.<i> This principle is founded upon the law of reason, justice and conscience. It is embodied in the maxim of the civil law non bis in idem, in the common law of England, and undoubtedly in every system of jurisprudence, and instead of having specific origin it simply always existed. It found expression in the Spanish Law and in the Constitution of the United States and is now embodied in our own Constitution as one of the fundamental rights of the citizen</i>.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> (Emphasis supplied) </blockquote>The Instructions of President William McKinley to the Philippine Commission, dated April 7, 1900, which is considered to be "the first colonial charter of fundamental law,"<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> ordained that the government to be established by the Americans should respect the inviolable rule that "no person shall be put twice in jeopardy for the same offense."<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> Succeeding organic acts passed by the U.S. Congress, namely the Philippine Organic Act<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> and the Philippine Autonomy Act,<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> likewise contained provisions protecting the right against double jeopardy. Then, the right was be enshrined in the 1935,<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> 1973,<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> and 1987 Constitutions. The present version of the provision, embodied in Article III, Section 21 of the current Charter, reads as follows:<br><blockquote>SECTION 21. No person shall be twice put in jeopardy of punishment for the same offense. If an act is punished by a law and an ordinance, conviction or acquittal under either shall constitute a bar to another prosecution for the same act. </blockquote>To implement the right against double jeopardy, the procedural rules have long provided that a violation of such right is a ground for the dismissal of the criminal case. When the country came under American sovereignty, General Order No. 58 was promulgated by the U.S. Military Governor in the exercise of his legislative powers as commander-in-chief of the American occupation army.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> This short and compact military General Order provided for the procedure to be followed in criminal cases in various courts. Particularly, it provided that a defendant's prior conviction or acquittal shall be a bar to another indictment for the same offense, whatever the stage of execution.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup><br><br>With the promulgation of the 1940 Rules of Court, a violation of the right against double jeopardy was explicitly included as a ground for the filing of a motion to quash the complaint or Information.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> The recodification in the 1964 Rules of Court did not substantially change double jeopardy as a ground in a motion to quash.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> Finally, the 2000 Rules of Criminal Procedure<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> retained the rule.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> However, an additional provision was incorporated to clarify when double jeopardy does not apply.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup><br><br>To establish the existence of double jeopardy, the following requisites must be present: (a) a first jeopardy must have attached prior to the second; (b) the first jeopardy must have been validly terminated; and (c) a second jeopardy must be for the same offense as that in the first.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> With respect to the first requisite, legal jeopardy only attaches: (a) upon a valid indictment; (b) before a competent court; (c) after arraignment; (d) when a valid plea has been entered; and (e) when the defendant was acquitted or convicted, or the case was dismissed or otherwise terminated without the express consent of the accused.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup><br><br>A dismissal of a criminal case for lack of jurisdiction over the offense does not result in the attachment of the first jeopardy.<br><br>As early as 1911, in<i> United States v. Bernardo</i>,<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> this Court has already ruled that a dismissal of a criminal case by a court without jurisdiction over the offense does not preclude the proper court from entertaining the same case if filed independently by the prosecutor. There, the accused was sentenced by the justice of the peace court for the crime of Seduction (<i>Estupro</i>). An appeal was taken before the Court of First Instance, but the provincial prosecutor filed a complaint with the latter court charging the accused with the same crime, which he was later convicted of. This Court held that the justice of the peace court had no jurisdiction over the offense considering that the penal code then in force provided for remedies to the victim that are beyond the powers granted by law to the justice of the peace. Thus, the Court held that the justice of the peace court did not have competence to hear and try the case for the crime of Seduction (<i>Estupro</i>); however, even if the case was dismissed, the same may still be filed before the Court of First Instance. Thus said the Court:<br><blockquote>After the case had been dismissed, and the proceedings had before the justice of the peace, together with his decision in the matter, had been declared null and void, the judge of First Instance, in the exercise of his original jurisdiction, could have given, in accordance with the law, due course to the complaint which would then have been presented by the provincial fiscal independently of the aforesaid proceedings, which were improperly instituted owing to the absolute lack of jurisdiction on the part of the justice of the peace to hear and try causes for the crime of seduction, for the reasons herein before set forth.<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> </blockquote>In<i> Cristobal v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> the accused was found to have been previously prosecuted of the same offense of Theft in the municipal court of Manila, but since the value of the stolen item exceeded the jurisdictional threshold, said municipal court dismissed the case. The Information was thereafter filed in the Court of First Instance, which ultimately convicted the accused as an accessory to the crime. The Court, citing<i> Bernardo</i>, held that "[s]ince the dismissal was based on lack of jurisdiction, it did not constitute a bar to the prosecution of the offense in the proper court."<sup style="COLOR: RGB(255, 0, 0);">[107]</sup><br><br>The Court would likewise rule, in<i> People v. Puno</i>,<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> that the filing of the Information in the proper court after having been dismissed by a court without competence to try and decide the case does not amount to double jeopardy. In<i> Puno</i>, the accused was first charged with six counts of Violation of Batas Pambansa Blg. 22,<sup style="COLOR: RGB(255, 0, 0);">[109]</sup> before the City Court of Lucena, Quezon. Thereafter, in compliance with the directive from the Ministry of Justice, the prosecutor filed six separate Informations for Violation of Batas Pambansa Blg. 22 before the Court of First Instance. The prosecutor then filed a Motion to Withdraw the criminal case before the City Court of Lucena in view of the filing of the Informations with the Court of First Instance. This Motion was granted by the City Court on the ground of lack of jurisdiction over the offense. The accused claimed that his right to double jeopardy was violated when the new batch of Informations were filed with the Court of First Instance. However, the Court ruled that there was no violation of such right. The Court noted that the prosecution has not yet presented any evidence when it filed for the withdrawal of the Informations in the City Court. Since there&nbsp; was no trial as of yet, there can be no violation of the right against double jeopardy. The Court thus explained:<br><blockquote>Hence, the City Court of Lucena correctly dismissed said case and<i> since the dismissal was based on lack of jurisdiction, it did not constitute a bar to the prosecution of the same offense in the proper court</i>. [. . .]<br><br>It is noteworthy that the Motion to Withdraw Criminal Case No. 10323 and the subsequent filing of the six [] criminal [I]nformations with the Court of First Instance were made compliance with the directive of the Ministry of Justice. Clearly, these were designed to correct the error committed with respect to the filing of the information in Criminal Case No. 10323. Nevertheless, the Court finds that the error does not constitute substantial prejudice to private respondent considering that no evidence yet has ever been presented and the private respondent was never exposed to trial. Thus, the proceedings in Criminal Cases Nos. 3485-3490 were as though the accused was being tried and prosecuted under an original information.<i> The constitutional mandate against putting a person twice in jeopardy of punishment for the same offense is to protect the accused from going through a trial a second time. But, since the first proceeding was dismissed for lack of jurisdiction and the State was not afforded the right to present its own evidence to substantiate the allegations in the information, there is no second jeopardy to speak of</i>. Contrary to the stand of the private respondent in its motion to quash Criminal Cases Nos. 3485-3490, the City Court's order of dismissal cannot be considered as a judgment of acquittal since, as already pointed out, the said court has no jurisdiction to try the case.<sup style="COLOR: RGB(255, 0, 0);">[110]</sup> (Emphasis supplied) </blockquote>Evidently, under established case law, the dismissal of a case due to lack of jurisdiction does not amount to attachment of a jeopardy. Logically, there can be no judgment of acquittal, which is a required element of double jeopardy, because the court which dismissed the case simply had no jurisdiction to rule otherwise. When a court is faced with a case with which it has no authority to try and decide, the only power it has is to dismiss it, as any act it performs without jurisdiction is null and void and without any binding legal effects.<sup style="COLOR: RGB(255, 0, 0);">[111]</sup><br><br>Aside from precedent, the procedural rules also allow, in certain instances, the filing of another criminal Information even if it has been subjected to a motion to quash. Rule 117, Sections 5 and 6 of the Rules of Court provide:<br><blockquote>Section 5.<i> Effect of sustaining the motion to quash. â</i> If the motion to quash is sustained, the court may order that another complaint or information be filed except as provided in section 6 of this Rule. If the order is made, the accused, if in custody, shall not be discharged unless admitted to bail. If no order is made or if having been made, no new information is filed within the time specified in the order or within such further time as the court may allow for good cause, the accused, if in custody, shall be discharged unless he is also in custody for another charge.<br><br>Section 6.<i> Order sustaining the motion to quash not a bar to another prosecution; exception</i>. â An order sustaining the motion to quash is not a bar to another prosecution for the same offense unless the motion was based on the grounds specified in section 3 (g) and (i) of this Rule. </blockquote>Rule 117, Section 5 of the Rules of Court empowers a court, in the event it sustained a motion to quash, to order that another Information be filed over the same offense. Relatedly, Section 6 allows the refiling of the Information for the same offense even if it has been subjected to a motion to quash, except if the grounds for the motion involve paragraphs (g) and (i) of Section 3. These grounds pertain to the following: "[t]hat the criminal action or liability has been extinguished" and "[t]hat the accused has been previously convicted or acquitted of the offense charged, or the case against him was dismissed or otherwise terminated without his express consent."<sup style="COLOR: RGB(255, 0, 0);">[112]</sup> Reading these provisions together, it can therefore be concluded that the prosecution may, on its own or upon the order of the trial court, file another Information for the same offense, except when the grounds raised in the motion to quash were extinction of criminal liability and double jeopardy.<sup style="COLOR: RGB(255, 0, 0);">[113]</sup><br><br>Here, the first Infonnation for Importation of Dangerous Drugs filed against Chen Julong before the RTC-Valenzuela City was dismissed on the ground of lack of jurisdiction over the offense charged, specifically that the place where the crime was committed was outside the territorial jurisdiction of the said trial court. Thus, the dismissal of the case before the RTC-Valenzuela City did not result in the attachment of a first jeopardy. Consequently, the filing of the second Information with the RTC-Manila did not amount to a violation of Chen Julong's right against double jeopardy as the first requisite, i.e., that a first jeopardy must have attached prior to the second one, was not complied with. In addition, the jurisprudence discussed above, together with Rule 117, Sections 5 and 6, explicitly allow for the filing of the second Information over the same offense. The prosecution was not precluded from filing the second Information, which was merely corrective of its prior act of indicting Chen Julong before the RTC-Valenzuela City.<br><br>Chen Julong contends that since the Orders of the RTC-Valenzuela City have not yet attained finality, then the prosecution cannot file the second Information with the RTC-Manila. The Court, however, finds no legal basis to support this argument.<br><br>To recall, in<i> Puno</i>, the Court found that the second batch of six Informations was filed by the prosecution in the Court of First Instance while the first batch was still pending in the City Court of Lucena. It was only after the filing of the second batch that the prosecution, in compliance with the instruction of the then Ministry of Justice, filed with the City Court a Motion to Withdraw the Informations, which was granted on the ground of lack of jurisdiction. Evidently, the factual milieu shows that when the subsequent Informations were filed, there was no valid withdrawal of the previous ones yet, nor was there a ruling by the City Court that it lacked jurisdiction. It was only after the filing of the subsequent Informations that the prosecution moved for the withdrawal of the previous batch. Notwithstanding, the Court ruled that this does not amount to a violation of the accused's right against double jeopardy because a dismissal based on lack of jurisdiction is not a bar to the prosecution of the same offense with the proper court.<br><br>As analogously applied in this case, the lack of finality of the Order of the RTC-Valenzuela City quashing the first Information is not a legal hurdle that would prevent the filing of the second Information with the RTC-Manila. Similar to the circumstances in<i> Puno</i>, the finality of the Order granting the Motion to Quash based on lack of jurisdiction over the offense is not a preÂ­requisite to the re-filing of another Information with the proper court.<br><br>In addition, there is nothing in Rule 117, Sections 5 and 6 of the Rules of Court which requires that the order sustaining the motion to quash must have attained finality first before a new Information is filed. While an order granting a motion to quash, unlike one of denial, is a final order and not merely interlocutory and thus is appealable,<sup style="COLOR: RGB(255, 0, 0);">[114]</sup> there is no legal obligation for the prosecution to wait for such order to attain finality before it can proceed with another indictment for the same offense. In fact, Rule 117, Section 5 allows the trial court to order the prosecution to re-file the appropriate Information. It would therefore be incongruous for the prosecution to await first for the finality of such order from the trial court before it complies therewith, especially when such court provides for a period within which to refile the Information.<br><br>Thus, the RTC-Manila did not commit grave abuse of discretion when it denied Chen Julong's Motion to Dismiss on the ground of forum shopping.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The RTC-Manila did not commit grave abuse of discretion in the issuance of the arrest warrant against Chen Julong</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Chen Julong alleges that the RTC-Manila committed grave abuse of discretion when it found probable cause for the issuance of an arrest warrant against him. He asserts that the Hongfei Group is neither the importer not consignee of the wooden crates where the<i> shabu</i> was discovered by agents of the BOC and NBI. The mere fact that he is a corporate officer of Hongfei Group does not necessarily establish that he conspired with others to import the dangerous drugs. More importantly, he stressed that he was the one who reported to the BOC about this particular shipment which arrived in their warehouse upon receiving information from the Chinese customs authorities. That the dangerous drugs were found in the warehouse of the Hongfei Group does not justify his inclusion in the indictment. Moreover, the Hongfei Group relied in good faith on the import declarations made by the shipper that the crates only contained metal cylinders. Thus, Chen Julong asserts that there is no probable cause to charge him of the crime of Importation of Dangerous Drugs.<sup style="COLOR: RGB(255, 0, 0);">[115]</sup><br><br>On the other hand, the OSG maintains that the finding of probable cause needs only to rest on evidence showing that more likely than not a crime has been committed by the suspects. It need not be based on clear and convincing evidence of guilt. Absent a finding that the Information is invalid on its face or that the prosecutor committed manifest error or grave abuse of discretion, a judge's determination of probable cause deserves great weight and respect. Since Chen Julong narrated evidentiary matters best reserved to trial, the OSG asserts that no error may be attributed to the RTC-Manila when it ordered the issuance of a warrant of arrest against Chen Julong.<sup style="COLOR: RGB(255, 0, 0);">[116]</sup><br><br>Article III, Section 2 of the Constitution provides for the right of the people against unreasonable searches and seizures. It reads:<br><blockquote>SECTION 2. The right of the people to be secure in their persons, houses, papers, and effects against unreasonable searches and seizures of whatever nature and for any purpose shall be inviolable, and no search warrant or warrant of arrest shall issue except upon probable cause to be determined personally by the judge after examination under oath or affirmation of the complainant and the witnesses he may produce, and particularly describing the place to be searched and the persons or things to be seized. </blockquote>The seizing of a person, i.e., his or her arrest and detention under custody of law, is permitted when there is a warrant issued by a judge upon the finding of probable cause to be determined after personally examining under oath or affirmation the complainant and his or her witnesses. Thus, the <i>judicial determination of probable cause</i> is a requirement by no less than the Constitution, which must be conducted by the court even without the prodding or motion of any party. This process is described in<i> People v. Yecyec</i>,<sup style="COLOR: RGB(255, 0, 0);">[117]</sup> as follows:<br><blockquote>The judicial determination of probable cause, is one made by the judge to ascertain whether a warrant of arrest should be issued against the accused. The judge must satisfy himself that based on the evidence submitted, there is a necessity to place the accused under custody in order not to frustrate the ends of justice. If the judge finds no probable cause, the judge cannot be forced to issue the arrest warrant.<br><br>Corollary to the principle that a judge cannot be compelled to issue a warrant of arrest if he or she deems that there is no probable cause for doing so, the judge should not override the public prosecutor's determination of probable cause to hold an accused for trial on the ground that the evidence presented to substantiate the issuance of an arrest warrant was insufficient. It must be stressed that in our criminal justice system, the public prosecutor exercises a wide latitude of discretion in determining whether a criminal case should be filed in court, and the courts must respect the exercise of such discretion when the information filed against the person charged is valid on its face, and that no manifest error or grave abuse of discretion can be imputed to the public prosecutor. <sup style="COLOR: RGB(255, 0, 0);">[118]</sup></blockquote>Judicial determination of probable cause involves the judge's independent assessment of the evidence on hand, i.e., those submitted alongside the Information, and its only purpose is to determine whether a warrant of arrest should be issued. During this stage, the judge does not act as an appellate body that reviews the prosecutor's own determination of probable cause; rather, the judge should make his or her own determination independent from the prosecutor's findings.<sup style="COLOR: RGB(255, 0, 0);">[119]</sup><br><br>Probable cause with respect to the issuance of an arrest warrant pertains to the "facts and circumstances which would lead a reasonably discreet and prudent person to believe that an offense has been committed by the person sought to be arrested."<sup style="COLOR: RGB(255, 0, 0);">[120]</sup> The standard used in the determination of this kind of probable cause is less stringent than that used in the determination of the guilt of the accused.<sup style="COLOR: RGB(255, 0, 0);">[121]</sup> Simply, as long as the evidence presented before the trial court shows a<i> prima facie</i> case against the accused, then the trial court has sufficient ground to issue the warrant of arrest.<sup style="COLOR: RGB(255, 0, 0);">[122]</sup><br><br>Evidentiary matters with regard to the charge and the defenses raised are not controlling in the judicial determination of probable cause as these must be presented and heard during trial. For example, "the presence of absence of any of the ingredients or elements of the crime charged is evidentiary in nature and is a matter of defense that may be best passed upon after a full-blown trial on the merits."<sup style="COLOR: RGB(255, 0, 0);">[123]</sup> Therefore, if the information is valid on its face, and there is no showing of manifest error or grave abuse of discretion, a judge's determination of probable cause is only for the purpose of deciding whether a warrant of arrest should be issued against the accused.<sup style="COLOR: RGB(255, 0, 0);">[124]</sup><br><br>The Joint Resolution of the DOJ Task Force, which was the basis for the filing of the second Information, was able to narrate both the allegations made by the NBI and the rebuttals of Chen Julong as contained in his counter-affidavit. It found that Chen Julong, as chairperson of the Hongfei Group, acted as the "consolidator" who was responsible for receiving the five metal cylinders containing dangerous drugs at his warehouse. He was likewise in charge of the loading of the shipment and the preparation of the packing list. He was the one who transmitted the same list to the facilitator or broker in the Philippines which became the basis for the issuance of the bill of lading, which was ultimately used for the importation of the dangerous drugs.<sup style="COLOR: RGB(255, 0, 0);">[125]</sup> These findings, together with the other supporting documents attached to the Information,<sup style="COLOR: RGB(255, 0, 0);">[126]</sup> establish a<i> prima facie</i> case against Chen Julong.<br><br>Chen Julong attempts to dispute the allegations against him by asserting that he was only a victim of circumstance considering that he is the responsible officer of the corporation which owned the warehouse where the dangerous drugs were discovered and confiscated. He further maintains that it was actually he who informed the BOC about the suspected shipment after obtaining prior information from the Chinese customs authorities.<br><br>The most appropriate recourse for Chen Julong is to proceed to trial and raise these matters as defenses. As correctly found by the CA, these are "indubitably evidentiary in nature that are best litigated in a full-blown trial on the merits."<sup style="COLOR: RGB(255, 0, 0);">[127]</sup> Absent any finding that there is manifest error or grave abuse of discretion, the Court must uphold the RTC-Manila's finding of probable cause for the issuance of the warrant of arrest against Chen Julong.<br><br>In sum, the Court finds that the CA did not commit a reversible error when it dismissed Chen Julong's Petition for<i> Certiorari</i> and no grave abuse of discretion can be attributed on the part of the RTC-Manila when it denied Chen Julong's Motion to Dismiss and ordered his arrest.<br><br><b>ACCORDINGLY</b>, the Petition for Review on<i> Certiorari</i> is<b> DENIED </b>for lack of merit. The Decision, dated August 31, 2018, and the Resolution, dated January 11, 2019, of the Court of Appeals in CA-G.R. SP No. 154727, are<b> AFFIRMED</b>.<br><br><b>SO ORDERED. </b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan,</i> and <i>Dimaampao, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 40-56. Penned by Associate Justice Ramon R. Garcia, and concurred in by Associate Justices Eduardo B. Peralta, Jr. and Geraldine C. Fiel-Macaraig of the Eleventh Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 59-60. Penned by Associate Justice Ramon P. Garcia, and concurred in by Associate Justices Eduardo B. Peralta, Jr. and Geraldine C. Fiel-Macaraig of the Former Eleventh Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 271-275. Penned by Presiding Judge Rainelda H. Estacio-Montesa, Branch 46, Regional Trial Court, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Republic Act No. 9165 (2002). Comprehensive Dangerous Drugs Act of 2002.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i>, p. 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 41-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 93-187.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 42-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 188-195.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 213-220.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 220.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 237-243.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 244-248.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Administrative Matter No. 15-06-10-SC (2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 272.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 273.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 273-274.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 277-302.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 48-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 51-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 61-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Medina v. Sps. Lozada</b>, 383 Phil. 17, 23 (2018) [Per J. Caguioa, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>Albor v. Court of Appeals</b>, 823 Phil. 901, 910 (2018) [Per J. Martires, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>Tagle v. Equitable PCI Bank</b>, 575 Phil. 384, 396 (2008) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>National Housing Authority v. Court of Appeals</b>, 413 Phil. 58, 63 (2001) [Per J. Bellosillo, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Republic v. Bayao</b>, 710 Phil. 279, 287 (2013) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Republic v. Spouses Lazo</b>, 744 Phil. 367, 384-385 (2014) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, pp. 13-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>. at 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Nuque v. Aquino</b>, 763 Phil. 362, 370 (2015) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, pp. 278-279.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>. at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>. at 23-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 238-239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 182.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Gomez v. People</b>, 889 Phil. 915, 958 (2020) [Per J. Gesmundo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>Yusop v. Sandiganbayan</b>, 405 Phil. 233, 239 (2001) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>De Lima v. Reyes</b>, 776 Phil. 623, 648 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Unilever Philippines, Inc. v. Tan</b>, 725 Phil. 486, 492 (2014) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Navaja v. De Castro</b>, 761 Phil. 142, 150 (2015) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Cabral v. Bracamonte</b>, 846 Phil. 110, 123-124 (2019) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i>, p. 119.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>Javier v. Sandiganbayan</b>, 615 Phil. 393, 405 (2009) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Rollo</i>, pp. 17-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id</i>. at 578-583.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Heirs of Inocentes Mampo v. Morada</b>, 888 Phil. 583, 592-593 (2020) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id</i>. at 593.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> 322 Phil. 280 (1996) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id</i>. at 303.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> 361 Phil. 744 (1999) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id</i>. at 754-755.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Batas Pambansa Blg. 129 (1981), The Judiciary Reorganization Act of 1980.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Burn v. Lopez</b>, 229 Phil. 65 (1986) [Per J. Narvasa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> RULES OF COURT, Rule 7, sec. 5, states:<br><blockquote>The plaintiff or principal party shall certify under oath in the complaint or other initiatory pleading asserting a claim for relief or in a sworn certification annexed thereto and simultaneously filed therewith: (a) that he has not theretofore commenced any action or filed any claim involving the same issues in any court, tribunal or quasi-judicial agency and, to the best of his knowledge, no such other action or claim is pending therein; (b) if there is such other pending action or claim, a complete statement of the present status thereof; and (c) if he should thereafter learn that the same or similar action or claim has been filed or is pending, he shall report that fact within five [ ] days therefrom to the court wherein his aforesaid complaint or initiatory pleading has been filed.<br><br>Failure to comply with the foregoing requirements shall not be curable by mere amendment of the complaint or other initiatory pleading but shall be cause for the dismissal of the case without prejudice, unless otherwise provided, upon motion and after hearing. The submission of a false certification or nonÂ­compliance with any of the undertakings therein shall constitute indirect contempt of court, without prejudice to the corresponding administrative and criminal actions. If the acts of the party or his counsel clearly constitute willful and deliberate forum shopping, the same shall be ground for summary dismissal with prejudice and shall constitute direct contempt, as well as a cause for administrative sanctions.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> Administrative Matter No. 19-10-20-SC (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>Korea Exchange Bank v. Gonzales</b>, 496 Phil. 127, 145 (2005) [Per J. Callejo, Sr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>Chua v. Metropolitan Bank &amp; Trust Company</b>, 613 Phil. 143, 153-154 (2009) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Yap v. Chua</b>, 687 Phil. 392, 400 (2012) [Per J. Reyes, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <b>Tanyag v. Tanyag</b>, 914 Phil. 150, 153-154 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup><i> </i><b>City of Taguig v. City of Makati</b>, 787 Phil. 367, 388 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <b>Trinidad v. Office of the Ombudsman</b>, 564 Phil. 382, 389 (2007) [Per J. Carpio Morales, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> 814 Phil. 840 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id</i>. at 857.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> RULES OF COURT, Rule 15, sec. 12(a), states:<br><blockquote>The following motions shall not be allowed:<br><blockquote>(a) Motion to dismiss except on the following grounds:<br><blockquote>. . . .<br>2) That there is another action pending between the same parties for the same cause; and<br>3) That the cause of action is barred by a prior judgment or by the statute of limitations;</blockquote></blockquote></blockquote><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> RULES OF COURT, Rule 6, sec. 5(b), states:<br><blockquote>Defenses may either be negative or affirmative.<br>. . . .<br>(b) . . . .<br>Affirmative defenses may also include grounds for the dismissal of a complaint, specifically, that the court has no jurisdiction over the subject matter, that there is another action pending between the same parties for the same cause, or that the action is barred by a prior judgment.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Caes v. Intermediate Appellate Court</i>, 258-A Phil. 620 (1989) [Per J. Cruz, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> 85 Phil. 766 (1950) [Per J. Moran].<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> J. Sandoval-Gutierrez, Dissenting Opinion in <b>Bengson III v. House of Representatives Electoral Tribunal</b>, 409 Phil. 633, 666 (2001) [Per J. Kapunan, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> WILLIAM MCKINLEY, INSTRUCTIONS OF THE PRESIDENT TO THE PHILIPPINE COMMISSION (1900), p. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> Philippine Organic Act of 1902, 32 Stat. 691, 692 (1902) [United States of America], sec. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> Philippine Autonomy Act, 39 Stat. 545, 546 (1916) [United States of America]. sec. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> 1935 CONST., art. III, sec. 1, par. 20, states:<br><blockquote>No person shall be twice put in jeopardy of punishment for the same offense. If an act is punished by a law and an ordinance, conviction or acquittal under either shall constitute a bar to another prosecution for the same act.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> 1973 CONST., art. IV, sec. 22, states:<br><blockquote>No person shall be twice put in jeopardy of punishment for the same offense. If an act is punished by a law and an ordinance, conviction or acquittal under either shall constitute a bar to another prosecution for the same act.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Collector of Customs v. Villaluz</i>, 163 Phil. 354 (1976) [Per J. Makasiar, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> General Order No. 58 (1900), sec. 26, states:<br><blockquote>When a defendant shall have been convicted or acquitted or once placed in jeopardy upon an information or complaint, the conviction, acquittal shall be a bar to another information or indictment for the offence charged, or for an attempt to commit the same, or for a frustration thereof, or for any offence necessarily therein included of which he might have been convicted under such complaint or information.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> RULES OF COURT (1940), Rule 113, sec. 2(h), states:<br><blockquote>The defendant may move to quash the complaint or information on any of the following grounds:<br><blockquote>. . . .<br>(h) That the defendant has been previously convicted or in jeopardy of being convicted, or acquitted of the offense charged.</blockquote></blockquote><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> RULES OF COURT (1964), Rule 117, sec. 2(h), states:<br><blockquote>The defendant may move to quash the complaint or information on any of the following grounds:<br><blockquote>. . . .<br>(h) That the defendant has been previously convicted or in jeopardy of being convicted, or acquitted of the offense charged.</blockquote></blockquote><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> Administrative Matter No. 00-5-03-SC (2000).<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> RULES OF COURT, Rule 117, sec. 3(i), states:<br><blockquote>The accused may move to quash the complaint or information on any of following grounds:<br><blockquote>. . . .<br>(i) That the accused has been previously convicted or acquitted of the offense charged, or the case against him was dismissed or otherwise terminated without his express consent.</blockquote></blockquote><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> RULES OF COURT, Rule 117, sec. 7, states:<br><blockquote>When an accused has been convicted or acquitted, or the case against him dismissed or otherwise terminated without his express consent by a court of competent jurisdiction, upon a valid complaint or information or other formal charge sufficient in form and substance to sustain a conviction and after the accused had pleaded to the charge, the conviction or acquittal of the accused or the dismissal of the case shall be a bar to another prosecution for the offense charged, or for any attempt to commit the same or frustration thereof, or for any offense which necessarily includes or is necessarily included in the offense charged in the former complaint or information. However, the conviction of the accused shall not be a bar to another prosecution for an offense which necessarily includes the offense charged in the former complaint or information under any of the following instances: (a) the graver offense developed due to supervening facts arising from the same act or omission constituting the former charge; (b) the facts constituting the graver charge became known or were discovered only after a plea was entered in the former complaint or information; or (c) the plea of guilty to the lesser offense was made without the consent of the prosecutor and of the offended party except as provided in section 1(f) of Rule 116. In any of the foregoing cases, where the accused satisfies or serves in whole or in part the judgment, he shall be credited with the same in the event of conviction for the graver offense.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <b>CastaÃ±eda v. People</b>, 876 Phil. 916, 930 (2020) [Per J. Inting, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <i>Id</i>. at 930-931.<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> 19 Phil. 265 (1911) [Per J. Torres].<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> 84 Phil. 473 (1949) [Per J. Ozaeta].<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> 284-A Phil. 48 (1992) [Per J. Medialdea, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> Batas Pambansa Blg. 22 (1979), An Act Penalizing the Making or Drawing and Issuance of a Check Without Sufficient Funds or Credit and for Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <b>People v. Puno</b>, 284-A Phil. 48, 59 (1992).<br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> <b>Bilag v. Ay-ay</b>, 809 Phil. 236, 248 (2017) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> RULES OF COURT, Rule 117, sec. 3(g) and (i), states:<br><blockquote>The accused may move to quash the complaint or information on any of following grounds:<br><blockquote>. . . .<br>(g) That the criminal action or liability has been extinguished;<br>. . . .<br>(i) That the accused has been previously convicted or acquitted of the offense charged, or the case against him was dismissed or otherwise terminated without his express consent.</blockquote></blockquote><sup style="COLOR: RGB(255, 0, 0);">[113]</sup> <b>Romualdez v. Marcelo</b>, 529 Phil. 90, 99 (2006) [Per J. Ynares-Santiago, Special First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[114]</sup> <b>Vasquez v. Hobilla-Alinio</b>, 337 Phil. 513, 519 (1997) [Per J. Bellosillo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[115]</sup> <i>Rollo</i>, pp. 24-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[116]</sup> <i>Id</i>. at 583-587.<br><br><sup style="COLOR: RGB(255, 0, 0);">[117]</sup> 746 Phil. 634 (2014) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[118]</sup> <i>Id</i>. at 646-647.<br><br><sup style="COLOR: RGB(255, 0, 0);">[119]</sup> <b>Mendoza v. People</b>, 733 Phil. 603, 611 (2014) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[120]</sup> <b>De Joya v. Judge Marquez</b>, 516 Phil. 717, 721 (2006) [Per J. Azcuna, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[121]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[122]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[123]</sup> <b>People v. Alcantara</b>, 835 Phil. 635, 648 (2018) [Per J. Tijam, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[124]</sup> <b>People v. Castillo</b>, 607 Phil. 754, 765-766 (2009) [Per J. Quisumbing, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[125]</sup> <i>Rollo</i>, pp. 141-142.<br><br><sup style="COLOR: RGB(255, 0, 0);">[126]</sup> <i>Id</i>. at 240-243.<br><br><sup style="COLOR: RGB(255, 0, 0);">[127]</sup> <i>Id</i>. at 53.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

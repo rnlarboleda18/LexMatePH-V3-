@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. Nos. 203547 and 203561 - COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. TEAM SUAL CORPORATION (FORMERLY MIRANT SUAL CORPORATION), RESPONDENT.[G.R. No. 203561] COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. TEAM SUAL CORPORATION (FORMERLY MIRANT SUAL CORPORATION), RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70281' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. Nos. 203547 and 203561, December 03, 2025 ]</H2>
+			<H3>COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. TEAM SUAL CORPORATION (FORMERLY MIRANT SUAL CORPORATION), RESPONDENT.<br><br>[G.R. No. 203561]<br><br> COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. TEAM SUAL CORPORATION (FORMERLY MIRANT SUAL CORPORATION), RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court are Petitions for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed under Rule 45 of the Rules of Court assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 22, 2012, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated September 17, 2012, of the Court of Tax Appeals (<b>CTA</b>) <i>En Banc</i> in CTA EB No. 686 (CTA Case Nos. 7230 &amp; 7299). The CTA ordered the Commissioner of Internal Revenue (<b>CIR</b>) to issue a tax credit certificate (<b>TCC</b>) in favor of Team Sual Corporation (<b>TSC</b>) amounting to PHP 60,093,255.69, representing excess unutilized input value-added tax (<b>VAT</b>) for the first quarter of the year 2003.<br><br><center><b><i>The Facts</i></b></center><br>TSC is a domestic corporation duly organized and ex1stmg under Philippine law, with principal office located in Barangay Pangascasan, Sual, Pangasinan. TSC is primarily engaged in the generation of power and its subsequent sale to the National Power Corporation (<b>NPC</b>) under a Build-Operate-Transfer (<b>BOT</b>) arrangement.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>As a seller of services, TSC is registered with the Bureau of Internal Revenue (<b>BIR</b>) as a VAT taxpayer with Certificate of Registration bearing Revenue District Office (<b>RDO</b>) Control No. 05-0181 and Taxpayer's Identification No. 003-841-103.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>On November 13, 2002, TSC filed with the BIR RDO No. 5-Alaminos, Pangasinan an application for zero-rating arising from its sale of power generation services to NPC, which was subsequently approved. Accordingly, TSC filed its VAT returns covering the four quarters of taxable year 2003 on April 24, 2003, July 25, 2003, October 27, 2003, and January 26, 2004, respectively. Subsequently, TSC filed amended quarterly VAT returns for the first, second, and fourth quarters of 2003 on July 25, 2003, August 19, 2003, and July 26, 2004, respectively.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>On December 20, 2004, TSC filed with the BIR an administrative claim for refund in the aggregate amount of PHP 166,158,823.50 for its unutilized input VAT for taxable year 2003.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>On April 22, 2005, without wa1tmg for the resolution of its administrative claim for refund or tax credit, TSC filed with the CTA Division a Petition for Review docketed as CTA Case No. 7230. It prayed for the refund or issuance of a tax credit certificate for its alleged unutilized input VAT on its domestic purchases of goods and services and importation of goods attributable to zero-rated sales for the first quarter of taxable year 2003 in the amount of PHP 67,257,025.75.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On July 22, 2005, TSC filed another Petition for Review docketed as CTA Case No. 7299, seeking the refund or issuance of a tax credit certificate for its alleged unutilized input VAT for the second, third, and fourth quarters of taxable year 2003 in the amount of PHP 98,631,797.75. Both cases were consolidated by the CTA in a Resolution, dated October 12, 2005.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Trial of these cases ensued.<br><br><center><b><i>The Ruling of the CTA in Division</i></b></center><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> dated February 6, 2009, the CTA in Division denied the Consolidated Petitions for failure of TSC to establish that it derived sales from power generation qualifying it for VAT zero-rating. The dispositive portion of the CTA in Division Decision reads:<blockquote>WHEREFORE, the instant Petition for Review is hereby DENIED for insufficiency of evidence.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></blockquote>TSC filed a Motion for Reconsideration, which was partially granted by the CTA in Division in an Amended Decision,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated June 30, 2009 (<b>First Amended Decision</b>). The CTA in Division granted the claim for VAT refund for the 3<sup>rd</sup> and 4<sup>th</sup> quarters of 2003, but dismissed the claim for the 1<sup>st</sup> and 2<sup>nd</sup> quarters for being filed out of time. The dispositive portion of the First Amended Decision reads:<blockquote><b>WHEREFORE</b>, [TSC's] "Motion for Reconsideration" is hereby <b>PARTIALLY GRANTED</b> and this Court's Decision dated February 6, 2009 denying [TSC's] Petition for Review is hereby <b>MODIFIED</b>. The Petition for Review in C.T.A. Case No. 7230 is hereby <b>DISMISSED</b> for being filed out of time, while the Petition for Review in C.T.A. Case No. 7299 is hereby <b>PARTIALLY GRANTED</b>.<br><br>Accordingly, [CIR] is hereby <b>ORDERED TO REFUND or TO ISSUE A TAX CREDIT CERTIFICATE</b> in favor of [TSC] in the amount of [PHP] 64,492,488.62, representing the latter's excess input VAT attributable to its zero-rated sales for the 3<sup>rd</sup> and 4<sup>th</sup> quarters of taxable year 2003.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> (Emphasis in the original)</blockquote>Unsatisfied, both TSC and the CIR filed their respective Motions for Reconsideration.<br><br>On November 26, 2009, the CTA in Division promulgated another Amended Decision,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> which reversed its dismissal of TSC's claim for the 1<sup>st</sup> and 2<sup>nd</sup> quarters of 2003 (<b>Second Amended Decision</b>). The dispositive portion of the Second Amended Decision reads:<blockquote><b>WHEREFORE</b>, [TSC's] "Motion for Partial Reconsideration" is hereby <b>GRANTED</b> and this Court's Amended Decision[,] dated June 30, 2009[,] denying [TSC's] claims for refund for the first and second quarters of2003 is hereby <b>REVERSED</b>.<br><br>On the other hand, [CIR's] "Motion for Reconsideration" is hereby <b>DENIED</b> for lack of merit.<br><br>Accordingly, [CIR] is hereby <b>ORDERED TO REFUND or TO ISSUE A TAX CREDIT CERTIFICATE</b> in favor of [TSC] in the amount of [PHP] 84,772,666.06, representing the latter's excess input VAT attributable to its zero-rated sales for the first and second quarters of taxable year 2003.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis in the original)</blockquote>Undaunted, the CIR filed a Petition for Review before the CTA <i>En Banc</i>. The CIR argued that TSC's judicial claim for refund, i.e., CTA Cases No. 7230 and 7299, were filed out of time.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br><center><b><i>The Ruling of the CTA En Banc<br><br></i></b></center>In the assailed Decision,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> the CTA <i>En Banc</i> partially granted the CIR's Petition for Review. Applying the provisions of Section 112 of the Tax Code, as elucidated in the case of <i>Commissioner of Internal Revenue v. Aichi Forging Company of Asia, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> it ruled that CTA Case No. 7299âfiled by TSC to claim a refund or the issuance of a tax credit certificate for its alleged unutilized input VAT for the second, third, and fourth quarters of 2003âwas filed beyond the 30-day reglementary period for appeals to the CTA and was thus dismissed for being untimely. Conversely, the CTA <i>En Banc</i> held that CTA Case No. 7230, which pertained to TSC's claim for refund of alleged unutilized input VAT for the first quarter of 2003, was filed within the prescribed period.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Nonetheless, the CTA <i>En Banc</i> found that only the portion of the claim amounting to PHP 60,093,255.69 was duly supported by complete documentation.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> The dispositive portion reads:<blockquote><b>WHEREFORE</b>, the Petition for Review filed by petitioner Commissioner of Internal Revenue on October 22, 2010, is <b>PARTIALLY GRANTED</b>. The claim for refund for the 1<sup>st</sup> quarter of the year 2003, subject of CIA Case No. 7230, is hereby <b>GRANTED</b>. [CIR] is directed to refund or to issue a Tax Credit Certificate in favor of respondent Team Sual Corporation in the amount of [PHP] 60,093,255.69, representing excess unutilized input VAT for the 1<sup>st</sup> quarter of year 2003.<br><br>On the other hand, [TSC's] claim for refund of unutilized input VAT for the 2<sup>nd</sup>, 3rd and 4<sup>th</sup> quarters of the year 2003, subject of CTA Case No. 7299 is DENIED on jurisdictional ground.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis in the original)</blockquote>Both TSC and the CIR filed their respective Motions for Partial Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> For its part, the CIR arguedâ<i>for the first time</i>âthat the CTA <i>En Banc</i> erred in granting TSC's claim for refund of input VAT for the first quarter of 2003 due to lack of jurisdiction. The CIR claimed that TSC failed to submit complete documents at the administrative level, pursuant to Revenue Memorandum Order (<b>RMO</b>) No. 53-98, thereby preventing it from acting accordingly on its claim.<br><br>On the other hand, TSC contended that the Court's ruling in <i>Aichi</i> cannot be retroactively applied to its claim, emphasizing that it merely relied on prevailing jurisprudence at the time of the filing of CTA Case No. 7230 on April 22, 2005.<br><br>The CTA <i>En Banc</i> denied both Motions for Partial Reconsideration in the assailed Resolution,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> dated September 17, 2012, for lack of merit.<br><br>Hence, these Petitions.<br><br><center><b><i>The Present Petitions</i></b></center><br><i>G.R. No. 203547</i><br><br>Seeking the disallowance as well of TSC's claim for the 1st quarter of 2003, the CIR contends that CTA Case No. 7230 was filed out of time.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> In support of this position, the CIR invokes the First Amended Decision of the CTA in Division, which cited the Court's ruling in <i>Commissioner of Internal Revenue v. Mirant Pagbilao Corp.</i><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> There, the CTA in Division held that both the administrative and judicial claims for refund must be filed within two years from the close of the taxable quarter when the pertinent sales were made.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> The CIR further reiterates that TSC failed to submit the complete set of supporting documents within the 120-day period prescribed under RMO No. 53-98.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> It was only before the CTA that TSC allegedly presented the various pieces of evidence substantiating its claim for refund.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Consequently, the CIR asserts that it had no basis to act on the administrative claim,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> and that the CTA lacked jurisdiction over the judicial claim due to TSC's failure to exhaust administrative remedies.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> TSC argues that the Court's ruling in <i>Mirant</i> cannot be retroactively applied to the present case without violating its right to due process.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> TSC further asserts that it submitted complete documents in connection with its administrative claim for refund.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Additionally, TSC takes exception to the CIR's belated invocation of this argument, noting that it was raised for the first time only in the CIR's Motion for Partial Reconsideration of the CTA <i>En Banc</i> Decision, dated May 22, 2012.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>In its Reply,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> the CIR reiterates that the <i>Mirant</i> ruling is applicable,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> and that the CTA had no jurisdiction to entertain TSC's claim as it failed to submit the required documents during the 120-day period.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br><i>G.R. No. 203561</i><br><br>On the other hand, TSC argues that the CTA <i>En Banc</i> erred in denying its claim for refund for the second, third, and fourth quarters of 2003, which was the subject of CTA Case No. 7299, on the ground of late filing. TSC maintains that the application of the Court's ruling in <i>Aichi</i> to its case would contravene the principle of non-retroactivity of judicial decisions and result in unjust enrichment on the part of the government at its expense.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> the CIR counters that the CTA <i>En Banc</i> lacked jurisdiction to entertain TSC's claim, as the latter allegedly failed to submit the requisite supporting documents for its administrative claim for refund. The CIR further asserts that the <i>Aichi</i> ruling must be applied to TSC's claim, and that no unjust enrichment occurred, emphasizing that tax refunds partake of the nature of tax exemptions and, as such, must be strictly construed against the taxpayer.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>In its Reply,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> TSC reiterates that it duly complied with the submission of all required documents in support of its administrative claim for refund.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Further, TSC maintains that the "120+30-day" rule enunciated in <i>Aichi</i> cannot be retroactively applied to its claim for refund,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> reiterating that to do so would unjustly enrich the government at TSC's expense.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>In a Resolution,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> dated November 27, 2013, the Court consolidated these cases.<br><br><center><b><i>The Issues</i></b></center><br><b><i>G.R. No. 203547</i></b><blockquote><ol><li>Did the CTA acquire jurisdiction over TSC's judicial claim for refund of its alleged unutilized input VAT for the year 2003?<br><br></li><li>Did the CTA <i>En Banc</i> err in ruling that CTA Case No. 7230 was timely filed?</li></ol></blockquote><b><i>G.R. No. 203561</i></b><br><br>Did the CTA <i>En Banc</i> err in dismissing CTA Case No.7299 for being filed out of time?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Court shall first address the timeliness of the filing of the CTA Case Nos. 7230 and 7299.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>CTA Case No. 7299 was filed out of time, whereas CTA Case No. 7230 was timely filed within the prescribed period.</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Both TSC and the CIR raised the issue of the timeliness of the filing of CTA Cases No. 7299 and 7230, respectively. On the one hand, TSC argues that the CTA erred in dismissing CTA Case No. 7299 for late filing, asserting that the <i>Aichi</i> ruling should not be retroactively applied to its case. On the other hand, the CIR contends that CTA Case No. 7230 was filed out of time as it was filed beyond two-year period provided in Section 112 of the Tax Code.<br><br>The Court finds both arguments to be without merit.<br><br>The issues presented by the parties were definitely resolved by the Court in <i>Aichi</i>:<blockquote>Section 112(D) of the NIRC clearly provides that the CIR has "120 days, from the date of the submission of the complete documents in support of the application [for tax refund/credit]," within which to grant or deny the claim. In case of full or partial denial by the CIR, the taxpayer's recourse is to file an appeal before the CTA within 30 days from receipt of the decision of the CIR. <b>However, if after the 120-day period the CIR fails to act on the application for tax refund/credit, the remedy of the taxpayer is to appeal the inaction of the CIR to CTA within 30 days.</b>&nbsp;<br><br>In this case, the administrative and the judicial claims were simultaneously filed on September 30, 2004. Obviously, respondent did not wait for the decision of the CIR or the lapse of the 120-day period. For this reason, we find the filing of the judicial claim with the CTA premature.<br><br>Respondent's assertion that the non-observance of the 120-day period is not fatal to the filing of a judicial claim as long as both the administrative and the judicial claims are filed within the two-year prescriptive period has no legal basis.<br><br>There is nothing in Section 112 of the NIRC to support respondent's view. Subsection (A) of the said provision states that "any VAT-registered person, whose sales are zero-rated or effectively zero-rated may, within two years after the close of the taxable quarter when the sales were made, apply for the issuance of a tax credit certificate or refund of creditable input tax due or paid attributable to such sales." <b>The phrase "within two (2) years xxx apply for the issuance of a tax credit certificate or refund" refers to applications for refund/credit filed with the CIR and not to appeals made to the CTA.</b> This is apparent in the first paragraph of subsection (D) of the same provision, which states that the CIR has "120 days from the submission of complete documents in support of the application filed in accordance with Subsections (A) and (B)" within which to decide on the claim.<br><br>In fact, applying the two-year period to judicial claims would render nugatory Section 112(D) of the NIRC, which already provides for a specific period within which a taxpayer should appeal the decision or inaction of the CIR. The second paragraph of Section 112(D) of the NIRC envisions two scenarios: (1) when a decision is issued by the CIR before the lapse of the 120-day period; and (2) when no decision is made after the 120-day period. In both instances, the taxpayer has 30 days within which to file an appeal with the CTA. As we see it then, the 120-day period is crucial in filing an appeal with the CTA.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> (Citations omitted; Emphasis supplied)</blockquote>In <i>Commissioner of Internal Revenue v. San Roque Power Corp.</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the Court unequivocally held that compliance with the 120+30-day period is mandatory and jurisdictional. The same Decision also definitively addressed the issue of the retroactive application of the <i>Aichi</i> ruling:<blockquote>To repeat, a claim for tax refund or credit, like a claim for tax exemption, is construed strictly against the taxpayer. One of the conditions for a judicial claim of refund or credit under the VAT System is compliance with the 120+30-day mandatory and jurisdictional periods. Thus, <i>strict compliance with the 120+30-day periods is necessary for such a claim to prosper, whether before, during, or after the effectivity of the Atlas doctrine, except for the period from the issuance of BIR Ruling No. DA-489-03 on I0 December 2003 to 6 October 2010 when the Aichi doctrine was adopted, which again reinstated the 120+30-day periods as mandatory and jurisdictional</i>.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> (Emphasis supplied)</blockquote>Based on the foregoing, it is evident that if the CIR fails to act on the application for tax refund/credit within the 120-day period (now 90 days), the remedy of the taxpayer is to appeal the inaction of the CIR to the CTA within 30 days. Compliance with the 120+30-day period is mandatory and jurisdictional. An exception exists for claims made during the effectivity of BIR Ruling No. DA-489-03 (from 10 December 2003 to 5 October 2010), which allowed taxpayers to seek judicial relief with the CTA without waiting for the lapse of the 120-day period. Finally, only the administrative claim must be filed within the two-year prescriptive period under Section 112(A) of the Tax Code; the judicial claim is not subject to the same two-year limitation.<br><br>Applying the foregoing rules to the present case, the Court notes the following material dates: TSC filed its administrative claim on December 20, 2004, which is well within the two-year period under Section 112(A) of the Tax Code from the close of the taxable quarter when the sales were made in 2003ânamely, March 31, June 30, September 30, and December 31 of 2003. The 120-day period for the CIR to act lapsed on April 19, 2005, giving TSC 30 days from April 19, 2005 to file its appeal before the CTA or until May 19, 2005. CTA Case No. 7230, filed on April 22, 2005, was therefore timely filed. In contrast, CTA Case No. 7299, which was filed on July 22, 2005, was filed way beyond the deadline.<br><br>The exception recognized in <i>San Roque</i> does not apply here, as it pertains to prematurely filed petitions before the CTAânot belated ones. CTA Case No. 7299 is analogous to the judicial claim filed by Philex Mining in <i>San Roque</i>, and the Court's pronouncements therein are equally applicable to TSC's case:<blockquote>Philex timely filed its administrative claim on 20 March 2006, within the two-year prescriptive period. Even if the two-year prescriptive period is computed from the date of payment of the output VAT under Section 229, Philex still filed its administrative claim on time. Thus, the <i>Atlas</i> doctrine is immaterial in this case. The Commissioner had until 17 July 2006, the last day of the 120-day period, to decide Philex's claim. Since the Commissioner did not act on Philex's claim on or before 17 July 2006, Philex had until 17 August 2006, the last day of the 30-day period, to file its judicial claim. <b>The CTA EB held that 17 August 2006 was indeed the last day for Philex to file its judicial claim. However, Philex filed its Petition for Review with the CTA only on 17 October 2007, or four hundred twenty-six (426) days after the last day of filing. In short, Philex was late by one year and 61 days in filing its judicial claim.</b> As the CTA EB correctly found:<blockquote><b>Evidently, the Petition for Review in C.T.A. Case No. 7687 was filed 426 days late.</b> Thus, the Petition for Review in C.T.A. Case No. 7687 should have been dismissed on the ground that the Petition for Review was filed way beyond the 30-day prescribed period; thus, no jurisdiction was acquired by the CTA Division; ....</blockquote><b>Unlike San Roque and Taganito, Philex's case is not one of premature filing but of late filing. Philex did not file any petition with the CTA within the 120-day period. Philex did not also file any petition with the CTA within 30 days after the expiration of the 120-day period. Philex filed its judicial claim long after the expiration of the 120-day period, in fact 426 days after the lapse of the 120-day period. In any event, whether governed by jurisprudence before, during, or after the Atlas case, Philex's judicial claim will have to be rejected because of late filing.</b> Whether the two-year prescriptive period is counted from the date of payment of the output VAT following the <i>Atlas</i> doctrine, or from the close of the taxable quarter when the sales attributable to the input VAT were made following the <i>Mirant</i> and <i>Aichi</i> doctrines, Philex's judicial claim was indisputably filed late.<br><br>The <i>Atlas</i> doctrine cannot save Philex from the late filing of its judicial claim. <b>The inaction of the Commissioner on Philex's claim during the 120-day period is, by express provision of law, "deemed a denial" of Philex's claim. Philex had 30 days from the expiration of the 120-day period to file its judicial claim with the CTA. Philex's failure to do so rendered the "deemed a denial" decision of the Commissioner final and inappealable. The right to appeal to the CTA from a decision or "deemed a denial" decision of the Commissioner is merely a statutory privilege, not a constitutional right. The exercise of such statutory privilege requires strict compliance with the conditions attached by the statute for its exercise. Philex failed to comply with the statutory conditions and must thus bear the consequences.</b><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (Citations omitted; Emphasis supplied)</blockquote>Thus, for being filed out time, the CTA <i>En Banc</i> correctly dismissed CTA Case No. 7299 as it had no jurisdiction to entertain it.<br><br>The Court will now address the CIR's contention that the CTA did not acquire jurisdiction over TSC's judicial claim for refund for failing to submit complete documents.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The CTA validly acquired jurisdiction over CTA Case No. 7230.</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Section 112 of Republic Act No. 8424,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> which was in force at the time of filing of TSC's claim for credit or refund of its creditable input VAT, pertinently provides, as follows:<blockquote>SEC. 112. <i>Refunds or Tax Credits of Input Tax</i>. â (A) Zero-rated or Effectively Zero-Rated Sales. â Any VAT-registered person, whose sales are zero-rated or effectively zero-rated may, within two (2) years after the close of the taxable quarter when the sales were made, apply for the issuance of a tax credit certificate or refund of creditable input tax due or paid attributable to such sales ....<br><br>. . . .<br><br>(D) <i>Period within which Refund or Tax Credit of Input Taxes shall be Made</i>. â In proper cases, the Commissioner shall grant a refund or issue the tax credit certificate for creditable input taxes <b>within one hundred twenty (120) days from the date of submission of complete documents in support of the application filed in accordance with Subsections (A) and (B) hereof</b>.<br><br><b>In case of full or partial denial of the claim for tax refund or tax credit, or the failure on the part of the Commissioner to act on the application within the period prescribed above, the taxpayer affected may, within thirty (30) days from the receipt of the decision denying the claim or after the expiration of the one hundred twenty-day period, appeal the decision or the unacted claim with the Court of Tax Appeals.</b><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (Emphasis supplied)</blockquote>The CIR argues that TSC's administrative claim for refund should be deemed merely <i>pro forma</i>, as it allegedly failed to submit the complete supporting documents required under RMO No. 53-98<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> within the 120-day period.<br><br>The Court disagrees.<br><br>The issue of what constitutes "complete documents" for purposes of commencing the 120-day period for the CIR to act has long been settled in <i>Pilipinas Total Gas, Inc. v. Commissioner of Internal Revenue</i>.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> In that case, the Court clarified that it is the taxpayer who determines the completeness of the submission of documents, and it is from such submission that the 120-day period for the CIR to act on the refund claim shall be reckoned. Thus:<blockquote>Indeed, the 120-day period granted to the CIR to decide the administrative claim under ... Section 112 is primarily intended to benefit the taxpayer, to ensure that his claim is decided judiciously and expeditiously. After all, the sooner the taxpayer successfully processes his refund, the sooner can such resources be further reinvested to the business translating to greater efficiencies and productivities that would ultimately uplift the general welfare. <b>To allow the CIR to determine the completeness of the documents submitted and, thus, dictate the running of the 120-day period, would undermine these objectives, as it would provide the CIR the unbridled power to indefinitely delay the administrative claim, which would ultimately prevent the filing of a judicial claim with the CTA.</b><br><br>A hypothetical situation illustrates the hazards of granting the CIR the authority to decide when complete documents have been submitted â A taxpayer files its administrative claim for VAT refund/credit with supporting documents. After 121 days, the CIR informs the taxpayer that it must submit additional documents. Considering that the CIR had determined that complete documents have not yet been submitted, the 120-day period to decide the administrative claim has not yet begun to run. In the meantime, more than 120 days have already passed since the application with the supporting documents was filed to the detriment of the taxpayer, who has no opportunity to file a judicial claim until the lapse of the 120+30[-]day period in Section 112(C). With no limitation to the period for the CIR to determine when complete documents have been submitted, the taxpayer may be left in a limbo and at the mercy of the CIR, with no adequate remedy available to hasten the processing of its administrative claim.<br><br>Thus, the question must be asked: <b>In an administrative claim for tax credit or refund of creditable input VAT, from what point does the law allow the CIR to determine when it should decide an application for refund? Or stated differently: Under present law, when should the submission of documents be deemed "completed" for purposes of determining the running of the 120-day period?</b><br><br>Ideally, upon filing his administrative claim, a taxpayer should complete the necessary documents to support his claim for tax credit or refund or for excess utilized VAT. After all, should the taxpayer decide to submit additional documents and effectively extend the 120 [day]-period, it grants the CIR more time to decide the claim. Moreover, it would be prejudicial to the interest of a taxpayer to prolong the period of processing of his application before he may reap the benefits of his claim. Therefore, ideally, the CIR has a period of 120 days from the date an administrative claim is filed within which to decide if a claim for tax credit or refund of excess unutilized VAT has merit.<br><br>Thus, when the VAT was first introduced through Executive Order No. 273, the pertinent rule was that:<blockquote>(e) Period within which refund of input taxes may be made by the Commissioner. The Commissioner shall refund input taxes within 60 days from the date the application for refund was filed with him or his duly authorized representative. No refund or input taxes shall be allowed unless the VAT-registered person files an application for refund within the period prescribed in paragraphs (a), (b) and (c), as the case may be.</blockquote>Here, the CIR was not only given 60 days within which to decide an administrative claim for refund of input taxes, but the beginning of the period was reckoned "from the date the application for refund was filed."<br><br>When Republic Act (R.A.) No. 7716 was, however, enacted on May 5, 1994, the law was amended to read:<blockquote>(d) Period within which refund or tax credit of input taxes shall be made. â In proper cases, [t]he Commissioner shall grant a refund or issue the tax credit for creditable input taxes within sixty (60) days from the date of submission of complete documents in support of the application filed in accordance with sub-paragraphs (a) and (b) hereof. In case of full or partial denial of the claim for tax refund or tax credit, or the failure on the part of the Commissioner to act on the application within the period prescribed above, the taxpayer affected may, within thirty (30) days from the receipt of the decision denying the claim or after the expiration of the sixty-day period, appeal the decision or the unacted claim with the Court of Tax Appeals.</blockquote>Again, while the CIR was given only 60 days within which to act upon an administrative claim for refund or tax credit, the period came to be reckoned "from the date of submission of complete documents in support of the application." With this amendment, the date when a taxpayer made its submission of complete documents became relevant. In order to ensure that such date was at least determinable, RMO No. 4-94 provides:<blockquote><center>REVENUE MEMORANDUM ORDER NO. 40-94</center><br>SUBJECT: Prescribing the Modified Procedures on the Processing of Claims for Value-Added Tax Credit/Refund<br><br>III. Procedures<br><br>REGIONAL OFFICE<br><br>A. Revenue District Office<br><br>In General:<br><br>1. Ascertain the completeness of the supporting documents prior to the receipt of the application for VAT credit/refund from the taxpayer.<br><br>2. Receive application for VAT Credit/Refund (BIR Form No. 2552) in three (3) copies in the following manner:<blockquote>a. stamp the word "RECEIVED" on the appropriate space provided in all copies of application;<br><br>b. indicate the claim number;<br><br>c. indicate the date of receipt; and<br><br>d. initial by receiving officer.</blockquote></blockquote>The application shall be received only if the required attachments prescribed in RAMO 1-91 have been fully complied with.<br><br>Then, when the NIRC was enacted on January 1, 1998, the rule was once more amended to read:<br><br>(D) Period within which Refund or Tax Credit of Input Taxes shall be Made. â In proper cases, the Commissioner shall grant a refund or issue the tax credit certificate for creditable input taxes within one hundred twenty (120) days from the date of submission of comp[l]ete documents in support of the application filed in accordance with Subsections (A) and (B) hereof.<br><br>In case of full or partial denial of the claim for tax refund or tax credit, or the failure on the part of the Commissioner to act on the application within the period prescribed above, the taxpayer affected may, within thirty (30) days from the receipt of the decision denying the claim or after the expiration of the one hundred twenty day-period, appeal the decision or the unacted claim with the Court of Tax Appeals.<br><br>This time, the period granted to the CIR to act upon an administrative claim for refund was extended to 120 days. The reckoning point however, remained "from the date of submission of complete documents."<br><br>Aware that not all taxpayers were able to file the complete documents to allow the CIR to properly evaluate an administrative claim for tax credit or refund of creditable input taxes, the CIR issued RMC No. 49-2003, which provided:<br><br>Q-18: For pending claims with incomplete documents, what is the period within which to submit the supporting documents required by the investigating/processing office? When should the investigating/processing office officially receive claims for tax credit/refund and what is the period required to process such claims?<br><br>A-18: <b>For pending claims which have not been acted upon by the investigating/processing office due to incomplete documentation, the taxpayer-claimants are given thirty (30) days within which to submit the documentary requirements unless given further extension by the head of the processing unit, but such extension should not exceed thirty (30) days.</b><br><br>For claims to be filed by claimants with the respective investigating/processing office of the administrative agency, the same shall be officially received only upon submission of complete documents.<br><br>For current and future claims for tax credit/refund, the same shall be processed within one hundred twenty (120) days from receipt of the complete documents. If, in the course of the investigation and processing of the claim, additional documents are required for the proper determination of the legitimate amount of claim, the taxpayer-claimants shall submit such documents within thirty (30) days from request of the investigating/processing office, which shall be construed as within the one hundred twenty (120)[-]day period.<br><br>. . . .<br><br>Consequently, upon filing of his application for tax credit or refund for excess creditable input taxes, the taxpayer-claimant is given thirty (30) days within which to complete the required documents, unless given further extension by the head of the processing unit. If, in the course of the investigation and processing of the claim, additional documents are required for the proper determination of the legitimate amount of claim, the taxpayer-claimants shall submit such documents within thirty (30) days from request of the investigating/processing office. Notice, by way of a request from the tax collection authority to produce the complete documents in these cases, became essential. It is only upon the submission of these documents that the 120-day period would begin to run.<br><br>Then, when R.A. No. 9337 was passed on July 1, 2005, the same provision under the NIRC was retained. With the amendment to Section 112, particularly the deletion of what was once Section 112(B) of the NIRC, Section 112(D) was amended and renamed 112(C). Thus:<br><br>(C) Period within which Refund or Tax Credit of Input Taxes shall be Made. â In proper cases, the Commissioner shall grant a refund or issue the tax credit certificate for creditable input taxes within one hundred twenty (120) days from the date of submission of complete documents in support of the application filed in accordance with Subsection (A) hereof.<br><br>In case of full or partial denial of the claim for tax refund or tax credit, or the failure on the part of the Commissioner to act on the application within the period prescribed above, the taxpayer affected may, within thirty (30) days from the receipt of the decision denying the claim or after the expiration of the one hundred twenty day-period, appeal the decision or the unacted claim with the Court of Tax Appeals.<br><br>With the amendments only with respect to its place under Section 112, the Court finds that RMC No. 49-2003 should still be observed. Thus, taking the foregoing changes to the law altogether, it becomes apparent that, for purposes of determining <b><i>when</i></b> the supporting documents have been completed â <b>it is the taxpayer who ultimately determines when complete documents have been submitted for the purpose of commencing and continuing the running of the 120-day period</b>. After all, he may have already completed the necessary documents the moment he filed his administrative claim, in which case, the 120-day period is reckoned from the date of filing. The taxpayer may have also filed the complete documents on the 30th day from filing of his application, pursuant to RMC No. 49-2003. He may very well have filed his supporting documents on the first day he was notified by the BIR of the lack of the necessary documents. In such cases, the 120-day period is computed from the date the taxpayer is able to submit the complete documents in support of his application.<br><br>Then, except in those instances where the BIR would require additional documents in order to fully appreciate a claim for tax credit or refund, in terms <b><i>what</i></b> additional document must be presented in support of a claim for tax credit or refund â <b>it is the taxpayer who has that right and the burden of providing any and all documents that would support his claim for tax credit or refund. After all, in a claim for tax credit or refund, it is the taxpayer who has the burden to prove his cause of action. As such, he enjoys relative freedom to submit such evidence to prove his claim.</b><br><br>The foregoing conclusion is but a logical consequence of the due process guarantee under the Constitution. Corollary to the guarantee that one be afforded the opportunity to be heard, it goes without saying that the applicant should be allowed reasonable freedom as to when and how to present his claim within the allowable period.<br><br><b>Thereafter, whether these documents are actually complete as required by law â is for the CIR and the courts to determine. Besides, as between a taxpayer-applicant, who seeks the refund of his creditable input tax and the CIR, it cannot be denied that the former has greater interest in ensuring that the complete set of documentary evidence is provided for proper evaluation of the State.</b>&nbsp;<br><br>Lest it be misunderstood, the benefit given to the taxpayer to determine when it should complete its submission of documents is not unbridled. Under RMC No. 49-2003, if in the course of the investigation and processing of the claim, additional documents are required for the proper determination of the legitimacy of the claim, the taxpayer-claimants shall submit such documents within thirty (30) days from request of the investigating/processing office. Again, notice, by way of a request from the tax collection authority to produce the complete documents in these cases, is essential.<br><br>Moreover, under Section 112(A) of the NIRC, as amended by RA 9337, a taxpayer has two (2) years, after the close of the taxable quarter when the sales were made, to apply for the issuance of a tax credit certificate or refund of creditable input tax due or paid attributable to such sales. Thus, before the administrative claim is barred by prescription, the taxpayer must be able to submit his complete documents in support of the application filed. This is because, it is upon the complete submission of his documents in support of his application that it can be said that the application was, "officially received" as provided under RMC No. 49-2003.<br><br><b>To summarize, for the just disposition of the subject controversy, the rule is that from the date an administrative claim for excess unutilized VAT is filed, a taxpayer has thirty (30) days within which to submit the documentary requirements sufficient to support his claim, unless given further extension by the CIR. Then, upon filing by the taxpayer of his complete documents to support his application, or expiration of the period given, the CIR has 120 days within which to decide the claim for tax credit or refund. Should the taxpayer, on the date of his filing, manifest that he no longer wishes to submit any other addition documents to complete his administrative claim, the 120[-]day period allowed to the CIR begins to run from the date of filing.</b><br><br><b>In all cases, whatever documents a taxpayer intends to file to support his claim must be completed within the two-year period under Section 112(A) of the NIRC. The 30-day period from denial of the claim or from the expiration of the 120-day period within which to appeal the denial or inaction of the CIR to the CTA must also be respected.</b><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> (Citations omitted; Emphasis supplied)</blockquote>Applying the foregoing to the present case, the Court finds no indication that the CIR required the submission of additional documents that would trigger the 30-day period under Revenue Memorandum Circular (<b>RMC</b>) No. 49-2003. Although the CIR repeatedly asserts in its pleadings that TSC failed to submit complete supporting documents, it did not identify with specificity which documents were allegedly lacking. As in <i>Total</i> Gas, there is no showing that the CIR notified TSC of any deficiency in its submission, nor was there any formal denial of the claim on the ground of insufficient documentation.<br><br>The CIR's reliance on RMO No. 53-98 is likewise misplaced. In <i>Total Gas</i>, the Court expressly held that the non-submission of documents enumerated in RMO No. 53-98 is not, by itself, fatal to a claim for refund or tax credit of excess unutilized input VAT. The Court emphasized:<blockquote>As explained earlier and underlined in <i>Team Sual</i> above, <b>taxpayers cannot simply be faulted for failing to submit the complete documents enumerated in RMO No. 53-98, absent notice from a revenue officer or employee that other documents are required. Granting that the BIR found that the documents submitted by Total Gas were inadequate, it should have notified the latter of the inadequacy by sending it a request to produce the necessary documents in order to make a just and expeditious resolution of the claim</b>.<br><br>Indeed, a taxpayer's failure [to comply] with the requirements listed under RMO No. 53-98 is not fatal to its claim for tax credit or refund of excess unutilized excess VAT. This holds especially true when the application for tax credit or refund of excess unutilized excess VAT has arrived at the judicial level. After all, in the judicial level or when the case is elevated to the Court, the Rules of Court governs. Simply put, the question of whether the evidence submitted by a party is sufficient to warrant the granting of its prayer lies within the sound discretion and judgment of the Court.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> (Emphasis supplied)</blockquote>Furthermore, the Court agrees with TSC's contention that the issue of non-submission of complete documents at the BIR level was only raised by the CIR in its Motion for Partial Reconsideration. It was neither raised in the CTA in Division nor in the Petition for Review filed before the Court <i>En Banc</i>. It is an established principle that points of law, theories, issues, and arguments not raised before the lower court need not be considered by the reviewing court as they cannot be raised for the first time on appeal, much more in a motion for reconsideration, because this would be offensive to the basic rules of fair play, justice, and due process.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>Thus, applying the Court's ruling in <i>Total Gas</i>, the CIR had 120 days to decide TSC's application which was finally filed on December 20, 2004. Upon the lapse of this period on April 19, 2005, TSC had 30 days to file an appeal before the CTA, or until May 19, 2005. TSC filed an appeal before the CTA on April 22, 2005, which was well within the 30-day period. Accordingly, the CTA validly acquired jurisdiction over CTA Case No. 7230.<br><br>It must be emphasized, however, that the foregoing rule that it is the taxpayer who determines the completeness of the documents applies only for claims for tax refund or credit filed prior to June 11, 2014, <i>such as the present refund claim</i>. As highlighted in <i>Total Gas</i>, the issuance of RMC No. 54-2014 on June 11, 2014 marked a shift in policy: taxpayers are required to submit all necessary documents upon submission of the application for refund, and are prohibited from submitting additional documents thereafter.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>In addition to the changes introduced by RMC No. 54-2014, several significant amendments have been made to the rules governing both the reckoning period for the BIR to act on VAT refund claims and the documentary requirements for such claims.<br><br>Republic Act No. 10963, or the Tax Reform for Acceleration and Inclusion (<b>TRAIN</b>) Law, which took effect on January 1, 2018, shortened the 120-day period for the CIR to process administrative claims for VAT refund to 90 days. The failure of any official, agent, or employee of the BIR to act on the application within this period is penalized under Section 269 of the Tax Code. To provide uniform guidelines and prescribe the revised mandatory documentary requirements in the processing and grant of VAT refund claims pursuant to the TRAIN Law, the BIR issued RMC No. 47-2019. Under this issuance, the failure of the taxpayer-claimant to submit the complete documents in support of the claim shall result in non-acceptance of the application.<br><br>Subsequently, the BIR issued RMO No. 47-2020 which took effect on January 19, 2021, introducing a Checklist of Requirements, which serves as basis to determine the completeness of the documentary requirements. The circular highlighted that only applications with complete documentary requirements will be received by the authorized processing office, and that the 90-day processing period will start from the actual filing of the application with complete documents duly received by the processing office.<br><br>RMC No. 14-2021 later clarified that the rules under RMO No. 47-2020 apply only for VAT refund claims filed on or after January 19, 2021, while claims filed prior to this date remain governed by RMC No. 47-2019.<br><br>Subsequently, on July 1, 2023, RMC No. 71-2023 and RMO No. 23-2023 took effect. These regulations were issued to reduce the mandatory documentary requirements prescribed in RMO No. 47-2020. The submission of soft copies was no longer required, but original sales invoices or official receipts remained mandatory. A notarized sworn certification attesting to the completeness of the submitted documents was also required. The BIR reiterated that only applications with complete documentary requirements would be received and processed.<br><br>Upon the effectivity of the Ease of Paying Taxes (<b>EOPT</b>) Act on January 22, 2024, which introduced the risk-based approach in verifying VAT refund claims, the BIR issued RMC No. 115-2024 on October 18, 2024 to clarify the applicable policies and procedures. This circular prescribed a revised checklist of mandatory requirements and reiterated that non-compliance with the completeness requirement shall result in non-acceptance of the application. It further clarified that the 90-day processing period shall commence upon acceptance of the application with complete documents, as determined through the check-listing procedure. The pertinent provisions of the RMC provide, as follows:<blockquote><b>Q3: With the number of documents required in the said Checklist of Mandatory Requirements which are sometimes voluminous, how can the receiving office ensure that all documents are indeed submitted?</b><br><br><b>A3:</b> During checklisting of submitted documents, the receiving offices shall perform the following procedures:<blockquote><ol type="a"><li>Check the completeness and propriety in the accomplishment of the application form for VAT refund particularly those falling under "General Requirements";<br><br></li><li>Check if the schedules comply with the prescribed format and that the required supporting documents are present but without confirmation if all the indicated transactions (e.g., sales, purchases) are individually supported.</li></ol></blockquote>Once all the documentary requirements were checked as submitted, the application for refund is accepted and the cursory checking of the completeness of documents supporting sales and purchases shall be done after acceptance.<br><br><b>Q4: When does the 90-day period to process VAT refund claims start?</b><br><br><b>A4: The 90-day period to process and decide shall start from the time of acceptance of the processing office of the claim/application for VAT refund with complete documentary requirements as a result of the checklisting procedure as discussed in Q&amp;A No. 3.</b> (Emphasis supplied)</blockquote>Finally, Republic Act No. 12066, also known as the CREATE MORE Act, which took effect on November 28, 2024, further streamlined the documentary requirements for VAT refund claims. Presently, the CIR now has <i>90 days to grant the refund of creditable input VAT from the date of submission of certified true copies of invoices and other documents specifically limited to those prescribed in pertinent revenue issuances and in support of the application filed</i>. It also introduced a new remedy for denied VAT refund claims: a request for reconsideration prior to filing an appeal with the CTA.<br><br>Section 112 (C) of the Tax Code now reads:<blockquote>SEC. 112. <i>Refunds or Tax Credits of Input Tax</i>. â<br><br><center>xxx</center><br>(C) <i>Period within which the Refund or Tax Credit of Input Taxes shall be Made</i>. â In proper cases, the Commissioner shall grant a refund for creditable input taxes <b>within ninety (90) days from the date of submission of certified true copies of invoices and other documents specifically limited to those prescribed in the revenue issuances and in support of the application filed in accordance with Subsections (A) and (B) hereof:</b> <i>Provided</i>, That for this purpose, the VAT refund claims shall be classified into low-, medium-, and high-risk claims, with the risk classification to be based on the amount of VAT refund claim, tax compliance history, frequency of filing VAT refund claims, among others: <i>Provided, further</i>, That medium- and high-risk claims shall be subject to audit or other verification processes in accordance with the BIR's national audit program for the relevant year. Should the Commissioner find that the grant of refund is not proper, the Commissioner must, within the ninety (90)-day period, communicate in writing to the taxpayer, the legal and factual basis for the denial, including the deficiencies of the VAT refund claim.<br><br>The taxpayer <b>shall have fifteen (15) days from receipt of the full or partial denial to file a request for reconsideration. The Commissioner shall decide on the request for reconsideration within fifteen (15) days from receipt thereof. Failure to file a request for reconsideration within the fifteen (15)-day period shall render the decision final.</b><br><br>In case of full or partial denial of the request for reconsideration, or failure on the part of the Commissioner to act on the application for refund or request for reconsideration within the periods prescribed above, <b>the taxpayer affected may, within thirty (30) days from the receipt of the decision denying the request for reconsideration, or after the expiration of the ninety (90)-day period to decide on the application for refund, or after the lapse of the fifteen (15)-day period to decide on the request for reconsideration in cases where no action is made by the Commissioner on the request for reconsideration, appeal the decision with the Court of Tax Appeals:</b> <i>Provided, however</i>, That failure on the part of any official, agent, or employee of the BIR to act on the application for VAT refund within the ninety (90)-day period and on the request for reconsideration within the fifteen (15)-day period shall be punishable under Section 269 of this Code. (Emphasis supplied)</blockquote>To implement the recent amendments to the VAT refund system, the BIR issued RR No. 10-2025 and RMC No. 37-2025, which took effect for VAT credit or refund claims filed starting April 1, 2025. Notably, VAT refund claims filed from this date may include taxable periods prior to April 1, 2025. For this purpose, RMC No. 37-2025 prescribes separate Checklists of Requirements for VAT refund claims covering taxable periods prior to and those from April 1, 2025, respectively. The BIR maintains its policy that only applications with complete documentary requirements, as enumerated in the applicable checklist, shall be received and processed. Accordingly, taxpayer-claimants are required to attach a notarized sworn certification attesting to the completeness of the documents submitted.<br><br>In view of the foregoing amendments, the Court deems it proper to amend and update the summary of the rules on the reckoning of the processing periods for VAT refund claims under Section 112(A) of the Tax Code as previously laid down in the case of <i>Commissioner of Internal Revenue v. Dahle Shipmanagement Philippines Corporation</i>:<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><blockquote>A. For administrative claims for VAT refund/credit filed <u><b><i>prior to June 11, 2014:</i></b></u><br><br>1. The 120-day period is reckoned from the date of the filing of the administrative claim when (a) the taxpayer submits complete documents with the administrative claim or (b) the taxpayer manifests that the taxpayer will no longer submit additional supporting documents;<br><br>2. If the BIR, pursuant to RMC 49-2003, finds that the documents submitted are insufficient, it shall notify the taxpayer of such and the taxpayer has 30 days to submit the requested documents unless given further extension by the BIR. The 120-day period is reckoned from the submission of the requested documents or lapse of the period given;<br><br>3. If the BIR did not notify the taxpayer of insufficiency of the documents already submitted, and the taxpayer submits additional supporting documents, the 120-day period is reckoned from the submission of said supporting documents;<br><br>4. The filing of the administrative claim for refund and submission of supporting documents must be done within two years from the close of the taxable quarter pursuant to Section 112(A) of the 1997 Tax Code.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>B. For administrative claims for VAT refund/credit filed <u><b><i>from June 11, 2014 until December 31, 2017:</i></b></u><br><br>1. The 120-day period is reckoned from the date of the filing of the administrative claim with complete supporting documents;<br><br>2. Pursuant to RMC 54-2014, the taxpayer is barred from submitting additional documents after the filing of the administrative claim for refund.<br><br>C. For administrative claims for VAT refund/credit filed <u><b><i>beginning January 1, 2018 until January 18, 2021:</i></b></u><br><br>1. The 90-day period is reckoned from the submission of the official receipts or invoices and other documents in support of the application for VAT refund.<br><br>3. Pursuant to RMC 47-2019, the failure on the part of the taxpayer-claimant to submit the complete documents in support of the claim shall result in non-acceptance of the application. Once an administrative claim for VAT refund is filed and duly received by the BIR, no additional document/s shall be subsequently requested/required from the taxpayer. Failure on the part of the taxpayer-claimant to submit the complete documents in support of the claim shall result in non-acceptance of the applications. Any unsupported claim shall be outrightly disallowed, resulting in full/partial denial of the claim.<br><br>D. For administrative claims for VAT refund/credit filed <u><b><i>beginning January 19, 2021 until June 30, 2023:</i></b></u><br><br>1. The 90-day period is reckoned from the submission of the official receipts or invoices and other documents in support of the application for VAT refund.<br><br>2. Pursuant to RMO No. 47-2020, only applications with complete documentary requirements, as enumerated in the Checklist of Requirements, which are filed within the prescribed period, shall be received by the authorized processing office.<br><br>E. For administrative claims for VAT refund/credit filed <u><b><i>beginning July 1, 2023 until October 17, 2024:</i></b></u><br><br>1. The 90-day period is reckoned from the submission of the official receipts or invoices and other documents in support of the application for VAT refund.<br><br>2. Only applications with complete documentary requirements as enumerated in the Checklist of Requirements prescribed in RMC No. 71-2023 and RMO No. 23-2023 shall be received and processed by the authorized processing office.<br><br>F. For administrative claims for VAT refund/credit filed <u><b><i>beginning October 18, 2024 until March 31, 2025:</i></b></u><br><br>1. The 90-day period is reckoned from the time of acceptance of the processing office of the claim or application for VAT refund with complete documentary requirements as a result of the check-listing procedure discussed in Q&amp;A No. 3 of RMC No. 115-2024.<br><br>2. Non-compliance with the completeness of mandatory requirements as enumerated in the Checklist of Requirements prescribed in RMC No. 115-2024 shall result in the non-acceptance of the VAT refund application.<br><br>G. For administrative claims for VAT refund/credit filed <u><b><i>beginning April 1, 2025 onwards:</i></b></u><br><br>1. The 90-day period is reckoned from the date of the submission of the certified true copies of the invoices or official receipts and other documents in support of the application.<br><br>2. Only applications with complete documentary requirements as enumerated in the applicable Checklist of Requirements prescribed in RMC No. 37-2025 shall be received and processed by the authorized processing office.</blockquote>The Court notes that the foregoing rules are based on existing laws and pertinent BIR issuances, which are deemed valid unless otherwise modified, challenged, or invalidated in future appropriate cases.<br><br>In sum, the CTA <i>En Banc</i> did not err in dismissing CTA Case No. 7299 for being been filed out of time, resulting in lack of jurisdiction. As for CTA Case No. 7230, the CTA <i>En Banc</i> validly acquired jurisdiction as it was timely filed.<br><br><i>A final note</i><br><br>It is a well settled doctrine that tax refunds, being in the nature of tax exemptions, are construed <i>in strictissimi juris</i> against the claimant. They are not granted as a matter of right but are privileges extended to taxpayers under specific conditions prescribed by law. As such, the grant of a refund is subject to strict compliance with both procedural and substantive requirements. Failure to meet these requirements renders the claim unavailing.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>Nonetheless, the Court recognizes that while the State retains its inherent power to impose and collect taxes, the conditions for claiming a refund must not be so onerous as to render compliance impractical or dissuade legitimate claims.<br><br>It is therefore incumbent upon the legal framework to strike a fair and judicious balance between the State's interest to earn revenue and the taxpayer's interest to a fair and accessible refund mechanism. Significantly, since the filing of the present cases, the rules governing claims for refund of input VAT have undergone substantial refinement. These reforms reflect a conscious effort on the part of the government to streamline administrative processes and ensure the equitable treatment of refund claims, for which it must be duly acknowledged.<br><br><b>ACCORDINGLY</b>, the Petitions for Review on <i>Certiorari</i> are <b>DENIED</b>. The Decision, dated May 22, 2012, and the Resolution, dated September 17, 2012, issued by the Court of Tax Appeals <i>En Banc</i> in CTA EB No. 686 (CTA Case Nos. 7230 &amp; 7299), are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), pp. 14-35; <i>rollo</i> (<b>G.R. No. 203561</b>), pp. 137-172.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), pp. 42-72; <i>rollo</i> (<b>G.R. No. 203561</b>), pp. 86-116. Penned by Associate Justice Esperanza R. Fabon-Victorino and concurred in by Presiding Justice Ernesto D. Acosta and Associate Justices Juanito C. CastaÃ±eda, Jr., Erlinda P. Uy, Caesar A. Casanova, Olga Palanca-Enriquez, and Amelia R. Cotangco-Manalastas.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), pp. 74-88; <i>rollo</i> (<b>G.R. No. 203561</b>), pp. 117-131. Penned by Associate Justice Esperanza R. Fabon-Victorino and concurred in by Presiding Justice Ernesto D. Acosta and Associate Justices Juanito C. CastaÃ±eda, Jr., Lovell R. Bautista, Erlinda P. Uy, Caesar A. Casanova, Olga Palanca-Enriquez, Cielito N. Mindaro-Grulla, and Amelia R. Cotangco-Manalastas.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), p. 43; <i>rollo</i> (<b>G.R. No. 203561</b>), p. 87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), p. 44; <i>rollo</i> (<b>G.R. No. 203561</b>), p. 88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), pp. 44-45; <i>rollo</i> (<b>G.R. No. 203561</b>), pp. 88-89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), p. 45; <i>rollo</i> (<b>G.R. No. 203561</b>), p. 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i> (<b>G.R. No. 203561</b>), pp. 15-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 25-50. Penned by Associate Justice Lovell R. Bautista and concurred in by Associate Justice Caesar A. Casanova. Presiding Justice Ernesto D. Acosta had a Concurring and Dissenting Opinion.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 52-73. Penned by Associate Justice Lovell R. Bautista and concurred in by Associate Justice Caesar A. Casanova. Presiding Justice Ernesto D. Acosta had a Concurring and Dissenting Opinion.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 67-68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 92.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 86-116; <i>rollo</i> (<b>G.R. No. 203547</b>), pp. 42-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 646 Phil. 710 (2010) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), p. 56; <i>rollo</i> (<b>G.R. No. 203561</b>), p. 101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), p. 70; <i>rollo</i> (<b>G.R. No. 203561</b>), p. 114.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), pp. 70-71; <i>rollo</i> (<b>G.R. No. 203561</b>), pp. 114-115.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), p. 73; <i>rollo</i> (<b>G.R. No. 203561</b>), p. 117.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), pp. 74-88; <i>rollo</i> (<b>G.R. No. 203561</b>), pp. 117-131.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Rollo</i> (<b>G.R. No. 203547</b>), p. 23.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> 586 Phil. 712 (2008) [Per J. Velasco, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i><i>Rollo</i></i> (<b>G.R. No. 203547</b>), p. 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 32.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 103-130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 114.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 116.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at l21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 136-148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 139.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 145.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i><i>Rollo</i></i> (<b>G.R. No. 203561</b>), p. 145.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 323-351.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 348.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 366-384.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 367.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 374.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 380.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 363.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Commissioner of Internal Revenue v. Aichi Forging Company of Asia, Inc.</b>, 646 Phil. 710, 731-732 (2010) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 703 Phil. 310 (2013) [Per J. Carpio, En Banc].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 371.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 361-363.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> An Act Amending the National Internal Revenue Code, as amended, and For Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Now Section 112(C), as renumbered by Republic Act No. 9337.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Checklist of Documents to be Submitted by a Taxpayer upon Audit of His Tax Liabilities as Well as of the Mandatory Reporting Requirements to be Prepared by a Revenue Officer, all of which comprise a Complete Tax Docket.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> 774 Phil. 473 (2015) [Per J. Mendoza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 488-495.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 500.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>See</i> <b>Rizal Commercial Banking Corporation v. Commissioner of Internal Revenue</b>, 550 Phil. 316, 326 (2007) [Per J. Ynares-Santiago, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Pilipinas Total Gas, Inc. v. Commissioner of Internal Revenue</b>, 774 Phil. 473, 496 (2015) [Per J. Mendoza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> 958 Phil. 298 (2024) [Per J. Caguioa, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 319-320.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>See</i> <b>Eastern Telecommunications Phils. Inc. v. Commissioner of internal Revenue</b>, 757 Phil. 136, 146-147 (2015) [Per J. Reyes, Third Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

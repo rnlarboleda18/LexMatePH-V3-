@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 274537 - NOEL C. SUATARON, PETITIONER, VS. HAWAIIAN PHILIPPINE COMPANY, INC., RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70331' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 274537, November 18, 2025 ]</H2>
+			<H3>NOEL C. SUATARON, PETITIONER, VS. HAWAIIAN PHILIPPINE COMPANY, INC., RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>KHO, JR., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated January 26, 2023 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated January 17, 2024 off the Court of Appeals (CA) in CA-G.R. SP. No. 14748, which reversed and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated May 31, 2021 and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated October 15, 2021 of the National Labor Relations Commission (NLRC). The NLRC rulings, in turn, reversed and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> dated January 28, 2021 of the labor arbiter (LA), which dismissed petitioner Noel C. Suataron's (Suataron) complaint for illegal dismissal against respondent Hawaiian Philippine Company, Inc. (HPCI).<br><br><center><b>The Facts</b></center><br>At around midnight of November 12, 2019, while Suataron, an assistant pan man in HPCI's Boiling House Department,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> was manning Pan Nos. 9 and 10, the area suddenly flooded. When Suataron checked the cause of the flooding, Suataron learned that it was due to the spillage of water from an open nash pump in Pan No. 6 operated by Rodrigo Apsay (Apsay). Suataron reported the matter to the head pan man, Noel Julayco (Julayco), and asked for assistance in draining and cleaning the flooded area. While Suataron was conversing with Julayco, Apsay interrupted and insisted that the water spillage was an ordinary consequence of the operation. A heated argument erupted between Suataron and Apsay; threatened by Apsay's act of standing up with clenched fist and aggressive goading, Suataron punched Apsay resulting in a fistfight. Apsay thereafter ran to the Supervisor's Office followed by Suataron, armed with a steel pipe. Jenny-Ann Dorilag (Dorilag), the supervisor on duty, locked the door to prevent Suataron from entering. Security guards then arrived to assist. Efforts to settle the matter between Suataron and Apsay thereafter failed; thus, they were brought to the police station, where Apsay filed a report against Suataron. Based on his medical certificate, Apsay sustained (1) "slight contusion at the infraorbital area, left" and (2) "erythema at the helix of the left ear."<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On November 15, 2019, Renato Togonon (Togonon), the Boiling House Superintendent, issued a Memo to Explain in Writing to Suataron. After the conduct of initial investigation, Suataron was placed under preventive suspension effective December 4, 2019. An administrative investigation was thereafter conducted on December 19, 2019. In a Notice dated January 2, 2020, Suataron was found guilty of violating Rule VI, Section 3 of the Company Regulations and Schedule of Penalties and was imposed the penalty of dismissal. Nevertheless, HPCI's Human Resource Managers, Gloria Pasustento and John Etabag, noted that Suataron showed great concern for his work performance and the housekeeping of his area, he was a recipient of the President's Award for Sugar Boiling, and had no other infractions in his 201 File.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Suataron thereafter filed a complaint, arguing that his dismissal was excessive considering (1) it was his first infraction in his 28 years of service, (2) his pristine record, and (3) that his actuations were out of concern for HPCI and its property.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>In defense, HPCI argued that punching another employee is an act of serious misconduct that warrants the penalty of dismissal. Contrary to Suataron's stance, HPCI opined that the length of his service should work against him instead of in his favor.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br><center><b>The LA Ruling</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated January 28, 2021, the LA dismissed Suataron's complaint for illegal dismissal. Nevertheless, it awarded Suataron PHP 52,714.31, which represents his sick leave benefit, signing bonus, milling bonus, differentials, and social amelioration bonus.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>The LA held that the failure to faithfully comply with company rules and regulations is considered a just cause in terminating an employee's employment based on the nature, severity, and circumstances of noncompliance. According to the LA, even if Suataron was generally a good employee and his annoyance to Apsay's careless work is understandable, HPCI cannot be faulted for being dismayed by Suataron's violent action. The LA found that while Suataron insists that he did not instigate the fight, he nevertheless admitted that he threw the first punch, as he anticipated that Apsay would hit him. Before that first blow, the argument, while heated, was merely a verbal disagreement. The LA also found that Suataron conceded that he followed Apsay, who went to report the matter to the supervisor, armed with a steel pipe. The LA opined that Suataron's claims that he armed himself as he was afraid that Apsay might harm him is counterintuitive to his admission that he sought out Apsay; and that based on the administrative hearing, it appears that he was only stopped from entering the supervisor's office by Dorilag and the security guards. Accordingly, the LA held that there was just cause to dismiss Suataron and that his dismissal is a management prerogative, which HPCI may exercise in disciplining its employees, for as long as it does not violate labor laws and it complies with due process requirement, which HPCI was able to do.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Aggrieved, Suataron appealed to the NLRC.<br><br><center><b>The NLRC Ruling</b>&nbsp;</center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> dated May 31, 2021, the NLRC reversed and set aside the LA ruling, and accordingly, ordered HPCI to admit Suataron back to work within 10 calendar days from the receipt of the decision under the same terms and conditions prior to his dismissal. Suataron was likewise ordered to report back to work within 10 calendar days from receipt of HPCI's return-to-work order. His failure to do so would then be deemed as voluntary severance of his employment with HPCI.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Finding the penalty of dismissal imposed by HPCI too harsh, the NLRC held that HPCI should have taken into consideration Suataron's unblemished 28 long years of service, its officer's commendation of Suataron's performance and concern for his work, his receipt of President's Award for Sugar Boiling, and the absence of derogatory records in Suataron's 201 File. The NLRC likewise observed that after Suataron found out that the flooding in his work area was caused by the spillage of water from an open nash pump in Pan No. 6 operated by Apsay, he immediately informed the head pan man about it, and asked assistance in cleaning the area, which manifested Suataron's rationality, good judgment, and clear thinking. The NLRC added that it was only after Apsay insisted that the spillage was a normal occurrence that the heated verbal altercation arose between him and Suataron, and a fistfight ensued between them thereafter. The NLRC held that a consideration of the foregoing would lead to a conclusion that Suataron is a desirable worker, whose only concern at work revolves around his best performance, the welfare and preservation of HPCI's properties, and the protection of the company's product from contamination.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>HPCI moved for reconsideration, which was denied by the NLRC in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated October 15, 2021. The NLRC reiterated that Suataron's dismissal was not commensurate to his commission of a lone infraction, which was based on an incident that is not entirely attributable to him. Aggrieved, HPCI appealed to the CA.<br>&nbsp;<br><center><b>The CA Ruling</b></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> dated January 26, 2023, the CA reversed and set aside the NLRC ruling, and accordingly, reinstated the LA ruling which dismissed Suataron's complaint for illegal dismissal.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>The CA held that all the elements of serious misconduct is present in Suataron's case and that the totality or the circumstances merit. his dismissal. The CA held that Suataron's physical attack was unprovoked as he and Apsay were merely engaged in a verbal altercation before Suataron threw the first punch. The CA then observed that Suataron's act of following Apsay to the supervisor's office, armed with a steel pipe, has no justification as Apsay was already moving away from Suataron. Moreover, the CA held that the conflict between Suataron and Apsay is rooted in workplace dynamics after Suataron reported the flooding caused by Apsay to the head pan man. The CA opined that a repeat attack is possible as Suataron refused to reconcile with Apsay to the effect that the issue ultimately reached the police, as evidenced by a police report. According to the CA, Suataron's violence upon the slightest provocation, his apparent lack of control over his anger, and his refusal to reconcile with his co-worker showed Suataron's unfitness to continue in HPCI's employ. Lastly, the CA held that considering that Suataron's act amounted to serious misconduct, the length of his service and the fact that he did not have any serious infractions are immaterial.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Suataron moved for a reconsideration, which was denied by the CA in Resolution<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> dated January 17, 2024; hence, this Petition.<br><br><center><b>The Issue Before the Court</b></center><br>The issue before the Court is whether the CA committed grave abuse of discretion in reversing the NLRC ruling and accordingly dismissing Suataron's complaint for illegal dismissal.<br><br>In his petition, Suataron insist that he did not initiate the attack as it was Apsay, who with a clenched fist, verbally provoked him. Moreover, he claims that although the altercation as work-related, his actions were not performed with wrongful intent but was a result of his genuine intention to preserve and protect HPCI's property from water damage. He adds that the incident between him and Apsay was an isolated incident and there is no basis to conclude that said attack will be repeated. Suataron defends that if he is indeed a person who resort to violence upon the slightest provocation and lacks self-control over his anger, his record would not remain unblemished for 28 years. Lastly, he avers that his 28 years of excellent record should be considered in meting his penalty.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br>&nbsp;<br>In its Comment/Opposition,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> HPCI avers that it was clearly established that Suataron first struck Apsay following their verbal altercation; thus, said attack was not an act of self-defense. Moreover, Suataron's attack together with his act of following Apsay to the supervisor's office with a steel pipe is a clear violation of HPCI's policy, amounting to serious misconduct, which is a just cause for his termination. Lastly, HPCI claims that Suataron's 28 years of service may not be considered in mitigating his liability for serious misconduct as the law makes no distinction between a first-time or a habitual delinquent for said infraction. <sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br><center><b>The Court's Ruling</b></center><br>The Petition is meritorious.<br><br>At the outset, it bears emphasizing the distinct approach of the Court in reviewing the appellate court's ruling in a labor case. In this instance, the Court is essentially called to rule whether the CA correctly determined the existence of grave abuse of discretion in the NLRC ruling.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> In labor cases, grave abuse of discretion may be ascribed when the findings and conclusions are not supported by substantial evidence, which refers to that amount of relevant evidence that a reasonable mind might accept as adequate to justify a conclusion.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Here, the Court finds that the CA erred in finding grave abuse of discretion in the NLRC ruling which held that Suataron's dismissal was too harsh for the acts he committed.<br><br>Under Article 297 of the Labor Code, an employer may terminate employment on the ground of serious misconduct committed by its employee relative to the performance of his/her duties:&nbsp;<br><blockquote>Article 297. [282] Termination by Employer. â An employer may terminate an employment for any of the following causes:&nbsp;<br><br>(a) Serious misconduct or willful disobedience by the employee of the lawful orders of his employer or representative in connection with his work[.]</blockquote>"Serious misconduct as a valid cause for the dismissal of an employee is simply defined as improper or wrong conduct; the transgression of some established and definite rule of action, a forbidden act, a dereliction of duty, willful in character, and implies wrongful intent and not mere error of judgment. To be serious within the meaning and intendment of the law, the misconduct must be of such grave and aggravated character and not merely trivial or unimportant. However serious such misconduct, it must, nevertheless, be in connection with the employee's work to constitute just cause for his separation. The act complained of must be related to the performance of the employee's duties such as would show him to be unfit to continue working for the employer."<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>Here, it was established that Suataron punched Apsay after a heated argument ensued between him and the latter when Apsay left a nash pump open thereby flooding their work station; that Suataron followed Apsay to the supervisor's office with a steel pipe; and that Suataron refused to reconcile with Apsay right after the incident. HPCI argued that Suataron's actuations are punishable by dismissal under company regulations.<br><br>It is true that an employer is accorded wide prerogative in managing its own affairs including the implementation of company rules and regulations and the imposition of disciplinary measures on its employees; however, this is not limitless but hemmed in by good faith and due consideration of the rights of the worker.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Thus, in the exercise of its management prerogative, an employer should be mindful that what is at stake is not only the employee's position but his very livelihood; this is not only the employee's concern but likewise his family.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> "Unemployment brings untold hardships and sorrows upon those dependent on the wage-earner."<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>While the power to dismiss is a normal prerogative of the employer, one limitation thereof is the reasonable regulation by the State in the exercise of its police power; thus, even if an employee's infraction is punishable by dismissal, the State may inquire whether the strict and rigid application thereof would be harsh to said employee.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>In <i>Farrol v. CA</i>,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> a station cashier incurred a shortage of PHP 50,985.37 in the Peragram, Petty and General Cash Funds of the company, which was said to have been misappropriated. Despite being able to return majority of the missing amount, leaving a balance of only PHP 6,995.37, said employee was dismissed on the ground that under the company's rules, the penalty therefor is dismissal. According to the Court, the penalty of dismissal was unduly harsh considering that the said employee had no previous infraction in his 24 long years of service. The Court underscored therein that "although the employer has the prerogative to discipline or dismiss its employees, such prerogative cannot be exercised wantonly but must be controlled by substantive due process and tempered by the fundamental policy of protection to labor enshrined in the Constitution."<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>In <i>Manila Electric Co. v. NLRC</i>,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> a supervisor-leadman was dismissed for making it appear that a residence, beyond the serviceable area of Meralco, is within the required 30-meter distance from the nearest existing Meralco facilities to expedite electrical connections. In reversing the employee's dismissal, the Court considered his 20 years of service without any derogatory record and the two commendations that he received in the past. According to the Court, "in carrying out and interpreting the Labor Code's provisions and its implementing regulations, the workingman's welfare should be the primordial and paramount consideration. This kind of interpretation gives meaning and substance to the liberal land compassionate spirit of the law as provided for in Article 4 of the New Labor Code which states that 'all doubts in the implementation and interpretation of the provisions of the Labor Code including its implementing rules and regulations shall be resolved in favor of labor."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Here, the Court cannot turn a blind eye to Suataron's untainted 28 years of service, which even merited a President's Award for Sugar Boiling and HPCI's officer's own attestation that Suataron showed great concern for his work performance and the housekeeping of his area. The Court likewise agrees with the NLRC's observation that Suataron's choice to report the flooding to the head pan man when the incident occurred, and ask assistance in the cleaning of the area, instead of confronting Apsay shows Suataron's rationality and good judgment. Verily, it was Apsay's insistence that the spillage was a normal occurrence, which irked Suataron leading to their heated argument. Moreover, it was Apsay's threatening act of standing up with clenched fist and aggressive goading, which led Suataron to punch him resulting in a fistfight and Suataron eventually following Apsay to the supervisor's office with a steel pipe. The foregoing circumstances show that Suataron's reactions were prompted by his concern for the welfare and preservation of HPCI's properties and the protection of its product from contamination. Although he was overtaken by his emotions, the same was not rooted in a wrongful intent.<br><br>The Court likewise notes that this is the first time that Suataron was involved in any altercation and he has no derogatory record in his 28 years of service;<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> thus, the altercation with Apsay may be deemed an isolated incident, moreso that the ensuing consequences of his actions ought to teach Suataron to be more circumspect in his future dealing with work conflicts. On Suataron's alleged refusal to reconcile with Apsay, the Court notes that the efforts for their reconciliation were made right after the altercation when their emotions were still high thereby clouding their judgments. Time and their necessity for a livelihood can work tb repair whatever grudge Suataron and Apsay might have.<br><br>This is not to say that Suataron's misbehavior is excusable or that the Court condones his actions, only that the penalty of dismissal is too harsh given the circumstances of the case. Considering that Suataron was not faultless to absolve him from liability, the Court holds that his reinstatement without the payment of backwages is in order. The forfeiture of his salary for five years that the case was pending is deemed an equitable punishment for the infraction that he committed.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br><b>ACCORDINGLY</b>, the Petition is <b>GRANTED</b>. The Decision dated January 26, 2023 and the Resolution dated January 17, 2024 of the Court of Appeals in CA-G.R. SP. No. 14748 are hereby <b>REVERSED and SET ASIDE</b>. The Decision dated May 31, 2021 of the National Labor Relations Commission is <b>REINSTATED</b>.<blockquote><ol><li>Respondent Hawaiian Philippine Company, Inc. is <b>ORDERED</b> to admit petitioner Noel C. Suataron under the same terms and conditions prior to his dismissal without entitlement to backwages and to issue a return-to-work order to him within 10 calendar days from receipt of this Resolution. Corollarily, petitioner Noel C. Suataron is directed to report back to work within 10 calendar days from receipt of the return-to-work order; failure to do so will be deemed as voluntary severance of his employment with respondent Hawaiian Philippine Company, Inc.; and<br><br></li><li>Respondent Hawaiian Philippine Company, Inc. is likewise <b>ORDERED</b> to pay petitioner Noel C. Suataron the amount of PHP 52,714.31 representing his sick leave benefit, signing bonus, milling bonus, differentials, and social amelioration bonus, as awarded by the labor arbiter in the Decision dated January 28, 2021, which amount was deposited with the Regional Arbitration Branch No. VI, Bacolod City of the National Labor Relations Commission.</li></ol></blockquote><b>SO ORDERED.</b><br><br><i>Lazaro-Javier, J. Lopez</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>LEONEN, SAJ. (Chairperson)</i>, see concurring opinion.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 4-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 25-50. Penned by Associate Justice Rogelio G. Largo and concurred in by Associate Justices Marilyn B. Lagura-Yap and Jacinto G. Fajardo, Jr. of the Nineteenth Division, Court of Appeals, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 53-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 69-76. Penned by Commissioner Julie C. Rendoque and concurred in by Presiding Commissioner Violeta Ortiz-Bantug and Commissioner Nendell Hanz L. Abella of the Seventh Division, National Labor Relations Commission, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 65-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 78-88. Penned by Labor Arbiter Asuncion Grace J. Divinagracia of the Regional Arbitration Branch VI, National Labor Relations Commission, Bacolod City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 26-27, 69-70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 27-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 78-88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 84-86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 69-76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 72-74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 65-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 25-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 41-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 53-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 14-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 92-102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 93-101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <b>Reuyan v. INC Navigation Co. Phils., Inc.</b>, 932 Phil. 549, 554 (2022) [Per J. Kho, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>Intercrew Shipping Agency, Inc. v. Calantoc</b>, 87 Phil. 869, 878 (2020) [Per J. Inting, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Villamor Golf Club v. Pehid</b>, 509 Phil. 33, 43-44 (2005) [Per J. Callejo, Sr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>Dongon v. Rapid Movers and Forwarders Co., Inc.</b>, 716 Phil. 533, 545 (2013) [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>Philippine Long Distance Telephone Co. v. Teves</b>, 649 Phil. 39, 51-52 (2010) [Per J. Peralta, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Sagales v. Rustan's Commercial Corporation</b>, 592 Phil. 468, 482-484 (2008) [Per J. R.T. Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> 382 Phil. 212 (2000) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 220.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> 256 Phil. 735 (1989) [Per J. Medialdea, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 741.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Lamadrid v. Cathay Pacific Airways Limited</b>, 90 Phil. 64 (2021) [Per J. Hernando, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>Manila Electric Co. v. Beltran</b>, 680 Phil. 417-429 (2012) [Per J. Del Castillo, First Division].&nbsp;<br><br><hr align="center" width="60%" size="1" noshade=""><br><div align="center">&nbsp;<b>CONCURRING OPINION</b><br></div><br><b>LEONEN, <i>SAJ</i>.:</b><br><br>I concur with the <i>ponencia</i> that petitioner Noel C. Suataron was illegally dismissed from employment and is entitled to reinstatement and backwages. I reiterate my view that a review of illegal dismissal cases must always take into account the social justice considerations in our Constitution. The <i>ponencia</i> underscores this view in stating:<blockquote>It is true that an employer is accorded wide prerogative in managing its own affairs including the implementation of company rules and regulations and the imposition of disciplinary measures on its employees; however, this is not limitless but hemmed in by good faith and due consideration of the rights of the worker. Thus, in the exercise of its management prerogative, an employer should be mindful that what is at stake is not only the employee's position but his very livelihood; this is not only the employee's concern but likewise his family. "Unemployment brings untold hardships and sorrows upon those dependent on the wage-earner."<sup style="COLOR: RGB(255, 0, 0);">[1]</sup></blockquote>Thus, in <i>Rivera v. Genesis Transport Service, Inc.</i><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> which involved the dismissal of a bus conductor for a paltry sum of PHP196.00, this Court had the occasion to explain:<blockquote>Our laws on labor, foremost of which is the Labor Code, are pieces of social legislation. They have been adopted pursuant to the constitutional recognition of "labor as a primary social economic force" and to the constitutional mandates for the state to "protect the rights of workers and promote their welfare" and for Congress to "give highest priority to the enactment of measures that protect and enhance the right of all the people to human dignity, [and] reduce social, economic, and political inequalities."<br><br>They are means for effecting social justice, i.e., the "humanization of laws and the equalization of social and economic forces by the State so that justice in the rational and objectively secular conception may at least be approximated."<br><br>Article XIII, Section 3 of the 1987 Constitution guarantees the right of workers to security of tenure. "One's employment, profession, trade or calling is a "property right," of which a worker may be deprived only upon compliance with due process requirements:<blockquote>It is the policy of the state to assure the right of workers to "security of tenure" (Article XIII, Sec. 3 of the New Constitution, Section 9, Article II of the 1973 Constitution). The guarantee is an act of social justice. When a person has no property, his job may possibly be his only possession or means of livelihood. Therefore, he should be protected against any arbitrary deprivation of his job. Article 280 of the Labor Code has construed security of tenure as meaning that "the employer shall not terminate the services of an employee except for a just cause or when authorized by" the code. Dismissal is not justified for being arbitrary where the workers were denied due process and a clear denial of due process, or constitutional right must be safeguarded against at all times.<br><br>Conformably, liberal construction of Labor Code provisions in favor of workers is stipulated by Article 4 of the Labor Code:<blockquote>Art. 4. Construction in favor of labor. All doubts in the implementation and interpretation of the provisions of this Code, including its implementing rules and regulations, shall be resolved in favor of labor.</blockquote>This case is quintessentially paradigmatic of the need for the law to be applied in order to ensure social justice. The resolution of this case should be guided by the constitutional command for courts to take a preferential view in favor of labor in ambitious cases.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> (Citations omitted)</blockquote></blockquote>In assessing infractions of employees that may give rise to disciplinary action by employers, this Court must also consider humanizing the laborer and must be careful not to adhere to a strict interpretation of labor laws that will result in unnecessarily enhancing the economic disparity between capital and labor.<br><br>This is not to say that petitioner was completely faultless. As found by the facts of this case, it was duly established that he punched his co-worker after a heated argument and then followed him to the supervisor's office carrying a steel pipe.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> While company regulations state that such act was punishable by dismissal,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> respondent Hawaiian Philippine Company, Inc. should have taken into account that: (1) this was petitioner's first infraction in his 28 years of service; (2) he had consistent work commendations; and (3) that the heated argument between him and his co-worker was the result of petitioner merely trying to correct his co-worker's mistakes which would have resulted in company losses.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Petitioner's actions may ha e been caused by a bout of toxic masculinity, where violence overcomes rationality. However, it is equally respondent's responsibility to maintain a healthy work environment, one where differences in how to go about tasks would not result in a fistfight but rather in a calm and rational discussion.<br><br>A workplace is always a place for human collective enlightenment. Petitioner identified a problem, that is, his co-worker caused a spillage of water from an open pump, and immediately informed the head pan man for assistance in draining and cleaning the flooded area.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> The carelessness of his co-worker and refusal to admit his mistakes angered petitioner, resulting in a heated and physical argument.<br><br>While petitioner transgressed company policies on fights in the workplace, respondent should not have immediately meted the penalty of dismissal. Respondent could have first mediated between the two of them, or subjected petitioner to seminars or classes that would help him manage his anger in the workplace. They chose instead to let go of a loyal and hardworking employee with years of commendable service, for an infraction that was easily avoidable.<br><br>In situations such as the case before us, management is equally at fault. There were better ways to resolve these issues that would not result in the dismissal from service and the loss of an employee's right to livelihood. Thus, when reviewing these kinds of labor cases, this Court must always be guided with our enduring principles of social justice and the protection of labor.<br><br><b>ACCORDINGLY</b>, I vote to <b>GRANT</b> the Petition and order respondent Hawaiian Philippine Company, Inc. to admit petitioner Noel C. Suataron under the same terms and conditions prior to his dismissal without entitlement to backwages.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Ponencia</i>, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> 765 Phil. 544 (2015) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 553-554.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Ponencia</i>, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

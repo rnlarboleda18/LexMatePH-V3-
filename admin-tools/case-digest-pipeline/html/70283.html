@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 274665 - JACQUELINE MAGDALENA ROMUALDEZ Y MAGALI, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70283' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 274665, December 01, 2025 ]</H2>
+			<H3>JACQUELINE MAGDALENA ROMUALDEZ <I>Y</I> MAGALI, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This resolves the Petition for Review on <i>Certiorari</i> filed by Jacqueline Magdalena Romualdez (Romualdez) against the July 28, 2021 Decision<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> and June 26, 2024 Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals, which affirmed her conviction for six counts of falsification and two counts of violation of Section 3(e) of Republic Act No. 3019, also known as the "Anti-Graft and Corrupt Practices Act."<br><br>Two administrative complaints were filed by Estrella Pineda, Fertilizer and Pesticide Authority (FPA) Finance Division Chief, against Romualdez, FPA Senior Trade Industry Development Specialist, accusing her of falsifying her travel itineraries and certificates of travel completed for her trips to Cebu City under Travel Order No. 2004-01-013 from January 27-30, 2004, and on February 21-25, 2005 through Travel Order No. 2005-02-013. Romualdez was also accused of falsifying her travel documents for her travel to Davao City from May 2-6, 2005 under Travel Order No. 2005-04-073.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>A fact-finding committee was created in the FPA finding <i>prima facie</i> evidence to issue formal charges against Romualdez.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Thereafter, a formal hearing committee was created, but it did not proceed due to the lack of qualified officer to hear and decide the case. Instead, the case was forwarded to the Field Investigation Office of the Ombudsman.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> On June 26, 2012, the Ombudsman issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> recommending the filing of eight Informations against Romualdez, which reads:<blockquote><center><u><b>Criminal Case No. R-QZN-13-04003-CR</b></u></center><br>That in January 2004 and sometime prior or subsequent thereto, in Quezon City, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, a low ranking public officer being the Senior Trade Industry Development Specialist (STIDS) of the Fertilizer and Pesticide Authority (FPA), Department of Agriculture (DA), Visayas Avenue, Diliman, Quezon City, taking advantage of her official position and committing the offense in relation to her office, did then and there willfully, unlawfully and feloniously, falsify, or cause to be falsified, her Itinerary of Travel for 27 to 30 January 2004, by making it appear that she was in Cebu City on 27 to 30 January 2004 in accordance with Travel Order No. 2004-01-013, when in truth and in fact accused fully well knew that she only travelled to and from Cebu City on 29 to 30 January 2004 for the purpose of reimbursing her travel expenses for four [] days when she is entitled only to two [] days travel expenses, to the damage and prejudice of public interest.<br><br>CONTRARY TO LAW.<br><br><center><u><b>Criminal Case No. R-QZN-13-04004-CR</b></u></center><br>That on or about 19 May 2004, and sometime prior or subsequent thereto, in Quezon City, Philippines, and within the jurisdiction of this Honorable Court, the above-name accused, a low ranking public officer, being the Senior Trade Industry Development Specialist (STIDS) of the Fertilizer and Pesticide Authority (FPA), Department of Agriculture (DA), Visayas Avenue, Diliman, Quezon City, taking advantage of her official position and committing the offense in relation to her office, did then and there, willfully, unlawfully and feloniously, falsify, or cause to be falsified, her Certificate of Travel Completed dated 19 May 2004, by making it appear that she was in Cebu City on 27 to 30 January 2004, in accordance with Travel Order No. 2004-01-013, when in truth and in fact, accused fully well knew that she only travelled to and front Cebu City on 29 to 30 January 2004, for the purpose of reimbursing her travel expenses for four [] days when she is entitled only to two [] days travel expenses, to the damage and prejudice of public interest.<br><br><center><u><b>Criminal Case No. R-QZN-13-04005-CR</b></u></center><br>That in February 2004, and sometime prior or subsequent thereto, in Quezon City, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, a low ranking public officer, being the Senior Trade Industry Development Specialist (STIDS) of the Fertilizer and Pesticide Authority (FPA), Department of Agriculture (DA), Visayas Avenue, Diliman, Quezon City, taking advantage of her official position and committing the offense in relation to her office, did then and there, willfully, unlawfully and feloniously, falsify, or cause to be falsified, her Itinerary of Travel for 21 to 25 February 2005, by making it appear that she was in Cebu City on 21 to 25 February 2005, in accordance with Travel Order No. 2005-02-013, when in truth and in fact, accused fully well knew that she only travelled to and from Cebu City on 23 to 24 February 2005, for the purpose of reimbursing her travel expenses for five [] days when she is entitled only to two [] days travel expenses, to the damage and prejudice of public interest.<br><br>CONTRARY TO LAW.<br><br><center><u><b>Criminal Case No. R-QZN-13-04006-CR</b></u></center><br>That on or about 30 March 2005, and sometime prior or subsequent thereto, in Quezon City, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, a low ranking public officer, being the Senior Trade Industry Development Specialist (STIDS) of the Fertilizer and Pesticide Authority (FPA), Department of Agriculture (DA), Visayas Avenue, Diliman, Quezon City, taking advantage of her official position and committing the offense in relation to her office, did then and there willfully, unlawfully and feloniously, falsify, or cause to be falsified, her Certificate of Travel Completed dated 30 March 2005, by making it appear that she was in Cebu City on 21 to 25 February 2005, in accordance with Travel Order No. 2005-02-013, when in truth and in fact, accused fully well knew that she only travelled to and from Cebu City on 23 to 24 February 2005, for the purpose of r imbursing her travel expenses for five [] days when she is entitled only to two [] days travel expenses, to the damage and prejudice of public interest.<br><br>CONTRARY TO LAW.<br><br><center><u><b>Criminal Case No. R-QZN-13-04007-CR</b></u></center><br>That on or about 16 May 2005, and sometime prior or subsequent thereto, in Quezon City Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, a low ranking public officer, being the Senior Trade Industry Development Specialist (STIDS) of the Fertilizer and Pesticide Authority (FPA), Department of Agriculture (DA), Visayas Avenue, Diliman, Quezon City, taking advantage of her official position and committing the offense in relation to her office, did then and there, willfully, unlawfully and feloniously, falsify, or cause to be falsified, her Certificate of Travel Completed dated 16 May 2005, by making it appear that she was in Davao City on 02 to 06 May 2005, in accordance with Travel Order No. 2005-04-073, when in truth and in fact, accused fully well knew that she only travelled to and from Davao City on 05 to 06 May 2005, for the purpose of reimbursing her travel expenses for five [] days when she is entitled only to two [] days travel expenses, to the damage and prejudice of public interest.<br><br>CONTRARY TO LAW.<br><br><center><u><b>Criminal Case No. R-QZN-13-04008-CR</b></u></center><br>That on or about 16 May 2005, and sometime prior or subsequent thereto, in Quezon City, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, a low ranking public officer, being the Senior Trade Industry Development Specialist (STIDS) of the Fertilizer and Pesticide Authority (FPA), Department of Agriculture (DA), Visayas Avenue, Diliman, Quezon City, taking advantage of her official position and committing the offense in relation to her office, did then and there, willfully, unlawfully and feloniously, falsify, or cause to be falsified, her Itinerary of Travel dated 16 May 2005, by making it appear that she was in Davao City on 02 to 06 May 2005, in accordance with Travel Order No. 2005-04-073, when in truth and in fact, accused fully well knew that she only travelled to and from Davao City on 05 to 06 May 2005, for the purpose of reimbursing her travel expenses for five [] days when she is entitled only to two [] days travel expenses, to the damage and prejudice of public interest.<br><br>CONTRARY TO LAW.<br><br><center><b><u>Criminal Case No R-QZN-13-04009-CR</u><br>(Amended Information)</b></center><br>That in January 2004, and sometime prior or subsequent thereto, in Quezon City, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, a low ranking public officer being the Senior Trade Industry Development Specialist (STIDS) of the Fertilizer and Pesticide Authority (FPA), Department of Agriculture (DA), Visayas Avenue, Diliman, Quezon City, taking advantage of her official position and committing the offense in relation to her office, and acting with evident bad faith or gross inexcusable negligence, did then and there, willfully, unlawfully and criminally, make it appear in her Itinerary of Travel and Certificate of Travel Completed that she was in Cebu City on 27 to 30 January 2004, in accordance with Travel Order No. 2004-01-013 and tried to collect the amount of [PHP] 1,920.00 as her per diem, but the amount approved was only [PHP] 1,700.00, when in fact she only travelled to and from Cebu City on 29 to 30 January 2004 which entitles her to a per diem of only [PHP] 1,100.00, thereby causing undue injury to the Government, in the amount equivalent to Six Hundred Pesos ([PHP] 600.00) and two [] days of accumulated leave credits.<br><br>CONTRARY TO LAW.<br><br><center><u><b>Criminal Case No. R-QZN-13-04010-CR</b></u></center><br>That in February 2005, and sometime prior or subsequent thereto, in Quezon City, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, a low ranking public officer, being the Senior Trade Industry Development Specialist (STIDS) of the Fertilizer and Pesticide Authority (FPA), Department of Agriculture (DA), Visayas Avenue, Diliman, Quezon City, taking advantage of her official position and committing the offense in relation to her office, and acting with evident bad faith or gross inexcusable negligence, did then and there, willfully, unlawfully and criminally make it appear in her Itinerary of Travel and Certificate of Travel Completed that she was in Cebu City on 21 to 25 February 2005, in accordance with Travel Order No. 2005-02-013, and collect the amount of [PHP] 4,220.00 as her per diem, when in fact she only travelled to and from Cebu City on 23 to 24 February 2005 which entitles her to a per diem of only [PHP] 1,820.00, thereby causing undue injury to the Government, in the amount equivalent to Two Thousand Four Hundred Pesos ([PHP] 2,400.00) and three [] days of accumulated leave credits.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> (Citations omitted)</blockquote>On arraignment, Romualdez pleaded not guilty to all charges. Trial on the merits then ensued.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>The prosecution presented the following witnesses: Digna De Leon (De Leon), Zelma Banzon (Banzon), Dindo Jacinto (Jacinto), and Veronica Oclarit (Oclarit).<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> They testified that Romualdez's wrongdoings were discovered during the liquidation for Travel Order No. 2005-04-073 during her travel to Davao City on May 2-6 2005. After returning from an official travel, a public officer must submit a detailed itinerary, evidence of actual travel, and a certificate of travel completed. Upon her return from Davao City, Romualdez submitted these documents along with a Justification explaining why she left Davao on May 7, 2005 instead of May 6. She also explained that since her May 6 flight was delayed for 5 hours, she moved it on the morning of May 7.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The Philippine Airlines also issued a certification showing that Romualdez travelled to Davao from May 5-6, 2005 and not from May 2-7. This prompted a review of Romualdez's other travels in Cebu.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>For her first trip to Cebu, Travel Order No. 2004-01-013 authorized her to stay there from January 27 to 30, 2004. Romualdez submitted supporting documents claiming that she was in Cebu for the entire period. However, Adelfa Cabanlong (Cabanlong), the General Manager of the Fumigation and Trading Corporation issued a Certification stating that Romualdez was in Cebu only from January 29 to 30, 2004.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>For her second trip to Cebu, Travel Order No. 2004-01-013 authorized her to stay there from February 21 to 25, 2005. Romualdez also submitted supporting documents and claimed that she stayed for the entire duration of the Travel Order. However, upon verification, Romualdez's hotel bill showed that she only checked in from February 23 to 24, 2005. This was supported by a Certification issued by Banzon, the FPA personnel in-charge in Cebu, who stated that Romualdez was only there for those dates.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>De Leon also testified that the false information in the documents provided by Romualdez caused the overpayment of travel expenses in her favor. For her first Cebu trip, she was overpaid two days' worth of per diem or PHP 600.00. For her second Cebu trip, she was overpaid three days' worth of per diem or PHP 2,400.00.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The total excess per diems that Romualdez received was PHP 3,000.00.<br><br>Banzon further testified and identified the Certification she issued regarding Romualdez's second Cebu trip where she did not stay for the entire duration of the trip. Jacinto, Associate Graft Investigation Officer II from the Office of the Ombudsman identified the flight coupons for Romualdez's Cebu trips which revealed her actual stay in Cebu. Finally, Oclarit, the Philippine Airlines Travel and Interline Accounting Division Manager, testified and certified the documents that showed the flights that Romualdez boarded to attend her trips.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>The defense only presented Gina Tomimbang, the FPA Finance Division Officer-in-Charge. She testified on the existence and due execution of some travel documents provided by Romualdez. She also said that Romualdez submitted several documents to prove that no notice of disallowance or audit observation memorandum was issued to her by the Commission on Audit for the covered period.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>In its September 26, 2019 Decision, the Regional Trial Court found Romualdez guilty of six counts of falsification of public documents and two counts of violation of Section 3(e) of republic Act No. 3019. The dispositive portion of the Decision reads:<blockquote>WHEREFORE, premises considered, this court finds accused JACQUELINE MAGDALENA M. ROMUALDEZ GUILTY beyond reasonable doubt of committing six [] counts of Falsification of Public Documents under Article 171(4) of the RPC, and with the application of the Indeterminate Sentence Law and Without any mitigating or aggravating circumstance, hereby sentencing her to suffer the indeterminate penalty of TWO [] YEARS FOUR [] MONTHS and ONE [] DAY of <i>prision correctional</i> as Minimum to EIGHT [] YEARS and ONE DAY of <i>prision mayor</i> as Maximum, for each count, with the accessories thereof and to pay a fine of TWO THOUSAND PESOS ([PHP] 2,000.00) with costs against the accused.<br><br>The Court likewise finds accused Romualdez GUILTY beyond reasonable doubt of committing two [] counts of violation of Sec. 3(e) of Republic Act No. 3019 and sentences her to suffer the indeterminate penalty of imprisonment of SIX [] YEARS and ONE [] MONTH, as MINIMUM up to [] 10 YEARS as MAXIMUM for each count with perpetual disqualification from public office.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></blockquote>Romualdez appealed the Regional Trial Court's Decision before the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>In its July 28, 2021 Decision,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> the Court of Appeals affirmed the trial court's Decision, ruling that the prosecution established all the elements of falsification of documents under Article 171(4) of the Revised Penal Code through the following: (1) Romualdez was a public officer at the time of the commission of the crime; (2) she took advantage of her official position since she had the duty to prepare the subject documents in relation to the travel orders issued to her; (3) these travel orders gave her a legal obligation to disclose the truth of the facts narrated through the documents that must be attached therein; and (4) all the facts she gave were absolutely false as she declared that she was present for the entire duration of all her trips.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> The Court of Appeals held that the element of gain or intent to injure a third person is not necessary in falsification since the act that is punished is the violation of public faith as to the truth reflected in these official documents.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>The Court of Appeals also found Romualdez guilty of violation of Section 3(e) of Republic Act No. 3019 because she demonstrated evident bad faith through misrepresentation that she was in Cebu for the entire duration of her travel.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> This "caused undue injury to the government in the form of sums of money she received for making such representations"<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> amounting to PHP 3,000.00.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> The dispositive portion of the Decision reads:<blockquote><b>WHEREFORE</b>, premises considered, the appeal is <b>DENIED</b>. The Decision of the Regional Trial Court of Quezon City, Branch 97, dated 26 September 2019 is <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[25]</sup></blockquote>Romualdez moved for reconsideration but it was denied in a June 26, 2024 Resolution<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> of the Court of Appeals.<br><br>Romualdez then filed the present Petition for Review on <i>Certiorari</i>.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Relying on <i>Department of Finance-Revenue Integrity Protection Service v. Office of the Ombudsman</i>,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> petitioner argues that she did not take advantage of her official position since the documents she supposedly falsified are not specific to her duties. Since the travel documents are not unique to her position as a chemical engineer in FPA, she claimed that she did not use such position, nor take advantage of the same in allegedly falsifying these documents.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Moreover, petitioner contends that the documents allegedly falsified do not fall under the classes of public documents under Section 19, Rule 132 of the Rules of Court. As liquidation of travel expenses, they are not intended for public purpose, use, or dissemination, nor made part of public record.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>Petitioner also denies that there were untruthful statements in the narration of facts in her travel documents. The certificates of travel completed she executed show that she complied with the travel authorized based on the travel order. She also claims that the narration contained in her travel itinerary was a mere oversight and she relied of the presumption that these documents will be reviewed by her superiors, for any erroneous entry. Moreover, the inaccuracies reflected in her travel itineraries and certificates of travel completed were done to be consistent with the dates reflected in her travel orders to Cebu and Davao City.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Petitioner adds that there were other pieces of evidence, such as the Certificates of Appearance issued by Alfredo T. Gonzales, Seminar Director, attesting that she was in Cebu administering the relevant trainings at that time. Petitioner contends that these should have been given more weight rather than the belated certifications issued by Banzon and Cabanlong.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>As regards her conviction for violation of Republic Act No. 3019, Section 3(e), petitioner maintains that the element of bad faith is not present in this case.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> She was not given the chance to rectify her error, similar to what was done in her Davao travel; neither was she required to return the alleged excess reimbursement of per diem.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Further, petitioner claims that the element of undue injury caused to the government is also lacking in this case as no damage was done to the Department of Agriculture considering that the Commission on Audit has not released an Audit Observation Memo and Notice of Disallowance from the years 2005 to 2007.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Finally, petitioner pleads for compassionate justice, pleading that the penalty imposed was disproportionate from the PHP 3,000.00 that she was denied to correct or reimburse. The penalties imposed were also too harsh considering her 35 years of service in the FPA, without any offense except for the instant case.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>The Office of the Solicitor General (OSG), representing the People of the Philippines, filed its Comment, arguing that the Petition should be dismissed outright for raising purely questions of fact. In any event, the Court of Appeals correctly affirmed the conviction for six counts of falsification raising similarities of the case with <i>People v. Uy</i>,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> where a NBI field agent was convicted of the same crime for making false statements in his Personal Information Sheet.<br><br>The documents involved were not similar to a SALN which is required from all public officers since not all are required by their duties to travel. Here, petitioner took advantage of her official position when she indicated untruthful statements in her certificate of travel completed and itinerary of travel knowing that she deviated from the approved itinerary.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Similarly, the OSG argues that petitioner was properly convicted of two counts of violation of Section 3(e) of the Republic Act No. 3019, citing the Court of Appeals' findings where the government paid an excess of PHP 600.00 for her first Cebu trip, and PHP 2,400.00 for her second Cebu trip.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>Finally, the OSG argues that the Court cannot lower down the penalty imposed under the Revised Penal Code as lamented to be disproportionate and excessive to the travel expenses reimbursed to petitioner. It argues that the Court must strictly construe penal provisions and apply the law and jurisprudence to the proven facts, as was done in the case.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>The issues to be resolved in this case are: (1) whether petitioner Jacqueline Magdalena Romualdez <i>y</i> Magali was correctly convicted of six counts of violation of Article 171(4) of the Revised Penal Code; and (2) whether she was correctly convicted of two counts of violation of Section 3(e) of Republic Act No. 3019.<br><br><center><b>This Court's Ruling</b></center><br>We partly grant the Petition.<br><br><center><b>I</b></center><br>Falsification is penalized for violating public faith and trust in official documents.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Article 171(4) of the Revised Penal Code penalizes the falsification of a public officer, employee, or notary, who, taking advantage of their official position, made "untruthful statements in narration of facts."<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> To sustain a conviction under this charge, the following elements must be proven: (1) that the offender is a public officer; (2) that the offender took advantage of their official position; and (3) the offender committed any acts of falsification under Article 171.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> In relation to paragraph 4, the additional elements are as follows: (4) the offender makes in a public document untruthful statements in a narration of facts; (5) the offender, has the legal obligation to disclose the truth of the facts narrated by them; and (6) that the facts narrated by them are absolutely false.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br><i>Ombudsman v. Santidad</i><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> expands these elements further:<blockquote>In Falsification of Public Documents, <b>the offender is considered to have taken advantage of his official position</b> in making the falsification <i>when (1) he has the duty to make or prepare or, otherwise, to intervene in the preparation of a document; or (2) he has the official custody of the document which he falsifies</i>. <b>By "legal obligation</b>," <i>it means that there is a law requiring the disclosure of the truth of the facts narrated</i>. In falsification of public or official documents, it is not necessary that there be present the idea of gain or the intent to injure a third person because in the falsification of a public document, what is punished is the violation of the public faith and the destruction of the truth as therein solemnly proclaimed.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> (Emphasis supplied, rations omitted)</blockquote>Here, petitioner contends that the travel documents she executed for liquidation purposes were not intended for public purpose, use, or dissemination, thus it cannot be considered as a public document under Rule 132, Section 19 of the Rules of Court. These documents were also not unique to her functions as a chemical engineer in FPA. Therefore, petitioner concludes that she did not use her position, nor take advantage of the same, in allegedly committing acts of falsification.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Petitioner also denies that there were any untruthful statements in the narration of facts in her travel documents and neither were they absolutely false. She argues that the inaccuracies in her travel documents are mere oversight. Petitioner further relies on the presumption that these documents will be reviewed by her superiors for any erroneous entry.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>We do not agree.<br><br>The 1987 Constitution provides that a public office is a public trust where public officers "must at all times be accountable to the people, serve them with utmost responsibility, integrity, loyalty, and efficiency, act with patriotism and justice, and lead modest lives."<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The public has an interest that every officer remains in their permanent official stations to ensure that they are performing their functions. However, in the exigencies of public service, official travel is allowed. To fulfill their functions during these authorized travels, public officers are given allowances to "enable them to travel in a manner befitting their representative capacity."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Such travel is the expenditure of public funds given to them.<br><br>Among these obligations is the compliance with the proper documentation for allowances received during official travel. Executive Order No. 248, Series of 1995 prescribed the guidelines for rates of allowances for official local and foreign travels of government personnel.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Under the regulations, heads of agencies generally approve the travel of public officers outside their permanent official stations.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> This is done through the issuance of a travel order. An authorized public officer is entitled to per diems, including board and lodging and other expenses such as transportation and daily allowance.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>The Commission on Audit issued Circular No. 96-004 prescribing the guidelines to implement the accounting of cash advance and other emoluments received during official travel. The regulations prescribe that the employee shall liquidate the amount received from authorized travel by submitting the following:<blockquote>a. Certificate of travel completed (Appendix B);<br><br>b. Plane, boat or bus tickets covering actual transportation fare from the official station or residence to the place of destination and back. A certification or affidavit of loss executed by the official or employee concerned shall not be considered as appropriate replacement for the required transportation tickets.<br><br>c. Certification of the head of the agency as to the absolute necessity of the expenses together with the corresponding bills and receipts, if the expenses incurred for official local travel exceeds the prescribed rate of P300 per day. The presentation of a certification or affidavit of loss in place of the bills and receipts shall not be considered for this purpose.<br><br>d. Hotel room/lodging bills with official receipts in the case of official travel to places within the fifty (50) kilometers radius from the last city or municipality covered by the MMA in the case of those whose permanent official station is in the MMA, or the city or municipality wherein the permanent official station is located in the case of those outside the MMA, if the travel allowance being claimed includes the hotel room/lodging rate.<br><br>e. Certificate of appearance or a copy of the report on the accomplishment of the purpose of the travel duly noted by the agency head or his authorized representative. However, the certificate of appearance shall no longer be required in the case of travels of agency heads within their area of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></blockquote>The Travel Orders issued to petitioner instructed her to prepare a detailed itinerary as prescribed in General Circular No. 88-A and submit evidence of actual travel. After her return, she was also tasked to accomplish her Certificate of Travel Completed, submit a full report, and liquidate any cash advance received. These were uniformly written in the Travel Order No. 2004-01-013, authorizing petitioner to travel to Cebu City from January 27 to 30, 2004 and Travel Order No. 2005-02-013 for February 21 to 25, 2005. These instructions were also reflected in the Travel Order No. 2005-04-073, authorizing petitioner to travel to Davao City from May 2 to 6, 2005.<br><br>While supposedly complying with these travel orders, petitioner made material misrepresentations in the documents she was required to execute as a public officer returning from her official travel. We discuss each element of violation of Article 171(4) of the Revised Penal Code when she executed falsified itineraries of travel and certificates of completed travel in relation to the travel orders issued to her.<br><br>The first element is established since petitioner is a public officer who works as a Senior Trade Industry Development Specialist for the FPA of the Department of Agrarian Reform.<br><br>The second and third elements are also present because by virtue of such position, petitioner was authorized to travel to Cebu City and Davao City on three different dates for a specific duration. Her travel was authorized to oversee and administer the exam during the Certified Pesticide Applicator Training Seminar and act as a resource person at CPA Symposium in various locations in Cebu and Davao City.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Thus, petitioner could not deny that she was authorized to travel as part of her duties but she took advantage of such authority by making it appear that she faithfully complied with the travel dates stated in her Travel Orders. To hide her deceit, petitioner executed false Itineraries of Travel and Certificates of Completed Travel. Falsifying these documents are acts violating Article 171(4) of the Revised Penal Code.<br><br>As regards the fourth element, petitioner made the following untruthful statements in the following public documents containing her narration of her trips to Cebu and Davao City:<br><br>For Criminal Case No. R-QZN-13-040003-CR, the public document involved is petitioner's Itinerary for Travel Order No. 2004-01-013 where she stated that on January 27, 2004, she left her residence, went to the airport, and flew to Cebu City. Upon arrival, she went to the Cebu DOH Training Center around 7:30 a.m. She spent three days in this facility or until January 30, 2004 before proceeding to the airport for her return flight to Manila.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> In relation to this travel, petitioner also executed a Certificate of Travel Completed which is the subject of Criminal Case No. R-QZN-13-040004-CR.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>For Criminal Case No. R-QZN-13-040005-CR, the public document involved is petitioner's Itinerary for Travel Order No. 2005-02-013 where she stated that on February 21, 2005, she departed from Metro Manila and arrived at Mactan Airport around 10:45 a.m. On the same day, she took a taxi to the Applied Nutrition Center in Banilad, Cebu. She also represented that she stayed in Cebu from her arrival until her departure on February 25, 2005 at around 7:45 p.m.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Petitioner also executed a Certificate of Travel Completed certifying that she has complied with the travel authorized in Travel Order No. 2005-02-013 and placed "February 21-25, 2005" and "Cebu" in the Date and Place of Travel.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> This is the subject public document of Criminal Case No. R-QZN-13-040006-CR.<br><br>For Criminal Case No. R-QZN-13-040007-CR, the public document involved is petitioner's Itinerary for Travel Order No. 2005-04-073 where she stated that she took a taxi from her residence to the domestic airport on May 2, 2005 and arrived at Davao Airport. She represented that she stayed the entire time in Davao from May 2 to 6 until her departure on May 7 at 8:30 a.m.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> She also executed a Certificate of Travel Completed where she certified that she has complied with the travel authorized for Travel Order No. 2005-04-073.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> This is the subject public document of Criminal Case No. R-QZN-13-040008-CR.<br><br>As regards the fifth element, petitioner had the legal obligation to disclose the truth in these public documents. The Itineraries of Travel and Certificate of Travel Completed are distinct but inseparable public documents which are necessary to process the reimbursement of per diem and other travel expenses incurred by the public officer during official travel. As previously discussed, their allowances will not be processed without their submission.<br><br>Finally, the sixth element is also present in this case since the prosecution's evidence show that the Itineraries and Certifications issued by petitioner in relation to her Travel Orders were false. She did not stay in Cebu and Davao for the entire duration as stated in the Travel Orders issued to her.<br><br>For her first trip to Cebu, Cabanlong, who was with the group who conducted the relevant training, issued a certification that petitioner only joined them from January 29 to 30.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> For petitioner's second trip to Cebu, Banzon was instructed to go to Castle Peak Hotel, where petitioner supposedly stayed for the entire dura ion of her deployment. She testified as to the hotel bill's contents showing that petitioner stayed there only from February 23 to 24, 2005.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup><br><br>The most damning evidence against petitioner's falsification is the testimony of Oclarit, the previous manager of the Revenue Accounting Support and Records Management Division of Philippine Airlines. She presented the plane ticket coupons and passenger manifests showing that petitioner took the flight to Cebu on January 29, 2004 and February 23, 2005, and back to Manila on January 30, 2004 and February 24, 2005, respectively. She also produced the same documents regarding petitioner's travel to Davao on May 5 and 6, 2005.<br><br>We give these documents more weight over the handwritten <i>pro forma</i> Certificates of Attendance allegedly issued to petitioner reflecting the entire duration of the activity involved.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Those who supposedly executed these certifications were not presented s witnesses and were not properly authenticated.<br><br>By virtue of the travel orders issued to her and the relevant circulars, petitioner had the legal obligation to disclose the truth in the documents that she was required to execute after travel. Thus, by stating in these documents that she strictly complied with the travel order, and executed made up itineraries of travel, she made untruthful statements in a narration of fact which is penalized under Article 171(4) of the Revised Penal Code.<br><br><center><b>II</b></center><br>We also sustain petitioner's conviction for two counts of violation of Section 3(e) of Republic Act 3019. The provision reads:<blockquote>Section 3. Corrupt practices of public officers. â In addition to acts or omissions of public officers already penalized by existing law, the following shall constitute corrupt practices of any public officer and are hereby declared to be unlawful:<br><br><center>. . . .</center><br>(e) Causing any undue injury to any party, including the Government, or giving any private party any unwarranted benefits, advantage or preference in the discharge of his official administrative or judicial functions through manifest partiality, evident bad faith or gross inexcusable negligence. This provision shall apply to officers and employees of offices or government corporations charged with the grant of licenses or permits or other concessions.</blockquote>In <i>Cabrera v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> this Court extensively discussed the elements necessary to establish this offense:<blockquote>Breaking down the above provision, the elements of violation of Section 3(e) of [Republic Act] 3019 are as follows: (a) that the accused must be a public officer discharging administrative, judicial, or official functions (or a private individual acting in conspiracy with such public officers); (b) that he or she acted with manifest partiality, evident bad faith, or inexcusable negligence; and (c) that his or her action caused any undue injury to any party, including the government, or gave any private party unwarranted benefits, advantage, or preference in the discharge of his or her functions.<br><br>Significantly, with respect to the second element on the three distinct modes of commission of the offense, case law expounds:<blockquote>There is "manifest partiality" when there is a clear, notorious or plain inclination or predilection to favor one side or person rather than another. "Evident bad faith" connotes not only bad judgment but also palpably and patently fraudulent and dishonest purpose to do moral obliquity or conscious wrongdoing for some perverse motive or ill will. It contemplates a state of mind affirmatively operating with furtive design or with some motive or self-interest or ill will or for ulterior purposes. "Gross inexcusable negligence" refers to negligence characterized by the want of even the slightest care, acting or omitting to act in a situation where there is a duty to act, not inadvertently but willfully and intentionally, with conscious indifference to consequences insofar as other persons may be affected.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> (Citations omitted)</blockquote></blockquote>Petitioner claims that she did not act in bad faith because the period she stated was merely "descriptive" and supported by certificates of appearance.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> To add, she only stated the facts to synchronize the schedules in the travel itineraries and the travel orders containing the authorized travel durations. Petitioner also made the same knowing that these will still be subject to review by the accounting and auditing department. However, she was not given the similar chance as she was given during her trip to Davao.<br><br>We do not agree.<br><br>All the elements for violation of Section 3(e) of Republic Act No. 3019 are present in this case. The first element is undoubtedly present, with petitioner being a public officer who was authorized to travel to Cebu City twice under Travel Order No. 2004-01-013 and Travel Order No. 2005-02-013.<br><br>Petitioner's evident bad faith is apparent when she executed the Travel Itineraries and Certificates of Travel attesting that she strictly complied with the Travel Orders when in reality, she only stayed there for two days and one night only. These misrepresentations were done to receive the entire duration of official leave and the per diem under the travel orders. Therefore, there was injury to the government in granting them to petitioner who misrepresented that she completed the entire duration.<br><br>For Travel Order No. 2004-01-013, petitioner requested for PHP 2,490.00 combining her Travel Itinerary for her trip to Cebu to her trip to Pangasinan under Travel Order No. 2004-03-165. During the Cebu leg, she claimed per diem of PHP 300.00 for 3 days from January 27 to 29, and PHP 200.00 per diem for January 30, 2004. Petitioner also claimed travel allowance for hired vehicle amounting to PHP 620.00 and terminal fee of PHP 200.00, or a total of PHP1,920.00 for the entire trip.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> There was a notation that only PHP 1,700.00 was considered as an allowable claim. A check for a total of PHP 2,470.00 was released as a reimbursement for traveling expenses and per diem of petitioner for said official travels to Cebu and in Pangasinan.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>In March 2004, Executive Order No. 248 was amended by Executive Order No. 298, increasing the per diem from PHP 300.00 to PHP 800.00.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Thus, for petitioner's travel to Cebu City on February 2005, as authorized by Travel Order No. 2005-02-013, she requested for PHP 4,670.00 inclusive of her PHP 800.00 per diem for 4 days for February 21 to 24, 2005, and the relevant taxi fares, and terminal fees.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Out of these expenses, only PHP 4,220.00 was accepted as reimbursement of travel expenses incurred.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>Since it was established that petitioner was in Cebu from January 29 to 30, 2004, there was excess payment of PHP 600.00 representing her claimed per diem for January 27 and 28. Similarly, for her second Cebu trip, it was established that petitioner was present there only for February 23 to 24, 2005. There was excess payment of her claimed per diem of three days or a total of PHP 2,400.00.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup><br><br>These amounts that were released to petitioner have already been processed and went through the Department of Agriculture's system of accounting and auditing using the documents submitted by petitioner. Other I than reliance with petitioner's word that she really went to Cebu pursuant to the Travel Orders, these offices would have no knowledge as to the per diem that petitioner is entitled to. Her deceit facilitated the release of these funds to her. Moreover, as shown in the records, these discrepancies were only discovered when she submitted a false justification from her Davao Trip under Travel Order No. 2005-04-073.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br><center><b>III</b></center><br>While upholding petitioner's conviction, this Court reexamines the penalties accorded to her.<br><br>The Revised Penal Code provides that a violation of Article 171 requires the imposition of <i>prision mayor</i> and a fine not exceeding PHP 5,000.00. Meanwhile, Section 9 of Republic Act No. 3019 provides that a violation of Section 3 shall be punished with imprisonment of not less than 1 year nor more than 10 years. Moreover, any prohibited interest shall be confiscated or forfeited in favor of the government.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>The Court of Appeals affirmed the Regional Trial Court's imposition of the indeterminate penalty of two years, four months, and one day of <i>prision correccional</i> as minimum to eight years and one day of <i>prision mayor</i> as maximum for each of the six counts of Falsification of Public Documents under Article 171(4) of the Revised Penal Code. Petitioner was also required to pay a PHP 2,000.00 fine. For violation of Section 3(e) of Republic Act No. 3019, the penalty of six years and one month as minimum to 10 years as maximum were imposed for each of the two counts of conviction.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>While we find these penalties too excessive for the crimes committed, the Court cannot impose a lower penalty beyond what is provided by the Revised Penal Code<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> as it would amount to judicial legislation. For excessive penalty, the remedy is provided under Article 5 of the Revised Penal Code which states:<blockquote>ART. 5. Duty of the court in connection with acts which should be repressed but which are not covered by the law, and in cases of excessive penalties.âWhenever a court has knowledge of any act which it may deem proper to repress and which is not punishable by law, it shall render the proper decision, and shall report to the Chief Executive, through the Department of Justice, the reasons which induce the court to believe that said act should be made the subject of penal legislation.<br><br>In the same way the court shall submit to the Chief Executive, through the Department of Justice, such statement as may be deemed proper, <i>without suspending the execution of the sentence, when a strict enforcement of the provisions of this Code would result in the imposition of a clearly excessive penalty, taking into consideration the degree of malice and the injury caused by the offense</i>. (Emphasis supplied)</blockquote>In <i>People v. Estoista</i>,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> we clarified that the Court may recommend the reduction of penalty or extension of executive clemency:<blockquote>Without deciding whether the prohibition of the Constitution against infliction of cruel and unusual punishment applies both to the form of the penalty and the duration of imprisonment, it is our opinion that confinement from 6 to 10 years for possessing or carrying firearm is not cruel or unusual, having due regard to the prevalent conditions which the law proposes to suppress or curb. The rampant lawlessness against property, person, and even the very security of the Government, directly traceable in large measure to promiscuous carrying and use of powerful weapons, justify imprisonment which in normal circumstances might appear excessive. If imprisonment from 5 to 10 years is but of proportion to the present case in view of certain circumstances, the law is not to be declared unconstitutional for this reason. The constitutionality of an act of the legislature is not to be judged in the light of exceptional cases. Small transgressors for which the heavy net was not spread are, like small fishes, bound to be caught, and it is to meet such a situation as this that courts are advised to make a recommendation to the Chief Executive for clemency or reduction of the penalty.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> (Citations omitted)</blockquote>Here, it cannot be denied that the total amount of damage to the government is a measly PHP 3,000.00. Nevertheless, we cannot ignore the transgression that petitioner made since public funds are involved. In making untruthful declarations in her travel itineraries and certifications of travel completed, petitioner made a mockery of the process of applying for travel reimbursements and abused her entitlement to per diem and other travel allowances permitted under relevant regulations.<br><br>However, considering that respondent did not refute that petitioner has dedicated 35 years of service in the FPA "with very satisfactory performance rating," and without any other incident, we find that these circumstances warrant the Court's compassion.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> Thus, taking these circumstances into consideration, we recommend the imposition of executive clemency and for petitioner to be liable for monetary fines only, instead of imprisonment. The trial court's imposition of PHP 2,000.00 fine per count of the violation of Article 171(4) of the Revised Penal Code is retained. In addition, petitioner is directed to return the PHP 3,000.00 excess per diem to the Department of Agriculture.<br><br><b>ACCORDINGLY</b>, the Petition is <b>PARTIALLY GRANTED</b>. The July 28, 2021 Decision of the Court of Appeals in CA-G.R. CR No. 44715 is <b>AFFIRMED</b> with <b>MODIFICATION</b>. Petitioner Jacqueline Magdalena Romualdez <i>y</i> Magali is <b>GUILTY</b> beyond reasonable doubt for six counts of violation of Article 171(4) of the Revised Penal Code and sentenced to suffer two years, four months, and one day of <i>prision correccional</i> as minimum to eight years and one day of <i>prision mayor</i> as maximum for each count. She is also <b>ORDERED</b> to pay a PHP 2,000.00 fine per count of her violation. Petitioner is also <b>GUILTY</b> beyond reasonable doubt of two counts of violation of Section 3(e) of Republic Act No. 3019 and sentenced to six years and one month as minimum to 10 years as maximum for each count. Petitioner is <b>DIRECTED</b> to return the PHP 3,000.00 excess <i>per diem</i> to the Department of Agriculture.<br><br>Considering the circumstances of the case, and pursuant to Article 5 of the Revised Penal Code, the Court shall <b>TRANSMIT</b> the case to the Chief Executive, through the Department of Justice, and <b>RECOMMEND</b> the grant of executive clemency to petitioner.<br><br><b>SO ORDERED."</b><br><br><i>Lazaro-Javier, J. Lopez</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>Kho, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 16-38. The July 28, 2021 Decision in CA-G.R. CR No. 44715 was penned by Associate Justice Mariflor P. Punzalan Castillo and concurred in by Associate Justices Maria Filomena D. Singh (now a Member of this Court) and Bonifacio S. Pascua of the Fourth Division of the Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 40-43. The June 26, 2024 Resolution in CA-G.R. CR No. 44715 was penned by Associate Justice Mariflor P. Punzalan Castillo and concurred in by Associate Justices Ramon A. Cruz and Bonifacio S. Pascua of the Special Former Fourth Division of the Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 94.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup>&nbsp;<i>Id.</i> at 312.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 334-358.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 56-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 21.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 22.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i>&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i>&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 25-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 16-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 31-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 40-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 86-164.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>G.R. No. 257516</b>, May 13, 2024 [Per J. Caguioa Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, pp. 129-133.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 133-135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 137.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at pp. 135-147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 86-88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 154-159.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 150-153.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 162.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 101 Phil. 159-163 (1957) [Per J. Bengzon, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i>, p. 983.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 991.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 992-994.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>Ltc. Guillergan (Ret.) v. People</b>, 656 Phil. 527, 533 (2011) [Per J. Abad, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> REVISED PENAL CODE, art. 171 (4).<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Malabanan v. Sandiganbayan</b>, 815 Phil. 183, 199 (2017) [Per C.J. Sereno, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Fullero v. People</b>, 559 Phil. 524, 539 (2007) [Per J. Chico-Nazario, Special Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> 867 Phil. 440 (2019) [Per C.J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 468.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, pp. 129-133.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 137.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> CONST. (1987), art. XI, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Executive Order No. 248 (1995), Whereas Clause.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> This was amended in Executive Order No. 248-A and Executive Order No. 298 series of 2004. These were repealed under Executive Order No. 77 series of 2019, the current applicable regulations.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Executive Order No. 248 (1995), sec. 5, as amended.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> ADMINISTRATIVE CODE (1987), Book VI, Chapter 7, sec. 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Commission on Audit Circular No. 96-0004, (1996), sec. 3.1.2.2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Rollo</i>, pp. 618, 631, 641.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 645.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 642.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 635<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 632<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 622.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 619.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Rollo</i>, p. 424.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 639-640.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 633.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> 922 Phil. 178 (2022) [Per J. Perlas-Bernabe, Special Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 186-187.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Rollo</i>, pp. 155-157.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 645.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 648.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Executive Order No. 298, sec. 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 635.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 638.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 75.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> Republic Act No. 3019 (1960), sec. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 883.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>Corpuz v. People</b>, 734 Phil. 353 (2014) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> 93 Phil. 647 (1953) [Per J. Tuason, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 653-654.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Rollo</i>, p. 162.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

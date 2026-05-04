@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { createPortal } from 'react-dom';
 import { jsPDF } from "jspdf";
-import { Gavel, FileText, X, BookOpen, Clock, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Download, Landmark, Scale } from 'lucide-react';
+import { Gavel, FileText, X, BookOpen, Clock, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Download, Landmark, Scale, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { formatDate } from '../utils/dateUtils';
 import { toTitleCase } from '../utils/textUtils';
@@ -997,6 +997,18 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         >
                             <FileText className="h-3.5 w-3.5" strokeWidth={2} />
                         </button>
+                    )}
+                    {viewMode === 'full' && fullDecision.sc_url && (
+                        <a
+                            href={fullDecision.sc_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="touch-manipulation mr-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-500 transition-all hover:bg-neutral-100 hover:text-gray-800 active:scale-95 dark:border-lex dark:bg-zinc-800 dark:text-gray-400 dark:hover:bg-zinc-700 dark:hover:text-gray-100"
+                            title="View on SC e-Library"
+                            aria-label="View on SC e-Library"
+                        >
+                            <ExternalLink className="h-3.5 w-3.5" strokeWidth={2} />
+                        </a>
                     )}
                     <button
                         type="button"

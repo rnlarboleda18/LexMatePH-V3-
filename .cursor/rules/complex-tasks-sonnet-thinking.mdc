@@ -1,0 +1,19 @@
+---
+description: Use Claude Sonnet 4.6 (thinking) when the user says the task is complex
+alwaysApply: true
+---
+
+# Complex tasks → Sonnet 4.6 thinking
+
+When the **user states the task is complex** (or clearly equivalent: complicated, large scope, multi-step architecture, needs deep reasoning), **use that heavier model for agent work**.
+
+## Subagents (Task tool)
+
+- For any **Task** / subagent invocation driven by that kind of request, set **`model` to `claude-4.6-sonnet-medium-thinking`** (Claude Sonnet 4.6 with extended thinking).
+- Use an appropriate **`subagent_type`** (`generalPurpose`, `explore`, `shell`, etc.) for the job; the model flag is what must be Sonnet 4.6 thinking here.
+
+## Main chat
+
+- If the primary work stays in the **current** chat (no Task), prefer the **Sonnet 4.6 Thinking** (or equivalent) model in the composer when the user has signaled complexity—**do not** default to a lighter model for that message thread when they asked for the deep-reasoning tier.
+
+Only use this when the user (or the combined thread context) **explicitly frames the work as complex** or obviously needs long-horizon reasoning; do not escalate routine edits.

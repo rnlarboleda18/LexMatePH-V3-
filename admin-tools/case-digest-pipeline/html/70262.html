@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 268687 - GEORGE N. YU, AS SUBSTITUTED BY ROSE MARIE S. YU AND ANDREA S. YU, PETITIONER, VS. ANITA QUE, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70262' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 268687, October 29, 2025 ]</H2>
+			<H3>GEORGE N. YU, AS SUBSTITUTED BY ROSE MARIE S. YU AND ANDREA S. YU, PETITIONER, VS. ANITA QUE, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (<b>Petition</b>) under Rule 45 of the Rules of Court filed by petitioner George N. Yu (<b>George</b>), assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated February 17, 2023, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated July 25, 2023, of the Court of Appeals (<b>CA</b>) in CA-G.R. SP No. 163829. The CA affirmed the Order,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated October 24, 2019, of Branch 93, Regional Trial Court (<b>RTC</b>) of Quezon City in Civil Case No. R-QZN-19-10334-CV, which ruled that George lacked the legal capacity to pursue his lawsuit against Anita Que (<b>Anita</b>), observing that the relief sought in his Complaint was, in fact, intended for the benefit of Vetamax Textile Manufacturing Corporation (<b>Vetamax</b>), a corporation in which both George and Anita are stakeholders.<br><br><center><b><i>The Facts</i></b></center><br>The dispute concerned the rightful ownership of shares in Vetamax, a domestic corporation organized under Philippine law and incorporated on July 11, 1978, with the following individuals as its original incorporators:<blockquote><table width="100%" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="50%"><div align="center"><strong>Name of Incorporator</strong></div></td><td width="50%"><div align="center"><strong>Number of Subscribed Shares</strong></div></td></tr><tr><td><div align="center">Yu Tian</div></td><td><div align="center">1,200</div></td></tr><tr><td><div align="center">William Yu</div></td><td><div align="center">1,000</div></td></tr><tr><td><div align="center">Robert Que</div></td><td><div align="center">800</div></td></tr><tr><td><div align="center">Ngan Po Giok</div></td><td><div align="center">600</div></td></tr><tr><td><div align="center">George Yu</div></td><td><div align="center">400<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></div></td></tr></tbody></table></blockquote>Among the original incorporators were Yu Tian and Ngan Po Giok, the parents of George, Anita, William Yu (<b>William</b>), and Robert Que (<b>Robert</b>).<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>As of 2009, the duly elected members of the Board of Directors and officers of Vetamax, along with their respective subscribed shares and corresponding ownership percentages, were as follows:<sup style="COLOR: RGB(255, 0, 0);">[7]</sup>&nbsp;&nbsp;<blockquote><table width="100%" Â ="" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="34%"><div align="center"><strong>Name of Directors and/or Officers</strong></div></td><td width="33%"><div align="center"><strong>Number of Subscribed Shares</strong></div></td><td width="33%"><div align="center"><strong>Percentage of Ownership</strong></div></td></tr><tr><td><div align="center">Yu Tian</div></td><td><div align="center">6,000</div></td><td><div align="center">30%</div></td></tr><tr><td><div align="center">William Yu</div></td><td><div align="center">5,000</div></td><td><div align="center">25%</div></td></tr><tr><td><div align="center">Robert Que</div></td><td><div align="center">4,000</div></td><td><div align="center">20%</div></td></tr><tr><td><div align="center">Ngan Po Giok</div></td><td><div align="center">3,000</div></td><td><div align="center">15%</div></td></tr><tr><td><div align="center">George Yu</div></td><td><div align="center">2,000</div></td><td><div align="center">10%<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></div></td></tr></tbody></table></blockquote>Subsequently, on July 23, 2009, Yu Tian died without leaving a will or executing any document concerning the shares he held in Vetamax.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Moreover, his heirs did not execute any extrajudicial settlement of his estate.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Despite the absence of any documentation regarding Yu Tian's shares, Anita allegedly prepared a General Information Sheet (<b>GIS</b>) wherein she identified herself as both a stockholder and the Corporate Secretary of Vetamax.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Thus, based on Vetamax's 2009 GIS, the following individuals were listed as directors and officers:<sup style="COLOR: RGB(255, 0, 0);">[12]</sup>&nbsp;&nbsp;<blockquote><table width="100%" Â ="" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="34%"><div align="center"><strong>Name of Directors and/or Officers</strong></div></td><td width="33%"><div align="center"><strong>Number of Subscribed Shares</strong></div></td><td width="33%"><div align="center"><strong>Percentage of Ownership</strong></div></td></tr><tr><td><div align="center">William Yu</div></td><td><div align="center">5,000</div></td><td><div align="center">25%</div></td></tr><tr><td><div align="center">Robert Que</div></td><td><div align="center">4,000</div></td><td><div align="center">20%</div></td></tr><tr><td><div align="center">George Yu</div></td><td><div align="center">2,000</div></td><td><div align="center">10%</div></td></tr><tr><td><div align="center">Anita Que</div></td><td><div align="center">6,000</div></td><td><div align="center">30% </div></td></tr><tr><td><div align="center">Ngan Po Giok</div></td><td><div align="center">3,000</div></td><td><div align="center">15%<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></div></td></tr></tbody></table></blockquote>Thereafter, on May 7, 2012, Ngan Po Giok, the parties' mother, died intestate and without any extrajudicial settlement executed by her heirs.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Then, about more than a month later, or on June 19, 2012, the parties' brother, William, died.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Thus, as of October 2016, the GIS of Vetamax showed the following stockholders:&nbsp;&nbsp;<blockquote><table width="100%" Â ="" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="34%"><div align="center"><strong>Name of Stockholders</strong></div></td><td width="33%"><div align="center"><strong> Number of Subscribed Shares</strong></div></td><td width="33%"><div align="center"><strong> Percentage of Ownership</strong></div></td></tr><tr><td><div align="center">George Yu</div></td><td><div align="center">3,000</div></td><td><div align="center">15%</div></td></tr><tr><td><div align="center">Anita Qu[e]</div></td><td><div align="center">5,000</div></td><td><div align="center">25%</div></td></tr><tr><td><div align="center">Shirley Qua</div></td><td><div align="center">2,000</div></td><td><div align="center">10%</div></td></tr><tr><td><div align="center">Robert Que</div></td><td><div align="center">5,000</div></td><td><div align="center">25%</div></td></tr><tr><td><div align="center">Hedy Lee</div></td><td><div align="center">2,000</div></td><td><div align="center">10%</div></td></tr><tr><td><div align="center">Jason Robert Que</div></td><td><div align="center">3,000</div></td><td><div align="center">15%<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></div></td></tr></tbody></table></blockquote>George alleged that the proper shareholding of Vetamax should be as follows, had the shares of their parents, Yu Tian and Ngan Po Giok, been properly distributed:<sup style="COLOR: RGB(255, 0, 0);">[17]</sup>&nbsp;&nbsp;<blockquote><table width="100%" Â ="" border="1" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="34%"><div align="center"><strong>Name of Stockholders</strong></div></td><td width="33%"><div align="center"><strong>Number of Subscribed Shares</strong></div></td><td width="33%"><div align="center"><strong>Percentage of Ownership</strong></div></td></tr><tr valign="top"><td><div align="center">Heirs of William Yu</div></td><td><div align="center">1,300</div></td><td><div align="center">32.5%</div></td></tr><tr valign="top"><td><div align="center">Robert Que</div></td><td><div align="center">1,100</div></td><td><div align="center">27.5%</div></td></tr><tr valign="top"><td><div align="center">George Yu</div></td><td><div align="center">700</div></td><td><div align="center">17.5%</div></td></tr><tr valign="top"><td><div align="center">Anita Que</div></td><td><div align="center">300</div></td><td><div align="center">7.5%</div></td></tr><tr valign="top"><td><div align="center">Shirley Qua</div></td><td><div align="center">300</div></td><td><div align="center">7.5%</div></td></tr><tr valign="top"><td><div align="center">Hedy Lee</div></td><td><div align="center">300</div></td><td><div align="center">7.5%<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></div></td></tr></tbody></table></blockquote>According to George, Anita should not have obtained 25% of the total shares in Vetamax since there were no records or documents showing that the shares were validly transferred to her name.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> He further asserted that the 2009 GIS of Vetamax should have been considered void since Anita's recorded shares therein were without basis and without any consideration.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>By representing that she owns 25% of the total shares in Vetamax, George alleged that Anita caused prejudice and detriment to his direct corporate interest in Vetamax.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> George maintained that Anita should only be holding 300 shares with 7.5% of Vetamax's shareholdings, which emanated from her right as an heir of their parents.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> If the proper allocation of shares was followed, George's percentage of shareholdings should have been 17.5% instead of 15%.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Moreover, George asserted that due to Anita's misrepresentation, she even became a director of Vetamax, with the authority and power to directly involve herself in Vetamax's affairs.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>When efforts towards compromise failed, George filed a Verified Complaint for Declaration of Inexistence of Contract on Conveyance of Shares of Stocks under Article 1410 of the New Civil Code of the Philippines (<b>Complaint</b>) against Anita.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> In his Complaint, George sought to have the 6,000 shares held by Anita declared as void and illegal due to the alleged inexistence of any contract to prove the acquisition of the same.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> George noted that the only record showing Anita's participation in Vetamax was the 2009 GIS where the latter inserted herself as a shareholder.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>George's Complaint was raffled to Branch 93 of the RTC of Quezon City.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> In its Order, dated April 12, 2019, the RTC found the Complaint to be sufficient in form and substance.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Thereafter, Anita filed her Answer with Compulsory Counterclaim, denying the allegations raised by George in his Complaint.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Anita claimed that George was asking for relief in the wrong forum.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> She argued that George's Complaint did not involve an intra-corporate dispute since his claim was anchored on the shares of stock on intestate succession brought about by the death of their father.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Further, even if the Complaint were to be considered an intra-corporate dispute, Anita averred that the same was barred by prescription.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> She noted that George filed his Complaint more than eight years after their father's death, contrary to the prescriptive period mentioned in Article 1140 of the Civil Code.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>If the claim was not barred by prescription, Anita contended that it was nevertheless precluded by the doctrines of estoppel and laches.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> In support of this argument, she pointed to George's express acknowledgment of her ownership interest in Vetamax.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Specifically, George declared that Anita was a stockholder of Vetamax as of October 2016, holding 5,000 shares.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> This acknowledgment was further reinforced by George's admission that Anita had served as a director of Vetamax and had been actively involved in its corporate affairs for an extended period.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> According to Anita, George's admissions undermine any attempt to deny her claim of ownership in Vetamax's shares.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>However, even assuming that the Complaint was an intra-corporate dispute and not barred by prescription, estoppel, or laches, Anita contended that it should still be dismissed because of George's lack of legal personality to sue.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Anita argued that Vetamax was the proper party to question the ownership or transfer of shares of stock illegally held by a stockholder.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>The RTC issued a Notice of Pre-Trial Conference on June 27, 2019.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>Both George and Anita filed their respective Pre-Trial Briefs.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Anita then interposed an Omnibus Motion to Declare George's Complaint as a Nuisance Suit and to Order the Payment of Correct Docket Fees before the RTC (<b>Omnibus Motion</b>).<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> In response, George filed a Comment<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> to the Omnibus Motion, where he argued that his Complaint is an intra-corporate dispute because it involves him, an incorporator and current President of Vetamax, on the one hand, and Anita, an alleged stockholder, on the other.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>In its Order,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> dated October 24, 2019, the RTC dismissed George's Complaint and granted Anita's Omnibus Motion.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> The <i>fallo</i> of the Order states:<blockquote><b>WHEREFORE</b>, in view of the foregoing, the <i>Omnibus Motion to Declare Complaint as Nuisance Suit and to Order the Payment of the Correct Docket Fees</i> filed by the defendant is hereby <b>GRANTED</b>.<br><br>Accordingly, the <i>Complaint for the Declaration of Inexistence of the Contract on Conveyance of Shares of Stocks under Article 1410 of the Civil Code</i> filed by the plaintiff is hereby <b>DISMISSED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (Emphasis in the original)</blockquote>The RTC first ruled that the case involved an intra-corporate controversy, satisfying both the relationship test and the nature of the controversy test, as established by jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>With respect to the relationship test, the RTC found that the dispute was between the stockholders of Vetamax, noting the Complaint's allegation that, as of October 2016, George held 3,000 shares while Anita held 5,000 shares, as reflected in Vetamax's GIS.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>As to the nature of the controversy test, the RTC determined that the case involved the interpretation and application of Section 62 of the Revised Corporation Code, which governs the issuance and transfer of shares to an alleged shareholder.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>Despite its finding of an intra-corporate controversy, the RTC nonetheless concluded that George had no cause of action and lacked the capacity to sue.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>Specifically, the RTC held that the relief sought by George was intended for the benefit of Vetamax.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Thus, it ruled that George should have first secured a board resolution authorizing him to initiate the suit on Vetamax's behalf.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> The relevant portion of the RTC Order reads:<blockquote>[George's] complaint does not contain a relief seeking the transfer of the shares to his name, or that he intends to acquire the same. The complaint also lacks any allegation on a violation of a right expressly granted to a shareholder provided for in the Revised Corporation Code. As ruled upon earlier, the complaint seeks to declare the nullity of the title of the defendant over the shares of stock due to the lack of a valid conveyance, while not specifically claiming the said shares. Therefore, the relief prayed for is actually for the benefit of the corporation.<br><br>It is settled that the corporation has its own separate juridical personality from its stockholders. For a shareholder, or any other person to exercise corporate powers, unless the articles of incorporation or the by-laws so provide or unless the doctrine of apparent authority applies, a board resolution is required to be able to represent the corporation. Given this, the plaintiff should have presented a board resolution authorizing him to file the instant suit. This, the plaintiff failed to do. There are also no allegations on his apparent authority, nor any provisions of the articles of incorporation or the by-laws authorizing him to bring the instant suit. Accordingly, as the plaintiff is filing a suit based on a right that is not his personally, the Court deems it proper to dismiss the instant complaint.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></blockquote>However, even assuming that George had a cause of action and the legal capacity to sue, the RTC held that the Complaint would not prosper due to his failure to comply with the requirements set forth Section 1, Rule 8 of the Interim Rules of Procedure Governing Intra-Corporate Controversies (<b>Interim Rules</b>).<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> In particular, the RTC noted the absence of any record demonstrating that: (1) George had exerted all reasonable efforts to exhaust available remedies under Vetamax's articles of incorporation, by-laws, or internal rules to obtain the relief he sought; (2) no appraisal right existed for the acts complained of; and (3) the Complaint was not intended merely as a nuisance or harassment suit.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Aggrieved, George filed a Petition for Review under Rule 43 of the Rules of Court with the CA, asserting that he possessed the legal capacity to maintain the suit.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> He argued that his Complaint, which sought a declaration of the inexistence of a contract conveying shares, did not redound to the benefit of Vetamax, as the shares in question were never intended to be transferred to it.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Rather, George maintained that the declaration of the inexistence of a contract conveying Anita's shares would result in an increase in his proportionate shareholdings, given that the shares of their late father, Yu Tian, would be distributed equally among his heirs.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Further, George argued that the anticipated increase in his ownership would not stem from a direct transfer of shares from Anita to him but from a redistribution of their parents' estate, such that the total shareholdings would be divided equally among the heirs, rather than disproportionately allocated to Anita.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> According to George, this reflected a clear effort to vindicate a personal and individual interest because his shares should have been 17.5% instead of 15%, while Anita's shares should have only been 7.5% instead of 25%.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Therefore, George contended that the Complaint did not allege an injury to Vetamax, but rather invoked a right that was purely personal to him.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br><center><b><i>The Ruling of the CA</i></b></center><br>The CA affirmed the RTC Order, holding that the RTC did not err in finding that George lacked the legal capacity to initiate the suit against Anita as the Complaint was characterized as a derivative suit.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> The dispositive portion of the CA Decision reads:<blockquote><b>WHEREFORE</b>, premises considered, the Petition for Review is <b>DISMISSED</b>. The Order[,] dated October 24, 2019[,] issued by [Branch 93, Regional Trial Court of Quezon City], in Civil Case No. R-QZN-19- 10334-CV is <b>AFFIRMED</b>.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> (Emphasis in the original)</blockquote>The CA held that George was not the only individual with a substantial interest in the validity of Anita's shares in Vetamax, nor was he the sole party who would suffer direct and personal injury because of Anita's alleged ownership.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> According to the CA, the relief sought by George pertained to acts and events that would ultimately impact the corporate structure of Vetamax, as the outcome would affect not only his shares but also those of other stockholders, including Robert, Shirley Qua, Hedy Lee, and the Heirs of William.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>In light of this, the CA ruled that the proper remedy was a derivative suit and that George was required to comply with the procedural requirements for such action, as provided under Rule 8, Section 1 of the Interim Rules.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Since George failed to satisfy these requirements, the CA concluded that he lacked the legal capacity to sue and that the Complaint failed to state a valid cause of action.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br>Undeterred, George filed a Motion for Reconsideration, which the CA denied in its Resolution,<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> dated July 25, 2023.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>Hence, the Petition, where George, as substituted by Rose Marie S. Yu (<b>Rose Marie</b>) and Andrea S. Yu (<b>Andrea</b>), contends that the CA erred in holding that George should have initiated a derivative suit.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> George argues that his claim does not involve a wrong committed against Vetamax, as the shareholders' equity interests do not constitute corporate assets or rights.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> He further emphasizes that his Complaint pertains specifically to Anita's act of unlawfully inserting her name as a shareholder of Vetamax in 2009, thereby diluting George's shareholding.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> According to George, this is a dispute between shareholders, and not an action involving or authorized by the board of directors.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> Accordingly, the suit was not brought on behalf of Vetamax, but rather as a personal action by one shareholder against another.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>Further, to support his claim, George cited the case of <i>Lu Ym v. Lu Ym, Sr.</i>,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> where the Court, in relevant part, held:<blockquote>LLDC and the minority stockholders whose shares were diluted, David included, have causes of action separate and distinct from each other. David has a substantial interest in the validity of the subscription and the amount for which the same was issued since he stands to suffer a direct personal injury by reason thereof, i.e., diminution of his shareholdings and, consequently, control in the corporation. The decrease in his voting power will expectedly result in the loss of his control in the corporate affairs of LLDC. Needless to state, David was well within his right as a stockholder to challenge Lu Ym father and sons' actions that adversely affected his personal interest in the corporation, such cause of action being anchored on Sec. 1 (a) (2) of the Interim Rules.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup></blockquote>George argues that in <i>Lu Ym</i>, the Court classified David Lu's action as an individual suit, despite the dilution of other shareholders' interests resulting from a questionable stock subscription.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> By analogy, he posits that the dilution of other Vetamax' s shareholders' stockholdings is irrelevant to his cause of action.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> He maintains that he has a distinct, separate, and substantial interest in challenging the validity of the share transfer from their father, Yu Tian, to Anita.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> Thus, he asserts his right to pursue an individual suit against Anita, independent of other stockholders.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup><br><br><center><b><i>The Issue</i></b></center><br>Did the CA err in holding that George should have initiated a derivative suit because his Complaint refers to acts and incidents that will ultimately concern the corporate structure of Vetamax?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Court resolves to grant the Petition.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Generally, the Court may only review issues raised in a Rule 45 Petition</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>As a general rule, a court may decide only those issues raised by the parties in their pleadings.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> This rule finds support in Section 8, Rule 51 of the Rules of Court, which provides:<blockquote>Section 8. <i>Questions that may be decided</i>. â No errors which does not affect the jurisdiction over the subject matter or the validity of the judgment appealed from or the proceedings therein will be considered unless stated in the assignment of errors, or closely related to or dependent on an assigned error and properly argued in the brief, save as the court may pass upon plain errors and clerical errors.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup></blockquote>The aforementioned provision underscores the limits of the court's authority to review only those issues expressly raised and developed by the parties, subject to narrowly defined exceptions. Consistent with this principle, a judgment rendered by a court on a matter within its general jurisdiction, but not placed in issue by any pleading or claim of the parties, and wholly unrelated to the questions submitted for resolution, is considered a legal nullity.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup><br><br>Here, the Petition raises the issue of whether the dilution of George's shareholdings, allegedly resulting from Anita's fraudulent and wrongful conduct, constitutes a valid cause of action for an individual suit under Rule 1, Section l(a)(2) of the Interim Rules.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup><br><br>Ordinarily, the Court would confine its review to the issues explicitly raised in the Petition. However, it is well established that courts possess the authority to consider matters not specifically pleaded when they: (1) are closely related to or dependent upon an assigned error; (2) affect the court's jurisdiction over the subject matter or the validity of the judgment; or (3) are indispensable to the just and final resolution of the issues presented.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> As explained by the Court in <i>Jugueta v. Ledesma</i>,<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> citing <i>The Insular Life Assurance Co., Ltd. Employees' Association v. The Insular Life Assurance Co., Ltd</i>:<sup style="COLOR: RGB(255, 0, 0);">[90]</sup><br><blockquote>The Supreme Court has ample authority to review and resolve matters not assigned and specified as errors by either of the parties in the <b>appeal if it finds the consideration and determination of the same essential and indispensable in order to arrive at a just decision in the case</b>. This Court, thus, has the authority to waive the lack of proper assignment of errors if the unassigned errors closely relate to errors properly pinpointed out or if the unassigned errors refer to matters upon which the determination of the questions raised by the errors properly assigned depend.<br><br>The same also applies to issues not specifically raised by the parties. The Supreme Court, likewise, has broad discretionary powers, in the resolution of a controversy, to take into consideration matters on record which the parties fail to submit to the Court as specific questions for determination. Where the issues already raised also rest on other issues not specifically presented, as long as the latter issues bear relevance and close relation to the former and as long as they arise from matters on record, the Court has the authority to include them in its discussion of the controversy as well as to pass upon them. In brief, <b>in those cases wherein questions not particularly raised by the parties surface as necessary for the complete adjudication of the rights and obligations of the parties and such questions fall within the issues already framed by the parties, the interests of justice dictate that the Court consider and resolve them</b>.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> (Emphasis in the original; citations omitted)</blockquote>In this case, determining whether the dispute constitutes an intra-corporate controversy is essential to the just and final resolution of the issue raised by George in his Petitionâwhether he should have filed a derivative suit to challenge Anita's actions. Accordingly, the Court's consideration of issues not explicitly raised in the Petition is justified.<br><br>To recapitulate, both the RTC and the CA held that George should have initiated a derivative suit to challenge Anita's actions. In reaching that conclusion, however, the RTC, as upheld by the CA, first determined that the dispute involved an intra-corporate controversy, as it arose between stockholders of Vetamax and required the interpretation and application of Section 62 of the Revised Corporation Code.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup><br><br>Upon a thorough review of the case records, the Court finds that the RTC erred in its characterization of the controversy. Thus, while the Petition does not directly raise the question of whether the dispute qualifies as an intra-corporate controversy, the Court deems it necessary to resolve the issue, as it is crucial to a just and definitive determination of the issues presented and implicates the court's very jurisdiction over the subject matter.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>At its core, the Complaint involves the determination and distribution of the successional rights of the stockholders-heirs</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Intra-corporate disputes are generally defined as suits arising from intra-corporate relations, either among stockholders or between stockholders and the corporation itself.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> To determine whether a particular suit falls within this category, jurisprudence developed two guiding criteria, commonly referred to as the relationship test and the nature of the controversy test. In <i>Reyes v. Regional Trial Court of Makati, Branch 142, et al.</i>,<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> the Court extensively discussed these two tests:<blockquote>A review of relevant jurisprudence shows a development in the Court's approach in classifying what constitutes an intra-corporate controversy. Initially, the main consideration in determining whether a dispute constitutes an intra-corporate controversy was limited to a consideration of the intra-corporate relationship existing between or among the parties. The types of relationships embraced under Section 5(b), as declared in the case of <i>Union Glass &amp; Container Corp. v. SEC</i>, were as follows:<blockquote>a) between the corporation, partnership, or association and the public;<br><br>b) between the corporation, partnership, or association and its stockholders, partners, members, or officers;<br><br>c) between the corporation, partnership, or association and the State as far as its franchise, permit or license to operate is concerned; and<br><br>d) <b>among the stockholders, partners, or associates themselves.</b></blockquote>The existence of any of the above intra-corporate relations was sufficient to confer jurisdiction to the SEC, regardless of the subject matter of the dispute. This came to be known as the <b>relationship test</b>.<br><br>However, in the 1984 case of <i>DMRC Enterprises v. Esta del Sol Mountain Reserve, Inc.</i>, the Court introduced the <b>nature of the controversy test</b>. We declared in this case that it is not the mere existence of an intra-corporate relationship that gives rise to an intra-corporate controversy; to rely on the relationship test alone will divest the regular courts of their jurisdiction for the sole reason that the dispute involves a corporation, its directors, officers, or stockholders. We saw that there is no legal sense in disregarding or minimizing the value of the nature of the transactions which gives rise to the dispute.<br><br>Under the nature of the controversy test, the incidents of that relationship must also be considered for the purpose of ascertaining whether the controversy itself is intra-corporate. The controversy must not only be rooted in the existence of an intra-corporate relationship, but must as well pertain to the enforcement of the parties' correlative rights and obligations under the Corporation Code and the internal and intra-corporate regulatory rules of the corporation. If the relationship and its incidents are merely incidental to the controversy or if there will still be conflict even if the relationship does not exist, then no intra-corporate controversy exists.<br><br>The Court then combined the two tests and declared that jurisdiction should be determined by considering not only the status or relationship of the parties, but also the nature of the question under controversy. This two-tier test was adopted in the recent case of <i>Speed Distribution, Inc. v. Court of Appeals</i>:<br><br>To determine whether a case involves an intra-corporate controversy, and is to be heard and decided by the branches of the RTC specifically designated by the Court to try and decide such cases, two elements must concur: (a) the status or relationship of the parties; and (2) the nature of the question that is the subject of their controversy.<br><br>The first element requires that the controversy must arise out of intra-corporate or partnership relations between any or all of the parties and the corporation, partnership, or association of which they are stockholders, members or associates; between any or all of them and the corporation, partnership, or association of which they are stockholders, members, or associates, respectively; and between such corporation, partnership, or association and the State insofar as it concerns their individual franchises. The second element requires that the dispute among the parties be intrinsically connected with the regulation of the corporation. If the nature of the controversy involves matters that are purely civil in character, necessarily, the case does not involve an intra-corporate controversy.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> (Emphasis in the original; citations omitted)</blockquote>Applying these standards, the Court finds that the present dispute does not satisfy the necessary criteria to be classified as an intra-corporate controversy.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The Complaint failed to satisfy the Relationship Test</em></div></td><td width="70%">&nbsp;</td></tr><tr><td><div align="justify"></div><br></td><td>&nbsp;</td></tr><tr><td><div align="justify"><em>a. The Complaint centers around the issue of successional rights of George and Anita</em></div></td><td>&nbsp;</td></tr></tbody></table><br>Generally, the jurisdiction of a court or tribunal over the subject matter is determined by the allegations in the complaint.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup><br><br>Here, the RTC ruled that the relationship test was satisfied, citing allegations in the Complaint that George held 3,000 shares of stock and Anita held 5,000 shares in Vetamax.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup><br><br>While the RTC's conclusion initially appears sound in recognizing the existence of a shareholder relationship between George and Anita, a closer scrutiny of the records suggests otherwise. It is critical to emphasize that George's fundamental argument in the Complaint is that Anita usurped her father's shares upon his death without presenting any document to substantiate a valid transfer of ownership. The Complaint alleged that there is no proof establishing that Anita legally acquired the status of a stockholder, thereby casting substantial doubt on the legitimacy of her claim to shareholder rights in Vetamax. This omission fundamentally undermines the RTC's finding that a stockholder-to-stockholder relationship exists between the parties, especially given the requirement under Section 62 of the Revised Corporation Code, which in pertinent part, reads:<blockquote>Section 62. <i>Certificate of Stock and Transfer of Shares</i>. â The capital stock of corporations shall be divided into shares for which certificates signed by the president or vice president, countersigned by the secretary or assistant secretary, and sealed with the seal of the corporation shall be issued in accordance with the by laws. <i>Shares of stock so issued are personal property and may be transferred by delivery of the certificate or certificates indorsed by the owner, his attorney-in-fact, or any other person legally authorized to make the transfer. No transfer, however, shall be valid, except as between the parties, until the transfer is recorded in the books of the corporation showing the names of the parties to the transaction, the date of the transfer, the number of the certificate or certificates, and the number of shares transferred.</i> The Commission may require corporations whose securities are traded in trading markets and which can reasonably demonstrate their capability to do so to issue their securities or shares of stocks in uncertificated or scripless form in accordance with the rules of the Commission[.]<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> (Emphasis supplied)</blockquote>Moreover, as further detailed in the Complaint, Anita initially held no shares in Vetamax and was only later identified as a shareholder when she allegedly inserted her name in the 2009 GIS of Vetamax. George contends that Anita's entitlement to any shares should be derived solely from the inheritance she stands to receive from their father's estate. Accordingly, rather than holding 25% of Vetamax's shares, as she claims, her lawful entitlement would amount to only 7.5% of Vetamax's shareholdings.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup><br><br>It is thus evident from the allegations in the Complaint that the core of the dispute revolves around the shares of stock belonging to Yu Tian, the parties' deceased father, and the corresponding interests of his heirs therein.<br><br>At this juncture, the Court deems it necessary to emphasize that while the death of Yu Tian triggered the transmission of successional rights to his heirs, effective from the moment of his death, this did not <i>ipso facto</i> confer upon Anita the status of a stockholder in Vetamax. In the absence of a formal settlement of the decedent's estate, no definitive transfer of ownership could be recognized.<br><br>It must be underscored that the heirs of Yu Tian merely acquired an undivided and inchoate interest in his shares, an interest that remains contingent upon the outcome of an appropriate estate settlement proceedings. Moreover, pursuant to Section 62 of the Revised Corporation Code, the transfer of shares of stock must be duly recorded in the corporate books of Vetamax to be considered valid and effective.<br><br>In the absence of both a settlement of Yu Tian's estate and the proper registration of the share transfer in Vetamax' s records, Anita could not be deemed a legitimate stockholder of Vetamax.<br><br>The Court previously had the occasion to address a comparable controversy in <i>Reyes v. Regional Trial Court of Makati, Branch 42, et al.</i>,<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> where it similarly held that the complaint did not constitute an intra-corporate dispute. In that case, the Court found that the core issue involved the enforcement of successional rights, rather than the assertion of stockholder rights.<br><br>Specifically, the petitioners in Reyes alleged that the shares of stock owned by their deceased mother had been arbitrarily and fraudulently appropriated by the defendant. In response, they initiated a derivative suit seeking, among others, an accounting of all income derived from the misappropriated shares from the time they were taken, as well as the delivery of their rightful and proportionate shares to the surviving siblings.<br><br>In finding that no intra-corporate relationship existed between the petitioners and the defendant, the Court explained:<blockquote>Article 777 of the Civil Code declares that the successional rights are transmitted from the moment of death of the decedent. Accordingly, upon Anastacia's death, her children acquired legal title to her estate (which title includes her shareholdings in Zenith), and they are, prior to the estate's partition, deemed co-owners thereof. This status as co-owners, however, does not immediately and necessarily make them stockholders of the corporation.<br><br>[....] In the present case, each of Anastacia's heirs holds only an undivided interest in the shares. This interest, at this point, is still inchoate and subject to the outcome of a settlement proceeding; the right of the heirs to specific, distributive shares of inheritance will not be determined until all the debts of the estate of the decedent are paid. In short, the heirs are only entitled to what remains after payment of the decedent's debts; whether there will be residue remains to be seen. Justice Jurado aptly puts it as follows:<br><br>No succession shall be declared unless and until a liquidation of the assets and debts left by the decedent shall have been made and all his creditors are fully paid. Until a final liquidation is made and all the debts are paid, the right of the heirs to inherit remains inchoate. This is so because under our rules of procedure, <b>liquidation is necessary in order to determine whether or not the decedent has left any liquid assets which may be transmitted to his heirs</b>.<br><br>Rodrigo must, therefore, hurdle two obstacles before he can be considered a stockholder of Zenith with respect to the shareholdings originally belonging to Anastacia. First, he must prove that there are shareholdings that will be left to him and his co-heirs, and this can be determined only in a settlement of the decedent's estate. No such proceeding has been commenced to date. Second, he must register the transfer of the shares allotted to him to make it binding against the corporation. He cannot demand that this be done unless and until he has established his specific allotment (and prima facie ownership) of the shares. Without the settlement of Anastacia's estate, there can be no definite partition and distribution of the estate to the heirs. Without the partition and distribution, there can be no registration of the transfer. And without the registration, we cannot consider the transferee-heir a stockholder who may invoke the existence of an intra-corporate relationship as premise for an intra-corporate controversy within the jurisdiction of a special commercial court.<br><br>In sum, we find that â insofar as the subject shares of stock (i.e., Anastacia's shares) are concerned â Rodrigo cannot be considered a stockholder of Zenith. Consequently, we cannot declare that an intra-corporate relationship exists that would serve as basis to bring this case within the special commercial court's jurisdiction under Section 5(b) of PD 902-A, as amended. Rodrigo's complaint, therefore, fails the relationship test.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> (Emphasis in the original; citations omitted)</blockquote>Similarly, here, Anita must first overcome the legal requirement of settling her deceased father's estate and effecting the registration of the transfer of shares in her name before she can be validly recognized as a stockholder of Vetamax.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>b. The fact that Anita's name is in Vetamax's GIS does not sufficiently prove ownership of shares</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>To recall, George alleged that the only document evidencing Anita's participation in the shareholdings of Vetamax is the corporation's GIS, beginning in 2009.<br><br>Relying on this, the RTC concluded that the relationship test was satisfied, reasoning that both Anita and George recognized each other's share ownership as reflected in Vetamax's GIS.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup><br><br>The Court, however, finds this reasoning unpersuasive.<br><br>It is a well established principle that the contents of the GIS are not conclusive evidence of the identities of its registered stockholders or the extent of their respective shareholdings.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> In accordance with Section 63, in relation to Section 73, of the Revised Corporation Code, the controlling document for determining the identities of registered stockholders is the corporation's Stock and Transfer Book (<b>STB</b>).<br><br>Section 73 of the Revised Corporation Code expressly mandates every corporation to maintain and carefully preserve an STB, which must include, among other things, the current ownership structure and voting rights within the corporation.<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> This includes detailed records of stockholders, intra-group relations, group structures, ownership data, and beneficial ownership of the corporation. Accordingly, reliance on the GIS alone, absent corroboration from the STB, is insufficient to establish legitimate shareholder status. As declared by the Court in <i>F&amp;S Velasco Company, Inc., et al. v. Madrid, et al</i>:<sup style="COLOR: RGB(255, 0, 0);">[105]</sup><blockquote>The contents of the GIS, however, should not be deemed conclusive as to the identities of the registered stockholders of the corporation, as well as their respective ownership of shares of stock, as the controlling document should be the corporate books, specifically the Stock and Transfer Book. Jurisprudence in <i>Lao v. Lao</i> is instructive on this matter, <i>to wit</i>:<blockquote><i>The mere inclusion as shareholder of petitioners in the General Information Sheet of PFSC is insufficient proof that they are shareholders of the company.</i><br><br>Petitioners bank heavily on the General Information Sheet submitted by PFSC to the SEC in which they were named as shareholders of PFSC. They claim that respondent is now estopped from contesting the General Information Sheet.</blockquote><i>While it may be true that petitioners were named as shareholders in the General Information Sheet submitted to the SEC, that document alone does not conclusively prove that they are shareholders of PFSC. The information in the document will still have to be correlated with the corporate books of PFSC. As between the General Information Sheet and the corporate books, it is the latter that is controlling.</i> As correctly ruled by the CA:<blockquote>We agree with the trial court that <i>mere inclusion in the General Information Sheets as stockholders and officers does not make one a stockholder of a corporation, for this may have come to pass by mistake, expediency or negligence. As professed by respondent-appellee, this was done merely to comply with the reportorial requirements with the SEC.</i> This maybe against the law but "practice, no matter how long continued, cannot give rise to any vested right."<br><br>If a transferee of shares of stock who failed to register such transfer in the Stock and Transfer Book of the Corporation could not exercise the rights granted unto him by law as stockholder, with more reason that such rights be denied to a person who is not a stockholder of a corporation. Petitioners-appellants never secured such a standing as stockholders of PFSC and consequently, their petition should be denied.<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> (Emphasis supplied; citations omitted)&nbsp;</blockquote></blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>c. The principle of laches does not transfer ownership of shares to Anita</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The Court is not unmindful of the passage of time since Anita purportedly inserted her name into Vetamax's GIS without any legal basis. Precisely on this ground, Anita contended that George is barred from challenging her claim of ownership over the shares by reason of estoppel and laches, particularly in light of her long-standing role as a director of Vetamax.<br><br>The Court does not agree with Anita's contentions.<br><br>Laches has been defined as the failure or neglect, for an unreasonable length of time, to do that which by exercising due diligence could or should have been done earlier; it is negligence or omission to assert a right within a reasonable time, warranting a presumption that the party entitled to assert it either has abandoned it or declined to assert it.<sup style="COLOR: RGB(255, 0, 0);">[107]</sup><br><br>While it may be argued that George failed to timely assert his right to challenge Anita's purported ownership of shares in Vetamax, given the lapse of time since 2009, such delay, by itself, does not operate to vest ownership in Anita. As previously discussed, for a transfer of shares to be valid and effective, it must be duly registered in the transferee's name in the corporation's STB. In this case, no such registration has been shown. Indeed, there is not even a single document evidencing any transfer of shares from Yu Tian to Anita.<br><br>Moreover, it bears emphasis that the proper party with the legal capacity to waive any rights over the Vetamax shares in question is not George, but the estate of Yu Tian. As a distinct juridical entity, the estate may only act through its duly appointed administrator.<br><br>In view of the foregoing, the circumstances surrounding the controversy at hand ultimately fail to satisfy the requirements of the relationship test.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The Complaint also failed to satisfy the Nature of the Controversy Test</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The nature of the controversy test requires that the dispute among the parties be intrinsically connected with the regulation of the corporation.<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> Here, George initially filed a Complaint for the Declaration of Inexistence of Contract of Conveyance of Shares, contending that Anita fraudulently transferred to herself the shares of stock owned by Yu Tian, despite the absence of any valid document evidencing such transfer. George further asserted that this unauthorized conveyance diluted his own shareholdings in Vetamax, as a proper distribution of Yu Tian's shares among the heirs would have entitled him to 17.5% ownership in the corporation.<br><br>Upon careful examination, the Court finds that the essence of the Complaint pertains to the protection and enforcement of successional rights and not to the regulation of Vetamax. The controversy arose from the parties' relationship as heirs of Yu Tian, rather than from any legally recognized relationship as stockholders of Vetamax.<br><br>In filing the Complaint, George was asserting his rights as a co-heir and not as a shareholder of record. Notably, he claimed that Anita should possess only 300 shares, representing 7.5% of Vetamax's shareholdings, derived from her inheritance, while his rightful shareholdings should have been 17.5%, not 15%. This strongly indicates that the real nature of the controversy concerns the proper distribution of undivided shares of Yu Tian's estate. The harm George seeks to redress arises from the alleged impairment of his successional rights as an heir, rather than any injury to the corporation or to him in his capacity as a shareholder.<br><br>More importantly, Anita's actions did not inflict any actual or imminent injury upon Vetamax. If she indeed transferred Yu Tian's shares to herself without legal basis, the harm resulting from such conduct would fall upon her co-heirs and not on Vetamax. The alleged wrongful transfer neither altered Vetamax's capital structure nor affected its corporate assets.<br><br>Thus, ultimately, the nature of the dispute places it outside the ambit of an intra-corporate controversy. Accordingly, both the RTC and the CA erred in ruling that George should have initiated a derivative suit, which cannot prosper in the absence of such a controversy.<br><br>Given these circumstances, the proper course of action is to initiate an ordinary civil action before the RTC to determine the composition of Yu Tian's estate. Should the trial court find that the disputed shares form part of the estate, the heirs may thereafter proceed with its settlement, either judicially or extrajudicially, in accordance with law. Only upon the completion of such settlement may the shares be distributed among the heirs and duly recorded in Vetamax's STB.<br><br>Nevertheless, to prevent further delay in the disposition of the case, the Court finds it appropriate to remand the matter to the RTC for the continuation of proceedings. The trial court is hereby directed to treat the case as an ordinary civil action solely for the purpose of determining whether the subject shares constitute part of Yu Tian's estate.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> filed by petitioner George N. Yu, as substituted by Rose Marie S. Yu and Andrea S. Yu, is <b>GRANTED</b>. The Decision dated February 17, 2023, and the Resolution, dated July 25, 2023, of the Court of Appeals in CA-G.R. SP No. 163829 are <b>REVERSED</b>. The case is <b>REMANDED</b> to the Regional Trial Court, which is directed to treat the same as an ordinary civil action for the purpose of determining whether the subject shares of stock form part of the estate of Yu Tian.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 23-34. Penned by Associate Justice Ramon A. Cruz and concurred in by Associate Justices Louis P. Acosta and Jaime Fortunato A. Caringal of the Ninth Division of the Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 35-37. Penned by Associate Justice Ramon A. Cruz and concurred in by Associate Justices Louis P. Acosta and Jaime Fortunato A. Caringal of the Ninth Division of the Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 130-137. Penned by Presiding Judge Arthur O. Malabaguio.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 24-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 25-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 142.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 91.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 125-129.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 127.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 130-137.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 137.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 136-137.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 27-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 35-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <b>G.R. Nos. 219902 et al.</b>, January 17, 2018 [Notice, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Rollo</i>, p. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <b>Santos v. Republic of the Philippines</b>, 899 Phil. 158, 164 (2021) [Per J. Carandang, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> RULES OF COURT, Rule 51, sec. 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <b>Reburiano v. De Vera</b>, 877 Phil. 880, 896 (2020) [Per J. Carandang, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Rollo</i>, p. 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <b>Santos v. Republic of the Philippines</b>, 899 Phil. 158, 164-165 (2021) [Per J. Carandang, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> 903 Phil. 610 (2021) [Per J. Carandang, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> 166 Phil. 505 (1977) [Per C.J. Castro, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>Jugueta v. Ledesma</b>, 903 Phil. 610, 618-619 (2021) [Per J. Carandang, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Rollo</i>, p. 132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <b>Strategic Alliance Dev't. Corp. v. Star Infrastructure Dev't Corp., et al.</b>, 649 Phil. 669, 680 (2010) [Per J. Perez, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> 583 Phil. 591 (2008) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id.</i> at 607-609.<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <b>Lim Tay v. Court of Appeals, et al.</b>, 355 Phil. 381, 383 (1998) [Per J. Panganiban, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Rollo</i>, p. 132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> REV. CORP. CODE, sec. 62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Rollo</i>, p. 105.<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> 583 Phil. 591 (2008) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Id.</i> at 610-612.<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>Rollo</i>, p. 132.<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <b>F&amp;S Velasco Company, Inc., et al. v. Madrid, et al.</b>, 772 Phil. 628, 642 (2015) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> REV. CORP. CODE, sec. 73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> 772 Phil. 628 (2015) [Per J. Perlas-Bernabe, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <i>Id.</i> at 642.<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <b>Lim Tay v. Court of Appeals</b>, 355 Phil. 381, 403 (1998) [Per J. Panganiban, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> <b>Aguirre and Aguirre v. FQB+7, Inc., et al.</b>, 701 Phil. 216, 234 (2013) [Per J. Del Castillo, Second Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

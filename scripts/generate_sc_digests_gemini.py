@@ -334,6 +334,35 @@ def repair_truncated_json(json_str):
         
     return json_str
 
+def extract_first_json_object(text):
+    """Extract the first complete JSON object, discarding any trailing content."""
+    start = text.find('{')
+    if start == -1:
+        return text
+    depth = 0
+    in_string = False
+    escaped = False
+    for i in range(start, len(text)):
+        char = text[i]
+        if escaped:
+            escaped = False
+            continue
+        if char == '\\' and in_string:
+            escaped = True
+            continue
+        if char == '"':
+            in_string = not in_string
+            continue
+        if not in_string:
+            if char == '{':
+                depth += 1
+            elif char == '}':
+                depth -= 1
+                if depth == 0:
+                    return text[start:i + 1]
+    return text[start:]
+
+
 def preprocess_json_string(json_str):
     """Aggressively remove trailing commas and heal missing quotes on common keys."""
     # 1. Remove trailing commas
@@ -855,6 +884,7 @@ TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat 
                     config=types.GenerateContentConfig(
                         system_instruction=sys_instruction,
                         temperature=0.1,
+                        response_mime_type="application/json",
                         safety_settings=[
                             types.SafetySetting(
                                 category=types.HarmCategory.HARM_CATEGORY_HARASSMENT,
@@ -931,6 +961,7 @@ TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat 
             # Parse JSON safely
             try:
                 clean_text = response.text.replace('```json', '').replace('```', '').strip()
+                clean_text = extract_first_json_object(clean_text)
                 clean_text = preprocess_json_string(clean_text)
                 data = json.loads(clean_text)
             except ValueError:

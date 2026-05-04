@@ -203,6 +203,7 @@ function App() {
   const [guestModalDismissedAt, setGuestModalDismissedAt] = useState(null); // timestamp of last dismiss
   const [foundingPromoAvailable, setFoundingPromoAvailable] = useState(false);
   const [showPwaModal, setShowPwaModal] = useState(false);
+  const [pwaInstallPrompt, setPwaInstallPrompt] = useState(null);
 
   // Bar search portal
   const [showBarSuggestions, setShowBarSuggestions] = useState(false);
@@ -405,11 +406,21 @@ function App() {
     return () => clearTimeout(timer);
   }, [authLoaded, isSignedIn, showGuestModal, guestModalDismissedAt, foundingPromoAvailable]);
 
-  // PWA install modal: fire once per browser session after 1 minute of browsing.
+  // Capture the browser's native PWA install prompt so the modal can trigger it.
   useEffect(() => {
-    if (sessionStorage.getItem('pwa_modal_shown')) return;
+    const handler = (e) => {
+      e.preventDefault();
+      setPwaInstallPrompt(e);
+    };
+    window.addEventListener('beforeinstallprompt', handler);
+    return () => window.removeEventListener('beforeinstallprompt', handler);
+  }, []);
+
+  // PWA install modal: fire once ever (localStorage) after 1 minute of browsing.
+  useEffect(() => {
+    if (localStorage.getItem('pwa_modal_shown')) return;
     const timer = setTimeout(() => {
-      sessionStorage.setItem('pwa_modal_shown', '1');
+      localStorage.setItem('pwa_modal_shown', '1');
       setShowPwaModal(true);
     }, 60 * 1000);
     return () => clearTimeout(timer);
@@ -1115,7 +1126,10 @@ function App() {
       )}
       {showPwaModal && (
         <Suspense fallback={null}>
-          <PwaInstallModal onClose={() => setShowPwaModal(false)} />
+          <PwaInstallModal
+            deferredPrompt={pwaInstallPrompt}
+            onClose={() => setShowPwaModal(false)}
+          />
         </Suspense>
       )}
 

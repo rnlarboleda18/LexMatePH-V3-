@@ -23,7 +23,14 @@ const INSTALL_STEPS = [
   },
 ];
 
-export default function PwaInstallModal({ onClose }) {
+export default function PwaInstallModal({ onClose, deferredPrompt }) {
+  const handleInstallNow = async () => {
+    if (!deferredPrompt) return;
+    deferredPrompt.prompt();
+    await deferredPrompt.userChoice;
+    onClose();
+  };
+
   return createPortal(
     <div
       className="fixed inset-0 z-[520] flex items-end justify-center sm:items-center bg-black/40 backdrop-blur-sm animate-in fade-in duration-200 p-0 sm:p-4"
@@ -103,13 +110,28 @@ export default function PwaInstallModal({ onClose }) {
             ))}
           </ol>
 
-          <button
-            type="button"
-            onClick={onClose}
-            className="mt-4 w-full rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition-opacity hover:opacity-90 active:scale-[0.99]"
-          >
-            Got it!
-          </button>
+          <div className="mt-4 flex gap-2">
+            {deferredPrompt && (
+              <button
+                type="button"
+                onClick={handleInstallNow}
+                className="flex-1 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition-opacity hover:opacity-90 active:scale-[0.99]"
+              >
+                Install Now
+              </button>
+            )}
+            <button
+              type="button"
+              onClick={onClose}
+              className={`rounded-xl px-4 py-2.5 text-sm font-bold transition-colors active:scale-[0.99] ${
+                deferredPrompt
+                  ? 'border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700'
+                  : 'w-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md shadow-indigo-900/20 hover:opacity-90'
+              }`}
+            >
+              Got it!
+            </button>
+          </div>
         </div>
       </div>
     </div>,

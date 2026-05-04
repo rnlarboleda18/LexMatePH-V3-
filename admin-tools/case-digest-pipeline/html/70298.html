@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 275732 - THE AGGRIEVED PARTY ATTY. HERMINIO HARRY L. ROQUE, JR., REPRESENTED BY HIS DAUGHTER AND ELDEST CHILD, BIANCA HACINTHA R. ROQUE, PETITIONER, VS. THE HOUSE OF REPRESENTATNES QUAD COMMITTEE, CONSISTING OF THE COMMITTEE ON DANGEROUS DRUGS CHAIRED BY REPRESENTATIVE ROBERT ACE BARBERS; COMMITTEE ON HUMAN RIGHTS CHAIRED BY REPRESENTATIVE BIENVENIDO ABANTE, JR.; COMMITTEE ON PUBLIC ACCOUNTS CHAIRED BY REPRESENTATIVE JOSEPH STEPHEN PADUANO; AND COMMITTEE ON PUBLIC ORDER AND SAFETY CHAIRED BY REPRESENTATIVE DAN FERNANDEZ; AND NAPOLEON C. TAAS, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70298' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 275732, December 03, 2025 ]</H2>
+			<H3>THE AGGRIEVED PARTY ATTY. HERMINIO HARRY L. ROQUE, JR., REPRESENTED BY HIS DAUGHTER AND ELDEST CHILD, BIANCA HACINTHA R. ROQUE, PETITIONER, VS. THE HOUSE OF REPRESENTATNES QUAD COMMITTEE, CONSISTING OF THE COMMITTEE ON DANGEROUS DRUGS CHAIRED BY REPRESENTATIVE ROBERT ACE BARBERS; COMMITTEE ON HUMAN RIGHTS CHAIRED BY REPRESENTATIVE BIENVENIDO ABANTE, JR.; COMMITTEE ON PUBLIC ACCOUNTS CHAIRED BY REPRESENTATIVE JOSEPH STEPHEN PADUANO; AND COMMITTEE ON PUBLIC ORDER AND SAFETY CHAIRED BY REPRESENTATIVE DAN FERNANDEZ; AND NAPOLEON C. TAAS, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Petitioner Atty. Herminio "Harry" L. Roque, Jr. (Atty. Roque) seeks the writs of <i>amparo, certiorari</i> and prohibition against alleged encroachments upon his life, liberty, and security by the Committees on Dangerous Drugs, Public Order and Safety, Human Rights, and Public Accounts of the House of Representatives (collectively, Quad Committee).<br><br><center><b>Antecedents</b></center><br>Acting on several resolutions and privilege speeches calling for investigations into certain activities that allegedly threaten public order and national security,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> the Committees on Dangerous Drugs, Public Order and Safety, Human Rights, and Public Accounts of the House of Representatives convened themselves on August 12, 2024 into a Quad Committee to jointly investigate "<i>several public issues with linkages to each other: the proliferation of drugs, criminal activities associated with Philippine offshore gaming operators (POGOs), extra-judicial killings, among others</i>."<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>The Quad Committee invited Atty. Roque to attend its first investigative hearing scheduled for August 16, 2024 as a resource person, but he failed to appear.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Atty. Roque claimed that his absence was an inadvertent mistake. He assumed that the hearing will be held on August 15, 2024âa Thursdayâbecause the previous House of Representatives hearing he attended regarding POGOs was also held on a Thursday. Thus, he chose to attend a previously scheduled court hearing in the City of Manila on August 15, 2024 and informed the Quad Committee in writing that he will not be able to attend its hearing on said date. By the time Atty. Roque realized that he acted on a wrong assumption, it was already too late to travel from his Quezon City residence to the hearing venue in Bacolor, Pampanga.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>Having been absent from the first hearing, the Quad Committee again invited Atty. Roque to attend the second hearing scheduled for August 22, 2024 at the House of Representatives complex in Quezon City.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> He accepted the invitation and testified before the Quad Committee.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> The committee members questioned him about his family circumstances, his business interests and activities, corporate shareholdings, and sources of income. Particularly, he was quizzed about his alleged involvement with POGOs, the alleged drastic increase in his assets, and his alleged holdings in private companies during his time in government service.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> He also alleged that the Quad Committee held him in contempt for failing to attend the August 16, 2024 hearing and ordered his detention for 24 hours.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>At the conclusion of the hearing, the Quad Committee directed Atty. Roque to appear at the next hearing scheduled on August 28, 2024 and to submit the following documents: 1) copy of deed of sale with tax return and transfer of a 1.8-hectare parcel of land located in Multinational Village, ParaÃ±aque City; 2) documents on the transfer of shareholdings from Atty. Roque to Atty. Percival Ortega with trust agreement and all other documents submitted to the Securities and Exchange Commission; 3) extrajudicial settlement of the estate of Atty. Roque's aunt, including corresponding tax returns; 4) Atty. Roque's Statements of Assets and Liabilities for the years 2016 to 2022; 5) income tax returns of Biancham, Inc., including Atty. Roque and his wife Mylah Roque from 2014 to 2022; 6) Atty. Roque's income tax return for 2018; 7) true and beneficial ownership forms filed at the Securities and Exchange Commission in relation to Biancham, Inc.; and 8) medical certificates of Atty. Roque and his wife.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Atty. Roque did not attend the August 28 hearing, citing a prior commitment to attend an arbitration hearing.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> He also failed to submit the documents sought by the Quad Committee. Instead, Atty. Roque filed a Motion to Quash<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> dated September 2, 2024, arguing that the documents sought from him are not covered by the subjects of the Quad Committee's investigation and that disclosure thereof will violate his rights to privacy and against self-incrimination.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Atty. Roque claimed that the Quad Committee verbally denied the Motion to Quash in its September 4, 2024 hearing,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> which he did not attend. Thereafter, the Quad Committee issued a Show Cause Order<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> directing Atty. Roque to explain why he should not be held in contempt for skipping the September 4, 2024 hearing. In response, Atty. Roque filed an Omnibus Motion and Compliance<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> reiterating the contents of his Motion to Quash and praying that he be excused from attending subsequent hearings of the Quad Committee, citing his medical condition and full submission of the information sought from him.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>On September 9, 2024, the Quad Committee notified Atty. Roque of the hearing scheduled for September 12, 2024. The notice stated that while he is not required to attend, he will nevertheless be invited if the Quad Committee decides that his presence is needed. <sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>The September 12, 2024 hearing proceeded as scheduled without Atty. Roque, leading the Quad Committee to cite him in contempt.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The Quad Committee also issued a Subpoena <i>Ad Testificandum</i><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> directing him to appear at the next hearing scheduled for September 19, 2024 and to testify under oath relative to the matters under inquiry.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> On the same day, the Quad Committee also issued an Order (Detention Order) directing respondent Napoleon C. Taas, the sergeant at arms of the House of Representatives, and "<i>any law enforcement officer</i>" to arrest and detain Atty. Roque. The Detention Order reads as follows:<blockquote>In view of the attached Contempt Order issued by the Joint Committee composed of the Committees on Dangerous Drugs, Public Order &amp; Safety, Human Rights, and Public Accounts on [September 12, 2024] against <b>ATTY. HERMINIO-HARRY L. ROQUE, JR.</b> and pursuant to the authority of the Speaker, under Rule IV, Section 15 (j) to sign all acts, resolution, memorials, writs, warrants and subpoena, you are hereby ordered to <b>TAKE INTO CUSTODY</b> and <b>DETAIN ATTY. HERMINIO HARRY L. ROQUE, JR.</b> at the House of Representatives, Quezon City, until he complies with the Subpoena <i>Duces Tecum</i> dated [August 22, 2024], or until the termination of the Joint Committee investigation.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis in the original)</blockquote>Attached to the Omnibus Petition is an affidavit executed by a certain Aniline Verden (Verden) who professed to be a former staffer of the Law Offices of Atty. Roque Verden claimed that police officers went to the office of Atty. Roque's law firm on September 14 and 15, 2024 to serve a warrant and a subpoena. At 2:27 p.m. of September 16, 2024, six National Bureau of Investigation (NBI) personnel and the officer-in-charge of security of Antel Corporate Center went to the office of Atty. Roque's law firm and served copies of the Contempt and Detention Orders. The NBI personnel inspected the office and took photographs and video footage thereof. They also asked the office staff about the circumstances of the law office, Atty. Roque's whereabouts, and his presence at the premises. The NBI personnel were followed, thirty minutes later, by two personnel of the Office of the Sergeant at Arms of the House of Representatives to serve the September 12, 2024 subpoena.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>In a Resolution<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> October 1, 2024, this Court denied Atty. Roque's prayer for a writ of <i>amparo</i> and directed The House Of Representatives Quad Committee, consisting of the Committee On Dangerous Drugs chaired by Representative Robert Ace Barbers; Committee On Human Rights chaired by Representative Bienvenido Abante, Jr.; Committee On Public Accounts chaired by Representative Joseph Stephen Paduano; And Committee On Public Order and Safety chaired by Representative Dan Fernandez; and Napoleon C. Taas (collectively, respondents) to comment on the certiorari and prohibition aspect of the Omnibus Petition.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Respondents filed their Comment<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> on January 15, 2025, to which Atty. Roque replied on March 10, 2025.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>On June 9, 2025, the Quad Committee lifted the contempt order against Atty. Roque.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> On June 10, 2025, the Quad Committee submitted its final report, Committee Report No. 1501.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The said report included several bills addressing the factual findings made during the hearings, namely: 1) defining and penalizing the crime of extrajudicial killing; 2) banning POGOs; 3) providing for the forfeiture in favor of the state of real properties unlawfully acquired by foreign nationals; 4) allowing and regulating the administrative cancellation of birth certificates fraudulently obtained by foreign nationals; and 5) defining and penalizing the crimes of conspiracy and proposal to commit espionage and misprision of espionage.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br><i>Arguments of the Parties</i><br><br>Atty. Roque justifies direct resort to Us by transcendental importance, claiming that this Court is the best arbiter of the delimitation of the investigatory and contempt powers of the House of Representatives and its committees.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Atty. Roque also claims that this Court â<blockquote><i>is the immediately better institution to adjudicate the questions raised because the assailed acts were, and are, being committed by the House of Representatives... [and] [t]rial court judges might hesitate to rule authoritatively and decisively in a case that would require reviewing the acts of Congress. Besides, there is a high probability that any ruling by a lower court will eventually be elevated to the Supreme Court for review.</i><sup style="COLOR: RGB(255, 0, 0);">[31]</sup></blockquote>On the merits, Atty. Roque argues that he cannot be compelled to attend the Quad Committee hearings, because the right against self-incrimination applies to administrative and legislative inquiries when the witness or resource person is placed in the position of an accused on trial. The Quad Committee investigation is essentially a publicized prosecutorial inquiry into the alleged illegal activities committed by POGO operators, and not an aid to legislation. Atty. Roque accuses the Quad Committee of reeling him into its "publicity trial", using an unofficial transcript of his questioning by Representative Gerville Luistro (Rep. Luistro) as basis.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Atty. Roque claims that the line of questioning by Rep. Luistro and the other members of the Quad Committee insinuated that he used dummies to conceal his business interests, failed to file required financial statements, and withheld information from his Statements of Assets, Liabilities, and Net Worth (SALN), thus effectively usurping the investigatory and adjudicatory powers of the executive and judicial branches.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Accordingly, handing over the documents required by Quad Committee would amount to self-incrimination. Worse, the Quad Committee continued to abusively wield the legislative power of inquiry against Atty. Roque even after another resource person named Katherine Cassandra Ong (Ong) categorically stated that Atty. Roque had no connection with the offshore gaming operations of the companies Lucky South 99 and Whirlwind.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Atty. Roque argues that the Quad Committee investigation violates Article VI, Section 26 of the Constitution, as it lacks a legislative purpose and violates the rights of the resource persons involved. The subpoena <i>duces tecum</i> issued against him violates not only his right against self-incrimination but also his right to privacy. Atty. Roque claims that the documents sought from him by the Quad Committee are all personal matters which have nothing to do with the alleged illegal activities of POGOs; and are just being elicited for the purpose of further incriminating and implicating him in such illegal activities.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Respondents ask Us to dismiss the petition outright for violating the hierarchy of courts, because transcendental importance is no longer enough to justify direct resort to the Supreme Court, when the case involves factual questions which must be resolved at the trial or appellate levels. Atty. Roque's petition raises questions of fact, such as the relevance to the legislative inquiry of the questions propounded to him, and the contemptibility of his acts.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> At any rate, the petition does not raise any question of transcendental importance. It involves neither public property nor a clear disregard of a constitutional or statutory prohibition. Furthermore, Atty. Roque is not the first or only person to be subjected to a congressional inquiry.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>On the merits, respondents argue that the August 22, 2024 hearing was not tainted with grave abuse of discretion. The questions and documents asked of Atty. Roque by the committee members are material and relevant to the matter of illegal POGO-associated activities and Atty. Roque's involvement therein.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> While the Agenda does not mention the specific bills subject of the hearing, the legislative thrust thereof is still apparent from the specific matters mentioned in the Agenda, such as the alleged increase in enrolment of Chinese students in schools in Cagayan, the regulation of special retiree and investor visas, and the proliferation of false birth certificates, which are all connected to the illegal POGO-associated activities that were discussed in the hearing.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> In any case, the questions asked of Atty. Roque by Rep. Luistro and the other members of the committee are pertinent to the matter of whether incumbent public officials like Atty. Roque played a role in the proliferation of illegal POGO-associated activities, which is turn relevant to several aspects of legislation such as anti-corruption, money laundering, and the regulation of gambling.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Atty. Roque's constitutional rights were not infringed during the August 22, 2024 hearing. First, Atty. Roque cannot use the right against self-incrimination to justify his non-appearance in the Quad Committee hearings. The right against self-incrimination is generally inapplicable to legislative hearings, and may only be invoked when an incriminating question is asked.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Second, the subpoena <i>duces tecum</i> issued by the Quad Committee does not violate Atty. Roque's right to privacy, as he does not have a reasonable expectation of privacy in his financial transactions during his tenure as a government official. Financial transparency is a major plank of the law on public officers, which specifically requires government employees to regularly submit SALN, and correspondingly gives the public a right to know about the assets, liabilities, and business interests of government officials. At any rate, Atty. Roque himself volunteered to submit some documents mentioned in the subpoena <i>duces tecum</i>.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br><center><b>Ruling</b></center><br>The petition has been rendered moot and academic by the lifting of the contempt order and the adjournment of the 19<sup>th</sup> Congress.<br><br>In <i>Balag v. Senate</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> the Court dismissed Arvin R. Balag's petition for <i>certiorari</i> against the contempt and detention orders issued against him by the Senate, because he had already been released from detention and the pertinent legislative inquiry was already terminated.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Nevertheless, the Court took the opportunity to rule that the period of detention under the legislative contempt power is temporally limited to the duration of the legislative inquiry under which the power is invoked, or of the Congress which invoked said power:<blockquote><b>The Court finds that the period of imprisonment under the inherent power of contempt by the Senate during inquiries in aid of legislation should only last until the termination of the legislative inquiry under which the said power is invoked.</b> In <i>Arnault</i>, it was stated that obedience to its process may be enforced by the Senate Committee if the subject of investigation before it was within the range of legitimate legislative inquiry and the proposed testimony called relates to that subject. Accordingly, as long as there is a legitimate legislative inquiry, then the inherent power of contempt by the Senate may be properly exercised. Conversely, once the said legislative inquiry concludes, the exercise of the inherent power of contempt ceases and there is no more genuine necessity to penalize the detained witness.<br><br>Further, the Court rules that the legislative inquiry of the Senate terminates on two instances:<br><br><i>First</i>, upon the approval or disapproval of the Committee Report...<br><br>. . . .<br><br>Evidently, the Committee Report is the culmination of the legislative inquiry. Its approval or disapproval signifies the end of such legislative inquiry and it is now up to the Senate whether or not to act upon the said Committee Report in the succeeding order of business. At that point, the power of contempt simultaneously ceases and the detained witness should be released. As the legislative inquiry ends, the basis for the detention of the recalcitrant witness likewise ends.<br><br><i>Second</i>, the legislative inquiry of the Senate also terminates upon the expiration of one (1) Congress. As stated in <i>Neri</i>, all pending matters and proceedings, such as unpassed bills and even legislative investigations, of the Senate are considered terminated upon the expiration of that Congress and it is merely optional on the Senate of the succeeding Congress to take up such unfinished matters, not in the same status, but as if presented for the first time. Again, while the Senate is a continuing institution, its proceedings are terminated upon the expiration of that Congress at the final adjournment of its last session. Hence, as the legislative inquiry ends upon that expiration, the imprisonment of the detained witnesses likewise ends.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup></blockquote>Sections 15 and 16 of the Rules of Procedure Governing Inquiries in Aid of Legislation in the House of Representatives states:<blockquote>Section 15. <i>Termination of Inquiry</i>. â The committee shall terminate an inquiry, and submit a report thereon within sixty (60) calendar days from the date of commencement unless the committee, by a majority vote of members present, there being a quorum, deems it necessary to extend such inquiry. The inquiry commences on the date of referral of the privilege speech, resolution or petition or information to the concerned committee.<br><br>Section 16. <i>Report of Committee</i>. â The report shall contain the findings of the committee on the subject matter of the inquiry, the grounds on which its findings are based and its recommendations, if any. The report shall be approved by a majority vote of the Members present, there being a quorum. Members who vote against the approval of the report and who do not sign the majority report may make concurring or dissenting opinions. The report, together with any concurring and dissenting opinion, shall be filed with the Secretary General who shall include the same in the Order of Business within three (3) days from receipt thereof[.]</blockquote>As explained in <i>Balag</i>, the submission of the committee report is concomitant to the committee's duty to terminate the inquiry. When the committee submits its final report, the inquiry ends, and any contempt order issued in such inquiry ceases to have any purpose or effect. Here, not only did the Quad Committee lift the contempt order against Atty. Roque on June 9, 2025,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> it also submitted its final committee report on June 10, 2025. The 19<sup>th</sup> Congress then adjourned sine die on June 11, 2025.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> "<i>A case is considered moot and academic when a determination is sought on a matter which, when rendered, cannot have any practical effect on the existing controversy, or where no practical relief can be granted.</i>"<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> "<i>That a court will not sit for the purpose of trying moot cases and spend its time in deciding questions the resolution of which can not in any way affect the rights of the person or persons presenting them is well settled.</i>"<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> With the lifting of the contempt order, the cessation of the Quad Committee's inquiry, and the expiration of the 19<sup>th</sup> Congress, this Court no longer grant any practical relief to Atty. Roque.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> The petition must perforce be dismissed.<br><br><b>ACCORDINGLY</b>, the present Petition for <i>Certiorari</i> and Prohibition is <b>DISMISSED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, Rosario, Dimaampao, Marquez, Singh</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>J. Lopez</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on official leave.<br><i>Kho, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.</i>, on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On official Business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Privilege Speech of Representative Aurelio "Dong" Gonzales, Jr. delivered in plenary on August 5, 2024 on extrajudicial killings, illegal drugs, and illegal activities; House Resolution No. 1346 on the PHP 3.6 billion worth of "<i>shabu</i>" Municipality of Mexico, Pampanga, and PHP 1.3 billion worth of <i>shabu</i> discovered in the City of Mabalacat, Pampanga; House Resolution No. 1351 on the PHP 3.8 Billion worth of "<i>shabu</i>" intercepted at the port of Subic Bay, Subic Bay Freeport Zone; House Resolution No. 14 on the cases of slain victims of the war on drugs and all related activities; House Resolution No. 1847 on the alleged drug-related extrajudicial killings under the bloody war on drugs of the Duterte Administration; Privilege Speech of Representative France Castro delivered on November 8, 2023 on the alleged extrajudicial killings during the Duterte Administration; <i>Motu Proprio</i> Inquiry on the alleged irregularities in the procurement process and unlawful contracts entered into by the Municipality of Mexico, Pampanga, in violation of relevant auditing, procurement, and other laws; <i>Motu Proprio</i> regarding proliferation of criminal activities and unlawful acts linked to the Philippine Offshore Gaming Operators; House Resolution No. 1629 on the spurious schemes employed by foreign nationals in the various parts of the country and the consequent risks to the country's national security and economy; House Resolution No. 1666 on the surge of alleged Chinese students enrolling in the various higher educational institutions in Cagayan province, particularly in the city of Tuguegarao; House Resolution No. 1703 on the entry and influx of a big number of Chinese nationals in our country who are now enrolled and studying in a school in Cagayan province; House Resolution No. 1771 on the processes of issuance of special resident retiree's visas (SRR V) and special investor's resident visa (SIRV), and the delayed registration of births as possible avenues enabling the influx of Chinese nationals in the Philippines; House Resolution No. 1802 on the proliferation of allegedly falsified certificates of live births and passports issued to foreign nationals; House Resolution No. 1810 on the proliferation of fake birth certificates; Privilege Speech of Representative Bienvenido M. Abante, Jr. delivered on April 30, 2024, on restoring honesty and integrity of the Bureau of Immigration in relation to national security and the protection of institutions from alien infiltration; Privilege Speech of Representative Faustino "Inno" Dy V delivered on March 5, 2024 regarding foreign nationals in Isabela obtaining loans from banks. Agenda of Third Joint Public Hearing, Committees on Dangerous Drugs, Public Order and Safety, Human Rights, and Public Accounts attached to Notice of Joint Committee Meeting dated August 28, 2024 and September 12, 2024 Contempt Order. (<i>Rollo</i>, vol. 1, pp. 84-86, 107).<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> House of Representatives, <i>Quad Committee Kicks Off Probe Into Links Of POGOs To Drug Trade, EJKs</i>, August 13, 2024, <i>available at</i> <a href="https://congress.gov.ph/media/view/?content=5403&amp;title=QUAD-i-COMMITTEE+KICKS+OFF+PROBE">https://congress.gov.ph/media/view/?content=5403&amp;title=QUAD-i-COMMITTEE+KICKS+OFF+PROBE</a>; <i>archive link at</i> <u><a href="https://web.archive.org/web/20240928080850/">https://web.archive.org/web/20240928080850/</a><a href="https://congress.gov.ph/media/view/?content=5403&amp;title=QUAD-i-COMMITTEE+KICKS+OFF+PROBE">https://congress.gov.ph/media/view/?content=5403&amp;title=QUAD-i-COMMITTEE+KICKS+OFF+PROBE</a></u> (last accessed on September 28, 2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i>, vol. 1, p. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 36-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 116-131.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 7-8, 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 8, 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 87-93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 94.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 95-105.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 106.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 107-108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 109-110.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 113-114.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 114.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 74-75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 207-223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 221-221.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, vol. 2, pp. 498-583.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Rollo</i>, vol. 6, pp. 2496-2524.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Gabriel Pabico Lalu, Contempt orders lifted as House quad comm ends, but solons vow justice, PHIL. DAILY INQUIRER, June 10, 2025, available at <a href="https://newsinfo.inquirer.net/2069145/contempt-orders-lifted-as-house-quad-comm-ends-but-solons-vow-justice">https://newsinfo.inquirer.net/2069145/contempt-orders-lifted-as-house-quad-comm-ends-but-solons-vow-justice</a>, <i>archive link at</i> <a href="https://archive.is/d99pG">https://archive.is/d99pG</a> (last accessed on November 26, 2025); Dominique Nicole Flores, House Quad Comm lifts contempt orders vs Harry Roque, wife, PHILSTAR.COM, June 10, 2025, available at <a href="https://www.philstar.com/headlines/2025/06/10/2449374/house-quad-comm-lifts-contempt-orders-vs-harry-roque-wife">https://www.philstar.com/headlines/2025/06/10/2449374/house-quad-comm-lifts-contempt-orders-vs-harry-roque-wife</a>, <i>archive link at</i> <a href="https://archive.md/GXTcw">https://archive.md/GXTcw</a> (last accessed on November 26, 2025); Ellson Quismorio, Harry Roque, wife, 2 others' contempt and detention orders lifted in final quad-comm hearing, MANILA BULLETIN, June 9, 2025, available at <a href="https://mb.com.ph/2025/06/09/harry-roque-wife-2-others-contempt-and-detention-orders-lifted-in-final-quad-comm-hearing">https://mb.com.ph/2025/06/09/harry-roque-wife-2-others-contempt-and-detention-orders-lifted-in-final-quad-comm-hearing</a> (last accessed on November 26, 2025). <i>See also</i> House of Representatives, FIFTEENTH PUBLIC HEARING OF THE HOUSE QUAD-COMMITTEE - Part 2 (JUNE 09, 2025) (livestream recording), available at <a href="https://youtu.be/8UKsdZoJzlY?t=2527">https://youtu.be/8UKsdZoJzlY?t=2527</a> (last accessed on November 26, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> House of Representatives Committee Report No. 1501 (2025), 19th Congress, 3rd Session, Joint Committee comprised of the Committees on Dangerous Drugs, Public Order and Safety, Human Rights, and Public Accounts, <i>available at</i> <a href="https://docs.congress.hrep.online/legisdocs/first_19/CR01501.pdf">https://docs.congress.hrep.online/legisdocs/first_19/CR01501.pdf</a>, <i>archive link at</i> <u><a href="https://web.archive.org/web/20251126064321/">https://web.archive.org/web/20251126064321/</a><a href="https://docs.congress.hrep.online/legisdocs/first_19/CR01501.pdf">https://docs.congress.hrep.online/legisdocs/first_19/CR01501.pdf</a></u> (last accessed on November 26. 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> Attachments after p. 66 of the Report.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, vol. 1, pp. 14-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 23-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 33-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 45-49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 56-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 536-537.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 538-539.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 544-545.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 545-549.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 550-553.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 556-564.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 564-572.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 835 Phil. 451 (2018) [Per J. Gesmundo, <i>En Banc</i>].&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 461-462.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 471-473.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Roque himself acknowledged the lifting of the contempt order in a social media post. Harry Roque, Statement of Atty. Harry Roque On the lifting of the contempt order, June 10, 2025, <i>available at</i> <a href="https://www.facebook.com/HarryRoque/posts/%F0%9D%97%A6%F0%9D%98%81%F0%9D%97%AE%F0%9D%98%81%F0%9D%97%B2%F0%9D%97%BA%F0%9D%97%B2%F0%9D%97%BB%F0%9D%98%81-%F0%9D%97%BC%F0%9D%97%B3-%F0%9D%97%94%F0%9D%98%81%F0%9D%98%81-%F0%9D%98%86-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%BF%F0%9D%98%86-%F0%9D%97%A5%F0%9D%97%BC%F0%9D%97%BE%F0%9D%98%82%F0%9D%97%B2-%F0%9D%97%A2%F0%9D%97%BB-%F0%9D%98%81%F0%9D%97%85%F0%9D%97%B2-%F0%9D%97%B9%F0%9D%97%B6%F0%9D%97%B3%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BB%F0%9D%97%B4-%F0%9D%97%BC%F0%9D%97%B3-%F0%9D%98%81%F0%9D%97%B5%F0%9D%97%B2-%F0%9D%97%B0%F0%9D%97%BC%F0%9D%97%BB%F0%9D%98%81%F0%9D%97%B2%F0%9D%97%BA%F0%9D%97%BD%F0%9D%98%81-%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%B1%F0%9D%97%B2%F0%9D%97%BFthe-lifting-of/1304615377687328/">https://www.facebook.com/HarryRoque/posts/%F0%9D%97%A6%F0%9D%98%81%F0%9D%97%AE%F0%9D%98%81%F0%9D%97%B2%F0%9D%97%BA%F0%9D%97%B2%F0%9D%97%BB%F0%9D%98%81-%F0%9D%97%BC%F0%9D%97%B3-%F0%9D%97%94%F0%9D%98%81%F0%9D%98%81-%F0%9D%98%86-%F0%9D%97%9B%F0%9D%97%AE%F0%9D%97%BF%F0%9D%97%BF%F0%9D%98%86-%F0%9D%97%A5%F0%9D%97%BC%F0%9D%97%BE%F0%9D%98%82%F0%9D%97%B2-%F0%9D%97%A2%F0%9D%97%BB-%F0%9D%98%81%F0%9D%97%85%F0%9D%97%B2-%F0%9D%97%B9%F0%9D%97%B6%F0%9D%97%B3%F0%9D%98%81%F0%9D%97%B6%F0%9D%97%BB%F0%9D%97%B4-%F0%9D%97%BC%F0%9D%97%B3-%F0%9D%98%81%F0%9D%97%B5%F0%9D%97%B2-%F0%9D%97%B0%F0%9D%97%BC%F0%9D%97%BB%F0%9D%98%81%F0%9D%97%B2%F0%9D%97%BA%F0%9D%97%BD%F0%9D%98%81-%F0%9D%97%BC%F0%9D%97%BF%F0%9D%97%B1%F0%9D%97%B2%F0%9D%97%BFthe-lifting-of/1304615377687328/</a>, <i>archive link at</i><a href="https://archive.md/ooKMN"> https://archive.md/ooKMN</a> (last accessed on November 27, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Journal (No. 39), House of Representatives, 19<sup>th</sup> Congress, 3<sup>rd</sup> Session (June 9-11, 2025), p. 113, <i>available at</i>&nbsp;<a href="https://docs.congress.hrep.online/legisdocs/journals_19/Journal-01588-20250609.pdf">https://docs.congress.hrep.online/legisdocs/journals_19/Journal-01588-20250609.pdf</a>, <i>archive&nbsp; link at</i>&nbsp;<u><a href="https://web.archive.org/save/">https://web.archive.org/save/</a><a href="https://docs.congress.hrep.online/legisdocs/journals_19/Journal-01588-20250609.pdf">https://docs.congress.hrep.online/legisdocs/journals_19/Journal-01588-20250609.pdf</a></u> (last accessed on November 27, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Heirs of Eugenia V. Roxas, Inc. v. IAC</b>, 255 Phil. 558, 574 (1989) [Per J. Cortes, Third Division], citing <b>Meralco Workers Union v. Yatco</b>, 125 Phil. 590, 594 (1967) [Per J. Makalintal, <i>En Banc</i>] and <b>Bongat v. Bureau of Labor Relations</b>, 220 Phil. 604, 608 (1985) [Per J. Cuevas, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Beech v. Crossfield</b>, 12 Phil. 555 (1909) [Per J. Willard, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>See Rollo</i>, vol. 1, pp. 66-67.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

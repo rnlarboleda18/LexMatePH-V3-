@@ -71,10 +71,11 @@ DB_URL = (
     or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
 )
 MODEL_NAME = get_linker_model_name()
-client = get_linker_genai_client()
+# client is initialised lazily in run() once --vertex-project is known.
+client = None
 db_pool: ThreadedConnectionPool = None  # type: ignore
 
-# Full registry (use ``--statutes`` to enable CIV/LAB/CONST/FAM). Default run = RPC + RCC only.
+# Full registry of supported codals. Default run = all 7.
 FULL_CODE_CONFIGS: dict = {
     "CIV": {
         "table": "civ_codal",
@@ -116,7 +117,7 @@ FULL_CODE_CONFIGS: dict = {
     },
 }
 
-DEFAULT_LINKER_STATUTES: tuple = ("RPC", "RCC")
+DEFAULT_LINKER_STATUTES: tuple = ("CIV", "LAB", "CONST", "FAM", "RPC", "ROC", "RCC")
 
 # Active set — reassigned at the start of each ``run()`` (default: RPC, RCC).
 CODE_CONFIGS: dict = {
@@ -296,6 +297,32 @@ def _canonical_provision_key(code_id: str, article_index: dict, art_clean: str) 
 
 
 # ---------------------------------------------------------------------------
+# Retry helper — handles 429 RESOURCE_EXHAUSTED from both AI Studio and Vertex
+# ---------------------------------------------------------------------------
+
+def _genai_generate_with_retry(prompt: str, max_retries: int = 5) -> str:
+    """Call client.models.generate_content with exponential backoff on 429."""
+    delay = 10
+    for attempt in range(max_retries):
+        try:
+            response = client.models.generate_content(
+                model=MODEL_NAME,
+                contents=prompt,
+                config=genai.types.GenerateContentConfig(response_mime_type="application/json"),
+            )
+            return response.text
+        except Exception as exc:
+            msg = str(exc)
+            is_rate_limit = "429" in msg or "RESOURCE_EXHAUSTED" in msg
+            if is_rate_limit and attempt < max_retries - 1:
+                print(f"    [RATE] 429 — waiting {delay}s before retry {attempt + 2}/{max_retries}…", flush=True)
+                time.sleep(delay)
+                delay = min(delay * 2, 120)
+                continue
+            raise
+
+
+# ---------------------------------------------------------------------------
 # PASS 1 – Router pass: which code + provision numbers does this case touch?
 # ---------------------------------------------------------------------------
 
@@ -350,12 +377,8 @@ OUTPUT FORMAT (JSON only):
 
     try:
         time.sleep(0.5)
-        response = client.models.generate_content(
-            model=MODEL_NAME,
-            contents=prompt,
-            config=genai.types.GenerateContentConfig(response_mime_type="application/json"),
-        )
-        data = json.loads(response.text)
+        text = _genai_generate_with_retry(prompt)
+        data = json.loads(text)
         return data.get("hits", []) if isinstance(data, dict) else []
     except Exception as exc:
         print(f"    [WARN] PASS-1 error: {exc}", flush=True)
@@ -448,12 +471,8 @@ OUTPUT (JSON only):
 
     try:
         time.sleep(0.5)
-        response = client.models.generate_content(
-            model=MODEL_NAME,
-            contents=prompt,
-            config=genai.types.GenerateContentConfig(response_mime_type="application/json"),
-        )
-        data = json.loads(response.text)
+        text = _genai_generate_with_retry(prompt)
+        data = json.loads(text)
         return data.get("links", []) if isinstance(data, dict) else []
     except Exception as exc:
         print(f"    [WARN] PASS-2 error: {exc}", flush=True)
@@ -576,12 +595,31 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
 # Orchestrator
 # ---------------------------------------------------------------------------
 
-def run(limit=None, start_year=None, end_year=None, workers=1, dry_run=True, statutes=None, target_ids=None):
+def run(
+    limit=None,
+    start_year=None,
+    end_year=None,
+    workers=1,
+    dry_run=True,
+    statutes=None,
+    target_ids=None,
+    vertex_project: str | None = None,
+    vertex_location: str | None = None,
+):
+    global client
+    client = get_linker_genai_client(
+        vertex_project=vertex_project,
+        vertex_location=vertex_location,
+    )
+    from linker_genai_client import _vertex_project as _vp
+    mode_str = f"Vertex AI (project={_vp})" if _vp else "AI Studio (API key)"
+
     print("\n" + "=" * 70)
     print(f"  Unified 2-Pass RAG Linker   Mode: {'DRY RUN' if dry_run else 'COMMIT'}")
     if dry_run:
         print("  (Dry run: no writes to codal_case_links or codal body tables.)")
-    print(f"  Vertex model: {MODEL_NAME}")
+    print(f"  GenAI backend: {mode_str}")
+    print(f"  Model: {MODEL_NAME}")
 
     global CODE_CONFIGS
     if statutes:
@@ -773,6 +811,20 @@ if __name__ == "__main__":
             "Intended for pipeline use after a fresh digest run."
         ),
     )
+    parser.add_argument(
+        "--vertex-project",
+        type=str,
+        dest="vertex_project",
+        default=None,
+        help="Google Cloud project ID for Vertex AI. If omitted, AI Studio API key is used.",
+    )
+    parser.add_argument(
+        "--vertex-location",
+        type=str,
+        dest="vertex_location",
+        default="us-central1",
+        help="Vertex AI region (default: us-central1). Only used when --vertex-project is set.",
+    )
     args = parser.parse_args()
 
     try:
@@ -806,6 +858,8 @@ if __name__ == "__main__":
             dry_run=not args.commit,
             statutes=statutes,
             target_ids=target_ids,
+            vertex_project=args.vertex_project,
+            vertex_location=args.vertex_location,
         )
     except KeyboardInterrupt:
         print("\n[stopped] Interrupted.")

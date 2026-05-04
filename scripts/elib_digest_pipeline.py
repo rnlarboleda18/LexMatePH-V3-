@@ -435,6 +435,9 @@ def fetch_showdocs_html(session: requests.Session, doc_id: int) -> tuple[str | N
     if r.status_code != 200:
         return None, "http_error"
 
+    # eLib serves text/html without charset; requests defaults to ISO-8859-1,
+    # which produces mojibake for UTF-8 content. Force UTF-8 decoding.
+    r.encoding = "utf-8"
     text = r.text
     if is_elib_error_page(text):
         return None, "error_page"

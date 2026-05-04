@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 232323 - JESSICA LUCILA G. REYES, PETITIONER, VS. THE HONORABLE SANDIGANBAYAN THIRD DIVISION AND THE PEOPLE OF THE PHILIPPINES, RESPONDENTS.[G.R. No. 243411]JESSICA LUCILA G. REYES, PETITIONER, VS. THE HONORABLE SANDIGANBAYAN THIRD DIVISION AND THE PEOPLE OF THE PHILIPPINES, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70266' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 232323, February 04, 2025 ]</H2>
+			<H3>JESSICA LUCILA G. REYES, PETITIONER, VS. THE HONORABLE SANDIGANBAYAN THIRD DIVISION AND THE PEOPLE OF THE PHILIPPINES, RESPONDENTS.<br><br>[G.R. No. 243411]<br><br>JESSICA LUCILA G. REYES, PETITIONER, VS. THE HONORABLE SANDIGANBAYAN THIRD DIVISION AND THE PEOPLE OF THE PHILIPPINES, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, M., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">A judgment of acquittal is final, unappealable, and immediately executory upon its promulgation. The fundamental philosophy highlighting the finality of an acquittal cuts deep into the humanity of the laws and in a jealous watchfulness over the rights of the citizen, when brought in unequal contest with the State.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> We observe this dictum in these consolidated Petition for <i>Certiorari</i> under Rule 65 of the Rules of Court and Motion for Reconsideration assailing the Sandiganbayan's Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated January 3, 2017 in SB-14-CRM-0238 and this Court's August 19, 2020 Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> in G.R. No. 243411, respectively.<br><br><center><b>ANTECEDENTS</b></center><br>On June 5, 2014, the Office of the Ombudsman filed an Information for Plunder under Republic Act No. 7080 against Juan Valentin Furaganan Ponce Enrile (Enrile), Jessica Lucila G. Reyes (Reyes), Janet Lim Napoles (Napoles), Ronald John Lim, and John Raymund de Asis before the Sandiganbayan docketed as SB-14-CRM-0238:<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><blockquote>In 2004 to 2010 or thereabout in the Philippines, and within this Honorable Court's jurisdiction, above-named accused JUAN PONCE ENRILE, then a Philippine Senator, <b>JESSICA LUCILA G. REYES, then Chief of Staff of Senator Enrile's Office, both public officers</b>, committing the offense in relation to their respective offices, <b>conspiring with one another</b> and with JANET LIM NAPOLES, RONALD JOHN LIM, and JOHN RAYMUND DE ASIS, did then and there <b>willfully, unlawfully, and criminally amass, accumulate, and/or acquire ill-gotten wealth amounting to at least ONE HUNDRED SEVENTY[-]TWO MILLION EIGHT HUNDRED THIRTY[-]FOUR THOUSAND FIVE HUNDRED PESOS ([PHP] 172,834,500.00) through a combination or series of overt criminal acts</b>, as follows:<br><br>(a) <b>by repeatedly receiving</b> from NAPOLES and/or her representatives LIM, DE ASIS, and others, <b>kickbacks or commissions</b> under the following circumstances: before, during and/or after the project identification, NAPOLES gave, and ENRILE and/or REYES received, <b>a percentage of the cost of a project to be funded from ENRILE'S Priority Development Assistance Fund (PDAF), in consideration of ENRILE'S endorsement, directly or through REYES, to the appropriate government agencies, of NAPOLES' non-government organizations which became the recipients and/or target implementers of ENRILE'S PDAF projects, which duly-funded projects turned out to be ghosts or fictitious</b>, thus enabling NAPOLES to misappropriate the PDAF proceeds for her personal gain;<br><br>(b) <b>by taking undue advantage, on. several occasions, of their official positions, authority, relationships, connections, and influence to unjustly enrich themselves</b> at the expense and to the damage and prejudice, of the Filipino people and the Republic of the Philippines.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> (Emphasis supplied)</blockquote>Enrile moved for bill of particulars on the grounds of ambiguity and insufficiency of the Information. On July 11, 2014, the Sandiganbayan denied the motion explaining that the details sought are substantial reiterations of his previous arguments to dismiss the Information and are evidentiary in nature that are best ventilated during trial. Aggrieved, Enrile filed a Petition for <i>Certiorari</i> before this Court docketed as G.R. No. 213455 ascribing grave abuse of discretion on the part of the Sandiganbayan. On August 11, 2015, the Court <i>En Banc</i> partly granted the petition and ordered the prosecution to submit a bill of particulars containing material and necessary facts, to wit: (1) the particular overt act/s alleged to constitute the combination or series of overt criminal acts charged in the Information; (2) a breakdown of the amounts of the kickbacks or commissions allegedly received, stating how the amount of PHP 172,834,500.00 was arrived at; (3) a brief description of the identified projects where kickbacks or commissions were received; (4) the approximate dates of receipt, in 2004 to 2010 or thereabout, of the alleged kickbacks and commissions from the identified projects. At the very least, the prosecution should state the year when the kickbacks and transactions from the identified projects were received; (5) the name of Napoles' non-government organizations (NGOs), which were the alleged recipients and/or target implementors of Enrile's Priority Development Assistance Fund (PDAF) projects; and (6) the government agencies to whom Enrile allegedly endorsed Napoles's NGOs. The particular person/s in each government agency who facilitated the transactions need not be named as a particular. Accordingly, the prosecution complied and submitted the required bill of particulars.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>On the other hand, Reyes filed a motion to quash due to the grossly insufficient Information and Bill of Particulars. Reyes invoked the ruling in <i>Macapagal-Arroyo v. People</i><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> and claimed that the prosecution failed to specify the main plunderer or to identify the person who committed the overt criminal acts. Reyes posited that the words "<i>or</i>", "<i>and/or</i>", and "<i>repeatedly</i>" are confusing in charging several accused of the predicate crimes for Plunder. Reyes argued that the admissions of the prosecution during Napoles bail hearing show that the facts charged do not constitute an offense.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Meantime, Reyes applied for bail <i>ad cautelam</i>.<br><br>On January 3, 2017, the Sandiganbayan disallowed the motion to quash and ruled that the Information contains factual averments which, if hypothetically admitted, validly alleged the essential elements of Plunder.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Reyes sought reconsideration but was denied. Reyes men filed a Petition for <i>Certiorari</i> before this Court docketed as G.R. No. 232123 ascribing grave abuse of discretion on the part of the Sandiganbayan in turning down the motion to quash Information. On June 28, 2018, the Sandiganbayan disapproved the application for bail <i>ad cautelam</i> and declared that the prosecution presented strong evidence of guilt.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Unsuccessful at a reconsideration, Reyes filed a Petition for <i>Certiorari</i> before this Court docketed as G.R. No. 243411. On August 19, 2020, the Court upheld the Sandiganbayan's findings that there is strong evidence that Reyes conspired with her co-accused and that she committed the acts of Plunder for which she was charged. Dissatisfied, Reyes moved for a reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On January 13, 2021, Reyes filed a Petition for <i>Habeas Corpus</i> before this Court docketed as G.R. No. 254838 and contended that she had been incarcerated for almost nine years due to vexatious, capricious, and oppressive delays in trial. In a Resolution dated January 17, 2023, the Court granted the petition and ratiocinated that Reyes' confinement, though pursuant to a court order, violated her constitutional right to speedy trial and infringed upon her right to liberty.<br><br>On January 19, 2023, Reyes was released from detention without prejudice to the resolution of pending criminal cases filed against her and subject to the conditions that she shall: (1) personally attend the hearings of the criminal cases filed against her before the Sandiganbayan; (2) submit a quarterly periodic report to the Clerk of Court of the Sandiganbayan of her whereabouts; (3) secure a travel authority from the Sandiganbayan in cases of foreign travel on her part, and to physically present herself to the Sandiganbayan and submit a report of her return within five days of her arrival in the country; and (4) submit to this Court, through the Office of the Clerk of Court. A quarterly report of her compliance with the foregoing conditions. Moreover, the release shall be without prejudice to Reyes' re-arrest and detention should she fail to comply with any of the conditions.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>On October 4, 2024, the Sandiganbayan acquitted Enrile, Reyes, and Napoles in SB-14-CRM-0238 on the grounds that the threshold amount for plunder was not established and that direct bribery was not proven beyond reasonable doubt:<blockquote>WHEREFORE, in light of all the foregoing, the Court resolved to:<br><br>(1) GRANT the Demurrer to Evidence of accused Juan Ponce Enrile;<br><br>(2) GRANT the Demurrer (Without Leave of Court) of accused Janet Luy Lim Napoles;<br><br>(3) ACQUIT accused Juan Ponce Enrile, Jessica Lucila Gozales Reyes and Janet Lim Napoles of the crime of plunder under Republic Act No. 7080, as amended, for the prosecution's failure to prove their guilt beyond reasonable doubt;<br><br>. . . .<br><br>Consequently, the Hold Departure Order issued against Enrile, Reyes and Napoles in the present case are LIFTED and SET ASIDE.<br>&nbsp;<br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup>&nbsp;</blockquote><center><b>RULING<br><br></b></center>It is the policy of the courts to consolidate cases involving similar parties and affecting closely related subject matters. The purpose of this rule is to settle the issues expeditiously and to avoid multiplicity of suits and the possibility of conflicting decisions.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Here, the Petition for <i>Certiorari</i> in G.R. No. 232323 and the Motion for Reconsideration in G.R. No. 243411 involve similar parties and common questions of law and fact. Hence, it is imperative upon this Court to consolidate these two cases which are dependent on each other. Undeniably, the ruling in G.R. No. 232323 substantially affects the outcome in G.R. No. 243411. Specifically, in G.R. No. 232323, Reyes ascribed grave abuse of discretion against the Sandiganbayan in denying the motion to quash Information on the ground that it does not charge any offense. Corollarily, if the motion to quash is granted and the case is dismissed and Reyes is ordered released, the resolution of the question on the propriety of the application for bail in G.R. No. 243411 may become futile.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> In this case, however, both the Petition for <i>Certiorari</i> and the motion for reconsideration must be dismissed for being moot and academic.<br><br>A case becomes moot and academic when it ceases to present a justiciable controversy by virtue of supervening events, so that a declaration thereon would be of no practical use or value.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> In such circumstance, courts of justice generally decline jurisdiction and no longer consider questions in which no actual interests are involved.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Nonetheless, courts will decide cases, otherwise moot and academic if: <i>first</i>, there is a grave violation of the Constitution; <i>second</i>, the exceptional character of the situation and the paramount public interest is involved; <i>third</i>, when the constitutional issue raised requires formulation of controlling principles to guide the bench, the bar, and the public; and <i>fourth</i>, the case is capable of repetition yet evading review.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The present case does not fall under any of these exceptions.<br><br>Notably, the acquittal of Reyes in SB-14-CRM-0238 has now removed any actual controversy between the parties<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> and rendered the resolution of the instant petition for <i>certiorari</i> in G.R. No. 232323 and Motion for Reconsideration in G.R. No. 243411 superfluous and unnecessary.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> The prayers of Reyes to quash the Information and/or be granted discretionary bail can no longer be enforced. These reliefs will serve no useful purpose because the judgment of acquittal terminated the criminal proceedings. Thus, no compelling reasons exist for the Court to finally settle the questions raised in the Petition for <i>Certiorari</i> and motion for reconsideration. Indeed, the judgment of acquittal is deemed final and executory.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> It is axiomatic that on the basis of humanity, fairness and justice, an acquitted accused is entitled to the right of repose as a direct consequence of the finality of acquittal.<br><br>More importantly, double jeopardy has set in. The Constitution is explicit that no person shall be twice put in jeopardy of punishment for the same offense.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> There is double jeopardy when the following elements concur: (1) the accused is charged under a complaint or information sufficient in form and substance to sustain his or her conviction; (2) the court has jurisdiction; (3) the accused has been arraigned and has pleaded; and (4) the accused is convicted or acquitted, or the case is dismissed without his or her consent.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Here, air the elements are present. Reyes was validly charged with plunder before the Sandiganbayan. Reyes pleaded not guilty to the charge. After trial the Sandiganbayan acquitted Reyes based on reasonable doubt. Absent grave abuse of discretion or denial of due process, the judgment of acquittal is final and executory.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Verily, it becomes pointless and unrealistic to insist on giving due course to the Petition for <i>Certiorari</i> and Motion for Reconsideration, and permit a review on the propriety of the denial of the motion to quash and application for bail without dwelling on the criminal liability of Reyes and violating her right against double jeopardy. Differently stated, any decision upon the merits of these cases would serve no useful purpose,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> and the grant of any actual substantial relief is no longer feasible.<br><br><b>FOR THESE REASONS</b>, the Petition for <i>Certiorari</i> and Motion for Reconsideration are <b>DISMISSED</b>.<br><br><b>SO ORDERED.</b>&nbsp;<br><br><i>Hernando, Lazaro-Javier, Inting Zalameda, Gaerlan, Rosario, J. Lopez, Dimaampao, Marquez</i>, and <i>Kho, Jr., JJ.</i>, concur.<br><i>Gesmundo</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>C.J.</i> and <i>Caguioa</i>,<sup style="COLOR: RGB(255, 0, 0);">*<i>&nbsp;</i></sup><i>J.</i>, no part.<br><i>Leonen, SAJ.</i>, see separate opinion.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.</i>, on leave.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> No part.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>People v. Velasco</b>, 394 Phil. 517, 555 (2000) [Per J. Bellosillo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i> (<b>G.R. No. 232323</b>), pp. 125-163. The January 3, 2017 Resolution in SB-14-CRM-0238 was penned by Presiding Justice Amparo M. Cabotaje-Tang and concurred in by Associate Justices Oscar C. Herrera, Jr., Sarah Jane T. Fernandez, and Reynaldo P. Cruz of the Special Third Division, Sandiganbayan, Quezon City, with Associate Justice Samuel R. Martires, dissenting.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <b>Reyes v. Sandiganbayan</b>, 879 Phil. 227 (2020) [Per J. Reyes, J. Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 8-9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 11-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> 790 Phil. 367 (2016) [Per J. Bersamin, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i> (<b>G.R. No. 232323</b>), pp. 198-199. Petitioner alluded to the following facts: (1) There is no evidence of her involvement in any PDAF project of the office of Senator Enrile for the years 2004 to 2006; (2) Her signatures on the endorsement letters are forged because the whistleblowers admitted preparing the endorsement letters and implementing documents for the PDAF projects and forging the signatures of the legislators and their staff; (3) Only one letter signed by her contained the name of the NGO CARED and this cannot sustain the charge of conspiracy granting that the said signature is not forged; (4) The Daily Disbursement Reports (DDRs) and summary of rebates prepared by Benhur Luy do not reflect that she received any money sourced from PDAF of the office of Senator Enrile; (5) The testimony of Ruby Tuason during the hearing of accused Napoles's petition for bail is devoid of details regarding her alleged delivery of kickbacks of Senator Enrile to her; (6) Her participation in the scheme is not necessary considering that from the whistleblowers' own account, they successfully operated the PDAF scheme even before 2007; (7) In its Resolution dated March 2, 2016, the Sandiganbayan expressly stated that the PDAF were amassed by accused Napoles; (8) The processing for the release of the PDAF passed through several stages which did not involve her; (9) The prosecution's evidence show that the unlawful acts occurred in a stage where she had no participation or involvement; (10) Granting that she received money from the PDAF given by accused Napoles to Tuason, that would at least make her an accessory to the crime charged because at the time of the receipt of the money, the fraudulent acts of accused Napoles were already consummated; (11) The amounts found in Luy's DDRs do not tally with the amount feedbacks allegedly given by Tuason to accused Reyes nor do they add up to [PHP] 172,834,500.00; and (12) Even it her signatures in the endorsement letters were not forged, the same is insufficient to establish conspiracy with accused Napoles as she only relied on her Deputy Chief of Staff Evangelista.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i> (<b>G.R. No. 232323</b>) pp. 125-452, and 153-163.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i> (<b>G.R. No. 243411</b>), pp 114-129. The June 28, 2018 Resolution SB-14-CRM-0238 was penned by Associate Justice Bernelito R. Fernandez and concurred in by Presiding Justice Amparo M. Cabotaje-Tang and Associate Justice Sarah Jane T. Fernandez of the Third Division, Sandiganbayan, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 1365-1387.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <b>Reyes v. Director or Whoever is In-Charge of Camp Bagong Diwa, Taguig, Metro Manila, G.R. No. 254838</b>, January 17, 2024 [Per J. Hernando, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <b>Yu, Sr. v. Basilio G. Magno Construction and Development Enterprises, Inc.</b>, 535 Phil. 604, 619 (2006) [Per J. Garcia, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <b>Serapio v. Sandiganbayan</b>, 444 Phil. 499 (2002) [Per J. Callejo, Sr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <b>So v. Tacla, Jr.</b>, 648 Phil. 149, 163 (2010) [Per J. Nachura, <i>En Banc</i>] <i>citing</i> <b>David v. Macapagal-Arroyo</b>, 522 Phil. 705 (2006) [Per J. Sandoval-Gutierrez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <b>Soriano Vda. de Dabao v. Court of Appeals</b>, 469 Phil. 928, 937 (2004) [Per J. Austria-Martinez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <b>Marquez v. Comelec</b>, 861 Phil. 667, 677-678 (2019) [Per J. Jardeleza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <b>Ozaeta v. Oil Industry Commission</b>, 187 Phil. 282, 288 (1980) [Per J. Concepcion, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <b>Camutin v. Potente</b>, 597 Phil. 143 (2009) [Per J. Tinga, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>Morillo v. People</b>, 775 Phil. 192, 211 (2015) Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> CONST., art. III, sec. 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <b>Merciales v. Court of Appeals</b>, 429 Phil. 70, 81 (2002) [Per J. Ynares-Santiago, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <b>People v. Sandiganbayan</b>, 661 Phil. 350 (2011) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <b>Philsugin v. Aspem</b>, 201 Phil. 416 (1982) [Per C.J. Fernando, Second Division].&nbsp;<br><br><hr align="center" width="60%" size="1" noshade=""><br><div align="center">&nbsp;<b>CONCURRING OPINION</b></div><br><b>LEONEN, <i>SAJ.</i>:</b>&nbsp;<br>&nbsp;<br>On June 5, 2014, an Information was filed in the Sandiganbayan<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> charging petitioner Jessica Lucila Reyes with plunder for amassing ill-gotten wealth diverted from Senator Juan Ponce Enrile's Priority Development Assistance Fund (PDAF). The allegations in the information involved an elaborate scheme orchestrated by Janet Lim Napoles, Ronald John Lim, and John Raymund de Asis, in conspiracy with petitioner and the senator who allegedly received kickbacks or commissions amounting to at least PHP 172,834,500.00 from inexistent projects supposedly funded by the Senator's PDAF.<br><br>There are two incidents before the Supreme Court <i>En Banc</i> arising from this Sandiganbayan plunder case: (1) the Petition for <i>Certiorari</i>, docketed as G.R. No. 232323, where petitioner claims that the Sandiganbayan committed grave abuse of discretion in denying her motion to quash the Information; and (2) petitioner's motion in G.R. No. 243411, seeking reconsideration of the Supreme Court First Division's August 19, 2020 Decision affirming the Sandiganbayan's denial of her bail application, on a finding that there is strong evidence of her guilt.<br><br>I concur with the consolidation of these cases, given the interrelationship of the issues raised in them. As pointed out by the <i>ponencia</i>, resolving these cases jointly avoids multiplicity of suits and prevents the possibility of conflicting decisions.<sup style="COLOR: RGB(255, 0, 0);">[2]<br></sup><br>I likewise concur with the <i>ponencia</i> in finding that the Court may no longer rule upon the merits of either the Petition of <i>Certiorari</i> in G.R. No. 232323 or the Motion for Reconsideration in G.R. No. 243411, in light of petitioner's acquittal in the plunder case before the Sandiganbayan.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>Delving into the merits of the <i>certiorari</i> petition in G.R. No. 232323 would require that the Information in the plunder case be examined to answer the question of "whether the facts asseverated would establish the essential elements of the crime defined in the law,"<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> without considering matters <i>aliunde</i>.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> There would thus be a need to "look into... (1) what must be alleged in a valid Information; (2) what the elements of the crime charged are; and (3) whether these elements are sufficiently stated in the Information."<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> As in <i>Laurel v. Judge Abrogar</i>:<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><blockquote>An information or complaint must state explicitly and directly every act or omission constituting an offense and must allege facts establishing conduct that a penal statute makes criminal; and describes the property which is the subject of theft to advise the accused with reasonable certainty of the accusation he is called upon to meet at the trial and to enable him to rely on the judgment thereunder of a subsequent prosecution for the same offense. It must show, on its face, that if the alleged facts are true, an offense has been committed. The rule is rooted on the constitutional right of the accused to be informed of the nature of the crime or cause of the accusation against him. He cannot be convicted of an offense even if proven unless it is alleged or necessarily included in the Information filed against him.<br><br>As a general prerequisite, a motion to quash on the ground that the Information does not constitute the offense charged, or any offense for that matter, should be resolved on the basis of said allegations whose truth and veracity are hypothetically committed; and on additional facts admitted or not denied by the prosecution. If the facts alleged in the Information do not constitute an offense, the complaint or information should be quashed by the court.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> (Citations omitted)</blockquote>Meanwhile, evaluating the merits of the motion in G.R. No. 243411 would entail a revisiting of "whether evidence of guilt of the accused is strong"<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> because the direct issue would be whether "the Sandiganbayan acted with grave abuse of discretion in concluding that there is strong evidence against petition."<sup style="COLOR: RGB(255, 0, 0);">[10]</sup>&nbsp;<br><br>Evidently, as the <i>ponencia</i> stressed, none of the foregoing may be carried out without running afoul of Article III, Section 21 of the Constitution, which articulates petitioner's protection from double jeopardy:<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><blockquote>SECTION 21. No person shall be twice put in jeopardy of punishment for the same offense. If an act is punished by a law and an ordinance, conviction or acquittal under either shall constitute a bar to another prosecution for the same act.</blockquote>The operationalization of the above provision was thoroughly discussed in <i>Corpus, Jr. v. Judge Pamular</i>:<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><blockquote>The Constitutional provision on double jeopardy guarantees the invocation of the law not only against the danger of a second punishment or a second trial for the same offense, "but also against being prosecuted twice for the same act where that act is punishable by ... law and an ordinance." When a person is charged with an offense and the case against [them] is terminated either by acquittal or conviction or in any other way without [their] consent, [they] cannot be charged again with a similar offense. Thus, "[t]his principle is founded upon the law of reason, justice and conscience."<br><br>The constitutionally mandated right against double jeopardy is procedurally bolstered by Rule 117, Section 7 of the Revised Rules of Criminal Procedure, which reads:<blockquote><center><div align="center">RULE 117<br></div>Motion to Quash</center>. . . .&nbsp;<br>&nbsp;<br>Section 7. <i>Former Conviction or Acquittal; Double Jeopardy</i>. â When an accused has been convicted or acquitted, or the case against [them] dismissed or otherwise terminated without [their] express consent by a court of competent jurisdiction, upon a valid complaint or information or other formal charge sufficient in form and substance to sustain a conviction and after the accused had pleaded to the charge, the conviction or acquittal of the accused or the dismissal of the case shall be a bar to another prosecution for the offense charged, or for any attempt to commit the same or frustration thereof, or for any offense which necessarily includes or is necessarily included in the offense charged in the former complaint or information.</blockquote>In substantiating a claim for double jeopardy, the following requisites should be present:<blockquote>(1) a first jeopardy must have attached prior to the second; (2) the first jeopardy must have been validly terminated; and (3) the second jeopardy must be for the same offense as in the first.</blockquote>With regard the first requisite, the first jeopardy only attaches:<blockquote>(a) after a valid indictment; (b) before a competent court; (c) after arraignment; (d) when a valid plea has been entered; and (e) when the accused was acquitted or convicted, or the case was dismissed or otherwise terminated without [their] express consent.</blockquote>The test for the third requisite is "whether one offense is identical with the other or is an attempt to commit it or a frustration thereof; or whether the second offense includes or is necessarily included in the offense charged in the first information."<br><br>Also known as "<i>res judicata</i> in prison grey," the mandate against double jeopardy forbids the "prosecution of a person for a crime of which [they have] been previously acquitted or convicted." This is to "set the effects of the first prosecution forever at rest, assuring the accused that [they] shall not thereafter be subjected to the danger and anxiety of a second charge against [them] for the same offense."<br><br><i>People v. Dela Torre</i> underscored the protection given under the prohibition against double jeopardy:<blockquote>Double jeopardy provides three related protections: (1) against a second prosecution for the same offense after acquittal, (2) against a second prosecution for the same offense after conviction, and (3) against multiple punishments for the same offense.<br><br>. . . .<br>&nbsp;<br>The ban on double jeopardy is deeply rooted in jurisprudence. The doctrine has several avowed purposes. <b><i>Primarily, it prevents the State from using its criminal processes as an instrument of harassment to wear out the accused by a multitude of cases with accumulated trials.</i></b> It also serves the additional purpose of precluding the State, following an acquittal, from successively retrying the defendant in the hope of securing a conviction. And finally, it prevents the State, following conviction, from retrying the defendant again in the hope of securing a greater penalty.</blockquote>Double jeopardy is a fundamental constitutional concept which guarantees that an accused may not be harassed with constant charges or revisions of the same charge arising out of the same facts constituting a single offense. When an accused traverses the allegations in the information by entering a plea during the arraignment, [they are] already put in jeopardy of conviction. Having understood the charges, the accused after entering a plea prepares for [their] defense based on the possible evidence that may be presented by the prosecution. The protection given to the accused by the double jeopardy rule does not attach only after an acquittal or a conviction. It also attaches after the entry of plea and when there is a prior dismissal for violation of speedy trial.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> (Emphasis in the original, citations omitted)</blockquote>In relation, "to give life to the rule on double jeopardy, our rules on criminal proceedings require that a judgment of acquittal, whether ordered by the trial court or the appellate court, is final, unappealable, and immediately executory upon its promulgation":<sup style="COLOR: RGB(255, 0, 0);">[14]</sup>&nbsp;<br><blockquote>This is referred to as the "finality-of-acquittal" rule. The rationale for the rule was explained in <i>People v. Velasco</i>:<blockquote>The fundamental philosophy highlighting the finality of an acquittal by the trial court cuts deep into "the humanity of the laws and in a jealous watchfulness over the rights of the citizen, when brought in unequal contest with the State[.]" Thus, Green expressed the concern that "(t)he underlying idea, one that is deeply ingrained in at least the Anglo-American system of jurisprudence, is that <i>the State with all its resources and power should not be allowed to make repeated attempts to convict an individual for an alleged offense, thereby subjecting [them] to embarrassment, expense and ordeal and compelling [them] to live in a continuing state of anxiety and insecurity, as well as enhancing the possibility that even though innocent, [they] may be found guilty</i>."<br><br>It is axiomatic that on the basis of humanity, fairness and justice, an acquitted defendant is entitled to the right of repose as a direct consequence of the finality of [their] acquittal. The philosophy underlying this rule establishing the absolute nature of acquittals is "part of the paramount importance criminal justice system attaches to the protection of the innocent against wrongful conviction." <i>The interest in the finality-of-acquittal rule, confined exclusively to verdicts of not guilty, is easy to understand: it is a need for "repose," a desire to know the exact extent of one's liability.</i> With this right of repose, the criminal justice system has built in a protection to insure that the innocent, even those whose innocence rests upon a jury's leniency, will not be found guilty in a subsequent proceeding.<br><br>Related to [their] right of repose is the defendant's interest in [their] right to have [their] trial completed by a particular tribunal. This interest encompasses [their] right to have [their] guilt or innocence determined in a single proceeding by the initial jury empanelled to try [them], for society's awareness of the heavy personal strain which the criminal trial represents for the individual defendant is manifested in the willingness to limit Government to a single criminal proceeding to vindicate its very vital interest in enforcement of criminal laws. The ultimate goal is prevention of government oppression; the goal finds its voice in the finality of the initial proceeding. As observed in <i>Lockhart v. Nelson, "(t)he fundamental tenet animating the Double Jeopardy Clause is that the State should not be able to oppress individuals through the abuse of the criminal process."</i> Because the innocence of the accused has been confirmed by a final judgment, the Constitution conclusively presumes that a second trial would be unfair[.]<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis in the original, citations omitted)</blockquote></blockquote>In fine, it is plainly infeasible for the Court to address the sufficiency of the Information allegations against petitioner, much less delve into the strength of the prosecution's evidence against her, without clashing with the final, unappealable verdict of acquittal in her favor and endangering her right against double jeopardy.<br><br><b>ACCORDINGLY</b>, I vote to <b>DISMISS</b> the Petition for <i>Certiorari</i> in G.R. No. 232323 and to <b>DENY</b> the Motion for Reconsideration in G.R. No. 243411.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> The Sandiganbayan case is docketed as Criminal Case No. SB-14-CRM-0238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Ponencia</i>, p. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 5-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <b>Domingo v. Sandiganbayan</b>, 379 Phil. 708, 719 (2000) [Per C.J. Davide, Jr., First Division]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <b>People v. Sandiganbayan (Fourth Division)</b>, 769 Phil. 378, 387 (2015) [Per J. Jardeleza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> 518 Phil. 409 (2006) [Per J. Callejo, Sr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 431-432.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <b>People v. Tanes</b>, 851 Phil. 295, 304 (2019) [Per J. Caguioa, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <b>Reyes v. Sandiganbayan Third Division</b>, 879 Phil. 227, 263 (2020) [Per J. J. Reyes, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Ponencia</i>, p. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> 839 Phil. 731 (2018) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 773-775.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <b>Chiok v. People</b>, 774 Phil. 230, 248 (2015) [Per J. Jardeleza, Third Division]. (Citation omitted)&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 248-249.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

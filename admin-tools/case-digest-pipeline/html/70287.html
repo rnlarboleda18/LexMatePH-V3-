@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 256591 - PONCE DE LEON Y LAMUAS, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- â load jQuery â -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- â load DataTables â -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '384d94b2d95be4494c7677a160116c9f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70287' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 256591, December 03, 2025 ]</H2>
+			<H3>PONCE DE LEON <i>Y</i> LAMUAS, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ZALAMEDA, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Courts must take judicial notice of the official acts of the legislative, executive, and judicial departments of the National Government of the Philippines. This rule is mandatory in the resolution of cases, more so if what is at stake is no less than the liberty of an accused. </p><p align="center"> <i>The Case</i> </p><p> This instant Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court seeks to annul and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA). The CA affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC), convicting petitioner Ponce De Leon <em>y</em> Lamuas (De Leon) with illegal possession of firearms punishable under Presidential Decree No. 1866,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> as amended by Republic Act Nos. 8294<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> and 10591.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p align="center"> <i>Antecedents</i> </p><p> In an Information dated October 12, 2015, De Leon was charged with violation of Presidential Decree No. 1866, as amended: </p><blockquote> <p> That on or about 5:40 [a.m.] of October 11, 2015 at Brgy. Sta. Rosa, municipality of Umingan, province of Pangasinan, Philippines, and within the jurisdiction of this Honorable Court, elements of PNP-CIDG, Urdaneta City (Pangasinan SATT3) implemented a search warrant No. T-005 issued by the Honorable Judge Emma S. Ines-Parajas of RTC-Branch 52, Tayug, Pangasinan against PONCE DE LEON [<em>y</em>] LAMUAS for violation of [Presidential Decree No.] 1866 as amended by [Republic Act No.] 8294, and as further amended by [Republic Act No.] 10591 (Comprehensive Firearm and Ammunition Act of 2013), as a result thereof, accused PONCE DE LEON [<em>Y</em>] LAMUS, did then and there willfully, unlawfully and feloniously have in his possession, control and custody, [<i>One</i>] <i>unit of Cal. 9mm Taurus PT with SN 20785 marked as "AN[,]"</i> [<i>One</i>] <i>magazine for Cal. 9mm marked as "AN1[,]"</i> [<i>Six</i>] <i>pieces live ammunition for Cal. 9mm marked as "AN2-AN7[,]" and</i> [<i>One</i>] <i>black holster marked as "AN8[,]" without any legal documents or authority to possess the same</i>.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p> </blockquote> <p> Upon arraignment, De Leon entered a plea of "not guilty."<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> The parties stipulated on the following matters during the pre-trial conference: (1) the identity of De Leon to be the same person charged; and (2) that he had an expired license of the subject firearm at the time of the search.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> During trial, the prosecution presented Senior Police Officer I Ariston Noval II (SPO1 Noval) and Senior Police Officer I Romeo Galisim (SPO1 Galisim) as its witnesses.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> They testified that on October 8, 2015, the Philippine National Police-Criminal Investigation and Detection Group (PNP CIDG) Urdaneta City applied for the issuance of a search warrant against De Leon.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> This was pursuant to a memorandum issued by the Camp Crame Firearms and Explosives Office (FEO) that De Leon is a registered holder of three firearms; however, two of his firearms' licenses have expired.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Subsequently, Search Warrant No. T-005 was issued.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> On October 11, 2015, SPO1 Noval and SPO1 Galisim went to De Leon's house at Brgy. Sta. Rosa, Umingan, Pangasinan, to implement the search warrant.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Notably, they invited Barangay Kagawads Tamayo Ducos and Edwin De Leon to serve as witnesses.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> SPO1 Noval presented the search warrant, explained its nature, and furnished De Leon a copy.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Thereafter, SPO1 Noval and SPO1 Galisim, together with the witnesses, entered De Leon's house.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> While searching, SPO1 Noval found on top of a cabinet in the living room a caliber 9mm Taurus PT 915 with Serial Number 20785 (subject firearm), and a magazine loaded with six pieces of live ammunition inside a black holster.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> When De Leon was asked, he presented a machine copy of Firearms License Card No. 432711719397 with an expiration date of July 18, 2014.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Thereafter, SPO1 Noval marked the items as follows: (1) the subject firearm as <i>AN</i>; (2) the magazine as <i>AN1</i>; (3) the six live ammunition as <i>AN2</i> to <i>AN7</i>; and (4) the holster as <i>AN8</i>.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> A Receipt/Inventory of Property Seized and a Certification of Orderly Search were subsequently executed, duly signed by De Leon and the witnesses.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></p><p> De Leon testified for himself.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> He admitted ownership of the subject firearm, which is covered by an expired firearms license.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> However, he claimed that he attempted to apply for the renewal of his firearms license but the process was very complicated at the time.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> He again applied for the renewal in January 2016 and was granted a Certificate of Firearms Registration for Individuals on March 2, 2016.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p align="center"> <i>Ruling of the RTC</i> </p><p> On June 18, 2018, the RTC rendered its judgment convicting De Leon of the crime charged, viz.: </p><blockquote> <p> <b><i>WHEREFORE</i></b>, judgment is rendered finding the accused <b><i>GUILTY</i></b> as charged and is hereby sentenced to an indeterminate penalty of [six] years and [eight] months of <i>prision mayor minimum</i>, as minimum, to [eight] years and [eight] months of <i>prision mayor medium</i>, as <i>maximum</i>. The firearm, magazine and ammunitions subject of this case are forfeited in favor of the government. </p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> (Emphasis in the original) </p> </blockquote> <p> The RTC stated that the prosecution was able to establish all the elements of illegal possession of firearms.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> It gave no credence to De Leon's assertion that he made attempts to renew his license upon its expiration, and he was in fact issued a Certificate of Firearms Registration on March 2, 2016.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The RTC noted that the application for firearms registration was filed almost two years after the expiration of De Leon's license on July 18, 2014, and three months after the filing of the criminal case against him.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Therefore, it stated that De Leon may have applied for the renewal only in hopes of being absolved of criminal liability.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> Finally, the RTC explained that a pistol is properly classified as a small arm, the penalty for the possession of which is <i>prision mayor</i> in its medium period, which ranges from eight years and one day to 10 years.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p> Aggrieved, De Leon filed an appeal with the CA. </p><p align="center"> <i>Ruling of the CA</i> </p><p> In its assailed June 17, 2020 Decision, the CA affirmed the ruling of the RTC, to wit: </p><blockquote> <p> <b>WHEREFORE</b>, the appeal is <b>DENIED</b>. The [June 18, 2018] <b>Decision</b> rendered by the Regional Trial Court, Branch 52, Tayug, Pangasinan, in Criminal Case No. T-6214, finding accused-appellant Ponce De Leon <em>y</em> Lamuas guilty beyond reasonable doubt for violation of [Presidential Decree] No. 1866, as amended by [Republic Act] No. 10591, is <b>AFFIRMED</b>. </p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Emphasis in the original) </p> </blockquote> <p> The CA confirmed that the prosecution was able to establish the presence of the elements of the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Similarly, it sustained the RTC's conclusion that De Leon's Certificate of Firearms Registration does not help his cause.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> It explained that Republic Act No. 10591 clearly states that failure to renew the registration of the firearm on or before the date of expiration shall cause the revocation of the license, and the firearm shall be confiscated or forfeited in favor of the government.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p> Also, the CA expounded that the prosecution was able to prove that De Leon had ownership and constructive possession of the subject firearm, coupled with intent to own and possess the same.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> His lack of authority to possess was proven through the memorandum issued by the Camp Crame FEO and his own admission that he only had an expired firearms license at the time of the arrest.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> It found no merit in De Leon's argument that the prosecution failed to prove that the subject firearm would be used for an unlawful purpose, as the crime of illegal possession of firearms is <i>malum prohibitum</i>.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> Incidentally, the CA mentioned that the prosecution failed to specifically state that the officers found the six pieces of live ammunition loaded into the magazine and inserted in the subject firearm.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Thus, the CA agreed with the RTC that De Leon is guilty of illegal possession of firearms under Section 28(a) of Republic Act No. 10591, which prescribes the penalty of <i>prision mayor</i> in its medium period for the unlawful possession of a small arm.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </p><p> Aggrieved, De Leon filed a motion for reconsideration with the CA.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Therein, he invoked for the first time that on August 20, 2014, then Chief PNP Director General Alan L. Purisima (PNP Chief Purisima) approved the extension of validity of firearms licenses due for expiration in 2014, to December 31, 2015.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Thus, De Leon asserted that his firearms license was still valid at the time of the implementation of the search warrant.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> As proof of this, screenshots of posts and articles from news outlets were attached to his motion.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> On May 25, 2021, the CA issued its assailed Resolution<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> denying De Leon's Motion for Reconsideration. It stated that issues raised for the first time on appeal or a motion for reconsideration are not allowed.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Further, it explained that it cannot take judicial notice of the alleged directive of the PNP taken from the internet.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> The CA stated that the screenshots are deemed as hearsay evidence unless authenticated under the Rules on Electronic Evidence.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p><p> Thus, the instant petition. De Leon maintains that the CA erred in ruling that it cannot take judicial notice of the PNP's extension of the validity of firearms licenses due for expiration in year 2014, to December 31, 2015.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Also, he asserts that the prosecution failed to prove that he had intent to possess the subject firearm, as all efforts were undertaken by him to renew his license.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> At any rate, Republic Act No. 10591 and its 2013 and 2018 Implementing Rules and Regulations (IRR) do not provide the procedure or regulation on how a firearm will be handled after the expiration of the license.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> In its Comment, respondent People of the Philippines, through the Office of the Solicitor General (OSG), argues that De Leon raises no substantial question of law.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Moreover, the OSG raises that De Leon's purported intention to renew his license is irrelevant in a prosecution for illegal possession of firearms.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Neither could the CA have taken judicial notice of mere internet articles submitted by De Leon, supposedly proving the extension of the validity of firearms licenses.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Further, the OSG states that the IRR of Republic Act No. 10591 clearly provides for the procedure for handling a firearm after the expiration of the license.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> </p><p align="center"> <i>Issue</i> </p><p> The relevant issue for resolution of the Court is whether petitioner was properly convicted of illegal possession of firearms under Presidential Decree No. 1866, as amended by Republic Act Nos. 8294 and 10591. </p><p align="center"> <i>Ruling of the Court</i> </p><p> We grant the Petition. </p><p> On May 29, 2013, Republic Act No. 10591 was enacted to regulate the ownership, possession, carrying, manufacture, dealing in, and importation of firearms, ammunition, or parts thereof.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> It was passed in light of the policy of the State to maintain peace and order, and to protect its people against violence.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Notably, Republic Act No. 10591 introduced changes and repealed certain provisions of Presidential Decree No. 1866 and Republic Act No. 8294, the laws originally dealing with the illegal possession of firearms, among others.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p><p> Under Republic Act No. 10591, the penalty of illegal possession of firearms is dependent on the type or part of firearm or weapon.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Republic Act No. 8294 defines the coverage of "unlicensed firearm" to include: (1) firearms with expired license; or (2) unauthorized use of licensed firearm in the commission of the crime.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Notably, this was not amended nor repealed under Republic Act No. 10591. </p><p> As jurisprudence dictates, the elements of the crime of illegal possession of firearms are as follows: (1) the existence of the subject firearm; and (2) the fact that the accused who possessed or owned the same does not have the corresponding license for it.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup></p><p> Taking the foregoing into consideration together with the arguments of the parties, the Court will now examine whether the prosecution was able to establish all of the elements of illegal possession of firearms. </p><p> The presence of the first element is undisputed. Petitioner admits in his petition that the subject firearm was confiscated from him, and it was originally a licensed firearm.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> This was also stipulated upon by the parties during the pre-trial conference.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> The license was purportedly issued in his name when he was still the Punong Barangay of Barangay Sta. Rosa, Umingan, Pangasinan, but this expired on July 18, 2014.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup></p><p> Under contention is the presence of the second element. Petitioner invokes that then PNP Chief Purisima approved the extension of the validity of firearms licenses supposedly expiring in 2014, to December 31, 2015.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> He concludes that, given the extension, his firearms license should still have been considered valid at the time of the search.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup></p><p> Pertinently, the CA gave no credence to petitioner's assertion. It considered petitioner's belated invocation of the said extension as a fatal flaw, as he was only able to raise this in his motion for reconsideration with the CA.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> Also, the CA noted that petitioner failed to attach a copy of the issuance or memorandum of the PNP on the alleged extension.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> This notwithstanding, petitioner insists that the rule that issues raised for the first time on appeal shall not be allowed, is not absolute.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Also, petitioner asserts that the CA should have taken judicial notice of the extension as it pertains to a directive given by the government.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> </p><p> The Court finds merit in petitioner's arguments. </p><p> Granted, it is settled that issues raised for the first time on appeal or on motion for reconsideration will not be entertained.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> However, it is known that an appeal in a criminal case throws the whole case open for review.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> Regardless of the fact that an issue is raised only upon appeal, our courts are bound to rule in favor of the accused if it gives rise to doubt as to their guilt.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> In this case, the issue raised by petitioner ultimately affects the determination of his innocence. Thus, the Court finds it proper to entertain the points raised by petitioner, for a just resolution of the case. </p><p> On the issue regarding petitioner's failure to attach a copy of the issuance or memorandum from the PNP, indeed, he merely attached copies of news articles and posts reporting the extension.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> However, there may be merit in petitioner's contention that the Court can take judicial notice of this matter. </p><p> Judicial notice is defined as the cognizance of certain facts which courts may take and act on without proof, because they already know them.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> Otherwise stated, by taking judicial notice, the court dispenses with the need for the traditional form of presentation of evidence.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> The Court took the opportunity to discuss this in <i>State Prosecutors v. Muro</i>,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> viz.: </p><blockquote> <p> Generally speaking, matters of judicial notice have three material requisites: (1) the matter must be one of common and general knowledge; (2) it must be well and authoritatively settled and not doubtful or uncertain; and (3) it must be known to be within the limits of the jurisdiction of the court. The provincial guide in determining what facts may be assumed to be judicially known is that of notoriety. Hence, it can be said that judicial notice is limited to facts evidenced by public records and facts of general notoriety.</p> <p> To say that a court will take judicial notice of a fact is merely another way of saying that the usual form of evidence will be dispensed with if knowledge of the fact can be otherwise acquired. This is because the court assumes that the matter is so notorious that it will not be disputed. But judicial notice is not judicial knowledge. The mere personal knowledge of the judge is not the judicial knowledge of the court, and [they are] not authorized to make [their] individual knowledge of a fact, not generally or professionally known, the basis of [their] action. Judicial cognizance is taken only of those matters which are "commonly" known. </p> <p> Things of "common knowledge," of which courts take judicial notice, may be matters coming to the knowledge of men generally in the course of the ordinary experiences of life, or they may be matters which are generally accepted by mankind as true and are capable of ready and unquestioned demonstration. Thus, facts which are universally known, and which may be found in encyclopedias, dictionaries or other publications, are judicially noticed, provided they are of such universal notoriety and so generally understood that they may be regarded as forming part of the common knowledge of every person.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup></p> </blockquote> <p> Under Rule 129 of the Revised Rules on Evidence, judicial notice may either be mandatory or discretionary, to wit: </p><p align="center"> <b>RULE 129 <br> WHAT NEED NOT BE PROVED</b> </p><blockquote> <p> Section 1. <i>Judicial notice, when mandatory</i>. â A court shall take judicial notice, without the introduction of evidence, of the existence and territorial extent of states, their political history, forms of government and symbols of nationality, the law of nations, the admiralty and maritime courts of the world and their seals, the political constitution and history of the Philippines, official acts of the legislative, executive and judicial departments of the National Government of the Philippines, the laws of nature, the measure of time, and the geographical divisions. </p> <p> Section 2. <i>Judicial notice, when discretionary</i>. â A court may take judicial notice of matters which are of public knowledge, or are capable of unquestionable demonstration, or ought to be known to judges because of their judicial functions. (Emphasis in the original) </p> </blockquote> <p> Verily, there have been several instances where the Court took judicial notice of facts deemed relevant for its proper resolution of the case. </p><p> In <i>In Re: Petition for Adoption of Jan Aurel Maghanoy Bulayo</i>,<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> the Court took judicial notice of the existence of diplomatic relations between the Philippines and Japan. It explained that diplomatic relations form part of the official acts of the executive department, and are matters which are of public knowledge.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> Hence, the Court concluded that this no longer requires the presentation of proof.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> </p><p> Also, in <i>Suplico v. NEDA</i>,<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> the Court dealt with the ZTE National Broadband Network Project, which petitioners therein sought to enjoin. However, in a meeting with China, then President Gloria Macapagal-Arroyo informed China's President Hu Jintao that the Philippines had decided not to continue with the project.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> On this basis, the OSG filed a manifestation and motion with the Court, insisting that the issues of the case have become moot.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> To counter this, petitioners asserted, among others, that the OSG failed to attach the notes of the said meeting with China to prove its allegations.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> </p><p> In agreeing with the OSG, the Court stated that pursuant to Rule 129, Section 1 of the Rules on Evidence, it has no alternative but to take judicial notice of the official acts of the President, who heads the executive branch.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> Since the act of the cancellation of the proposed project is an official act of the executive department, the Court explained that it must take judicial notice of the same without the need for evidence.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> </p><p> Lastly, in <i>Integrated Bar of the Philippines v. Zamora</i>,<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> the Court was called to determine whether the President committed grave abuse of discretion in calling the armed forces to prevent or suppress lawless violence, invasion, or rebellion. Ultimately, the Court concluded that the President's exercise of judgment and discretion deserves to be accorded respect.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> In its examination, the Court took judicial notice of bombings perpetrated by lawless elements in shopping malls, public utilities, and other public places at that time.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> </p><p> At this juncture, it must be pointed out that pursuant to Republic Act No. 6975,<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> it is the PNP that has the authority to issue licenses for the possession of firearms and explosives.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> Republic Act No. 10591 expressly states that it is the Chief of the PNP, through the FEO, who shall issue licenses to qualified individuals and cause the registration of firearms.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> The PNP is likewise in charge of implementing the provisions of Republic Act No. 10591.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup></p><p> To reiterate, Republic Act No. 10591 introduced significant changes in the application and procedure for firearms licenses. Thus, upon the promulgation of the IRR of Republic Act No. 10591 on December 7, 2013, individuals and organizations filed petitions to question the validity of the law and the rules, consolidated in <i>Acosta v. Ochoa</i>.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> Pending the resolution of the petitions, on April 8, 2014, the Court issued a Temporary Restraining Order (TRO) enjoining the PNP from fully implementing Republic Act No. 10591 and its IRR, particularly the provisions on: (1) the centralization of firearms applications and renewals at the PNP Headquarters at Camp Crame, Quezon City; (2) the implementation and enforcement of the "waiver and consent" requirement for the licensing and registration of firearms, whereby applicants were required to sign a Consent for Voluntary Presentation for Inspection, authorizing the PNP to inspect their firearms at the residence/address indicated in the application; and (3) the utilization of courier services for delivery of firearms license cards.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup></p><p> Subsequently, the PNP announced the extension of the validity of firearms licenses expiring in 2014, to December 31, 2015. The PNP explained that this is to give way to upgrades in the information technology involved in the firearms registration system.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> Also, given the Court's issuance of the TRO, the extension was called for due to the necessary replication of the registration system to the regional offices of the PNP, as this was originally only available at its Headquarters in Camp Crame.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> Notably, the said extension was publicly reported in different news outlets at the time.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> </p><p> Verily, on October 15, 2019, the Court promulgated its decision on <i>Acosta</i>, declaring the provision in the IRR on the "waiver and consent" requirement for the licensing and registration of firearms as unconstitutional.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> Hence, the Court made its TRO on this matter permanent.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> </p><p> To repeat, a court is mandated to take judicial notice of, without the introduction of evidence, the official acts of the legislative, executive, and judicial departments of the National Government of the Philippines.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> Concomitantly, in light of the PNP's authority to issue licenses for the possession of firearms,<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> the TRO issued during the pendency of <i>Acosta</i>, and the publicity of the extension granted by the PNP, it is clear that the extension is an official act of the government which the Court has no alternative but to take judicial notice of.</p><p> Again, the firearms license of petitioner relevant in this case expired on July 18, 2014,<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> and his house was searched on October 11, 2015.<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> Both of these dates fall under the extension announced by the PNP, which again, extended the validity of firearms licenses due for expiration in 2014, to December 31, 2015. Therefore, it is evident that the second element of illegal possession of firearms is absent. Petitioner benefited from the extension and his firearms license was still valid at the time his house was searched. </p><p> It is established that in criminal cases, the paramount consideration is not whether there is doubt in the innocence of the accused, but whether there is reasonable doubt as to their guilt.<sup style="COLOR: RGB(255, 0, 0);">[107]</sup> If the accused's guilt is questionable, the Court must rule in their favor, as every fact relevant to constitute the crime must be established by proof beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> The Court will fall short of its duties if it fails to apply these well-entrenched principles in petitioner's case. </p><p> Hence, due to the prosecution's failure to establish all the elements of the crime of illegal possession of firearms, petitioner must perforce be acquitted. </p><p> <b>FOR THESE REASONS</b>, the Petition is <b>GRANTED</b>. The June 17, 2020 Decision and May 25, 2021 Resolution of the Court of Appeals in CA-G.R. CR No. 42045, affirming the June 18, 2018 Decision of Branch 52, Regional Trial Court of Tayug, Pangasinan, are <b>REVERSED and SET ASIDE</b>. Accordingly, petitioner Ponce De Leon <em>y</em> Lamuas is <b>ACQUITTED</b> for failure of the prosecution to prove his guilt beyond reasonable doubt. </p><p> Let an entry of final judgment be issued immediately. </p><p> <b>SO ORDERED. </b></p><p> <i>Gesmundo, C.J., Hernando, Rosario</i>, and <i>Marquez, JJ</i>., concur. <br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-27. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 32-39. The June 17, 2020 Decision in CA-G.R. CR No. 42045 was penned by Associate Justice Ruben Reynaldo G. Roxas and concurred in by Associate Justices Fernanda Lampas Peralta and Myra V. Garcia-Fernandez of the Second Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 60-62. The May 25, 2021 Resolution in CA-G.R. CR No. 42045 was penned by Associate Justice Ruben Reynaldo G. Roxas and concurred in by Associate Justices Fernanda Lampas-Peralta and Myra V. Garcia-Fernandez of the Former Second Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 28-31. The June 18, 2018 Decision in Criminal Case No. T-6214 was penned by Judge Emma S. Ines-Parajas of Branch 52, Regional Trial Court, Tayug, Pangasinan.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Presidential Decree No. 1866 (1983), Codifying the Laws on Illegal/Unlawful Possession, Manufacture, Dealing in, Acquisition or Disposition, of Firearms, Ammunition or Explosives or Instruments used in the Manufacture of Firearms, Ammunition or Explosives, and Imposing Stiffer Penalties for Certain Violations thereof, and for relevant purposes.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Republic Act No. 8294 (1997), An Act Amending the Provisions of Presidential Decree No. 1866, as amended, Entitled "Codifying the Laws on Illegal/Unlawful Possession, Manufacture, Dealing in, Acquisition or Disposition, of Firearms, Ammunition or Explosives or Instruments used in the Manufacture of Firearms, Ammunition or Explosives, and Imposing Stiffer Penalties for Certain Violations thereof, and for relevant purposes."</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Republic Act No. 10591 (2013), Comprehensive Firearms and Ammunition Regulation Act.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Rollo</i>, p. 28.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 29.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 33. </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 34. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 29. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 34. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 29. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 33. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 29. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 34-35. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 29. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 30. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 30-31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 31. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 38-39. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 36-37. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 37. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 37-38. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 38. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 40-51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 41-44. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 52-56. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 60-61. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 61. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 60-61. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 16-18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 18-20. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 20-23. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 95-97. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 97-101. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 98-101. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 101-102. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Republic Act No. 10591, art. I, sec. 2. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Republic Act No. 10591, art. I, sec. 2. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Republic Act No. 10591, art. VI, sec. 45. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Republic Act No. 10591, art. V, sec. 28. </p><p><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Republic Act No. 8294, sec. 5. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>Castil v. People</b>, 925 Phil. 786, 796 (2022) [Per J. Hernando, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Rollo</i>, p. 14. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 29. </p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 16-18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 40-51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 8-9. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 18. </p><p><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 16-18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Del Rosario v. Bonga</b>, 402 Phil. 949, 957-958, (2001) [Per J. Panganiban, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>People v. Miranda</b>, 824 Phil. 1043, 1057 (2018) [Per J. Perlas-Bernabe, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 1056. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Rollo</i>, pp. 52-56. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>People v. Tundag</b>, 396 Phil. 873, 887 (2000) [Per J. Quisumbing, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>CLT Realty Development Corp. v. Hi-Grade Feeds-Corp.</b>, 768 Phil. 149, 163-164 (2015) [Per J. Perez, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> 306 Phil. 519 (1994) [<i>Per Curiam, En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 537-538.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[80]</sup> 864 Phil. 59 (2019) [Per C.J. Bersamin, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 69-70. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> 580 Phil. 301 (2008) [Per J. Reyes, R.T., <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i> at 317. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> at 321. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id.</i> at 317. </p><p><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> at 321. </p><p><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id.</i> at 322. </p><p><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> 392 Phil. 618 (2000) [Per J. Kapunan, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id.</i> at 645. </p><p><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> Republic Act No. 6975 (1990), Department of the Interior and Local Government Act of 1990. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[93]</sup> Republic Act No. 6975, chapter III (A), sec. 24(f). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[94]</sup> Republic Act No. 10591, art. III, sec. 8. </p><p><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> Republic Act No. 10591, art. VI, sec. 44. </p><p><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> 923 Phil. 451 (2019) [Per J. Leonen, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Id.</i> at 433. </p><p><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <b>Acosta v. Ochoa</b>, 865 Phil. 400, 433 (2019) [Per J. Leonen, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <b>Republic v. Rosario</b>, 779 Phil. 418, 432 (2016) [Per J. Perez, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[104]</sup> Republic Act No. 6975, chapter III (A), sec. 24(f). </p><p><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Rollo</i>, p. 30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <i>Id.</i> at 28. </p><p><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <b>Marcos v. People</b>, 914 Phil. 388, 401 (2021) [Per J. Carandang, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> <b>People v. Martin</b>, 853 Phil. 322, 350 (2019) [Per J. Reyes, Jr., A., Third Division]. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>
