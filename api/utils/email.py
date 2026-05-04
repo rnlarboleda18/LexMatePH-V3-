@@ -379,7 +379,112 @@ def send_subscription_payment_past_due_email(
         )
         return True
     except Exception as e:
-        logger.error("send_subscription_payment_past_due_email failed for %s: %s", to_email, e)
+        return False
+
+
+def _trial_ending_html(tier_label: str, expires_display: str, hours_left: int, open_url: str) -> str:
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LexMatePH — Trial ending soon</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:'Segoe UI',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:32px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;
+            box-shadow:0 4px 24px rgba(0,0,0,0.08);max-width:600px;width:100%;">
+        <tr>
+          <td style="background:linear-gradient(135deg,#7c3aed 0%,#4f46e5 100%);padding:28px 36px;text-align:center;">
+            <h1 style="margin:0;font-size:22px;font-weight:800;color:#ffffff;">LexMate<span style="color:#fbbf24;">PH</span></h1>
+            <p style="margin:8px 0 0;font-size:12px;color:rgba(255,255,255,0.9);font-weight:600;">Trial reminder</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:32px 36px 24px;">
+            <h2 style="margin:0 0 12px;font-size:18px;font-weight:700;color:#1e1b4b;">Your free trial ends soon</h2>
+            <p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#374151;">
+              Your <strong style="color:#7c3aed;">{tier_label}</strong> trial access ends at
+              <strong>{expires_display}</strong> (about <strong>{hours_left} hours</strong> from when we sent this).
+            </p>
+            <p style="margin:0 0 20px;font-size:15px;line-height:1.65;color:#374151;">
+              When the trial ends, your account moves to the <strong>Free</strong> plan automatically unless you subscribe.
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#faf5ff;border:1.5px solid #ddd6fe;border-radius:12px;">
+              <tr><td style="padding:18px 22px;text-align:center;">
+                <a href="{open_url}" style="display:inline-block;background:#7c3aed;color:#fff;font-weight:700;
+                  font-size:14px;padding:12px 28px;border-radius:10px;text-decoration:none;">Open LexMatePH & subscribe</a>
+              </td></tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:18px 36px;text-align:center;">
+            <p style="margin:0;font-size:12px;color:#9ca3af;">This is a one-time reminder. Questions? support@lexmateph.com</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>"""
+
+
+def _trial_ending_text(tier_label: str, expires_display: str, hours_left: int, open_url: str) -> str:
+    return f"""LexMatePH — Your trial ends soon
+
+Your {tier_label} trial ends at {expires_display} (about {hours_left} hours from when we sent this).
+
+After that, your account moves to the Free plan unless you subscribe.
+
+Open the app and choose a plan:
+{open_url}
+
+This is a one-time reminder.
+— LexMatePH
+"""
+
+
+def send_trial_ending_reminder_email(
+    to_email: str,
+    tier_label: str,
+    expires_at_utc: datetime,
+    hours_window: int,
+) -> bool:
+    """One-time email before trial expiry (caller should claim row first). Non-blocking."""
+    client = _get_client()
+    sender = _sender()
+    if not client or not sender:
+        return False
+
+    if expires_at_utc.tzinfo is None:
+        expires_at_utc = expires_at_utc.replace(tzinfo=timezone.utc)
+    now = datetime.now(timezone.utc)
+    delta = expires_at_utc - now
+    hours_left = max(1, int(delta.total_seconds() // 3600) + (1 if delta.total_seconds() % 3600 > 0 else 0))
+
+    expires_display = expires_at_utc.strftime("%B %d, %Y %H:%M UTC")
+    open_url = f"{_FRONTEND_URL}/decisions"
+
+    try:
+        message = {
+            "senderAddress": sender,
+            "recipients": {"to": [{"address": to_email}]},
+            "content": {
+                "subject": f"LexMatePH: Your {tier_label} trial ends in about {hours_window} hours",
+                "html": _trial_ending_html(tier_label, expires_display, hours_left, open_url),
+                "plainText": _trial_ending_text(tier_label, expires_display, hours_left, open_url),
+            },
+        }
+        poller = client.begin_send(message)
+        result = poller.result()
+        logger.info(
+            "Trial ending reminder sent to %s — messageId=%s",
+            to_email,
+            result.get("id") if isinstance(result, dict) else result,
+        )
+        return True
+    except Exception as e:
+        logger.error("send_trial_ending_reminder_email failed for %s: %s", to_email, e)
         return False
 
 

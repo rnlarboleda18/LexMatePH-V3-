@@ -42,6 +42,54 @@ def past_due_grace_days() -> int:
         return 5
 
 
+def trial_reminder_hours_before_end() -> int:
+    """Send one-time trial-ending email when expires_at is within this many hours. Env: TRIAL_REMINDER_HOURS_BEFORE_END (default 24)."""
+    try:
+        return max(1, min(168, int(os.environ.get("TRIAL_REMINDER_HOURS_BEFORE_END", "24"))))
+    except ValueError:
+        return 24
+
+
+def claim_trial_ending_reminder(cur, clerk_id: str) -> tuple[str, str, object] | None:
+    """
+    If this user is on an active trial ending within trial_reminder_hours_before_end(),
+    set trial_reminder_sent_at and return (email, tier, expires_at) so the caller can send email.
+    Returns None if no send is due or column missing.
+    """
+    if not clerk_id:
+        return None
+    try:
+        hours = trial_reminder_hours_before_end()
+        cur.execute(
+            """
+            UPDATE users SET trial_reminder_sent_at = NOW()
+            WHERE clerk_id = %s
+              AND subscription_source = 'trial'
+              AND subscription_status = 'active'
+              AND subscription_expires_at IS NOT NULL
+              AND subscription_expires_at > NOW()
+              AND subscription_expires_at <= NOW() + make_interval(hours => %s)
+              AND trial_reminder_sent_at IS NULL
+            RETURNING email, subscription_tier, subscription_expires_at
+            """,
+            (clerk_id, hours),
+        )
+        row = cur.fetchone()
+        if not row:
+            return None
+        email, stier, exp_at = row[0], row[1], row[2]
+        if not (email or "").strip():
+            return None
+        logger.info("trial ending reminder claimed for clerk_id=%s", clerk_id)
+        return (email.strip(), (stier or "barrister"), exp_at)
+    except pg_errors.UndefinedColumn:
+        logger.debug("claim_trial_ending_reminder: column missing; run sql/trial_reminder_migration.sql")
+        return None
+    except Exception:
+        logger.exception("claim_trial_ending_reminder error for clerk_id=%s", clerk_id)
+        return None
+
+
 def try_grant_trial(cur, clerk_id: str, trial_tier: str | None = None) -> bool:
     """
     Grant a time-limited trial on a specific paid tier (default barrister).
@@ -63,7 +111,8 @@ def try_grant_trial(cur, clerk_id: str, trial_tier: str | None = None) -> bool:
                 subscription_tier      = %s,
                 subscription_status    = 'active',
                 subscription_source    = 'trial',
-                subscription_expires_at = NOW() + make_interval(hours => %s)
+                subscription_expires_at = NOW() + make_interval(hours => %s),
+                trial_reminder_sent_at = NULL
             WHERE clerk_id = %s
               AND (subscription_source IS NULL OR subscription_source = '')
               AND (subscription_tier IS NULL OR subscription_tier = 'free')

@@ -17,8 +17,14 @@ from utils.trial import (
     expire_past_due_xendit_sub,
     trial_duration_hours,
     past_due_grace_days,
+    claim_trial_ending_reminder,
+    trial_reminder_hours_before_end,
 )
-from utils.email import send_cancellation_email, send_subscription_payment_past_due_email
+from utils.email import (
+    send_cancellation_email,
+    send_subscription_payment_past_due_email,
+    send_trial_ending_reminder_email,
+)
 
 xendit_bp = func.Blueprint()
 
@@ -306,6 +312,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
     # Auto-create DB row if Clerk webhook missed this user
     _ensure_user_exists(clerk_id, req)
     try:
+        trial_reminder_claim = None
         try:
             with _get_db() as conn:
                 with conn.cursor() as cur:
@@ -324,9 +331,19 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         admin_list = [e.strip().lower() for e in ADMIN_EMAILS]
                         is_admin_flag = bool(db_admin) or (em in admin_list)
                         try_grant_founding_promo(cur, clerk_id, is_admin_flag)
+                    trial_reminder_claim = claim_trial_ending_reminder(cur, clerk_id)
                     conn.commit()
         except Exception as ex:
             logging.warning("trial/founding promo expire/grant: %s", ex)
+
+        if trial_reminder_claim:
+            rem_email, rem_tier, rem_exp = trial_reminder_claim
+            send_trial_ending_reminder_email(
+                rem_email,
+                _subscription_tier_label(str(rem_tier)),
+                rem_exp,
+                trial_reminder_hours_before_end(),
+            )
 
         with _get_db() as conn:
             with conn.cursor() as cur:
