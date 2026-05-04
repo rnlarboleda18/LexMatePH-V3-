@@ -137,6 +137,18 @@ describe('consumeFreeTierUsage', () => {
     expect(fetchSpy).not.toHaveBeenCalled();
     expect(r).toEqual(expect.objectContaining({ allowed: true, skipped: true, reason: 'subscription_loading' }));
   });
+
+  it('skips track-usage while Clerk auth is not loaded yet', async () => {
+    const fetchSpy = vi.spyOn(globalThis, 'fetch');
+    const r = await consumeFreeTierUsage({
+      feature: 'case_digest',
+      getToken: async () => null,
+      isSignedIn: false,
+      authLoaded: false,
+    });
+    expect(fetchSpy).not.toHaveBeenCalled();
+    expect(r).toEqual(expect.objectContaining({ allowed: true, skipped: true, reason: 'auth_loading' }));
+  });
 });
 
 describe('getOrCreateAnonymousUsageId', () => {

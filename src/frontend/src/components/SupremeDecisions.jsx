@@ -504,7 +504,7 @@ const MarkdownText = ({ content, onCaseClick, variant = 'default' }) => {
 
 
 const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerge }) => {
-    const { getToken, isSignedIn } = useAuth();
+    const { getToken, isSignedIn, isLoaded: authLoaded } = useAuth();
     const { openUpgradeModal, canAccess, loading: subscriptionLoading } = useSubscription();
 
     // Seed from ?q= so direct links and page-refreshes restore the search.
@@ -615,6 +615,12 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
 
     // Tracks how many prefetch fetches are in-flight; cap at 3 to avoid flooding setState.
     const prefetchInflightRef = useRef(0);
+    /**
+     * With onCaseSelect, selectedDecision stays null, so the old effect always thought the global case
+     * was "new" and re-ran handleCaseClick on every globalSelectedCase update (including full-text patch),
+     * duplicating track-usage and triggering false "couldn't verify daily limit" alerts.
+     */
+    const lastHandledGlobalCaseIdRef = useRef(null);
 
     const prefetchDetails = async (id) => {
         if (!id || prefetchCache[id] || prefetchInflightRef.current >= 3) return;
@@ -709,13 +715,6 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
             window.location.pathname + (qs ? `?${qs}` : '')
         );
     }, [debouncedSearchTerm]);
-
-    // Sync external case selection from App.jsx
-    useEffect(() => {
-        if (externalSelectedCase && externalSelectedCase.id !== selectedDecision?.id) {
-            handleCaseClick(externalSelectedCase);
-        }
-    }, [externalSelectedCase]);
 
 
     const fetchPonentes = async () => {
@@ -881,6 +880,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
     };
 
     const handleCaseClick = async (decision) => {
+        if (decision?.id == null) return;
+        lastHandledGlobalCaseIdRef.current = decision.id;
+
         let fullData = prefetchCache[decision.id];
         const cacheHasDigest = fullData && fullData.digest_facts;
 
@@ -929,6 +931,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                 isSignedIn,
                 canAccess,
                 subscriptionLoading,
+                authLoaded,
             });
             if (!usage.allowed) {
                 notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_unlimited');
@@ -941,6 +944,21 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         }
     };
 
+    // Open the list’s modal when App sets globalSelectedCase without a prior click (same id skipped — see ref).
+    useEffect(() => {
+        const id = externalSelectedCase?.id ?? null;
+        if (id == null) {
+            lastHandledGlobalCaseIdRef.current = null;
+            return;
+        }
+        if (lastHandledGlobalCaseIdRef.current === id) {
+            return;
+        }
+        lastHandledGlobalCaseIdRef.current = id;
+        void handleCaseClick(externalSelectedCase);
+        // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-sync when global case identity changes; handleCaseClick is latest from render
+    }, [externalSelectedCase]);
+
     const handleViewFullText = async (e, decision) => {
         e.stopPropagation();
         const usage = await consumeFreeTierUsage({
@@ -949,6 +967,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
             isSignedIn,
             canAccess,
             subscriptionLoading,
+            authLoaded,
         });
         if (!usage.allowed) {
             notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_unlimited');
@@ -1064,6 +1083,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
             isSignedIn,
             canAccess,
             subscriptionLoading,
+            authLoaded,
         });
         if (!usage.allowed) {
             notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_download_unlimited');

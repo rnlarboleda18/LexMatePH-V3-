@@ -82,6 +82,7 @@ function getEphemeralAnonymousUsageId() {
  * @param {boolean|undefined} opts.isSignedIn — Bearer only when strictly `true`
  * @param {(feature: string) => boolean} [opts.canAccess] — when provided, Amicus+ skips the network round-trip
  * @param {boolean} [opts.subscriptionLoading] — when true with signed-in Clerk, skips metering until tier is known (avoids paid users hitting DB as “free” during cold start)
+ * @param {boolean} [opts.authLoaded=true] — when false (Clerk still booting), skip the track-usage round-trip so we don’t POST as anonymous before session is known
  * @returns {Promise<{ allowed: boolean, skipped?: boolean, unlimited?: boolean, degraded?: boolean, blockedByLimit?: boolean, verifyFailed?: boolean, used?: number, limit?: number, anonymous?: boolean, status?: number, reason?: string }>}
  */
 export async function consumeFreeTierUsage({
@@ -90,6 +91,7 @@ export async function consumeFreeTierUsage({
   isSignedIn,
   canAccess,
   subscriptionLoading = false,
+  authLoaded = true,
 }) {
   try {
     const skipDev =
@@ -105,6 +107,10 @@ export async function consumeFreeTierUsage({
     }
   } catch (_) {
     /* ignore */
+  }
+
+  if (authLoaded === false) {
+    return { allowed: true, skipped: true, reason: 'auth_loading' };
   }
 
   if (isSignedIn === true && subscriptionLoading) {

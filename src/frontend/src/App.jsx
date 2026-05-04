@@ -134,6 +134,7 @@ function App() {
           isSignedIn,
           canAccess,
           subscriptionLoading,
+          authLoaded,
         });
         if (!usage.allowed) {
           notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_unlimited');
@@ -142,7 +143,7 @@ function App() {
         selectGlobalCase(next);
       })();
     },
-    [selectGlobalCase, getToken, isSignedIn, openUpgradeModal, canAccess, subscriptionLoading],
+    [selectGlobalCase, getToken, isSignedIn, openUpgradeModal, canAccess, subscriptionLoading, authLoaded],
   );
 
   const tryOpenBarQuestion = useCallback(
@@ -154,6 +155,7 @@ function App() {
           isSignedIn,
           canAccess,
           subscriptionLoading,
+          authLoaded,
         });
         if (!usage.allowed) {
           notifyUsageBlocked(usage, openUpgradeModal, 'bar_question_unlimited');
@@ -162,7 +164,7 @@ function App() {
         setSelectedQuestion(q);
       })();
     },
-    [getToken, isSignedIn, openUpgradeModal, canAccess, subscriptionLoading],
+    [getToken, isSignedIn, openUpgradeModal, canAccess, subscriptionLoading, authLoaded],
   );
 
   // --- URL ↔ mode mapping ---
@@ -540,6 +542,7 @@ function App() {
         isSignedIn,
         canAccess,
         subscriptionLoading,
+        authLoaded,
       });
       if (!usage.allowed) {
         notifyUsageBlocked(usage, openUpgradeModal, 'flashcard_unlimited');
@@ -565,6 +568,7 @@ function App() {
           isSignedIn,
           canAccess,
           subscriptionLoading,
+          authLoaded,
         });
         if (!usage.allowed) {
           notifyUsageBlocked(usage, openUpgradeModal, 'flashcard_unlimited');

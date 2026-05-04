@@ -321,7 +321,7 @@ function drawDigestPdfWatermark(doc) {
 }
 
 const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
-    const { getToken, isSignedIn } = useAuth();
+    const { getToken, isSignedIn, isLoaded: authLoaded } = useAuth();
     const { canAccess, openUpgradeModal, loading: subscriptionLoading } = useSubscription();
     const canLexPlay = canAccess('lexplay_case_digest');
     const [fullDecision, setFullDecision] = useState(decision);
@@ -442,6 +442,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
             isSignedIn,
             canAccess,
             subscriptionLoading,
+            authLoaded,
         });
         if (!usage.allowed) {
             notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_download_unlimited');
@@ -464,6 +465,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
             isSignedIn,
             canAccess,
             subscriptionLoading,
+            authLoaded,
         });
         if (!usage.allowed) {
             notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_download_unlimited');
