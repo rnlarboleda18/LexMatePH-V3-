@@ -121,13 +121,14 @@ const About = () => {
                   </div>
                   <div className="min-w-0 flex-1 text-left">
                     <h1 className="text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl">
-                      Your Legal Companion
+                      Your All-In-One Legal Companion
                     </h1>
                   </div>
                 </div>
                 <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
-                  Built for law students, teachers, bar candidates, and practitioners: codals, past bar questions,
-                  Supreme Court materials, and study tools in one purple-tinted glass workspace.
+                  Built for law students, teachers, bar candidates, and practitioners: codals also as podcast, past bar
+                  questions, Supreme Court decisions comprehensively digested in beautiful easy to read user interface
+                  also available as podcast, flashcards, and study tools all in one app. No more separate subscriptions.
                 </p>
                 <p className="text-xs text-slate-500 dark:text-slate-500">
                   Official Judiciary RSS and social embeds (SC news) live on the{' '}

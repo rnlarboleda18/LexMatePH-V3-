@@ -103,7 +103,7 @@ const Layout = ({
                                     LexMatePH
                                 </span>
                                 <span className="hidden text-[10px] font-semibold uppercase tracking-[0.16em] text-gray-500 dark:text-gray-400 sm:block">
-                                    Your legal companion
+                                    Your all-in-one legal companion
                                 </span>
                             </div>
                         </div>
