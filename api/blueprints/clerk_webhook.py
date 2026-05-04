@@ -12,6 +12,12 @@ from utils.email import send_new_signup_notification
 clerk_webhook_bp = func.Blueprint()
 
 
+def _unsafe_metadata_from_clerk_user(data: dict) -> dict:
+    """Clerk user payloads include optional unsafe_metadata (dict)."""
+    meta = data.get("unsafe_metadata")
+    return meta if isinstance(meta, dict) else {}
+
+
 def _clerk_primary_email(data: dict):
     """Prefer primary_email_address_id; avoids empty/wrong order in email_addresses."""
     emails = data.get("email_addresses") or []
@@ -92,6 +98,9 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
         email = _clerk_primary_email(data)
         first_name = (data.get("first_name") or "").strip() or None
         last_name  = (data.get("last_name")  or "").strip() or None
+        unsafe_meta = _unsafe_metadata_from_clerk_user(data)
+        signup_intent = (unsafe_meta.get("signup_intent") or "").strip().lower()
+        clerk_trial_tier = unsafe_meta.get("trial_tier")
 
         if not email:
             logging.warning(
@@ -144,21 +153,23 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
                             WHERE clerk_id = %s;
                         """, (clerk_id,))
                     elif evt_type == "user.created":
-                        # Founding promo first (slots limited); trial is the fallback for everyone else
-                        try:
-                            try_grant_founding_promo(cur, clerk_id, is_admin)
-                            cur.execute(
-                                "SELECT subscription_source, founding_promo_slot FROM users WHERE clerk_id = %s",
-                                (clerk_id,),
-                            )
-                            src_row = cur.fetchone()
-                            granted_promo = bool(src_row and src_row[0] == "founding_promo")
-                            promo_slot = src_row[1] if granted_promo else None
-                        except Exception as promo_err:
-                            logging.warning("founding promo grant error: %s", promo_err)
+                        # Explicit "free only" sign-up from pricing modal: skip founding slot + paid trial.
+                        explicit_free = signup_intent == "free"
+                        if not explicit_free:
+                            try:
+                                try_grant_founding_promo(cur, clerk_id, is_admin)
+                                cur.execute(
+                                    "SELECT subscription_source, founding_promo_slot FROM users WHERE clerk_id = %s",
+                                    (clerk_id,),
+                                )
+                                src_row = cur.fetchone()
+                                granted_promo = bool(src_row and src_row[0] == "founding_promo")
+                                promo_slot = src_row[1] if granted_promo else None
+                            except Exception as promo_err:
+                                logging.warning("founding promo grant error: %s", promo_err)
 
-                        if not granted_promo:
-                            granted_trial = try_grant_trial(cur, clerk_id)
+                        if not granted_promo and not explicit_free:
+                            granted_trial = try_grant_trial(cur, clerk_id, clerk_trial_tier)
 
                     conn.commit()
             logging.info(f"Successfully synced Clerk user ({evt_type}): {clerk_id}")

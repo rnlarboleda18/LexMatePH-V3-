@@ -1,15 +1,31 @@
 """
-Universal 24-hour Barrister trial granted to every new user on sign-up.
+24-hour trial on sign-up for paid-style exploration (tier matches Clerk unsafeMetadata).
 Uses subscription_source = 'trial' and subscription_expires_at for expiry.
-Founding promo winners overwrite this with a 30-day slot (higher priority).
+Founding promo (limited slots) is handled separately in the Clerk webhook and takes priority.
 
-Disable entirely by setting TRIAL_ENABLED=false in app settings / local.settings.json.
+Override duration with TRIAL_DURATION_HOURS (default 24).
+Disable trials entirely with TRIAL_ENABLED=false in app settings / local.settings.json.
 """
 import logging
 import os
 from psycopg import errors as pg_errors
 
 logger = logging.getLogger(__name__)
+
+ALLOWED_TRIAL_TIERS = frozenset({"amicus", "juris", "barrister"})
+
+
+def normalize_trial_tier(raw: str | None) -> str:
+    """Map frontend/Clerk metadata to a subscription tier; invalid values → barrister."""
+    t = (raw or "barrister").strip().lower()
+    return t if t in ALLOWED_TRIAL_TIERS else "barrister"
+
+
+def trial_duration_hours() -> int:
+    try:
+        return max(1, int(os.environ.get("TRIAL_DURATION_HOURS", "24")))
+    except ValueError:
+        return 24
 
 
 def _trial_enabled() -> bool:
@@ -18,9 +34,9 @@ def _trial_enabled() -> bool:
     return val not in ("false", "0", "no")
 
 
-def try_grant_trial(cur, clerk_id: str) -> bool:
+def try_grant_trial(cur, clerk_id: str, trial_tier: str | None = None) -> bool:
     """
-    Grant a 24-hour Barrister trial to a newly created user.
+    Grant a time-limited trial on a specific paid tier (default barrister).
     Only activates if the user has no existing subscription (source is NULL/empty).
     Skipped entirely when TRIAL_ENABLED=false.
     Returns True if the trial was granted.
@@ -30,23 +46,25 @@ def try_grant_trial(cur, clerk_id: str) -> bool:
     if not _trial_enabled():
         logger.info("try_grant_trial skipped: TRIAL_ENABLED=false")
         return False
+    tier = normalize_trial_tier(trial_tier)
+    hours = trial_duration_hours()
     try:
         cur.execute(
             """
             UPDATE users SET
-                subscription_tier      = 'barrister',
+                subscription_tier      = %s,
                 subscription_status    = 'active',
                 subscription_source    = 'trial',
-                subscription_expires_at = NOW() + INTERVAL '24 hours'
+                subscription_expires_at = NOW() + make_interval(hours => %s)
             WHERE clerk_id = %s
               AND (subscription_source IS NULL OR subscription_source = '')
               AND (subscription_tier IS NULL OR subscription_tier = 'free')
             """,
-            (clerk_id,),
+            (tier, hours, clerk_id),
         )
         granted = cur.rowcount > 0
         if granted:
-            logger.info("24h trial granted to clerk_id=%s", clerk_id)
+            logger.info("%sh %s trial granted to clerk_id=%s", hours, tier, clerk_id)
         return granted
     except (pg_errors.UndefinedColumn, pg_errors.UndefinedTable) as e:
         logger.warning("try_grant_trial skipped (columns missing): %s", e)

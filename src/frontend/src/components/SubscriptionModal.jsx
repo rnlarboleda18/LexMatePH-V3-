@@ -4,6 +4,18 @@ import { X, Check, Zap, Star, Crown, Shield, Loader2 } from 'lucide-react';
 import { useAuth, useClerk } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
 
+/** Build return URL for Clerk after sign-up (keeps path; adds subscribe for paid intent). */
+function signUpReturnUrl(subscribePlanId) {
+  if (typeof window === 'undefined') return '/';
+  const path = window.location.pathname || '/';
+  const hash = window.location.hash || '';
+  if (!subscribePlanId) {
+    const qs = window.location.search || '';
+    return `${path}${qs}${hash}`;
+  }
+  return `${path}?subscribe=${encodeURIComponent(subscribePlanId)}${hash}`;
+}
+
 const PLANS = [
   {
     id: 'free',
@@ -113,6 +125,7 @@ export default function SubscriptionModal({ onClose, guestPrompt = false }) {
   const { redirectToSignUp } = useClerk();
   const [billing, setBilling] = useState('monthly');
   const [bypassMode, setBypassMode] = useState(false);
+  const [trialHours, setTrialHours] = useState(24);
   const [loadingPlan, setLoadingPlan] = useState(null);
   const [successPlan, setSuccessPlan] = useState(null);
   const [errorMsg, setErrorMsg] = useState('');
@@ -133,6 +146,8 @@ export default function SubscriptionModal({ onClose, guestPrompt = false }) {
       .then(r => r.json())
       .then(data => {
         setBypassMode(data.bypass_mode === true);
+        const h = data.trial_duration_hours;
+        if (typeof h === 'number' && h > 0) setTrialHours(h);
       })
       .catch(() => {});
   }, []);
@@ -141,7 +156,10 @@ export default function SubscriptionModal({ onClose, guestPrompt = false }) {
     // In guest-prompt mode, Free tier signs the user up for free.
     if (plan.id === 'free') {
       if (guestPrompt && !isSignedIn) {
-        redirectToSignUp({ redirectUrl: window.location.pathname });
+        redirectToSignUp({
+          redirectUrl: signUpReturnUrl(null),
+          unsafeMetadata: { signup_intent: 'free' },
+        });
       }
       return;
     }
@@ -151,7 +169,8 @@ export default function SubscriptionModal({ onClose, guestPrompt = false }) {
     // land back on the pricing page after registering.
     if (!isSignedIn) {
       redirectToSignUp({
-        redirectUrl: window.location.pathname + '?subscribe=' + plan.id,
+        redirectUrl: signUpReturnUrl(plan.id),
+        unsafeMetadata: { signup_intent: 'paid_explore', trial_tier: plan.id },
       });
       return;
     }
@@ -265,11 +284,11 @@ export default function SubscriptionModal({ onClose, guestPrompt = false }) {
               id="subscription-modal-title"
               className="text-lg font-extrabold tracking-tight text-white drop-shadow-sm sm:text-xl"
             >
-              {guestPrompt ? 'Continue Your Smart Study' : 'Upgrade Your Plan'}
+              {guestPrompt ? 'Pick a plan to get started' : 'Upgrade Your Plan'}
             </h2>
             <p className="mt-0.5 text-[11px] font-medium text-white/75">
               {guestPrompt
-                ? 'Your free session has ended — sign up or choose a plan to keep going.'
+                ? `Pick a paid tier and sign up — you get ${trialHours} hours on that tier first. Then complete checkout to keep paid access; billing repeats until you cancel. Cancel and you return to Free.`
                 : <>GCash · Maya · GrabPay · Card · QR Ph · Direct Debit · <span className="text-white/50">Powered by Xendit</span></>}
             </p>
           </div>
@@ -299,6 +318,14 @@ export default function SubscriptionModal({ onClose, guestPrompt = false }) {
         <div
           className={`grid grid-cols-1 gap-tile md:grid-cols-4 md:items-stretch ${isMobileLayout ? 'p-4 sm:p-5' : 'p-5'}`}
         >
+          {guestPrompt && (
+            <div className="md:col-span-4 mb-1 rounded-xl border border-violet-200/80 bg-white/90 p-3 text-xs leading-snug text-slate-700 shadow-sm dark:border-violet-500/30 dark:bg-slate-800/90 dark:text-slate-200">
+              <strong className="font-semibold text-violet-800 dark:text-violet-200">How it works:</strong>{' '}
+              Start for Free stays on the Free tier. For a paid tier, sign up to use that plan&apos;s features for{' '}
+              <strong className="font-semibold">{trialHours} hours</strong> first, then finish checkout to stay subscribed.
+              Paid plans renew until you cancel; after you cancel, you go back to Free-tier limits once access ends.
+            </div>
+          )}
           {PLANS.map(plan => {
             const isCurrent = plan.id === tier;
             const freeSignUpAllowed = plan.id === 'free' && guestPrompt && !isSignedIn;
@@ -411,7 +438,7 @@ export default function SubscriptionModal({ onClose, guestPrompt = false }) {
           className={`text-center text-xs text-gray-400 dark:text-gray-600 ${isMobileLayout ? 'px-4 pb-4 sm:px-5 sm:pb-5' : 'px-5 pb-5'}`}
         >
           {guestPrompt
-            ? 'GCash · Maya · Card · QR Ph · Powered by Xendit · Cancel anytime'
+            ? 'Payments via Xendit · Cancel subscription in account settings · You keep access through the end of any paid period'
             : 'Secured by Xendit · Cancel anytime'}
         </p>
       </div>

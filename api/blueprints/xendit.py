@@ -11,7 +11,12 @@ from datetime import datetime, timezone, timedelta
 
 from utils.clerk_auth import get_authenticated_user_id
 from utils.founding_promo import expire_founding_promo_for_user, try_grant_founding_promo
-from utils.trial import expire_trial_for_user, expire_cancelled_xendit_sub, expire_past_due_xendit_sub
+from utils.trial import (
+    expire_trial_for_user,
+    expire_cancelled_xendit_sub,
+    expire_past_due_xendit_sub,
+    trial_duration_hours,
+)
 from utils.email import send_cancellation_email
 
 xendit_bp = func.Blueprint()
@@ -868,7 +873,7 @@ def available_plans(req: func.HttpRequest) -> func.HttpResponse:
     }
 
     # Check if founding promo slots are still available (best-effort; public endpoint).
-    from utils.founding_promo import get_promo_slot_limit
+    from utils.founding_promo import get_promo_slot_limit, get_promo_duration_days
     founding_promo_available = False
     founding_promo_slots_remaining = 0
     try:
@@ -895,6 +900,8 @@ def available_plans(req: func.HttpRequest) -> func.HttpResponse:
             "payment_provider": "xendit",
             "founding_promo_available": founding_promo_available,
             "founding_promo_slots_remaining": founding_promo_slots_remaining,
+            "founding_promo_duration_days": get_promo_duration_days(),
+            "trial_duration_hours": trial_duration_hours(),
         }),
         mimetype="application/json", status_code=200,
     )

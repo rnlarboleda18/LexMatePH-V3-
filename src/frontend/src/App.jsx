@@ -210,6 +210,8 @@ function App() {
   const [showGuestModal, setShowGuestModal] = useState(null); // null | 'subscription' | 'founding_promo'
   const [guestModalDismissedAt, setGuestModalDismissedAt] = useState(null); // timestamp of last dismiss
   const [foundingPromoAvailable, setFoundingPromoAvailable] = useState(false);
+  const [foundingPromoDurationDays, setFoundingPromoDurationDays] = useState(30);
+  const [trialDurationHours, setTrialDurationHours] = useState(24);
   const [showPwaModal, setShowPwaModal] = useState(false);
   const [pwaInstallPrompt, setPwaInstallPrompt] = useState(null);
 
@@ -403,16 +405,21 @@ function App() {
   useEffect(() => {
     fetch('/api/available-plans')
       .then((r) => r.json())
-      .then((data) => { setFoundingPromoAvailable(data.founding_promo_available === true); })
+      .then((data) => {
+        setFoundingPromoAvailable(data.founding_promo_available === true);
+        const d = data.founding_promo_duration_days;
+        if (typeof d === 'number' && d > 0) setFoundingPromoDurationDays(d);
+        const h = data.trial_duration_hours;
+        if (typeof h === 'number' && h > 0) setTrialDurationHours(h);
+      })
       .catch(() => {});
   }, []);
 
-  // Gate modal: show after 1 second on first load; re-show 5 minutes after each dismissal.
-  // Runs whenever auth state, dismiss timestamp, or modal visibility changes.
+  // Gate modal: show on first load; re-show after GUEST_GATE_GRACE_MS when dismissed.
   useEffect(() => {
     if (!authLoaded || isSignedIn || showGuestModal !== null) return;
     const delay = guestModalDismissedAt === null
-      ? 1000
+      ? 0
       : Math.max(0, GUEST_GATE_GRACE_MS - (Date.now() - guestModalDismissedAt));
     const timer = setTimeout(() => {
       setShowGuestModal(foundingPromoAvailable ? 'founding_promo' : 'subscription');
@@ -1134,7 +1141,11 @@ function App() {
       )}
       {showGuestModal === 'founding_promo' && (
         <Suspense fallback={null}>
-          <FoundingPromoModal onClose={handleGuestModalClose} />
+          <FoundingPromoModal
+            onClose={handleGuestModalClose}
+            promoDurationDays={foundingPromoDurationDays}
+            postPromoTrialHours={trialDurationHours}
+          />
         </Suspense>
       )}
       {showGuestModal === 'subscription' && (
