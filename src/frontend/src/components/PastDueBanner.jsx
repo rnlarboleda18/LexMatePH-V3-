@@ -3,22 +3,27 @@ import { AlertTriangle, X } from 'lucide-react';
 import { useSubscription } from '../context/SubscriptionContext';
 
 /**
- * Shows a sticky warning banner when the user's payment has failed and the
- * account is in a grace period (status === 'past_due').
- *
- * The backend sets subscription_expires_at = NOW() + 30 days on the first
- * failed cycle, so expiresAt here is the last day of free access. After
- * that, expire_past_due_xendit_sub() downgrades the account to Free.
+ * Shows a sticky warning when subscription payment failed and the account is
+ * in grace (status === 'past_due'). Grace length comes from the API
+ * (PAST_DUE_GRACE_DAYS, default 5). After subscription_expires_at passes,
+ * the backend downgrades to Free.
  */
 export default function PastDueBanner() {
-  const { status, expiresAt, isAdmin } = useSubscription();
+  const { status, expiresAt, isAdmin, pastDueGraceDays } = useSubscription();
   const [dismissed, setDismissed] = useState(false);
 
   if (isAdmin || status !== 'past_due' || dismissed) return null;
 
+  const graceDays = typeof pastDueGraceDays === 'number' && pastDueGraceDays > 0 ? pastDueGraceDays : 5;
+
   const deadlineText = expiresAt
-    ? new Date(expiresAt).toLocaleDateString('en-PH', {
-        month: 'long', day: 'numeric', year: 'numeric',
+    ? new Date(expiresAt).toLocaleString('en-PH', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        timeZoneName: 'short',
       })
     : 'soon';
 
@@ -36,11 +41,13 @@ export default function PastDueBanner() {
 
       <p className="flex-1">
         <strong className="font-semibold">Payment failed.</strong>{' '}
-        We were unable to charge your payment method for this billing cycle.
-        Xendit will retry automatically — please ensure your account has sufficient funds.{' '}
-        Your {'\u00a0'}
-        <strong className="font-semibold">full access is maintained until {deadlineText}</strong>.
-        After that, your account will move to the Free plan if payment remains unsettled.
+        We could not complete your subscription charge for this billing cycle. Our payment partner may retry automatically;
+        please ensure your payment method and balance are in good standing.{' '}
+        You have a <strong className="font-semibold">{graceDays}-day</strong> grace period (see deadline below).{' '}
+        <strong className="font-semibold">
+          Full access continues until {deadlineText}. If payment is still not settled after that, your account will be
+          downgraded to the Free plan.
+        </strong>
       </p>
 
       <button

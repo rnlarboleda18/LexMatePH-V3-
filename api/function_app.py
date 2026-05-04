@@ -114,7 +114,7 @@ def health_db(req: func.HttpRequest) -> func.HttpResponse:
 
 @app.timer_trigger(schedule="0 0 2 * * *", arg_name="myTimer", run_on_startup=False)
 def founding_promo_expire_timer(myTimer: func.TimerRequest) -> None:
-    """Daily at 02:00 UTC: set founding-promo users to Free after FOUNDING_PROMO_DURATION_DAYS (default 30)."""
+    """Daily at 02:00 UTC: expire trials, past-due Xendit grace, and founding-promo periods."""
     import psycopg
     from utils.founding_promo import expire_all_founding_promo_past_due
 
@@ -124,8 +124,10 @@ def founding_promo_expire_timer(myTimer: func.TimerRequest) -> None:
         return
     try:
         with psycopg.connect(cs) as conn:
-            from utils.trial import expire_all_trials
+            from utils.trial import expire_all_trials, expire_all_past_due_xendit_subs
+
             expire_all_trials(conn)
+            expire_all_past_due_xendit_subs(conn)
             expire_all_founding_promo_past_due(conn)
     except Exception as e:
         logging.error("founding_promo_expire_timer: %s", e)

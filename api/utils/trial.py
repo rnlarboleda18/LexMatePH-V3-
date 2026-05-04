@@ -34,6 +34,14 @@ def _trial_enabled() -> bool:
     return val not in ("false", "0", "no")
 
 
+def past_due_grace_days() -> int:
+    """Grace period (days) after a failed Xendit cycle before downgrade to Free. Env: PAST_DUE_GRACE_DAYS (default 5)."""
+    try:
+        return max(1, min(90, int(os.environ.get("PAST_DUE_GRACE_DAYS", "5"))))
+    except ValueError:
+        return 5
+
+
 def try_grant_trial(cur, clerk_id: str, trial_tier: str | None = None) -> bool:
     """
     Grant a time-limited trial on a specific paid tier (default barrister).
@@ -146,9 +154,9 @@ def expire_cancelled_xendit_sub(cur, clerk_id: str) -> int:
 
 def expire_past_due_xendit_sub(cur, clerk_id: str) -> int:
     """
-    Downgrade a user who has been past_due for more than 30 days.
-    The 30-day grace period end is stored in subscription_expires_at when
-    _handle_cycle_failed fires.
+    Downgrade a user who has been past_due past subscription_expires_at.
+    The grace end time is stored in subscription_expires_at when Xendit cycle
+    retry/failure webhooks fire (see past_due_grace_days()).
 
     Called on every subscription-status request.
     Returns the number of rows updated (0 or 1).
@@ -184,8 +192,8 @@ def expire_past_due_xendit_sub(cur, clerk_id: str) -> int:
 
 def expire_all_past_due_xendit_subs(conn) -> int:
     """
-    Batch downgrade of all past_due users whose 30-day grace period has elapsed.
-    Can be called from a nightly timer.
+    Batch downgrade of all past_due users whose grace period has ended
+    (subscription_expires_at < NOW()). Call from the daily timer with expire_all_trials.
     """
     try:
         with conn.cursor() as cur:

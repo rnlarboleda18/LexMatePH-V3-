@@ -16,8 +16,9 @@ from utils.trial import (
     expire_cancelled_xendit_sub,
     expire_past_due_xendit_sub,
     trial_duration_hours,
+    past_due_grace_days,
 )
-from utils.email import send_cancellation_email
+from utils.email import send_cancellation_email, send_subscription_payment_past_due_email
 
 xendit_bp = func.Blueprint()
 
@@ -133,6 +134,41 @@ def _next_anchor_date(interval: str) -> str:
 
 
 
+def _subscription_tier_label(tier: str | None) -> str:
+    return {
+        "amicus": "Amicus",
+        "juris": "Juris",
+        "barrister": "Barrister",
+    }.get((tier or "").strip().lower(), "Paid plan")
+
+
+def _notify_subscription_payment_grace(plan_id: str, grace_fallback: datetime, *, final_failure: bool) -> None:
+    """Load user by Xendit plan id and email them about grace / downgrade (non-blocking)."""
+    if not plan_id:
+        return
+    try:
+        with _get_db() as conn:
+            with conn.cursor() as cur:
+                cur.execute(
+                    """SELECT email, subscription_tier, subscription_expires_at
+                       FROM users WHERE xendit_plan_id = %s""",
+                    (plan_id,),
+                )
+                row = cur.fetchone()
+        if not row or not (row[0] or "").strip():
+            return
+        raw_email, stier, exp_at = row[0], row[1], row[2]
+        deadline = exp_at if exp_at is not None else grace_fallback
+        send_subscription_payment_past_due_email(
+            raw_email.strip(),
+            _subscription_tier_label(stier),
+            deadline,
+            final_failure=final_failure,
+        )
+    except Exception as e:
+        logging.warning("_notify_subscription_payment_grace: %s", e)
+
+
 def _ensure_user_exists(clerk_id: str, req: func.HttpRequest):
     """Create a DB row for this Clerk user if one doesn't exist yet.
 
@@ -215,10 +251,13 @@ def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, payment_token
             "retry_interval": "DAY",
             "retry_interval_count": 3,
             "total_retry": 3,
+            "failed_attempt_notifications": [1, 2, 3],
         },
         "immediate_payment": False,  # first payment already collected via the PAY session
         "failed_cycle_action": "RESUME",
         "notification_channels": ["EMAIL"],
+        "payment_link_for_failed_attempt": True,
+        "locale": "en",
         "metadata": {
             "clerk_id": clerk_id,
             "plan_key": plan_key,
@@ -368,6 +407,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                         "founding_promo_slot": founding_slot,
                         "subscription_source": sub_source,
                         "can_cancel_xendit": can_cancel_xendit,
+                        "past_due_grace_days": past_due_grace_days(),
                     }),
                     mimetype="application/json", status_code=200,
                     headers={"Cache-Control": "no-store, no-cache, must-revalidate"},
@@ -902,6 +942,7 @@ def available_plans(req: func.HttpRequest) -> func.HttpResponse:
             "founding_promo_slots_remaining": founding_promo_slots_remaining,
             "founding_promo_duration_days": get_promo_duration_days(),
             "trial_duration_hours": trial_duration_hours(),
+            "past_due_grace_days": past_due_grace_days(),
         }),
         mimetype="application/json", status_code=200,
     )
@@ -1405,16 +1446,17 @@ def _handle_cycle_succeeded(data: dict):
 def _handle_cycle_failed(data: dict):
     """recurring.cycle.failed — all retries exhausted.
 
-    Sets status to past_due and records a 30-day grace period in
-    subscription_expires_at. If the payment is not resolved within 30 days,
+    Sets status to past_due and records a grace period (PAST_DUE_GRACE_DAYS) in
+    subscription_expires_at. If the payment is not resolved by then,
     expire_past_due_xendit_sub() will downgrade the user to Free on their
-    next subscription-status request.
+    next subscription-status request (or nightly batch).
     """
     plan_id = data.get("recurring_plan_id", "")
     if not plan_id:
         logging.warning("recurring.cycle.failed: missing recurring_plan_id")
         return
-    grace_until = datetime.now(timezone.utc) + timedelta(days=30)
+    grace_days = past_due_grace_days()
+    grace_until = datetime.now(timezone.utc) + timedelta(days=grace_days)
     try:
         with _get_db() as conn:
             with conn.cursor() as cur:
@@ -1432,6 +1474,7 @@ def _handle_cycle_failed(data: dict):
             "recurring.cycle.failed: plan_id=%s — grace period until %s",
             plan_id, grace_until,
         )
+        _notify_subscription_payment_grace(plan_id, grace_until, final_failure=True)
     except Exception as e:
         logging.error(f"recurring.cycle.failed: DB update failed: {e}")
 
@@ -1446,7 +1489,8 @@ def _handle_cycle_retrying(data: dict):
     if not plan_id:
         logging.warning("recurring.cycle.retrying: missing recurring_plan_id")
         return
-    grace_until = datetime.now(timezone.utc) + timedelta(days=30)
+    grace_days = past_due_grace_days()
+    grace_until = datetime.now(timezone.utc) + timedelta(days=grace_days)
     try:
         with _get_db() as conn:
             with conn.cursor() as cur:
@@ -1459,5 +1503,6 @@ def _handle_cycle_retrying(data: dict):
                 )
                 conn.commit()
         logging.info(f"recurring.cycle.retrying: plan_id={plan_id}")
+        _notify_subscription_payment_grace(plan_id, grace_until, final_failure=False)
     except Exception as e:
         logging.error(f"recurring.cycle.retrying: DB update failed: {e}")

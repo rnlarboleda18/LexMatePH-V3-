@@ -247,6 +247,142 @@ def send_cancellation_email(
         return False
 
 
+def _past_due_payment_html(
+    tier_label: str,
+    deadline_display: str,
+    final_failure: bool,
+    billing_url: str,
+) -> str:
+    scenario = (
+        "Your latest subscription charge did not go through after all retry attempts."
+        if final_failure
+        else "We could not charge your subscription for this billing cycle. Our payment partner will retry automatically."
+    )
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LexMatePH — Payment action needed</title>
+</head>
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:'Segoe UI',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:32px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;
+            box-shadow:0 4px 24px rgba(0,0,0,0.08);max-width:600px;width:100%;">
+        <tr>
+          <td style="background:linear-gradient(135deg,#b45309 0%,#d97706 100%);padding:28px 36px;text-align:center;">
+            <h1 style="margin:0;font-size:22px;font-weight:800;color:#ffffff;">LexMate<span style="color:#fef08a;">PH</span></h1>
+            <p style="margin:8px 0 0;font-size:12px;color:rgba(255,255,255,0.9);font-weight:600;">Subscription payment</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:32px 36px 24px;">
+            <h2 style="margin:0 0 12px;font-size:18px;font-weight:700;color:#1e1b4b;">Payment needs your attention</h2>
+            <p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#374151;">{scenario}</p>
+            <p style="margin:0 0 16px;font-size:15px;line-height:1.65;color:#374151;">
+              Your <strong style="color:#7c3aed;">{tier_label}</strong> benefits stay active until
+              <strong>{deadline_display}</strong>.
+            </p>
+            <p style="margin:0 0 20px;font-size:15px;line-height:1.65;color:#991b1b;font-weight:600;">
+              If payment is still not settled by that time, your account will be downgraded to the Free plan automatically.
+            </p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#faf5ff;border:1.5px solid #ddd6fe;border-radius:12px;">
+              <tr><td style="padding:18px 22px;text-align:center;">
+                <a href="{billing_url}" style="display:inline-block;background:#7c3aed;color:#fff;font-weight:700;
+                  font-size:14px;padding:12px 28px;border-radius:10px;text-decoration:none;">Open billing in LexMatePH</a>
+              </td></tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:18px 36px;text-align:center;">
+            <p style="margin:0;font-size:12px;color:#9ca3af;">Questions? support@lexmateph.com</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>"""
+
+
+def _past_due_payment_text(
+    tier_label: str,
+    deadline_display: str,
+    final_failure: bool,
+    billing_url: str,
+) -> str:
+    scenario = (
+        "Your latest subscription charge did not go through after all retry attempts."
+        if final_failure
+        else "We could not charge your subscription for this billing cycle. Our payment partner will retry automatically."
+    )
+    return f"""LexMatePH — Subscription payment
+
+{scenario}
+
+Plan: {tier_label}
+Keep full access until: {deadline_display}
+
+IMPORTANT: If payment is still not settled by that time, your account will be downgraded to the Free plan automatically.
+
+Update payment or review billing:
+{billing_url}
+
+— LexMatePH
+"""
+
+
+def send_subscription_payment_past_due_email(
+    to_email: str,
+    tier_label: str,
+    grace_until_utc: datetime,
+    *,
+    final_failure: bool,
+) -> bool:
+    """Notify user of failed / retrying subscription charge and automatic downgrade after grace. Non-blocking."""
+    client = _get_client()
+    sender = _sender()
+    if not client or not sender:
+        return False
+
+    if grace_until_utc.tzinfo is None:
+        grace_until_utc = grace_until_utc.replace(tzinfo=timezone.utc)
+    deadline_display = grace_until_utc.strftime("%B %d, %Y %H:%M UTC")
+    billing_url = f"{_FRONTEND_URL}/decisions"
+    subject = (
+        "LexMatePH: Your subscription payment failed — action needed"
+        if final_failure
+        else "LexMatePH: Subscription payment issue — please check your payment method"
+    )
+
+    try:
+        message = {
+            "senderAddress": sender,
+            "recipients": {"to": [{"address": to_email}]},
+            "content": {
+                "subject": subject,
+                "html": _past_due_payment_html(
+                    tier_label, deadline_display, final_failure, billing_url
+                ),
+                "plainText": _past_due_payment_text(
+                    tier_label, deadline_display, final_failure, billing_url
+                ),
+            },
+        }
+        poller = client.begin_send(message)
+        result = poller.result()
+        logger.info(
+            "Past-due payment email sent to %s (final=%s) — messageId=%s",
+            to_email,
+            final_failure,
+            result.get("id") if isinstance(result, dict) else result,
+        )
+        return True
+    except Exception as e:
+        logger.error("send_subscription_payment_past_due_email failed for %s: %s", to_email, e)
+        return False
+
+
 # ─── Generic new-signup admin notification ────────────────────────────────────
 
 _SOURCE_LABELS = {

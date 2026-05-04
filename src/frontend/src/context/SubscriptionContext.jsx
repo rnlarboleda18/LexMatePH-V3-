@@ -75,6 +75,7 @@ export function SubscriptionProvider({ children }) {
   const [expiresAt, setExpiresAt] = useState(null);
   const [subscriptionSource, setSubscriptionSource] = useState(null);
   const [canCancelXendit, setCanCancelXendit] = useState(false);
+  const [pastDueGraceDays, setPastDueGraceDays] = useState(5);
   const [isAdmin, setIsAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
@@ -96,6 +97,7 @@ export function SubscriptionProvider({ children }) {
       setSubscriptionSource(null);
       setCanCancelXendit(false);
       setExpiresAt(null);
+      setPastDueGraceDays(5);
       setLoading(false);
       return 'free';
     }
@@ -114,6 +116,7 @@ export function SubscriptionProvider({ children }) {
       setTier('barrister');
       setStatus('active');
       setCanCancelXendit(false);
+      setPastDueGraceDays(5);
       setLoading(false);
       return 'barrister';
     }
@@ -159,6 +162,8 @@ export function SubscriptionProvider({ children }) {
         setSubscriptionSource(data.subscription_source || null);
         setCanCancelXendit(data.can_cancel_xendit === true);
         setIsAdmin(backendAdmin);
+        const g = data.past_due_grace_days;
+        if (typeof g === 'number' && g > 0) setPastDueGraceDays(g);
         setTokenRetry(0);
         console.log(`[Subscription] Tier: ${effectiveTier}, Admin: ${backendAdmin}, Email: ${data.email || 'N/A'}`);
         return effectiveTier;
@@ -320,6 +325,7 @@ export function SubscriptionProvider({ children }) {
         foundingPromoDaysLeft,
         subscriptionSource,
         canCancelXendit,
+        pastDueGraceDays,
         loading,
         canAccess,
         requireAccess,
