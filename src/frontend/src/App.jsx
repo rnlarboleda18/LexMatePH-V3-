@@ -31,6 +31,20 @@ import {
   FILTER_SEARCH_ICON_CLASS,
   FILTER_FIELD_LABEL,
 } from './utils/filterChromeClasses';
+import { apiUrl } from './utils/apiUrl';
+
+/** True when the app is already opened as an installed PWA (not a normal browser tab). */
+function isPwaInstalledDisplayMode() {
+  if (typeof window === 'undefined') return false;
+  try {
+    if (window.matchMedia('(display-mode: standalone)').matches) return true;
+    if (window.matchMedia('(display-mode: minimal-ui)').matches) return true;
+    if (window.navigator.standalone === true) return true;
+  } catch {
+    /* ignore */
+  }
+  return false;
+}
 
 const About = lazy(() => import('./components/About'));
 const AdminTools = lazy(() => import('./components/admin/AdminTools'));
@@ -188,11 +202,11 @@ function App() {
 
   // UI State
   /** Initial mode is derived from the URL so deep-links and refreshes land correctly.
-   *  Unknown paths default to supreme_decisions (/decisions).
+   *  Unknown paths default to about (/about).
    *  We read window.location.pathname directly (not useLocation) to avoid subscribing
    *  App to the React Router context, which would cause an extra re-render on every
    *  navigate() call and make child components (e.g. SupremeDecisions) re-render needlessly. */
-  const [mode, setMode] = useState(() => PATH_TO_MODE[window.location.pathname] ?? 'supreme_decisions');
+  const [mode, setMode] = useState(() => PATH_TO_MODE[window.location.pathname] ?? 'about');
   const [flashcardState, setFlashcardState] = useState('setup'); // 'setup' | 'active'
   const [flashcardQuestions, setFlashcardQuestions] = useState([]);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
@@ -440,14 +454,82 @@ function App() {
     return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
-  // PWA install modal: fire once ever (localStorage) after 1 minute of browsing.
+  // While user reads About, warm case digest list API + lazy route chunks in the background.
   useEffect(() => {
-    if (localStorage.getItem('pwa_modal_shown')) return;
-    const timer = setTimeout(() => {
-      localStorage.setItem('pwa_modal_shown', '1');
+    if (mode !== 'about') return undefined;
+    let cancelled = false;
+    const startWarm = () => {
+      if (cancelled) return;
+      const urls = [
+        apiUrl('/api/sc_decisions?search=&page=1&limit=20'),
+        apiUrl('/api/sc_decisions/ponentes'),
+        apiUrl('/api/sc_decisions/divisions'),
+      ];
+      urls.forEach((url) => {
+        fetch(url).catch(() => {});
+      });
+      void import('./components/LexCodeViewer');
+      void import('./components/Updates');
+      void import('./features/lexify/LexifyApp');
+      void import('./components/FlashcardSetup');
+      void import('./components/CaseDecisionModal');
+      void import('./components/QuestionDetailModal');
+    };
+
+    let usedIdle = false;
+    let handle;
+    if (typeof requestIdleCallback !== 'undefined') {
+      usedIdle = true;
+      handle = requestIdleCallback(startWarm, { timeout: 4000 });
+    } else {
+      handle = setTimeout(startWarm, 800);
+    }
+
+    return () => {
+      cancelled = true;
+      if (usedIdle && typeof cancelIdleCallback !== 'undefined') {
+        cancelIdleCallback(handle);
+      } else {
+        clearTimeout(handle);
+      }
+    };
+  }, [mode]);
+
+  // PWA install nudge: first after 1 minute, then every 5 minutes until installed (standalone / iOS home screen).
+  useEffect(() => {
+    let intervalId = null;
+
+    const stopRepeating = () => {
+      if (intervalId != null) {
+        clearInterval(intervalId);
+        intervalId = null;
+      }
+    };
+
+    const tick = () => {
+      if (isPwaInstalledDisplayMode()) {
+        setShowPwaModal(false);
+        stopRepeating();
+        return;
+      }
       setShowPwaModal(true);
-    }, 60 * 1000);
-    return () => clearTimeout(timer);
+    };
+
+    const onAppInstalled = () => {
+      setShowPwaModal(false);
+      stopRepeating();
+    };
+
+    window.addEventListener('appinstalled', onAppInstalled);
+
+    const firstTimer = setTimeout(tick, 60 * 1000);
+    intervalId = setInterval(tick, 5 * 60 * 1000);
+
+    return () => {
+      clearTimeout(firstTimer);
+      stopRepeating();
+      window.removeEventListener('appinstalled', onAppInstalled);
+    };
   }, []);
 
   useEffect(() => {
@@ -458,7 +540,7 @@ function App() {
   // Admin tools are the only mode strictly off-limits without auth.
   useEffect(() => {
     if (!authLoaded || isSignedIn) return;
-    if (mode === 'admin_tools') setMode('supreme_decisions');
+    if (mode === 'admin_tools') setMode('about');
   }, [authLoaded, isSignedIn, mode]);
 
   // Track sign-in / sign-out transitions to clear gate state.
