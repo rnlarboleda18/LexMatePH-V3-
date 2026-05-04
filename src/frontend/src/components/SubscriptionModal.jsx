@@ -278,7 +278,7 @@ export default function SubscriptionModal({ onClose, guestPrompt = false }) {
         <div className="pointer-events-none absolute -right-6 -top-6 h-32 w-32 rounded-full bg-fuchsia-400/20 blur-2xl" />
         <div className="pointer-events-none absolute bottom-0 left-1/2 h-24 w-64 -translate-x-1/2 rounded-full bg-indigo-400/20 blur-2xl" />
 
-        <div className="relative flex flex-col gap-3 px-4 py-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:px-6 sm:py-4">
+        <div className="relative flex flex-col gap-3 px-4 py-3 pr-14 sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:gap-4 sm:px-6 sm:py-4 sm:pr-16">
           <div className="min-w-0 sm:mr-auto">
             <h2
               id="subscription-modal-title"
@@ -292,18 +292,10 @@ export default function SubscriptionModal({ onClose, guestPrompt = false }) {
                 : <>GCash · Maya · GrabPay · Card · QR Ph · Direct Debit · <span className="text-white/50">Powered by Xendit</span></>}
             </p>
           </div>
-          <div className="flex w-full min-w-0 shrink-0 items-center justify-between gap-2 sm:w-auto sm:justify-end sm:gap-3">
+          <div className="flex w-full min-w-0 shrink-0 items-center justify-end gap-2 sm:w-auto sm:justify-end sm:gap-3">
             <div className="min-w-0 flex-1 overflow-x-auto pb-0.5 sm:flex-initial sm:overflow-visible">
               {billingToggleDesktop}
             </div>
-            <button
-              type="button"
-              onClick={onClose}
-              className="touch-manipulation shrink-0 rounded-full p-2 text-white/70 transition-colors hover:bg-white/15 hover:text-white"
-              aria-label="Close"
-            >
-              <X size={20} />
-            </button>
           </div>
         </div>
       </div>
@@ -463,6 +455,14 @@ export default function SubscriptionModal({ onClose, guestPrompt = false }) {
         aria-labelledby="subscription-modal-title"
         onClick={(e) => e.stopPropagation()}
       >
+        <button
+          type="button"
+          onClick={onClose}
+          className="absolute right-2 top-2 z-[100] flex h-10 w-10 touch-manipulation items-center justify-center rounded-full border border-white/50 bg-white/95 text-purple-700 shadow-lg ring-2 ring-black/10 transition hover:bg-white hover:text-purple-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 dark:bg-white/95 dark:text-purple-800"
+          aria-label="Close"
+        >
+          <X size={22} strokeWidth={2.25} />
+        </button>
         {panelContent}
       </div>
     </div>,

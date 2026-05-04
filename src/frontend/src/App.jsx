@@ -210,6 +210,8 @@ function App() {
   const [showGuestModal, setShowGuestModal] = useState(null); // null | 'subscription' | 'founding_promo'
   const [guestModalDismissedAt, setGuestModalDismissedAt] = useState(null); // timestamp of last dismiss
   const [foundingPromoAvailable, setFoundingPromoAvailable] = useState(false);
+  /** Wait for /api/available-plans before choosing guest modal — avoids opening subscription before founding promo flag loads. */
+  const [guestGatePlansReady, setGuestGatePlansReady] = useState(false);
   const [foundingPromoDurationDays, setFoundingPromoDurationDays] = useState(30);
   const [trialDurationHours, setTrialDurationHours] = useState(24);
   const [showPwaModal, setShowPwaModal] = useState(false);
@@ -412,12 +414,13 @@ function App() {
         const h = data.trial_duration_hours;
         if (typeof h === 'number' && h > 0) setTrialDurationHours(h);
       })
-      .catch(() => {});
+      .catch(() => {})
+      .finally(() => setGuestGatePlansReady(true));
   }, []);
 
   // Gate modal: show on first load; re-show after GUEST_GATE_GRACE_MS when dismissed.
   useEffect(() => {
-    if (!authLoaded || isSignedIn || showGuestModal !== null) return;
+    if (!authLoaded || isSignedIn || showGuestModal !== null || !guestGatePlansReady) return;
     const delay = guestModalDismissedAt === null
       ? 0
       : Math.max(0, GUEST_GATE_GRACE_MS - (Date.now() - guestModalDismissedAt));
@@ -425,7 +428,7 @@ function App() {
       setShowGuestModal(foundingPromoAvailable ? 'founding_promo' : 'subscription');
     }, delay);
     return () => clearTimeout(timer);
-  }, [authLoaded, isSignedIn, showGuestModal, guestModalDismissedAt, foundingPromoAvailable]);
+  }, [authLoaded, isSignedIn, showGuestModal, guestModalDismissedAt, foundingPromoAvailable, guestGatePlansReady]);
 
   // Capture the browser's native PWA install prompt so the modal can trigger it.
   useEffect(() => {
