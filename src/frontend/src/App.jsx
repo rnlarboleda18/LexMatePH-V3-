@@ -46,6 +46,18 @@ function isPwaInstalledDisplayMode() {
   return false;
 }
 
+/**
+ * iPhone / iPad (all in-app browsers use WebKit). Used to show Add-to-Home-Screen instructions;
+ * there is no `beforeinstallprompt` on iOS.
+ */
+function isLikelyIosWebKit() {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent || '';
+  if (/iPad|iPhone|iPod/i.test(ua)) return true;
+  if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return true;
+  return false;
+}
+
 const About = lazy(() => import('./components/About'));
 const AdminTools = lazy(() => import('./components/admin/AdminTools'));
 const LegalPage = lazy(() => import('./components/LegalPage'));
@@ -230,6 +242,8 @@ function App() {
   const [trialDurationHours, setTrialDurationHours] = useState(24);
   const [showPwaModal, setShowPwaModal] = useState(false);
   const [pwaInstallPrompt, setPwaInstallPrompt] = useState(null);
+  /** Latest deferred install prompt for interval ticks (avoid stale closure). */
+  const pwaInstallPromptRef = useRef(null);
 
   // Bar search portal
   const [showBarSuggestions, setShowBarSuggestions] = useState(false);
@@ -454,6 +468,10 @@ function App() {
     return () => window.removeEventListener('beforeinstallprompt', handler);
   }, []);
 
+  useEffect(() => {
+    pwaInstallPromptRef.current = pwaInstallPrompt;
+  }, [pwaInstallPrompt]);
+
   // While user reads About, warm case digest list API + lazy route chunks in the background.
   useEffect(() => {
     if (mode !== 'about') return undefined;
@@ -495,7 +513,8 @@ function App() {
     };
   }, [mode]);
 
-  // PWA install nudge: first after 1 minute, then every 5 minutes until installed (standalone / iOS home screen).
+  // PWA install nudge: Chromium gets “Install Now” when `beforeinstallprompt` fired; iOS gets custom
+  // Add-to-Home-Screen steps only (no native install API).
   useEffect(() => {
     let intervalId = null;
 
@@ -512,7 +531,15 @@ function App() {
         stopRepeating();
         return;
       }
-      setShowPwaModal(true);
+      if (pwaInstallPromptRef.current) {
+        setShowPwaModal(true);
+        return;
+      }
+      if (isLikelyIosWebKit()) {
+        setShowPwaModal(true);
+        return;
+      }
+      setShowPwaModal(false);
     };
 
     const onAppInstalled = () => {
@@ -1238,10 +1265,11 @@ function App() {
           <SubscriptionModal onClose={handleGuestModalClose} guestPrompt />
         </Suspense>
       )}
-      {showPwaModal && (
+      {showPwaModal && (pwaInstallPrompt || isLikelyIosWebKit()) && (
         <Suspense fallback={null}>
           <PwaInstallModal
-            deferredPrompt={pwaInstallPrompt}
+            variant={pwaInstallPrompt ? 'deferred' : 'ios'}
+            deferredPrompt={pwaInstallPrompt ?? undefined}
             onClose={() => setShowPwaModal(false)}
           />
         </Suspense>

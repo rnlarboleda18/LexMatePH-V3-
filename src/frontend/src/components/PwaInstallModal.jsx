@@ -2,34 +2,74 @@ import React from 'react';
 import { createPortal } from 'react-dom';
 import { X, Globe, Share2, Smartphone, Download } from 'lucide-react';
 
-const INSTALL_STEPS = [
+/** Shown when the browser exposes `beforeinstallprompt` (Chrome / Edge / Android Chrome, etc.). */
+const DEFERRED_INSTALL_STEPS = [
   {
     step: '1',
-    title: 'Open LexMatePH',
-    body: 'Use Safari on iPhone and iPad. Use Chrome on Android tablets, phones, and desktop.',
+    title: 'Stay on LexMatePH',
+    body: 'Keep this tab open. Install Now uses your browser’s built-in installer.',
     Icon: Globe,
   },
   {
     step: '2',
-    title: 'Install the app',
-    body: 'iPhone: Share (↑), then Add to Home Screen. Android or desktop: tap Install, or ⋮ → Install app.',
+    title: 'Confirm install',
+    body: 'Tap Install Now below, then confirm in the prompt. Or use the install icon in the address bar / ⋮ → Install app.',
     Icon: Share2,
   },
   {
     step: '3',
-    title: 'Open from your home screen',
-    body: 'Tap the LexMatePH icon. On iPhone, turn on Open as Web App if you see that option.',
+    title: 'Open like an app',
+    body: 'Launch LexMatePH from your home screen or app drawer for quicker access and offline use.',
     Icon: Smartphone,
   },
 ];
 
-export default function PwaInstallModal({ onClose, deferredPrompt }) {
+/** Add to Home Screen — Safari, Chrome, and other browsers on iPhone / iPad all use WebKit here. */
+const IOS_INSTALL_STEPS = [
+  {
+    step: '1',
+    title: 'Open the share menu',
+    body: 'Tap Share (square with arrow) in Safari or Chrome on your iPhone or iPad.',
+    Icon: Share2,
+  },
+  {
+    step: '2',
+    title: 'Add to Home Screen',
+    body: 'Scroll the share sheet and tap Add to Home Screen, then Add.',
+    Icon: Smartphone,
+  },
+  {
+    step: '3',
+    title: 'Launch from the home screen',
+    body: 'Tap the LexMatePH icon. If you see Open as Web App, turn it on for a full-screen app feel.',
+    Icon: Globe,
+  },
+];
+
+/** `deferred`: browser install prompt available. `ios`: WebKit / Add to Home Screen instructions only. */
+export default function PwaInstallModal({ onClose, deferredPrompt, variant = 'deferred' }) {
+  const steps = variant === 'ios' ? IOS_INSTALL_STEPS : DEFERRED_INSTALL_STEPS;
+
   const handleInstallNow = async () => {
     if (!deferredPrompt) return;
     deferredPrompt.prompt();
     await deferredPrompt.userChoice;
     onClose();
   };
+
+  const intro =
+    variant === 'ios' ? (
+      <>
+        <span className="font-bold text-violet-700 dark:text-violet-400">On iPhone and iPad,</span>{' '}
+        add LexMatePH to your Home Screen — it opens like an app and works offline after you’ve visited once.
+      </>
+    ) : (
+      <>
+        <span className="font-bold text-violet-700 dark:text-violet-400">Enjoying so far?</span>{' '}
+        Install LexMatePH with one tap below, or use your browser’s install option — launch it like a native app from
+        your home screen.
+      </>
+    );
 
   return createPortal(
     <div
@@ -43,14 +83,11 @@ export default function PwaInstallModal({ onClose, deferredPrompt }) {
         aria-labelledby="pwa-modal-title"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Glow */}
         <div className="pointer-events-none absolute -left-12 -top-12 h-48 w-48 rounded-full bg-violet-400/15 blur-3xl" />
         <div className="pointer-events-none absolute -right-12 bottom-0 h-40 w-40 rounded-full bg-indigo-400/15 blur-3xl" />
 
-        {/* Drag handle (mobile) */}
         <div className="mx-auto mt-3 h-1 w-10 rounded-full bg-gray-300 dark:bg-slate-700 sm:hidden" />
 
-        {/* Header */}
         <div className="relative flex items-start justify-between gap-3 px-5 pt-4 pb-3 sm:pt-5">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-indigo-700 shadow-md shadow-indigo-900/25">
@@ -78,16 +115,11 @@ export default function PwaInstallModal({ onClose, deferredPrompt }) {
           </button>
         </div>
 
-        {/* Body */}
         <div className="relative z-10 px-5 pb-5">
-          <p className="mb-4 text-sm leading-relaxed text-gray-700 dark:text-gray-300">
-            <span className="font-bold text-violet-700 dark:text-violet-400">Enjoying so far?</span>{' '}
-            For seamless access, install LexMatePH as a PWA — launch it like a native app straight
-            from your home screen.
-          </p>
+          <p className="mb-4 text-sm leading-relaxed text-gray-700 dark:text-gray-300">{intro}</p>
 
           <ol className="space-y-2.5">
-            {INSTALL_STEPS.map(({ step, title, body, Icon }) => (
+            {steps.map(({ step, title, body, Icon }) => (
               <li
                 key={step}
                 className="flex gap-3 rounded-xl border border-gray-100 bg-gray-50 p-3 dark:border-slate-700/60 dark:bg-slate-800/50"
@@ -99,38 +131,40 @@ export default function PwaInstallModal({ onClose, deferredPrompt }) {
                   <p className="text-[10px] font-bold uppercase tracking-widest text-indigo-600 dark:text-indigo-400">
                     Step {step}
                   </p>
-                  <p className="mt-0.5 text-xs font-semibold leading-snug text-gray-900 dark:text-white">
-                    {title}
-                  </p>
-                  <p className="mt-0.5 text-[11px] leading-snug text-gray-500 dark:text-gray-400">
-                    {body}
-                  </p>
+                  <p className="mt-0.5 text-xs font-semibold leading-snug text-gray-900 dark:text-white">{title}</p>
+                  <p className="mt-0.5 text-[11px] leading-snug text-gray-500 dark:text-gray-400">{body}</p>
                 </div>
               </li>
             ))}
           </ol>
 
           <div className="mt-4 flex gap-2">
-            {deferredPrompt && (
+            {variant === 'deferred' && deferredPrompt ? (
+              <>
+                <button
+                  type="button"
+                  onClick={handleInstallNow}
+                  className="flex-1 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition-opacity hover:opacity-90 active:scale-[0.99]"
+                >
+                  Install Now
+                </button>
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-bold text-gray-700 transition-colors hover:bg-gray-50 active:scale-[0.99] dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700"
+                >
+                  Got it!
+                </button>
+              </>
+            ) : (
               <button
                 type="button"
-                onClick={handleInstallNow}
-                className="flex-1 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition-opacity hover:opacity-90 active:scale-[0.99]"
+                onClick={onClose}
+                className="w-full rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition-opacity hover:opacity-90 active:scale-[0.99]"
               >
-                Install Now
+                Got it!
               </button>
             )}
-            <button
-              type="button"
-              onClick={onClose}
-              className={`rounded-xl px-4 py-2.5 text-sm font-bold transition-colors active:scale-[0.99] ${
-                deferredPrompt
-                  ? 'border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700'
-                  : 'w-full bg-gradient-to-r from-violet-600 to-indigo-600 text-white shadow-md shadow-indigo-900/20 hover:opacity-90'
-              }`}
-            >
-              Got it!
-            </button>
           </div>
         </div>
       </div>
