@@ -146,6 +146,7 @@ def run_backfill():
                - **Do NOT** use Phil. Reports or SCRA as the primary citation. **Always function G.R. No. and Date.**
                - Example: *People v. Estrada, G.R. No. 123456, December 25, 2025*
                - If G.R. No. is missing in the text, use Case Name + Date.
+               - If the decision date is not in the text, omit it from the title (keep case name and G.R. No. if present)—do **not** write "No date found", "date not found", or similar in `title` or `elaboration`.
             
             **OUTPUT FORMAT:**
             {{

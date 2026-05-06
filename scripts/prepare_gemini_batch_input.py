@@ -37,6 +37,7 @@ Analyze the provided legal text and generate a structured, educational JSON dige
 4. **Structural Alignment:** For every issue listed in "digest_issues", there MUST be a corresponding and clearly labeled bullet point in "digest_ratio" (e.g., "* **On Issue 1:** ...", "* **On Issue 2:** ..."). Do NOT group issues together or skip indices.
 5. **Acronyms & Abbreviations:** You MUST define all acronyms and abbreviations in full upon their first occurrence in the text (e.g., "Sexual Orientation, Gender Identity and Expression, and Sex Characteristics (SOGIESC)"). Subsequent mentions can use the acronym alone. Do NOT use undefined acronyms.
 6. **No "None" Strings:** If a field has no data, use `null` or `[]`. Do not write the literal string "None" or "N/A".
+7. **Cited-case display strings:** In `cited_cases` entries, never write "No date found", "date not found", or similar. If a cited case's decision date is not in the source text, omit the date from the `title` (keep case name and G.R. No. if stated).
 
 **YOUR TASKS (Execute in Order):**
 
@@ -63,6 +64,7 @@ Analyze the provided legal text and generate a structured, educational JSON dige
      * **Applied Cases:** Include ONLY those cases that the Court explicitly emphasized or relied upon as the main precedents. Skip minor citations.
      * If you have space after Distinguished cases (up to 10 total), add the most important Applied cases.
    - **Constraint:** Ensure the 'elaboration' field in the JSON output is populated.
+   - **Citation title:** Prefer "Case Name, G.R. No. XXXXX, Month DD, YYYY" when every part is explicitly stated in the text. If the decision date of a cited case is not stated, omit it—never use "No date found" or similar wording.
 
 3. **TIMELINE GENERATION (For UI Rendering):**
    - Extract key events with dates into a chronological list.

@@ -27,6 +27,14 @@ function _jurisSidebarCacheSet(key, value) {
     _jurisSidebarCache.set(key, { exp: Date.now() + JURIS_SIDEBAR_CACHE_MS, value });
 }
 
+/** Year from `sc_decided_cases.date` for sidebar display; null if missing or not parseable. */
+function scLinkedCaseYear(raw) {
+    if (raw == null || raw === '') return null;
+    const d = new Date(raw);
+    if (Number.isNaN(d.getTime())) return null;
+    return d.getFullYear();
+}
+
 /**
  * Client-side paragraph filter for juris rows.
  * RPC linker rows often use target_paragraph_index NULL or -1 for whole-article / general links,
@@ -119,9 +127,14 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
 
                 // Convert to array and Sort by Date DESC
                 const sortedGroups = Object.values(groups).sort((a, b) => {
-                    const dateA = new Date(a.date);
-                    const dateB = new Date(b.date);
-                    return dateB - dateA; // Newest first
+                    const ya = scLinkedCaseYear(a.date);
+                    const yb = scLinkedCaseYear(b.date);
+                    const na = ya === null;
+                    const nb = yb === null;
+                    if (na && nb) return 0;
+                    if (na) return 1;
+                    if (nb) return -1;
+                    return yb - ya;
                 });
 
                 // Extract unique ponentes, filtering out falsy values
@@ -215,6 +228,7 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                     .filter(group => !ponenteFilter || group.ponente === ponenteFilter)
                     .map((group) => {
                     const firstLink = group.ratios[0];
+                    const year = scLinkedCaseYear(group.date);
                     return (
                         <div
                             key={group.caseId}
@@ -237,14 +251,16 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                                     </span>
                                 </div>
                                 <div className="text-xs text-gray-500 dark:text-gray-400 flex flex-wrap items-center gap-1.5 mt-1">
-                                    <span className="font-semibold text-slate-600 dark:text-slate-300">{new Date(group.date).getFullYear()}</span>
+                                    {year != null && (
+                                        <span className="font-semibold text-slate-600 dark:text-slate-300">{year}</span>
+                                    )}
                                     {group.ponente && (
                                         <>
-                                            <span>•</span>
+                                            {(year != null) && <span>•</span>}
                                             <span className="font-medium text-slate-600 dark:text-slate-300 truncate max-w-[120px]">{group.ponente}</span>
                                         </>
                                     )}
-                                    <span>•</span>
+                                    {(year != null || group.ponente) && <span>•</span>}
                                     <span className="truncate flex-1">{firstLink.subject_area}</span>
                                 </div>
                             </div>

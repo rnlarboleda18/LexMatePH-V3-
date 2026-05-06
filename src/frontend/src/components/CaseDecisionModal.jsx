@@ -6,7 +6,7 @@ import { jsPDF } from "jspdf";
 import { Gavel, FileText, X, BookOpen, Clock, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Download, Landmark, Scale, ExternalLink } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { formatDate } from '../utils/dateUtils';
-import { toTitleCase } from '../utils/textUtils';
+import { toTitleCase, normalizeDigestCitationDisplayText } from '../utils/textUtils';
 import { useLexPlay } from '../features/lexplay';
 import { useSubscription } from '../context/SubscriptionContext';
 import DigestHtmlViewer from './DigestHtmlViewer';
@@ -239,11 +239,16 @@ const CitedCasesSection = React.memo(({ citations }) => {
                 CITED JURISPRUDENCE
             </h4>
             <div className="space-y-3">
-                {items.map((item, idx) => (
+                {items.map((item, idx) => {
+                    const rawTitle = item.case_title || item.title;
+                    const citeTitle =
+                        normalizeDigestCitationDisplayText(rawTitle || '') || rawTitle || '';
+                    const citeElab = normalizeDigestCitationDisplayText(item.elaboration || '');
+                    return (
                     <div key={idx} className="bg-white dark:bg-gray-800 border border-lex rounded-lg p-3 hover:border-indigo-300 dark:hover:border-indigo-700 transition-colors shadow-sm">
                         <div className="flex justify-between items-start gap-3 mb-1">
                             <h5 className="text-[16px] font-bold text-gray-900 dark:text-white flex-grow">
-                                <SmartLink text={item.case_title || item.title} plain />
+                                <SmartLink text={citeTitle || '—'} plain />
                             </h5>
                             {item.type && (
                                 <span className={`px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wide border ${getTypeColor(item.type)} whitespace-nowrap`}>
@@ -251,7 +256,7 @@ const CitedCasesSection = React.memo(({ citations }) => {
                                 </span>
                             )}
                         </div>
-                        {item.elaboration && (
+                        {citeElab && (
                             <div className="text-xs text-gray-600 dark:text-gray-400 mt-1 leading-relaxed border-l-2 border-lex-strong pl-2">
                                 <ReactMarkdown components={{
                                     p: ({ node, ...props }) => <p className="mb-1 last:mb-0" {...props} />,
@@ -263,12 +268,13 @@ const CitedCasesSection = React.memo(({ citations }) => {
                                         </span>
                                     )
                                 }}>
-                                    {item.elaboration}
+                                    {citeElab}
                                 </ReactMarkdown>
                             </div>
                         )}
                     </div>
-                ))}
+                );
+                })}
             </div>
         </div>
     );

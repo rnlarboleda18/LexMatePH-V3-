@@ -87,3 +87,22 @@ export const toTitleCase = (str, skipRomanKeywords = []) => {
         return word.toLowerCase();
     }).join('');
 };
+
+/**
+ * Strip awkward LLM meta-phrases from digest "cited jurisprudence" strings (title / elaboration).
+ * Models sometimes print "No date found" when a cited case's date is not in the source text.
+ */
+export function normalizeDigestCitationDisplayText(s) {
+    if (!s || typeof s !== 'string') return s;
+    let t = s
+        .replace(/\bno\s+date\s+found\b/gi, '')
+        .replace(/\bdate\s+not\s+found\b/gi, '');
+    t = t
+        .replace(/\s*,\s*,+/g, ',')
+        .replace(/\(\s*\)/g, '')
+        .replace(/,\s*$/g, '')
+        .replace(/^\s*,/g, '')
+        .replace(/\s{2,}/g, ' ')
+        .trim();
+    return t;
+}

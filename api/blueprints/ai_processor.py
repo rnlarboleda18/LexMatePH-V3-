@@ -121,6 +121,7 @@ def ai_digest_case(req: func.HttpRequest) -> func.HttpResponse:
                  - **"Distinguished":** Different factual milieu.
                - Extract **Short Titles** (e.g., "People v. Genosa").
                - **Constraint:** Do NOT include the G.R. Number unless the case has no popular name.
+               - **Cited-case lines:** In each `cited_cases` entry, use title plus relationship. Prefer full cite when the source text gives case name, G.R. No., and date. If a cited case's decision date is **not** in the text, omit the date—do **not** write "No date found", "date not found", or similar in `title` or elaboration.
 
             3. **TIMELINE GENERATION (For UI Rendering):**
                - Extract key events with dates into a chronological list.
