@@ -59,6 +59,7 @@ function isLikelyIosWebKit() {
 }
 
 const About = lazy(() => import('./components/About'));
+const Bar2026 = lazy(() => import('./components/Bar2026'));
 const AdminTools = lazy(() => import('./components/admin/AdminTools'));
 const LegalPage = lazy(() => import('./components/LegalPage'));
 const Updates = lazy(() => import('./components/Updates'));
@@ -100,6 +101,7 @@ const MODE_TO_PATH = {
   browse_bar: '/bar-questions',
   lexplay: '/lexplay',
   admin_tools: '/admin',
+  bar_2026: '/bar-2026',
 };
 
 const PATH_TO_MODE = Object.fromEntries(
@@ -564,11 +566,11 @@ function App() {
   }, [mode]);
 
   // Auth guard: unauthenticated users can freely browse all public modes.
-  // Admin tools are the only mode strictly off-limits without auth.
+  // Admin-only modes redirect non-admins to about.
   useEffect(() => {
-    if (!authLoaded || isSignedIn) return;
-    if (mode === 'admin_tools') setMode('about');
-  }, [authLoaded, isSignedIn, mode]);
+    if (!authLoaded || subscriptionLoading) return;
+    if ((mode === 'admin_tools' || mode === 'bar_2026') && !isAdmin) setMode('about');
+  }, [authLoaded, subscriptionLoading, isAdmin, mode]);
 
   // Track sign-in / sign-out transitions to clear gate state.
   const prevSignedInRef = useRef(false);
@@ -718,6 +720,10 @@ function App() {
     setMode('codex');
   }, []);
 
+  const handleToggleBar2026 = useCallback(() => {
+    setMode('bar_2026');
+  }, []);
+
   const isPublicDocumentMode = mode === 'legal';
 
   // --- Public /legal (no dashboard sidebar) ---
@@ -763,6 +769,7 @@ function App() {
           }}
           onToggleLexCode={handleToggleLexCode}
           onToggleAdminTools={() => setMode('admin_tools')}
+          onToggleBar2026={handleToggleBar2026}
           mode={mode}
         />
       }
@@ -1157,6 +1164,11 @@ function App() {
                         <AdminTools />
                       </Suspense>
                     </div>
+                  )}
+                  {effectiveMode === 'bar_2026' && (
+                    <Suspense fallback={<PageLoadingFallback label="Loading BAR 2026…" />}>
+                      <Bar2026 />
+                    </Suspense>
                   )}
                   </>
                 </ErrorBoundary>

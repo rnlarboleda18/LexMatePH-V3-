@@ -1,5 +1,5 @@
 import React from 'react';
-import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, Terminal } from 'lucide-react';
+import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, Terminal, Scale } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
 import { SIDEBAR_NAV_ACTIVE, SIDEBAR_NAV_IDLE, SIDEBAR_MOBILE_AUTH_CARD } from '../utils/filterChromeClasses';
@@ -31,6 +31,7 @@ const Sidebar = ({
   onToggleFlashcard,
   onSelectSubject,
   onToggleAdminTools,
+  onToggleBar2026,
 }) => {
     const { tier, tierLabel, openUpgradeModal, openAccountBillingModal, isAdmin, loading, isFoundingPromo, foundingPromoDaysLeft } = useSubscription();
     const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
@@ -282,6 +283,24 @@ const Sidebar = ({
                 <Book size={20} className={`${mode === 'browse_bar' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
                 Bar Questions
             </button>
+
+            {/* BAR 2026 — admin only */}
+            {isAdmin && (
+                <button
+                    onClick={() => {
+                        if (onToggleBar2026) onToggleBar2026();
+                    }}
+                    className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                    ${mode === 'bar_2026'
+                            ? SIDEBAR_NAV_ACTIVE
+                            : SIDEBAR_NAV_IDLE
+                        }`}
+                >
+                    <Scale size={20} className={`${mode === 'bar_2026' ? 'text-violet-700 dark:text-violet-400' : 'text-violet-600 dark:text-violet-400'} group-hover:scale-110 transition-all duration-200`} />
+                    <span className="flex-1">BAR 2026</span>
+                    <span className="shrink-0 rounded-full bg-violet-100 px-1.5 py-0.5 text-[10px] font-bold text-violet-700 dark:bg-violet-900/40 dark:text-violet-300">NEW</span>
+                </button>
+            )}
 
 
 
