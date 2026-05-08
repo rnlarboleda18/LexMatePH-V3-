@@ -1165,7 +1165,7 @@ function App() {
                       </Suspense>
                     </div>
                   )}
-                  {effectiveMode === 'bar_2026' && (
+                  {isAdmin && effectiveMode === 'bar_2026' && (
                     <Suspense fallback={<PageLoadingFallback label="Loading BAR 2026…" />}>
                       <Bar2026 onCaseClick={selectGlobalCaseGuarded} />
                     </Suspense>
