@@ -57,17 +57,36 @@ def _ai_generate(
     response_mime_type: str = "text/plain",
     temperature: float = 0.2,
     max_tokens: int = 8192,
+    retries: int = 5,
 ) -> str:
-    """Generate content via Vertex AI (when GOOGLE_CLOUD_PROJECT is set) or AI Studio fallback."""
+    """Generate content via Vertex AI with exponential backoff on 429s."""
     from google import genai
+    from google.api_core.exceptions import ResourceExhausted, ServiceUnavailable
     client = get_linker_genai_client()
     cfg = genai.types.GenerateContentConfig(
         response_mime_type=response_mime_type,
         temperature=temperature,
         max_output_tokens=max_tokens,
     )
-    resp = client.models.generate_content(model=model, contents=prompt, config=cfg)
-    return resp.text or ""
+    for attempt in range(retries):
+        try:
+            resp = client.models.generate_content(model=model, contents=prompt, config=cfg)
+            return resp.text or ""
+        except (ResourceExhausted, ServiceUnavailable) as e:
+            if attempt == retries - 1:
+                raise
+            wait = 30 * (2 ** attempt)   # 30s, 60s, 120s, 240s …
+            log.warning("Vertex AI 429/503 (attempt %d/%d), retrying in %ds: %s", attempt + 1, retries, wait, e)
+            time.sleep(wait)
+        except Exception as e:
+            if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e):
+                if attempt == retries - 1:
+                    raise
+                wait = 30 * (2 ** attempt)
+                log.warning("Vertex AI rate limit (attempt %d/%d), retrying in %ds", attempt + 1, retries, wait)
+                time.sleep(wait)
+            else:
+                raise
 
 SUBJECT_MAPS = {
     "criminal":    CRIMINAL_MAP,
@@ -638,7 +657,7 @@ def main():
             upsert_topic(conn, record)
             log.info(f"  ✓ Saved: {topic['roman_num']}.{topic.get('sub_letter','')}")
             success += 1
-            time.sleep(1.0)   # pacing between topics
+            time.sleep(5.0)   # pacing between topics to avoid Vertex AI rate limits
         except Exception as e:
             log.error(f"  ✗ FAILED {topic['roman_num']}.{topic.get('sub_letter','')}: {e}")
             failed += 1
