@@ -416,8 +416,13 @@ export default function Bar2026({ onCaseClick }) {
   const [topicsLoading, setTopicsLoading] = useState(false);
   const [topicsError, setTopicsError] = useState(null);
   const [selectedTopic, setSelectedTopic] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [publishing, setPublishing] = useState(false);
+  const [publishMsg, setPublishMsg] = useState(null);
 
   const active = SUBJECTS.find(s => s.id === activeTab) ?? SUBJECTS[0];
+
+  const draftCount = topics.filter(t => t.status === 'draft').length;
 
   // Fetch topics when subject changes
   useEffect(() => {
@@ -425,14 +430,15 @@ export default function Bar2026({ onCaseClick }) {
     setSelectedTopic(null);
     setTopicsError(null);
     setTopicsLoading(true);
+    setPublishMsg(null);
 
-    // Try to fetch all (including draft) for admin, fall back to published
     fetch(apiUrl(`/api/reviewer/${activeTab}?all=1`))
       .then(r => {
         if (r.status === 401 || r.status === 403) {
-          // Not admin — fetch published only
+          setIsAdmin(false);
           return fetch(apiUrl(`/api/reviewer/${activeTab}`));
         }
+        setIsAdmin(true);
         return r;
       })
       .then(r => r.json())
@@ -445,6 +451,24 @@ export default function Bar2026({ onCaseClick }) {
         setTopicsLoading(false);
       });
   }, [activeTab]);
+
+  const handlePublishAll = useCallback(() => {
+    if (!window.confirm(`Publish all ${draftCount} draft topics for ${active.fullLabel}?`)) return;
+    setPublishing(true);
+    setPublishMsg(null);
+    fetch(apiUrl('/api/reviewer/publish'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ subject: activeTab, publish_all: true, status: 'published' }),
+    })
+      .then(r => r.json())
+      .then(data => {
+        setPublishMsg(`Published ${data.updated ?? 0} topics.`);
+        setTopics(prev => prev.map(t => ({ ...t, status: 'published' })));
+      })
+      .catch(e => setPublishMsg(`Error: ${e.message}`))
+      .finally(() => setPublishing(false));
+  }, [activeTab, draftCount, active.fullLabel]);
 
   // Auto-select first topic
   useEffect(() => {
@@ -511,6 +535,20 @@ export default function Bar2026({ onCaseClick }) {
                   <active.icon size={11} />
                   {active.fullLabel}
                 </div>
+                {isAdmin && draftCount > 0 && (
+                  <div className="mt-2 flex flex-col gap-1">
+                    <button
+                      onClick={handlePublishAll}
+                      disabled={publishing}
+                      className="w-full rounded-md bg-emerald-600 px-2 py-1 text-[10px] font-bold text-white hover:bg-emerald-700 disabled:opacity-50"
+                    >
+                      {publishing ? 'Publishing…' : `Publish All (${draftCount} draft)`}
+                    </button>
+                    {publishMsg && (
+                      <p className="text-[10px] text-emerald-700 dark:text-emerald-400">{publishMsg}</p>
+                    )}
+                  </div>
+                )}
               </div>
               <div className="overflow-y-auto px-1.5 py-2" style={{ maxHeight: 'calc(100vh - 260px)' }}>
                 {topicsLoading && (
