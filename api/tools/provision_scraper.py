@@ -224,8 +224,22 @@ def extract_sections(full_text: str, sections_spec: Optional[str]) -> str:
 
 # ── Source-specific scrapers ───────────────────────────────────────────────────
 
+def _normalize_lawphil_url(url: str) -> str:
+    """Fix missing 'statutes/' segment in LawPhil RA/PD/Act URLs."""
+    import re as _re
+    # lawphil.net/repacts/... → lawphil.net/statutes/repacts/...
+    # lawphil.net/presdecs/... → lawphil.net/statutes/presdecs/...
+    # lawphil.net/acts/...    → lawphil.net/statutes/acts/...
+    return _re.sub(
+        r'(https?://lawphil\.net/)(?!statutes/)(repacts|presdecs|acts|comacts|execords|batasamba)/',
+        r'\1statutes/\2/',
+        url,
+    )
+
+
 def scrape_lawphil(url: str, sections_spec: Optional[str] = None) -> dict:
     """Scrape a provision from LawPhil. Returns {text, source_url, source_type}."""
+    url = _normalize_lawphil_url(url)
     time.sleep(REQUEST_DELAY)
     html = _fetch_html(url)
     if not html:
