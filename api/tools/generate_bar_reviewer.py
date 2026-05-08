@@ -258,7 +258,23 @@ def fetch_bar_questions(cur, subject_id: str, sub_heading: str) -> list:
 
 # ── Gemini prompt builders ─────────────────────────────────────────────────────
 
-def build_doctrine_prompt(topic: dict, provisions_text: list, cases: list) -> str:
+SUBJECT_LABELS = {
+    "criminal":   "Criminal Law (10% of Bar)",
+    "remedial":   "Remedial Law, Legal and Judicial Ethics, with Practical Exercises (25% of Bar)",
+    "political":  "Political Law and Public International Law (15% of Bar)",
+    "civil":      "Civil Law and Land Titles and Deeds (20% of Bar)",
+    "labor":      "Labor Law and Social Legislation (10% of Bar)",
+    "commercial": "Commercial and Taxation Laws (20% of Bar)",
+}
+
+
+def _topic_display(topic: dict) -> str:
+    """Return 'Roman.Sub — sub_heading' for any map format."""
+    heading = topic.get("sub_heading") or topic.get("heading") or topic.get("topic_heading", "")
+    return f"{topic['roman_num']}.{topic.get('sub_letter') or ''} — {heading}"
+
+
+def build_doctrine_prompt(topic: dict, provisions_text: list, cases: list, subject_id: str = "criminal") -> str:
     provisions_block = "\n\n---\n\n".join(
         f"[{p['label']}]\n{p.get('text') or p.get('retrieved_text', '[text not retrieved]')}"
         for p in provisions_text
@@ -271,12 +287,13 @@ def build_doctrine_prompt(topic: dict, provisions_text: list, cases: list) -> st
         for c in cases
     ) or "No linked cases available for this topic."
 
+    subject_label = SUBJECT_LABELS.get(subject_id, subject_id.title())
     return f"""You are a Senior Bar Review Lecturer and Philippine legal scholar.
 
 TASK: Write a structured reviewer section for the following 2026 Philippine Bar Exam topic.
 
-TOPIC: {topic['roman_num']}.{topic.get('sub_letter', '')} — {topic.get('sub_heading', topic['topic_heading'])}
-SUBJECT: Criminal Law (10% of Bar)
+TOPIC: {_topic_display(topic)}
+SUBJECT: {subject_label}
 CASE CUTOFF: {CASE_CUTOFF}
 
 ━━━ STATUTORY BASIS (use ONLY the following; do not introduce other provisions) ━━━
@@ -320,10 +337,13 @@ Return ONLY valid JSON: {{"relevance": "..."}}"""
 
 def generate_topic(conn, topic: dict, subject_id: str, dry_run: bool = False) -> dict:
     cur = conn.cursor(cursor_factory=RealDictCursor)
-    roman       = topic["roman_num"]
-    sub_letter  = topic.get("sub_letter")
-    sub_heading = topic.get("sub_heading", topic["topic_heading"])
-    provisions  = topic.get("provisions", [])
+    roman         = topic["roman_num"]
+    sub_letter    = topic.get("sub_letter")
+    # Support both {topic_heading, sub_heading} and flat {heading} formats
+    _heading      = topic.get("heading", "")
+    topic_heading = topic.get("topic_heading") or _heading
+    sub_heading   = topic.get("sub_heading") or _heading
+    provisions    = topic.get("provisions", [])
 
     log.info(f"\n{'='*60}")
     log.info(f"Topic {roman}.{sub_letter or ''} — {sub_heading}")
@@ -335,13 +355,13 @@ def generate_topic(conn, topic: dict, subject_id: str, dry_run: bool = False) ->
     for prov in provisions:
         source = prov.get("source")
 
+        # ── Legacy format: source = "db" ──────────────────────────────────────
         if source == "db":
             text = fetch_db_provision(cur, prov)
             enriched_provisions.append({**prov, "text": text or "[Not found in DB]"})
 
         elif source == "db_case":
-            # The whole "provision" is a case — handled in cases section
-            pass
+            pass  # handled in Step 2 cases section
 
         elif source == "scrape":
             result = retrieve_provision(prov)
@@ -352,7 +372,66 @@ def generate_topic(conn, topic: dict, subject_id: str, dry_run: bool = False) ->
                 "retrieved_source_type": result.get("source_type"),
             })
             if result.get("retrieval_status") == "ai_fallback":
-                confidence = "search-grounded"  # demote confidence
+                confidence = "search-grounded"
+
+        # ── New format: source = "const" | "rpc" | "roc" | "statute" ─────────
+        elif source in ("const", "rpc", "roc", "statute"):
+            _prov_for_db = {
+                "statute_id":   {"const": "CONST", "rpc": "RPC"}.get(source, prov.get("provision_id", "")),
+                "provision_id": prov.get("provision_id", ""),
+                "label":        prov.get("label") or prov.get("provision_id", ""),
+            }
+            if source == "const":
+                # provision_id format: "art-3-sec-1" → consti_codal key e.g. "III-1"
+                _INT_TO_ROMAN = {1:"I",2:"II",3:"III",4:"IV",5:"V",6:"VI",7:"VII",
+                                 8:"VIII",9:"IX",10:"X",11:"XI",12:"XII",13:"XIII",
+                                 14:"XIV",15:"XV",16:"XVI",17:"XVII",18:"XVIII"}
+                raw_id = prov.get("provision_id", "")
+                parts = raw_id.replace("art-", "").split("-sec-")
+                if len(parts) == 2:
+                    try:
+                        art_roman = _INT_TO_ROMAN.get(int(parts[0]), parts[0].upper())
+                    except Exception:
+                        art_roman = parts[0].upper()
+                    _prov_for_db["provision_id"] = f"{art_roman}-{parts[1]}"
+                text = fetch_const_section(cur, _prov_for_db["provision_id"])
+                enriched_provisions.append({**prov, "label": _prov_for_db["label"], "text": text or "[Not found in DB]"})
+            elif source == "rpc":
+                text = fetch_rpc_article(cur, prov.get("provision_id", ""))
+                enriched_provisions.append({**prov, "text": text or "[Not found in DB]"})
+            else:
+                # roc / statute — no DB table yet; treat as scrape via lawphil URL if available
+                url = prov.get("url") or prov.get("lawphil_url", "")
+                if url:
+                    result = retrieve_provision({"source": "scrape", "url": url, "label": prov.get("label", "")})
+                    enriched_provisions.append({
+                        **prov,
+                        "text": result.get("text") or "[Retrieval failed]",
+                        "retrieved_source_url": url,
+                    })
+                    if result.get("retrieval_status") == "ai_fallback":
+                        confidence = "search-grounded"
+                else:
+                    enriched_provisions.append({**prov, "text": f"[{source}: {prov.get('provision_id', '')}]"})
+
+        # ── New format: source = "lawphil" — scrape by URL ───────────────────
+        elif source == "lawphil":
+            url = prov.get("url", "")
+            result = retrieve_provision({"source": "scrape", "url": url, "label": prov.get("label", url)})
+            enriched_provisions.append({
+                **prov,
+                "label": prov.get("label") or url,
+                "text": result.get("text") or "[Retrieval failed]",
+                "retrieved_source_url": url,
+            })
+            if result.get("retrieval_status") == "ai_fallback":
+                confidence = "search-grounded"
+
+        # ── New format: source = "ai" — no provision text; AI synthesises ────
+        elif source == "ai":
+            note = prov.get("note", "")
+            enriched_provisions.append({**prov, "label": note, "text": f"[AI synthesis note: {note}]"})
+            confidence = "ai-synthesized"
 
     # ── Step 2: Fetch cases ────────────────────────────────────────────────────
     cases = fetch_cases_for_topic(cur, subject_id, provisions)
@@ -424,7 +503,7 @@ def generate_topic(conn, topic: dict, subject_id: str, dry_run: bool = False) ->
         memory_aid      = "[dry-run mnemonic]"
         model_used      = "dry-run"
     else:
-        prompt = build_doctrine_prompt(topic, enriched_provisions, cases)
+        prompt = build_doctrine_prompt(topic, enriched_provisions, cases, subject_id=subject_id)
         try:
             raw  = _ai_generate(
                 prompt,
@@ -450,18 +529,18 @@ def generate_topic(conn, topic: dict, subject_id: str, dry_run: bool = False) ->
     key_provisions = []
     for p in enriched_provisions:
         key_provisions.append({
-            "statute_id":   p["statute_id"],
-            "provision_id": p["provision_id"],
-            "label":        p["label"],
+            "statute_id":   p.get("statute_id", ""),
+            "provision_id": p.get("provision_id", ""),
+            "label":        p.get("label") or p.get("note", ""),
             "text":         p.get("text") or p.get("retrieved_text", ""),
-            "source_url":   p.get("retrieved_source_url") or p.get("scrape_url", ""),
+            "source_url":   p.get("retrieved_source_url") or p.get("scrape_url") or p.get("url", ""),
             "source_type":  p.get("retrieved_source_type", p.get("source", "")),
         })
 
     return {
         "subject_id":       subject_id,
         "roman_num":        roman,
-        "topic_heading":    topic["topic_heading"],
+        "topic_heading":    topic_heading,
         "sub_letter":       sub_letter,
         "sub_heading":      sub_heading,
         "sort_order":       topic.get("sort_order", 0),
