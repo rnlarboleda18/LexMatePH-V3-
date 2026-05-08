@@ -1,0 +1,620 @@
+"""
+Remedial Law, Legal and Judicial Ethics — 2026 Bar Syllabus Topic-to-Provision Map
+Case cutoff: June 30, 2025
+Weight: 25% (highest)
+
+source='db'     → provision is in the app's DB (roc_codal, rpc_codal, etc.)
+source='scrape' → provision scraped from LawPhil or SC eLib
+source='ai'     → no codal text; AI synthesizes from SC rules and case law
+
+Statutes in DB:
+  ROC   → Rules of Court (roc_codal)
+  RPC   → Revised Penal Code (rpc_codal)
+  CONST → Constitution (consti_codal)
+
+LawPhil URL patterns:
+  AM    → https://lawphil.net/courts/supreme/am/{code}.html
+  RA    → https://lawphil.net/statutes/repacts/ra{yr}/ra_{num}_{yr}.html
+"""
+
+LAWPHIL = "https://lawphil.net"
+ELIB    = "https://elibrary.judiciary.gov.ph"
+
+REMEDIAL_MAP = [
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # I. GENERAL PRINCIPLES OF REMEDIAL LAW
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "I", "topic_heading": "General Principles of Remedial Law",
+        "sub_letter": "A", "sub_heading": "Nature and Purpose of Remedial Law",
+        "sort_order": 1,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "1-1",  "label": "Rule 1, Sec. 1 – Title of Rules", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "1-2",  "label": "Rule 1, Sec. 2 – In what courts applicable", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "1-6",  "label": "Rule 1, Sec. 6 – Construction", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "I", "topic_heading": "General Principles of Remedial Law",
+        "sub_letter": "B", "sub_heading": "Substantive Law vs Procedural Law; Hierarchy of Courts",
+        "sort_order": 2,
+        "provisions": [
+            {"statute_id": "CONST", "provision_id": "VIII-1", "label": "Art. VIII, Sec. 1 – Judicial power", "source": "db"},
+            {"statute_id": "CONST", "provision_id": "VIII-5", "label": "Art. VIII, Sec. 5 – SC powers (rule-making)", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # II. JURISDICTION
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "II", "topic_heading": "Jurisdiction",
+        "sub_letter": "A", "sub_heading": "Concept, Acquisition, and Types of Jurisdiction",
+        "sort_order": 3,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "1-3",  "label": "Rule 1, Sec. 3 – Cases governed", "source": "db"},
+            {
+                "statute_id": "RA-7691", "provision_id": "general",
+                "label": "R.A. 7691 – Expanding MTC Jurisdiction (as amended by R.A. 11576)",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/statutes/repacts/ra1994/ra_7691_1994.html",
+            },
+            {
+                "statute_id": "RA-11576", "provision_id": "general",
+                "label": "R.A. 11576 – Expanded RTC Jurisdiction (2021)",
+                "source": "scrape",
+                "scrape_url": f"{ELIB}/republic_acts/11576",
+            },
+        ]
+    },
+    {
+        "roman_num": "II", "topic_heading": "Jurisdiction",
+        "sub_letter": "B", "sub_heading": "Jurisdiction over the Subject Matter, Parties, and Res",
+        "sort_order": 4,
+        "provisions": [
+            {
+                "statute_id": "BP-129", "provision_id": "general",
+                "label": "B.P. 129 – Judiciary Reorganization Act (RTC, CA jurisdiction)",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/statutes/bpblg/bp_129_1980.html",
+                "specific_sections": "Secs. 9, 19, 20, 21, 22",
+            },
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # III. CIVIL PROCEDURE — ACTIONS, PLEADINGS, PARTIES, AND SUMMONS
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "III", "topic_heading": "Civil Procedure — Actions, Pleadings, Parties, and Summons",
+        "sub_letter": "A", "sub_heading": "Cause of Action; Splitting; Joinder",
+        "sort_order": 5,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "2-1",  "label": "Rule 2, Sec. 1 – Ordinary civil actions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "2-2",  "label": "Rule 2, Sec. 2 – Cause of action defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "2-4",  "label": "Rule 2, Sec. 4 – Splitting a single cause of action", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "2-5",  "label": "Rule 2, Sec. 5 – Joinder of causes of action", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "III", "topic_heading": "Civil Procedure — Actions, Pleadings, Parties, and Summons",
+        "sub_letter": "B", "sub_heading": "Pleadings (Complaint, Answer, Counterclaim, Cross-claim, Reply)",
+        "sort_order": 6,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "6-1",  "label": "Rule 6, Sec. 1 – Pleadings defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "6-3",  "label": "Rule 6, Sec. 3 – Complaint", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "6-4",  "label": "Rule 6, Sec. 4 – Answer", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "6-6",  "label": "Rule 6, Sec. 6 – Counterclaim", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "6-7",  "label": "Rule 6, Sec. 7 – Compulsory counterclaim", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "6-8",  "label": "Rule 6, Sec. 8 – Cross-claim", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "11-1", "label": "Rule 11, Sec. 1 – Periods to plead", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "III", "topic_heading": "Civil Procedure — Actions, Pleadings, Parties, and Summons",
+        "sub_letter": "C", "sub_heading": "Parties in Interest; Real Party; Indispensable and Necessary Parties",
+        "sort_order": 7,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "3-1",  "label": "Rule 3, Sec. 1 – Who may be parties", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "3-2",  "label": "Rule 3, Sec. 2 – Parties in interest", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "3-7",  "label": "Rule 3, Sec. 7 – Compulsory joinder of indispensable parties", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "3-8",  "label": "Rule 3, Sec. 8 – Necessary party", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "III", "topic_heading": "Civil Procedure — Actions, Pleadings, Parties, and Summons",
+        "sub_letter": "D", "sub_heading": "Service of Summons; Modes and Effects",
+        "sort_order": 8,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "14-1",  "label": "Rule 14, Sec. 1 – Clerk to issue summons", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-6",  "label": "Rule 14, Sec. 6 – Service in person on defendant", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-7",  "label": "Rule 14, Sec. 7 – Substituted service", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-12", "label": "Rule 14, Sec. 12 – Service upon foreign private juridical entity", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-16", "label": "Rule 14, Sec. 16 – Service by publication", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # IV. CIVIL PROCEDURE — TRIAL, JUDGMENT, APPEALS, AND EXECUTION
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "IV", "topic_heading": "Civil Procedure — Trial, Judgment, Appeals, and Execution",
+        "sub_letter": "A", "sub_heading": "Pre-trial; Judicial Dispute Resolution (JDR); Trial",
+        "sort_order": 9,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "18-1", "label": "Rule 18, Sec. 1 – When conducted", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "18-2", "label": "Rule 18, Sec. 2 – Pre-trial conference", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "18-6", "label": "Rule 18, Sec. 6 – Pre-trial order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "30-1", "label": "Rule 30, Sec. 1 – Notice of trial", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "IV", "topic_heading": "Civil Procedure — Trial, Judgment, Appeals, and Execution",
+        "sub_letter": "B", "sub_heading": "Judgments (Summary Judgment, Default, Judgment on Pleadings)",
+        "sort_order": 10,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "35-1",  "label": "Rule 35, Sec. 1 – Summary judgment for claimant", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "35-2",  "label": "Rule 35, Sec. 2 – Summary judgment for defending party", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "36-1",  "label": "Rule 36, Sec. 1 – Judgment or final order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "37-1",  "label": "Rule 37, Sec. 1 – New trial or reconsideration", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "IV", "topic_heading": "Civil Procedure — Trial, Judgment, Appeals, and Execution",
+        "sub_letter": "C", "sub_heading": "Appeals (RTC, CA, SC); Modes of Appeal; Certiorari Distinguished",
+        "sort_order": 11,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "40-1",  "label": "Rule 40, Sec. 1 – Appeal from MTC to RTC", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "41-1",  "label": "Rule 41, Sec. 1 – Appeal from RTC to CA", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "42-1",  "label": "Rule 42 – Petition for review from RTC to CA", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "43-1",  "label": "Rule 43 – Appeal from quasi-judicial agencies to CA", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "45-1",  "label": "Rule 45 – Petition for review on certiorari (SC)", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "IV", "topic_heading": "Civil Procedure — Trial, Judgment, Appeals, and Execution",
+        "sub_letter": "D", "sub_heading": "Execution, Satisfaction, and Effect of Judgments",
+        "sort_order": 12,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "39-1",  "label": "Rule 39, Sec. 1 – Execution upon judgments", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "39-6",  "label": "Rule 39, Sec. 6 – Execution by motion or independent action", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "39-47", "label": "Rule 39, Sec. 47 – Effect of judgments", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # V. RES JUDICATA AND FORUM SHOPPING
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "V", "topic_heading": "Res Judicata and Forum Shopping",
+        "sub_letter": None, "sub_heading": None,
+        "sort_order": 13,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "39-47", "label": "Rule 39, Sec. 47 – Effect of judgments (res judicata)", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "1-3",   "label": "Rule 7, Sec. 5 – Certification against forum shopping", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # VI. PROVISIONAL REMEDIES
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "VI", "topic_heading": "Provisional Remedies",
+        "sub_letter": "A", "sub_heading": "Preliminary Attachment",
+        "sort_order": 14,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "57-1",  "label": "Rule 57, Sec. 1 – Grounds for preliminary attachment", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "57-5",  "label": "Rule 57, Sec. 5 – Manner of attaching property", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "57-13", "label": "Rule 57, Sec. 13 – Discharge of attachment", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "VI", "topic_heading": "Provisional Remedies",
+        "sub_letter": "B", "sub_heading": "Preliminary Injunction and TRO",
+        "sort_order": 15,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "58-1",  "label": "Rule 58, Sec. 1 – Preliminary injunction defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "58-3",  "label": "Rule 58, Sec. 3 – Grounds for issuance", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "58-5",  "label": "Rule 58, Sec. 5 – Preliminary injunction not granted without hearing", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "VI", "topic_heading": "Provisional Remedies",
+        "sub_letter": "C", "sub_heading": "Receivership and Replevin",
+        "sort_order": 16,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "59-1",  "label": "Rule 59, Sec. 1 – Appointment of receiver", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "60-1",  "label": "Rule 60, Sec. 1 – Replevin", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # VII. SPECIAL CIVIL ACTIONS — PREROGATIVE WRITS (RULE 65, ETC.)
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "VII", "topic_heading": "Special Civil Actions — Prerogative Writs",
+        "sub_letter": "A", "sub_heading": "Certiorari, Prohibition, and Mandamus (Rule 65)",
+        "sort_order": 17,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "65-1",  "label": "Rule 65, Sec. 1 – Certiorari", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "65-2",  "label": "Rule 65, Sec. 2 – Prohibition", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "65-3",  "label": "Rule 65, Sec. 3 – Mandamus", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "65-4",  "label": "Rule 65, Sec. 4 – When and where to file petition", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "65-8",  "label": "Rule 65, Sec. 8 – Effect of filing (no TRO until filed)", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "VII", "topic_heading": "Special Civil Actions — Prerogative Writs",
+        "sub_letter": "B", "sub_heading": "Quo Warranto (Rule 66)",
+        "sort_order": 18,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "66-1",  "label": "Rule 66, Sec. 1 – Action by government", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "66-5",  "label": "Rule 66, Sec. 5 – When individual may commence", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # VIII. SPECIAL CIVIL ACTIONS — EXPROPRIATION, FORECLOSURE, EJECTMENT, CONTEMPT
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "VIII", "topic_heading": "Special Civil Actions — Expropriation, Foreclosure, Ejectment, Contempt",
+        "sub_letter": "A", "sub_heading": "Expropriation (Rule 67)",
+        "sort_order": 19,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "67-1",  "label": "Rule 67, Sec. 1 – Complaint for expropriation", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "67-3",  "label": "Rule 67, Sec. 3 – Defenses and objections", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "67-4",  "label": "Rule 67, Sec. 4 – Order of expropriation", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "VIII", "topic_heading": "Special Civil Actions — Expropriation, Foreclosure, Ejectment, Contempt",
+        "sub_letter": "B", "sub_heading": "Foreclosure of Real Estate Mortgage (Rule 68); Partition (Rule 69)",
+        "sort_order": 20,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "68-1",  "label": "Rule 68, Sec. 1 – Complaint for foreclosure", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "68-3",  "label": "Rule 68, Sec. 3 – Sale of mortgaged property", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "69-1",  "label": "Rule 69, Sec. 1 – Complaint for partition", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "VIII", "topic_heading": "Special Civil Actions — Expropriation, Foreclosure, Ejectment, Contempt",
+        "sub_letter": "C", "sub_heading": "Forcible Entry and Unlawful Detainer (Rule 70); Contempt (Rule 71)",
+        "sort_order": 21,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "70-1",  "label": "Rule 70, Sec. 1 – Forcible entry vs unlawful detainer", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "71-1",  "label": "Rule 71, Sec. 1 – Direct contempt of court", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "71-3",  "label": "Rule 71, Sec. 3 – Indirect contempt", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # IX. SPECIAL PROCEEDINGS
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "IX", "topic_heading": "Special Proceedings",
+        "sub_letter": "A", "sub_heading": "Settlement of Estate of Deceased (Rules 73–90)",
+        "sort_order": 22,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "73-1",  "label": "Rule 73, Sec. 1 – Venue for settlement of estate", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "74-1",  "label": "Rule 74, Sec. 1 – Extrajudicial settlement", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "79-1",  "label": "Rule 79, Sec. 1 – Opposition to issuance of letters testamentary", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "90-1",  "label": "Rule 90, Sec. 1 – Distribution and partition of estate", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "IX", "topic_heading": "Special Proceedings",
+        "sub_letter": "B", "sub_heading": "Guardianship; Adoption; Cancellation of Civil Registry Entries",
+        "sort_order": 23,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "93-1",  "label": "Rule 93, Sec. 1 – Venue for guardianship proceedings", "source": "db"},
+            {
+                "statute_id": "RA-9523", "provision_id": "general",
+                "label": "R.A. 9523 – Domestic Adoption Act (administrative adoption)",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/statutes/repacts/ra2009/ra_9523_2009.html",
+            },
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # X. WRITS OF HABEAS CORPUS, AMPARO, HABEAS DATA, AND KALIKASAN
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "X", "topic_heading": "Extraordinary Writs",
+        "sub_letter": "A", "sub_heading": "Writ of Habeas Corpus (Rule 102)",
+        "sort_order": 24,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "102-1", "label": "Rule 102, Sec. 1 – To what habeas corpus extends", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "102-4", "label": "Rule 102, Sec. 4 – When writ not allowed or discharged", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "X", "topic_heading": "Extraordinary Writs",
+        "sub_letter": "B", "sub_heading": "Writ of Amparo; Writ of Habeas Data",
+        "sort_order": 25,
+        "provisions": [
+            {
+                "statute_id": "AM-07-9-12-SC", "provision_id": "general",
+                "label": "A.M. No. 07-9-12-SC – Rule on the Writ of Amparo",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_07_9_12_sc_2007.html",
+            },
+            {
+                "statute_id": "AM-08-1-16-SC", "provision_id": "general",
+                "label": "A.M. No. 08-1-16-SC – Rule on the Writ of Habeas Data",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_08_1_16_sc_2008.html",
+            },
+        ]
+    },
+    {
+        "roman_num": "X", "topic_heading": "Extraordinary Writs",
+        "sub_letter": "C", "sub_heading": "Writ of Kalikasan",
+        "sort_order": 26,
+        "provisions": [
+            {
+                "statute_id": "AM-09-6-8-SC", "provision_id": "general",
+                "label": "A.M. No. 09-6-8-SC – Rules of Procedure for Environmental Cases (Writ of Kalikasan)",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_09_6_8_sc_2010.html",
+            },
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # XI. CRIMINAL PROCEDURE
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "XI", "topic_heading": "Criminal Procedure — Prosecution, Preliminary Investigation, Arrest, Bail",
+        "sub_letter": "A", "sub_heading": "Prosecution of Offenses; Complaint and Information",
+        "sort_order": 27,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "110-1",  "label": "Rule 110, Sec. 1 – Institution of criminal actions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "110-2",  "label": "Rule 110, Sec. 2 – Control of prosecution", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "110-3",  "label": "Rule 110, Sec. 3 – Complaint defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "110-4",  "label": "Rule 110, Sec. 4 – Information defined", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "XI", "topic_heading": "Criminal Procedure — Prosecution, Preliminary Investigation, Arrest, Bail",
+        "sub_letter": "B", "sub_heading": "Preliminary Investigation (Rule 112)",
+        "sort_order": 28,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "112-1",  "label": "Rule 112, Sec. 1 – Preliminary investigation defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "112-2",  "label": "Rule 112, Sec. 2 – Officers authorized to conduct", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "112-3",  "label": "Rule 112, Sec. 3 – Procedure", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "112-6",  "label": "Rule 112, Sec. 6 – When warrant of arrest may issue", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "XI", "topic_heading": "Criminal Procedure — Prosecution, Preliminary Investigation, Arrest, Bail",
+        "sub_letter": "C", "sub_heading": "Arrest (Rule 113); Bail (Rule 114)",
+        "sort_order": 29,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "113-1",  "label": "Rule 113, Sec. 1 – Arrest; how made", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "113-5",  "label": "Rule 113, Sec. 5 – Arrest without warrant", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "114-1",  "label": "Rule 114, Sec. 1 – Bail defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "114-5",  "label": "Rule 114, Sec. 5 – Bail discretionary", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "114-8",  "label": "Rule 114, Sec. 8 – Capital offense — bail denied", "source": "db"},
+            {"statute_id": "CONST", "provision_id": "III-13", "label": "Art. III, Sec. 13 – Right to bail", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # XII. CRIMINAL PROCEDURE — ARRAIGNMENT, TRIAL, JUDGMENT, SEARCH AND SEIZURE
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "XII", "topic_heading": "Criminal Procedure — Arraignment, Trial, Judgment, Search and Seizure",
+        "sub_letter": "A", "sub_heading": "Arraignment and Plea (Rule 116); Motion to Quash (Rule 117)",
+        "sort_order": 30,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "116-1",  "label": "Rule 116, Sec. 1 – Arraignment and plea", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "117-1",  "label": "Rule 117, Sec. 1 – Grounds for motion to quash", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "117-3",  "label": "Rule 117, Sec. 3 – Grounds (double jeopardy, etc.)", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "XII", "topic_heading": "Criminal Procedure — Arraignment, Trial, Judgment, Search and Seizure",
+        "sub_letter": "B", "sub_heading": "Pre-trial Conference; Trial; Judgment; Double Jeopardy",
+        "sort_order": 31,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "118-1",  "label": "Rule 118, Sec. 1 – Pre-trial; mandatory", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "120-1",  "label": "Rule 120, Sec. 1 – Judgment defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "120-4",  "label": "Rule 120, Sec. 4 – Judgment in case of variance", "source": "db"},
+            {"statute_id": "CONST", "provision_id": "III-21", "label": "Art. III, Sec. 21 – Double jeopardy", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "XII", "topic_heading": "Criminal Procedure — Arraignment, Trial, Judgment, Search and Seizure",
+        "sub_letter": "C", "sub_heading": "Search and Seizure; Exclusionary Rule (Rule 126)",
+        "sort_order": 32,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "126-1",  "label": "Rule 126, Sec. 1 – Search warrant defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "126-3",  "label": "Rule 126, Sec. 3 – Requisites for issuing", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "126-5",  "label": "Rule 126, Sec. 5 – Validity of search warrant", "source": "db"},
+            {"statute_id": "CONST", "provision_id": "III-2",  "label": "Art. III, Sec. 2 – Right against unreasonable searches and seizures", "source": "db"},
+            {"statute_id": "CONST", "provision_id": "III-3",  "label": "Art. III, Sec. 3(2) – Exclusionary rule", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # XIII. EVIDENCE
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "XIII", "topic_heading": "Evidence — Admissibility, Documentary, Electronic, Testimonial",
+        "sub_letter": "A", "sub_heading": "Admissibility; Relevance; Competence (Rule 128–130)",
+        "sort_order": 33,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "128-1",  "label": "Rule 128, Sec. 1 – Evidence defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "128-3",  "label": "Rule 128, Sec. 3 – Admissibility of evidence", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "130-1",  "label": "Rule 130, Sec. 1 – Original document rule (Best Evidence)", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "130-3",  "label": "Rule 130, Sec. 3 – Secondary evidence", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "XIII", "topic_heading": "Evidence — Admissibility, Documentary, Electronic, Testimonial",
+        "sub_letter": "B", "sub_heading": "Parol Evidence Rule; Electronic Evidence (R.A. 8792, A.M. 01-7-01-SC)",
+        "sort_order": 34,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "130-9",  "label": "Rule 130, Sec. 9 – Parol evidence rule", "source": "db"},
+            {
+                "statute_id": "AM-01-7-01-SC", "provision_id": "general",
+                "label": "A.M. No. 01-7-01-SC – Rules on Electronic Evidence",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_01_7_01_sc_2001.html",
+            },
+        ]
+    },
+    {
+        "roman_num": "XIII", "topic_heading": "Evidence — Admissibility, Documentary, Electronic, Testimonial",
+        "sub_letter": "C", "sub_heading": "Testimonial Evidence; Privilege; Hearsay; Dying Declaration",
+        "sort_order": 35,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "130-25", "label": "Rule 130, Sec. 25 – Parental and filial privilege", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "130-37", "label": "Rule 130, Sec. 37 – Hearsay rule", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "130-38", "label": "Rule 130, Sec. 38 – Dying declaration", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "130-40", "label": "Rule 130, Sec. 40 – Declaration against interest", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # XIV. EVIDENCE — JUDICIAL NOTICE, PRESUMPTIONS, HAGUE EVIDENCE CONVENTION
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "XIV", "topic_heading": "Evidence — Judicial Notice, Presumptions, Hague Evidence Convention",
+        "sub_letter": "A", "sub_heading": "Judicial Notice and Judicial Admissions (Rule 129)",
+        "sort_order": 36,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "129-1",  "label": "Rule 129, Sec. 1 – Mandatory judicial notice", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "129-2",  "label": "Rule 129, Sec. 2 – Discretionary judicial notice", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "129-3",  "label": "Rule 129, Sec. 3 – Judicial admissions", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "XIV", "topic_heading": "Evidence — Judicial Notice, Presumptions, Hague Evidence Convention",
+        "sub_letter": "B", "sub_heading": "Burden of Proof, Burden of Evidence, Presumptions",
+        "sort_order": 37,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "131-1",  "label": "Rule 131, Sec. 1 – Burden of proof; onus probandi", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "131-3",  "label": "Rule 131, Sec. 3 – Presumptions", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "XIV", "topic_heading": "Evidence — Judicial Notice, Presumptions, Hague Evidence Convention",
+        "sub_letter": "C", "sub_heading": "Hague Evidence Convention; Revised Rules on Evidence (2019)",
+        "sort_order": 38,
+        "provisions": [
+            {
+                "statute_id": "AM-19-08-15-SC", "provision_id": "general",
+                "label": "A.M. No. 19-08-15-SC – 2019 Amendments to Rules on Evidence",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_19_08_15_sc_2019.html",
+            },
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # XV. LEGAL ETHICS — CODE OF PROFESSIONAL RESPONSIBILITY AND ACCOUNTABILITY
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "XV", "topic_heading": "Legal Ethics — Code of Professional Responsibility and Accountability (CPRA)",
+        "sub_letter": "A", "sub_heading": "Lawyer's Duties to the Court, Client, Profession, and Society",
+        "sort_order": 39,
+        "provisions": [
+            {
+                "statute_id": "CPRA", "provision_id": "general",
+                "label": "Code of Professional Responsibility and Accountability (A.M. No. 22-09-01-SC, 2023)",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_22_09_01_sc_2023.html",
+            },
+        ]
+    },
+    {
+        "roman_num": "XV", "topic_heading": "Legal Ethics — Code of Professional Responsibility and Accountability (CPRA)",
+        "sub_letter": "B", "sub_heading": "Privileged Communication; Conflict of Interest; Disqualification",
+        "sort_order": 40,
+        "provisions": [
+            {
+                "statute_id": "CPRA", "provision_id": "canon4",
+                "label": "CPRA – Canon IV: Duties to Clients (confidentiality, conflict of interest)",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_22_09_01_sc_2023.html",
+                "specific_sections": "Canon IV",
+            },
+        ]
+    },
+    {
+        "roman_num": "XV", "topic_heading": "Legal Ethics — Code of Professional Responsibility and Accountability (CPRA)",
+        "sub_letter": "C", "sub_heading": "Sanctions and Disciplinary Actions; IBP Proceedings",
+        "sort_order": 41,
+        "provisions": [
+            {
+                "statute_id": "CPRA", "provision_id": "canon6",
+                "label": "CPRA – Canon VI: Discipline of Members of the Bar",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_22_09_01_sc_2023.html",
+                "specific_sections": "Canon VI",
+            },
+            {"statute_id": "ROC", "provision_id": "138-1", "label": "Rule 138, Sec. 1 – Who may practice law", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "139-1", "label": "Rule 139-B – IBP disciplinary proceedings", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # XVI. NOTARIAL PRACTICE AND REMOTE NOTARIZATION
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "XVI", "topic_heading": "Notarial Practice",
+        "sub_letter": None, "sub_heading": None,
+        "sort_order": 42,
+        "provisions": [
+            {
+                "statute_id": "AM-02-8-13-SC", "provision_id": "general",
+                "label": "A.M. No. 02-8-13-SC – 2004 Rules on Notarial Practice",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_02_8_13_sc_2004.html",
+            },
+            {
+                "statute_id": "AM-20-07-04-SC", "provision_id": "general",
+                "label": "A.M. No. 20-07-04-SC – Guidelines on Remote Notarization (2020)",
+                "source": "ai",
+            },
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # XVII. JUDICIAL ETHICS
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "XVII", "topic_heading": "Judicial Ethics",
+        "sub_letter": None, "sub_heading": None,
+        "sort_order": 43,
+        "provisions": [
+            {
+                "statute_id": "NCJC", "provision_id": "general",
+                "label": "New Code of Judicial Conduct for the Philippine Judiciary (A.M. No. 03-05-01-SC)",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_03_05_01_sc_2004.html",
+            },
+            {"statute_id": "ROC", "provision_id": "140-1", "label": "Rule 140, Sec. 1 – Discipline of judges", "source": "db"},
+        ]
+    },
+
+    # ──────────────────────────────────────────────────────────────────────────
+    # XVIII. PRACTICAL EXERCISES
+    # ──────────────────────────────────────────────────────────────────────────
+    {
+        "roman_num": "XVIII", "topic_heading": "Practical Exercises",
+        "sub_letter": None, "sub_heading": None,
+        "sort_order": 44,
+        "provisions": [
+            {
+                "statute_id": "PRACTICE", "provision_id": "general",
+                "label": "Drafting: Complaints, Informations, Motions, Affidavits, Contracts",
+                "source": "ai",
+            },
+        ]
+    },
+
+]

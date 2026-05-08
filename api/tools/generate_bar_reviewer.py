@@ -30,21 +30,24 @@ from typing import Optional
 API_DIR = Path(__file__).parent.parent
 sys.path.insert(0, str(API_DIR))
 
-from utils.gemini_rest import gemini_generate_text
+from utils.ai_client import call_vertex_ai
 from tools.provision_scraper import retrieve_provision
 from tools.bar_criminal_map import CRIMINAL_MAP
+from tools.bar_remedial_map import REMEDIAL_MAP
 
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 
 CASE_CUTOFF     = "2025-06-30"
-MODEL_DOCTRINE  = "gemini-2.5-pro"        # doctrine + distinctions
-MODEL_FLASH     = "gemini-3-flash-preview" # mnemonics + connectors
+# gemini-2.5-flash: best quality available on free/standard quota tier
+# Switch to gemini-2.5-pro once billing is enabled on the project
+MODEL_DOCTRINE  = os.environ.get("BAR_DOCTRINE_MODEL", "gemini-2.5-flash")
+MODEL_FLASH     = os.environ.get("BAR_FLASH_MODEL",    "gemini-2.5-flash")
 MAX_CASES       = 5
 
 SUBJECT_MAPS = {
     "criminal": CRIMINAL_MAP,
-    # add others here as they are built
+    "remedial": REMEDIAL_MAP,
 }
 
 # ── DB helpers ─────────────────────────────────────────────────────────────────
@@ -342,10 +345,10 @@ def generate_topic(conn, topic: dict, subject_id: str, dry_run: bool = False) ->
             relevance = "[dry-run]"
         else:
             try:
-                raw = gemini_generate_text(
-                    MODEL_FLASH,
+                raw = call_vertex_ai(
                     build_case_connector_prompt(case, sub_heading),
                     response_mime_type="application/json",
+                    model=MODEL_FLASH,
                 )
                 relevance = json.loads(raw).get("relevance", "")
             except Exception as e:
@@ -395,11 +398,12 @@ def generate_topic(conn, topic: dict, subject_id: str, dry_run: bool = False) ->
     else:
         prompt = build_doctrine_prompt(topic, enriched_provisions, cases)
         try:
-            raw  = gemini_generate_text(
-                MODEL_DOCTRINE,
+            raw  = call_vertex_ai(
                 prompt,
                 response_mime_type="application/json",
-                generation_config={"temperature": 0.2},
+                temperature=0.2,
+                max_tokens=16384,
+                model=MODEL_DOCTRINE,
             )
             data = json.loads(raw)
             doctrine_md     = data.get("doctrine_md", "")
