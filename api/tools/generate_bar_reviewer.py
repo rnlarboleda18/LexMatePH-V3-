@@ -34,6 +34,10 @@ from utils.ai_client import call_vertex_ai
 from tools.provision_scraper import retrieve_provision
 from tools.bar_criminal_map import CRIMINAL_MAP
 from tools.bar_remedial_map import REMEDIAL_MAP
+from tools.bar_political_map import POLITICAL_MAP
+from tools.bar_civil_map import CIVIL_MAP
+from tools.bar_labor_map import LABOR_MAP
+from tools.bar_commercial_map import COMMERCIAL_MAP
 
 log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
@@ -46,8 +50,12 @@ MODEL_FLASH     = os.environ.get("BAR_FLASH_MODEL",    "gemini-2.5-flash")
 MAX_CASES       = 5
 
 SUBJECT_MAPS = {
-    "criminal": CRIMINAL_MAP,
-    "remedial": REMEDIAL_MAP,
+    "criminal":    CRIMINAL_MAP,
+    "remedial":    REMEDIAL_MAP,
+    "political":   POLITICAL_MAP,
+    "civil":       CIVIL_MAP,
+    "labor":       LABOR_MAP,
+    "commercial":  COMMERCIAL_MAP,
 }
 
 # ── DB helpers ─────────────────────────────────────────────────────────────────
