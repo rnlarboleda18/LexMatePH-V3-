@@ -40,6 +40,7 @@ try:
     # PayMongo disabled — kept for reference, replaced by Xendit
     # from blueprints.paymongo import paymongo_bp
     from blueprints.xendit import xendit_bp
+    from blueprints.bar_reviewer import bar_reviewer_bp
 
     app.register_functions(questions_bp)
     app.register_functions(lexify_bp)
@@ -61,6 +62,7 @@ try:
     # PayMongo disabled
     # app.register_functions(paymongo_bp)
     app.register_functions(xendit_bp)
+    app.register_functions(bar_reviewer_bp)
 
 except Exception as e:
     import_error = f"Error during import/registration: {str(e)}\n{traceback.format_exc()}"

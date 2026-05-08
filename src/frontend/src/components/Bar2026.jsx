@@ -1,200 +1,471 @@
-import React, { useState } from 'react';
-import { Scale, Globe, Briefcase, FileText, Users, Sword, BookOpen } from 'lucide-react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import ReactMarkdown from 'react-markdown';
+import {
+  Scale, Globe, Briefcase, FileText, Users, Sword, BookOpen,
+  ChevronRight, ChevronDown, BookMarked, Brain, AlertTriangle,
+  Gavel, Lightbulb, Star, Clock, CheckCircle2, Circle,
+  ExternalLink, Tag, AlertCircle,
+} from 'lucide-react';
 import PurpleGlassAmbient from './PurpleGlassAmbient';
 import CardVioletInnerWash from './CardVioletInnerWash';
+import { apiUrl } from '../utils/apiUrl';
+
+// ── Subject definitions ────────────────────────────────────────────────────────
 
 const SUBJECTS = [
-  {
-    id: 'political',
-    label: 'Political & PIL',
-    fullLabel: 'Political and Public International Law',
-    weight: '15%',
-    icon: Globe,
-    color: 'text-blue-600 dark:text-blue-400',
-    bgActive: 'border-blue-600 dark:border-blue-400 text-blue-700 dark:text-blue-300',
-    topics: [
-      'Basic Concepts (Constitution, Sovereignty, State Immunity, Separation of Powers)',
-      'National Territory',
-      'Citizenship',
-      'Legislative Department',
-      'Executive Department',
-      'Judicial Department',
-      'Constitutional Commissions (CSC, COMELEC, COA)',
-      'Constitutional Rights (Bill of Rights, Due Process, Equal Protection)',
-      'Writs of Amparo, Habeas Data, and Kalikasan',
-      'National Economy and Patrimony',
-      'Administrative Law and Quasi-judicial Bodies',
-      'Law on Public Officers (Accountability, Liability)',
-      'Election Law (COMELEC, Electoral Contests)',
-      'Local Government Code (Autonomy, Powers, Liability)',
-      'Public International Law (Sources, Subjects, Jurisdiction)',
-      'Treaty Law and International Agreements',
-      'International Humanitarian Law',
-      'Law of the Sea and International Environmental Law',
-    ],
-  },
-  {
-    id: 'commercial',
-    label: 'Commercial & Tax',
-    fullLabel: 'Commercial and Taxation Laws',
-    weight: '20%',
-    icon: Briefcase,
-    color: 'text-emerald-600 dark:text-emerald-400',
-    bgActive: 'border-emerald-600 dark:border-emerald-400 text-emerald-700 dark:text-emerald-300',
-    topics: [
-      'Negotiable Instruments Law',
-      'Corporation Code (R.A. No. 11232)',
-      'Securities Regulation Code',
-      'Intellectual Property Code',
-      'Insurance Law',
-      'Banking Laws (General Banking Law, BSP Charter)',
-      'Financial Rehabilitation and Insolvency Act (FRIA)',
-      'E-Commerce Act',
-      'National Internal Revenue Code (Income Tax, VAT, Estate Tax)',
-      'Customs Modernization and Tariff Act',
-      'Real Estate Investment Trust Act',
-    ],
-  },
-  {
-    id: 'civil',
-    label: 'Civil Law & Land',
-    fullLabel: 'Civil Law and Land Titles and Deeds',
-    weight: '20%',
-    icon: FileText,
-    color: 'text-violet-600 dark:text-violet-400',
-    bgActive: 'border-violet-600 dark:border-violet-400 text-violet-700 dark:text-violet-300',
-    topics: [
-      'Effect and Application of Laws; Conflict of Laws (Renvoi)',
-      'Persons (Juridical Capacity, Civil Personality)',
-      'Marriage (Essential and Formal Requisites, Void and Voidable)',
-      'Legal Separation and Annulment',
-      'Paternity, Filiation, and Adoption',
-      'Support and Parental Authority',
-      'Property, Ownership, and Its Modifications (Co-ownership, Usufruct, Easements)',
-      'Land Titles and Deeds — Torrens System (PD 1529)',
-      'Regalian Doctrine; Original and Subsequent Registration',
-      'Assurance Fund; Reconstitution of Titles',
-      'Succession (Wills, Testamentary and Intestate)',
-      'Obligations (Sources, Kinds, Extinguishment)',
-      'Contracts (Essential Requisites, Defective Contracts)',
-      'Special Contracts (Sale, Lease, Agency, Loan, Pledge, Mortgage)',
-      'Personal Property Security Act',
-      'Quasi-contracts (Solutio Indebiti, Negotiorum Gestio)',
-      'Torts and Quasi-delicts',
-      'Damages (Actual, Moral, Exemplary, Nominal, Temperate)',
-    ],
-  },
-  {
-    id: 'labor',
-    label: 'Labor & Social',
-    fullLabel: 'Labor Law and Social Legislation',
-    weight: '10%',
-    icon: Users,
-    color: 'text-amber-600 dark:text-amber-400',
-    bgActive: 'border-amber-600 dark:border-amber-400 text-amber-700 dark:text-amber-300',
-    topics: [
-      'Basic Principles (ILO Standards, Constitutional Labor Policies)',
-      'Recruitment and Placement — Local (DOLE, PESO)',
-      'Overseas Filipino Workers (POEA/DMW, Illegal Recruitment)',
-      'Employer-Employee Relationship (Four-fold Test, Economic Reality Test)',
-      'Labor-Only Contracting vs. Legitimate Job Contracting',
-      'Kinds of Employment (Regular, Project, Seasonal, Fixed-term, Casual)',
-      'Hours of Work, Rest Periods, and Overtime',
-      'Wages (Minimum Wage, Non-diminution, COLA)',
-      'Leave Benefits and Telecommuting',
-      'Special Workers (Women, Minors, Night Workers, Homeworkers)',
-      'Right to Self-organization and Bargaining Unit',
-      'Collective Bargaining Agreement (CBA)',
-      'Unfair Labor Practices (ULP)',
-      'Strikes, Lockouts, and Picketing',
-      'Just and Authorized Causes for Termination',
-      'Illegal Dismissal, Reinstatement, and Back Wages',
-      'Retirement Pay Law',
-      'Social Security System (SSS) and GSIS',
-      'Employees\' Compensation and State Insurance Fund',
-      'Labor Adjudication (NLRC, DOLE, Voluntary Arbitration)',
-    ],
-  },
-  {
-    id: 'criminal',
-    label: 'Criminal Law',
-    fullLabel: 'Criminal Law',
-    weight: '10%',
-    icon: Sword,
-    color: 'text-rose-600 dark:text-rose-400',
-    bgActive: 'border-rose-600 dark:border-rose-400 text-rose-700 dark:text-rose-300',
-    topics: [
-      'Fundamental Principles (Nullum Crimen, Mala in Se vs. Mala Prohibita)',
-      'Constitutional Limitations on Penal Laws',
-      'Felonies — Elements, Stages, and Plurality of Crimes',
-      'Conspiracy and Proposal to Commit a Crime',
-      'Justifying, Exempting, and Mitigating/Aggravating Circumstances',
-      'Criminal Liability, Penalties, and Their Extinction',
-      'Crimes Against National Security and Terrorism Laws',
-      'Crimes Against Fundamental Laws of the State',
-      'Crimes Against Public Order',
-      'Crimes Against Public Interest and Cybercrime Prevention Act',
-      'Comprehensive Dangerous Drugs Act (R.A. No. 9165)',
-      'Crimes Against Public Morals',
-      'Crimes by Public Officers (Plunder, Graft and Corrupt Practices)',
-      'Crimes Against Persons (Trafficking, VAWC, Child Abuse, Rape)',
-      'Crimes Against Personal Liberty and Cybercrime',
-      'Crimes Against Property (Fencing, Arson, Carnapping, Anti-Money Laundering)',
-      'Crimes Against Honor (Libel, Cyber Libel)',
-      'Quasi-offenses (Criminal Negligence)',
-    ],
-  },
-  {
-    id: 'remedial',
-    label: 'Remedial & Ethics',
-    fullLabel: 'Remedial Law, Legal and Judicial Ethics',
-    weight: '25%',
-    icon: BookOpen,
-    color: 'text-indigo-600 dark:text-indigo-400',
-    bgActive: 'border-indigo-600 dark:border-indigo-400 text-indigo-700 dark:text-indigo-300',
-    topics: [
-      'General Principles of Remedial Law',
-      'Jurisdiction (Concept, Acquisition, Courts and Tribunals)',
-      'Civil Procedure — Actions, Pleadings, Parties, and Summons',
-      'Civil Procedure — Trial, Judgment, Appeals, and Execution',
-      'Res Judicata and Forum Shopping',
-      'Provisional Remedies (Attachment, Injunction, Receivership, Replevin)',
-      'Special Civil Actions (Certiorari, Mandamus, Prohibition, Quo Warranto)',
-      'Special Civil Actions (Expropriation, Foreclosure, Partition, Ejectment, Contempt)',
-      'Special Proceedings (Estate Settlement, Guardianship, Adoption)',
-      'Writs of Habeas Corpus, Amparo, Habeas Data, and Kalikasan',
-      'Criminal Procedure (Prosecution, Preliminary Investigation, Arrest, Bail)',
-      'Criminal Procedure (Arraignment, Trial, Judgment, Search and Seizure)',
-      'Evidence (Admissibility, Documentary, Electronic, Testimonial)',
-      'Evidence (Judicial Notice, Presumptions, Hague Evidence Convention)',
-      'Legal Ethics — Code of Professional Responsibility and Accountability (CPRA)',
-      'Notarial Practice (A.M. No. 02-8-13-SC, Remote Notarization)',
-      'Judicial Ethics (NCJC, Discipline of Judges)',
-      'Practical Exercises (Contracts, Affidavits, Motions, Informations)',
-    ],
-  },
+  { id: 'political',  label: 'Political & PIL',    fullLabel: 'Political and Public International Law',      weight: '15%', icon: Globe,     color: 'text-blue-600 dark:text-blue-400',    bgActive: 'border-blue-600 dark:border-blue-400 text-blue-700 dark:text-blue-300' },
+  { id: 'commercial', label: 'Commercial & Tax',   fullLabel: 'Commercial and Taxation Laws',                weight: '20%', icon: Briefcase, color: 'text-emerald-600 dark:text-emerald-400', bgActive: 'border-emerald-600 dark:border-emerald-400 text-emerald-700 dark:text-emerald-300' },
+  { id: 'civil',      label: 'Civil Law & Land',   fullLabel: 'Civil Law and Land Titles and Deeds',         weight: '20%', icon: FileText,  color: 'text-violet-600 dark:text-violet-400',  bgActive: 'border-violet-600 dark:border-violet-400 text-violet-700 dark:text-violet-300' },
+  { id: 'labor',      label: 'Labor & Social',     fullLabel: 'Labor Law and Social Legislation',            weight: '10%', icon: Users,     color: 'text-amber-600 dark:text-amber-400',    bgActive: 'border-amber-600 dark:border-amber-400 text-amber-700 dark:text-amber-300' },
+  { id: 'criminal',   label: 'Criminal Law',       fullLabel: 'Criminal Law',                                weight: '10%', icon: Sword,     color: 'text-rose-600 dark:text-rose-400',      bgActive: 'border-rose-600 dark:border-rose-400 text-rose-700 dark:text-rose-300' },
+  { id: 'remedial',   label: 'Remedial & Ethics',  fullLabel: 'Remedial Law, Legal and Judicial Ethics',     weight: '25%', icon: BookOpen,  color: 'text-indigo-600 dark:text-indigo-400',  bgActive: 'border-indigo-600 dark:border-indigo-400 text-indigo-700 dark:text-indigo-300' },
 ];
 
 const EXAM_DATE = 'September 6, 9 & 13, 2026';
 
-export default function Bar2026() {
-  const [activeTab, setActiveTab] = useState('political');
+// ── Confidence badge ───────────────────────────────────────────────────────────
 
-  const active = SUBJECTS.find((s) => s.id === activeTab) ?? SUBJECTS[0];
+const CONFIDENCE_STYLES = {
+  'db-sourced':       'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/40 dark:text-emerald-300',
+  'search-grounded':  'bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300',
+  'ai-synthesized':   'bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300',
+};
+const CONFIDENCE_LABELS = {
+  'db-sourced':       'DB-sourced',
+  'search-grounded':  'Search-grounded',
+  'ai-synthesized':   'AI-synthesized',
+};
+
+function ConfidenceBadge({ value }) {
+  if (!value) return null;
+  return (
+    <span className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${CONFIDENCE_STYLES[value] ?? 'bg-gray-100 text-gray-600'}`}>
+      <CheckCircle2 size={9} />
+      {CONFIDENCE_LABELS[value] ?? value}
+    </span>
+  );
+}
+
+// ── Key Provisions list ────────────────────────────────────────────────────────
+
+function ProvisionList({ provisions }) {
+  if (!provisions?.length) return null;
+  return (
+    <div className="space-y-2">
+      {provisions.map((p, i) => (
+        <div key={i} className="rounded-lg border border-lex bg-white/40 px-3 py-2.5 dark:bg-zinc-800/40">
+          <div className="flex items-start gap-2">
+            <BookMarked size={13} className="mt-0.5 shrink-0 text-violet-500" />
+            <div className="min-w-0">
+              <p className="text-sm font-semibold text-gray-800 dark:text-gray-100">{p.label}</p>
+              {p.text && (
+                <p className="mt-1 text-xs leading-relaxed text-gray-600 dark:text-gray-300 whitespace-pre-wrap">
+                  {p.text.length > 600 ? p.text.slice(0, 600) + '…' : p.text}
+                </p>
+              )}
+              {p.source_url && (
+                <a
+                  href={p.source_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-flex items-center gap-1 text-[10px] text-violet-500 hover:underline"
+                >
+                  <ExternalLink size={9} />
+                  Source
+                </a>
+              )}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Case card ─────────────────────────────────────────────────────────────────
+
+function CaseCard({ c, onCaseClick }) {
+  const isEnBanc = c.division === 'En Banc';
+  return (
+    <div
+      className="group cursor-pointer rounded-lg border border-lex bg-white/40 px-3 py-2.5 transition-colors hover:bg-white/70 dark:bg-zinc-800/40 dark:hover:bg-zinc-800/70"
+      onClick={() => onCaseClick?.(c)}
+    >
+      <div className="flex items-start justify-between gap-2">
+        <div className="min-w-0">
+          <div className="flex flex-wrap items-center gap-1.5">
+            {isEnBanc && (
+              <span className="inline-flex items-center gap-0.5 rounded-full bg-rose-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-rose-700 dark:bg-rose-900/40 dark:text-rose-300">
+                <Star size={8} /> En Banc
+              </span>
+            )}
+            {c.significance_category && c.significance_category !== 'ORDINARY' && (
+              <span className="inline-flex items-center gap-0.5 rounded-full bg-amber-100 px-1.5 py-0.5 text-[9px] font-bold uppercase tracking-wider text-amber-700 dark:bg-amber-900/40 dark:text-amber-300">
+                <Lightbulb size={8} /> {c.significance_category}
+              </span>
+            )}
+          </div>
+          <p className="mt-0.5 text-sm font-semibold text-gray-800 group-hover:text-violet-700 dark:text-gray-100 dark:group-hover:text-violet-300">
+            {c.short_title || c.gr_number}
+          </p>
+          {c.gr_number && (
+            <p className="text-[11px] text-gray-400 dark:text-gray-500">
+              {c.gr_number}{c.date ? ` · ${c.date?.slice(0, 10)}` : ''}
+              {c.ponente ? ` · J. ${c.ponente}` : ''}
+            </p>
+          )}
+        </div>
+        <ChevronRight size={14} className="mt-1 shrink-0 text-gray-300 group-hover:text-violet-400" />
+      </div>
+      {c.doctrine && (
+        <p className="mt-1.5 text-xs leading-relaxed text-gray-600 dark:text-gray-300 line-clamp-3">
+          {c.doctrine}
+        </p>
+      )}
+      {c.bar_trap && (
+        <div className="mt-1.5 flex items-start gap-1 rounded bg-rose-50 px-2 py-1 dark:bg-rose-900/20">
+          <AlertTriangle size={10} className="mt-0.5 shrink-0 text-rose-500" />
+          <p className="text-[11px] text-rose-700 dark:text-rose-300">{c.bar_trap}</p>
+        </div>
+      )}
+      {c.separate_opinions?.length > 0 && (
+        <div className="mt-1.5 flex flex-wrap gap-1">
+          {c.separate_opinions.map((op, i) => (
+            <span key={i} className="inline-flex items-center gap-0.5 rounded-full border border-indigo-200 bg-indigo-50 px-1.5 py-0.5 text-[9px] font-medium text-indigo-700 dark:border-indigo-700 dark:bg-indigo-900/30 dark:text-indigo-300">
+              {op.cited_in_syllabus && <span className="font-bold">[SYLLABUS] </span>}
+              {op.type}: J. {op.justice}
+            </span>
+          ))}
+        </div>
+      )}
+      {c.connector && (
+        <p className="mt-1.5 text-[11px] italic text-indigo-600 dark:text-indigo-400">{c.connector}</p>
+      )}
+    </div>
+  );
+}
+
+// ── Bar Questions ─────────────────────────────────────────────────────────────
+
+function BarQuestions({ questions }) {
+  const [open, setOpen] = useState(null);
+  if (!questions?.length) return null;
+  return (
+    <div className="space-y-2">
+      {questions.map((q, i) => (
+        <div key={i} className="rounded-lg border border-lex bg-white/40 dark:bg-zinc-800/40">
+          <button
+            className="flex w-full items-start justify-between gap-2 px-3 py-2.5 text-left"
+            onClick={() => setOpen(open === i ? null : i)}
+          >
+            <div className="min-w-0">
+              {q.year && (
+                <span className="mb-0.5 inline-block text-[10px] font-bold uppercase tracking-wider text-gray-400">{q.year}{q.institution ? ` · ${q.institution}` : ''}</span>
+              )}
+              <p className="text-sm font-medium text-gray-800 dark:text-gray-100">{q.text}</p>
+            </div>
+            {open === i ? <ChevronDown size={14} className="mt-0.5 shrink-0 text-gray-400" /> : <ChevronRight size={14} className="mt-0.5 shrink-0 text-gray-400" />}
+          </button>
+          {open === i && q.answer && (
+            <div className="border-t border-lex px-3 py-2.5">
+              <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200">
+                <ReactMarkdown>{q.answer}</ReactMarkdown>
+              </div>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Content panel ─────────────────────────────────────────────────────────────
+
+function ContentPanel({ subject, topic, onCaseClick }) {
+  const [detail, setDetail] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    if (!topic) { setDetail(null); return; }
+    setLoading(true);
+    setError(null);
+    fetch(apiUrl(`/api/reviewer/${subject}/${topic.id}`))
+      .then(r => r.json())
+      .then(d => { setDetail(d); setLoading(false); })
+      .catch(e => { setError(e.message); setLoading(false); });
+  }, [subject, topic?.id]);
+
+  if (!topic) {
+    return (
+      <div className="flex h-full min-h-[300px] items-center justify-center rounded-xl border border-lex bg-white/60 p-8 text-center dark:bg-zinc-900/60">
+        <div>
+          <BookOpen size={32} className="mx-auto mb-3 text-gray-300 dark:text-gray-600" />
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Select a topic to start reviewing</p>
+        </div>
+      </div>
+    );
+  }
+
+  const data = detail ?? topic;
+  const isEmpty = !data.doctrine_md && !data.distinctions_md && !data.memory_aid
+               && !data.key_provisions?.length && !data.key_cases?.length;
+
+  return (
+    <div className="relative min-w-0 overflow-hidden rounded-xl border border-lex bg-white shadow-sm dark:bg-zinc-900">
+      <div className="pointer-events-none absolute inset-0"><CardVioletInnerWash /></div>
+      <div className="relative z-[1]">
+
+        {/* Topic header */}
+        <div className="border-b border-lex px-5 py-4">
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <div>
+              <p className="text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+                {topic.roman_num}{topic.sub_letter ? `.${topic.sub_letter}` : ''}
+              </p>
+              <h2 className="text-base font-black tracking-tight text-gray-900 dark:text-white sm:text-lg">
+                {topic.topic_heading}
+              </h2>
+              {topic.sub_heading && (
+                <p className="mt-0.5 text-sm font-medium text-gray-500 dark:text-gray-400">{topic.sub_heading}</p>
+              )}
+            </div>
+            <div className="flex flex-wrap items-center gap-2">
+              <ConfidenceBadge value={data.confidence} />
+              {data.status === 'draft' && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:bg-zinc-700 dark:text-gray-400">
+                  <Circle size={8} /> Draft
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {loading && (
+          <div className="px-5 py-8 text-center text-sm text-gray-400">Loading…</div>
+        )}
+        {error && (
+          <div className="px-5 py-4 text-sm text-rose-600 dark:text-rose-400">Error: {error}</div>
+        )}
+
+        {!loading && isEmpty && (
+          <div className="px-5 py-8 text-center">
+            <Clock size={28} className="mx-auto mb-2 text-gray-300 dark:text-gray-600" />
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Content being prepared</p>
+            <p className="mt-1 text-xs text-gray-400 dark:text-gray-500">This topic's reviewer material is being generated.</p>
+          </div>
+        )}
+
+        {!loading && !isEmpty && (
+          <div className="space-y-6 px-5 py-5">
+
+            {/* Key Provisions */}
+            {data.key_provisions?.length > 0 && (
+              <section>
+                <SectionHeader icon={BookMarked} label="Key Provisions" />
+                <ProvisionList provisions={data.key_provisions} />
+              </section>
+            )}
+
+            {/* Doctrine */}
+            {data.doctrine_md && (
+              <section>
+                <SectionHeader icon={Scale} label="Doctrine & Discussion" />
+                <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200 leading-relaxed">
+                  <ReactMarkdown>{data.doctrine_md}</ReactMarkdown>
+                </div>
+              </section>
+            )}
+
+            {/* Distinctions */}
+            {data.distinctions_md && (
+              <section>
+                <SectionHeader icon={AlertTriangle} label="Key Distinctions & Bar Traps" color="text-rose-500" />
+                <div className="rounded-lg border border-rose-200 bg-rose-50/60 p-4 dark:border-rose-800/50 dark:bg-rose-900/10">
+                  <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200">
+                    <ReactMarkdown>{data.distinctions_md}</ReactMarkdown>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* Memory Aid */}
+            {data.memory_aid && (
+              <section>
+                <SectionHeader icon={Brain} label="Memory Aid" color="text-indigo-500" />
+                <div className="rounded-lg border border-indigo-200 bg-indigo-50/60 p-4 dark:border-indigo-800/50 dark:bg-indigo-900/10">
+                  <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200">
+                    <ReactMarkdown>{data.memory_aid}</ReactMarkdown>
+                  </div>
+                </div>
+              </section>
+            )}
+
+            {/* Key Cases */}
+            {data.key_cases?.length > 0 && (
+              <section>
+                <SectionHeader icon={Gavel} label={`Key Cases (${data.key_cases.length})`} />
+                <div className="space-y-2">
+                  {data.key_cases.map((c, i) => (
+                    <CaseCard key={c.id ?? c.gr_number ?? i} c={c} onCaseClick={onCaseClick} />
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {/* Bar Questions */}
+            {data.bar_questions?.length > 0 && (
+              <section>
+                <SectionHeader icon={AlertCircle} label={`Past Bar Questions (${data.bar_questions.length})`} color="text-amber-500" />
+                <BarQuestions questions={data.bar_questions} />
+              </section>
+            )}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function SectionHeader({ icon: Icon, label, color = 'text-violet-500' }) {
+  return (
+    <div className="mb-2.5 flex items-center gap-2">
+      <Icon size={14} className={color} />
+      <h3 className="text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">{label}</h3>
+    </div>
+  );
+}
+
+// ── Topic tree ─────────────────────────────────────────────────────────────────
+
+function TopicTree({ topics, selectedId, onSelect, subjectColor }) {
+  // Group by roman_num
+  const groups = topics.reduce((acc, t) => {
+    if (!acc[t.roman_num]) acc[t.roman_num] = { heading: t.topic_heading, items: [] };
+    acc[t.roman_num].items.push(t);
+    return acc;
+  }, {});
+
+  const [collapsed, setCollapsed] = useState({});
+
+  const toggle = (roman) => setCollapsed(c => ({ ...c, [roman]: !c[roman] }));
+
+  if (!topics.length) {
+    return (
+      <div className="px-3 py-6 text-center text-xs text-gray-400 dark:text-gray-500">
+        No topics available yet.
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-0.5">
+      {Object.entries(groups).map(([roman, group]) => (
+        <div key={roman}>
+          {/* Roman numeral group header */}
+          <button
+            onClick={() => toggle(roman)}
+            className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left transition-colors hover:bg-white/60 dark:hover:bg-zinc-700/60"
+          >
+            <span className={`w-5 shrink-0 text-center text-[11px] font-black ${subjectColor}`}>{roman}</span>
+            <span className="flex-1 truncate text-xs font-semibold text-gray-700 dark:text-gray-300">
+              {group.heading}
+            </span>
+            {collapsed[roman]
+              ? <ChevronRight size={12} className="shrink-0 text-gray-400" />
+              : <ChevronDown size={12} className="shrink-0 text-gray-400" />
+            }
+          </button>
+
+          {/* Sub-topics */}
+          {!collapsed[roman] && group.items.map((t) => {
+            const isSelected = t.id === selectedId;
+            const hasContent = t.status === 'published' || !!t.generated_at;
+            return (
+              <button
+                key={t.id}
+                onClick={() => onSelect(t)}
+                className={`flex w-full items-start gap-2 rounded-lg px-2.5 py-1.5 text-left text-xs transition-colors ${
+                  isSelected
+                    ? 'bg-violet-100 text-violet-800 dark:bg-violet-900/40 dark:text-violet-200'
+                    : 'text-gray-600 hover:bg-white/60 dark:text-gray-400 dark:hover:bg-zinc-700/60'
+                }`}
+              >
+                <span className="mt-0.5 w-5 shrink-0 text-center text-[10px] font-bold text-gray-400">
+                  {t.sub_letter ?? '–'}
+                </span>
+                <span className="flex-1 leading-snug">{t.sub_heading || t.topic_heading}</span>
+                {hasContent
+                  ? <CheckCircle2 size={10} className="mt-0.5 shrink-0 text-emerald-500" />
+                  : <Circle size={10} className="mt-0.5 shrink-0 text-gray-300 dark:text-gray-600" />
+                }
+              </button>
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+// ── Main component ─────────────────────────────────────────────────────────────
+
+export default function Bar2026({ onCaseClick }) {
+  const [activeTab, setActiveTab] = useState('criminal');
+  const [topics, setTopics] = useState([]);
+  const [topicsLoading, setTopicsLoading] = useState(false);
+  const [topicsError, setTopicsError] = useState(null);
+  const [selectedTopic, setSelectedTopic] = useState(null);
+
+  const active = SUBJECTS.find(s => s.id === activeTab) ?? SUBJECTS[0];
+
+  // Fetch topics when subject changes
+  useEffect(() => {
+    setTopics([]);
+    setSelectedTopic(null);
+    setTopicsError(null);
+    setTopicsLoading(true);
+
+    // Try to fetch all (including draft) for admin, fall back to published
+    fetch(apiUrl(`/api/reviewer/${activeTab}?all=1`))
+      .then(r => {
+        if (r.status === 401 || r.status === 403) {
+          // Not admin — fetch published only
+          return fetch(apiUrl(`/api/reviewer/${activeTab}`));
+        }
+        return r;
+      })
+      .then(r => r.json())
+      .then(data => {
+        setTopics(data.topics ?? []);
+        setTopicsLoading(false);
+      })
+      .catch(e => {
+        setTopicsError(e.message);
+        setTopicsLoading(false);
+      });
+  }, [activeTab]);
+
+  // Auto-select first topic
+  useEffect(() => {
+    if (topics.length > 0 && !selectedTopic) {
+      setSelectedTopic(topics[0]);
+    }
+  }, [topics]);
 
   return (
     <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-8 font-sans text-gray-900 dark:text-gray-100">
       <div className="w-full min-w-0 max-w-7xl px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
 
         {/* Header */}
-        <div className="mb-5 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
+        <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
           <div className="flex items-center gap-3">
             <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-purple-700 shadow-md shadow-violet-900/30">
               <Scale size={20} className="text-white" />
             </div>
             <div>
               <h1 className="text-xl font-black tracking-tight text-gray-900 dark:text-white sm:text-2xl">
-                BAR 2026
+                BAR 2026 Reviewer
               </h1>
               <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
                 Philippine Bar Examination · {EXAM_DATE}
@@ -207,7 +478,7 @@ export default function Bar2026() {
           </div>
         </div>
 
-        {/* Tab Bar */}
+        {/* Subject tab bar */}
         <div className="mb-4 flex gap-0.5 overflow-x-auto rounded-xl border border-lex bg-white/60 p-1 shadow-sm backdrop-blur-sm dark:bg-zinc-900/60 no-scrollbar">
           {SUBJECTS.map(({ id, label, weight, icon: Icon, color, bgActive }) => (
             <button
@@ -228,74 +499,47 @@ export default function Bar2026() {
           ))}
         </div>
 
-        {/* Tab Content */}
-        <div className="relative min-w-0 overflow-hidden rounded-xl border border-lex bg-white p-5 shadow-sm dark:bg-zinc-900 sm:p-6">
-          <div className="pointer-events-none absolute inset-0">
-            <CardVioletInnerWash />
-          </div>
-          <div className="relative z-[1]">
-            {/* Subject Header */}
-            <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
-              <div>
-                <div className={`mb-1 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider ${active.color}`}>
-                  <active.icon size={13} />
-                  Subject {SUBJECTS.findIndex((s) => s.id === activeTab) + 1} of 6
-                </div>
-                <h2 className="text-lg font-black tracking-tight text-gray-900 dark:text-white sm:text-xl">
+        {/* Two-column layout */}
+        <div className="flex gap-3 min-h-[600px]">
+
+          {/* Topic Tree — left sidebar */}
+          <div className="relative w-56 shrink-0 overflow-hidden rounded-xl border border-lex bg-white/70 shadow-sm backdrop-blur-sm dark:bg-zinc-900/70 lg:w-64">
+            <div className="pointer-events-none absolute inset-0"><CardVioletInnerWash /></div>
+            <div className="relative z-[1]">
+              <div className="border-b border-lex px-3 py-2.5">
+                <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider ${active.color}`}>
+                  <active.icon size={11} />
                   {active.fullLabel}
-                </h2>
-              </div>
-              <div className={`flex shrink-0 items-center justify-center rounded-xl border-2 px-4 py-2 ${active.bgActive.replace('border-', 'border-').replace('text-', '')} border-current bg-white/60 dark:bg-zinc-800/60`}>
-                <div className="text-center">
-                  <p className={`text-2xl font-black ${active.color}`}>{active.weight}</p>
-                  <p className="text-[10px] font-semibold uppercase tracking-wide text-gray-500 dark:text-gray-400">of exam</p>
                 </div>
               </div>
-            </div>
-
-            {/* Topic Coverage */}
-            <div>
-              <h3 className="mb-3 text-xs font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                Coverage Areas
-              </h3>
-              <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-                {active.topics.map((topic, i) => (
-                  <div
-                    key={i}
-                    className="flex items-start gap-2.5 rounded-lg border border-lex bg-white/50 px-3 py-2.5 dark:bg-zinc-800/50"
-                  >
-                    <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${active.color} bg-current/10`}>
-                      <span className="text-[9px]">{i + 1}</span>
-                    </span>
-                    <span className="text-sm font-medium text-gray-800 dark:text-gray-200">{topic}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* All subjects weight summary */}
-            <div className="mt-6 rounded-lg border border-lex bg-white/40 p-4 dark:bg-zinc-800/40">
-              <p className="mb-3 text-[11px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-                Weight Distribution — All Subjects
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {SUBJECTS.map(({ id, label, weight, color, icon: Icon }) => (
-                  <button
-                    key={id}
-                    onClick={() => setActiveTab(id)}
-                    className={`flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs font-semibold transition-colors ${
-                      id === activeTab
-                        ? `border-current ${color} bg-current/5`
-                        : 'border-lex text-gray-500 hover:border-gray-400 dark:text-zinc-400'
-                    }`}
-                  >
-                    <Icon size={11} className={id === activeTab ? color : ''} />
-                    {label} · {weight}
-                  </button>
-                ))}
+              <div className="overflow-y-auto px-1.5 py-2" style={{ maxHeight: 'calc(100vh - 260px)' }}>
+                {topicsLoading && (
+                  <div className="py-6 text-center text-xs text-gray-400">Loading topics…</div>
+                )}
+                {topicsError && (
+                  <div className="py-4 px-2 text-center text-xs text-rose-500">{topicsError}</div>
+                )}
+                {!topicsLoading && (
+                  <TopicTree
+                    topics={topics}
+                    selectedId={selectedTopic?.id}
+                    onSelect={setSelectedTopic}
+                    subjectColor={active.color}
+                  />
+                )}
               </div>
             </div>
           </div>
+
+          {/* Content panel — right */}
+          <div className="min-w-0 flex-1 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 220px)' }}>
+            <ContentPanel
+              subject={activeTab}
+              topic={selectedTopic}
+              onCaseClick={onCaseClick}
+            />
+          </div>
+
         </div>
       </div>
     </PurpleGlassAmbient>
