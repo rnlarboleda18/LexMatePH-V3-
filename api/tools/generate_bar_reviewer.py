@@ -28,9 +28,11 @@ from typing import Optional
 
 # ── Path setup ────────────────────────────────────────────────────────────────
 API_DIR = Path(__file__).parent.parent
+SCRIPTS_DIR = API_DIR.parent / "scripts"
 sys.path.insert(0, str(API_DIR))
+sys.path.insert(0, str(SCRIPTS_DIR))
 
-from utils.ai_client import call_vertex_ai
+from linker_genai_client import get_linker_genai_client, merge_local_settings_into_env
 from tools.provision_scraper import retrieve_provision
 from tools.bar_criminal_map import CRIMINAL_MAP
 from tools.bar_remedial_map import REMEDIAL_MAP
@@ -43,11 +45,29 @@ log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 
 CASE_CUTOFF     = "2025-06-30"
-# gemini-2.5-flash: best quality available on free/standard quota tier
-# Switch to gemini-2.5-pro once billing is enabled on the project
 MODEL_DOCTRINE  = os.environ.get("BAR_DOCTRINE_MODEL", "gemini-2.5-flash")
 MODEL_FLASH     = os.environ.get("BAR_FLASH_MODEL",    "gemini-2.5-flash")
 MAX_CASES       = 5
+
+
+def _ai_generate(
+    prompt: str,
+    *,
+    model: str,
+    response_mime_type: str = "text/plain",
+    temperature: float = 0.2,
+    max_tokens: int = 8192,
+) -> str:
+    """Generate content via Vertex AI (when GOOGLE_CLOUD_PROJECT is set) or AI Studio fallback."""
+    from google import genai
+    client = get_linker_genai_client()
+    cfg = genai.types.GenerateContentConfig(
+        response_mime_type=response_mime_type,
+        temperature=temperature,
+        max_output_tokens=max_tokens,
+    )
+    resp = client.models.generate_content(model=model, contents=prompt, config=cfg)
+    return resp.text or ""
 
 SUBJECT_MAPS = {
     "criminal":    CRIMINAL_MAP,
@@ -353,7 +373,7 @@ def generate_topic(conn, topic: dict, subject_id: str, dry_run: bool = False) ->
             relevance = "[dry-run]"
         else:
             try:
-                raw = call_vertex_ai(
+                raw = _ai_generate(
                     build_case_connector_prompt(case, sub_heading),
                     response_mime_type="application/json",
                     model=MODEL_FLASH,
@@ -406,7 +426,7 @@ def generate_topic(conn, topic: dict, subject_id: str, dry_run: bool = False) ->
     else:
         prompt = build_doctrine_prompt(topic, enriched_provisions, cases)
         try:
-            raw  = call_vertex_ai(
+            raw  = _ai_generate(
                 prompt,
                 response_mime_type="application/json",
                 temperature=0.2,
