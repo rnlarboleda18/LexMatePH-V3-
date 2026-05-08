@@ -1,5 +1,5 @@
 import React from 'react';
-import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, Terminal, Scale } from 'lucide-react';
+import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, Terminal, Scale, MessageSquare } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
 import { SIDEBAR_NAV_ACTIVE, SIDEBAR_NAV_IDLE, SIDEBAR_MOBILE_AUTH_CARD } from '../utils/filterChromeClasses';
@@ -26,6 +26,7 @@ const Sidebar = ({
   onToggleUpdates,
   onToggleSupremeDecisions,
   onToggleLexCode,
+  onToggleLexMate,
   mode,
   onToggleLexPlay,
   onToggleFlashcard,
@@ -222,6 +223,19 @@ const Sidebar = ({
             >
                 <SquareStack size={20} className={`${mode === 'flashcard' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
                 Flashcards
+            </button>
+
+            {/* LexMate Button */}
+            <button
+                onClick={() => { if (onToggleLexMate) onToggleLexMate(); }}
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                ${mode === 'lexmate'
+                        ? SIDEBAR_NAV_ACTIVE
+                        : SIDEBAR_NAV_IDLE
+                    }`}
+            >
+                <MessageSquare size={20} className={`${mode === 'lexmate' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
+                LexMate AI
             </button>
 
             {/* LexPlay Button */}

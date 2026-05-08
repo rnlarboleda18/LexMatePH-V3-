@@ -64,6 +64,9 @@ try:
     app.register_functions(xendit_bp)
     app.register_functions(bar_reviewer_bp)
 
+    from blueprints.legal_chat import legal_chat_bp
+    app.register_functions(legal_chat_bp)
+
 except Exception as e:
     import_error = f"Error during import/registration: {str(e)}\n{traceback.format_exc()}"
 

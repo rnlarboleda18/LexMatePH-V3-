@@ -49,8 +49,52 @@ FLASHCARD_BAR_MIN_TOS_SCORE = float(os.getenv("FLASHCARD_BAR_MIN_TOS_SCORE", "0.
 # Override per request with ?bar_2026_only=0 or =1. Rows with NULL bar_2026_aligned are excluded when strict.
 FLASHCARD_BAR_2026_ONLY_DEFAULT = os.getenv("FLASHCARD_BAR_2026_ONLY", "").lower() in ("1", "true", "yes")
 
+# ── RAG / Legal Expert AI ─────────────────────────────────────────────────────
+GCP_PROJECT          = os.getenv("GCP_PROJECT", "gen-lang-client-0176283199")
+GCP_LOCATION         = os.getenv("GCP_LOCATION", "us-central1")       # Gemini model calls
+RAG_REGION           = os.getenv("RAG_REGION", "europe-west4")         # RAG Engine corpus (avoids Spanner capacity limit)
+GCP_CREDENTIALS_FILE = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "lexmateph-rag-key.json")
+
+# GCS
+GCS_CORPUS_BUCKET    = os.getenv("GCS_CORPUS_BUCKET", "lexmateph-legal-corpus")
+GCS_CASES_PREFIX     = "cases/full-text"
+GCS_DIGESTS_PREFIX   = "cases/digests"
+GCS_STATUTES_PREFIX  = "statutes/full-text"
+GCS_PROVISIONS_PREFIX= "statutes/provisions"
+GCS_BAR_PREFIX       = "bar-exam"
+
+# Gemini models (Vertex AI — billed to GenAI App Builder credit)
+GEMINI_PRO_MODEL     = os.getenv("GEMINI_PRO_MODEL",   "gemini-2.5-pro")
+GEMINI_FLASH_MODEL   = os.getenv("GEMINI_FLASH_MODEL", "gemini-2.5-flash")
+
+# RAG Engine
+RAG_CORPUS_NAME      = os.getenv("RAG_CORPUS_NAME", "")   # set after corpus creation
+RAG_TOP_K            = int(os.getenv("RAG_TOP_K", "20"))
+RAG_RERANK_TOP_K     = int(os.getenv("RAG_RERANK_TOP_K", "7"))
+RAG_CHUNK_SIZE       = int(os.getenv("RAG_CHUNK_SIZE", "512"))
+RAG_CHUNK_OVERLAP    = int(os.getenv("RAG_CHUNK_OVERLAP", "100"))
+
+# Complexity thresholds (1-5 scale)
+COMPLEXITY_FLASH_MAX = int(os.getenv("COMPLEXITY_FLASH_MAX", "3"))  # ≤3 uses Flash, >3 uses Pro
+
+# Semantic cache similarity threshold (0.0-1.0)
+CACHE_SEMANTIC_THRESHOLD = float(os.getenv("CACHE_SEMANTIC_THRESHOLD", "0.92"))
+CACHE_TTL_LEGAL_CHAT     = int(os.getenv("CACHE_TTL_LEGAL_CHAT", "604800"))  # 7 days
+
+# Rate limits per plan (questions per day, -1 = unlimited)
+RATE_LIMIT_GUEST  = int(os.getenv("RATE_LIMIT_GUEST",  "3"))
+RATE_LIMIT_FREE   = int(os.getenv("RATE_LIMIT_FREE",  "10"))
+RATE_LIMIT_AMICUS = int(os.getenv("RATE_LIMIT_AMICUS", "-1"))
+
+# Budget guard thresholds (% of credit used)
+BUDGET_WARN_PCT      = int(os.getenv("BUDGET_WARN_PCT",  "60"))
+BUDGET_CAUTION_PCT   = int(os.getenv("BUDGET_CAUTION_PCT", "80"))
+BUDGET_EMERGENCY_PCT = int(os.getenv("BUDGET_EMERGENCY_PCT", "95"))
+CREDIT_TOTAL_EUR     = float(os.getenv("CREDIT_TOTAL_EUR", "855.05"))
+
 # Logging
 import logging
 logging.info(f"Environment: {'LOCAL' if IS_LOCAL_DEV else 'PRODUCTION'}")
 logging.info("Database: Cloud PostgreSQL (DB_CONNECTION_STRING)")
 logging.info(f"Redis: {'Enabled' if REDIS_ENABLED else 'Disabled'}")
+logging.info(f"RAG: project={GCP_PROJECT} location={GCP_LOCATION} bucket={GCS_CORPUS_BUCKET}")
