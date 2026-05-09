@@ -7,9 +7,12 @@ def load_settings():
         with open("local.settings.json") as f:
             data = json.load(f)
             vals = data.get("Values", {})
+            db_from_file = (vals.get("DB_CONNECTION_STRING") or "").strip()
             for k, v in vals.items():
                 if k not in os.environ:
                     os.environ[k] = v
+            if db_from_file:
+                os.environ["DB_CONNECTION_STRING"] = db_from_file
     except Exception:
         pass
 

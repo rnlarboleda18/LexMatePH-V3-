@@ -2,13 +2,17 @@
 Apply billing-related SQL migrations to DB_CONNECTION_STRING.
 
 Migrations applied (in order):
-  1. sql/paymongo_migration.sql           — subscription columns + usage_logs table
-  2. sql/founding_promo_migration.sql     — founding promo columns
-  3. sql/webhook_events_idempotency.sql   — webhook deduplication table
-  4. sql/xendit_migration.sql             — Xendit customer/plan/pending columns
-  5. sql/trial_reminder_migration.sql      — trial_reminder_sent_at for one-time reminder email
+  1. sql/users_clerk_identity_migration.sql — clerk_id + unique (required for Clerk + admin API)
+  2. sql/paymongo_migration.sql           — subscription columns + usage_logs table
+  3. sql/founding_promo_migration.sql     — founding promo columns
+  4. sql/webhook_events_idempotency.sql   — webhook deduplication table
+  5. sql/xendit_migration.sql             — Xendit customer/plan/pending columns
+  6. sql/trial_reminder_migration.sql      — trial_reminder_sent_at for one-time reminder email
 
-Loads api/local.settings.json Values into os.environ (same pattern as run_migration.py).
+Loads api/local.settings.json Values into os.environ. **DB_CONNECTION_STRING from the file
+always overrides** any value already in the process environment so this script hits the same DB
+as Azure Functions local.settings.json (avoids silent migrations to the wrong server).
+
 Run from repo root: python api/tools/run_billing_migrations.py
 Or from api/tools: python run_billing_migrations.py
 """
@@ -27,9 +31,13 @@ def _load_local_settings():
         try:
             with open(candidate, encoding="utf-8") as f:
                 data = json.load(f)
-            for k, v in (data.get("Values") or {}).items():
+            vals = data.get("Values") or {}
+            db_from_file = (vals.get("DB_CONNECTION_STRING") or "").strip()
+            for k, v in vals.items():
                 if k not in os.environ:
                     os.environ[k] = str(v) if v is not None else ""
+            if db_from_file:
+                os.environ["DB_CONNECTION_STRING"] = db_from_file
             return
         except OSError:
             continue
@@ -59,6 +67,7 @@ def main() -> int:
     here = Path(__file__).resolve().parent       # api/tools/
     root = here.parent.parent                    # repo root (sql/ lives here)
     files = [
+        root / "sql" / "users_clerk_identity_migration.sql",
         root / "sql" / "paymongo_migration.sql",
         root / "sql" / "founding_promo_migration.sql",
         root / "sql" / "webhook_events_idempotency.sql",

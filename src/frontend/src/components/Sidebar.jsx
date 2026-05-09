@@ -225,7 +225,8 @@ const Sidebar = ({
                 Flashcards
             </button>
 
-            {/* LexMate Button */}
+            {/* LexMate Button — admin only */}
+            {isAdmin && (
             <button
                 onClick={() => { if (onToggleLexMate) onToggleLexMate(); }}
                 className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
@@ -237,6 +238,7 @@ const Sidebar = ({
                 <MessageSquare size={20} className={`${mode === 'lexmate' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
                 LexMate AI
             </button>
+            )}
 
             {/* LexPlay Button */}
             <button

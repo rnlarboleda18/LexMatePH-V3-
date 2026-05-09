@@ -822,8 +822,8 @@ if __name__ == "__main__":
         "--vertex-location",
         type=str,
         dest="vertex_location",
-        default="us-central1",
-        help="Vertex AI region (default: us-central1). Only used when --vertex-project is set.",
+        default=None,
+        help="Vertex AI region. Defaults to GOOGLE_CLOUD_LOCATION env var (global for gemini-3-flash-preview).",
     )
     args = parser.parse_args()
 

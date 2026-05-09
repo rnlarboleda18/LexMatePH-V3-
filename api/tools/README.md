@@ -45,6 +45,7 @@ Set `DB_CONNECTION_STRING` in your environment or ensure `local.settings.json` i
 | Script | Purpose |
 |--------|---------|
 | `check_admin.py` | Verify admin user rows |
+| `diagnose_admin_check.py` | Confirm `users` has `clerk_id` / `is_admin` and admin SQL works (fixes "Internal error" in Admin when schema is legacy) |
 | `check_all_counts.py` | Count rows across tables |
 | `check_cloud_count.py` | Count cloud DB rows |
 | `check_codal_links.py` | Verify codal cross-links |
