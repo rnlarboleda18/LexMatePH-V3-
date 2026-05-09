@@ -27,7 +27,7 @@ from psycopg2.extras import RealDictCursor
 from typing import Optional
 
 # ── Path setup ────────────────────────────────────────────────────────────────
-API_DIR = Path(__file__).parent.parent
+API_DIR = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = API_DIR.parent / "scripts"
 sys.path.insert(0, str(API_DIR))
 sys.path.insert(0, str(SCRIPTS_DIR))
@@ -295,7 +295,7 @@ def _topic_display(topic: dict) -> str:
 
 def build_doctrine_prompt(topic: dict, provisions_text: list, cases: list, subject_id: str = "criminal") -> str:
     provisions_block = "\n\n---\n\n".join(
-        f"[{p['label']}]\n{p.get('text') or p.get('retrieved_text', '[text not retrieved]')}"
+        f"[{p.get('label') or p.get('note') or p.get('provision_id') or p.get('url', 'provision')}]\n{p.get('text') or p.get('retrieved_text', '[text not retrieved]')}"
         for p in provisions_text
     )
     cases_block = "\n\n".join(
@@ -652,6 +652,17 @@ def main():
 
     success, failed = 0, 0
     for topic in topic_map:
+        # Reconnect if the connection was dropped (e.g. idle timeout during long retry waits)
+        try:
+            conn.cursor().execute("SELECT 1")
+        except Exception:
+            log.warning("DB connection lost — reconnecting")
+            try:
+                conn.close()
+            except Exception:
+                pass
+            conn = get_conn()
+
         try:
             record = generate_topic(conn, topic, args.subject, dry_run=args.dry_run)
             upsert_topic(conn, record)
