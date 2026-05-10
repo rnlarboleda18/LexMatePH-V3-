@@ -18,7 +18,7 @@ const ROUTE_META = {
     path: '/decisions',
     title: 'SC Case Digests · LexMatePH',
     description:
-      'Browse thousands of Supreme Court of the Philippines case digests. Search by GR number, ponente, division, or keyword. Updated regularly.',
+      'High-fidelity, comprehensive Supreme Court of the Philippines case digests. Search by GR number, ponente, division, or keyword. Updated regularly.',
   },
   codex: {
     path: '/lexcode',
@@ -60,7 +60,7 @@ const ROUTE_META = {
     path: '/lexify',
     title: 'Lexify Exam Simulator · LexMatePH',
     description:
-      'Simulate bar exam conditions with Lexify — timed quizzes, subject filters, and AI-powered answer explanations.',
+      'Practice with actual Philippine bar exam questions and suggested answers. AI-powered checking grounded on official suggested answers — know exactly where you stand.',
   },
   lexmate: {
     path: '/lexmate',
