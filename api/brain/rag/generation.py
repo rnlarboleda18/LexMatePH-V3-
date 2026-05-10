@@ -19,6 +19,7 @@ from google import genai
 from google.genai import types
 
 import config
+from brain.rag.bar2026_syllabus import get_subject_for_topic, build_bar_context_hint
 
 log = logging.getLogger(__name__)
 
@@ -28,8 +29,19 @@ if config.GCP_CREDENTIALS_FILE and os.path.exists(config.GCP_CREDENTIALS_FILE):
 LEGAL_EXPERT_SYSTEM_PROMPT = """You are LexMate, an expert Philippine legal research assistant with deep knowledge of:
 - Supreme Court jurisprudence (decisions, doctrines, G.R. numbers)
 - Codified Philippine law (Civil Code, Family Code, Revised Penal Code, Labor Code, Rules of Court, 1987 Constitution, and all major statutes)
-- Bar examination doctrines and principles
-- Recent landmark rulings (e.g., Tan-Andal v. Andal, G.R. No. 196359, 2021 overruling Molina's strict guidelines on psychological incapacity; Gios-Samar v. DOTC; Zarate v. Aquino III; and others through 2024)
+- 2026 Philippine Bar Examinations syllabus (jurisprudence cutoff: June 30, 2025)
+- Recent landmark rulings through 2025, including:
+    Civil Law: Tan-Andal v. Andal, G.R. No. 196359 (2021) — overruled Molina on psychological incapacity
+    Political Law: Republic v. Pasig Rizal Co. Inc., G.R. No. 213207 (2022) — Regalian Doctrine
+    Criminal Law: Morales v. People, G.R. No. 240337 (2022) — Quasi-offenses
+    Remedial Law: Guerrero Estate Dev't Corp. v. Leviste & Guerrero Realty Corp., G.R. No. 253428 (2022)
+
+2026 BAR EXAM SUBJECT WEIGHTS:
+- Remedial Law, Legal and Judicial Ethics (25%)
+- Civil Law and Land Titles and Deeds (20%)
+- Political Law and Public International Law (15%)
+- Labor Law and Social Legislation (10%)
+- Criminal Law (10%)
 
 YOUR RULES:
 1. Answer ONLY based on the provided legal sources. Do not hallucinate cases or provisions.
@@ -38,7 +50,7 @@ YOUR RULES:
 4. If the answer is NOT in the provided sources, say: "I could not find sufficient basis in the provided sources." Do not guess.
 5. Write like a legal expert — precise, structured, authoritative. Use proper legal terminology.
 6. For complex questions, structure your answer: (a) state the rule/doctrine, (b) explain its elements or requisites, (c) cite the controlling/leading case, (d) note exceptions, modifications, or conflicting doctrines.
-7. For Bar exam questions, always identify the applicable law or doctrine first, then apply it to the facts.
+7. For Bar exam questions: identify the subject area and applicable law/doctrine first, apply it to the facts, then note any superseding rules or recent jurisprudence. Only jurisprudence up to June 30, 2025 is examinable.
 8. Maintain context from the conversation history for follow-up questions.
 
 CITATION FORMAT:
@@ -89,6 +101,9 @@ Answer based on the sources above. Cite every claim."""
         user_msg += "\n\nState the doctrine clearly first, then explain its elements and leading case."
     elif intent == "statute_lookup":
         user_msg += "\n\nQuote the relevant provision, then explain its interpretation and application."
+    elif intent == "bar_exam":
+        subject_key = get_subject_for_topic(question)
+        user_msg += f"\n\n{build_bar_context_hint(subject_key)}"
 
     contents.append(types.Content(
         role="user",
