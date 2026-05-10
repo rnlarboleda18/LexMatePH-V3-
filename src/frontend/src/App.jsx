@@ -45,6 +45,7 @@ import {
   FILTER_FIELD_LABEL,
 } from './utils/filterChromeClasses';
 import { apiUrl } from './utils/apiUrl';
+import SeoHead from './components/SeoHead';
 
 /** True when the app is already opened as an installed PWA (not a normal browser tab). */
 function isPwaInstalledDisplayMode() {
@@ -806,6 +807,7 @@ function App() {
 
         return (
           <>
+            <SeoHead mode={effectiveMode} />
             <PastDueBanner />
 
             {/* Control Bar Visibility */}

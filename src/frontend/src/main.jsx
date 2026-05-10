@@ -61,6 +61,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { LexPlayProvider } from './features/lexplay'
 import { ClerkProvider } from '@clerk/clerk-react'
 import { SubscriptionProvider } from './context/SubscriptionContext'
+import { HelmetProvider } from 'react-helmet-async'
 
 // Import your publishable key
 const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
@@ -80,19 +81,21 @@ if (!PUBLISHABLE_KEY) {
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <ErrorBoundary>
-      <BrowserRouter>
-        <ClerkProvider
-          publishableKey={PUBLISHABLE_KEY}
-          afterSignOutUrl="/"
-        >
-          <SubscriptionProvider>
-            <LexPlayProvider>
-              <App />
-            </LexPlayProvider>
-          </SubscriptionProvider>
-        </ClerkProvider>
-      </BrowserRouter>
-    </ErrorBoundary>
+    <HelmetProvider>
+      <ErrorBoundary>
+        <BrowserRouter>
+          <ClerkProvider
+            publishableKey={PUBLISHABLE_KEY}
+            afterSignOutUrl="/"
+          >
+            <SubscriptionProvider>
+              <LexPlayProvider>
+                <App />
+              </LexPlayProvider>
+            </SubscriptionProvider>
+          </ClerkProvider>
+        </BrowserRouter>
+      </ErrorBoundary>
+    </HelmetProvider>
   </StrictMode>,
 )
