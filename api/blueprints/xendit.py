@@ -866,10 +866,47 @@ def track_usage(req: func.HttpRequest) -> func.HttpResponse:
             with _get_db() as conn:
                 with conn.transaction():
                     with conn.cursor() as cur:
+                        # Check when this anonymous ID was first seen (any feature).
+                        # If within 24 hours, grant full unlimited access — no metering.
                         cur.execute(
-                            "SELECT pg_advisory_xact_lock(hashtext(%s::text))",
-                            (f"{usage_key}|{feature}",),
+                            """
+                            SELECT MIN(created_at) FROM usage_logs
+                            WHERE clerk_id = %s
+                            """,
+                            (usage_key,),
                         )
+                        first_row = cur.fetchone()
+                        first_seen = first_row[0] if first_row else None
+
+                        # Determine if the 24-hour guest window is still active
+                        guest_window_hours = int(os.environ.get("GUEST_FULL_ACCESS_HOURS", "24"))
+                        in_guest_window = False
+                        if first_seen is None:
+                            # First ever request — window starts now
+                            in_guest_window = True
+                        else:
+                            # Make first_seen offset-aware for comparison
+                            if first_seen.tzinfo is None:
+                                from datetime import timezone as _tz
+                                first_seen = first_seen.replace(tzinfo=_tz.utc)
+                            elapsed = datetime.now(timezone.utc) - first_seen
+                            in_guest_window = elapsed.total_seconds() < guest_window_hours * 3600
+
+                        # Always record a usage log entry (so we can track first_seen)
+                        cur.execute(
+                            "INSERT INTO usage_logs (clerk_id, feature) VALUES (%s, %s)",
+                            (usage_key, feature),
+                        )
+
+                        if in_guest_window:
+                            return func.HttpResponse(
+                                json.dumps({"allowed": True, "used": 1, "limit": -1,
+                                            "tier": "free", "anonymous": True,
+                                            "guest_window": True}),
+                                mimetype="application/json", status_code=200,
+                            )
+
+                        # 24-hour window expired — fall back to daily cap metering
                         cur.execute(
                             """
                             SELECT COUNT(*) FROM usage_logs
@@ -881,20 +918,15 @@ def track_usage(req: func.HttpRequest) -> func.HttpResponse:
                         )
                         used = cur.fetchone()[0]
 
-                        if used >= limit:
+                        if used > limit:
                             return func.HttpResponse(
                                 json.dumps({"allowed": False, "used": used, "limit": limit,
                                             "tier": "free", "anonymous": True}),
                                 mimetype="application/json", status_code=200,
                             )
 
-                        cur.execute(
-                            "INSERT INTO usage_logs (clerk_id, feature) VALUES (%s, %s)",
-                            (usage_key, feature),
-                        )
-
                 return func.HttpResponse(
-                    json.dumps({"allowed": True, "used": used + 1, "limit": limit,
+                    json.dumps({"allowed": True, "used": used, "limit": limit,
                                 "tier": "free", "anonymous": True}),
                     mimetype="application/json", status_code=200,
                 )

@@ -21,8 +21,19 @@ import { LexPlayer, useLexPlay } from './features/lexplay';
 const LexMateApp = lazy(() => import('./features/lexmate/LexMateApp'));
 import { useSubscription } from './context/SubscriptionContext';
 import { normalizeBarQuestionSubject, normalizeBarSubject } from './utils/subjectNormalize';
-import { consumeFreeTierUsage, notifyUsageBlocked } from './utils/freeTierUsage';
+import { consumeFreeTierUsage, notifyUsageBlocked, GUEST_WINDOW_MS } from './utils/freeTierUsage';
 import { GUEST_GATE_GRACE_MS, startGuestGateGrace, clearGuestGateGrace } from './utils/guestGateGrace';
+
+/** Returns true while the anonymous user is within their 24-hour free-access window. */
+function isInGuestWindow() {
+  try {
+    const startStr = localStorage.getItem('lexmate_anonymous_usage_start');
+    if (!startStr) return true; // Not yet set → treat as brand-new visitor still in window
+    return Date.now() - new Date(startStr).getTime() < GUEST_WINDOW_MS;
+  } catch (_) {
+    return false;
+  }
+}
 import { useBarQuestions } from './hooks/useBarQuestions';
 import { useFlashcardConcepts } from './hooks/useFlashcardConcepts';
 import { useGlobalCaseModal } from './hooks/useGlobalCaseModal';
@@ -451,11 +462,16 @@ function App() {
       .finally(() => setGuestGatePlansReady(true));
   }, []);
 
-  // Gate modal: show on first load; re-show after GUEST_GATE_GRACE_MS when dismissed.
+  // Gate modal logic:
+  // - FoundingPromoModal: still shows during the 24h guest window — it's an incentive (promo offer), not a paywall.
+  // - SubscriptionModal:  suppressed during the 24h window — visitors have full access and don't need to be gated.
+  // After 24h, both modals can show as normal.
   useEffect(() => {
     if (!authLoaded || isSignedIn || showGuestModal !== null || !guestGatePlansReady) return;
+    // During the 24-hour full-access guest window: only show the founding promo offer, not the plain paywall gate.
+    if (isInGuestWindow() && !foundingPromoAvailable) return;
     const delay = guestModalDismissedAt === null
-      ? 0
+      ? (foundingPromoAvailable ? 3000 : 0)   // small delay for promo so user sees the app first
       : Math.max(0, GUEST_GATE_GRACE_MS - (Date.now() - guestModalDismissedAt));
     const timer = setTimeout(() => {
       setShowGuestModal(foundingPromoAvailable ? 'founding_promo' : 'subscription');

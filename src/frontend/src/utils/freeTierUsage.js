@@ -11,6 +11,11 @@ import { TRACK_USAGE_FEATURE_TO_UNLIMITED } from '../context/SubscriptionContext
 import { isGuestGateGraceActive } from './guestGateGrace';
 
 const ANON_STORAGE_KEY = 'lexmate_anonymous_usage_id';
+const ANON_START_KEY   = 'lexmate_anonymous_usage_start'; // ISO timestamp of first visit
+
+/** Duration of full-access guest window (24 h, matches GUEST_FULL_ACCESS_HOURS on the backend). */
+export const GUEST_WINDOW_MS = 24 * 60 * 60 * 1000;
+
 
 /**
  * Anonymous bucket resets each full page load (F5) when:
@@ -48,10 +53,17 @@ export function getOrCreateAnonymousUsageId() {
   }
   try {
     let id = localStorage.getItem(ANON_STORAGE_KEY);
-    if (id && isUuidString(id)) return id;
+    if (id && isUuidString(id)) {
+      // Ensure start timestamp exists (backfill for older sessions)
+      if (!localStorage.getItem(ANON_START_KEY)) {
+        localStorage.setItem(ANON_START_KEY, new Date().toISOString());
+      }
+      return id;
+    }
     id = typeof crypto !== 'undefined' && crypto.randomUUID ? crypto.randomUUID() : null;
     if (!id) return null;
     localStorage.setItem(ANON_STORAGE_KEY, id);
+    localStorage.setItem(ANON_START_KEY, new Date().toISOString());
     return id;
   } catch (_) {
     try {
@@ -66,6 +78,7 @@ export function getOrCreateAnonymousUsageId() {
     }
   }
 }
+
 
 let _ephemeralAnonId = null;
 
@@ -119,6 +132,29 @@ export async function consumeFreeTierUsage({
   if (isSignedIn !== true && isGuestGateGraceActive()) {
     return { allowed: true, skipped: true, reason: 'guest_gate_grace' };
   }
+
+  // ── 24-hour full-access guest window ─────────────────────────────────────
+  // Unregistered (anonymous) users get full, unlimited access for the first
+  // 24 hours from when their anonymous ID was created.  After that, normal
+  // per-feature daily caps apply.  Mirrors GUEST_FULL_ACCESS_HOURS on the backend.
+  if (isSignedIn !== true) {
+    try {
+      const startStr = localStorage.getItem(ANON_START_KEY);
+      if (startStr) {
+        const elapsed = Date.now() - new Date(startStr).getTime();
+        if (elapsed < GUEST_WINDOW_MS) {
+          return { allowed: true, skipped: true, unlimited: true, reason: 'guest_window' };
+        }
+      } else {
+        // No timestamp yet — this will be set when getOrCreateAnonymousUsageId() runs;
+        // treat as in-window for this call.
+        return { allowed: true, skipped: true, unlimited: true, reason: 'guest_window_new' };
+      }
+    } catch (_) {
+      /* localStorage unavailable — fall through to network check */
+    }
+  }
+  // ─────────────────────────────────────────────────────────────────────────
 
   if (isSignedIn === true && subscriptionLoading) {
     return { allowed: true, skipped: true, reason: 'subscription_loading' };

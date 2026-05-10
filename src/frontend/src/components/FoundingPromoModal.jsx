@@ -81,7 +81,7 @@ export default function FoundingPromoModal({
           <p className="mb-5 text-sm leading-relaxed text-gray-500 dark:text-gray-400">
             Create a free account from this screen or from the Sign up button in the sidebar — you get the same founding
             slot if one is still open. Full Barrister access (case digests, LexPlay, Lexify, and more) applies right after
-            sign-up. Close this window to keep browsing as a visitor with Free-tier limits.
+            sign-up. Close this window to keep exploring with full access for 24 hours.
           </p>
 
           <div className="mb-5 flex flex-wrap gap-2">
@@ -113,7 +113,7 @@ export default function FoundingPromoModal({
             onClick={onClose}
             className="mt-3 w-full rounded-xl px-6 py-2 text-sm text-gray-400 transition-colors hover:text-gray-600 dark:text-gray-600 dark:hover:text-gray-400"
           >
-            Not now — browse with Free limits
+            Not now — I'll explore for 24 hours first
           </button>
 
           <p className="mt-4 text-center text-[11px] text-gray-400 dark:text-gray-600">
