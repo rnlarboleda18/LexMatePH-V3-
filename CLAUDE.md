@@ -12,7 +12,7 @@
 | AI Engine | Google Gemini API (legal linking & digest generation) |
 | Auth | Clerk (webhooks for user sync) |
 | Payments | Xendit + PayMongo (subscription billing, PHP) |
-| Deployment | Azure Static Web Apps + Azure Function App |
+| Deployment | Azure Static Web Apps (managed backend — `api/` is SWA-managed Functions) |
 | Dev tooling | swa-cli (local SWA emulation) |
 
 ## Project layout

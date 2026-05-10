@@ -12,6 +12,7 @@ import SupremeDecisions from './components/SupremeDecisions';
 import PageLoadingFallback from './components/PageLoadingFallback';
 import ErrorBoundary from './components/ErrorBoundary';
 import PastDueBanner from './components/PastDueBanner';
+import CookieConsentBanner from './components/CookieConsentBanner';
 import FeaturePageShell from './components/FeaturePageShell';
 import PurpleGlassAmbient from './components/PurpleGlassAmbient';
 import CardVioletInnerWash from './components/CardVioletInnerWash';
@@ -735,6 +736,7 @@ function App() {
         <Suspense fallback={<PageLoadingFallback label="Loading legal information…" />}>
           <LegalPage />
         </Suspense>
+        <CookieConsentBanner onGoToLegal={handleToggleLegal} />
       </PublicLayout>
     );
   }
@@ -1297,6 +1299,7 @@ function App() {
         </Suspense>
       )}
 
+      <CookieConsentBanner onGoToLegal={handleToggleLegal} />
     </Layout>
   );
 }
