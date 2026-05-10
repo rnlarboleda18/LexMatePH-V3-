@@ -8,6 +8,7 @@ describe('consumeFreeTierUsage', () => {
     clearGuestGateGrace();
     try {
       localStorage.removeItem('lexmate_anonymous_usage_id');
+      localStorage.removeItem('lexmate_anonymous_usage_start');
     } catch (_) {
       /* ignore */
     }
@@ -16,12 +17,17 @@ describe('consumeFreeTierUsage', () => {
   afterEach(() => {
     try {
       localStorage.removeItem('lexmate_anonymous_usage_id');
+      localStorage.removeItem('lexmate_anonymous_usage_start');
     } catch (_) {
       /* ignore */
     }
   });
 
   it('sends anonymousId when not signed in to Clerk', async () => {
+    // Simulate expired 24h guest window so the fetch path is exercised
+    try {
+      localStorage.setItem('lexmate_anonymous_usage_start', new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString());
+    } catch (_) { /* ignore */ }
     const fetchSpy = vi.spyOn(globalThis, 'fetch').mockResolvedValue({
       ok: true,
       json: async () => ({ allowed: true, used: 1, limit: 5, anonymous: true }),
@@ -61,6 +67,10 @@ describe('consumeFreeTierUsage', () => {
   });
 
   it('returns allowed false when the server reports the daily limit', async () => {
+    // Simulate expired 24h guest window so daily-cap response is respected
+    try {
+      localStorage.setItem('lexmate_anonymous_usage_start', new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString());
+    } catch (_) { /* ignore */ }
     vi.spyOn(globalThis, 'fetch').mockResolvedValue({
       ok: true,
       json: async () => ({ allowed: false, used: 5, limit: 5, anonymous: true }),
@@ -77,6 +87,10 @@ describe('consumeFreeTierUsage', () => {
   });
 
   it('does not allow usage when the HTTP response is not OK (e.g. 404)', async () => {
+    // Simulate expired 24h guest window so network error path is exercised
+    try {
+      localStorage.setItem('lexmate_anonymous_usage_start', new Date(Date.now() - 25 * 60 * 60 * 1000).toISOString());
+    } catch (_) { /* ignore */ }
     vi.spyOn(globalThis, 'fetch').mockResolvedValue({
       ok: false,
       status: 404,
