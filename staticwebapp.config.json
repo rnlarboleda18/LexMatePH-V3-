@@ -9,10 +9,26 @@
             "/fonts/*",
             "/sw.js",
             "/manifest.webmanifest",
-            "/workbox-*.js"
+            "/workbox-*.js",
+            "/robots.txt",
+            "/sitemap.xml"
         ]
     },
     "routes": [
+        {
+            "route": "/robots.txt",
+            "headers": {
+                "Content-Type": "text/plain",
+                "Cache-Control": "public, max-age=86400"
+            }
+        },
+        {
+            "route": "/sitemap.xml",
+            "headers": {
+                "Content-Type": "application/xml",
+                "Cache-Control": "public, max-age=86400"
+            }
+        },
         {
             "route": "/api/*",
             "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],

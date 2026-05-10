@@ -90,7 +90,7 @@ export default defineConfig(({ mode }) => {
           globPatterns: ['**/*.{js,css,html,ico,png,svg,webp,woff,woff2}'],
           // Ensure SPA routing still works when offline
           navigateFallback: 'index.html',
-          navigateFallbackDenylist: [/^\/api/],
+          navigateFallbackDenylist: [/^\/api/, /^\/robots\.txt$/, /^\/sitemap\.xml$/],
           // Cache API responses with a network-first strategy (try network, fall back to cache)
           runtimeCaching: [
             {
