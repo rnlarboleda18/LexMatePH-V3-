@@ -70,7 +70,7 @@ GEMINI_FLASH_MODEL   = os.getenv("GEMINI_FLASH_MODEL", "gemini-2.5-flash")
 # RAG Engine
 RAG_CORPUS_NAME      = os.getenv("RAG_CORPUS_NAME", "")   # set after corpus creation
 RAG_TOP_K            = int(os.getenv("RAG_TOP_K", "20"))
-RAG_RERANK_TOP_K     = int(os.getenv("RAG_RERANK_TOP_K", "7"))
+RAG_RERANK_TOP_K     = int(os.getenv("RAG_RERANK_TOP_K", "10"))
 RAG_CHUNK_SIZE       = int(os.getenv("RAG_CHUNK_SIZE", "512"))
 RAG_CHUNK_OVERLAP    = int(os.getenv("RAG_CHUNK_OVERLAP", "100"))
 

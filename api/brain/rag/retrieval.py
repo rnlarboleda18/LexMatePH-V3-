@@ -259,7 +259,7 @@ def rerank_chunks(
     )
 
     records = [
-        {"id": str(i), "content": c["text"][:2000]}
+        {"id": str(i), "content": c["text"][:3000]}
         for i, c in enumerate(chunks)
     ]
 
@@ -405,7 +405,7 @@ def retrieve(
 
     # Step 6 — Full section loading
     if pipeline.get("load_full_doc"):
-        enriched = load_full_sections(chunks, max_sections=5)
+        enriched = load_full_sections(chunks, max_sections=7)
         result["enriched_chunks"] = enriched
     else:
         result["enriched_chunks"] = chunks
@@ -414,7 +414,9 @@ def retrieve(
     context_parts = []
     for i, chunk in enumerate(result["enriched_chunks"], 1):
         full_text = chunk.get("full_section_text") or chunk.get("text", "")
-        source    = chunk.get("source_display_name") or chunk.get("source_uri", f"Source {i}")
+        raw_source = chunk.get("source_display_name") or chunk.get("source_uri", f"Source {i}")
+        # Normalize GCS filenames: strip path, .txt, underscores → spaces
+        source = raw_source.split("/")[-1].removesuffix(".txt").replace("_", " ")
         context_parts.append(f"[SOURCE {i}: {source}]\n{full_text}")
 
     result["retrieval_context"] = "\n\n---\n\n".join(context_parts)

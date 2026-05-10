@@ -18,22 +18,22 @@ COST_PER_TOKEN_PRO   = 0.00000125   # EUR
 PIPELINES = {
     "lite": {
         "use_hyde":      False,
-        "use_rerank":    False,
-        "top_k":         5,
+        "use_rerank":    True,
+        "top_k":         12,
         "load_full_doc": False,
         "model":         config.GEMINI_FLASH_MODEL,
     },
     "standard": {
         "use_hyde":      True,
         "use_rerank":    True,
-        "top_k":         10,
+        "top_k":         20,
         "load_full_doc": True,
         "model":         config.GEMINI_FLASH_MODEL,
     },
     "full": {
         "use_hyde":      True,
         "use_rerank":    True,
-        "top_k":         20,
+        "top_k":         30,
         "load_full_doc": True,
         "model":         config.GEMINI_PRO_MODEL,
     },
