@@ -6,7 +6,8 @@
     <meta name="theme-color" content="#0f172a" />
     <meta name="description" content="LexMatePH — Master the Philippine Bar with a fast, offline-ready PWA. Bar questions, SC decisions, digests, codals, flashcards, and LexPlay audio review." />
     <meta name="msvalidate.01" content="8910E4D7502904C32A6B0EAAD0010A85" />
-    <link rel="canonical" href="https://lexmateph.com/" />
+    <!-- canonical is set per-route by SeoHead.jsx — no global fallback here so
+         Googlebot does not treat every SPA route as a duplicate of /. -->
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -74,7 +75,9 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- X (Twitter) widgets: deferred so it never blocks initial render -->
+    <!-- X (Twitter) twttr queue stub — widgets.js itself is loaded lazily
+         by useTwitterTimeline via IntersectionObserver (only when the embed
+         scrolls into view). Do NOT eagerly load widgets.js here. -->
     <script defer>
       window.twttr = (function () {
         var t = window.twttr || {};
@@ -82,15 +85,6 @@
         t.ready = t.ready || function (f) { t._e.push(f); };
         return t;
       })();
-      // Load widgets.js only after page is interactive
-      window.addEventListener('load', function () {
-        var s = document.createElement('script');
-        s.id = 'twitter-wjs';
-        s.src = 'https://platform.twitter.com/widgets.js';
-        s.charset = 'utf-8';
-        s.async = true;
-        document.head.appendChild(s);
-      });
     </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
