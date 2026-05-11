@@ -141,8 +141,18 @@ function App() {
 
   // --- Data hooks — only fetch when the user is on the page that needs the data ---
   // browse_bar + quiz need 1.2 MB of questions; flashcard needs 974 KB of concepts.
-  const barQuestionsNeeded = mode === 'browse_bar' || mode === 'quiz';
-  const flashcardsNeeded   = mode === 'flashcard';
+  // After 3 s / 5 s, prefetch both in the background so navigation feels instant.
+  const [prefetchBarReady,   setPrefetchBarReady]   = useState(false);
+  const [prefetchFlashReady, setPrefetchFlashReady] = useState(false);
+
+  useEffect(() => {
+    const t1 = setTimeout(() => setPrefetchBarReady(true),   3000); // bar questions
+    const t2 = setTimeout(() => setPrefetchFlashReady(true), 5000); // flashcard concepts
+    return () => { clearTimeout(t1); clearTimeout(t2); };
+  }, []);
+
+  const barQuestionsNeeded = mode === 'browse_bar' || mode === 'quiz' || prefetchBarReady;
+  const flashcardsNeeded   = mode === 'flashcard' || prefetchFlashReady;
 
   const { questions, loading, error, retry: handleRetryFetch } = useBarQuestions({ enabled: barQuestionsNeeded });
   const {

@@ -26,7 +26,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
     const [showPasswordModal, setShowPasswordModal] = useState(false);
     const [showPrefsModal, setShowPrefsModal] = useState(false);
     const [showDetailsModal, setShowDetailsModal] = useState(null); // Holds the exam object for the details modal
-    const [password, setPassword] = useState('');
+    const [password, setPassword] = useState(PROCTOR_PASSWORD); // pre-filled: user just presses Enter / Confirm
     const [passwordError, setPasswordError] = useState('');
     const [alarmTime, setAlarmTime] = useState('00:30:00');
     
@@ -65,7 +65,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
     const handleBeginClick = (exam) => {
         setSelectedExam(exam);
         setShowPasswordModal(true);
-        setPassword('');
+        // password stays pre-filled with PROCTOR_PASSWORD — user just clicks Confirm
         setPasswordError('');
     };
 
