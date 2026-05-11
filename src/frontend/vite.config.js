@@ -27,9 +27,17 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       sourcemap: false,
-      // Warn when any individual chunk exceeds 600 kB (gzip). Main bundle currently ~850 kB raw;
-      // flag intentionally set above current size to avoid blocking CI—lower as code is split further.
-      chunkSizeWarningLimit: 900,
+      chunkSizeWarningLimit: 600,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            // Safe vendor splits (does not break React singleton)
+            if (id.includes('@clerk')) return 'vendor-clerk';
+            if (id.includes('lucide-react')) return 'vendor-lucide';
+            if (id.includes('fuse.js') || id.includes('fuse/')) return 'vendor-fuse';
+          },
+        },
+      },
     },
     plugins: [
       react(),

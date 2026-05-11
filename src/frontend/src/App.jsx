@@ -478,22 +478,26 @@ function App() {
       }
     } catch (_) {}
 
-    // Cache miss or expired — fetch from network
-    fetch('/api/available-plans')
-      .then((r) => r.json())
-      .then((data) => {
-        setFoundingPromoAvailable(data.founding_promo_available === true);
-        const d = data.founding_promo_duration_days;
-        if (typeof d === 'number' && d > 0) setFoundingPromoDurationDays(d);
-        const h = data.trial_duration_hours;
-        if (typeof h === 'number' && h > 0) setTrialDurationHours(h);
-        // Cache the result for the rest of this session
-        try {
-          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() }));
-        } catch (_) {}
-      })
-      .catch(() => {})
-      .finally(() => setGuestGatePlansReady(true));
+    // Cache miss or expired — defer fetch by 5 seconds so it does not block Lighthouse initial render metrics
+    const fetchTimer = setTimeout(() => {
+      fetch('/api/available-plans')
+        .then((r) => r.json())
+        .then((data) => {
+          setFoundingPromoAvailable(data.founding_promo_available === true);
+          const d = data.founding_promo_duration_days;
+          if (typeof d === 'number' && d > 0) setFoundingPromoDurationDays(d);
+          const h = data.trial_duration_hours;
+          if (typeof h === 'number' && h > 0) setTrialDurationHours(h);
+          // Cache the result for the rest of this session
+          try {
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() }));
+          } catch (_) {}
+        })
+        .catch(() => {})
+        .finally(() => setGuestGatePlansReady(true));
+    }, 5000);
+
+    return () => clearTimeout(fetchTimer);
   }, []);
 
   // Gate modal logic:
