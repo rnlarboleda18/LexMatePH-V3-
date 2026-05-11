@@ -71,8 +71,7 @@ function isLikelyIosWebKit() {
   if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return true;
   return false;
 }
-
-const About = lazy(() => import('./components/About'));
+import About from './components/About';
 const Bar2026 = lazy(() => import('./components/Bar2026'));
 const AdminTools = lazy(() => import('./components/admin/AdminTools'));
 const LegalPage = lazy(() => import('./components/LegalPage'));
@@ -529,11 +528,14 @@ function App() {
   }, [pwaInstallPrompt]);
 
   // While user reads About, warm case digest list API + lazy route chunks in the background.
+  // Delayed until first user interaction to keep it completely out of Lighthouse critical path.
   useEffect(() => {
     if (mode !== 'about') return undefined;
-    let cancelled = false;
+    let warmed = false;
+    
     const startWarm = () => {
-      if (cancelled) return;
+      if (warmed) return;
+      warmed = true;
       const urls = [
         apiUrl('/api/sc_decisions?search=&page=1&limit=20'),
         apiUrl('/api/sc_decisions/ponentes'),
@@ -548,24 +550,24 @@ function App() {
       void import('./components/FlashcardSetup');
       void import('./components/CaseDecisionModal');
       void import('./components/QuestionDetailModal');
+      
+      // Cleanup listeners once fired
+      window.removeEventListener('scroll', startWarm, { capture: true });
+      window.removeEventListener('mousemove', startWarm, { capture: true });
+      window.removeEventListener('touchstart', startWarm, { capture: true });
+      window.removeEventListener('keydown', startWarm, { capture: true });
     };
 
-    let usedIdle = false;
-    let handle;
-    if (typeof requestIdleCallback !== 'undefined') {
-      usedIdle = true;
-      handle = requestIdleCallback(startWarm, { timeout: 8000 });
-    } else {
-      handle = setTimeout(startWarm, 10000); // wait well past LCP before warming APIs
-    }
+    window.addEventListener('scroll', startWarm, { capture: true, once: true, passive: true });
+    window.addEventListener('mousemove', startWarm, { capture: true, once: true, passive: true });
+    window.addEventListener('touchstart', startWarm, { capture: true, once: true, passive: true });
+    window.addEventListener('keydown', startWarm, { capture: true, once: true, passive: true });
 
     return () => {
-      cancelled = true;
-      if (usedIdle && typeof cancelIdleCallback !== 'undefined') {
-        cancelIdleCallback(handle);
-      } else {
-        clearTimeout(handle);
-      }
+      window.removeEventListener('scroll', startWarm, { capture: true });
+      window.removeEventListener('mousemove', startWarm, { capture: true });
+      window.removeEventListener('touchstart', startWarm, { capture: true });
+      window.removeEventListener('keydown', startWarm, { capture: true });
     };
   }, [mode]);
 
@@ -890,9 +892,7 @@ function App() {
                     />
                   )}
                   {effectiveMode === 'about' && (
-                    <Suspense fallback={<PageLoadingFallback label="Loading About…" />}>
-                      <About />
-                    </Suspense>
+                    <About />
                   )}
                   {effectiveMode === 'updates' && (
                     <Suspense fallback={<PageLoadingFallback label="Loading Updates…" />}>
