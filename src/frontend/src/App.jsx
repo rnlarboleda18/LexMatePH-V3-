@@ -147,10 +147,12 @@ function App() {
   const { user } = useUser();
   const { getToken, isSignedIn, isLoaded: authLoaded } = useAuth();
 
+  // mode must be declared before the data hooks so barQuestionsNeeded/flashcardsNeeded
+  // can reference it without hitting a Temporal Dead Zone error.
+  const [mode, setMode] = useState(() => PATH_TO_MODE[window.location.pathname] ?? 'about');
 
-  // --- Hooks ---
-  // Only load heavy data when the user is actually on the page that needs it.
-  // browse_bar + quiz need questions (1.2 MB); flashcard needs concepts (974 KB).
+  // --- Data hooks — only fetch when the user is on the page that needs the data ---
+  // browse_bar + quiz need 1.2 MB of questions; flashcard needs 974 KB of concepts.
   const barQuestionsNeeded = mode === 'browse_bar' || mode === 'quiz';
   const flashcardsNeeded   = mode === 'flashcard';
 
@@ -239,8 +241,9 @@ function App() {
    *  Unknown paths default to about (/about).
    *  We read window.location.pathname directly (not useLocation) to avoid subscribing
    *  App to the React Router context, which would cause an extra re-render on every
-   *  navigate() call and make child components (e.g. SupremeDecisions) re-render needlessly. */
-  const [mode, setMode] = useState(() => PATH_TO_MODE[window.location.pathname] ?? 'about');
+   *  navigate() call and make child components (e.g. SupremeDecisions) re-render needlessly.
+   *  NOTE: mode useState is declared earlier in the component (after useAuth) so it can
+   *  be used in the enabled flags for useBarQuestions / useFlashcardConcepts. */
   const [flashcardState, setFlashcardState] = useState('setup'); // 'setup' | 'active'
   const [flashcardQuestions, setFlashcardQuestions] = useState([]);
   const [flashcardIndex, setFlashcardIndex] = useState(0);
