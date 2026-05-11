@@ -482,22 +482,7 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
     TIER_ORDER = ['free', 'amicus', 'juris', 'barrister']
     REQUIRED_TIER = 'juris'
 
-    auth_header = (
-        req.headers.get("X-Clerk-Authorization") or req.headers.get("Authorization") or ""
-    ).strip()
-
-    if not auth_header:
-        return func.HttpResponse(
-            json.dumps({"error": "Authentication required", "required_tier": REQUIRED_TIER}),
-            mimetype="application/json", status_code=401,
-        )
-
-    clerk_id, auth_error = get_authenticated_user_id(req)
-    if auth_error or not clerk_id:
-        return func.HttpResponse(
-            json.dumps({"error": "Unauthorized", "detail": auth_error}),
-            mimetype="application/json", status_code=401,
-        )
+    clerk_id, _ = get_authenticated_user_id(req)
 
     provision_id = req.params.get('provision_id')
     statute_id = req.params.get('statute_id')
@@ -511,29 +496,31 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
-        try:
-            cur.execute(
-                "SELECT subscription_tier, is_admin FROM users WHERE clerk_id = %s",
-                (clerk_id,),
-            )
-            row = cur.fetchone()
-            user_tier = (row.get("subscription_tier") if row else None) or "free"
-            is_admin = bool((row.get("is_admin") if row else False) or False)
+        
+        if clerk_id:
             try:
-                tier_idx = TIER_ORDER.index(user_tier)
-            except ValueError:
-                tier_idx = 0
-            if not is_admin and tier_idx < TIER_ORDER.index(REQUIRED_TIER):
-                return func.HttpResponse(
-                    json.dumps({
-                        "error": "Juris subscription required",
-                        "required_tier": REQUIRED_TIER,
-                        "current_tier": user_tier,
-                    }),
-                    mimetype="application/json", status_code=403,
+                cur.execute(
+                    "SELECT subscription_tier, is_admin FROM users WHERE clerk_id = %s",
+                    (clerk_id,),
                 )
-        except Exception as gate_err:
-            logging.warning("codex/jurisprudence tier check error (allowing through): %s", gate_err)
+                row = cur.fetchone()
+                user_tier = (row.get("subscription_tier") if row else None) or "free"
+                is_admin = bool((row.get("is_admin") if row else False) or False)
+                try:
+                    tier_idx = TIER_ORDER.index(user_tier)
+                except ValueError:
+                    tier_idx = 0
+                if not is_admin and tier_idx < TIER_ORDER.index(REQUIRED_TIER):
+                    return func.HttpResponse(
+                        json.dumps({
+                            "error": "Juris subscription required",
+                            "required_tier": REQUIRED_TIER,
+                            "current_tier": user_tier,
+                        }),
+                        mimetype="application/json", status_code=403,
+                    )
+            except Exception as gate_err:
+                logging.warning("codex/jurisprudence tier check error (allowing through): %s", gate_err)
 
         STATUTE_MAPPING = {'FC': 'FAM', 'LABOR': 'LAB'}
         statute_id = STATUTE_MAPPING.get(statute_id.upper(), statute_id.upper())
