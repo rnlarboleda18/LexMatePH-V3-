@@ -11,7 +11,7 @@ const QUESTIONS_CACHE_KEY = 'bar_questions_limit5000';
  */
 export function useBarQuestions({ enabled = true } = {}) {
   const [questions, setQuestions] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(enabled);
   const [error, setError] = useState(null);
 
   useEffect(() => {
