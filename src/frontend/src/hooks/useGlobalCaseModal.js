@@ -66,17 +66,19 @@ export function useGlobalCaseModal() {
       suppressUntilRef.current = Date.now() + 750;
     }
 
+    // Always clear React state immediately — do NOT rely on popstate firing
+    // (jsdom's history.back() is a no-op; real browsers fire it async).
+    setSelectedCase(null);
+
     if (didPushStateRef.current) {
-      // We own this history entry — go back, which will fire popstate and
-      // the listener below will call setSelectedCase(null).
+      // We pushed a /decisions/{id} entry — go back to restore the previous URL.
+      // In real browsers this also fires popstate, but setSelectedCase(null)
+      // above already handled the state so the listener becomes a safe no-op.
       didPushStateRef.current = false;
       window.history.back();
-    } else {
-      // Either arrived via deep-link or already on /decisions — just rewrite.
-      if (getCaseIdFromUrl()) {
-        window.history.replaceState(null, '', DECISIONS_BASE);
-      }
-      setSelectedCase(null);
+    } else if (getCaseIdFromUrl()) {
+      // Arrived via deep-link — rewrite URL back to /decisions.
+      window.history.replaceState(null, '', DECISIONS_BASE);
     }
   }, [selectedCase]);
 
