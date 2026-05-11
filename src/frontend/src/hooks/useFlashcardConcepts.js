@@ -11,21 +11,33 @@ const FLASHCARD_FETCH_MS = 300000;
  */
 export function useFlashcardConcepts({ enabled = true } = {}) {
   const [conceptPool, setConceptPool] = useState([]);
-  const [busy, setBusy] = useState(false);
+  // Start busy=true when enabled so FlashcardSetup never flashes the
+  // "No digest cards" warning before the first fetch completes.
+  const [busy, setBusy] = useState(() => enabled);
   const [conceptsError, setConceptsError] = useState(null);
   const [fetchNonce, setFetchNonce] = useState(0);
   const [relaxedBarMatch, setRelaxedBarMatch] = useState(false);
   const [bar2026Only, setBar2026Only] = useState(false);
 
   useEffect(() => {
-    if (!enabled) return;
+    // When disabled (user is on a different page), mark not-busy and bail.
+    if (!enabled) {
+      setBusy(false);
+      return;
+    }
+
+    // If we already have data and are just re-enabling (navigation back),
+    // skip re-fetch unless nonce / filters changed.
+    // NOTE: conceptPool.length check handled by dependency changes below.
+
+    setBusy(true);
+    setConceptsError(null);
+
     const ac = new AbortController();
     const tid = setTimeout(() => ac.abort(), FLASHCARD_FETCH_MS);
     let cancelled = false;
 
     const load = async () => {
-      setBusy(true);
-      setConceptsError(null);
       if (fetchNonce > 0) setConceptPool([]);
 
       try {
@@ -79,7 +91,9 @@ export function useFlashcardConcepts({ enabled = true } = {}) {
       cancelled = true;
       ac.abort();
     };
-  }, [fetchNonce, relaxedBarMatch, bar2026Only]);
+  // enabled MUST be in the dep array: navigating to flashcards flips it
+  // false→true and must trigger the fetch.
+  }, [enabled, fetchNonce, relaxedBarMatch, bar2026Only]);
 
   const refetch = useCallback(() => setFetchNonce((n) => n + 1), []);
 
