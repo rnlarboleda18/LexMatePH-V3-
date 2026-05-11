@@ -530,7 +530,7 @@ function App() {
       usedIdle = true;
       handle = requestIdleCallback(startWarm, { timeout: 4000 });
     } else {
-      handle = setTimeout(startWarm, 800);
+      handle = setTimeout(startWarm, 5000); // wait for LCP to paint before warming APIs
     }
 
     return () => {
