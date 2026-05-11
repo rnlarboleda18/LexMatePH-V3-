@@ -542,8 +542,9 @@ const LexPlayer = ({
     const { user } = useUser();
     const userId = user?.id;
     const canDownloadAll = canAccess('download_tracks');
+    const isUnlimited = canAccess('lexplay_unlimited');
 
-    const dailyLimit = LEXPLAY_DAILY_LIMITS[tier] ?? LEXPLAY_DAILY_LIMITS.free;
+    const dailyLimit = isUnlimited ? Infinity : (LEXPLAY_DAILY_LIMITS[tier] ?? LEXPLAY_DAILY_LIMITS.free);
     const hasLimit = dailyLimit !== Infinity;
 
     const [remainingSeconds, setRemainingSeconds] = useState(() =>
