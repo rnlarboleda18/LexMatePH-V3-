@@ -137,7 +137,23 @@ function App() {
 
   // mode must be declared before the data hooks so barQuestionsNeeded/flashcardsNeeded
   // can reference it without hitting a Temporal Dead Zone error.
-  const [mode, setMode] = useState(() => PATH_TO_MODE[window.location.pathname] ?? 'about');
+  const [mode, setMode] = useState(() => {
+    const path = window.location.pathname;
+    if (PATH_TO_MODE[path]) return PATH_TO_MODE[path];
+    // Deep-link to a specific case: /decisions/12345
+    if (/^\/decisions\/\d+/.test(path)) return 'supreme_decisions';
+    return 'about';
+  });
+
+  /**
+   * Numeric case ID extracted from a deep-link URL on initial load
+   * (e.g. user navigated directly to /decisions/12345).
+   * Cleared after the case is opened so the effect only fires once.
+   */
+  const [pendingDeepLinkId] = useState(() => {
+    const m = window.location.pathname.match(/^\/decisions\/(\d+)/);
+    return m ? m[1] : null;
+  });
 
   // --- Data hooks — only fetch when the user is on the page that needs the data ---
   // browse_bar + quiz need 1.2 MB of questions; flashcard needs 974 KB of concepts.
@@ -194,6 +210,24 @@ function App() {
     },
     [selectGlobalCase, getToken, isSignedIn, openUpgradeModal, canAccess, subscriptionLoading, authLoaded],
   );
+
+  /**
+   * Deep-link handler: if the page was loaded at /decisions/{id}, wait until
+   * Clerk auth is ready then fetch the case digest and open the modal.
+   */
+  useEffect(() => {
+    if (!pendingDeepLinkId || !authLoaded) return;
+    let cancelled = false;
+    fetch(apiUrl(`/api/sc_decisions/${pendingDeepLinkId}?digest_only=true`))
+      .then((r) => r.json())
+      .then((data) => {
+        if (cancelled || !data || data.error) return;
+        selectGlobalCaseGuarded(data);
+      })
+      .catch(() => {}); // silent — user can search manually if fetch fails
+    return () => { cancelled = true; };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pendingDeepLinkId, authLoaded]); // selectGlobalCaseGuarded intentionally omitted — stable ref
 
   const tryOpenBarQuestion = useCallback(
     (q) => {

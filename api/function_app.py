@@ -41,6 +41,7 @@ try:
     # from blueprints.paymongo import paymongo_bp
     from blueprints.xendit import xendit_bp
     from blueprints.bar_reviewer import bar_reviewer_bp
+    from blueprints.sitemap import sitemap_bp
 
     app.register_functions(questions_bp)
     app.register_functions(lexify_bp)
@@ -63,6 +64,7 @@ try:
     # app.register_functions(paymongo_bp)
     app.register_functions(xendit_bp)
     app.register_functions(bar_reviewer_bp)
+    app.register_functions(sitemap_bp)
 
     from blueprints.legal_chat import legal_chat_bp
     app.register_functions(legal_chat_bp)
