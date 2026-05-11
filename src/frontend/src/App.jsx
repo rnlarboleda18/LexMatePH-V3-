@@ -480,7 +480,7 @@ function App() {
     // During the 24-hour full-access guest window: only show the founding promo offer, not the plain paywall gate.
     if (isInGuestWindow() && !foundingPromoAvailable) return;
     const delay = guestModalDismissedAt === null
-      ? (foundingPromoAvailable ? 3000 : 0)   // small delay for promo so user sees the app first
+      ? (foundingPromoAvailable ? 10000 : 0)  // 10s delay for promo so user can explore the app first
       : Math.max(0, GUEST_GATE_GRACE_MS - (Date.now() - guestModalDismissedAt));
     const timer = setTimeout(() => {
       setShowGuestModal(foundingPromoAvailable ? 'founding_promo' : 'subscription');
