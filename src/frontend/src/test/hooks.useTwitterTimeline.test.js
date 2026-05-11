@@ -6,6 +6,20 @@ describe('useTwitterTimeline', () => {
   beforeEach(() => {
     document.body.innerHTML = '';
     delete window.twttr;
+
+    // jsdom has a stub IntersectionObserver that never fires its callback.
+    // Replace it with one that fires immediately (element is already "visible"),
+    // which matches real browser behaviour for elements already in the viewport.
+    // Must use `function` (not arrow) so it can be called with `new`.
+    window.IntersectionObserver = vi.fn().mockImplementation(function(callback) {
+      return {
+        observe: vi.fn().mockImplementation((el) => {
+          callback([{ isIntersecting: true, target: el }]);
+        }),
+        disconnect: vi.fn(),
+        unobserve: vi.fn(),
+      };
+    });
   });
 
   afterEach(() => {
