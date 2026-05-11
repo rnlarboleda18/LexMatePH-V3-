@@ -21,19 +21,8 @@ import { LexPlayer, useLexPlay } from './features/lexplay';
 const LexMateApp = lazy(() => import('./features/lexmate/LexMateApp'));
 import { useSubscription } from './context/SubscriptionContext';
 import { normalizeBarQuestionSubject, normalizeBarSubject } from './utils/subjectNormalize';
-import { consumeFreeTierUsage, notifyUsageBlocked, GUEST_WINDOW_MS } from './utils/freeTierUsage';
+import { consumeFreeTierUsage, notifyUsageBlocked, GUEST_WINDOW_MS, isInGuestWindow } from './utils/freeTierUsage';
 import { GUEST_GATE_GRACE_MS, startGuestGateGrace, clearGuestGateGrace } from './utils/guestGateGrace';
-
-/** Returns true while the anonymous user is within their 24-hour free-access window. */
-function isInGuestWindow() {
-  try {
-    const startStr = localStorage.getItem('lexmate_anonymous_usage_start');
-    if (!startStr) return true; // Not yet set → treat as brand-new visitor still in window
-    return Date.now() - new Date(startStr).getTime() < GUEST_WINDOW_MS;
-  } catch (_) {
-    return false;
-  }
-}
 import { useBarQuestions } from './hooks/useBarQuestions';
 import { useFlashcardConcepts } from './hooks/useFlashcardConcepts';
 import { useGlobalCaseModal } from './hooks/useGlobalCaseModal';

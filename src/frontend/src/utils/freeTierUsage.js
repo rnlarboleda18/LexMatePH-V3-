@@ -16,6 +16,18 @@ const ANON_START_KEY   = 'lexmate_anonymous_usage_start'; // ISO timestamp of fi
 /** Duration of full-access guest window (24 h, matches GUEST_FULL_ACCESS_HOURS on the backend). */
 export const GUEST_WINDOW_MS = 24 * 60 * 60 * 1000;
 
+/** Returns true while the anonymous user is within their 24-hour free-access window. */
+export function isInGuestWindow() {
+  if (typeof window === 'undefined') return false;
+  try {
+    const startStr = localStorage.getItem(ANON_START_KEY);
+    if (!startStr) return true; // Not yet set → treat as brand-new visitor still in window
+    return Date.now() - new Date(startStr).getTime() < GUEST_WINDOW_MS;
+  } catch (_) {
+    return false;
+  }
+}
+
 
 /**
  * Anonymous bucket resets each full page load (F5) when:

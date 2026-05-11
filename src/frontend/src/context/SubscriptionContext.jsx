@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { useAuth, useUser } from '@clerk/clerk-react';
+import { isInGuestWindow } from '../utils/freeTierUsage';
 
 const SubscriptionContext = createContext(null);
 
@@ -263,6 +264,9 @@ export function SubscriptionProvider({ children }) {
 
   const canAccess = (feature) => {
     if (isAdmin) return true;
+    // 24-hour full access guest window
+    if (!isSignedIn && isInGuestWindow()) return true;
+    
     const required = FEATURE_REQUIREMENTS[feature];
     if (!required) return true;
     return TIER_ORDER.indexOf(effectiveTier) >= TIER_ORDER.indexOf(required);
