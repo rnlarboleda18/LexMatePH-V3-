@@ -27,9 +27,23 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       sourcemap: false,
-      // Warn when any individual chunk exceeds 600 kB (gzip). Main bundle currently ~850 kB raw;
-      // flag intentionally set above current size to avoid blocking CI—lower as code is split further.
-      chunkSizeWarningLimit: 900,
+      chunkSizeWarningLimit: 600,
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            // Clerk — large 3rd-party auth lib, changes independently of app code
+            if (id.includes('@clerk')) return 'vendor-clerk';
+            // React core — stable, long-lived cache
+            if (id.includes('node_modules/react/') || id.includes('node_modules/react-dom/')) return 'vendor-react';
+            // React Router
+            if (id.includes('react-router')) return 'vendor-router';
+            // Lucide icons — large tree; split so unused routes don’t pull it all in
+            if (id.includes('lucide-react')) return 'vendor-lucide';
+            // Fuse.js fuzzy search
+            if (id.includes('fuse.js') || id.includes('fuse/')) return 'vendor-fuse';
+          },
+        },
+      },
     },
     plugins: [
       react(),

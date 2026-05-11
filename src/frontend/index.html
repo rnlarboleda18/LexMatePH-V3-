@@ -22,13 +22,13 @@
     <meta name="twitter:title" content="LexMatePH · Your Philippine Law Companion" />
     <meta name="twitter:description" content="LexMatePH — Master the Philippine Bar with a fast, offline-ready PWA. Bar questions, SC decisions, digests, codals, flashcards, and LexPlay audio review." />
     <meta name="twitter:image" content="https://lexmateph.com/pwa-512x512.png" />
-    <!-- Preconnect: fonts, Clerk, Twitter (PageSpeed recommendations) -->
+    <!-- Preconnect: max 4 (Lighthouse limit) — fonts + Clerk only -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preconnect" href="https://clerk-telemetry.com" crossorigin />
     <link rel="preconnect" href="https://capital-ghost-60.clerk.accounts.dev" crossorigin />
-    <link rel="preconnect" href="https://syndication.twitter.com" crossorigin />
+    <!-- Twitter: dns-prefetch only (not preconnect) to stay within the 4-connection budget -->
     <link rel="dns-prefetch" href="https://platform.twitter.com" />
+    <link rel="dns-prefetch" href="https://syndication.twitter.com" />
     <!-- Non-render-blocking Google Fonts (saves ~800ms on critical path) -->
     <link rel="preload" as="style"
       href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&display=swap"
@@ -74,23 +74,24 @@
   </head>
   <body>
     <div id="root"></div>
-    <!-- X (Twitter) widgets: official twttr queue so widgets.js merges _e/ready. Must load before the app. -->
-    <script>
-      window.twttr = (function (d) {
+    <!-- X (Twitter) widgets: deferred so it never blocks initial render -->
+    <script defer>
+      window.twttr = (function () {
         var t = window.twttr || {};
         t._e = t._e || [];
-        t.ready = t.ready || function (f) {
-          t._e.push(f);
-        };
+        t.ready = t.ready || function (f) { t._e.push(f); };
         return t;
-      })(document);
+      })();
+      // Load widgets.js only after page is interactive
+      window.addEventListener('load', function () {
+        var s = document.createElement('script');
+        s.id = 'twitter-wjs';
+        s.src = 'https://platform.twitter.com/widgets.js';
+        s.charset = 'utf-8';
+        s.async = true;
+        document.head.appendChild(s);
+      });
     </script>
-    <script
-      id="twitter-wjs"
-      src="https://platform.twitter.com/widgets.js"
-      async
-      charset="utf-8"
-    ></script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

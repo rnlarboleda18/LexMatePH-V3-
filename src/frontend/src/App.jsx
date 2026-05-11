@@ -457,7 +457,29 @@ function App() {
   }, [isSignedIn]);
 
   // Fetch founding promo slot availability once on mount.
+  // Uses sessionStorage as a short-lived cache so repeat navigations are instant (no 8s API hit).
   useEffect(() => {
+    const CACHE_KEY = 'lx_plans_cache';
+    const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
+
+    // Try to serve from cache first (makes this instant on repeat loads)
+    try {
+      const raw = sessionStorage.getItem(CACHE_KEY);
+      if (raw) {
+        const { data, ts } = JSON.parse(raw);
+        if (Date.now() - ts < CACHE_TTL_MS) {
+          setFoundingPromoAvailable(data.founding_promo_available === true);
+          const d = data.founding_promo_duration_days;
+          if (typeof d === 'number' && d > 0) setFoundingPromoDurationDays(d);
+          const h = data.trial_duration_hours;
+          if (typeof h === 'number' && h > 0) setTrialDurationHours(h);
+          setGuestGatePlansReady(true);
+          return; // skip network fetch — cache is fresh
+        }
+      }
+    } catch (_) {}
+
+    // Cache miss or expired — fetch from network
     fetch('/api/available-plans')
       .then((r) => r.json())
       .then((data) => {
@@ -466,6 +488,10 @@ function App() {
         if (typeof d === 'number' && d > 0) setFoundingPromoDurationDays(d);
         const h = data.trial_duration_hours;
         if (typeof h === 'number' && h > 0) setTrialDurationHours(h);
+        // Cache the result for the rest of this session
+        try {
+          sessionStorage.setItem(CACHE_KEY, JSON.stringify({ data, ts: Date.now() }));
+        } catch (_) {}
       })
       .catch(() => {})
       .finally(() => setGuestGatePlansReady(true));
@@ -528,9 +554,9 @@ function App() {
     let handle;
     if (typeof requestIdleCallback !== 'undefined') {
       usedIdle = true;
-      handle = requestIdleCallback(startWarm, { timeout: 4000 });
+      handle = requestIdleCallback(startWarm, { timeout: 8000 });
     } else {
-      handle = setTimeout(startWarm, 5000); // wait for LCP to paint before warming APIs
+      handle = setTimeout(startWarm, 10000); // wait well past LCP before warming APIs
     }
 
     return () => {
