@@ -9,12 +9,16 @@ const QUESTIONS_CACHE_KEY = 'bar_questions_limit5000';
  * Fetches bar exam questions via IndexedDB SWR.
  * Cached data is delivered first; network refresh runs in the background.
  */
-export function useBarQuestions() {
+export function useBarQuestions({ enabled = true } = {}) {
   const [questions, setQuestions] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!enabled) {
+      setLoading(false);
+      return;
+    }
     let cancelled = false;
     setLoading(true);
     setError(null);
@@ -44,7 +48,7 @@ export function useBarQuestions() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [enabled]);
 
   const retry = useCallback(async () => {
     setError(null);

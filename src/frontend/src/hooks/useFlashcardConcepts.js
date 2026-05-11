@@ -9,7 +9,7 @@ const FLASHCARD_FETCH_MS = 300000;
  * Loads SC digest key legal concepts for the flashcard feature.
  * Prefetches on mount; exposes retry / filter controls.
  */
-export function useFlashcardConcepts() {
+export function useFlashcardConcepts({ enabled = true } = {}) {
   const [conceptPool, setConceptPool] = useState([]);
   const [busy, setBusy] = useState(false);
   const [conceptsError, setConceptsError] = useState(null);
@@ -18,6 +18,7 @@ export function useFlashcardConcepts() {
   const [bar2026Only, setBar2026Only] = useState(false);
 
   useEffect(() => {
+    if (!enabled) return;
     const ac = new AbortController();
     const tid = setTimeout(() => ac.abort(), FLASHCARD_FETCH_MS);
     let cancelled = false;

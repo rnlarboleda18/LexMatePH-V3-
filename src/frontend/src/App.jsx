@@ -149,7 +149,12 @@ function App() {
 
 
   // --- Hooks ---
-  const { questions, loading, error, retry: handleRetryFetch } = useBarQuestions();
+  // Only load heavy data when the user is actually on the page that needs it.
+  // browse_bar + quiz need questions (1.2 MB); flashcard needs concepts (974 KB).
+  const barQuestionsNeeded = mode === 'browse_bar' || mode === 'quiz';
+  const flashcardsNeeded   = mode === 'flashcard';
+
+  const { questions, loading, error, retry: handleRetryFetch } = useBarQuestions({ enabled: barQuestionsNeeded });
   const {
     conceptPool: flashcardConceptPool,
     busy: flashcardConceptsBusy,
@@ -157,7 +162,7 @@ function App() {
     refetch: refetchFlashcardConcepts,
     getPrimarySubject: getCardPrimarySubject,
     subjectCounts: flashcardSubjectCounts,
-  } = useFlashcardConcepts();
+  } = useFlashcardConcepts({ enabled: flashcardsNeeded });
   const {
     selectedCase: globalSelectedCase,
     selectCase: selectGlobalCase,
