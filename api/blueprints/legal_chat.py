@@ -85,15 +85,18 @@ def _get_user_plan(user_id: str | None) -> str:
                 row = cur.fetchone()
                 if not row:
                     return "free"
-                
+
                 status, is_admin = row
-                if is_admin or status == "active":
+                if is_admin:
+                    return "admin"
+                if status == "active":
                     return "amicus"
         finally:
             put_db_connection(conn)
     except Exception as e:
         log.warning(f"Plan lookup failed: {e}")
     return "free"
+
 
 
 
