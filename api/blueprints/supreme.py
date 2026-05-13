@@ -441,14 +441,13 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
         # digest fields already cover the vast majority of meaningful queries.
         fts_expr = """
             to_tsvector('english', 
-                COALESCE(short_title, '') || ' ' || 
+                COALESCE(full_title, '') || ' ' || 
                 COALESCE(case_number, '') || ' ' || 
                 COALESCE(main_doctrine, '') || ' ' || 
-                COALESCE(digest_facts, '') || ' ' || 
-                COALESCE(digest_ruling, '') || ' ' || 
-                COALESCE(digest_ratio, '')
+                COALESCE(digest_facts, '')
             )
         """
+
 
         params = []
         

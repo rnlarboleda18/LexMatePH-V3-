@@ -337,6 +337,88 @@ def load_full_sections(chunks: list[dict], max_sections: int = 5) -> list[dict]:
     return enriched
 
 
+# ── Step 7: PostgreSQL Fallback Retrieval ─────────────────────────────────────
+
+def pg_fallback_retrieve(query: str, top_k: int = 5) -> list[dict]:
+    """
+    Fallback: search the local sc_decided_cases table using FTS and Trigrams.
+    Used when the Vertex AI RAG corpus is empty or still indexing.
+    """
+    from db_pool import get_db_connection, put_db_connection
+    from psycopg2.extras import RealDictCursor
+
+    log.info(f"RAG Fallback: searching PostgreSQL for '{query[:50]}...'")
+    chunks = []
+    conn = None
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+
+        # Use Tier 3 (FTS) and Tier 4 (Trigram) logic from supreme.py
+        fts_expr = """
+            to_tsvector('english', 
+                COALESCE(full_title, '') || ' ' || 
+                COALESCE(case_number, '') || ' ' || 
+                COALESCE(main_doctrine, '') || ' ' || 
+                COALESCE(digest_facts, '')
+            )
+        """
+
+        
+        # Try FTS first
+        sql = f"""
+            SELECT id, short_title, case_number, main_doctrine, digest_facts, digest_ruling, digest_ratio,
+                   ts_rank_cd({fts_expr}, websearch_to_tsquery('english', %s)) AS score
+            FROM sc_decided_cases
+            WHERE {fts_expr} @@ websearch_to_tsquery('english', %s)
+            ORDER BY score DESC
+            LIMIT %s
+        """
+        cur.execute(sql, (query, query, top_k))
+        rows = cur.fetchall()
+
+        # If FTS returns nothing, try Trigram Similarity
+        if not rows:
+            sql = f"""
+                SELECT id, short_title, case_number, main_doctrine, digest_facts, digest_ruling, digest_ratio,
+                       similarity(COALESCE(short_title,''), %s) AS score
+                FROM sc_decided_cases
+                WHERE short_title %% %s OR full_title %% %s
+                ORDER BY score DESC
+                LIMIT %s
+            """
+            try:
+                cur.execute(sql, (query, query, query, top_k))
+                rows = cur.fetchall()
+            except Exception:
+                rows = []
+
+        for row in rows:
+            # Enforce "retrieval context" format
+            text = f"TITLE: {row['short_title']}\nCASE NO: {row['case_number']}\n\nDOCTRINE: {row['main_doctrine'] or 'N/A'}\n\nFACTS: {row['digest_facts'] or 'N/A'}\n\nRULING: {row['digest_ruling'] or 'N/A'}\n\nRATIO: {row['digest_ratio'] or 'N/A'}"
+            chunks.append({
+                "text": text,
+                "source_uri": f"pg://sc_decided_cases/{row['id']}",
+                "source_display_name": f"{row['short_title']} (G.R. {row['case_number']})",
+                "score": float(row['score'] or 0.0),
+                "doc_metadata": {
+                    "short_title": row['short_title'],
+                    "gr_number": row['case_number'],
+                    "id": row['id']
+                }
+            })
+
+        cur.close()
+    except Exception as e:
+        log.error(f"PostgreSQL fallback failed: {e}")
+    finally:
+        if conn:
+            put_db_connection(conn)
+
+    log.info(f"PostgreSQL fallback found {len(chunks)} results")
+    return chunks
+
+
 # ── Main Retrieval Orchestrator ────────────────────────────────────────────────
 
 def retrieve(
@@ -392,23 +474,29 @@ def retrieve(
         result["chunks"] = chunks
     except Exception as e:
         log.error(f"RAG retrieval failed: {e}")
-        return result
-
-    if not chunks:
-        log.warning("No chunks retrieved")
-        return result
-
-    # Step 5 — Re-ranking
-    if pipeline.get("use_rerank") and len(chunks) > config.RAG_RERANK_TOP_K:
-        chunks = rerank_chunks(question, chunks, top_k=config.RAG_RERANK_TOP_K)
+        chunks = []
         result["chunks"] = chunks
-
-    # Step 6 — Full section loading
-    if pipeline.get("load_full_doc"):
-        enriched = load_full_sections(chunks, max_sections=7)
-        result["enriched_chunks"] = enriched
-    else:
+    if not chunks:
+        log.warning("No RAG chunks retrieved. Attempting PostgreSQL fallback...")
+        chunks = pg_fallback_retrieve(question, top_k=5)
+        result["chunks"] = chunks
+        if not chunks:
+            log.warning("PostgreSQL fallback also returned zero results")
+            return result
+        # Since it's a fallback, we skip re-ranking and full doc loading (already full in fallback)
         result["enriched_chunks"] = chunks
+    else:
+        # Step 5 — Re-ranking
+        if pipeline.get("use_rerank") and len(chunks) > config.RAG_RERANK_TOP_K:
+            chunks = rerank_chunks(question, chunks, top_k=config.RAG_RERANK_TOP_K)
+            result["chunks"] = chunks
+
+        # Step 6 — Full section loading
+        if pipeline.get("load_full_doc"):
+            enriched = load_full_sections(chunks, max_sections=7)
+            result["enriched_chunks"] = enriched
+        else:
+            result["enriched_chunks"] = chunks
 
     # Build final retrieval context string for Gemini
     context_parts = []
