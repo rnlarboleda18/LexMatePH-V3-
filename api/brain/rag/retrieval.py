@@ -42,7 +42,7 @@ RAG_BASE    = (
 
 # ── Gemini client ──────────────────────────────────────────────────────────────
 
-@lru_cache(max_size=1)
+@lru_cache(maxsize=1)
 def _gemini_client() -> genai.Client:
     return genai.Client(
         vertexai=True,
