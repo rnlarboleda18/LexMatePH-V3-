@@ -171,7 +171,7 @@ Add relevant: GR numbers (if known), statute names, article numbers, doctrine na
 Do NOT answer the question. Output the expanded query only."""
 
     try:
-        expanded = _flash(prompt, system=system, max_tokens=150)
+        expanded = _llm(prompt, system=system, max_tokens=150)
         # Combine original + expanded for best recall
         return f"{question} {expanded}"
     except Exception as e:

@@ -123,7 +123,7 @@ def get_spend_pct() -> float:
                     FROM legal_chat_usage
                     WHERE usage_date >= date_trunc('month', CURRENT_DATE)
                 """)
-                total_tokens = cur.fetchone()[0]
+                total_tokens = float(cur.fetchone()[0])
 
         # Assume 80% Flash, 20% Pro for cost estimate
         estimated_eur = (
