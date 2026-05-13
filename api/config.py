@@ -57,18 +57,33 @@ GCP_CREDENTIALS_FILE = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "lexmateph-ra
 
 # In Azure production, we cannot upload the JSON file via git.
 # We read the raw JSON string from an App Setting and write it to a temporary file.
-_gcp_sa_json = os.getenv("GCP_SA_JSON", "").strip()
-if _gcp_sa_json:
+# GCP_SA_JSON_B64: base64-encoded service account JSON (preferred — survives shell escaping).
+# GCP_SA_JSON:     raw JSON string (fallback for local dev / direct paste).
+_gcp_sa_b64  = os.getenv("GCP_SA_JSON_B64", "").strip()
+_gcp_sa_json = os.getenv("GCP_SA_JSON",     "").strip()
+
+_sa_content = None
+if _gcp_sa_b64:
+    import base64
+    try:
+        _sa_content = base64.b64decode(_gcp_sa_b64).decode("utf-8")
+    except Exception as _e:
+        import logging
+        logging.error(f"Failed to decode GCP_SA_JSON_B64: {_e}")
+elif _gcp_sa_json:
+    _sa_content = _gcp_sa_json
+
+if _sa_content:
     import tempfile
     _tmp_key_path = os.path.join(tempfile.gettempdir(), "lexmateph-rag-key.json")
     try:
         with open(_tmp_key_path, "w", encoding="utf-8") as _f:
-            _f.write(_gcp_sa_json)
+            _f.write(_sa_content)
         os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = _tmp_key_path
         GCP_CREDENTIALS_FILE = _tmp_key_path
-    except Exception as e:
+    except Exception as _e:
         import logging
-        logging.error(f"Failed to write GCP_SA_JSON to temp file: {e}")
+        logging.error(f"Failed to write GCP SA JSON to temp file: {_e}")
 
 # GCS
 GCS_CORPUS_BUCKET    = os.getenv("GCS_CORPUS_BUCKET", "lexmateph-legal-corpus")
