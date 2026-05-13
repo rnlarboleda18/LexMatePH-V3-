@@ -55,6 +55,21 @@ GCP_LOCATION         = os.getenv("GCP_LOCATION", "us-central1")       # Gemini m
 RAG_REGION           = os.getenv("RAG_REGION", "europe-west4")         # RAG Engine corpus (avoids Spanner capacity limit)
 GCP_CREDENTIALS_FILE = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "lexmateph-rag-key.json")
 
+# In Azure production, we cannot upload the JSON file via git.
+# We read the raw JSON string from an App Setting and write it to a temporary file.
+_gcp_sa_json = os.getenv("GCP_SA_JSON", "").strip()
+if _gcp_sa_json:
+    import tempfile
+    _tmp_key_path = os.path.join(tempfile.gettempdir(), "lexmateph-rag-key.json")
+    try:
+        with open(_tmp_key_path, "w", encoding="utf-8") as _f:
+            _f.write(_gcp_sa_json)
+        os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = _tmp_key_path
+        GCP_CREDENTIALS_FILE = _tmp_key_path
+    except Exception as e:
+        import logging
+        logging.error(f"Failed to write GCP_SA_JSON to temp file: {e}")
+
 # GCS
 GCS_CORPUS_BUCKET    = os.getenv("GCS_CORPUS_BUCKET", "lexmateph-legal-corpus")
 GCS_CASES_PREFIX     = "cases/full-text"
