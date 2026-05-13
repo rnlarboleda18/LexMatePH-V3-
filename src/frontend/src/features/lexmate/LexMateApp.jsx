@@ -6,7 +6,7 @@ import LexMateMessage from './LexMateMessage';
 const SUGGESTED_QUESTIONS = [
   'What is the leading case on psychological incapacity under Article 36?',
   'What are the elements of murder under the Revised Penal Code?',
-  'Explain the Holley doctrine on constructive dismissal.',
+  'What constitutes constructive dismissal under Philippine labor law?',
   'What is the difference between legal separation and annulment?',
   'What are the requisites of a valid contract under the Civil Code?',
 ];
