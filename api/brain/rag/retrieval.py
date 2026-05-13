@@ -15,6 +15,8 @@ import logging
 import os
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
+from functools import lru_cache
 
 import requests
 import google.auth
@@ -23,6 +25,7 @@ from google import genai
 from google.genai import types
 
 import config
+
 from brain.rag.parser import parse_document
 
 log = logging.getLogger(__name__)
@@ -39,12 +42,14 @@ RAG_BASE    = (
 
 # ── Gemini client ──────────────────────────────────────────────────────────────
 
+@lru_cache(max_size=1)
 def _gemini_client() -> genai.Client:
     return genai.Client(
         vertexai=True,
         project=config.GCP_PROJECT,
         location=config.GCP_LOCATION,
     )
+
 
 
 def _flash(prompt: str, system: str = None, max_tokens: int = 1024) -> str:
@@ -64,12 +69,27 @@ def _flash(prompt: str, system: str = None, max_tokens: int = 1024) -> str:
 
 # ── Auth for RAG Engine REST ───────────────────────────────────────────────────
 
+_cached_token = None
+_token_expiry = 0
+
 def _token() -> str:
+    global _cached_token, _token_expiry
+    now = time.time()
+    
+    # Cache token for 50 minutes (Google tokens usually last 60m)
+    if _cached_token and now < _token_expiry:
+        return _cached_token
+
+    log.info("Refreshing Google OAuth token")
     creds, _ = google.auth.default(
         scopes=["https://www.googleapis.com/auth/cloud-platform"]
     )
     creds.refresh(google.auth.transport.requests.Request())
-    return creds.token
+    
+    _cached_token = creds.token
+    # Tokens usually expire in 3600s, we refresh at 3000s
+    _token_expiry = now + 3000
+    return _cached_token
 
 
 def _headers() -> dict:
@@ -295,46 +315,50 @@ def rerank_chunks(
 
 def load_full_sections(chunks: list[dict], max_sections: int = 5) -> list[dict]:
     """
-    For top chunks, download the full parent document from GCS and
-    extract the high-priority sections (doctrine, ruling, ratio).
-    Returns enriched chunks with full_section_text added.
+    Parallel fetch of top chunks' full parent documents from GCS.
     """
     from google.cloud import storage
-
+    
     gcs = storage.Client(project=config.GCP_PROJECT)
-    seen_uris = set()
-    enriched = []
-
-    for chunk in chunks[:max_sections]:
+    
+    def _fetch_one(chunk):
         uri = chunk.get("source_uri", "")
-        if not uri or uri in seen_uris:
-            enriched.append(chunk)
-            continue
-
-        seen_uris.add(uri)
+        if not uri or "gs://" not in uri:
+            return chunk
 
         try:
             # Parse gs://bucket/path/to/file.txt
             path = uri.replace("gs://", "")
             bucket_name, _, blob_name = path.partition("/")
             bucket = gcs.bucket(bucket_name)
-            full_text = bucket.blob(blob_name).download_as_text()
+            # Use short timeout for GCS to avoid hanging the whole pipeline
+            full_text = bucket.blob(blob_name).download_as_text(timeout=10)
 
             doc = parse_document(full_text)
             context = doc.get_retrieval_context(max_words=3000)
 
-            chunk = chunk.copy()
-            chunk["full_section_text"] = context
-            chunk["doc_metadata"]      = doc.metadata
-            chunk["doc_type"]          = doc.doc_type
-            chunk["total_doc_words"]   = doc.total_words
-
+            enriched = chunk.copy()
+            enriched["full_section_text"] = context
+            enriched["doc_metadata"]      = doc.metadata
+            enriched["doc_type"]          = doc.doc_type
+            enriched["total_doc_words"]   = doc.total_words
+            return enriched
         except Exception as e:
             log.warning(f"Failed to load full doc for {uri}: {e}")
+            return chunk
 
-        enriched.append(chunk)
+    # Filter to top N unique URIs to avoid redundant downloads
+    to_fetch = chunks[:max_sections]
+    
+    t_start = time.time()
+    with ThreadPoolExecutor(max_workers=max_sections) as executor:
+        results = list(executor.map(_fetch_one, to_fetch))
+    
+    log.info(f"Parallel GCS fetch of {len(results)} docs took {time.time() - t_start:.2f}s")
+    
+    # Combine back with any remaining chunks
+    return results + chunks[max_sections:]
 
-    return enriched
 
 
 # ── Step 7: PostgreSQL Fallback Retrieval ─────────────────────────────────────

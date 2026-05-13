@@ -79,17 +79,22 @@ def _get_user_plan(user_id: str | None) -> str:
         try:
             with conn.cursor() as cur:
                 cur.execute(
-                    "SELECT subscription_status FROM users WHERE clerk_id = %s",
+                    "SELECT subscription_status, is_admin FROM users WHERE clerk_id = %s",
                     [user_id]
                 )
                 row = cur.fetchone()
-                if row and row[0] == "active":
+                if not row:
+                    return "free"
+                
+                status, is_admin = row
+                if is_admin or status == "active":
                     return "amicus"
         finally:
             put_db_connection(conn)
     except Exception as e:
         log.warning(f"Plan lookup failed: {e}")
     return "free"
+
 
 
 def _json_response(data: dict, status: int = 200) -> func.HttpResponse:
