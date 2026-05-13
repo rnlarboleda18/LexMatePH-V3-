@@ -94,6 +94,7 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
     const codeSubtitle = codeTitleMap[codeKey]?.subtitle || null;
     /** RA 11232 uses Sections in the statute; DB column remains article_num. */
     const codalProvisionLabel = codeKey === 'RCC' ? 'Section' : 'Article';
+    const isROC = codeKey === 'ROC';
 
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -506,7 +507,14 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
 
                 await lexCache.swr('codals', cacheKey, fetcher, (json, isCached) => {
                     setData(json);
+                    setLoading(false); // show content immediately — TOC builds in background
 
+                    // Defer the TOC build so the browser can paint the article list first
+                    const scheduleToc = typeof requestIdleCallback === 'function'
+                        ? (cb) => requestIdleCallback(cb, { timeout: 500 })
+                        : (cb) => setTimeout(cb, 0);
+
+                    scheduleToc(() => {
                     // Build TOC
                     const root = { id: 'root', label: 'root', rank: -1, children: [], articles: [] };
                     const stack = [root];
@@ -518,6 +526,7 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
                         if (t.startsWith('TITLE') || t.startsWith('PRELIMINARY TITLE') || t.startsWith('RULE')) return 1;
                         if (t.startsWith('CHAPTER')) return 2;
                         if (t.startsWith('SECTION')) return 3;
+                        if (isROC) return 1;
                         return 4;
                     };
 
@@ -536,93 +545,112 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
 
                         const artBody = art.content || art.content_md || '';
 
-                        // 1. Process headers inside article first (usually at the top)
-                        // This ensures the current article falls under the header it contains.
-                        const headers = [...artBody.matchAll(/^##\s+(.+)$/gm)].map(m => m[1].strip ? m[1].strip() : m[1].trim());
-                        headers.forEach(headerText => {
-                            const rank = getRank(headerText);
-                            const newNode = createNode(headerText, rank, art.id || art.article_number || art.key_id);
-                            while (stack.length > 0 && stack[stack.length - 1].rank >= rank) {
-                                stack.pop();
+                        if (isROC) {
+                            // ── ROC-specific TOC builder ──────────────────────────────────────
+                            const partLabel = art.book_label || (art.book ? `Part ${art.book}` : null);
+                            const ruleNum   = art.title_num;
+                            const ruleLabel = art.title_label;
+
+                            if (partLabel) {
+                                const currentPart = stack.length > 1 ? stack[1] : null;
+                                if (!currentPart || currentPart.label !== partLabel) {
+                                    while (stack.length > 1) stack.pop();
+                                    const partNode = createNode(partLabel, 0, art.id || art.article_number);
+                                    root.children.push(partNode);
+                                    stack.push(partNode);
+                                }
                             }
-                            const parent = stack.length > 0 ? stack[stack.length - 1] : root;
-                            parent.children.push(newNode);
-                            stack.push(newNode);
-                        });
 
-                        // 2. Build provision label (Section for RCC, Article for other codals)
-                        let label = `${codalProvisionLabel} ${art.article_number}`;
-                        if (art.article_number === '0' || !art.article_number) label = 'Preamble';
-
-                        // Try to find title in content if not provided by backend
-                        if (!art.article_title) {
-                            const titleMatch = artBody.match(
-                                /^(?:\*\*)?((?:Article|Section)\s+\w+\.?\s+.*?)(?:\*\*|\.\-|:|\n|$)/i
-                            );
-                            if (titleMatch && titleMatch[1]) {
-                                label = titleMatch[1].trim();
-                                if (label.length > 65) label = label.substring(0, 65) + '...';
+                            if (ruleLabel) {
+                                const ruleText = ruleNum ? `Rule ${ruleNum} – ${ruleLabel}` : ruleLabel;
+                                const currentRule = stack.find(n => n.rank === 1);
+                                if (!currentRule || currentRule.label !== ruleText) {
+                                    while (stack.length > 2) stack.pop();
+                                    const ruleNode = createNode(ruleText, 1, art.id || art.article_number);
+                                    const ruleParent = stack[stack.length - 1];
+                                    ruleParent.children.push(ruleNode);
+                                    stack.push(ruleNode);
+                                }
                             }
-                        }
 
-                        let cleanNum = art.article_number;
-                        let cleanTitle = art.article_title || label;
+                            const secNum   = art.section_num ? `Sec. ${art.section_num}` : (art.article_number || '');
+                            const secTitle = art.article_title || '';
+                            const secLabel = secTitle ? `${secNum}: ${secTitle}` : secNum;
 
-                        // Robust Sanitization
-                        const isConstitution = shortName && shortName.toUpperCase() === 'CONST';
-                        const isROC = shortName && shortName.toUpperCase() === 'ROC';
-                        const hasRomanOrWord = /[IVXLCDM]/i.test(cleanNum) || /ARTICLE/i.test(cleanNum) || /RULE/i.test(cleanNum);
+                            stack[stack.length - 1].articles.push({
+                                id: art.id || art.article_number,
+                                label: secLabel,
+                            });
 
-                        // Priority 1: If the label already has a structural word at the start, use it as is
-                        const hasWordPrefix = /^(Article|Section|Title|Chapter|Preamble|Book|Rule|Part)/i.test(cleanTitle);
+                        } else {
+                            // ── Generic TOC builder for all other codals ────────────────────
+                            const headers = [...artBody.matchAll(/^##\s+(.+)$/gm)].map(m => m[1].trim());
+                            headers.forEach(headerText => {
+                                const rank = getRank(headerText);
+                                const newNode = createNode(headerText, rank, art.id || art.article_number || art.key_id);
+                                while (stack.length > 0 && stack[stack.length - 1].rank >= rank) {
+                                    stack.pop();
+                                }
+                                const parent = stack.length > 0 ? stack[stack.length - 1] : root;
+                                parent.children.push(newNode);
+                                stack.push(newNode);
+                            });
 
-                        let tocLabel = cleanTitle;
+                            let label = `${codalProvisionLabel} ${art.article_number}`;
+                            if (art.article_number === '0' || !art.article_number) label = 'Preamble';
 
-                        if (!hasWordPrefix && cleanNum && cleanNum !== '0') {
-                            if (isConstitution) {
-                                // If it's something like "XIII", just use "ARTICLE XIII"
-                                if (isNaN(parseInt(cleanNum)) || hasRomanOrWord) {
-                                    tocLabel = `${cleanNum}: ${cleanTitle}`;
-                                    if (!tocLabel.toUpperCase().startsWith('ARTICLE')) {
-                                        tocLabel = `Article ${tocLabel}`;
+                            if (!art.article_title) {
+                                const titleMatch = artBody.match(
+                                    /^(?:\*\*)?((?:Article|Section)\s+\w+\.?\s+.*?)(?:\*\*|\.\-|:|\n|$)/i
+                                );
+                                if (titleMatch && titleMatch[1]) {
+                                    label = titleMatch[1].trim();
+                                    if (label.length > 65) label = label.substring(0, 65) + '...';
+                                }
+                            }
+
+                            let cleanNum = art.article_number;
+                            let cleanTitle = art.article_title || label;
+
+                            const isConstitution = shortName && shortName.toUpperCase() === 'CONST';
+                            const hasRomanOrWord = /[IVXLCDM]/i.test(cleanNum) || /ARTICLE/i.test(cleanNum) || /RULE/i.test(cleanNum);
+                            const hasWordPrefix = /^(Article|Section|Title|Chapter|Preamble|Book|Rule|Part)/i.test(cleanTitle);
+
+                            let tocLabel = cleanTitle;
+
+                            if (!hasWordPrefix && cleanNum && cleanNum !== '0') {
+                                if (isConstitution) {
+                                    if (isNaN(parseInt(cleanNum)) || hasRomanOrWord) {
+                                        tocLabel = `${cleanNum}: ${cleanTitle}`;
+                                        if (!tocLabel.toUpperCase().startsWith('ARTICLE')) tocLabel = `Article ${tocLabel}`;
+                                    } else {
+                                        tocLabel = `Section ${cleanNum}: ${cleanTitle}`;
                                     }
                                 } else {
-                                    tocLabel = `Section ${cleanNum}: ${cleanTitle}`;
+                                    tocLabel = `${codalProvisionLabel} ${cleanNum}: ${cleanTitle}`;
                                 }
-                            } else if (isROC) {
-                                 // For ROC, article_num is often "Rule 1, Section 1"
-                                 // Just use it as is, or strip Rule part if we want just section
-                                 tocLabel = `${cleanNum}: ${cleanTitle}`;
-                            } else {
-                                tocLabel = `${codalProvisionLabel} ${cleanNum}: ${cleanTitle}`;
+                            } else if (!hasWordPrefix && (cleanNum === '0' || !cleanNum)) {
+                                tocLabel = 'Preamble';
                             }
-                        } else if (!hasWordPrefix && (cleanNum === '0' || !cleanNum)) {
-                            tocLabel = 'Preamble';
+
+                            tocLabel = tocLabel.replace(/^(Section|Article|Rule)\s+(Section|Article|Rule)/i, '$1');
+
+                            stack[stack.length - 1].articles.push({
+                                id: art.id || art.article_number,
+                                label: tocLabel
+                            });
                         }
-
-                        // Final cleanup: remove redundant "Section Article" or "Rule Article"
-                        tocLabel = tocLabel.replace(/^(Section|Article|Rule)\s+(Section|Article|Rule)/i, '$1');
-
-                        // 3. Push to current stack top
-                        stack[stack.length - 1].articles.push({
-                            id: art.id || art.article_number,
-                            label: tocLabel
-                        });
                     });
 
                     setTocData(root);
 
-                    const expandAll = (node) => {
-                        const expanded = { [node.id]: true };
-                        node.children.forEach(child => Object.assign(expanded, expandAll(child)));
-                        return expanded;
-                    };
-                    const allExpanded = {};
-                    root.children.forEach(child => Object.assign(allExpanded, expandAll(child)));
-                    setExpandedGroups(allExpanded);
+                    // Expand only the top-level nodes (Parts/Books) by default — not full tree
+                    const topExpanded = {};
+                    root.children.forEach(child => { topExpanded[child.id] = true; });
+                    setExpandedGroups(topExpanded);
                     setTocVersion(prev => prev + 1);
-                    setLoading(false);
-                });
+                    }); // end scheduleToc
+                }); // end swr callback
 
             } catch (err) {
                 console.error("Fetch error:", err);
@@ -664,19 +692,25 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
     const fuseRef = useRef(null);
     useEffect(() => {
         if (!data?.articles) { fuseRef.current = null; return; }
-        const articles = data.articles.filter(
-            (art) => !art.article_number?.includes('(') // skip sub-articles like "5(b)"
-        );
-        fuseRef.current = new Fuse(articles, {
-            keys: [
-                { name: 'article_title',  weight: 0.5 },
-                { name: 'article_number', weight: 0.3 },
-                { name: 'content',        weight: 0.2 },
-            ],
-            threshold: 0.4,   // 0 = exact, 1 = match anything; 0.4 tolerates ~1-2 char typos
-            distance: 200,    // how far into each field to look
-            minMatchCharLength: 2,
-            includeScore: false,
+        // Defer Fuse index build to idle time — it's CPU-heavy and not needed for initial render
+        const schedule = typeof requestIdleCallback === 'function'
+            ? (cb) => requestIdleCallback(cb, { timeout: 2000 })
+            : (cb) => setTimeout(cb, 200);
+        schedule(() => {
+            const articles = data.articles.filter(
+                (art) => !art.article_number?.includes('(')
+            );
+            fuseRef.current = new Fuse(articles, {
+                keys: [
+                    { name: 'article_title',  weight: 0.5 },
+                    { name: 'article_number', weight: 0.3 },
+                    { name: 'content',        weight: 0.2 },
+                ],
+                threshold: 0.4,
+                distance: 200,
+                minMatchCharLength: 2,
+                includeScore: false,
+            });
         });
     }, [data]);
 

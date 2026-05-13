@@ -294,14 +294,27 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                  if book_lbl and prev_book != book_lbl:
                      injections.append(f"## {book_lbl}")
                      prev_book = book_lbl
+                 
                  if title_lbl and prev_title != title_lbl:
-                     injections.append(f"## {title_lbl}")
+                     if short_name.upper() == 'ROC':
+                         title_prefix = f"Rule {title_n} - " if title_n else ""
+                         injections.append(f"## {title_prefix}{title_lbl}")
+                     else:
+                         injections.append(f"## {title_lbl}")
                      prev_title = title_lbl
+                     
                  if chapter_lbl and prev_chapter != chapter_lbl:
-                     injections.append(f"## {chapter_lbl}")
+                     if short_name.upper() == 'ROC':
+                         injections.append(f"## Chapter - {chapter_lbl}")
+                     else:
+                         injections.append(f"## {chapter_lbl}")
                      prev_chapter = chapter_lbl
+                     
                  if section_lbl and prev_section != section_lbl:
-                     injections.append(f"## {section_lbl}")
+                     if short_name.upper() == 'ROC':
+                         injections.append(f"## Section - {section_lbl}")
+                     else:
+                         injections.append(f"## {section_lbl}")
                      prev_section = section_lbl
 
                  # LexCodeStream (CodalStream) already hoists book/title/chapter/section from row fields.
