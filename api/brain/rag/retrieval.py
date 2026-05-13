@@ -52,7 +52,8 @@ def _gemini_client() -> genai.Client:
 
 
 
-def _flash(prompt: str, system: str = None, max_tokens: int = 1024) -> str:
+def _llm(prompt: str, system: str = None, max_tokens: int = 1024) -> str:
+    """Call Gemini Pro for intermediate pipeline steps (intent, expansion, HyDE)."""
     client = _gemini_client()
     cfg = types.GenerateContentConfig(
         max_output_tokens=max_tokens,
@@ -60,7 +61,7 @@ def _flash(prompt: str, system: str = None, max_tokens: int = 1024) -> str:
         system_instruction=system,
     )
     resp = client.models.generate_content(
-        model=config.GEMINI_FLASH_MODEL,
+        model=config.GEMINI_PRO_MODEL,
         contents=prompt,
         config=cfg,
     )
@@ -137,7 +138,7 @@ Respond with JSON only:
 {{"intent": "<type>", "confidence": "high|medium|low", "topic": "<1-3 word topic>"}}"""
 
     try:
-        raw = _flash(prompt, max_tokens=100)
+        raw = _llm(prompt, max_tokens=100)
         # Extract JSON from response
         if "{" in raw:
             raw = raw[raw.index("{"):raw.rindex("}") + 1]
@@ -199,7 +200,7 @@ def generate_hyde(question: str, intent: str) -> str | None:
     prompt = f'Write a hypothetical expert answer to: "{question}"'
 
     try:
-        return _flash(prompt, system=system, max_tokens=200)
+        return _llm(prompt, system=system, max_tokens=200)
     except Exception as e:
         log.warning(f"HyDE generation failed: {e}")
         return None

@@ -21,14 +21,14 @@ PIPELINES = {
         "use_rerank":    True,
         "top_k":         12,
         "load_full_doc": False,
-        "model":         config.GEMINI_FLASH_MODEL,
+        "model":         config.GEMINI_PRO_MODEL,
     },
     "standard": {
         "use_hyde":      True,
         "use_rerank":    True,
         "top_k":         20,
         "load_full_doc": True,
-        "model":         config.GEMINI_FLASH_MODEL,
+        "model":         config.GEMINI_PRO_MODEL,
     },
     "full": {
         "use_hyde":      True,
@@ -38,6 +38,7 @@ PIPELINES = {
         "model":         config.GEMINI_PRO_MODEL,
     },
 }
+
 
 _complexity_signals = {
     "compare":            5,
@@ -100,8 +101,7 @@ def apply_budget_guard(pipeline: dict) -> dict:
         pipeline["budget_downgraded"] = "emergency"
 
     elif pct >= config.BUDGET_CAUTION_PCT:
-        log.warning(f"Budget CAUTION ({pct:.1f}%): downgrading Pro → Flash, disabling HyDE")
-        pipeline["model"]    = config.GEMINI_FLASH_MODEL
+        log.warning(f"Budget CAUTION ({pct:.1f}%): disabling HyDE")
         pipeline["use_hyde"] = False
         pipeline["budget_downgraded"] = "caution"
 
