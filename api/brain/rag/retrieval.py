@@ -53,7 +53,7 @@ def _gemini_client() -> genai.Client:
 
 
 def _llm(prompt: str, system: str = None, max_tokens: int = 1024) -> str:
-    """Call Gemini Pro for intermediate pipeline steps (intent, expansion, HyDE)."""
+    """Call Gemini Flash for intermediate pipeline steps (intent, expansion, HyDE) to save time."""
     client = _gemini_client()
     cfg = types.GenerateContentConfig(
         max_output_tokens=max_tokens,
@@ -61,7 +61,7 @@ def _llm(prompt: str, system: str = None, max_tokens: int = 1024) -> str:
         system_instruction=system,
     )
     resp = client.models.generate_content(
-        model=config.GEMINI_PRO_MODEL,
+        model=config.GEMINI_FLASH_MODEL,
         contents=prompt,
         config=cfg,
     )
