@@ -177,10 +177,15 @@ def legal_chat(req: func.HttpRequest) -> func.HttpResponse:
         log.warning(f"Cache lookup failed (continuing): {e}")
         save_to_cache = lambda *a, **kw: None
 
-    # ── Gate 3 & 4: Pipeline + budget guard ────────────────────────────────
-    from brain.rag.budget import get_pipeline, apply_budget_guard
-    pipeline = get_pipeline(question, plan)
-    pipeline = apply_budget_guard(pipeline)
+    # ── Gate 3 & 4: Pipeline + budget guard ────────────────────────────
+    try:
+        from brain.rag.budget import get_pipeline, apply_budget_guard
+        pipeline = get_pipeline(question, plan)
+        pipeline = apply_budget_guard(pipeline)
+    except Exception as e:
+        import traceback
+        log.error(f"Pipeline/budget error: {e}\n{traceback.format_exc()}")
+        return _error(f"Pipeline setup failed: {type(e).__name__}: {e}", 502)
 
     corpus_name = _get_corpus_name()
     if not corpus_name:
