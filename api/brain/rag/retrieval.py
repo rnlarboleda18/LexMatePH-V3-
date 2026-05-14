@@ -65,6 +65,8 @@ def _llm(prompt: str, system: str = None, max_tokens: int = 1024) -> str:
         contents=prompt,
         config=cfg,
     )
+    if not resp.text:
+        return ""
     return resp.text.strip()
 
 
@@ -464,6 +466,9 @@ def retrieve(
             chunks, enriched_chunks, retrieval_context
         }
     """
+    import time
+    t_start = time.time()
+    
     result = {
         "intent":           "general",
         "topic":            "",
@@ -478,20 +483,30 @@ def retrieve(
     intent_data = classify_intent(question)
     result["intent"] = intent_data.get("intent", "general")
     result["topic"]  = intent_data.get("topic", "")
-    log.info(f"Intent: {result['intent']} ({intent_data.get('confidence')})")
+    log.info(f"[{time.time()-t_start:.2f}s] Intent: {result['intent']} ({intent_data.get('confidence')})")
 
-    # Step 2 — Query expansion
-    expanded = expand_query(question, result["intent"], result["topic"])
+    # Step 2 & 3 — Parallel Query Expansion and HyDE (if pipeline allows)
+    from concurrent.futures import ThreadPoolExecutor
+    expanded = question
+    hyde = None
+
+    with ThreadPoolExecutor(max_workers=2) as executor:
+        future_expand = executor.submit(expand_query, question, result["intent"], result["topic"])
+        if pipeline.get("use_hyde"):
+            future_hyde = executor.submit(generate_hyde, question, result["intent"])
+        
+        expanded = future_expand.result()
+        if pipeline.get("use_hyde"):
+            hyde = future_hyde.result()
+
     result["expanded_query"] = expanded
-
-    # Step 3 — HyDE (if pipeline allows)
     search_query = expanded
-    if pipeline.get("use_hyde"):
-        hyde = generate_hyde(question, result["intent"])
-        if hyde:
-            result["hyde_query"] = hyde
-            search_query = f"{expanded}\n\n{hyde}"
-            log.info("HyDE generated, using combined search query")
+    if hyde:
+        result["hyde_query"] = hyde
+        search_query = f"{expanded}\n\n{hyde}"
+        log.info(f"[{time.time()-t_start:.2f}s] HyDE generated, using combined search query")
+    else:
+        log.info(f"[{time.time()-t_start:.2f}s] Parallel expand/HyDE done")
 
     # Step 4 — RAG retrieval
     try:
@@ -505,23 +520,24 @@ def retrieve(
         log.warning("No RAG chunks retrieved. Attempting PostgreSQL fallback...")
         chunks = pg_fallback_retrieve(question, top_k=5)
         result["chunks"] = chunks
-        if not chunks:
-            log.warning("PostgreSQL fallback also returned zero results")
-            return result
-        # Since it's a fallback, we skip re-ranking and full doc loading (already full in fallback)
-        result["enriched_chunks"] = chunks
-    else:
-        # Step 5 — Re-ranking
-        if pipeline.get("use_rerank") and len(chunks) > config.RAG_RERANK_TOP_K:
-            chunks = rerank_chunks(question, chunks, top_k=config.RAG_RERANK_TOP_K)
-            result["chunks"] = chunks
+    if not chunks:
+        log.warning("PostgreSQL fallback also returned zero results")
+        return result
+        
+    log.info(f"[{time.time()-t_start:.2f}s] RAG retrieval done. Found {len(chunks)} chunks.")
 
-        # Step 6 — Full section loading
-        if pipeline.get("load_full_doc"):
-            enriched = load_full_sections(chunks, max_sections=7)
-            result["enriched_chunks"] = enriched
-        else:
-            result["enriched_chunks"] = chunks
+    # Step 5 — Re-ranking
+    if pipeline.get("use_rerank") and len(chunks) > config.RAG_RERANK_TOP_K:
+        chunks = rerank_chunks(question, chunks, top_k=config.RAG_RERANK_TOP_K)
+        result["chunks"] = chunks
+        log.info(f"[{time.time()-t_start:.2f}s] Rerank done.")
+
+    # Step 6 — Full section loading
+    if pipeline.get("load_full_doc"):
+        enriched = load_full_sections(chunks, max_sections=3)
+        result["enriched_chunks"] = enriched
+    else:
+        result["enriched_chunks"] = chunks
 
     # Build final retrieval context string for Gemini
     context_parts = []

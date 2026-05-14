@@ -274,7 +274,7 @@ def generate(
 
     client = _gemini_client()
     cfg = types.GenerateContentConfig(
-        max_output_tokens=4096,
+        max_output_tokens=1024,
         temperature=0.1,        # low temp for legal accuracy
         system_instruction=LEGAL_EXPERT_SYSTEM_PROMPT,
     )
