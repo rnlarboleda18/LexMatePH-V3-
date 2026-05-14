@@ -57,7 +57,9 @@ CITATION FORMAT:
 - Cases: [Republic v. Molina, G.R. No. 108763, February 13, 1997]
 - Statutes: [Family Code, Article 36] or [Revised Penal Code, Article 248]
 - Constitutional provisions: [1987 Constitution, Article III, Section 1]
-- Do NOT cite sources you haven't been given in the retrieved sources above."""
+- Do NOT cite sources you haven't been given in the retrieved sources above.
+
+CRITICAL: Keep your answer extremely concise, direct to the point, and authoritative. Limit your answer to a maximum of 3-4 paragraphs. Avoid unnecessary wordiness."""
 
 
 def _gemini_client() -> genai.Client:
@@ -274,7 +276,6 @@ def generate(
 
     client = _gemini_client()
     cfg = types.GenerateContentConfig(
-        max_output_tokens=1024,
         temperature=0.1,        # low temp for legal accuracy
         system_instruction=LEGAL_EXPERT_SYSTEM_PROMPT,
     )
