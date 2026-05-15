@@ -688,6 +688,17 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
 
     // Debounced Search Effect
     useEffect(() => {
+        // Natural-language queries are handled entirely by the AI search overlay.
+        // Skip the regular SC decisions fetch — it would crash the backend trying
+        // to FTS-rank "what is mcburnie case" across digest_facts without an index.
+        if (isNaturalLanguageQuery(searchTerm)) {
+            if (abortControllerRef.current) abortControllerRef.current.abort();
+            setLoading(false);
+            setSearchResults([]);
+            setFetchError(null);
+            return;
+        }
+
         if (abortControllerRef.current) {
             abortControllerRef.current.abort();
         }
