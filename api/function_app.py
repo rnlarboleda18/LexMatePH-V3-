@@ -69,6 +69,9 @@ try:
     from blueprints.legal_chat import legal_chat_bp
     app.register_functions(legal_chat_bp)
 
+    from blueprints.ai_search import ai_search_bp
+    app.register_functions(ai_search_bp)
+
 except Exception as e:
     import_error = f"Error during import/registration: {str(e)}\n{traceback.format_exc()}"
 

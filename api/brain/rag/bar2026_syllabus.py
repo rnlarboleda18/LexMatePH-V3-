@@ -174,8 +174,17 @@ SUBJECTS: dict[str, dict] = {
             "RA 11576 (Expanded MTC Jurisdiction)", "RA 7160 (LGC — Lupong Tagapamayapa)",
         ],
         "notable_cases": [
+            "Neypes v. Court of Appeals, G.R. No. 141524, September 14, 2005 — Fresh Period Rule: a party has a fresh 15-day period to appeal from receipt of the order denying a motion for new trial/reconsideration, not from the original judgment",
+            "Tijam v. Sibonghanoy, G.R. No. L-21450, April 15, 1968 — Estoppel by laches may bar a party from assailing jurisdiction after actively participating in proceedings for an unreasonable length of time",
+            "Heirs of Maura So v. Obliosca, G.R. No. 147076, December 17, 2007 — Cascade-type questions on res judicata and litis pendentia",
+            "Spouses Munoz v. Yabut, G.R. No. 142676, June 6, 2011 — Distinction between direct and collateral attack on title",
+            "Stonehill v. Diokno, G.R. No. L-19550, June 19, 1967 — Exclusionary rule; illegally seized evidence inadmissible",
+            "People v. Inting, G.R. No. 88919, July 25, 1990 — Probable cause in preliminary investigation; determination by prosecutor",
+            "Dela Torre v. Comelec, G.R. No. 121592, July 5, 1996 — Probation bars candidacy; conviction not wiped out by probation",
             "Lorenzo Shipping Corp. v. Villarin, G.R. Nos. 175727 & 178713, March 6, 2019 (Provisional Deposit)",
             "Guerrero Estate Dev't Corp. v. Leviste & Guerrero Realty Corp., G.R. No. 253428, February 16, 2022",
+            "Republic v. Caguioa, G.R. No. 168584, October 15, 2007 — Distinction between jurisdiction over subject matter and jurisdiction over the person",
+            "Metrobank v. Perez, G.R. No. 181842, July 8, 2009 — Res judicata: bar by prior judgment vs. conclusiveness of judgment",
         ],
     },
 }
@@ -219,6 +228,14 @@ def get_subject_for_topic(query: str) -> str | None:
         "appeal", "execution of judgment", "res judicata", "legal ethics", "cpra",
         "disbarment", "notarial", "judicial ethics", "special proceedings", "habeas data",
         "kalikasan", "quo warranto rule 66",
+        # landmark doctrines that should map to remedial law
+        "neypes", "fresh period", "tijam", "sibonghanoy", "stonehill", "diokno",
+        "estoppel by laches", "exclusionary rule", "fruit of the poisonous tree",
+        "demurrer to evidence", "motion to dismiss", "forum shopping",
+        "litis pendentia", "splitting cause of action", "cause of action",
+        "substituted service", "service of summons", "summons",
+        "modes of discovery", "deposition", "interrogatories",
+        "writ of execution", "writ of possession",
     ]
 
     scores = {
@@ -235,8 +252,8 @@ def get_subject_for_topic(query: str) -> str | None:
 
 def build_bar_context_hint(subject_key: str | None) -> str:
     """
-    Return a one-paragraph hint to inject into the generation prompt for
-    BAR 2026-oriented questions.
+    Return a structured hint injected into the generation prompt for BAR 2026 questions.
+    Includes notable landmark cases for the subject as supplementary reference.
     """
     if not subject_key or subject_key not in SUBJECTS:
         return (
@@ -246,9 +263,19 @@ def build_bar_context_hint(subject_key: str | None) -> str:
         )
 
     subj = SUBJECTS[subject_key]
+    cases = subj.get("notable_cases", [])
+    cases_block = ""
+    if cases:
+        cases_list = "\n".join(f"  - {c}" for c in cases)
+        cases_block = (
+            f"\n\nKEY LANDMARK CASES FOR THIS SUBJECT (use as supplementary reference "
+            f"even if not in the retrieved sources above):\n{cases_list}"
+        )
+
     return (
         f"NOTE: This is a {BAR_EXAM_YEAR} Bar Examinations question under "
         f"{subj['title']} ({subj['weight_pct']}% of the exam). "
         f"Only laws, rules, and jurisprudence up to {JURISPRUDENCE_CUTOFF} are examinable. "
-        "Identify the applicable law/doctrine first, apply it to the facts, cite the controlling case, and note any exceptions or superseding rules."
+        "Identify the applicable law/doctrine first, apply it to the facts, cite the controlling case, "
+        f"and note any exceptions or superseding rules.{cases_block}"
     )

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useLayoutEffect, useCallback } from
 import { useAuth } from '@clerk/clerk-react';
 import { createPortal } from 'react-dom';
 import { jsPDF } from "jspdf";
-import { Search, Gavel, FileText, X, Filter, BookOpen, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, ChevronRight, Scale, ChevronDown, ChevronUp, Landmark, Clock } from 'lucide-react';
+import { Search, Gavel, FileText, X, Filter, BookOpen, AlertTriangle, Lightbulb, Layers, Book, Star, Zap, User, ChevronRight, Scale, ChevronDown, ChevronUp, Landmark, Clock, Sparkles } from 'lucide-react';
 import { lexCache } from '../utils/cache';
 
 
@@ -515,6 +515,11 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
     );
     const [searchResults, setSearchResults] = useState([]);
 
+    // AI Search — natural language overlay above results
+    const [aiAnswer, setAiAnswer] = useState(null);
+    const [aiCases, setAiCases] = useState([]);
+    const [aiLoading, setAiLoading] = useState(false);
+
     // Search dropdown (portal — escapes any overflow-hidden ancestor)
     const [showSuggestions, setShowSuggestions] = useState(false);
     const [searchBoxRect, setSearchBoxRect] = useState(null);
@@ -714,6 +719,62 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
             '',
             window.location.pathname + (qs ? `?${qs}` : '')
         );
+    }, [debouncedSearchTerm]);
+
+    // AI Search — fires when the debounced query looks like a natural-language question
+    const AI_QUESTION_STARTERS = ['what', 'who', 'when', 'where', 'why', 'how', 'explain', 'define',
+        'describe', 'discuss', 'compare', 'distinguish', 'is there', 'are there',
+        'does ', 'can ', 'which', 'give me', 'tell me', "what's", "who's"];
+    const isNaturalLanguageQuery = (q) => {
+        const s = q.toLowerCase().trim();
+        if (s.endsWith('?')) return true;
+        if (s.split(' ').length < 3) return false;
+        return AI_QUESTION_STARTERS.some(w => s.startsWith(w));
+    };
+
+    useEffect(() => {
+        const query = debouncedSearchTerm.trim();
+        if (!query || !isNaturalLanguageQuery(query)) {
+            setAiAnswer(null);
+            setAiCases([]);
+            setAiLoading(false);
+            return;
+        }
+
+        const controller = new AbortController();
+        // Kill the request after 12s — backend can be slow on cold starts
+        const timeoutId = setTimeout(() => controller.abort(), 12000);
+
+        setAiLoading(true);
+        setAiAnswer(null);
+        setAiCases([]);
+
+        fetch(apiUrl('/api/ai-search'), {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query }),
+            signal: controller.signal,
+        })
+            .then(r => r.json())
+            .then(data => {
+                if (!data.skipped) {
+                    setAiAnswer(data.answer || null);
+                    setAiCases(data.cases || []);
+                }
+            })
+            .catch(err => {
+                // AbortError = user typed more or timeout — silently ignore
+                if (err?.name !== 'AbortError') console.warn('AI search error:', err);
+            })
+            .finally(() => {
+                clearTimeout(timeoutId);
+                setAiLoading(false);
+            });
+
+        return () => {
+            controller.abort();
+            clearTimeout(timeoutId);
+        };
     }, [debouncedSearchTerm]);
 
 
@@ -1363,6 +1424,62 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                             directly from the Court's own language—no paraphrasing of holdings. Entries are tagged by Bar
                             subject and searchable by ponente, year, and significance.
                         </p>
+                    </div>
+                )}
+
+                {/* AI Search overlay — shown when query is a natural-language question */}
+                {(aiLoading || aiAnswer || aiCases.length > 0) && (
+                    <div className="mb-4 rounded-xl border border-violet-200 bg-violet-50/70 p-4 shadow-sm dark:border-violet-800/40 dark:bg-violet-950/30">
+                        <div className="mb-2 flex items-center gap-1.5">
+                            <Sparkles size={13} className="text-violet-600 dark:text-violet-400" />
+                            <span className="text-xs font-semibold uppercase tracking-widest text-violet-700 dark:text-violet-300">
+                                AI Answer
+                            </span>
+                        </div>
+                        {aiLoading ? (
+                            <div className="space-y-2 animate-pulse">
+                                <div className="h-3 w-full rounded bg-violet-200 dark:bg-violet-800/60" />
+                                <div className="h-3 w-[82%] rounded bg-violet-200 dark:bg-violet-800/60" />
+                                <div className="h-3 w-[65%] rounded bg-violet-200 dark:bg-violet-800/60" />
+                            </div>
+                        ) : (
+                            <>
+                                {aiAnswer ? (
+                                    <p className="text-sm leading-relaxed text-neutral-800 dark:text-zinc-200">
+                                        {aiAnswer}
+                                    </p>
+                                ) : (
+                                    <p className="text-sm italic text-neutral-400 dark:text-zinc-500">
+                                        AI summary unavailable — see matched cases below.
+                                    </p>
+                                )}
+                                {aiCases.length > 0 && (
+                                    <div className="mt-3 flex flex-col gap-2">
+                                        <p className="text-[11px] font-medium uppercase tracking-wider text-violet-500 dark:text-violet-400">
+                                            Related cases in database
+                                        </p>
+                                        {aiCases.map(c => (
+                                            <button
+                                                key={c.id}
+                                                onClick={() => handleCaseClick(c)}
+                                                className="flex w-full items-center gap-2 rounded-lg border border-violet-200 bg-white px-3 py-2 text-left text-sm transition-colors hover:border-violet-400 hover:bg-violet-50 dark:border-violet-800/50 dark:bg-zinc-800/80 dark:hover:bg-violet-900/30"
+                                            >
+                                                <FileText size={13} className="shrink-0 text-violet-500 dark:text-violet-400" />
+                                                <span className="min-w-0 flex-1 truncate font-medium text-neutral-900 dark:text-zinc-100">
+                                                    {c.short_title}
+                                                </span>
+                                                {c.case_number && (
+                                                    <span className="shrink-0 text-[11px] text-neutral-500 dark:text-zinc-400">
+                                                        G.R. No.&nbsp;{c.case_number}
+                                                    </span>
+                                                )}
+                                                <ChevronRight size={13} className="shrink-0 text-violet-400" />
+                                            </button>
+                                        ))}
+                                    </div>
+                                )}
+                            </>
+                        )}
                     </div>
                 )}
 

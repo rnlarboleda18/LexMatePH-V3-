@@ -23,11 +23,13 @@ PIPELINES = {
         "load_full_doc": False,
         "model":         config.GEMINI_PRO_MODEL,
     },
+    # GCS full-doc loading removed from standard to keep latency under 30s.
+    # RAG chunks alone provide enough context for most doctrinal questions.
     "standard": {
         "use_hyde":      True,
         "use_rerank":    True,
         "top_k":         20,
-        "load_full_doc": True,
+        "load_full_doc": False,
         "model":         config.GEMINI_PRO_MODEL,
     },
     "full": {

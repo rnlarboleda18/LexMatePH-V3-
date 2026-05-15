@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async';
 
-const BASE_URL = 'https://lexmateph.com';
+const BASE_URL = 'https://www.lexmateph.com';
 const DEFAULT_IMAGE = `${BASE_URL}/pwa-512x512.png`;
 
 /**

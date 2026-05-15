@@ -189,8 +189,10 @@ def generate_hyde(question: str, intent: str) -> str | None:
     Only used for doctrine_lookup and comparison intents (complexity ≥ 3).
     Returns None if HyDE should be skipped.
     """
-    if intent in ("case_search", "statute_lookup"):
-        return None  # HyDE not useful for exact lookups
+    # HyDE only helps for open-ended doctrinal/comparative questions.
+    # Exact lookups, procedure questions, and general queries don't benefit.
+    if intent in ("case_search", "statute_lookup", "general", "procedural"):
+        return None
 
     system = (
         "You are a Philippine legal expert. Write a brief, authoritative "
@@ -334,8 +336,8 @@ def load_full_sections(chunks: list[dict], max_sections: int = 5) -> list[dict]:
             path = uri.replace("gs://", "")
             bucket_name, _, blob_name = path.partition("/")
             bucket = gcs.bucket(bucket_name)
-            # Use short timeout for GCS to avoid hanging the whole pipeline
-            full_text = bucket.blob(blob_name).download_as_text(timeout=10)
+            # Short timeout — GCS is best-effort enrichment; don't block generation
+            full_text = bucket.blob(blob_name).download_as_text(timeout=5)
 
             doc = parse_document(full_text)
             context = doc.get_retrieval_context(max_words=3000)
@@ -534,7 +536,7 @@ def retrieve(
 
     # Step 6 — Full section loading
     if pipeline.get("load_full_doc"):
-        enriched = load_full_sections(chunks, max_sections=3)
+        enriched = load_full_sections(chunks, max_sections=2)
         result["enriched_chunks"] = enriched
     else:
         result["enriched_chunks"] = chunks
