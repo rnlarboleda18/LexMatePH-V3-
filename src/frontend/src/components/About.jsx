@@ -114,14 +114,14 @@ const About = () => {
               <div className="flex max-w-2xl flex-col gap-4">
                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-4">
                   <div
-                    className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-lg shadow-purple-600/35"
+                    className="flex h-16 w-16 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-lg shadow-purple-600/35 sm:h-20 sm:w-20"
                     aria-hidden
                   >
-                    <Scale className="h-7 w-7" strokeWidth={2} />
+                    <Scale className="h-9 w-9 sm:h-11 sm:w-11" strokeWidth={2} />
                   </div>
                   <div className="min-w-0 flex-1 text-left">
                     <h1 className="text-3xl font-bold tracking-tight text-black dark:text-white sm:text-4xl">
-                      Your All-In-One Legal Companion
+                      LexMatePH - Your all-in-one Legal Companion App. One App does all.
                     </h1>
                   </div>
                 </div>

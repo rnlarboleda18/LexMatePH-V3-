@@ -515,6 +515,32 @@ def run_digest_subprocess(
         if live_bar:
             live_bar.set_postfix_str(f"Gemini db row {case_id}")
         proc = subprocess.run(cmd, cwd=str(_REPO_ROOT))
+        if proc.returncode == 100:
+            # Soft failure: child found no claimable row for this ID (already digested,
+            # SKIP LOCKED by a concurrent worker, or API rate-limit caused 0 processed).
+            # Log a warning but do not raise — the outer error-collection logic will
+            # only fail the pipeline if ALL children return 100 (nothing processed at all).
+            log.warning("Digest child for case_id=%s exited with code 100 (no case processed).", case_id)
+            if progress and progress_lock:
+                with progress_lock:
+                    progress.note_case(
+                        elib_id=ei,
+                        db_row_id=case_id,
+                        label="",
+                        stage="skipped",
+                        detail="Digest child: no case processed (code 100)",
+                        outcome="DIGEST_SKIP",
+                    )
+            elif progress:
+                progress.note_case(
+                    elib_id=ei,
+                    db_row_id=case_id,
+                    label="",
+                    stage="skipped",
+                    detail="Digest child: no case processed (code 100)",
+                    outcome="DIGEST_SKIP",
+                )
+            return
         if proc.returncode != 0:
             raise subprocess.CalledProcessError(proc.returncode, cmd)
         if progress and progress_lock:
@@ -568,6 +594,13 @@ def run_digest_subprocess(
         if live_bar:
             live_bar.set_postfix_str(f"Gemini batch n={len(new_case_ids)}")
         proc = subprocess.run(cmd, cwd=str(_REPO_ROOT))
+        if proc.returncode == 100:
+            # Soft failure: no cases were claimable (all already digested or SKIP LOCKED).
+            log.warning(
+                "Digest batch (workers=1) exited with code 100 — no cases processed. "
+                "Rows may already be digested or were locked by another worker."
+            )
+            return
         if proc.returncode != 0:
             raise subprocess.CalledProcessError(proc.returncode, cmd)
         if progress:

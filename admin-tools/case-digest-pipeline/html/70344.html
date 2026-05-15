@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 269722 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. RONALDO INFORTUNO, SR. Y CRUZ* ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70344' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 269722, January 06, 2026 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. RONALDO INFORTUNO, SR. <I>Y</I> CRUZ<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> ACCUSED-APPELLANT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is an ordinary appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> from the Court of Appeals (CA) Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> which affirmed with modification the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Regional Trial Court (RTC) and found accused-appellant Ronaldo Infortuno, Sr. <i>y</i> Cruz (Infortuno) guilty beyond reasonable doubt of rape.<br><br><center><i>The Antecedents</i></center><br>Infortuno was charged with the crime of forcible abduction with rape of 17-year-old AAA in an Information, the accusatory portion of which reads:<blockquote>That on [July 22,] 2017, in the Municipality of San Ildefonso, province of Bulacan, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, with lewd designs, did then and there willfully, unlawfully and feloniously abduct and carry away the [17-year-old AAA] from the latter's home by pointing a knife at her and thereafter, by means of force and intimidation, did then and there willfully, unlawfully and feloniously have carnal knowledge of said [AAA] against her will and without her consent.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></blockquote>Upon arraignment, Infortuno pleaded not guilty. Subsequently, trial on the merits ensued.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>According to the evidence for the prosecution, AAA and her family are permanent residents of Bulacan, where they are distant neighbors of Infortuno. On July 22, 2017, between 1:00 to 1:30 a.m., AAA was asleep in her room with her younger brother when a male, later identified as Infortuno, suddenly entered. He poked a knife at AAA's nape and whispered, "<i>Subukan mong sumigaw. Masasaktan ka.</i>" He then tied her hands and gagged her mouth using a handkerchief.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Infortuno brought AAA to a rice field, where he directed her not to shout as he removed the handkerchief from her mouth. Infortuno proceeded to cut AAA's shirt and bra using a pair of scissors and removed her pajama and panty. Infortuno tried to insert his penis into AAA's vagina, but failed. When she resisted, he punched her stomach and right thigh. Infortuno then transferred them to another location and had his penis sucked by AAA twice to get an erection. He then spread her legs and was able to penetrate her vagina. Subsequently, Infortuno put his clothes on AAA and sat beside her. He placed his arm on her shoulder and fondled her breast and pubic hair. He then instructed her to lie down, took a small flashlight and pair of scissors from his bag, cut her pubic hair, and wrapped the same using her panty. AAA was able to see his face because of the light coming from the flashlight.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>As AAA made her way home, Infortuno stood behind her with a pair of scissors. AAA thought he would stab her, but he untied her hands and let her go. She picked up her clothes and wrapped them around her body. When AAA arrived at the house of her maternal grandmother, she immediately relayed what happened to her. They then went to the house of her paternal grandparents and aunt to report the incident. AAA's aunt immediately called AAA's mother, MMM, and upon the latter's arrival, they went to the police station to report what happened. At the time, the perpetrator's identity was still unknown as he was unfamiliar to AAA. However, around two months later, on October 2, 2017, when MMM showed AAA a picture of Infortuno from Facebook, AAA identified him as the one who raped her.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Police Chief Inspector Editha B. Martinez (PCINSP Martinez), a Medico-Legal Officer of the Bulacan Provincial Crime Laboratory Office, examined AAA and found that she had suffered several injuries and clear evidence of recent blunt penetrating trauma to the hymen.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>On the part of the defense, Infortuno denied all allegations against him. According to Infortuno, on July 21, 2017, he was installing windows in the home of Gloria Cruz, which was 40 meters away from AAA's residence. After work, he proceeded to Barangay Tupahan, San Miguel, Bulacan for a drinking spree. The drinking spree, which was with Luis Gonzales (Gonzales) and two of Gonzales's nephews, sta1ied at around 7:00 p.m. and lasted until the wee hours of the following day. They drank four bottles of Ginebra San Miguel, otherwise known as "gin <i>bilog</i>," and at around 6:00 a.m. of the following morning, Infortuno went home. He then returned to Cruz's residence to continue working.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> the RTC convicted Infortuno of forcible abduction with rape. The dispositive portion of the Decision reads:<blockquote>WHEREFORE, accused Ronalda Infortuno, Sr. <i>y</i> Cruz, having been proven guilty beyond reasonable doubt [of] the crime of forcible abduction with rape, he is hereby sentenced to suffer the penalty of <i>reclusion perpetua</i> and to pay [the] victim [AAA] the amount of [PHP] 75,000.00 as civil indemnity, [PHP] 75,000.00 as moral damages[,] and [PHP] 75,000.00 as exemplary damages, with interest at the rate of [6%) per annum, on all damages awarded from the date of the finality of this Decision until fully paid.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></blockquote>Aggrieved, Infortuno appealed before the CA, arguing in his Brief<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> that: (1) the prosecution failed to prove his guilt beyond reasonable doubt of the crime charged; (2) his out-of-court identification by AAA as the perpetrator of the crime does not pass the totality of circumstances test; (3) AAA admitted that during the incident, the lights in her home were turned off and there was neither a light post nor a streetlight in the rice field; (4) although AAA claimed that she was able to see the perpetrator's face when he cut her pubic hair and used scissors and a flashlight, the flashlight was placed in her mouth and would not provide enough illumination as it was directed to her private part and not the perpetrator's face; (5) AAA had never met Infortuno before, and she was only able to identify him as the perpetrator of the crime around two months after the incident; (6) AAA did not give a description of the alleged perpetrator when she first reported the incident on July 22, 2017, and her mother showing her Infortuno's photograph may have influenced her identification of him as the perpetrator; (7) it is unusual that Infortuno would cut AAA's pubic hair after the incident and use a flashlight that may illuminate their surroundings and reveal his identity, as crimes are usually committed clandestinely; (8) the prosecution failed to establish the element of force, threat, or intimidation, as AAA admitted that she was unable to see the knife pointed at her, and she also did not call for help; and (9) assuming that the prosecution's version is upheld, the trial court erred in convicting Infortuno of forcible abduction with rape because forcible abduction is absorbed by rape.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>In their Brief,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> the People, through the Office of the Solicitor General, countered that: (1) the prosecution established beyond reasonable doubt all elements of forcible adbuction with rape; (2) AAA's identification of Infortuno as the perpetrator of the crime passes the totality of circumstances test; (3) AAA had an unobstructed view of Infortuno's face when he bound her hands and turned his flashlight on in the rice field; (4) nothing on record shows the presence of any distraction which would have disrupted AAA's attention at the time of the incident and prevented her from having a clear view of Infortuno's face; (5) AAA disclosed to her parents that while she does not know the perpetrator's name, she could recognize the man who abused and raped her; (6) AAA's certainty was further shown when she immediately identified Infortuno as her rapist upon seeing his photograph; (7) the prosecution sufficiently explained the circumstances surrounding the two-month delay in reporting the incident; (8) nothing in the records suggests that Infortuno was singled out in the series of photographs that AAA's mother showed her, and it was only when AAA saw Infortuno's picture that she immediately recognized and identified him as the one who abused her; (9) failure to shout for help does not undermine the credibility of rape victims; (10) AAA's narration of the entire ordeal was clear, categorical, and straightforward; and (11) Infortuno's defense of denial is inherently weak and cannot overcome his positive identification by AAA.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br><center><i>The Ruling of the CA</i></center><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> the CA affirmed the ruling of the RTC, with the modification that Infortuno was guilty of rape instead of forcible abduction with rape. The dispositive portion of the Decision states:<blockquote>WHEREFORE, the appeal is DENIED. Accordingly, the Judgment dated November 4, 2020 of the Regional Trial Court[,] Branch 18 of Malolos City, Bulacan in Criminal Case No. 2608-M-2018 is hereby AFFIRMED with MODIFICATION in that accused-appellant [Infortuno] is hereby found GUILTY beyond reasonable doubt of rape under Article [266-A(l)] of the Revised Penal Code, as amended by Republic Act No. 8353. The penalty imposed as well as the damages plus interest awarded by the Regional Trial Court shall remain.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></blockquote>Hence, the present appeal.<br><br>In their respective Manifestations,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> the parties opted to dispense with the filing of supplemental briefs and adopted their respective appellate briefs.<br><br><center><i>The Issue</i></center><br>The issue before the Court is whether the CA erred in finding accused-appellant guilty beyond reasonable doubt of rape.<br><br><center><i>The Court's Ruling</i></center><br>The appeal is dismissed.<br><br>Before the CA, accused-appellant essentially impugned AAA's credibility as a witness and her identification of accused-appellant as the perpetrator of the crime. As asserted in accused-appellant's Brief<sup style="COLOR: RGB(255, 0, 0);">[20]</sup>: (1) the prosecution failed to prove his guilt beyond reasonable doubt of the crime charged; (2) his out-of-court identification by AAA as the perpetrator of the crime does not pass the totality of circumstances test; (3) AAA admitted that during the incident, the lights in her home were turned off and there was neither a light post nor a streetlight in the rice field; (4) although AAA claimed that she was able to see the perpetrator's face when he cut her pubic hair and used scissors and a flashlight, the flashlight was placed in her mouth and would not provide enough illumination as it was directed to her private part and not the perpetrator's face; (5) AAA had never met accused-appellant before, and she was only able to identify him as the perpetrator of the crime around two months after the incident; (6) AAA did not give a description of the alleged perpetrator when she first reported the incident on July 22, 2017, and her mother showing her accused-appellant's photograph may have influenced her identification of him as the perpetrator; (7) it is unusual that accused-appellant would cut AAA's pubic hair after the incident and use a flashlight that may illuminate their surroundings and reveal his identity, as crimes are usually committed clandestinely; and (8) the prosecution failed to establish the clement of force, threat, or intimidation, as AAA admitted that she was unable to see the knife pointed at her, and she also did not call for help.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>The Court is not convinced.<br><br><i>AAA's credibility as a witness</i><br><br><i>First</i>, not all victims of rape react in the same way. While one reaction to such a horrific and personal crime may be to call for help, this does not impair the credibility of victims who respond in a different manner. As held in <i>People v. XXX</i>:<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><blockquote>There is no standard form of reaction for a woman when facing a shocking and horrifying experience such as a sexual assault. The workings of the human mind placed under emotional stress are unpredictable. People react differently — some may shout, some may faint, and some may be shocked into insensibility, while others may openly welcome the intrusion. But any of these reactions does not impair the credibility of a rape victim.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></blockquote>Hence, the failure of AAA to call for help does not affect her credibility as a witness.<br><br><i>Second</i>, this Court has held that lust is no respecter of time or place. Crimes against chastity have been carried out in many different places that may be deemed unlikely or inappropriate, and rape is not always committed in isolation or seclusion.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Thus, accused-appellant's claim that such crimes are usually committed in a clandestine manner does not indicate that the rape did not happen or detract from AAA's credibility.<br><br>While accused-appellant attempts to cast doubt on the credibility of AAA, it is settled that the trial court's determination of witness credibility will not be disturbed on appeal unless significant matters have been overlooked. Such determination is treated with respect, as the trial court has the opportunity to observe the witnesses' demeanor during trial. Its findings assume even greater weight when they are affirmed by the CA.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Here, the trial court, as affirmed by the CA, gave full credence to AAA's testimony. No significant matters having been overlooked, We find no reason to reverse such finding on appeal.<br><br><i>AAA's identification of accused-appellant</i><br><br>In determining the reliability of out-of-court identifications, the Court has adopted the totality of circumstances test, which looks at the following factors:<blockquote><i>[O]ne</i>, the [witness's] opportunity to view the criminal at the time of the crime; <i>two</i>, the [witness's] degree of attention at that time; <i>three</i>, the accuracy of any prior description given by the witness; <i>four</i>, the length of time between the crime and the identification; <i>five</i>, the level of certainty demonstrated by the witness at the identification; and <i>six</i>, the suggestiveness of the identification procedure.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> (Emphasis in the original)</blockquote>Relatedly, the following "danger signals" tend to indicate when an out-of-court identification may be erroneous:<blockquote>(1) The witness originally stated that [they] could not identify anyone;<br><br>(2) The identifying witness knew the accused before the crime, but made no accusation against [them] when questioned by the police;<br><br>(3) A serious discrepancy exists between the identifying [witness's] original description and the actual description of the accused;<br><br>(4) Before identifying the accused at the trial, the witness erroneously identified some other person;<br><br>(5) Other witnesses to the crime fail to identify the accused;<br><br>(6) Before trial, the witness sees the accused but fails to identify [them];<br><br>(7) Before the commission of the crime, the witness had limited opportunity to see the accused;<br><br>(8) The witness and the person identified are of different racial groups;<br><br>(9) During [their] original observation of the perpetrator of the crime, the witness was unaware that a crime was involved;<br><br>(10) A considerable time elapsed between the [witness's] view of the criminal and [their] identification of the accused;<br><br>(11) Several persons committed the crime; and<br><br>(12) The witness fails to make a positive trial identification.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup></blockquote>In the instant case, it was sufficiently established that while there may have been no lights on in AAA's home or the rice field, AAA was able to see accused-appellant's face when he placed a flashlight in her mouth. While the light may have been pointed towards her vagina, accused-appellant was in the same direction, allowing her to see his face.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> There is also no showing that AAA was distracted during this time.<br><br>The Court notes that around two months had passed between the rape of AAA and her identification of accused-appellant as the perpetrator of the said crime. During this time, AAA was shown photographs of different people by her mother in the hopes of identifying her rapist.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>As rightly pointed out by AAA, nothing in the records suggests that accused-appellant was singled out in the series of photographs shown to her. Moreover, it was only when AAA saw accused-appellant's picture that she immediately recognized and identified him as the one who raped her.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>As explained by MMM in court:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="2"><div align="justify">COURT:</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="95%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">Did your daughter tell you who raped her?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify"><i>Hindi po [niya kilala[,] mukha lang[.] [P]ag nakita daw po [niya] makikilala [niya] pero hindi [niyal alam saan nakatira, hindi [niya alam] kung ano pangalan[,] pero sa mukha lang.</i> (witness crying)</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><br><div align="justify"><center>. . . .</center></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">PROS. RAMOS:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">Considering that your daughter[,] according to you[,] could identify the identity of the rapist if she could see him personally or implying if she could sec him in person[,] what efforts did you take in trying to help your daughter in finding the rapist or the culprit?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">(witness crying) [T]hat dale [,]7:00 p.m. <i>[siya nakauwi ng] bahay [namin] eh, so ibig sabihin noong gabi lang na iyon may nakakita sa [rapist], hindi noong nakaraang araw pa, so basta that day lang, so yung mga possible na noong araw na iyon makakakita</i>... everyday we showed her pictures of different people.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">And what happened in your efforts of trying to search for people who could have possibly seen the suspect?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">Somebody from our neighbors relayed to us that day there was a drinking spree held opposite to our house[.] [T]hat's why we inquire[d] as to who could be possibly the participants of that drinking spree, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">When you said there was a drinking spree held opposite your house does it mean there is a highway in between or opposite your house?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">Yes, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify"> And what did you do next when somebody told you that there were persons who held a drinking spree?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">I mentioned several names to my daughter and she would say no since she knew the person or the people that I mentioned to her, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">And during this time were you able to mention the name of the accused?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">Yes, I told her[,] and she asked me[,] "<i>sino yun</i>?" [S]o that's the time we started to look for the picture of the accused, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">And why did you mention the name of the accused to your daughter?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify"><i>Dahil po nagtratrabaho, gumagawa [siya] ng bahay sa kabilang bahay[,] so posibleng uminom [siya] that day kaya ko binanggit ang pangalan niya[.] [S]abi ng anak ko sino [siya], so ibig sabihin parang medyo may something[,] so ibig sabihin [hindi niya] kilala, kaya't naghanap pa kami ng picture para ipakita [sa kanya].</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">And how were you able to get the pictures of the accused?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">Through FB or [F]acebook, <i>hanap-hanap lang po</i>, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">And when was that when you were able to get his photos from the internet?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">Last October 2 [was] when I was able to find the pictures of the accused, and also that day I showed it to my daughter, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:] </div></td><td><div align="justify">And what was the response of your daughter upon seeing the pictures of the accused?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">(witness crying) After showing her the pictures, she said[,"]Mommy <i>sino 'yan, nasaan yan[,] bakit may ganyan ka</i>[?" <i>Sabi] ko</i>, [']<i>bakit anak[?</i>" "]Mommy <i>siya 'yan</i>."</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"><center>. . . .</center></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">And what did [your] daughter tell you upon seeing the pictures of the accused?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">"[<i>Siya, siya</i>] <i>ang naggahasa sa akin</i>."<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></div></td></tr></tbody></table></blockquote>Meanwhile, AAA likewise testified:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="2"><div align="justify">PROS. RAMOS:</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="95%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">Why is it that it was only on October 2, 2017 that you went to the police to lodge a complaint?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">Because that's the only time when I saw the picture of that guy who raped me, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">And who showed you a picture?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">My mother, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">And where is the picture now?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">It's with my mother, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">Miss Witness[,] I'm showing you this picture[,] what connection docs it have to the picture you mentioned a while ago?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">This is the same picture, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"><center>. . . .</center></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">Are you very sure[,] Miss Witness[,] that is the same person who raped you in that evening?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify">Yes, Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q[:]</div></td><td><div align="justify">And what made you so sure about it?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A[:]</div></td><td><div align="justify"><i>Noong unang beses ko din pong nakita 'yung mukha [niya] nong ni rape na po [niya] ako nung time po na sinunggaban [niya] ako at tinutukan ako ng kutsilyo, lapit na lapit po kasi ang mukha [niya] sa akin, though, kahit madilim po[,] 'yon alam ko po na nakakapag-adjust 'yung mata natin sa dilim kasi di naman po madilim sa langit parang maaliwalas po kasi ang langit that time, so naaano ku po yung mukha [niya,] pero yung pinakamalinaw po na nakapagpakita sa akin ng mukha [niya] ay noong inilawan [niya] ang ari ko para gupitin po 'yung pubic [hair] ko.</i><sup style="COLOR: RGB(255, 0, 0);">[32]</sup></div></td></tr></tbody></table></blockquote>Therefore, We find that the process by which MMM showed AAA photographs of various men in the hopes of finding her rapist was not at all suggestive. In fact, MMM showed AAA photographs of different men every day. It was not until AAA saw accused-appellant's photograph on October 2, 2017 that she immediately recognized and identified him as her rapist.<br><br>In light of the foregoing, We find AAA's identification of accused-appellant as the perpetrator of the crime to be credible.<br><br><i>Accused-appellant is guilty of rape</i><br><br>Article 266-A(l) of the Revised Penal Code, as amended by Republic Act No. 8353,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> describes how rape may be committed:<blockquote>Article 266-A. <i>Rape: When and How Committed</i>. — Rape is committed:<blockquote>1) By a man who shall have carnal knowledge of a woman under any of the following circumstances:<blockquote>a) Through force, threat, or intimidation;<br><br>b) When the offended party is deprived of reason or is otherwise unconscious;<br><br>c) By means of fraudulent machination or grave abuse of authority; and<br><br>d) When the offended party is under [12] years of age or is demented, even though none of the circumstances mentioned above be present.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></blockquote></blockquote></blockquote>Thus, the elements of rape under the foregoing paragraph are as follows: (1) the accused had carnal knowledge of the victim; and (2) the act was accomplished: (a) through the use of force or intimidation; (b) when the victim is deprived of reason or otherwise unconscious; or (c) when the victim is under 12 years of age or is demented.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br><i>First</i>, as previously discussed, AAA's testimony, which was corroborated by the findings of PCINSP Martinez, sufficiently proves that accused-appellant had carnal knowledge of AAA. <i>Second</i>, accused-appellant's act was clearly committed through force, threat, or intimidation, as he held a knife to AAA's nape and threatened to hurt her if she screamed for help. Upon bringing AAA to a rice field, accused-appellant cut her shirt and bra with a pair of scissors, and punched her stomach and thigh when she tried to resist.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Indubitably, accused-appellant exerted force, threat, or intimidation upon AAA in order to have sexual congress with her.<br><br>Pursuant to Article 266-B of the Revised Penal Code, as amended by Republic Act No. 8353,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> the penalty imposed was correctly held to be <i>reclusion perpetua</i>. Finally, the award of civil indemnity, moral damages, and exemplary damages at PHP 75,000.00 each is likewise affirmed,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> all of which shall be subject to 6% legal interest per annum from the finality of this Decision until full payment.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br><b>FOR THESE REASONS</b>, the appeal is <b>DISMISSED</b>. The March 27, 2023 Decision of the Court of Appeals in CA-G.R. CR-HC No. 15216 is <b>AFFIRMED</b>. Accused-appellant Ronaldo Infortuno, Sr. <i>y</i> Cruz is found <b>GUILTY</b> beyond reasonable doubt of rape and is sentenced to suffer the penalty of <i>reclusion perpetua</i>. He is likewise <b>ORDERED</b> to pay AAA the following: (a) PHP 75,000.00 as civil indemnity; (b) PHP 75,000.00 as moral damages; and (c) PHP 75,000.00 as exemplary damages, all of which shall be subject to 6% legal interest per annum from the finality of this Decision until full payment.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J. (Chairperson), Hernando, Zalameda</i>, and <i>Marquez, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015, as mandated by Article 266-A of the Revised Penal Code, the names of the private offended party, along with all other personal circumstances that may tend to establish their identity, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> CA <i>rollo</i>, pp. 132-135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 123-131. The March 27, 2023 Decision in CA-G.R. CR-HC No. 15216 was penned by Associate Justice Mary Charlene V. Hernandez-Azura and concurred in by Associate Justices Victoria Isabel A. Paredes and Florencio M. Mamauag, Jr. of the Thirteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 74-83. The November 4, 2020 Decision in Criminal Case No. 2608-M-2018 was penned by Presiding Judge <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span> of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxx</span>, Bulacan.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 74-75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 124.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 126.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 74-83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 54-73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 89-116.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 123-131.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 130-131.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, pp. 35-39, 40-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> CA <i>rollo</i>, pp. 54-73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> 857 Phil. 689 (2019) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 698.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <b>People v. XXX</b>, 886 Phil. 155, 175 (2020) [Per C.J. Peralta, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <b>People v. ZZZ</b>, 870 Phil. 725, 736 (2020) [Per J. Leonen, Third Division], <i>citing</i> <b>People v. Diu</b>, 708 Phil. 218, 232 (2013) [Per J. Leonardo-De Castro, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <b>People v. Jimenez</b>, 948 Phil. 510, 517 (2023) [Per J. Zalameda, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 518.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> CA <i>rollo</i>, p. 125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> TSN, MMM, September 19, 2018, pp. 7-9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> CA <i>rollo</i>, pp. 111-112.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> TSN, MMM, September 19, 2018, pp. 6-9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> TSN, AAA, November 14, 2018, pp. 13-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Republic Act No. 8353 (1997), An Act Expanding the Definition of the Crime of Rape, Reclassifying the Same as a Crime Against Persons, Amending for the Purpose Act No. 3815, as Amended, Otherwise Known as the Revised Penal Code and for Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> REV. PEN. CODE, art. 266-A(l).<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>People v. XXX</b>, 920 Phil. 272, 284 (2022) [Per J. Hernando, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> CA <i>rollo</i>, p. 125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Republic Act No. 8353 (1997), An Act Expanding the Definition of the Crime of Rape, Reclassifying the Same as a Crime Against Persons. Amending for the Purpose Act No. 3815, as Amended, Otherwise Known as the Revised Penal Code and for Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <b>People v. Jugueta</b>, 783 Phil. 806, 840 (2016) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>Lara's Gifts &amp; Decors, Inc. v. Midtown Industrial Sales, Inc.</b>, 929 Phil. 754, 781 (2022) [Per J. Leonen, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 274498 - REPUBLIC OF THE PHILIPPINES, REPRESENTED BY THE DEPARTMENT OF PUBLIC WORKS AND HIGHWAYS, PETITIONER, VS. ERLINDA C. TORRES, CAROLYN C. TORRES, AND CHRISTIAN C. TORRES, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70333' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 274498, April 08, 2026 ]</H2>
+			<H3>REPUBLIC OF THE PHILIPPINES, REPRESENTED BY THE DEPARTMENT OF PUBLIC WORKS AND HIGHWAYS, PETITIONER, VS. ERLINDA C. TORRES, CAROLYN C. TORRES, AND CHRISTIAN C. TORRES, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>HERNANDO, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in CA-G.R. CV No. 06455-MIN. The CA modified the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC) and remanded the case to the trial court to reconvene or appoint new commissioners to determine the measurement of the road-right-of-way as well as the proper amount of just compensation.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p><p><i>The Factual Antecedents</i> </p><p> In May 2017, the Republic, represented by the Department of Public Works and Highways, filed a Complaint with Urgent Prayer for the Issuance of a Writ of Possession<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> seeking to expropriate a portion of land in Sumilihon, Butuan City owned by Erlinda Torres, Carolyn Torres, and Christian Torres (Torres et al.) and covered by Transfer Certificate of Title (TCT) No. RT-55087. The expropriation was brought about by the road-widening project of the Taguibo and Sumilihon sections of the Agusan-Surigao road and the Taguibo Steel Bridge project.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> The subject property was a homestead patent granted on January 10, 1940 under Commonwealth Act No. 141 or the Public Land Act<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> and was originally registered under Original Certificate of Title (OCT) No. RP-26(1730) on February 13, 1941. It is contiguous to the Agusan-Surigao national highway and part of the Asian Highway 26. It was used for agricultural purposes and planted with coconut and perennial trees.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> Section 112 of the Public Land Act prescribes that lands granted under such law shall be subject to a right of way "not exceeding [20] meters in width for public highways, railroads, irrigation ditches, aqueducts, telegraph and telephone lines, and similar works as the Government or any public or quasi-public service or enterprise, including mining or forest concessionaires, may reasonably require for carrying on their business, with damages for the improvements only." In 1975, Presidential Decree No. 635<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> amended said provision which provided that the right of way should not exceed 60 meters in width. </p><p> The Agusan-Surigao national highway has a two-lane concrete paved road with an area of 10 meters more or less, measuring 6.70 meters plus the 1.50 to 2 meters shoulder of the road.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Torres et al. were informed of the need to enforce half of the 60-meter easement for the road widening project.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> The Republic was willing and able to deposit the required check with the trial court in favor of Torres et al. in the amount equivalent to the total value of the affected portion based on the current zonal valuation including the trees and crops therein, amounting to PHP 121,818.20.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> In the Republic's motion, it prayed for the court to allow the deposit of the said amount and a writ of possession be issued in its favor.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> Torres et al. opposed the taking insisting that their property which is supposed to be developed as a memorial park is outside the 30-meter road right-of-way or 15 meters from the centerline of the Agusan-Surigao national highway, or in the alternative, that PHP 121,818.20 was an unacceptable amount and averred that the just compensation should be PHP 234,321,179.75.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></p><p> In October 2017, finding that the Republic substantially complied with the requirements of the law, the trial court issued a writ of possession in its favor.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> The case underwent mediation and the parties agreed to refer the case back to the court for the board of commissioners to fix the amount of just compensation.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> The report of the commissioners valued the just compensation at PHP 6,090.00 per square meter or a total of PHP 27,191,850.00.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> <i>Ruling of the Regional Trial Court</i></p><p> In its Decision dated October 6, 2021, the trial court ruled that the Republic has the authority to expropriate the land, and it adopted the just compensation set forth in the report of the commissioners in the amount of PHP 6,090 per square meter. </p><p> The dispositive portion of the Decision states: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, judgment is hereby rendered: </p> <p> 1. Declaring plaintiff Republic-DPWH to have lawful right to acquire possession of and title over Four Thousand Four Hundred Sixty-Five square meters (4,465 square meters) covered under Transfer Certificate of Title No. RT-55087 and the [Twenty-Eight] square meters (28 square meters) which is a portion of defendants' property covered under TCT No. RT-38754, all registered in the names of CAROLYN C. TORRES, CHRISTIAN C. TORRES, and ERLINDA C. TORRES for the construction of the road widening project of Sumilihon-Taguibo Section of Asian Highway 26 or Daang Maharlika; </p> <p> 2. Ordering the plaintiff Republic-DPWH to pay defendants by way of just compensation the amount of [PHP 6,090.00] per square meters or a total of [PHP] 27,191,850.00; </p> <p> 3. Inasmuch as the amount of [PHP] 121,818.20 was deposited under OR No. 7661238 C dated [October 2, 2017], the said amount shall be deducted to the whole amount, hence, the sum of [PHP] 27,070,031.80 shall be paid by plaintiff to defendants CAROLYN C. TORRES, CHRISTIAN C. TORRES, and ERLINDA C. TORRES; </p> <p> 4. The amount of just compensation shall earn legal interest of 6% per annum from the finality of the Decision until full payment thereof; and</p> <p> 5. Ordering the Office of the Register of Deeds of Butuan City to annotate this Decision in TCT RT-55087 and TCT RT-38754 registered in the name of defendants CAROLYN C. TORRES, CHRISTIAN C. TORRES, and ERLINDA C. TORRES. </p> <p> The defendants' counterclaim is denied for being a prohibited pleading under Section 3, Rule 67 of the Rules of Court. </p> <p> Parties are reminded to deposit the commissioners' fee of Thirty Thousand Pesos ([PHP] 30,000.00) each within thirty (30) days from receipt of this Decision. </p> <p> Let a copy of this Decision be furnished to the Office of the Register of Deeds, Butuan City for its information and appropriate action. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original) </p> </blockquote> <p> The trial court denied the parties' motions for reconsideration in its Resolution dated February 16, 2022.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Consequently, the Republic filed an appeal with the CA.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> <i>Ruling of the Court of Appeals</i></p><p> On October 18, 2023, the appellate court rendered the assailed Decision. It settled that the Republic is entitled to a right-of-way over the subject property because the government enjoys such easement over a land that was originally a public land and was subsequently awarded thru a homestead patent even if such land was sold to another.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Moreover, the Republic is entitled only to 20 square meters pursuant to Department Order No. 11, Series of 2004<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> of the Department of Public Works and Highways. Since the title to the subject property was acquired prior to the issuance of Presidential Decree No. 635, the government is entitled only to 20 meters road right-of-way.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Damages to improvements found on the 20-meter right-of-way should be compensated by the Republic. Furthermore, the Republic was ordered to pay just compensation for the extra 10 meters because the Republic expropriated 30 meters from the centerline of the existing highway.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> The appellate court did not agree with the valuation of the just compensation for the expropriated land and the improvements thereon as reported by the commissioners. It should have been computed in accordance with Section 7 or Republic Act No. 10752<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> and relevant regulations.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> As to the consequential damages, it found no concrete evidence showing that the remainder of the subject property would suffer damages.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </p><p> The <i>fallo</i> of the assailed Decision reads: </p><blockquote> <p> WHEREFORE, the appealed Decision dated October 6, 2021 of the 10th Judicial Region, Regional Trial Court, Branch 3, Hall of Justice, Libertad, Butuan City in Civil Case No. 1596 for Expropriation, is hereby MODIFIED. </p> <p> 1. The case is REMANDED to the trial court which is ordered to reconvene the commissioners or appoint new commissioners to determine how many square meters encompassed the 10 square [sic] meters width measured from the edge of the 20 square [sic] meter width road-right-of-way from the center of the centerline of the existing road; </p> <p> 2. Moreover, the Commissioners shall, in accordance with this Decision, determine the amount of just compensation due to the [Torres] family; </p> <p> 3. The Republic through DPWH is hereby ORDERED to pay the [Torres] family the balance, if any, of just compensation to be finally determined after deducting the amount of [PHP] 121,818.20 DPWH previously advanced and deposited with the trial court; and</p> <p> 4. The Republic through DPWH is hereby ORDERED to pay the [Torres] family 6% legal interest per annum on the amount it provisionally deposited from the time of taking up to the time it is deposited with the trial court on June 21, 2017; and on the balance, if any, from the time of taking on May 10, 2017 until fully paid. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p> </blockquote> <p> The parties filed their respective motions for reconsideration which the appellate court denied in its Resolution dated June 7, 2024. It also rectified the dispositive portion of its Decision dated October 18, 2023, <i>viz</i>.: </p><blockquote> <p> <b>WHEREFORE</b>, the Court resolves to <b>DENY</b> the Motions for Partial Reconsideration filed by the respective parties. Accordingly, the assailed Decision dated [October 18,] 2023 of this Court is AFFIRMED with the following [corrections], to read as follows: </p> <ol><li> The case is REMANDED to the trial court which is ordered to reconvene the commissioners or appoint new commissioners to determine the exact area that is encompassed by the 20-meter width that is subject to the payment of just compensation. The 20-meter width is to be reckoned from the edge of the 10-meter easement of right-of-way. The said easement of right-of-way is to be measured from the centerline of the existing Agusan-Surigao Road.<br><br></li><li> Moreover, the Commissioners shall, in accordance with this Decision, DETERMINE the amount of just compensation due to [Torres et al.];<br><br></li><li> The [Republic], through the DPWH is hereby ORDERED to pay [Torres et al.] the balance, if any, of just compensation to be finally determined after deducting the amount of [PHP] 121,818.20 that the DPWH previously advanced and deposited with the trial court; and<br><br></li><li> The [Republic] is hereby ORDERED to pay [Torres et al.] a 6% legal interest per annum on the amount it provisionally deposited from the time of taking up to the time it is deposited with the trial court on [June 21,] 2017; and on the balance, if any, from the time of taking on [May 10,] 2017 until fully paid. </li></ol> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Emphasis in the original) </p> </blockquote> <p> In view of the denial of the reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the Republic files the present Petition before this Court. </p><p> The Republic essentially contends that the appellate court erred on a question of law when it concluded that the 20-meter width right-of-way should be measured from the centerline of the Agusan-Surigao national highway, contrary to the intent of the Public Land Act, as amended. The Republic urges that the measurement should be taken from within the subject property inwards from the edge of the property line.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></p><p> On the other hand, Torres et al. advance that the easement was properly measured from the centerline of the Agusan-Surigao national highway. Measuring the width from the edge of their property line would result in the excessive acquisition of private land. The intent of the Public Land Act was to reserve a right-of-way on properties granted by free patent to the extent necessary for public infrastructures.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Lastly, consequential damages may be recovered for the cost of the redesign and amendment and re-application of permits of the memorial park's site development plan.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p align="center"> <i>Issues</i> </p><p> The issues for resolution are: (1) the delineation or reckoning point of the easement of right-of-way; and (2) whether consequential damages can be awarded to Torres et al. </p><p align="center"> <i>Our Ruling</i> </p><p> The petition is without merit. </p><p> The law, decree and order relied upon by the parties point to a uniform measurement of the easement of right-of-way involving the Agusan-Surigao national highway and the subject property. The governing provisions of the Public Land Act, the Executive Order No. 194, series of 1939, and the DPWH Department Order No. 11, series of 2004 specifically mention that the width of the easement of right-of-way shall not exceed 20 meters. The provisions read in this wise: </p><blockquote> <p> Public Land Act</p> <p> SECTION 112. Said lands shall further be subject to a right of way <i>not exceeding twenty meters in width</i> for public highways, railroads, irrigation ditches, aqueducts, telegraph and telephone lines, and similar works as the Government or any public or quasi-public service or enterprise, including mining or forest concessionaires, may reasonably require for carrying on their business, with damages for the improvements only. (Emphasis supplied) </p> <p> Executive Order No. 194</p> <p> I. NATIONAL ROADS:</p> <p> All roads now classified as Insular roads; main traffic routes connecting provincial capitals with important commercial centers, national airports, national seaports, and national parks and roads of military importance, which may be so designated by the President upon favorable recommendation of the Secretary of Public Works and Communications. National roads shall have a right-of-way of <i>not less than twenty meters</i>; Provided, That a right-of-way of at least sixty meters shall be acquired for roads constructed through unpatented public land. (Emphasis supplied) </p> <p>DPWH Department Order No. 11 (2004) </p> <p> In the interest of the service and to ensure the expeditious acquisition of right-of-way for the roads and flood control projects of the Department, all implementing offices, such as the Regional, District and Project Management Offices, shall strictly implement the provisions of the Public Land Act, as amended by [Presidential Decree] No. 635. <i>If the title to the property was acquired before January 7, 1975, under the Public Land Act, the government shall be entitled to a 20-meter right-of-way under Sec. 112 of [Commnwealth Act No.] 141 or a 60-meter right-of-way if the title was acquired on or after said date under [Presidential Decree No.] 635, with corresponding compensation only for the affected improvements thereon</i>. (Emphasis supplied) </p> </blockquote> <p> As may be gleaned from the facts, the subject property was a homestead patent granted on January 10, 1940 under the Public Land Act and was registered under OCT No. RP-26(1730) on February 13, 1941. Following the cited provisions, particularly DPWH Department Order No. 11, series of 2004, and as correctly resolved by the appellate court, the government is entitled to a right-of-way <i>not exceeding 20 meters</i> since the title to the subject property was acquired before January 7, 1975 when Presidential Decree No. 635 took effect amending Section 112 of the Public Land Act. The amendment modified the width from "not exceeding 20 meters" to "not exceeding 60 meters" in this wise: </p><blockquote> <p> SEC. 112. Said land shall further be subject to a right-of-way <i>not exceeding sixty (60) meters</i> in width for public highways, railroads, irrigation ditches, aqueducts, telegraph and telephone lines, and similar works as the Government or any public or quasi-public service or enterprise, including mining or forest concessionaires, may reasonably require for carrying on their business, with damages for the improvements only. (Emphasis supplied) </p> </blockquote> <p> The conflict is more apparent than real. The DPWH Department Order No. 11, series of 2004 involved two scenarios: <i>first</i>, if the title to the property was acquired prior to January 7, 1975, the government shall be entitled to a 20-meter right-of-way under the Public Land Act; and <i>second</i>, if the title to the property was acquired on or after January 7, 1975, then the government is entitled to a 60-meter right-of-way under Presidential Decree No. 635. The first situation applies in the present controversy hence, the Republic is entitled only to a 20-meter right-of-way, contrary to the expropriated 30-meter easement of right-of-way. As correctly pointed out by the appellate court, there must be a determination whether improvements on the said 20-meter right-of-way were present at the time of taking because damages to such improvements should be compensated. Considering that the Republic expropriated 30 meters, just compensation should be paid for the 10 meters in excess of the 20-meter mandated right-of-way.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> </p><p> On the crux of the controversy is the reckoning point of the baseline of the width of the right-of-way. To the Republic, the 20 meters should be taken inwards from the edge of the property line.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> On the other hand, Torres et al. maintain that the appellate court was correct in setting the baseline from the centerline of the national highway.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </p><p> The Court cannot subscribe to the Republic's contention that the width should be measured inwards from the edge of the subject property line. Section 112 of the Public Land Act, as amended by Presidential Decree No. 635, in relation to the Implementing Rules and Regulations of Republic Act No. 10752<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> reads: </p><blockquote> <p> SECTION 112. Said lands shall further be subject to a right of way. . . as the Government . . . may reasonably require for carrying on their business, with damages for the improvements only. </p> <p> Section 8. Acquisition of Properties Under [the Public Land Act]</p> <p> . . . .</p> <p> With respect to Section 8b above, under the provisions of [the Public Land Act], particularly Section 112, a [right-of-way] strip not exceeding 20 meters in width within the land acquired under that law is reserved by the government for public use with damages to improvements only. </p> </blockquote> <p> The language of the cited provisions recognizes the reservation of a right-of-way strip not exceeding 20 meters by the government without clear prescription regarding the method by which the right-of-way strip is to be located or measured. They serve as a substantive source or limitation on the maximum width and scope of damages. As aptly ruled by the appellate court, the 20-meter right-of-way is measured from the centerline of the Agusan-Surigao national highway. While the term centerline is not explicitly specified as the baseline under the law, the DPWH Department Order No. 152, series of 2017 is instructive as to the use of the DPWH Right-of-Way Acquisition Manual.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> The delineation and precise location of the right-of-way is determined through the alignment and parcellary survey plans which are prepared by the DPWH based on the approved road centerline following engineering survey standards. A parcellary survey is part of the Detailed Engineering Design of a project defining the proposed right-of-way alignment and limits, the affected lots with the name of the owners or claimants, lot numbers, areas, technical descriptions, and all improvements within the right-of-way limits.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> Notably, Engr. Ericton John Brilleta, a licensed geodetic engineer and employee of the Butuan City District Engineering Office, testified in his judicial affidavit that they located the right-of-way as measured from the centerline of the existing road of the highway.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> He made several references to the centerline in terms of delineation and measurement.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> His reliance on the highway centerline demonstrates consistency and compliance with the DPWH Right-of-Way Acquisition Manual, which technical manual serves and operationalizes the 20-meter width limit set forth in the Public Land Act. </p><p> Likewise, the Republic, in its Complaint,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> acknowledged and relied upon the road centerline as a point of reference in framing its material averments in this wise: </p><blockquote> <p> To enable [the Republic] to complete its road-widening project of the Taguibo and Sumilihon sections of the Agusan-Surigao Road, including the widening of the Taguibo Steel Bridge, a public purpose, it is both necessary and urgent for [the Republic] to enforce the legal easement for the Agusan-Surigao National Highway over a portion of the subject parcel of land of [Torres et al.] covering an area of [4,465 sqm] that is covered by the [30-meter] strip measured <i>from the center line of the existing Agusan-Surigao Road</i>, as provided for by Section 112 of [the Public Land Act].<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> (Emphasis supplied) </p> </blockquote> <p> Moreover, the admitted facts by the parties also referred to the centerline of the highway, viz.: </p><blockquote> <p> 5. That the actual metes and bounds of the area covered by the 30-meter strip road-right-of-way . . . <i>from the center line of the highway</i>. There is no issue as to the specific areas . . . and that the same represent the 30-meter strip <i>from the center line of the highway</i>[.]<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> (Emphasis supplied) </p> </blockquote> <p> Collectively, the centerline of the national highway was consistently referenced by the geodetic engineer and mutually recognized by the Republic and Torres et al. in the complaint and admitted facts, respectively. It also finds anchor in the DPWH Right-of-Way Acquisition Manual and breathes life into the language of the Public Land Act which defined the maximum width of the right-of-way strip. As to the Republic, it cannot be permitted to alter its stance acknowledging the centerline in its complaint to measuring inwards from the property line in the present petition. It would run counter to due process and offensive to the principles of fair play and justice.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Consequently, the Republic is entitled to the 20-meter right-of-way from the centerline of the Agusan-Surigao national highway. It should be ascertained whether improvements exist thereon at the time of taking for damages to be compensated. Furthermore, as clarified by the appellate court in its Resolution dated June 7, 2024: </p><blockquote> <p> From the centerline of said road, a 10-meter width is measured on both sides. This would constitute the 20-meter easement of right-of-way that the [Republic] is entitled to. The [Republic] already expropriated a width of 30 meters reckoned from the centerline of the existing road for the widening of the Agusan Road one side. This abuts the subject property belonging to [Torres et al.]. Since the [Republic] is only entitled to an easement of right-of-way of 10 meters on one side, there shall be payment of just compensation for the portion that exceeds the 10-meter easement of right-of-way reckoned from the centerline of the existing road. Therefore, the area from the end of the 10-meter easement of right-of-way and measuring 20 meters outward shall be subject to the payment of the just compensation.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> </p> </blockquote> <p> The Court upholds the appellate court's findings on the lack of proof for consequential damages in view of the 25-meter buffer zone required for the memorial park that was allegedly affected by the expropriation. It found no concrete evidence that would show that the remaining area of the subject property would suffer an impairment or decrease in value as a result of the expropriation.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> However, the Court modifies the imposition of the 6% legal interest per <i>annum</i> on the just compensation to align with the pronouncement in <i>Republic v. Heirs of Spouses Bonifacio</i>.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The legal interest of 6% per <i>annum</i> on the difference between the final amount adjudged by the court and the initial payment made shall accrue from the time of taking until finality of the decision of the court, and the total amount of just compensation shall earn legal interest of 6% per <i>annum</i> from the finality of this decision until full payment thereof.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> All these considerations merit a remand of the case to the trial court for the reconstitution or reconvening of the Board of Commissioners pursuant to Our pronouncements. By doing so; the factual and legal matters such as the correct delineation and measurement of the right-of-way and the computation of just compensation are ascertained in accordance with the rules and prevailing jurisprudence. </p><p> <b>FOR THESE REASONS</b>, the Petition is <b>DENIED</b>. The Decision dated October 18, 2023 and the Resolution dated June 7, 2024 of the Court of Appeals in CA-G.R. CV No. 06455-MIN are <b>AFFIRMED</b> with <b>MODIFICATION.</b> The legal interest of 6% per <i>annum</i> on the difference between the final amount adjudged by the court and the initial payment made shall accrue from the time of taking until finality of the decision of the court, and the total amount of just compensation shall earn legal interest of 6% per <i>annum</i> from the finality of this decision until full payment thereof.</p><p> <b>SO ORDERED.</b></p><p> <i>Gesmundo, C.J. (Chairperson), Zalameda, Rosario</i>, and <i>Marquez, JJ</i>., concur.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 11-32. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 39-61. The October 18, 2023 Decision in CA-G.R. CV No. 06455-MIN was penned by Associate Justice Oscar V. Badelles and concurred in by Associate Justices Richard D. Mordeno and Jill Rose S. Jaugan-Lo of the Twenty-First Division, Court of Appeals, Cagayan de Oro City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 63-72. The June 7, 2024 Resolution in CA-G.R. CV No. 06455-MIN was penned by Associate Justice Richard D. Mordeno and concurred in by Associate Justices Jill Rose S. Jaugan-Lo and John Z. Lee of the Special Former Twenty-First Division, Court of Appeals, Cagayan de Oro City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 165-174. The October 6, 2021 Decision in Civil Case No. 1596 was penned by Presiding Judge Marigel S. Dagani-Hugo of Branch 3, Regional Trial Court, Butuan City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 60-61.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 93-108. </p><p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 94-95. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> An Act to Amend and Compile the Laws Relative to Lands of the Public Domain, The Public Land Act (1936). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, p. 95. </p><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Amending Section One Hundred Twelve of Commonwealth Act Numbered One Hundred Forty-One, As Amended, Otherwise Known as the Public Land Law (1975). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, p. 96. </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 96-97. </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 43, 101. </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 43. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 45. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 46. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 48-49. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 188-191. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i>at 192. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 51-52. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> DPWH Department Order No. 11 (2004), Strict Implementation of the Provisions of Sec. 112 of Commonwealth Act [No.] 141 (C.A. 141) or the Public Land Act, as amended by Presidential Decree No. 635. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Rollo</i>, p. 52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 53. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> An Act Facilitating the Acquisition of Right-of-Way Site or Location for National Government Infrastructure Projects, The Right-of-Way Act (2016). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, pp. 53-60. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 59. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 66-67. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 71-72. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 24-30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 274-279. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 279-282. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 53. </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 24-30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 274-279. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> The Right-of-Way Act (2016). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Department of Works and Public Highways, <i>DPWH Right-of-Way Acquisition Manual Main Guidelines</i>, <i>available at </i><a href="https://dpwh.gov.ph/dpwh/sites/default/files/issuances/DO_152_s2017.pdf">https://dpwh.gov.ph/dpwh/sites/default/files/issuances/DO_152_s2017.pdf</a> (last accessed on February 12, 2026). </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Department of Works and Public Highways, <i>DPWH Right-of-Way Acquisition Manual Main Guidelines</i>, Glossary of Terms, 2, <i>available at</i> <a href="https://dpwh.gov.ph/dpwh/sites/default/files/issuances/DO_152_s2017.pdf">https://dpwh.gov.ph/dpwh/sites/default/files/issuances/DO_152_s2017.pdf</a> (last accessed on February 12, 2026). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 167. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 168. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 40-43. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 41. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 44-45. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Spouses Angeles v. Traders Royal Bank</b>, 901 Phil. 779, 790 (2021) [Per J. Leonen, Third Division]. (Citation omitted) </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, pp. 70-71. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 70. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 902 Phil. 403 (2021) [Per J. Leonen, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 410.&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

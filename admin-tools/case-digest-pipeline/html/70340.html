@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 273684 - PEOPLE OF THE PHILIPPINES PLAINTIFF-APPELLEE, VS. JAKE LARIOSA Y BAYONETA, ACCUSED-APPELLANT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70340' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 273684, November 26, 2025 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES PLAINTIFF-APPELLEE, VS. JAKE LARIOSA <i>Y</i> BAYONETA, ACCUSED-APPELLANT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is an Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Jake Lariosa <em>y</em> Bayoneta (accused-appellant) under Rule 122 of the Rules of Court assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated August 25, 2023, of the Court of Appeals (CA) in CA-G.R. CR-HC No. 04207. The CA affirmed <i>in toto</i> the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated March 1, 2022, of Branch 22, Regional Trial Court (RTC), Iloilo City in Criminal Case No. 17-79892 that found accused-appellant guilty beyond reasonable doubt of Murder under Article 248 of the Revised Penal Code. </p><p align="center"> <i>The Antecedents</i> </p><p> The case stemmed from an Information<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> charging accused-appellant with Murder following the death of Gener H. Panes (Panes). The accusatory portion of the Information reads: </p><blockquote> <p> That on or about the 12<sup>th</sup> day of February 2017, in the City of Iloilo, Philippines, and within the jurisdiction of the Honorable Court, said accused, with intent to kill and with qualifying circumstance of treachery, did then and there willfully, unlawfully[,] and feloniously shoot Gener H. Panes, with the use of a gun of unknown caliber, and with which he was provided at the time, deliberately hitting Gener Panes at his back, without risk upon himself arising from the defense which the victim might make, and when the said victim fell on the ground, said [a]ccused again fired several gun shots at him, thereby causing upon said Gener H. Panes, mortal wounds on the vital parts of his body, which caused his death few moments thereafter.</p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p> </blockquote> <p> Upon arraignment, accused-appellant entered a plea of "Not Guilty" to the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></p><p> During the pre-trial,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> the prosecution presented the following as its witnesses: (1) Dr. Owen Lebaquin (Dr. Lebaquin); (2) Senior Police Officer I Alain B. Silda (SPO1 Silda); (3) the Brgy. Tanod of Barangay Nabitasan, Lapaz I.C; (4) Police Officer III Percival Colacion (PO3 Colacion); (5) Police Officer II Emmanuel Decrepito (PO2 Decrepito); (6) representative from the Scene of the Crime Operatives (; (7) Ronald Calanza (Ronald); (8) Rodel Bayoneta (Rodel); and (9) Melba Panes (Melba).<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> After the pre-trial, tria1 ensued.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> The prosecution presented PO3 Colacion, who testified as follows: </p><p> On February 12, 2017, at around 7:30 p.m., he was in Barangay Jalandoni Estate, Lapuz, Iloilo City, with PO2 Decrepito. They received a radio call from their station directing them to respond to a shooting incident in Zone 3, Barangay Nabitasan, Lapaz, Iloilo City. Upon their arrival thereat, they saw the lifeless body of Panes soaked in blood. Rodel, who was having a drinking spree in the area when the shooting incident occurred, informed the police officers that it was accused-appellant who shot Panes.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> After the receipt of the information from Rodel, the police officers immediately coordinated with the barangay officials to locate the suspect in the killing of Panes. Soon after, they were able to locate accused-appellant in Zone 1, Barangay Nabitasan, La Paz, Iloilo City. Then and there, PO3 Colacion apprised the accused-appellant of his Constitutional rights. After which, they arrested him and brought him to the police station.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> The second prosecution witness was Dr. Lebaquin, the Chief Medico-Legal Officer of the Philippine National Police Crime Laboratory Regional Office 6. He testified that on February 13, 2017, his office received a request for the conduct of an autopsy on deceased Panes to determine the cause of death. Upon examining the cadaver, Dr. Lebaquin found that Panes sustained two gunshot wounds directly from the back. The two gunshot wounds were through and through, making a point of exit in the anterior area.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> He further testified that upon observation, the victim was more than three feet from the barrel of the gun due to the absence of the marking of gun powder nitrates.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> Then, Melba, the mother of Panes, testified that her son told her of a misunderstanding with accused-appellant during the wake of a relative. Thereafter, she was shocked to learn about her son's death. Due to the incident, she incurred expenses relating to Panes' burial.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> During the proceedings, trial was postponed<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> several times due to the repeated absences of the listed prosecution witnesses, Rodel and Ronald. Despite the issuance of multiple subpoenas<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> to compel their attendance, both witnesses failed to appear. The prosecution then moved for the issuance of a subpoena to Lita Calanza (Lita), the sister of Ronald. Consequently, the RTC issued an Order<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> directing Lita to appear as a witness for the prosecution on October 15, 2019, the next scheduled hearing.</p><p> On October 15, 2019, Lita was called to the witness stand. Before the offer of her testimony, the defense counsel immediately manifested that Lita was not named as a witness for the prosecution in the Pre-Trial Order. The RTC directed the prosecution to comment. In response, the prosecution stated that "considering that the other witness is not available," the prosecution will present Lita as a substitute for Ronald. The RTC then allowed the presentation of Lita for substantial justice.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> Lita testified that on February 12, 2017, at around 7:30 p.m., she was in Barangay Nabitasan, La Paz, Iloilo City, and was counting her earnings from the sale of dried fish. At that time, Panes was playing billiards alone. Later on, accused-appellant shot Panes in the back which caused him to fall to the ground. The accused-appellant shot Panes again. Lita further testified that she heard three gunshots. Shocked, she was unable to move from where she was sitting. After the shooting, the accused-appellant walked away as if nothing had happened.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> After Lita's testimony, the prosecution filed its Formal Offer of Evidence<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated October 29, 2019. In the Order<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> dated November 19, 2019, the RTC admitted the prosecution's documentary evidence. The prosecution then rested its case. </p><p> Thereafter, the defense filed a Motion for Leave To File Demurrer To Evidence<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> dated December 2, 2019, which the RTC granted in its Order<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> dated November 19, 2019. The defense then filed the Demurrer to Evidence<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated December 13, 2019 wherein the defense contended, among others, that Lita's testimony should be excluded because she was not listed as a prosecution witness in the Pre-Trial Order. However, the RTC denied the Demurrer and ruled as follows: </p><blockquote> <p> Acting on the Demurrer to Evidence filed by the accused, through counsel, Atty. Eleanor Alayon, with comment/opposition filed by the Public Prosecutor, the Court resolves to DENY the motion. </p> <p> . . . .</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></p> </blockquote> <p> Following the denial of the Demurrer To Evidence, the defense presented the accused-appellant and Celso Marcelo, Sr. (Celso) as its witnesses. </p><p> Celso testified that on February 12, 2017, at around 7:00 p.m., he was drinking at the Moy Store located beside the gym of Nabitasan Lapaz, Iloilo. Later, accused-appellant arrived and joined him. At around 9:00 p.m., police officers came looking for accused-appellant. Upon seeing accused-appellant, they brought him to the police station. The following morning, they received information that accused-appellant was charged with Murder.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> Accused-appellant testified that on the day of the incident, at around 7:00 p.m., he was drinking at the Moy Store with Celso, Cedric Lim, Alandino Alodlod, Jr., and Reynaldo Uy. Then, police officers came looking for him, so he volunteered and introduced himself. At the police station, the police officers questioned him about the shooting incident. He told them that he does not know anything about the shooting of Panes because he was drinking with his friends in another place.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> Accused-appellant further testified that Panes was always drunk, and he would always block the route going to the Dialysis Center. He insisted that even though they were not on speaking terms, he had no ill will towards Panes. Lastly, he stated that the place where Panes was shot was about 300 to 350 meters away from the place where he (accused-appellant) and his companions were drinking.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></p><p align="center"> <i>The Ruling of the RTC</i> </p><p> In the Decision<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> dated March 1, 2022, the RTC found accused-appellant guilty of Murder and decreed as follows: </p><blockquote> <p> WHEREFORE, this Court finds accused Jake Lariosa "Guilty" beyond reasonable doubt of Murder and hereby sentences him to suffer the penalty of <i>reclusion perpetua</i> with all the accessory penalties provided by law. </p> <p> The accused is also ordered to pay the heirs of the victim civil indemnity of [PHP] 75,000.00; moral damages of [PHP] 75,000.00; exemplary damages of [PHP] 75,000.00; and temperate damages of [PHP] 50,000.00. In addition, interest at the rate of six percent (6%) per annum shall be imposed on all monetary awards from the date of finality of this [D]ecision until fully paid. </p> <p> Cost of suit shall be borne by the accused. </p> <p>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></p> </blockquote> <p> The RTC ruled that the prosecution proved beyond reasonable doubt all the elements of the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> It found that Lita's testimony deserves credence because she was present during the shooting incident and saw accused-appellant shoot Panes.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p> Aggrieved, accused-appellant appealed to the CA.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p align="center"> <i>The Ruling of the CA</i> </p><p> In the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> dated August 25, 2023, the CA affirmed <i>in toto</i> the RTC ruling. The <i>fallo</i> of the CA Decision states: </p><blockquote> <p> WHEREFORE, premises considered, the [A]ppeal is DENIED. The Decision dated March 1, 2022 of the Regional Trial Court, 6th Judicial Region, Branch 22, Iloilo City in Criminal Case No. 17-79892 for Murder is AFFIRMED <i>in toto</i>.</p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p> </blockquote> <p> The CA affirmed the RTC's conclusion that the prosecution proved the guilt of accused-appellant beyond. reasonable doubt. It ruled that accused-appellant's argument—that Lita was not named as a prosecution witness during pre-trial and her testimony should not be given credence—was untenable. It concluded that even though Lita was an unlisted witness, the court <i>a quo</i> correctly considered her testimony in view of the obtaining circumstances as well as in the greater interest of justice.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p> Aggrieved, accused-appellant filed the present Appeal.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></p><p> When required by the Court to submit supplemental briefs,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> both accused-appellant<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> and the People,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> through the Office of the Solicitor General (OSG), manifested that their Briefs before the CA sufficiently argued their respective positions.</p><p align="center"> <i>The Accused-Appellant's Arguments</i> </p><p> In his Brief,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> accused-appellant sought his acquittal upon the following arguments: </p><p> <i>First</i>, Lita was not named as a prosecution witness in the Pre-Trial Order. If indeed Lita was an eyewitness, then she should have been identified as such as early as the initial investigation and during the pre-trial stage of the proceedings. The fact that Lita was only presented as a substitute for Ronald casts doubt on her identification of accused-appellant as the assailant.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p> Further, Lita's testimony lacks credibility for being contrary to human experience. It is incredible that after she allegedly witnessed the shooting incident, Lita simply went home to rest without reporting the matter to the proper authorities.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </p><p> <i>Second</i>, the prosecution did not present any evidence to prove the element of treachery. There is no showing that the alleged manner of attack was pre-conceived or deliberately adopted by accused-appellant.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p align="center"> <i>The Respondent's Arguments</i> </p><p> The OSG<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> argues that Lita's testimony was properly allowed by the RTC even though she was not listed as a prosecution witness in the Pre-Trial Order. It asserts that the defense waived any objection to the admission of Lita's testimony because it did not make the proper objection at the time of witness presentation but simply pointed out that Lita was not included in the Pre-Trial Order. Moreover, the defense counsel allowed Lita to testify and even cross-examined her without further objection. In addition, it asserted that the RTC is allowed to modify the Pre-Trial Order during litigation in the interest of substantive justice.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> The OSG further argues that because no ill motive was ascribed to Lita as a prosecution eyewitness, her testimony should be given credence. It asserts that Lita's narration of the events is credible because it is supported by the medical conclusions of Dr. Lebaquin, who testified that Panes died due to gunshot wounds at the back.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p><p> Finally, the OSG insists that treachery was sufficiently proven by the prosecution because Panes was shot from behind while playing billiards; hence, he had no opportunity to defend himself. The manner of attack upon Panes further serves as evidence that it was deliberately adopted by accused-appellant to ensure his own safety and at the same time accomplish his intent to kill the victim.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> </p><p align="center"> <i>The Issues</i> </p><p> The core issues to be resolved in the case are: (1) whether Lita's testimony is admissible and should be given probative weight despite her non-inclusion as a prosecution witness in the Pre-Trial Order; and (2) whether the guilt of the accused-appellant was proved beyond reasonable doubt. </p><p align="center"> <i>The Court's Ruling</i> </p><p> The Appeal is <i>meritorious</i>. </p><p> Generally, the Court will not reexamine evidence that had been analyzed and ruled upon by the RTC and affirmed by the CA. However, a well-entrenched rule in criminal cases is that an appeal opens the entire case for review and enables the reviewing court to correct any error committed by the lower courts, even if unassigned.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> "The appeal confers the appellate court <i>full jurisdiction</i> over the case and renders such court competent to examine records, revise the judgment appealed from, increase the penalty, and cite the proper provision of the penal law."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> </p><p> In the case, the appeal is primarily hinged on the issue of the admissibility of Lita's testimony. To reiterate, accused-appellant avers that Lita was not listed in the Pre-Trial Order; hence, she must be excluded as a witness for the prosecution. On the other hand, the prosecution asserts that the defense did not make the proper objection and even if it did, such objection was waived when it proceeded to cross-examine Lita. At any rate, the RTC has the authority to modify the Pre-Trial Order to prevent injustice. </p><p> The Court finds the contention of accused-appellant meritorious. </p><p> Rule 118, Section 4 of the Rules of Court provides: </p><blockquote> <p> SECTION 4. <i>Pre-trial order</i>. – After the pre-trial conference, the court shall issue an order reciting the actions taken, the facts stipulated, and evidence marked. Such <i>order shall bind the parties, limit the trial to matters not disposed of</i>, and control the course of the action during trial, <i>unless modified by the court to prevent manifest injustice</i>. </p> </blockquote> <p> A.M. No. 03-1-09-SC<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> or the Guidelines in the Conduct of Pre-Trial and Use of Deposition-Discovery Measures further states: </p><blockquote> <p> I. PRE-TRIAL<br> . . . .<br> B. Criminal Cases<br> . . . .</p> <p> 2. After the arraignment, the court shall forthwith set the pre-trial conference within thirty days from the date of arraignment, and issue an order: (a) requiring the private offended party to appear thereat for purposes of plea-bargaining except for violations of the Comprehensive Dangerous Drugs Act of 2002, and for other matters requiring his presence; (b) referring the case to the Branch COC, if warranted, for a preliminary conference to be set at least three days prior to the pre-trial to mark the documents or exhibits to be presented by the parties and copies thereof to be attached to the records after comparison and to consider other matters as may aid in its prompt disposition; and (c) <i>informing the parties that no evidence shall be allowed to be presented and offered during the trial other than those identified and marked during</i> the pre-trial <i>except</i> when allowed by the court for <i>good cause shown</i>[.] (Emphasis supplied) </p> </blockquote> <p> Undeniably, pre-trial is an essential procedural device for the speedy disposition of cases.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> By clarifying and limiting the basic issues of the case, it takes the trial of cases out of the realm of surprise and maneuvering,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> ensures a fair trial, and prevents undue delay.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Hence, parties cannot simply brush aside the procedural rule on pre-trial as a mere technicality. </p><p> The importance of pre-trial is illustrated in <i>Heirs of Pasag v. Spouses Parocha</i><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> wherein the Court applied A.M. No. 03-1-09-SC and declared that before the scheduled pre-trial conference, the parties must already gather and collate all of their respective pieces of evidence—testimonial, documentary, or object. Otherwise, evidence that was not identified or marked during the pre-trial proceedings are deemed <i>waived</i>: </p><blockquote> <p> It is apparent from the foregoing provision that both parties should obtain. gather, collate, and list all their respective pieces of evidence — <i>whether testimonial, documentary, or object</i> — even prior to the preliminary conference before the clerk of court or at the latest before the scheduled pre-trial conference. <i>Otherwise, pieces of evidence not identified or marked during the pre-trial proceedings are deemed waived and rendered inutile</i>. The parties should strictly adhere to the principle of "laying one's cards on the table." In the light of these issuances and in order to obviate interminable delay in case processing, the parties and lawyers should closely conform to the requirement that the offer of evidence must be done orally on the day scheduled for the presentation of the last witness.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> (Emphasis supplied) </p> </blockquote> <p> In the case, the Pre-Trial Order<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> dated July 25, 2017, unequivocally reveals that the prosecution did <i>not</i> identify Lita as a witness; neither did the prosecution make any reservation on the matter: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="4%"><div align="justify">4.</div></td> <td colspan="2"> <div align="justify">The prosecution will present the following witnesses:</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td width="4%"><div align="justify">[a.]</div></td> <td width="92%"><div align="justify">Dr. Owen Lebquin;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">b.</div></td> <td><div align="justify">SPO1 Alain B. Silda;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">c.</div></td> <td><div align="justify">Brgy. Tanod of Brgy. Nabitasan, Lapaz, I.C; </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">d.</div></td> <td> <div align="justify">PO3 Percival Colacion;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">e.</div></td> <td><div align="justify">PO2 Emmanuel Decrepito;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">f.</div></td> <td><div align="justify">representative from SOCO;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">g.</div></td> <td><div align="justify">Ronald Calanza;</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">h.</div></td> <td><div align="justify">Rodel Bayoneta; and</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">i.</div></td> <td><div align="justify">Melba Panes[.]<sup style="COLOR: RGB(255, 0, 0);">[58]</sup></div></td> </tr> </tbody></table> </blockquote> <p> Pursuant to the pertinent rules on procedure, the prosecution is <i>not</i> allowed to present a witness who was not identified as such during pre-trial. It is deemed to have <i>waived</i> the presentation of witnesses other than those who were included in the Pre-Trial Order. The rule may only be relaxed to prevent manifest injustice and upon a showing of valid grounds.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup></p> <p> In this regard, the standard of "good cause" under A.M. No. 03-1-09-SC may be applied by the Court to determine whether there are valid grounds to relax the rules on pre-trial in favor of the prosecution. "Good cause" has been defined as any <i>substantial reason</i> that "affords a <i>legal</i> <i>excuse</i>."<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> The existence of a "good cause" is a matter to be determined by the trial court at its judicial discretion.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> "Good cause" must be established by the party seeking relief "to show some plainly adequate reasons" therefor.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> There must be a "<i>particular and specific demonstration of facts</i>, as distinguished from conclusory statements," to establish "good cause."<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> This is consistent with the elementary principle that a relaxation of the procedural rules must be accompanied by an effort on the part of the party invoking liberality to at least explain its failure to comply with the rules and provide a compelling justification for the relief sought.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup></p><p> Thus, in <i>Cruz v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> the prosecution was allowed to present additional evidence because at the time of Pre-Trial, the document was not in its possession but was still in police custody. Likewise, in <i>Heirs of Lagon v. Ultramax Healthcare Supplies, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> the offeror was allowed to introduce additional evidence because the latter's presentation as <i>impeaching</i> evidence became necessary only during trial. Similarly, in <i>Spouses Ong v. Gan</i>,<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> a party was allowed to present evidence that was not identified in the Pre-Trial Order because the Presiding Judge in the case was not privy to the reasons for the non-inclusion of a documentary evidence and therefore found it more prudent and consistent with justice to permit its presentation, subject to cross-examination and objections upon formal offer.</p><p> On the other hand, in <i>Chua v. Spouses Santiago</i>,<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> the Court disallowed the presentation of an unlisted witness because the party simply failed to have the witness included in the Pre-Trial Order despite several opportunities to do so. Similarly, in <i>Techem Korea Co. Ltd. v. Chan</i>,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> a substitute witness who was not identified in the Pre-Trial Order was disallowed because the offeror simply invoked a liberal application of the rules without providing a sufficient justification therefor.</p><p> Here, the records show that contrary to the OSG's contention, the defense counsel immediately objected to the presentation of Lita on the ground that she was not included in the Pre-Trial Order as a prosecution witness. Yet when the RTC directed the prosecution to comment on the objection, it did <i>not</i> offer any explanation as to why Lita was not included in its list of witnesses in the Pre-Trial Order.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Rather, the prosecution simply stated that Lita was being presented<i> in lieu</i> of Ronald, Lita's brother: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="27%"><div align="justify">PROS. GUADALOPE: </div></td> <td width="73%"><div align="justify">I would like to call on the witness, Lita Calanza.</div></td> </tr> <tr valign="top"> <td> <div align="justify">. . . .</div></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">COURT:</div></td> <td><div align="justify">Your witness.</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td align="left"><div>ATTY. ALAYON [defense]:</div></td> <td><div align="justify">Your Honor please, before the presentation of the witness Your Honor, the said witness named Lita Calanza<i> is not one of the witnesses listed in the pre-trial order</i>[,] Your Honor.</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">COURT: </div></td> <td><div align="justify">Comment from the prosecution?</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> </tr> <tr valign="top"> <td><div align="justify">PROS. GUADALOPE: </div></td> <td><div align="justify">We submit Your Honor, <i>considering that the other witness is not available, so we will present this witness</i>.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> (Emphasis supplied)</div></td> </tr> </tbody></table> </blockquote> <p>Clearly, the prosecution did not provide any sufficient justification or "good cause" for the relaxation of the rules on Pre-Trial. Its assertion that Lita's testimony must be admitted "in the interest of substantial justice" is nothing more than a bare conclusion that is unsupported by a particular and specific demonstration of facts proving it.</p> <p> It must also be emphasized that on two occasions, i.e., on June 9, 2019<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> and on August 15, 2019,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> Ronald <i>personally</i> received the subpoena<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> issued to him by the RTC. In the Order<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> dated June 11, 2019, the RTC even directed Ronald to explain his failure to attend the scheduled hearing, yet no such explanation can be found in the records. Given Ronald's non-compliance with the subpoenas and the RTC Order dated June 11, 2019, the prosecution could have filed the necessary motion for the issuance of a bench warrant against Ronald to secure his attendance in court.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> </p><p> Considering that Ronald was in fact personally notified of the scheduled hearings, as well as, the remedies available to the prosecution to compel his attendance, Lita's presentation as a "substitute" for Ronald cannot stand as a "good cause" that warrants a liberal application of the rules on Pre-Trial. Although the prosecution "has the right to choose whom it wishes to present as witnesses,"<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> the exercise of such right is limited by the relevant rules on Pre-Trial. In the absence of valid grounds sufficient to justify Lita's non-inclusion as a prosecution witness in the Pre-Trial Order, the Court is constrained to order the exclusion of Lita's testimony. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>There is no waiver on the part of accused-appellant</i>. </div></td> </tr> </tbody></table> <p>Settled is the rule that to exclude evidence, the objection to the admissibility of evidence must be raised at the proper time, and the grounds therefor specified.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> The proper time to make the objection is set forth in Section 36, Rule 132 of the Rules of Court, as amended, which provides: </p><blockquote> <p> SEC. 36. <i>Objection</i>. – Objection to offer of evidence <i>must be made</i> orally <i>immediately</i> after the offer is made.</p> <p> Objection to the testimony of a witness for lack of a formal offer must be made as soon as the witness begins to testify. Objection to a question propounded in the course of the oral examination of a witness must be made as soon as the grounds therefor become reasonably apparent.</p> <p> The grounds for the objection must be specified.</p> </blockquote> <p> In simple terms, objections to testimonial evidence must be raised at the earliest time.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> If the objection is based on a witness's incompetence, it must be made <i>before</i> the witness has given any testimony and as soon as the objection becomes apparent.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> Objections not raised at the proper time shall be deemed waived.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup></p><p> Here, the objection against Lita's presentation on the ground of her non-inclusion in the Pre-Trial Order as a prosecution witness was timely raised, i.e., <i>immediately after</i> Lita was called to the witness stand and <i>before</i> she has provided any testimony. Notwithstanding the same, the OSG insists that the objection was waived by the defense when it proceeded to cross-examine Lita.</p><p> The Court is not convinced by the prosecution's argument. </p><p> It is true that an objection may be waived by a cross-examination on the prohibited matter, or if a witness is cross-examined <i>and</i> no exception or reservation of the objection was made.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> Still, it is well-established that an <i>implied</i> waiver of a right is not presumed; rather, courts must indulge every reasonable presumption against the existence and validity of such waiver.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> For there to be a valid waiver, an actual intention to relinquish the right must be established.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> The conduct of the parties before, during, and after the alleged waiver should also be considered.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> </p><p> Thus, in <i>Limketkai Sons Milling Inc. v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> the Court held that an objection to the admissibility of parol evidence was not waived despite cross-examination. In the case therein, the Court noted that the party timely objected to the presentation of the parol evidence and made of record a continuing objection to the matter before and after the cross-examination. Further, it was apparent that the party simply took the path of prudence when it chose to cross-examine the witness rather than being silent and letting the inadmissible testimony pass without challenge.</p><p> In a similar fashion, the Court in <i>Ang Toa v. Alvarez</i><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> ruled that the defendant did <i>not</i> waive its counterclaim, notwithstanding an earlier pronouncement by the trial court that no evidence on such claim shall be admissible. The Court noted that the trial court's order was very broad; thus, its import must be determined "not only by the words contained therein, but also by the conduct of the parties at the time and immediately after the making of the statement" Therein, the alleged waiver was disputed by the fact that the defendant proceeded to offer evidence on its counterclaim without prohibition by the trial court.</p><p> In the case, the circumstances do not support the conclusion that the defense's cross-examination of Lita constitutes a waiver of its objection against her presentation. <i>First</i>, the defense immediately interposed the objection when the prosecution called Lita to the witness stand. In connection therewith, the Court has decreed that when an objection is raised against the taking of the testimony of a witness, it is immaterial that no further objections are raised as to the particular questions propounded. Rather, the objection made at the beginning is deemed a <i>continuing</i> one.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Second</i>, the defense reiterated its objection to Lita's presentation in the Demurrer to Evidence.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Third</i>, in the Opposition to the Demurrer to Evidence,<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> the prosecution did not at all argue that the objection had already been waived and instead simply asserted that the RTC has allowed the testimony in the interest of justice.</p><p> Given the foregoing, the Court is not convinced that the defense waived its objection to the presentation of Lita as an unlisted witness in the Pre-Trial Order. The circumstances are simply insufficient to overcome the presumption <i>against</i> the implied waiver of an objection. Rather, the parties' conduct before, during, and after Lita's presentation demonstrates that the defense merely exercised the path of prudence when it cross-examined Lita—to test her credibility through cross-examination rather than allowing it to go unchallenged. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The guilt of accused-appellant was not proven beyond reasonable doubt</i> </div></td> </tr> </tbody></table> <p>The crime of Murder is penalized under Article 248 of the Revised Penal Code, which provides: </p><blockquote> <p> ARTICLE 248. <i>Murder</i>. – <i>Any person who, not falling within the provisions of Article 246 shall kill another, shall be guilty of murder and shall be punished by reclusion temporal</i> in its maximum period to death, if committed with any of the following attendant circumstances:</p> <ol><li> With treachery, taking advantage of superior strength, with the aid of armed men, or employing means to weaken the defense or of means or persons to insure or afford impunity[.]</li></ol> </blockquote> <p> The elements of Murder are as follows: (1) that a person was killed; (2) that the accused killed him; (3) the killing was attended by any of the qualifying circumstances mentioned in Article 248; and (4) the killing is not parricide or infanticide.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> </p><p> In <i>People v. Maantos</i>,<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> the Court held that to have a valid judgment of conviction, two requisites must be present: a.) the <i>identification</i> of the accused as the perpetrator of the crime by a credible witness; and b.) proof that all elements of the crime charged are present. To wit: </p><blockquote> <p> A valid judgment of conviction has two vital components: first, the identification of the accused as the perpetrator of the crime by a credible witness, which was done in accordance with constitutional standards; and second, proof that all the elements of the crime are present. It is imperative for the prosecution to establish both components using the same quantum of proof, that is, proof beyond reasonable doubt. Failing which, the accused cannot be convicted of the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup></p> </blockquote> <p> As enshrined in our Constitution, one of the essential rights given to the accused in a criminal proceeding is to be presumed innocent unless the contrary is proved and the proof required must be one that is beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup></p><p> Here, the prosecution was not able to present proof beyond reasonable doubt as to the <i>identity</i> of accused-appellant as the perpetrator of the crime charged.</p><p> The only witness who positively identified accused-appellant as the person who shot Panes and caused his death was Lita, the supposed eyewitness. According to her, at the time of the incident, she was counting her collection from the sale of dried fish while Panes was playing billiards when accused-appellant suddenly shot Panes at his back.</p><p> However, as discussed earlier, the trial court erred in allowing the taking of Lita's testimony despite the prosecution's failure to show valid reasons as to why she may he allowed to testify despite her non-inclusion as a prosecution witness in the Pre-Trial Order. Lita's testimony should therefore be excluded.</p><p> Without Lita's testimony, the prosecution is left with no other evidence to prove the identity of accused-appellant as the perpetrator of the crime charged. Although the prosecution presented other witnesses, none of them positively identified accused-appellant as the shooter who caused Panes' death. Thus, the Court has no choice but to order the acquittal of accused-appellant.</p><p> With the absence of the positive identification of accused-appellant as the assailant in the case at bar, there is no need to discuss the other issues raised in the appeal.</p><p> In summary, any slight doubt as to the identity of the perpetrator of the crime must be resolved in favor of the accused.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> While it is indeed regretful that a life was lost in the case, the identification of accused-appellant as the person responsible for Panes' death failed to meet the quantum of proof necessary for his conviction.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup></p><p> With the foregoing, the Court reminds both the defense and the prosecution to obtain, gather, collate, and list all their respective pieces of evidence–whether testimonial, documentary, or object–even before the pre-trial conference.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> The purpose of this is to "<i>lay all the cards on the table</i>" to avoid any "<i>surprise</i>" during the trial. Otherwise, evidence not identified or marked during the pre-trial proceedings is deemed waived,<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> subject only to the "good cause" and "manifest injustice" exceptions.</p><p> <b>ACCORDINGLY</b>, the Appeal is <b>GRANTED</b>. The Decision dated August 25, 2023, of the Court of Appeals in CA-G.R. CR-HC No. 04207 is <b>REVERSED</b> and <b>SET ASIDE</b>.</p><p> Accused-appellant Jake Lariosa<em> y </em>Bayoneta is hereby <b>ACQUITTED</b> of the charge of Murder in Criminal Case No. 17-79892 filed before Branch 22, Regional Trial Court, Iloilo City on the ground of reasonable doubt. He is thereby <b>ORDERED IMMEDIATELY RELEASED</b> from detention, unless he is being held for some other valid or lawful cause. </p><p> Let a copy of this Decision be <b>FURNISHED</b> to the Director General of the Bureau of Corrections, Muntinlupa City for immediate implementation. The Director General is <b>DIRECTED</b> to <b>REPORT</b> to this Court within five days from receipt hereof of the action he has taken.</p><p> Finally, let an entry of judgment be issued immediately.</p><p> <b>SO ORDERED</b>.</p><p> <i>Caguioa (Chairperson)</i> and <i>Gaerlan, JJ</i>. concur. <i><br> Dimaampao, J</i>., on official leave. <i><br> Singh, J</i>., on official business.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave. <p> <sup style="COLOR: RGB(255, 0, 0);">**</sup> On official business. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 6-8. <i>See</i> Notice of Appeal. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 12-29. Penned by Associate Justice Bautista G. Corpin, Jr. and concurred in by Associate Justices Mercedita G. Dadole-Ygnacio and Eleuterio L. Bathan of the Twentieth Division, Court of Appeals, Cebu City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 31-38. Penned by Presiding Judge Redentor E. Esperanza.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> RTC records, p. 1.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[</sup><sup style="COLOR: RGB(255, 0, 0);">6]</sup> <i>Id.</i> at 56. <i>See</i> RTC Order dated April 19, 2017.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 73-76. <i>See</i> Pre-Trial Order dated July 25, 2017.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 74.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 116. <i>See</i> RTC Order dated August 7, 2018.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Rollo</i>, pp. 31 -32. <i>See</i> also TSN, PO3 Percival Colacion, August 7, 2018, pp. 5-7.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 14. <i>See</i> also TSN, PO3 Percival Colacion, August 7, 2018, <i>id.</i> at 7-8. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>See</i> Medico-Legal Report No. M-117-2017 dated February 14, 2017, RTC records, p. 115.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> TSN, Dr. Owen Jaen Lebaquin, August 7, 2018, pp. 14-16.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Rollo</i>, pp. 14-15; TSN, Melba Panes, July 16, 2019, pp. 5-8.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The postponements were either based on the motion of the prosecution or absence of its witnesses. <i>See</i> RTC records, pp. 86-87, Urgent Motion for Postponement dated October 19, 2017; <i>id.</i> at 90, RTC Order dated October 24, 2017; <i>id.</i> at 95, RTC Order dated November 14, 2017; <i>id.</i> at 100. RTC Order dated January 30, 2018; <i>id.</i> at 104-105, Urgent Motion for Postponement dated February 23, 2018; <i>id.</i> at 119, RTC Order dated September 4, 2018; <i>id.</i> at 133, RTC Order dated November 18, 2018; <i>id.</i> at 149, Motion for Postponement dated May 9, 2019; <i>id.</i> at 151, RTC Order dated May 14, 2019; <i>id.</i> at 157, RTC Order dated June 11, 2019; <i>id.</i> at 167, RTC Order dated August 20, 2019.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 123, 130, 133, 136, 141, 148, 155, 160, 166. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 167. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>See</i> <i>rollo</i>, pp. 23-24.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> RTC records, pp. 177-178. <i>See</i>&nbsp;Formal Offer of Exhibits.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>See</i> Order dated November 19, 2019. RTC records, p. 189. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 193-194. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> A Motion for Leave of Court to File Demurrer to Evidence was filed by the defense on December 2, 2019. <i>See</i> <i>id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 196-205. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 209. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 33-34; TSN, Celso Marcelo, Sr., August 6, 2020, pp. 3-8. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 34; TSN, Jake Lariasa, March 16, 2021, pp. 4-5.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 7-8. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, pp. 31-38. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 38.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 35. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See</i> RTC records, p. 275.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Rollo</i>, pp. 12-29.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 28. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 23. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 6-7.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 39-40.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>See</i> Manifestation (In Lieu of Supplemental Brief) dated April 3, 2025, <i>id.</i> at 46-47.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>See</i> Manifestation (In Lieu of Supplemental Brief) dated March 21, 2025, <i>id.</i> at 42-43.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> CA <i>rollo</i>, pp. 41-47. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 41-42.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 45-46. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>See</i> <i>id.</i> at 69-84. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 76-78. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 74-75. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 82. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>People v. Paguio</b>, 923 Phil. 42, 45 (2022); <b>People v. Comboy</b>, 782 Phil. 187, 196 (2016). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <b>People v. Acosta</b>, 846 Phil. 198, 203 (2019). </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> "Guidelines in the Conduct of Pre-Trial and Use of Deposition-Discovery Measures," approved on July 13, 2004. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>Tiu v. Middleton</b>, 369 Phil. 829, 837 (1999). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>LCK Industries v. Planters Development Bank</b>, 563 Phil. 957, 968 (2007). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>People v. Guzman</b>, 542 Phil. 152, 169 (2007). </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> 550 Phil. 571 (2007). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 581. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> RTC records, pp. 73-76. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 74. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>See</i> <b>Lara's Gift and Decors, Inc. v. PNB General Insurers Co., Inc.</b>, 824 Phil. 652, 666 (2018). </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Cruz v. People</b>, 810 Phil. 810, 815 (2017). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Fortune Corp. v. Court of Appeals</b>, 299 Phil. 356, 383 (1994). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>Paguio v. Commission on Audit</b>, 900 Phil. 514, 542-543 (2021); <b>Ramirez v. Court of Appeals</b>, 622 Phil. 782, 803 (2009). </p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Cruz v. People</b>, 810, <i>supra</i> note 70 at 815 (2017). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> 891 Phil. 688 (2020). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <strong>G.R. No. 222363</strong>, October 13, 2021 [Notice]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> 821 Phil. 594 (2017). </p><p><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <strong>G.R. No. 235995</strong>, September 28, 2022 [Notice]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>See</i> <i>rollo</i>, pp. 22-23. </p><p><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> TSN, Lita Calanza, October 15, 2019, pp. 2-3. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> RTC records, p. 155. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 166. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 155, 166. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 157, Order dated June 11, 2019. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>See</i> Rules of Court, Rule 21, sec. 8, which states: </p><blockquote> <p> SECTION 8. <i>Compelling attendance</i>. - In case of failure of a witness to attend, the court or judge issuing the subpoena, upon proof of the service thereof and of the failure of the witness, may issue a warrant to the sheriff of the province, or his or her deputy, to arrest the witness and bring him or her before the court or officer where his or her attendance is required, and the cost of such warrant and seizure of such witness shall be paid by the witness if the court issuing it shall determine that his or her failure to answer the subpoena was willful and without just excuse.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <b>People v. Padua</b>, 639 Phil. 235, 250 (2010). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <b>Magsino v. Magsino</b>, 847 Phil. 209, 214 (2019). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>Catuira v. Court of Appeals</b>, 306 Phil. 424, 426 (1994). </p><p><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <b>Republic v. Court of Appeals</b>, 402 Phil. 498, 509 (2001). </p><p><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <b>Catuira v. Court of Appeals</b>, 306 Phil. 424, 427 (1994). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <b>Macfarlane v. Green</b>, 54 Phil. 551, 556 (1930). </p><p><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>Figueroa v. Sandiganbayan, Special Third Division</b>, 919 Phil. 892, 901 (2022). </p><p><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <b>Ang Toa v. Alvarez</b>, 11 Phil. 146, 148-149 (1908). </p><p><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> 325 Phil. 967, 991 (1996). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Supra</i> at 149. </p><p><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <b>Chavez v. Court of Appeals</b>, 133 Phil. 661, 682 (1968). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[89]</sup> RTC records, pp. 197-198. </p><p><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id.</i> at 206-208. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>People v. Seguisabal</b>, 899 Phil. 525, 530 (2021). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[92]</sup> 944 Phil. 430 (2023). </p><p><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id.</i> at 440. </p><p><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> CONST., art. III, sec. 14(2). <i>See also</i> <b>People v. Marquina</b>, 426 Phil. 46, 56 (2002). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <b>People v. Matias</b>, 940 Phil. 155, 128 (2023). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <b>People v. Maantos</b>, 944 Phil. 43, 440 (2023). </p><p><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>See</i> <b>Heirs of Pasag v. Sps. Parocha</b>, <i>supra</i> note 55 at 581. </p><p><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Id.</i>&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

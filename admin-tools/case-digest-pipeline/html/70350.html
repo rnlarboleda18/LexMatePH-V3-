@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 274387 - JUDER RACSOR P. GERALDO, PETITIONER, VS. PLTCOL MARK NAVARETTE NALDA, PSMS JONATHAN DAYOLA GAVIOLA, PSSg JAMES ORTEGA CABERIO, PCpl ANDREW N. RAMOS, PCpl CATALINO TANTOY, and PCpl RICKY T. ABI&Ntilde;ON, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70350' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 274387, October 06, 2025 ]</H2>
+			<H3>JUDER RACSOR P. GERALDO, PETITIONER, VS. PLTCOL MARK NAVARETTE NALDA, PSMS JONATHAN DAYOLA GAVIOLA, PSSg JAMES ORTEGA CABERIO, PCpl ANDREW N. RAMOS, PCpl CATALINO TANTOY, and PCpl RICKY T. ABIÑON, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN,* ACTING C.J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Police officers are the very public officers specifically entrusted with the duty of maintaining peace and order. If they become the oppressors of the citizens they vowed to protect, public trust in the police and in the government may be crippled and compromised. As such, police officers who abuse their power and cause harm will unhesitatingly be stripped of their badges. </p><p> This Court resolves a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, assailing the Court of Appeals' September 6, 2023<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and May 17, 2024<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Resolutions. The Court of Appeals affirmed the Office of the Deputy Ombudsman for the Military and Other Law Enforcement Offices' Joint Order,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> which ruled that respondents are administratively liable of simple misconduct.</p><p> Juder Racsor P. Geraldo (Geraldo) filed criminal complaints for unlawful arrest and planting of evidence, and administrative complaints for grave misconduct and grave abuse of authority against the following Maasin City police officers: PLTCOL Mark Navarette Nalda (PLTCOL Nalda), PSMS Jonathan D. Gaviola (PSMS Gaviola), PSSg James O. Caberio (PSSg Caberio), PCpl Andrew N. Ramos (PCpl Ramos), PCpl Catalino Tantoy (PCpl Tantoy), and PCpl Ricky Abiñon (PCpl Abiñon), and (collectively, PLTCOL Nalda et al.) before the Office of the Deputy Ombudsman.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p><p> Geraldo claimed that he was invited by Police Officer Wendell Rosales (Rosales) to Maasin City Police Station on the evening of November 19, 2019. When he arrived, Rosales and a certain "Sir Orito" ordered him to help them arrest a drug suspect named Ian Alvarez (Alvarez). Due to their threats, Geraldo agreed and cooperated with the police officers.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> The following day, Geraldo reported to Rosales that he failed to locate Alvarez. However, on his way home, he saw PSMS Gaviola and PSSg. Caberio standing beside a silver vehicle with license plate number UOU 455 allegedly owned by PLTCOL Nalda. After telling them that he could not find Alvarez, the police officers forced Geraldo to board the vehicle. This happened in broad daylight and was witnessed by Victoria Ardeño (Ardeño), Jan Ray Acasio (Acasio), Jinky Sanchez (Sanchez), Hazel Funtalan (Funtalan)<sup style="COLOR: RGB(255, 0, 0);">*</sup>, and Janseen Geraldo (Janseen). Geraldo saw PCpl Ramos in the driver's seat with PCpl Abiñon awaiting inside. After a while, PSSg Caberio asked him again where Alvarez was, and Geraldo stated that he might be at Villa Perla, Barangay Combado, Maasin City.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> At Villa Perla, PCpl Abiñon and PCpl Ramos suggested to go somewhere else due to the large crowd. Sensing that something bad was about to happen to him, Geraldo tried to escape but the police officers caught and maimed him. They then drove to Barangay Maria Clara.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> Upon arriving at Barangay Maria Clara, PSMS Gaviola sat beside Geraldo and inserted sachets of <i>shabu</i> in his shorts. Geraldo again attempted to escape by jumping out of the vehicle and running through the rice fields towards the house of his friend, Vanjo Colado (Colado). The police officers, however, ran after him and Geraldo was again caught, mauled, his feet cuffed, and dragged out of the house, all of which were seen by Colado. Afterward, PLTCOL Nalda arrived and they left for Maasin Police Station.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> At the police station, PLTCOL Nalda, PSMS Gaviola, PCpl Abiñon, PCpl Tantoy, and PCpl Ramos allegedly executed falsified judicial affidavits to make it appear that Geraldo sold a sachet of <i>shabu</i> to PCpl Ramos in Barangay Maria Clara.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> A criminal complaint for violations of Sections 5 and 11 of Republic Act No. 9165 was filed against Geraldo based on the judicial affidavits, the falsified Certificate of Inventory, and the planted evidence.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> The city prosecutor, however, dismissed the complaint as the pieces of evidence were inadmissible.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> After the complaint against Geraldo was dismissed, he claimed that PSMS Gaviola and PCpl Abiñon threatened him and stated that something bad will happen if he files a case against them. Geraldo's witnesses received similar threats to discourage them from testifying.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> Nonetheless, Geraldo filed the resent complaint alleging that PLTCOL Nalda et al. conspired to make it appear that he was caught selling <i>shabu</i> in a buy-bust operation, when in fact, they abducted him and planted <i>shabu</i> on his person. To support his claim, Geraldo submitted the following in evidence: (1) judicial affidavits of PLTCOL Nalda, PCpl Ramos, PCpl Abiñon, and PCpl Tantoy; (2) a printout of the Facebook Messenger exchange between him and Rosales; (3) photographs of a vehicle with license plate number UOU 455; (3) the police blotter entry; (4) photographs of his injuries; (5) the Certificate of Inventory; (6) Geraldo's counter-affidavit; (7) the joint affidavit of Ardeño, Acasio, Sanchez, Funtalan, and Janseen; (8) the affidavit of Edgardo T. Melon (Melon); and (9) the city prosecutor's Resolutions dated December 17, 2019 and January 7, 2020.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> PLTCOL Nalda et al. denied the charges against them. They maintain that Geraldo sustained his injuries when he fell on a barbed wire during his escape attempt. While they asserted that the City Prosecutor effectively acted as Geraldo's counsel in dismissing the complaint, the Case Review Committee on Dismissed Drug Casas of Southern Leyte Police Provincial Office found "no evident bad faith and malice on the part of the members of the buy-bust team that might have caused the dismissal of the complaint against the suspect." Further, they emphasized that no vehicle was used during the buy-bust operation as their own motorcycles were utilized. They also submitted the affidavits of Funtalan and Melon, two of Geraldo's witnesses who retracted their earlier affidavits.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></p><p> For his part, PLTCOL Nalda claimed that he was the team leader and insisted that the planned buy-bust operation strictly observed the mandatory requirements of the law, the Philippine National Police Operational Procedures, and respected Geraldo's human rights. Based on the intelligence report, Geraldo was a "pusher" of illegal drugs and was classified as "high value individual." He also denied owning the silver vehicle with license plate number UOU 455, which was allegedly used to abduct Geraldo. PLTCOL Nalda explained that his own vehicle, a tonic blue Ford Escape with the same license plate number as photographed by Geraldo's father, was parked at the police station the whole time. His claim was certified by the desk officer and jail guard on duty at that time.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></p><p> In its July 11, 2022 Joint Resolution,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> the Office of the Deputy Ombudsman for the Military and Other Law Enforcement Offices found PLTCOL Nalda et al. guilty of grave misconduct and dismissed them from service. The retired police officers involved in the case were imposed with a fine equivalent to one year's salary. Further, the Joint Resolution ordered the filing of Informations against them for arbitrary detention under Article 124 of the Revised Penal Code and planting of evidence under Section 29 of Republic Act No. 9165.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></p><p> The Office of the Deputy Ombudsman for the Military and Other Law Enforcement Offices stated that it agreed with the city prosecutor's dismissal of the complaint against Geraldo as the buy-bust operation was a mere pretense and a sham. PLTCOL Nalda et al.'s affidavits regarding the operation were found to be self-serving and unsubstantiated, making Geraldo's arrest unlawful. However, as PLTCOL Nalda et al. possessed the authority to conduct arrests, they can only be charged with arbitrary detention.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup></p><p> As regards the charge of planting of evidence, the Office of the Deputy Ombudsman for the Military and Other Law Enforcement Offices observed that PLTCOL Nalda et al. merely denied inserting sachets of <i>shabu </i>in Geraldo's pockets and failed to present any evidence regarding their claim that Geraldo is a high-value target or secured the legally-required witnesses for Geraldo's arrest. There was also no compliance with the Philippine National Police Manual on Anti-Illegal Drugs Operation and Investigation regarding the prior coordination with the Philippine Drug Enforcement Agency, and the required planning, preparation, and reporting requirements. These deviations prove the dubious nature of the buy-bust operation.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> The retraction of Geraldo's two witnesses were deemed unreliable, consistent with jurisprudence that retractions are looked upon with considerable disfavor as they may be caused by intimidation or monetary consideration.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></p><p> Similarly, PLTCOL Nalda et al were found guilty of grave misconduct for arbitrarily detaining and planting evidence to implicate Geraldo. They were held to have used their power and authority to further their political motives.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></p><p> PLTCOL Nalda et al. moved for reconsideration. In his Supplement to the Joint Motion for Reconsideration, PLTCOL Nalda stated that the Department of Justice's February 23, 2022 Resolution reversed the City Prosecutor's dismissal of the complaint and caused the filing of two Informations for violations of Sections 5 and 11 of Republic Act No. 9165 against Geraldo. As such, both the executive and judicial departments found probable cause sufficient to file cases against Geraldo.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></p><p> In its November 4, 2022 Joint Order,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> the Office of the Deputy Ombudsman for the Military and Other Law Enforcement Offices reversed its July 11, 2022 Joint Resolution, thus: </p><blockquote> <p> <b>WHEREFORE</b>, respondents-movants' Motion for Reconsideration is <b>PARTIALLY GRANTED</b>. This Office's Joint Resolution dated 11 July 2022 is, thus, <b>MODIFIED</b> as follows:</p> <ol><li> The charges for Arbitrary Detention and Planting of Evidence are <b>DISMISSED</b> for insufficiency of evidence. </li><li>Respondents-movants are found <b>GUILTY</b> of <b>SIMPLE MISCONDUCT</b> and are meted the penalty of <b>THREE [] MONTHS FINE</b> in the amount equivalent to their respective salaries, payable to the Office of the Ombudsman, and may be deducted from their retirement benefits, accrued leave credits or any receivable from their office. In the event of failure of respondents-movants to pay the Fine or part thereof, the penalty shall be reverted to the original penalty of Suspension from the service for a period of <b>THREE [] MONTHS</b> without pay, irrespective of the amount of [f]ine already paid.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></li></ol> </blockquote> <p> The Office of the Deputy Ombudsman for the Military and Other Law Enforcement Offices justified its reversal on the ground of newly discovered evidence through the February 23, 2022 Resolution of the Department of Justice. This Resolution held that there was "sufficient evidence to sustain a reasonable belief that drugs were found in complainant's possession and that he sold drugs to the buy-bust team."<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> It also relied on the Chemistry Report, the Receipt of Property Seized/Certificate of Inventory signed by two public officials and a representative of the media, the Pre-Operation Form, the Certificate of Coordination, and the High Value Individual Database Certification. Geraldo's motion to enter into a plea bargaining agreement, although withdrawn, was held to "seriously [cast] doubt" on the truthfulness of the allegations in his complaint.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> However, the Office of the Deputy Ombudsman for the Military and Other Law Enforcement Offices maintained that PLTCOL Nalda et al. still committed simple misconduct for only contacting the insulating witnesses after the buy-bust operation was completed. As such, they were each fined for three months' worth of salary.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </p><p> Geraldo moved for reconsideration, praying that the Office of the Deputy Ombudsman for the Military and Other Law Enforcement Offices uphold its previous finding that there was probable cause that PLTCOL Nalda et al. planted evidence and arbitrarily detained him and were guilty of grave misconduct. He maintained that his withdrawn proposal for plea bargaining, as well as the Chemistry Report, the Receipt of Pre-Operation Form, and the High Value Individual Database Certification were insufficient to justify the reversal.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> Geraldo's motion was denied in a February 17, 2023 Joint Order.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The Office of the Deputy Ombudsman for the Military and Other Law Enforcement Offices held that Geraldo's assertions of innocence are matters of defense that are better ventilated in the criminal proceedings.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></p><p> Geraldo then filed a Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> under Rule 65 before the Court of Appeals.</p><p> In its September 6, 2023 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> the Court of Appeals dismissed the Petition, ruling that Geraldo availed of the wrong remedy as he should have filed an appeal under Rule 43 instead since the imposed penalty was more than one month's salary. On the merits, however, the Court of Appeals agreed with the lower tribunal's ruling that PLTCOL Nalda et al. are administratively liable for failing to follow the law and rules of buy-bust operations. Nonetheless, the police officers can only be penalized for simple misconduct absent any proof of corruption, clear intent to violate the law, or flagrant disregard of established rule.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></p><p> Geraldo's Motion for Reconsideration was also denied by the Court of Appeals in its May 17, 2024 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></p><p> Dissatisfied, Geraldo filed a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> before this Court.</p><p> While petitioner admits that the Petition involves mixed questions of facts and law, he asserts that the factual findings of the lower courts do not conform to the evidence and is thus subject to the review of the Supreme Court.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup></p><p> Petitioner maintains that respondents PLTCOL Nalda et al. should be held liable for grave abuse of authority and grave misconduct for their actions against him.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></p><p> Petitioner reiterates the first Resolution<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> of the Office of the Deputy Ombudsman for the Military and Other Law Enforcement Offices stating that respondents arbitrarily detained and planted evidence against him when they executed the sham buy-bust operation. This is evident from the many procedural lapses of the Philippine National Police Manual on Anti-Illegal Drugs Operation and Investigation. Petitioner also notes that the prosecution did not present the record book and the request for and result of the ultraviolet examination of the buy-bust money. In addition, petitioner claimed that he was not submitted to any physical or medical examination following his arrest. Further, the wounds he sustained are inconsistent with respondents' claim that he fell on a barbed wire. As such, petitioner asserts that respondents gravely abused their power and authority of office as they willfully violated the law and disregarded established rules. Therefore, this merits their dismissal from office.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup></p><p> Petitioner also points out several irregularities in the conduct of the buy-bust operation. First, respondents did not secure a search warrant despite petitioner's alleged status as a high value target. Second, no evidence was shown that respondents first conducted a surveillance over petitioner to verify that he was engaged in illegal drug activities. Third, the prosecution did not present the photographs of the illegal drugs allegedly seized from petitioner. Fourth, the chain of custody was broken when the required insulating witnesses were not present during the buy-bust operation. Lastly, the marking on the seized evidence did not indicate the time and place where they were recovered. Thus, the presumption of regularity does not apply in this case.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup></p><p> In their Comment,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> respondents raise several procedural infirmities committed by petitioner, such as when petitioner did not furnish their counsels with the Motion for Extension of Time to File Petition for Review on <i>Certiorari</i> and the Petition for Review on <i>Certiorari</i>—both of which were filed with the Supreme Court. To add, petitioner's failure to comply with Section 5, Rule 45 of the Rules of Court leads to the running of the period to appeal the Court of Appeals' May 17, 2024 Resolution, rendering it final and executory after its lapse. In sum, respondents maintain that the Court of Appeals correctly dismissed the petition as petitioner availed of the wrong remedy.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup></p><p> Respondents agree with the Court of Appeals' disposition of the merits. They stated that petitioner filed the present complaint as the criminal complaint against him for violations of Sections 5 and 11 of Republic Act No. 9165 was dismissed. Hence, the Department of Justice's reversal of its dismissal not only negates the basis for petitioner's complaint, but also supports the conclusion that the buy-bust operation was valid and that petitioner was selling and in possession of illegal drugs.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></p><p> The issues for this Court's resolution are: (1) whether respondents are guilty of grave abuse of authority; anti (2) whether respondents are guilty of simple or grave misconduct.</p><p> The petition is meritorious. </p><p>The present case filed before the Office of the Ombudsman is an administrative case charging respondents with grave misconduct and grave abuse of authority. <i>Neri v. Office of the Ombudsman</i><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> lays down the quantum of evidence required to hold an individual guilty of an administrative offense charged: </p><blockquote> <p> In administrative cases before the Office of the Ombudsman, the complainants must prove their allegations by substantial evidence. Substantial evidence is the "relevant evidence as a reasonable mind will accept as adequate to support a conclusion." This weight of evidence is satisfied if "there is reasonable ground to believe that one is guilty of the act or omission complained of, even if the evidence might not be overwhelming."<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> (Citations omitted)</p> </blockquote> <p> Grave abuse of authority, or oppression, is defined as "a misdemeanor committed by a public officer, who under color of his office, wrongfully inflicts upon any person any bodily harm, imprisonment or other injury constituting an act of cruelty, severity, or excessive use of authority."<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p><p> Petitioner insists that respondents acted with grave abuse of authority. In his complaint, he included the (1) Joint Affidavit of Ardeño, Acasio, Sanchez, Funtalan, and Janseen,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> and (2) Melon's Affidavit of Witness—both of which were sworn to before the city prosecutor for the criminal cases—(3) a police blotter entry, and (4) photographs of his injuries.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup></p><p> The Joint Affidavit also support petitioner's statement that he was stopped by certain individuals and forced to board a vehicle while on his way home on November 20, 2019: </p><ol start="2"><li> That contrary to the allegations of the police officers, accused was not arrested at Brgy. Maria Clara, Maasin City where accused allegedly sold shabu to a police officer in the morning of November 20, 2019. The truth of the matter is that accused was summarily arrested at Sitio Basak Brgy. Rizal, Maasin City, in the morning of November 20, 2019; </li><li>Accused was just walking towards home at around 9:40 in the morning of November 20, 2019 when certain persons standing near a silver colored vehicle summarily arrested Jude Rascor Geraldo and forced him to board said vehicle;</li><li> We were not able to help Jude Rascor Geraldo because we were so afraid that we might be arrested too[.]<sup style="COLOR: RGB(255, 0, 0);">[50]</sup></li></ol> <p> These affidavits are further corroborated by the police blotter entry<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> reported by petitioner's mother, which stated that petitioner was picked up outside of their residence that morning: </p><blockquote> <p> At about 11:55 [a.m.] of November 20, 2019, one Rosalinda Pero Geraldo, 57 years old, married, Teacher and a resident of Sitio Basak, Brgy Rizal, Maasin City appeared this Station and requested to put into record that at about 9:00 [a.m.] of same date, her son, Jude Racsor Pero Geraldo was picked-up while he was outside in their residence and boarded into a private vehicle believed to be police officer, as it was seen by their neighbors.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></p> </blockquote> <p> Petitioner's father also took photographs of the silver vehicle which was allegedly used to abduct his son. Even though the vehicle was certified by the desk officer and jail guard on duty as having been parked there that morning,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> the affidavits of the witnesses stating that respondents forced petitioner into a vehicle, "or summarily arrested"<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> him, deserve more consideration.</p><p> Melon's December 11, 2019 Affidavit of Witness also detailed petitioner's second escape from the vehicle in a handcuffed state: </p><ol start="2"><li> That contrary to the allegations, the police officers, accused did not sell shabu at Brgy. Maria Clara, Maasin City in the morning of November 20, 2019. The truth of the matter is that:&nbsp;<br><br> <ol start="" type="a"><li> While I was cleaning the vicinity of the school at Brgy. Maria Clara, Maasin City, as was my usual duty as a janitor, I saw a silver colored vehicle stop a few distance from where I was situated;</li><li>Later on, I saw a handcuffed person, whom I later know to be Jude Geraldo, jump from the vehicle and ran away from the vehicle. He was already handcuffed when he jumped and ran away from said vehicle; </li><li> Three [] other men from the vehicle ran after Geraldo;</li><li> Jude Geraldo ran towards the ricefields until he finally sought help and shelter inside the house of Vanjo Culado[.]<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></li></ol> </li></ol> However, respondents included Melon's Affidavit of Denial<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> and Funtalan's Affidavit<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> as evidence to their Joint Counter-Affidavit. Both affidavits are dated March 11, 2021 and contain retractions of their earlier affidavits.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><p> Courts generally frown upon recantations. As explained in <i>Busuego v. Office of the Ombudsman (Mindanao)</i>:<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> </p><blockquote> <p> Affidavits of recantation are unreliable and deserve scant consideration. The asserted motives for the repudiation are commonly held suspect, and the veracity of the statements made in the affidavit of repudiation are frequently and deservedly subject to serious doubt.</p> <blockquote> <p> In <i>Firaza v. People</i>, we intoned:</p> <p> Merely because a witness says that what he had declared is false and that what he now says is true, is not sufficient ground for concluding that the previous testimony is false. No such reasoning has ever crystallized into a rule of credibility. The rule is that a witness may be impeached by a previous contradictory statement . . . not that a previous statement is presumed to be false merely because a witness now says that the same is not true. The jurisprudence of this Court has always been otherwise, i.e., that contradictory testimony given subsequently does not necessarily discredit the previous testimony if the contradictions are satisfactorily explained. [Citations omitted].</p> <p> Indeed, it is a dangerous rule to set aside a testimony which has been solemnly taken before a court of justice in an open and free trial and under conditions precisely sought to discourage and forestall falsehood simply because one of the witnesses who had given the testimony later on changed his mind. Such a rule will make solemn trials a mockery and place the investigation of the truth at the mercy of unscrupulous witnesses. Unless there be special circumstances which, coupled with the retraction of the witness, really raise doubt as to the truth of the testimony given by him at the trial and accepted by the trial judge, and only if such testimony is essential to the judgment of conviction, or its elimination would lead the trial judge to a different conclusion, an acquittal of the accused based on such a retraction would not be justified.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> (Citations omitted)</p> </blockquote> </blockquote> <p> Thus, the circumstances and justifications for the recantations should be strictly scrutinized before it is accepted.</p><p> In this case, Melon claimed that he did not witness the incident, and it was his live-in partner who signed his first affidavit. Geraldo's father allegedly convinced her to execute the Affidavit of Witness to secure the freedom of his son.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> On the other hand, Funtalan stated that petitioner's family convinced her to sign the Joint Affidavit, even if she did not see the abduction.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup></p><p> Their reasons do not merit belief. Given that respondents are police officers, it is highly doubtful that anyone would be willing to sign an affidavit stating that they committed something as serious as abducting a citizen— much more swear to its truthfulness before a prosecutor—if it were false. Instead, it is highly likely that respondents threatened and intimidated Funtalan and Melon to retract their statements, which is consistent with petitioner's claim.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup></p><p> Similarly, the timing of the affidavits is suspicious. The Joint Affidavit and the Affidavit of Witness were both sworn before the prosecutor on December 11, 2019, three weeks since the incident transpired. It was only on March 11, 2021, or after almost a year and a half later, that they both decided to recant their statements through affidavits that were merely notarized. These observations support the conclusion that their recantations were secured through ill means and not naturally given.</p><p> Considering the foregoing, this Court cannot give any value to the recantations. Petitioner's narration of events, the Joint Affidavit, and the Affidavit of Witness corroborate each other on material points, <i>i.e</i>., respondents forced petitioner into a vehicle against his will and without any valid reason, handcuffed him inside, and he tried to escape. Further, even assuming that Funtalan's recantation was accepted, this will not affect the Joint Affidavit because Ardeño, Acasio, Sanchez, and Janseen are still signatories to it.</p><p> Thus, petitioner established by substantial evidence that respondents acted with grave abuse of authority or oppression.</p><p> As to the second issue, this Court rules that respondents are guilty of grave misconduct, as opposed to simple misconduct.</p><p> Jurisprudence defines misconduct as "a transgression of some established and definite rule of action, more particularly, unlawful behavior or gross negligence by a public officer."<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> To distinguish grave from simple misconduct, the "elements of corruption, clear intent to violate the law or flagrant disregard of established rule [must be] present."<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Corruption, on the other hand, is an "act of an official or fiduciary person who unlawfully and wrongfully uses his station or character to procure some benefit for himself or for another person, contrary to duty and the rights of others."<sup style="COLOR: RGB(255, 0, 0);">[66]</sup></p><p> <i>Zoleta v. Investigating Staff, Internal Affairs Board, Office of the Ombudsman</i><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> further explained: </p><blockquote> <p> To warrant dismissal from service, the misconduct must be grave, serious, important, weighty, momentous, and not trifling. The misconduct must imply wrongful intention and not a mere error of judgment and must also have a direct relation to and be connected with the performance of the public officer's official duties amounting either to maladministration or willful, intentional neglect, or failure to discharge the duties of the office. The elements of corruption, clear intent to violate the law, or flagrant disregard of an established rule, must be manifest in gross misconduct.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> (Citations omitted)</p> </blockquote> <p> As earlier discussed, respondents forcibly dragged petitioner into a vehicle, which were corroborated by several of his witnesses, despite his protests and without any legal reason. Based on sequence of events, the alleged buy-bust operation occurred later on, thereby negating any possibility that he was arrested pursuant thereto. Respondents also did not produce any warrant of arrest to justify their actions nor did they provide any explanation for their execution of a warrantless arrest.</p><p> These actions surely fall within the definition of misconduct as respondents exhibited unlawful behavior in executing an invalid warrantless arrest. In so doing, respondents connived to violate the law and flagrantly disregard established rule in a manner directly connected to the performance of their duties, thereby aggravating the offense to grave misconduct.</p><p> In <i>PO3 Ines v. Pangandaman</i>,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> this Court stated that an arrest without any legal ground constitutes wrongful intention: </p><blockquote> <p> [T]he act of arresting respondent without any legal ground implies a vile intent and not a mere error of judgment to violate the law, and if it were not for petitioner's position and official duty as a police officer, it would not have been possible for him to perform the illegal arrest. The act has a direct relation to and is connected with the performance of his official duties, amounting to maladministration or willful failure to discharge the duties of the office.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup></p> </blockquote> <p> Having established that respondents are guilty of grave misconduct and grave abuse of authority or oppression, it is now proper to discuss the imposable penalty.</p><p> The 2017 Rules on Administrative Cases in the Civil Service<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> classifies both grave misconduct and oppression as grave offenses. The former is punishable by dismissal from service, while the latter is punishable by suspension of six months and one day to one year for the first offense.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> Section 55 thereof provides that "[i]f the respondent is found guilty of two or more different offenses, the penalty to be imposed should be that corresponding to the most serious offense and the rest shall be considered as aggravating circumstances)."<sup style="COLOR: RGB(255, 0, 0);">[73]</sup></p><p> As grave misconduct is the more serious offense, its penalty of dismissal from service should be imposed upon respondents for acting with grave misconduct and grave abuse of authority or oppression.</p><p> Police officers are the very public officers specifically entrusted with the duty of maintaining peace and order. If they become the oppressors of the citizens they vowed to protect, public trust in the police and in the government may be crippled and compromised. As such, police officers who abuse their power and cause harm will unhesitatingly be stripped of their badges. </p><p> <b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The Court of Appeals' September 6, 2023 and May 17, 2024 Resolutions in CA-G.R. SP No. 179192 are <b>REVERSED</b> and <b>SET ASIDE.</b> Respondents <b>PLTCOL MARK NAVARETTE NALDA, PSMS JONATHAN DAYOLA GAVIOLA, PSSg JAMES ORTEGA CABERIO, PCpl ANDREW N. RAMOS, PCpl CATALINO TANTOY, and PCpl RICKY T. ABIÑON</b> are <b>GUILTY</b> of grave misconduct and oppression. They are ordered <b>DISMISSED</b> from service, along with the <b>ACCESSORY PENALTIES</b> of cancellation of eligibility, perpetual disqualification from holding public office, bar from taking civil service examinations, and forfeiture of retirement benefits. </p><p> <b>SO ORDERED.</b></p><p> <i>Kho, Jr.</i> and <i>Villanueva, JJ</i>., concur. <i><br> Lazaro-Javier</i> and <i>J. Lopez, JJ.</i>, on official business.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> Acting Chief Justice per Special Order No. 3223. <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 13-40.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 44-50. The September 6, 2023 Resolution in CA-G.R. SP No. 179192 was penned by Associate Justice Apolinario D. Bruselas, Jr. and concurred in by Associate Justices Geraldine C. Fiel-Macaraig and Jennifer Joy C. Ong of the Fourth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 52-54. The May 17, 2024 Resolution in CA-G.R. SP No. 179192 was penned by Associate Justice Apolinario D. Bruselas, Jr. and concurred in by Associate Justices Geraldine C. Fiel-Macaraig and Jennifer Joy C. Ong of the Former Fourth Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 102-106. The February 17, 2023 Joint Order in OMB-P-C-20-0047 and OMB-P-A-20-0050 was penned by Graft Investigation and Prosecution Officer Ilyn S. Manongtong and concurred in by PIAAPB-B Acting Director Yvette Marie S. Evaristo. It was approved by Deputy Ombudsman for the Military and Other Law Enforcement Offices Jose M. Balmeo, Jr. upon recommendation of Assistant Ombudsman Rex Raynaldo C. Sandoval.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 205.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 205-206. </p> <p><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also spelled as "Hazel Futalan" in some parts of the <i>rollo</i>.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 206.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 206-207. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 207. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 207-208.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 209-210.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 208. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 204-218.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 216-217.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 211-212. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 212-214. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 214.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 214-216. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 21. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 92-100. The November 4, 2022 Joint Order in OMB-P-C-20-0047 and OMB-P-A-20-0050 was penned by Graft Investigation and Prosecution Officer Ilyn S. Manongtong and concurred in by PIAAPB-B Acting Director Yvette Marie S. Evaristo. It was approved by Deputy Ombudsman for the Military and Other Law Enforcement Offices Jose M. Balmeo, Jr. upon recommendation of Acting Assistant Ombudsman Dennis L. Garcia. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 98-99. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 95. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 94-96. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 96-99. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 103. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 102-106. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 104. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 55-89. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 44-50. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 47-49. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 52-54. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup><em> Id. </em>at 13-40. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 25. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 28. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 204-218. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 28-32. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 32-34. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 410-429. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 411-423. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 423-428. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> 906 Phil. 638 (2021) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 655. </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Purisima v. Ricafranca</b>, 916 Phil. 690, 715 (2021) [Per J. Inting, Second Division]. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Rollo</i>, pp. 146-147. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 148-149. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 146. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 138. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 208. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 146. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 148. </p><p><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 200-201. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 203. </p><p><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 209-210. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[59]</sup> 719 Phil. 367 (2013) [Per J. Perez, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 390-391. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i>, pp. 200-201. </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 203. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 207. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>Office of the Ombudsman v. Miedes, Sr.</b>, 570 Phil. 464, 472 (2008) [Per J. Austria-Martinez, <i>En Banc</i>]. (Citation omitted) </p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <strong>Imperial, Jr. v. Government Service Insurance System</strong>, 674 Phil. 286, 296 (2011) [Per J. Brion, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Office of the Ombudsman v. Miedes, Sr.</b>, 570 Phil. 464, 473 (2008) [Per J. Austria-Martinez, <i>En Banc</i>]. (Citations omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> 952 Phil. 654 (2024) [Per J. Gaerlan, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 667-668. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> 881 Phil. 211 (2020) [Per J. Gesmundo, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 225. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[71]</sup> CSC Resolution No. 1701077 (2017), 2017 Rules on Administrative Cases in the Civil Service (2017 RACCS). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id</i>. at Rule 10, sec. 50(a), (b). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id</i>. at Rule 10, sec. 55. </p></div>&nbsp;</p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

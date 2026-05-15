@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 279718 - EDGARDO G. LAGUDA, PETITIONER, VS. JOHNNA M. MANGUARDIA-LAGUDA AND REPUBLIC OF THE PHILIPPINES, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70349' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 279718, January 29, 2026 ]</H2>
+			<H3>EDGARDO G. LAGUDA, PETITIONER, VS. JOHNNA M. MANGUARDIA-LAGUDA AND REPUBLIC OF THE PHILIPPINES, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Edgardo G. Laguda (Edgardo) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated October 25, 2024, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated March 17, 2025, of the Court of Appeals (CA) in CA-G.R. CV No. 07013. In the assailed dispositions, the CA affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated March 1, 2018, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated August 14, 2018, of Branch 20, Regional Trial Court (RTC), Mambusao, Capiz in Civil Case No. M-15-0403-04 that denied petitioner's Petition for Declaration of Nullity of Marriage.<br><br><center><i>The Antecedents</i></center><br>On November 12, 1998, Edgardo and Johnna M. Manguardia-Laguda (Johnna) got married.<br><br>Instead of securing a marriage license, they availed themselves of an exemption and executed a Joint Affidavit stating that they had been living together as husband and wife for five (5) years prior to their date of marriage. The Presiding Judge of the Municipal Trial Court in Cities, Branch 1, Roxas City solemnized the marriage and had it registered with the City Civil Registrar of Roxas City under Registry No. 98-888.<br><br>The couple have two children.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>In 2015, Edgardo filed a petition for declaration of nullity of his marriage to Johnna. He alleged that he met Johnna in early 1997 while serving as a member of the Armed Forces of the Philippines (AFP) in Maguindanao. Despite being stationed there, he occasionally visited her in Cudian, Ivisan, Capiz, where she lived with her parents. Later that year, Johnna became pregnant and gave birth to their first child on April 1, 1998.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>In his petition, Edgardo averred the following: He was pressured to marry Johnna due to her family's disapproval of their relationship which resulted in a child born out of wedlock, and to preserve his morale as a member of the AFP. Thus, he sought assistance from someone who could expedite the marriage process. The facilitator informed him that they could dispense with a marriage license requirement and requested him to sign certain documents.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> After the marriage ceremony, he learned that one of the documents he had signed was an affidavit of cohabitation. However, he denied the truth of its contents considering that he and Johnna could not have lived together for five (5) years prior to their marriage, as they had only met a year before and he had been stationed in Maguindanao. Thus, the affidavit is invalid, and their marriage is null and void for lack of a marriage license.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Johnna was psychologically incapacitated to comply with her essential marital obligations. Despite sending her monthly financial support, she frequently complained about money matters and persuaded him to take out a loan from a lending institution. He agreed and later made the payments, only to discover that Johnna had fabricated the story and merely deceived him to obtain money.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Also, Johnna communicated with him only when she needed something and often treated him disrespectfully, using belittling and degrading language against him even in public. Her behavior manifested her psychological incapacity, warranting a declaration of nullity of their marriage.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>For her part, Johnna denied Edgardo's allegations. She countered that they began their courtship in 1993 and not in 1997. They started cohabiting in 1993, initially in her sister's house and later in the residence of Edgardo's mother. Eventually, they had their own home in Maralag, Mambusao, Capiz. Although Edgardo was later assigned to Maguindanao, the former regularly went home and lived with them until around 2009.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Johnna admitted that she and Edgardo executed an affidavit of cohabitation in lieu of a marriage license and Edgardo knew and understood the contents of the document. As to Edgardo's claim of her psychological incapacity, she denied manipulating her in taking a loan, or receiving loan payments. She vehemently denied the ill-behavior attributed to her by Edgardo.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>During the trial, Edgardo presented the judicial affidavit of Cezar L. Leonor (Leonor), his neighbor, to corroborate that he and Johnna did not live together prior to marriage. He also presented the judicial affidavit of Nelson Potato (Potato), his friend from a neighboring barangay, to support his claim that Johnna was psychologically incapacitated.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Leonor testified that he had long been Edgardo's neighbor and friend, and that he only heard about Johnna shortly before the marriage. Leonor further testified that came to know of Johnna only in 1998 when the couple got married. In all the years the couple lived in his neighborhood, he never saw Edgardo with a girlfriend, although he did not frequent Edgardo's house and merely passed by it.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> On the part of Potato, he testified that he was the former Punong Barangay of Brgy. Pang-pang, Mambusao, Capiz, and likewise a long-time friend of Edgardo. He recounted that sometime in 1999, upon learning that Edgardo had returned from his APP assignment, he visited his house. While he was there, he heard a woman shouting and engaging in a heated argument with Edgardo. He later learned that the woman was Johnna.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>For her part, Johnna did not present any evidence.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated March 1, 2018, the RTC denied the petition for declaration of nullity of marriage. It held that Edgardo failed to prove and establish that he and Johnna did not meet the required five-year period of cohabitation; and that he unknowingly signed the affidavit of cohabitation. Still, it held that Edgardo failed to establish Johnna's psychological incapacity to comply with her essential marital obligations.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>On April 25, 2018, Edgardo filed a motion for reconsideration, but the RTC denied it in a Resolution<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated August 14, 2018.<br><br>Edgardo appealed to the CA.<br><br>In his Appeal before the CA, Edgardo argued that the affidavit of cohabitation was false, as he and Johnna could not have lived together as husband and wife for five years prior to their marriage. He maintained that the affidavit was invalid for purposes of the marriage license exemption, rendering their marriage null and void for lack of a marriage license.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> He likewise asserted that Johnna was psychologically incapacitated to perform her essential marital obligations, describing her as manipulative, deceitful, and addicted to gambling; that she communicated with him only for money and habitually disrespected him; and that Johnna failed to rebut his and his witnesses' testimonies on her alleged erratic behavior.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>In response, Johnna contended that Edgardo failed to establish the nullity of their marriage. She maintained that he voluntarily signed the affidavit of cohabitation and failed to corroborate his claim that they had not lived together for five years before marrying. She likewise denied being psychologically incapacitated, emphasizing that his allegations of her "nagging" and negative behavior did not amount to incapacity under the law. She added that doubts should be resolved in favor of the validity and continuation of marriage.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>The Office of the Solicitor General (OSG) supported the RTC's findings, arguing that the absence of a marriage license did not render the marriage void, as the parties had executed an affidavit of cohabitation. It noted that Edgardo's witnesses lacked personal knowledge of the alleged false declarations and that their testimonies were insufficient to support his claims.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>As to the alleged psychological incapacity, the OSG argued that Edgardo's evidence is inadequate, pointing out that he presented no expert testimony and failed to establish the gravity, juridical antecedence, and incurability of the alleged condition. It opined that, at most, Johnna's conduct reflected immaturity or indifference which does not constitute psychological incapacity under Article 36 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br><center><i>The Ruling of the CA</i></center><br>In a Decision<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> dated October 25, 2024, the CA affirmed the RTC's denial of the petition. It held that Edgardo failed to prove any ground to declare the marriage void.<br><br>The CA explained that under Article 34 of the Family Code, couples who have lived together as husband and wife for at least five years may validly marry without a license upon executing an affidavit of cohabitation.<br><br>The CA rejected Edgardo's attack on the truthfulness of the affidavit that he and Johnna had signed considering that they never lived together for the required period. It held that the affidavit being a notarized document, it enjoys the presumption of regularity, and the burden was on Edgardo to present clear and convincing evidence to disprove its contents; that he failed to prove his assertions and was inconsistent in saying when he and Johnna actually met; that he failed to present reliable evidence to refute the affidavit's declarations; and that the testimony of his neighbor, Leonor, was unhelpful, as the latter had no personal knowledge of the couple's relationship.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Thus, Edgardo failed to prove that the affidavit contained falsehoods.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>The CA ruled that Johnna, on the other hand, gave a coherent account of her life with Edgardo. She asserted that they lived with family members before eventually settling in their own home; that Edgardo regularly returned home despite his work assignment in Mindanao; that his absences in their home did not break the continuity of their cohabitation; that not proof was presented to show a third-party relationship that could negate exclusivity.<br><br>Finally, the CA found no merit in Edgardo's allegation that the marriage should be declared void under Article 36 on the ground of psychological incapacity. It declared that as held in <i>Tan-Andal v. Andal</i>,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> psychological incapacity must be shown to be rooted in the spouse's personality structure, existing at the time of marriage, incurable in a legal sense, and grave enough to prevent compliance with essential marital obligations. But Edgardo failed to satisfy any of these requirements. His only witness knew Johnna only after the marriage, and the behaviors he described, such as arguments, misunderstandings, and occasional outbursts, were ordinary marital incidents, not proof of psychological incapacity. Edgardo also failed to identify which essential marital obligations Johnna was allegedly unable to perform.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>In sum, the CA held that Edgardo failed to overcome the presumption of regularity of the affidavit of cohabitation and failed to prove psychological incapacity by clear and convincing evidence. The CA thus upheld the validity of the marriage.<br><br>In a Resolution<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> dated March 17, 2025, the CA denied Edgardo's motion for reconsideration.<br><br>Hence, the present Petition.<br><br><center><i>The Issues</i></center><br>The issues before the Court are:<blockquote><ol><li>Whether the marriage is void for lack of a marriage license due to an allegedly false affidavit of cohabitation.<br><br></li><li>Whether Johnna is psychologically incapacitated under Article 36 of the Family Code.</li></ol></blockquote><center><i>The Ruling of the Court</i></center><br>The Petition lacks merit.<br><br>The Court finds no reason to overturn the CA's ruling that affirmed the RTC's denial of Edgardo's petition for declaration of nullity of his marriage to Johnna.<br><br>Marriage is an inviolable social institution protected by the Constitution and the law. Every intendment of the law leans toward the preservation, not the dissolution, of marriage. Hence, a party who alleges the nullity of a marriage bears the burden of proving the same by clear and convincing evidence.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Bare allegations and self-serving testimonies cannot overthrow the strong presumption of validity accorded to this solemn contract.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Edgardo failed to prove the supposed falsity of the affidavit of cohabitation</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Edgardo insists that the marriage is void because it was solemnized without a marriage license. He claims that the Joint Affidavit of Cohabitation he signed was false, as the parties had not lived together for five years prior to the marriage.<br><br>The argument is unpersuasive.<br><br>It is undisputed that the parties executed a Joint Affidavit of Cohabitation, duly notarized, attesting that they had lived together as husband and wife for at least five years prior to their marriage. A notarized document enjoys the presumption of regularity and due execution. This presumption is not easily overcome and can be rebutted only by clear, convincing, and credible evidence<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> showing that the statements therein are false or that the affiant was deceived as to its contents.<br><br>In the present case, Edgardo merely alleged that he was unaware of what he signed and that the affidavit was false. He failed, however, to present any convincing proof that the affidavit was fraudulently prepared, or that he was coerced or deceived into signing it. His mere claim that he did not read the document, or that he was unaware of its contents does not excuse him from the legal effects of his voluntary act. The law presumes that a person who signs a document has read and understood it; one cannot later on repudiate its contents simply because the outcome proves unfavorable. Further, Edgardo's own witness, Leonor, had no personal knowledge of the couple's relationship and therefore could not credibly dispute the contents of the affidavit.<br><br>Moreover, Edgardo failed to present clear and credible evidence that the parties did not, in fact, cohabit as husband and wife prior to their marriage. His testimony is inconsistent. At one point, he stated that he met Johnna in 1997 but later on, he alleged that he knew her as early as 1996. He likewise failed to explain how his military assignment in Mindanao precluded cohabitation, given that Johnna credibly testified that Edgardo regularly returned home to Capiz and stayed with her whenever possible. As the Court has ruled in <i>Niñal v. Bayadog</i>,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> the five-year cohabitation period required under Article 34<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> of the Family Code is characterized by exclusivity and continuity, not necessarily by daily physical proximity. The fact that a spouse is temporarily away due to employment or assignment does not, by itself, interrupt the continuity of the cohabitation, provided the relationship remains exclusive and the intent to live as husband and wife persists. There is no showing that Edgardo and Johnna's relationship lacked these elements. Rather, the surrounding circumstances indicate that the parties' pre-marital cohabitation exhibited both exclusivity and continuity. There is no evidence that either party was involved with another person during this period; the absence of any third-party relationship reinforces the exclusivity of their union. As aforesaid, Edgardo's intermittent absences due to his military assignment in Maguindanao did not necessarily break the continuity of their cohabitation. Johnna's testimony that Edgardo regularly returned home to their family whenever possible demonstrates the sustained nature of their partnership despite physical distance.<br><br>As the alleged falsity of the affidavit of cohabitation was not proven, the marriage cannot be declared void for lack of a marriage license.<br><br>Equally telling is the long passage of time before Edgardo sought to challenge the affidavit's truthfulness, nearly two decades after the marriage and after having built a family with two children. This delay undermines his claim and suggests acquiescence, if not acknowledgment, of the veracity of their sworn statements. Taken together, these circumstances strongly indicate that the couple's cohabitation was continuous, exclusive, and undertaken in good faith, satisfying the conditions for exemption from the marriage license requirement under Article 34 of the Family Code.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Psychological incapacity was not proven</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Edgardo failed to substantiate his claim that Johnna is psychologically incapacitated within the contemplation of Article 36<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> of the Family Code. Article 36 of the Family Code contemplates a serious and incurable psychological illness existing at the time of the marriage that renders a spouse incapable of understanding and fulfilling the essential obligations of marriage.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> In <i>Tan-Andal v. Andal</i>,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> the Court clarified that psychological incapacity is not a mere difficulty, refusal, or unwillingness to perform marital duties, but a deep-rooted condition of the personality structure that makes compliance with such duties impossible. It must be shown to exist prior to the marriage, must be grave, and must be incurable in the juridical sense.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>Edgardo's allegations fall far short of this standard. His allegations that Johnna deceived him regarding a loan, communicated with him only when she needed money, used harsh language, and engaged in quarrels, reflect at most immaturity, incompatibility, and emotional shortcomings. These are ordinary human frailties which do not constitute psychological incapacity. They may suggest marital conflict, but they do not indicate a psychological condition so grave and enduring that it renders a spouse incapable of performing the essential obligations of marriage.<br><br>His witness, Potato, was not competent to testify on Johnna's psychological state at the time of marriage, as he knew her only after the wedding and could only recount a single argument between the spouses. Such isolated incidents cannot establish the existence of a grave and incurable personality structure. Edgardo identified no essential marital obligation that Johnna was allegedly unable to assume. His testimony focused on behavior he found unacceptable, rather than a legally cognizable incapacity.<br><br>Indeed, what the evidence reveals is not a psychologically incapacitated spouse, but a strained relationship arising from ordinary human failings. The Court cannot allow the remedy of nullity to be used as a convenient escape from a marriage that has turned sour. As aforesaid, psychological incapacity does not refer to mere refusal, difficulty, or unwillingness to perform marital obligations. It is not established by trivial disagreements or by traits typically encountered in marriages that encounter strain. The evidence presented does not meet the high threshold required by law and jurisprudence.<br><br>All told, Edgardo failed to establish either of the grounds he invoked for the declaration of nullity of his marriage. The notarized affidavit of cohabitation remains valid and effective, and the evidence on record does not demonstrate any psychological incapacity on Johnna's part within the meaning of Article 36 of the Family Code.<br><br><b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The Decision dated October 25, 2024, and the Resolution dated March 17, 2025, of the Court of Appeals in CA-G.R. CV No. 07013 affirming the Regional Trial Court's judgment denying the petition for declaration of nullity of marriage are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Gaerlan, Dimaampao</i>, and <i>Singh, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 16-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 117-131. Penned by Associate Justice Pamela Ann Abella Maxino and concurred in by Associate Justices Nancy C. Rivas-Palmones and Ronald Suva Tolentino of the Eighteenth Division, Court of Appeals, Cebu City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 145-148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 41-49. Penned by Judge Judith D. Orendain-Tonogbanua.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 54-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 118.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 118-119.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 119.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 119-120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 41-49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 54-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 123.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 124.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 117-131.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 124-127.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 127-128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> 902 Phil. 558 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, pp. 128-130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 145-148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Tan-Andal v. Andal</b>, <i>supra</i> note 29, at 591.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See</i> <b>Heirs of Spouses Liwagon v. Heirs of Spouses Liwagon</b>, 748 Phil. 675, 686 (2014).<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 384 Phil. 661, 669-670 (2000).<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Article 34. No license shall be necessary for the marriage of a man and a woman who have lived together as husband and wife for at least five years and without any legal impediment to marry each other. The contracting parties shall state the foregoing facts in an affidavit before any person authorized by law to administer oaths. The solemnizing officer shall also state under oath that he ascertained the qualifications of the contracting parties are found no legal impediment to the marriage.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Art. 36. A marriage contracted by any party who, at the time of the celebration, was psychologically incapacitated to comply with the essential marital obligations of marriage, shall likewise be void even if such incapacity becomes manifest only after its solemnization.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Tan-Andal v. Andal</b>, <i>supra</i> note 29, at 584.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 584.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> 584-585.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

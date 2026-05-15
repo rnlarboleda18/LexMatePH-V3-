@@ -10,7 +10,7 @@ const DEFAULT_IMAGE = `${BASE_URL}/pwa-512x512.png`;
 const ROUTE_META = {
   about: {
     path: '/',
-    title: 'LexMatePH · Your Philippine Law Companion',
+    title: 'LexMatePH - Your all-in-one Legal Companion App. One App does all.',
     description:
       'LexMatePH — the all-in-one Philippine bar review app. SC decisions, case digests, codals, bar questions, flashcards, and LexPlay audio review. Free to explore.',
     keywords:
@@ -167,7 +167,7 @@ const ROUTE_META = {
     path: '/updates',
     title: 'Updates · LexMatePH',
     description:
-      'Latest updates, new features, and improvements to LexMatePH — your Philippine law companion.',
+      'Latest updates, new features, and improvements to LexMatePH - Your all-in-one Legal Companion App. One App does all.',
     keywords: 'LexMatePH updates, LexMatePH new features, Philippine law app updates',
     schema: null,
   },

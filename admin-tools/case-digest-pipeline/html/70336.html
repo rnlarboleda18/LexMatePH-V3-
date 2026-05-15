@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 274549 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX, ACCUSED-APPELLANT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70336' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 274549, April 06, 2026 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX, ACCUSED-APPELLANT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GESMUNDO, C.J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This is an Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> from the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals (CA), which affirmed the Judgment<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Regional Trial Court (RTC), convicting accused-appellant XXX of lascivious conduct under Section 5(b) of Republic Act No. 7610, otherwise known as the Special Protection of Children Against Abuse, Exploitation and Discrimination Act, as amended, committed against AAA.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></p><p> <i>Antecedents</i> </p><p> XXX was indicted for the crime of lascivious conduct under Section 5(b) of Republic Act No. 7610 in the Information dated February 23, 2016, the accusatory portion of which reads: </p><blockquote> <p>That on or about 8:00 [p.m.] of February 21, 2016 at Brgy. <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxx</span>,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Pangasinan and within the jurisdiction of this Honorable Court, the above-named accused, who is the biological father of <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>, by means of coercion, threat, intimidation[,] and influence[,] and with lewd design, did then and there willfully, unlawfully, and feloniously commit/perform lascivious conduct upon the said <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span>, a minor[,] [13] years old, subjected to sexual abuse, by touching, caressing, fondling[,] and mashing her breasts and vagina, against her will and without her consent, to her damage and prejudice.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p> </blockquote> <p> Upon arraignment, XXX pleaded not guilty to the charge.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> During pre-trial, the prosecution and the defense stipulated the following matters: (1) the identity of the accused being the biological father of AAA; (2) the conditional admission of the certificate of live birth of AAA being 13 years old at the time of the incident; and (3) the due execution and authenticity of the Joint Affidavit of Arrest of Police Officer II Rodney Fernandez (PO2 Fernandez), PO1 Abraham Butuyan, PO1 Cipriano Macam, Jr., and PO1 Cecilio Pedro of the Philippine National Police, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxx</span>, Pangasinan.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> After pre-trial was terminated, trial on the merits ensued.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> During trial, the prosecution presented two witnesses, namely: (a) AAA; and (b) PO2 Fernandez, the investigating officer. </p><p> The prosecution evidence shows that AAA, who was 13 years old at the time of the incident, is the biological daughter of XXX. On the night of February 21, 2016, while she was about to sleep beside her mother, sister, and XXX, AAA felt XXX's hand on her breast and subsequently, on her lap. She further narrated that XXX proceeded to touch her vagina inside her underwear.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> When AAA protested, her mother was awakened and immediately asked XXX as to what he was doing to their daughter. XXX responded that AAA had kicked him. AAA, already traumatized by XXX's history of violence against her, was afraid and unable to immediately reveal the sexual assault.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> The following day, AAA disclosed the full extent of the assault to her mother, prompting them to immediately report the incident to the authorities.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> At the police station, PO2 Fernandez documented the complaint of AAA and initiated a manhunt, which resulted in XXX's arrest.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> XXX vehemently denied the allegations against him, and claimed that the present criminal charge was just a mere fabrication. He testified that AAA resented him because he acquired the cellphone numbers of her classmates.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup></p><p> He admitted that he was with his children on the night of February 21, 2016, but had no recollection of any untoward incident that happened during that time. He further narrated that on the same night, AAA left their residence while the family was watching television. He followed her and witnessed her embracing a male classmate, whose identity remained unknown to him. He alleged that he warned said classmate to distance himself from his daughter. XXX also expressed dismay, suggesting that AAA was unduly influenced by others in filing the instant charge against him.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p align="center"> <i>The RTC Ruling</i> </p><p> In its Judgment dated October 3, 2021, the RTC found XXX guilty beyond reasonable doubt of the crime of lascivious conduct under Section 5(b) of Republic Act No. 7610. The dispositive portion of the said judgment reads: </p><blockquote> <p> WHEREFORE, premises considered, this court finds accused <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxxxxx</span>, guilty beyond reasonable [doubt] of the crime [of] violation of [Section] 5(b) of [Republic Act No.] 7610 with attendant circumstance[] of blood-relation and without mitigating circumstance[,] this court imposes upon him the penalty of <i>reclusion perpetua</i> and to indemnify AAA [PHP] 75,000.00 a[s] compensatory damages, [PHP] 50,000.00 as moral damages and [PHP] 15,000.00 as exemplary damages[,] which will earn interest at 6% per annum from the finality of the judgment until fully paid. </p> <p> No pronouncement as to cost. </p> <p>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p> </blockquote> <p> Dissatisfied, XXX appealed the RTC judgment of conviction before the CA. He argued that the RTC erred in finding his guilt beyond reasonable doubt because: (1) the prosecution's factual allegations were improbable;<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (2) AAA's behavior during and after the alleged sexual assault deviated from expected human response;<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> and (3) AAA made an inconsistent statement regarding XXX's alleged insertion of his finger into her vagina.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p align="center"> <i>The CA Ruling</i> </p><p> In its assailed Decision dated February 16, 2024, the CA affirmed the RTC Judgment with modification, the dispositive portion of which states: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the appeal is <b>DENIED</b>. The Judgment dated [October 3, 2021 issued by the Regional Trial Court <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxxxxxxxxxxxxxxxxxxxxx</span> in Crim. Case No. U-21915 is hereby <b>AFFIRMED with MODIFICATION</b>. Appellant is <b>ORDERED TO PAY A FINE </b>of [PHP] 15,000.00 as per Section 31(f) of Republic Act No. 7610. </p> <p> Appellant is also ordered to pay AAA the following amounts: </p> <blockquote> <p> 1. [PHP] 75,000.00 as civil indemnity; <br> 2. [PHP] 75,000.00 as moral damages; and <br> 3. [PHP] 75,000.00 as exemplary damages. </p> </blockquote> <p> The awards of civil indemnity and damages shall earn legal interest at the rate of [6% per annum] from the date of finality of this Decision until fully paid. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis in the original) </p> </blockquote> <p> In finding that XXX committed the crime of lascivious conduct, the CA determined that the prosecution had successfully established all elements of lascivious conduct as defined under Section 5(b) of Republic Act No. 7610. The CA upheld the RTC's assessment of AAA's testimony as credible and reliable, rejecting XXX's assertions. The CA emphasized AAA's clear and direct account of the sexual assault. It dismissed the argument that the presence of other persons negated the crime, stating that a determined perpetrator would not be deterred. Further, the CA reasoned that the detailed and harrowing nature of a minor's testimony regarding sexual abuse lends inherent credibility. Finally, the CA deemed XXX's cited inconsistencies as immaterial, not affecting the RTC's finding of his guilt.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> Undaunted, XXX filed an appeal before the Court insisting on his innocence and asserting the reversal of the finding of guilt rendered by the RTC and the CA. </p><p> On October 9, 2024, the Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> directing the parties to file their respective supplemental briefs within 30 days from notice, if so desired. On March 7, 2025, XXX filed a Manifestation (In Lieu of Supplemental Brief)<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> informing the Court that he will no longer submit a supplemental brief and instead, will adopt the arguments he had exhaustively discussed in his appellant's brief previously filed with the CA. On the other hand, the Office of the Solicitor General (OSG) also filed a Manifestation in Lieu of Supplemental Brief<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> stating that it will dispense with the filing of a supplemental brief to avoid a repetition of arguments which it already raised in its February 3, 2023 appellee's brief. </p><p align="center"> <i>The Issue</i> </p><p> The core issue for the Court's resolution is whether the CA correctly affirmed XXX's conviction for the crime charged against him. </p><p align="center"> <i>The Court's Ruling</i> </p><p> The appeal is bereft of merit. </p><p> At the outset, it is a hornbook rule that an appeal in criminal cases opens the entire case for review and it is the duty of the reviewing tribunal to correct errors, though unassigned, in the appealed judgment, or even reverse the trial court's decision based on grounds other than those that the parties raised as errors. The appellate court has full jurisdiction over the case and renders such court competent to examine records, revise the judgment appealed from, increase the appropriate penalty, and cite the proper provision of the penal law involved.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> After an examination of the records of the present criminal case, the Court finds that the instant appeal lacks merit. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Proper charge is acts of lasciviousness under Section 336 of the Revised Penal Code, not violation of Section 5(b) of Republic Act No. 7610</i> </div></td> </tr> </tbody></table> <p>Guided by the Court's recent ruling in <i>Gramatica v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> the Court finds that the elements necessary to sustain a conviction for violation of Section 5(b) of Republic Act No. 7610 are absent in this case. Instead, the acts proven constitute the crime of acts of lasciviousness under Article 336 of the Revised Penal Code. </p><p> In <i>Gramatica</i>, the Court clarified that Section 5(b) of Republic Act No. 7610, as amended by Republic Act No. 11648 (which raised the age of sexual consent to 16 years old), applies to minors aged 16 and above but below 18 years old who are subjected to other forms of sexual abuse.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> It covers situations where a child <b><i>consents or indulges</i></b>, albeit defectively, in a sexual activity due to the employment, use, persuasion, inducement, enticement, or coercion exerted by an adult.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The law contemplates instances where the minor actively participates in the sexual conduct, and not merely a passive victim, but such participation is vitiated.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Conversely, Section 5(b) does not apply where the minor is entirely unaware, unconscious, overpowered, or unwilling from the outset.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> In <i>Gramatica</i>, the minor victim testified that she was asleep when her grandfather touched her vagina and breast. The Court found that she neither consented nor indulged in the sexual activity. Indeed, there was no semblance of consent on the part of the victim. There was likewise no coercion or influence within the contemplation of Republic Act No. 7610, as the accused merely took advantage of her unconscious state. Even assuming coercion was present, the minor could not be said to have "engaged" in lascivious conduct in the legal sense, as she was asleep when her grandfather placed his hand inside her panties. Accordingly, the conviction was affirmed, but for acts of lasciviousness under Article 336 of the Revised Penal Code, not for violation of Section 5(b) of Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> Applying the foregoing principles enunciated in <i>Gramatica</i> to the instant case, the Court rules that the acts committed by accused-appellant against AAA constituted acts of lasciviousness under Article 336 of the Revised Penal Code, not violation of Section 5(b) of Republic Act No. 7610, as found by the courts <i>a quo</i>. </p><p> While AAA was not fully unconscious and was merely about to fall asleep, her testimony clearly establishes that she did not consent from the outset. She categorically testified that, when accused-appellant placed his hand on her breast, lap, and then vagina, she uttered "stop" in a loud voice, a plea that awakened her mother.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p> Following <i>Gramatica</i>, since AAA did not "engage" nor "indulge" in the sexual conduct, but was instead a passive victim of a sudden lewd act while in a state of rest, the Court deems it proper to convict accused-appellant of acts of lasciviousness penalized under Article 336 of the Revised Penal Code. </p><p> Further, following Rule 120, Section 4<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> of the Rules of Court, accused-appellant may still be held liable for acts of lasciviousness, as the Information sufficiently alleged that the offense was committed through intimidation. Jurisprudence consistently holds that in cases of incestuous sexual abuse, moral ascendancy supplants the element of intimidation, as in the present case.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Elements of acts of lasciviousness under Article 336 of the Revised Penal Code were duly established by the prosecution</i> </div></td> </tr> </tbody></table> <p>To secure conviction for the crime of acts of lasciviousness, the confluence of the following elements must be established by the prosecution beyond reasonable doubt: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">1.</div></td> <td colspan="2"> <div align="justify">the offender commits any act of lasciviousness or lewdness upon another person of either sex; and</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">2.</div></td> <td colspan="2"><div align="justify">the act of lasciviousness or lewdness is committed either</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td width="5%"><div align="justify">a.</div></td> <td width="90%"><div align="justify">by using force or intimidation; or</div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">b.</div></td> <td><div align="justify">when the offended party is deprived of reason or is otherwise unconscious; or </div></td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">c.</div></td> <td><div align="justify">when the offended party is under 12 years of age.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> </div></td> </tr> </tbody></table> </blockquote> <p>Jurisprudence defined lewd as "obscene, lustful, indecent, lecherous; it signifies that form of immorality which has relation to moral impurity; or that which is carried on a wanton manner."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p> <p> A careful perusal of the evidence on record will reveal that the acts of accused-appellant are covered by the definition of "lewd." </p><p> At this juncture, it bears emphasizing that sexual abuse cases are, more often than not, solely decided based on the credibility of the testimony of private complainant. In <i>People v. Amarela</i>,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> the Court laid down the guidelines in evaluating the credibility of witnesses, thus: </p><blockquote> <p> First, the Court gives the highest respect to the RTC's evaluation of the testimony of the witnesses, considering its unique position in directly observing the demeanor of a witness on the stand. From its vantage point, the trial court is in the best position to determine the truthfulness of witnesses. </p> <p> Second, absent any substantial reason which would justify the reversal of the RTC's assessments and conclusions, the reviewing court is generally bound by the lower court's findings, particularly when no significant facts and circumstances, affecting the outcome of the case, are shown to have been overlooked or disregarded. </p> <p> And third, the rule is even more stringently applied if the CA concurred with the RTC.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (Citation omitted) </p> </blockquote> <p> After a judicious review of the records of this case, the Court finds that the evidence adduced by the prosecution sufficiently established the elements of the crime of acts of lasciviousness under Article 336 of the Revised Penal Code. </p><p> <i>First</i>, accused-appellant's act of inserting his hand inside AAA's shirt, touching her breasts and lap, and subsequently inserting his hand in her underwear to touch her vagina, clearly constitute as "lewd." </p><p> <i>Second</i>, the foregoing lewd and lascivious acts were performed by accused-appellant through intimidation. Accused-appellant was able to further gratify his lust by taking advantage of his moral ascendancy over AAA. Being her biological father, accused-appellant undeniably exercised moral ascendancy over her. As previously mentioned, it is settled in jurisprudence that in cases of incestuous sexual abuse, moral ascendancy supplants the element of intimidation.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></p><p> Further, the CA correctly determined that AAA, who was then 13 years old, was vulnerable and easily cowed by her abuser who is not only a grown man, but also someone who exercised moral ascendancy over her being her biological father. Accused-appellant's moral ascendancy over AAA was evident from her testimony that she feared him because he would hurt her whenever she did something wrong, or whenever he was drunk, or even merely tired from work.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> <i>Credible testimony</i></p><p> Verily, the courts <i>a quo</i> correctly ruled that the prosecution—through AAA's positive and categorical testimony—had established beyond reasonable doubt that accused-appellant, her father, through intimidation, inserted his hand inside her shirt, touched her breasts and lap, and inserted his fingers in her underwear to touch her vagina. As testified to by AAA: </p><blockquote> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td width="95%"><div align="justify">do you know this [XXX]?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">yes, ma'am. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">why do you know him?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">he is my father.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">why are you filing a complaint against your father [XXX]?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">because he raped.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">on February 21 where were you?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">I was inside our room. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td> <div align="justify">who were with you?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td> <div align="justify">I was with my mother, my sister and my father.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">what were you doing then?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">I was about to sleep, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">how you positioned yourself in relation of those who were with you in that room?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">my father, me, my mother and my sister. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">in one bed?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">yes, ma'am. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">and what happened next if any lying in the bed positioned yourself beside your father. </div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td> <div align="justify">I felt that his hand is holding my breast and next he put his hand on my lap and then he inserted his finger under my underwear holding my vagina. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">when your father held your breast, lap and your vagina, what did you do?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td> <div align="justify">I told him to stop and do not do that.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td> <div align="justify">and what was his response?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">he stopped. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">did you report that specific incident on February 21, 2016 to your mother considering that she is only beside you?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">no, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">why not? </div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td> <div align="justify">because I was afraid, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">why are you afraid of your father?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">because I know his attitude.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">why, what is his attitude?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">he used to hit.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">and did you report the incident to the police?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">yes, ma'am.</div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">how old are you on February 21, 2016?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td> <div align="justify">I was 13 years old. </div></td> </tr> <tr valign="top"> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td colspan="2"><div align="justify">. . . . </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">when you told your father to stop was it loud?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">yes, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">and despite your loud voice your mother did not wake up, ma'am witness?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">she was awakened and she said "what are doing to your daughter". </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">when she asked what are you doing to your daughter, what did you tell to your mother? </div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">I did not say anything but it was my father who said that I was kicked by your daughter.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">did you kick your father?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">no, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">you said that you are afraid of your father's attitude, correct?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">Yes, ma'am.</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td width="5%"><div align="justify">q:</div></td> <td><div align="justify">because he is hurting you, madam witness?</div></td> </tr> <tr valign="top"> <td><div align="justify">a:</div></td> <td><div align="justify">yes, ma'am.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> </div></td> </tr> </tbody></table> </blockquote> <p> To reiterate, it is elementary that the assessment of a trial court in matters pertaining to the credibility of witnesses, especially when affirmed by an appellate court, just like in this case, are accorded great respect—if not binding significance—on further appeal to this Court. The rationale of this rule is the recognition of the unique and distinctive position of the trial court to examine real evidence and to observe the demeanor, conduct, and attitude of the witnesses whose credibility have been put in issue, and can therefore discern if they are telling the truth or not.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> In the case at bench, the Court rules that the RTC did not overlook any material and relevant matter and hence, finds no necessity to review, must less, overturn or disturb its factual findings. </p> <p> Accused-appellant's claim of inconsistency between AAA's <i>Salaysay</i> and her testimony during direct examination, where she initially stated that accused-appellant inserted his finger into her vagina, and her subsequent cross-examination testimony where she maintained that such insertion never happened on February 21, 2016,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> is unfounded. </p><p> The courts <i>a quo</i> correctly found that minor inconsistencies are typical in testimonies, especially from minors, provided they do not pertain to the elements of the crime.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Further, AAA clarified that her initial statement referred to a separate incident, distinct from the date specified in the Information, during which the insertion did occur.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Therefore, the alleged inconsistency is adequately explained and does not undermine the reliability of her testimony. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Arguments raised by accused-appellant deserve scant consideration</i> </div></td> </tr> </tbody></table> <p>Accused-appellant contends that AAA's factual allegations are too incredible<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> and that her behavior following the alleged abuse contradicted human experience.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> </p><p> These arguments must fail. </p><p> <i>First</i>, the argument that accused-appellant's actions were unlikely due to the presence of AAA's mother and sister on the same bed will not negate the established commission of lascivious acts against her. As jurisprudence affirms, "lust is no respecter of time and place."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> This Court has consistently declared that even the more serious offense of rape may be "committed even in places where people congregate, in parks, along the roadside, within school premises, inside a house where there are other occupants, and even in the same room where other members of the family are also sleeping."<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Consequently, the contention that lascivious acts could not occur under the circumstances in the instant case is untenable, given the less severe nature of the offense and the established propensity for sexual offenses to occur irrespective of location or immediate proximity to others. </p><p> <i>Second</i>, accused-appellant's assertion that AAA's silence and lack of resistance during and after the alleged sexual molestation contradicted human nature and self-preservation,<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> is unfounded. </p><p> The Court's pronouncement in <i>People v. Saludo</i><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> is instructive on this regard, thus: </p><blockquote> <p> Not every victim of rape can be expected to act with reason or in conformity with the usual expectations of everyone. The workings of a human mind placed under emotional stress are unpredictable; people react differently. Some may shout, some may faint, while others may be shocked into insensibility. And although the conduct of the victim immediately following the alleged sexual assault is of utmost importance as it tends to establish the truth or falsity of the charge of rape, it is not accurate to say that there is a typical reaction or norm of behavior among rape victims, as not every victim can be expected to act conformably with the usual expectation of [humankind] and there is no standard behavioral response when one is confronted with a strange or startling experience, each situation being different and dependent on the various circumstances prevailing in each case.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (Citations omitted) </p> </blockquote> <p> In this case, AAA's testimony that her fear of accused-appellant's violence prevented her from immediately disclosing the sexual assault<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> provides a credible explanation for her silence. </p><p> <i>Finally</i>, accused-appellant's defense of denial deserves scant consideration. The Court has held time and again that both denial and alibi are inherently weak defenses which cannot prevail over the positive and credible testimony of the prosecution witness that it was the accused who perpetrated the crime.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Here, AAA's unequivocal and positive identification of accused-appellant as the perpetrator of the sexual assault on the night of February 21, 2016, outweighs accused-appellant's mere denial of the offense. </p><p> <i>Penalty and Damages</i></p><p> Under Article 336 of the Revised Penal Code, the imposable penalty for the crime of acts of lasciviousness is <i>prision correccional</i> or six months and one day to six years. </p><p> In this case, the aggravating circumstance of relationship is present. Accused-appellant is the biological father of AAA, a fact both alleged in the Information and duly established during trial. Accordingly, the penalty imposed shall be in its maximum period, or within the range of four years, two months, and one day to six years of <i>prision correccional</i>. Applying the Indeterminate Sentence Law, the minimum of the penalty shall be taken from that one degree lower or <i>arresto mayor</i> which has a range of one month and one day to six months. Thus, accused-appellant must suffer the indeterminate penalty of imprisonment of six months of <i>arresto mayor</i> to six years of <i>prision correccional</i>. </p><p> Additionally, consistent with <i>Gramatica</i>, the Court finds it proper to increase the awards of civil indemnity, moral damages, and exemplary damages to PHP 150,000.00 each, considering: (1) the penalty meted against accused-appellant is significantly lower than that which would have been imposed had he been found liable for violation of Section 5(b) of Republic Act No. 7610; and (2) the presence of the aggravating circumstance of relationship, accused-appellant being the biological father of AAA. This also aligns with <i>People v. ABC260708</i>,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> which recognized that while the law and jurisprudence prescribe the minimum amounts of civil indemnity and damages, they do not impose a maximum limit. In said case, the Court increased the award of civil indemnity, moral damages, and exemplary damages to serve as a deterrent against incestuous sexual abuse of minors.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> </p><p> In conformity with prevailing jurisprudence,<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> all monetary awards shall earn legal interest at the rate of 6% per annum, from date of finality of this Decision until fully paid. </p><p> <b>FOR THESE REASONS</b>, the appeal is <b>DISMISSED</b>. The February 16, 2024 Decision of the Court of Appeals in CA-G.R. CR HC No. 16168 is <b>AFFIRMED</b> with <b>MODIFICATIONS</b>. Accordingly, accused-appellant XXX is found <b>GUILTY</b> beyond reasonable doubt of the crime of acts of lasciviousness under Article 336 of the Revised Penal Code. He is <b>SENTENCED</b> to suffer the indeterminate penalty of imprisonment of six months of <i>arresto mayor</i>, as minimum to six years of <i>prision correccional</i>, as maximum. He is also <b>ORDERED</b> to pay AAA the amounts of PHP 150,000.00 as civil indemnity, PHP 150,000.00 as moral damages, and PHP 150,000.00 as exemplary damages, all of which shall earn legal interest of 6% per annum, reckoned from the finality of this Decision until full payment. </p><p> <b>SO ORDERED</b>.</p><p> <i>Hernando, Zalameda, Rosario</i>, and <i>Marquez, JJ</i>., concur.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-7. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 10-19. The February 16, 2024 Decision in CA-G.R. CR HC No. 16168 was penned by Associate Justice Ronaldo Roberto B. Martin and concurred in by Associate Justices Ramon M. Bato, Jr. and Alfonso C. Ruiz II of the Third Division, Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 21-30. The October 3, 2021 Judgment in Criminal Case No. U-21915 was penned by Presiding Judge Joven M. Maramba of Branch <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxx</span>, Regional Trial Court, <span style="background-color: rgb(0, 0, 0); color: rgb(0, 0, 0);">xxxxxxxxxx</span>, Pangasinan.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> The identity of the victim or any information which could establish or compromise their identity, and those of their immediate family or household members, shall be withheld pursuant to Republic Act No. 7610 (1992); Republic Act No. 9262 (2004), An Act Defining Violence Against Women and Their Children, Providing for Protective Measures for Victim, Prescribing Penalties Therefor, and for Other Purposes; and Section 40 of A.M. No. 04-10-11-SC (2004), Rule on Violence Against Women and Their Children.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Supreme Court Amended Administrative Circular No. 83-2015 states that the geographical location where the crime was committed should refer only to the province where the crime occurred. References to the specific barangay or town should be blotted out from the body of the court decision if its identification could lead to the disclosure of the women or children victims. </p><p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i>, p. 21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 22. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 22. </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 23. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 24. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 30. </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> CA <i>rollo</i>, p. 44. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 46. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 47. </p><p><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i>, pp. 18-19. </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> 13-17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 31-32. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 34-38. </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 46-51. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <b>People v. Bernardo</b>, 890 Phil. 97, 110 (2020) [Per J. Perlas-Bernabe, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <b>G.R. Nos. 260233 and 266039</b>, August 12, 2025 [Per J. Inting, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 52-53. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 23-25. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 25. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 38. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Rollo</i>, p. 27. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Sec. 4. <i>Judgment in case of variance between allegation and proof</i>. — When there is variance between the offense charged in the complaint or information and that proved, and the offense as charged is included in or necessarily includes the offense proved, the accused shall be convicted of the offense proved which is included in the offense charged, or of the offense charged which is included in the offense proved. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>People v. ZZZ</b>, 955 Phil. 733, 755 (2024) [Per J. Singh, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Cruz v. People</b>, 745 Phil. 54, 73-74 (2014) [Per J. Bersamin, First Division], <i>citing</i> <b>People v. Lizada</b>, 444 Phil. 67, 97 (2003) [Per J. Callejo, Sr., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Cruz v. People</b>, 745 Phil. 54, 74 (2014) [Per J. Bersamin, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 823 Phil. 1188 (2018) [Per J. Martires, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 1201. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>People v. ZZZ</b>, 955 Phil. 733, 755 (2024) [Per J. Singh, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, p. 12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 26-27. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>People v. Fetalco</b>, 878 Phil. 475, 486 (2020) [Per C.J. Peralta, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> CA <i>rollo</i>, pp. 47-48. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, p. 15. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 14-15. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> CA <i>rollo</i>, p. 44-46. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 47. </p><p><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>People v. CCC</b>, 843 Phil. 473, 485 (2018) [Per J. Peralta, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> CA <i>rollo</i>, p. 47. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 662 Phil. 738 (2011) [Per J. Leonardo-De Castro, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 758-759. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Rollo</i>, p. 12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>People v. Quinto</b>, 873 Phil. 679, 691 (2020) [Per J. Reyes, J. Jr., First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> 950 Phil. 199 (2024) [Per J. Lopez, M., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 235. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Uddin v. People</b>, 890 Phil. 878, 903 (2020) [Per J. Inting, Third Division].&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

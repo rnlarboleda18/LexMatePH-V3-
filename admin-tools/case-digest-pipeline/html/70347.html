@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 277496 - MICHAEL E. SORIANO,* PETITIONER, VS. INTESTATE ESTATE OF BRYAN G. DIANO, REPRESENTED BY NEMESIA DIANO, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70347' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 277496, January 20, 2026 ]</H2>
+			<H3>MICHAEL E. SORIANO,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> PETITIONER, VS. INTESTATE ESTATE OF BRYAN G. DIANO, REPRESENTED BY NEMESIA DIANO, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by Michael E. Soriano (petitioner) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated April 15, 2024, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated October 22, 2024, of the Court of Appeals (CA) in CA-G.R. CV No. 113204 which affirmed <i>in toto</i> the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated February 12, 2018, of Branch 216, Regional Trial Court (RTC), Quezon City in Civil Case No. R-12-71443. The RTC found petitioner jointly and severally liable with his co-defendant Allan P. Francisco (Francisco) for the death of Bryan G. Diano (Bryan).<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center><i>The Antecedents</i></center><br>On June 13, 2012, the Intestate Estate of Bryan G. Diano, represented by his mother, Nemesia Diano (respondent), filed a Complaint<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> for Damages against petitioner, together with Jojit M. Solis (Solis), Francisco, Romeo Puducay Jr. (Puducay Jr.), and Alejandro G. Salazar (Salazar).<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>The Complaint stemmed from the death of Bryan in a vehicular accident that occurred on September 11, 2011, along Barangay Bagong Norte, E. Rodriguez Jr. Avenue, Quezon City.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Respondent alleged that at around 3:15 a.m. on the said date, Bryan and his sister, Judy Grace G. Diano, were passengers in the front seat of an Isuzu Passenger Vehicle (Isuzu), with Plate No. TWH-941, driven by Solis.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>While the Isuzu was at a complete stop to unload passengers, it was suddenly rammed at the rear by a Honda Civic, with Plate No. SFZ-533, recklessly driven at high speed by Salazar, who was later found to be under the influence of liquor.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The collision resulted in injuries to 15 passengers and the deaths of two others, including Bryan, who was pinned to death inside the vehicle. Salazar himself was declared dead on arrival at the Rizal Medical Center.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>To support its allegations, respondent attached to the Complaint a Traffic Accident Report<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated September 11, 2011, and Bryan's Certificate of Death.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Respondent alleged that Bryan was then a fourth-year chemical engineering student at the University of the Philippines in Quezon City, was only 19 years old at the time of the accident. He was a Department of Science and Technology scholar in high school and at the prime of his life. He was expected to graduate, practice his profession, and become gainfully employed either in the Philippines or abroad. His untimely death, however, resulted in the loss of his earning capacity, which was conservatively estimated at PHP 500,000.00, claimed as actual damages.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>In addition, respondent alleged that it incurred burial expenses amounting to PHP 120,000.00, duly evidenced by receipts. It also prayed for moral damages of PHP 300,000.00 for the profound grief, sorrow, and mental anguish suffered by Bryan's family, as well as attorney's fees equivalent to 10% of the total monetary award.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>In his Answer<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> dated December 3, 2013, petitioner denied liability, contending that he was merely the owner and operator of the Isuzu and that he had exercised the diligence of a good father of a family in the selection of its driver. Before hiring Solis, he had taken the necessary steps to verify his driving skills, proficiency, and history, thus absolving him of liability for the accident.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>For his part, Puducay Jr. argued in his Answer<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> dated July 27, 2012, that respondent had neither the legal personality nor the cause of action to sue him.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Meanwhile, Francisco, in his Answer with Compulsory Counterclaim and Crossclaim<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated August 8, 2012, insisted that he could not be held liable as he had already divested ownership of the Honda Civic before the accident, having sold it to the mother of Puducay Jr., who allegedly purchased it for the latter.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Francisco alleged that he was being harassed.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> He added that in the event judgment was rendered against him, Puducay Jr., as the actual owner of the vehicle, should be ordered to reimburse him for any amount adjudged against him.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated February 12, 2018, the RTC ruled in favor of respondent. It held Francisco, the registered owner of the Honda Civic, and petitioner, the owner of the Isuzu, jointly and severally liable for damages.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> However, considering that the evidence showed that Puducay Jr. was the actual owner of the Honda Civic, he was ordered to reimburse Francisco under the latter's cross-claim.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Moreover, the RTC found petitioner negligent as an employer, ruling that he failed to prove diligence in the selection and supervision of his driver, Solis.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> It also found concurrent negligence between Solis, who unloaded passengers in a prohibited zone, and Salazar, who drove under the influence of liquor.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Both drivers and their respective vehicle owners were held solidarily liable.<br><br>The RTC decreed as follows:<blockquote>WHEREFORE, in view of the foregoing, the defendant Michael E. Soriano is hereby declared to be jointly and severally liable with his co-defendant Allan P. Francisco and ordered to pay and deliver to the plaintiff the following:<blockquote><ol type="a"><li>The sum of Fifty Thousand Pesos ([PHP] 50,000.00) as civil indemnity for the death of Bryan G. Diano;<br><br></li><li>The total sum of One Hundred Seventeen Thousand Eight-Hundred Pesos ([PHP] 117,800.00) as actual damages;<br><br></li><li>The sum of One Hundred Thousand Pesos ([PHP] 100,000.00) as moral damages;<br><br></li><li>Ten Percent (10%) of the total amount Two Hundred Sixty Seven Thousand Eight Hundred Pesos ([PHP] 267,800.00) or Twenty Six Thousand Seven Hundred Eighty Pesos ([PHP] 26,780.00) as [a]ttorney's [f]ees;<br><br></li><li>All monetary awards for damages shall bear interest at the rate of six percent (6%) per annum from the date of [the] finality of judgment until fully paid; and<br><br></li><li>Cost of suit.</li></ol></blockquote>On the cross-claim of defendant Allan P. Francisco, defendant Romeo Puducay, Jr., is hereby ordered to reimburse Allan P. Francisco any and all amounts which may be recovered by the plaintiff from him by virtue of this Decision.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></blockquote>In its Order<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> dated February 1, 2019, the RTC denied the Motions for Reconsideration of petitioner,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> dated March 16, 2018, and that of Puducay, Jr.<br><br>Aggrieved, petitioner appealed to the CA.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br><center><i>The Ruling of the CA</i></center><br>In its Decision<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated April 15, 2024, the CA affirmed the RTC rulings <i>in toto</i>.<br><br>The CA noted that Solis unloaded passengers at a prohibited zone—beside a traffic light.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Therefore, it found Solis negligent as he operated his Isuzu vehicle in violation of traffic rules when the Honda Civic driven by Salazar rammed the Isuzu, resulting in the death of Bryan.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Corollary to this, petitioner as Solis' employer, is liable as he failed miserably to prove that he exercised due diligence in the selection of his driver.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Further, the CA found Francisco severally liable with petitioner, as the former was the registered owner of the vehicle being driven by Salazar. Agreeing with the RTC, it held that Francisco could recover from Puducay Jr., who was already then, the actual owner of the Honda Civic.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>In its Resolution<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> dated October 22, 2024, the CA denied petitioner's Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> dated June 7, 2024.<br><br>Hence, the instant Petition.<br><br>Petitioner seeks to overturn the RTC and CA Decisions that found Solis liable for a vehicular accident that resulted in the death of Bryan. He argues that Solis was not negligent and, therefore, he is not liable for the damages as the latter's employer.<br><br><i>First</i>, petitioner argues that the proximate cause of Bryan's death was the negligence of Salazar, the driver of the Honda Civic, who was under the influence of alcohol when he rear-ended Solis' stationary Isuzu vehicle. This is supported by the legal principle that the driver who "bumps the rear" of another vehicle is presumed to be the cause of the accident.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br><i>Second</i>, Solis was not negligent because his vehicle was not moving at the time of the collision.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Even if Solis was negligent, the doctrine of last clear chance would apply, holding Salazar solely responsible because he had the last opportunity to avoid the collision.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br><i>Third</i>, petitioner exercised due diligence in hiring and supervising Solis, providing evidence that the latter was a professional driver with a valid license and a clean record.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br><i>Fourth</i>, Solis should not be held liable for moral damages or attorney's fees. Moral damages are not meant to be punitive but compensatory, and respondent failed to prove the necessary grounds to recover them. Furthermore, the recovery of attorney's fees is the exception, not the rule, and respondent failed to meet the criteria for their recovery.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br><center><i>The Issue</i></center><br>The issue for the resolution of the Court is whether the CA gravely erred in ruling that petitioner, as the registered owner and operator of the Isuzu passenger vehicle driven by Solis, is liable for damages arising from the death of Bryan in the vehicular accident<br><br><center><i>The Ruling of the Court</i></center><br>The Court resolves to deny the Petition for failure to sufficiently show that the CA committed reversible error in rendering its assailed dispositions as to warrant the exercise of the Court's discretionary appellate jurisdiction.<br><br>Moreover, a petition for review on <i>certiorari</i> should solely raise questions of law. When deciding such a petition, the Court does not act as an arbiter of facts, as it is not the Court's role to reevaluate evidence presented in the proceedings below.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>Petitioner is essentially raising factual and evidentiary matters to escape liability, such as whether Solis was negligent or whether petitioner exercised due diligence in selecting and supervising his driver, Solis. Such questions are not proper under a Rule 45 petition. The factual findings of the CA affirming those of the trial court are final and conclusive in this Court and may not be subject to review on appeal unless petitioner can demonstrate compelling or exceptional reasons for this Court to disregard, overturn, or modify such findings.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>At this point, the Court affirms the <i>uniform</i> factual findings of the RTC and the CA.<br><br>Article 2176<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> of the Civil Code provides that whoever, by act or omission, causes damage to another through fault or negligence shall be liable.<br><br>Article 2180<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> of the same Code extends such liability to employers for the damages caused by their employees acting within the scope of their assigned tasks, <i>unless</i> the employer can prove that they observed the diligence of a good father of a family in the selection and supervision of their employees.<br><br>In this situation, the liability of an employer is <i>primary</i> and <i>direct</i>, although it is based on a presumption of negligence which the employer may rebut by proof of due diligence. This requires presenting the best and most complete evidence, not mere self-serving or generalized claims.<br><br>In <i>Metro Manila Transit Corp. v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> the Court stressed that oral testimonies alone, especially when couched in vague generalities, are <i>insufficient</i>. Assertions of diligence must be supported by objective and documentary proof—such as employment records, qualifications, training certifications, or established supervision protocols—which can substantiate the employer's claim of diligence and dispel any suspicion of bias. The failure to present records or other corroborative evidence strongly argues against the employer's claim. While there is no fixed rule on the exact quantum of proof required, the law demands credible, concrete, and trustworthy evidence showing that the employer took meaningful steps to ensure both the competence of the employee at the time of hiring and the adequacy of supervision thereafter.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>Petitioner alleged that he exercised due diligence in hiring Solis. However, the records reveal that: (1) he merely offered self-serving statements that he had "verified" Solis' driving skills and background; and (2) no documentary or testimonial evidence was presented to prove any actual vetting process (e.g., driver's license checks, employment history, training, or supervision protocols).<br><br>At this point, bare assertions of diligence, without substantiating evidence, are <i>insufficient</i> to overcome the presumption of employer negligence. Specifically for petitioner, his liability is based on his negligence in the supervision and authority of Solis.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>Both the RTC and CA found that Solis, driver of the Isuzu, committed negligence by unloading passengers at a prohibited zone, thereby <i>exposing</i> the vehicle and its passengers to danger. Moreover, Salazar, the driver of the Honda Civic, was grossly negligent as he drove recklessly while under the <i>influence of liquor</i>, directly causing the collision. When two or more negligent acts concur to cause an injury, the negligent parties are <i>solidarily</i> liable. Article 2194 of the Civil Code provides:<blockquote>ARTICLE 2194. The responsibility of two or more persons who are liable for quasi-delict is solidary.</blockquote>Here, there is no dispute that at the time of the accident, petitioner was the owner of the Isuzu driven by his driver, Solis. The negligence of Solis in unloading passengers in a prohibited zone, coupled with Salazar's reckless driving under the influence of liquor, caused Bryan's untimely demise.<br><br>Given the concurrent negligence of Solis and Salazar, and petitioner's failure to rebut the presumption of employer negligence, petitioner was correctly held <i>solidarily</i> liable with the other parties for damages. The CA discussed:<blockquote>Accordingly, the RTC correctly found Soriano, as employer of Solis, jointly and severally liable with Francisco, the registered owner of the vehicle being driven by Salazar. At this juncture, however, We clarify that the ruling of the RTC with regard to the liability of Puducay Jr. as the actual owner of the Honda Civic is hereby affirmed. The RTC rightly held that:<blockquote>Although the registered owner might seem to be unjust to defendant Allan Francisco, the law did not leave him without any remedy or recourse. In the case of MMTC vs. Cuevas, citing the case of Filcar Transport Services vs. Espinas, the Supreme Court explained that the registered owner could recover from the actual employer of the negligent driver all the amounts that it could be required to pay as damages arising from the driver's negligence.<br><br>Hence, defendant Allan Francisco could recover from Romeo Puducay, Jr., the actual owner of the Honda Civic which collided into the Isuzu Passenger Vehicle, by means of a crossclaim seeking reimbursement of all the amounts that he could be required to pay as damages.<br><br>In synthesis, this Court held that the registered owner, the defendant Allan Francisco, is primarily responsible for the damage caused to the plaintiff, but he (Allan Francisco) has a right to be indemnified by the real or actual owner of the amount that he may be required to pay as damage for the injury caused to the plaintiff.<br><br>. . . .<br><br>In this case, co-defendant Allan Francisco, as the registered owner of the Honda Civic was held to be jointly and severally liable with Michael E. Soriano, the owner of the Isuzu Passenger Jeepney. And since it was clearly established by the evidence presented by the parties that the actual and real owner of the said Honda Civic is Romeo Puducay, Jr., he (Romeo Puducay, Jr.) is liable for the [c]ross-claim of Allan Francisco.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></blockquote></blockquote>Lastly, a Petition for Review on <i>Certiorari</i> under Rule 45 must raise not only pure questions of law but also questions of such substance as to be of distinctly significant consequence and value. An appeal by <i>certiorari</i> that fails to readily demonstrate "special and important reasons" as required by Rule 45, Section 6,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> may be denied due course and disposed of without further action by this Court.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>In the end, the Court affirms the award of PHP 117,800.00 as actual damages by the RTC and the CA. To recall, the RTC found that the actual damages proven during trial were limited only to the funeral and internment expenses,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> as evidenced by the submitted receipts. No other actual damages were awarded as it ratiocinated that for actual damages to be recoverable, they must be proved with a reasonable degree of certainty. In other words, it explained that the court <i>cannot</i> simply rely on speculation, conjecture, and guesswork in determining the amount of damages.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> The CA agreed and affirmed this ruling of the RTC.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>While an averment was made in the complaint relating to claim for actual damages pertaining to the loss of earning capacity, however, as found by the RTC, no other evidence<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> was presented to support this claim.<br><br>In <i>Davao del Norte Electric Cooperative v. Heirs of Lucas</i>,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> the Court clarified that indemnity for loss of earning capacity partakes of the nature of actual damages, which must be proven by <i>competent proof</i> and the <i>best obtainable evidence</i>.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Thus, indemnity for the loss of earning capacity, <i>being compensatory in nature</i>, should be based on evidence as <i>proved</i> during trial.<br><br>The Court likewise affirms the civil indemnity award of PHP 50,000.00 for the death of Bryan. Civil or death indemnity is mandatory and automatically granted to the deceased's heirs upon the commission of the crime, without requiring any proof. Currently, the indemnity amount is set at PHP 50,000.00.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Regarding the award of moral damages amounting to PHP 100,000.00, Article 2206(3)<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> of the Civil Code provides for moral damages for mental suffering caused by the death of the deceased, alongside civil indemnity.<br><br>The Court also affirms the award of attorney's fees and legal interest of 6% per annum on the damages awarded herein, from the date of the finality of this Decision until fully paid.<br><br><b>ACCORDINGLY</b>, the present Petition for Review on <i>Certiorari</i> under Rule 45 of the Rules of Court is <b>DENIED</b>. The Decision dated April 15, 2024, and the Resolution dated October 22, 2024, of the Court of Appeals in CA-G.R. CV No. 113204 are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Gaerlan, Dimaampao</i>, and <i>Singh, JJ.</i>, concur.<br><i>Caguioa (Chairperson), J.</i>, see concurring opinion.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to as "Michael B. Soriano" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 13-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 38-51. Penned by Associate Justice Ramon M. Sato, Jr. and concurred in by Associate Justices Pedro B. Corales and Ronaldo Roberto B. Martin of the Special Third Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 53-54. Penned by Associate Justice Ramon M. Bato, Jr. and concurred in by Associate Justices Pedro B. Corales and Ronaldo Roberto B. Martin of the Former Special Third Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 228-239. Penned by Presiding Judge Alfonso C. Ruiz II.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 237-238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 55-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 39; <i>id.</i> at 56, Complaint; <i>id.</i> at 61, Traffic Accident Report; <i>id.</i> at 94, Answer.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 39-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 60-64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 93-95.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 94.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 80-81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 76-79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 228-239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 233.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 232.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 234.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 237-238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 240-241.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 207-211.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 38-51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 53-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 242-247.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 25-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <b>Serra v. Mumar</b>, 684 Phil. 363, 370 (2012).<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>BPI v. Leobrera</b>, 461 Phil. 461, 469 (2003).<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> CIVIL CODE, art. 2176, states:<blockquote>ARTICLE 2176. Whoever by act or omission causes damage to another, there being fault or negligence, is obliged to pay for the damage done. Such fault or negligence, if there is no pre-existing contractual relation between the parties, is called a quasi-delict and is governed by the provisions of this Chapter.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> CIVIL CODE, art. 2180, in pertinent part, states:<blockquote>ARTICLE 2180. The obligation imposed by article 2176 is demandable not only for one's own acts or omissions, but also for those of persons for whom one is responsible.<br><br>. . . .<br><br>Employers shall be liable for the damages caused by their employees and household helpers acting within the scope of their assigned tasks, even though the former are not engaged in any business or industry.<br><br>. . . .<br><br>The responsibility treated of in this article shall cease when the persons herein mentioned prove that they observed all the diligence of a good father of a family to prevent damage.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> 295 Phil. 591 (1993).<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 607-608.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>De Belen v. Fuchs</b>, 948 Phil. 608, 619 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 48-49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> SECTION 6. <i>Review discretionary</i>. – A review is not a matter of right, but of sound judicial discretion, and will be granted only when there are special and important reasons therefor. The following, while neither controlling nor fully measuring the court's discretion, indicate the character of the reasons which will be considered:&nbsp;<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">When the court <i>a quo</i> has decided a question of substance, not theretofore determined by the Supreme Court, or has decided it in a way probably not in accord with law or with the applicable decisions of the Supreme Court; or</div></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">When the court <i>a quo</i> has so far departed from the accepted and usual course of judicial proceedings, or so far sanctioned such departure by a lower court, as to call for an exercise of the power of supervision.</div></td></tr></tbody></table></blockquote><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Kumar v. People</b>, 874 Phil. 214, 216 (2020).<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> The expenses included: internment fee, cost of the food and refreshments provided for the mourners, and chapel rental fee. The total expenses amounted to PHP 117,800.00. <i>Rollo</i>, p. 236.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>See</i> relevant discussion in <i>id.</i> at 143-144 (TSN, Judy Grace Diano, June 15, 2015, pp. 27-28).<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> 942 Phil. 392 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 407.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Torreon v. Aparra</b>, 822 Phil. 561, 581 (2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> CIVIL CODE, art. 2206(3) states:<blockquote>ARTICLE 2206. The amount of damages for death caused by a crime or quasi-delict shall be at least three thousand pesos, even though there may have been mitigating circumstances. In addition:<br><br>. . . .&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">3)</div></td><td width="95%"><div align="justify">The spouse, legitimate and illegitimate descendants and ascendants of the deceased may demand moral damages for mental anguish by reason of the death of the deceased.&nbsp;</div></td></tr></tbody></table></blockquote><hr align="center" width="60%" size="1" noshade=""><br><center><b>CONCURRING OPINION</b></center><br><b>CAGUIOA, <i>J.</i>:</b><br><br>I concur.<br><br>Briefly, the case at bar arose from the death of Bryan G. Diano (Bryan) due to a vehicular accident. Bryan, who was a fourth-year chemical engineering student at the University of the Philippines, was onboard an Isuzu passenger vehicle driven by Jojit M. Solis (Solis). While at a complete stop at a prohibited zone to unload passengers, it was rear-ended by a Honda Civic driven by Alejandro G. Salazar (Salazar) who was under the influence of alcohol. The collision resulted in the death of Bryan prompting his mother, Nemesia Diano (Diano), to file a Complaint for Damages (Complaint) against petitioner Michael E. Soriano (Soriano), the owner and operator of the Isuzu passenger vehicle and employer of Solis. Furthermore, Allan P. Francisco (Francisco), the registered owner of the Honda Civic, Romeo Puducay Jr. (Puducay Jr.), who had purchased the Honda Civic from Francisco, and Salazar were likewise named as defendants.<br><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> the Regional Trial Court of Quezon City (RTC) found Soriano jointly and severally liable with Francisco for damages. Since it was proven that Puducay Jr. was the actual owner of the Honda Civic, however, he was ordered to reimburse Francisco under the latter's cross-claim. The RTC held that Soriano was negligent as an employer for failing to prove that he was diligent in selecting and supervising his driver, Solis. The RTC also held that Solis and Salazar had concurrent negligence for, respectively, unloading passengers by a stoplight and driving drunk, and thus held both drivers and their respective vehicle owners as solidarily liable. The Court of Appeals affirmed the RTC Decision <i>in toto</i>.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br>&nbsp;<br>The <i>ponencia</i> resolves to deny the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> and affirm the findings of the lower courts. The <i>ponencia</i> holds that Soriano merely gave bare assertions of diligence in hiring Solis and failed to provide documentary or testimonial evidence to show that he actually scrutinized Solis and his records prior to hiring. Moreover, the <i>ponencia</i> affirms the findings of the lower courts that both Solis and Salazar had concurrent negligence. As a result, Soriano was solidarily liable with the other parties for damages.<br><br>I agree with the disposition of the case and, in order to enrich jurisprudence surrounding our laws on torts, I take this opportunity to expound on and supplement the topics that the <i>ponencia</i> did not discuss at length.<br><br><i>The Registered Owner Rule</i><br><br>The Court has previously held that, with respect to the public and third persons, the registered owner of a motor vehicle is directly and primarily responsible for the consequences of its operation regardless of who the actual vehicle owner might be.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Otherwise known as the 'Registered Owner Rule,' liability is pinned on the registered owner of a motor vehicle involved in an accident. By doing so, victims no longer need to undergo the arduous task of identifying who they should demand proper indemnity from since liability becomes definite and fixed against a specific person and the latter is likewise prevented from avoiding said liability.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>The Court has clarified, however, that in line with the principle of unjust enrichment, this rule is not meant to insulate the real owner of a vehicle involved in an accident from any liability. Should it be proven that a vehicle's registered owner is different from the actual owner thereof, then the former has the right to be indemnified by the latter by means of a cross-claim.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> The Court has recognized that while the rule may be inconvenient for the registered owner of a motor vehicle, said inconvenience cannot outweigh the more important public policy being advanced which is the protection of innocent persons who may be victims of reckless drivers and irresponsible motor vehicle owners.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Thus, in this case, the RTC ordered Puducay Jr., the current and real owner of the vehicle, to reimburse Francisco, through the latter's cross-claim, for the damages Francisco was ordered to pay considering that the vehicle was still registered in his name.<br><br><i>The Registered Owner Rule should be refined</i><br><br>The purpose served by the Registered Owner Rule is, ultimately, to avoid inconveniencing an injured party when it is unclear who the owner of the erring vehicle is. It aims to prevent situations where indemnification can be delayed by a negligent party and third-party passing blame onto another.<br><br>While the rule ensures indemnification for victims of vehicular accidents, I submit that the appreciation of the Registered Owner Rule should be refined. Although a registered owner is not without recourse as they have the right to be indemnified by the negligent party through a cross-claim, the current formulation of the Registered Owner Rule conflicts with our laws on sales anent vendors who have divested ownership of their vehicles through a valid contract of sale.<br><br>Briefly, Article 1458 of the Civil Code provides that in a contract of sale a contracting party obligates himself to transfer the ownership and to deliver a determinate thing. Meanwhile, the other party is obligated to pay a price certain in money or its equivalent. Article 1477 then states that ownership of the thing sold shall be transferred to the vendee upon the actual or constructive delivery thereof. Among others, the thing sold shall be understood as delivered when it is placed in the control and possession of the vendee,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> or in any other manner signifying an agreement that the possession is transferred from the vendor to the vendee.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Thus, through a valid contract of sale and with delivery of the object thereof, vendees obtain the right to enjoy and dispose of the latter, to the exclusion of the vendor or any other person. Along the same vein, it follows that vendees must likewise bear any damage or injury to other persons arising from their use thereof, as a consequence of their ownership.<br><br>As it stands, the Registered Owner Rule allows an injured party to demand reparations from the registered owner even if the latter had already sold his vehicle and even if the former knew that it was the vendee himself involved in the accident. Even if the injured party is aware that the vehicle is already owned by a person different from the registered owner, case law still allows the injured party to include the registered owner as defendant and drag him through the entire litigation process.<br><br>In other situations, the Registered Owner Rule can be used to defeat our laws on quasi-delicts. Article 2176 of the Civil Code is clear that whoever by act or omission causes damage to another, there being fault or negligence, is obliged to pay for the damage done. Thus, in cases of vehicular accidents, negligent drivers who cause damage, injury, or death upon another are obliged to indemnify their victims or the latter's heirs, when applicable. However, as stated, the current formulation of the Registered Owner Rule would allow an injured party to file a claim against a registered owner who had already sold his vehicle prior to the time of the vehicular accident rather than the negligent driver who caused the injury or death.<br><br>While the rule may be said to be rooted in public policy, it would create an equally unfair scenario where a vendor may be hounded by an injured party, dragged into a legal battle, and made to pay indemnification, even if the latter is no longer the owner of the vehicle, due simply from the inaction of the vendee or any other subsequent vendee thereafter in registering the sale of the vehicle.<br><br>Thus, although the rule currently demands that a registered owner participate in trial to prove the authenticity of their deed of sale, courts must be keen on dismissing cases filed against these vendors or to drop them as party defendants at the earliest opportunity due to a lack of cause of action against them. Once a valid transfer of ownership is proven, vendors must be alleviated from the burden of having to litigate any further and filing a cross-claim against the truly negligent party.<br><br><i>Actual Damages and Loss of Earning Capacity</i><br><br>The foregoing aside, I concur in affirming the award of PHP 117,800.00 as actual damages. The rationale behind such award is to reinstate an injured party to the same position prior to the injury they suffered.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Article 2199 of the Civil Code states that one is entitled to an adequate compensation only for such pecuniary loss suffered by him as he has duly proved. Thus, for one to be entitled to actual damages, it is necessary to prove the actual amount of loss with a reasonable degree of certainty. It must be premised upon competent proof and best obtainable evidence of said loss.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> As correctly cited by the <i>ponencia</i>, courts cannot rely on speculations, conjectures, or guesswork as to the fact and amount of damages. Here, the actual damages proven during trial, as supported by Diano's receipts, were funeral and internment expenses such as the cost of food and beverages for the mourners as well as the chapel rental fee.<br><br>In relation thereto, the <i>ponencia</i> declined to grant compensation for Bryan's loss of expected earning capacity arising from his death. Article 2206(l) of the Civil Code provides that the heirs of a victim are entitled to indemnity for loss of earning capacity. Such indemnity shall in every case be assessed and awarded by the court. The exception thereto is if the deceased, on account of permanent physical disability not caused by the defendant, had no earning capacity at the time of his death.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br>&nbsp;<br>It is important to note that it is not necessary that the victim, at the time of injury or death, be gainfully employed. Compensation of this nature is awarded not for loss of earnings, but for loss of capacity to earn money.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Moreover, the indemnification for loss of earning capacity partakes of the nature of actual damages which, to reiterate, must be duly proven by competent proof and the best obtainable evidence thereof.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Delving into the foregoing and with specific regard to students, the Court in <i>Metro Manila Transit Corp v. Court of Appeals</i><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> held that evidence must be presented that the victim, if not yet employed at the time of death, was reasonably certain to complete training for a specific profession.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> To illustrate, in <i>People v. Teehankee, Jr.</i><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (<i>Teehankee</i>) no award of compensation for loss of earning capacity was granted to a college freshman who survived a shot in the head and was severely injured due to insufficient evidence to show that he would have become a professional pilot. The Court in <i>Teehankee</i> pointed out that the student was only in his first year, first semester of flying school at the Manila Aero Club. Moreover, at the time he entered flying school, he only had a high school degree. Based on the foregoing circumstances, the Court held that the amount sought to cover his loss of earning capacity was highly speculative. There was no sufficient justification to form a reasonable assumption that the aspiring aviator would actually finish his studies and become a professional pilot.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br><i>Cariaga, et al. v. L.T.B. and Manila Railroad Co.</i><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (<i>Cariaga</i>) involved Edgardo Cariaga (Edgardo), a fourth-year medical student from the University of Santo Tomas, who was physically and mentally debilitated due to a collision between a train and the bus he was riding. While the only actual damage he suffered consisted of medical expenses, the Court therein accounted for what Edgardo could have earned if he would have finished his course and passed the board exams. The Court thus looked at Edgardo's scholastic record submitted into evidence and found it sufficient to justify the assumption that he would have finished medicine and passed the board exams on time. In determining a specific amount of compensation, the Court then relied on the testimony of one of the witnesses, a medical practitioner, who gave an estimate of what could have likely been Edgardo's minimum monthly income had he finished his studies.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>At this juncture, however, it is worth pointing out that there have been cases where the Court, despite lack of sufficient evidence, still granted compensation for loss of earning capacity. Generally, documentary evidence<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> should be presented to substantiate the claim for damages for loss of earning capacity.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> The Court has likewise accepted testimonial evidence, however, in considering indemnity for such loss. Despite the foregoing, it bears reiterating that damages for loss of earning capacity may be awarded to the heirs of a deceased non-working victim because earning capacity, not necessarily actual earnings, may be lost. The Court has thus allowed such recovery with respect to children, students, and other unemployed victims. The latter likewise finds support in Article 2206(l) of the Civil Code.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>In <i>People v. Mayor Sanchez</i><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> (<i>Sanchez</i>) the Court said that even if the prosecution failed to present documentary evidence to support its claim for damages for loss of earning capacity of the deceased, the absence thereof does not preclude recovery of the same.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> In <i>Sanchez</i>, Eileen Sarmenta (Sarmenta) and Allan Gomez (Gomez) were senior agriculture students at University of the Philippines Los Baños (UPLB) prior to their deaths at the hands of Mayor Antonio Sanchez and his men. Both mothers of Sarmenta and Gomez testified to the effect that their children had job opportunities available to them after their graduation, as well as the basic salaries they could expect as new graduates of UPLB. While the Court therein held that such testimonies were insufficient, the Court still gave due consideration to the fact that Sarmenta and Gomez would have graduated from a reputable university and also assumed that they would have earned more than minimum wage. The Com1 thus found it fair and reasonable to fix the monthly income they would have earned, computed for the amount they would have received throughout their lifetime, and ruled that they were entitled thereto.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>All things considered, however, and despite the tenor of the Court's ruling in <i>Sanchez</i> vis-à-vis compensation for loss of earning capacity, I concur with the <i>ponencia</i> in holding that Diano is not entitled to said award. As stated earlier, loss of earning capacity partakes the nature of actual damages which must be duly proven by competent proof and the best obtainable evidence.<br><br>While Diano made averments in her Complaint that would have ideally warranted an award of actual damages for loss of earning capacity, i.e., that Bryan was a 19-year-old fourth year chemical engineering student at the University of the Philippines, a scholar since high school until the time of the accident, and that he was expected to graduate and become a professional gainfully employed with an earning capacity conservatively estimated at PHP 500,000.00,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> a review of the records would show a dearth of evidence to such effect. While both Diano and Bryan's sister, Judy Grace Diano (Judy Grace), said in their respective judicial affidavits that Bryan was an engineering student from the University of the Philippines and a Department of Science and Technology (DOST) scholar, they failed to support their claims outside of their bare statements.<br><br>Upon examination of the proceedings before the RTC, when counsel for the heirs of Diano asked Judy Grace on re-direct examination whether she had any proof of Bryan's status as a student in University of the Philippines and DOST scholar, the lower court sustained the objections of the counsels for the defendants on the ground that it was not covered on cross examination. Moreover, neither was Diano able to provide an iota of proof anent her claim that Bryan would have at least earned PHP 500,000.00.<br><br>Thus, while the Court has previously ruled in favor of promising students whose lives were prematurely taken, it would be hasty for the Court to grant an award premised on unsubstantiated assertions. Similar to <i>Cariaga</i>, it would have been beneficial to Diano had she submitted Bryan's scholastic records into evidence to prove that he was indeed a student from the University of the Philippines and was likely to graduate with a degree. At the very least, Diano could have likewise attached other documentary evidence, such as Bryan's student identification card, tuition receipts, or even a certification from the DOST that he was a scholar. In doing so, even if she may fail to substantiate her estimate that Bryan would have had a notable income, then the Court would have at least been able to grant her compensation based on the minimum wage at the time of Bryan's death.<br><br>To elaborate, in similar cases where students in good standing met their untimely demise and the Court ruled that their heirs were entitled to compensation, it was held that the basis for the computation of earning capacity is not what the decedent would have become or what they would have wanted to be, but the minimum wage in effect at the time of their death.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Although the Court has previously factored in the prospective future of such students, in general the relevant formula, used by the Court in <i>Villa Rey Transit, Inc. v. Court of Appeals, et al.</i>,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> adopting the American Expectancy Table of Morality, is as follows:<blockquote>Net Earning Capacity = Life Expectancy x [Gross Annual Income less Necessary Living Expenses]<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></blockquote>Life expectancy is equivalent to 2/3 multiplied by the difference of 80 and the age of the deceased. Thereafter, gross annual income is computed based on the minimum wage in effect at the time of death.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Living expenses, on the other hand, is placed at 50% of the gross annual income.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>In view of the foregoing, I vote to <b>DENY</b> the Petition for Review on <i>Certiorari</i>.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 228-239. The Decision dated February 12, 2018 in Civil Case No. R-12-71443 was rendered by Presiding Judge Hon. Alfonso C. Ruiz II of Branch 216, Regional Trial Court of Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 38-51. The Decision dated April 15, 2024 in CA-G.R. CV No. 113204 was penned by Associate Justice Ramon M. Bato, Jr., with the concurrence of Associate Justices Pedro B. Corales and Ronalda Roberto B. Martin of the Special Third Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 13-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <b>Sps. Mangaron v. Hanna Via Design &amp; Construction</b>, 863 Phil. 731, 736 (2019) [Per J. Reyes, J., Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 737-738.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <b>Filcar Transport Services v. Espinas</b>, 688 Phil. 430, 442 (2012) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> CIVIL CODE, art. 1497.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> CIVIL CODE, art. 1496.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <b>OMC Carriers, Inc., et al. v. Spouses Nabua</b>, 636 Phil. 634, 650 (2010) [Per J. Peralta, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <b>Yamauchi v. Suñiga</b>, 830 Phil. 122, 130 (2018) [Per J. Martires, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> CIVIL CODE, art. 2206, par. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <b>People v. Mayor Sanchez</b>, 419 Phil. 808, 816 (2001) [Per J. Melo, Special First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <b>Da Jose, et al. v. Angeles, et al.</b>, 720 Phil. 451, 463 (2013) [Per J. Villarama, Jr., First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> 359 Phil. 18 (1998) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> 319 Phil. 128 (1995) [Per J. Puno, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 208.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> 110 Phil. 346 (1960) [Per J. Dizon, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 351-352.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> As an exception, damages for loss of earning capacity may be awarded despite absence of documentary evidence when: (1) the deceased is self-employed and earning less than the minimum wage under current labor laws, in which case, judicial notice may be taken of the fact that in the deceased's line of work no documentary evidence is available; or (2) the deceased is employed as a daily wage worker earning less than the minimum wage under current labor laws. <b>Da Jose, et al. v. Angeles, et al.</b>, <i>supra</i> note 14, at 463.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <b>Abrogar, et al. v. Cosmos Bottling Co., et al.</b>, 807 Phil. 317, 368 (2017) [Per J. Bersamin, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Supra</i> note 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 816.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 817.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 40, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Abrogar, et al. v. Cosmos Bottling Co., et al.</b>, <i>supra</i> note 23, at 369-371.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> 142 Phil. 494 (1970) [Per C.J. Concepcion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>Abrogar, et al. v. Cosmos Bottling Co., et al.</b>, <i>supra</i> note 23, at 371, <i>citing</i> <b>Villa Rey Transit, Inc. v. Court of Appeals, et al.</b>, <i>id.</i> at 497-498.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Abrogar, et al. v. Cosmos Bottling Co., et al.</b>, <i>id.</i> at 371.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Negros Navigation Co., Inc. v. Court of Appeals</b>, 346 Phil. 551, 568-569 (1997) [Per J. Mendoza, Second Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

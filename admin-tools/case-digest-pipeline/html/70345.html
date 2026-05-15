@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 256320 - FAUSTINE FELIZ ABAD, PETITIONER, VS. PEOPLE OF THE PHILIPPINES AND GHT TRAVEL AND TOURS, REPRESENTED BY JOHANNA MOULIC, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70345' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 256320, January 13, 2026 ]</H2>
+			<H3>FAUSTINE FELIZ ABAD, PETITIONER, VS. PEOPLE OF THE PHILIPPINES AND GHT TRAVEL AND TOURS, REPRESENTED BY JOHANNA MOULIC, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This resolves the Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, filed by petitioner Faustine Feliz Abad (<b>Faustine</b>) of the Orders, dated March 1, 2021,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and March 31, 2021,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of Branch 50, Regional Trial Court, Manila (<b>RTC</b>), in Spec. Proc. No. R-MNL-20-06070-SP, which denied Faustine's Motion to Lift/Recall the Precautionary Hold Departure Order (<b>PHDO</b>) issued by the RTC against her and the subsequent Motion for Reconsideration, respectively.<br><br><center><b><i>The Facts</i></b></center><br>On June 3, 2020, Johanna Moulic (<b>Johanna</b>), the sole proprietor of respondent GHT Travel and Tours (<b>GHT</b>), filed a Complaint-Affidavit<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> before the Office of the City Prosecutor of Manila alleging that Faustine, who represented herself as an agent of then Senator Emmanuel "Manny" Pacquiao (<b>Sen. Pacquiao</b>), inquired from her if she can book airline tickets for 96 passengers who will participate in the Maharlika Pilipinas Basketball League to be held in Calgary, Canada.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>For the transaction to proceed, Johanna advised Faustine to give partial payment for the airline tickets. However, at that time, Faustine was still in the United States and could not sign and transmit the checks as her checkbook was in Canada. Thus, Faustine resolved to fly back to the Philippines on December 21, 2019 in order to sign and issue checks and personally transact with GHT. She had guaranteed that Sen. Pacquiao had given her PHP 6 million for the transaction and that the remaining balance will be paid once the prices of the airline tickets are settled.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>On December 23, 2019, Faustine went to the office of GHT to personally purchase the 96 tickets for which she issued a Manager's Check worth PHP 374,000.00, a regular check worth PHP 6 million, and a postdated check of PHP 4,148,194.00, or a total of PHP 10,522,194.00.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> On the same date, the 96 airline tickets were released to Faustine.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On December 29, 2019, Faustine returned to the office of GHT to book 25 additional tickets under the same itinerary. Johanna requested that Faustine deposit, at least, PHP 2 million for the transaction to proceed.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Faustine informed Johanna that PHP 2 Million had already been released by Sen. Pacquiao and that the former had already instructed someone to collect the money. However, after a few hours, Faustine said that only PHP 1 million had been released.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>To cover the entire amount covering the additional airfare bookings, Faustine offered to issue another postdated check worth PHP 3,559,606.25. Faustine guaranteed Johanna that the checks were funded and that as agent of Sen. Pacquiao, she will not evade the obligation. Relying on such representation, Johanna accepted the second postdated check.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On January 4, 2020, Faustine requested for the rebooking, rerouting and upgrading of the tickets corresponding to the entourage of Sen. Pacquiao. As a result, additional fees and charges in the amount of PHP 566,192.75 were incurred. However, of this amount, PHP 366,192.75 remained unpaid.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Prior to the maturity of the two postdated checks, Faustine requested that Johanna put the checks on hold as Sen. Pacquiao will allegedly deposit the total amount. However, several days passed until the postdated checks matured and no deposit was made. With no payment forthcoming, GHT decided to encash the two checks, which were both dishonored for being "Drawn Against Insufficient Funds."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Thus, Johanna accused Faustine of committing the crime of Estafa under Article 315(2)(a) and (d) of the Revised Penal Code,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> and violation of Batas Pambansa Blg. 22.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The total amount of actual damage allegedly suffered by GHT amounted to PHP 7,593,993.50.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>In the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> dated August 18, 2020, the City Prosecutor found probable cause to indict Faustine for two counts of violation of Batas Pambansa Blg. 22. However, it found that there is insufficient evidence to charge Faustine of the crime of Estafa. Thus, two Informations were filed before the Metropolitan Trial Court (<b>MeTC</b>) of Manila, charging Faustine with two counts of violation of Batas Pambansa Blg. 22.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>On September 29, 2020, the prosecution filed an Ex-Parte Petition for the Issuance of a PHDO before the RTC in Spec. Proc. No. R-MNL-20-06070-SP.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Considering that probable cause has been determined, and it was alleged that Faustine was a flight risk, the prosecutor prayed that the RTC issue a PHDO against Faustine.<br><br>In the Order,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> dated October 7, 2020, the RTC granted the Ex-Parte Petition of the prosecution and ordered the issuance of a PHDO against Faustine. Accordingly, a PHDO was issued on even date.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>On November 20, 2020, Johanna, in behalf of GHT, filed a Motion for Partial Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> of the Resolution, dated August 18, 2020, which resolved to indict Faustine for two counts of violation of Batas Pambansa Blg. 22. This Motion was denied in the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> dated December 29, 2020.<br><br>Thus, on February 10, 2021, Johanna filed a Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> with the Secretary of the Department of Justice (<b>DOJ</b>), contending that City Prosecutor erred in finding that no probable cause exists to charge Faustine of Estafa under Article 315(2)(a) and (d) of the Revised Penal Code. On the same date, Faustine filed before the RTC a Motion to Lift/Recall the PHDO.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>In the Order, dated March 1, 2021, the RTC denied Faustine's Motion to Lift/Recall the PHDO. The RTC held that the Motion was not verified, contrary to the requirement of Section 7 of the Rule on PHDO.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>And even if the belated verification submitted by Faustine was deemed as substantial compliance, the RTC ruled that the Motion must still be denied. The RTC noted that the Petition for Review was still pending resolution before the DOJ Secretary, thus the prosecutor's dismissal of the criminal complaint with regard to the Estafa charges had not yet attained finality.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>The RTC also stated that prudence dictates that Faustine may not be allowed to leave in the meantime considering that she is a permanent resident of the United States, and no evidence was adduced to convince the trial court that she is not a flight risk. Thus, in order to afford the State due process, it was imperative for the RTC to uphold the PHDO.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>Faustine filed a Motion for Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>In the Resolution, dated March 31, 2021, the RTC reiterated that the dismissal of the charge for Estafa by the City Prosecutor was still tentative as the DOJ Secretary, acting on the Petition for Review, may still order the filing of an Information in court. Should Faustine be allowed to leave the country while the appeal is pending, the RTC held that there would be a miscarriage of justice if an Information is later filed and Faustine is nowhere to be found. Moreover, certain circumstances, i.e., the pendency of the criminal case against her for violation of Batas Pambansa Blg. 22, and that she is a permanent resident of the United States, all the more bolster the possibility that Faustine may abscond as soon as the PHDO is lifted. Thus, the RTC denied Faustine's Motion for Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>Thereafter, Faustine filed the present Petition.<br><br><center><b><i>The Issue</i></b></center><br>Did the RTC err in not lifting the PHDO issued against Faustine?<br><br><center><b><i>The Arguments of the Parties</i></b></center><br>Faustine contends that the assailed Orders of the RTC failed to provide any valid legal and jurisprudential basis to justify the continued validity of the PHDO issued against her. While the dismissal of the Estafa case is subject to review by the DOJ Secretary, Faustine stressed that the Court is not bound by the rules of procedure of the DOJ and that the constitutional provision on the right to travel is clear and categorical.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Moreover, Faustine cites the dissenting opinion of Justice Mario Victor F. Leonen on the promulgation of the Rules on PHDO to support her cause.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Assuming that she is indeed a permanent resident of the United States, Faustine argues that she is still a Filipino citizen who is entitled to the full protection of Philippine laws, particularly she still enjoys her constitutional right to liberty of abode and travel and the presumption of innocence. There is no indication yet that Faustine will depart, or is about to depart, or abscond from the jurisdiction of the Philippine courts. Faustine maintains that no proof was submitted that she is a flight risk, except for the fact that she is a "green card" holder.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>The Office of the Solicitor General, as the statutory counsel of the People, asserts that the present Petition should be dismissed for its failure to observe the rule on the hierarchy of courts. There being no special, important or compelling reason in this case, the prosecution urges the Court to dismiss the Petition. Likewise, it argues that there is no basis for the Petition as Faustine failed to show that she is not a flight risk and an Information for two counts of violation of Batas Pambansa Blg. 22 has already been filed.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>GHT, through Johanna, as private complainant, maintains that Faustine failed to present sufficient justification in availing the remedy provided in Rule 45 of the Rules of Court; particularly, the present Petition failed to present a novel legal issue that the Court may validly rule on. GHT likewise contends that Faustine's constitutional right to travel is not absolute and the RTC's act of issuing and sustaining the PHDO is sanctioned by procedural rules and recognized by case law as a limitation on the right to travel. GHT asserts that the RTC was correct in finding that the dismissal of the complaint for Estafa had not yet attained finality due to the timely filing of the Petition for Review with the Secretary of Justice; thus, the RTC was correct in sustaining the PHDO. Finally, GHT argues that Faustine failed to establish that she is not a flight risk.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Court finds merit in the Petition.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The constitutional right to travel is not absolute; case law has recognized the power of the courts to regulate it in certain instances; such power includes the power to issue a PHDO</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Article III, Section 6 of the Constitution provides for the right to travel, which is part and parcel of one's liberty and is essential to the exercise of other rights such as the rights to education, free expression, assembly, association, and religion.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> The provision reads as follows:<blockquote>SECTION 6. The liberty of abode and of changing the same within the limits prescribed by law shall not be impaired except upon lawful order of the court. <i>Neither shall the right to travel be impaired except in the interest of national security, public safety, or public health, as may be provided by law.</i><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> (Emphasis supplied)</blockquote>As may be gleaned above, the provision provides for two distinct and separate rights: (a) the liberty of abode; and (b) the right to travel. In <i>Genuino v. De Lima</i>,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> the Court traced the history of this provision and the bifurcation of these related rights. There, the Court noted that under the 1973 Constitution, these rights were compounded together in one provision containing one sentence.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> However, the provision proved insufficient to afford protection to the people, especially those who were victims of "hamletting" or the "herding of people into a militarily quarantined sanctuary within rebel areas"<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> under the Marcos regime. As recounted by the Court in <i>Genuino</i>:<blockquote>Realizing the loophole in the provision, the members of the Constitutional Commission agreed that a safeguard must be incorporated in the provision in order to avoid this unwanted consequence. Thus, the Commission meticulously framed the subject provision in such a manner that the right cannot be subjected to the whims of any administrative officer. In addressing the loophole, they found that requiring the authority of a law most viable in preventing unnecessary intrusion in the freedom of movement, <i>viz</i>.:<blockquote>MR. NOLLEDO.<br><br>[. . . .]<br><br>My next question is with respect to Section 5, lines 8 to 12 of page 2. It says here that the liberty of abode shall not be impaired except upon lawful order of the court or – underscoring the word "or" – when necessary in the interest of national security, public safety or public health. So, in the first part, there is the word "court"; in the second part, it seems that the question rises as to who determines whether it is in the interest of national security, public safety, or public health. May it be determined merely by administrative authorities?<br><br>FR. BERNAS. The understanding we have of this is that, yes, it may be determined by administrative authorities provided that they act, according to line 9, within the limits prescribed by law. For instance when this thing came up; what was in mind were passport officers. If they want to deny a passport on the first instance, do they have to go to court? The position is, they may deny a passport provided that the denial is based on the limits prescribed by law. The phrase "within the limits prescribed by law" is something which is added here. That did not exist in the old provision.</blockquote>During the discussions, however, the Commission realized the necessity of separating the concept of liberty of abode and the right to travel in order to avoid untoward results. Ultimately, distinct safeguards were laid down which will protect the liberty of abode and the right to travel separately, viz.:<blockquote>MR. TADEO. Mr. Presiding Officer, anterior amendment on Section 5, page 2, line 11. <i>Iminumungkahi kong alisin iyong mga salitang nagmumula sa</i> "or" <i>upang maiwasan natin ang walang pakundangang paglabag sa</i> liberty of abode <i>sa ngalan ng</i> national security <i>at pagsasagawa ng</i> "hamletting" <i>ng kung sinu-sino na lamang</i>. <i>Kapag inalis ito, maisasagawa lamang ang</i> "hamletting" upon lawful order of the court [. . .]<br><br>[. . . .]<br><br>MR. RODRIGO. Aside from that, this includes the right to travel?<br><br>FR. BERNAS. Yes.<br><br>MR. RODRIGO. And there are cases when passports may not be granted or passports already granted may be cancelled. If the amendment is approved, then passports may not be cancelled unless it is ordered by the court. Is that the intention? [. . .]<br><br>FR. BERNAS. Yes<br><br>MR. RODRIGO. But another right is involved here and that is to travel.<br><br><center>SUSPENSION OF SESSION</center><br>FR. BERNAS. Mr. Presiding Officer, may I request a suspension so that we can separate the liberty of abode and or changing the same from the right to travel, because they may necessitate different provisions.<br><br>THE PRESIDING OFFICER (Mr. Bengzon). The session is suspended.<br><br>[. . . .]<br><br>RESUMPTION OF SESSION<br><br>[. . . .]<br><br>THE PRESIDING OFFICER (Mr. Bengzon). Commissioner Bernas is recognized<br><br>The session is resumed.<br><br>FR. BERNAS. The proposal is amended to read:<br><br>The liberty of abode and of changing the same within the limits prescribed by law, shall not be impaired except upon lawful order of the court. NEITHER SHALL THE RIGHT TO TRAVEL BE IMPAIRED EXCEPT IN THE INTEREST OF NATIONAL SECURITY, PUBLIC SAFETY, OR PUBLIC HEALTH AS MAYBE PROVIDED BY LAW.<br><br>THE PRESIDING OFFICER (Mr. Bengzon). The Committee has accepted the amendment, as amended. Is there any objection? (Silence) The Chair hears none; the amendment, as amended, is approved.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> (Emphasis in the original)</blockquote></blockquote>It is clear that when it comes to liberty of abode, restrictions may only be imposed upon a legal directive from the Court. However, when it comes to the right to travel, the same may be limited on the basis of "national security, public safety, or public health" and "as may be provided by law." The Court has previously discussed that the wording in the Constitution was a result of the experiences during the Marcos regime when individuals, especially those suspected to be against the administration, were not allowed to travel abroad without clearance from an administrative office:<blockquote>Apparently, the phraseology in the 1987 Constitution was a reaction to the ban on international travel imposed under the previous regime when there was a Travel Processing Center, which issued certificates of eligibility to travel upon application of an interested party.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup></blockquote>Thus, the framers saw it fit to provide an additional requirement with regard to the impairment of the right to travel—that is, such impairment must be provided by law. This condition was added "to avoid abuse, particularly by petty administrators with less than the proper regard for the Constitution, that the ascertainment of the grounds for the exception should be made by the executive officers only 'as may be provided by law' specifying strict guidelines and appropriate standards."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Indeed, in <i>Leave Division v. Heusdens</i>,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> the Court declared that "the exercise of one's right to travel or the freedom to move from one place to another, as assured by the Constitution, is not absolute."<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> The Court then listed down some statutory limitations on such right, which the Court now brings up to date as follows:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">1)</div></td><td width="95%"><div align="justify"><i>The Anti-Terrorism Act of 2020</i>.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> The law, particularly Section 34 thereof, provides for restrictions on the right to travel prior to and upon filing of the Information regarding the commission of any acts punished under the said law. It also provides for restrictions to the accused's right to travel even if bail is granted;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">2)</div></td><td><div align="justify"><i>New Philippine Passport Act</i>.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> The Secretary of Foreign Affairs or any authorized consular official may deny the issuance of a passport or cancel a passport in the interest of national security, public safety and public health;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">3)</div></td><td><div align="justify"><i>Anti-Trafficking in Persons Act of 2003</i><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> and <i>Expanded Anti-Trafficking in Persons Act of 2022</i>.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The Inter-Agency Council Against Trafficking (<b>IACAT</b>) has issued the 2023 Revised IACAT Guidelines on Departure Formalities for International-Bound Filipino Passengers that governs the conduct of immigration inspection for assessment, clearance and documentation of international-bound Filipino passengers. It provides for the required travel documents that a Filipino passengers must possess, and the inspection procedures to be conducted by immigration officers who have the discretion to withhold clearance for departure of any Filipino passenger;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">4)</div></td><td><div align="justify"><i>Migrant Workers and Overseas Filipinos Act of 1995</i><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> and <i>Department of Migrant Workers Act</i>.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> The Secretary of Migrant Workers is empowered to terminate, suspend or impose a total ban on the deployment of migrant workers when the conditions in the receiving country or region are inimical and not protective of the best interest, welfare and safety of migrant workers;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">5)</div></td><td><div align="justify"><i>Anti-Violence Against Women and Their Children Act of 2004</i>.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> The law restricts the movement of an individual against whom the protection order is intended;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">6)</div></td><td><div align="justify"><i>Special Protection of Children Against Abuse, Exploitation and Discrimination Act</i>.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Section 8 of the Rules and Regulations on the Trafficking of Children, which implements Section 32 of the law, provides that an unaccompanied child will not be allowed to travel alone to a foreign country without a travel clearance issued by the Department of Social Welfare and Development or a written permit issued under oath by the natural or adoptive parents or legal guardian;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">7)</div></td><td><div align="justify"><i>Inter-Country Adoption Act of 1995</i>.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Pursuant to the statute, the Inter-Country Adoption Board, which has been reorganized into the National Authority for Child Care,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> may issue rules restrictive of an adoptee's right to travel to protect the Filipino child from abuse, exploitation, trafficking and sale or any other practice in connection with adoption which is harmful, detrimental or prejudicial to the child; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">8)</div></td><td><div align="justify"><i>Mandatory Reporting of Notifiable Diseases and Health Events of Public Health Concern Act</i>.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Section 6(e)(4) of the law grants statutory and regulatory authority to the Department of Health and its local counterparts to conduct rapid containment, quarantine and isolation measures that restrict the movement of people.</div></td></tr></tbody></table></blockquote>Aside from the abovementioned statutes, there are also other limitations recognized under our legal system. For example, there is the constitutional power of the Congress to conduct inquiries in aid of legislation, and with it comes the power to hold a person in contempt upon which the concerned House may imprison an uncooperative individual.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Another example is the overseas travel by government officials and employees, for which they must first secure the authorization of the concerned heads of departments and offices.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> For officials and employees of the Judiciary, travel abroad must be authorized in accordance with the rules and regulations promulgated by the Court in the exercise of its power of administrative supervision over all court personnel.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>Notwithstanding that the constitutional provision provides that the right to travel may be impaired only in three instances and when there is a law that permits it, jurisprudence has long recognized that the right to travel may also be impaired upon lawful order of the court. The bifurcation of the two cognate rights under Article III, Section 6 of the Constitution should not lead to any confusion that the right to travel may also be the subject of regulation by the judicial department in certain instances.<br><br>A prime example is when an accused is facing criminal prosecution. The right to travel of an accused who is detained is clearly restricted. Meanwhile, an accused who is admitted to bail enjoys some degree of liberty but his or her right to travel is also subject to limitation. In <i>Manotoc v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> the Court held that a Court has the power to prohibit a person admitted to bail from leaving the country. Thus said the Court:<blockquote>The condition imposed upon petitioner to make himself available at all times whenever the court requires his presence operates as a valid restriction on his right to travel. As we have held in <i>People v. Uy Tuising</i>[:]<blockquote>"[. . . .] the result of the obligation assumed appellee (surety) hold the accused amenable at all times to the orders and processes of the lower court, was to prohibit said accused from leaving the jurisdiction of the Philippines, because, otherwise, said orders and processes will be nugatory, and inasmuch as the jurisdiction of the courts from which they issued does not extend beyond that of the Philippines they would have no binding force outside of said jurisdiction."</blockquote>Indeed, if the accused were allowed to leave the Philippines without sufficient reason, he may be placed beyond the reach of the courts.<blockquote>"The effect of a recognizance or bail bond, when fully executed or filed of record, and the prisoner released thereunder, is to transfer the custody of the accused from the public officials who have him in their charge to keepers of his own selection. Such custody has been regarded merely as a continuation of the original imprisonment. The sureties become invested with full authority over the person of the principal and have the right to prevent the principal from leaving the state."</blockquote>If the sureties have the right prevent the principal from leaving the state, more so then has the court from which the sureties merely derive such right, and whose jurisdiction over the person of the principal remains unaffected despite the grant of bail to the latter. In fact, this inherent right of the court is recognized by petitioner himself, notwithstanding his allegation that he is at total liberty to leave the country, for he would not have filed the motion for permission to leave the country in the first place, if it were otherwise.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup></blockquote>In <i>Pichay v. Sandiganbayan</i>,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> the Court held that the issuance by a court of a hold departure order (<b>HDO</b>) is a valid restriction on an accused's right to travel. This is in line with the court's inherent power to effectuate the exercise of its jurisdiction. Thus said succinctly by the Court:<blockquote>Criminal prosecutions should be allowed to run their course without undue delay. Pichay, as one facing criminal charges with the People of the Philippines as the offended party, should hold himself amenable to court orders and processes at all times. Otherwise, such orders and processes would serve no purpose if he would be allowed to leave the country, outside the reach of the courts. An accused in a criminal case may be issued an HDO, as a valid restriction on their right to travel, so that they may be dealt with in accordance with law.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup></blockquote>A court's power to restrict the accused's right to travel is based on the general grant of jurisdiction to such court; it is inherent in the exercise of judicial power. As elucidated by the Court in <i>Defensor Santiago v. Vasquez</i>:<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><blockquote>Courts possess certain inherent powers which may be said to be implied from a general grant of jurisdiction, in addition to those expressly conferred on them. These inherent powers are such powers as are necessary for the ordinary and efficient exercise of jurisdiction; or essential to the existence, dignity and functions of the courts, as well as to the due administration of justice; or are directly appropriate, convenient and suitable to the execution of their granted powers; and include the power to maintain the court's jurisdiction and render it effective in behalf of the litigants.<br><br>Therefore, while a court may be expressly granted the incidental powers necessary to effectuate its jurisdiction, a grant of jurisdiction, in the absence of prohibitive legislation, implies the necessary and usual incidental powers essential to effectuate it, and, subject to existing laws and constitutional provisions, every regularly constituted court has the power to do all things that are reasonably necessary for the administration of justice within the scope of its jurisdiction. Hence, demands, matters, or questions ancillary or incidental to, or growing out of, the main action, and coming within the above principles, may be taken cognizance of by the court and determined, since such jurisdiction is in aid of its authority over the principal matter, even though the court may thus be called on to consider and decide matters which, as original causes of action, would not be within its cognizance.<br><br>Furthermore, a court has the inherent power to make interlocutory orders necessary to protect its jurisdiction. Such being the case, with more reason may a party litigant be subjected to proper coercive measures where he disobeys a proper order, or commits a fraud on the court or the opposing party, the result of which is that the jurisdiction of the court would be ineffectual. What ought to be done depends upon the particular circumstances.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup></blockquote>Therefore, the issuance by the competent court of orders that may restrict the right to travel of an accused, be it conditions in the grant of bail or the issuance of an HDO, is but an exercise of such court's inherent power to maintain the effectiveness of its jurisdiction over the case and the person of the accused. It has been held that this power to restrict the accused's right to travel is "subsumed under the inherent power of the courts because it is an implement by which the jurisdiction of the court is preserved."<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>However, the circumstances described above show that the right to travel may be restricted if an individual is already facing a criminal indictment filed in court. The court's inherent power to preserve the effectiveness of its jurisdiction may only be logically exercised if the court already possesses jurisdiction over the case. Indeed, "[t]he filing of [an] ... information in [c]ourt initiates a criminal action. The [c]ourt thereby acquires jurisdiction over the case, which is the authority to hear and determine the case."<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> Thus, without an Information, the trial court cannot impose travel restrictions based on its inherent power to maintain the effectiveness of its jurisdiction because the Court's jurisdiction has not been invoked just yet.<br><br>In the United States, an individual who is under investigation and may well be criminally indicted can be subject to travel restrictions, and even arrest, under the federal material witness statute.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> Notwithstanding that the primary purpose of the statute is to ensure the appearance of the material witness during investigation and trial, it has been observed that "prosecutors and police have sometimes invoked the power to confine criminal suspects as witnesses while gathering evidence against the witness-defendant."<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> This is so because a material witness to a crime may very well be considered by the police and prosecutors as a suspect due to the close proximity of such individual to the scene of the crime. Travel restrictions on the material witness require an order by a federal district court.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br>In the Philippines, there is no statute that allows trial courts to restrict the right to travel of individuals still just suspected of committing a crime. This is the dilemma recognized by the Court in <i>Genuino</i>. There, the Court invalidated DOJ Circular No. 41 because it authorized the DOJ Secretary, without an enabling law, to issue HDOs and restrict the travel of individuals facing criminal complaints filed before the prosecutor notwithstanding that these individuals have not been indicted in court but are still subject to preliminary investigation. Thus, the Court was cognizant of certain situations where respondents may abscond from the proceedings, leave the country and avoid eventual arrest when an lnformation is ultimately filed in Court. The Court was firm, however, that the DOJ "may not promulgate rules that have a negative impact on constitutionally-protected rights without the authority of a valid law. Even with the predicament of preventing the proliferation of crimes and evasion of criminal responsibility, it may not overstep constitutional boundaries and skirt the prescribed legal process"<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>To address this legal lacuna, the Court issued the Rule on PHDO on August 7, 2018, or more than three months since the promulgation of Genuino. Indeed, the Rule was a "remedy formulated to fill in the vacuum created by the declaration of nullity of DOJ Circular No. 41[.]"<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>In essence, the Rule on PHDO empowers an RTC to issue a PHDO, which is "an order in writing issued by a court commanding the Bureau of Immigration [(<b>BI</b>)] to prevent any attempt by a person suspected of a crime to depart from the Philippines[.]" The PHDO "shall be issued <i>ex-parte</i> in cases involving crimes where the minimum of the penalty prescribed by law is at least six years and one day or when the offender is a foreigner regardless of the imposable penalty."<sup style="COLOR: RGB(255, 0, 0);">[73]</sup><br><br>An application for a PHDO may be filed by the prosecutor with the RTC within whose territorial jurisdiction the alleged crime was committed. However, for compelling reasons, the application may be filed with the RTC within the judicial region where the crime was committed if the place of the commission of the crime is known. Furthermore, the RTCs of Manila, Quezon City, Cebu City, Iloilo City, Davao City and Cagayan de Oro City have been empowered to act on applications based on complaints filed by the National Bureau of Investigation, irrespective of where the crime was committed.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>Upon the filing of the application, the RTC judge shall personally examine under oath or affirmation, in the form of searching questions and answers in writing, the applicant and witnesses he or she may produce on facts personally known to them and attaching to the record their sworn statement. If the judge finds that probable cause exists, and there is high probability that the respondent will depart from the Philippines to evade arrest and prosecution of the crime against him or her, the PHDO shall be issued and the BI shall be directed to hold and prevent the departure of the respondent at any Philippine airport or port. Otherwise, the judge shall order the dismissal of the application.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>Since the finding of probable cause by the judge for the purpose of issuance of PHDO is solely based on the complaint, it shall be without prejudice to the resolution of the prosecutor of the criminal complaint. If the prosecutor dismisses the complaint for lack of probable cause, the respondent may use the dismissal as a ground for the lifting of the PHDO. However, if the prosecutor finds probable cause and files the Information, the case with the RTC that issued the PHDO, on motion of the prosecutor, shall be consolidated with the RTC where the Information is filed.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>The PHDO may be temporarily lifted upon the filing before the issuing court a verified motion based on meritorious grounds—that is, based on the complaint and the evidence that the respondent will present, there is doubt that probable cause exists to issue the PHDO or it is shown that the respondent is not a flight risk. In such case, the respondent must post a bond. The temporary lifting of the PHDO is without prejudice to the resolution of the preliminary investigation against the respondent.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>Thus, with the Rule on PHDO, the Court addressed the situation that an individual who is suspected of committing a crime may have his or her right to travel restricted for the purpose of ensuring that individual's attendance at the proceedings and prevent him or her from absconding in the event that a criminal Information is filed with the courts. The issuance of the Rule on PHDO is in line with the Court's power to "[p]romulgate rules concerning the protection and enforcement of constitutional rights, [and] pleading, practice and procedure in all courts,"<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> since the Rule provides a simplified procedure by which Courts can restrict the right to travel by criminal suspects.<br><br>What the Rule restricts, through the valid issuance of a PHDO, is the respondent's ability to leave the country and nothing else. It is limited to the ability of an individual, who is suspected of committing a crime punishable by an afflictive penalty and has a high propensity to leave the country and avoid the impending criminal proceedings against him or her, to travel abroad. At any rate, the Rule provides that a respondent who has been issued a PHDO against him or her is not without any remedy. The respondent may file a motion to lift the PHDO if the grounds for the issuance have already ceased, i.e., the criminal complaints have been dismissed by the prosecutor or that the circumstances show that he or she is not a flight risk. Likewise, the RTC may temporarily allow the respondent to travel abroad notwithstanding that a PHDO has been issued if it is shown that the respondent's travel is based on meritorious grounds and that, as a measure of security, the respondent posted a bond.<br><br>Again, an individual's right to travel is not absolute. It can be circumscribed by constitutional, statutory and inherent limitations. In deciding whether an individual can leave the Philippines, "the [C]ourt must delicately balance, on the one hand, the right of the accused to the presumption of his innocence and the exercise of his fundamental rights, and on the other hand, the interest of the State to ensure that the accused will be ready to serve or suffer the penalty should he [or she] be eventually found liable for the crime charged."<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> With the issuance of the Rule on PHDO, the Court has provided for a mechanism by which the courts can properly balance these interests, albeit applicable to individuals suspected of committing an offense, under an orderly and nuanced procedure with transparent standards and practical remedies available to the parties concerned.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The denial of a motion to lift a PHDO is not a final order or judgment subject to review under Rule 45 of the Rules of Court; the determination of probable cause for the purpose of issuing a PHDO is a factual matter; notwithstanding, the Court may relax procedural rules in the interest of substantial justice</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Preliminarily, the Court takes note that Faustine filed the present Petition under Rule 45 of the Rules of Court. Notwithstanding that the Rule on PHDO does not explicitly provide how a denial of motion to lift a PHDO may be reviewed, the Court rules that a petition for review on <i>certiorari</i> is not the proper remedy to question such denial.<br><br>Rule 41, Section 2(c) of the Rules of Court provides that a petition for review on <i>certiorari</i> is a mode of <i>appeal</i> in cases where only questions of law are raised or involved.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> Relatedly, an <i>appeal</i> may only be taken from "a judgment or final order that completely disposes of the case, or of a particular matter therein when declared by [the] Rules to be appealable."<sup style="COLOR: RGB(255, 0, 0);">[81]</sup><br><br>A judgment or final order is often distinguished from an interlocutory order. The distinction between the two was succinctly discussed by the Court in <i>Integrated Credit and Corporate Services, Co. v. Labrador</i>,<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> thus:<blockquote>[T]he main difference between an interlocutory order and a final order is that a final order disposes of a case, an interlocutory order, on the other hand, does not dispose of a case and does not end the court's task of adjudicating the parties' contentions. The test to determine whether an order or a judgment is interlocutory or final is: Does the order or judgment leave something to be done in the trial court regarding the merits of the case? If it does, the order or judgment is interlocutory; otherwise, it is final.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup></blockquote>As explicitly stated in Rule 41, Section 1(c) of the Rules of Court, an interlocutory order is not subject to appeal; appeal is an improper remedy to assail an interlocutory order. In other words, no petition for review on <i>certiorari</i> under Rule 45 may be entertained to question an interlocutory order. The remedy against an interlocutory order is a special civil action for <i>certiorari</i> under Rule 65, but only when there is grave abuse of discretion amounting to lack or excess of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> These two petitions, though having the Latin term <i>certiorari</i> in them, should not be confused with each other as a petition under Rule 65 seeks to correct errors of jurisdiction while a petition under Rule 45 seeks to correct errors of judgment committed by a lower court.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup><br><br>As provided for under Section 5 of the Rule on PHDO, a respondent may move for the lifting of the PHDO if the prosecutor, after preliminary investigation, dismisses the complaint for lack of probable cause. When such motion is denied, the PHDO stands and the case proceeds until the PHDO is lifted. As provided for under Section 6 of the Rule, "[t]he order shall be valid until lifted by the issuing court as may be warranted by result of the preliminary investigation."<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> The PHDO case will likewise be consolidated, upon motion of the prosecutor, with the court where the Information is filed.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> Thereafter, the court that will hear the criminal case lodged against the accused may rule whether to transform the PHDO into a regular HDO or lift it altogether as the circumstances warrant. Thus, an order denying a motion to lift a PHDO can be properly classified as an interlocutory order as it "merely resolves incidental matters and does not finally dispose of the case."<sup style="COLOR: RGB(255, 0, 0);">[88]</sup><br><br>Since an order denying a motion to lift a PHDO is interlocutory in nature, Faustine was in error when she filed the present Petition under Rule 45 of the Rules of Court.<br><br>And even if the Court considers the present Petition procedurally correct, a petition for review on <i>certiorari</i> is not the proper vehicle to review the factual matters that led to the issuance of the PHDO and the denial of the motion seeking its withdrawal.<br><br>Under the Rules of Court, a trial court determines probable cause in two instances: (a) in the issuance of a search warrant;<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> and (b) in the issuance of a warrant of arrest.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> Probable cause in relation to the former refers to the "facts and circumstances which would lead a reasonably discreet and prudent man to believe that an offense has been committed, and that objects sought in connection with the offense are in the place sought to be searched."<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> Meanwhile, probable cause in the issuance of a warrant of arrest pertains to the "facts and circumstances which would lead a reasonably discreet and prudent person to believe that an offense has been committed by the person sought to be arrested."<sup style="COLOR: RGB(255, 0, 0);">[92]</sup><br><br>Under the Rule on PHDO, the trial court is also called to exercise its power to determine probable cause for the purpose of the issuance of a PHDO. The judge is mandated to personally examine the applicant and the witnesses he or she may produce. The finding of probable cause is based on the complaint and its attachments. Thus, probable cause in this sense refers to the facts and circumstances which would lead a reasonably discreet and prudent person to believe that an offense has been committed by the person who is sought to be barred from departing the Philippines.<br><br>In <i>Microsoft Corporation v. Farajallah</i>,<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> the Court ruled that the existence of probable cause is a question of fact. Probable cause is "dependent largely on the opinion and findings of the judge who conducted the examination and who had the opportunity to question the applicant and his [or her] witnesses." Thus, the findings of the judge deserves great weight and should be overturned only upon proof that the judge disregarded the facts or ignored the clear dictates of reason.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup><br><br>The Court has consistently held that "[q]uestions of fact, which would require a re-evaluation of the evidence, are inappropriate under Rule 45 of the Rules of Court. The jurisdiction of the Court under Rule 45, Section 1 is limited only to errors of law as the Court is not a trier of facts."<sup style="COLOR: RGB(255, 0, 0);">[95]</sup><br><br>Thus, the determination of probable cause for the issuance of a PHDO is a factual matter that is beyond the scope of a petition for review on <i>certiorari</i>.<br><br>Notwithstanding, rules of procedure are tools designed to promote efficiency and orderliness, they are not intended to frustrate the ends of justice. Law and jurisprudence grant to courts the prerogative to relax compliance with procedural rules of even the most mandatory character, mindful of the duty to reconcile both the need to put an end to litigation speedily and the parties' right to an opportunity to be heard.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> Procedural rules may be relaxed for the following reasons: (a) matters of life, liberty, honor or property; (b) the existence of special or compelling circumstances; (c) the merits of the case; (d) a cause not entirely attributable to the fault or negligence of the party favored by the suspension of the rules; (e) a lack of any showing that the review sought is merely frivolous and dilatory; and (f) the other party will not be unjustly prejudiced thereby.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup><br><br>Considering that this case involves Faustine's right to travel, a guarantee provided by no less than the Constitution, and that the merits of this case warrant the Court's interpretation of the Rule on PHDO, the Court finds the presence of compelling reasons for the relaxation of procedural rules. Thus, the resolution of this case on the merits must ensue.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The non-filing of the Information for Estafa is a valid ground for the lifting of the PHDO; the pendency of an appeal with the Secretary of Justice should not deter the court from examining the merits of the motion to lift the PHDO</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>It is worth emphasizing that under Section 1 of the Rule on PHDO, a PHDO shall only issue when: (a) the case involves crimes where the minimum penalty prescribed by law is, at least, six years and one day; or (b) the offender is a foreigner regardless of the imposable penalty. Thus, when an individual who is a citizen of the Philippines is faced with a criminal complaint where the imposable penalty of the alleged crime is imprisonment of, at least, six years and one day, then a PHDO may issue.<br><br>This criterion under the Rule on PHDO provides for a screening mechanism in that a PHDO shall issue only when the offense involved is of such grave character that the imposable penalty is, at least, <i>afflictive</i> in nature,<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> such that the minimum penalty is imprisonment of, at least, six years and one day (corresponding to <i>prision mayor</i> in its minimum term).<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> This mechanism also aligns with the jurisdiction of trial courts in criminal cases—it is only the RTC, which has jurisdiction for offenses punishable with imprisonment exceeding six years,<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> that is granted the authority to issue PHDOs.<br><br>Here, the Complaint-Affidavit filed by Johanna accused Faustine of the following offenses: (a) Estafa punished under Article 315(2)(a) and (d) of the Revised Penal Code; and (b) two counts of violation of Batas Pambansa Blg. 22. In the Resolution, dated August 18, 2020, the prosecutor found probable cause to indict Faustine for two counts of Violation of Batas Pambansa Blg. 22. However, the prosecutor did not find probable cause to charge Faustine of Estafa.<br><br>Under Article 315 of the Revised Penal Code, as amended by Section 85 of Republic Act No. 10951,<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> if the amount of fraud committed through false pretenses exceeds PHP 4.4 million, the penalty is <i>prision mayor</i> in its maximum period, with additional one year for each PHP 2 million. However, the total penalty which may be imposed shall not exceed 20 years. In addition, the same provision provides that if the amount of fraud committed through the postdating of an unfunded check is over PHP 4.4 million but does not exceed PHP 8.8 million, the penalty is <i>reclusion temporal</i> in its maximum period.<br><br>Since the alleged Estafa in this case involves the total amount of PHP 7,593,993.50, the imposable penalty for Estafa under Article 315(2)(a) is <i>prision mayor</i> in its maximum period (10 years and 1 day to 12 years), with an additional one year in excess of PHP 2 million, while the imposable penalty for Estafa under Article 315(2)(d) is <i>reclusion temporal</i> in its maximum period (17 years, four months and one day to 20 years). Thus, it is clear that the total imposable penalty for Faustine's alleged commission of Estafa exceeds six years and one day.<br><br>On the other hand, the imposable penalty for violation of Batas Pambansa Blg. 22 is imprisonment of not less than 30 days but not more than one year. Considering that the Complaint-Affidavit alleged that Faustine issued two checks that "bounced," then the maximum total imposable penalty is only two years.<br><br>Since the Resolution of the prosecutor only found probable cause to indict Faustine for two counts of Violation of Batas Pambansa Blg. 22, which has a maximum total imposable penalty of two years, this would not fall under the criteria of Section 1 of the Rule on PHDO. The total imposable penalty for the crime would not amount to, at least, six years and one day of imprisonment. More so, the Court has issued pronouncements that provide a preference for the imposition of fine in certain circumstances concerning violations of Batas Pambansa Blg. 22.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> Thus, it was proper for Faustine to move for the lifting of the PHDO in accordance with Section 5 of the Rule on PHDO considering that the Informations that were eventually filed in court did not meet the criteria for the issuance of a PHDO.<br><br>While it is true that the non-filing of the Information for Estafa has not yet attained finality as the Resolution of the prosecutor is still subject to review by the DOJ Secretary, this circumstance should have caused the RTC to reevaluate the Complaint-Affidavit and the documents submitted together with the application. In sustaining the PHDO, the RTC justified that it would be more prudent to have Faustine restricted from leaving the country in case an Information for Estafa is eventually filed against her, i.e., if the Resolution is reversed by the DOJ Secretary.<br><br>This callous consideration of Faustine's right to travel is anathema to the courts' role as "guardians of constitutional rights."<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> "All the presumptions of law independent of evidence are in favor of innocence; and every person is presumed to be innocent until he is proved guilty."<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> As between Faustine's freedom to travel which is guaranteed by the Constitution and a speculative or contingent legal threat that she may be charged in court for Estafa pending the decision of the DOI Secretary, the former must prevail.<br><br>Moreover, the Court has consistently adopted a policy of non-interference in the prosecutor's conduct of preliminary investigation. As held in <i>Chan v. Secretary of Justice</i>,<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> "[a]bsent any showing of arbitrariness on the party of the prosecutor [...], courts as a rule must defer to said officer's finding and determination of probable cause, since the determination of the existence of probable cause is the function of the prosecutor."<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> Likewise, "the public prosecutor exercises a wide latitude of discretion in determining whether a criminal case should be filed in court, and the courts must respect the exercise of such discretion[.]"<sup style="COLOR: RGB(255, 0, 0);">[107]</sup><br><br>In this case, the prosecutor had already made a determination as to the absence of probable cause with regard to allegation that Faustine committed Estafa. That finding of the prosecutor should have been given weight by the RTC in determining whether to sustain the PHDO. Notwithstanding that the Resolution was pending appeal before the DOJ Secretary, the Court could have taken into consideration the merits as to why the prosecutor did not indict Faustine of the said crime. That was not at all discussed by the RTC in the assailed Orders.<br><br>The Rule on PHDO requires the judge to determine probable cause for the purpose of issuing a PHDO. That determination is, however, merely preliminary as it is based only on the complaint and its attachments. As provided for in Section 5 of the Rule, such preliminary finding is without prejudice to the resolution of the prosecutor of the criminal complaint. Thus, even though the RTC is tasked to preliminarily determine probable cause, the issue on the propriety of the issuance of the PHDO would still ultimately depend on the determination of probable cause to be made by the prosecutor. It would be incongruous for a court to continue restricting the right of a person to travel abroad if the Information filed against him or her does not meet the criteria for the issuance of a PHDO. Worse, if no Information is filed in court at all.<br><br>As aptly pointed out by Associate Justice Alfredo Benjamin Caguioa during the deliberations in this case, the upholding of the PHDO against Faustine would result in the circumvention of the existing rules on the issuance of regular HDOs. Under Circular No. 39-97,<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> it is only the RTCs, not the First Level Courts, which have the authority to issue regular HDOs for criminal cases filed within their jurisdiction. This Circular was promulgated by the Court to prevent the indiscriminate issuance of HDOs resulting in inconvenience to the parties affected, and the infringement of the people's right to travel.<sup style="COLOR: RGB(255, 0, 0);">[109]</sup><br>&nbsp;<br>Here, upon conclusion of the preliminary investigation, the prosecutor determined that two criminal cases for Violation of Batas Pambansa Blg. 22 should be filed against Faustine before the MeTC. In order to prevent her from leaving the country, the prosecutor then applied for the issuance of a PHDO before the RTC. Thus, the prosecution's actions were clearly done to circumvent the guidelines under Circular No. 39-97 since the MeTC is bereft of authority to issue a regular HDO.<br><br>The Rule on PHDO primarily applies while preliminary investigation is still pending, and once it is completed and an Information is filed with the court, then the guidelines on the issuance of regular HDOs begin to apply. Upon the filing of the two Informations against Faustine before the MeTC, the PHDO should not have been issued by the RTC as there was no probable cause that would require the restriction of her right to travel abroad.<br><br>It was an error on the part of the RTC to deny the motion to lift the PHDO by the mere fact that an appeal to the prosecutor's Resolution was pending with the DOJ Secretary. More than considering this technicality, the RTC should have undertaken a reevaluation of Johanna's Complaint-Affidavit and its attachments considering that the prosecutor found no probable cause to indict Faustine of a crime within the RTC's jurisdiction. At stake here is an enshrined constitutional right of an individual. That alone should have given the RTC pause whether to uphold the PHDO it had earlier issued.<br><br>Thus, the Court finds no basis to sustain the PHDO issued against Faustine. The RTC was in clear error when it did so.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The Orders, dated March 1, 2021, and March 31, 2021, of Branch 50, Regional Trial Court, Manila, in Spec. Proc. No. R-MNL-20-06070-SP, are <b>REVERSED</b>. The Precautionary Hold Departure Order issued against Faustine Feliz Abad is <b>LIFTED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 10-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 33-34. Penned by Judge Bibiano G. Colasito of Branch 50, Regional Trial Court, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 35-38. Penned by Judge Bibiano G. Colasito of Branch 50, Regional Trial Court, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 40-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> REVISED PENAL CODE, art. 315(2)(a) and (d) states:<blockquote>Any person who shall defraud another by any of the means mentioned hereinbelow shall be punished by:<br><br>. . . .<br><br>2. By means of any of the following false pretenses or fraudulent acts executed prior to or simultaneously with the commission of the fraud:&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">By using fictitious name, or falsely pretending to possess power, influence, qualifications, property, credit, agency, business or imaginary transactions, or by means of other similar deceits.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">. . . .</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(d)</div></td><td><div align="justify">By postdating a check, or issuing such check in payment of an obligation, the offender knowing that at the time he had no funds in the bank, or the funds deposited by him in the bank were not sufficient to cover the amount of the check, and without informing the payee of such circumstances.</div></td></tr></tbody></table></blockquote><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Batas Pambansa Blg. 22 (1979). An Act Penalizing the Making or Drawing and Issuance of a Check Without Sufficient Funds or Credit and for Other Purposes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Rollo</i>, pp. 111-112.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 79-80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 81-85.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 94.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 95-114.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 124-125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 127-139.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 277-279.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> SC Administrative Matter No. 18-07-05-SC, August 7, 2018, Rule on Precautionary Hold Departure Order.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i>, p. 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 290-294.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 35-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 21-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 23-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 362-367.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 343-354.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Samahan ng mga Progresibong Kabataan v. Quezon City</b>, 815 Phil. 1067, 1107 (2017) [Per J. Perlas-Bernabe, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> CONST., art. III, sec. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> 829 Phil. 691 (2018) [Per J. Reyes, Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> CONST. (1973), art. IV, sec. 5 states:<blockquote>The liberty of abode and of travel shall not be impaired except upon lawful order of the court, or when necessary in the interest of national security, public safety, or public health.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> JOAQUIN G. BERNAS, THE 1987 CONSTITUTION OF THE REPUBLIC OF THE PHILIPPINES: A COMMENTARY 376 (2009).<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 718-720.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Silverio v. Court of Appeals</b>, 273 Phil. 128 (1991) [Per J. Melencio-Herrera, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> ISAGANI A. CRUZ &amp; CARLO L. CRUZ, CONSTITUTIONAL LAW 419-420 (2015).<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 678 Phil. 328 (2011) [Per J. Mendoza, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 339.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Republic Act No. 11479 (2020).<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Republic Act No. 11983 (2024).<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Republic Act No. 9208 (2003).<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Republic Act No. 11862 (2022).<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Republic Act No. 8042 (1995), as amended by Republic Act No. 10022 (2010).<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Republic Act No. 11641 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Republic Act No. 9262 (2004).<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Republic Act No. 7610 (1992).<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Republic Act No. 8043 (1995).<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Republic Act No. 11642 (2022), art. II, sec. 5. Domestic Administrative Adoption and Alternative Child Care Act.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Republic Act No. 11332 (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Balag v. Senate of 1he Philippines</b>, 835 Phil. 451, 464 (2018) [Per J. Gesmundo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Executive Order No. 6 (1986); Memorandum Order No. 26 (1986).<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>See</i> <b>Office of Administrative Services v. Judge Macarine</b>, 691 Phil. 217, 222 (2012) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 226 Phil. 75 (1986) [Per J. Fernan, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> 903 Phil. 271 (2021) [Per J. Delos Santos, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 279.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> 291 Phil. 664 (1993) [Per J. Regalado, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Garcia v. Sandiganbayan</b>, 842 Phil. 240, 266 (2018) [Per J. A. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Crespo v. Mogul</b>, 235 Phil. 465 (1987) [Per J. Gancayco, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> 18 U.S.C. sec. 3144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Ronald L. Carlson &amp; Mark S. Voelpel, <i>Material Witness and Material Injustice</i>, 58 WASH. U. L.Q. 1, 9 (1980).<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> 18 U.S.C. sec. 3144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>Genuino v. De Lima</b>, 829 Phil. 691, 752 (2018) [Per J. Reyes, Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Garcia v. Sandiganbayan</b>, 842 Phil. 240, 269 (2018) [Per J. A. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> SC Administrative Matter No. 18-07-05-SC, August 7, 2018, Rule on Precautionary Hold Departure Order, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> SC Administrative Matter No. 18-07-05-SC, (2018), sec. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> SC Administrative Matter No. 18-07-05-SC (2018), sec. 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> SC Administrative Matter No. 18-07-05-SC (2018), sec. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> SC Administrative Matter No. 18-07-05-SC (2018), sec. 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> CONST., art. VIII, sec. 5(5) states:<blockquote>The Supreme Court shall have the following powers:<br><br>. . . .<br><br>(5) Promulgate rules concerning the protection and enforcement of constitutional rights, pleading, practice, and procedure in all courts, the admission to the practice of law, the Integrated Bar, and legal assistance to the underprivileged. Such rules shall provide a simplified and inexpensive procedure for the speedy disposition of cases, shall be uniform for all courts of the same grade, and shall not diminish, increase, or modify substantive rights. Rules of procedure of special courts and quasi-judicial bodies shall remain effective unless disapproved by the Supreme Court.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>Sy v. Sandiganbayan</b>, 841 Phil. 475, 487 (2018) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> RULES OF COURT, Rule 41, sec. 2(c) states:<blockquote>In all cases where only questions of law are raised or involved, the appeal shall be to the Supreme Court by petition for review on certiorari in accordance with the Rule 45.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> RULES OF COURT, Rule 41, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> 943 Phil. 581 (2023) [Per C.J. Gesmundo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id.</i> at 589.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i> at 591.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <b>Hi-Yield Realty, Inc. v. Court of Appeals</b>, 608 Phil. 350, 357 (2009) [Per J. Quisumbing, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> A.M. No. 18-07-05-SC (2018), sec. 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> A.M. No. 18-07-05-SC (2018), sec. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <b>Crispino v. Tansay</b>, 801 Phil. 711, 722 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> RULES OF COURT, Rule 126, sec. 4 states:<blockquote>A search warrant shall not issue except upon probable cause in connection with one specific offense to be determined personally by the judge after examination under oath or affirmation of the complainant and the witnesses he may produce, and particularly describing the place to be searched and the things to be seized which may be anywhere in the Philippines.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> RULES OF COURT, Rule 112, sec. 6(a) states:<blockquote>Within ten (10) days from the filing of the complaint or information, the judge shall personally evaluate the resolution of the prosecutor and its supporting evidence. He may immediately dismiss the case if the evidence on record clearly fails to establish probable cause. If he finds probable cause, he shall issue a warrant of arrest, or a commitment order if the accused has already been arrested pursuant to a warrant issued by the judge who conducted the preliminary investigation or when the complaint or information was filed pursuant to section 7 of this Rule. In case of doubt on the existence of probable cause, the judge may order the prosecutor to present additional evidence within five (5) days from notice and the issue must be resolved by the court within thirty (30) days from the filing of the complaint of information.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>Cunanan v. People</b>, 843 Phil. 96, 107-108 (2018) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <b>De Joya v. Judge Marquez</b>, 516 Phil. 717, 721 (2006) [Per J. Azcuna, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> 742 Phil. 775 (2014) [Per Acting C.J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>Id.</i> at 785.<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <b>Lopez v. Saludo</b>, 910 Phil. 600, 605 (2021) [Per J. Hernando, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <b>Barnes v. Hon. Quijano Padilla</b>, 500 Phil. 303, 311 (2005) [Per J. Austria-Martinez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <b>Malixi v. Baltazar</b>, 821 Phil. 423, 448 (2017) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> REVISED PENAL CODE, art. 25 states:<blockquote>The penalties which may be imposed to this Code, and their different classes, are those included in the following:<br><br>. . . .<br><br><i>Afflictive penalties</i>:<blockquote>Reclusion perpetua,<br>Reclusion temporal,<br>Perpetual or temporary absolute disqualification,<br>Perpetual or temporary special disqualification,<br>Prision mayor.</blockquote></blockquote><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> REVISED PENAL CODE, art. 27 states:<blockquote>. . . .<br><br><i>Prision mayor and temporary disqualification</i>. – The duration of the penalties of <i>prision mayor</i> and temporary disqualification shall be from six years and one day to twelve years[.]</blockquote><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> Batas Pambansa Blg. 129 (1981), secs. 20 &amp; 32, as amended by Republic Act No. 7691 (1994).<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> Republic Act No. 10951 (2017). An Act Adjusting the Amount or the Value of Property and Damage on which a Penalty is Based, and the Fines Imposed Under the Revised Penal Code, Amending for the Purpose Act No. 3815, Otherwise Known as "The Revised Penal Code", as Amended.<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <b>Sumbilla v. Matrix Finance Corporation</b>, 762 Phil. 130, 142 (2015) [Per J. Villarama, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <b>Frias v. Alcayde</b>, 826 Phil. 713, 734 (2018) [Per J. Tijam, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <b>People v. Claro</b>, 808 Phil. 455, 464-465 (2017) [Per J. Bersamin, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> 572 Phil. 118 (2008) [Per J. Nachura, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <i>Id.</i> at 130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <b>People v. Yecyec</b>, 746 Phil. 634, 647 (2014) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> Circular No. 39-97 (1997). Guidelines in the Issuance of Hold-Departure Orders.<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>See</i>, e.g., <b>Re: Hold-departure Order Issued by Judge Occiano</b>, 431 Phil. 408 (2002) [Per C.J. Davide, Jr., First Division]; <b>Mondejar v. Judge Buban</b>, 413 Phil. 428 (2001) [Per J. Kapunan, First Division]; <b>OCA v. Judge Mendoza</b>, 394 Phil. 603 (2000) [Per J. Kapunan, First Division]; <b>Hold Departure Order Issued by Acting Judge Madronio</b>, 380 Phil. 314 (2000) [Per J. Mendoza, <i>En Banc</i>]; <b>Issuance of Hold Departure Order of Judge Adaoag</b>, 373 Phil. 621 (1999) [Per J. Mendoza, <i>En Banc</i>]; <b>Hold Departure Order Issued by Judge Abalos</b>, 377 Phil. 138 (1999) [Per J. Ynares-Santiago, <i>En Banc</i>]; <b>Hold Departure Order Issued by Judge Barot</b>, 371 Phil. 786 (1999) [Per J. Mendoza, <i>En Banc</i>]; and <b>Hold Departure Order</b>, 359 Phil. 239 (1998) [Per J. Mendoza, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

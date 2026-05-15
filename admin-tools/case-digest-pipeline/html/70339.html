@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 267217 (Formerly UDK No. 17695) - ALVIN G. CARPIO, PETITIONER, VS. GREEN ERA BIOTECH CORP./MR. JOHNSON LI* [OWNER], GREAT VALUE MANAGEMENT AND SERVICES CORPORATION/MS. NINAY P. RILE [PRESIDENT], RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70339' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 267217 (Formerly UDK No. 17695), November 19, 2025 ]</H2>
+			<H3>ALVIN G. CARPIO, PETITIONER, VS. GREEN ERA BIOTECH CORP./MR. JOHNSON LI<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> [OWNER], GREAT VALUE MANAGEMENT AND SERVICES CORPORATION/MS. NINAY P. RILE [PRESIDENT], RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Mere absence from work, without more, will ordinarily fail to support a finding of abandonment of work, absent any overt act from the employee clearly showing that he or she intends to sever his or her employment. Even so, an employee who was terminated for unjustified absence from work is not entitled to backwages notwithstanding the illegality of his dismissal. </p><p> Before the Court is a Petition for Review on <i>Certiorari</i><sup style="color: rgb(255, 0, 0);">[1]</sup> (<b>Petition</b>) under Rule 45 filed by petitioner Alvin G. Carpio (<b>Carpio</b>) seeking the reversal of the Decision,<sup style="color: rgb(255, 0, 0);">[2]</sup> dated May 30, 2022, and the Resolution,<sup style="color: rgb(255, 0, 0);">[3]</sup> dated September 8, 2022, of the Court of Appeals (<b>CA</b>) in CA-G.R. SP No. 167132. The CA affirmed the Decision,<sup style="color: rgb(255, 0, 0);">[4]</sup> dated December 10, 2019, and the Resolution,<sup style="color: rgb(255, 0, 0);">[5]</sup> dated August 26, 2020, of the National Labor Relations Commission (<b>NLRC</b>), which ruled that Carpio was not illegally dismissed by respondents Green Era Biotech Corp. (<b>Green Era Biotech</b>), Johnson Li (<b>Li</b>), Great Value Management (<b>Great Value</b>), and Ninay P. Rile (<b>Rile</b>) (collectively, the <b>respondents</b>). The assailed Resolution denied Carpio's Motion for Reconsideration of the CA Decision. </p><p align="center"><b><i>The Facts</i></b> </p><p> The present case originated from a complaint for illegal dismissal, underpayment of salaries/wages, non-payment of service incentive pay, and 13<sup>th</sup> month pay, unfair labor practices, damages, and attorney's fees filed by Carpio against respondents.<sup style="color: rgb(255, 0, 0);">[6]</sup> </p><p> According to Carpio, he started working with Green Era Biotech on April 26, 2015 as Production Utility, a position directly related and usually desirable to the usual business of his employer. Carpio claimed that he was summarily and illegally dismissed without any valid ground on May 21, 2018.<sup style="color: rgb(255, 0, 0);">[7]</sup> </p><p> Carpio further argued that he is a regular employee of Green Era Biotech, and that Great Value is engaged in prohibited labor-only contracting. Thus, Carpio prayed that the respondents be held jointly and solidarily liable to pay his money claims.<sup style="color: rgb(255, 0, 0);">[8]</sup> </p><p> In their position paper, Great Value and Rile explained that Great Value is a service provider registered with the Department of Labor and Employment (<b>DOLE</b>) and engaged in deploying its employees for domestic services to clients. Great Value has been supplying manpower to Green Era Biotech since 2016 pursuant to a service agreement or contract of manpower issued yearly. Thus, when Carpio was hired by Great Value on January 1, 2017, there was an existing service agreement between Great Value and Green Era Biotech.<sup style="color: rgb(255, 0, 0);">[9]</sup> </p><p> Further, Great Value and Rile alleged that Carpio was hired as a probationary employee and deployed to Green Era Biotech as a Utility Helper for a fixed period of six months. They claimed that Great Value explained to Carpio that he might be assigned to another area or client depending on operational needs and management discretion. They further alleged that Carpio was given a copy of the employee handbook, <i>Mga Alituntunin at Patakaran</i>, which he read and agreed to follow.<sup style="color: rgb(255, 0, 0);">[10]</sup> </p><p> Great Value and Rile averred that Carpio failed to report for work at Green Era Biotech from April 27 to May 3, 2018. When he reported for work on May 4, 2018, Great Value's Human Resource Coordinator Christian Pile (<b>Pile</b>) issued to Carpio a Notice to Explain, informing him that his absence for eight consecutive days without leave or permission is in gross violation of company rules and policy, giving him an opportunity to explain. Carpio was then issued a stern warning that he will be given an Absence Without Leave (<b>AWOL</b>) Notice should he repeat the violation.<sup style="color: rgb(255, 0, 0);">[11]</sup> </p><p> Great Value and Rile alleged that, despite the notice, Carpio was once again absent from May 11 to May 19, 2018 without permission from Great Value. Pile referred the matter to Great Value's Paralegal Officer, and Great Value later sent a Notice of AWOL, dated May 19, 2018, to Carpio, informing him that his continued absences are considered serious misconduct and abandonment of work, which are grounds for termination.<sup style="color: rgb(255, 0, 0);">[12]</sup> </p><p> Despite receiving the Notice of AWOL, Carpio still failed to report for work. Later, Great Value learned that Carpio filed a request for assistance under the Single-Entry Approach (<b>SEnA</b>) at the DOLE Regional Arbitration Branch No. III (<b>RAB III</b>) on July 30, 2018.<sup style="color: rgb(255, 0, 0);">[13]</sup> </p><p> According to Great Value, Carpio was validly dismissed due to gross and habitual neglect of duty and serious misconduct due to his absences without permission. It also claimed that it followed procedural due process in terminating Carpio's employment, as it complied with the twin notice requirement.<sup style="color: rgb(255, 0, 0);">[14]</sup> </p><p> For its part, Green Era Biotech, in its position paper, alleged that Carpio was hired under a Service Contract with Great Value as a utility worker, which is a position not directly connected to Green Era Biotech's manufacturing/production process. It averred that, on February 2019, Carpio, along with other individuals, filed a case for regularization against Green Era Biotech.<sup style="color: rgb(255, 0, 0);">[15]</sup> </p><p> Green Era Biotech argued that Great Value is a legitimate labor contractor and is Carpio's employer. Thus, Green Era Biotech cannot be held liable for Carpio's alleged illegal dismissal.<sup style="color: rgb(255, 0, 0);">[16]</sup> </p><p> In his rejoinder to the respondents' position papers, Carpio, integrating his <i>Sinumpaang Salaysay</i>, alleged that he was hired by Green Era as a Production Utility worker on April 26, 2015, and that, on December 6, 2016, he was forced to sign a resignation paper with a threat of removal from employment by Green Era Biotech should he refuse to do so.<sup style="color: rgb(255, 0, 0);">[17]</sup> </p><p> Carpio further alleged that, on January 3, 2017, he and other employees were transferred by Green Era Biotech President Li to Great Value. Carpio then joined a union and filed for regularization.<sup style="color: rgb(255, 0, 0);">[18]</sup> </p><p> According to Carpio, he failed to report to work from April 27 to May 3, 2018 because he got sick, and that, on May 10, 2018, he had a toothache and was allowed a half-day leave by Green Era Biotech's Foreman and Pile.<sup style="color: rgb(255, 0, 0);">[19]</sup> </p><p> Carpio further admitted that he was not able to report for work from May 11 to 19, 2018. He averred that on May 18, 2018, he was not able to work because of his toothache, but he asked permission from Green Era Biotech's Foreman and Pile. On May 19, 2018, Carpio pleaded with Assistant Supervisor Roderick Rasuena for another leave, and was allowed by the latter.<sup style="color: rgb(255, 0, 0);">[20]</sup> </p><p> Carpio averred that on May 20, 2018, he reported for work but was not allowed to enter the work premises. On May 21, 2018, Carpio returned to Green Era Biotech to speak with Pile, who informed him that he could no longer decide whether Carpio would be allowed to resume work, as the matter had already been elevated to the company's higher management. Pile then told Carpio to wait for a message or call from them. On May 28, 2018, Carpio received a text message from Pile stating that he can no longer return to work because he was on AWOL.<sup style="color: rgb(255, 0, 0);">[21]</sup> </p><p align="center"><b><i>The Ruling of the Labor Arbiter</i></b> </p><p> In a Decision,<sup style="color: rgb(255, 0, 0);">[22]</sup> dated June 27, 2019, the Labor Arbiter issued a Decision dismissing Carpio's Complaint for Illegal Dismissal for lack of merit: </p><blockquote><p><b>WHEREFORE</b>, premises considered, judgment is hereby rendered dismissing the complaint for illegal dismissal for lack of merit. However, <b>respondent Great Value Mgt. Services Corporation</b> is ordered to indemnify complainant Alvin G. Carpio in the sum of <b>[PHP] 30,000.00 as nominal damages</b> for violating his right to procedural due process. Additionally, complainant is hereby entitled to 13<sup>th</sup> month pay and Service Incentive Leave Pay in the aggregate amount of <b>[PHP] 4,970.61</b>. </p><p> All other claims are dismissed for lack of merit. </p><p><b>SO ORDERED</b>.<sup style="color: rgb(255, 0, 0);">[23]</sup> (Emphasis in the original) </p></blockquote><p> The Labor Arbiter, citing an earlier regularization case filed by Carpio and other individuals, ruled that it is already settled that Great Value is an "independent contractor." Thus, the Labor Arbiter determined that the only issue to be resolved is the legality of Carpio's dismissal.<sup style="color: rgb(255, 0, 0);">[24]</sup> </p><p> In this regard, the Labor Arbiter ruled that Carpio failed to prove that he was dismissed from employment, and that he abandoned his work due to his prolonged absences without the prior consent or knowledge of his employer.<sup style="color: rgb(255, 0, 0);">[25]</sup> </p><p> Nevertheless, the Labor Arbiter found that there is no proof that Carpio received the First Notice to Explain from Green Era Biotech and Great Value. Thus, Green Era Biotech and Great Value failed to comply with the procedural due process requirement of a written notice informing Carpio of the grounds for his termination and giving him reasonable opportunity to be heard.<sup style="color: rgb(255, 0, 0);">[26]</sup> </p><p> Aggrieved by the Decision of the Labor Arbiter, Carpio appealed to the NLRC. </p><p align="center"><b><i>The Ruling of the NLRC</i></b> </p><p> In a Decision, dated December 10, 2019, the NLRC modified the Decision of the Labor Arbiter and ruled that Green Era Biotech and Great Value are engaged in labor-only contracting: </p><blockquote><p><b>WHEREFORE</b>, premises considered, the Decision of Labor Arbiter Jennifer R. Santos[,] dated June 27, 2019[,] is hereby <b>MODIFIED</b>. Respondents Green Era Bio-Tech Corporation and Great Value Managements Services Corporation are declared to be engaged in labor-only contracting. As such, both respondents are solidarily liable to pay complainant nominal damages in the amount of [PHP] 30,000.00, and his 13<sup>th</sup> month pay and service incentive leave pay in the aggregate amount of [PHP] 4,970.61. </p><p><b>SO ORDERED</b>.<sup style="color: rgb(255, 0, 0);">[27]</sup> (Emphasis in the original) </p></blockquote><p> According to the NLRC, the following circumstances show that Great Value is engaged in prohibited labor-only contracting: (1) Great Value failed to prove that it has other clients other than Green Era Biotech; (2) Great Value failed to show that it has tools and equipment which were actually utilized by Carpio in performing his job at Green Era Biotech; (3) Copies of the service agreements were never presented; and (4) the Certificate of Approval of Increase of Capital Stock and Treasurer's Affidavit, which stated that Great Value has paid up capital of more than the required PHP 3 million under Department Order 18-A, may not be used as proof of substantial capital since both documents were issued in 2014.<sup style="color: rgb(255, 0, 0);">[28]</sup></p><p> Nevertheless, the NLRC agreed with the Labor Arbiter that Carpio's dismissal is based on a valid ground, and that he was not afforded procedural due process.<sup style="color: rgb(255, 0, 0);">[29]</sup> </p><p> Both Carpio and Green Era Biotech sought reconsideration of the NLRC Decision, but their motions were denied by the NLRC in a Resolution, dated August 26, 2020. Thus, Carpio filed a Petition for <i>Certiorari</i> under Rule 65 of the Rules of Court with the CA seeking the reversal of the NLRC's issuances. </p><p align="center"><b><i>The Ruling of the CA</i></b> </p><p> In a Decision, dated May 30, 2022, the CA dismissed Carpio's Petition for <i>Certiorari </i>for lack of merit: </p><blockquote><p><b>WHEREFORE</b>, the petition for <i>certiorari</i> is <b>DISMISSED</b>. </p><p><b>SO ORDERED</b>.<sup style="color: rgb(255, 0, 0);">[30]</sup> (Emphasis in the original) </p></blockquote><p> According to the CA, Carpio's dismissal is valid since he failed to prove that he gave prior notice to or obtained authorization from Green Era Biotech and Great Value for his absences on May 11 to 19, 2018. Thus, pursuant to Great Value's <i>Mga Alituntunin at Patakaran</i>, Carpio's acts merit the penalty of dismissal.<sup style="color: rgb(255, 0, 0);">[31]</sup> </p><p> Carpio moved for reconsideration, but his motion was denied by the CA in a Resolution, dated September 8, 2022. Thus, Carpio filed the present Petition for Review on <i>Certiorari</i> for the Court's resolution. </p><p> Upon receipt of the Petition, Great Value filed its Comment,<sup style="color: rgb(255, 0, 0);">[32]</sup> dated October 17, 2022. In the Resolution,<sup style="color: rgb(255, 0, 0);">[33]</sup> dated March 13, 2023, the Court deferred action on the Petition until Green Era Biotech and Li have filed their respective Comments, or until the period to file thereof has expired. Green Era Biotech filed its Comment<sup style="color: rgb(255, 0, 0);">[34]</sup> on September 8, 2023. </p><p align="center"><b><i>The Issue</i></b> </p><p> Was Carpio legally dismissed by Green Era Biotech and Great Value? </p><p align="center"><b><i>The Ruling of the Court</i></b> </p><p> Since Green Era Biotech, Li, Great Value, and Rile no longer questioned the ruling of the NLRC before the CA, the only issue to be resolved by the Court is whether Carpio was illegally dismissed. </p><p> In this context, the Court grants the Petition. Carpio's absences from May 11 to 19, 2018, though clearly unauthorized, do not merit the severe penalty of dismissal. </p><p><i>Carpio did not abandon his work</i></p><p> To recall, the Labor Arbiter ruled that Carpio's repeated unauthorized absences constituted abandonment of work, and, as such, his dismissal was proper. </p><p> The Court disagrees. </p><p> Abandonment has been defined by the Court as the deliberate and unjustified refusal of an employee to resume his employment. As a form of neglect of duty, abandonment is considered as a just cause for termination of employment by the employer.<sup style="color: rgb(255, 0, 0);">[35]</sup></p><p> However, in order to prove that the employee indeed abandoned his work, two factors must first be proven to be present: <i>First</i>, the failure to report for work or absence without valid or justifiable reason, and, <i>second</i>, a clear intention to sever the employer-employee relationship.<sup style="color: rgb(255, 0, 0);">[36]</sup> </p><p> It must be noted that the second factor is the more determinative factor, and is manifested by overt acts from which it may be deduced that the employee has no more intention to work. In other words, the intent of the employee to discontinue his employment must be shown by clear proof that the employee did so deliberately and without justification.<sup style="color: rgb(255, 0, 0);">[37]</sup> </p><p> Since abandonment is a just cause for termination, the burden of proving abandonment falls on the employer.<sup style="color: rgb(255, 0, 0);">[38]</sup> </p><p> In this case, while it may be conceded that Carpio's absences from May 11 to 19, 2018 were unauthorized and unjustified, the records are bereft of any allegation, much less proof, that Carpio deliberately failed to report to work with the intent to discontinue his employment. </p><p> In fact, following his absences, Carpio even attempted to report for work, but was no longer allowed to do so, and he thus filed a case for illegal dismissal protesting his removal from work. To the Court's mind, these acts reinforce the fact that Carpio lacked intent to sever his employment with Great Value and Green Era Biotech, notwithstanding his unexplained absences. </p><p> The Court has consistently held that abandonment is incompatible with the prompt filing of an illegal dismissal complaint. Logically, an employee who truly intended to abandon his or her work would not immediately take steps to challenge the termination.<sup style="color: rgb(255, 0, 0);">[39]</sup> In <i>TEA-SPFL v. National Labor Relations Commission</i>,<sup style="color: rgb(255, 0, 0);">[40]</sup> the Court ruled: </p><blockquote><p> [T]o constitute abandonment, there must be a clear and deliberate intent to discontinue one's employment without any intention of returning. In <i>Labor v. NLRC</i>, we held that two elements must concur for a valid abandonment, <i>viz</i>.: (1) the failure to report to work or absence without valid or justifiable reason, and (2) a clear intention to sever the employer-employee relationship, with the second element as the more determinative factor being manifested by some overt acts. </p><p><i>The filing of the complaint for illegal dismissal by petitioners on July 26, 1989, or within six days from the alleged retrenchment, negates the charge of abandonment, for it is illogical for an employee to "abandon" his employment and thereafter file a complaint for illegal dismissal</i>. This doctrine finds support in a long line of cases.<sup style="color: rgb(255, 0, 0);">[41]</sup> (Emphasis supplied; citations omitted) </p></blockquote><p> To be sure, absence from work, in itself, cannot generate a finding of abandonment, absent any overt act from the employee clearly manifesting his or her desire to end the employment.<sup style="color: rgb(255, 0, 0);">[42]</sup> The Court repeats that mere absence from or failure to work is not tantamount to abandonment. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><i>Great Value's policy on absenteeism, which prescribes dismissal as penalty, is too harsh</i> </div></td></tr></tbody></table><p>In illegal dismissal cases, the <i>onus probandi</i> rests on the employer to prove that the employee's dismissal was for a valid cause. Thus, the court must examine whether the factual circumstances of the case correspond to a just or authorized cause of dismissal under the Labor Code to determine whether the employee was indeed legally dismissed.<sup style="color: rgb(255, 0, 0);">[43]</sup> </p><p> In this case, Carpio was dismissed by Great Value for his repeated absences without the employer's consent, pursuant to Great Value's employee manual, or <i>Mga Alituntunin at Patakaran</i>. </p><p> Specifically, in the manual, failure to report for work for, at least, five consecutive days without authorization (<i>'Di pagpasok sa trabaho [nang] hindi kukulang sa [limang] araw sa sunod-sunod [nang] walang pasabi</i>) is considered as gross and habitual neglect of duty and serious misconduct for which an employee may be terminated.<sup style="color: rgb(255, 0, 0);">[44]</sup> </p><p> The Court finds that Great Value's policy on absenteeism, which prescribes a penalty of dismissal for, at least, five days of unexplained absences, is too harsh and must be tempered. </p><p> While the power of the employer to dismiss an employee is part and parcel of its management prerogative, this power is not without its limits. One of the overarching limitations which restrict management prerogative is the working class' rights under the Constitution. Thus, in <i>Verizon Communications Philippines, Inc. v. Margin</i>,<sup style="color: rgb(255, 0, 0);">[45]</sup> the Court ruled: </p><blockquote><p> The Constitution looks with compassion on the working class and its intent in protecting their rights. A worker's employment is property in a constitutional sense, and he/she cannot be deprived thereof without due process and unless the deprivation is commensurate to his/her acts and degree of moral depravity. While the Court recognizes the right of an employer to terminate the services of an employee for a just or authorized cause, the dismissal must be made within the parameters of law and pursuant to the tenets of equity and fair play. An employer's power to discipline his employees must not be exercised in an arbitrary manner as to erode the constitutional guarantee of security of tenure. </p><p> Indeed, the power to dismiss is a formal prerogative of the employer, but this is not without limitations. The employer is bound to exercise caution in terminating the services of his employees and dismissals must not be arbitrary and capricious. Due process must be observed and employers should respect and protect the rights of their employees. To effect a valid dismissal, the law requires not only that there be just and valid cause; it must also be supported by evidence. There must be a reasonable proportionality between the offense and the penalty. Dismissal, without doubt, is the ultimate penalty that can be meted to an employee. Hence, where a penalty less punitive would suffice, whatever missteps may be committed by labor ought not to be visited with a consequence so severe.<sup style="color: rgb(255, 0, 0);">[46]</sup> </p></blockquote><p> Thus, in <i>Verizon</i>, the Court ruled that Verizon's company rules which provide that "five or more consecutive days of absence is tantamount to abandonment of work, absence without leave or voluntary resignation of the employee" is too harsh and disproportionate to the wrongdoing committed: </p><blockquote><p> Similarly, since Verizon based their defense on violation of company rules, it is incumbent upon Verizon to prove that Laurence clearly, voluntarily and intentionally committed the infraction. Laurence's absence from work was due to sickness. He gave proper notification of his absence, which reason should have been given kind consideration by Verizon. An employee cannot anticipate when an illness may happen, thus, he may not be able to give prior notice or seek prior approval of his absence, but could only do so after the occurrence of the incident. </p><p><i>Even assuming that there was deliberate violation of the company's rules, the penalty of dismissal is too harsh and not proportionate to the wrongdoing committed. Knowledge of the company's rules, its violation, and dismissal in accordance with said rules do not automatically bind this Court. It is settled that the law serves to equalize the unequal</i>. The labor force is a special class that is constitutionally protected because of the inequality between capital and labor. This constitutional protection presupposes that the labor force is weak. However, the level of protection to labor should vary from case to case; otherwise, the State might appear to be too paternalistic in affording protection to labor.<sup style="color: rgb(255, 0, 0);">[47]</sup> (Emphasis supplied; citations omitted) </p></blockquote><p> The <i>Verizon</i> case is on all fours with the factual milieu of the present case. Great Value's similar policy of considering five days of unauthorized absences as a dismissible offense is also disproportionate to the offense committed. Thus, the Court finds that Carpio's dismissal based on this company policy was illegal. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><i>Great Value and Green Era Biotech are not liable to pay backwages, considering that Carpio's absences were still unjustified and inexcusable</i> </div></td></tr></tbody></table><p>The normal legal consequence of a finding of illegal dismissal is an order for the employee's reinstatement, or an award of full backwages, should reinstatement no longer be possible. Nevertheless, the Court stays its hand in awarding backwages while directing the reinstatement of an employee on account of the following circumstances: (1) the fact that the dismissal of the employee would be too harsh of a penalty; and (2) that the employer was in good faith in terminating the employment.<sup style="color: rgb(255, 0, 0);">[48]</sup> </p><p> Both circumstances are present in this case. As discussed above, dismissal is too harsh a penalty for Carpio's unjustified absences, but Great Value may still be considered in good faith in terminating his employment on the basis of the company policy. Thus, even as the Court rules that Carpio's dismissal from employment was improper, Great Value and Green Era Biotech must not be held liable to pay his backwages as Carpio's absences are still considered a violation of company policy and unjustified. </p><p> Consequently, Carpio is entitled only to be reinstated by Great Value and Green Era Biotech to his former position. Should reinstatement be no longer viable, Carpio should be paid separation pay equivalent to one month pay for every year of service, with a fraction of, at least, six months considered as one whole year.<sup style="color: rgb(255, 0, 0);">[49]</sup> </p><table width="50%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><i>Great Value and Green Era Biotech are liable for nominal damages for failure to observe procedural due process in terminating Carpio's employment</i> </div></td></tr></tbody></table><p>Not only does the Court find Carpio's dismissal substantively infirm, there being no just or authorized cause to sustain it, but it is also evident that Great Value and Green Era Biotech failed to comply with the requirements of procedural due process. </p><p> In labor cases, procedural due process concerns the manner by which an employee is dismissed and mandates the observance of both notice and hearing. The employer is required to furnish the employee with two written notices before termination may be validly effected: first, a notice apprising the employee of the specific acts or omissions on which the proposed dismissal is based; and second, a notice informing the employee of the employer's decision to terminate his or her employment.<sup style="color: rgb(255, 0, 0);">[50]</sup> This second notice, or written notice of termination, must clearly state that (a) all relevant circumstances surrounding the charge have been fully considered, and (b) adequate grounds have been established to warrant the employee's dismissal. </p><p> In <i>King of Kings Transport, Inc. v. Mamac</i>,<sup style="color: rgb(255, 0, 0);">[51]</sup> the Court clarified how these two written notices must be implemented in order to give full effect to the employee's right to be heard in connection with his termination: </p><blockquote><p> (1) The first written notice to be served on the employees should contain the specific causes or grounds for termination against them, and a directive that the employees are given the opportunity to submit their written explanation within a reasonable period. "Reasonable opportunity" under the Omnibus Rules means every kind of assistance that management must accord to the employees to enable them to prepare adequately for their defense. This should be construed as a period of at least five [ ] calendar days from receipt of the notice to give the employees an opportunity to study the accusation against them, consult a union official or lawyer, gather data and evidence, and decide on the defenses they will raise against the complaint. Moreover, in order to enable the employees to intelligently prepare their explanation and defenses, the notice should contain a detailed narration of the facts and circumstances that will serve as basis for the charge against the employees. A general description of the charge will not suffice. Lastly, the notice should specifically mention which company rules, if any, are violated and/or which among the grounds under Art. 282 is being charged against the employees. </p><p> (2) After serving the first notice, the employers should schedule and conduct a hearing or conference wherein the employees will be given the opportunity to: (1) explain and clarify their defenses to the charge against them; (2) present evidence in support of their defenses; and (3) rebut the evidence presented against them by the management. During the hearing or conference, the employees are given the chance to defend themselves personally, with the assistance of a representative or counsel of their choice. Moreover, this conference or hearing could be used by the parties as an opportunity to come to an amicable settlement. </p><p> (3) After determining that termination of employment is justified, the employers shall serve the employees a written notice of termination indicating that: (1) all circumstances involving the charge against the employees have been considered; and (2) grounds have been established to justify the severance of their employment.<sup style="color: rgb(255, 0, 0);">[52]</sup></p></blockquote><p> The employer's failure to comply with these procedural due process requirements warrants the imposition of nominal damages. Applying these standards, the Court finds that Great Value and Green Era Biotech did not observe the requisites of procedural due process and are, therefore, liable for nominal damages. </p><p> Regarding the first written notice, although Carpio was issued a Notice to Explain, the records do not show that he was afforded a proper hearing or a genuine opportunity to be heard. He was not given sufficient time or means to review the accusations, consult with a union representative or counsel, gather supporting evidence, or determine the defenses he would raise. This omission falls short of the procedural safeguards intended to protect an employee's right to due process. </p><p> Similarly, the second written notice was deficient. While Carpio was given a Notice of AWOL, this did not constitute the second notice required by law. It merely advised that his continued absences would be treated as serious misconduct and abandonment of work.<sup style="color: rgb(255, 0, 0);">[53]</sup> There is no indication that the notice informed Carpio that all circumstances of the charge had been considered, or that grounds for termination had been properly established despite such consideration. </p><p> In fact, the communication regarding Carpio's employment status was unclear and confusing. Great Value's Human Resource Coordinator, Pile, told him that the decision was out of his hands and deferred responsibility to upper management, who were to make the final determination. Carpio was never formally notified of his termination; he was only informed via text message that he was on AWOL and could no longer return to work. </p><p> It is evident, therefore, that Great Value and Green Era Biotech failed to comply with procedural due process, both by denying Carpio a reasonable opportunity to explain and by failing to provide a proper written notice of termination. Accordingly, they are liable for nominal damages in the amount of PHP 30,000.00, consistent with prevailing jurisprudence.<sup style="color: rgb(255, 0, 0);">[54]</sup> </p><table width="50%" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td><div align="justify"><i>Great Value and Green Era Biotech are solidarily liable for the monetary awards in favor of Carpio, while Li and Rile are not liable. </i></div></td></tr></tbody></table><p>The Labor Code defines labor-only contracting as an arrangement whereby a person, who does not have substantial capital or investment in the form of tools, equipment, machineries, work premises, among others, supplies workers to an employer to perform activities which are directly related to the principal business of the employer.<sup style="color: rgb(255, 0, 0);">[55]</sup> This provision is implemented by Section 6 of DOLE Department Order No. 18-A, Series of 2011, which was effective during Carpio's employment with Great Value and Green Era Biotech. Section 5 provides: </p><blockquote><p> SECTION 6. Prohibition Against Labor-only Contracting. — Labor-only contracting is hereby declared prohibited. For this purpose, labor only contracting shall refer to an arrangement where: </p><p> (a) The contractor does not have substantial capital or investments in the form of tools, equipment, machineries, work premises, among others, and the employees recruited and placed are performing activities which are usually necessary or desirable to the operation of the company, or directly related to the main business of the principal within a definite or predetermined period, regardless of whether such job, work or service is to be performed or completed within or outside the premises of the principal; or</p><p> (b) The contractor does not exercise the right to control over the performance of the work of the employee. </p></blockquote><p> Notably, the law does not require a contractor to possess both substantial capital and investments in the form of tools, equipment, or machineries in order to be considered legitimate.<sup style="color: rgb(255, 0, 0);">[56]</sup> Nevertheless, the general rule is that a contractor is presumed to be engaged in labor-only contracting, and the burden rests on the entity claiming legitimate contractor status to prove that it is not a labor-only contractor.<sup style="color: rgb(255, 0, 0);">[57]</sup> </p><p> On the one hand, Great Value claims that it is a legitimate job contractor, considering that it is registered with the Department of Labor and Employment, and that Great Value has been Green Era Biotech's manpower service provider since 2016. Great Value further claims that there is an existing service agreement when Carpio was hired on January 1, 2017.<sup style="color: rgb(255, 0, 0);">[58]</sup></p><p> On the other hand, the NLRC held that Great Value was engaged in prohibited labor-only contracting based on the following circumstances: (1) there was no showing that Great Value had clients other than Green Era Biotech; (2) Great Value failed to demonstrate that it possessed tools and equipment actually utilized by Carpio in the performance of his duties at Green Era Biotech; (3) copies of the service agreements were never presented; and (4) the Certificate of Approval of Increase of Capital Stock and the Treasurer's Affidavit, both issued in 2014, could not serve as proof of substantial capital, despite stating that Great Value had paid-up capital exceeding the PHP 3 million requirement under Department Order No. 18-A.<sup style="color: rgb(255, 0, 0);">[59]</sup> </p><p> The Court upholds the NLRC's finding. A contractor's Certificate of Registration is not conclusive proof of its legitimacy. Such certificate merely prevents the automatic presumption of labor-only contracting and gives rise to a disputable presumption of legitimacy.<sup style="color: rgb(255, 0, 0);">[60]</sup> </p><p> Here, Great Value's Certificate of Registration was issued only on June 28, 2017.<sup style="color: rgb(255, 0, 0);">[61]</sup> As the NLRC correctly observed, Great Value failed to controvert Carpio's assertion that he began working for Green Era Biotech on April 26, 2015.<sup style="color: rgb(255, 0, 0);">[62]</sup> Even assuming Great Value's claim that Carpio commenced employment on January 1, 2017, the fact remains that Great Value was not yet registered with the DOLE at the time of his hiring. Accordingly, no presumption of legitimate contracting arises in this case. </p><p> Moreover, Great Value failed to establish either the existence of substantial capital or any investment in tools, equipment, machineries, or other implements actually used by Carpio in the performance of his duties. The Certificate of Approval of Increase of Capital Stock and the Treasurer's Affidavit submitted by Great Value were both issued in 2014 and do not show whether it possessed substantial capital in 2017.<sup style="color: rgb(255, 0, 0);">[63]</sup> </p><p> Taken together with the circumstances that Green Era Biotech was Great Value's sole client and that no tools, equipment, machineries, or other work implements were provided for Carpio's use, these facts lead to the inescapable conclusion that Great Value is a labor-only contractor. </p><p> The consequence of a finding of labor-only contracting is that the contractor is deemed a mere agent of the principal, such that the principal becomes the direct employer and both entities are held jointly and solidarily liable to the contractor's employees. Accordingly, Department Order No. 18-A, series of 2011, provides: </p><blockquote><p><b>Section 27. Effects of labor-only contracting and/or violation of Sections 7, 8 or 9 of the Rules. </b>— A finding by competent authority of labor-only contracting shall render the principal jointly and severally liable with the contractor to the latter's employees, in the same manner and extent that the principal is liable to employees directly hired by him/her, as provided in Article 106 of the Labor Code, as amended. </p><p> A finding of commission of any of the prohibited activities in Section 7, or violation of either Sections 8 or 9 hereof, shall render the principal the direct employer of the employees of the contractor or subcontractor, pursuant to Article 109 of the Labor Code, as amended. (Emphasis in the original) </p></blockquote><p> Given the finding of labor-only contracting in this case, Great Value and Green Era Biotech are solidarily liable for the monetary awards in Carpio's favor. </p><p> Nevertheless, the Court rules that respondents Li and Rile are not liable to pay Carpio his separation pay, should reinstatement no longer be possible. As a general rule, corporate officers should not be held solidarily liable with the corporation for separation pay for it is settled that a corporation is invested by law with a personality separate and distinct from those of the persons composing it as well as from that of any other legal entity to which it may be related.<sup style="color: rgb(255, 0, 0);">[64]</sup></p><p> There being no reason to disregard the separate personality of Great Value and Green Era Biotech in this case, Li and Rile should not be held solidarily liable for the monetary award in favor of Carpio. </p><p><b>ACCORDINGLY,</b> the Petition for Review on <i>Certiorari</i> is <b>PARTIALLY GRANTED</b>. The Decision, dated May 30, 2022, and the Resolution, dated September 8, 2022, of the Court of Appeals in CA-G.R. SP No. 167132 are <b>REVERSED</b> insofar as they uphold the legality of the dismissal of Alvin G. Carpio. </p><p> Respondents Great Value Management and Services Corporation and Green Era Biotech Corp. are found liable for the illegal dismissal of Alvin G. Carpio and are ordered to <b>REINSTATE</b> him to his former position without loss of privileges and seniority, but without any right to backwages. </p><p> Should reinstatement no longer be possible, Great Value Management and Services Corporation and Green Era Biotech Corp. are declared jointly and solidarily liable, and are <b>ORDERED</b> to <b>PAY</b> Alvin G. Carpio separation pay equivalent to one month pay for every year of service, with a fraction of at least six months considered as one whole year, from April 26, 2015 up to the date of finality of this Decision. Great Value Management and Services Corporation and Green Era Biotech Corp. are also <b>ORDERED</b> to <b>PAY</b> nominal damages equivalent to PHP 30,000.00. The total monetary award shall earn legal interest at 6% per annum from the date of finality of this Decision until fully paid. </p><p> The case is <b>REMANDED</b> to the Labor Arbiter for the computation of the total monetary award. </p><p><b>SO ORDERED.</b> </p><p><i>Caguioa (Chairperson), Inting</i>, and <i>Gaerlan, JJ</i>., concur. <i><br> Dimaampao, J</i>., see dissenting opinion.<br><br></p><hr width="60%" size="1" align="LEFT" noshade=""><i></i><sup style="color: rgb(255, 0, 0);">*</sup> Also referred to as "Johnson Lu" in some parts of the <i>rollo</i>. <p><sup style="color: rgb(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-22. </p><p><sup style="color: rgb(255, 0, 0);">[2]</sup> <i>Id.</i> at 64-71. Penned by Associate Justice Myra V. Garcia-Fernandez and concurred in by Associate Justices Louis P. Acosta and Jaime Fortunato A. Caringal of the Eleventh Division, Court of Appeals, Manila.</p><p><sup style="color: rgb(255, 0, 0);">[3]</sup> <i>Id.</i> at 26-27. Penned by Associate Justice Myra V. Garcia-Fernandez and concurred in by Associate Justices Louis P. Acosta and Jaime Fortunato A. Caringal of the Former Eleventh Division, Court of Appeals, Manila.</p><p><sup style="color: rgb(255, 0, 0);">[4]</sup> <i>Id.</i> at 215-244. Penned by Commissioner Erlinda T. Agus and concurred in by Presiding Commissioner Julia Cecily Coching-Sosito of the Second Division, National Labor Relations Commission, Quezon City.</p><p><sup style="color: rgb(255, 0, 0);">[5]</sup> <i>Id.</i> at 173-183. Penned by Commissioner Erlinda T. Agus and concurred in by Presiding Commissioner Julia Cecily Coching-Sosito and Commissioner Nicolas B. Nicolas of the Second Division, National Labor Relations Commission, Quezon City.</p><p><sup style="color: rgb(255, 0, 0);">[6]</sup> <i>Id.</i> at 64-65. </p><p><sup style="color: rgb(255, 0, 0);">[7]</sup> <i>Id.</i> at 65.</p><p><sup style="color: rgb(255, 0, 0);">[8]</sup> <i>Id.</i></p><p><sup style="color: rgb(255, 0, 0);">[9]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[10]</sup> <i>Id.</i></p><p><sup style="color: rgb(255, 0, 0);">[11]</sup> <i>Id.</i> at 65-66. </p><p><sup style="color: rgb(255, 0, 0);">[12]</sup> <i>Id.</i> at 66.</p><p><sup style="color: rgb(255, 0, 0);">[13]</sup> <i>Id.</i></p><p><sup style="color: rgb(255, 0, 0);">[14]</sup> <i>Id.</i></p><p><sup style="color: rgb(255, 0, 0);">[15]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[16]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[17]</sup> <i>Id.</i> at 66-67. </p><p><sup style="color: rgb(255, 0, 0);">[18]</sup> <i>Id.</i> at 67. </p><p><sup style="color: rgb(255, 0, 0);">[19]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[20]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[21]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[22]</sup> <i>Id.</i> at 265-279. Penned by Labor Arbiter Jennifer R. Santos. </p><p><sup style="color: rgb(255, 0, 0);">[23]</sup> <i>Id.</i> at 278-279. </p><p><sup style="color: rgb(255, 0, 0);">[24]</sup> <i>Id.</i> at 269. </p><p><sup style="color: rgb(255, 0, 0);">[25]</sup> <i>Id.</i> at 270. </p><p><sup style="color: rgb(255, 0, 0);">[26]</sup> <i>Id.</i> at 274. </p><p><sup style="color: rgb(255, 0, 0);">[27]</sup> <i>Id.</i> at 243-244. </p><p><sup style="color: rgb(255, 0, 0);">[28]</sup> <i>Id.</i> at 68. </p><p><sup style="color: rgb(255, 0, 0);">[29]</sup> <i>Id.</i> at 68-69. </p><p><sup style="color: rgb(255, 0, 0);">[30]</sup> <i>Id.</i> at 70. </p><p><sup style="color: rgb(255, 0, 0);">[31]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[32]</sup> <i>Id.</i> at 459-469. </p><p><sup style="color: rgb(255, 0, 0);">[33]</sup> <i>Id.</i> at 472-473. </p><p><sup style="color: rgb(255, 0, 0);">[34]</sup> <i>Id.</i> at 474-477. </p><p><sup style="color: rgb(255, 0, 0);">[35]</sup> <i>See</i> <b>Atienza v. Saluta</b>, 853 Phil. 661, 680 (2019) [Per J. J. Reyes, Jr., Second Division]. </p><p><sup style="color: rgb(255, 0, 0);">[36]</sup> <i>Id.</i> at 681. </p><p><sup style="color: rgb(255, 0, 0);">[37]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[38]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[39]</sup> <i>See</i> <b>JS Unitrade Merchandise, Inc. v. Samson, Jr.</b>, 871 Phil. 717, 726 (2020) [Per J. Lazaro-Javier, First Division]. <i>See also</i> <b>Stanley Fine Furniture v. Gallano</b>, 748 Phil. 624, 748 (2014) [Per J. Leonen, Second Division]; <b>Ang v. San Joaquin, Jr.</b>, 716 Phil. 115, 124 (2013) [Per J. Del Castillo, Second Division]; <b>RBC Cable Master System v. Baluyot</b>, 596 Phil. 729, 741 (2009) [Per C.J. Puno, First Division]; and <b>Litonjua Group of Companies v. Vigan</b>, 412 Phil. 627, 640 (2001) [Per J. Gonzaga-Reyes, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[40]</sup> 338 Phil. 681 (1997) [Per J. Romero, Second Division]. </p><p><sup style="color: rgb(255, 0, 0);">[41]</sup> <i>Id.</i> at 685-686. </p><p><sup style="color: rgb(255, 0, 0);">[42]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[43]</sup> <i>See</i> <b>Verizon Communications Philippines, Inc. v. Margin</b>, 885 Phil. 203, 217 (2020) [Per J. Lopez, First Division]. </p><p><sup style="color: rgb(255, 0, 0);">[44]</sup> <i>Rollo</i>, p. 237. </p><p><sup style="color: rgb(255, 0, 0);">[45]</sup> 885 Phil. 203 (2020) [Per J. Lopez, First Division]. </p><p><sup style="color: rgb(255, 0, 0);">[46]</sup> <i>Id.</i> at 217. </p><p><sup style="color: rgb(255, 0, 0);">[47]</sup> <i>Id.</i> at 218-219. </p><p><sup style="color: rgb(255, 0, 0);">[48]</sup> <i>Id.</i> at 224. </p><p><sup style="color: rgb(255, 0, 0);">[49]</sup> <i>See</i> <b>Gimalay v. Court of Appeals</b>, 874 Phil. 627, 648 (2020) [Per J. Lazaro-Javier, First Division]. </p><p><sup style="color: rgb(255, 0, 0);">[50]</sup> <i>See</i> <b>G&amp;S Transport Corporation v. Medina</b>, 929 Phil. 426, 437 (2022) [Per J. Hernando, First Division]. </p><p><sup style="color: rgb(255, 0, 0);">[51]</sup> 553 Phil. 108 (2007) [Per J. Velasco, Jr., Second Division]. </p><p><sup style="color: rgb(255, 0, 0);">[52]</sup> <i>Id.</i> at 115-116. </p><p><sup style="color: rgb(255, 0, 0);">[53]</sup> <i>Rollo</i>, p. 66. </p><p><sup style="color: rgb(255, 0, 0);">[54]</sup> <i>See</i> <b>Philam Homeowners Association, Inc. v. De Luna</b>, 898 Phil. 763 (2021) [Per J. Hernando, Third Division]; <b>Sy v. Neat, Inc.</b>, 821 Phil. 751 (2017) [Per J. Peralta, Second Division]; <b>Santos v. Integrated Pharmaceutical, Inc.</b>, 789 Phil. 477 (2016) [Per J. Del Castillo, Second Division]. </p><p><sup style="color: rgb(255, 0, 0);">[55]</sup> <i>See</i> LABOR CODE, art. 106. </p><p><sup style="color: rgb(255, 0, 0);">[56]</sup> <i>See</i> <b>Conqueror Industrial Peace Management Cooperative v. Balingbing</b>, 919 Phil. 170, 182 (2022) [Per J. Inting, Second Division]. </p><p><sup style="color: rgb(255, 0, 0);">[57]</sup> <i>See</i> <b>Añonuevo v. CBK Power Company</b>, 934 Phil. 171 (2023) [Per J. Singh, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[58]</sup> <i>Rollo</i>, p. 65. </p><p><sup style="color: rgb(255, 0, 0);">[59]</sup> <i>Id.</i> at 68. </p><p><sup style="color: rgb(255, 0, 0);">[60]</sup> <i>See</i> <b>Añonuevo v. CBK Power Company</b>, 934 Phil. 171 (2023) [Per J. Singh, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[61]</sup> <i>Rollo</i>, p. 233. </p><p><sup style="color: rgb(255, 0, 0);">[62]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[63]</sup> <i>Id.</i> at 234-235. </p><p><sup style="color: rgb(255, 0, 0);">[64]</sup> <i>See</i> <b>Ever Electrical Manufacturing, Inc., et al. v. Samahang Manggagawa ng Ever Electrical/NAMAWU Local 224</b>, 687 Phil. 529, 536 (2012) [Per J. Mendoza, Third Division].<br><br></p><hr width="60%" size="1" align="center" noshade=""><div align="center"><b><br></b></div><div align="center"><b>DISSENTING OPINION</b></div><p><b>DIMAAMPAO, <i>J</i>.:</b> </p><p> The <i>ponencia</i> grants the petition and declares petitioner Alvin G. Carpio's (Carpio) dismissal illegal. In so ruling, it ratiocinates that absences from work <i>per se</i> do not establish abandonment, and that the company rule deeming five or more consecutive days of absence as a dismissible offense is too harsh and exceeds the bounds of a valid exercise of management prerogative. Nevertheless, the <i>ponencia</i> withholds backwages because the absences in this case remain unjustified and inexcusable, and the employer, i.e., Great Value Management, acted in good faith under its policy.<sup style="color: rgb(255, 0, 0);">[1]</sup></p><p><b><i>With due respect, I submit a different view and echo the uniform findings of the Labor Arbiter, the National Labor Relations Commission, and the Court of Appeals that the dismissal was valid for just causes.</i></b> </p><p> At the outset, it is no longer disputed that Green Era Biotech and Great Value Management engaged in labor-only contracting, thereby rendering them solidarily liable for Carpio's monetary claims. The sole issue for resolution is whether he was illegally dismissed. </p><p> It is settled that for a dismissal to be valid, the rule is that the employer must comply with both substantive and procedural due process requirements. Substantive due process requires that the dismissal must be pursuant to either a just or an authorized cause under Articles 297, 298, or 299 of the Labor Code. Procedural due process, on the other hand, mandates that the employer must observe the twin requirements of notice and hearing before a dismissal can be effected. Thus, to determine the validity of an employee's dismissal, there is a need to discuss whether there was indeed a just cause for his termination.<sup style="color: rgb(255, 0, 0);">[2]</sup></p><p> In termination cases, the burden of proof in showing that the dismissal was for a valid or authorized cause rests upon the employer. Its failure to discharge this burden would mean that the dismissal was illegal.<sup style="color: rgb(255, 0, 0);">[3]</sup> Based on the attending facts herein, it is my view that the burden has been discharged and the dismissal rests on valid grounds of willful disobedience and serious misconduct. </p><p><i>I endeavor to explicate my stance</i>. </p><p> Great Value Management, purportedly pursuant to a service agreement, engaged Carpio as Utility Helper on January 1, 2017 and assigned him to Green Era Biotech. </p><p> As it happened, Carpio failed to report for work at Green Era Biotech on two separate occasions—first from April 27 to May 3, 2018, and again from May 11 to 19, 2018<sup style="color: rgb(255, 0, 0);">[4]</sup>—amounting to 16 calendar days of absence within roughly three weeks, all without prior approved leave. In terms of working days, this translates to either nine (9) days if computed under a standard five-day workweek (Monday–Friday), or twelve (12) days if reckoned under the six-day workweek (Monday–Saturday) commonly observed in private employment, in both cases excluding May 1 (Labor Day, a regular holiday) and May 14 (a special non-working holiday). </p><p> After the first infraction, Great Value Management Resource Coordinator Christian Pile issued a Notice to Explain dated May 4, 2018, citing a violation of company policy and directing Carpio to account for his conduct, which he did not comply with. Carpio nevertheless incurred a second—and longer—unauthorized absence, prompting the issuance of a subsequent Absence Without Leave (AWOL) notice on May 19, 2018.<sup style="color: rgb(255, 0, 0);">[5]</sup> Regardless of the duration of the workweek, what remains is the material fact that Carpio committed two distinct instances of AWOL in breach of reasonable company rules, which Great Value Management treated as violations of its prescribed leave process. </p><p> Worse, Carpio invoked "sickness" and a "toothache" to justify his absences, <b>yet offered no contemporaneous medical certificate, clinic slip, or any documentary substantiation despite clear policy requiring written proof for health-related leaves.</b> Records evince that he was even accommodated with a half-day on May 10 when he allegedly felt unwell,<sup style="color: rgb(255, 0, 0);">[6]</sup> which reveals that Great Value Management acted in good faith. There is likewise no indication that it would have rejected the leave application of Carpio had he complied with the requirements. </p><p> Evidently, Carpio's conduct reflects a deliberate non-compliance with established company policy. </p><p> At this juncture, it bears stressing—and remains uncontroverted—that upon hiring, Carpio was informed of and furnished a copy of the employee handbook, <i>Mga Alituntunin at Patakaran</i>, and agreed to abide by it.<sup style="color: rgb(255, 0, 0);">[7]</sup> It explicitly provides that failure to report for work for at least five consecutive days without authorization <i>("Di pagpasok sa trabaho [nang] hindi kukulang sa [limang] araw sa sunod-sunod <b><u>[nang] walang pasabi</u></b>")</i> constitutes gross and habitual neglect of duty and serious misconduct warranting termination. Great Value Management, as with all employers, may promulgate policies, rules, and regulations on work-related activities of its employees. This includes the implementation of company rules and regulations and the imposition of disciplinary measures on its workers.<sup style="color: rgb(255, 0, 0);">[8]</sup> </p><p> To my mind, the company policy is reasonable and lawful as it <b>does not prohibit employees from being absent</b>. <b><u>It only requires that absences exceeding five consecutive days be reported and authorized.</u></b> The rule appears to target non-communication—not illness or emergencies—and ensures staffing predictability, operational continuity, and fairness to co-workers, while still accommodating legitimate reasons through a simple duty to notify HR and, when appropriate, submit basic documentation. If Carpio was ill or otherwise indisposed, he could have easily informed HR through the available channels and avoided any violation. His failure to do so—twice, and after being formally warned—breached a clear, reasonable, and work-related requirement, justifying the imposition of disciplinary measures. </p><p> Under the Labor Code,<sup style="color: rgb(255, 0, 0);">[9]</sup> an employer may terminate the services of an employee for a just cause. <b>While there was no abandonment, I submit that Carpio's dismissal was justified on the ground of willful disobedience and serious misconduct</b>. </p><p> One of the fundamental duties of an employee is to obey all reasonable rules, orders, and instructions of the employer. Willful disobedience of the employer's lawful orders, as a just cause for dismissal of an employee, envisages the concurrence of at least two requisites: (1) the employee's assailed conduct must have been willful, that is, characterized by a wrongful and perverse attitude; and (2) the order violated must have been reasonable, lawful, made known to the employee and must pertain to the duties which he had been engaged to discharge.<sup style="color: rgb(255, 0, 0);">[10]</sup> These requisites obtain in this case. Serious misconduct, on the other hand, is a transgression of some established and definite rule of action, a forbidden act, a dereliction of duty, willful in character, and indicative of wrongful intent and not mere error of judgment.<sup style="color: rgb(255, 0, 0);">[11]</sup> Here, <b>Carpio offered no valid justification for his two successive periods of prolonged, unauthorized absence.</b> His intentional disregard of company rules manifests willful disobedience and indifference to his work and to the employer's interests. Indeed, there can be no good faith in deliberately and repeatedly incurring inexcusable absences.<sup style="color: rgb(255, 0, 0);">[12]</sup> </p><p> On the penalty of dismissal, it is my humble stance that the same was proper and justified after Carpio went on unexcused leave twice, in close succession. Verily, Great Value Management merely applied the penalty provided under its employee handbook, as a lawful and reasonable exercise of its management prerogative. </p><p> In line with the fact that an employee's right to security of tenure does not give him a vested right to his position, Carpio should also be reminded that employers like Great Value Management have the prerogative to prescribe reasonable rules and regulations necessary or proper for the conduct of their business, and to provide certain disciplinary measures in order to implement said rules. Even as the State affords protection to labor, it also safeguards the right of employers to exercise what are clearly management prerogatives, so long as the exercise is without abuse of discretion.<sup style="color: rgb(255, 0, 0);">[13]</sup> Clearly, there is no abuse here. </p><p> Notably, the facts of the instant case are substantially similar to <i>Almogera, Jr. v. A &amp; L Fishpond &amp; Hatchery, Inc</i>.,<sup style="color: rgb(255, 0, 0);">[14]</sup> where the Court upheld dismissal for AWOL grounded on a written leave/attendance policy after the employee failed to report for <b>11 consecutive days</b> without prior approved leave of absence and offered no written or verbal explanation. The Court even brushed aside the plea of first offense therein. </p><p> As a final point, I agree with the <i>ponencia</i>'s finding that Great Value Management failed to observe procedural due process, warranting an award of nominal damages. Although it issued a first notice (Notice to Explain), no hearing—or equivalent opportunity to be heard—was conducted. No Notice of Termination was likewise issued. The Notice of AWOL is not the second notice contemplated by law as it merely advised that Carpio's continued absence would be treated as serious misconduct/abandonment and did not communicate a definitive dismissal with the factual and legal bases for termination. </p><p> Accordingly, I vote to DENY the petition.<br><br></p><hr width="60%" size="1" align="LEFT" noshade=""><p><sup style="color: rgb(255, 0, 0);">[1]</sup> See <i>ponencia</i>, pp. 8-12. </p><p><sup style="color: rgb(255, 0, 0);">[2]</sup> <b>Almogera, Jr. v. A &amp; L Fishpond and Hatchery, Inc., G.R. No. 247428</b>, 897 Phil 459-475, February 17, 2021 [Per J. Delos Santos, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[3]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[4]</sup> See <i>ponencia</i>, p. 4. </p><p><sup style="color: rgb(255, 0, 0);">[5]</sup> <i>Id.</i> at 3. </p><p><sup style="color: rgb(255, 0, 0);">[6]</sup> <i>Id.</i> at 4.</p><p><sup style="color: rgb(255, 0, 0);">[7]</sup> <i>Id.</i> at 3.</p><p><sup style="color: rgb(255, 0, 0);">[8]</sup> <i>See</i> <b>Raza v. Daikoku Electronics Phils., Inc.</b>, 765 Phil. 61, 82 (2015) [Per J. Peralta, Third Division]. </p><p><sup style="color: rgb(255, 0, 0);">[9]</sup> Art. 282. <i>Termination by employer</i>. — An employer may terminate an employment for any of the following causes:</p><blockquote><table width="100%" border="0" cellspacing="0" cellpadding="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">Serious misconduct or <b>willful disobedience</b> by the employee of the lawful orders of his employer or representative in connection with his work[.] </div></td></tr></tbody></table></blockquote><p><sup style="color: rgb(255, 0, 0);">[10]</sup> <b>Almogera, Jr. v. A &amp; L Fishpond and Hatchery, Inc., G.R. No. 247428</b>, 897 Phil. 459-475, February 17, 2021 [Per J. Delos Santos, Third Division].</p><p><sup style="color: rgb(255, 0, 0);">[11]</sup> <i>See</i> <b>Quiambao v. Manila Electric Railroad and Light Co., G.R. No. 171023</b>, 623 Phil. 416-424, December 18, 2009 [Per J. Del Castillo, Second Division].</p><p><sup style="color: rgb(255, 0, 0);">[12]</sup> <i>Id.</i> </p><p><sup style="color: rgb(255, 0, 0);">[13]</sup> See <b>Sy v. Neat, Inc.</b>, 821 Phil. 751, 774 (2017) [Per J. Peralta, Second Division].</p><p><sup style="color: rgb(255, 0, 0);">[14]</sup> <b>G.R. No. 247428</b>, February 17, 2021 [Per J. Delos Santos, Third Division]. </p></div><br></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

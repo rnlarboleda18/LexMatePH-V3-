@@ -58,9 +58,9 @@ const LandingPage = ({ onEnterApp }) => {
                         </div>
                         <div className="relative z-10 min-w-0 flex-1 max-lg:min-w-0 lg:max-w-[26rem] xl:max-w-[28rem]">
                             <h1 className="font-display text-xl font-semibold leading-[1.12] tracking-tight text-gray-900 dark:text-white max-lg:leading-snug sm:max-lg:text-2xl lg:text-[1.55rem] lg:leading-snug xl:text-2xl 2xl:text-3xl">
-                                Study Smart
+                                LexMatePH
                                 <span className="mt-1 block bg-gradient-to-r from-indigo-700 via-violet-700 to-amber-700 bg-clip-text text-transparent dark:from-indigo-200 dark:via-violet-200 dark:to-amber-200 sm:mt-1.5 lg:mt-1">
-                                    without the burnout with your all-in-one legal companion
+                                    Your all-in-one Legal Companion App. One App does all.
                                 </span>
                             </h1>
                             <p className="mt-2 max-w-xl text-xs leading-relaxed text-gray-700 dark:text-gray-300 max-lg:max-w-none sm:mt-3 sm:max-lg:text-sm lg:mt-2.5 lg:text-sm xl:text-[0.95rem]">

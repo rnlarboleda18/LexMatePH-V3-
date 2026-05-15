@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 256723 - COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. UPS-DELBROS TRANSPORT, INC., RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70346' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 256723, December 01, 2025 ]</H2>
+			<H3>COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. UPS-DELBROS TRANSPORT, INC., RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by the Commissioner of Internal Revenue (CIR), through the Office of the Solicitor General, assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated November 19, 2020 (assailed Decision), and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated June 2, 2021, of the Court of Tax Appeals (CTA) <i>En Banc</i> in CTA EB Nos. 2026 and 2031. The assailed issuances affirmed the Amended Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated October 19, 2018, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated February 21, 2019, of the CTA Special Third Division (CTA Division) in CTA Case No. 9063, which upheld the deficiency expanded withholding tax (EWT) assessment against UPS-Delbros Transport, Inc. (UDTI) amounting to PHP 219,421.07, inclusive of interest. </p><p align="center"> <i>The Antecedents</i> </p><p> On September 4, 2006, UDTI received Letter of Authority (LOA) No. 2001-00028936, authorizing Revenue Officers Gilquin Tolentino and Group Supervisor Crispo Y. Macarabe to examine its books of accounts and other accounting records for calendar year (CY) 2005.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> On December 8, 2008, UDTI received a Preliminary Assessment Notice (PAN) dated December 5, 2008. The PAN proposed deficiency income tax, Value-Added Tax (VAT), and EWT assessments for CY 2005, in the amounts of PHP 42,398,361.16, PHP 13,041,298.87, and PHP 1,026,627.83, respectively. UDTI contested the audit findings in its reply to the PAN filed on December 23, 2008.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p> During the course of the examination, UDTI executed several Waivers of the Defense of Prescription (waivers) under the Statute of Limitations of the National Internal Revenue Code (Tax Code).<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> On June 29, 2010, UDTI received a Formal Assessment Notice (FAN) dated June 28, 2010, which demanded payment for deficiency income tax, VAT, and EWT for CY 2005, in the respective amounts of PHP 49,082,932.28, PHP 14,781,353.13, and PHP 1,209,388.34.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></p><p> UDTI filed its administrative protest letter against the FAN on July 26, 2010, requesting the cancellation and withdrawal of the assessments. On the same day, it submitted supporting documents.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> On May 8, 2015, UDTI received the Final Decision on Disputed Assessment (FDDA) dated May 5, 2015, wherein the CIR ordered UDTI to pay deficiency income tax, VAT, and EWT for CY 2005, totaling PHP 87,229,227.61, inclusive of interest.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> Aggrieved, UDTI filed a judicial protest before the CTA on June 5, 2015. The CIR, in his Answer, maintained that the assessments were valid and issued within the prescriptive period on account of the waivers executed by UDTI. The CIR further alleged that UDTI failed to submit sufficient evidence to rebut the findings against it.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> After the parties submitted their Pre-Trial Briefs and a Joint Stipulation of Facts and Issues, the CTA terminated the pre-trial through an Order dated January 5, 2016.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> During the trial, UDTI presented three witnesses: (i) Florinda P. Casilag (Casilag), the Finance and Accounting Manager of UPS International General Services Co.; (ii) Maurice Gohoce, Director of UPS Delbros International Express Ltd., Inc. (UDE); and (iii) Maria Myla S. Maralit, the court-commissioned Independent Certified Public Accountant. UDTI formally offered its evidence, which the CTA admitted in Resolutions dated June 14, 2016, and September 16, 2016.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> The CIR, for his part, presented Revenue Officer Roland S. Dela Torre as his witness and likewise formally offered his evidence, which the CTA also admitted in the Resolution dated April 17, 2017.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> UDTI filed its Memorandum on June 19, 2017. The CIR, for his part, filed a Manifestation adopting his previously filed pleadings in lieu of a memorandum. Consequently, the CTA declared the case submitted for decision. </p><p align="center"> <i>The Ruling of the CTA Division</i> </p><p> In the Decision<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> dated May 22, 2018 (Original Decision), the CTA Division partially granted UDTI's judicial protest. The dispositive portion of the Decision reads: </p><blockquote> <p> WHEREFORE, premises considered, the assessments issued by [the CIR] against [UDTI] for taxable year 2005 covering deficiency income tax and value-added tax are CANCELLED for lack of merit, while the deficiency expanded withholding tax assessment is AFFIRMED. Accordingly, [UDTI] is hereby ORDERED TO PAY respondent the amount of SEVEN HUNDRED FIFTY-SIX THOUSAND SEVEN HUNDRED FIFTY-FIVE PESOS AND 60/100 ([PHP] 756,755.60) representing basic deficiency expanded withholding tax and the 25% surcharge imposed under Section 248(A)(3) of the NIRC of 1997, as amended: </p> <blockquote> <table width="100%" border="1" cellspacing="0" cellpadding="0"> <tbody><tr> <td width="50%"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td>Basic Tax Due</td> </tr> </tbody></table></td> <td width="50%"><div align="right"> <table width="80%" border="0" align="left" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">[PHP ]605,404.48</div></td> </tr> </tbody></table> </div></td> </tr> <tr> <td><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td> Add: 25% Surcharge</td> </tr> </tbody></table></td> <td><div align="right"> <table width="80%" border="0" align="left" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">[PHP ]151,351.12</div></td> </tr> </tbody></table> </div></td> </tr> <tr> <td><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td>Total Amount Due</td> </tr> </tbody></table></td> <td><div align="right"> <table width="80%" border="0" align="left" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">[PHP ]756,755.60 </div></td> </tr> </tbody></table> </div></td> </tr> </tbody></table> </blockquote> <p>In addition, petitioner is hereby ORDERED TO PAY: </p> <p> (a) Deficiency interest at the rate of [20%] per annum on the basic expanded withholding tax computed from January 11, 2006 until December 31, 2017 pursuant to Section 249(B) of the [Tax Code], as amended; []</p> <p> (b) Delinquency interest at the rate of 20% per annum on the total amount of [PHP] 756,755.60 and on the deficiency interest which accrued as afore-stated in (a), computed from June 5, 2015 until December 31, 2017 pursuant to Section 249(C) of the [Tax Code], as amended; and</p> <p> (c) Delinquency interest at a rate of 12% per annum on the unpaid amount (basic tax plus surcharge plus interests computed in (a) and (b)) from January 1, 2018 until the amount fully paid[,] pursuant to the relevant provision of Republic Act No. 10963[,] more commonly known as the TRAIN Law, which took effect on January 1, 2018. </p> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p> </blockquote> <p> The tax court ruled that the 10-year prescriptive period for fraud under Section 222 of the Tax Code was not applicable, as the CIR failed to prove by clear and convincing evidence that UDTI filed false or fraudulent returns.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Nevertheless, it found that the waivers were valid and effectively extended the ordinary three-year prescriptive period, rendering the assessment timely.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Consequently, the 50% surcharge for fraud was cancelled.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> The CTA Division cancelled the assessments for deficiency income tax and VAT, finding no factual basis for the CIR's claim of undeclared income. It explained its findings on the following grounds: </p><p> <i>First</i>, a discrepancy in salaries and wages amounting to PHP 4,799,050.19 did not automatically mean undeclared income. The CTA Third Division reasoned that a taxpayer is free to claim, or not claim, an expense as a deduction; what the law prohibits is overclaiming a deduction, not underclaiming one.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></p><p> <i>Second</i>, regarding the alleged undeclared revenue amounting to PHP 55,415,430.00, the CTA Third Division gave credence to UDTI's explanation that this resulted from an erroneous double withholding of tax by UPS Delbros International Express Ltd., Inc. (UDE).<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> <i>Third</i>, it cancelled the assessment on the disallowed Net Operating Loss Carry-Over of PHP 3,578,684.00, ruling that any tax benefit from it would apply to subsequent years, which were outside the scope of the CY 2005 assessment.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> <i>Fourth</i>, it found the disallowance of the PHP 4,412,998.00 carry-over amount improper for the same reason: any tax benefit would be realized in a succeeding year, not the period under review.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> </p><p> <i>Fifth</i>, the deficiency VAT assessment, which was based on alleged undeclared sales of PHP 55,415,420.50, was also cancelled because the CTA Third Division had already attributed this amount to an error by UDE.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> The tax court, however, upheld the assessment for EWT deficiency. It invoked the presumption of correctness of a tax assessment and held that while the CIR's computation method was based on an estimate, the burden was on UDTI to prove that the assessment was wrong, which it failed to do. Consequently, it imposed a surcharge at the rate of 25% on the EWT deficiency for failure to pay within the prescribed period.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> UDTI moved for partial reconsideration, specifically questioning the validity of the waivers and the upheld deficiency EWT assessment.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Notably, the CIR did not file a motion for reconsideration to challenge the cancellation of the deficiency income tax and VAT assessments. </p><p> Subsequently, the CTA Division promulgated an Amended Decision<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> dated October 19, 2018, which partially granted UDTI's motion for partial reconsideration. The dispositive portion of the Amended Decision reads: </p><blockquote> <p> WHEREFORE, premises considered, petitioner's Motion for Partial Reconsideration (Re: Decision dated May 22, 2018) is PARTIALLY GRANTED. </p> <p> Accordingly, the Decision dated May 22, 2018 is amended to read as follows: </p> <blockquote> <p> 'WHEREFORE, premises considered, the assessments issued by respondent against petitioner for [the] taxable year 2005 covering deficiency income tax and value-added tax are CANCELLED for lack of merit, while the deficiency expanded withholding tax assessment is AFFIRMED with modification. Accordingly, petitioner is hereby ORDERED TO PAY respondent the amount of Two Hundred Nineteen Thousand Four Hundred Twenty-One Pesos and 07/100 ([PHP] 219,421.07), representing Basic expanded withholding tax, 25% surcharges imposed under Section 248(A)(3) of the [Tax Code], as amended, 20% deficiency interest and 20% delinquency interest imposed under Sections 249(B) and (C), respectively, of the same Code, computed until December 31, 2017, to wit:</p> <blockquote> <table width="100%" border="1" cellspacing="0" cellpadding="0"> <tbody><tr> <td valign="top"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td>Basic Tax Due </td> </tr> </tbody></table></td> <td valign="top"><table width="96%" border="0" align="left" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">[PHP] 41,730.40 </div></td> </tr> </tbody></table></td> </tr> <tr> <td valign="top"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td>Add: 25% Surcharge </td> </tr> </tbody></table></td> <td valign="top"><table width="96%" border="0" align="left" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">10,432.60</div></td> </tr> </tbody></table></td> </tr> <tr> <td width="69%" valign="top"><div align="center"> <table width="96%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="10%">&nbsp;</td> <td width="90%" valign="top"><div align="justify">20% Deficiency Interest from January 12, 2006 to June 5, 2015 (3,432 days)</div></td> </tr> </tbody></table> </div></td> <td width="31%" valign="top"><table width="96%" border="0" align="left" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="right">78,476.02</div></td> </tr> </tbody></table></td> </tr> <tr> <td valign="top"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td>Total Amount Due, June 5, 2015</td> </tr> </tbody></table></td> <td valign="top"><table width="96%" border="0" align="left" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">[PHP] 130,639.02</div></td> </tr> </tbody></table></td> </tr> <tr> <td valign="top"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr valign="top"> <td width="10%"><div align="justify">Add:</div></td> <td width="90%"><div align="justify">20% Deficiency Interest from June 6, 2015 to December 31, 2017 (940 days; based on basic tax of [PHP ]41,730.40)</div></td> </tr> </tbody></table></td> <td valign="top"><table width="96%" border="0" align="right" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="middle"><div align="left"> <p align="left"> x21,494.01<br> <br> </p> </div></td> </tr> </tbody></table></td> </tr> <tr> <td valign="top"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr valign="top"> <td width="10%"><div align="justify"></div><br></td> <td width="90%"><div align="justify">20% Delinquency Interest from June 6, 2015 to December 31, 2017 (940 days; based on total amount due of [PHP ]130,639.02 as of June 5, 2015)</div></td> </tr> </tbody></table></td> <td valign="top"><table width="96%" border="0" align="left" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">67,288.04</div></td> </tr> </tbody></table></td> </tr> <tr> <td valign="top"><table width="96%" border="0" align="center" cellpadding="0" cellspacing="0"> <tbody><tr> <td>Total Amount Due as of December 31, 2017 </td> </tr> </tbody></table></td> <td valign="top"><table width="96%" border="0" align="left" cellpadding="0" cellspacing="0"> <tbody><tr> <td><div align="right">[PHP] 219,421.07 </div></td> </tr> </tbody></table></td> </tr> </tbody></table> </blockquote> <p>In addition, [UDTI] is liable to pay delinquency interest at the rate of 12% on the total unpaid amount of [PHP] 130,639.02 as of June 5, 2015, as determined above, computed from January 1, 2018 until full payment thereof pursuant to Section 249(C) of the [Tax Code], as amended by Republic Act No. 10963, also known as the ["]Tax Reform for Acceleration and Inclusion Law,[''] and as implemented by RR No. 21-2018.</p> <p> SO ORDERED.'</p> </blockquote> <p> SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p> </blockquote> <p> The CTA Division ruled that the assessments for deficiency VAT for the first to third quarters of CY 2005 and for deficiency EWT from January to November 2005 were void, as they were issued beyond the three-year prescriptive period under Section 203 of the Tax Code. It found that the first waiver, executed on January 6, 2009, was already belated for those periods. Moreover, the tax court noted that the deficiency VAT assessment had already been cancelled in the Original Decision, leaving only the deficiency EWT assessment for December 2005 as timely issued.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> The CTA Division then affirmed the validity of the assessment method used by the CIR for the remaining deficiency EWT. It held that because UDTI's own accounting system was unavailable for verification—a fact UDTI did not controvert—the CIR was justified in resorting to the "best evidence obtainable" under Section 6(B) of the Tax Code. The assessment, which was based on an analysis of UDTI's Accounts Payable register, was deemed <i>prima facie</i> correct. The CTA Division found that UDTI failed to present clear and convincing proof to overturn the validity of the deficiency EWT assessment.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></p><p> Consequently, the CTA Division further reduced the deficiency EWT assessment. It recomputed the liability to cover only the month of December 2005, resulting in a basic deficiency EWT of PHP 41,730.40.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p> Finally, the CTA Division addressed the computation of interests in light of Republic Act No. 10963, or the Tax Reform for Acceleration and Inclusion (TRAIN) Law. It ruled that the 20% deficiency and delinquency interest rates under the old Tax Code were applicable until December 31, 2017. Starting January 1, 2018, the new 12% delinquency interest rate would apply until the total amount is fully paid. The dispositive portion of the decision was amended to order UDTI to pay the total amount of PHP 219,421.07, representing the basic EWT, surcharge, and interests computed up to December 31, 2017, plus the 12% delinquency interest on the unpaid amount thereafter.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup></p><p> Both parties filed their respective Motions for Reconsideration of the Amended Decision<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> dated October 19, 2018. The CTA Division denied both Motions in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> dated February 21, 2019. Aggrieved by the denial, both the CIR and UDTI elevated the case to the CTA <i>En Banc</i> by filing their respective Petitions for Review.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p><p align="center"> <i>The Ruling of the CTA En Banc</i> </p><p> In the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> dated November 19, 2020, the CTA <i>En Banc</i> denied both Petitions and affirmed the Amended Decision and the Resolution of the CTA Division. </p><p> The CTA <i>En Banc</i> upheld the validity of the waivers, finding that they complied with the requirements of Section 222(b) of the Tax Code and pertinent revenue issuances. It held that minor defects, such as citing the wrong provision of the law, did not invalidate the waivers, especially considering that UDTI was never deprived of the opportunity to contest the assessment.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Nevertheless, considering that the first waiver was executed by UDTI only on January 6, 2009 and accepted on January 7, 2009, only the EWT of PHP 41,730.40 pertaining to the month of December 2005 was timely assessed.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> The CTA <i>En Banc</i> affirmed the cancellation of the income tax and VAT assessments, agreeing with the CTA Division that UDTI had sufficiently proven that there was no undeclared income. The evidence showed that the discrepancy arose from an erroneous double withholding of tax by UDE, a third-party payor, a fact confirmed by the payor's director and its own records.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> </p><p> Further, the CTA <i>En Banc</i> sustained the deficiency EWT assessment for December 2005. It ruled that the assessment was based on the best evidence obtainable, as permitted by Section 6(B) of the Tax Code, because UDTI's own accounting system was unavailable for verification. The tax court reiterated the principle that tax assessments are presumed correct and that the taxpayer bears the burden of proving otherwise. It found UDTI's evidence insufficient to rebut the EWT assessment.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup></p><p> Finally, the CTA <i>En Banc</i> affirmed the simultaneous imposition of deficiency and delinquency interests. It explained that the two interests are distinct in nature: deficiency interest is imposed for the shortage in taxes paid, while delinquency interest is imposed for the delay in payment. It held that the law clearly allows for their concurrent application and upheld the computation applying the 20% interest rate before the effectivity of the TRAIN Law and the 12% rate thereafter.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </p><p> Both parties filed their Motions for Reconsideration, which the CTA <i>En Banc</i> denied in the assailed Resolution<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> dated June 2, 2021. The CTA <i>En Banc</i> found that the arguments raised were a mere rehash of issues already passed upon. It specifically addressed UDTI's new argument concerning alleged defects in the notarization of the waivers, ruling that there were no fatal infirmities that would warrant their nullification and that, in any case, UDTI was responsible for the purported defects in the notarization and could not use its oversight to its advantage.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </p><p> Hence, the CIR filed the present Petition. </p><p align="center"> <i>The Arguments of the CIR</i> </p><p> The CIR assails the ruling of the CTA <i>En Banc</i>, arguing that it erred in affirming the cancellation of the deficiency income tax and VAT assessments issued to UDTI for CY 2005. </p><p> The CIR maintains that UDTI had undeclared income of PHP 55,415,430.00 for CY 2005. He points to the fact that while UDE made two separate income payments to UDTI of that amount, and UDTI claimed creditable withholding taxes for both payments in its Income Tax Return (ITR), it declared only one of the payments as revenue. The CIR posits that the evidence UDTI presented to explain this discrepancy—namely, a self-serving Confirmation Certificate from UDE and the testimony of its witness, Casilag—is hearsay and lacks probative value. The CIR insists that UDTI was obligated to present the signatories of its returns, invoices, and official receipts to prove its claims.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> Further, the CIR argues that the substantial underdeclaration of income renders UDTI's 2005 ITR a false return. Citing <i>Aznar v. Court of Tax Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> the CIR posits that a return is considered false when it contains wrong information due to mistake, carelessness, or ignorance, and that an intent to evade taxes is not a necessary element. According to the CIR, the return's falsity, established by the failure to report more than 30% of its income, creates a <i>prima facie</i> case that warrants applying the extraordinary ten-year prescriptive period to assess under Section 222(a) of the Tax Code.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup></p><p align="center"> <i>The Arguments of UDTI</i> </p><p> In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> UDTI manifests that it has already paid its EWT deficiency in the total amount of PHP 276,200.73.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Hence, UDTI posits that there is no more reason tor the Court to revisit the assailed issuances of the CTA <i>En Banc</i>.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup></p><p> Further, UDTI argues that the Petition lacks merit, invoking the principle that the factual findings of the CTA, as a specialized court with recognized expertise, are accorded great respect and are not to be disturbed on appeal absent any showing of gross error or abuse of authority.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></p><p> UDTI asserts that it presented sufficient evidence to prove there was no undeclared income and that the discrepancy merely resulted from an erroneous double withholding of tax by its client, UDE. It refutes the CIR's hearsay objection, arguing that its witness, Casilag, had personal knowledge of the transactions and that the commercial documents it submitted have recognized probative value.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p><p> Finally, UDTI argues that the ten-year prescriptive period under Section 222(a) of the Tax Code is inapplicable. Because the CTA correctly found that there was no undeclared income, there is no basis to claim that the ITR was false. Citing <i>Commissioner of Internal Revenue v. Philippine Daily Inquirer, Inc</i>.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> and <i>Commissioner of Internal Revenue v. B.F. Goodrich Phils</i>.,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> UDTI posits that for a return to be considered false for the purpose of applying the extraordinary prescriptive period, the deviation from the truth must be accompanied by a clear and willful intention to evade tax, which the CIR failed to prove.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p><p align="center"> <i>The Issue</i> </p><p> The sole issue is whether the CTA <i>En Banc</i> erred in affirming the cancellation of the deficiency income tax and VAT assessments against UDTI for CY 2005. </p><p align="center"> <i>The Ruling of the Court</i> </p><p> The present Petition is bereft of merit. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The Petition raises questions of fact not cognizable under a Rule 45 Petition</i> </div></td> </tr> </tbody></table> <p>It is well-settled that the Court's review sought via Rule 45 of the Rules of Court shall be limited to resolving pure questions of law.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> A question of law exists when the doubt or controversy concerns the correct application of law or jurisprudence to a certain set of facts, while a question of fact arises when the issue is the truth or falsehood of alleged facts.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> The issue is a question of law if the Court can resolve it without reviewing the evidence; it is a question of fact if an evidence review is necessary.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> </p><p> Here, the CIR's entire case hinges on the matter of UDTI's alleged undeclared income. This issue turns on a single question of fact: whether UDE made two separate payments of PHP 55,415,430.00, or just one, to UDTI for CY 2005. Resolving this would require the Court to re-examine and weigh the evidence, which has already been meticulously examined by the CTA Division, whose findings were upheld by the CTA <i>En Banc</i>. </p><p> Notably, the CTA Division already ruled that UDTI received the amount of PHP 55,415,430.00 from UDE once. It was already found that UDE made an error in preparing two separate creditable withholding tax certificates pertaining to the same amount, resulting in a double withholding of tax from the same revenue transaction. Thus, UDTI was not obliged to declare income from the same revenue transaction a second time.</p><p> As a highly specialized body with the expertise to adjudicate tax matters, the CTA's findings are not to be disturbed on appeal unless it is shown that they are not supported by substantial evidence or there is a clear showing of gross error or improvident exercise of authority on its part.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> The CIR has failed to demonstrate that any of the recognized exceptions<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> to this rule is present in the case at bar. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The CTA Division's cancellation of the deficiency income tax and VAT assessments has attained finality</i> </div></td> </tr> </tbody></table> <p>The core of this case rests on a crucial procedural lapse by the CIR. </p><p> Rule 15, Section 1 of the Revised Rules of the CTA requires an aggrieved party to file a motion for reconsideration within 15 days from receipt of the adverse Decision of the CTA: </p><p align="center"> RULE 15 <br>MOTION FOR RECONSIDERATION OR NEW TRIAL </p><blockquote> <p> SECTION 1. <i>Who may and when to file motion</i>. – Any aggrieved party may seek a reconsideration or new trial of any decision, resolution or order of the Court. He shall file a motion for reconsideration or new trial within fifteen days from the date he received notice of the decision, resolution or order of the Court in question. </p> </blockquote> <p> Following the promulgation of the Original Decision, only UDTI filed a timely Motion for Partial Reconsideration, and it did so exclusively with respect to the finding on the validity of the waivers and its EWT deficiency. The record is clear: the CIR never filed a motion for reconsideration of the cancellation of the deficiency income and VAT assessments in the Original Decision.</p><p> This procedural lapse is fatal to the CIR's case. </p><p> While rendered as a single judgment, the Original Decision effectively made three distinct rulings: (1) it upheld the validity of the waivers; (2) it cancelled the income tax and VAT deficiency assessments for lack of factual basis; and (3) it affirmed the deficiency EWT assessment, which was based on the best evidence obtainable. </p><p> The concept of separate judgments is recognized in Section 5, Rule 36 of the Rules of Court, to wit: </p><blockquote> <p> SECTION 5. <i>Separate judgments</i>. – When more than one claim for relief is presented in an action, the court, at any stage, upon a determination of the issues material to a particular claim and all counterclaims arising out of the transaction or occurrence which is the subject matter of the claim, may render a separate judgment disposing of such claim. The judgment shall terminate the action with respect to the claim so disposed of and the action shall proceed as to the remaining claims. In case a separate judgment is rendered, the court by order may stay its enforcement until the rendition of a subsequent judgment or judgments and may prescribe such conditions as may be necessary to secure the benefit thereof to the party in whose favor the judgment is rendered. </p> </blockquote> <p> This provision establishes that different claims within a single case can be treated as separate and distinct, allowing a judgment on one claim to become final and executory even while others remain pending. It underscores the principle that a ruling on a severable issue can be conclusively resolved independently of the main action. </p><p> This same principle of severance can also be initiated by the parties themselves. When a party files a motion for partial new trial or consideration and selectively challenges a specific portion of the assailed judgment, said party is performing an explicit act of severance. This finds support in Section 7, Rule 37 of the Rules of Court: </p><blockquote> <p> SECTION 7. <i>Partial new trial or reconsideration</i>. – If the grounds for a motion under this Rule appear to the court to <i>affect the issues as to only a part, or less than all of the matter in controversy, or only one, or less than all, of the parties to it, the court may order a new trial or grant reconsideration as to such issues if severable <b>without interfering with the judgment or final order upon the rest.</b> </i>(Emphasis supplied)</p> </blockquote> <p> Consequently, when a party files a motion for <i>partial</i> new trial or reconsideration, the 15-day reglementary period shall be tolled only with respect to the challenged portions, if severable, without interfering with the judgment or final order upon the rest. In other words, the partial motion interrupts the reglementary period only for the issues it raises. It follows then that the reglementary period shall continue to run with respect to the unchallenged parts. Those portions that will remain unassailed after the lapse of this period shall become final and executory by operation of law and, thus, immutable.</p><p> From these provisions, a clear test for severability emerges which hinges on this crucial question: Would a review of the challenged portion of a judgment logically or legally interfere with the finality of the unchallenged portions? If a review of the challenged portion will not interfere with the unchallenged portions, the judgment is severable. In such cases, a partial motion for new trial or reconsideration tolls the reglementary period only for the specific issues it raises. For the parts that are not assailed by any party, the 15-day period to appeal continues to run, and upon its lapse, they become final and executory by operation of law.</p><p> Conversely, the judgment is <i>not severable</i> if the unchallenged portions are <i>inextricably linked</i> with those challenged in the motion. A motion challenging one part, which necessarily affects the others, tolls the reglementary period for the finality of the entire judgment.</p><p> The distinction between severable and intertwined issues was elucidated in <i>Associated Anglo-American Tobacco Corp., et al. vs. Hon. Court of Appeals, et al</i>.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup></p><p> In <i>Associate Anglo-American Tobacco</i>, the Court found that the issue of releasing a mortgaged property was inextricably linked to the computation of a monetary overage and the award of damages. It was held that a re-examination of the entire account during appeal could potentially alter the finding of an overage, which would necessarily affect the correctness of the property's release and the basis for damages. Because the issues were not severable, the Court ruled that the original decision and the subsequent order amending a portion of it formed "one integrated amended decision," and an appeal from the amended order was effectively an appeal from the whole.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup></p><p> In contrast, the Court has applied the principle of partial finality when the issues are severable, ruling that any unchallenged portions of a decision attain finality independent from the challenged portion.</p><p> In the case of <i>Incumbent and Former Employees of the National Economic and Development Authority Regional Office XIII v. Commission on Audit Chairperson Aguinaldo</i>,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> the Court was unequivocal: the filing of a motion for partial reconsideration only tolls the running of the reglementary period for the portion of the decision that was challenged, that is, the liability of the officers. The period continues to run for the parts of the decision not assailed, that is, the liability of the recipients, the petitioners therein. Thus, the Court held that the Commission on Audit (COA) Proper should have limited its resolution to the issues raised in the motion for partial reconsideration. Considering that no party questioned the exoneration of the petitioners therein, judgment on the said matter lapsed into finality. This has a profound consequence—no court or tribunal (not even the Court) can review or modify the said judgment, to wit: </p><blockquote> <p> <i>Petitioners' exoneration has become final</i></p> <p> Since no party questioned the COA Proper's affirmance of petitioners' exemption from liability, judgment on that matter undeniably lapsed into finality pursuant to Rule X, Section 9 of the RRPC, as amended. It is well-established, a judgment becomes final and executory by operation of law. Finality becomes a fact when the reglementary period to question the judgment lapses and no such question was lodged. As a consequence, no court or tribunal (not even this Court) can review or modify a judgment that has become final. Our pronouncement in <i>One Shipping Corp. v. Peñafiel</i> is apropos:</p> <blockquote> <p> In <i>Aliviado v. Procter and Gamble Phils., Inc</i>., [we ruled]:</p> <p> It is a hornbook rule that once a judgment has become final and executory, it may no longer be modified in [any] respect, even if the modification is meant to correct an erroneous conclusion of fact or law, and regardless of whether the modification is attempted to be made by the court rendering it or by the highest court of the land, as what remains to be done is the purely ministerial enforcement or execution of the judgment.</p> <p> The doctrine of finality of judgment is grounded on fundamental considerations of public policy and sound practice at the risk of occasional errors, the judgment of adjudicating bodies must become final and executory on some definite date fixed by law. [...], the Supreme Court reiterated that the doctrine of immutability of judgment is adhered to by necessity notwithstanding occasional errors that may result thereby, since litigations must somehow come to an end for otherwise, it would "even be more intolerable than the wrong and injustice it is designed to correct."</p> <p> [Also,] [i]n <i>Mocorro, Jr. v. Ramirez</i>, we held that:</p> <p> A definitive final judgment, however erroneous, is no longer subject to change or revision.</p> <p> A decision that has acquired finality becomes immutable and unalterable. This quality of immutability precludes the modification of a final judgment, even if the modification is meant to correct erroneous conclusions of fact and law. And this postulate holds true whether the modification is made by the court that rendered it or by the highest court in the land. The orderly administration of justice requires that, at the risk of occasional errors, the judgments/resolutions of a court must reach a point of finality set by the law. The noble purpose is to write finis to dispute once and for all. This is a fundamental principle in our justice system, without which there would be no end to litigations. Utmost respect and adherence to this principle must always be maintained by those who exercise the power of adjudication. Any act, which violates such principle, must immediately be struck down. Indeed, the principle of conclusiveness of prior adjudications is not confined in its operation to the judgments of what are ordinarily known as courts, but extends to all bodies upon which judicial powers had been conferred. (Citations omitted and emphasis supplied)</p> </blockquote> <p> We stress, not even this Court can re-assess, much less alter, a final judgment, especially when such ruling was not challenged before the forum[.]<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> (Citations omitted)</p> </blockquote> <p> The Court reiterated this doctrine in <i>Castañeda, Jr. v. Commission on Audit</i>.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> The petitioners in <i>Castañeda, Jr</i>. likewise filed a Motion for Partial Reconsideration that exclusively challenged their own liability as approving officers, while expressly concurring with the part of the decision that had absolved the passive employee-recipients. The Court similarly held that the COA committed grave abuse of discretion when it later revisited and reversed the employees' absolution. It was explained that because that portion of the judgment was never challenged, it had become final and executory by operation of law, placing it beyond the COA's power to review. </p><p> Applying the test of severability in the case at bar, the Court finds that the Original Decision dealt with three distinct and severable matters: (1) the validity of the waivers; (2) the cancellation of the deficiency income tax and VAT assessments; and (3) the affirmation of the deficiency EWT assessment. In its Motion for Partial Reconsideration, UDTI questioned the <i>first</i> and <i>third</i> matters only. </p><p> The second matter is clearly severable from the rest of the judgment. Whether there had been undeclared income which would have justified the deficiency income tax and VAT assessments is entirely independent of the deficiency EWT assessment, an indirect liability arising from UDTI's duty as a withholding agent. The waivers' validity also had no direct impact on the merits of the deficiency income and VAT assessments. The Original Decision itself demonstrates this when it upheld the waivers' validity (favoring the CIR), yet proceeded to cancel the deficiency income and VAT assessments (favoring UDTI). In fine, a review of the challenged deficiency EWT assessment and the waivers' validity would therefore not logically or legally interfere with the finality of the unchallenged cancellation of the deficiency income and VAT assessments.</p><p> To be sure, the Original Decision was challenged only with respect to its rulings on deficiency EWT and the waivers' validity. The matter of cancellation of the deficiency income tax and VAT assessments, being distinct and unchallenged by either party, was left undisturbed. When the 15-day reglementary period expired without this matter being put for reconsideration, this severable portion of the ruling became final, immutable, and beyond the jurisdiction of any court to review.</p><p> It follows that the scope of the CTA <i>En Banc</i>'s subsequent review was limited only to the issues assailed in UDTI's motion (i.e., validity of the waivers and the deficiency EWT assessment). By the time the case reached the CTA <i>En Banc</i>, it no longer had jurisdiction over the already-final issue of cancellation of the deficiency income tax and VAT assessments.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> </p><p> While the CIR later filed a motion for reconsideration assailing the CTA Division's Amended Decision, the motion did not address the modifications introduced therein, i.e., reduction of UDTI's EWT deficiency. Instead, the CIR's motion was a belated attempt to challenge the findings in the Original Decision on the cancellation of the deficiency income tax and VAT assessments. </p><p> This procedural maneuver is improper.</p><p> When the CIR failed to question the issue on deficiency income tax and VAT at first instance or as soon as this matter was resolved in the Original Decision, it allowed this portion of the judgment to lapse to finality. The CIR's belated attempts at questioning this matter (e.g., on motion for reconsideration of the Amended Decision before the CTA Division and petition for review before the CTA <i>En Banc</i>) did not revive or reopen the distinct and severable issue of the deficiency income tax and VAT assessments which have already become final. </p><p> In other words, the CIR cannot use the Amended Decision promulgated by the CTA Division as a procedural pretext to re-litigate matters which have been clearly resolved in the Original Decision. To permit such a strategy would undermine the doctrine of immutability of final judgments. </p><p> This conclusion finds strong support in <i>De Leon v. Hercules Agro Industrial Corp., et al</i>.,<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> where the Court held that a party who fails to question an adverse decision within the reglementary period loses the right to do so. The <i>De Leon</i> case highlights how finality attaches to specific parts of a judgment against specific parties. The trial court rendered a decision in favor of the petitioner, Gregorio De Leon (Gregorio), against one defendant (Rumi Rungis Milk) but dismissed the complaint against two other defendants (Hercules Agro and Jesus Chua) for want of evidence. Gregorio failed to file a timely motion for reconsideration or an appeal against the dismissal. The case was elevated to the appellate courts only because the defendant found liable, Rumi Rungis Milk, perfected its own appeal. The Court affirmed that Gregorio's failure to perfect his appeal within the reglementary period rendered the decision dismissing the case against Hercules Agro and Chua final and executory <i>as against him</i>. The Court unequivocally stated, "[t]he rule is clear that no modification of judgment could be granted to a party who did not appeal." The appeal perfected by Rumi Rungis Milk on the matter of its own liability did not and could not revive Gregorio's lost right to challenge the dismissal of his complaint against the other defendants. The dismissal thus became a conclusive and settled matter for Gregorio the moment his appeal period lapsed, and the appellate courts were thus barred from reviewing it.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup></p><p> The situation of the CIR in the present case is directly analogous.</p><p> UDTI's Motion for Partial Reconsideration on the validity of the waivers and deficiency EWT assessment did not relieve the CIR of its own separate and distinct duty to timely challenge the cancellation of the deficiency income tax and VAT assessments. In other words, UDTI's timely filed motion only tolled its own period to file a motion for reconsideration and only with respect to the specific issues it raised. For the CIR, the 15-day reglementary period to file a motion for reconsideration on the cancellation of the deficiency income tax and VAT assessments continued to run unabated. When that period lapsed without any action from the CIR, the unchallenged portion of the judgment became final and thus, both the CTA <i>En Banc</i> and the Court are precluded from reviewing the cancellation of the deficiency income tax and VAT assessments.</p><p> Although the rule on immutability of final judgments is not absolute and admits of a few limited exceptions,<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> none are present in the case. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>The only reviewable matter is UDTI's reduced EWT deficiency</i> </div></td> </tr> </tbody></table> <p>A cursory reading of the Petition reveals that none of the arguments raised by the CIR pertains to UDTI's reduced EWT deficiency, the sole issue which can be reviewed by the Court considering that UDTI is deemed to have conceded the validity of the waivers when it paid its EWT deficiency. Instead, the CIR focuses exclusively on the alleged underdeclaration of income, an issue material only to the cancellation of the deficiency income tax and VAT assessments—the very issue that has already attained finality. </p><p> The CIR is therefore arguing a point over which this Court can no longer review, while simultaneously abandoning the only reviewable issue that was timely elevated by UDTI.</p><p> The Court is mindful that UDTI failed to raise the CIR's procedural lapse before the courts <i>a quo</i> and the Court. Regardless, the Court is duty-bound to recognize that the issue raised by the CIR in the Petition is beyond the Court's power of review considering that this is apparent in the records of the case.</p><p> In <i>Spouses Custodio v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> the Court explicitly and <i>motu proprio</i> refused to entertain the arguments by the petitioners therein who were disadvantaged by the grant of the right of way but did not appeal this specific ruling. The Court then proceeded to adjudicate only the issue of damages which was the subject of the appeal of the private respondents therein.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup></p><p> It must be stressed that, for decisions rendered by a CTA Division, the 15-day reglementary period for filing a motion for reconsideration or new trial is not merely mandatory but is jurisdictional in nature, precisely because the Division must first rule on said motion before the losing party can invoke the jurisdiction of the CTA <i>En Banc</i> through a petition for review.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> Moreover, it is a fundamental rule that no modification of judgment could be granted to a party who did not timely file an appeal,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> or in this case, a motion for reconsideration. A narrow exception to this rule exists for co-parties with intertwined common interests in the subject matter such that it would be illogical, unjust, or impossible to enforce the judgment against one but not the other, also known as the principle of communality of interest.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> This exception, however, is inherently inapplicable in tax cases where the interest of the government, represented by the CIR, is always adverse to the taxpayer.</p><p> In fine, the cancellation of the deficiency income tax and VAT assessments already attained finality, leaving the deficiency EWT as the sole issue properly elevated for the Court's review. The CIR's Petition, however, does not put in issue the CTA <i>En Banc</i>'s ruling on UDTI's reduced EWT deficiency; it focuses exclusively on the final and immutable cancellation of deficiency income tax and VAT assessments, matters that are already outside the scope of the Court's review. Consequently, the assailed Decision and Resolution of the CTA <i>En Banc</i> must be upheld.</p><p> <b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision dated November 19, 2020, and the Resolution dated June 2, 2021, of the Court of Tax Appeals <i>En Banc</i> in CTA EB Nos. 2026 and 2031 are <b>AFFIRMED</b>.</p><p> <b>SO ORDERED</b>.</p><p> <i>Caguioa (Chairperson), Gaerlan, Dimaampao</i>, and <i>Singh, JJ</i>., concur.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-28. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 38-60. Penned by Associate Justice Jean Marie A. Bacorro-Villena and concurred in by Presiding Justice Roman G. Del Rosario and Associate Justices Juanito C. Castañeda, Jr., Erlinda P. Uy, Ma. Belen M. Ringpis-Liban, and Catherine T. Manahan of the <i>En Banc</i>, Court of Tax Appeals, Quezon City. Associate Justice Maria Rowena Modesto-San Pedro was on leave.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 61-68. Penned by Associate Justice Jean Marie A. Bacorro-Villena and concurred in by Presiding Justice Roman G. Del Rosario and Associate Justices Juanito C. Castañeda, Jr., Erlinda P. Uy, Ma. Belen M. Ringpis-Liban, and Maria Rowena Modesto-San Pedro of the <i>En Banc</i>, Court of Tax Appeals, Quezon City. Associate Justice Catherine T. Manahan was on leave. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 215-226. Penned by Associate Justice Ma. Belen M. Ringpis-Liban and concurred in by Associate Justice Esperanza R. Fabon-Victorino and certified by Presiding Justice Roman G. Del Rosario of the Special Third Division, Court of Tax Appeals, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 227-236. Penned by Associate Justice Ma. Belen M. Ringpis-Liban and concurred in by Associate Justice Esperanza R. Fabon-Victorino of the Special Third Division, Court of Tax Appeals, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 70.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 187.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 70.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 70-71.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 71.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 188.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 189.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 186-214.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 213-214.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 195-197. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 197-199. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 212-213. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 201. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 202-204. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 204-205. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 207. </p><p><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 208. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 212-213. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 215. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 215-226. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 225. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 218-219. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 220-221. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 221. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 221-225. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 227. </p><p><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 227-236. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 39. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 38-60. </p><p><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 49. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 53. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 50-52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 52-54. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 37. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 61-68. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 64. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 20-21. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> 157 Phil. 510 (1974). </p><p><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, pp. 22-25. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 348-355. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 349, 357-358. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 350. </p><p><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 351-352. </p><p><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> 807 Phil. 912 (2017). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 363 Phil. 169 (1999). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Rollo</i>, pp. 352-353. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> RULES OF COURT, Rule 45, sec. 1. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>See</i> <b>Morales v. The Board of Regents of the UP</b>, 487 Phil. 449, 464 (2004). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Rep. of the Phils. v. Caraig</b>, 887 Phil. 827, 838 (2020), <i>citing</i> <b>Leoncio v. De Vera</b>, 569 Phil. 512, 516 (2008), <i>further citing</i> <b>Binay v. Odeña</b>, 551 Phil. 681, 689 (2007). </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Toshiba Information Equipment (Phils.), Inc. v. Commissioner of Internal Revenue</b>, 628 Phil. 430, 468 (2010). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Commissioner of Internal Revenue v. Toledo Power Company</b>, 940 Phil. 201, 223-224 (2023). <br> 1) When the conclusion is a finding grounded entirely on speculation, surmises or conjectures; 2) when the inference made is manifestly mistaken, absurd or impossible; 3) Where there is a grave abuse of discretion; 4) When the judgment is based on a misapprehension of facts; 5) When the findings of fact are conflicting; 6) When the CTA, in making its findings, went beyond the issues of the case and the same is contrary to the admissions of both petitioner and respondent; 7) the findings of the CTA <i>En Banc</i> are contrary to those of the CTA Division; 8) When the findings of fact are conclusions without citation of specific evidence on which they are based; 9) When the facts set forth in the petition as well as in the petitioner's main and reply briefs are not disputed by the respondents; and 10) the finding of fact of the CTA is premised on the supposed absence of evidence and is contradicted by the evidence on record. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> 633 Phil. 266 (2010). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 274-276. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> 947 Phil. 591 (2023). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 603-605. </p><p><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>G.R. No. 263014</b>, February 25, 2025. </p><p><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>See</i> <b>Incumbent and Former Employees of the National Economic and Development Authority Regional Office XIII v. Commission on Audit</b>, <i>supra</i> note 63 at 603; <b>Castañeda, Jr. v. Commission on Audit</b>, <i>id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[67]</sup> 734 Phil. 652 (2014). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 659-661. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[69]</sup> (1) the correction of clerical errors: (2) the so-called nunc pro tunc entries, which cause no prejudice to any party by placing on the record a judgment that had been previously rendered; and (3) void judgments. <i>See</i> <b>One Shipping Corp. v. Peñafiel</b>, 751 Phil. 204 (2015). A supervening event that transpires after the judgment has become final and which renders its execution impossible or unjust is another recognized exception. <i>See</i> <b>Gocolay v. Gocolay</b>, 893 Phil. 178 (2021). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[70]</sup> 323 Phil. 575 (1996). </p><p><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 583-584. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>See</i> Section 18 of Republic Act No. 1125, as amended by Republic Act No. 9282: </p><blockquote> <p> SEC. 18. Appeal to the Court of Tax Appeals <i>En Banc</i>. - . . .</p> <p> A party adversely affected by a resolution of a Division of the CTA <i>on a motion for reconsideration or new trial</i>, may file a petition for review with the CTA <i>en banc</i>. </p> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>De Leon vs. Hercules Agro Industrial Corp.</b>, <i>supra</i> note 67 at 661. </p><p><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>See</i> <b>Dadizon v. Bernadas</b>, 606 Phil. 687, 694 (2009).&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

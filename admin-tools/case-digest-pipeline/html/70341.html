@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 277969 - BISHOP GERARDO A. ALMINAZA, BISHOP JOSE C. M. BAGAFORO, PMGEN WILFREDO D. FRANCO (RET.), PMGEN EDGARDO INGKING (RET.), PBGEN NOEL O. DELOS REYES (RET.), MGEN REYNALDO V. REYES (RET.), COL. GUILLERMO G. CUNANAN (RET.), CAPT. ROBERTO D. YAP, CESAR S. MELENCIO, ALEXANDER L. LACSON, PETITIONERS, VS. COMMISSION ON ELECTIONS, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '89c36641b6085b29832429462fea6eba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70341' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 277969, October 28, 2025 ]</H2>
+			<H3>BISHOP GERARDO A. ALMINAZA, BISHOP JOSE C. M. BAGAFORO, PMGEN WILFREDO D. FRANCO (RET.), PMGEN EDGARDO INGKING (RET.), PBGEN NOEL O. DELOS REYES (RET.), MGEN REYNALDO V. REYES (RET.), COL. GUILLERMO G. CUNANAN (RET.), CAPT. ROBERTO D. YAP, CESAR S. MELENCIO, ALEXANDER L. LACSON, PETITIONERS, VS. COMMISSION ON ELECTIONS, RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 65 of the Rules of Court was filed by Bishop Gerardo A. Alminaza, Bishop Jose C. M. Bagaforo, Police Major General Wilfredo D. Franco (Ret.), PMGen Edgardo Ingking (Ret.), Police Brigadier General Noel O. Delos Reyes (Ret.), MGen Reynaldo V. Reyes (Ret.), Colonel Guillermo G. Cunanan (Ret.), Captain Roberto D. Yap, Cesar S. Melencio, and Alexander L. Lacson (<b>Alminaza, et al.</b>) seeking to enjoin the Commission on Elections (<b>COMELEC</b>) to promulgate rules and regulations for the manual counting of votes at the precinct level as allegedly mandated by Republic Act No. 9369<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> or the Automated Election Law. </p><p align="center"> <b><i>The Facts</i></b> </p><p> On January 2, 2025, Alminaza, et al., all of whom are concerned citizens, taxpayers, and registered voters, sent a letter<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> to the COMELEC requesting for the promulgation of the necessary rules and regulations for the manual counting of votes at the precinct level, as allegedly mandated by Section 31<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of Republic Act No. 9369. However, their request was met with inaction, as the COMELEC did not issue a response.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Aggrieved by the COMELEC's failure to act on their request, Alminaza, et al. filed the present Petition. </p><p> They now allege that the COMELEC's failure or refusal to issue the necessary rules and regulations constitutes grave abuse of discretion, amounting to lack or excess of jurisdiction. They emphasize that under Section 31 of Republic Act No. 9369, which amends Section 25 of Republic Act No. 7166,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> the law mandates that official ballots must be read by the chairman of the Board of Election Inspectors (<b>BEIs</b>) at the precinct level in a public and transparent manner, ensuring an unimpeded view of the election process.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </p><p> Alminaza, et al. argue that the provision explicitly grants the authority to read and count votes at the precinct level to the BEI chairperson, not to the Automated Counting Machines (<b>ACMs</b>).<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> They assert that while Republic Act No. 9369 permits using an Automated Election System (<b>AES</b>), it does not expressly repeal or dispense with the statutory requirement for manual counting at the precinct level.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> They stress that the word "shall" in the law indicates a mandatory requirement, making the COMELEC's omission of manual counting rules a clear violation of the law.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> Alminaza, et al. clarify that they do not seek to halt the implementation of the AES for the upcoming May 12, 2025 elections, but rather to ensure compliance with the legislative intent and policy of Republic Act No. 9369, which aims to promote transparency, credibility, fairness, and accuracy in elections.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> They further contend that the reliance on ACMs compromises transparency, as the Voter Verifiable Paper Audit Trail (<b>VVPAT</b>) receipts issued by the machines do not sufficiently demonstrate how votes were added, consolidated, and tabulated.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> They cite <i>Bagumbayan-VNP Movement, Inc. v. Commission on Elections</i>,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> which affirmed that official ballots and VVPAT receipts are distinct, with the official ballot serving as the primary and best official record of a voter's choices.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> Moreover, Alminaza, et al. highlight that the Commission on Elections's use of coded details in the publication of precinct-level results effectively conceals election data from the public, and thus, violating the transparency requirement of Republic Act No. 9369.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup>&nbsp;They further argue that the COMELEC failed to conduct public testing and demonstration to ensure that the ACMs of MIRU Systems, the machines to be used in the 2025 elections, would meet the minimum system capabilities set under Section 7<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> of Republic Act No. 9369. As of January 23, 2025, they claim that no COMELEC resolution, press release, or public record demonstrates compliance with this requirement.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> Ultimately, Alminaza, et al. assert that the reading, counting, tabulation, and consolidation of votes at the precinct level should not be fully automated. They maintain that manual counting remains a legal requirement under Republic Act No. 9369 and that the COMELEC's refusal to promulgate the necessary rules to effectuate this constitutes an evasion of a positive duty required by law.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p align="center"> <b><i>The Issue</i></b> </p><p> Does manual counting remain a mandatory requirement under Republic Act No. 9369, notwithstanding the COMELEC's implementation of an automated election system? </p><p> Alternatively, did COMELEC commit grave abuse of discretion amounting to lack or excess of jurisdiction by failing to promulgate rules and regulations for manual counting of votes at the precinct level, as allegedly mandated by Republic Act No. 9369? </p><p align="center"> <b><i>The Ruling of the Court</i></b> </p><p> The Petition has no merit. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Manual counting is not a mandatory requirement under Republic Act No. 9369</i> </div></td> </tr> </tbody></table> <p>Republic Act No. 9369 explicitly amends Republic Act No. 8436<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> to authorize and mandate the nationwide adoption of an AES in Philippine elections. This law was precisely enacted to modernize the electoral process, ensuring greater transparency, efficiency, and credibility. Section 7 of Republic Act No. 9369 provides for the AES' minimum system capabilities, including mechanisms for VVPAT, system auditability, and electronic transmission of results. These features were designed to prevent electoral fraud, minimize human intervention, and ensure a reliable election outcome. </p><p> Alminaza, et al. argue that Section 31 of Republic Act No. 9369 mandates that official ballots be read and counted by the chairperson of the BEI at the precinct level in a public and transparent manner. They assert that this provision remains in full force and was not repealed by Republic Act No. 9369. Furthermore, they emphasize that the word "shall" in Section 31 connotes a mandatory obligation to conduct manual counting.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></p><p> This argument is untenable. </p><p> A plain reading of Republic Act No. 9369 in its entirety reveals that the legislative intent was to modernize the Philippine electoral process through the implementation of an AES. The law expressly mandates the automation of elections, ensuring that vote counting, tabulation, and consolidation are conducted through a secure and tamper-proof automated system. </p><p> Moreover, Alminaza et al.'s interpretation disregards the overarching policy in Section 1<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> of Republic Act No. 9369, which aims to "ensure secrecy and sanctity of the ballot" while promoting transparency and credibility through automated means. The very purpose of the AES is to eliminate manual counting at the precinct level to reduce human intervention and the risks of electoral fraud, as recognized in <i>Bagumbayan-VNP Movement</i>.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> Alminaza, et al.'s reliance on Section 31 of Republic Act No. 9369 fails to consider its proper context within the law's broader legislative framework. While Section 31 makes reference to manual counting, it must be interpreted in harmony with the general provisions of Republic Act No. 9369, which prioritizes automated elections. A fundamental objective of Section 1 of the law is to mandate the adoption of an AES that upholds the secrecy and sanctity of the ballot. The requirement extends beyond mere procedural compliance, as it safeguards the integrity of all election-related processes, including voting, consolidation, and transmission of results. The AES aims to foster public confidence in the electoral process by ensuring transparency and credibility. Furthermore, the law underscores the necessity for election outcomes to be fast, accurate, and genuinely reflective of the people's will, reinforcing the democratic principles of fairness and reliability in determining electoral results. Thus, the provision evinces the clear legislative intent to fully automate elections, replacing the previously manual system prone to human error and manipulation. </p><p> Section 7 of Republic Act No. 9369 also prescribes the minimum system capabilities of the AES, requiring an auditable and accurate count of votes at the precinct level. The provision reinforces the statutory shift from manual to automated counting, further highlighting that Alminaza, et al.'s interpretation of Section 31 is misplaced. </p><p> Alminaza, et al. further contend that "shall" in Section 31 imposes a mandatory obligation for manual counting.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> The interpretation, however, is erroneous. The word "shall" in legal interpretation must be read in light of the entire legislative framework. In this case, "shall" pertains to procedural safeguards ensuring transparency during manual counting, should it be conducted under specific circumstances, rather than an absolute requirement for precinct-level manual counting in every election. </p><p> Interpreting Section 31 in isolation would create an inconsistency with the broader legislative mandate to automate elections. It is a rule in statutory construction that every part of the statute must be interpreted with reference to the context, <i>i.e</i>., that every part of the statute must be considered together with the other parts and kept subservient to the general intent of the whole enactment.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> The clear directive of Republic Act No. 9369 is to implement an AES as the principal method of conducting elections, with manual counting serving only as a contingency under limited and prescribed circumstances.</p><p> Alminaza, et al. must likewise be reminded that the constitutionality of Republic Act No. 9369 has already been upheld by the Court in <i>Barangay Association for National Advancement and Transparency (BANAT) Party-List v. Commission on Elections</i>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> In that case, the petitioners challenged Republic Act No. 9369 for allegedly violating Article VI, Section 26(1),<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> of the 1987 Constitution, arguing that its title was misleading by focusing on poll automation while containing provisions on manual canvassing. They further contended that certain provisions, specifically Sections 34, 37, 38, and 43, were not embraced in the title nor germane to the subject matter of the law. The Court, however, ruled otherwise, holding that a statute amending a specific code need not further state the precise nature of the amendments in its title. It clarified that the assailed provisions, which amended specific sections of Republic Act No. 7166<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> and Batas Pambansa Blg. 881,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> were relevant to the overarching purpose of Republic Act No. 9369.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p><p> Furthermore, the Court has consistently upheld the sufficiency of the AES in ensuring electoral transparency and accuracy.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> It has ruled that the use of automated vote-counting machines complies with statutory and constitutional mandates for a fair and credible electoral process. Central to this affirmation is incorporating critical safeguards, such as the VVPAT and system auditability mechanisms, effectively mitigating concerns about transparency and the integrity of election results. These judicial pronouncements reinforce the validity of Republic Act No. 9369 and underscore its role in modernizing and securing the electoral process.</p><p> Thus, relying on manual counting as the primary method of tabulation contradicts established jurisprudence and legislative intent behind Republic Act No. 9369. Alminaza, et al.'s arguments fail to account for the policy shift that replaced the manual system with an automated and verifiable election process. Their contention that manual counting remains a mandatory requirement is contrary to both the plain text and spirit of Republic Act No. 9369. The law's overarching objective is to modernize the electoral process, ensuring transparency, credibility, and efficiency through automation. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>COMELEC did not commit grave abuse of discretion</i> </div></td> </tr> </tbody></table> <p>Under Rule 65, grave abuse of discretion has a precise and stringent definition. It refers to an arbitrary or despotic exercise of power, driven by passion, prejudice, or personal hostility, or a capricious and whimsical action amounting to an evasion of a legal duty or a complete refusal to act in contemplation of law. This level of abuse must be patent and gross, signifying a clear departure from the standards of reason and fairness.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> Alminaza, et al. contend that the COMELEC committed grave abuse of discretion by failing to promulgate rules on manual counting, arguing that the law mandates such a procedure to run concurrently with the AES. However, as discussed, this claim is unmeritorious. </p><p> Under Article IX-C, Section 2<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> of the 1987 Constitution, the COMELEC is vested with broad authority to enforce and administer election laws. This discretionary power includes determining the most effective means of ensuring fair, orderly, and credible elections. Republic Act No. 9369, which governs automated polls, does not mandate a simultaneous manual count. Instead, it requires the AES to include a VVPAT system and other minimum system capabilities which are the minimum safeguards provided by law.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup>&nbsp;This mechanism allows voters to confirm their ballots and provides an inherent safeguard, rendering a precinct-level manual count unnecessary. Accordingly, the decision to forgo manual counting falls well within the legal authority for the AES and does not constitute grave abuse of discretion.</p><p> Alminaza, et al. further argue that reliance on ACMs undermines election transparency. However, this assertion is speculative. In <i>AES Watch v. Commission on Elections</i>,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> the Court upheld the sufficiency of AES safeguards, emphasizing that VVPAT receipts and Random Manual Audits (<b>RMA</b>) provide adequate verification mechanisms. After every election, the law requires an RMA to cross-check automated results with manually counted ballots from selected precincts, addressing concerns about transparency and reliability.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Moreover, the AES incorporates multiple security measures, including digital signatures and audit trails, to preserve the integrity of election results. While petitioners cite <i>Bagumbayan-VNP Movement</i> to argue that official ballots should be the primary basis for counting, the same case upholds automation, provided the adequate safeguards in place. The statutory framework of Republic Act No. 9369 ensures a public and transparent electoral process through clear audit trails and scrutiny mechanisms embedded in automated counting. </p><p> Mandating a parallel manual count contradicts the objectives of automation and introduces unnecessary procedural redundancies that will only cause the long delays that provide opportunities for fraud and manipulation. Republic Act No. 9369 establishes sufficient safeguards to verify electoral results, eliminating the need for an additional manual counting requirement. Nowhere in the law is the Commission on Elections directed to conduct a simultaneous manual count alongside the AES implementation. </p><p> Ultimately, Alminaza, et al. assert that the Commission on Elections's failure to promulgate rules for manual counting constitutes grave abuse of discretion amounting to an evasion of a positive duty. However, for grave abuse of discretion to exist, an agency must act arbitrarily or capriciously in a manner that effectively denies due process. In this case, the Commission on Elections has acted within its legal authority. Republic Act No. 9369 grants the Commission on Elections broad powers to administer election laws and adopt necessary regulations. The absence of specific rules for manual counting logically follows from the statutory transition to automated counting, rather than constitute an abuse of discretion. </p><p> In sum, Alminaza, et al.'s allegations of grave abuse of discretion fail to demonstrate any capricious, whimsical, or arbitrary action on the part of the COMELEC. The AES is equipped with sufficient transparency safeguards, and the absence of a manual counting requirement does not constitute a denial of due process. The Commission on Elections has acted within the bounds of its constitutional and statutory authority, and its decision to rely on automated counting is fully justified under existing legal and jurisprudential standards. </p><p> <b>ACCORDINGLY,</b> the Petition for <i>Certiorari</i> is <b>DISMISSED</b> for lack of merit. </p><p> <b>SO ORDERED.</b> </p><p> <i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Lazaro-Javier, Inting, Gaerlan, Dimaampao</i>, and <i>Marquez, JJ</i>., concur. <i><br> Zalameda,<sup style="COLOR: RGB(255, 0, 0);">*</sup> Rosario,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J. Lopez</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> and <i>Kho, Jr.<sup style="COLOR: RGB(255, 0, 0);">*</sup>, JJ</i>., on official business. <i><br> Villanueva,<sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on official leave. </p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business. <p> <sup style="COLOR: RGB(255, 0, 0);">*</sup><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official leave. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 5-33.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> Republic Act No. 9369 (2007), An Act Amending Republic Act No. 8436, entitled "An Act Authorizing the Commission on Elections to Use an Automated Election System in the May 11, 1998 National or Local Elections and in Subsequent National and Local Electoral Exercises, to Encourage Transparency, Credibility, Fairness and Accuracy of Elections, Amending for the Purpose Batas Pambansa Blg. 881, as Amended, Republic Act No. 7166 and Other Related Election Laws, Providing Funds Therefor and for Other Purposes."</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i>, pp. 34-43. </p><p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> SECTION 31. Section 25 of Republic Act No. 7166 is hereby amended to read as follows: </p><blockquote> <p> Sec. 25. <i>Manner of Counting Votes</i>. — In addition to the requirement in the fourth paragraph of Section 12 of the Republic Act No. 6646 and Section 210 of the Omnibus Election Code, <i>in reading the official ballots during the counting, the chairman, the poll clerk and the third member shall assume such positions as to provide the watchers and the members of the public as may be conveniently accommodated in the polling place, an unimpeded view of the ballot being read by the chairman, of the election return and the tally board being simultaneously accomplished by the poll clerk and the third member, respectively, without touching any of these election documents</i>. The table shall be cleared of all unnecessary writing paraphernalia. Any violation of this requirement shall constitute an election offense punishable under Sections 263 and 264 of the Omnibus Election Code.</p> <p> The chairman shall first read the votes for national positions. </p> <p> Any violation of this Section, or its pertinent portion, shall constitute an election offense and shall be penalized in accordance with Batas Pambansa Blg. 881. (Emphasis supplied)</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Rollo</i>, p. 8. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Republic Act No. 7166 (1991), An Act Providing for Synchronized National and Local Elections and for Electoral Reforms, Authorizing Appropriations Therefor, and for Other Purposes. </p><p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i>, p. 15-16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 16. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 17. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 6-7. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> 782 Phil. 1306 (2016) [Per SAJ Leonen, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Rollo</i>, p. 21. </p><p><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 22. </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Section 7 of Republic Act No. 8436 is hereby amended to read as follows: </p><blockquote> <p> [Sec.] 6. <i>Minimum System Capabilities</i>. — The automated election system must at least have the following functional capabilities:<br> (a) Adequate security against unauthorized access; <br> (b) Accuracy in recording and reading of votes as well as in the tabulation, consolidation/canvassing, electronic transmission, and storage of results;<br> (c) Error recovery in case of non-catastrophic failure of device; <br> (d) System integrity which ensures physical stability and functioning of the vote recording and counting process;<br> (e) Provision for voter verified paper audit trail;<br> (f) System auditability which provides supporting documentation for verifying the correctness of reported election results; <br> (g) An election management system for preparing ballots and programs for use in the casting and counting of votes and to consolidate, report and display election results in the shortest time possible;<br> (h) Accessibility to illiterates and disabled voters;<br> (i) Vote tabulating program for election, referendum or plebiscite;<br> (j) Accurate ballot counters;<br> (k) Data retention provision;<br> (l) Provide for the safekeeping, storing and archiving of physical or paper resource used in the election process;<br> (m) Utilize or generate official ballots as herein defined;<br> (n) Provide the voter a system of verification to find out whether or not the machine has registered his choice; and <br> (o) Configure access control for sensitive system data and functions.</p> <p> In the procurement of this system, the Commission shall develop and adopt an evaluation system to ascertain that the above minimum system capabilities are met. This evaluation system shall be developed with the assistance of an advisory council.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Rollo</i>, p. 23. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 12. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Republic Act No. 8436 (1997), An Act Authorizing the Commission on Elections to Use an Automated Election System in the May 11, 1998 National or Local Elections and in Subsequent National and Local Electoral Exercises, Providing Funds Therefor and for Other Purposes. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i>, pp. 16- 18. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> SECTION 1. Section 1 of Republic Act No. 8436 is hereby amended to read as follows: </p><blockquote> <p> Sec. 1. <i>Declaration of Policy</i>. — It is the policy of the State to ensure free, orderly, honest, peaceful, credible and informed elections, plebiscites, referenda, recall and other similar electoral exercises by improving on the election process and adopting systems, which shall involve the <i>use of an automated election system that will ensure the secrecy and sanctity of the ballot and all election, consolidation and transmission documents in order that the process shall be transparent and credible and that the results shall be fast, accurate and reflective of the genuine will of the people</i>.</p> <p> The State recognizes the mandate and authority of the Commission to prescribe the adoption and use of the most suitable technology of demonstrated capability taking into account the situation prevailing in the area and the funds available for the purpose. (Emphasis supplied)</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> 782 Phil. 1306, 1309-1310 (2016) [Per J. Leonen, <i>En Banc</i>]. Where the Court held: "Automation is hailed as a key towards clean and credible elections, reducing the long wait and discouraging cheating." </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> SECTION 31. Section 25 of Republic Act No. 7166 is hereby amended to read as follows: </p><blockquote> <p> Sec. 25. <i>Manner of Counting Votes</i>. — In addition to the requirement in the fourth paragraph of Section 12 of the Republic Act No. 6646 and Section 210 of the Omnibus Election Code, in reading the official ballots during the counting, the chairman, the poll clerk and the third member <i>shall</i> assume such positions as to provide the watchers and the members of the public as may be conveniently, accommodated in the polling place, an unimpeded view of the ballot being read by the chairman, of the election return and the tally board being simultaneously accomplished by the, poll clerk and the third member respectively, without touching any of these election documents. The table <i>shall</i> be cleared of all unnecessary writing paraphernalia. Any violation of this requirement <i>shall</i> constitute an election offense punishable under Sections 263 and 264 of the Omnibus Election Code. </p> <p> The chairman <i>shall</i> first read the votes for national positions.</p> <p> Any violation of this Section, or its pertinent portion, <i>shall</i> constitute an election offense and shall be penalized in accordance with Batas Pambansa Blg. 881. (Emphasis supplied)</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>See</i> <b>ACT Teachers Rep. Tinio v. President Duterte</b>, 934 Phil. 212, 265 (2023) [Per J. Dimaampao, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> 612 Phil. 793 (2009) [Per J. Carpio, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> CONST., art. VI, sec. 26(1) states, "Every bill passed by the Congress shall embrace only one subject which shall be expressed in the title thereof." </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> An Act Providing for Synchronized National and Local Elections and for Electoral Reforms, Authorizing Appropriations Therefor, and for other Purposes (1991). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> OMNIBUS ELECTION CODE (1985). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>Barangay Association for National Advancement &amp; Transparency (BANAT) Party-List v. Commission on Elections</b>, 612 Phil. 793, 805-806 (2009) [Per J. Carpio, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>See</i> <b>AES Watch v. Commission on Elections</b>, 892 Phil. 510 (2020) [Per J. Lopez, <i>En Banc</i>]; <b>Bagumbayan-VNP Movement, Inc. v. Commission on Elections</b>, 782 Phil. 1306 (2016) [Per J. Leonen, <i>En Banc</i>]; <b>BANAT v. Commission on Elections</b>, 612 Phil. 793 (2009) [Per J. Carpio, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Caballes v. Court of Appeals</b>, 935 Phil. 823, 827 (2023) [Per J. Gaerlan, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Sec. 2. The Commission on Elections shall exercise the following powers and functions: </p><blockquote> <p> (1) <i>Enforce and administer all laws and regulations relative to the conduct of an election, plebiscite, initiative, referendum, and recall</i>. <br> (2) Exercise exclusive original jurisdiction over all contests relating to the elections, returns, and qualifications of all elective regional, provincial, and city officials, and appellate jurisdiction over all contests involving elective municipal officials decided by trial courts of general jurisdiction, or involving elective barangay officials decided by trial courts of limited jurisdiction.&nbsp;<br>Decisions, final orders, or rulings of the Commission on election contests involving elective municipal and barangay offices shall be final, executory, and not appealable.<br> (3) Decide, except those involving the right to vote, all questions affecting elections, including determination of the number and location of polling places, appointment of election officials and inspectors, and registration of voters.<br> (4) Deputize, with the concurrence of the President, law enforcement agencies and instrumentalities of the Government, including the Armed Forces of the Philippines, for the exclusive purpose of ensuring free, orderly, honest, peaceful, and credible elections.<br> (5) Register, after sufficient publication, political parties, organizations, or coalitions which, in addition to other requirements, must present their platform or program of government; and accredit citizens' arms of the Commission on Elections. Religious denominations and sects shall not be registered. Those which seek to achieve their goals through violence or unlawful means, or refuse to uphold and adhere to this Constitution, or which are supported by any foreign government shall likewise be refused registration. Financial contributions from foreign governments and their agencies to political parties, organizations, coalitions, or candidates related to elections constitute interference in national affairs, and, when accepted, shall be an additional ground for the cancellation of their registration with the Commission, in addition to other penalties that may be prescribed by law.<br> (6) File, upon a verified complaint, or on its own initiative, petitions in court for inclusion or exclusion of voters; investigate and, where appropriate, prosecute cases of violations of election laws, including acts or omissions constituting election frauds, offenses, and malpractices.<br> (7) Recommend to the Congress effective measures to minimize election spending, including limitation of places where propaganda materials shall be posted, and to prevent and penalize all forms of election frauds, offenses, malpractices, and nuisance candidacies.<br> (8) Recommend to the President the removal of any officer or employee it has deputized, or the imposition of any other disciplinary action, for violation or disregard of, or disobedience to its directive, order, or decision.<br> (9) Submit to the President and the Congress a comprehensive report on the conduct of each election, plebiscite, initiative, referendum, or recall. (Emphasis supplied) </p> </blockquote> <p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See</i> <b>Bagumbayan-VNP Movement, Inc. v. Commission on Elections</b>, 782 Phil. 1306, 1323 (2016) [Per J. Leonen, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 892 Phil. 510 (2020) [Per J. Lopez, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Republic Act No. 9369, sec. 24.&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>
