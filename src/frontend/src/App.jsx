@@ -60,6 +60,12 @@ function isLikelyIosWebKit() {
   if (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1) return true;
   return false;
 }
+
+function isLikelyAndroidChrome() {
+  if (typeof navigator === 'undefined') return false;
+  const ua = navigator.userAgent || '';
+  return /Android/i.test(ua) && /Chrome\/[0-9]/i.test(ua) && !/SamsungBrowser|EdgA|OPR\//i.test(ua);
+}
 import About from './components/About';
 const Bar2026 = lazy(() => import('./components/Bar2026'));
 const AdminTools = lazy(() => import('./components/admin/AdminTools'));
@@ -614,8 +620,12 @@ function App() {
     };
   }, [mode]);
 
-  // PWA install nudge: Chromium gets “Install Now” when `beforeinstallprompt` fired; iOS gets custom
-  // Add-to-Home-Screen steps only (no native install API).
+  // PWA install nudge: Chromium gets “Install Now” when `beforeinstallprompt` fired; iOS and Android
+  // get manual Add-to-Home-Screen instructions when the native prompt isn't available.
+  // Suppressed while a guest gate modal (founding promo / subscription) is open.
+  const showGuestModalRef = useRef(showGuestModal);
+  useEffect(() => { showGuestModalRef.current = showGuestModal; }, [showGuestModal]);
+
   useEffect(() => {
     let intervalId = null;
 
@@ -632,11 +642,12 @@ function App() {
         stopRepeating();
         return;
       }
-      if (pwaInstallPromptRef.current) {
-        setShowPwaModal(true);
+      // Don't stack on top of the founding promo / subscription gate.
+      if (showGuestModalRef.current) {
+        setShowPwaModal(false);
         return;
       }
-      if (isLikelyIosWebKit()) {
+      if (pwaInstallPromptRef.current || isLikelyIosWebKit() || isLikelyAndroidChrome()) {
         setShowPwaModal(true);
         return;
       }
@@ -663,6 +674,16 @@ function App() {
   useEffect(() => {
     if (mode === 'lexplay') setLexPlayMiniDismissed(false);
   }, [mode]);
+
+  // When the guest gate modal closes, immediately re-evaluate PWA nudge so it
+  // appears right away instead of waiting up to 5 minutes for the next tick.
+  useEffect(() => {
+    if (showGuestModal !== null) return;
+    if (isPwaInstalledDisplayMode()) return;
+    if (pwaInstallPromptRef.current || isLikelyIosWebKit() || isLikelyAndroidChrome()) {
+      setShowPwaModal(true);
+    }
+  }, [showGuestModal]);
 
   // Auth guard: unauthenticated users can freely browse all public modes.
   // Admin-only modes redirect non-admins to about.
@@ -1384,10 +1405,10 @@ function App() {
           <SubscriptionModal onClose={handleGuestModalClose} guestPrompt />
         </Suspense>
       )}
-      {showPwaModal && (pwaInstallPrompt || isLikelyIosWebKit()) && (
+      {showPwaModal && (pwaInstallPrompt || isLikelyIosWebKit() || isLikelyAndroidChrome()) && (
         <Suspense fallback={null}>
           <PwaInstallModal
-            variant={pwaInstallPrompt ? 'deferred' : 'ios'}
+            variant={pwaInstallPrompt ? 'deferred' : isLikelyIosWebKit() ? 'ios' : 'android'}
             deferredPrompt={pwaInstallPrompt ?? undefined}
             onClose={() => setShowPwaModal(false)}
           />
