@@ -45,6 +45,9 @@ def sitemap_decisions(req: func.HttpRequest) -> func.HttpResponse:
             """
         )
         rows = cur.fetchall()
+
+        cur.execute("SELECT TO_CHAR(MAX(date), 'YYYY-MM-DD') FROM sc_decided_cases")
+        max_date = cur.fetchone()[0] or "2026-01-01"
         cur.close()
     except Exception as exc:
         logging.error("sitemap_decisions: DB error: %s", exc)
@@ -109,7 +112,7 @@ def sitemap_decisions(req: func.HttpRequest) -> func.HttpResponse:
         status_code=200,
         mimetype="application/xml",
         headers={
-            # Cache for 24 h on the CDN; re-validate after 1 h at the edge.
             "Cache-Control": "public, max-age=3600, s-maxage=86400",
+            "Last-Modified": max_date,
         },
     )
