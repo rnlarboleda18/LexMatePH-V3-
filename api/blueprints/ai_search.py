@@ -12,6 +12,7 @@ Target latency: 3–5 seconds.
 import json
 import logging
 import os
+import re
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 
@@ -36,6 +37,26 @@ AI_SEARCH_SYSTEM_PROMPT = (
     "Be precise and authoritative. Use proper legal terminology. "
     "If the question is not about Philippine law, say so in one sentence."
 )
+
+
+_NL_STOP_WORDS = {
+    'what', 'who', 'when', 'where', 'why', 'how', 'explain', 'define',
+    'describe', 'discuss', 'compare', 'distinguish', 'is', 'are', 'was',
+    'were', 'does', 'did', 'can', 'could', 'would', 'should', 'there',
+    'the', 'a', 'an', 'in', 'of', 'for', 'to', 'and', 'or', 'on', 'at',
+    'by', 'from', 'with', 'about', 'give', 'me', 'tell', 'this', 'that',
+    'these', 'those', 'its', 'their', 'case', 'cases', 'ruling', 'decision',
+    'doctrine', 'rule',
+}
+
+
+def _extract_keywords(query: str) -> str:
+    """Strip question/stop words; keep names, GR numbers, and meaningful terms."""
+    # Preserve G.R. / GR number patterns as a single token
+    gr = re.findall(r'g\.?\s*r\.?\s*no\.?\s*\d+', query, re.IGNORECASE)
+    words = re.findall(r"[a-zA-Z']+", query.lower())
+    keywords = [w for w in words if w not in _NL_STOP_WORDS and len(w) > 2]
+    return ' '.join(gr + keywords) if gr else ' '.join(keywords)
 
 
 def _looks_like_question(query: str) -> bool:
@@ -85,6 +106,8 @@ def _search_cases_db(query: str, limit: int = 3) -> list[dict]:
 
     conn = None
     cases = []
+    keywords = _extract_keywords(query)
+
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -98,34 +121,46 @@ def _search_cases_db(query: str, limit: int = 3) -> list[dict]:
                 COALESCE(digest_facts, '')
             )
         """
-        sql = f"""
-            SELECT id, short_title, case_number, date_str, main_doctrine,
-                   subject, significance_category,
-                   ts_rank_cd({fts_expr}, websearch_to_tsquery('english', %s)) AS score
-            FROM sc_decided_cases
-            WHERE {fts_expr} @@ websearch_to_tsquery('english', %s)
-            ORDER BY score DESC
-            LIMIT %s
-        """
-        cur.execute(sql, (query, query, limit))
-        rows = cur.fetchall()
 
-        if not rows:
-            # Trigram fallback for partial name matches
-            sql2 = """
+        def _fts_query(term: str):
+            sql = f"""
                 SELECT id, short_title, case_number, date_str, main_doctrine,
                        subject, significance_category,
-                       similarity(COALESCE(short_title,'') || ' ' || COALESCE(full_title,''), %s) AS score
+                       ts_rank_cd({fts_expr}, websearch_to_tsquery('english', %s)) AS score
                 FROM sc_decided_cases
-                WHERE short_title %% %s OR full_title %% %s
+                WHERE {fts_expr} @@ websearch_to_tsquery('english', %s)
                 ORDER BY score DESC
                 LIMIT %s
             """
-            try:
-                cur.execute(sql2, (query, query, query, limit))
-                rows = cur.fetchall()
-            except Exception:
-                rows = []
+            cur.execute(sql, (term, term, limit))
+            return cur.fetchall()
+
+        # 1. FTS on raw query
+        rows = _fts_query(query)
+
+        # 2. FTS on extracted keywords (catches "what is mcburnie case" → "mcburnie")
+        if not rows and keywords and keywords != query:
+            rows = _fts_query(keywords)
+
+        if not rows:
+            # 3. Trigram fallback — try keywords first, then raw query
+            for trig_term in ([keywords, query] if keywords != query else [query]):
+                sql2 = """
+                    SELECT id, short_title, case_number, date_str, main_doctrine,
+                           subject, significance_category,
+                           similarity(COALESCE(short_title,'') || ' ' || COALESCE(full_title,''), %s) AS score
+                    FROM sc_decided_cases
+                    WHERE short_title %% %s OR full_title %% %s
+                    ORDER BY score DESC
+                    LIMIT %s
+                """
+                try:
+                    cur.execute(sql2, (trig_term, trig_term, trig_term, limit))
+                    rows = cur.fetchall()
+                except Exception:
+                    rows = []
+                if rows:
+                    break
 
         for row in rows:
             cases.append({

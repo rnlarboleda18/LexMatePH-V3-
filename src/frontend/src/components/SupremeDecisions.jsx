@@ -519,6 +519,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
     const [aiAnswer, setAiAnswer] = useState(null);
     const [aiCases, setAiCases] = useState([]);
     const [aiLoading, setAiLoading] = useState(false);
+    const [aiError, setAiError] = useState(null); // 'timeout' | 'error' | null
 
     // Search dropdown (portal — escapes any overflow-hidden ancestor)
     const [showSuggestions, setShowSuggestions] = useState(false);
@@ -738,16 +739,22 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
             setAiAnswer(null);
             setAiCases([]);
             setAiLoading(false);
+            setAiError(null);
             return;
         }
 
         const controller = new AbortController();
-        // Kill the request after 12s — backend can be slow on cold starts
-        const timeoutId = setTimeout(() => controller.abort(), 12000);
+        let didTimeout = false;
+        // 25 s — must exceed the backend's 20 s Gemini timeout + network overhead
+        const timeoutId = setTimeout(() => {
+            didTimeout = true;
+            controller.abort();
+        }, 25000);
 
         setAiLoading(true);
         setAiAnswer(null);
         setAiCases([]);
+        setAiError(null);
 
         fetch(apiUrl('/api/ai-search'), {
             method: 'POST',
@@ -763,8 +770,13 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                 }
             })
             .catch(err => {
-                // AbortError = user typed more or timeout — silently ignore
-                if (err?.name !== 'AbortError') console.warn('AI search error:', err);
+                if (err?.name === 'AbortError') {
+                    if (didTimeout) setAiError('timeout');
+                    // else user typed more — silently discard
+                } else {
+                    console.warn('AI search error:', err);
+                    setAiError('error');
+                }
             })
             .finally(() => {
                 clearTimeout(timeoutId);
@@ -1303,11 +1315,25 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                         setShowSuggestions(true);
                                     }}
                                 />
-                                {loading && (
-                                    <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
+                                    {loading ? (
                                         <div className="h-3.5 w-3.5 animate-spin rounded-full border-b-2 border-neutral-600 dark:border-zinc-500" />
-                                    </div>
-                                )}
+                                    ) : aiLoading ? (
+                                        <div className="relative h-4 w-4 shrink-0">
+                                            <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-violet-500 dark:border-t-violet-400" />
+                                            <Sparkles className="absolute inset-0 m-auto h-2 w-2 text-violet-500 dark:text-violet-400" strokeWidth={2} />
+                                        </div>
+                                    ) : (
+                                        <Sparkles
+                                            strokeWidth={1.5}
+                                            className={`lexify-sparkle-wink h-3.5 w-3.5 shrink-0 transition-colors ${
+                                                isNaturalLanguageQuery(searchTerm)
+                                                    ? 'text-violet-500 dark:text-violet-400'
+                                                    : 'text-neutral-300 dark:text-zinc-600'
+                                            }`}
+                                        />
+                                    )}
+                                </div>
                             </div>
                         </div>
 
@@ -1439,7 +1465,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                 )}
 
                 {/* AI Search overlay — shown when query is a natural-language question */}
-                {(aiLoading || aiAnswer || aiCases.length > 0) && (
+                {(aiLoading || aiAnswer || aiCases.length > 0 || aiError) && (
                     <div className="mb-4 rounded-xl border border-violet-200 bg-violet-50/70 p-4 shadow-sm dark:border-violet-800/40 dark:bg-violet-950/30">
                         <div className="mb-2 flex items-center gap-1.5">
                             <Sparkles size={13} className="text-violet-600 dark:text-violet-400" />
@@ -1453,6 +1479,12 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                 <div className="h-3 w-[82%] rounded bg-violet-200 dark:bg-violet-800/60" />
                                 <div className="h-3 w-[65%] rounded bg-violet-200 dark:bg-violet-800/60" />
                             </div>
+                        ) : aiError ? (
+                            <p className="text-sm text-neutral-500 dark:text-zinc-400">
+                                {aiError === 'timeout'
+                                    ? 'AI Search timed out — the server took too long to respond. Try again in a moment.'
+                                    : 'AI Search encountered an error. Try again.'}
+                            </p>
                         ) : (
                             <>
                                 {aiAnswer ? (
