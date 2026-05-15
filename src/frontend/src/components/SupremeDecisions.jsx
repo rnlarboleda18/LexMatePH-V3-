@@ -1555,7 +1555,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                         ))
                     ) : (
                         <>
-                            {hasInitialLoaded && !fetchError && searchResults.length === 0 && (
+                            {hasInitialLoaded && !fetchError && searchResults.length === 0 && !isNaturalLanguageQuery(searchTerm) && (
                                 <div className="text-center py-8 text-gray-500 md:col-span-2">
                                     <FileText className="h-10 w-10 mx-auto text-gray-300 mb-2" />
                                     {/^\d+$/.test(searchTerm.trim()) ? (

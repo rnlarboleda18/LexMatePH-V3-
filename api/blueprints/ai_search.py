@@ -100,78 +100,70 @@ def _get_ai_answer(query: str) -> str:
 
 
 def _search_cases_db(query: str, limit: int = 3) -> list[dict]:
-    """Search sc_decided_cases via FTS + trigram. Returns top matching cases."""
+    """Search sc_decided_cases via ILIKE on extracted keywords.
+
+    Avoids FTS / to_tsvector which requires a GIN index to be fast — without
+    one it does a full table scan over digest_facts and times out on production.
+    ILIKE on title columns is fast enough for LIMIT 3 and matches what
+    supreme.py Tier 1/2 already does reliably.
+    """
     from db_pool import get_db_connection, put_db_connection
     from psycopg2.extras import RealDictCursor
 
     conn = None
     cases = []
     keywords = _extract_keywords(query)
+    tokens = [t for t in keywords.split() if len(t) > 2] if keywords else []
+
+    if not tokens:
+        return cases
 
     try:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
 
-        fts_expr = """
-            to_tsvector('english',
-                COALESCE(full_title, '') || ' ' ||
-                COALESCE(short_title, '') || ' ' ||
-                COALESCE(case_number, '') || ' ' ||
-                COALESCE(main_doctrine, '') || ' ' ||
-                COALESCE(digest_facts, '')
-            )
+        select_cols = """
+            id, short_title, case_number, date_str, main_doctrine,
+            subject, significance_category
         """
 
-        def _fts_query(term: str):
-            sql = f"""
-                SELECT id, short_title, case_number, date_str, main_doctrine,
-                       subject, significance_category,
-                       ts_rank_cd({fts_expr}, websearch_to_tsquery('english', %s)) AS score
-                FROM sc_decided_cases
-                WHERE {fts_expr} @@ websearch_to_tsquery('english', %s)
-                ORDER BY score DESC
-                LIMIT %s
-            """
-            cur.execute(sql, (term, term, limit))
-            return cur.fetchall()
+        # Tier A: any keyword appears in short_title OR full_title
+        or_clauses = " OR ".join(
+            ["short_title ILIKE %s OR full_title ILIKE %s" for _ in tokens]
+        )
+        params: list = []
+        for t in tokens:
+            params += [f"%{t}%", f"%{t}%"]
 
-        # 1. FTS on raw query
-        rows = _fts_query(query)
+        cur.execute(
+            f"SELECT {select_cols} FROM sc_decided_cases WHERE {or_clauses} ORDER BY date DESC LIMIT %s",
+            params + [limit],
+        )
+        rows = cur.fetchall()
 
-        # 2. FTS on extracted keywords (catches "what is mcburnie case" → "mcburnie")
-        if not rows and keywords and keywords != query:
-            rows = _fts_query(keywords)
-
+        # Tier B: keyword in main_doctrine if title search returned nothing
         if not rows:
-            # 3. Trigram fallback — try keywords first, then raw query
-            for trig_term in ([keywords, query] if keywords != query else [query]):
-                sql2 = """
-                    SELECT id, short_title, case_number, date_str, main_doctrine,
-                           subject, significance_category,
-                           similarity(COALESCE(short_title,'') || ' ' || COALESCE(full_title,''), %s) AS score
-                    FROM sc_decided_cases
-                    WHERE short_title %% %s OR full_title %% %s
-                    ORDER BY score DESC
-                    LIMIT %s
-                """
-                try:
-                    cur.execute(sql2, (trig_term, trig_term, trig_term, limit))
-                    rows = cur.fetchall()
-                except Exception:
-                    rows = []
-                if rows:
-                    break
+            doc_clauses = " OR ".join(["main_doctrine ILIKE %s" for _ in tokens])
+            doc_params = [f"%{t}%" for t in tokens] + [limit]
+            try:
+                cur.execute(
+                    f"SELECT {select_cols} FROM sc_decided_cases WHERE {doc_clauses} ORDER BY date DESC LIMIT %s",
+                    doc_params,
+                )
+                rows = cur.fetchall()
+            except Exception:
+                rows = []
 
         for row in rows:
             cases.append({
-                "id":                   row["id"],
-                "short_title":          row["short_title"] or "",
-                "case_number":          row["case_number"] or "",
-                "date_str":             row["date_str"] or "",
-                "main_doctrine":        (row["main_doctrine"] or "")[:200],
-                "subject":              row["subject"] or "",
+                "id":                    row["id"],
+                "short_title":           row["short_title"] or "",
+                "case_number":           row["case_number"] or "",
+                "date_str":              row["date_str"] or "",
+                "main_doctrine":         (row["main_doctrine"] or "")[:200],
+                "subject":               row["subject"] or "",
                 "significance_category": row["significance_category"] or "",
-                "score":                float(row["score"] or 0),
+                "score":                 1.0,
             })
         cur.close()
     except Exception as e:
