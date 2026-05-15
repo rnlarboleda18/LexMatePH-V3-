@@ -38,7 +38,7 @@ def sitemap_decisions(req: func.HttpRequest) -> func.HttpResponse:
         # Fetch only the fields needed for the sitemap — keep the query fast.
         cur.execute(
             """
-            SELECT id, date_str
+            SELECT id, TO_CHAR(date, 'YYYY-MM-DD') AS date_str
             FROM   sc_decided_cases
             WHERE  id IS NOT NULL
             ORDER  BY id
