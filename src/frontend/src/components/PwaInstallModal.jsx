@@ -7,7 +7,7 @@ const DEFERRED_INSTALL_STEPS = [
   {
     step: ‘1’,
     title: ‘Stay on LexMatePH’,
-    body: ‘Keep this tab open. Install Now uses your browser’s built-in installer.’,
+    body: "Keep this tab open. Install Now uses your browser’s built-in installer.",
     Icon: Globe,
   },
   {
@@ -86,17 +86,17 @@ export default function PwaInstallModal({ onClose, deferredPrompt, variant = ‘
     variant === ‘ios’ ? (
       <>
         <span className="font-bold text-violet-700 dark:text-violet-400">On iPhone and iPad,</span>{‘ ‘}
-        add LexMatePH to your Home Screen — it opens like an app and works offline after you’ve visited once.
+        add LexMatePH to your Home Screen — it opens like an app and works offline after you have visited once.
       </>
     ) : variant === ‘android’ ? (
       <>
         <span className="font-bold text-violet-700 dark:text-violet-400">On Android,</span>{‘ ‘}
-        install LexMatePH via Chrome’s menu — it opens like a native app and works offline.
+        install LexMatePH via Chrome menu — it opens like a native app and works offline.
       </>
     ) : (
       <>
         <span className="font-bold text-violet-700 dark:text-violet-400">Enjoying so far?</span>{‘ ‘}
-        Install LexMatePH with one tap below, or use your browser’s install option — launch it like a native app from
+        Install LexMatePH with one tap below, or use your browser install option — launch it like a native app from
         your home screen.
       </>
     );
