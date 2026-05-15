@@ -76,9 +76,10 @@ export default function PwaInstallModal({ onClose, deferredPrompt, variant = 'de
     DEFERRED_INSTALL_STEPS;
 
   const handleInstallNow = async () => {
-    if (!deferredPrompt) return;
-    deferredPrompt.prompt();
-    await deferredPrompt.userChoice;
+    const prompt = deferredPrompt ?? (typeof window !== 'undefined' ? window.__pwaInstallPrompt ?? null : null);
+    if (!prompt) return;
+    prompt.prompt();
+    await prompt.userChoice;
     onClose();
   };
 
@@ -169,7 +170,7 @@ export default function PwaInstallModal({ onClose, deferredPrompt, variant = 'de
           </ol>
 
           <div className="mt-4 flex gap-2">
-            {variant === 'deferred' && deferredPrompt ? (
+            {variant !== 'ios' ? (
               <>
                 <button
                   type="button"
