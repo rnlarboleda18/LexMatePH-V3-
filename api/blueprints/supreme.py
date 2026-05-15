@@ -515,13 +515,17 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
         select_with_count = select_cols + ", COUNT(*) OVER() AS _total_count"
 
         if search_term:
-            # TIER 0: Exact ID Match (numeric only)
+            # TIER 0: GR Number match — numeric-only queries are always GR number lookups,
+            # never internal DB IDs.  Match against case_number (e.g. "274549" → "G.R. No. 274549").
             if search_term.isdigit():
-                t0_where = base_where + " AND id = %s"
-                t0_params = list(base_params) + [int(search_term)]
+                t0_where = base_where + " AND case_number ILIKE %s"
+                t0_params = list(base_params) + [f"%{search_term}%"]
                 if _probe(t0_where, t0_params):
-                    logging.info("Search Hit Tier 0 (ID Match)")
-                    final_query = f"SELECT {select_with_count} FROM sc_decided_cases {t0_where}"
+                    logging.info("Search Hit Tier 0 (GR Number Match)")
+                    final_query = (
+                        f"SELECT {select_with_count} FROM sc_decided_cases"
+                        f" {t0_where} ORDER BY date DESC, id DESC"
+                    )
                     final_params = t0_params
 
             # TIER 1: Metadata partial match (case_number OR short_title)

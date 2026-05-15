@@ -1403,8 +1403,19 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                         className="mb-4 rounded-lg border border-rose-200 bg-rose-50 px-4 py-3 text-sm text-rose-900 dark:border-rose-900/50 dark:bg-rose-950/40 dark:text-rose-100"
                         role="alert"
                     >
-                        <p className="font-semibold">Could not load decisions</p>
-                        <p className="mt-1 text-rose-800/90 dark:text-rose-200/90">{fetchError}</p>
+                        {/^\d+$/.test(searchTerm.trim()) ? (
+                            <>
+                                <p className="font-semibold">G.R. No. {searchTerm.trim()} not found</p>
+                                <p className="mt-1 text-rose-800/90 dark:text-rose-200/90">
+                                    This case has not been uploaded yet. It will be available on LexMatePH very soon.
+                                </p>
+                            </>
+                        ) : (
+                            <>
+                                <p className="font-semibold">Could not load decisions</p>
+                                <p className="mt-1 text-rose-800/90 dark:text-rose-200/90">{fetchError}</p>
+                            </>
+                        )}
                     </div>
                 )}
 
@@ -1504,7 +1515,18 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                             {hasInitialLoaded && !fetchError && searchResults.length === 0 && (
                                 <div className="text-center py-8 text-gray-500 md:col-span-2">
                                     <FileText className="h-10 w-10 mx-auto text-gray-300 mb-2" />
-                                    <p>No decisions found. Adjust your search or filters.</p>
+                                    {/^\d+$/.test(searchTerm.trim()) ? (
+                                        <>
+                                            <p className="font-medium text-neutral-700 dark:text-zinc-300">
+                                                G.R. No. {searchTerm.trim()} not found
+                                            </p>
+                                            <p className="mt-1 text-sm text-gray-400 dark:text-zinc-500">
+                                                This case has not been uploaded yet. It will be available on LexMatePH very soon.
+                                            </p>
+                                        </>
+                                    ) : (
+                                        <p>No decisions found. Adjust your search or filters.</p>
+                                    )}
                                 </div>
                             )}
                             {searchResults.map((decision) => {
