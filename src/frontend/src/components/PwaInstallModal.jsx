@@ -1,25 +1,25 @@
-import React from ‘react’;
-import { createPortal } from ‘react-dom’;
-import { X, Globe, Share2, Smartphone, Download, MoreVertical } from ‘lucide-react’;
+import React from 'react';
+import { createPortal } from 'react-dom';
+import { X, Globe, Share2, Smartphone, Download, MoreVertical } from 'lucide-react';
 
 /** Shown when the browser exposes `beforeinstallprompt` (Chrome / Edge / Android Chrome, etc.). */
 const DEFERRED_INSTALL_STEPS = [
   {
-    step: ‘1’,
-    title: ‘Stay on LexMatePH’,
-    body: "Keep this tab open. Install Now uses your browser’s built-in installer.",
+    step: '1',
+    title: 'Stay on LexMatePH',
+    body: "Keep this tab open. Install Now uses your browser's built-in installer.",
     Icon: Globe,
   },
   {
-    step: ‘2’,
-    title: ‘Confirm install’,
-    body: ‘Tap Install Now below, then confirm in the prompt. Or use the install icon in the address bar / ⋮ → Install app.’,
+    step: '2',
+    title: 'Confirm install',
+    body: 'Tap Install Now below, then confirm in the prompt. Or use the install icon in the address bar / menu.',
     Icon: Share2,
   },
   {
-    step: ‘3’,
-    title: ‘Open like an app’,
-    body: ‘Launch LexMatePH from your home screen or app drawer for quicker access and offline use.’,
+    step: '3',
+    title: 'Open like an app',
+    body: 'Launch LexMatePH from your home screen or app drawer for quicker access and offline use.',
     Icon: Smartphone,
   },
 ];
@@ -27,52 +27,52 @@ const DEFERRED_INSTALL_STEPS = [
 /** Add to Home Screen — Safari, Chrome, and other browsers on iPhone / iPad all use WebKit here. */
 const IOS_INSTALL_STEPS = [
   {
-    step: ‘1’,
-    title: ‘Open the share menu’,
-    body: ‘Tap Share (square with arrow) in Safari or Chrome on your iPhone or iPad.’,
+    step: '1',
+    title: 'Open the share menu',
+    body: 'Tap Share (square with arrow) in Safari or Chrome on your iPhone or iPad.',
     Icon: Share2,
   },
   {
-    step: ‘2’,
-    title: ‘Add to Home Screen’,
-    body: ‘Scroll the share sheet and tap Add to Home Screen, then Add.’,
+    step: '2',
+    title: 'Add to Home Screen',
+    body: 'Scroll the share sheet and tap Add to Home Screen, then Add.',
     Icon: Smartphone,
   },
   {
-    step: ‘3’,
-    title: ‘Launch from the home screen’,
-    body: ‘Tap the LexMatePH icon. If you see Open as Web App, turn it on for a full-screen app feel.’,
+    step: '3',
+    title: 'Launch from the home screen',
+    body: 'Tap the LexMatePH icon. If you see Open as Web App, turn it on for a full-screen app feel.',
     Icon: Globe,
   },
 ];
 
-/** Fallback for Android Chrome when beforeinstallprompt didn’t fire (e.g. first visit, cooldown). */
+/** Fallback for Android Chrome when beforeinstallprompt did not fire (e.g. first visit, cooldown). */
 const ANDROID_INSTALL_STEPS = [
   {
-    step: ‘1’,
-    title: ‘Open Chrome menu’,
-    body: ‘Tap the three-dot menu (⋮) in the top-right corner of Chrome.’,
+    step: '1',
+    title: 'Open Chrome menu',
+    body: 'Tap the three-dot menu in the top-right corner of Chrome.',
     Icon: MoreVertical,
   },
   {
-    step: ‘2’,
-    title: ‘Add to Home Screen’,
-    body: ‘Tap "Add to Home screen" or "Install app" and confirm.’,
+    step: '2',
+    title: 'Add to Home Screen',
+    body: 'Tap "Add to Home screen" or "Install app" and confirm.',
     Icon: Smartphone,
   },
   {
-    step: ‘3’,
-    title: ‘Launch like a native app’,
-    body: ‘Find LexMatePH on your home screen or app drawer — no browser bar, works offline.’,
+    step: '3',
+    title: 'Launch like a native app',
+    body: 'Find LexMatePH on your home screen or app drawer — no browser bar, works offline.',
     Icon: Globe,
   },
 ];
 
 /** `deferred`: browser install prompt available. `ios`: WebKit. `android`: Android Chrome manual fallback. */
-export default function PwaInstallModal({ onClose, deferredPrompt, variant = ‘deferred’ }) {
+export default function PwaInstallModal({ onClose, deferredPrompt, variant = 'deferred' }) {
   const steps =
-    variant === ‘ios’ ? IOS_INSTALL_STEPS :
-    variant === ‘android’ ? ANDROID_INSTALL_STEPS :
+    variant === 'ios' ? IOS_INSTALL_STEPS :
+    variant === 'android' ? ANDROID_INSTALL_STEPS :
     DEFERRED_INSTALL_STEPS;
 
   const handleInstallNow = async () => {
@@ -83,19 +83,19 @@ export default function PwaInstallModal({ onClose, deferredPrompt, variant = ‘
   };
 
   const intro =
-    variant === ‘ios’ ? (
+    variant === 'ios' ? (
       <>
-        <span className="font-bold text-violet-700 dark:text-violet-400">On iPhone and iPad,</span>{‘ ‘}
-        add LexMatePH to your Home Screen — it opens like an app and works offline after you have visited once.
+        <span className="font-bold text-violet-700 dark:text-violet-400">On iPhone and iPad,</span>{' '}
+        add LexMatePH to your Home Screen — it opens like an app and works offline after your first visit.
       </>
-    ) : variant === ‘android’ ? (
+    ) : variant === 'android' ? (
       <>
-        <span className="font-bold text-violet-700 dark:text-violet-400">On Android,</span>{‘ ‘}
+        <span className="font-bold text-violet-700 dark:text-violet-400">On Android,</span>{' '}
         install LexMatePH via Chrome menu — it opens like a native app and works offline.
       </>
     ) : (
       <>
-        <span className="font-bold text-violet-700 dark:text-violet-400">Enjoying so far?</span>{‘ ‘}
+        <span className="font-bold text-violet-700 dark:text-violet-400">Enjoying so far?</span>{' '}
         Install LexMatePH with one tap below, or use your browser install option — launch it like a native app from
         your home screen.
       </>
