@@ -3,11 +3,11 @@ import { render, screen } from '@testing-library/react';
 import PwaInstallModal from '../components/PwaInstallModal';
 
 describe('PwaInstallModal', () => {
-  it('ios variant shows home-screen steps without Install Now', () => {
+  it('ios variant shows home-screen steps with Install Now and Got it buttons', () => {
     render(<PwaInstallModal variant="ios" onClose={() => {}} />);
     expect(screen.getByText(/On iPhone and iPad/i)).toBeInTheDocument();
     expect(screen.getByText(/Scroll the share sheet/i)).toBeInTheDocument();
-    expect(screen.queryByRole('button', { name: /^Install Now$/i })).not.toBeInTheDocument();
+    expect(screen.getByRole('button', { name: /^Install Now$/i })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /^Got it!$/i })).toBeInTheDocument();
   });
 
