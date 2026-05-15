@@ -86,6 +86,14 @@
         return t;
       })();
     </script>
+    <!-- Capture beforeinstallprompt before React mounts — Android Chrome fires it
+         early and the App.jsx useEffect listener would miss it otherwise. -->
+    <script>
+      window.addEventListener('beforeinstallprompt', function(e) {
+        e.preventDefault();
+        window.__pwaInstallPrompt = e;
+      });
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

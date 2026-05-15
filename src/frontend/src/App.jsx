@@ -298,7 +298,9 @@ function App() {
   const [foundingPromoDurationDays, setFoundingPromoDurationDays] = useState(30);
   const [trialDurationHours, setTrialDurationHours] = useState(24);
   const [showPwaModal, setShowPwaModal] = useState(false);
-  const [pwaInstallPrompt, setPwaInstallPrompt] = useState(null);
+  const [pwaInstallPrompt, setPwaInstallPrompt] = useState(() =>
+    typeof window !== 'undefined' ? (window.__pwaInstallPrompt ?? null) : null
+  );
   /** Latest deferred install prompt for interval ticks (avoid stale closure). */
   const pwaInstallPromptRef = useRef(null);
 
@@ -551,9 +553,13 @@ function App() {
   }, [authLoaded, isSignedIn, showGuestModal, guestModalDismissedAt, foundingPromoAvailable, guestGatePlansReady]);
 
   // Capture the browser's native PWA install prompt so the modal can trigger it.
+  // index.html captures early (before React mounts) into window.__pwaInstallPrompt;
+  // state is already seeded from that, but we re-flush here in case the ref needs it.
   useEffect(() => {
+    if (window.__pwaInstallPrompt) setPwaInstallPrompt(window.__pwaInstallPrompt);
     const handler = (e) => {
       e.preventDefault();
+      window.__pwaInstallPrompt = e;
       setPwaInstallPrompt(e);
     };
     window.addEventListener('beforeinstallprompt', handler);
