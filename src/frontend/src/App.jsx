@@ -1407,11 +1407,16 @@ function App() {
       )}
       {showPwaModal && (pwaInstallPrompt || isLikelyIosWebKit() || isLikelyAndroidChrome()) && (
         <Suspense fallback={null}>
-          <PwaInstallModal
-            variant={pwaInstallPrompt ? 'deferred' : isLikelyIosWebKit() ? 'ios' : 'android'}
-            deferredPrompt={pwaInstallPrompt ?? undefined}
-            onClose={() => setShowPwaModal(false)}
-          />
+          {(() => {
+            const effectivePrompt = pwaInstallPrompt ?? window.__pwaInstallPrompt ?? null;
+            return (
+              <PwaInstallModal
+                variant={effectivePrompt ? 'deferred' : isLikelyIosWebKit() ? 'ios' : 'android'}
+                deferredPrompt={effectivePrompt ?? undefined}
+                onClose={() => setShowPwaModal(false)}
+              />
+            );
+          })()}
         </Suspense>
       )}
 
