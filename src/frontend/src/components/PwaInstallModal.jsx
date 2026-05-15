@@ -76,6 +76,14 @@ export default function PwaInstallModal({ onClose, deferredPrompt, variant = 'de
     DEFERRED_INSTALL_STEPS;
 
   const handleInstallNow = async () => {
+    if (variant === 'ios') {
+      // iOS has no beforeinstallprompt — open the share sheet so the user can tap "Add to Home Screen"
+      if (navigator.share) {
+        try { await navigator.share({ title: 'LexMatePH', url: window.location.href }); } catch { /* cancelled */ }
+      }
+      onClose();
+      return;
+    }
     const prompt = deferredPrompt ?? (typeof window !== 'undefined' ? window.__pwaInstallPrompt ?? null : null);
     if (!prompt) return;
     prompt.prompt();
@@ -170,32 +178,20 @@ export default function PwaInstallModal({ onClose, deferredPrompt, variant = 'de
           </ol>
 
           <div className="mt-4 flex gap-2">
-            {variant !== 'ios' ? (
-              <>
-                <button
-                  type="button"
-                  onClick={handleInstallNow}
-                  className="flex-1 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition-opacity hover:opacity-90 active:scale-[0.99]"
-                >
-                  Install Now
-                </button>
-                <button
-                  type="button"
-                  onClick={onClose}
-                  className="rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-bold text-gray-700 transition-colors hover:bg-gray-50 active:scale-[0.99] dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700"
-                >
-                  Got it!
-                </button>
-              </>
-            ) : (
-              <button
-                type="button"
-                onClick={onClose}
-                className="w-full rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition-opacity hover:opacity-90 active:scale-[0.99]"
-              >
-                Got it!
-              </button>
-            )}
+            <button
+              type="button"
+              onClick={handleInstallNow}
+              className="flex-1 rounded-xl bg-gradient-to-r from-violet-600 to-indigo-600 px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-indigo-900/20 transition-opacity hover:opacity-90 active:scale-[0.99]"
+            >
+              Install Now
+            </button>
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm font-bold text-gray-700 transition-colors hover:bg-gray-50 active:scale-[0.99] dark:border-slate-700 dark:bg-slate-800 dark:text-gray-300 dark:hover:bg-slate-700"
+            >
+              Got it!
+            </button>
           </div>
         </div>
       </div>
