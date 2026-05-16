@@ -14,7 +14,7 @@ import logging
 import os
 import re
 import sys
-from concurrent.futures import ThreadPoolExecutor, as_completed
+from concurrent.futures import ThreadPoolExecutor, wait as futures_wait
 
 import azure.functions as func
 
@@ -213,7 +213,10 @@ def ai_search(req: func.HttpRequest) -> func.HttpResponse:
     if not _looks_like_question(query):
         return _json({"answer": None, "cases": [], "skipped": True})
 
-    # Run AI generation + DB search in parallel
+    # Run AI generation + DB search in parallel with a shared 22s budget.
+    # Sequential .result(timeout=8) + .result(timeout=20) = 28s worst case,
+    # which exceeds the 25s frontend AbortController. A single futures_wait
+    # deadline keeps total backend time inside the frontend limit.
     answer = ""
     cases = []
 
@@ -221,13 +224,15 @@ def ai_search(req: func.HttpRequest) -> func.HttpResponse:
         future_ai = executor.submit(_get_ai_answer, query)
         future_db = executor.submit(_search_cases_db, query, 3)
 
+        done, _ = futures_wait([future_ai, future_db], timeout=22)
+
         try:
-            cases = future_db.result(timeout=8)
+            cases = future_db.result(timeout=0) if future_db in done else []
         except Exception:
             cases = []
 
         try:
-            answer = future_ai.result(timeout=20)
+            answer = future_ai.result(timeout=0) if future_ai in done else ""
         except Exception:
             answer = ""
 

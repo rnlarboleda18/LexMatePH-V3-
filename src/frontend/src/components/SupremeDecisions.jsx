@@ -757,11 +757,11 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
 
         const controller = new AbortController();
         let didTimeout = false;
-        // 25 s — must exceed the backend's 20 s Gemini timeout + network overhead
+        // 30 s — backend shared budget is 22 s; this adds 8 s for network overhead
         const timeoutId = setTimeout(() => {
             didTimeout = true;
             controller.abort();
-        }, 25000);
+        }, 30000);
 
         setAiLoading(true);
         setAiAnswer(null);
