@@ -1,7 +1,7 @@
 /** Wall-clock end of “browse without metering” after a signed-out user closes the gate modal (see App.jsx). */
 let graceUntilMs = null;
 
-export const GUEST_GATE_GRACE_MS = 5 * 60 * 1000;
+export const GUEST_GATE_GRACE_MS = 4 * 60 * 1000;
 
 export function startGuestGateGrace() {
   graceUntilMs = Date.now() + GUEST_GATE_GRACE_MS;

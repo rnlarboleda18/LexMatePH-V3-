@@ -550,7 +550,7 @@ function App() {
     // During the 24-hour full-access guest window: only show the founding promo offer, not the plain paywall gate.
     if (isInGuestWindow() && !foundingPromoAvailable) return;
     const delay = guestModalDismissedAt === null
-      ? (foundingPromoAvailable ? 10000 : 0)  // 10s delay for promo so user can explore the app first
+      ? (foundingPromoAvailable ? 90000 : 0)  // 90s delay for promo so user can explore the app first
       : Math.max(0, GUEST_GATE_GRACE_MS - (Date.now() - guestModalDismissedAt));
     const timer = setTimeout(() => {
       setShowGuestModal(foundingPromoAvailable ? 'founding_promo' : 'subscription');
@@ -625,6 +625,7 @@ function App() {
   // Suppressed while a guest gate modal (founding promo / subscription) is open.
   const showGuestModalRef = useRef(showGuestModal);
   useEffect(() => { showGuestModalRef.current = showGuestModal; }, [showGuestModal]);
+  const prevShowGuestModalRef = useRef(null);
 
   useEffect(() => {
     let intervalId = null;
@@ -677,8 +678,12 @@ function App() {
 
   // When the guest gate modal closes, immediately re-evaluate PWA nudge so it
   // appears right away instead of waiting up to 5 minutes for the next tick.
+  // prevShowGuestModalRef guards against firing on mount (only runs on non-null → null transitions).
   useEffect(() => {
-    if (showGuestModal !== null) return;
+    const prev = prevShowGuestModalRef.current;
+    prevShowGuestModalRef.current = showGuestModal;
+    if (prev === null) return;          // initial mount — let the 60s timer handle first show
+    if (showGuestModal !== null) return; // guest gate just opened, not closed
     if (isPwaInstalledDisplayMode()) return;
     if (pwaInstallPromptRef.current || isLikelyIosWebKit() || isLikelyAndroidChrome()) {
       setShowPwaModal(true);
