@@ -231,7 +231,7 @@ def ai_search(req: func.HttpRequest) -> func.HttpResponse:
     executor = ThreadPoolExecutor(max_workers=1)
     future_ai = executor.submit(_get_ai_answer, query)
 
-    done, _ = futures_wait([future_ai], timeout=18)
+    done, _ = futures_wait([future_ai], timeout=25)
     future_ai.cancel()
 
     try:
