@@ -223,25 +223,16 @@ def ai_search(req: func.HttpRequest) -> func.HttpResponse:
     if not _looks_like_question(query):
         return _json({"answer": None, "cases": [], "skipped": True})
 
-    # Run AI + DB in parallel. Use shutdown(wait=False) so a slow/stuck AI
-    # thread never blocks the response — the `with` block calls shutdown(wait=True)
-    # by default which would hold the response hostage until tenacity retries finish.
-    answer = ""
-    cases = []
+    # DB is fast (<1s) — run synchronously to avoid psycopg2 pool deadlock
+    # when the pool is accessed from both the main thread and a thread-pool worker.
+    # Only the Gemini call needs a thread + timeout.
+    cases = _search_cases_db(query, 3)
 
-    executor = ThreadPoolExecutor(max_workers=2)
+    executor = ThreadPoolExecutor(max_workers=1)
     future_ai = executor.submit(_get_ai_answer, query)
-    future_db = executor.submit(_search_cases_db, query, 3)
 
-    done, pending = futures_wait([future_ai, future_db], timeout=18)
-
-    for f in pending:
-        f.cancel()
-
-    try:
-        cases = future_db.result(timeout=0) if future_db in done else []
-    except Exception:
-        cases = []
+    done, _ = futures_wait([future_ai], timeout=18)
+    future_ai.cancel()
 
     try:
         answer = future_ai.result(timeout=0) if future_ai in done else ""
