@@ -123,8 +123,9 @@ def _search_cases_db(query: str, limit: int = 3) -> list[dict]:
         cur = conn.cursor(cursor_factory=RealDictCursor)
 
         select_cols = """
-            id, short_title, case_number, date_str, main_doctrine,
-            subject, significance_category
+            id, short_title, case_number,
+            TO_CHAR(date, 'YYYY-MM-DD') AS date_str,
+            main_doctrine, subject, significance_category
         """
 
         # Tier A: any keyword appears in short_title OR full_title

@@ -695,6 +695,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
             if (abortControllerRef.current) abortControllerRef.current.abort();
             setLoading(false);
             setSearchResults([]);
+            setTotalCount(0);
             setFetchError(null);
             return;
         }
