@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
 import {
   Scale, Globe, Briefcase, FileText, Users, Sword, BookOpen,
-  ChevronRight, ChevronDown, BookMarked, Brain, AlertTriangle,
+  ChevronRight, ChevronDown, ChevronLeft, BookMarked, Brain, AlertTriangle,
   Gavel, Lightbulb, Star, Clock, CheckCircle2, Circle,
   ExternalLink, Tag, AlertCircle,
 } from 'lucide-react';
@@ -419,6 +419,7 @@ export default function Bar2026({ onCaseClick }) {
   const [isAdmin, setIsAdmin] = useState(false);
   const [publishing, setPublishing] = useState(false);
   const [publishMsg, setPublishMsg] = useState(null);
+  const [showTopicTree, setShowTopicTree] = useState(true);
 
   const active = SUBJECTS.find(s => s.id === activeTab) ?? SUBJECTS[0];
 
@@ -431,6 +432,7 @@ export default function Bar2026({ onCaseClick }) {
     setTopicsError(null);
     setTopicsLoading(true);
     setPublishMsg(null);
+    setShowTopicTree(true);
 
     fetch(apiUrl(`/api/reviewer/${activeTab}?all=1`))
       .then(r => {
@@ -451,6 +453,11 @@ export default function Bar2026({ onCaseClick }) {
         setTopicsLoading(false);
       });
   }, [activeTab]);
+
+  const handleSelectTopic = useCallback((t) => {
+    setSelectedTopic(t);
+    if (window.innerWidth < 768) setShowTopicTree(false);
+  }, []);
 
   const handlePublishAll = useCallback(() => {
     if (!window.confirm(`Publish all ${draftCount} draft topics for ${active.fullLabel}?`)) return;
@@ -524,17 +531,29 @@ export default function Bar2026({ onCaseClick }) {
         </div>
 
         {/* Two-column layout */}
-        <div className="flex gap-3 min-h-[600px]">
+        <div className="flex flex-col gap-3 min-h-[400px] md:flex-row md:min-h-[600px]">
 
           {/* Topic Tree — left sidebar */}
-          <div className="relative w-56 shrink-0 overflow-hidden rounded-xl border border-lex bg-white/70 shadow-sm backdrop-blur-sm dark:bg-zinc-900/70 lg:w-64">
+          <div className="relative w-full overflow-hidden rounded-xl border border-lex bg-white/70 shadow-sm backdrop-blur-sm dark:bg-zinc-900/70 md:w-56 md:shrink-0 lg:w-64">
             <div className="pointer-events-none absolute inset-0"><CardVioletInnerWash /></div>
             <div className="relative z-[1]">
               <div className="border-b border-lex px-3 py-2.5">
-                <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider ${active.color}`}>
-                  <active.icon size={11} />
-                  {active.fullLabel}
-                </div>
+                {/* Header — tappable on mobile to toggle tree */}
+                <button
+                  className="flex w-full items-center justify-between md:cursor-default md:pointer-events-none"
+                  onClick={() => setShowTopicTree(v => !v)}
+                >
+                  <div className={`flex items-center gap-1.5 text-[10px] font-bold uppercase tracking-wider ${active.color}`}>
+                    <active.icon size={11} />
+                    {active.fullLabel}
+                  </div>
+                  <span className="md:hidden">
+                    {showTopicTree
+                      ? <ChevronDown size={14} className="text-gray-400" />
+                      : <ChevronRight size={14} className="text-gray-400" />
+                    }
+                  </span>
+                </button>
                 {isAdmin && draftCount > 0 && (
                   <div className="mt-2 flex flex-col gap-1">
                     <button
@@ -550,7 +569,7 @@ export default function Bar2026({ onCaseClick }) {
                   </div>
                 )}
               </div>
-              <div className="overflow-y-auto px-1.5 py-2" style={{ maxHeight: 'calc(100vh - 260px)' }}>
+              <div className={`overflow-y-auto px-1.5 py-2 max-h-72 md:max-h-[calc(100vh-260px)] ${showTopicTree ? '' : 'hidden md:block'}`}>
                 {topicsLoading && (
                   <div className="py-6 text-center text-xs text-gray-400">Loading topics…</div>
                 )}
@@ -561,7 +580,7 @@ export default function Bar2026({ onCaseClick }) {
                   <TopicTree
                     topics={topics}
                     selectedId={selectedTopic?.id}
-                    onSelect={setSelectedTopic}
+                    onSelect={handleSelectTopic}
                     subjectColor={active.color}
                   />
                 )}
@@ -570,7 +589,14 @@ export default function Bar2026({ onCaseClick }) {
           </div>
 
           {/* Content panel — right */}
-          <div className="min-w-0 flex-1 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 220px)' }}>
+          <div className={`min-w-0 flex-1 md:overflow-y-auto md:max-h-[calc(100vh-220px)] ${showTopicTree ? 'hidden md:block' : 'block'}`}>
+            {/* Back to topics — mobile only */}
+            <button
+              className="mb-3 flex items-center gap-1 text-xs font-semibold text-violet-600 hover:underline dark:text-violet-400 md:hidden"
+              onClick={() => setShowTopicTree(true)}
+            >
+              <ChevronLeft size={14} /> All Topics
+            </button>
             <ContentPanel
               subject={activeTab}
               topic={selectedTopic}
