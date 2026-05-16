@@ -6,6 +6,7 @@ import { RefreshCcw, AlertTriangle, Search } from 'lucide-react';
 import Fuse from 'fuse.js';
 import Layout from './components/Layout';
 import Sidebar from './components/Sidebar';
+import TabBar from './components/TabBar';
 import ControlBar from './components/ControlBar';
 import QuestionCard from './components/QuestionCard';
 import SupremeDecisions from './components/SupremeDecisions';
@@ -150,6 +151,36 @@ function App() {
     if (/^\/decisions\/\d+/.test(path)) return 'supreme_decisions';
     return 'about';
   });
+
+  // openTabs tracks which sections the user has opened as tabs.
+  // Sidebar navigation adds to this list; closing a tab removes it.
+  const [openTabs, setOpenTabs] = useState(() => [
+    (() => {
+      const path = window.location.pathname;
+      if (PATH_TO_MODE[path]) return PATH_TO_MODE[path];
+      if (/^\/decisions\/\d+/.test(path)) return 'supreme_decisions';
+      return 'about';
+    })(),
+  ]);
+  const openTabsRef = React.useRef(openTabs);
+  useEffect(() => { openTabsRef.current = openTabs; }, [openTabs]);
+
+  const navigateToTab = useCallback((newMode) => {
+    setOpenTabs((prev) => (prev.includes(newMode) ? prev : [...prev, newMode]));
+    setMode(newMode);
+  }, []);
+
+  const closeTab = useCallback((tabMode) => {
+    const current = openTabsRef.current;
+    const next = current.filter((t) => t !== tabMode);
+    const safeNext = next.length === 0 ? ['about'] : next;
+    setOpenTabs(safeNext);
+    setMode((currentMode) => {
+      if (currentMode !== tabMode) return currentMode;
+      const idx = current.indexOf(tabMode);
+      return safeNext[Math.max(0, idx - 1)] ?? safeNext[0] ?? 'about';
+    });
+  }, []);
 
   /**
    * Numeric case ID extracted from a deep-link URL on initial load
@@ -743,7 +774,7 @@ function App() {
 
 
   const handleToggleAbout = () => {
-    setMode('about');
+    navigateToTab('about');
   };
 
   const handleToggleLegal = useCallback(() => {
@@ -753,7 +784,7 @@ function App() {
   const handleSelectSubject = (subject) => {
     setCurrentSubject(subject === 'All Subjects' ? null : subject);
     setSearchTerm(''); // Clear search when picking a subject
-    setMode('browse_bar');
+    navigateToTab('browse_bar');
   };
 
   const handleStartFlashcard = (subject) => {
@@ -809,7 +840,7 @@ function App() {
   };
 
   const handleToggleQuiz = () => {
-    setMode('quiz');
+    navigateToTab('quiz');
     setFlashcardIndex(0);
   };
 
@@ -837,18 +868,18 @@ function App() {
   };
 
   const handleToggleFlashcard = () => {
-    setMode('flashcard');
+    navigateToTab('flashcard');
     setFlashcardState('setup');
     setFlashcardDeckError(null);
   };
 
   const handleToggleLexCode = useCallback(() => {
-    setMode('codex');
-  }, []);
+    navigateToTab('codex');
+  }, [navigateToTab]);
 
   const handleToggleBar2026 = useCallback(() => {
-    setMode('bar_2026');
-  }, []);
+    navigateToTab('bar_2026');
+  }, [navigateToTab]);
 
   const isPublicDocumentMode = mode === 'legal';
 
@@ -887,16 +918,16 @@ function App() {
           onToggleQuiz={handleToggleQuiz}
           onSelectSubject={handleSelectSubject}
           onToggleAbout={handleToggleAbout}
-          onToggleUpdates={() => setMode('updates')}
-          onToggleSupremeDecisions={() => setMode('supreme_decisions')}
+          onToggleUpdates={() => navigateToTab('updates')}
+          onToggleSupremeDecisions={() => navigateToTab('supreme_decisions')}
           onToggleFlashcard={handleToggleFlashcard}
           onToggleLexPlay={() => {
             setPreviousMode(mode);
-            setMode('lexplay');
+            navigateToTab('lexplay');
           }}
           onToggleLexCode={handleToggleLexCode}
-          onToggleLexMate={() => setMode('lexmate')}
-          onToggleAdminTools={() => setMode('admin_tools')}
+          onToggleLexMate={() => navigateToTab('lexmate')}
+          onToggleAdminTools={() => navigateToTab('admin_tools')}
           onToggleBar2026={handleToggleBar2026}
           mode={mode}
         />
@@ -1072,9 +1103,10 @@ function App() {
                         ref={barFilterChromeRef}
                         className={`z-20 ${FILTER_CHROME_SURFACE} ${
                           xlFixedChrome
-                            ? 'fixed left-0 right-0 top-[var(--app-header-offset)] xl:left-52'
+                            ? 'fixed left-0 right-0 xl:left-52'
                             : 'relative'
                         }`}
+                        style={xlFixedChrome ? { top: 'calc(var(--app-header-offset) + var(--tab-bar-height, 0px))' } : undefined}
                       >
                         <div className="w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
                           <div className="flex w-full min-w-0 flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2">
@@ -1299,10 +1331,12 @@ function App() {
                       </Suspense>
                     </div>
                   )}
-                  {isAdmin && effectiveMode === 'bar_2026' && (
-                    <Suspense fallback={<PageLoadingFallback label="Loading BAR 2026…" />}>
-                      <Bar2026 onCaseClick={selectGlobalCaseGuarded} />
-                    </Suspense>
+                  {isAdmin && openTabs.includes('bar_2026') && (
+                    <div style={{ display: effectiveMode === 'bar_2026' ? undefined : 'none' }}>
+                      <Suspense fallback={<PageLoadingFallback label="Loading BAR 2026…" />}>
+                        <Bar2026 onCaseClick={selectGlobalCaseGuarded} />
+                      </Suspense>
+                    </div>
                   )}
                   </>
                 </ErrorBoundary>
@@ -1327,6 +1361,15 @@ function App() {
         );
       })()}
 
+
+      {/* In-app tab bar — portaled to body; only visible when >= 2 tabs are open */}
+      <TabBar
+        tabs={openTabs}
+        activeMode={mode}
+        onSwitch={navigateToTab}
+        onClose={closeTab}
+        isDarkMode={isDarkMode}
+      />
 
       {/* Doctrinal Detail Modal */}
 

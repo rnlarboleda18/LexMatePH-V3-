@@ -1074,9 +1074,10 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
                 ref={lexFilterChromeRef}
                 className={`z-[30] ${FILTER_CHROME_SURFACE} ${
                     xlFixedChrome
-                        ? 'fixed left-0 right-0 top-[var(--app-header-offset)] xl:left-52'
+                        ? 'fixed left-0 right-0 xl:left-52'
                         : 'relative'
                 }`}
+                style={xlFixedChrome ? { top: 'calc(var(--app-header-offset) + var(--tab-bar-height, 0px))' } : undefined}
             >
                 <div className="w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
                     <div className="flex w-full min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2">
