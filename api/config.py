@@ -95,7 +95,7 @@ GCS_BAR_PREFIX       = "bar-exam"
 
 # Gemini models (Vertex AI — billed to GenAI App Builder credit)
 GEMINI_PRO_MODEL     = os.getenv("GEMINI_PRO_MODEL",   "gemini-2.5-pro")
-GEMINI_FLASH_MODEL   = os.getenv("GEMINI_FLASH_MODEL", "gemini-3-flash-preview")
+GEMINI_FLASH_MODEL   = os.getenv("GEMINI_FLASH_MODEL", "gemini-2.5-flash")
 
 # RAG Engine
 RAG_CORPUS_NAME      = os.getenv("RAG_CORPUS_NAME", "")   # set after corpus creation

@@ -68,26 +68,36 @@ def _looks_like_question(query: str) -> bool:
     return any(q.startswith(w) for w in _QUESTION_WORDS)
 
 
-def _get_ai_answer(query: str) -> str:
-    """Call Gemini Flash directly for a fast 3-4 sentence answer."""
-    try:
+_gemini_client = None
+
+
+def _get_gemini_client():
+    """Return a cached Vertex AI client (one-time init per worker process)."""
+    global _gemini_client
+    if _gemini_client is None:
         import config
         from google import genai
-        from google.genai import types
-
         if config.GCP_CREDENTIALS_FILE and os.path.exists(config.GCP_CREDENTIALS_FILE):
             os.environ.setdefault("GOOGLE_APPLICATION_CREDENTIALS", config.GCP_CREDENTIALS_FILE)
-
-        client = genai.Client(
+        _gemini_client = genai.Client(
             vertexai=True,
             project=config.GCP_PROJECT,
             location=config.GCP_LOCATION,
         )
+    return _gemini_client
+
+
+def _get_ai_answer(query: str) -> str:
+    """Call Gemini Flash directly for a fast 3-4 sentence answer."""
+    try:
+        import config
+        from google.genai import types
+
         cfg = types.GenerateContentConfig(
             temperature=0.1,
             system_instruction=AI_SEARCH_SYSTEM_PROMPT,
         )
-        resp = client.models.generate_content(
+        resp = _get_gemini_client().models.generate_content(
             model=config.GEMINI_FLASH_MODEL,
             contents=query,
             config=cfg,
@@ -213,27 +223,31 @@ def ai_search(req: func.HttpRequest) -> func.HttpResponse:
     if not _looks_like_question(query):
         return _json({"answer": None, "cases": [], "skipped": True})
 
-    # Run AI generation + DB search in parallel with a shared 22s budget.
-    # Sequential .result(timeout=8) + .result(timeout=20) = 28s worst case,
-    # which exceeds the 25s frontend AbortController. A single futures_wait
-    # deadline keeps total backend time inside the frontend limit.
+    # Run AI + DB in parallel. Use shutdown(wait=False) so a slow/stuck AI
+    # thread never blocks the response — the `with` block calls shutdown(wait=True)
+    # by default which would hold the response hostage until tenacity retries finish.
     answer = ""
     cases = []
 
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        future_ai = executor.submit(_get_ai_answer, query)
-        future_db = executor.submit(_search_cases_db, query, 3)
+    executor = ThreadPoolExecutor(max_workers=2)
+    future_ai = executor.submit(_get_ai_answer, query)
+    future_db = executor.submit(_search_cases_db, query, 3)
 
-        done, _ = futures_wait([future_ai, future_db], timeout=22)
+    done, pending = futures_wait([future_ai, future_db], timeout=18)
 
-        try:
-            cases = future_db.result(timeout=0) if future_db in done else []
-        except Exception:
-            cases = []
+    for f in pending:
+        f.cancel()
 
-        try:
-            answer = future_ai.result(timeout=0) if future_ai in done else ""
-        except Exception:
-            answer = ""
+    try:
+        cases = future_db.result(timeout=0) if future_db in done else []
+    except Exception:
+        cases = []
+
+    try:
+        answer = future_ai.result(timeout=0) if future_ai in done else ""
+    except Exception:
+        answer = ""
+
+    executor.shutdown(wait=False)
 
     return _json({"answer": answer, "cases": cases})
