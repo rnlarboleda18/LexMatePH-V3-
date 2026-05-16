@@ -744,6 +744,19 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         if (s.split(' ').length < 3) return false;
         return AI_QUESTION_STARTERS.some(w => s.startsWith(w));
     };
+    const NL_STOP_WORDS = new Set([
+        'what','who','when','where','why','how','explain','define','describe',
+        'discuss','compare','distinguish','is','are','was','were','does','did',
+        'can','could','would','should','there','the','a','an','in','of','for',
+        'to','and','or','on','at','by','from','with','about','give','me','tell',
+        'this','that','these','those','its','their','case','cases','ruling',
+        'decision','doctrine','rule',
+    ]);
+    const extractKeywords = (q) => {
+        const words = q.toLowerCase().replace(/[^a-z\s']/g, ' ').split(/\s+/).filter(Boolean);
+        const kw = words.filter(w => !NL_STOP_WORDS.has(w) && w.length > 2);
+        return kw.join(' ');
+    };
 
     useEffect(() => {
         const query = debouncedSearchTerm.trim();
@@ -869,7 +882,10 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         setLoading(true);
         setFetchError(null);
         try {
-            let query = `/api/sc_decisions?search=${encodeURIComponent(searchTerm)}&page=${currentPage}&limit=${ITEMS_PER_PAGE}`;
+            const effectiveSearch = isNaturalLanguageQuery(searchTerm)
+                ? extractKeywords(searchTerm)
+                : searchTerm;
+            let query = `/api/sc_decisions?search=${encodeURIComponent(effectiveSearch)}&page=${currentPage}&limit=${ITEMS_PER_PAGE}`;
             if (selectedYear) query += `&year=${selectedYear}`;
             if (selectedMonth) query += `&month=${encodeURIComponent(selectedMonth)}`;
             if (selectedPonente) query += `&ponente=${encodeURIComponent(selectedPonente)}`;
