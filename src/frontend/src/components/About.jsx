@@ -21,6 +21,7 @@ const FEATURES = [
   {
     icon: Brain,
     title: 'Lexify',
+    path: '/lexify',
     accent:
       'bg-gradient-to-br from-fuchsia-500/20 to-purple-600/10 text-fuchsia-700 ring-1 ring-fuchsia-500/20 dark:text-fuchsia-300 dark:ring-fuchsia-400/20',
     description:
@@ -29,6 +30,7 @@ const FEATURES = [
   {
     icon: SquareStack,
     title: 'Flashcards',
+    path: '/flashcards',
     accent:
       'bg-gradient-to-br from-violet-500/20 to-indigo-600/10 text-violet-700 ring-1 ring-violet-500/20 dark:text-violet-300 dark:ring-violet-400/20',
     description: 'Flip through concept decks tied to your materials to reinforce doctrines and definitions.',
@@ -36,6 +38,7 @@ const FEATURES = [
   {
     icon: Headphones,
     title: 'LexPlay',
+    path: '/lexplay',
     accent:
       'bg-gradient-to-br from-purple-500/25 to-violet-600/10 text-purple-700 ring-1 ring-purple-500/25 dark:text-purple-300 dark:ring-purple-400/25',
     description: 'Listen to LexMatePH audio content alongside your study flow.',
@@ -43,6 +46,7 @@ const FEATURES = [
   {
     icon: Gavel,
     title: 'Case Digest',
+    path: '/decisions',
     accent:
       'bg-gradient-to-br from-rose-500/15 to-purple-600/10 text-rose-700 ring-1 ring-rose-500/15 dark:text-rose-300 dark:ring-rose-400/20',
     description:
@@ -51,6 +55,7 @@ const FEATURES = [
   {
     icon: Library,
     title: 'LexCode',
+    path: '/lexcode',
     accent:
       'bg-gradient-to-br from-indigo-500/20 to-purple-600/10 text-indigo-700 ring-1 ring-indigo-500/20 dark:text-indigo-300 dark:ring-indigo-400/20',
     description:
@@ -59,6 +64,7 @@ const FEATURES = [
   {
     icon: Book,
     title: 'Bar Questions',
+    path: '/bar-questions',
     accent:
       'bg-gradient-to-br from-amber-500/15 to-violet-600/10 text-amber-800 ring-1 ring-amber-500/20 dark:text-amber-300 dark:ring-amber-400/20',
     description:
@@ -225,9 +231,10 @@ const About = () => {
           <section className="space-y-2">
             <h2 className="text-xl font-bold text-slate-900 dark:text-white sm:text-2xl">Tools at a glance</h2>
             <div className="grid grid-cols-1 gap-tile sm:grid-cols-2 xl:grid-cols-3">
-              {FEATURES.map(({ icon: Icon, title, description, accent }) => (
-                <div
+              {FEATURES.map(({ icon: Icon, title, path, description, accent }) => (
+                <Link
                   key={title}
+                  to={path}
                   className={`group relative overflow-hidden rounded-2xl border border-lex bg-white p-5 shadow-md dark:border-lex dark:bg-zinc-900 ${CHROME_INTERACTIVE_TILE_HOVER}`}
                 >
                   <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-purple-400/10 blur-2xl transition group-hover:bg-purple-400/20" />
@@ -240,7 +247,7 @@ const About = () => {
                   <p className="relative mt-1.5 text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                     {description}
                   </p>
-                </div>
+                </Link>
               ))}
             </div>
           </section>
