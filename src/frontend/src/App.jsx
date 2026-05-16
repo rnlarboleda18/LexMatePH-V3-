@@ -353,6 +353,7 @@ function App() {
   useEffect(() => {
     const path = MODE_TO_PATH[mode] ?? '/';
     if (window.location.pathname !== path) navigate(path, { replace: true });
+    document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'instant' });
   // navigate is stable (React Router guarantee); MODE_TO_PATH is a module constant.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+import { Link } from 'react-router-dom';
 import { Sun, Moon, Menu, X, Scale } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { APP_HEADER_SURFACE, SIDEBAR_ASIDE_SURFACE } from '../utils/filterChromeClasses';
@@ -91,7 +92,7 @@ const Layout = ({
                         </button>
 
                         {/* Same logo lockup as LandingPage.jsx (official marketing branding) */}
-                        <div className="flex min-w-0 items-center gap-2.5 max-sm:gap-2">
+                        <Link to="/about" className="flex min-w-0 items-center gap-2.5 max-sm:gap-2">
                             <div
                                 className="flex h-10 w-10 max-sm:h-8 max-sm:w-8 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-purple-600 to-violet-600 text-white shadow-md shadow-purple-600/30 max-sm:rounded-lg"
                                 aria-hidden
@@ -106,7 +107,7 @@ const Layout = ({
                                     Your all-in-one Legal Companion App. One App does all.
                                 </span>
                             </div>
-                        </div>
+                        </Link>
                     </div>
 
                     <div className="relative z-10 ml-auto flex shrink-0 items-center justify-end gap-1 md:gap-1.5">
