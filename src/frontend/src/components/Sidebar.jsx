@@ -1,8 +1,62 @@
-import React from 'react';
-import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, Terminal, Scale, MessageSquare } from 'lucide-react';
+import React, { useState } from 'react';
+import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, Terminal, Scale, MessageSquare, ChevronDown, ChevronRight } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
 import { SIDEBAR_NAV_ACTIVE, SIDEBAR_NAV_IDLE, SIDEBAR_MOBILE_AUTH_CARD } from '../utils/filterChromeClasses';
+
+const LEXCODE_SUBJECTS = [
+    {
+        id: 'civil',
+        label: 'Civil Law',
+        laws: [
+            { id: 'civ',  label: 'Civil Code' },
+            { id: 'fc',   label: 'Family Code' },
+        ],
+    },
+    {
+        id: 'criminal',
+        label: 'Criminal Law',
+        laws: [
+            { id: 'rpc', label: 'Revised Penal Code' },
+        ],
+    },
+    {
+        id: 'commercial',
+        label: 'Commercial Law',
+        laws: [
+            { id: 'rcc', label: 'Revised Corporation Code' },
+        ],
+    },
+    {
+        id: 'political',
+        label: 'Political Law',
+        laws: [
+            { id: 'const', label: 'Philippine Constitution' },
+        ],
+    },
+    {
+        id: 'labor',
+        label: 'Labor Law & Social Legislation',
+        laws: [
+            { id: 'labor', label: 'Labor Code' },
+        ],
+    },
+    {
+        id: 'remedial',
+        label: 'Remedial Law & Legal Ethics',
+        laws: [
+            { id: 'roc',          label: 'Rules of Court' },
+            { id: 'AM-07-9-12-SC', label: 'Writ of Amparo' },
+            { id: 'AM-08-1-16-SC', label: 'Writ of Habeas Data' },
+            { id: 'AM-09-6-8-SC',  label: 'Rules for Environmental Cases' },
+            { id: 'AM-01-7-01-SC', label: 'Rules on Electronic Evidence' },
+            { id: 'CPRA',          label: 'Code of Professional Responsibility & Accountability' },
+            { id: 'AM-02-8-13-SC', label: '2004 Rules on Notarial Practice' },
+            { id: 'NCJC',          label: 'New Code of Judicial Conduct' },
+            { id: 'RA-11642',      label: 'Domestic Administrative Adoption Act' },
+        ],
+    },
+];
 
 const TIER_ICON = { free: Shield, amicus: Zap, juris: Star, barrister: Crown };
 const TIER_COLOR = {
@@ -33,9 +87,30 @@ const Sidebar = ({
   onSelectSubject,
   onToggleAdminTools,
   onToggleBar2026,
+  onSelectCodal,
+  selectedCodalCode,
 }) => {
     const { tier, tierLabel, openUpgradeModal, openAccountBillingModal, isAdmin, loading, isFoundingPromo, foundingPromoDaysLeft } = useSubscription();
     const TierIcon = isAdmin ? Crown : (TIER_ICON[tier] || Shield);
+
+    const activeLawId = (selectedCodalCode || '').toLowerCase();
+    const activeSubjectId = LEXCODE_SUBJECTS.find(s =>
+        s.laws.some(l => l.id.toLowerCase() === activeLawId)
+    )?.id ?? null;
+
+    const [lexOpen, setLexOpen] = useState(false);
+    const [openSubjects, setOpenSubjects] = useState(() => {
+        if (activeSubjectId) return { [activeSubjectId]: true };
+        return {};
+    });
+
+    const toggleSubject = (id) =>
+        setOpenSubjects(p => ({ ...p, [id]: !p[id] }));
+
+    const handleLexCodeClick = () => {
+        setLexOpen(p => !p);
+        if (onToggleLexCode) onToggleLexCode();
+    };
 
     return (
         <nav className="space-y-1 px-1.5 sm:px-2 pb-[calc(var(--app-header-height)+var(--player-height,0px))]">
@@ -267,20 +342,72 @@ const Sidebar = ({
                 Case Digest
             </button>
 
-            {/* LexCode — codal picker lives on the page */}
+            {/* LexCode — expandable subject tree */}
             <button
-                onClick={() => {
-                    if (onToggleLexCode) onToggleLexCode();
-                }}
+                onClick={handleLexCodeClick}
                 className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
-                ${mode === 'codex'
-                        ? SIDEBAR_NAV_ACTIVE
-                        : SIDEBAR_NAV_IDLE
-                    }`}
+                ${mode === 'codex' ? SIDEBAR_NAV_ACTIVE : SIDEBAR_NAV_IDLE}`}
             >
                 <Library size={20} className={`${mode === 'codex' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
-                LexCode
+                <span className="flex-1">LexCode</span>
+                {(lexOpen || mode === 'codex')
+                    ? <ChevronDown size={14} className="shrink-0 text-neutral-400 dark:text-zinc-500" />
+                    : <ChevronRight size={14} className="shrink-0 text-neutral-400 dark:text-zinc-500" />
+                }
             </button>
+
+            {/* Subject tree — visible when LexCode is open or active */}
+            {(lexOpen || mode === 'codex') && (
+                <div className="ml-3 border-l border-amber-200 dark:border-zinc-700 pl-2 space-y-0.5">
+                    {LEXCODE_SUBJECTS.map(subject => {
+                        const isSubjectOpen = !!openSubjects[subject.id];
+                        const hasActive = subject.laws.some(l => l.id.toLowerCase() === activeLawId);
+                        return (
+                            <div key={subject.id}>
+                                {/* Subject header */}
+                                <button
+                                    onClick={() => toggleSubject(subject.id)}
+                                    className={`flex w-full items-center gap-1.5 rounded-lg px-2 py-1.5 text-left text-[12px] font-semibold transition-colors
+                                        ${hasActive
+                                            ? 'text-amber-700 dark:text-amber-400'
+                                            : 'text-neutral-600 hover:text-neutral-900 dark:text-zinc-400 dark:hover:text-zinc-200'
+                                        } hover:bg-neutral-100 dark:hover:bg-zinc-800/60`}
+                                >
+                                    <span className="flex-1 leading-snug">{subject.label}</span>
+                                    {(isSubjectOpen || hasActive)
+                                        ? <ChevronDown size={11} className="shrink-0 opacity-60" />
+                                        : <ChevronRight size={11} className="shrink-0 opacity-40" />
+                                    }
+                                </button>
+
+                                {/* Law items */}
+                                {(isSubjectOpen || hasActive) && (
+                                    <div className="ml-2 mt-0.5 space-y-0.5 border-l border-neutral-200 dark:border-zinc-700/60 pl-2 pb-1">
+                                        {subject.laws.map(law => {
+                                            const isActive = law.id.toLowerCase() === activeLawId && mode === 'codex';
+                                            return (
+                                                <button
+                                                    key={law.id}
+                                                    onClick={() => {
+                                                        if (onSelectCodal) onSelectCodal(law.id);
+                                                    }}
+                                                    className={`w-full rounded-md px-2 py-1 text-left text-[11px] leading-snug transition-colors
+                                                        ${isActive
+                                                            ? 'bg-amber-100 font-semibold text-amber-800 dark:bg-amber-950/40 dark:text-amber-300'
+                                                            : 'text-neutral-500 hover:bg-neutral-100 hover:text-neutral-800 dark:text-zinc-500 dark:hover:bg-zinc-800 dark:hover:text-zinc-200'
+                                                        }`}
+                                                >
+                                                    {law.label}
+                                                </button>
+                                            );
+                                        })}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
 
 
 

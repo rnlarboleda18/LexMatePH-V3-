@@ -10,7 +10,7 @@ COMMERCIAL_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "ra-11232"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra2019/ra_11232_2019.html"},
-            {"source": "ai", "note": "Covers Secs. 2-19 RCC (incorporation, articles, by-laws), Secs. 36-44 (corporate powers), Secs. 60-72 (capital stock, subscriptions, paid-up capital)."},
+            {"source": "db", "statute_id": "RCC", "provision_id": "2", "label": "Sec. 2, Revised Corporation Code", "note": "Covers Secs. 2-19 RCC (incorporation, articles, by-laws), Secs. 36-44 (corporate powers), Secs. 60-72 (capital stock, subscriptions, paid-up capital)."},
         ],
         "sort_order": 1,
     },
@@ -21,7 +21,7 @@ COMMERCIAL_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "ra-11232"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra2019/ra_11232_2019.html"},
-            {"source": "ai", "note": "Secs. 22-31 RCC: election, qualifications, compensation, removal. Sec. 30: liability of directors. Business judgment rule, duty of diligence, duty of loyalty, interlocking directorates (Sec. 31), self-dealing (Sec. 32), watered stock liability (Sec. 64)."},
+            {"source": "db", "statute_id": "RCC", "provision_id": "22", "label": "Sec. 22, Revised Corporation Code", "note": "Secs. 22-31 RCC: election, qualifications, compensation, removal. Sec. 30: liability of directors. Business judgment rule, duty of diligence, duty of loyalty, interlocking directorates (Sec. 31), self-dealing (Sec. 32), watered stock liability (Sec. 64)."},
         ],
         "sort_order": 2,
     },
@@ -32,7 +32,7 @@ COMMERCIAL_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "ra-11232"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra2019/ra_11232_2019.html"},
-            {"source": "ai", "note": "Voting rights (Secs. 56-58 RCC), appraisal right (Sec. 80-85), pre-emptive right (Sec. 38), right to inspect (Sec. 73-74), right to dividends (Sec. 42-43), derivative suits."},
+            {"source": "db", "statute_id": "RCC", "provision_id": "56", "label": "Sec. 56, Revised Corporation Code", "note": "Voting rights (Secs. 56-58 RCC), appraisal right (Sec. 80-85), pre-emptive right (Sec. 38), right to inspect (Sec. 73-74), right to dividends (Sec. 42-43), derivative suits."},
         ],
         "sort_order": 3,
     },
@@ -43,7 +43,7 @@ COMMERCIAL_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "ra-11232"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra2019/ra_11232_2019.html"},
-            {"source": "ai", "note": "Close corporations: Secs. 95-104 RCC (20-stockholder limit, restrictions on transfer, deadlock). OPC: Secs. 116-132 RCC (single stockholder, nominee/alternate, liability shield, reporting)."},
+            {"source": "db", "statute_id": "RCC", "provision_id": "95", "label": "Sec. 95, Revised Corporation Code", "note": "Close corporations: Secs. 95-104 RCC (20-stockholder limit, restrictions on transfer, deadlock). OPC: Secs. 116-132 RCC (single stockholder, nominee/alternate, liability shield, reporting)."},
         ],
         "sort_order": 4,
     },
@@ -54,7 +54,7 @@ COMMERCIAL_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "ra-11232"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra2019/ra_11232_2019.html"},
-            {"source": "ai", "note": "Secs. 133-145 RCC: voluntary dissolution (majority/2-thirds vote, SEC approval), involuntary (SEC motu proprio or upon complaint), liquidation by trustee, 3-year winding-up period, corporate term extension."},
+            {"source": "db", "statute_id": "RCC", "provision_id": "133", "label": "Sec. 133, Revised Corporation Code", "note": "Secs. 133-145 RCC: voluntary dissolution (majority/2-thirds vote, SEC approval), involuntary (SEC motu proprio or upon complaint), liquidation by trustee, 3-year winding-up period, corporate term extension."},
         ],
         "sort_order": 5,
     },
@@ -249,7 +249,7 @@ COMMERCIAL_MAP = [
         "sub_letter": "A",
         "heading": "Common Carriers — Extraordinary Diligence (Civil Code Arts. 1732-1766); Presumption of Fault",
         "provisions": [
-            {"source": "ai", "note": "Civil Code Arts. 1732-1766: definition of common carrier (public, for compensation), extraordinary diligence (Sec. 1733), presumption of negligence upon loss/damage (Art. 1735), limitation agreements void (Art. 1745), contributory negligence (Art. 1762), fortuitous events and exceptions (Arts. 1739-1740), passenger vs. goods transportation distinctions."},
+            {"source": "db", "statute_id": "CIV", "provision_id": "1732", "label": "Art. 1732, Civil Code", "note": "Civil Code Arts. 1732-1766: definition of common carrier (public, for compensation), extraordinary diligence (Sec. 1733), presumption of negligence upon loss/damage (Art. 1735), limitation agreements void (Art. 1745), contributory negligence (Art. 1762), fortuitous events and exceptions (Arts. 1739-1740), passenger vs. goods transportation distinctions."},
         ],
         "sort_order": 22,
     },

@@ -339,6 +339,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     const { playNow } = useLexPlayApi();
     const docCode = (codeId || article?.code_id || "").toLowerCase();
     const isRcc = docCode === 'rcc' || (article?.code_id || '').toLowerCase() === 'rcc';
+    const _ISSUANCE_DOCODES = new Set(['am-07-9-12-sc','am-08-1-16-sc','am-09-6-8-sc','am-01-7-01-sc','cpra','am-02-8-13-sc','ncjc','ra-11642']);
+    const isIssuance = _ISSUANCE_DOCODES.has(docCode);
     const rccSectionLabel = 'Section';
 
     const hasContent = !!(article.content_md || 
@@ -357,7 +359,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
         e.stopPropagation();
 
         const numStr = String(article.article_num || '');
-        const provLabel = docCode === 'rcc' ? 'Section' : 'Article';
+        const provLabel = (docCode === 'rcc' || isIssuance) ? 'Section' : 'Article';
         let displayTitle = /^(article|preamble|section|rule)/i.test(numStr)
             ? toTitleCase(numStr, skipKeywords)
             : docCode === 'rcc'
@@ -530,7 +532,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             }
 
             const embeddedKey = normArticleKey(boldPart);
-            const rowKey = normArticleKey(isRcc ? `${rccSectionLabel} ${articleNumKey}` : `Article ${articleNumKey}`);
+            const rowKey = normArticleKey((isRcc || isIssuance) ? `Section ${articleNumKey}` : `Article ${articleNumKey}`);
             const isConstArticle = codeId === 'const' || (article?.code_id && article.code_id.toLowerCase() === 'const');
             const redundantEmbedded =
                 embeddedKey &&
@@ -880,7 +882,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                         </span>
                                                     );
                                                 }
-                                                const prefix = `Article ${article_num}`;
+                                                const prefix = isIssuance ? `Section ${article_num}` : `Article ${article_num}`;
                                                 if (article_title && String(article_title).trim().toUpperCase().startsWith(prefix.toUpperCase())) {
                                                     return rpcTitle(toTitleCase(article_title, skipKeywords));
                                                 }

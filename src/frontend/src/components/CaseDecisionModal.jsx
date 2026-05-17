@@ -964,7 +964,6 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             <CitedCasesSection citations={fullDecision.cited_cases} />
 
                             <LegalConceptsSection concepts={fullDecision.legal_concepts} />
-                            <SignificanceSection narrative={fullDecision.digest_significance} category={fullDecision.significance_category} />
                             <FlashcardSection flashcards={fullDecision.flashcards} />
 
                             {fullDecision.separate_opinions && fullDecision.separate_opinions.length > 0 && (

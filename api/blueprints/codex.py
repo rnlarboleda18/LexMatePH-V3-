@@ -124,6 +124,83 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
 
+        # SC Issuances — stored in sc_issuances_codal, not in legal_codes
+        _ISSUANCE_IDS = {'AM-07-9-12-SC', 'AM-08-1-16-SC', 'AM-09-6-8-SC', 'AM-01-7-01-SC',
+                         'CPRA', 'AM-02-8-13-SC', 'NCJC', 'RA-11642'}
+        if short_name.upper() in _ISSUANCE_IDS:
+            sid = short_name.upper()
+            cur.execute("""
+                SELECT id, statute_label, group_type, group_num, group_label,
+                       section_num, section_title, content_md
+                FROM sc_issuances_codal
+                WHERE statute_id = %s
+                ORDER BY sort_order, id
+            """, (sid,))
+            rows = cur.fetchall()
+
+            mapped_rows = []
+            for r in rows:
+                gt = (r.get('group_type') or '').strip().upper()
+                gn = r.get('group_num')
+                gl = (r.get('group_label') or '').strip()
+                sec_num = str(r.get('section_num') or '')
+                sec_title = (r.get('section_title') or '').strip()
+                content_md = (r.get('content_md') or '').strip()
+
+                prefix = f"**Section {sec_num}. {sec_title}. —**" if sec_title else f"**Section {sec_num}.**"
+                content_to_send = f"{prefix} {content_md}" if content_md else prefix
+
+                title_label = ''
+                title_num = None
+                chapter_label = ''
+                chapter_num = None
+                book_label = ''
+                book = None
+
+                if gt == 'RULE':
+                    title_num = int(gn) if gn and str(gn).isdigit() else gn
+                    title_label = f"Rule {gn} — {gl}" if gl else f"Rule {gn}"
+                elif gt == 'CHAPTER':
+                    chapter_num = int(gn) if gn and str(gn).isdigit() else gn
+                    chapter_label = f"Chapter {gn} — {gl}" if gl else f"Chapter {gn}"
+                elif gt in ('ARTICLE', 'PART', 'TITLE'):
+                    book = gn
+                    book_label = f"{gt.capitalize()} {gn} — {gl}" if gl else f"{gt.capitalize()} {gn}"
+                elif gt:
+                    title_label = f"{gt} {gn} — {gl}" if gl else (f"{gt} {gn}" if gn else (f"{gt} — {gl}" if gl else gt))
+                    title_num = int(gn) if gn and str(gn).isdigit() else gn
+
+                mapped_rows.append({
+                    "version_id": str(r['id']),
+                    "id": str(r['id']),
+                    "key_id": sec_num,
+                    "article_number": sec_num,
+                    "article_num": sec_num,
+                    "article_title": sec_title,
+                    "group_header": " ".join(x for x in [gt, str(gn) if gn is not None else '', gl] if x).strip(),
+                    "section_label": "",
+                    "book": book,
+                    "book_label": book_label,
+                    "title_num": title_num,
+                    "title_label": title_label,
+                    "chapter_num": chapter_num,
+                    "chapter_label": chapter_label,
+                    "content": content_to_send,
+                    "content_md": content_to_send,
+                    "valid_from": None,
+                    "valid_to": None,
+                    "amendment_history": [],
+                })
+
+            statute_label = rows[0]['statute_label'] if rows else sid
+            payload_out = {
+                "metadata": {"short_name": sid, "full_name": statute_label},
+                "articles": mapped_rows,
+                "date": "latest",
+            }
+            codal_set(cv_ck, payload_out)
+            return compressed_json_response(payload_out, req, 200, max_age=3600)
+
         # 1. Get Code ID
         cur.execute("SELECT code_id, full_name, description FROM legal_codes WHERE short_name = %s", (short_name.upper(),))
         code_meta = cur.fetchone()
@@ -451,6 +528,47 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
     finally:
         if conn:
             put_db_connection(conn)
+
+@codex_bp.route(route="codex/issuance", auth_level=func.AuthLevel.ANONYMOUS)
+def get_codex_issuance(req: func.HttpRequest) -> func.HttpResponse:
+    statute_id = (req.params.get('statute_id') or '').strip().upper()
+    if not statute_id:
+        return func.HttpResponse(json.dumps({"error": "statute_id required"}), status_code=400)
+
+    ck = f"codal:codex:v1:issuance:{statute_id}"
+    hit = codal_try_get(req, ck)
+    if hit is not None:
+        return compressed_json_response(hit, req, 200, max_age=3600)
+
+    conn = None
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur.execute("""
+            SELECT id, statute_id, statute_label, group_type, group_num, group_label,
+                   section_num, section_title, content_md, sort_order
+            FROM sc_issuances_codal
+            WHERE statute_id = %s
+            ORDER BY sort_order ASC
+        """, (statute_id,))
+        rows = cur.fetchall()
+        if not rows:
+            return func.HttpResponse(json.dumps({"error": "Statute not found"}), status_code=404)
+        payload = {
+            "statute_id": statute_id,
+            "statute_label": rows[0]["statute_label"],
+            "sections": [dict(r) for r in rows],
+        }
+        codal_set(ck, payload)
+        cur.close()
+        return compressed_json_response(payload, req, 200, max_age=3600)
+    except Exception as e:
+        logging.error(f"Codex Issuance API Error: {e}")
+        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+    finally:
+        if conn:
+            put_db_connection(conn)
+
 
 @codex_bp.route(route="codex/amendments", auth_level=func.AuthLevel.ANONYMOUS)
 def get_codex_amendments(req: func.HttpRequest) -> func.HttpResponse:

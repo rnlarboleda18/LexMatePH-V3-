@@ -13,7 +13,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "2",
+                "label": "Art. 2, Civil Code",
                 "note": (
                     "Arts. 1-18 of the Civil Code cover effectivity (Art. 2 — 15-day rule), "
                     "ignorance of the law (Art. 3), retroactivity (Art. 4), mandatory vs. "
@@ -33,7 +36,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "19",
+                "label": "Art. 19, Civil Code",
                 "note": (
                     "Art. 19 — abuse of rights doctrine (act with justice, give everyone his due, "
                     "observe honesty and good faith). Art. 20 — damages for violation of law. "
@@ -56,7 +62,10 @@ CIVIL_MAP = [
                 "url": "https://lawphil.net/statutes/execords/eo1987/eo_209_1987.html",
             },
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "FC",
+                "provision_id": "1",
+                "label": "Art. 1, Family Code",
                 "note": (
                     "Family Code (EO 209, 1987). Art. 1 — marriage as an inviolable social "
                     "institution. Arts. 2-3 — essential vs. formal requisites. Arts. 35-38 — "
@@ -80,7 +89,10 @@ CIVIL_MAP = [
                 "url": "https://lawphil.net/statutes/execords/eo1987/eo_209_1987.html",
             },
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "FC",
+                "provision_id": "55",
+                "label": "Art. 55, Family Code",
                 "note": (
                     "FC Arts. 55-67. Grounds for legal separation (Art. 55) including repeated "
                     "physical violence, drug addiction, homosexuality, infidelity, abandonment. "
@@ -102,7 +114,10 @@ CIVIL_MAP = [
                 "url": "https://lawphil.net/statutes/execords/eo1987/eo_209_1987.html",
             },
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "FC",
+                "provision_id": "75",
+                "label": "Art. 75, Family Code",
                 "note": (
                     "Default regime: Absolute Community of Property (ACP) for marriages after "
                     "Aug 3, 1988 (FC Art. 75). Conjugal Partnership of Gains (CPG) applies to "
@@ -127,7 +142,10 @@ CIVIL_MAP = [
             },
             {"source": "statute", "provision_id": "ra-386"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "FC",
+                "provision_id": "163",
+                "label": "Art. 163, Family Code",
                 "note": (
                     "FC Arts. 163-182. Legitimate children conceived or born during valid marriage "
                     "(Art. 164). Presumption of legitimacy (Art. 167). Impugning legitimacy: "
@@ -180,7 +198,10 @@ CIVIL_MAP = [
                 "url": "https://lawphil.net/statutes/execords/eo1987/eo_209_1987.html",
             },
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "FC",
+                "provision_id": "194",
+                "label": "Art. 194, Family Code",
                 "note": (
                     "FC Arts. 194-208. Definition of support (Art. 194): sustenance, dwelling, "
                     "clothing, medical, education. Persons obliged to support each other (Art. 195). "
@@ -203,7 +224,10 @@ CIVIL_MAP = [
                 "url": "https://lawphil.net/statutes/execords/eo1987/eo_209_1987.html",
             },
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "FC",
+                "provision_id": "209",
+                "label": "Art. 209, Family Code",
                 "note": (
                     "FC Arts. 209-233. Natural parents exercise parental authority jointly (Art. 211). "
                     "Upon death, separation, or annulment: custody rules (Arts. 213-214). "
@@ -226,7 +250,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "774",
+                "label": "Art. 774, Civil Code",
                 "note": (
                     "Arts. 774-777 — definition, moment of transmission (Art. 777: rights transmitted "
                     "at death). Art. 783 — will defined. Testamentary capacity (Art. 796-800): "
@@ -247,7 +274,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "887",
+                "label": "Art. 887, Civil Code",
                 "note": (
                     "Art. 887 — primary compulsory heirs (legitimate children/descendants, "
                     "surviving spouse, illegitimate children) and secondary (legitimate parents). "
@@ -269,7 +299,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "960",
+                "label": "Art. 960, Civil Code",
                 "note": (
                     "Art. 960 — when intestacy applies (no will, void will, or will does not dispose "
                     "of all property). Order of intestate heirs: (1) legitimate children/descendants "
@@ -291,7 +324,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "1061",
+                "label": "Art. 1061, Civil Code",
                 "note": (
                     "Collation (Arts. 1061-1077): compulsory heirs must bring to the hereditary "
                     "estate properties received by gratuitous title from decedent during lifetime, "
@@ -314,7 +350,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "1156",
+                "label": "Art. 1156, Civil Code",
                 "note": (
                     "Art. 1156 — obligation defined: juridical necessity to give, do, or not do. "
                     "Sources (Art. 1157): law, contracts, quasi-contracts, delicts, quasi-delicts. "
@@ -336,7 +375,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "1231",
+                "label": "Art. 1231, Civil Code",
                 "note": (
                     "Modes of extinguishment (Art. 1231). Payment/performance (Arts. 1232-1261): "
                     "who pays, to whom, what is paid, application of payments, dation in payment, "
@@ -358,7 +400,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "2195",
+                "label": "Art. 2195, Civil Code",
                 "note": (
                     "Arts. 2195-2235. Actual/compensatory damages (Arts. 2199-2205): duly proved "
                     "loss; loss of earning capacity formula (Villa Rey Transit). Moral damages "
@@ -383,7 +428,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "1305",
+                "label": "Art. 1305, Civil Code",
                 "note": (
                     "Art. 1305 — contract defined. Essential elements: consent, object, cause "
                     "(Art. 1318). Characteristics: obligatory force (Art. 1315), mutuality "
@@ -406,7 +454,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "1380",
+                "label": "Art. 1380, Civil Code",
                 "note": (
                     "Rescissible contracts (Arts. 1380-1389): valid until rescinded; grounds include "
                     "lesion of ward/absentee by more than 1/4, contracts in fraud of creditors "
@@ -429,7 +480,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "1458",
+                "label": "Art. 1458, Civil Code",
                 "note": (
                     "Art. 1458 — sale defined: one party obligates to transfer ownership, other to "
                     "pay price. Essential elements: parties, object (determinate/determinable), "
@@ -455,7 +509,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "1642",
+                "label": "Art. 1642, Civil Code",
                 "note": (
                     "Arts. 1642-1688. Lease of things (Arts. 1642-1676): lessor's obligations — "
                     "deliver thing in good condition, make repairs, maintain peaceful possession "
@@ -477,7 +534,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "1767",
+                "label": "Art. 1767, Civil Code",
                 "note": (
                     "Art. 1767 — partnership defined: two or more persons bind themselves to "
                     "contribute money/property/industry to a common fund with the intention of "
@@ -500,7 +560,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "1868",
+                "label": "Art. 1868, Civil Code",
                 "note": (
                     "Art. 1868 — agency: agent acts on behalf and in name of principal. "
                     "Express/implied agency; general/special agency (Art. 1877 — general power "
@@ -523,7 +586,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "1933",
+                "label": "Art. 1933, Civil Code",
                 "note": (
                     "Commodatum (Arts. 1933-1955): gratuitous, bailor retains ownership, bailee "
                     "uses and returns same thing. Simple loan/mutuum (Arts. 1953-1961): ownership "
@@ -548,7 +614,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "414",
+                "label": "Art. 414, Civil Code",
                 "note": (
                     "Arts. 414-418 — immovables (real property): land, buildings, trees, machinery "
                     "attached. Arts. 419-421 — movables: everything not immovable. Public dominion "
@@ -570,7 +639,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "427",
+                "label": "Art. 427, Civil Code",
                 "note": (
                     "Art. 427 — ownership: right to enjoy, dispose, and recover. Art. 428 — "
                     "action to recover (reivindicatoria) and to exclude (accion publiciana, "
@@ -593,7 +665,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "484",
+                "label": "Art. 484, Civil Code",
                 "note": (
                     "Art. 484 — co-ownership: common undivided thing owned pro-indiviso. "
                     "Each co-owner may use the thing (Art. 486) and alienate his ideal share "
@@ -615,7 +690,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "562",
+                "label": "Art. 562, Civil Code",
                 "note": (
                     "Usufruct (Arts. 562-612): right to enjoy another's property without altering "
                     "its substance (salva rerum substantia). Usufructuary's rights and obligations: "
@@ -639,7 +717,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "523",
+                "label": "Art. 523, Civil Code",
                 "note": (
                     "Possession (Arts. 523-561): concept, acquisition, effects. Possession in "
                     "concept of owner vs. holder. Presumptions in favor of possessor (Art. 541). "
@@ -666,7 +747,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "2176",
+                "label": "Art. 2176, Civil Code",
                 "note": (
                     "Art. 2176 — quasi-delict: act or omission causing damage to another by fault "
                     "or negligence, no pre-existing contractual relation (though culpa contractual "
@@ -690,7 +774,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "2180",
+                "label": "Art. 2180, Civil Code",
                 "note": (
                     "Art. 2180 — persons liable for others: parents (unemancipated minor children), "
                     "guardians, owners/managers of establishments for employees, employers for "
@@ -712,7 +799,10 @@ CIVIL_MAP = [
             {"source": "statute", "provision_id": "ra-386"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/repacts/ra1950/ra_386_1950.html"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "CIV",
+                "provision_id": "694",
+                "label": "Art. 694, Civil Code",
                 "note": (
                     "Nuisance (Arts. 694-707): public nuisance (affects community) vs. private "
                     "nuisance (affects only one or few persons). Remedies: civil action, abatement "

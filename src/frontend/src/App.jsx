@@ -93,6 +93,14 @@ const CODAL_FILTER_OPTIONS = [
   { id: 'roc', label: 'Rules of Court' },
   { id: 'const', label: 'Philippine Constitution' },
   { id: 'labor', label: 'Labor Code' },
+  { id: 'AM-07-9-12-SC', label: 'Writ of Amparo' },
+  { id: 'AM-08-1-16-SC', label: 'Writ of Habeas Data' },
+  { id: 'AM-09-6-8-SC',  label: 'Rules for Environmental Cases' },
+  { id: 'AM-01-7-01-SC', label: 'Rules on Electronic Evidence' },
+  { id: 'CPRA',          label: 'Code of Professional Responsibility & Accountability' },
+  { id: 'AM-02-8-13-SC', label: '2004 Rules on Notarial Practice' },
+  { id: 'NCJC',          label: 'New Code of Judicial Conduct' },
+  { id: 'RA-11642',      label: 'Domestic Administrative Adoption Act' },
   { id: 'admin', label: 'Administrative Code', disabled: true },
   { id: 'special', label: 'Special Laws', disabled: true },
 ];
@@ -877,6 +885,12 @@ function App() {
     navigateToTab('codex');
   }, [navigateToTab]);
 
+  const handleSelectCodal = useCallback((codalId) => {
+    setSelectedCodalCode(codalId);
+    navigateToTab('codex');
+    document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'instant' });
+  }, [navigateToTab]);
+
   const handleToggleBar2026 = useCallback(() => {
     navigateToTab('bar_2026');
   }, [navigateToTab]);
@@ -929,6 +943,8 @@ function App() {
           onToggleLexMate={() => navigateToTab('lexmate')}
           onToggleAdminTools={() => navigateToTab('admin_tools')}
           onToggleBar2026={handleToggleBar2026}
+          onSelectCodal={handleSelectCodal}
+          selectedCodalCode={selectedCodalCode}
           mode={mode}
         />
       }

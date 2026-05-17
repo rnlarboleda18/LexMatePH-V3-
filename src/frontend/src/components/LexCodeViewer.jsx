@@ -88,12 +88,22 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
         'LABOR': { title: 'Labor Code of the Philippines', subtitle: 'Presidential Decree No. 442, as amended' },
         'ROC': { title: 'Rules of Court of the Philippines', subtitle: 'As amended, 2019' },
         'RCC': { title: 'Revised Corporation Code of the Philippines', subtitle: 'Republic Act No. 11232' },
+        'AM-07-9-12-SC': { title: 'Rule on the Writ of Amparo', subtitle: 'A.M. No. 07-9-12-SC' },
+        'AM-08-1-16-SC': { title: 'Rule on the Writ of Habeas Data', subtitle: 'A.M. No. 08-1-16-SC' },
+        'AM-09-6-8-SC':  { title: 'Rules of Procedure for Environmental Cases', subtitle: 'A.M. No. 09-6-8-SC' },
+        'AM-01-7-01-SC': { title: 'Rules on Electronic Evidence', subtitle: 'A.M. No. 01-7-01-SC' },
+        'CPRA':          { title: 'Code of Professional Responsibility and Accountability', subtitle: 'A.M. No. 22-09-01-SC' },
+        'AM-02-8-13-SC': { title: '2004 Rules on Notarial Practice', subtitle: 'A.M. No. 02-8-13-SC' },
+        'NCJC':          { title: 'New Code of Judicial Conduct for the Philippine Judiciary', subtitle: 'A.M. No. 03-05-01-SC' },
+        'RA-11642':      { title: 'Domestic Administrative Adoption and Alternative Child Care Act', subtitle: 'Republic Act No. 11642' },
     };
+    const _ISSUANCE_CODES = new Set(['AM-07-9-12-SC', 'AM-08-1-16-SC', 'AM-09-6-8-SC', 'AM-01-7-01-SC',
+        'CPRA', 'AM-02-8-13-SC', 'NCJC', 'RA-11642']);
     const codeKey = (shortName || '').toUpperCase();
     const codeTitle = codeTitleMap[codeKey]?.title || shortName || '';
     const codeSubtitle = codeTitleMap[codeKey]?.subtitle || null;
-    /** RA 11232 uses Sections in the statute; DB column remains article_num. */
-    const codalProvisionLabel = codeKey === 'RCC' ? 'Section' : 'Article';
+    /** RCC and SC issuances use Sections; all other codals use Articles. */
+    const codalProvisionLabel = (codeKey === 'RCC' || _ISSUANCE_CODES.has(codeKey)) ? 'Section' : 'Article';
     const isROC = codeKey === 'ROC';
 
     const [data, setData] = useState(null);
@@ -1081,25 +1091,6 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
             >
                 <div className="w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
                     <div className="flex w-full min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2">
-                        {codalOptions && codalOptions.length > 0 && onCodalChange && (
-                            <div className="flex min-w-0 shrink-0 flex-col sm:w-[min(100%,14rem)] md:w-44">
-                                <label htmlFor="lexcode-codal-select" className="sr-only">
-                                    Choose codal
-                                </label>
-                                <select
-                                    id="lexcode-codal-select"
-                                    value={selectedCodal != null && selectedCodal !== '' ? selectedCodal : ''}
-                                    onChange={(e) => onCodalChange(e.target.value)}
-                                    title="Switch Codal"
-                                    className={FILTER_SELECT}
-                                >
-                                    <option value="">Choose Codal</option>
-                                    {codalOptions.filter(o => !o.disabled).map(o => (
-                                        <option key={o.id} value={o.id}>{o.label}</option>
-                                    ))}
-                                </select>
-                            </div>
-                        )}
                         <form
                             onSubmit={handleSearchSubmit}
                             className="relative min-w-0 w-full flex-1 basis-0 sm:w-auto"

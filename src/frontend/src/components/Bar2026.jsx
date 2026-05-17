@@ -117,9 +117,9 @@ function CaseCard({ c, onCaseClick }) {
         </div>
         <ChevronRight size={14} className="mt-1 shrink-0 text-gray-300 group-hover:text-violet-400" />
       </div>
-      {c.doctrine && (
+      {c.main_doctrine && (
         <p className="mt-1.5 text-xs leading-relaxed text-gray-600 dark:text-gray-300 line-clamp-3">
-          {c.doctrine}
+          {c.main_doctrine}
         </p>
       )}
       {c.bar_trap && (
@@ -147,34 +147,73 @@ function CaseCard({ c, onCaseClick }) {
 
 // ── Bar Questions ─────────────────────────────────────────────────────────────
 
+function parseBarQuestion(q) {
+  // Separate question from answer — handle synthetic questions where AI packed
+  // both into the text field with a "SUGGESTED ANSWER:" separator.
+  let questionText = q.text || '';
+  let answerText   = q.answer || null;
+  if (!answerText) {
+    const sepIdx = questionText.toUpperCase().indexOf('SUGGESTED ANSWER:');
+    if (sepIdx !== -1) {
+      answerText   = questionText.slice(sepIdx).trim();
+      questionText = questionText.slice(0, sepIdx).trim();
+    }
+  }
+  return { questionText, answerText };
+}
+
 function BarQuestions({ questions }) {
   const [open, setOpen] = useState(null);
   if (!questions?.length) return null;
+  const isSynthetic = (q) => String(q.year || '').toLowerCase().includes('synthetic') || q.institution === 'AI-generated';
   return (
     <div className="space-y-2">
-      {questions.map((q, i) => (
-        <div key={i} className="rounded-lg border border-lex bg-white/40 dark:bg-zinc-800/40">
-          <button
-            className="flex w-full items-start justify-between gap-2 px-3 py-2.5 text-left"
-            onClick={() => setOpen(open === i ? null : i)}
-          >
-            <div className="min-w-0">
-              {q.year && (
-                <span className="mb-0.5 inline-block text-[10px] font-bold uppercase tracking-wider text-gray-400">{q.year}{q.institution ? ` · ${q.institution}` : ''}</span>
-              )}
-              <p className="text-sm font-medium text-gray-800 dark:text-gray-100">{q.text}</p>
-            </div>
-            {open === i ? <ChevronDown size={14} className="mt-0.5 shrink-0 text-gray-400" /> : <ChevronRight size={14} className="mt-0.5 shrink-0 text-gray-400" />}
-          </button>
-          {open === i && q.answer && (
-            <div className="border-t border-lex px-3 py-2.5">
-              <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200">
-                <ReactMarkdown>{q.answer}</ReactMarkdown>
+      {questions.map((q, i) => {
+        const { questionText, answerText } = parseBarQuestion(q);
+        const synthetic = isSynthetic(q);
+        return (
+          <div key={i} className="overflow-hidden rounded-lg border border-lex bg-white/40 dark:bg-zinc-800/40">
+            <button
+              className="flex w-full items-start justify-between gap-2 px-3 py-3 text-left"
+              onClick={() => setOpen(open === i ? null : i)}
+            >
+              <div className="min-w-0 flex-1">
+                <div className="mb-1.5 flex flex-wrap items-center gap-1.5">
+                  {q.year && (
+                    <span className={`inline-flex items-center rounded-full px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider ${synthetic ? 'bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300' : 'bg-amber-100 text-amber-800 dark:bg-amber-900/40 dark:text-amber-300'}`}>
+                      {q.year}
+                    </span>
+                  )}
+                  {synthetic && (
+                    <span className="inline-flex items-center rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:bg-zinc-700 dark:text-gray-400">
+                      AI-Generated
+                    </span>
+                  )}
+                  {!synthetic && q.institution && (
+                    <span className="text-[10px] text-gray-400 dark:text-gray-500">{q.institution}</span>
+                  )}
+                </div>
+                <p className="text-sm leading-relaxed text-gray-800 dark:text-gray-100">{questionText}</p>
               </div>
-            </div>
-          )}
-        </div>
-      ))}
+              <div className="mt-0.5 shrink-0">
+                {open === i
+                  ? <ChevronDown size={14} className="text-gray-400" />
+                  : <ChevronRight size={14} className="text-gray-400" />}
+              </div>
+            </button>
+            {open === i && answerText && (
+              <div className="border-t border-lex bg-gray-50/60 px-3 py-3 dark:bg-zinc-900/40">
+                <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400">Suggested Answer</p>
+                <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200">
+                  <ReactMarkdown>
+                    {answerText.replace(/^SUGGESTED ANSWER:\s*/i, '')}
+                  </ReactMarkdown>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      })}
     </div>
   );
 }

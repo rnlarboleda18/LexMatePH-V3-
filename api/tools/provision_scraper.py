@@ -320,14 +320,15 @@ def retrieve_provision(provision: dict) -> dict:
     if source == "db_case":
         return {**provision, "retrieval_status": "db_case"}
 
-    scrape_url      = provision.get("scrape_url", "")
+    scrape_url      = provision.get("scrape_url") or provision.get("url", "")
     sections_spec   = provision.get("specific_sections")
+    _label          = provision.get("label") or provision.get("url") or provision.get("provision_id", "provision")
 
     # ── 1. LawPhil (primary) ──────────────────────────────────────────────────
     if scrape_url and "lawphil" in scrape_url:
         result = scrape_lawphil(scrape_url, sections_spec)
         if result.get("text"):
-            log.info(f"  ✓ LawPhil: {provision['label'][:60]}")
+            log.info(f"  ✓ LawPhil: {_label[:60]}")
             return {**provision, **result, "retrieval_status": "ok"}
 
         # LawPhil failed — try SC eLib for Republic Acts
@@ -338,7 +339,7 @@ def retrieve_provision(provision: dict) -> dict:
             log.info(f"  → LawPhil failed, trying SC eLib for RA {ra_num}")
             result = scrape_elib(ra_num, sections_spec)
             if result.get("text"):
-                log.info(f"  ✓ SC eLib: {provision['label'][:60]}")
+                log.info(f"  ✓ SC eLib: {_label[:60]}")
                 return {**provision, **result, "retrieval_status": "ok"}
 
     # ── 2. SC eLib direct (if no lawphil URL) ────────────────────────────────
@@ -348,11 +349,11 @@ def retrieve_provision(provision: dict) -> dict:
         ra_num = ra_match.group(1)
         result = scrape_elib(ra_num, sections_spec)
         if result.get("text"):
-            log.info(f"  ✓ SC eLib: {provision['label'][:60]}")
+            log.info(f"  ✓ SC eLib: {_label[:60]}")
             return {**provision, **result, "retrieval_status": "ok"}
 
     # ── 3. Mark as needing AI fallback ───────────────────────────────────────
-    log.warning(f"  ✗ All sources failed: {provision['label'][:60]} — flagged for AI fallback")
+    log.warning(f"  ✗ All sources failed: {_label[:60]} — flagged for AI fallback")
     return {
         **provision,
         "text": None,

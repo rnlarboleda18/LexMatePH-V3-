@@ -78,7 +78,6 @@ REMEDIAL_MAP = [
                 "label": "B.P. 129 – Judiciary Reorganization Act (RTC, CA jurisdiction)",
                 "source": "scrape",
                 "scrape_url": f"{LAWPHIL}/statutes/bpblg/bp_129_1980.html",
-                "specific_sections": "Secs. 9, 19, 20, 21, 22",
             },
         ]
     },
@@ -309,10 +308,9 @@ REMEDIAL_MAP = [
         "provisions": [
             {"statute_id": "ROC", "provision_id": "93-1",  "label": "Rule 93, Sec. 1 – Venue for guardianship proceedings", "source": "db"},
             {
-                "statute_id": "RA-9523", "provision_id": "general",
-                "label": "R.A. 9523 – Domestic Adoption Act (administrative adoption)",
-                "source": "scrape",
-                "scrape_url": f"{LAWPHIL}/statutes/repacts/ra2009/ra_9523_2009.html",
+                "statute_id": "RA-11642", "provision_id": "general",
+                "label": "R.A. 11642 – Domestic Administrative Adoption and Alternative Child Care Act",
+                "source": "db",
             },
         ]
     },
@@ -337,14 +335,12 @@ REMEDIAL_MAP = [
             {
                 "statute_id": "AM-07-9-12-SC", "provision_id": "general",
                 "label": "A.M. No. 07-9-12-SC – Rule on the Writ of Amparo",
-                "source": "scrape",
-                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_07_9_12_sc_2007.html",
+                "source": "db",
             },
             {
                 "statute_id": "AM-08-1-16-SC", "provision_id": "general",
                 "label": "A.M. No. 08-1-16-SC – Rule on the Writ of Habeas Data",
-                "source": "scrape",
-                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_08_1_16_sc_2008.html",
+                "source": "db",
             },
         ]
     },
@@ -356,8 +352,7 @@ REMEDIAL_MAP = [
             {
                 "statute_id": "AM-09-6-8-SC", "provision_id": "general",
                 "label": "A.M. No. 09-6-8-SC – Rules of Procedure for Environmental Cases (Writ of Kalikasan)",
-                "source": "scrape",
-                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_09_6_8_sc_2010.html",
+                "source": "db",
             },
         ]
     },
@@ -461,8 +456,7 @@ REMEDIAL_MAP = [
             {
                 "statute_id": "AM-01-7-01-SC", "provision_id": "general",
                 "label": "A.M. No. 01-7-01-SC – Rules on Electronic Evidence",
-                "source": "scrape",
-                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_01_7_01_sc_2001.html",
+                "source": "db",
             },
         ]
     },
@@ -525,8 +519,7 @@ REMEDIAL_MAP = [
             {
                 "statute_id": "CPRA", "provision_id": "general",
                 "label": "Code of Professional Responsibility and Accountability (A.M. No. 22-09-01-SC, 2023)",
-                "source": "scrape",
-                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_22_09_01_sc_2023.html",
+                "source": "db",
             },
         ]
     },
@@ -538,9 +531,7 @@ REMEDIAL_MAP = [
             {
                 "statute_id": "CPRA", "provision_id": "canon4",
                 "label": "CPRA – Canon IV: Duties to Clients (confidentiality, conflict of interest)",
-                "source": "scrape",
-                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_22_09_01_sc_2023.html",
-                "specific_sections": "Canon IV",
+                "source": "db",
             },
         ]
     },
@@ -552,9 +543,7 @@ REMEDIAL_MAP = [
             {
                 "statute_id": "CPRA", "provision_id": "canon6",
                 "label": "CPRA – Canon VI: Discipline of Members of the Bar",
-                "source": "scrape",
-                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_22_09_01_sc_2023.html",
-                "specific_sections": "Canon VI",
+                "source": "db",
             },
             {"statute_id": "ROC", "provision_id": "138-1", "label": "Rule 138, Sec. 1 – Who may practice law", "source": "db"},
             {"statute_id": "ROC", "provision_id": "139-1", "label": "Rule 139-B – IBP disciplinary proceedings", "source": "db"},
@@ -572,8 +561,7 @@ REMEDIAL_MAP = [
             {
                 "statute_id": "AM-02-8-13-SC", "provision_id": "general",
                 "label": "A.M. No. 02-8-13-SC – 2004 Rules on Notarial Practice",
-                "source": "scrape",
-                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_02_8_13_sc_2004.html",
+                "source": "db",
             },
             {
                 "statute_id": "AM-20-07-04-SC", "provision_id": "general",
@@ -594,8 +582,7 @@ REMEDIAL_MAP = [
             {
                 "statute_id": "NCJC", "provision_id": "general",
                 "label": "New Code of Judicial Conduct for the Philippine Judiciary (A.M. No. 03-05-01-SC)",
-                "source": "scrape",
-                "scrape_url": f"{LAWPHIL}/courts/supreme/am/am_03_05_01_sc_2004.html",
+                "source": "db",
             },
             {"statute_id": "ROC", "provision_id": "140-1", "label": "Rule 140, Sec. 1 – Discipline of judges", "source": "db"},
         ]

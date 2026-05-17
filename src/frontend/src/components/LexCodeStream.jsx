@@ -78,9 +78,11 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
             setLoading(true);
             setError(null);
             
+            const _ISSUANCE_APICODES = new Set(['am-07-9-12-sc','am-08-1-16-sc','am-09-6-8-sc','am-01-7-01-sc','cpra','am-02-8-13-sc','ncjc','ra-11642']);
             const cacheKey =
                 (titleNum ? `${apiCode}_title_${titleNum}` : bookNum ? `${apiCode}_book_${bookNum}` : `${apiCode}_all`) +
-                (['rcc', 'civ', 'labor', 'rpc', 'fc'].includes(apiCode) ? CODAL_LEXCACHE_REVISION : '');
+                (['rcc', 'civ', 'labor', 'rpc', 'fc'].includes(apiCode) ? CODAL_LEXCACHE_REVISION : '') +
+                (_ISSUANCE_APICODES.has(apiCode) ? '_v3' : '');
 
             const fetcher = async () => {
                 let url = '';
@@ -169,6 +171,56 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                 article_num: num,
                                 content_md,
                             };
+                        });
+                    } else if (['AM-07-9-12-SC','AM-08-1-16-SC','AM-09-6-8-SC','AM-01-7-01-SC',
+                                'CPRA','AM-02-8-13-SC','NCJC','RA-11642'].includes(code.toUpperCase())) {
+                        const res = await fetch(`/api/codex/versions?short_name=${encodeURIComponent(code.toUpperCase())}`);
+                        if (!res.ok) {
+                            let msg = `Codex HTTP ${res.status}`;
+                            try {
+                                const err = await res.json();
+                                if (err && typeof err.detail === 'string' && err.detail) msg = err.detail;
+                                else if (err && typeof err.error === 'string' && err.error) msg = err.error;
+                            } catch {
+                                /* ignore */
+                            }
+                            throw new Error(msg);
+                        }
+                        const json = await res.json();
+                        return (json.articles || []).map((a) => {
+                            const num = a.article_num ?? a.article_number ?? a.key_id;
+                            const raw = a.content_md || a.content || '';
+                            const gh = (a.group_header || '').trim().toLowerCase();
+
+                            // Reconstruct content_md to ROC format so ArticleNode renders the
+                            // section title inline with the number (bold H3 like ROC sections).
+                            // Backend format: "**Section N.** Title.\n– Body..."
+                            // Target format:  "**Section N. Title. —** Body..."
+                            let content_md = raw;
+                            let article_title = a.article_title || '';
+                            if (!article_title) {
+                                const m = raw.match(/^(\*\*Section\s+[\w\d-]+\.)\*\*\s+([^\n]+)\n[–\-—]\s*([\s\S]*)$/);
+                                if (m) {
+                                    const secPrefix = m[1];
+                                    const titleClean = m[2].trim().replace(/\.\s*$/, '');
+                                    const body = m[3].trim();
+                                    article_title = titleClean;
+                                    content_md = `${secPrefix} ${titleClean}. —** ${body}`;
+                                }
+                            }
+
+                            return {
+                                ...a,
+                                article_num: num,
+                                article_title,
+                                content_md,
+                                group_header: gh === 'none' ? '' : (a.group_header || ''),
+                            };
+                        }).sort((a, b) => {
+                            const na = parseInt(a.article_num, 10);
+                            const nb = parseInt(b.article_num, 10);
+                            if (!isNaN(na) && !isNaN(nb)) return na - nb;
+                            return String(a.article_num).localeCompare(String(b.article_num), undefined, { numeric: true });
                         });
                     }
                 }

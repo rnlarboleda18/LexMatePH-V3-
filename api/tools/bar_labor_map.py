@@ -37,7 +37,10 @@ LABOR_MAP = [
                 "url": "https://lawphil.net/statutes/presdecs/pd1974/pd_442_1974.html",
             },
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "4",
+                "label": "Art. 4, Labor Code",
                 "note": (
                     "Presidential Decree No. 442 (Labor Code of the Philippines), as amended, "
                     "is the primary statute governing employment relations, labor standards, "
@@ -88,7 +91,10 @@ LABOR_MAP = [
                 "url": "https://lawphil.net/statutes/presdecs/pd1974/pd_442_1974.html",
             },
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "255",
+                "label": "Art. 255, Labor Code",
                 "note": (
                     "Book V of the Labor Code governs labor relations. Art. 243 (now Art. 255) "
                     "guarantees the right to self-organization for all persons employed in "
@@ -111,7 +117,10 @@ LABOR_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "261",
+                "label": "Art. 261, Labor Code",
                 "note": (
                     "Arts. 261-272 (renumbered) of the Labor Code impose a mutual duty on the "
                     "employer and the exclusive bargaining agent to bargain collectively in good "
@@ -187,7 +196,10 @@ LABOR_MAP = [
                 "url": "https://lawphil.net/statutes/presdecs/pd1974/pd_442_1974.html",
             },
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "297",
+                "label": "Art. 297, Labor Code",
                 "note": (
                     "Art. 297 (formerly Art. 282) enumerates just causes attributable to the "
                     "employee: (a) serious misconduct or willful disobedience of lawful orders; "
@@ -210,7 +222,10 @@ LABOR_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "298",
+                "label": "Art. 298, Labor Code",
                 "note": (
                     "Art. 298 (formerly Art. 283) authorizes termination for installation of "
                     "labor-saving devices, redundancy, retrenchment to prevent losses, closure "
@@ -257,7 +272,10 @@ LABOR_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "294",
+                "label": "Art. 294, Labor Code",
                 "note": (
                     "An illegally dismissed employee is entitled to: (1) reinstatement without "
                     "loss of seniority rights and other privileges; (2) full backwages, "
@@ -336,7 +354,10 @@ LABOR_MAP = [
                 "url": "https://lawphil.net/statutes/presdecs/pd1974/pd_442_1974.html",
             },
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "82",
+                "label": "Art. 82, Labor Code",
                 "note": (
                     "Arts. 82-95 of the Labor Code (Book III, Title I) govern hours of work "
                     "and rest periods. Normal hours: 8 hours/day. Overtime: plus 25% of "
@@ -386,7 +407,10 @@ LABOR_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "100",
+                "label": "Art. 100, Labor Code",
                 "note": (
                     "Art. 100 of the Labor Code prohibits the elimination or diminution of "
                     "existing benefits already enjoyed by employees. The non-diminution rule "
@@ -635,7 +659,10 @@ LABOR_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "229",
+                "label": "Art. 229, Labor Code",
                 "note": (
                     "The National Labor Relations Commission (NLRC) is a quasi-judicial body "
                     "that exercises appellate jurisdiction over decisions of Labor Arbiters "
@@ -659,7 +686,10 @@ LABOR_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "224",
+                "label": "Art. 224, Labor Code",
                 "note": (
                     "Labor Arbiters have original and exclusive jurisdiction (Art. 224, "
                     "formerly Art. 217) over: unfair labor practice cases; termination "
@@ -685,7 +715,10 @@ LABOR_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "274",
+                "label": "Art. 274, Labor Code",
                 "note": (
                     "Art. 274 (formerly Art. 261) requires all CBAs to include a grievance "
                     "machinery for the adjustment and resolution of grievances arising from "
@@ -709,7 +742,10 @@ LABOR_MAP = [
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
             {
-                "source": "ai",
+                "source": "db",
+                "statute_id": "LABOR",
+                "provision_id": "278",
+                "label": "Art. 278, Labor Code",
                 "note": (
                     "Art. 278 (formerly Art. 263(g)) empowers the DOLE Secretary to assume "
                     "jurisdiction over a labor dispute in an industry indispensable to the "
