@@ -594,13 +594,15 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
         article_num,
         article_number,
         article_suffix,
-        article_title,
+        article_title: _article_title_raw,
         content_md,
         elements,
         amendments,
         structural_map,
         footnotes
     } = article;
+    // Strip trailing em-dash/en-dash that the parser can embed when a section body starts on the next line
+    const article_title = (_article_title_raw || '').replace(/\s*[—–]+\s*\.?\s*$/, '').replace(/\.\s*$/, '').trim() || _article_title_raw;
 
     const currentArtNum = article_num || article_number;
     const stableId = id || currentArtNum;
@@ -805,8 +807,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
                         {customHeaderNode ? customHeaderNode : (
                             String(article_num) === '0' ? (
-                                // Canon preambles (untitled section-0): no header, just the link button
-                                !article_title ? null : (
+                                // Canon preambles (untitled section-0): no header, just the link button.
+                                // Issuances never get a "Preliminary Article" label — Canon headers
+                                // are already rendered as TITLE-type headers by LexCodeStream.
+                                (!article_title || isIssuance) ? null : (
                                 <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
                                     {isRcc
                                         ? 'Preliminary Section'
@@ -1120,6 +1124,11 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             }
                         }
                         if (currentSegment) segments.push(currentSegment);
+                    } else if (isIssuance) {
+                        // Issuances store paragraphs and enumeration items separated by single \n.
+                        // Split each line into its own segment so paragraphs get proper spacing and
+                        // nested items like (1)/(2)/(3) under (a) get their own indentation level.
+                        segments = contentToDisplay.split('\n').filter(s => s.trim() !== '');
                     } else {
                         // For Constitution, if a new line starts with an enumeration like `(1)` or `(a)`,
                         // we enforce a double newline so it is parsed as an independent paragraph segment.
@@ -1142,7 +1151,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                         }
 
                         segments = processedContent.split(/\n\n+/);
-                        
+
                         // Strip remaining inner single newlines to ensure clean paragraph wrapping
                         if (isConst) {
                             segments = segments.map(s => s.replace(/\n/g, ' ').replace(/\r/g, ''));

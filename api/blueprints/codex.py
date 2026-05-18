@@ -161,7 +161,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                 gn = r.get('group_num')
                 gl = (r.get('group_label') or '').strip()
                 sec_num = str(r.get('section_num') or '')
-                sec_title = (r.get('section_title') or '').strip()
+                sec_title = re.sub(r'\s*[—–\-]+\s*$', '', (r.get('section_title') or '').strip()).rstrip('. ').strip()
                 content_md = (r.get('content_md') or '').strip()
 
                 if sec_num == "0":
