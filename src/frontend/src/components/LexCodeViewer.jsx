@@ -463,11 +463,10 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
                     ? `/api/codex/versions?short_name=${shortName}&date=${viewDate}`
                     : `/api/codex/versions?short_name=${shortName}`;
 
-                // Reset sidebars and search when switching codals
+                // Reset sidebars when switching codals
                 setActiveJurisArticle(null);
                 setActiveJurisParagraph(null);
                 setActiveAmendmentArticle(null);
-                setSearchTerm('');
                 
                 const fetcher = async () => {
                     const res = await fetch(url);
