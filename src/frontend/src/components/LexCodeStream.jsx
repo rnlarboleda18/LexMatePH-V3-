@@ -223,12 +223,11 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
 
                         // Promote stray ARTICLE structural headers that the old pipeline stored
                         // at the end of the preceding section's body text.
-                        // Pattern: content_md ends with "\n\nARTICLE [roman]\n[SUBTITLE]"
-                        const artHdrRe = /\n\n(ARTICLE\s+[IVXLCDM\d]+)[ \t]*\n([A-Z][A-Z\s]*)[\s]*$/i;
+                        const artHdrRe = /\n\n(ARTICLE\s+[IVXLCDM\d]+)[\s\n]*([A-Z][A-Z\s\-,.'’‘“”]*)[\s]*$/i;
                         for (let i = 0; i < mapped.length - 1; i++) {
                             const m = mapped[i].content_md.match(artHdrRe);
                             if (!m) continue;
-                            const label = `${m[1].trim()} — ${m[2].trim()}`;
+                            const label = `${m[1].trim().toUpperCase()}${m[2].trim() ? ' — ' + m[2].trim().replace(/\s+/g, ' ') : ''}`;
                             mapped[i] = { ...mapped[i], content_md: mapped[i].content_md.slice(0, m.index).trimEnd() };
                             if (!mapped[i + 1].book_label) {
                                 mapped[i + 1] = { ...mapped[i + 1], book_label: label };
@@ -440,7 +439,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                             if (!art.book_label.toUpperCase().includes('PRELIMINARY')) {
                                 const bookPrefix = code.toLowerCase() === 'roc' ? 'Part' : 'Book';
                                 const cleanLabel = toTitleCase(art.book_label);
-                                const hasStructuralPrefix = /^(Book|Part|Chapter|Title|Canon)\b/i.test(cleanLabel);
+                                const hasStructuralPrefix = /^(Article|Book|Part|Chapter|Title|Canon)\b/i.test(cleanLabel);
                                 const bookText = hasStructuralPrefix
                                     ? cleanLabel
                                     : art.book ? `${bookPrefix} ${art.book} - ${cleanLabel}` : cleanLabel;
