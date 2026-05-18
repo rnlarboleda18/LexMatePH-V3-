@@ -108,7 +108,11 @@ _LAWPHIL_WATERMARKS = [
 
 # ── Chanrobles watermarks ─────────────────────────────────────────────────────
 _CHANROBLES_WATERMARKS = [
-    r"chanroblesvirtualawlibrary",
+    r"chanroblesvirtuallawlibrary",          # correct spelling
+    r"chanroblesvirtualawlibrary",           # old misspelling kept for safety
+    r"chan\s+robles\s+virtual\s+law\s+library",  # split-line form in HTML source
+    r"cralaw:red",
+    r"\bcralaw\b",
     r"ChanRobles Virtual\s*[Ll]aw\s*Library",
     r"ChanRobles Virtual Law Library",
     r"ChanRobles On-Line Bar Review",
@@ -121,6 +125,10 @@ _CHANROBLES_WATERMARKS = [
     r"WorldWide Legal Re[sc]ources",
     r"US Federal Laws,\s*Statutes\s*&\s*Codes",
     r"US Supreme Court Decisions",
+    r"THE\s+-\s*QUICK\s+GLANCE",
+    r"Philippines\s*\|\s*Worldwide\s*\|[^\n]*",
+    # Justice/ponente signature block at end of SC resolutions
+    r"Davide,\s+Jr\.\s+C\.J\.\s*,.*?(?:JJ|J)\s*\.",
     r"The Business Page",
     r"ChanRobles Professional Review,\s*Inc\.",
 ]
@@ -159,11 +167,30 @@ def _clean_gosupra(text: str) -> str:
     return text.strip()
 
 
-def _html_to_text(html_bytes: bytes) -> str:
+def _preprocess_chanrobles_dom(soup) -> None:
+    """Remove Chanrobles DOM-level watermark elements before text extraction.
+
+    Chanrobles injects watermarks two ways:
+      1. <font color="#333333"><font size="-2">chan robles virtual law library</font></font>
+      2. <span style="color:#ffffff; font-size:1pt;">chanroblesvirtuallawlibrary</span>
+    Both are removed at the DOM level so get_text() never sees them.
+    """
+    for el in soup.find_all("font", color="#333333"):
+        el.decompose()
+    for el in soup.find_all("span"):
+        style = el.get("style", "")
+        if re.search(r"color\s*:\s*#fff", style, re.IGNORECASE) and \
+                re.search(r"font-size\s*:\s*1pt", style, re.IGNORECASE):
+            el.decompose()
+
+
+def _html_to_text(html_bytes: bytes, *, preprocess_chanrobles: bool = False) -> str:
     """
     Convert HTML to clean plain-text while preserving structure:
       - Each <p> is extracted with inline separator=" " so "SECTION 1. <em>Petition.</em>"
         stays on one line instead of splitting into two separate lines.
+      - Internal whitespace (including stray newlines from HTML text nodes) is
+        collapsed to a single space per paragraph.
       - <ol> items get explicit letter markers (a. b. c.) because the original
         markers are CSS-generated and invisible to get_text().
       - <ul> items get a dash marker.
@@ -176,33 +203,68 @@ def _html_to_text(html_bytes: bytes) -> str:
                      "iframe", "nav", "footer", "header"]):
         tag.decompose()
 
+    if preprocess_chanrobles:
+        _preprocess_chanrobles_dom(soup)
+
+    # Tags treated as block containers when deciding whether to recurse vs. leaf-extract.
+    _BLOCK = frozenset({"p", "blockquote", "div", "center", "table",
+                        "tbody", "tr", "td", "th", "ol", "ul"})
+
     chunks: list[str] = []
+
+    def _extract_inline(node) -> str:
+        """Return normalised text from direct inline (non-block) children only."""
+        parts: list[str] = []
+        for child in node.children:
+            if not hasattr(child, "name") or not child.name:
+                t = str(child).strip()
+                if t:
+                    parts.append(t)
+            elif child.name not in _BLOCK:
+                t = child.get_text(separator=" ").strip()
+                if t:
+                    parts.append(t)
+        return " ".join(" ".join(parts).split())
 
     def _visit(node) -> None:
         """Recursively walk block-level elements, collecting text chunks."""
         if not hasattr(node, "name") or not node.name:
-            return  # NavigableString or Comment at root level — skip
+            return  # NavigableString or Comment — skip
         if node.name == "ol":
             items = node.find_all("li", recursive=False)
             for idx, li in enumerate(items):
                 letter = chr(ord("a") + idx)
-                text = li.get_text(separator=" ").strip()
+                text = " ".join(li.get_text(separator=" ").split())
                 if text:
-                    # Each item is its own paragraph (\n\n) so ArticleNode splits
-                    # it into a distinct segment for per-paragraph juris linking.
+                    # Each item is its own paragraph so ArticleNode splits it
+                    # into a distinct segment for per-paragraph juris linking.
                     chunks.append(f"{letter}. {text}")
         elif node.name == "ul":
             items = node.find_all("li", recursive=False)
             for li in items:
-                text = li.get_text(separator=" ").strip()
+                text = " ".join(li.get_text(separator=" ").split())
                 if text:
                     chunks.append(f"- {text}")
-        elif node.name == "p":
-            text = node.get_text(separator=" ").strip()
-            if text:
-                chunks.append(text)
+        elif node.name in ("p", "center"):
+            # Check for direct block children (Chanrobles nests blocks inside <p>).
+            block_kids = [c for c in node.children
+                          if hasattr(c, "name") and c.name and c.name in _BLOCK]
+            if block_kids:
+                # Mixed content: emit any inline text prefix as its own chunk,
+                # then recurse into each block child individually.  This captures
+                # section headers like "SEC. 2. Foo. - Bar" that sit in the same
+                # <p> as a following <blockquote> of sub-items.
+                prefix = _extract_inline(node)
+                if prefix:
+                    chunks.append(prefix)
+                for child in block_kids:
+                    _visit(child)
+            else:
+                text = " ".join(node.get_text(separator=" ").split())
+                if text:
+                    chunks.append(text)
         else:
-            # div, blockquote, table, body, etc. — recurse into children
+            # div, blockquote, table rows/cells, body, etc. — recurse into children
             for child in node.children:
                 _visit(child)
 
@@ -252,7 +314,7 @@ def scrape_statute(statute: dict) -> tuple[bytes, str]:
         resp = requests.get(url, headers={"User-Agent": _UA_BROWSER}, timeout=30)
         resp.raise_for_status()
         raw = resp.content
-        text = _clean_chanrobles(_html_to_text(raw))
+        text = _clean_chanrobles(_html_to_text(raw, preprocess_chanrobles=True))
         return raw, text
 
     # Default: lawphil / plain HTML
@@ -283,8 +345,21 @@ def main() -> None:
             continue
 
         try:
-            raw, cleaned = scrape_statute(statute)
-            raw_path.write_bytes(raw)
+            # Re-use cached raw file to avoid redundant network requests
+            if raw_path.exists():
+                print(f"  Re-processing from cached {raw_path.name}")
+                raw = raw_path.read_bytes()
+                if src == "chanrobles":
+                    cleaned = _clean_chanrobles(_html_to_text(raw, preprocess_chanrobles=True))
+                elif src == "gosupra":
+                    cleaned = _clean_gosupra(_html_to_text(raw))
+                elif src == "pdf":
+                    cleaned = _clean_lawphil(_pdf_to_text(raw))
+                else:
+                    cleaned = _clean_lawphil(_html_to_text(raw))
+            else:
+                raw, cleaned = scrape_statute(statute)
+                raw_path.write_bytes(raw)
             md_path.write_text(cleaned, encoding="utf-8")
             print(f"  Saved {len(cleaned):,} chars -> {md_path.name}")
         except Exception as e:

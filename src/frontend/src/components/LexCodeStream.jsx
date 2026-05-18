@@ -476,7 +476,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                     const titleTrigger = (hasTitleNum || isRocStream)
                         ? (art.title_num != null && art.title_num !== prevArt.title_num)
                         : (art.title_label && art.title_label !== prevArt.title_label);
-                    if (String(art.article_num) !== '0' && art.title_label && titleTrigger) {
+                    if ((String(art.article_num) !== '0' || art.content_md) && art.title_label && titleTrigger) {
                         const cleanLabel = formatHeader(art.title_label);
                         const titleText = (cleanLabel.toUpperCase().startsWith('TITLE'))
                             ? cleanLabel
@@ -498,7 +498,9 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         }
                     }
 
-                    if (String(art.article_num) === '0' && art.title_label) {
+                    // Only push legacy PREAMBLE header for label-only section-0 articles (e.g. CONST).
+                    // Canon preambles (CPRA etc.) have content_md and render via ArticleNode instead.
+                    if (String(art.article_num) === '0' && art.title_label && !art.content_md) {
                         headersToRender.push({ type: 'PREAMBLE', text: art.title_label });
                     }
                     if (bookHdr) headersToRender.push(bookHdr);
@@ -541,6 +543,14 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                 const isRccStructural =
                                     isRccStream && ['TITLE', 'CHAPTER', 'SECTION'].includes(h.type);
 
+                                if (h.type === 'GROUP_PREAMBLE') {
+                                    return (
+                                        <p key={i} className="text-[14px] text-gray-700 dark:text-gray-300 italic mb-4 leading-relaxed">
+                                            {h.text}
+                                        </p>
+                                    );
+                                }
+
                                 if (h.type === 'SECTION') {
                                     sizeClass = "text-[16px]";
                                     colorClass = "text-gray-900 dark:text-gray-300 font-bold";
@@ -574,7 +584,11 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                             <ArticleNode
                                 article={art}
                                 showElements={false}
-                                centerLayout={centerLayout}
+                                centerLayout={centerLayout || (
+                                    String(art.article_num) === '0' &&
+                                    !art.article_title &&
+                                    (art.title_label || '').toLowerCase().includes("lawyer")
+                                )}
                                 onToggleJurisprudence={onJurisprudenceClick}
                                 onToggleAmendment={onAmendmentClick}
                                 codeId={code.toLowerCase()}

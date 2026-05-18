@@ -54,6 +54,11 @@ _GROUP_RE = re.compile(
     r'^(CANON|PART|TITLE|CHAPTER)\s+([IVXLCDM\d]+)[.\s]*(?:[-–—]\s*)?(.*)$',
     re.IGNORECASE,
 )
+# Unnumbered group headers (e.g. GENERAL PROVISIONS, LAWYER'S OATH)
+_UNNUMBERED_GROUP_RE = re.compile(
+    r"^(GENERAL PROVISIONS|TRANSITORY PROVISIONS|PRELIMINARY PROVISIONS|MISCELLANEOUS PROVISIONS|LAWYER'S OATH)$",
+    re.IGNORECASE,
+)
 # Standard section headers: SECTION 1. / Section 1. / SEC. 1.
 _SEC_RE = re.compile(
     r'^(?:SECTION|SEC\.?|Section)\s+(\d+[A-Za-z]?)[.:]?\s*(.*)',
@@ -64,10 +69,11 @@ _RULE_RE = re.compile(
     r'^Rule\s+(\d+\.\d+)[.:]?\s*(.*)',
     re.IGNORECASE,
 )
-# Integer rule group headers: RULE 1 GENERAL PROVISIONS / Rule 1 COVERAGE.
-# IGNORECASE handles both all-caps (Env Cases) and mixed-case (Electronic Evidence).
-# Negative lookahead (?!\.\d) excludes NCJC-style decimal headers like "Rule 1.01".
-_RULE_GROUP_RE = re.compile(r'^Rule\s+(\d+)(?!\.\d)\s*(.*)', re.IGNORECASE)
+# Integer/Roman rule group headers: RULE 1 COVERAGE / RULE I IMPLEMENTATION.
+# [IVXLCDM\d]+ matches both Roman numerals (I, II, IV, VI …) and decimal integers.
+# IGNORECASE handles all-caps (Notarial Practice, Env Cases) and mixed-case (Electronic Evidence).
+# Negative lookahead (?!\.\d) excludes NCJC decimal headers like "Rule 1.01".
+_RULE_GROUP_RE = re.compile(r'^Rule\s+([IVXLCDM\d]+)(?!\.\d)\s*(.*)', re.IGNORECASE)
 
 
 def _split_title_body(rest: str) -> tuple[str, str]:
@@ -169,6 +175,21 @@ def parse_statute_md(text: str, statute_id: str, statute_label: str) -> list[dic
             cur_lines     = []
             continue
 
+        ugm = _UNNUMBERED_GROUP_RE.match(line)
+        if ugm:
+            emit()
+            cur_group_type  = ' '.join(w.capitalize() for w in ugm.group(1).split())
+            cur_group_num   = None
+            # Space sentinel: truthy so first text line goes into section-0 content, not group_label;
+            # codex.py strips it to '' so it doesn't appear in the API response.
+            cur_group_label = ' '
+            cur_part_num    = None
+            cur_part_label  = None
+            cur_sec_num     = None
+            cur_sec_title   = None
+            cur_lines       = []
+            continue
+
         sm = _SEC_RE.match(line) or _RULE_RE.match(line)
         if sm:
             emit()
@@ -186,8 +207,14 @@ def parse_statute_md(text: str, statute_id: str, statute_label: str) -> list[dic
             if cur_lines and cur_lines[-1] != "":
                 cur_lines.append("")
         elif cur_sec_num is None and cur_group_type is not None and line and not cur_group_label:
-            # Text sitting between a group header and the first section
+            # Text sitting between a group header and the first section (no label yet)
             cur_group_label = line
+        elif cur_sec_num is None and cur_group_type is not None and line and cur_group_label:
+            # Introductory paragraph between the group label and the first numbered section.
+            # Emit as section "0" so it gets its own version_id and can carry jurisprudence links.
+            cur_sec_num   = "0"
+            cur_sec_title = ""
+            cur_lines     = [line]
 
     emit()
     return records

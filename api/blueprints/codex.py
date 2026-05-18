@@ -129,7 +129,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
     if not short_name:
          return func.HttpResponse(json.dumps({"error": "short_name required"}), status_code=400)
 
-    cv_ck = f"codal:codex:v6:versions:{short_name.upper()}:{target_date or 'latest'}"
+    cv_ck = f"codal:codex:v11:versions:{short_name.upper()}:{target_date or 'latest'}"
     cached_v = codal_try_get(req, cv_ck)
     if cached_v is not None:
         ma = (0 if short_name.upper() == "CONST" else 3600) if not target_date else 86400
@@ -164,8 +164,12 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                 sec_title = (r.get('section_title') or '').strip()
                 content_md = (r.get('content_md') or '').strip()
 
-                prefix = f"**Section {sec_num}. {sec_title}. —**" if sec_title else f"**Section {sec_num}.**"
-                content_to_send = f"{prefix} {content_md}" if content_md else prefix
+                if sec_num == "0":
+                    # Canon/group preamble — no section label, raw content only
+                    content_to_send = content_md
+                else:
+                    prefix = f"**Section {sec_num}. {sec_title}. —**" if sec_title else f"**Section {sec_num}.**"
+                    content_to_send = f"{prefix} {content_md}" if content_md else prefix
 
                 title_label = ''
                 title_num = None

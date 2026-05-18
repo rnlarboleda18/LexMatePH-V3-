@@ -534,11 +534,12 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             const embeddedKey = normArticleKey(boldPart);
             const rowKey = normArticleKey((isRcc || isIssuance) ? `Section ${articleNumKey}` : `Article ${articleNumKey}`);
             const isConstArticle = codeId === 'const' || (article?.code_id && article.code_id.toLowerCase() === 'const');
+            const isCanonPreamble = String(article.article_num) === '0' && !article.article_title;
             const redundantEmbedded =
                 embeddedKey &&
                 rowKey &&
                 embeddedKey === rowKey &&
-                String(article.article_num) !== '0' &&
+                (String(article.article_num) !== '0' || isCanonPreamble) &&
                 !String(article.article_num || '').includes('Header') &&
                 !String(article.article_num || '').includes('Subheader') &&
                 !isConstArticle;
@@ -548,9 +549,11 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                 const restOfBody = parts.slice(1).join('\n\n');
                 contentToDisplay = [introPart, restOfBody].filter(Boolean).join('\n\n');
             } else {
+                // Strip trailing em-dash separator (". —" or " —") that codex.py embeds in the bold prefix
+                const boldPartClean = boldPart.replace(/\s*[.–—]+\s*$/, '').trim();
                 customHeaderNode = (
                     <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
-                        {rpcTitle(toTitleCase(boldPart, skipKeywords))}
+                        {rpcTitle(toTitleCase(boldPartClean, skipKeywords))}
                     </h3>
                 );
 
@@ -575,7 +578,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
         articleNumKey &&
         /^[\d]+-[A-Za-z]+$/.test(articleNumKey) &&
         String(article.article_num) !== '0' &&
-        !String(article.article_num || '').includes('Header')
+        !String(article.article_num || '').includes('Header') &&
+        !(!article.article_title && String(article.article_num) === '0')
     ) {
         const esc = articleNumKey.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         const runInLine = new RegExp(`^"?\\s*Article\\s+${esc}\\.[^\\n]*(?:\\n|$)`, 'i');
@@ -801,6 +805,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
                         {customHeaderNode ? customHeaderNode : (
                             String(article_num) === '0' ? (
+                                // Canon preambles (untitled section-0): no header, just the link button
+                                !article_title ? null : (
                                 <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
                                     {isRcc
                                         ? 'Preliminary Section'
@@ -808,6 +814,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                           ? rpcArticleHeaderTerminalPeriod('Preliminary Article')
                                           : 'Preliminary Article'}
                                 </h3>
+                                )
                             ) : (
                                 <h3
                                     className={
@@ -1337,9 +1344,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             // Fallback to regex (for documents without explicit space indentation)
                             const textForIndent = cleanSeg.replace(/^(?:\[\d+\]\([^)]+\)\s*)*\[?\s*/, '');
 
-                            // Issuance hierarchy: (a)/(b)/1. = level 1, (i)/(ii)/(iii) = level 2
+                            // Issuance hierarchy: (a)/(b)/1. = level 1, (1)/(2)/(3) = level 2, (i)/(ii) = level 3
                             if (isIssuance) {
-                                if (issuanceRomanNumerals && issuanceRomanNumerals.has(segIdx)) return 2;
+                                if (issuanceRomanNumerals && issuanceRomanNumerals.has(segIdx)) return 3;
+                                if (/^\(\d{1,3}\)([\s\u00A0]|$)/.test(textForIndent)) return 2;
                                 if (/^(\([a-z]\)|[a-z][\.\)]|\d{1,2}[\.\)])([\s\u00A0]|$)/i.test(textForIndent)) return 1;
                                 return 0;
                             }

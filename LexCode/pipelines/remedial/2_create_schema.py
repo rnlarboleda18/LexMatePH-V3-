@@ -59,10 +59,11 @@ def main() -> None:
         # Add part_num/part_label columns if they don't exist yet
         cur.execute("""
             ALTER TABLE sc_issuances_codal
-                ADD COLUMN IF NOT EXISTS part_num   VARCHAR(50),
-                ADD COLUMN IF NOT EXISTS part_label TEXT
+                ADD COLUMN IF NOT EXISTS part_num       VARCHAR(50),
+                ADD COLUMN IF NOT EXISTS part_label     TEXT,
+                ADD COLUMN IF NOT EXISTS group_preamble TEXT
         """)
-        print("Ensured part_num / part_label columns exist.")
+        print("Ensured part_num / part_label / group_preamble columns exist.")
     else:
         print("Creating sc_issuances_codal ...")
         cur.execute("""
@@ -73,6 +74,7 @@ def main() -> None:
                 group_type     VARCHAR(50),    -- 'Canon', 'Part', 'Chapter', 'Rule', etc.
                 group_num      VARCHAR(50),    -- 'I', 'II', '1', '2', etc.
                 group_label    TEXT,
+                group_preamble TEXT,           -- introductory paragraph between group header and first section
                 part_num       VARCHAR(50),    -- parent PART/CHAPTER num when group is a RULE
                 part_label     TEXT,           -- parent PART/CHAPTER label
                 section_num    VARCHAR(50),

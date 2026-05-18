@@ -283,7 +283,7 @@ $viteBatContent = "@echo off`r`n"
 $viteBatContent += "cd /d `"$frontendDir`"`r`n"
 $viteBatContent += "if not exist node_modules call npm install`r`n"
 $viteBatContent += "echo [VITE] Starting on http://localhost:5173 ...`r`n"
-$viteBatContent += "npm run dev -- --host 0.0.0.0`r`n"
+$viteBatContent += "npm run dev`r`n"
 Set-Content -Path $viteBat -Value $viteBatContent -Encoding ASCII
 Start-Process cmd -ArgumentList "/k", "`"$viteBat`""
 Wait-Port "Vite" 5173
