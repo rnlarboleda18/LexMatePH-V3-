@@ -499,9 +499,10 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                 .replace(/([.;:])\s+(\([a-zA-Z0-9]{1,3}\)\s+)/g, '$1\n\n$2')
                 // 4. Break before digit-dot markers like `2.` wedged directly on the same line after a sentence ender
                 .replace(/([.;:])\s+(\d{1,3}\.\s+)/g, '$1\n\n$2')
-                // 5. Break before word-based ordinals like `First.` wedged on the same line or separated by single newline
+                // 5. Break before word-based ordinals like `First.` wedged on the same line or separated by single newline.
+                // (?<![a-zA-Z]) prevents matching ordinals that are suffixes of other words (e.g. "done." → "d"+"one.").
                 .replace(
-                    /([a-zA-Z0-9.,;:!?])\s*\n?\s*((?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+)/gi,
+                    /([a-zA-Z0-9.,;:!?])\s*\n?\s*(?<![a-zA-Z])((?:First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.\s+)/gi,
                     '$1\n\n$2',
                 ),
         );
