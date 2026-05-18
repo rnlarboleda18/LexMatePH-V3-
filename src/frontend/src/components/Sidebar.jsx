@@ -228,13 +228,13 @@ const Sidebar = ({
                     <div className="my-1.5 h-px rounded-full bg-rose-200/80 dark:bg-zinc-700" />
                     <button
                         onClick={() => { if (onToggleAdminTools) onToggleAdminTools(); }}
-                        className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                        className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
                         ${mode === 'admin_tools'
                             ? SIDEBAR_NAV_ACTIVE
                             : SIDEBAR_NAV_IDLE
                         }`}
                     >
-                        <Terminal size={20} className={`${mode === 'admin_tools' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'} group-hover:scale-110 transition-all duration-200`} />
+                        <Terminal size={18} className={`${mode === 'admin_tools' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'} group-hover:scale-110 transition-all duration-200`} />
                         Admin Tools
                     </button>
                     <div className="my-1.5 h-px rounded-full bg-violet-300/70 dark:bg-zinc-700" />
@@ -245,13 +245,13 @@ const Sidebar = ({
                 onClick={() => {
                     onToggleAbout();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
                 ${mode === 'about'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
                     }`}
             >
-                <Info size={20} className={`${mode === 'about' ? 'text-sky-700 dark:text-sky-400' : 'text-sky-600 dark:text-sky-400'} group-hover:scale-110 transition-all duration-200`} />
+                <Info size={18} className={`${mode === 'about' ? 'text-sky-700 dark:text-sky-400' : 'text-sky-600 dark:text-sky-400'} group-hover:scale-110 transition-all duration-200`} />
                 About
             </button>
 
@@ -260,13 +260,13 @@ const Sidebar = ({
                 onClick={() => {
                     onToggleUpdates();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
                 ${mode === 'updates'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
                     }`}
             >
-                <Newspaper size={20} className={`transition-all duration-200 group-hover:scale-110 ${mode === 'updates' ? 'text-emerald-700 dark:text-emerald-400' : 'text-emerald-600 dark:text-emerald-400'}`} />
+                <Newspaper size={18} className={`transition-all duration-200 group-hover:scale-110 ${mode === 'updates' ? 'text-emerald-700 dark:text-emerald-400' : 'text-emerald-600 dark:text-emerald-400'}`} />
                 Updates
             </button>
 
@@ -275,13 +275,13 @@ const Sidebar = ({
                 onClick={() => {
                     onToggleQuiz();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
                 ${mode === 'quiz'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
                     }`}
             >
-                <Brain size={20} className={`${mode === 'quiz' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'} group-hover:scale-110 transition-all duration-200`} />
+                <Brain size={18} className={`${mode === 'quiz' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'} group-hover:scale-110 transition-all duration-200`} />
                 Lexify
             </button>
 
@@ -290,13 +290,13 @@ const Sidebar = ({
                 onClick={() => {
                     if (onToggleFlashcard) onToggleFlashcard();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
                 ${mode === 'flashcard'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
                     }`}
             >
-                <SquareStack size={20} className={`${mode === 'flashcard' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
+                <SquareStack size={18} className={`${mode === 'flashcard' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
                 Flashcards
             </button>
 
@@ -304,13 +304,13 @@ const Sidebar = ({
             {isAdmin && (
             <button
                 onClick={() => { if (onToggleLexMate) onToggleLexMate(); }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
                 ${mode === 'lexmate'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
                     }`}
             >
-                <MessageSquare size={20} className={`${mode === 'lexmate' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
+                <MessageSquare size={18} className={`${mode === 'lexmate' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
                 LexMate AI
             </button>
             )}
@@ -320,9 +320,9 @@ const Sidebar = ({
                 onClick={() => {
                     if (onToggleLexPlay) onToggleLexPlay();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base ${SIDEBAR_NAV_IDLE}`}
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors ${SIDEBAR_NAV_IDLE}`}
             >
-                <Headphones size={20} className="text-violet-600 dark:text-zinc-400 group-hover:scale-110 transition-all duration-200" />
+                <Headphones size={18} className="text-violet-600 dark:text-zinc-400 group-hover:scale-110 transition-all duration-200" />
                 LexPlay
             </button>
 
@@ -332,23 +332,23 @@ const Sidebar = ({
                 onClick={() => {
                     onToggleSupremeDecisions();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
                 ${mode === 'supreme_decisions'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
                     }`}
             >
-                <Gavel size={20} className={`transition-all duration-200 group-hover:scale-110 ${mode === 'supreme_decisions' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'}`} />
+                <Gavel size={18} className={`transition-all duration-200 group-hover:scale-110 ${mode === 'supreme_decisions' ? 'text-rose-700 dark:text-rose-400' : 'text-rose-600 dark:text-rose-400'}`} />
                 Case Digest
             </button>
 
             {/* LexCode — expandable subject tree */}
             <button
                 onClick={handleLexCodeClick}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
                 ${mode === 'codex' ? SIDEBAR_NAV_ACTIVE : SIDEBAR_NAV_IDLE}`}
             >
-                <Library size={20} className={`${mode === 'codex' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
+                <Library size={18} className={`${mode === 'codex' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
                 <span className="flex-1">LexCode</span>
                 {(lexOpen || mode === 'codex')
                     ? <ChevronDown size={14} className="shrink-0 text-neutral-400 dark:text-zinc-500" />
@@ -417,13 +417,13 @@ const Sidebar = ({
                 onClick={() => {
                     if (onSelectSubject) onSelectSubject('All Subjects');
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
                 ${mode === 'browse_bar'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
                     }`}
             >
-                <Book size={20} className={`${mode === 'browse_bar' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
+                <Book size={18} className={`${mode === 'browse_bar' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
                 Bar Questions
             </button>
 
@@ -433,13 +433,13 @@ const Sidebar = ({
                     onClick={() => {
                         if (onToggleBar2026) onToggleBar2026();
                     }}
-                    className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-[15px] font-medium transition-colors md:py-3 md:text-base
+                    className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
                     ${mode === 'bar_2026'
                             ? SIDEBAR_NAV_ACTIVE
                             : SIDEBAR_NAV_IDLE
                         }`}
                 >
-                    <Scale size={20} className={`${mode === 'bar_2026' ? 'text-violet-700 dark:text-violet-400' : 'text-violet-600 dark:text-violet-400'} group-hover:scale-110 transition-all duration-200`} />
+                    <Scale size={18} className={`${mode === 'bar_2026' ? 'text-violet-700 dark:text-violet-400' : 'text-violet-600 dark:text-violet-400'} group-hover:scale-110 transition-all duration-200`} />
                     <span className="flex-1">BAR 2026</span>
                     <span className="shrink-0 rounded-full bg-violet-100 px-1.5 py-0.5 text-[10px] font-bold text-violet-700 dark:bg-violet-900/40 dark:text-violet-300">NEW</span>
                 </button>
