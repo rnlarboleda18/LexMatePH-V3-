@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useLayoutEffect, useRef, useCallback, useMemo } from 'react';
 import { createPortal } from 'react-dom';
-import { Book, Calendar, ListTree, X, Gavel, ChevronDown, ChevronRight, Info, Search, ChevronLeft, Lock } from 'lucide-react';
+import { Book, Calendar, ListTree, X, Gavel, ChevronDown, ChevronRight, Info, ChevronLeft, Lock } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import LexCodeStream from './LexCodeStream';
 import LexCodeJurisSidebar from './LexCodeJurisSidebar';
@@ -12,17 +12,8 @@ import {
     stripLegacyCodexArticleRunIn,
 } from '../utils/codalMarkdown';
 import { useSubscription } from '../context/SubscriptionContext';
-import Fuse from 'fuse.js';
-import { useDebounce } from '../hooks/useDebounce';
-import { HighlightText } from '../utils/highlight';
 import PurpleGlassAmbient from './PurpleGlassAmbient';
 import CardVioletInnerWash from './CardVioletInnerWash';
-import {
-    FILTER_CHROME_SURFACE,
-    FILTER_SELECT,
-    FILTER_SEARCH_INPUT,
-    FILTER_SEARCH_ICON_CLASS,
-} from '../utils/filterChromeClasses';
 import { apiUrl, normalizeScDecisionsRouteId } from '../utils/apiUrl';
 import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
 
@@ -125,18 +116,9 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
     const [activeAmendmentArticle, setActiveAmendmentArticle] = useState(null); // For Amendment Sidebar
 
 
-    // Search States
-    const [searchTerm, setSearchTerm] = useState('');
-    const [searchSuggestions, setSearchSuggestions] = useState([]);
-    const [showSuggestions, setShowSuggestions] = useState(false);
-    /** Measured rect of the search input — used to position the portaled dropdown
-     *  outside the overflow-hidden codal shell so it isn't clipped. */
-    const [searchBoxRect, setSearchBoxRect] = useState(null);
-    const closeSuggestionsTimerRef = useRef(null);
-    const searchBoxRef = useRef(null);
     /** Codal picker + search row — in-flow below xl; fixed at xl+; height drives content `padding-top` when fixed. */
     const lexFilterChromeRef = useRef(null);
-    const [lexFilterChromeHeight, setLexFilterChromeHeight] = useState(52);
+    const [lexFilterChromeHeight, setLexFilterChromeHeight] = useState(0);
     /** Match Tailwind `xl:` (1280px). */
     const [xlFixedChrome, setXlFixedChrome] = useState(() =>
         typeof window !== 'undefined' && window.matchMedia('(min-width: 1280px)').matches,
@@ -691,100 +673,6 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
         }, 300);
     };
 
-    // --- Search ---
-    // Debounce the typed term so we don't recompute on every keystroke.
-    const debouncedSearchTerm = useDebounce(searchTerm, 250);
-
-    // Build a Fuse index whenever the codal data changes.
-    // Keys are weighted: article_title and article_number surface first;
-    // content is included so body text matches (e.g. typing "parricide" or
-    // "paricide" still finds Article 246 of the RPC).
-    const fuseRef = useRef(null);
-    useEffect(() => {
-        if (!data?.articles) { fuseRef.current = null; return; }
-        // Defer Fuse index build to idle time — it's CPU-heavy and not needed for initial render
-        const schedule = typeof requestIdleCallback === 'function'
-            ? (cb) => requestIdleCallback(cb, { timeout: 2000 })
-            : (cb) => setTimeout(cb, 200);
-        schedule(() => {
-            const articles = data.articles.filter(
-                (art) => !art.article_number?.includes('(')
-            );
-            fuseRef.current = new Fuse(articles, {
-                keys: [
-                    { name: 'article_title',  weight: 0.5 },
-                    { name: 'article_number', weight: 0.3 },
-                    { name: 'content',        weight: 0.2 },
-                ],
-                threshold: 0.4,
-                distance: 200,
-                minMatchCharLength: 2,
-                includeScore: false,
-            });
-        });
-    }, [data]);
-
-    // Run fuzzy search on the debounced term.
-    useEffect(() => {
-        if (!debouncedSearchTerm.trim()) {
-            setSearchSuggestions([]);
-            return;
-        }
-        if (!fuseRef.current) return;
-
-        const results = fuseRef.current
-            .search(debouncedSearchTerm)
-            .map((r) => r.item)
-            .slice(0, 50);
-
-        setSearchSuggestions(results);
-    }, [debouncedSearchTerm]);
-
-    const handleSearchSubmit = (e) => { e?.preventDefault?.(); };
-
-    const handleSearchInputChange = (e) => setSearchTerm(e.target.value);
-
-    const handleClearSearch = () => {
-        setSearchTerm('');
-        setSearchSuggestions([]);
-        setShowSuggestions(false);
-        setSearchBoxRect(null);
-    };
-
-    // Keep the dropdown anchored correctly when the page scrolls while it's open.
-    useEffect(() => {
-        if (!showSuggestions) return;
-        const update = () => {
-            if (searchBoxRef.current) {
-                setSearchBoxRect(searchBoxRef.current.getBoundingClientRect());
-            }
-        };
-        window.addEventListener('scroll', update, true);
-        window.addEventListener('resize', update);
-        return () => {
-            window.removeEventListener('scroll', update, true);
-            window.removeEventListener('resize', update);
-        };
-    }, [showSuggestions]);
-
-    const handleKeyDown = (e) => {
-        if (e.key === 'Escape') {
-            handleClearSearch();
-            searchBoxRef.current?.blur();
-        }
-    };
-
-    // Clicking a suggestion navigates to the article and closes the dropdown.
-    const handleSuggestionClick = (articleId) => {
-        setSearchTerm('');
-        setSearchSuggestions([]);
-        setShowSuggestions(false);
-        scrollToArticle(articleId);
-    };
-
-    const clearAllSearchStates = handleClearSearch;
-    const handlePreviousArticle = () => {};
-    const handleNextArticle = () => {};
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
     // Derived Data
@@ -1079,62 +967,9 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
     return (
         <>
         <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-1 font-sans text-gray-900 dark:text-gray-100">
-            {/* Codal picker + search — scrolls with page below xl; fixed at xl+ */}
-            <div
-                ref={lexFilterChromeRef}
-                className={`z-[30] ${FILTER_CHROME_SURFACE} ${
-                    xlFixedChrome
-                        ? 'fixed left-0 right-0 xl:left-52'
-                        : 'relative'
-                }`}
-                style={xlFixedChrome ? { top: 'calc(var(--app-header-offset) + var(--tab-bar-height, 0px))' } : undefined}
-            >
-                <div className="w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
-                    <div className="flex w-full min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2">
-                        <form
-                            onSubmit={handleSearchSubmit}
-                            className="relative min-w-0 w-full flex-1 basis-0 sm:w-auto"
-                        >
-                            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-2">
-                                <Search className={FILTER_SEARCH_ICON_CLASS} strokeWidth={2} aria-hidden />
-                            </div>
-                            <input
-                                ref={searchBoxRef}
-                                type="search"
-                                value={searchTerm}
-                                onChange={(e) => { setSearchTerm(e.target.value); setShowSuggestions(true); }}
-                                onFocus={() => {
-                                    clearTimeout(closeSuggestionsTimerRef.current);
-                                    if (searchBoxRef.current) {
-                                        setSearchBoxRect(searchBoxRef.current.getBoundingClientRect());
-                                    }
-                                    setShowSuggestions(true);
-                                }}
-                                onBlur={() => {
-                                    closeSuggestionsTimerRef.current = setTimeout(() => setShowSuggestions(false), 160);
-                                }}
-                                onKeyDown={handleKeyDown}
-                                placeholder="Search articles…"
-                                className={FILTER_SEARCH_INPUT}
-                            />
-                            {searchTerm && (
-                                <button
-                                    type="button"
-                                    onClick={handleClearSearch}
-                                    className="absolute right-1.5 top-1/2 -translate-y-1/2 rounded-full p-1 text-violet-800 transition-colors hover:bg-violet-200/90 hover:text-violet-950 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-white"
-                                    aria-label="Clear search"
-                                >
-                                    <X size={14} />
-                                </button>
-                            )}
-                        </form>
-                    </div>
-                </div>
-            </div>
 
             <div
-                className="relative z-0 w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
-                style={xlFixedChrome ? { paddingTop: 'var(--lex-tile-gap)' } : undefined}
+                className="relative z-0 w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6"
             >
                 <div className="flex w-full max-w-full flex-col items-stretch justify-center gap-4 lg:flex-row lg:items-start lg:gap-6">
                     {/* TOC layout spacer — real panel is `position:fixed` via portal */}
@@ -1203,83 +1038,6 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
             {desktopTocPortal}
             {mobileTocModalPortal}
 
-            {/* Search dropdown — portaled to body so it escapes overflow-hidden on the codal shell */}
-            {showSuggestions && searchBoxRect && typeof document !== 'undefined' &&
-                createPortal(
-                    <div
-                        className="fixed z-[200] max-h-72 overflow-y-auto rounded-xl border border-lex bg-white shadow-lg dark:border-lex dark:bg-zinc-900"
-                        style={{
-                            top: searchBoxRect.bottom + 4,
-                            left: searchBoxRect.left,
-                            width: searchBoxRect.width,
-                        }}
-                        onMouseDown={(e) => e.preventDefault()} // keep focus on input so blur doesn't fire
-                    >
-                        {!debouncedSearchTerm.trim() ? (
-                            <p className="px-3 py-4 text-center text-xs text-gray-400 dark:text-gray-500">
-                                Start typing to find articles in this codal…
-                            </p>
-                        ) : searchSuggestions.length === 0 ? (
-                            <div className="flex flex-col items-center gap-2 px-3 py-5 text-center">
-                                <p className="text-xs text-gray-500 dark:text-gray-400">
-                                    No articles match{' '}
-                                    <span className="font-semibold text-gray-700 dark:text-gray-300">
-                                        &ldquo;{debouncedSearchTerm}&rdquo;
-                                    </span>
-                                </p>
-                                <button
-                                    type="button"
-                                    onClick={handleClearSearch}
-                                    className="text-xs text-violet-600 hover:underline dark:text-zinc-400 dark:hover:text-zinc-200"
-                                >
-                                    Clear
-                                </button>
-                            </div>
-                        ) : (
-                            <>
-                                <div className="border-b border-lex px-3 py-1.5">
-                                    <span className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
-                                        {searchSuggestions.length} article{searchSuggestions.length !== 1 ? 's' : ''} found — click to jump
-                                    </span>
-                                </div>
-                                <div className="divide-y divide-lex">
-                                    {searchSuggestions.map((art) => {
-                                        const titleText =
-                                            art.article_title ||
-                                            (art.article_number
-                                                ? `${codalProvisionLabel} ${art.article_number}`
-                                                : codalProvisionLabel);
-                                        const rawSnippet = (art.content || art.content_md || '')
-                                            .replace(/[#*`_~]/g, '')
-                                            .trim()
-                                            .slice(0, 180);
-                                        return (
-                                            <button
-                                                key={art.id || art.article_number}
-                                                type="button"
-                                                onClick={() =>
-                                                    handleSuggestionClick(art.id || art.article_number)
-                                                }
-                                                className="w-full px-3 py-2.5 text-left transition-colors hover:bg-violet-50 dark:hover:bg-zinc-800"
-                                            >
-                                                <p className="line-clamp-1 text-sm font-bold text-violet-800 dark:text-zinc-200">
-                                                    <HighlightText text={titleText} query={debouncedSearchTerm} />
-                                                </p>
-                                                {rawSnippet && (
-                                                    <p className="mt-0.5 line-clamp-2 text-xs leading-relaxed text-gray-500 dark:text-gray-400">
-                                                        <HighlightText text={rawSnippet} query={debouncedSearchTerm} />
-                                                    </p>
-                                                )}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            </>
-                        )}
-                    </div>,
-                    document.body
-                )
-            }
             {desktopJurisPortal}
 
             {typeof document !== 'undefined' &&
