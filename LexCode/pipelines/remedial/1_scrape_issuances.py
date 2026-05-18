@@ -125,7 +125,9 @@ _CHANROBLES_WATERMARKS = [
     r"WorldWide Legal Re[sc]ources",
     r"US Federal Laws,\s*Statutes\s*&\s*Codes",
     r"US Supreme Court Decisions",
+    r"THE\s+CHAN\s+ROBLES\s+VIRTUAL\s+LAW\s+LIBRARY\s+-\s*QUICK\s+GLANCE",
     r"THE\s+-\s*QUICK\s+GLANCE",
+    r"CHAN\s+ROBLES\s+VIRTUAL\s+LAW\s+LIBRARY",
     r"Philippines\s*\|\s*Worldwide\s*\|[^\n]*",
     # Justice/ponente signature block at end of SC resolutions
     r"Davide,\s+Jr\.\s+C\.J\.\s*,.*?(?:JJ|J)\s*\.",
@@ -154,7 +156,11 @@ def _clean_lawphil(text: str) -> str:
 def _clean_chanrobles(text: str) -> str:
     for pat in _CHANROBLES_WATERMARKS:
         text = re.sub(pat, "", text, flags=re.IGNORECASE | re.MULTILINE)
-    text = re.sub(r'\.(\s*)-(\s*)', r'. - ', text)
+    # Remove lines that are only dashes and whitespace (bare nav separators after content removal)
+    text = re.sub(r'(?m)^\s*(?:-\s*)+$', '', text)
+    # Normalize ". - " separators — use [^\S\n]* (non-newline whitespace only) so
+    # the pattern never matches across paragraph boundaries and creates ". - -" artifacts.
+    text = re.sub(r'\.[^\S\n]*-[^\S\n]*', '. - ', text)
     text = re.sub(r'\n{4,}', '\n\n\n', text)
     return text.strip()
 
@@ -184,7 +190,41 @@ def _preprocess_chanrobles_dom(soup) -> None:
             el.decompose()
 
 
-def _html_to_text(html_bytes: bytes, *, preprocess_chanrobles: bool = False) -> str:
+def _preprocess_gosupra_dom(soup) -> None:
+    """Normalize GoSupra HTML before text extraction.
+
+    GoSupra wraps Canon headers in div.title + div.subtitle inside div.view.mode.
+    _visit() recurses into divs but skips bare NavigableStrings, so these are
+    silently dropped.  We convert each such div.view.mode into a <p> element so
+    _visit() processes it as a normal paragraph.
+
+    Also strips navbar chrome so nav links don't bleed into the extracted text.
+    """
+    # Remove navigation chrome and sidebar table of contents
+    for nav in list(soup.find_all("div", class_="navbar")):
+        nav.decompose()
+    for sidebar in list(soup.find_all("div", class_="sidebar-wrapper")):
+        sidebar.decompose()
+
+    # Convert each div.view.mode that contains a direct div.title child into a <p>.
+    # Structure: div.view.mode > div.title ("Canon N") + div.subtitle ("Independence")
+    # Provision containers (div.view.mode > div.pro-content) are left untouched.
+    for view_div in list(soup.find_all("div", class_="view")):
+        title_div = view_div.find("div", class_="title", recursive=False)
+        if not title_div:
+            continue
+        title_text = title_div.get_text(strip=True)
+        if not title_text:
+            continue
+        subtitle_div = view_div.find("div", class_="subtitle", recursive=False)
+        subtitle_text = subtitle_div.get_text(strip=True) if subtitle_div else ""
+        combined = f"{title_text} — {subtitle_text}" if subtitle_text else title_text
+        new_p = soup.new_tag("p")
+        new_p.string = combined
+        view_div.replace_with(new_p)
+
+
+def _html_to_text(html_bytes: bytes, *, preprocess_chanrobles: bool = False, preprocess_gosupra: bool = False) -> str:
     """
     Convert HTML to clean plain-text while preserving structure:
       - Each <p> is extracted with inline separator=" " so "SECTION 1. <em>Petition.</em>"
@@ -205,6 +245,9 @@ def _html_to_text(html_bytes: bytes, *, preprocess_chanrobles: bool = False) -> 
 
     if preprocess_chanrobles:
         _preprocess_chanrobles_dom(soup)
+
+    if preprocess_gosupra:
+        _preprocess_gosupra_dom(soup)
 
     # Tags treated as block containers when deciding whether to recurse vs. leaf-extract.
     _BLOCK = frozenset({"p", "blockquote", "div", "center", "table",
@@ -307,7 +350,7 @@ def scrape_statute(statute: dict) -> tuple[bytes, str]:
         resp = requests.get(url, headers={"User-Agent": _UA_BOT}, timeout=30)
         resp.raise_for_status()
         raw = resp.content
-        text = _clean_gosupra(_html_to_text(raw))
+        text = _clean_gosupra(_html_to_text(raw, preprocess_gosupra=True))
         return raw, text
 
     if src == "chanrobles":
@@ -352,7 +395,7 @@ def main() -> None:
                 if src == "chanrobles":
                     cleaned = _clean_chanrobles(_html_to_text(raw, preprocess_chanrobles=True))
                 elif src == "gosupra":
-                    cleaned = _clean_gosupra(_html_to_text(raw))
+                    cleaned = _clean_gosupra(_html_to_text(raw, preprocess_gosupra=True))
                 elif src == "pdf":
                     cleaned = _clean_lawphil(_pdf_to_text(raw))
                 else:

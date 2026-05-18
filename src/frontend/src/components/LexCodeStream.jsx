@@ -82,7 +82,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
             const cacheKey =
                 (titleNum ? `${apiCode}_title_${titleNum}` : bookNum ? `${apiCode}_book_${bookNum}` : `${apiCode}_all`) +
                 (['rcc', 'civ', 'labor', 'rpc', 'fc'].includes(apiCode) ? CODAL_LEXCACHE_REVISION : '') +
-                (_ISSUANCE_APICODES.has(apiCode) ? '_v8' : '');
+                (_ISSUANCE_APICODES.has(apiCode) ? '_v10' : '');
 
             const fetcher = async () => {
                 let url = '';
@@ -187,17 +187,17 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                             throw new Error(msg);
                         }
                         const json = await res.json();
-                        return (json.articles || []).map((a) => {
+                        const mapped = (json.articles || []).map((a) => {
                             const num = a.article_num ?? a.article_number ?? a.key_id;
                             const raw = a.content_md || a.content || '';
-                            const gh = (a.group_header || '').trim().toLowerCase();
 
-                            // Reconstruct content_md to ROC format so ArticleNode renders the
-                            // section title inline with the number (bold H3 like ROC sections).
-                            // Backend format: "**Section N.** Title.\n– Body..."
-                            // Target format:  "**Section N. Title. —** Body..."
                             let content_md = raw;
                             let article_title = a.article_title || '';
+                            // Strip trailing dash/em-dash left by E-Library sourced section titles
+                            // (backend cleans this too, but may serve stale cache).
+                            if (article_title) {
+                                article_title = article_title.replace(/\s*[–—\-]+\s*$/, '').replace(/\.\s*$/, '').trim();
+                            }
                             if (!article_title) {
                                 const m = raw.match(/^(\*\*Section\s+[\w\d-]+\.)\*\*\s+([^\n]+)\n[–\-—]\s*([\s\S]*)$/);
                                 if (m) {
@@ -220,6 +220,21 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                 group_header: '',
                             };
                         });
+
+                        // Promote stray ARTICLE structural headers that the old pipeline stored
+                        // at the end of the preceding section's body text.
+                        // Pattern: content_md ends with "\n\nARTICLE [roman]\n[SUBTITLE]"
+                        const artHdrRe = /\n\n(ARTICLE\s+[IVXLCDM\d]+)[ \t]*\n([A-Z][A-Z\s]*)[\s]*$/i;
+                        for (let i = 0; i < mapped.length - 1; i++) {
+                            const m = mapped[i].content_md.match(artHdrRe);
+                            if (!m) continue;
+                            const label = `${m[1].trim()} — ${m[2].trim()}`;
+                            mapped[i] = { ...mapped[i], content_md: mapped[i].content_md.slice(0, m.index).trimEnd() };
+                            if (!mapped[i + 1].book_label) {
+                                mapped[i + 1] = { ...mapped[i + 1], book_label: label };
+                            }
+                        }
+                        return mapped;
                         // No sort — DB already orders by sort_order. Sorting by article_num
                         // would scramble codals where section numbers restart per rule/canon
                         // (e.g. Environmental Cases: Rule 1 §1, Rule 2 §1, Rule 3 §1…).
@@ -499,8 +514,9 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                     }
 
                     // Only push legacy PREAMBLE header for label-only section-0 articles (e.g. CONST).
-                    // Canon preambles (CPRA etc.) have content_md and render via ArticleNode instead.
-                    if (String(art.article_num) === '0' && art.title_label && !art.content_md) {
+                    // Issuances (CPRA, NCJC, etc.) use Canon TITLE headers instead — never show PREAMBLE.
+                    const _issuanceCodes = new Set(['AM-07-9-12-SC','AM-08-1-16-SC','AM-09-6-8-SC','AM-01-7-01-SC','CPRA','AM-02-8-13-SC','NCJC','RA-11642']);
+                    if (String(art.article_num) === '0' && art.title_label && !art.content_md && !_issuanceCodes.has(code.toUpperCase())) {
                         headersToRender.push({ type: 'PREAMBLE', text: art.title_label });
                     }
                     if (bookHdr) headersToRender.push(bookHdr);
@@ -524,6 +540,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                             headersToRender.push({ type, text: formatHeader(p) });
                         });
                     }
+
 
                     return (
                         <div key={art.id} className="mb-4 min-w-0 max-w-full">

@@ -49,9 +49,9 @@ STATUTES = [
     {"statute_id": "RA-11642",       "filename": "ra_11642_2022",       "label": "Republic Act No. 11642 — Domestic Administrative Adoption and Alternative Child Care Act"},
 ]
 
-# Group-level structural headers (Canon, Part, Title, Chapter)
+# Group-level structural headers (Canon, Part, Title, Chapter, Article)
 _GROUP_RE = re.compile(
-    r'^(CANON|PART|TITLE|CHAPTER)\s+([IVXLCDM\d]+)[.\s]*(?:[-–—]\s*)?(.*)$',
+    r'^(CANON|PART|TITLE|CHAPTER|ARTICLE)\s+([IVXLCDM\d]+)[.\s]*(?:[-–—]\s*)?(.*)$',
     re.IGNORECASE,
 )
 # Unnumbered group headers (e.g. GENERAL PROVISIONS, LAWYER'S OATH)
@@ -81,7 +81,9 @@ def _split_title_body(rest: str) -> tuple[str, str]:
     m = re.match(r'^(.*?)\s*[-–—]\s+(.*)', rest, re.DOTALL)
     if m:
         return m.group(1).rstrip('. ').strip(), m.group(2).strip()
-    return rest.rstrip('. ').strip(), ""
+    # Strip trailing dash with no body (e.g. "Violations and Penalties.  –")
+    cleaned = re.sub(r'\s*[-–—]+\s*$', '', rest).rstrip('. ').strip()
+    return cleaned, ""
 
 
 def parse_statute_md(text: str, statute_id: str, statute_label: str) -> list[dict]:
