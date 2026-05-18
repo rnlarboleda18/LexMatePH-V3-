@@ -31,7 +31,7 @@ export default function TabBar({ tabs, activeMode, onSwitch, onClose, isDarkMode
   return createPortal(
     <div className={isDarkMode ? 'dark' : ''}>
       <div
-        className={`fixed left-0 right-0 z-[45] flex items-stretch overflow-x-auto xl:left-52 ${APP_HEADER_SURFACE}`}
+        className={`fixed left-0 right-0 z-[45] flex items-stretch overflow-x-auto ${APP_HEADER_SURFACE}`}
         style={{ top: 'var(--app-header-offset)', height: `${TAB_BAR_HEIGHT_PX}px` }}
         data-lex-tab-bar
       >

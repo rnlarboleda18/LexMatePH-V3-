@@ -1273,12 +1273,12 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
 
     return (
         <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-1 font-sans text-gray-900 dark:text-gray-100">
-            {/* Search + optional custom filters — in-flow below xl; fixed under app header at xl+ (xl:left-52 with persistent sidebar) */}
+            {/* Search + optional custom filters — in-flow below xl; fixed under app header at xl+ */}
             <div
                 ref={filterChromeRef}
                 className={`z-20 ${FILTER_CHROME_SURFACE} ${
                     xlFixedChrome
-                        ? 'fixed left-0 right-0 xl:left-52'
+                        ? 'fixed left-0 right-0'
                         : 'relative'
                 }`}
                 style={xlFixedChrome ? { top: 'calc(var(--app-header-offset) + var(--tab-bar-height, 0px))' } : undefined}

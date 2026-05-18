@@ -1119,7 +1119,7 @@ function App() {
                         ref={barFilterChromeRef}
                         className={`z-20 ${FILTER_CHROME_SURFACE} ${
                           xlFixedChrome
-                            ? 'fixed left-0 right-0 xl:left-52'
+                            ? 'fixed left-0 right-0'
                             : 'relative'
                         }`}
                         style={xlFixedChrome ? { top: 'calc(var(--app-header-offset) + var(--tab-bar-height, 0px))' } : undefined}
