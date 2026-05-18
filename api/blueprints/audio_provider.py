@@ -630,7 +630,88 @@ def _get_text_for_codal(content_id, code_id=None):
         'fc': 'fc_codal',
         'roc': 'roc_codal',
     }
+    # SC issuance codals stored in sc_issuances_codal (not legacy codal tables / article_versions)
+    _SC_ISSUANCE_IDS = {
+        'am-07-9-12-sc', 'am-08-1-16-sc', 'am-09-6-8-sc', 'am-01-7-01-sc',
+        'cpra', 'am-02-8-13-sc', 'ncjc', 'ra-11642',
+    }
     try:
+        # ---- Strategy A′: SC Issuances (sc_issuances_codal) ----
+        if code_id and code_id.lower() in _SC_ISSUANCE_IDS:
+            statute_id_upper = code_id.upper()
+            row = None
+            # Primary: match by UUID id (sent by ArticleNode via article.id / version_id)
+            if _looks_like_uuid(str(content_id)):
+                try:
+                    cur.execute(
+                        """SELECT id, statute_id, statute_label, group_type, group_num, group_label,
+                                  part_num, part_label, section_num, section_title, content_md
+                           FROM sc_issuances_codal
+                           WHERE id::text = %s AND statute_id = %s LIMIT 1""",
+                        (str(content_id), statute_id_upper)
+                    )
+                    row = cur.fetchone()
+                except Exception:
+                    conn.rollback()
+            # Fallback: match by section_num (plain number string)
+            if not row:
+                try:
+                    cur.execute(
+                        """SELECT id, statute_id, statute_label, group_type, group_num, group_label,
+                                  part_num, part_label, section_num, section_title, content_md
+                           FROM sc_issuances_codal
+                           WHERE statute_id = %s AND section_num::text = %s LIMIT 1""",
+                        (statute_id_upper, str(content_id))
+                    )
+                    row = cur.fetchone()
+                except Exception:
+                    conn.rollback()
+
+            if not row:
+                return None, f"Issuance section '{content_id}' not found for '{code_id}'"
+
+            statute_label = (row.get('statute_label') or code_id).strip()
+            group_type    = (row.get('group_type') or '').strip().upper()
+            group_num     = row.get('group_num') or ''
+            group_label   = (row.get('group_label') or '').strip()
+            sec_num       = str(row.get('section_num') or '').strip()
+            sec_title     = (row.get('section_title') or '').strip()
+            content_md    = (row.get('content_md') or '').strip()
+
+            # Build TTS header:  "Canon I — Propriety. Section 3. Title."
+            header_parts = []
+
+            # Group-level label (Canon, Rule, Chapter, Part, etc.)
+            if group_type and group_num:
+                gtype_cap = group_type.capitalize()  # "Canon", "Rule", "Chapter" …
+                if group_label:
+                    header_parts.append(f"{gtype_cap} {group_num}. {group_label}")
+                else:
+                    header_parts.append(f"{gtype_cap} {group_num}")
+
+            # Section-level label
+            if sec_num and sec_num != '0':
+                if sec_title:
+                    header_parts.append(f"Section {sec_num}. {sec_title}")
+                else:
+                    header_parts.append(f"Section {sec_num}")
+            elif sec_num == '0' and sec_title:
+                # Preamble / group intro
+                header_parts.append(sec_title)
+
+            # Flatten body markdown → plain TTS text
+            clean = tts_flatten_codal_body(content_md)
+            clean = _apply_custom_pronunciations(clean)
+
+            # Dedupe: if clean already opens with the section header, skip prepending
+            header = '. '.join(header_parts)
+            if header:
+                header, _ = dedupe_codal_header_prefix(clean, header, sec_num)
+
+            full_text = f"{header}. {clean}" if header and clean else (header or clean)
+            full_text = _apply_custom_pronunciations(full_text)
+            return full_text, None
+
         if code_id and code_id.lower() in LEGACY_TABLES:
             table = LEGACY_TABLES[code_id.lower()]
             cols = "id, article_num, article_title, content_md"
