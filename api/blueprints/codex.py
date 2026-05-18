@@ -129,7 +129,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
     if not short_name:
          return func.HttpResponse(json.dumps({"error": "short_name required"}), status_code=400)
 
-    cv_ck = f"codal:codex:v11:versions:{short_name.upper()}:{target_date or 'latest'}"
+    cv_ck = f"codal:codex:v12:versions:{short_name.upper()}:{target_date or 'latest'}"
     cached_v = codal_try_get(req, cv_ck)
     if cached_v is not None:
         ma = (0 if short_name.upper() == "CONST" else 3600) if not target_date else 86400
@@ -194,6 +194,11 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                 elif gt in ('ARTICLE', 'PART', 'TITLE'):
                     book = gn
                     book_label = f"{gt.capitalize()} {gn} — {gl}" if gl else f"{gt.capitalize()} {gn}"
+                elif gt == 'CANON':
+                    # Keep title_num as string so parseInt() in LexCodeStream returns NaN
+                    # and the "Title I - " prefix is never prepended to Canon headers.
+                    title_label = f"Canon {gn} — {gl}" if gl else f"Canon {gn}"
+                    title_num = gn
                 elif gt:
                     title_label = f"{gt} {gn} — {gl}" if gl else (f"{gt} {gn}" if gn else (f"{gt} — {gl}" if gl else gt))
                     title_num = int(gn) if gn and str(gn).isdigit() else gn
@@ -201,7 +206,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                 mapped_rows.append({
                     "version_id": str(r['id']),
                     "id": str(r['id']),
-                    "key_id": sec_num,
+                    "key_id": str(r['id']),
                     "article_number": sec_num,
                     "article_num": sec_num,
                     "article_title": sec_title,
@@ -563,7 +568,7 @@ def get_codex_issuance(req: func.HttpRequest) -> func.HttpResponse:
     if not statute_id:
         return func.HttpResponse(json.dumps({"error": "statute_id required"}), status_code=400)
 
-    ck = f"codal:codex:v1:issuance:{statute_id}"
+    ck = f"codal:codex:v2:issuance:{statute_id}"
     hit = codal_try_get(req, ck)
     if hit is not None:
         return compressed_json_response(hit, req, 200, max_age=3600)
