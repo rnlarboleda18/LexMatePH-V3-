@@ -77,7 +77,7 @@ const Layout = ({
                         <button
                             type="button"
                             onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-                            className={`xl:hidden flex h-9 w-9 max-sm:h-8 max-sm:w-8 shrink-0 items-center justify-center rounded-lg border transition-colors backdrop-blur-md ${
+                            className={`flex h-9 w-9 max-sm:h-8 max-sm:w-8 shrink-0 items-center justify-center rounded-lg border transition-colors backdrop-blur-md ${
                                 isDarkMode
                                     ? 'border-zinc-600 bg-zinc-900/80 text-zinc-200 shadow-sm ring-1 ring-inset ring-white/[0.06] hover:bg-zinc-800 hover:text-white'
                                     : 'border-lex-strong bg-white text-black shadow-sm ring-1 ring-inset ring-neutral-200/80 hover:bg-neutral-50'
@@ -182,7 +182,7 @@ const Layout = ({
                             />
                         )}
                         <aside
-                            className={`fixed left-0 top-[var(--app-header-offset)] z-40 w-52 transform overflow-y-auto transition-transform duration-300 ease-in-out xl:block xl:translate-x-0 ${SIDEBAR_ASIDE_SURFACE} ${
+                            className={`fixed left-0 top-[var(--app-header-offset)] z-40 w-52 transform overflow-y-auto transition-transform duration-300 ease-in-out ${SIDEBAR_ASIDE_SURFACE} ${
                                 isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                             }`}
                             style={{
@@ -208,7 +208,7 @@ const Layout = ({
                     WebkitOverflowScrolling: 'touch',
                 }}
             >
-                <div className={hideAppChrome ? '' : `xl:pl-52 ${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'}`}>
+                <div className={hideAppChrome ? '' : `${['supreme_decisions', 'codex', 'browse_bar', 'flashcard', 'about', 'updates', 'quiz', 'landing'].includes(mode) ? 'px-0' : 'px-4 lg:px-8'}`}>
                     <div
                         className={`${
                             hideAppChrome
