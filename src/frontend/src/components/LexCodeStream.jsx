@@ -82,7 +82,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
             const cacheKey =
                 (titleNum ? `${apiCode}_title_${titleNum}` : bookNum ? `${apiCode}_book_${bookNum}` : `${apiCode}_all`) +
                 (['rcc', 'civ', 'labor', 'rpc', 'fc'].includes(apiCode) ? CODAL_LEXCACHE_REVISION : '') +
-                (_ISSUANCE_APICODES.has(apiCode) ? '_v3' : '');
+                (_ISSUANCE_APICODES.has(apiCode) ? '_v8' : '');
 
             const fetcher = async () => {
                 let url = '';
@@ -214,14 +214,15 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                 article_num: num,
                                 article_title,
                                 content_md,
-                                group_header: gh === 'none' ? '' : (a.group_header || ''),
+                                // Structural hierarchy is already in title_label/chapter_label/book_label;
+                                // clearing group_header prevents the legacy ROC path from rendering
+                                // duplicate section headers for grouped issuances (CPRA Canons, etc.).
+                                group_header: '',
                             };
-                        }).sort((a, b) => {
-                            const na = parseInt(a.article_num, 10);
-                            const nb = parseInt(b.article_num, 10);
-                            if (!isNaN(na) && !isNaN(nb)) return na - nb;
-                            return String(a.article_num).localeCompare(String(b.article_num), undefined, { numeric: true });
                         });
+                        // No sort — DB already orders by sort_order. Sorting by article_num
+                        // would scramble codals where section numbers restart per rule/canon
+                        // (e.g. Environmental Cases: Rule 1 §1, Rule 2 §1, Rule 3 §1…).
                     }
                 }
                 return [];
@@ -409,9 +410,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                     const formatHeader = (text) => {
                         const raw = isRccStream ? fixRccStructuralHeadingGlue(text) : text;
                         let proc = toTitleCase(raw);
-                        if (code && code.toLowerCase() === 'roc') {
-                            proc = cleanRomanRules(proc);
-                        }
+                        proc = cleanRomanRules(proc);
                         return proc;
                     };
 
@@ -426,7 +425,8 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                             if (!art.book_label.toUpperCase().includes('PRELIMINARY')) {
                                 const bookPrefix = code.toLowerCase() === 'roc' ? 'Part' : 'Book';
                                 const cleanLabel = toTitleCase(art.book_label);
-                                const bookText = cleanLabel.toUpperCase().includes(bookPrefix.toUpperCase())
+                                const hasStructuralPrefix = /^(Book|Part|Chapter|Title|Canon)\b/i.test(cleanLabel);
+                                const bookText = hasStructuralPrefix
                                     ? cleanLabel
                                     : art.book ? `${bookPrefix} ${art.book} - ${cleanLabel}` : cleanLabel;
                                 const bookNorm = normalizeTitle(bookText);
@@ -480,7 +480,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                         const cleanLabel = formatHeader(art.title_label);
                         const titleText = (cleanLabel.toUpperCase().startsWith('TITLE'))
                             ? cleanLabel
-                            : (art.title_num && parseInt(art.title_num) > 0 && !isRocStream)
+                            : (art.title_num && parseInt(art.title_num) > 0 && !isRocStream && !cleanLabel.toUpperCase().startsWith('RULE'))
                                 ? `Title ${intToRoman(parseInt(art.title_num))} - ${cleanLabel}`
                                 : cleanLabel;
                         const dup = [bookHdr, chapterHdr, sectionHdr].some(
@@ -537,7 +537,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                                       ? ['SECTION']
                                       : isRccStream
                                         ? ['SECTION', 'TITLE', 'CHAPTER']
-                                        : [];
+                                        : ['RULE'];
                                 const isRccStructural =
                                     isRccStream && ['TITLE', 'CHAPTER', 'SECTION'].includes(h.type);
 

@@ -351,7 +351,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
     const skipKeywords =
         docCode === 'rcc'
             ? ['SECTION', 'TITLE', 'CHAPTER']
-            : ['roc', 'const'].includes(docCode)
+            : ['roc', 'const'].includes(docCode) || isIssuance
               ? ['SECTION', 'RULE']
               : [];
 
@@ -546,7 +546,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             if (redundantEmbedded) {
                 customHeaderNode = null;
                 const restOfBody = parts.slice(1).join('\n\n');
-                contentToDisplay = introPart ? `${introPart}\n\n${restOfBody}` : restOfBody;
+                contentToDisplay = [introPart, restOfBody].filter(Boolean).join('\n\n');
             } else {
                 customHeaderNode = (
                     <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
@@ -555,7 +555,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                 );
 
                 const restOfBody = parts.slice(1).join('\n\n');
-                contentToDisplay = introPart ? `${introPart}\n\n${restOfBody}` : restOfBody;
+                contentToDisplay = [introPart, restOfBody].filter(Boolean).join('\n\n');
             }
         } else {
             // Fallback: Just render the whole first block as H3
@@ -1205,6 +1205,44 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                     // Track numeric context separately so ordinals don't pollute the "am I nested?" check
                     let lastNumericEnumLevel = 0;
 
+                    // For issuances: pre-compute which plain paragraphs are genuine enum continuations
+                    // (i.e. a new lettered/numbered item follows them). Only those should inherit indent;
+                    // standalone paragraphs after the last list item should be flush.
+                    // Matches: "a. text", "(a) text", "(1) text", "1. text"
+                    const _enumMarkerRe = /^(?:[a-z]\.\s+|\([a-z0-9]{1,3}\)\s+|\d{1,2}\.\s+)/i;
+                    const issuanceEnumContinuation = isIssuance ? new Set(
+                        segments.reduce((acc, seg, i) => {
+                            const clean = typeof seg === 'string' ? seg.trim() : '';
+                            if (!_enumMarkerRe.test(clean)) {
+                                const nextClean = i + 1 < segments.length && typeof segments[i + 1] === 'string'
+                                    ? segments[i + 1].trim() : '';
+                                if (_enumMarkerRe.test(nextClean)) acc.push(i);
+                            }
+                            return acc;
+                        }, [])
+                    ) : null;
+
+                    // For issuances: pre-compute which segments are Roman numeral sub-items.
+                    // (ii), (iii), (iv) etc. are unambiguous; lone (i) is Roman when adjacent to them.
+                    // Also catches the dot-format: ii. iii. iv. (no parentheses).
+                    const _clearRomanRe = /^\([ivxl]{2,}\)\s+/i;
+                    const _clearRomanDotRe = /^[ivxl]{2,}\.\s+/; // lowercase only — avoids "II." section headers
+                    const issuanceRomanNumerals = isIssuance ? (() => {
+                        const set = new Set();
+                        for (let i = 0; i < segments.length; i++) {
+                            const c = typeof segments[i] === 'string' ? segments[i].trim() : '';
+                            if (_clearRomanRe.test(c) || _clearRomanDotRe.test(c)) {
+                                set.add(i);
+                                // Mark preceding lone (i)/(i.) if it sits right before this Roman item
+                                if (i > 0) {
+                                    const prev = typeof segments[i - 1] === 'string' ? segments[i - 1].trim() : '';
+                                    if (/^\(i\)\s+/i.test(prev) || /^i\.\s+/.test(prev)) set.add(i - 1);
+                                }
+                            }
+                        }
+                        return set;
+                    })() : null;
+
                     return segments.map((segment, segIdx) => {
                         if (isRocOrRpc && typeof segment === 'string' && segment.trim() === '') {
                             // Explicit vertical spacing for intentional source blank lines
@@ -1299,6 +1337,13 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             // Fallback to regex (for documents without explicit space indentation)
                             const textForIndent = cleanSeg.replace(/^(?:\[\d+\]\([^)]+\)\s*)*\[?\s*/, '');
 
+                            // Issuance hierarchy: (a)/(b)/1. = level 1, (i)/(ii)/(iii) = level 2
+                            if (isIssuance) {
+                                if (issuanceRomanNumerals && issuanceRomanNumerals.has(segIdx)) return 2;
+                                if (/^(\([a-z]\)|[a-z][\.\)]|\d{1,2}[\.\)])([\s\u00A0]|$)/i.test(textForIndent)) return 1;
+                                return 0;
+                            }
+
                             // RPC/ROC hierarchy: outer Arabic 1. / 1) first, then lettered (a) / a) nested under it,
                             // then parenthetical (1), then roman (i). Higher level number = more ml-* (was inverted before).
                             if (/^\d+[\.\)]([\s\u00A0]|$)/.test(textForIndent)) return 1;
@@ -1307,6 +1352,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             if (/^(First|Second|Third|Fourth|Fifth|Sixth|Seventh|Eighth|Ninth|Tenth|One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten)\.([\s\u00A0]|$)/i.test(textForIndent)) {
                                 return 3;
                             }
+                            if (/^[ivxl]{2,}\.\s/.test(textForIndent)) return 3; // lowercase Roman-dot: ii. iii. iv.
                             if (/^\([ivxl]+\)([\s\u00A0]|$)/i.test(textForIndent)) return 4;
                             return 0;
                         })();
@@ -1336,7 +1382,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                             !cleanSeg.startsWith('#') &&
                             !rccProseOutdent &&
                             !isRpcArt25ColonFlush &&
-                            !isRpcArt25CenterHeading;
+                            !isRpcArt25CenterHeading &&
+                            (!isIssuance || issuanceEnumContinuation.has(segIdx));
 
                         const effectiveLevel = shouldInheritEnumIndent ? lastEnumLevel : indentationLevel;
 

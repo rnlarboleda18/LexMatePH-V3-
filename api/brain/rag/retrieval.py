@@ -61,7 +61,7 @@ def _llm(prompt: str, system: str = None, max_tokens: int = 1024) -> str:
         system_instruction=system,
     )
     resp = client.models.generate_content(
-        model=config.GEMINI_FLASH_MODEL,
+        model=config.GEMINI_PRO_MODEL,
         contents=prompt,
         config=cfg,
     )

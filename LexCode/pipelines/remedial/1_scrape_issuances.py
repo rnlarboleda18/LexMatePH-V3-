@@ -70,9 +70,9 @@ STATUTES = [
     {
         "statute_id": "AM-02-8-13-SC",
         "label":      "2004 Rules on Notarial Practice (A.M. No. 02-8-13-SC)",
-        "url":        "https://sc.judiciary.gov.ph/wp-content/uploads/2022/08/02-08-13-SC-1.pdf",
+        "url":        "https://chanrobles.com/supremecourtamno02-8-13-sc2004.html",
         "filename":   "am_02_8_13_sc_2004",
-        "source":     "pdf",
+        "source":     "chanrobles",
     },
     {
         "statute_id": "NCJC",
@@ -160,10 +160,60 @@ def _clean_gosupra(text: str) -> str:
 
 
 def _html_to_text(html_bytes: bytes) -> str:
+    """
+    Convert HTML to clean plain-text while preserving structure:
+      - Each <p> is extracted with inline separator=" " so "SECTION 1. <em>Petition.</em>"
+        stays on one line instead of splitting into two separate lines.
+      - <ol> items get explicit letter markers (a. b. c.) because the original
+        markers are CSS-generated and invisible to get_text().
+      - <ul> items get a dash marker.
+      - Consecutive list items within one <ol>/<ul> are joined with "\n" (single
+        newline) so they form a compact block separated from surrounding paragraphs
+        by double newlines.
+    """
     soup = BeautifulSoup(html_bytes, "html.parser")
     for tag in soup(["script", "style", "head", "meta", "link",
                      "iframe", "nav", "footer", "header"]):
         tag.decompose()
+
+    chunks: list[str] = []
+
+    def _visit(node) -> None:
+        """Recursively walk block-level elements, collecting text chunks."""
+        if not hasattr(node, "name") or not node.name:
+            return  # NavigableString or Comment at root level — skip
+        if node.name == "ol":
+            items = node.find_all("li", recursive=False)
+            for idx, li in enumerate(items):
+                letter = chr(ord("a") + idx)
+                text = li.get_text(separator=" ").strip()
+                if text:
+                    # Each item is its own paragraph (\n\n) so ArticleNode splits
+                    # it into a distinct segment for per-paragraph juris linking.
+                    chunks.append(f"{letter}. {text}")
+        elif node.name == "ul":
+            items = node.find_all("li", recursive=False)
+            for li in items:
+                text = li.get_text(separator=" ").strip()
+                if text:
+                    chunks.append(f"- {text}")
+        elif node.name == "p":
+            text = node.get_text(separator=" ").strip()
+            if text:
+                chunks.append(text)
+        else:
+            # div, blockquote, table, body, etc. — recurse into children
+            for child in node.children:
+                _visit(child)
+
+    root = soup.body if soup.body else soup
+    for child in root.children:
+        _visit(child)
+
+    if chunks:
+        return "\n\n".join(chunks)
+
+    # Fallback: original flat approach
     lines = [ln.strip() for ln in soup.get_text(separator="\n").splitlines() if ln.strip()]
     return "\n\n".join(lines)
 

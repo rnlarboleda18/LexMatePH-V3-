@@ -64,6 +64,10 @@ _RULE_RE = re.compile(
     r'^Rule\s+(\d+\.\d+)[.:]?\s*(.*)',
     re.IGNORECASE,
 )
+# Integer rule group headers: RULE 1 GENERAL PROVISIONS / Rule 1 COVERAGE.
+# IGNORECASE handles both all-caps (Env Cases) and mixed-case (Electronic Evidence).
+# Negative lookahead (?!\.\d) excludes NCJC-style decimal headers like "Rule 1.01".
+_RULE_GROUP_RE = re.compile(r'^Rule\s+(\d+)(?!\.\d)\s*(.*)', re.IGNORECASE)
 
 
 def _split_title_body(rest: str) -> tuple[str, str]:
@@ -82,6 +86,9 @@ def parse_statute_md(text: str, statute_id: str, statute_label: str) -> list[dic
     cur_group_type:  Optional[str] = None
     cur_group_num:   Optional[str] = None
     cur_group_label: Optional[str] = None
+    # Parent-level context (PART/CHAPTER/TITLE) preserved when a RULE sub-group follows.
+    cur_part_num:    Optional[str] = None
+    cur_part_label:  Optional[str] = None
     cur_sec_num:     Optional[str] = None
     cur_sec_title:   Optional[str] = None
     cur_lines:       list[str]     = []
@@ -101,6 +108,8 @@ def parse_statute_md(text: str, statute_id: str, statute_label: str) -> list[dic
             "group_type":    cur_group_type,
             "group_num":     cur_group_num,
             "group_label":   cur_group_label,
+            "part_num":      cur_part_num,
+            "part_label":    cur_part_label,
             "section_num":   cur_sec_num,
             "section_title": cur_sec_title or "",
             "content_md":    content,
@@ -117,13 +126,42 @@ def parse_statute_md(text: str, statute_id: str, statute_label: str) -> list[dic
         gm = _GROUP_RE.match(line)
         if gm:
             emit()
-            cur_group_type  = gm.group(1).capitalize()
-            cur_group_num   = gm.group(2).strip()
-            cur_group_label = gm.group(3).strip()
+            gtype = gm.group(1).capitalize()
+            gnum  = gm.group(2).strip()
+            glbl  = gm.group(3).strip()
             # Peek at next non-blank line for group title if it wasn't inline
+            if not glbl and i < len(lines):
+                nxt = lines[i].strip()
+                if nxt and not _GROUP_RE.match(nxt) and not _RULE_GROUP_RE.match(nxt) and not _SEC_RE.match(nxt) and not _RULE_RE.match(nxt):
+                    glbl = nxt
+                    i += 1
+            if gtype.upper() in ('PART', 'CHAPTER', 'TITLE'):
+                # Save as parent context — a RULE header will follow and become the
+                # primary group; if sections follow directly (no RULE), the group_type
+                # below acts as the primary group and part_num duplicates it (harmless).
+                cur_part_num   = gnum
+                cur_part_label = glbl
+            else:
+                # CANON and other top-level groups own sections directly — clear part ctx.
+                cur_part_num   = None
+                cur_part_label = None
+            cur_group_type  = gtype
+            cur_group_num   = gnum
+            cur_group_label = glbl
+            cur_sec_num   = None
+            cur_sec_title = None
+            cur_lines     = []
+            continue
+
+        rgm = _RULE_GROUP_RE.match(line)
+        if rgm:
+            emit()
+            cur_group_type  = 'Rule'
+            cur_group_num   = rgm.group(1).strip()
+            cur_group_label = rgm.group(2).strip()
             if not cur_group_label and i < len(lines):
                 nxt = lines[i].strip()
-                if nxt and not _GROUP_RE.match(nxt) and not _SEC_RE.match(nxt) and not _RULE_RE.match(nxt):
+                if nxt and not _GROUP_RE.match(nxt) and not _RULE_GROUP_RE.match(nxt) and not _SEC_RE.match(nxt) and not _RULE_RE.match(nxt):
                     cur_group_label = nxt
                     i += 1
             cur_sec_num   = None
@@ -142,6 +180,11 @@ def parse_statute_md(text: str, statute_id: str, statute_label: str) -> list[dic
 
         if cur_sec_num is not None and line:
             cur_lines.append(line)
+        elif cur_sec_num is not None and not line:
+            # Preserve paragraph break within a section — emit a blank sentinel so
+            # emit()'s split("\n\n") can recover paragraph boundaries.
+            if cur_lines and cur_lines[-1] != "":
+                cur_lines.append("")
         elif cur_sec_num is None and cur_group_type is not None and line and not cur_group_label:
             # Text sitting between a group header and the first section
             cur_group_label = line
@@ -172,13 +215,15 @@ def ingest_statute(cur, statute: dict) -> int:
         cur,
         """INSERT INTO sc_issuances_codal
              (id, statute_id, statute_label, group_type, group_num, group_label,
+              part_num, part_label,
               section_num, section_title, content_md, sort_order)
            VALUES %s""",
         [
             (
                 r["id"], r["statute_id"], r["statute_label"], r["group_type"],
-                r["group_num"], r["group_label"], r["section_num"],
-                r["section_title"], r["content_md"], r["sort_order"],
+                r["group_num"], r["group_label"],
+                r.get("part_num"), r.get("part_label"),
+                r["section_num"], r["section_title"], r["content_md"], r["sort_order"],
             )
             for r in records
         ],

@@ -62,6 +62,22 @@ def int_to_roman(num):
         return str(num)
     return result
 
+def roman_to_int(s):
+    """Convert a Roman numeral string to int. Returns original string if not a valid Roman numeral."""
+    if not s:
+        return s
+    roman_map = {'I': 1, 'V': 5, 'X': 10, 'L': 50, 'C': 100, 'D': 500, 'M': 1000}
+    s_up = str(s).upper()
+    if not all(c in roman_map for c in s_up):
+        return s
+    val = 0
+    for i in range(len(s_up)):
+        if i > 0 and roman_map[s_up[i]] > roman_map[s_up[i - 1]]:
+            val += roman_map[s_up[i]] - 2 * roman_map[s_up[i - 1]]
+        else:
+            val += roman_map[s_up[i]]
+    return val
+
 def clean_structural_label(label):
     if not label: return ""
     # Remove "TITLE ONE: ", "CHAPTER ONE: " etc.
@@ -113,7 +129,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
     if not short_name:
          return func.HttpResponse(json.dumps({"error": "short_name required"}), status_code=400)
 
-    cv_ck = f"codal:codex:v1:versions:{short_name.upper()}:{target_date or 'latest'}"
+    cv_ck = f"codal:codex:v6:versions:{short_name.upper()}:{target_date or 'latest'}"
     cached_v = codal_try_get(req, cv_ck)
     if cached_v is not None:
         ma = (0 if short_name.upper() == "CONST" else 3600) if not target_date else 86400
@@ -131,6 +147,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
             sid = short_name.upper()
             cur.execute("""
                 SELECT id, statute_label, group_type, group_num, group_label,
+                       part_num, part_label,
                        section_num, section_title, content_md
                 FROM sc_issuances_codal
                 WHERE statute_id = %s
@@ -157,9 +174,16 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                 book_label = ''
                 book = None
 
+                part_n = (r.get('part_num') or '').strip()
+                part_l = (r.get('part_label') or '').strip()
+
                 if gt == 'RULE':
-                    title_num = int(gn) if gn and str(gn).isdigit() else gn
-                    title_label = f"Rule {gn} — {gl}" if gl else f"Rule {gn}"
+                    arabic_gn = roman_to_int(gn) if gn and not str(gn).isdigit() else (int(gn) if gn and str(gn).isdigit() else gn)
+                    title_num = arabic_gn if isinstance(arabic_gn, int) else gn
+                    title_label = f"Rule {arabic_gn} — {gl}" if gl else f"Rule {arabic_gn}"
+                    if part_n:
+                        book = part_n
+                        book_label = f"Part {part_n} — {part_l}" if part_l else f"Part {part_n}"
                 elif gt == 'CHAPTER':
                     chapter_num = int(gn) if gn and str(gn).isdigit() else gn
                     chapter_label = f"Chapter {gn} — {gl}" if gl else f"Chapter {gn}"

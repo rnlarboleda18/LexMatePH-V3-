@@ -105,7 +105,7 @@ RAG_CHUNK_SIZE       = int(os.getenv("RAG_CHUNK_SIZE", "512"))
 RAG_CHUNK_OVERLAP    = int(os.getenv("RAG_CHUNK_OVERLAP", "100"))
 
 # Complexity thresholds (1-5 scale)
-COMPLEXITY_FLASH_MAX = int(os.getenv("COMPLEXITY_FLASH_MAX", "3"))  # ≤3 uses Flash, >3 uses Pro
+COMPLEXITY_FLASH_MAX = int(os.getenv("COMPLEXITY_FLASH_MAX", "0"))  # ≤N uses Flash, >N uses Pro — 0 = always Pro
 
 # Semantic cache similarity threshold (0.0-1.0)
 CACHE_SEMANTIC_THRESHOLD = float(os.getenv("CACHE_SEMANTIC_THRESHOLD", "0.92"))
