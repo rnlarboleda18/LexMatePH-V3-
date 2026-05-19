@@ -113,7 +113,7 @@ const Sidebar = ({
     };
 
     return (
-        <nav className="space-y-1 px-1.5 sm:px-2 pb-[calc(var(--app-header-height)+var(--player-height,0px))]">
+        <nav className="space-y-0.5 px-1.5 sm:px-2 pb-[calc(var(--app-header-height)+var(--player-height,0px))]">
 
             {/* Mobile Only Actions */}
             <div className="mb-3 space-y-3 lg:hidden">
@@ -173,7 +173,7 @@ const Sidebar = ({
                     </div>
                 ) : (
                     <div
-                        className={`mb-3 mt-0 flex items-center gap-2 rounded-xl border p-3 shadow-sm backdrop-blur-md ring-1 ring-inset ring-white/35 dark:ring-white/[0.06] ${isAdmin ? TIER_BG.admin : TIER_BG[tier]}`}
+                        className={`mb-2 mt-0 flex items-center gap-2 rounded-xl border p-2 shadow-sm backdrop-blur-md ring-1 ring-inset ring-white/35 dark:ring-white/[0.06] ${isAdmin ? TIER_BG.admin : TIER_BG[tier]}`}
                     >
                         <button
                             type="button"
@@ -228,7 +228,7 @@ const Sidebar = ({
                     <div className="my-1.5 h-px rounded-full bg-rose-200/80 dark:bg-zinc-700" />
                     <button
                         onClick={() => { if (onToggleAdminTools) onToggleAdminTools(); }}
-                        className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
+                        className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors
                         ${mode === 'admin_tools'
                             ? SIDEBAR_NAV_ACTIVE
                             : SIDEBAR_NAV_IDLE
@@ -245,7 +245,7 @@ const Sidebar = ({
                 onClick={() => {
                     onToggleAbout();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors
                 ${mode === 'about'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
@@ -260,7 +260,7 @@ const Sidebar = ({
                 onClick={() => {
                     onToggleUpdates();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors
                 ${mode === 'updates'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
@@ -275,7 +275,7 @@ const Sidebar = ({
                 onClick={() => {
                     onToggleQuiz();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors
                 ${mode === 'quiz'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
@@ -290,7 +290,7 @@ const Sidebar = ({
                 onClick={() => {
                     if (onToggleFlashcard) onToggleFlashcard();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors
                 ${mode === 'flashcard'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
@@ -304,7 +304,7 @@ const Sidebar = ({
             {isAdmin && (
             <button
                 onClick={() => { if (onToggleLexMate) onToggleLexMate(); }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors
                 ${mode === 'lexmate'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
@@ -320,7 +320,7 @@ const Sidebar = ({
                 onClick={() => {
                     if (onToggleLexPlay) onToggleLexPlay();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors ${SIDEBAR_NAV_IDLE}`}
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors ${SIDEBAR_NAV_IDLE}`}
             >
                 <Headphones size={18} className="text-violet-600 dark:text-zinc-400 group-hover:scale-110 transition-all duration-200" />
                 LexPlay
@@ -332,7 +332,7 @@ const Sidebar = ({
                 onClick={() => {
                     onToggleSupremeDecisions();
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors
                 ${mode === 'supreme_decisions'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
@@ -345,7 +345,7 @@ const Sidebar = ({
             {/* LexCode — expandable subject tree */}
             <button
                 onClick={handleLexCodeClick}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors
                 ${mode === 'codex' ? SIDEBAR_NAV_ACTIVE : SIDEBAR_NAV_IDLE}`}
             >
                 <Library size={18} className={`${mode === 'codex' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
@@ -358,7 +358,7 @@ const Sidebar = ({
 
             {/* Subject tree — visible when LexCode is open or active */}
             {(lexOpen || mode === 'codex') && (
-                <div className="ml-3 border-l border-amber-200 dark:border-zinc-700 pl-2 space-y-0.5">
+                <div className="ml-2 border-l border-amber-200 dark:border-zinc-700 pl-1.5 space-y-0">
                     {LEXCODE_SUBJECTS.map(subject => {
                         const isSubjectOpen = !!openSubjects[subject.id];
                         const hasActive = subject.laws.some(l => l.id.toLowerCase() === activeLawId);
@@ -417,7 +417,7 @@ const Sidebar = ({
                 onClick={() => {
                     if (onSelectSubject) onSelectSubject('All Subjects');
                 }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors
                 ${mode === 'browse_bar'
                         ? SIDEBAR_NAV_ACTIVE
                         : SIDEBAR_NAV_IDLE
@@ -433,7 +433,7 @@ const Sidebar = ({
                     onClick={() => {
                         if (onToggleBar2026) onToggleBar2026();
                     }}
-                    className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2.5 text-left text-sm font-medium transition-colors
+                    className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-sm font-medium transition-colors
                     ${mode === 'bar_2026'
                             ? SIDEBAR_NAV_ACTIVE
                             : SIDEBAR_NAV_IDLE

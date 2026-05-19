@@ -717,44 +717,42 @@ def supreme_decision_ponentes(req: func.HttpRequest) -> func.HttpResponse:
                 status_code=200
             )
     
+    conn = None
     try:
-        conn = None
         conn = get_db_connection()
         cur = conn.cursor()
-        
+
         # Get Distinct Ponentes, ordered
         cur.execute("""
-            SELECT DISTINCT ponente 
-            FROM sc_decided_cases 
-            WHERE ponente IS NOT NULL AND ponente != '' 
+            SELECT DISTINCT ponente
+            FROM sc_decided_cases
+            WHERE ponente IS NOT NULL AND ponente != ''
         """)
         raw_ponentes = [row[0] for row in cur.fetchall()]
-        
+        cur.close()
+
         # Normalize and Deduplicate logic
         normalized_set = set()
         for p in raw_ponentes:
              norm = normalize_ponente_text(p)
              if norm:
                  normalized_set.add(norm)
-        
+
         results = sorted(list(normalized_set))
-        
-        cur.close()
-        put_db_connection(conn)
-        
+
         # Cache the result
         if REDIS_ENABLED:
             cache_set(cache_key, results, ttl=CACHE_TTL_PONENTES)
-            
+
         # Generate ETag and Cache Headers
         response_json = json.dumps(results)
         etag = hashlib.md5(response_json.encode()).hexdigest()
-        
+
         headers = {
             "Cache-Control": f"public, max-age={CACHE_TTL_PONENTES}",
             "ETag": etag
         }
-        
+
         return func.HttpResponse(
             response_json,
             mimetype="application/json",
@@ -769,6 +767,8 @@ def supreme_decision_ponentes(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json",
             status_code=500
         )
+    finally:
+        put_db_connection(conn)
 
 @supreme_bp.route(route="sc_decisions/divisions", auth_level=func.AuthLevel.ANONYMOUS)
 def supreme_decision_divisions(req: func.HttpRequest) -> func.HttpResponse:
@@ -785,64 +785,48 @@ def supreme_decision_divisions(req: func.HttpRequest) -> func.HttpResponse:
                 status_code=200
             )
 
+    conn = None
     try:
-        conn = None
         conn = get_db_connection()
         cur = conn.cursor()
-        
+
         cur.execute("""
-            SELECT DISTINCT division 
-            FROM sc_decided_cases 
-            WHERE division IS NOT NULL AND division != '' 
+            SELECT DISTINCT division
+            FROM sc_decided_cases
+            WHERE division IS NOT NULL AND division != ''
         """)
         raw_rows = [row[0] for row in cur.fetchall()]
-        
+        cur.close()
+
         # Normalize: Title Case and Deduplicate
         normalized_set = set()
         for d in raw_rows:
             norm = d.strip().title()
-            
-            # Specific Normalization
-            if "4Th" in norm or "4Th" in norm:
+            if "4Th" in norm or "4th" in norm:
                 norm = norm.replace("4Th", "Fourth").replace("4th", "Fourth")
-            
-            if norm == "Division": continue # Skip generic invalid entry
-            
+            if norm == "Division":
+                continue
             if norm:
                 normalized_set.add(norm)
-        
-        # Custom Sorting Logic
+
         def sort_key(division):
             d = division.lower()
-            if "en banc" in d:
-                return (0, d)
-            if "first division" == d:
-                return (1, d)
-            if "second division" == d:
-                return (2, d)
-            if "third division" == d:
-                return (3, d)
-            if "fourth division" == d:
-                return (4, d)
-            if "fifth division" == d:
-                return (5, d)
-            if "sixth division" == d:
-                return (6, d)
-            # Group Special divisions after standard ones
-            if "special" in d:
-                return (10, d)
-            # Others
+            if "en banc" in d: return (0, d)
+            if "first division" == d: return (1, d)
+            if "second division" == d: return (2, d)
+            if "third division" == d: return (3, d)
+            if "fourth division" == d: return (4, d)
+            if "fifth division" == d: return (5, d)
+            if "sixth division" == d: return (6, d)
+            if "special" in d: return (10, d)
             return (5, d)
 
         results = sorted(list(normalized_set), key=sort_key)
-        
-        cur.close()
-        put_db_connection(conn)
-        
+
         # Cache
         if REDIS_ENABLED:
             cache_set(cache_key, results, ttl=CACHE_TTL_PONENTES)
-            
+
         return func.HttpResponse(
             json.dumps(results),
             mimetype="application/json",
@@ -856,6 +840,8 @@ def supreme_decision_divisions(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json",
             status_code=500
         )
+    finally:
+        put_db_connection(conn)
 
 def _normalize_subject_bar(raw):
     """Canonical Bar subject for query params (aligned with digest flashcard normalizer)."""
@@ -1221,26 +1207,22 @@ def supreme_decision_models(req: func.HttpRequest) -> func.HttpResponse:
                 status_code=200
             )
 
+    conn = None
     try:
-        conn = None
         conn = get_db_connection()
         cur = conn.cursor()
-        
         cur.execute("""
-            SELECT DISTINCT ai_model 
-            FROM sc_decided_cases 
-            WHERE ai_model IS NOT NULL AND ai_model != '' 
+            SELECT DISTINCT ai_model
+            FROM sc_decided_cases
+            WHERE ai_model IS NOT NULL AND ai_model != ''
             ORDER BY ai_model ASC
         """)
         results = [row[0] for row in cur.fetchall()]
-        
         cur.close()
-        put_db_connection(conn)
-        
-        # Cache
+
         if REDIS_ENABLED:
-            cache_set(cache_key, results, ttl=CACHE_TTL_PONENTES) # same TTL as other lists
-            
+            cache_set(cache_key, results, ttl=CACHE_TTL_PONENTES)
+
         return func.HttpResponse(
             json.dumps(results),
             mimetype="application/json",
@@ -1254,16 +1236,18 @@ def supreme_decision_models(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json",
             status_code=500
         )
+    finally:
+        put_db_connection(conn)
 
 @supreme_bp.route(route="fix_ponentes", auth_level=func.AuthLevel.ANONYMOUS)
 def fix_ponentes_endpoint(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Triggering Manual Ponente Fix...')
     
+    conn = None
     try:
-        conn = None
         conn = get_db_connection()
         cur = conn.cursor()
-        
+
         # Get all distinct ponentes
         cur.execute("SELECT DISTINCT ponente FROM sc_decided_cases WHERE ponente IS NOT NULL")
         raw_rows = cur.fetchall()
@@ -1308,16 +1292,18 @@ def fix_ponentes_endpoint(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json",
             status_code=500
         )
+    finally:
+        put_db_connection(conn)
 
 @supreme_bp.route(route="backfill_per_curiam", auth_level=func.AuthLevel.ANONYMOUS)
 def backfill_per_curiam_endpoint(req: func.HttpRequest) -> func.HttpResponse:
     logging.info('Triggering Per Curiam Backfill...')
     
+    conn = None
     try:
-        conn = None
         conn = get_db_connection()
         cur = conn.cursor()
-        
+
         # 1. Find candidates (Missing Ponente + Has Text)
         cur.execute("""
             SELECT id, full_text_md 
@@ -1367,4 +1353,6 @@ def backfill_per_curiam_endpoint(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json",
             status_code=500
         )
+    finally:
+        put_db_connection(conn)
 

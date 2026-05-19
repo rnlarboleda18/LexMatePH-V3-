@@ -176,7 +176,7 @@ const Layout = ({
                     <div className={isDarkMode ? 'dark' : ''} data-lex-app-navigation>
                         {isSidebarOpen && (
                             <div
-                                className="lex-vv-surface fixed inset-0 z-[39] bg-black/50 xl:hidden"
+                                className="lex-vv-surface fixed inset-0 z-[39] bg-black/50"
                                 aria-hidden
                                 onClick={() => setIsSidebarOpen(false)}
                             />
