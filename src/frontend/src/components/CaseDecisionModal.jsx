@@ -68,7 +68,7 @@ const TimelineSection = React.memo(({ timeline }) => {
                     <div key={idx} className="relative pl-6">
                         <span className="absolute -left-[9px] top-1 h-4 w-4 rounded-full bg-blue-100 dark:bg-amber-900 border-2 border-blue-500 dark:border-amber-500"></span>
                         <div className="text-sm font-bold text-blue-700 dark:text-amber-300 mb-1">{t.date}</div>
-                        <div className="text-gray-700 dark:text-gray-300 text-sm">{t.event}</div>
+                        <div className="text-gray-700 dark:text-gray-300">{t.event}</div>
                     </div>
                 ))}
             </div>
@@ -95,7 +95,7 @@ const FlashcardSection = React.memo(({ flashcards }) => {
                     <div key={idx} className="bg-yellow-50 dark:bg-yellow-900/10 border border-yellow-200 dark:border-yellow-700 p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow">
                         <div className="text-xs font-bold text-yellow-700 dark:text-yellow-400 uppercase tracking-wide mb-2">{card.type}</div>
                         <div className="font-sans font-bold text-gray-800 dark:text-gray-100 mb-3">{card.q}</div>
-                        <div className="text-sm text-gray-700 dark:text-gray-300 border-t border-yellow-200 dark:border-yellow-700 pt-2">{card.a}</div>
+                        <div className="text-gray-700 dark:text-gray-300 border-t border-yellow-200 dark:border-yellow-700 pt-2">{card.a}</div>
                     </div>
                 ))}
             </div>
@@ -120,7 +120,7 @@ const LegalConceptsSection = React.memo(({ concepts }) => {
                 </h4>
                 <div className="space-y-4">
                     {items.map((item, idx) => (
-                        <div key={idx} className="text-sm">
+                        <div key={idx}>
                             <span className="font-bold text-purple-900 dark:text-purple-200 block mb-1">{item.term}</span>
                             <div className="text-gray-800 dark:text-gray-200 border-l-2 border-purple-300 dark:border-purple-600 pl-3 leading-relaxed">
                                 {item.definition}
@@ -156,7 +156,7 @@ const SignificanceSection = React.memo(({ narrative, category }) => {
                 {category && <span className={`text-[12px] px-3 py-1.5 rounded-md border text-xs ${getCategoryColor(category)} uppercase tracking-wider font-extrabold ml-2 shadow-sm`}>{category}</span>}
             </h4>
             <div className="bg-gradient-to-br from-white to-amber-50/50 dark:from-gray-800 dark:to-amber-900/10 p-5 rounded-xl border border-lex shadow-sm relative overflow-hidden">
-                <div className="text-gray-800 dark:text-gray-200 leading-relaxed text-sm relative z-10">
+                <div className="text-gray-800 dark:text-gray-200 leading-relaxed relative z-10">
                     <ReactMarkdown components={{
                         p: ({ node, ...props }) => <p className="mb-4 last:mb-0 text-left leading-relaxed" {...props} />,
                         strong: ({ node, ...props }) => <strong className="font-bold text-amber-900 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/30 px-1 rounded" {...props} />
@@ -203,10 +203,10 @@ const StatutesSection = React.memo(({ statutes }) => {
                     <tbody className="divide-y divide-teal-100 dark:divide-teal-800/50 bg-white dark:bg-gray-800/50">
                         {items.map((item, idx) => (
                             <tr key={idx} className="hover:bg-teal-50/50 dark:hover:bg-teal-900/20 transition-colors">
-                                <td className="px-4 py-2.5 text-sm font-semibold text-gray-800 dark:text-gray-200 align-top">
+                                <td className="px-4 py-2.5 font-semibold text-gray-800 dark:text-gray-200 align-top">
                                     {item.law || "Unknown Law"}
                                 </td>
-                                <td className="px-4 py-2.5 text-sm text-gray-700 dark:text-gray-300 align-top">
+                                <td className="px-4 py-2.5 text-gray-700 dark:text-gray-300 align-top">
                                     {item.provision || "N/A"}
                                 </td>
                             </tr>
@@ -890,7 +890,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <Lightbulb className={`h-5 w-5 drop-shadow-sm ${doctrinePanel.icon}`} />
                                         Main Doctrine
                                     </h4>
-                                    <div className="text-gray-800 dark:text-gray-100 text-sm leading-relaxed font-medium">
+                                    <div className="text-gray-800 dark:text-gray-100 leading-relaxed font-medium">
                                         <SmartLink text={fullDecision.main_doctrine} plain />
                                     </div>
                                 </div>
@@ -1094,7 +1094,7 @@ const SeparateOpinionCard = React.memo(({ op, idx }) => {
                 <span className="text-sm font-medium text-gray-500 dark:text-gray-400">{op.justice}</span>
             </div>
 
-            <p className="text-gray-700 dark:text-gray-300 text-sm italic border-l-2 border-gray-300 dark:border-gray-600 pl-3 mb-3">
+            <p className="text-gray-700 dark:text-gray-300 italic border-l-2 border-gray-300 dark:border-gray-600 pl-3 mb-3">
                 "{op.summary}"
             </p>
 
@@ -1109,7 +1109,7 @@ const SeparateOpinionCard = React.memo(({ op, idx }) => {
                         </button>
                     ) : (
                         <div className="mt-3 animate-fadeIn">
-                            <div className="bg-white dark:bg-gray-800 p-4 rounded-md border border-lex-strong text-sm text-gray-800 dark:text-gray-200 whitespace-pre-wrap leading-relaxed max-h-[400px] overflow-y-auto">
+                            <div className="bg-white dark:bg-gray-800 p-4 rounded-md border border-lex-strong text-gray-800 dark:text-gray-200 whitespace-pre-wrap leading-relaxed max-h-[400px] overflow-y-auto">
                                 {op.text}
                             </div>
                             <button
