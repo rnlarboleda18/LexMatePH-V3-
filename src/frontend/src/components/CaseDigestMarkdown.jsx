@@ -307,7 +307,7 @@ function useMarkdownComponents(onCaseClick, includeTables, options = {}) {
 }
 
 /** Digest sections (facts, issues, ruling, ratio) — no GFM tables. */
-export const DigestMarkdownText = React.memo(({ content, variant = 'default', contextRef }) => {
+export const DigestMarkdownText = React.memo(({ content, variant = 'default', contextRef, fontSize }) => {
     const processedContent = useMemo(() => {
         if (!content) return content;
         let p = repairDoubleUtf8Latin1(content);
@@ -324,7 +324,7 @@ export const DigestMarkdownText = React.memo(({ content, variant = 'default', co
     if (!content) return null;
 
     return (
-        <div ref={contextRef} className="text-gray-800 dark:text-gray-200 leading-relaxed text-left text-sm">
+        <div ref={contextRef} className="text-gray-800 dark:text-gray-200 leading-relaxed text-left text-sm" style={fontSize ? { fontSize: `${fontSize}px` } : undefined}>
             <ReactMarkdown remarkPlugins={[]} components={components}>
                 {processedContent}
             </ReactMarkdown>
@@ -337,7 +337,7 @@ export const DigestMarkdownText = React.memo(({ content, variant = 'default', co
  * (tables, footnotes, etc.). Kept separate from digest markdown so CaseDecisionModal cannot drop
  * this pipeline by accident.
  */
-export const CaseFullTextMarkdown = React.memo(({ content }) => {
+export const CaseFullTextMarkdown = React.memo(({ content, fontSize }) => {
     const fullTextPIdx = useRef(0);
     const scCaptionEndRef = useRef(false);
 
@@ -359,7 +359,7 @@ export const CaseFullTextMarkdown = React.memo(({ content }) => {
     fullTextPIdx.current = 0;
     scCaptionEndRef.current = false;
     return (
-        <div className="text-gray-800 dark:text-gray-200 leading-relaxed text-sm">
+        <div className="text-gray-800 dark:text-gray-200 leading-relaxed text-sm" style={fontSize ? { fontSize: `${fontSize}px` } : undefined}>
             <ReactMarkdown remarkPlugins={[remarkGfm]} components={components}>
                 {processedContent}
             </ReactMarkdown>
