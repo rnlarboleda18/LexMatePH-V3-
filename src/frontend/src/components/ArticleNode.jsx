@@ -553,7 +553,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                 // Strip trailing em-dash separator (". —" or " —") that codex.py embeds in the bold prefix
                 const boldPartClean = boldPart.replace(/\s*[.–—]+\s*$/, '').trim();
                 customHeaderNode = (
-                    <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
+                    <h3 className="font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>
                         {rpcTitle(toTitleCase(boldPartClean, skipKeywords))}
                     </h3>
                 );
@@ -564,7 +564,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
         } else {
             // Fallback: Just render the whole first block as H3
             customHeaderNode = (
-                <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
+                <h3 className="font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>
                     {rpcTitle(toTitleCase(headerBlock.replace(/\*\*/g, ''), skipKeywords))}
                 </h3>
             );
@@ -772,7 +772,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
 
             {/* Main Content Area with Floated Badge */}
             {hasHeaderContent && (
-                <div className="max-w-full min-w-0 text-[16px] font-sans leading-relaxed text-gray-800 dark:text-gray-200">
+                <div className="max-w-full min-w-0 font-sans leading-relaxed text-gray-800 dark:text-gray-200" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>
 
                 {/* Floating Badge */}
                 <div className="flex flex-col mb-1 relative">
@@ -812,7 +812,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                 // Issuances never get a "Preliminary Article" label — Canon headers
                                 // are already rendered as TITLE-type headers by LexCodeStream.
                                 (!article_title || isIssuance) ? null : (
-                                <h3 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline">
+                                <h3 className="font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>
                                     {isRcc
                                         ? 'Preliminary Section'
                                         : isRpcLike
@@ -824,11 +824,12 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                 <h3
                                     className={
                                         rccInlineLeadTitle
-                                            ? `inline-flex min-w-0 max-w-full flex-row flex-wrap items-baseline gap-x-1.5 text-[16px] font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'justify-center text-center' : 'text-left'}`
+                                            ? `inline-flex min-w-0 max-w-full flex-row flex-wrap items-baseline gap-x-1.5 font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'justify-center text-center' : 'text-left'}`
                                             : isRcc && article_title
-                                              ? `inline-flex min-w-0 max-w-full flex-row flex-wrap items-baseline gap-x-1.5 text-[16px] font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'justify-center text-center' : 'text-left'}`
-                                              : `text-[16px] font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline ${centerLayout ? 'text-center w-full' : 'text-left'}`
+                                              ? `inline-flex min-w-0 max-w-full flex-row flex-wrap items-baseline gap-x-1.5 font-bold font-sans !my-0 text-gray-900 dark:text-gray-100 ${centerLayout ? 'justify-center text-center' : 'text-left'}`
+                                              : `font-bold text-gray-900 dark:text-gray-100 font-sans !my-0 inline align-baseline ${centerLayout ? 'text-center w-full' : 'text-left'}`
                                     }
+                                    style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}
                                 >
                                     {/* Smart prefix: RCC uses "Section"; omit if article_num already includes a structural label */}
                                     {(!article_num || String(article_num).includes('Header') || String(article_num).includes('Subheader')) ? null :
@@ -1474,7 +1475,8 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                     </div>
                                 )}
                                 <div
-                                    className={`prose dark:prose-invert relative min-w-0 max-w-full break-words font-sans text-[16px] leading-relaxed text-gray-800 dark:text-gray-200 [overflow-wrap:anywhere] ${indentClass} ${isSubHeader ? 'mt-0 mb-1 text-center font-bold tracking-wide text-gray-900 dark:text-gray-200 text-[16px]' : ''}`}
+                                    className={`prose dark:prose-invert relative min-w-0 max-w-full break-words font-sans leading-relaxed text-gray-800 dark:text-gray-200 [overflow-wrap:anywhere] ${indentClass} ${isSubHeader ? 'mt-0 mb-1 text-center font-bold tracking-wide text-gray-900 dark:text-gray-200' : ''}`}
+                                    style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}
                                 >
                                     <ReactMarkdown
                                         remarkPlugins={[remarkGfm]}
@@ -1772,7 +1774,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                         return (
                                                             <p
                                                                 {...props}
-                                                                className={`!m-0 max-w-full [overflow-wrap:anywhere] ${isSubHeader ? "text-center font-bold text-gray-900 dark:text-gray-200 tracking-wide text-[16px]" : ""}`}
+                                                                className={`!m-0 max-w-full [overflow-wrap:anywhere] ${isSubHeader ? "text-center font-bold text-gray-900 dark:text-gray-200 tracking-wide" : ""}`}
                                                                 style={textBlockStyle}
                                                             >
                                                                 <span className="inline-block w-full max-w-full whitespace-pre-wrap break-words align-top [overflow-wrap:anywhere]">
@@ -1813,7 +1815,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                     return (
                                                         <p
                                                             {...props}
-                                                            className={`!m-0 max-w-full whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${isSubHeader ? "text-center font-bold text-gray-900 dark:text-gray-200 tracking-wide text-[16px]" : ""}`}
+                                                            className={`!m-0 max-w-full whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${isSubHeader ? "text-center font-bold text-gray-900 dark:text-gray-200 tracking-wide" : ""}`}
                                                             style={textBlockStyle}
                                                         >
                                                             {cleanSegments}
@@ -1833,7 +1835,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                     return (
                                                         <p
                                                             {...props}
-                                                            className={`!m-0 max-w-full [overflow-wrap:anywhere] ${isSubHeader ? 'text-center font-bold tracking-wide text-gray-900 dark:text-gray-200 text-[16px]' : ''}`}
+                                                            className={`!m-0 max-w-full [overflow-wrap:anywhere] ${isSubHeader ? 'text-center font-bold tracking-wide text-gray-900 dark:text-gray-200' : ''}`}
                                                             style={{
                                                                 maxWidth: '100%',
                                                                 overflowWrap: 'anywhere',
@@ -1880,7 +1882,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
                                                 return (
                                                     <p
                                                         {...props}
-                                                        className={`!m-0 max-w-full whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${isSubHeader ? 'text-center font-bold tracking-wide text-gray-900 dark:text-gray-200 text-[16px]' : 'text-justify'}`}
+                                                        className={`!m-0 max-w-full whitespace-pre-wrap break-words [overflow-wrap:anywhere] ${isSubHeader ? 'text-center font-bold tracking-wide text-gray-900 dark:text-gray-200' : 'text-justify'}`}
                                                         style={{
                                                             maxWidth: '100%',
                                                             overflowWrap: 'anywhere',
@@ -1926,7 +1928,7 @@ const ArticleNode = React.memo(({ article, highlight, showElements = true, showH
             {/* Elements Box */}
             {showElements && parsedElements && parsedElements.length > 0 && (
                 <div className="mt-4 bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-lex">
-                    <h4 className="text-[16px] font-bold text-gray-700 dark:text-gray-300 mb-2">Elements of the Crime</h4>
+                    <h4 className="font-bold text-gray-700 dark:text-gray-300 mb-2" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>Elements of the Crime</h4>
                     <ul className="list-disc list-inside space-y-1 text-sm text-gray-700 dark:text-gray-300">
                         {parsedElements.map((el, idx) => (
                             <li key={idx}>{el}</li>

@@ -1028,7 +1028,7 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
                         </div>
                     </div>
 
-                    <div className="custom-scrollbar min-w-0 max-w-full px-2 pt-4 pb-24 [overflow-wrap:anywhere] [word-break:break-word]" style={{ fontSize: `${fontSize}px` }}>
+                    <div className="custom-scrollbar min-w-0 max-w-full px-2 pt-4 pb-24 [overflow-wrap:anywhere] [word-break:break-word]" style={{ fontSize: `${fontSize}px`, '--lex-codal-font-size': `${fontSize}px` }}>
                         {renderMainContent()}
                     </div>
                     </div>

@@ -907,7 +907,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <DigestMarkdownText content={fullDecision.digest_facts} variant="facts" />
+                                        <DigestMarkdownText content={fullDecision.digest_facts} variant="facts" fontSize={fontSize} />
                                     </div>
                                 </section>
                             )}
@@ -926,7 +926,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <DigestMarkdownText content={fullDecision.digest_issues} />
+                                        <DigestMarkdownText content={fullDecision.digest_issues} fontSize={fontSize} />
                                     </div>
                                 </section>
                             )}
@@ -942,7 +942,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <DigestMarkdownText content={fullDecision.digest_ruling} />
+                                        <DigestMarkdownText content={fullDecision.digest_ruling} fontSize={fontSize} />
                                     </div>
                                 </section>
                             )}
@@ -958,7 +958,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
                                     <div className="pl-6 border-l-2 border-purple-200 dark:border-purple-500/30 text-gray-700 dark:text-gray-300 leading-relaxed">
-                                        <DigestMarkdownText content={formatRatioToParagraphs(fullDecision.digest_ratio)} contextRef={ratioRef} />
+                                        <DigestMarkdownText content={formatRatioToParagraphs(fullDecision.digest_ratio)} contextRef={ratioRef} fontSize={fontSize} />
                                     </div>
                                 </section>
                             )}
@@ -1004,6 +1004,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none text-justify" style={{ fontSize: `${fontSize}px` }}>
                                     <CaseFullTextMarkdown
                                         content={fullDecision.full_text_md || '*Content not available in Markdown format.*'}
+                                        fontSize={fontSize}
                                     />
                                 </div>
                             )}
