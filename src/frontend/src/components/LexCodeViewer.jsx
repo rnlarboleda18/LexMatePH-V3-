@@ -210,9 +210,12 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
         if (wantPanels) {
             const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
             const headerBottom = gh ? gh.getBoundingClientRect().bottom : (window.innerWidth >= 768 ? 64 : 48);
+            const tb = typeof document !== 'undefined' ? document.querySelector('[data-lex-tab-bar]') : null;
+            const tabBottom = tb ? tb.getBoundingClientRect().bottom : 0;
+            const baseTop = Math.max(headerBottom, tabBottom);
             const filterEl = lexFilterChromeRef.current;
-            const chromeBottom = filterEl ? filterEl.getBoundingClientRect().bottom : headerBottom;
-            setFixedPanelTopPx(Math.max(headerBottom, chromeBottom));
+            const chromeBottom = filterEl ? filterEl.getBoundingClientRect().bottom : baseTop;
+            setFixedPanelTopPx(Math.max(baseTop, chromeBottom));
         } else {
             setFixedPanelTopPx(null);
         }
@@ -294,11 +297,14 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
         }
         const gh = typeof document !== 'undefined' ? document.querySelector('header') : null;
         const headerBottom = gh ? gh.getBoundingClientRect().bottom : (w >= 768 ? 64 : 48);
+        const tb = typeof document !== 'undefined' ? document.querySelector('[data-lex-tab-bar]') : null;
+        const tabBottom = tb ? tb.getBoundingClientRect().bottom : 0;
+        const baseTop = Math.max(headerBottom, tabBottom);
         const filterEl = lexFilterChromeRef.current;
-        const chromeBottom = filterEl ? filterEl.getBoundingClientRect().bottom : headerBottom;
+        const chromeBottom = filterEl ? filterEl.getBoundingClientRect().bottom : baseTop;
         setTocFabPos({
             left,
-            top: Math.max(headerBottom, chromeBottom),
+            top: Math.max(baseTop, chromeBottom),
         });
     }, [isSidebarOpen]);
 
