@@ -395,6 +395,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                             ))
                         )}
                     </div>
+                )}
             </div>
             </div>
             </div>
