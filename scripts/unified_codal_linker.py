@@ -786,7 +786,7 @@ if __name__ == "__main__":
     parser.add_argument("--year", type=int, help="Filter by case year (ignored with --target-ids)")
     parser.add_argument("--start_year", type=int, help="Filter by start year (ignored with --target-ids)")
     parser.add_argument("--end_year", type=int, help="Filter by end year (ignored with --target-ids)")
-    parser.add_argument("--workers", type=int, default=1, help="Parallel workers")
+    parser.add_argument("--workers", type=int, default=5, help="Parallel workers")
     parser.add_argument("--commit", action="store_true", help="Write to DB (default: dry-run)")
     parser.add_argument(
         "--statutes",

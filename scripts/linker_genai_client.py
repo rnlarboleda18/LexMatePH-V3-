@@ -22,7 +22,7 @@ import os
 import sys
 from pathlib import Path
 
-DEFAULT_LINKER_MODEL  = "gemini-3-flash-preview"
+DEFAULT_LINKER_MODEL  = "gemini-2.5-pro"
 FALLBACK_LINKER_MODEL = "gemini-2.5-flash"
 
 _genai_client = None

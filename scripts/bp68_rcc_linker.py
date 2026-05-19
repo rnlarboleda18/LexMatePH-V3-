@@ -652,7 +652,7 @@ if __name__ == "__main__":
     parser.add_argument("--year", type=int, help="Filter by single year")
     parser.add_argument("--start_year", type=int, help="Filter by start year")
     parser.add_argument("--end_year", type=int, default=2018, help="Filter by end year (default: 2018)")
-    parser.add_argument("--workers", type=int, default=1, help="Parallel workers")
+    parser.add_argument("--workers", type=int, default=5, help="Parallel workers")
     parser.add_argument("--commit", action="store_true", help="Write to DB (default: dry-run)")
     parser.add_argument(
         "--target-ids",
