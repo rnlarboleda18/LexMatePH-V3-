@@ -139,8 +139,8 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                 <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-purple-500/25 blur-3xl dark:bg-purple-600/20" aria-hidden />
                 <div className="pointer-events-none absolute right-0 top-40 h-72 w-72 rounded-full bg-violet-500/20 blur-3xl dark:bg-fuchsia-600/15" aria-hidden />
                 <div className="pointer-events-none absolute bottom-20 left-1/3 h-64 w-96 rounded-full bg-indigo-400/15 blur-3xl dark:bg-indigo-500/10" aria-hidden />
-                <div className="relative mx-auto w-full max-w-5xl space-y-5">
-            <div className="flex h-12 shrink-0 select-none items-center justify-between rounded-lg border border-lex bg-white/90 px-4 sm:px-6 shadow-sm backdrop-blur-sm dark:border-lex dark:bg-zinc-900/90">
+                <div className="relative mx-auto w-full max-w-7xl space-y-tile">
+            <div className="flex h-12 shrink-0 select-none items-center justify-between rounded-lg border border-lex bg-gradient-to-br from-white via-white to-slate-50/60 px-4 sm:px-6 shadow-sm backdrop-blur-sm dark:border-lex dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.45)]">
                 <div className="relative z-50 flex items-center gap-3">
                     <button type="button" onClick={() => setShowMenu(!showMenu)} className="flex flex-col gap-1 rounded-lg p-2 transition hover:bg-white/70 dark:hover:bg-white/10">
                         <span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" />
@@ -191,7 +191,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                     <div className="h-2 w-2 animate-pulse rounded-full bg-violet-500 shadow-[0_0_12px_rgba(139,92,246,0.7)]" title="Simulator active" />
                 </div>
             </div>
-            <div className="mx-auto w-full max-w-5xl flex-1 px-2 py-4 sm:px-0">
+            <div className="mx-auto w-full max-w-7xl flex-1 px-2 py-4 sm:px-0">
                 {/* Tabs Selection Navbar */}
                 <div className="mb-6 flex select-none justify-center gap-8 border-b border-lex">
                     <button

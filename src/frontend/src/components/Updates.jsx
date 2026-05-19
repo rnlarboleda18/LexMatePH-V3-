@@ -267,9 +267,9 @@ const Updates = ({ isDarkMode = false }) => {
           aria-hidden
         />
 
-        <div className="relative mx-auto max-w-6xl space-y-5">
+        <div className="relative mx-auto w-full max-w-7xl space-y-tile">
           {/* Hero */}
-          <header className="relative overflow-hidden rounded-lg border-2 border-lex bg-white px-6 py-10 shadow-lg dark:border-lex dark:bg-zinc-900 sm:px-10">
+          <header className="relative overflow-hidden rounded-lg border border-lex bg-gradient-to-br from-white via-white to-slate-50/60 px-6 py-10 shadow-lg dark:border-lex dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.45)] sm:px-10">
             <div className="pointer-events-none absolute -right-16 -top-24 h-56 w-56 rounded-full bg-gradient-to-br from-indigo-400/30 to-fuchsia-500/20 blur-2xl" />
             <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-64 rounded-full bg-cyan-400/10 blur-2xl" />
             <div className="relative flex flex-col gap-3 lg:flex-row lg:items-end lg:justify-between">

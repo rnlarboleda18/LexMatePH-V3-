@@ -24,9 +24,9 @@ export default function AdminTools() {
         <div className="pointer-events-none absolute right-0 top-40 h-72 w-72 rounded-full bg-violet-500/20 blur-3xl dark:bg-fuchsia-600/15" aria-hidden />
         <div className="pointer-events-none absolute bottom-20 left-1/3 h-64 w-96 rounded-full bg-indigo-400/15 blur-3xl dark:bg-indigo-500/10" aria-hidden />
         
-        <div className="relative mx-auto w-full max-w-7xl space-y-5">
+        <div className="relative mx-auto w-full max-w-7xl space-y-tile">
           {/* Hero Header */}
-          <header className="relative overflow-hidden rounded-lg border border-lex bg-white px-6 py-8 shadow-md dark:border-lex dark:bg-zinc-900 sm:px-10">
+          <header className="relative overflow-hidden rounded-lg border border-lex bg-gradient-to-br from-white via-white to-slate-50/60 px-6 py-8 shadow-lg dark:border-lex dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.45)] sm:px-10">
             <div className="pointer-events-none absolute -right-16 -top-24 h-56 w-56 rounded-full bg-gradient-to-br from-rose-400/30 to-fuchsia-500/20 blur-2xl" />
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex items-center gap-4">

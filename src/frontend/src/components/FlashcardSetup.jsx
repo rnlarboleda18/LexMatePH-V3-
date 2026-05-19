@@ -75,9 +75,9 @@ const FlashcardSetup = ({
                 )}
 
                 <div className={embedded ? 'min-w-0 flex-1 space-y-6' : 'flex-1 space-y-10 overflow-y-auto p-6 sm:p-8'}>
-                    <section className="min-w-0 max-w-full space-y-5">
+                    <section className="min-w-0 max-w-full space-y-tile">
                         {embedded ? (
-                            <header className="relative overflow-hidden rounded-lg border border-lex bg-white px-6 py-10 shadow-md dark:border-lex dark:bg-zinc-900 sm:px-10">
+                            <header className="relative overflow-hidden rounded-lg border border-lex bg-gradient-to-br from-white via-white to-slate-50/60 px-6 py-10 shadow-lg dark:border-lex dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.45)] sm:px-10">
                                 <div className="pointer-events-none absolute -right-16 -top-24 h-56 w-56 rounded-full bg-gradient-to-br from-violet-400/30 to-indigo-500/20 blur-2xl" />
                                 <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-64 rounded-full bg-purple-400/10 blur-2xl" />
                                 <div className="relative">
