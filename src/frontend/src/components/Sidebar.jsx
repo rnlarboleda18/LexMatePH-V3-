@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, Terminal, Scale, MessageSquare, ChevronDown, ChevronRight } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
