@@ -129,7 +129,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
     if not short_name:
          return func.HttpResponse(json.dumps({"error": "short_name required"}), status_code=400)
 
-    cv_ck = f"codal:codex:v14:versions:{short_name.upper()}:{target_date or 'latest'}"
+    cv_ck = f"codal:codex:v15:versions:{short_name.upper()}:{target_date or 'latest'}"
     cached_v = codal_try_get(req, cv_ck)
     if cached_v is not None:
         ma = (0 if short_name.upper() == "CONST" else 3600) if not target_date else 86400
@@ -158,11 +158,21 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
             mapped_rows = []
             for r in rows:
                 gt = (r.get('group_type') or '').strip().upper()
+                gt_raw = (r.get('group_type') or '').strip()   # capitalized as stored, e.g. "Canon", "Rule"
                 gn = r.get('group_num')
+                gn_raw = str(gn or '').strip()
                 gl = (r.get('group_label') or '').strip()
                 sec_num = str(r.get('section_num') or '')
                 sec_title = re.sub(r'\s*[—–\-]+\s*$', '', (r.get('section_title') or '').strip()).rstrip('. ').strip()
                 content_md = (r.get('content_md') or '').strip()
+
+                # Match provision_id format used by unified_codal_linker.py
+                if sid in ('AM-07-9-12-SC', 'AM-08-1-16-SC', 'RA-11642'):
+                    juris_key = sec_num
+                elif gt_raw and gn_raw:
+                    juris_key = f"{gt_raw} {gn_raw}, Section {sec_num}"
+                else:
+                    juris_key = sec_num
 
                 if sec_num == "0":
                     # Canon/group preamble — no section label, raw content only
@@ -206,7 +216,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                 mapped_rows.append({
                     "version_id": str(r['id']),
                     "id": str(r['id']),
-                    "key_id": sec_num,
+                    "key_id": juris_key,
                     "article_number": sec_num,
                     "article_num": sec_num,
                     "article_title": sec_title,
