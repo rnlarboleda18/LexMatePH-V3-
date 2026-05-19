@@ -1012,8 +1012,9 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
 
                     {/* Toolbar — codal title + subtitle */}
                     <div className="flex flex-col rounded-t-2xl border-b border-white/20 bg-white/60 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
-                        <div className="flex items-center gap-3 px-4 py-3">
-                            <div className="min-w-0 flex-1 px-2 text-center">
+                        <div className="grid grid-cols-[1fr_auto_1fr] items-center px-4 py-3">
+                            <div />
+                            <div className="min-w-0 px-2 text-center">
                                 <h1 className="font-extrabold tracking-wide text-gray-900 dark:text-gray-100 font-sans leading-tight" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>
                                     {codeTitle ? toTitleCase(codeTitle) : 'Lex Code'}
                                 </h1>
@@ -1023,7 +1024,9 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
                                     </p>
                                 )}
                             </div>
-                            <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} />
+                            <div className="flex justify-end">
+                                <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} />
+                            </div>
                         </div>
                     </div>
 
