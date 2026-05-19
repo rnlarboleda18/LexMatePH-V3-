@@ -38,7 +38,7 @@ const FlashcardSetup = ({
             <div
                 className={
                     embedded
-                        ? 'relative flex w-full max-w-full min-w-0 flex-col gap-4 lg:rounded-lg lg:border lg:border-lex lg:bg-white lg:p-5 lg:shadow-lg dark:lg:border-lex dark:lg:bg-zinc-900 lg:sm:p-6'
+                        ? 'relative flex w-full max-w-full min-w-0 flex-col gap-6 animate-in fade-in duration-700'
                         : 'lex-modal-card relative flex max-w-4xl flex-col overflow-hidden rounded-lg border border-lex bg-white shadow-xl animate-in zoom-in-95 duration-200 dark:border-lex dark:bg-zinc-900'
                 }
             >
@@ -75,24 +75,28 @@ const FlashcardSetup = ({
                 )}
 
                 <div className={embedded ? 'min-w-0 flex-1 space-y-6' : 'flex-1 space-y-10 overflow-y-auto p-6 sm:p-8'}>
-                    <section className="min-w-0 max-w-full">
+                    <section className="min-w-0 max-w-full space-y-5">
                         {embedded ? (
-                            <div className="mb-4 max-lg:rounded-lg max-lg:border-2 max-lg:border-lex max-lg:bg-white max-lg:p-4 max-lg:shadow-sm dark:max-lg:border-lex dark:max-lg:bg-zinc-900 sm:max-lg:p-5 lg:mb-6 lg:rounded-none lg:border-0 lg:bg-transparent lg:p-0 lg:shadow-none dark:lg:bg-transparent">
-                                <h3 className="mb-3 text-balance text-base font-bold uppercase tracking-wide text-black dark:text-violet-300">
-                                    Legal concepts (SC digests)
-                                </h3>
-                                <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
-                                    <span className="font-medium text-slate-700 dark:text-slate-300">Legal concepts</span>{' '}
-                                    are short, exam-style distillations of doctrines and holdings drawn from Supreme Court
-                                    digest summaries in the app. They are tagged to the Philippine Bar’s{' '}
-                                    <span className="font-medium text-slate-700 dark:text-slate-300">
-                                        Table of Specifications
-                                    </span>{' '}
-                                    so you drill what the syllabus actually weights—useful for quick recall and
-                                    issue-spotting under time pressure. The default deck favors strong syllabus matches;
-                                    clearly peripheral items stay out unless you widen the deck with the options below.
-                                </p>
-                            </div>
+                            <header className="relative overflow-hidden rounded-lg border border-lex bg-white px-6 py-10 shadow-md dark:border-lex dark:bg-zinc-900 sm:px-10">
+                                <div className="pointer-events-none absolute -right-16 -top-24 h-56 w-56 rounded-full bg-gradient-to-br from-violet-400/30 to-indigo-500/20 blur-2xl" />
+                                <div className="pointer-events-none absolute bottom-0 left-1/3 h-32 w-64 rounded-full bg-purple-400/10 blur-2xl" />
+                                <div className="relative">
+                                    <h1 className="mb-3 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+                                        Legal concepts (SC digests)
+                                    </h1>
+                                    <p className="max-w-3xl text-sm leading-relaxed text-slate-600 dark:text-slate-400 sm:text-base">
+                                        <span className="font-semibold text-slate-800 dark:text-slate-200">Legal concepts</span>{' '}
+                                        are short, exam-style distillations of doctrines and holdings drawn from Supreme Court
+                                        digest summaries in the app. They are tagged to the Philippine Bar’s{' '}
+                                        <span className="font-semibold text-slate-800 dark:text-slate-200">
+                                            Table of Specifications
+                                        </span>{' '}
+                                        so you drill what the syllabus actually weights—useful for quick recall and
+                                        issue-spotting under time pressure. The default deck favors strong syllabus matches;
+                                        clearly peripheral items stay out unless you widen the deck with the options below.
+                                    </p>
+                                </div>
+                            </header>
                         ) : (
                             <>
                                 <h3 className="mb-3 text-balance text-base font-bold uppercase tracking-wide text-black dark:text-violet-300">

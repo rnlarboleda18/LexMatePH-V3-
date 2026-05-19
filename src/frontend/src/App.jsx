@@ -1124,7 +1124,7 @@ function App() {
                         }`}
                         style={xlFixedChrome ? { top: 'calc(var(--app-header-offset) + var(--tab-bar-height, 0px))' } : undefined}
                       >
-                        <div className="w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
+                        <div className="mx-auto w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
                           <div className="flex w-full min-w-0 flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2">
                             <div className="flex min-w-0 shrink-0 flex-col sm:w-[min(100%,14rem)] md:w-44">
                               <label htmlFor="bar-subject-filter" className={`${FILTER_FIELD_LABEL} sm:sr-only`}>
@@ -1190,7 +1190,7 @@ function App() {
                       </div>
 
                       <main
-                        className="w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
+                        className="mx-auto w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
                         style={xlFixedChrome ? { paddingTop: `${barFilterChromeHeight + 12}px` } : undefined}
                       >
                       <div className="flex flex-col gap-4 lg:relative lg:min-w-0 lg:w-full lg:overflow-hidden lg:rounded-xl lg:border lg:border-lex lg:bg-white lg:p-5 lg:shadow-sm lg:dark:bg-zinc-900 lg:sm:p-6">

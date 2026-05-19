@@ -525,7 +525,7 @@ export default function Bar2026({ onCaseClick }) {
 
   return (
     <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-8 font-sans text-gray-900 dark:text-gray-100">
-      <div className="w-full min-w-0 max-w-7xl px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
+      <div className="mx-auto w-full min-w-0 max-w-7xl px-3 py-4 sm:px-5 sm:py-5 lg:px-6">
 
         {/* Header */}
         <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">

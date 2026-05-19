@@ -1283,7 +1283,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                 }`}
                 style={xlFixedChrome ? { top: 'calc(var(--app-header-offset) + var(--tab-bar-height, 0px))' } : undefined}
             >
-                <div className="w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
+                <div className="mx-auto w-full min-w-0 max-w-7xl px-3 py-2 sm:px-5 lg:px-6">
                     <div className="flex w-full min-w-0 flex-col gap-2">
                         {/* Bar Questions order: filter column first (same width md:w-44), then search */}
                         <div className="flex w-full min-w-0 max-w-full flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-2">
@@ -1450,7 +1450,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
             </div>
 
             <main
-                className="w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
+                className="mx-auto w-full min-w-0 max-w-7xl px-3 pb-4 pt-3 sm:px-5 sm:pb-5 lg:px-6 xl:pt-0"
                 style={xlFixedChrome ? { paddingTop: `${filterChromeHeight + 12}px` } : undefined}
             >
                 {fetchError && !loading && (
