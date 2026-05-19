@@ -692,8 +692,8 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
 
     // Renderers
     const renderers = {
-        h1: ({ node, children, ...props }) => <h1 className="text-center font-extrabold text-amber-900 dark:text-gray-100 mt-10 mb-8 text-[16px] tracking-wide" {...props}>{toTitleCase(String(children))}</h1>,
-        h2: ({ node, children, ...props }) => <h2 className="text-center font-bold text-amber-800 dark:text-gray-200 mt-10 mb-6 text-[16px] tracking-wide border-b-2 border-amber-200 dark:border-gray-700 pb-3" {...props}>{toTitleCase(String(children))}</h2>,
+        h1: ({ node, children, ...props }) => <h1 className="text-center font-extrabold text-amber-900 dark:text-gray-100 mt-10 mb-8 tracking-wide" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }} {...props}>{toTitleCase(String(children))}</h1>,
+        h2: ({ node, children, ...props }) => <h2 className="text-center font-bold text-amber-800 dark:text-gray-200 mt-10 mb-6 tracking-wide border-b-2 border-amber-200 dark:border-gray-700 pb-3" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }} {...props}>{toTitleCase(String(children))}</h2>,
         h3: ({ node, children, ...props }) => {
             let text = '';
             const extractText = (c) => {
@@ -715,18 +715,17 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
                 }
                 return (
                     <div className="mt-8 mb-4 leading-relaxed text-gray-900 dark:text-white text-justify" {...props}>
-                        <span className="text-amber-700 dark:text-gray-200 font-extrabold text-[16px] mr-2">{prefix}</span>
-                        {titlePart && <span className="text-amber-700 dark:text-gray-200 font-extrabold text-[16px] mr-2">{titlePart}</span>}
-                        <span className="text-[16px]">{suffix}</span>
+                        <span className="text-amber-700 dark:text-gray-200 font-extrabold mr-2" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>{prefix}</span>
+                        {titlePart && <span className="text-amber-700 dark:text-gray-200 font-extrabold mr-2" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>{titlePart}</span>}
+                        <span style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>{suffix}</span>
                     </div>
                 );
             }
-            return <h3 className="text-left font-bold text-gray-900 dark:text-white mt-8 mb-4 text-[16px]" {...props}>{children}</h3>;
+            return <h3 className="text-left font-bold text-gray-900 dark:text-white mt-8 mb-4" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }} {...props}>{children}</h3>;
         },
-        h4: ({ node, children, ...props }) => <h4 className="text-left font-semibold text-gray-800 dark:text-gray-200 mt-6 mb-3 text-[16px]" {...props}>{toTitleCase(String(children))}</h4>,
+        h4: ({ node, children, ...props }) => <h4 className="text-left font-semibold text-gray-800 dark:text-gray-200 mt-6 mb-3" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }} {...props}>{toTitleCase(String(children))}</h4>,
         p: ({ node, children, ...props }) => {
-            // Simplified P renderer logic for rescue
-            return <p className="mb-4 leading-relaxed text-lg text-gray-900 dark:text-white text-justify" style={{ maxWidth: 'none' }} {...props}>{children}</p>;
+            return <p className="mb-4 leading-relaxed text-gray-900 dark:text-white text-justify" style={{ fontSize: 'var(--lex-codal-font-size, 16px)', maxWidth: 'none' }} {...props}>{children}</p>;
         },
         ul: ({ node, ...props }) => <ul className="list-disc pl-8 space-y-2 my-3" {...props} />,
         ol: ({ node, ...props }) => <ol className="list-decimal pl-8 space-y-2 my-3" {...props} />,
@@ -1009,13 +1008,13 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
                         className="relative flex min-w-0 w-full flex-col overflow-hidden rounded-2xl border border-violet-200/65 bg-white/45 backdrop-blur-xl dark:border-zinc-700 dark:bg-zinc-900/85 glass"
                     >
                     <CardVioletInnerWash />
-                    <div className="relative z-[1] flex min-h-0 w-full min-w-0 flex-1 flex-col">
+                    <div className="relative z-[1] flex min-h-0 w-full min-w-0 flex-1 flex-col" style={{ '--lex-codal-font-size': `${fontSize}px` }}>
 
                     {/* Toolbar — codal title + subtitle */}
                     <div className="flex flex-col rounded-t-2xl border-b border-white/20 bg-white/60 backdrop-blur-md dark:border-zinc-800 dark:bg-zinc-950/80">
                         <div className="flex items-center gap-3 px-4 py-3">
                             <div className="min-w-0 flex-1 px-2 text-center">
-                                <h1 className="text-[16px] font-extrabold tracking-wide text-gray-900 dark:text-gray-100 font-sans leading-tight">
+                                <h1 className="font-extrabold tracking-wide text-gray-900 dark:text-gray-100 font-sans leading-tight" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>
                                     {codeTitle ? toTitleCase(codeTitle) : 'Lex Code'}
                                 </h1>
                                 {codeSubtitle && (
