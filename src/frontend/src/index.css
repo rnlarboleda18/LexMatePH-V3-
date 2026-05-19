@@ -208,6 +208,20 @@ header.lex-pin-visual-header {
   }
 }
 
+/* Mobile full-bleed: remove the 0.5rem gap on all sides so the card snaps edge-to-edge.
+   Safe-area insets are kept to protect Dynamic Island / notch / home indicator. */
+@media (max-width: 767px) {
+  .lex-modal-overlay.lex-modal-overlay--full-bleed {
+    padding-top: env(safe-area-inset-top, 0px) !important;
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + var(--player-height, 0px)) !important;
+    padding-left: env(safe-area-inset-left, 0px) !important;
+    padding-right: env(safe-area-inset-right, 0px) !important;
+  }
+  .lex-modal-overlay.lex-modal-overlay--full-bleed .lex-modal-card {
+    border-radius: 0;
+  }
+}
+
 /* Shared modal card — uniform sizing and shape across all modals on mobile.
    On mobile: card fills the full available window (overlay handles safe gaps).
    On md+: reverts to centered floating card with max-height. */
