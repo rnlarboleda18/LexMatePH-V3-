@@ -134,6 +134,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
               : 'text-fuchsia-700 dark:text-zinc-500';
 
     return (
+        <>
         <FeaturePageShell>
             <div className="animate-in fade-in relative pb-12 duration-700 font-sans text-gray-900 dark:text-gray-100">
                 <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-purple-500/25 blur-3xl dark:bg-purple-600/20" aria-hidden />
@@ -397,7 +398,6 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
             </div>
             </div>
             </div>
-        </FeaturePageShell>
 
             {/* Exam Details & Grading Info Modal */}
             {showDetailsModal && (
@@ -493,6 +493,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                 </div>
             )}
         </FeaturePageShell>
+        </>
     );
 };
 
