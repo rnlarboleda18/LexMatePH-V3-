@@ -193,11 +193,18 @@ header.lex-pin-visual-header {
   }
 }
 
-/* Default md+ overlay reserves bottom space for LexPlay + trim. Full-bleed still avoids the bottom “trim” gap but must
-   sit above the fixed LexPlayer mini bar (--player-height), same as the global md+ .lex-modal-overlay rule. */
+/* Full-bleed modals on md+: snap edge-to-edge between the app header and LexPlay bar.
+   Zero padding so the card fills every pixel; the header/player dividers act as natural separators. */
 @media (min-width: 768px) {
   .lex-modal-overlay.lex-modal-overlay--full-bleed {
+    padding: 0 !important;
     bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .lex-modal-overlay.lex-modal-overlay--full-bleed .lex-modal-card {
+    height: 100%;
+    max-height: 100%;
+    max-width: 100% !important;
+    border-radius: 0;
   }
 }
 
