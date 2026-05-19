@@ -98,7 +98,10 @@ const Sidebar = ({
         s.laws.some(l => l.id.toLowerCase() === activeLawId)
     )?.id ?? null;
 
-    const [lexOpen, setLexOpen] = useState(false);
+    const [lexOpen, setLexOpen] = useState(mode === 'codex');
+    useEffect(() => {
+        if (mode === 'codex') setLexOpen(true);
+    }, [mode]);
     const [openSubjects, setOpenSubjects] = useState(() => {
         if (activeSubjectId) return { [activeSubjectId]: true };
         return {};
@@ -109,7 +112,6 @@ const Sidebar = ({
 
     const handleLexCodeClick = () => {
         setLexOpen(p => !p);
-        if (onToggleLexCode) onToggleLexCode();
     };
 
     return (
@@ -350,14 +352,14 @@ const Sidebar = ({
             >
                 <Library size={18} className={`${mode === 'codex' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
                 <span className="flex-1">LexCode</span>
-                {(lexOpen || mode === 'codex')
+                {lexOpen
                     ? <ChevronDown size={14} className="shrink-0 text-neutral-400 dark:text-zinc-500" />
                     : <ChevronRight size={14} className="shrink-0 text-neutral-400 dark:text-zinc-500" />
                 }
             </button>
 
-            {/* Subject tree — visible when LexCode is open or active */}
-            {(lexOpen || mode === 'codex') && (
+            {/* Subject tree — visible when LexCode is open */}
+            {lexOpen && (
                 <div className="ml-2 border-l border-amber-200 dark:border-zinc-700 pl-1.5 space-y-0">
                     {LEXCODE_SUBJECTS.map(subject => {
                         const isSubjectOpen = !!openSubjects[subject.id];
