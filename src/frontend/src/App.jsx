@@ -1106,11 +1106,9 @@ function App() {
                     )
                   )}
                   {effectiveMode === 'lexmate' && (
-                    <div className="flex flex-col" style={{ height: 'calc(100vh - var(--app-header-height, 56px))' }}>
-                      <Suspense fallback={<PageLoadingFallback label="Loading LexMate…" />}>
-                        <LexMateApp onClose={() => setMode('supreme_decisions')} />
-                      </Suspense>
-                    </div>
+                    <Suspense fallback={<PageLoadingFallback label="Loading LexMate…" />}>
+                      <LexMateApp onClose={() => setMode('supreme_decisions')} />
+                    </Suspense>
                   )}
                   {effectiveMode === 'browse_bar' && (
                     <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-6 font-sans text-gray-900 dark:text-gray-100">

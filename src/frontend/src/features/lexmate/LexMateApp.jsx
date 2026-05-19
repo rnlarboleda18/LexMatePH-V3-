@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { useLexMateChat } from './useLexMateChat';
 import LexMateMessage from './LexMateMessage';
+import FeaturePageShell from '../../components/FeaturePageShell';
 
 const SUGGESTED_QUESTIONS = [
   'What is the leading case on psychological incapacity under Article 36?',
@@ -47,16 +48,23 @@ export default function LexMateApp({ onClose }) {
   };
 
   return (
-    <div className="flex flex-col h-full bg-gray-50">
-      {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-200 shrink-0">
+    <FeaturePageShell>
+      <div className="animate-in fade-in relative pb-12 duration-700 font-sans text-gray-900 dark:text-gray-100">
+        <div className="pointer-events-none absolute -left-20 top-0 h-80 w-80 rounded-full bg-purple-500/25 blur-3xl dark:bg-purple-600/20" aria-hidden />
+        <div className="pointer-events-none absolute right-0 top-40 h-72 w-72 rounded-full bg-violet-500/20 blur-3xl dark:bg-fuchsia-600/15" aria-hidden />
+        <div className="pointer-events-none absolute bottom-20 left-1/3 h-64 w-96 rounded-full bg-indigo-400/15 blur-3xl dark:bg-indigo-500/10" aria-hidden />
+        
+        <div className="relative mx-auto w-full max-w-7xl space-y-tile">
+          <div className="flex flex-col overflow-hidden rounded-2xl border border-lex bg-white/90 shadow-2xl backdrop-blur-sm dark:border-lex dark:bg-zinc-900/90" style={{ height: 'calc(100vh - 120px)' }}>
+            {/* Header */}
+            <div className="flex shrink-0 items-center justify-between border-b border-lex px-4 py-3 dark:border-lex">
         <div className="flex items-center gap-3">
           <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold text-sm">
             L
           </div>
           <div>
-            <h2 className="font-semibold text-gray-900 text-sm">LexMate Legal Expert</h2>
-            <p className="text-xs text-gray-400">Powered by Gemini 2.5 · Philippine Law</p>
+            <h2 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white">LexMate Legal Expert</h2>
+            <p className="text-xs text-gray-500 dark:text-gray-400">Powered by Gemini 2.5 · Philippine Law</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
@@ -71,7 +79,7 @@ export default function LexMateApp({ onClose }) {
           {onClose && (
             <button
               onClick={onClose}
-              className="text-gray-400 hover:text-gray-600 p-1 rounded hover:bg-gray-100"
+              className="rounded p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600 dark:hover:bg-zinc-800 dark:hover:text-gray-300"
             >
               ✕
             </button>
@@ -80,28 +88,28 @@ export default function LexMateApp({ onClose }) {
       </div>
 
       {/* Messages */}
-      <div className="flex-1 overflow-y-auto px-4 py-4 space-y-4">
+      <div className="flex-1 space-y-4 overflow-y-auto px-4 py-4 sm:px-6">
         {messages.length === 0 && (
           <div className="space-y-6 py-4">
             <div className="text-center space-y-2">
-              <div className="w-16 h-16 rounded-full bg-indigo-100 flex items-center justify-center mx-auto">
-                <span className="text-2xl font-bold text-indigo-600">L</span>
+              <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-500/20">
+                <span className="text-2xl font-bold text-indigo-600 dark:text-indigo-400">L</span>
               </div>
-              <h3 className="font-semibold text-gray-800">LexMate Legal Expert AI</h3>
-              <p className="text-sm text-gray-500 max-w-sm mx-auto">
+              <h3 className="font-bold tracking-tight text-gray-900 dark:text-white">LexMate Legal Expert AI</h3>
+              <p className="mx-auto max-w-sm text-sm text-gray-600 dark:text-gray-400">
                 Ask any question about Philippine law — cases, statutes, doctrines.
                 I'll cite my sources from the LexMatePH legal corpus.
               </p>
             </div>
 
             {/* Suggested questions */}
-            <div className="space-y-2 max-w-lg mx-auto">
-              <p className="text-xs font-medium text-gray-400 uppercase tracking-wide">Try asking</p>
+            <div className="mx-auto max-w-lg space-y-2">
+              <p className="text-xs font-bold uppercase tracking-wide text-gray-500 dark:text-gray-400">Try asking</p>
               {SUGGESTED_QUESTIONS.map((q, i) => (
                 <button
                   key={i}
                   onClick={() => handleSuggest(q)}
-                  className="w-full text-left text-sm bg-white border border-gray-200 rounded-xl px-4 py-2.5 hover:border-indigo-300 hover:bg-indigo-50 transition-colors text-gray-700"
+                  className="w-full rounded-xl border border-lex bg-white px-4 py-2.5 text-left text-sm text-gray-700 transition-colors hover:border-indigo-300 hover:bg-indigo-50 dark:border-lex dark:bg-zinc-800/80 dark:text-gray-200 dark:hover:border-indigo-500/30 dark:hover:bg-indigo-500/10"
                 >
                   {q}
                 </button>
@@ -164,9 +172,9 @@ export default function LexMateApp({ onClose }) {
         <div ref={bottomRef} />
       </div>
 
-      {/* Input */}
-      <div className="shrink-0 px-4 py-3 bg-white border-t border-gray-200">
-        <div className="flex gap-2 items-end">
+        {/* Input */}
+        <div className="shrink-0 border-t border-lex bg-white px-4 py-3 dark:border-lex dark:bg-zinc-900 sm:px-6">
+          <div className="flex items-end gap-2">
           <textarea
             ref={inputRef}
             value={input}
@@ -174,9 +182,9 @@ export default function LexMateApp({ onClose }) {
             onKeyDown={handleKeyDown}
             placeholder="Ask a Philippine legal question..."
             rows={1}
-            disabled={loading}
-            className="flex-1 resize-none rounded-xl border border-gray-300 px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent disabled:opacity-50 min-h-[40px] max-h-[120px] leading-relaxed"
-            style={{ height: 'auto' }}
+              disabled={loading}
+              className="min-h-[40px] max-h-[120px] flex-1 resize-none rounded-xl border border-lex-strong bg-white px-4 py-2.5 text-sm leading-relaxed text-gray-900 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/25 disabled:opacity-50 dark:border-lex-strong dark:bg-zinc-800 dark:text-gray-100"
+              style={{ height: 'auto' }}
             onInput={e => {
               e.target.style.height = 'auto';
               e.target.style.height = Math.min(e.target.scrollHeight, 120) + 'px';
@@ -192,10 +200,13 @@ export default function LexMateApp({ onClose }) {
             </svg>
           </button>
         </div>
-        <p className="text-xs text-gray-400 mt-1.5 px-1">
-          LexMate cites sources from the LexMatePH corpus. Always verify with primary sources.
-        </p>
+          <p className="mt-1.5 px-1 text-xs text-gray-500 dark:text-gray-400">
+            LexMate cites sources from the LexMatePH corpus. Always verify with primary sources.
+          </p>
+        </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </FeaturePageShell>
   );
 }
