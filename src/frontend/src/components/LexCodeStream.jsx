@@ -343,7 +343,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
                 {/* Main Document Title ΓÇö shown only when not already shown in a parent toolbar */}
                 {showDocHeader && !hideDocHeader && (
                     <div className="text-center mb-6 relative">
-                        <h1 className="text-3xl font-extrabold text-gray-900 dark:text-gray-100 tracking-wide font-sans uppercase">
+                        <h1 className="font-extrabold text-gray-900 dark:text-gray-100 tracking-wide font-sans uppercase" style={{ fontSize: 'calc(var(--lex-codal-font-size, 16px) * 1.875)' }}>
                             {mainTitle}
                         </h1>
                         <div className="flex justify-center items-center gap-4 mt-3">
@@ -561,31 +561,28 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
 
                                 if (h.type === 'GROUP_PREAMBLE') {
                                     return (
-                                        <p key={i} className="text-[14px] text-gray-700 dark:text-gray-300 italic mb-4 leading-relaxed">
+                                        <p key={i} className="text-gray-700 dark:text-gray-300 italic mb-4 leading-relaxed" style={{ fontSize: 'var(--lex-codal-font-size, 14px)' }}>
                                             {h.text}
                                         </p>
                                     );
                                 }
 
                                 if (h.type === 'SECTION') {
-                                    sizeClass = "text-[16px]";
                                     colorClass = "text-gray-900 dark:text-gray-300 font-bold";
-                                }
-                                else if (h.type === 'RULE' || h.type === 'CHAPTER' || h.type === 'TITLE' || h.type === 'BOOK' || h.type === 'PREAMBLE') {
-                                    sizeClass = "text-[16px]";
                                 }
 
                                 return (
                                     <div key={i} className={`my-2 ${ (h.type === 'BOOK' || h.type === 'TITLE' || h.type === 'PREAMBLE' || h.type === 'CHAPTER' || h.type === 'SECTION' || h.type === 'RULE') ? 'text-center border-b-[1px] border-lex pb-1 mb-4' : '' }`}>
                                         {/* Add Main Header just once before the Preamble or First Book */}
                                         {h.type === 'PREAMBLE' && (
-                                            <h1 className="text-[16px] font-extrabold text-gray-900 dark:text-gray-100 mb-2 tracking-wide font-sans">
+                                            <h1 className="font-extrabold text-gray-900 dark:text-gray-100 mb-2 tracking-wide font-sans" style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}>
                                                 {toTitleCase(mainTitle, skipKeywords)}
                                             </h1>
                                         )}
 
                                         <h2
-                                            className={`font-sans ${colorClass} ${sizeClass} tracking-wide whitespace-pre-line leading-tight ${isRccStructural ? 'uppercase' : ''}`}
+                                            className={`font-sans ${colorClass} tracking-wide whitespace-pre-line leading-tight ${isRccStructural ? 'uppercase' : ''}`}
+                                            style={{ fontSize: 'var(--lex-codal-font-size, 16px)' }}
                                         >
                                             {isRccStructural
                                                 ? fixRccStructuralHeadingGlue(
