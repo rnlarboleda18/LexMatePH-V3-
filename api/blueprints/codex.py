@@ -129,7 +129,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
     if not short_name:
          return func.HttpResponse(json.dumps({"error": "short_name required"}), status_code=400)
 
-    cv_ck = f"codal:codex:v13:versions:{short_name.upper()}:{target_date or 'latest'}"
+    cv_ck = f"codal:codex:v14:versions:{short_name.upper()}:{target_date or 'latest'}"
     cached_v = codal_try_get(req, cv_ck)
     if cached_v is not None:
         ma = (0 if short_name.upper() == "CONST" else 3600) if not target_date else 86400
@@ -206,7 +206,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
                 mapped_rows.append({
                     "version_id": str(r['id']),
                     "id": str(r['id']),
-                    "key_id": str(r['id']),
+                    "key_id": sec_num,
                     "article_number": sec_num,
                     "article_num": sec_num,
                     "article_title": sec_title,
