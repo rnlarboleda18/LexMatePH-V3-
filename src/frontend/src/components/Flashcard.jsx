@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { ChevronRight, RotateCcw, X, Headphones, Lock } from 'lucide-react';
+import FontSizeControl from './FontSizeControl';
+import { useFontSize } from '../hooks/useFontSize';
 import { getSubjectColor } from '../utils/colors';
 import { normalizeBarSubject } from '../utils/subjectNormalize';
 import { getFlashcardConceptPrimarySubject } from '../utils/flashcardPrimarySubject';
@@ -17,6 +19,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
     const { playNow } = useLexPlayApi();
     const { canAccess, openUpgradeModal } = useSubscription();
     const canLexPlay = canAccess('lexplay_flashcard');
+    const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize();
 
     useEffect(() => {
         setIsFlipped(false);
@@ -103,14 +106,17 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                     {headerDate}
                 </p>
             </div>
-            <button
-                type="button"
-                onClick={handleClose}
-                className="touch-manipulation -mr-0.5 -mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-red-200/80 bg-red-50 text-red-600 transition-colors hover:bg-red-100 dark:border-red-800/60 dark:bg-red-950/60 dark:text-red-400 dark:hover:bg-red-900/50"
-                aria-label="Close"
-            >
-                <X className="h-3.5 w-3.5" strokeWidth={2.25} />
-            </button>
+            <div className="flex shrink-0 items-center gap-1">
+                <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} />
+                <button
+                    type="button"
+                    onClick={handleClose}
+                    className="touch-manipulation -mr-0.5 -mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-red-200/80 bg-red-50 text-red-600 transition-colors hover:bg-red-100 dark:border-red-800/60 dark:bg-red-950/60 dark:text-red-400 dark:hover:bg-red-900/50"
+                    aria-label="Close"
+                >
+                    <X className="h-3.5 w-3.5" strokeWidth={2.25} />
+                </button>
+            </div>
         </div>
     );
 
@@ -195,7 +201,8 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                     }}
                 >
                     <p
-                        className={`text-[17px] font-semibold leading-snug text-stone-900 dark:text-stone-50 sm:text-[18px] sm:leading-normal md:text-[19px] whitespace-pre-wrap break-words ${isBar ? 'text-left' : 'text-center'}`}
+                        className={`font-semibold leading-snug text-stone-900 dark:text-stone-50 whitespace-pre-wrap break-words ${isBar ? 'text-left' : 'text-center'}`}
+                        style={{ fontSize: `${fontSize}px` }}
                     >
                         {isBar ? card.text : card.term}
                     </p>
@@ -203,7 +210,8 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                         card.subQuestions?.map((sub, i) => (
                             <p
                                 key={i}
-                                className="mt-4 border-t border-lex pt-4 text-left text-[15px] font-medium leading-relaxed text-stone-800 dark:border-lex dark:text-stone-200 whitespace-pre-wrap break-words"
+                                className="mt-4 border-t border-lex pt-4 text-left font-medium leading-relaxed text-stone-800 dark:border-lex dark:text-stone-200 whitespace-pre-wrap break-words"
+                                style={{ fontSize: `${Math.max(fontSize - 2, 11)}px` }}
                             >
                                 {sub.text}
                             </p>
@@ -234,12 +242,12 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                             Suggested answers
                         </span>
                         <div ref={backScrollRef} className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden pr-1 custom-scrollbar">
-                            <p className="text-[15px] font-normal leading-relaxed text-stone-900 dark:text-stone-100 sm:text-[16px] sm:leading-relaxed whitespace-pre-wrap break-words">
+                            <p className="font-normal leading-relaxed text-stone-900 dark:text-stone-100 whitespace-pre-wrap break-words" style={{ fontSize: `${fontSize}px` }}>
                                 {card.answer || 'Answer not available.'}
                             </p>
                             {card.subQuestions?.map((sub, i) => (
                                 <div key={i} className="relative mt-4 border-t border-lex pt-4 dark:border-lex">
-                                    <p className="text-[15px] font-normal leading-relaxed text-stone-900 dark:text-stone-100 sm:text-[16px] whitespace-pre-wrap break-words">
+                                    <p className="font-normal leading-relaxed text-stone-900 dark:text-stone-100 whitespace-pre-wrap break-words" style={{ fontSize: `${fontSize}px` }}>
                                         {sub.answer || 'Answer not available.'}
                                     </p>
                                 </div>
@@ -252,7 +260,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                             Definition
                         </span>
                         <div ref={backScrollRef} className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden pr-1 custom-scrollbar">
-                            <p className="text-[15px] font-normal leading-relaxed text-stone-900 dark:text-stone-100 sm:text-[16px] sm:leading-relaxed whitespace-pre-wrap break-words">
+                            <p className="font-normal leading-relaxed text-stone-900 dark:text-stone-100 whitespace-pre-wrap break-words" style={{ fontSize: `${fontSize}px` }}>
                                 {card.definition || 'No definition stored for this concept.'}
                             </p>
                             {sources.length > 0 && (

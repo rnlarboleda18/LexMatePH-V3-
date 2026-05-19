@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import ReactMarkdown from 'react-markdown';
+import FontSizeControl from './FontSizeControl';
+import { useFontSize } from '../hooks/useFontSize';
 import {
   Scale, Globe, Briefcase, FileText, Users, Sword, BookOpen,
   ChevronRight, ChevronDown, ChevronLeft, BookMarked, Brain, AlertTriangle,
@@ -162,7 +164,7 @@ function parseBarQuestion(q) {
   return { questionText, answerText };
 }
 
-function BarQuestions({ questions }) {
+function BarQuestions({ questions, fontSize = 15 }) {
   const [open, setOpen] = useState(null);
   if (!questions?.length) return null;
   const isSynthetic = (q) => String(q.year || '').toLowerCase().includes('synthetic') || q.institution === 'AI-generated';
@@ -204,7 +206,7 @@ function BarQuestions({ questions }) {
             {open === i && answerText && (
               <div className="border-t border-lex bg-gray-50/60 px-3 py-3 dark:bg-zinc-900/40">
                 <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-violet-600 dark:text-violet-400">Suggested Answer</p>
-                <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200">
+                <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200" style={{ fontSize: `${fontSize}px` }}>
                   <ReactMarkdown>
                     {answerText.replace(/^SUGGESTED ANSWER:\s*/i, '')}
                   </ReactMarkdown>
@@ -224,6 +226,7 @@ function ContentPanel({ subject, topic, onCaseClick }) {
   const [detail, setDetail] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize();
 
   useEffect(() => {
     if (!topic) { setDetail(null); return; }
@@ -270,6 +273,7 @@ function ContentPanel({ subject, topic, onCaseClick }) {
               )}
             </div>
             <div className="flex flex-wrap items-center gap-2">
+              <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} />
               <ConfidenceBadge value={data.confidence} />
               {data.status === 'draft' && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-gray-500 dark:bg-zinc-700 dark:text-gray-400">
@@ -310,7 +314,7 @@ function ContentPanel({ subject, topic, onCaseClick }) {
             {data.doctrine_md && (
               <section>
                 <SectionHeader icon={Scale} label="Doctrine & Discussion" />
-                <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200 leading-relaxed">
+                <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200 leading-relaxed" style={{ fontSize: `${fontSize}px` }}>
                   <ReactMarkdown>{data.doctrine_md}</ReactMarkdown>
                 </div>
               </section>
@@ -321,7 +325,7 @@ function ContentPanel({ subject, topic, onCaseClick }) {
               <section>
                 <SectionHeader icon={AlertTriangle} label="Key Distinctions & Bar Traps" color="text-rose-500" />
                 <div className="rounded-lg border border-rose-200 bg-rose-50/60 p-4 dark:border-rose-800/50 dark:bg-rose-900/10">
-                  <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200">
+                  <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200" style={{ fontSize: `${fontSize}px` }}>
                     <ReactMarkdown>{data.distinctions_md}</ReactMarkdown>
                   </div>
                 </div>
@@ -333,7 +337,7 @@ function ContentPanel({ subject, topic, onCaseClick }) {
               <section>
                 <SectionHeader icon={Brain} label="Memory Aid" color="text-indigo-500" />
                 <div className="rounded-lg border border-indigo-200 bg-indigo-50/60 p-4 dark:border-indigo-800/50 dark:bg-indigo-900/10">
-                  <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200">
+                  <div className="prose prose-sm dark:prose-invert max-w-none text-gray-700 dark:text-gray-200" style={{ fontSize: `${fontSize}px` }}>
                     <ReactMarkdown>{data.memory_aid}</ReactMarkdown>
                   </div>
                 </div>
@@ -356,7 +360,7 @@ function ContentPanel({ subject, topic, onCaseClick }) {
             {data.bar_questions?.length > 0 && (
               <section>
                 <SectionHeader icon={AlertCircle} label={`Past Bar Questions (${data.bar_questions.length})`} color="text-amber-500" />
-                <BarQuestions questions={data.bar_questions} />
+                <BarQuestions questions={data.bar_questions} fontSize={fontSize} />
               </section>
             )}
           </div>

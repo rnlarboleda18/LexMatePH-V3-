@@ -7,6 +7,8 @@ import { HighlightText } from '../utils/highlight';
 import { useLexPlay } from '../features/lexplay';
 import { useSubscription } from '../context/SubscriptionContext';
 import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
+import FontSizeControl from './FontSizeControl';
+import { useFontSize } from '../hooks/useFontSize';
 
 const QuestionDetailModal = ({ 
     question, 
@@ -38,6 +40,7 @@ const QuestionDetailModal = ({
 
     const { canAccess, openUpgradeModal } = useSubscription();
     const canLexPlay = canAccess('lexplay_bar');
+    const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize();
 
     const handleAddToPlaylist = useCallback(async (playlistId) => {
         try {
@@ -122,6 +125,7 @@ const QuestionDetailModal = ({
                         </span>
                     </div>
                     <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+                        <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} />
                         <span className="tabular-nums text-[15px] font-medium leading-snug text-gray-900 dark:text-white md:text-[17px]">
                             {question.year}
                         </span>
@@ -197,7 +201,7 @@ const QuestionDetailModal = ({
                 )}
 
                 {/* Content - Scrollable */}
-                <div ref={scrollRef} className="relative z-10 flex min-h-0 flex-1 flex-col space-y-6 overflow-y-auto p-3 lex-modal-scroll custom-scrollbar sm:p-6 md:space-y-10 md:p-8">
+                <div ref={scrollRef} className="relative z-10 flex min-h-0 flex-1 flex-col space-y-6 overflow-y-auto p-3 lex-modal-scroll custom-scrollbar sm:p-6 md:space-y-10 md:p-8" style={{ fontSize: `${fontSize}px` }}>
                     {/* Main/Parent Question */}
                     <div>
                         <div className="mb-1.5 flex items-center gap-2 drop-shadow-sm md:mb-4">
@@ -206,7 +210,7 @@ const QuestionDetailModal = ({
                             </h4>
                             <div className="h-px flex-1 bg-gradient-to-r from-gray-200 to-transparent dark:from-white/10 dark:to-transparent" />
                         </div>
-                        <div className="px-1 text-[15px] font-medium leading-relaxed text-gray-800 dark:text-gray-100 md:text-[17px] whitespace-pre-wrap">
+                        <div className="px-1 font-medium leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap" style={{ fontSize: `${fontSize}px` }}>
                             <HighlightText text={question.text} query={searchQuery} />
                         </div>
                     </div>
@@ -222,7 +226,7 @@ const QuestionDetailModal = ({
                             </div>
                             <div className="relative overflow-hidden rounded-xl border border-lex bg-gradient-to-br from-blue-50/80 to-white p-3 shadow-md dark:border-lex dark:from-slate-800/80 dark:to-zinc-900 sm:p-5 md:rounded-2xl md:p-8">
                                 <div className="absolute top-0 left-0 h-full w-[4px] bg-gradient-to-b from-blue-400 to-indigo-600 md:w-1.5" />
-                                <div className="text-[15px] leading-relaxed text-gray-800 dark:text-gray-100 md:text-[17px] whitespace-pre-wrap">
+                                <div className="leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap" style={{ fontSize: `${fontSize}px` }}>
                                     <HighlightText text={question.answer || 'Answer not available.'} query={searchQuery} />
                                 </div>
                             </div>
@@ -241,7 +245,7 @@ const QuestionDetailModal = ({
                                     </h4>
                                     <div className="h-px flex-1 bg-gradient-to-r from-gray-200 to-transparent dark:from-white/10 dark:to-transparent" />
                                 </div>
-                                <div className="px-1 text-[15px] font-medium leading-relaxed text-gray-800 dark:text-gray-100 md:text-[17px] whitespace-pre-wrap">
+                                <div className="px-1 font-medium leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap" style={{ fontSize: `${fontSize}px` }}>
                                     <HighlightText text={sub.text} query={searchQuery} />
                                 </div>
                             </div>
@@ -255,7 +259,7 @@ const QuestionDetailModal = ({
                                 </div>
                                 <div className="relative overflow-hidden rounded-xl border border-lex bg-gradient-to-br from-blue-50/80 to-white p-3 shadow-md dark:border-lex dark:from-slate-800/80 dark:to-zinc-900 sm:p-5 md:rounded-2xl md:p-8">
                                     <div className="absolute top-0 left-0 h-full w-[4px] bg-gradient-to-b from-blue-400 to-indigo-600 md:w-1.5" />
-                                    <div className="text-[15px] leading-relaxed text-gray-800 dark:text-gray-100 md:text-[17px] whitespace-pre-wrap">
+                                    <div className="leading-relaxed text-gray-800 dark:text-gray-100 whitespace-pre-wrap" style={{ fontSize: `${fontSize}px` }}>
                                         <HighlightText text={sub.answer || 'Answer not available.'} query={searchQuery} />
                                     </div>
                                 </div>

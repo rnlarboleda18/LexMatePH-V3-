@@ -20,14 +20,74 @@ from __future__ import annotations
 import json
 import os
 import sys
+import threading
+import time
 from pathlib import Path
 
-DEFAULT_LINKER_MODEL  = "gemini-2.5-pro"
+DEFAULT_LINKER_MODEL  = "gemini-2.5-flash"
 FALLBACK_LINKER_MODEL = "gemini-2.5-flash"
 
 _genai_client = None
 _vertex_project: str | None = None
 _vertex_location: str | None = None
+
+# ---------------------------------------------------------------------------
+# Global token-bucket rate limiter — shared across all threads/workers.
+# Prevents bursting past the Vertex AI project quota (new accounts start
+# with very low RPM defaults; 429s happen even before the per-call backoff
+# can protect you).
+# Override with GEMINI_LINKER_RPM env var (default 40 RPM — safe for new
+# Vertex projects while still allowing 5 workers to run steadily).
+# ---------------------------------------------------------------------------
+_DEFAULT_LINKER_RPM = 40  # requests per minute; conservative for new projects
+
+class _TokenBucket:
+    """Thread-safe token bucket.  Callers block in ``acquire()`` until a
+    token is available, capping global throughput to ``rate_per_minute``."""
+
+    def __init__(self, rate_per_minute: float) -> None:
+        self._rate = rate_per_minute / 60.0          # tokens / second
+        self._tokens: float = self._rate * 2          # small initial burst
+        self._last: float = time.monotonic()
+        self._lock = threading.Lock()
+
+    def acquire(self) -> None:
+        while True:
+            with self._lock:
+                now = time.monotonic()
+                self._tokens = min(
+                    self._rate * 10,                  # cap at 10 s worth
+                    self._tokens + (now - self._last) * self._rate,
+                )
+                self._last = now
+                if self._tokens >= 1.0:
+                    self._tokens -= 1.0
+                    return
+                wait = (1.0 - self._tokens) / self._rate
+            time.sleep(min(wait, 0.5))               # wake up frequently
+
+
+_rate_limiter: _TokenBucket | None = None
+_rate_limiter_lock = threading.Lock()
+
+
+def get_linker_rate_limiter() -> _TokenBucket:
+    """Return the shared rate limiter, creating it on first call."""
+    global _rate_limiter
+    if _rate_limiter is not None:
+        return _rate_limiter
+    with _rate_limiter_lock:
+        if _rate_limiter is None:
+            merge_local_settings_into_env()
+            raw = (os.environ.get("GEMINI_LINKER_RPM") or "").strip()
+            try:
+                rpm = float(raw) if raw else _DEFAULT_LINKER_RPM
+            except ValueError:
+                rpm = _DEFAULT_LINKER_RPM
+            rpm = max(1.0, min(rpm, 1200.0))         # clamp to sane range
+            _rate_limiter = _TokenBucket(rpm)
+            print(f"[rate] Linker rate limiter initialised at {rpm:.0f} RPM", flush=True)
+    return _rate_limiter
 
 
 def _repo_root() -> Path:
@@ -87,8 +147,16 @@ def get_linker_genai_client(
         timeout_ms = 300_000
     timeout_ms = max(timeout_ms, 10_000)
 
-    # Resolve Vertex project — explicit arg wins, then env var.
-    project  = vertex_project  or (os.environ.get("GOOGLE_CLOUD_PROJECT") or "").strip() or None
+    # Resolve Vertex project.
+    # Priority: explicit arg → GEMINI_LINKER_VERTEX_PROJECT → GOOGLE_CLOUD_PROJECT.
+    # Set GEMINI_LINKER_VERTEX_PROJECT="" to force AI Studio (API key) path
+    # without touching GOOGLE_CLOUD_PROJECT (which the rest of the app needs).
+    linker_proj_env = os.environ.get("GEMINI_LINKER_VERTEX_PROJECT")
+    if linker_proj_env is not None:
+        # Env var is explicitly set — use it (even if empty, which forces AI Studio)
+        project = vertex_project or linker_proj_env.strip() or None
+    else:
+        project = vertex_project or (os.environ.get("GOOGLE_CLOUD_PROJECT") or "").strip() or None
     location = vertex_location or (os.environ.get("GOOGLE_CLOUD_LOCATION") or "").strip() or "us-central1"
 
     if project:

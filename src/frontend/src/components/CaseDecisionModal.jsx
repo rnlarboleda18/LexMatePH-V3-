@@ -15,6 +15,8 @@ import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
 import { apiUrl } from '../utils/apiUrl';
 import { consumeFreeTierUsage, notifyUsageBlocked } from '../utils/freeTierUsage';
 import { CaseFullTextMarkdown, DigestMarkdownText, SmartLink } from './CaseDigestMarkdown';
+import FontSizeControl from './FontSizeControl';
+import { useFontSize } from '../hooks/useFontSize';
 
 // --- HELPER COMPONENTS ---
 
@@ -340,6 +342,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const [newPlaylistName, setNewPlaylistName] = useState('');
     const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
     const [headerCollapsed, setHeaderCollapsed] = useState(true); // metadata panel hidden until user expands (all breakpoints)
+    const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize();
     const ratioRef = useRef(null);
 
     const { 
@@ -876,7 +879,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 </div>
 
                 {/* SCROLLABLE MAIN CONTENT */}
-                <div className="relative z-0 flex-1 min-h-0 space-y-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent">
+                <div className="relative z-0 flex-1 min-h-0 space-y-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent" style={{ fontSize: `${fontSize}px` }}>
 
                     {viewMode === 'digest' ? (
                         <>
@@ -998,7 +1001,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                     <span className="text-sm">Loading full text…</span>
                                 </div>
                             ) : (
-                                <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none text-justify">
+                                <div className="prose prose-sm md:prose-base dark:prose-invert max-w-none text-justify" style={{ fontSize: `${fontSize}px` }}>
                                     <CaseFullTextMarkdown
                                         content={fullDecision.full_text_md || '*Content not available in Markdown format.*'}
                                     />
@@ -1011,6 +1014,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                 {/* FOOTER — full-bleed width of the card (no side inset); same chrome as filter tiles */}
                 <div className="relative z-20 flex w-full min-w-0 shrink-0 self-stretch items-center justify-end gap-1 border-t border-lex bg-white px-tile py-2.5 dark:border-lex dark:bg-zinc-900 sm:gap-1.5">
+                    <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} className="mr-auto" />
                     {viewMode === 'digest' && (
                         <button
                             type="button"

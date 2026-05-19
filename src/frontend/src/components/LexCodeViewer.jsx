@@ -16,6 +16,8 @@ import PurpleGlassAmbient from './PurpleGlassAmbient';
 import CardVioletInnerWash from './CardVioletInnerWash';
 import { apiUrl, normalizeScDecisionsRouteId } from '../utils/apiUrl';
 import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
+import FontSizeControl from './FontSizeControl';
+import { useFontSize } from '../hooks/useFontSize';
 
 
 // Recursive TOC Node Component
@@ -100,6 +102,7 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize();
     const [viewDate, setViewDate] = useState('');
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
     /** max-width 1023px: TOC uses modal + FAB; lg+ uses side panel + FAB. */
@@ -1021,10 +1024,11 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionT
                                     </p>
                                 )}
                             </div>
+                            <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} />
                         </div>
                     </div>
 
-                    <div className="custom-scrollbar min-w-0 max-w-full px-2 pt-4 pb-24 [overflow-wrap:anywhere] [word-break:break-word]">
+                    <div className="custom-scrollbar min-w-0 max-w-full px-2 pt-4 pb-24 [overflow-wrap:anywhere] [word-break:break-word]" style={{ fontSize: `${fontSize}px` }}>
                         {renderMainContent()}
                     </div>
                     </div>

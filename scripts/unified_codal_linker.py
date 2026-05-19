@@ -59,6 +59,7 @@ from google import genai
 from linker_genai_client import (
     get_linker_genai_client,
     get_linker_model_name,
+    get_linker_rate_limiter,
     merge_local_settings_into_env,
 )
 
@@ -66,10 +67,9 @@ from linker_genai_client import (
 # CONFIG
 # ---------------------------------------------------------------------------
 merge_local_settings_into_env()
-DB_URL = (
-    os.environ.get("DB_CONNECTION_STRING")
-    or "postgresql://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
-)
+DB_URL = os.environ.get("DB_CONNECTION_STRING")
+if not DB_URL:
+    raise RuntimeError("DB_CONNECTION_STRING environment variable is missing. Refusing to connect to fallback.")
 MODEL_NAME = get_linker_model_name()
 # client is initialised lazily in run() once --vertex-project is known.
 client = None
@@ -115,6 +115,54 @@ FULL_CODE_CONFIGS: dict = {
         "name": "Rules of Court of the Philippines",
         "subject_area": "Remedial Law",
     },
+    "AM-07-9-12-SC": {
+        "table": "sc_issuances_codal",
+        "name": "Rule on the Writ of Amparo",
+        "subject_area": "Remedial Law",
+        "where": "statute_id = 'AM-07-9-12-SC'",
+    },
+    "AM-08-1-16-SC": {
+        "table": "sc_issuances_codal",
+        "name": "Rule on the Writ of Habeas Data",
+        "subject_area": "Remedial Law",
+        "where": "statute_id = 'AM-08-1-16-SC'",
+    },
+    "AM-09-6-8-SC": {
+        "table": "sc_issuances_codal",
+        "name": "Rules of Procedure for Environmental Cases",
+        "subject_area": "Remedial Law",
+        "where": "statute_id = 'AM-09-6-8-SC'",
+    },
+    "AM-01-7-01-SC": {
+        "table": "sc_issuances_codal",
+        "name": "Rules on Electronic Evidence",
+        "subject_area": "Remedial Law",
+        "where": "statute_id = 'AM-01-7-01-SC'",
+    },
+    "CPRA": {
+        "table": "sc_issuances_codal",
+        "name": "Code of Professional Responsibility and Accountability",
+        "subject_area": "Remedial Law",
+        "where": "statute_id = 'CPRA'",
+    },
+    "AM-02-8-13-SC": {
+        "table": "sc_issuances_codal",
+        "name": "2004 Rules on Notarial Practice",
+        "subject_area": "Remedial Law",
+        "where": "statute_id = 'AM-02-8-13-SC'",
+    },
+    "NCJC": {
+        "table": "sc_issuances_codal",
+        "name": "New Code of Judicial Conduct",
+        "subject_area": "Remedial Law",
+        "where": "statute_id = 'NCJC'",
+    },
+    "RA-11642": {
+        "table": "sc_issuances_codal",
+        "name": "Domestic Administrative Adoption Act",
+        "subject_area": "Remedial Law",
+        "where": "statute_id = 'RA-11642'",
+    },
 }
 
 DEFAULT_LINKER_STATUTES: tuple = ("CIV", "LAB", "CONST", "FAM", "RPC", "ROC", "RCC")
@@ -145,9 +193,17 @@ _STATUTE_PROMPT_LINES: dict = {
         '(typically like "Rule 39, Section 3" with "Rule" and comma; match spacing and numbering to the index). '
         'JSON key remains **"article"**; value is that full label, not a bare section number alone.'
     ),
+    "AM-07-9-12-SC": '  AM-07-9-12-SC: Rule on the Writ of Amparo — format: bare section number (e.g. "3")',
+    "AM-08-1-16-SC": '  AM-08-1-16-SC: Rule on the Writ of Habeas Data — format: bare section number (e.g. "3")',
+    "AM-09-6-8-SC": '  AM-09-6-8-SC: Rules of Procedure for Environmental Cases — format: Rule-Section (e.g. "Rule 1, Section 2")',
+    "AM-01-7-01-SC": '  AM-01-7-01-SC: Rules on Electronic Evidence — format: Rule-Section (e.g. "Rule 1, Section 2")',
+    "CPRA": '  CPRA: Code of Professional Responsibility and Accountability — format: Canon-Section (e.g. "Canon I, Section 1" or "Canon II, Section 0" for preambles)',
+    "AM-02-8-13-SC": '  AM-02-8-13-SC: 2004 Rules on Notarial Practice — format: Rule-Section (e.g. "Rule I, Section 1")',
+    "NCJC": '  NCJC: New Code of Judicial Conduct — format: Canon-Section (e.g. "Canon 1, Section 1")',
+    "RA-11642": '  RA-11642: Domestic Administrative Adoption Act — format: bare section number (e.g. "5")',
 }
 
-_STATUTE_ORDER: tuple = ("CIV", "LAB", "CONST", "FAM", "RPC", "ROC", "RCC")
+_STATUTE_ORDER: tuple = ("CIV", "LAB", "CONST", "FAM", "RPC", "ROC", "RCC", "AM-07-9-12-SC", "AM-08-1-16-SC", "AM-09-6-8-SC", "AM-01-7-01-SC", "CPRA", "AM-02-8-13-SC", "NCJC", "RA-11642")
 
 
 def _codes_detail_prompt() -> str:
@@ -264,6 +320,36 @@ def load_article_index() -> dict:
                     "content": text,
                     "paragraph_count": len(paragraphs),
                 }
+        elif code_id in ("AM-07-9-12-SC", "AM-08-1-16-SC", "RA-11642"):
+            cur.execute(f"SELECT section_num, content_md FROM {table} {where}")
+            for row in cur.fetchall():
+                key = str(row[0] or "").strip()
+                if not key:
+                    continue
+                text = str(row[1] or "")
+                paragraphs = [p.strip() for p in re.split(r"\n\n+", text) if p.strip()]
+                index[code_id][key] = {
+                    "content": text,
+                    "paragraph_count": len(paragraphs),
+                }
+        elif code_id in ("AM-09-6-8-SC", "AM-01-7-01-SC", "CPRA", "AM-02-8-13-SC", "NCJC"):
+            cur.execute(f"SELECT group_type, group_num, section_num, content_md FROM {table} {where}")
+            for row in cur.fetchall():
+                g_type = str(row[0] or "").strip()
+                g_num = str(row[1] or "").strip()
+                s_num = str(row[2] or "").strip()
+                if g_type and g_num:
+                    key = f"{g_type} {g_num}, Section {s_num}"
+                else:
+                    key = s_num
+                if not key:
+                    continue
+                text = str(row[3] or "")
+                paragraphs = [p.strip() for p in re.split(r"\n\n+", text) if p.strip()]
+                index[code_id][key] = {
+                    "content": text,
+                    "paragraph_count": len(paragraphs),
+                }
         else:
             cur.execute(f"SELECT article_num, content_md FROM {table} {where}")
             for row in cur.fetchall():
@@ -288,7 +374,7 @@ def _canonical_provision_key(code_id: str, article_index: dict, art_clean: str) 
     bucket = article_index.get(code_id) or {}
     if art_clean in bucket:
         return art_clean
-    if code_id == "ROC":
+    if code_id in ("ROC", "AM-09-6-8-SC", "AM-01-7-01-SC", "CPRA", "AM-02-8-13-SC", "NCJC"):
         cf = art_clean.casefold()
         for k in bucket:
             if k.casefold() == cf:
@@ -301,8 +387,10 @@ def _canonical_provision_key(code_id: str, article_index: dict, art_clean: str) 
 # ---------------------------------------------------------------------------
 
 def _genai_generate_with_retry(prompt: str, max_retries: int = 5) -> str:
-    """Call client.models.generate_content with exponential backoff on 429."""
-    delay = 10
+    """Call client.models.generate_content with global rate limiting + exponential backoff on 429."""
+    get_linker_rate_limiter().acquire()
+
+    delay = 15
     for attempt in range(max_retries):
         try:
             response = client.models.generate_content(
@@ -310,14 +398,25 @@ def _genai_generate_with_retry(prompt: str, max_retries: int = 5) -> str:
                 contents=prompt,
                 config=genai.types.GenerateContentConfig(response_mime_type="application/json"),
             )
+            if not response.text:
+                raise ValueError("Empty response from API (response.text is None)")
             return response.text
         except Exception as exc:
             msg = str(exc)
             is_rate_limit = "429" in msg or "RESOURCE_EXHAUSTED" in msg
+            is_transient = (
+                "SSL" in msg or "EOF" in msg
+                or "Server disconnected" in msg
+                or "Empty response" in msg
+                or "ConnectionError" in msg
+            )
             if is_rate_limit and attempt < max_retries - 1:
                 print(f"    [RATE] 429 — waiting {delay}s before retry {attempt + 2}/{max_retries}…", flush=True)
                 time.sleep(delay)
                 delay = min(delay * 2, 120)
+                continue
+            if is_transient and attempt < 3:
+                time.sleep(3)
                 continue
             raise
 
@@ -376,7 +475,6 @@ OUTPUT FORMAT (JSON only):
 """
 
     try:
-        time.sleep(0.5)
         text = _genai_generate_with_retry(prompt)
         data = json.loads(text)
         return data.get("hits", []) if isinstance(data, dict) else []
@@ -405,9 +503,9 @@ PASS2_SCHEMA = """
 
 def _candidate_heading(code_id: str, art_num: str) -> str:
     """RCC: Section; ROC: rule_section_label as-is; others: Article."""
-    if code_id == "RCC":
+    if code_id in ("RCC", "AM-07-9-12-SC", "AM-08-1-16-SC", "RA-11642"):
         return f"[{code_id}] Section {art_num}:"
-    if code_id == "ROC":
+    if code_id in ("ROC", "AM-09-6-8-SC", "AM-01-7-01-SC", "CPRA", "AM-02-8-13-SC", "NCJC"):
         return f"[{code_id}] {art_num}:"
     return f"[{code_id}] Article {art_num}:"
 
@@ -470,7 +568,6 @@ OUTPUT (JSON only):
 """
 
     try:
-        time.sleep(0.5)
         text = _genai_generate_with_retry(prompt)
         data = json.loads(text)
         return data.get("links", []) if isinstance(data, dict) else []
@@ -554,6 +651,7 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
         return len(final_links)
 
     # ---- COMMIT ----
+    skey = ",".join(sorted(CODE_CONFIGS.keys()))
     conn = get_db_connection()
     try:
         cur = conn.cursor()
@@ -579,6 +677,14 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
                     lk["subject_area"],
                 ),
             )
+        # Mark as processed so 0-link cases are not retried
+        cur.execute(
+            """
+            INSERT INTO codal_linker_processed (case_id, statutes_key)
+            VALUES (%s, %s) ON CONFLICT DO NOTHING
+            """,
+            (case["id"], skey),
+        )
         conn.commit()
         cur.close()
         print(f"   [saved] {len(final_links)} links -> {title}", flush=True)
@@ -689,16 +795,23 @@ def run(
             params += [f"{end_year}-12-31"]
 
         if not dry_run:
-            # Exclude cases already linked for all configured statutes
+            # Exclude cases already linked OR already processed (0-link) for these statutes
             target_statutes = list(CODE_CONFIGS.keys())
+            skey = ",".join(sorted(target_statutes))
             query += """
                 AND NOT EXISTS (
                     SELECT 1 FROM codal_case_links
                     WHERE case_id = sc_decided_cases.id
                       AND statute_id = ANY(%s)
                 )
+                AND NOT EXISTS (
+                    SELECT 1 FROM codal_linker_processed
+                    WHERE case_id = sc_decided_cases.id
+                      AND statutes_key = %s
+                )
             """
             params.append(target_statutes)
+            params.append(skey)
 
     query += " ORDER BY id DESC"
     if limit and not target_ids:
@@ -733,7 +846,7 @@ def run(
                 elapsed = time.time() - t0
                 print(
                     f"  [...] heartbeat {elapsed:.0f}s: {d}/{len(cases)} cases finished "
-                    f"(workers={workers}; still waiting on Vertex if d is 0)",
+                    f"(workers={workers})",
                     flush=True,
                 )
 
