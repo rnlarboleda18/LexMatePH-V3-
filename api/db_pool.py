@@ -7,6 +7,7 @@ cannot exhaust the server's max_connections limit.
 Configure via DB_POOL_MIN_CONN / DB_POOL_MAX_CONN (defaults 2 / 15).
 """
 import logging
+import time
 import psycopg2
 import psycopg2.pool
 
@@ -35,14 +36,23 @@ def _get_pool():
     return _pool
 
 
-def get_db_connection():
+def get_db_connection(retries=20, delay=0.5):
     """Borrow a connection from the pool. Always pair with put_db_connection(conn)."""
-    conn = _get_pool().getconn()
-    try:
-        conn.autocommit = False
-    except Exception:
-        pass
-    return conn
+    pool = _get_pool()
+    for attempt in range(retries):
+        try:
+            conn = pool.getconn()
+            try:
+                conn.autocommit = False
+            except Exception:
+                pass
+            return conn
+        except psycopg2.pool.PoolError as e:
+            if "exhausted" in str(e).lower() and attempt < retries - 1:
+                logging.warning(f"DB pool exhausted. Retrying in {delay}s (Attempt {attempt+1}/{retries})")
+                time.sleep(delay)
+                continue
+            raise
 
 
 def put_db_connection(conn):
