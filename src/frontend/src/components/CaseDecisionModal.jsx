@@ -741,12 +741,8 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         <h2 className="min-w-0 flex-1 break-words text-[15px] font-medium leading-snug text-gray-900 [overflow-wrap:anywhere] dark:text-white md:text-[17px]">
                             {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
                         </h2>
-                        <div className="mt-0.5 flex shrink-0 items-center gap-0.5 sm:gap-1">
-                            {decisionYear !== '' && (
-                                <span className="tabular-nums text-[14px] font-medium leading-snug text-gray-900 dark:text-white sm:text-[15px] md:text-[17px]">
-                                    {decisionYear}
-                                </span>
-                            )}
+                        <div className="mt-0.5 flex shrink-0 items-center gap-0.5 sm:gap-1.5">
+                            <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} className="mr-1" />
                             <button
                                 type="button"
                                 className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-gray-500 transition-all hover:bg-gray-100 hover:text-gray-800 active:scale-95 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-100"
@@ -1020,7 +1016,6 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                 {/* FOOTER — full-bleed width of the card (no side inset); same chrome as filter tiles */}
                 <div className="relative z-20 flex w-full min-w-0 shrink-0 self-stretch items-center justify-end gap-1 border-t border-lex bg-white px-tile py-2.5 dark:border-lex dark:bg-zinc-900 sm:gap-1.5">
-                    <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} className="mr-auto" />
                     {viewMode === 'digest' && (
                         <button
                             type="button"
