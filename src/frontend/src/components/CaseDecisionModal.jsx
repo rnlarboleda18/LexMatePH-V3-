@@ -112,7 +112,7 @@ const LegalConceptsSection = React.memo(({ concepts }) => {
     if (!items || items.length === 0) return null;
 
     return (
-        <div className="mb-6 pt-4 md:pt-6">
+        <div className="mb-6 pt-6 md:pt-8 border-t border-lex dark:border-lex mt-6">
             <div className="rounded-lg border border-purple-100 bg-purple-50 p-5 dark:border-purple-900/30 dark:bg-purple-900/10">
                 <h4 className="text-[16px] font-bold text-purple-800 dark:text-purple-300 flex items-center gap-2 mb-3">
                     <BookOpen className="w-5 h-5" />
@@ -187,7 +187,7 @@ const StatutesSection = React.memo(({ statutes }) => {
     if (!Array.isArray(items) || items.length === 0) return null;
 
     return (
-        <div className="mb-8">
+        <div className="mb-8 pt-6 md:pt-8 border-t border-lex dark:border-lex mt-6">
             <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-lex pb-2 mb-4 flex items-center gap-2">
                 <Book className="w-5 h-5 text-teal-600 dark:text-teal-400" />
                 STATUTES INVOLVED
@@ -235,7 +235,7 @@ const CitedCasesSection = React.memo(({ citations }) => {
     };
 
     return (
-        <div className="mb-8 pt-4 md:pt-6">
+        <div className="mb-8 pt-6 md:pt-8 border-t border-lex dark:border-lex mt-6">
             <h4 className="text-[16px] font-bold text-gray-900 dark:text-gray-100 border-b border-lex pb-2 mb-4 flex items-center gap-2">
                 <Gavel className="w-5 h-5 text-indigo-500 dark:text-indigo-400" />
                 CITED JURISPRUDENCE
