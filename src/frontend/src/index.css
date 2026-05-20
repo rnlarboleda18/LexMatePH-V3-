@@ -108,15 +108,16 @@
   -webkit-backdrop-filter: blur(16px) !important;
 }
 
-/* iOS / PWA: fixed modal rect tracks `visualViewport` (Reachability, status bar) — narrow widths only. */
+/* iOS / PWA: fixed modal rect tracks `visualViewport` (Reachability, status bar) — narrow widths only.
+   Constrained below the app header and active tab bar so navigation remains clickable. */
 @media (max-width: 767px) {
   .lex-modal-overlay {
-    top: var(--lex-vv-top, 0px) !important;
+    top: calc(var(--lex-vv-top, 0px) + var(--app-header-offset) + var(--tab-bar-height, 0px)) !important;
     left: var(--lex-vv-left, 0px) !important;
     right: auto !important;
     bottom: auto !important;
     width: var(--lex-vv-width, 100vw) !important;
-    height: var(--lex-vv-height, 100dvh) !important;
+    height: calc(var(--lex-vv-height, 100dvh) - var(--app-header-offset) - var(--tab-bar-height, 0px)) !important;
   }
 }
 
@@ -168,8 +169,8 @@ header.lex-pin-visual-header {
 @media (min-width: 768px) {
   .lex-modal-overlay {
     padding: 2rem !important;
-    /* md+: constrain below header and above player; trim lifts the overlay bottom by --lex-modal-bottom-trim */
-    top: var(--app-header-offset) !important;
+    /* md+: constrain below header and tab bar, and above player */
+    top: calc(var(--app-header-offset) + var(--tab-bar-height, 0px)) !important;
     bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)) !important;
   }
 }
@@ -183,8 +184,8 @@ header.lex-pin-visual-header {
   }
 }
 
-/* Tablet only (md–lg, 768–1023px): inset overlay — shorten modal column by 1cm from bottom */
-@media (min-width: 768px) and (max-width: 1023px) {
+/* Tablet only (md–lg, 768–1023px) in portrait and landscape: inset overlay */
+@media (min-width: 768px) and (max-width: 1023px), (min-width: 768px) and (max-width: 1366px) and (hover: none) and (pointer: coarse) {
   .lex-modal-overlay {
     bottom: calc(
       var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)
@@ -192,9 +193,9 @@ header.lex-pin-visual-header {
   }
 }
 
-/* Full-bleed modals on tablet (md-lg): snap edge-to-edge between the app header and LexPlay bar.
-   Zero padding so the card fills every pixel; the header/player dividers act as natural separators. */
-@media (min-width: 768px) and (max-width: 1023px) {
+/* Full-bleed modals on tablet (md-lg) in both portrait and landscape:
+   snap edge-to-edge below the header/tab-bar and above the LexPlay bar. */
+@media (min-width: 768px) and (max-width: 1023px), (min-width: 768px) and (max-width: 1366px) and (hover: none) and (pointer: coarse) {
   .lex-modal-overlay.lex-modal-overlay--full-bleed {
     padding: 0 !important;
     bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)) !important;
@@ -207,11 +208,11 @@ header.lex-pin-visual-header {
   }
 }
 
-/* Mobile full-bleed: remove the 0.5rem gap on all sides so the card snaps edge-to-edge.
-   Safe-area insets are kept to protect Dynamic Island / notch / home indicator. */
+/* Mobile full-bleed: remove the gap on all sides so the card snaps edge-to-edge.
+   Header offset is handled by overlay top, so we don't need top padding. */
 @media (max-width: 767px) {
   .lex-modal-overlay.lex-modal-overlay--full-bleed {
-    padding-top: env(safe-area-inset-top, 0px) !important;
+    padding-top: 0 !important;
     padding-bottom: calc(env(safe-area-inset-bottom, 0px) + var(--player-height, 0px)) !important;
     padding-left: env(safe-area-inset-left, 0px) !important;
     padding-right: env(safe-area-inset-right, 0px) !important;

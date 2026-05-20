@@ -62,7 +62,7 @@ const Layout = ({
                 createPortal(
                     <div className={isDarkMode ? 'dark' : ''} data-lex-app-chrome>
                         <header
-                            className={`lex-pin-visual-header fixed top-0 left-0 right-0 z-50 flex flex-wrap items-center gap-x-2 gap-y-1.5 px-3 pb-[max(0px,calc(0.375rem-2mm))] sm:flex-nowrap sm:gap-y-0 md:gap-x-3 md:px-4 md:pb-[calc(0.5rem-2mm)] lg:gap-x-4 lg:px-5
+                            className={`lex-pin-visual-header fixed top-0 left-0 right-0 z-[570] flex flex-wrap items-center gap-x-2 gap-y-1.5 px-3 pb-[max(0px,calc(0.375rem-2mm))] sm:flex-nowrap sm:gap-y-0 md:gap-x-3 md:px-4 md:pb-[calc(0.5rem-2mm)] lg:gap-x-4 lg:px-5
                     min-h-[calc(var(--app-header-top-gap)+env(safe-area-inset-top,0px)+var(--app-header-height)+var(--app-header-bottom-pad))]
                     pt-[calc(var(--app-header-top-gap)+env(safe-area-inset-top,0px))]
                     ${APP_HEADER_SURFACE}`}
@@ -176,13 +176,13 @@ const Layout = ({
                     <div className={isDarkMode ? 'dark' : ''} data-lex-app-navigation>
                         {isSidebarOpen && (
                             <div
-                                className="lex-vv-surface fixed inset-0 z-[39] bg-black/50"
+                                className="lex-vv-surface fixed inset-0 z-[550] bg-black/50"
                                 aria-hidden
                                 onClick={() => setIsSidebarOpen(false)}
                             />
                         )}
                         <aside
-                            className={`fixed left-0 z-40 w-64 transform overflow-y-auto transition-transform duration-300 ease-in-out ${SIDEBAR_ASIDE_SURFACE} ${
+                            className={`fixed left-0 z-[560] w-64 transform overflow-y-auto transition-transform duration-300 ease-in-out ${SIDEBAR_ASIDE_SURFACE} ${
                                 isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
                             }`}
                             style={{
