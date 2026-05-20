@@ -963,6 +963,11 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 </section>
                             )}
 
+                            <SignificanceSection 
+                                narrative={fullDecision.digest_significance} 
+                                category={fullDecision.significance_category} 
+                            />
+
                             <StatutesSection statutes={fullDecision.statutes_involved} />
                             <CitedCasesSection citations={fullDecision.cited_cases} />
 
