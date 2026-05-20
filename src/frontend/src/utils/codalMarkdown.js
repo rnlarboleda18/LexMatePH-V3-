@@ -2,7 +2,7 @@
  * IndexedDB / codex cache buster: bump when `/api/codex/versions` article body shape changes
  * so `lexCache.swr('codals', …)` does not keep serving stale `content_md` after deploy.
  */
-export const CODAL_LEXCACHE_REVISION = '_codexfmt11';
+export const CODAL_LEXCACHE_REVISION = '_codexfmt12';
 
 /**
  * E-Library / bad exports sometimes emit one table header cell per line (`| Name` only has one `|`).

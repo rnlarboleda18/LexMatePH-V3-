@@ -80,9 +80,7 @@ const CodalStream = ({ code = 'RPC', bookNum, titleNum, hideDocHeader = false, o
             
             const _ISSUANCE_APICODES = new Set(['am-07-9-12-sc','am-08-1-16-sc','am-09-6-8-sc','am-01-7-01-sc','cpra','am-02-8-13-sc','ncjc','ra-11642']);
             const cacheKey =
-                (titleNum ? `${apiCode}_title_${titleNum}` : bookNum ? `${apiCode}_book_${bookNum}` : `${apiCode}_all`) +
-                (['rcc', 'civ', 'labor', 'rpc', 'fc'].includes(apiCode) ? CODAL_LEXCACHE_REVISION : '') +
-                (_ISSUANCE_APICODES.has(apiCode) ? '_v10' : '');
+                (titleNum ? `${apiCode}_title_${titleNum}` : bookNum ? `${apiCode}_book_${bookNum}` : `${apiCode}_all`) + CODAL_LEXCACHE_REVISION;
 
             const fetcher = async () => {
                 let url = '';
