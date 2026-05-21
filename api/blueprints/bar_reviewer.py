@@ -163,7 +163,13 @@ def get_reviewer_topic(req: func.HttpRequest) -> func.HttpResponse:
                 id, subject_id, roman_num, topic_heading,
                 sub_letter, sub_heading, sort_order,
                 doctrine_md, distinctions_md, memory_aid,
-                key_provisions, key_cases, bar_questions,
+                key_provisions,
+                CASE
+                    WHEN jsonb_array_length(key_cases) > 30
+                    THEN jsonb_path_query_array(key_cases, '$[0 to 29]')
+                    ELSE key_cases
+                END AS key_cases,
+                bar_questions,
                 status, confidence, generated_at, generation_model,
                 case_cutoff
             FROM bar_reviewer_topics
