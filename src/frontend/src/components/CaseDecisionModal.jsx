@@ -425,6 +425,10 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     }, [fullDecision]);
 
     useEffect(() => {
+        if (showPlaylistSelector) fetchPlaylists();
+    }, [showPlaylistSelector, fetchPlaylists]);
+
+    useEffect(() => {
         const mq = window.matchMedia('(max-width: 767px)');
         const onViewportChange = () => {
             if (mq.matches) setShowHtmlViewer(false);
