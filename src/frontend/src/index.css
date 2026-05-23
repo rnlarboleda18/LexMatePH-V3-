@@ -172,6 +172,7 @@ header.lex-pin-visual-header {
     /* md+: constrain below header and tab bar, and above player */
     top: calc(var(--app-header-offset) + var(--tab-bar-height, 0px)) !important;
     bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+    transition: bottom 300ms ease;
   }
 }
 
@@ -190,6 +191,7 @@ header.lex-pin-visual-header {
     bottom: calc(
       var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)
     ) !important;
+    transition: bottom 300ms ease;
   }
 }
 
@@ -199,26 +201,33 @@ header.lex-pin-visual-header {
   .lex-modal-overlay.lex-modal-overlay--full-bleed {
     padding: 0 !important;
     bottom: calc(var(--player-height, 0px) + env(safe-area-inset-bottom, 0px)) !important;
+    transition: bottom 300ms ease;
   }
   .lex-modal-overlay.lex-modal-overlay--full-bleed .lex-modal-card {
     height: 100%;
     max-height: 100%;
     max-width: 100% !important;
     border-radius: 0;
+    min-height: 0;
   }
 }
 
-/* Mobile full-bleed: remove the gap on all sides so the card snaps edge-to-edge.
-   Header offset is handled by overlay top, so we don't need top padding. */
+/* Mobile full-bleed: card snaps flush above the mini-player bar (or safe area when player
+   is closed). align-items:stretch makes the card fill the padded overlay so its bottom
+   edge always meets the mini-player top. transition animates the resize when the player
+   opens/closes. */
 @media (max-width: 767px) {
   .lex-modal-overlay.lex-modal-overlay--full-bleed {
     padding-top: 0 !important;
     padding-bottom: calc(env(safe-area-inset-bottom, 0px) + var(--player-height, 0px)) !important;
     padding-left: env(safe-area-inset-left, 0px) !important;
     padding-right: env(safe-area-inset-right, 0px) !important;
+    align-items: stretch !important;
+    transition: padding-bottom 300ms ease;
   }
   .lex-modal-overlay.lex-modal-overlay--full-bleed .lex-modal-card {
     border-radius: 0;
+    min-height: 0;
   }
 }
 
