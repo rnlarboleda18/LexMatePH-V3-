@@ -21,6 +21,7 @@ const SUBJECTS = [
   { id: 'labor',      label: 'Labor & Social',     fullLabel: 'Labor Law and Social Legislation',            weight: '10%', icon: Users,     color: 'text-amber-600 dark:text-amber-400',    bgActive: 'border-amber-600 dark:border-amber-400 text-amber-700 dark:text-amber-300' },
   { id: 'criminal',   label: 'Criminal Law',       fullLabel: 'Criminal Law',                                weight: '10%', icon: Sword,     color: 'text-rose-600 dark:text-rose-400',      bgActive: 'border-rose-600 dark:border-rose-400 text-rose-700 dark:text-rose-300' },
   { id: 'remedial',   label: 'Remedial & Ethics',  fullLabel: 'Remedial Law, Legal and Judicial Ethics',     weight: '25%', icon: BookOpen,  color: 'text-indigo-600 dark:text-indigo-400',  bgActive: 'border-indigo-600 dark:border-indigo-400 text-indigo-700 dark:text-indigo-300' },
+  { id: 'sherwin',    label: 'Sherwin',             fullLabel: 'Sherwin',                                     weight: '',    icon: Brain,     color: 'text-purple-600 dark:text-purple-400',  bgActive: 'border-purple-600 dark:border-purple-400 text-purple-700 dark:text-purple-300' },
 ];
 
 const EXAM_DATE = 'September 6, 9 & 13, 2026';
