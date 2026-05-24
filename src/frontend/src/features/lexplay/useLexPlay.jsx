@@ -7,6 +7,20 @@ const LexPlayApiContext = createContext();
 /** Bust Service Worker `audio-cache` after server TTS text changes (bump with api `CACHE_VERSION` for codal). */
 export const LEXPLAY_CODAL_AUDIO_CV = 'v28';
 
+// ── Offline playlist cache (localStorage, keyed by Clerk userId) ──────────────
+function _plCacheKey(userId) { return `lp_playlists_v1_${userId}`; }
+function readPlaylistCache(userId) {
+    if (!userId) return null;
+    try { return JSON.parse(localStorage.getItem(_plCacheKey(userId)) ?? 'null'); }
+    catch { return null; }
+}
+function writePlaylistCache(userId, playlists) {
+    if (!userId) return;
+    try { localStorage.setItem(_plCacheKey(userId), JSON.stringify(playlists)); }
+    catch { /* storage full — silently ignore */ }
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 /** Relative URL for LexPlay TTS/audio (same formula as playTrack). */
 function buildAudioFetchPath(track, rate = 1.0) {
     const codeParam = track.code_id ? `code=${track.code_id}&` : '';
@@ -41,7 +55,7 @@ export const useLexPlayApi = () => {
 };
 
 export const LexPlayProvider = ({ children }) => {
-    const { getToken, isLoaded, isSignedIn } = useAuth();
+    const { getToken, isLoaded, isSignedIn, userId } = useAuth();
     const [playlist, setPlaylist] = useState([]); // This is the "Active Queue"
     const [savedPlaylists, setSavedPlaylists] = useState([]);
     /** Set when GET /api/playlists fails (e.g. 401) so UI can explain empty dropdown while signed in */
@@ -58,6 +72,7 @@ export const LexPlayProvider = ({ children }) => {
     const [isShuffle, setIsShuffle] = useState(false);
     
     const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+    const [isOffline, setIsOffline] = useState(() => typeof navigator !== 'undefined' ? !navigator.onLine : false);
     const audioRef = useRef(null);
     const playlistRef = useRef([]);
     const currentIndexRef = useRef(-1);
@@ -73,6 +88,26 @@ export const LexPlayProvider = ({ children }) => {
         isMounted.current = true;
         return () => { isMounted.current = false; };
     }, []);
+
+    // Track online / offline state
+    useEffect(() => {
+        const goOnline = () => setIsOffline(false);
+        const goOffline = () => setIsOffline(true);
+        window.addEventListener('online', goOnline);
+        window.addEventListener('offline', goOffline);
+        return () => {
+            window.removeEventListener('online', goOnline);
+            window.removeEventListener('offline', goOffline);
+        };
+    }, []);
+
+    // Seed savedPlaylists from cache immediately when auth is ready, so the UI
+    // shows the last-known list before the API responds (or when offline).
+    useEffect(() => {
+        if (!isLoaded || !isSignedIn || !userId) return;
+        const cached = readPlaylistCache(userId);
+        if (cached?.length) setSavedPlaylists(cached);
+    }, [isLoaded, isSignedIn, userId]);
     
     // MediaSession Stable Handler Refs
     const playPauseRef = useRef(null);
@@ -491,7 +526,9 @@ export const LexPlayProvider = ({ children }) => {
             const res = await fetch('/api/playlists', { headers });
             if (res.ok) {
                 const data = await res.json();
-                setSavedPlaylists(Array.isArray(data) ? data : []);
+                const playlists = Array.isArray(data) ? data : [];
+                setSavedPlaylists(playlists);
+                writePlaylistCache(userId, playlists);
                 setPlaylistFetchError(null);
                 return;
             }
@@ -511,11 +548,19 @@ export const LexPlayProvider = ({ children }) => {
             setSavedPlaylists([]);
             setPlaylistFetchError(res.status === 401 ? 'unauthorized' : `http_${res.status}`);
         } catch (e) {
-            console.error('Failed to fetch playlists:', e);
-            setSavedPlaylists([]);
-            setPlaylistFetchError('network');
+            // Network failure — fall back to the last-known cache so offline users
+            // can still see their playlists without re-authenticating.
+            console.warn('[LexPlay] Playlist fetch failed (network). Falling back to cache.', e);
+            const cached = readPlaylistCache(userId);
+            if (cached) {
+                setSavedPlaylists(cached);
+                setPlaylistFetchError('offline');
+            } else {
+                setSavedPlaylists([]);
+                setPlaylistFetchError('network');
+            }
         }
-    }, [isLoaded, isSignedIn, getToken]);
+    }, [isLoaded, isSignedIn, getToken, userId]);
 
     useEffect(() => {
         // Fetch saved playlists on mount
@@ -593,7 +638,11 @@ export const LexPlayProvider = ({ children }) => {
             if (res.ok) {
                 const newPlaylist = await res.json();
                 // Optimistically update savedPlaylists so UI updates immediately
-                setSavedPlaylists(prev => [...prev, newPlaylist]);
+                setSavedPlaylists(prev => {
+                    const updated = [...prev, newPlaylist];
+                    writePlaylistCache(userId, updated);
+                    return updated;
+                });
                 fetchPlaylists(); // Background sync
                 // Auto-select the newly created playlist
                 setActivePlaylistId(newPlaylist.id);
@@ -1245,6 +1294,7 @@ export const LexPlayProvider = ({ children }) => {
         handleScrubBackward,
         isDrawerOpen,
         setIsDrawerOpen,
+        isOffline,
         addToPlaylist,
         playNow,
         removeFromPlaylist,
@@ -1300,6 +1350,7 @@ export const LexPlayProvider = ({ children }) => {
         handleScrubForward,
         handleScrubBackward,
         isDrawerOpen,
+        isOffline,
         savedPlaylists,
         playlistFetchError,
         activePlaylistId,

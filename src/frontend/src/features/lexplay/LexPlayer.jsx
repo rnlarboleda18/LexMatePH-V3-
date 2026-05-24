@@ -1355,11 +1355,13 @@ const LexPlayer = ({
                                         <p className="mt-2 text-[11px] leading-relaxed text-amber-800 md:mt-3 dark:text-amber-200/90">
                                             {playlistFetchError === 'unauthorized'
                                                 ? 'Playlists could not be loaded (server rejected the session). Try refreshing the page.'
-                                                : playlistFetchError === 'network'
-                                                  ? 'Could not reach the server to load playlists. Check your connection.'
-                                                  : playlistFetchError?.startsWith('http_5')
-                                                    ? 'Playlists could not be loaded (server error). Try again; if it keeps failing, check the browser console—your database may need the playlist migration for Clerk user IDs.'
-                                                    : 'Playlists could not be loaded.'}
+                                                : playlistFetchError === 'offline'
+                                                  ? 'You\'re offline — showing your last saved playlists.'
+                                                  : playlistFetchError === 'network'
+                                                    ? 'Could not reach the server to load playlists. Check your connection.'
+                                                    : playlistFetchError?.startsWith('http_5')
+                                                      ? 'Playlists could not be loaded (server error). Try again; if it keeps failing, check the browser console—your database may need the playlist migration for Clerk user IDs.'
+                                                      : 'Playlists could not be loaded.'}
                                         </p>
                                     )}
                                 </>
