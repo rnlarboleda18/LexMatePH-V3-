@@ -228,6 +228,12 @@ header.lex-pin-visual-header {
   .lex-modal-overlay.lex-modal-overlay--full-bleed .lex-modal-card {
     border-radius: 0;
     min-height: 0;
+    /* height:100% on the base .lex-modal-card rule resolves against the overlay's
+       full height (ignoring padding) in a flex row container, so the card bleeds
+       into the mini-player zone. Override to auto so align-items:stretch controls
+       the height against the padded content-box instead. */
+    height: auto !important;
+    max-height: 100% !important;
   }
 }
 
