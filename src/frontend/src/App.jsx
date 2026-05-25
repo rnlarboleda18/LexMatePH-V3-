@@ -963,7 +963,7 @@ function App() {
 
         return (
           <>
-            <SeoHead mode={effectiveMode} />
+            <SeoHead mode={effectiveMode} caseId={pendingDeepLinkId} />
             <PastDueBanner />
 
             {/* Control Bar Visibility */}

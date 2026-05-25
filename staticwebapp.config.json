@@ -11,7 +11,8 @@
             "/manifest.webmanifest",
             "/workbox-*.js",
             "/robots.txt",
-            "/sitemap.xml"
+            "/sitemap.xml",
+            "/sitemap_pages.xml"
         ]
     },
     "routes": [
@@ -24,6 +25,13 @@
         },
         {
             "route": "/sitemap.xml",
+            "headers": {
+                "Content-Type": "application/xml",
+                "Cache-Control": "public, max-age=86400"
+            }
+        },
+        {
+            "route": "/sitemap_pages.xml",
             "headers": {
                 "Content-Type": "application/xml",
                 "Cache-Control": "public, max-age=86400"

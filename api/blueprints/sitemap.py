@@ -14,7 +14,8 @@ _STATIC_URLS = [
     {"loc": f"{SITE_BASE}/lexcode",       "changefreq": "weekly",  "priority": "1.0"},
     {"loc": f"{SITE_BASE}/lexplay",       "changefreq": "weekly",  "priority": "0.9"},
     {"loc": f"{SITE_BASE}/flashcards",    "changefreq": "weekly",  "priority": "0.8"},
-    {"loc": f"{SITE_BASE}/about",         "changefreq": "monthly", "priority": "0.5"},
+    {"loc": f"{SITE_BASE}/lexify",        "changefreq": "weekly",  "priority": "1.0"},
+    {"loc": f"{SITE_BASE}/lexmate",       "changefreq": "weekly",  "priority": "0.9"},
     {"loc": f"{SITE_BASE}/updates",       "changefreq": "weekly",  "priority": "0.5"},
     {"loc": f"{SITE_BASE}/legal",         "changefreq": "monthly", "priority": "0.3"},
 ]

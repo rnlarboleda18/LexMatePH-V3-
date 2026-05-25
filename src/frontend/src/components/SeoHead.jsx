@@ -185,16 +185,21 @@ const ROUTE_META = {
  *
  * @param {object} props
  * @param {string} props.mode - App mode key (matches ROUTE_META keys above)
+ * @param {string} [props.caseId] - Numeric case ID when on a /decisions/{id} deep-link
  * @param {string} [props.title] - Override title
  * @param {string} [props.description] - Override description
  * @param {string} [props.image] - Override OG image URL
  */
-export default function SeoHead({ mode, title, description, image }) {
+export default function SeoHead({ mode, caseId, title, description, image }) {
   const meta = ROUTE_META[mode] || ROUTE_META.about;
   const resolvedTitle = title || meta.title;
   const resolvedDesc = description || meta.description;
   const resolvedImage = image || DEFAULT_IMAGE;
-  const canonicalUrl = `${BASE_URL}${meta.path}`;
+  // Deep-link pages (/decisions/12345) get a case-specific canonical so Google
+  // indexes each case individually rather than treating them all as duplicates of /decisions.
+  const canonicalUrl = (mode === 'supreme_decisions' && caseId)
+    ? `${BASE_URL}/decisions/${caseId}`
+    : `${BASE_URL}${meta.path}`;
 
   return (
     <Helmet>
