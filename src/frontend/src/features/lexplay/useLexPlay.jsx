@@ -19,6 +19,16 @@ function writePlaylistCache(userId, playlists) {
     try { localStorage.setItem(_plCacheKey(userId), JSON.stringify(playlists)); }
     catch { /* storage full — silently ignore */ }
 }
+// Persist the userId so we can seed the cache even when Clerk's token has
+// expired (e.g. app opened offline after >1 h).
+function readLastUserId() {
+    try { return localStorage.getItem('lp_last_uid') ?? null; }
+    catch { return null; }
+}
+function writeLastUserId(uid) {
+    try { if (uid) localStorage.setItem('lp_last_uid', uid); }
+    catch {}
+}
 // ─────────────────────────────────────────────────────────────────────────────
 
 /** Relative URL for LexPlay TTS/audio (same formula as playTrack). */
@@ -101,12 +111,19 @@ export const LexPlayProvider = ({ children }) => {
         };
     }, []);
 
-    // Seed savedPlaylists from cache immediately when auth is ready, so the UI
-    // shows the last-known list before the API responds (or when offline).
+    // Seed playlists from cache on mount using the last-known userId.
+    // Runs once, before Clerk confirms auth, so offline users (including those
+    // whose token expired after >1 h) see their playlists immediately.
     useEffect(() => {
-        if (!isLoaded || !isSignedIn || !userId) return;
-        const cached = readPlaylistCache(userId);
+        const lastUid = readLastUserId();
+        if (!lastUid) return;
+        const cached = readPlaylistCache(lastUid);
         if (cached?.length) setSavedPlaylists(cached);
+    }, []); // intentionally empty — runs exactly once on mount
+
+    // Once Clerk confirms auth, persist the userId for future offline seeds.
+    useEffect(() => {
+        if (isLoaded && isSignedIn && userId) writeLastUserId(userId);
     }, [isLoaded, isSignedIn, userId]);
     
     // MediaSession Stable Handler Refs
@@ -514,7 +531,9 @@ export const LexPlayProvider = ({ children }) => {
     // --- Saved Playlists API Logic ---
 
     const fetchPlaylists = useCallback(async () => {
-        if (!isLoaded || !isSignedIn) {
+        if (!isLoaded) return; // Still initialising — keep whatever the cache seed set
+        if (!isSignedIn) {
+            // Confirmed signed out — clear everything
             setSavedPlaylists([]);
             setPlaylistFetchError(null);
             return;
