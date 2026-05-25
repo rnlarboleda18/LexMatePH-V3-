@@ -212,10 +212,13 @@ header.lex-pin-visual-header {
   }
 }
 
-/* Mobile full-bleed: overlay has no padding; the card height is computed directly so its
-   bottom edge lands at safe-area-bottom + player-height above the screen bottom.
-   align-items:flex-start pins the card to the top of the overlay (which already starts
-   below the app header). transition on height animates resize when the player opens/closes. */
+/* Mobile full-bleed: overlay has zero padding; card height is computed directly so its
+   bottom edge lands at the mini-player top. align-items:flex-start pins the card to the
+   top of the overlay (which already starts below the app header). --player-height is
+   measured via getBoundingClientRect() on the mini-bar element and already includes any
+   safe-area-inset-bottom bottom padding, so we subtract it once — no double-counting.
+   When the player is closed --player-height is 0px and the card fills to the screen bottom.
+   height transition animates the resize when the player opens/closes. */
 @media (max-width: 767px) {
   .lex-modal-overlay.lex-modal-overlay--full-bleed {
     padding-top: 0 !important;
@@ -227,10 +230,8 @@ header.lex-pin-visual-header {
   .lex-modal-overlay.lex-modal-overlay--full-bleed .lex-modal-card {
     border-radius: 0;
     min-height: 0;
-    /* 100% resolves against the overlay height = vv-height - app-header-offset.
-       Subtract safe-area-bottom and player-height so the card bottom stops exactly
-       at the mini-player top (or safe area when player is closed). */
-    height: calc(100% - env(safe-area-inset-bottom, 0px) - var(--player-height, 0px)) !important;
+    /* --player-height already includes env(safe-area-inset-bottom) — do not add it again */
+    height: calc(100% - var(--player-height, 0px)) !important;
     max-height: none !important;
     transition: height 300ms ease;
   }
