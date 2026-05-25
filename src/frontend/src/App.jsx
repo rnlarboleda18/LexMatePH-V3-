@@ -135,7 +135,7 @@ function barQuestionYearIdSort(a, b) {
 }
 
 function App() {
-  const { isDrawerOpen, setIsDrawerOpen } = useLexPlay();
+  const { isDrawerOpen, setIsDrawerOpen, isOffline } = useLexPlay();
   const {
     showUpgradeModal,
     closeUpgradeModal,
@@ -587,6 +587,9 @@ function App() {
   // After 24h, both modals can show as normal.
   useEffect(() => {
     if (!authLoaded || isSignedIn || showGuestModal !== null || !guestGatePlansReady) return;
+    // Suppress gate when offline and the user was previously signed in — Clerk's
+    // short-lived token expired without a network round-trip, not an actual sign-out.
+    if (isOffline && localStorage.getItem('lp_last_uid')) return;
     // During the 24-hour full-access guest window: only show the founding promo offer, not the plain paywall gate.
     if (isInGuestWindow() && !foundingPromoAvailable) return;
     const delay = guestModalDismissedAt === null
@@ -596,7 +599,7 @@ function App() {
       setShowGuestModal(foundingPromoAvailable ? 'founding_promo' : 'subscription');
     }, delay);
     return () => clearTimeout(timer);
-  }, [authLoaded, isSignedIn, showGuestModal, guestModalDismissedAt, foundingPromoAvailable, guestGatePlansReady]);
+  }, [authLoaded, isSignedIn, showGuestModal, guestModalDismissedAt, foundingPromoAvailable, guestGatePlansReady, isOffline]);
 
   // Capture the browser's native PWA install prompt so the modal can trigger it.
   // index.html captures early (before React mounts) into window.__pwaInstallPrompt;

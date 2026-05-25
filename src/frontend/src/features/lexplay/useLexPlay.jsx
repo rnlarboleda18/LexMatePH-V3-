@@ -533,7 +533,18 @@ export const LexPlayProvider = ({ children }) => {
     const fetchPlaylists = useCallback(async () => {
         if (!isLoaded) return; // Still initialising — keep whatever the cache seed set
         if (!isSignedIn) {
-            // Confirmed signed out — clear everything
+            // Offline: Clerk's token expired but the user didn't actually sign out.
+            // Load from cache so they still see their playlists.
+            if (!navigator.onLine) {
+                const cachedUid = readLastUserId();
+                const cached = cachedUid ? readPlaylistCache(cachedUid) : null;
+                if (cached) {
+                    setSavedPlaylists(cached);
+                    setPlaylistFetchError('offline');
+                    return;
+                }
+            }
+            // Confirmed online sign-out — clear everything
             setSavedPlaylists([]);
             setPlaylistFetchError(null);
             return;
