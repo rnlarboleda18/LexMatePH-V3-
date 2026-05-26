@@ -78,7 +78,7 @@ def get_const_by_book(req: func.HttpRequest) -> func.HttpResponse:
         codal_set(ck, mapped_results)
         return func.HttpResponse(json.dumps(mapped_results, default=str), mimetype="application/json")
     except Exception as e:
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if 'conn' in locals(): put_db_connection(conn)
 
@@ -138,7 +138,7 @@ def get_family_code(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps(mapped_results, default=str), mimetype="application/json")
     except Exception as e:
         logging.error(f"Error in get_family_code: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if 'conn' in locals(): put_db_connection(conn)
 

@@ -59,7 +59,7 @@ def ai_clean_case(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps({"error": "AI failure"}), status_code=500)
 
     except Exception as e:
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if conn is not None:
             put_db_connection(conn)
@@ -294,7 +294,7 @@ def ai_digest_case(req: func.HttpRequest) -> func.HttpResponse:
 
     except Exception as e:
         logging.error(f"Digestion error: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if conn is not None:
             put_db_connection(conn)
@@ -342,7 +342,7 @@ def ai_mock_exam(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps(questions), mimetype="application/json", status_code=200)
 
     except Exception as e:
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if conn is not None:
             put_db_connection(conn)
@@ -380,4 +380,4 @@ def ai_tts_proxy(req: func.HttpRequest) -> func.HttpResponse:
 
     except Exception as e:
         logging.error(f"TTS Error: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)

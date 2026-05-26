@@ -85,7 +85,7 @@ def get_labor_books(req: func.HttpRequest) -> func.HttpResponse:
         codal_set(ck, payload)
         return func.HttpResponse(json.dumps(payload), mimetype="application/json")
     except Exception as e:
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500, mimetype="application/json")
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500, mimetype="application/json")
     finally:
         if conn is not None:
             put_db_connection(conn)
@@ -141,7 +141,7 @@ def get_labor_book_content(req: func.HttpRequest) -> func.HttpResponse:
         codal_set(ck, payload)
         return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
     except Exception as e:
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500, mimetype="application/json")
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500, mimetype="application/json")
     finally:
         if conn is not None:
             put_db_connection(conn)

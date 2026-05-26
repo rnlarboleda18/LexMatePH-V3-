@@ -34,7 +34,7 @@ def get_civ_preliminary(req: func.HttpRequest) -> func.HttpResponse:
         codal_set(ck, payload)
         return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
     except Exception as e:
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if 'conn' in locals(): put_db_connection(conn)
 
@@ -67,7 +67,7 @@ def get_civ_by_book(req: func.HttpRequest) -> func.HttpResponse:
         codal_set(ck, payload)
         return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
     except Exception as e:
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if 'conn' in locals(): put_db_connection(conn)
 
@@ -193,7 +193,7 @@ def get_civ_by_title(req: func.HttpRequest) -> func.HttpResponse:
         codal_set(ck, payload)
         return func.HttpResponse(json.dumps(payload, default=str), mimetype="application/json")
     except Exception as e:
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if 'conn' in locals(): put_db_connection(conn)
 
@@ -223,6 +223,6 @@ def get_civ_article(req: func.HttpRequest) -> func.HttpResponse:
         else:
              return func.HttpResponse(json.dumps({"error": "Not Found"}), status_code=404)
     except Exception as e:
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if 'conn' in locals(): put_db_connection(conn)

@@ -690,7 +690,7 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error in sc_decisions: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )
@@ -763,7 +763,7 @@ def supreme_decision_ponentes(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error in supreme_decision_ponentes: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )
@@ -836,7 +836,7 @@ def supreme_decision_divisions(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error in supreme_decision_divisions: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )
@@ -1081,7 +1081,7 @@ def sc_decisions_flashcard_concepts(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error in sc_decisions_flashcard_concepts: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500,
         )
@@ -1184,7 +1184,7 @@ def supreme_decision_detail(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error in supreme_decision_detail: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500,
         )
@@ -1232,7 +1232,7 @@ def supreme_decision_models(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error in supreme_decision_models: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )
@@ -1288,7 +1288,7 @@ def fix_ponentes_endpoint(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error in fix_ponentes: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )
@@ -1349,7 +1349,7 @@ def backfill_per_curiam_endpoint(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error in backfill_per_curiam: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )

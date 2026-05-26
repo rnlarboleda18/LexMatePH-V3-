@@ -59,7 +59,7 @@ async def get_schedule(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error getting schedule: {e}")
         return func.HttpResponse(
-            body=json.dumps({"error": str(e)}),
+            body=json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )

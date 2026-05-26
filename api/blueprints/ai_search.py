@@ -23,6 +23,8 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 log = logging.getLogger(__name__)
 ai_search_bp = func.Blueprint()
 
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://lexmateph.com").rstrip("/")
+
 _QUESTION_WORDS = (
     "what", "who", "when", "where", "why", "how", "explain", "define",
     "describe", "discuss", "compare", "distinguish", "is there", "are there",
@@ -191,7 +193,7 @@ def _json(data: dict, status: int = 200) -> func.HttpResponse:
         json.dumps(data, default=str),
         status_code=status,
         mimetype="application/json",
-        headers={"Access-Control-Allow-Origin": "*"},
+        headers={"Access-Control-Allow-Origin": FRONTEND_URL},
     )
 
 
@@ -202,7 +204,7 @@ def ai_search(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(
             status_code=204,
             headers={
-                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Origin": FRONTEND_URL,
                 "Access-Control-Allow-Methods": "POST",
                 "Access-Control-Allow-Headers": "Content-Type,Authorization",
             },

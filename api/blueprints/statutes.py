@@ -35,7 +35,7 @@ def get_statute(req: func.HttpRequest) -> func.HttpResponse:
 
     except Exception as e:
         logging.error(f"Error fetching statute: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur: cur.close()
         if conn: put_db_connection(conn)

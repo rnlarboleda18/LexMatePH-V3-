@@ -125,7 +125,7 @@ def get_playlists(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps(playlists), mimetype="application/json", status_code=200)
     except Exception as e:
         logging.error(f"Error fetching playlists: {traceback.format_exc()}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             try:
@@ -162,7 +162,7 @@ def create_playlist(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps(playlist), mimetype="application/json", status_code=201)
     except Exception as e:
         logging.error(f"Error creating playlist: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             try:
@@ -200,7 +200,7 @@ def rename_playlist(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps({"success": True}), mimetype="application/json", status_code=200)
     except Exception as e:
         logging.error(f"Error renaming playlist: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             try:
@@ -234,7 +234,7 @@ def delete_playlist(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps({"success": True}), mimetype="application/json", status_code=200)
     except Exception as e:
         logging.error(f"Error deleting playlist: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             try:
@@ -278,7 +278,7 @@ def get_playlist_items(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps(items), mimetype="application/json", status_code=200)
     except Exception as e:
         logging.error(f"Error fetching items: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             try:
@@ -334,7 +334,7 @@ def add_playlist_item(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps(item), mimetype="application/json", status_code=201)
     except Exception as e:
         logging.error(f"Error adding item: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             try:
@@ -368,7 +368,7 @@ def remove_playlist_item(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps({"success": True}), mimetype="application/json", status_code=200)
     except Exception as e:
         logging.error(f"Error removing item: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             try:
@@ -437,7 +437,7 @@ def add_playlist_items_bulk(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps([]), mimetype="application/json")
     except Exception as e:
         logging.error(f"Error bulk adding items: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             try:
@@ -476,7 +476,7 @@ def get_playback_state(req: func.HttpRequest) -> func.HttpResponse:
             return func.HttpResponse(json.dumps({}), mimetype="application/json", status_code=200)
     except Exception as e:
         logging.error(f"Error fetching playback state: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             try:
@@ -518,7 +518,7 @@ def save_playback_state(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(json.dumps({"success": True}), mimetype="application/json", status_code=200)
     except Exception as e:
         logging.error(f"Error saving playback state: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             try:
