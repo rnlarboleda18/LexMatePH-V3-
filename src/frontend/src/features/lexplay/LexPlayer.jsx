@@ -843,39 +843,43 @@ const LexPlayer = ({
                             <X className="h-4 w-4" strokeWidth={2.25} />
                         </button>
                     )}
-                    {/* Mobile: GR number left, transport truly centered, X absolute right */}
-                    <div className="md:hidden flex h-[28px] w-full items-center">
-                        <p
-                            className={`min-w-0 flex-1 truncate text-left text-[10px] font-semibold leading-none tracking-tight ${miniMarqueeClass}`}
-                            title={miniMarqueeText}
-                        >
-                            {error ? `⚠ ${error}` : isLoading ? 'Generating audio…' : (currentTrack?.subtitle ?? '')}
-                        </p>
+                    {/* Mobile: transport absolutely centered in bar; GR number centered in left half */}
+                    <div className="md:hidden relative h-[28px] w-full">
+                        {/* GR number — centered between left edge and transport buttons */}
+                        <div className="absolute inset-y-0 left-0 right-1/2 flex items-center justify-center pr-1 pointer-events-none">
+                            <p
+                                className={`min-w-0 max-w-full truncate text-[10px] font-semibold leading-none tracking-tight ${miniMarqueeClass}`}
+                                title={miniMarqueeText}
+                            >
+                                {error ? `⚠ ${error}` : isLoading ? 'Generating…' : (currentTrack?.subtitle ?? '')}
+                            </p>
+                        </div>
+                        {/* Transport controls — pinned to exact horizontal center of the bar */}
                         <div
-                            className="relative z-10 flex shrink-0 items-center gap-1.5"
+                            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex shrink-0 items-center gap-2"
                             onClick={(e) => e.stopPropagation()}
                         >
                             <button
                                 type="button"
                                 onClick={(e) => { e.stopPropagation(); handlePrevious(); }}
-                                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-neutral-100 text-neutral-700 shadow-sm transition-all hover:bg-neutral-200 hover:text-neutral-900 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
+                                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-neutral-100 text-neutral-700 shadow-sm transition-all hover:bg-neutral-200 hover:text-neutral-900 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
                                 disabled={playlist.length === 0}
                                 aria-label="Previous track"
                             >
-                                <SkipBack className="h-3 w-3" fill="currentColor" />
+                                <SkipBack className="h-3.5 w-3.5" fill="currentColor" />
                             </button>
                             <button
                                 type="button"
                                 onClick={(e) => { e.stopPropagation(); handlePlayPause(); }}
                                 disabled={playlist.length === 0}
-                                className="group flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-violet-700 text-white shadow-md transition-all hover:bg-violet-800 active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100 dark:bg-violet-600 dark:hover:bg-violet-500"
+                                className="group flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-violet-700 text-white shadow-md transition-all hover:bg-violet-800 active:scale-95 disabled:pointer-events-none disabled:opacity-45 disabled:hover:scale-100 dark:bg-violet-600 dark:hover:bg-violet-500"
                                 aria-label={isPlaying ? 'Pause' : 'Play'}
                             >
                                 {isLoading ? (
                                     <div className="h-4 w-4 animate-spin rounded-full border-[3px] border-white/25 border-t-white" />
                                 ) : isPlaying ? (
                                     <>
-                                        <div className="flex h-3 items-end justify-center gap-0.5 group-hover:hidden" aria-hidden>
+                                        <div className="flex h-3.5 items-end justify-center gap-0.5 group-hover:hidden" aria-hidden>
                                             {[0.4, 1.0, 0.7, 0.5].map((h, i) => (
                                                 <div
                                                     key={i}
@@ -884,7 +888,7 @@ const LexPlayer = ({
                                                 />
                                             ))}
                                         </div>
-                                        <Pause className="hidden h-3.5 w-3.5 fill-current group-hover:block" />
+                                        <Pause className="hidden h-4 w-4 fill-current group-hover:block" />
                                     </>
                                 ) : (
                                     <Play className="ml-0.5 h-4 w-4 fill-current" />
@@ -893,15 +897,13 @@ const LexPlayer = ({
                             <button
                                 type="button"
                                 onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                                className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-neutral-100 text-neutral-700 shadow-sm transition-all hover:bg-neutral-200 hover:text-neutral-900 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
+                                className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-lex-strong bg-neutral-100 text-neutral-700 shadow-sm transition-all hover:bg-neutral-200 hover:text-neutral-900 active:scale-95 disabled:pointer-events-none disabled:opacity-25 dark:bg-zinc-800 dark:text-zinc-200 dark:hover:bg-zinc-700 dark:hover:text-white"
                                 disabled={playlist.length === 0}
                                 aria-label="Next track"
                             >
-                                <SkipForward className="h-3 w-3" fill="currentColor" />
+                                <SkipForward className="h-3.5 w-3.5" fill="currentColor" />
                             </button>
                         </div>
-                        {/* Equal-width spacer so controls are truly centered (X is absolute) */}
-                        <div className="flex-1" />
                     </div>
 
                     {/* Desktop/tablet: label left, transport centered via grid */}
