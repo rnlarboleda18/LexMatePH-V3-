@@ -17,7 +17,7 @@ const TAB_CONFIG = {
   admin_tools:       { label: 'Admin',         Icon: Terminal },
 };
 
-const TAB_BAR_HEIGHT_PX = 36;
+const TAB_BAR_HEIGHT_PX = 28;
 
 export default function TabBar({ tabs, activeMode, onSwitch, onClose, isDarkMode }) {
   useLayoutEffect(() => {

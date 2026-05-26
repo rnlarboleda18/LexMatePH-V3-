@@ -729,27 +729,27 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                 {/* HEADER — must stack above scroll body (both were z-10; scroll came later in DOM and ate taps on the X on mobile) */}
                 <div className="relative z-30 shrink-0 border-b border-lex bg-white dark:border-lex dark:bg-zinc-900">
-                    <div className="flex min-w-0 items-start gap-1.5 px-1.5 pt-1.5 pb-1 sm:gap-2 sm:px-2 md:px-3">
+                    <div className="flex h-[28px] min-w-0 items-center gap-1 overflow-hidden px-1.5 sm:h-auto sm:items-start sm:gap-2 sm:overflow-visible sm:px-2 sm:pt-1.5 sm:pb-1 md:px-3">
                         <button
                             type="button"
                             onClick={() => {
                                 if (!canLexPlay) { openUpgradeModal('lexplay_case_digest'); return; }
                                 setShowPlaylistSelector(true);
                             }}
-                            className="touch-manipulation mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-purple-200/80 bg-purple-50/90 text-purple-600 transition-all hover:bg-purple-100 active:scale-95 dark:border-purple-800 dark:bg-purple-900/40 dark:text-purple-300 dark:hover:bg-purple-900/60"
+                            className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-purple-200/80 bg-purple-50/90 text-purple-600 transition-all hover:bg-purple-100 active:scale-95 sm:mt-0.5 sm:h-7 sm:w-7 dark:border-purple-800 dark:bg-purple-900/40 dark:text-purple-300 dark:hover:bg-purple-900/60"
                             title={canLexPlay ? "Add audio digest to LexPlay playlist" : "Upgrade to add case digest audio to LexPlay"}
                             aria-label="Add to LexPlay playlist"
                         >
                             <Headphones className="h-3 w-3" strokeWidth={2} />
                         </button>
-                        <h2 className="min-w-0 flex-1 break-words text-[15px] font-medium leading-snug text-gray-900 [overflow-wrap:anywhere] dark:text-white md:text-[17px]">
+                        <h2 className="min-w-0 flex-1 truncate text-[13px] font-medium leading-none text-gray-900 dark:text-white sm:whitespace-normal sm:overflow-visible sm:break-words sm:text-[15px] sm:leading-snug [overflow-wrap:anywhere] md:text-[17px]">
                             {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
                         </h2>
-                        <div className="mt-0.5 flex shrink-0 items-center gap-0.5 sm:gap-1.5">
+                        <div className="flex shrink-0 items-center gap-0.5 sm:mt-0.5 sm:gap-1.5">
                             <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} className="mr-1" />
                             <button
                                 type="button"
-                                className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-gray-500 transition-all hover:bg-gray-100 hover:text-gray-800 active:scale-95 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+                                className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-gray-500 transition-all hover:bg-gray-100 hover:text-gray-800 active:scale-95 sm:h-7 sm:w-7 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-100"
                                 onClick={() => setHeaderCollapsed((v) => !v)}
                                 title={headerCollapsed ? 'Show details' : 'Hide details'}
                                 aria-label={headerCollapsed ? 'Show details' : 'Hide details'}
@@ -760,7 +760,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             <button
                                 type="button"
                                 onClick={handleClose}
-                                className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-red-200/70 bg-red-50/80 text-red-500 transition-all hover:bg-red-100 active:scale-95 dark:border-red-800/60 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-900/50"
+                                className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-red-200/70 bg-red-50/80 text-red-500 transition-all hover:bg-red-100 active:scale-95 sm:h-7 sm:w-7 dark:border-red-800/60 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-900/50"
                                 title="Close"
                                 aria-label="Close"
                             >
