@@ -42,6 +42,7 @@ try:
     from blueprints.xendit import xendit_bp
     from blueprints.bar_reviewer import bar_reviewer_bp
     from blueprints.sitemap import sitemap_bp
+    from blueprints.decision_page import decision_page_bp
 
     app.register_functions(questions_bp)
     app.register_functions(lexify_bp)
@@ -65,6 +66,7 @@ try:
     app.register_functions(xendit_bp)
     app.register_functions(bar_reviewer_bp)
     app.register_functions(sitemap_bp)
+    app.register_functions(decision_page_bp)
 
     from blueprints.legal_chat import legal_chat_bp
     app.register_functions(legal_chat_bp)
