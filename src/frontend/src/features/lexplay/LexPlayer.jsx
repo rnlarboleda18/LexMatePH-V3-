@@ -843,13 +843,13 @@ const LexPlayer = ({
                             <X className="h-4 w-4" strokeWidth={2.25} />
                         </button>
                     )}
-                    {/* Mobile: single-row label + compact transport */}
-                    <div className="md:hidden flex h-[28px] w-full items-center gap-2">
+                    {/* Mobile: GR number left, transport truly centered, X absolute right */}
+                    <div className="md:hidden flex h-[28px] w-full items-center">
                         <p
                             className={`min-w-0 flex-1 truncate text-left text-[10px] font-semibold leading-none tracking-tight ${miniMarqueeClass}`}
                             title={miniMarqueeText}
                         >
-                            {miniMarqueeText}
+                            {error ? `⚠ ${error}` : isLoading ? 'Generating audio…' : (currentTrack?.subtitle ?? '')}
                         </p>
                         <div
                             className="relative z-10 flex shrink-0 items-center gap-1.5"
@@ -900,6 +900,8 @@ const LexPlayer = ({
                                 <SkipForward className="h-3 w-3" fill="currentColor" />
                             </button>
                         </div>
+                        {/* Equal-width spacer so controls are truly centered (X is absolute) */}
+                        <div className="flex-1" />
                     </div>
 
                     {/* Desktop/tablet: label left, transport centered via grid */}
