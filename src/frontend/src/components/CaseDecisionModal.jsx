@@ -921,15 +921,15 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 {/* SCROLLABLE MAIN CONTENT */}
                 <div onScroll={handleContentScroll} className="relative z-0 flex-1 min-h-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent" style={{ fontSize: `${fontSize}px` }}>
 
-                    {/* Case identity card — scrolls with content, replaces the old sticky GR/date bar */}
-                    <div className="mb-4 sm:mb-6 rounded-xl border border-lex bg-white px-4 py-3 text-center dark:bg-zinc-900 dark:border-lex">
-                        <p className="text-[15px] font-bold leading-snug text-gray-900 dark:text-white sm:text-[17px]">
+                    {/* Case title block — document-style, no card border */}
+                    <div className="mb-6 pb-4 text-center border-b border-lex dark:border-lex">
+                        <h2 className="text-[18px] font-bold leading-snug text-gray-900 dark:text-white sm:text-[20px]">
                             {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
-                        </p>
+                        </h2>
                         {(fullDecision.case_number || fullDecision.date_str) && (
-                            <p className="mt-1 font-mono text-[11px] font-medium text-gray-500 dark:text-gray-400 sm:text-[12px]">
+                            <p className="mt-1.5 font-mono text-[11px] text-gray-400 dark:text-gray-500">
                                 {fullDecision.case_number}
-                                {fullDecision.case_number && fullDecision.date_str && <span className="mx-1.5">|</span>}
+                                {fullDecision.case_number && fullDecision.date_str && <span className="mx-1.5">·</span>}
                                 {fullDecision.date_str && formatDate(fullDecision.date_str)}
                             </p>
                         )}
