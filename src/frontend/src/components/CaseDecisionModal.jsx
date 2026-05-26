@@ -743,95 +743,84 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 {/* HEADER — auto-hides on scroll down, reveals on scroll up */}
                 <div className={`overflow-hidden transition-[max-height] duration-200 ease-in-out shrink-0 ${headerVisible ? 'max-h-[500px]' : 'max-h-0'}`}>
                 <div className="relative z-30 border-b border-lex bg-white dark:border-lex dark:bg-zinc-900">
-                    <div className="flex h-[28px] min-w-0 items-center gap-1 overflow-hidden px-1.5 sm:h-auto sm:items-start sm:gap-2 sm:overflow-visible sm:px-2 sm:pt-1.5 sm:pb-1 md:px-3">
+                    <div className="flex h-[28px] min-w-0 items-center gap-1 px-1.5 sm:h-auto sm:gap-1.5 sm:px-2 sm:py-1 md:px-3">
+                        {/* Left cluster: collapse · headphones · view toggle · SC link */}
+                        <button
+                            type="button"
+                            className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-gray-500 transition-all hover:bg-gray-100 hover:text-gray-800 active:scale-95 sm:h-7 sm:w-7 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-100"
+                            onClick={() => setHeaderCollapsed((v) => !v)}
+                            title={headerCollapsed ? 'Show details' : 'Hide details'}
+                            aria-label={headerCollapsed ? 'Show details' : 'Hide details'}
+                            aria-expanded={!headerCollapsed}
+                        >
+                            <ChevronDown size={16} className={`transition-transform duration-200 ${headerCollapsed ? '' : 'rotate-180'}`} />
+                        </button>
                         <button
                             type="button"
                             onClick={() => {
                                 if (!canLexPlay) { openUpgradeModal('lexplay_case_digest'); return; }
                                 setShowPlaylistSelector(true);
                             }}
-                            className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-purple-200/80 bg-purple-50/90 text-purple-600 transition-all hover:bg-purple-100 active:scale-95 sm:mt-0.5 sm:h-7 sm:w-7 dark:border-purple-800 dark:bg-purple-900/40 dark:text-purple-300 dark:hover:bg-purple-900/60"
+                            className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-purple-200/80 bg-purple-50/90 text-purple-600 transition-all hover:bg-purple-100 active:scale-95 sm:h-7 sm:w-7 dark:border-purple-800 dark:bg-purple-900/40 dark:text-purple-300 dark:hover:bg-purple-900/60"
                             title={canLexPlay ? "Add audio digest to LexPlay playlist" : "Upgrade to add case digest audio to LexPlay"}
                             aria-label="Add to LexPlay playlist"
                         >
                             <Headphones className="h-3 w-3" strokeWidth={2} />
                         </button>
-                        <h2 className="min-w-0 flex-1 truncate text-[13px] font-medium leading-none text-gray-900 dark:text-white sm:whitespace-normal sm:overflow-visible sm:break-words sm:text-[15px] sm:leading-snug [overflow-wrap:anywhere] md:text-[17px]">
-                            {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
-                        </h2>
-                        <div className="flex shrink-0 items-center gap-0.5 sm:mt-0.5 sm:gap-1.5">
-                            {viewMode === 'full' && fullDecision.sc_url && (
-                                <a
-                                    href={fullDecision.sc_url}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-500 transition-all hover:bg-neutral-100 hover:text-gray-800 active:scale-95 sm:h-7 sm:w-7 dark:border-lex dark:bg-zinc-800 dark:text-gray-400 dark:hover:bg-zinc-700 dark:hover:text-gray-100"
-                                    title="View on SC e-Library"
-                                    aria-label="View on SC e-Library"
-                                >
-                                    <ExternalLink className="h-3.5 w-3.5" strokeWidth={2} />
-                                </a>
+                        <button
+                            type="button"
+                            onClick={() => {
+                                if (viewMode === 'digest') {
+                                    setViewMode('full');
+                                    setFullTextReady(false);
+                                    requestAnimationFrame(() =>
+                                        requestAnimationFrame(() => setFullTextReady(true))
+                                    );
+                                } else {
+                                    setViewMode('digest');
+                                    setFullTextReady(false);
+                                }
+                            }}
+                            className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-700 transition-all hover:bg-neutral-100 active:scale-95 sm:h-7 sm:w-7 dark:border-lex dark:bg-zinc-800 dark:text-gray-200 dark:hover:bg-zinc-700"
+                            title={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
+                            aria-label={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
+                        >
+                            {viewMode === 'digest' ? (
+                                <BookOpen className="h-3.5 w-3.5" strokeWidth={2} />
+                            ) : (
+                                <FileText className="h-3.5 w-3.5" strokeWidth={2} />
                             )}
-                            <button
-                                type="button"
-                                onClick={() => {
-                                    if (viewMode === 'digest') {
-                                        setViewMode('full');
-                                        setFullTextReady(false);
-                                        requestAnimationFrame(() =>
-                                            requestAnimationFrame(() => setFullTextReady(true))
-                                        );
-                                    } else {
-                                        setViewMode('digest');
-                                        setFullTextReady(false);
-                                    }
-                                }}
-                                className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-700 transition-all hover:bg-neutral-100 active:scale-95 sm:h-7 sm:w-7 dark:border-lex dark:bg-zinc-800 dark:text-gray-200 dark:hover:bg-zinc-700"
-                                title={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
-                                aria-label={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
+                        </button>
+                        {viewMode === 'full' && fullDecision.sc_url && (
+                            <a
+                                href={fullDecision.sc_url}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-500 transition-all hover:bg-neutral-100 hover:text-gray-800 active:scale-95 sm:h-7 sm:w-7 dark:border-lex dark:bg-zinc-800 dark:text-gray-400 dark:hover:bg-zinc-700 dark:hover:text-gray-100"
+                                title="View on SC e-Library"
+                                aria-label="View on SC e-Library"
                             >
-                                {viewMode === 'digest' ? (
-                                    <BookOpen className="h-3.5 w-3.5" strokeWidth={2} />
-                                ) : (
-                                    <FileText className="h-3.5 w-3.5" strokeWidth={2} />
-                                )}
-                            </button>
-                            <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} className="mr-1" />
-                            <button
-                                type="button"
-                                className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-gray-500 transition-all hover:bg-gray-100 hover:text-gray-800 active:scale-95 sm:h-7 sm:w-7 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-100"
-                                onClick={() => setHeaderCollapsed((v) => !v)}
-                                title={headerCollapsed ? 'Show details' : 'Hide details'}
-                                aria-label={headerCollapsed ? 'Show details' : 'Hide details'}
-                                aria-expanded={!headerCollapsed}
-                            >
-                                <ChevronDown size={18} className={`transition-transform duration-200 ${headerCollapsed ? '' : 'rotate-180'}`} />
-                            </button>
-                            <button
-                                type="button"
-                                onClick={handleClose}
-                                className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-red-200/70 bg-red-50/80 text-red-500 transition-all hover:bg-red-100 active:scale-95 sm:h-7 sm:w-7 dark:border-red-800/60 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-900/50"
-                                title="Close"
-                                aria-label="Close"
-                            >
-                                <X className="h-3.5 w-3.5" strokeWidth={2.25} />
-                            </button>
-                        </div>
+                                <ExternalLink className="h-3.5 w-3.5" strokeWidth={2} />
+                            </a>
+                        )}
+
+                        {/* Spacer */}
+                        <div className="flex-1" />
+
+                        {/* Right cluster: A-/A+ · close */}
+                        <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} />
+                        <button
+                            type="button"
+                            onClick={handleClose}
+                            className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-red-200/70 bg-red-50/80 text-red-500 transition-all hover:bg-red-100 active:scale-95 sm:h-7 sm:w-7 dark:border-red-800/60 dark:bg-red-950/40 dark:text-red-400 dark:hover:bg-red-900/50"
+                            title="Close"
+                            aria-label="Close"
+                        >
+                            <X className="h-3.5 w-3.5" strokeWidth={2.25} />
+                        </button>
                     </div>
 
-                    <div className="border-t border-lex px-1.5 py-1 sm:px-2 md:px-3 dark:border-lex">
-                        <p className="w-full text-left font-mono text-[12px] font-medium leading-snug text-gray-600 [overflow-wrap:anywhere] dark:text-gray-400 sm:text-[13px]">
-                            {fullDecision.case_number || '—'}
-                            {fullDecision.date_str ? (
-                                <span className="text-gray-500 dark:text-gray-500">
-                                    {' '}
-                                    &middot; {formatDate(fullDecision.date_str)}
-                                </span>
-                            ) : null}
-                        </p>
-                    </div>
-
-                    <div className={`px-4 pb-3 sm:px-6 sm:pb-4 ${headerCollapsed ? 'hidden' : 'block'}`}>
+                    <div className={`border-t border-lex px-4 pb-3 sm:px-6 sm:pb-4 ${headerCollapsed ? 'hidden' : 'block'}`}>
                         <div className="rounded-lg border border-lex bg-neutral-50 px-3 py-2.5 dark:border-lex dark:bg-zinc-800/90">
                             <dl className="space-y-2.5">
                                 {fullDecision.significance_category && (
@@ -931,6 +920,20 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                 {/* SCROLLABLE MAIN CONTENT */}
                 <div onScroll={handleContentScroll} className="relative z-0 flex-1 min-h-0 space-y-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent" style={{ fontSize: `${fontSize}px` }}>
+
+                    {/* Case identity card — scrolls with content, replaces the old sticky GR/date bar */}
+                    <div className="mb-4 sm:mb-6 rounded-xl border border-lex bg-white px-4 py-3 text-center dark:bg-zinc-900 dark:border-lex">
+                        <p className="text-[15px] font-bold leading-snug text-gray-900 dark:text-white sm:text-[17px]">
+                            {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
+                        </p>
+                        {(fullDecision.case_number || fullDecision.date_str) && (
+                            <p className="mt-1 font-mono text-[11px] font-medium text-gray-500 dark:text-gray-400 sm:text-[12px]">
+                                {fullDecision.case_number}
+                                {fullDecision.case_number && fullDecision.date_str && <span className="mx-1.5">|</span>}
+                                {fullDecision.date_str && formatDate(fullDecision.date_str)}
+                            </p>
+                        )}
+                    </div>
 
                     {viewMode === 'digest' ? (
                         <>
