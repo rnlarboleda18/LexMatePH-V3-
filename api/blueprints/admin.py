@@ -26,6 +26,8 @@ from utils.clerk_auth import get_authenticated_user_id
 
 admin_bp = func.Blueprint()
 
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://lexmateph.com").rstrip("/")
+
 # ── In-memory backup job store ────────────────────────────────────────────────
 # Persists within a single Azure Functions worker lifetime.
 _backup_jobs: dict = {}
@@ -146,7 +148,7 @@ def _json(data, status=200):
         json.dumps(data, default=str),
         mimetype="application/json",
         status_code=status,
-        headers={"Access-Control-Allow-Origin": "*"},
+        headers={"Access-Control-Allow-Origin": FRONTEND_URL},
     )
 
 

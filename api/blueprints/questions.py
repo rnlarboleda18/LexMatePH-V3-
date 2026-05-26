@@ -63,7 +63,7 @@ def get_questions(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error getting questions: {e}")
         return func.HttpResponse(
-            body=json.dumps({"error": str(e)}),
+            body=json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )
@@ -229,7 +229,7 @@ def get_lexify_questions(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"lexify_questions error: {e}")
         return func.HttpResponse(
-            body=json.dumps({"error": str(e)}),
+            body=json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )
@@ -290,7 +290,7 @@ def get_lexify_exams(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"lexify_exams error: {e}")
         return func.HttpResponse(
-            body=json.dumps({"error": str(e)}),
+            body=json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500,
         )

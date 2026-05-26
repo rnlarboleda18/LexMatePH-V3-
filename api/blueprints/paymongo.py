@@ -87,11 +87,6 @@ def _normalize_anonymous_usage_id(raw) -> str | None:
         return None
 
 
-ADMIN_EMAILS = [
-    "rnlarboleda@gmail.com",
-    "rnlarboleda18@gmail.com"
-]
-
 # ── Testing / dev mode ────────────────────────────────────────────────────────
 # Set PAYMONGO_BYPASS=true in local.settings.json to skip PayMongo entirely.
 # Any subscription button will IMMEDIATELY grant the tier without payment.
@@ -199,7 +194,7 @@ def _verify_paymongo_webhook(payload: bytes, signature_header: str) -> bool:
         # Accept either test or live hash
         return computed == te_hash or computed == li_hash
     except Exception as e:
-        logging.error(f"Webhook signature verification error: {e}")
+        logging.error(f"Webhook signature verification error: {e}", exc_info=True)
         return False
 
 
@@ -229,9 +224,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     urow = cur.fetchone()
                     if urow:
                         db_admin, email = urow[0], urow[1]
-                        em = (email or "").strip().lower()
-                        admin_list = [e.strip().lower() for e in ADMIN_EMAILS]
-                        is_admin_flag = bool(db_admin) or (em in admin_list)
+                        is_admin_flag = bool(db_admin)
                         try_grant_founding_promo(cur, clerk_id, is_admin_flag)
                     conn.commit()
         except Exception as ex:
@@ -283,19 +276,6 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     from utils.founding_promo import get_promo_duration_days
                     expires_at = founding_granted_at + timedelta(days=get_promo_duration_days())
 
-                # Check for hardcoded admin bypass
-                if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
-                    is_admin = True
-                    # Self-heal DB if needed (wrap in try to avoid 500 if col missing)
-                    try:
-                        if not row[3]: # row[3] is is_admin
-                            cur.execute("UPDATE users SET is_admin = TRUE WHERE clerk_id = %s", (clerk_id,))
-                            conn.commit()
-                    except:
-                        conn.rollback()
-                        logging.warning("Could not self-heal is_admin column (probably missing)")
-
-
                 return func.HttpResponse(
                     json.dumps({
                         "tier": tier or "free",
@@ -314,7 +294,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
 
 
     except Exception as e:
-        logging.error(f"subscription_status error: {e}")
+        logging.error(f"subscription_status error: {e}", exc_info=True)
         return func.HttpResponse(
             json.dumps({"error": "Internal server error"}),
             mimetype="application/json", status_code=500
@@ -452,9 +432,9 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     except Exception as e:
-        logging.error(f"create_checkout error: {e}")
+        logging.error(f"create_checkout error: {e}", exc_info=True)
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json", status_code=500
         )
 
@@ -515,9 +495,9 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json", status_code=200
         )
     except Exception as e:
-        logging.error(f"cancel_subscription error: {e}")
+        logging.error(f"cancel_subscription error: {e}", exc_info=True)
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json", status_code=500
         )
 
@@ -672,9 +652,9 @@ def track_usage(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     except Exception as e:
-        logging.error(f"track_usage error: {e}")
+        logging.error(f"track_usage error: {e}", exc_info=True)
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json", status_code=500
         )
 
@@ -794,9 +774,9 @@ def attach_payment_method(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     except Exception as e:
-        logging.error(f"attach_payment_method error: {e}")
+        logging.error(f"attach_payment_method error: {e}", exc_info=True)
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json", status_code=500,
         )
 
@@ -859,7 +839,7 @@ def paymongo_webhook(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse("OK", status_code=200)
 
     except Exception as e:
-        logging.error(f"paymongo_webhook error: {e}")
+        logging.error(f"paymongo_webhook error: {e}", exc_info=True)
         return func.HttpResponse("Internal error", status_code=500)
 
 

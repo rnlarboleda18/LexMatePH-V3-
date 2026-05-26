@@ -173,7 +173,7 @@ async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
         except Exception as e:
             logging.error(f"Vertex AI Grading error: {e}")
             return func.HttpResponse(
-                json.dumps({"error": "AI Grading service error", "detail": str(e)}),
+                json.dumps({"error": "AI Grading service error", "detail": "AI service error"}),
                 mimetype="application/json",
                 status_code=502
             )
@@ -187,7 +187,7 @@ async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Lexify grading error: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )
@@ -273,7 +273,7 @@ async def lexify_grade_batch(req: func.HttpRequest) -> func.HttpResponse:
         except Exception as e:
             logging.error(f"Vertex AI batch grading error: {e}")
             return func.HttpResponse(
-                json.dumps({"error": "AI Grading service error", "detail": str(e)}),
+                json.dumps({"error": "AI Grading service error", "detail": "AI service error"}),
                 mimetype="application/json",
                 status_code=502,
             )
@@ -339,7 +339,7 @@ async def lexify_grade_batch(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Lexify batch grading error: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500,
         )

@@ -568,7 +568,7 @@ def get_codex_versions(req: func.HttpRequest) -> func.HttpResponse:
 
     except Exception as e:
         logging.error(f"Codex API Error: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if conn:
             put_db_connection(conn)
@@ -608,7 +608,7 @@ def get_codex_issuance(req: func.HttpRequest) -> func.HttpResponse:
         return compressed_json_response(payload, req, 200, max_age=3600)
     except Exception as e:
         logging.error(f"Codex Issuance API Error: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if conn:
             put_db_connection(conn)
@@ -647,7 +647,7 @@ def get_codex_amendments(req: func.HttpRequest) -> func.HttpResponse:
         return compressed_json_response(rows_out, req, 200, max_age=7200)
     except Exception as e:
         logging.error(f"Codex Amendments API Error: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if conn: put_db_connection(conn)
 
@@ -746,7 +746,7 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
         return compressed_json_response(rows, req, 200, max_age=1800)
     except Exception as e:
         logging.error(f"Codex Jurisprudence API Error: {e}")
-        return func.HttpResponse(json.dumps({"error": str(e)}), status_code=500)
+        return func.HttpResponse(json.dumps({"error": "Internal server error"}), status_code=500)
     finally:
         if cur:
             cur.close()

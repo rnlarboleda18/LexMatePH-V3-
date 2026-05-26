@@ -36,11 +36,6 @@ XENDIT_BASE_URL     = "https://api.xendit.co"
 
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://lexmateph.com").rstrip("/")
 
-ADMIN_EMAILS = [
-    "rnlarboleda@gmail.com",
-    "rnlarboleda18@gmail.com",
-]
-
 # ── Bypass mode (same as old PayMongo bypass — skip payment, grant tier) ─────
 # Set XENDIT_BYPASS=true in local.settings.json for local dev without real payments.
 XENDIT_BYPASS = os.environ.get("XENDIT_BYPASS", "").lower() in ("true", "1", "yes")
@@ -327,9 +322,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     urow = cur.fetchone()
                     if urow:
                         db_admin, email = urow[0], urow[1]
-                        em = (email or "").strip().lower()
-                        admin_list = [e.strip().lower() for e in ADMIN_EMAILS]
-                        is_admin_flag = bool(db_admin) or (em in admin_list)
+                        is_admin_flag = bool(db_admin)
                         try_grant_founding_promo(cur, clerk_id, is_admin_flag)
                     trial_reminder_claim = claim_trial_ending_reminder(cur, clerk_id)
                     conn.commit()
@@ -394,15 +387,6 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     from datetime import timedelta
                     from utils.founding_promo import get_promo_duration_days
                     expires_at = founding_granted_at + timedelta(days=get_promo_duration_days())
-
-                if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
-                    is_admin = True
-                    try:
-                        if not row[3]:
-                            cur.execute("UPDATE users SET is_admin = TRUE WHERE clerk_id = %s", (clerk_id,))
-                            conn.commit()
-                    except Exception:
-                        conn.rollback()
 
                 is_admin_eff = bool(is_admin)
                 tier_norm = (tier or "free")
@@ -613,14 +597,14 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
         logging.error(f"create_checkout error: {e}\n{detail}")
         if "XENDIT_API_KEY" in str(e):
             return func.HttpResponse(
-                json.dumps({"error": "Payment provider is not configured", "detail": str(e)}),
+                json.dumps({"error": "Payment provider is not configured"}),
                 mimetype="application/json",
                 status_code=503,
             )
         return func.HttpResponse(
-            json.dumps({"error": str(e) or "Unknown internal error", "trace": detail[-600:]}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
-            status_code=422,
+            status_code=500,
         )
 
 
@@ -776,9 +760,9 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
             mimetype="application/json", status_code=200,
         )
     except Exception as e:
-        logging.error(f"cancel_subscription error: {e}")
+        logging.error(f"cancel_subscription error: {e}", exc_info=True)
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json", status_code=500,
         )
 
@@ -943,9 +927,9 @@ def track_usage(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     except Exception as e:
-        logging.error(f"track_usage error: {e}")
+        logging.error(f"track_usage error: {e}", exc_info=True)
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Internal server error"}),
             mimetype="application/json", status_code=500,
         )
 

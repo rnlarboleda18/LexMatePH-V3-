@@ -26,6 +26,8 @@ from config import (
 log = logging.getLogger(__name__)
 legal_chat_bp = func.Blueprint()
 
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://lexmateph.com").rstrip("/")
+
 # In-memory session store — survives within a single function instance.
 # For multi-instance deployments, swap for Redis (REDIS_URL is already in config).
 _sessions: dict[str, list[dict]] = {}
@@ -105,7 +107,7 @@ def _json_response(data: dict, status: int = 200) -> func.HttpResponse:
         json.dumps(data, default=str),
         status_code=status,
         mimetype="application/json",
-        headers={"Access-Control-Allow-Origin": "*"},
+        headers={"Access-Control-Allow-Origin": FRONTEND_URL},
     )
 
 
@@ -120,7 +122,7 @@ def _error(msg: str, status: int = 400) -> func.HttpResponse:
 def legal_chat(req: func.HttpRequest) -> func.HttpResponse:
     if req.method == "OPTIONS":
         return func.HttpResponse(status_code=204,
-                                 headers={"Access-Control-Allow-Origin": "*",
+                                 headers={"Access-Control-Allow-Origin": FRONTEND_URL,
                                           "Access-Control-Allow-Methods": "POST",
                                           "Access-Control-Allow-Headers": "Content-Type,Authorization"})
 

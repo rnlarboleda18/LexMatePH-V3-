@@ -139,11 +139,11 @@ def test_admin_flag_from_db_is_admin():
     assert body["is_admin"] is True
 
 
-# ── Admin via hardcoded email (documents current behavior) ────────────────────
+# ── Admin status is DB-only (Tier 2 security fix applied) ─────────────────────
 
-def test_hardcoded_admin_email_grants_admin():
-    # Documents current behavior: hardcoded email grants admin via two separate checks.
-    # This test should FAIL after admin emails are moved to DB roles (Tier 2 security fix).
+def test_admin_email_without_db_flag_is_not_admin():
+    # Admin status comes solely from the DB is_admin column after Tier 2 fix.
+    # A known admin email with is_admin=False in DB must NOT be granted admin.
     admin_email = "rnlarboleda18@gmail.com"
     db = _two_call_db(
         (False, admin_email),
@@ -153,7 +153,7 @@ def test_hardcoded_admin_email_grants_admin():
     resp = _call(req, db_conn=db)
     status, body = parse_response(resp)
     assert status == 200
-    assert body["is_admin"] is True  # granted via hardcoded list — should become DB role
+    assert body["is_admin"] is False  # DB flag is authoritative; email alone does not grant admin
 
 
 def test_non_admin_email_is_not_admin():

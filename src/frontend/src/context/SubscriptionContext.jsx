@@ -42,18 +42,6 @@ const TIER_LABELS = {
   barrister: 'Barrister',
 };
 
-// ─── Hardcoded admin emails (purely frontend, no DB needed) ───────────────────
-const ADMIN_EMAILS = [
-  'rnlarboleda18@gmail.com',
-];
-
-function isAdminEmail(emailAddresses = []) {
-  return emailAddresses.some((ea) => {
-    const addr = (ea.emailAddress || ea || '').trim().toLowerCase();
-    return ADMIN_EMAILS.includes(addr);
-  });
-}
-
 // ─── Test/Dev tier override ───────────────────────────────────────────────────
 // To test a tier, open your browser console and run:
 //   localStorage.setItem('lexmate_test_tier', 'amicus')   // or 'juris', 'barrister', 'free'
@@ -108,21 +96,6 @@ export function SubscriptionProvider({ children }) {
       setLoading(true);
       return null;
     }
-
-    const emails = u.emailAddresses || [];
-    const clerkAdmin = isAdminEmail(emails);
-    if (clerkAdmin) {
-      console.log('[Subscription] 🔑 Admin access granted for:', u.primaryEmailAddress?.emailAddress);
-      setIsAdmin(true);
-      setTier('barrister');
-      setStatus('active');
-      setCanCancelXendit(false);
-      setPastDueGraceDays(5);
-      setLoading(false);
-      return 'barrister';
-    }
-
-    setIsAdmin(false);
 
     try {
       setLoading(true);
