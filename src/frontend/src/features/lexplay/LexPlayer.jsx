@@ -829,7 +829,7 @@ const LexPlayer = ({
                 {/* Mobile: label row above transport. Desktop/tablet: label left, transport centered. */}
                 <div
                     className="relative flex w-full flex-col cursor-pointer hover:bg-neutral-50 dark:hover:bg-zinc-900/80
-                        pl-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] pr-[max(2.25rem,env(safe-area-inset-right,0px))] py-0 md:py-1 md:pb-1 md:pr-[max(2.75rem,env(safe-area-inset-right,0px))]"
+                        py-0 md:pl-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] md:py-1 md:pb-1 md:pr-[max(2.75rem,env(safe-area-inset-right,0px))]"
                     onClick={onExpand}
                 >
                     {typeof onCloseMini === 'function' && (
@@ -845,8 +845,8 @@ const LexPlayer = ({
                     )}
                     {/* Mobile: transport absolutely centered in bar; GR number centered in left half */}
                     <div className="md:hidden relative h-[28px] w-full">
-                        {/* GR number — centered between left edge and transport buttons */}
-                        <div className="absolute inset-y-0 left-0 right-1/2 flex items-center justify-center pr-1 pointer-events-none">
+                        {/* GR number — centered between left safe-area edge and transport buttons */}
+                        <div className="absolute inset-y-0 left-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] right-1/2 flex items-center justify-center pr-1 pointer-events-none">
                             <p
                                 className={`min-w-0 max-w-full truncate text-[10px] font-semibold leading-none tracking-tight ${miniMarqueeClass}`}
                                 title={miniMarqueeText}
