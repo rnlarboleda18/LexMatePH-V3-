@@ -582,10 +582,33 @@ OUTPUT (JSON only):
 
 def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
     title = case.get("short_title", str(case["id"]))[:50]
+    skey = ",".join(sorted(CODE_CONFIGS.keys()))
+
+    def _mark_processed_in_db():
+        if dry_run:
+            return
+        conn = get_db_connection()
+        try:
+            cur = conn.cursor()
+            cur.execute(
+                """
+                INSERT INTO codal_linker_processed (case_id, statutes_key)
+                VALUES (%s, %s) ON CONFLICT DO NOTHING
+                """,
+                (case["id"], skey),
+            )
+            conn.commit()
+            cur.close()
+        except Exception as exc:
+            conn.rollback()
+            print(f"   [ERR] DB error marking processed for {title}: {exc}", flush=True)
+        finally:
+            release(conn)
 
     # ---- PASS 1 ----
     raw_hits = pass1_route(case)
     if not raw_hits:
+        _mark_processed_in_db()
         return 0
 
     # Validate hits against index (normalise article numbers)
@@ -604,11 +627,13 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
             valid_candidates.append((code_id, canon))
 
     if not valid_candidates:
+        _mark_processed_in_db()
         return 0
 
     # ---- PASS 2 ----
     granular = pass2_granular(case, valid_candidates, article_index)
     if not granular:
+        _mark_processed_in_db()
         return 0
 
     # Validate and sanitise PASS-2 output
@@ -641,6 +666,10 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
             "subject_area": CODE_CONFIGS[code_id]["subject_area"],
         })
 
+    if not final_links:
+        _mark_processed_in_db()
+        return 0
+
     if dry_run:
         for lk in final_links:
             prov = "Sec." if lk["code_id"] == "RCC" else "Art."
@@ -651,7 +680,6 @@ def process_case(case: dict, article_index: dict, dry_run: bool) -> int:
         return len(final_links)
 
     # ---- COMMIT ----
-    skey = ",".join(sorted(CODE_CONFIGS.keys()))
     conn = get_db_connection()
     try:
         cur = conn.cursor()

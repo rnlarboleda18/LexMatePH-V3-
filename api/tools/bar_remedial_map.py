@@ -81,6 +81,19 @@ REMEDIAL_MAP = [
             },
         ]
     },
+    {
+        "roman_num": "II", "topic_heading": "Jurisdiction",
+        "sub_letter": "C", "sub_heading": "Katarungang Pambarangay (Lupong Tagapamayapa - R.A. 7160)",
+        "sort_order": 4.5,
+        "provisions": [
+            {
+                "statute_id": "RA-7160", "provision_id": "general",
+                "label": "R.A. 7160 – Katarungang Pambarangay Law (Sections 399-422)",
+                "source": "scrape",
+                "scrape_url": f"{LAWPHIL}/statutes/repacts/ra1991/ra_7160_1991.html",
+            }
+        ]
+    },
 
     # ──────────────────────────────────────────────────────────────────────────
     # III. CIVIL PROCEDURE — ACTIONS, PLEADINGS, PARTIES, AND SUMMONS
@@ -98,6 +111,17 @@ REMEDIAL_MAP = [
     },
     {
         "roman_num": "III", "topic_heading": "Civil Procedure — Actions, Pleadings, Parties, and Summons",
+        "sub_letter": "A1", "sub_heading": "Venue of Actions (Rule 4)",
+        "sort_order": 5.5,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "4-1",  "label": "Rule 4, Sec. 1 – Venue of real actions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "4-2",  "label": "Rule 4, Sec. 2 – Venue of personal actions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "4-3",  "label": "Rule 4, Sec. 3 – Venue of actions against nonresidents", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "4-4",  "label": "Rule 4, Sec. 4 – When Rule not applicable", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "III", "topic_heading": "Civil Procedure — Actions, Pleadings, Parties, and Summons",
         "sub_letter": "B", "sub_heading": "Pleadings (Complaint, Answer, Counterclaim, Cross-claim, Reply)",
         "sort_order": 6,
         "provisions": [
@@ -107,7 +131,46 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "6-6",  "label": "Rule 6, Sec. 6 – Counterclaim", "source": "db"},
             {"statute_id": "ROC", "provision_id": "6-7",  "label": "Rule 6, Sec. 7 – Compulsory counterclaim", "source": "db"},
             {"statute_id": "ROC", "provision_id": "6-8",  "label": "Rule 6, Sec. 8 – Cross-claim", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "7-1",  "label": "Rule 7, Sec. 1 – Caption", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "7-3",  "label": "Rule 7, Sec. 3 – Signature and address", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "7-4",  "label": "Rule 7, Sec. 4 – Verification", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "7-5",  "label": "Rule 7, Sec. 5 – Certification against forum shopping", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "8-1",  "label": "Rule 8, Sec. 1 – Manner of making allegations in general", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "8-3",  "label": "Rule 8, Sec. 3 – Conditions precedent", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "9-1",  "label": "Rule 9, Sec. 1 – Defenses and objections not pleaded (waiver)", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "9-3",  "label": "Rule 9, Sec. 3 – Default; declaration of", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "10-1", "label": "Rule 10, Sec. 1 – Amendments in general", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "10-2", "label": "Rule 10, Sec. 2 – Amendments as a matter of right", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "10-3", "label": "Rule 10, Sec. 3 – Amendments by leave of court", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "10-8", "label": "Rule 10, Sec. 8 – Supplemental pleadings", "source": "db"},
             {"statute_id": "ROC", "provision_id": "11-1", "label": "Rule 11, Sec. 1 – Periods to plead", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "III", "topic_heading": "Civil Procedure — Actions, Pleadings, Parties, and Summons",
+        "sub_letter": "B1", "sub_heading": "Filing and Service of Pleadings; Bill of Particulars (Rules 12 and 13)",
+        "sort_order": 6.2,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "12-1", "label": "Rule 12, Sec. 1 – Bill of particulars; purpose", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "12-4", "label": "Rule 12, Sec. 4 – Effect of non-compliance", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "13-2", "label": "Rule 13, Sec. 2 – Filing and service, defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "13-3", "label": "Rule 13, Sec. 3 – Manner of filing", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "13-5", "label": "Rule 13, Sec. 5 – Modes of service", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "13-9", "label": "Rule 13, Sec. 9 – Service by electronic means", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "III", "topic_heading": "Civil Procedure — Actions, Pleadings, Parties, and Summons",
+        "sub_letter": "B2", "sub_heading": "Motions and Dismissal of Actions (Rules 15 and 17)",
+        "sort_order": 6.4,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "15-1", "label": "Rule 15, Sec. 1 – Motion defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "15-2", "label": "Rule 15, Sec. 2 – Motions must be in writing", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "15-4", "label": "Rule 15, Sec. 4 – Non-litigious motions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "15-5", "label": "Rule 15, Sec. 5 – Litigious motions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "17-1", "label": "Rule 17, Sec. 1 – Dismissal upon notice by plaintiff", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "17-2", "label": "Rule 17, Sec. 2 – Dismissal upon motion of plaintiff", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "17-3", "label": "Rule 17, Sec. 3 – Dismissal due to fault of plaintiff", "source": "db"},
         ]
     },
     {
@@ -150,6 +213,21 @@ REMEDIAL_MAP = [
     },
     {
         "roman_num": "IV", "topic_heading": "Civil Procedure — Trial, Judgment, Appeals, and Execution",
+        "sub_letter": "A2", "sub_heading": "Modes of Discovery (Rules 23 to 29)",
+        "sort_order": 9.5,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "23-1", "label": "Rule 23, Sec. 1 – Depositions pending action", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "23-4", "label": "Rule 23, Sec. 4 – Use of depositions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "24-1", "label": "Rule 24, Sec. 1 – Depositions before action; petition", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "25-1", "label": "Rule 25, Sec. 1 – Interrogatories to parties", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "26-1", "label": "Rule 26, Sec. 1 – Request for admission", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 – Production or inspection of documents or things", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 – Physical and mental examination of persons", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "29-1", "label": "Rule 29, Sec. 1 – Refusal to answer discovery", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "IV", "topic_heading": "Civil Procedure — Trial, Judgment, Appeals, and Execution",
         "sub_letter": "B", "sub_heading": "Judgments (Summary Judgment, Default, Judgment on Pleadings)",
         "sort_order": 10,
         "provisions": [
@@ -157,6 +235,18 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "35-2",  "label": "Rule 35, Sec. 2 – Summary judgment for defending party", "source": "db"},
             {"statute_id": "ROC", "provision_id": "36-1",  "label": "Rule 36, Sec. 1 – Judgment or final order", "source": "db"},
             {"statute_id": "ROC", "provision_id": "37-1",  "label": "Rule 37, Sec. 1 – New trial or reconsideration", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "IV", "topic_heading": "Civil Procedure — Trial, Judgment, Appeals, and Execution",
+        "sub_letter": "B1", "sub_heading": "Post-Judgment Remedies (Relief from Judgment Rule 38; Annulment of Judgment Rule 47)",
+        "sort_order": 10.5,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "38-1", "label": "Rule 38, Sec. 1 – Petition for relief from judgment", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "38-3", "label": "Rule 38, Sec. 3 – Time for filing petition", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "47-1", "label": "Rule 47, Sec. 1 – Coverage of annulment of judgment", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "47-2", "label": "Rule 47, Sec. 2 – Grounds for annulment", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "47-3", "label": "Rule 47, Sec. 3 – Period for filing action", "source": "db"},
         ]
     },
     {
@@ -179,6 +269,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "39-1",  "label": "Rule 39, Sec. 1 – Execution upon judgments", "source": "db"},
             {"statute_id": "ROC", "provision_id": "39-6",  "label": "Rule 39, Sec. 6 – Execution by motion or independent action", "source": "db"},
             {"statute_id": "ROC", "provision_id": "39-47", "label": "Rule 39, Sec. 47 – Effect of judgments", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "39-48", "label": "Rule 39, Sec. 48 – Effect of foreign judgments or final orders", "source": "db"},
         ]
     },
 
@@ -191,7 +282,7 @@ REMEDIAL_MAP = [
         "sort_order": 13,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "39-47", "label": "Rule 39, Sec. 47 – Effect of judgments (res judicata)", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "1-3",   "label": "Rule 7, Sec. 5 – Certification against forum shopping", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "7-5",   "label": "Rule 7, Sec. 5 – Certification against forum shopping", "source": "db"},
         ]
     },
 
@@ -250,6 +341,16 @@ REMEDIAL_MAP = [
         "provisions": [
             {"statute_id": "ROC", "provision_id": "66-1",  "label": "Rule 66, Sec. 1 – Action by government", "source": "db"},
             {"statute_id": "ROC", "provision_id": "66-5",  "label": "Rule 66, Sec. 5 – When individual may commence", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "VII", "topic_heading": "Special Civil Actions — Prerogative Writs",
+        "sub_letter": "C", "sub_heading": "Interpleader (Rule 62) and Declaratory Relief (Rule 63)",
+        "sort_order": 18.5,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "62-1", "label": "Rule 62, Sec. 1 – When interpleader proper", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "63-1", "label": "Rule 63, Sec. 1 – Who may file petition for declaratory relief", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "63-2", "label": "Rule 63, Sec. 2 – Parties in declaratory relief", "source": "db"},
         ]
     },
 
@@ -373,6 +474,16 @@ REMEDIAL_MAP = [
     },
     {
         "roman_num": "XI", "topic_heading": "Criminal Procedure — Prosecution, Preliminary Investigation, Arrest, Bail",
+        "sub_letter": "A2", "sub_heading": "Prosecution of Civil Action (Rule 111)",
+        "sort_order": 27.5,
+        "provisions": [
+            {"statute_id": "ROC", "provision_id": "111-1",  "label": "Rule 111, Sec. 1 – Institution of criminal and civil actions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "111-2",  "label": "Rule 111, Sec. 2 – When separate civil action is suspended", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "111-3",  "label": "Rule 111, Sec. 3 – When civil action may proceed independently", "source": "db"},
+        ]
+    },
+    {
+        "roman_num": "XI", "topic_heading": "Criminal Procedure — Prosecution, Preliminary Investigation, Arrest, Bail",
         "sub_letter": "B", "sub_heading": "Preliminary Investigation (Rule 112)",
         "sort_order": 28,
         "provisions": [
@@ -393,6 +504,11 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "114-5",  "label": "Rule 114, Sec. 5 – Bail discretionary", "source": "db"},
             {"statute_id": "ROC", "provision_id": "114-8",  "label": "Rule 114, Sec. 8 – Capital offense — bail denied", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-13", "label": "Art. III, Sec. 13 – Right to bail", "source": "db"},
+            {
+                "statute_id": "AM-21-06-08", "provision_id": "general",
+                "label": "A.M. No. 21-06-08 – Rules on the Use of Body-Worn Cameras in the Execution of Warrants",
+                "source": "ai",
+            },
         ]
     },
 
@@ -415,6 +531,8 @@ REMEDIAL_MAP = [
         "sort_order": 31,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "118-1",  "label": "Rule 118, Sec. 1 – Pre-trial; mandatory", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "119-17", "label": "Rule 119, Sec. 17 – Discharge of accused to be state witness", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "119-23", "label": "Rule 119, Sec. 23 – Demurrer to evidence", "source": "db"},
             {"statute_id": "ROC", "provision_id": "120-1",  "label": "Rule 120, Sec. 1 – Judgment defined", "source": "db"},
             {"statute_id": "ROC", "provision_id": "120-4",  "label": "Rule 120, Sec. 4 – Judgment in case of variance", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-21", "label": "Art. III, Sec. 21 – Double jeopardy", "source": "db"},
@@ -430,6 +548,11 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "126-5",  "label": "Rule 126, Sec. 5 – Validity of search warrant", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-2",  "label": "Art. III, Sec. 2 – Right against unreasonable searches and seizures", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-3",  "label": "Art. III, Sec. 3(2) – Exclusionary rule", "source": "db"},
+            {
+                "statute_id": "AM-17-11-03-SC", "provision_id": "general",
+                "label": "A.M. No. 17-11-03-SC – Rule on Cybercrime Warrants",
+                "source": "ai",
+            },
         ]
     },
 
@@ -449,7 +572,7 @@ REMEDIAL_MAP = [
     },
     {
         "roman_num": "XIII", "topic_heading": "Evidence — Admissibility, Documentary, Electronic, Testimonial",
-        "sub_letter": "B", "sub_heading": "Parol Evidence Rule; Electronic Evidence (R.A. 8792, A.M. 01-7-01-SC)",
+        "sub_letter": "B", "sub_heading": "Parol Evidence Rule; Electronic Evidence; DNA Evidence",
         "sort_order": 34,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "130-9",  "label": "Rule 130, Sec. 9 – Parol evidence rule", "source": "db"},
@@ -457,6 +580,11 @@ REMEDIAL_MAP = [
                 "statute_id": "AM-01-7-01-SC", "provision_id": "general",
                 "label": "A.M. No. 01-7-01-SC – Rules on Electronic Evidence",
                 "source": "db",
+            },
+            {
+                "statute_id": "AM-06-11-5-SC", "provision_id": "general",
+                "label": "A.M. No. 06-11-5-SC – Revised Rule on DNA Evidence",
+                "source": "ai",
             },
         ]
     },

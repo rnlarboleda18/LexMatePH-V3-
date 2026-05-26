@@ -180,26 +180,75 @@ const ROUTE_META = {
   },
 };
 
+function stripMarkdown(text) {
+  if (!text) return '';
+  return text
+    .replace(/#{1,6}\s+/g, '')
+    .replace(/[*_`>~]/g, '')
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
 /**
  * Drop-in SEO head component. Place at the top of each page/route.
  *
  * @param {object} props
  * @param {string} props.mode - App mode key (matches ROUTE_META keys above)
  * @param {string} [props.caseId] - Numeric case ID when on a /decisions/{id} deep-link
+ * @param {object} [props.caseData] - Loaded case object for deep-link pages (globalSelectedCase)
  * @param {string} [props.title] - Override title
  * @param {string} [props.description] - Override description
  * @param {string} [props.image] - Override OG image URL
  */
-export default function SeoHead({ mode, caseId, title, description, image }) {
+export default function SeoHead({ mode, caseId, caseData, title, description, image }) {
   const meta = ROUTE_META[mode] || ROUTE_META.about;
-  const resolvedTitle = title || meta.title;
-  const resolvedDesc = description || meta.description;
   const resolvedImage = image || DEFAULT_IMAGE;
+
   // Deep-link pages (/decisions/12345) get a case-specific canonical so Google
   // indexes each case individually rather than treating them all as duplicates of /decisions.
   const canonicalUrl = (mode === 'supreme_decisions' && caseId)
     ? `${BASE_URL}/decisions/${caseId}`
     : `${BASE_URL}${meta.path}`;
+
+  // Build case-specific title/description when case data is available for deep links.
+  let resolvedTitle = title || meta.title;
+  let resolvedDesc = description || meta.description;
+  let caseSchema = null;
+
+  if (mode === 'supreme_decisions' && caseId && caseData && !caseData.error) {
+    const caseLabel = caseData.short_title || caseData.title || '';
+    const grNo = caseData.case_number || caseData.gr_number || '';
+    const date = caseData.date_promulgated || '';
+    const ponente = caseData.ponente || '';
+
+    if (caseLabel) {
+      resolvedTitle = grNo
+        ? `${caseLabel} [${grNo}] · LexMatePH`
+        : `${caseLabel} · LexMatePH`;
+    }
+
+    const factsText = stripMarkdown(caseData.digest_facts || caseData.digest_ruling || '');
+    if (factsText) {
+      const snippet = factsText.slice(0, 155).trimEnd();
+      resolvedDesc = snippet.length < factsText.length ? `${snippet}…` : snippet;
+    } else if (ponente) {
+      resolvedDesc = `Case digest: ${caseLabel}${grNo ? ` (${grNo})` : ''}${ponente ? `. Ponente: ${ponente}` : ''}. Philippine Supreme Court jurisprudence on LexMatePH.`;
+    }
+
+    caseSchema = {
+      '@context': 'https://schema.org',
+      '@type': 'LegalCase',
+      name: caseLabel,
+      identifier: grNo,
+      datePublished: date,
+      author: ponente ? { '@type': 'Person', name: ponente } : undefined,
+      url: canonicalUrl,
+      publisher: { '@type': 'Organization', name: 'Supreme Court of the Philippines' },
+      description: resolvedDesc,
+      inLanguage: 'en-PH',
+    };
+  }
 
   return (
     <Helmet>
@@ -226,9 +275,9 @@ export default function SeoHead({ mode, caseId, title, description, image }) {
       <meta name="twitter:image" content={resolvedImage} />
 
       {/* JSON-LD Structured Data */}
-      {meta.schema && (
+      {(caseSchema || meta.schema) && (
         <script type="application/ld+json">
-          {JSON.stringify(meta.schema)}
+          {JSON.stringify(caseSchema || meta.schema)}
         </script>
       )}
     </Helmet>

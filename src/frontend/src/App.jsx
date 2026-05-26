@@ -963,7 +963,7 @@ function App() {
 
         return (
           <>
-            <SeoHead mode={effectiveMode} caseId={pendingDeepLinkId} />
+            <SeoHead mode={effectiveMode} caseId={pendingDeepLinkId} caseData={pendingDeepLinkId ? globalSelectedCase : null} />
             <PastDueBanner />
 
             {/* Control Bar Visibility */}
@@ -1348,7 +1348,7 @@ function App() {
                       </Suspense>
                     </div>
                   )}
-                  {isAdmin && openTabs.includes('bar_2026') && (
+                  {openTabs.includes('bar_2026') && (
                     <div style={{ display: effectiveMode === 'bar_2026' ? undefined : 'none' }}>
                       <Suspense fallback={<PageLoadingFallback label="Loading BAR 2026…" />}>
                         <Bar2026 onCaseClick={selectGlobalCaseGuarded} />

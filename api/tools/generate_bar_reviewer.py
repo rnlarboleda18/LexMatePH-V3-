@@ -142,7 +142,7 @@ def load_settings():
             for k, v in vals.items():
                 if k not in os.environ:
                     os.environ[k] = v
-            if db:
+            if db and "DB_CONNECTION_STRING" not in os.environ:
                 os.environ["DB_CONNECTION_STRING"] = db
     except Exception:
         pass
