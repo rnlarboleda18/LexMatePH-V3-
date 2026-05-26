@@ -342,6 +342,8 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const [newPlaylistName, setNewPlaylistName] = useState('');
     const [isCreatingPlaylist, setIsCreatingPlaylist] = useState(false);
     const [headerCollapsed, setHeaderCollapsed] = useState(true); // metadata panel hidden until user expands (all breakpoints)
+    const [headerVisible, setHeaderVisible] = useState(true);
+    const lastScrollYRef = useRef(0);
     const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize();
     const ratioRef = useRef(null);
 
@@ -408,6 +410,17 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         }
         setFullDecision((prev) => (prev ? { ...prev, ...decision } : decision));
     }, [decision]);
+
+    // Reveal header when switching view modes so new buttons are visible
+    useEffect(() => { setHeaderVisible(true); }, [viewMode]);
+
+    const handleContentScroll = useCallback((e) => {
+        const scrollY = e.currentTarget.scrollTop;
+        const delta = scrollY - lastScrollYRef.current;
+        lastScrollYRef.current = scrollY;
+        if (delta > 8) setHeaderVisible(false);
+        else if (delta < -3) setHeaderVisible(true);
+    }, []);
 
     // Handle Scroller Sync
     useEffect(() => {
@@ -727,8 +740,9 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     </div>
                 )}
 
-                {/* HEADER — must stack above scroll body (both were z-10; scroll came later in DOM and ate taps on the X on mobile) */}
-                <div className="relative z-30 shrink-0 border-b border-lex bg-white dark:border-lex dark:bg-zinc-900">
+                {/* HEADER — auto-hides on scroll down, reveals on scroll up */}
+                <div className={`overflow-hidden transition-[max-height] duration-200 ease-in-out shrink-0 ${headerVisible ? 'max-h-[500px]' : 'max-h-0'}`}>
+                <div className="relative z-30 border-b border-lex bg-white dark:border-lex dark:bg-zinc-900">
                     <div className="flex h-[28px] min-w-0 items-center gap-1 overflow-hidden px-1.5 sm:h-auto sm:items-start sm:gap-2 sm:overflow-visible sm:px-2 sm:pt-1.5 sm:pb-1 md:px-3">
                         <button
                             type="button"
@@ -746,6 +760,42 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
                         </h2>
                         <div className="flex shrink-0 items-center gap-0.5 sm:mt-0.5 sm:gap-1.5">
+                            {viewMode === 'full' && fullDecision.sc_url && (
+                                <a
+                                    href={fullDecision.sc_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-500 transition-all hover:bg-neutral-100 hover:text-gray-800 active:scale-95 sm:h-7 sm:w-7 dark:border-lex dark:bg-zinc-800 dark:text-gray-400 dark:hover:bg-zinc-700 dark:hover:text-gray-100"
+                                    title="View on SC e-Library"
+                                    aria-label="View on SC e-Library"
+                                >
+                                    <ExternalLink className="h-3.5 w-3.5" strokeWidth={2} />
+                                </a>
+                            )}
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    if (viewMode === 'digest') {
+                                        setViewMode('full');
+                                        setFullTextReady(false);
+                                        requestAnimationFrame(() =>
+                                            requestAnimationFrame(() => setFullTextReady(true))
+                                        );
+                                    } else {
+                                        setViewMode('digest');
+                                        setFullTextReady(false);
+                                    }
+                                }}
+                                className="touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-700 transition-all hover:bg-neutral-100 active:scale-95 sm:h-7 sm:w-7 dark:border-lex dark:bg-zinc-800 dark:text-gray-200 dark:hover:bg-zinc-700"
+                                title={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
+                                aria-label={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
+                            >
+                                {viewMode === 'digest' ? (
+                                    <BookOpen className="h-3.5 w-3.5" strokeWidth={2} />
+                                ) : (
+                                    <FileText className="h-3.5 w-3.5" strokeWidth={2} />
+                                )}
+                            </button>
                             <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} className="mr-1" />
                             <button
                                 type="button"
@@ -877,9 +927,10 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         </div>
                     </div>
                 </div>
+                </div>{/* end auto-hide header wrapper */}
 
                 {/* SCROLLABLE MAIN CONTENT */}
-                <div className="relative z-0 flex-1 min-h-0 space-y-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent" style={{ fontSize: `${fontSize}px` }}>
+                <div onScroll={handleContentScroll} className="relative z-0 flex-1 min-h-0 space-y-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent" style={{ fontSize: `${fontSize}px` }}>
 
                     {viewMode === 'digest' ? (
                         <>
@@ -1016,58 +1067,6 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         </div>
                     )}
 
-                </div>
-
-                {/* FOOTER — full-bleed width of the card (no side inset); same chrome as filter tiles */}
-                <div className="relative z-20 flex w-full min-w-0 shrink-0 self-stretch items-center justify-end gap-1 border-t border-lex bg-white px-tile py-2.5 dark:border-lex dark:bg-zinc-900 sm:gap-1.5">
-                    {viewMode === 'digest' && (
-                        <button
-                            type="button"
-                            onClick={() => handleViewHtmlViewer()}
-                            className="touch-manipulation mr-auto hidden h-7 w-7 shrink-0 items-center justify-center rounded-md border border-amber-200/80 bg-amber-50/90 text-amber-700 transition-all hover:bg-amber-100 active:scale-95 dark:border-amber-800/80 dark:bg-amber-950/40 dark:text-amber-300 dark:hover:bg-amber-900/50 md:flex"
-                            title="View digest format (tablet or desktop)"
-                            aria-label="View digest format"
-                        >
-                            <FileText className="h-3.5 w-3.5" strokeWidth={2} />
-                        </button>
-                    )}
-                    {viewMode === 'full' && fullDecision.sc_url && (
-                        <a
-                            href={fullDecision.sc_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="touch-manipulation mr-auto flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-500 transition-all hover:bg-neutral-100 hover:text-gray-800 active:scale-95 dark:border-lex dark:bg-zinc-800 dark:text-gray-400 dark:hover:bg-zinc-700 dark:hover:text-gray-100"
-                            title="View on SC e-Library"
-                            aria-label="View on SC e-Library"
-                        >
-                            <ExternalLink className="h-3.5 w-3.5" strokeWidth={2} />
-                        </a>
-                    )}
-                    <button
-                        type="button"
-                        onClick={() => {
-                            if (viewMode === 'digest') {
-                                setViewMode('full');
-                                setFullTextReady(false);
-                                // Two rAF ticks: first lets the spinner paint, second starts MD parse
-                                requestAnimationFrame(() =>
-                                    requestAnimationFrame(() => setFullTextReady(true))
-                                );
-                            } else {
-                                setViewMode('digest');
-                                setFullTextReady(false);
-                            }
-                        }}
-                        className="touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-700 transition-all hover:bg-neutral-100 active:scale-95 dark:border-lex dark:bg-zinc-800 dark:text-gray-200 dark:hover:bg-zinc-700"
-                        title={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
-                        aria-label={viewMode === 'digest' ? 'Read full text' : 'View case digest'}
-                    >
-                        {viewMode === 'digest' ? (
-                            <BookOpen className="h-3.5 w-3.5" strokeWidth={2} />
-                        ) : (
-                            <FileText className="h-3.5 w-3.5" strokeWidth={2} />
-                        )}
-                    </button>
                 </div>
 
             </div>
