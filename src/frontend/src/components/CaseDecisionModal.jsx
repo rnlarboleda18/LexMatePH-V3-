@@ -938,7 +938,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     {viewMode === 'digest' ? (
                         <>
                              {fullDecision.main_doctrine && (
-                                <div className={`relative mb-10 overflow-hidden rounded-2xl border border-lex bg-gradient-to-br ${doctrinePanel.card} p-4 shadow-md sm:mb-10 dark:border-lex sm:p-6 md:p-8`}>
+                                <div className={`relative mb-6 overflow-hidden rounded-2xl border border-lex bg-gradient-to-br ${doctrinePanel.card} p-4 shadow-md sm:mb-10 dark:border-lex sm:p-6 md:p-8`}>
                                     <div className={`absolute top-0 left-0 h-full w-1.5 bg-gradient-to-b ${doctrinePanel.stripe}`}></div>
                                     <h4 className={`mb-4 flex items-center gap-2 bg-gradient-to-r ${doctrinePanel.title} bg-clip-text text-[13px] font-black uppercase tracking-widest text-transparent`}>
                                         <Lightbulb className={`h-5 w-5 drop-shadow-sm ${doctrinePanel.icon}`} />
