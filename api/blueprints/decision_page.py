@@ -183,7 +183,8 @@ def _build_html(case: dict) -> str:
     methods=["GET"],
     auth_level=func.AuthLevel.ANONYMOUS,
 )
-def decision_page(req: func.HttpRequest, case_id: str) -> func.HttpResponse:
+def decision_page(req: func.HttpRequest) -> func.HttpResponse:
+    case_id = req.route_params.get("case_id", "")
     if not case_id.isdigit():
         return func.HttpResponse("Not found.", status_code=404)
 
