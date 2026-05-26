@@ -919,7 +919,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 </div>{/* end auto-hide header wrapper */}
 
                 {/* SCROLLABLE MAIN CONTENT */}
-                <div onScroll={handleContentScroll} className="relative z-0 flex-1 min-h-0 space-y-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent" style={{ fontSize: `${fontSize}px` }}>
+                <div onScroll={handleContentScroll} className="relative z-0 flex-1 min-h-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent" style={{ fontSize: `${fontSize}px` }}>
 
                     {/* Case identity card — scrolls with content, replaces the old sticky GR/date bar */}
                     <div className="mb-4 sm:mb-6 rounded-xl border border-lex bg-white px-4 py-3 text-center dark:bg-zinc-900 dark:border-lex">
