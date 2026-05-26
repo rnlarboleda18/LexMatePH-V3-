@@ -844,7 +844,7 @@ const LexPlayer = ({
                         </button>
                     )}
                     {/* Mobile: transport absolutely centered in bar; GR number centered in left half */}
-                    <div className="md:hidden relative h-[28px] w-full">
+                    <div className="md:hidden relative h-[40px] w-full">
                         {/* GR number — centered between left safe-area edge and the back button */}
                         <div className="absolute inset-y-0 left-[max(0.5rem,calc(env(safe-area-inset-left,0px)+0.35rem))] right-[calc(50%+58px)] flex items-center justify-center pointer-events-none">
                             <p
