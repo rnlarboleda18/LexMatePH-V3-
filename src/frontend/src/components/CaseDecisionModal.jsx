@@ -921,19 +921,21 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 {/* SCROLLABLE MAIN CONTENT */}
                 <div onScroll={handleContentScroll} className="relative z-0 flex-1 min-h-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent" style={{ fontSize: `${fontSize}px` }}>
 
-                    {/* Case title block — document-style, no card border */}
-                    <div className="mb-6 pb-4 text-center border-b border-lex dark:border-lex">
-                        <h2 className="text-[18px] font-bold leading-snug text-gray-900 dark:text-white sm:text-[20px]">
-                            {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
-                        </h2>
-                        {(fullDecision.case_number || fullDecision.date_str) && (
-                            <p className="mt-1.5 font-mono text-[11px] text-gray-400 dark:text-gray-500">
-                                {fullDecision.case_number}
-                                {fullDecision.case_number && fullDecision.date_str && <span className="mx-1.5">·</span>}
-                                {fullDecision.date_str && formatDate(fullDecision.date_str)}
-                            </p>
-                        )}
-                    </div>
+                    {/* Case title — only shown in digest mode; full text has its own header in the document body */}
+                    {viewMode === 'digest' && (
+                        <div className="mb-8 text-center">
+                            <h2 className="text-[22px] font-black leading-tight tracking-tight text-gray-900 dark:text-white sm:text-[26px]">
+                                {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
+                            </h2>
+                            {(fullDecision.case_number || fullDecision.date_str) && (
+                                <p className="mt-2 font-mono text-[12px] text-gray-400 dark:text-gray-500">
+                                    {fullDecision.case_number}
+                                    {fullDecision.case_number && fullDecision.date_str && <span className="mx-2">|</span>}
+                                    {fullDecision.date_str && formatDate(fullDecision.date_str)}
+                                </p>
+                            )}
+                        </div>
+                    )}
 
                     {viewMode === 'digest' ? (
                         <>
@@ -1045,15 +1047,6 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     ) : (
                         // FULL TEXT VIEW — content deferred until fullTextReady to keep UI responsive
                         <div className="animate-in fade-in duration-300">
-                            <div className="mb-6 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg border border-lex">
-                                <h3 className="text-[16px] font-bold text-center text-gray-900 dark:text-white mb-2">
-                                    {fullDecision.short_title}
-                                </h3>
-                                <div className="text-center text-sm text-gray-600 dark:text-gray-400 font-mono">
-                                    {fullDecision.case_number} | {formatDate(fullDecision.date_str)}
-                                </div>
-                            </div>
-
                             {!fullTextReady ? (
                                 <div className="flex flex-col items-center gap-4 py-16 text-gray-500 dark:text-gray-400">
                                     <div className="h-8 w-8 animate-spin rounded-full border-4 border-purple-300 border-t-purple-600 dark:border-purple-700 dark:border-t-purple-300" />
