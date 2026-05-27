@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect, useCallback, useMemo } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { createPortal } from 'react-dom';
 import { jsPDF } from "jspdf";
@@ -503,6 +503,37 @@ const MarkdownText = ({ content, onCaseClick, variant = 'default' }) => {
 };
 
 
+// ── Pure query helpers (no component state) ───────────────────────────────────
+
+const AI_QUESTION_STARTERS = [
+    'what', 'who', 'when', 'where', 'why', 'how', 'explain', 'define',
+    'describe', 'discuss', 'compare', 'distinguish', 'is there', 'are there',
+    'does ', 'can ', 'which', 'give me', 'tell me', "what's", "who's",
+];
+
+const isNaturalLanguageQuery = (q) => {
+    const s = q.toLowerCase().trim();
+    if (s.endsWith('?')) return true;
+    if (s.split(' ').length < 3) return false;
+    return AI_QUESTION_STARTERS.some(w => s.startsWith(w));
+};
+
+const NL_STOP_WORDS = new Set([
+    'what','who','when','where','why','how','explain','define','describe',
+    'discuss','compare','distinguish','is','are','was','were','does','did',
+    'can','could','would','should','there','the','a','an','in','of','for',
+    'to','and','or','on','at','by','from','with','about','give','me','tell',
+    'this','that','these','those','its','their','case','cases','ruling',
+    'decision','doctrine','rule',
+]);
+
+const extractKeywords = (q) => {
+    const words = q.toLowerCase().replace(/[^a-z\s']/g, ' ').split(/\s+/).filter(Boolean);
+    return words.filter(w => !NL_STOP_WORDS.has(w) && w.length > 2).join(' ');
+};
+
+// ─────────────────────────────────────────────────────────────────────────────
+
 const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerge }) => {
     const { getToken, isSignedIn, isLoaded: authLoaded } = useAuth();
     const { openUpgradeModal, canAccess, loading: subscriptionLoading } = useSubscription();
@@ -564,6 +595,21 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
 
     const [isDoctrinal, setIsDoctrinal] = useState(false);
     const [hasInitialLoaded, setHasInitialLoaded] = useState(false);
+
+    // Stable filter-change handlers — setState setters are always stable so deps are empty.
+    const handleYearChange       = useCallback((e) => { setSelectedYear(e.target.value);         setCurrentPage(1); }, []);
+    const handleMonthChange      = useCallback((e) => { setSelectedMonth(e.target.value);        setCurrentPage(1); }, []);
+    const handlePonenteChange    = useCallback((e) => { setSelectedPonente(e.target.value);      setCurrentPage(1); }, []);
+    const handleSubjectChange    = useCallback((e) => { setSelectedSubject(e.target.value);      setCurrentPage(1); }, []);
+    const handleSignificanceChange = useCallback((e) => { setSelectedSignificance(e.target.value); setCurrentPage(1); }, []);
+    const handleDivisionChange   = useCallback((e) => { setSelectedDivision(e.target.value);     setCurrentPage(1); }, []);
+    const handleToggleFilters    = useCallback(() => setShowCustomFilters((v) => !v), []);
+
+    // Memoised: regex check runs on every keystroke — avoid recomputing in render and effects.
+    const isNaturalQuery = useMemo(
+        () => isNaturalLanguageQuery(searchTerm),
+        [searchTerm]
+    );
 
     // Pagination
     const [currentPage, setCurrentPage] = useState(1);
@@ -691,7 +737,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         // Natural-language queries are handled entirely by the AI search overlay.
         // Skip the regular SC decisions fetch — it would crash the backend trying
         // to FTS-rank "what is mcburnie case" across digest_facts without an index.
-        if (isNaturalLanguageQuery(searchTerm)) {
+        if (isNaturalQuery) {
             if (abortControllerRef.current) abortControllerRef.current.abort();
             setLoading(false);
             setSearchResults([]);
@@ -735,28 +781,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
     }, [debouncedSearchTerm]);
 
     // AI Search — fires when the debounced query looks like a natural-language question
-    const AI_QUESTION_STARTERS = ['what', 'who', 'when', 'where', 'why', 'how', 'explain', 'define',
-        'describe', 'discuss', 'compare', 'distinguish', 'is there', 'are there',
-        'does ', 'can ', 'which', 'give me', 'tell me', "what's", "who's"];
-    const isNaturalLanguageQuery = (q) => {
-        const s = q.toLowerCase().trim();
-        if (s.endsWith('?')) return true;
-        if (s.split(' ').length < 3) return false;
-        return AI_QUESTION_STARTERS.some(w => s.startsWith(w));
-    };
-    const NL_STOP_WORDS = new Set([
-        'what','who','when','where','why','how','explain','define','describe',
-        'discuss','compare','distinguish','is','are','was','were','does','did',
-        'can','could','would','should','there','the','a','an','in','of','for',
-        'to','and','or','on','at','by','from','with','about','give','me','tell',
-        'this','that','these','those','its','their','case','cases','ruling',
-        'decision','doctrine','rule',
-    ]);
-    const extractKeywords = (q) => {
-        const words = q.toLowerCase().replace(/[^a-z\s']/g, ' ').split(/\s+/).filter(Boolean);
-        const kw = words.filter(w => !NL_STOP_WORDS.has(w) && w.length > 2);
-        return kw.join(' ');
-    };
+    // (isNaturalLanguageQuery, extractKeywords, AI_QUESTION_STARTERS, NL_STOP_WORDS are module-level)
 
     useEffect(() => {
         const query = debouncedSearchTerm.trim();
@@ -882,7 +907,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         setLoading(true);
         setFetchError(null);
         try {
-            const effectiveSearch = isNaturalLanguageQuery(searchTerm)
+            const effectiveSearch = isNaturalQuery
                 ? extractKeywords(searchTerm)
                 : searchTerm;
             let query = `/api/sc_decisions?search=${encodeURIComponent(effectiveSearch)}&page=${currentPage}&limit=${ITEMS_PER_PAGE}`;
@@ -980,7 +1005,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         }
     };
 
-    const handleCaseClick = async (decision) => {
+    const handleCaseClick = useCallback(async (decision) => {
         if (decision?.id == null) return;
         lastHandledGlobalCaseIdRef.current = decision.id;
 
@@ -1043,7 +1068,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                 scheduleBackgroundFullCase(decision.id);
             }
         }
-    };
+    }, [prefetchCache, onCaseSelect, getToken, isSignedIn, canAccess, subscriptionLoading, authLoaded, openUpgradeModal, scheduleBackgroundFullCase]);
 
     // Open the list’s modal when App sets globalSelectedCase without a prior click (same id skipped — see ref).
     useEffect(() => {
@@ -1060,7 +1085,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         // eslint-disable-next-line react-hooks/exhaustive-deps -- only re-sync when global case identity changes; handleCaseClick is latest from render
     }, [externalSelectedCase]);
 
-    const handleViewFullText = async (e, decision) => {
+    const handleViewFullText = useCallback(async (e, decision) => {
         e.stopPropagation();
         const usage = await consumeFreeTierUsage({
             feature: 'case_digest',
@@ -1084,30 +1109,23 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         if (!decision.full_text_md && !decision.full_text_html) {
             await fetchDecisionDetails(decision.id, decision);
         }
-    };
+    }, [getToken, isSignedIn, canAccess, subscriptionLoading, authLoaded, openUpgradeModal]);
 
-    const handleSmartCaseClick = async (caseRef) => {
-        console.log("SmartLink: Click handler started for", caseRef);
-
+    const handleSmartCaseClick = useCallback(async (caseRef) => {
         // Visual feedback immediately
         document.body.style.cursor = 'wait';
 
         // Safety: Force cursor reset after 10 seconds no matter what
         const cursorTimeout = setTimeout(() => {
-            console.warn("SmartLink: Force resetting cursor after 10s timeout");
             document.body.style.cursor = 'default';
         }, 10000);
 
         try {
-            console.log("SmartLink: Searching for", caseRef);
-
             // Strategy 1: Try strict search first
-            console.log("SmartLink: Strategy 1 - Exact search");
             let response = await fetch(apiUrl(`/api/sc_decisions?search=${encodeURIComponent(caseRef)}&limit=1`));
             let data = await response.json();
 
             if (data.data && data.data.length > 0) {
-                console.log("SmartLink: Found match (Exact)", data.data[0].id);
                 try {
                     await handleCaseClick(data.data[0]);
                 } catch (err) {
@@ -1120,11 +1138,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
             // Strategy 2: Clean the title (Remove citations like "(435 Phil. 1)")
             const cleanedTitle = caseRef.replace(/\s*\([^)]{5,}\)$/, '').trim();
             if (cleanedTitle !== caseRef) {
-                console.log("SmartLink: Strategy 2 - Cleaned title:", cleanedTitle);
                 response = await fetch(apiUrl(`/api/sc_decisions?search=${encodeURIComponent(cleanedTitle)}&limit=1`));
                 data = await response.json();
                 if (data.data && data.data.length > 0) {
-                    console.log("SmartLink: Found match (Cleaned)", data.data[0].id);
                     try {
                         await handleCaseClick(data.data[0]);
                     } catch (err) {
@@ -1138,11 +1154,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
             // Strategy 3: Extract Case Number (Broader Regex)
             const caseNoMatch = caseRef.match(/(G\.R\.|A\.M\.|A\.C\.|B\.M\.|U\.D\.K\.|Bar Matter)\s*(No\.)?\s*[\w-]+/i);
             if (caseNoMatch) {
-                console.log("SmartLink: Strategy 3 - Case number:", caseNoMatch[0]);
                 const retryResp = await fetch(apiUrl(`/api/sc_decisions?search=${encodeURIComponent(caseNoMatch[0])}&limit=1`));
                 const retryData = await retryResp.json();
                 if (retryData.data && retryData.data.length > 0) {
-                    console.log("SmartLink: Found match (Case No)", retryData.data[0].id);
                     try {
                         await handleCaseClick(retryData.data[0]);
                     } catch (err) {
@@ -1153,7 +1167,6 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                 }
             }
 
-            console.log("SmartLink: No match found.");
             alert(`Case not found: "${caseRef}"\n\nThis case may not be in the database yet.`);
 
         } catch (error) {
@@ -1162,9 +1175,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         } finally {
             clearTimeout(cursorTimeout);
             document.body.style.cursor = 'default';
-            console.log("SmartLink: Handler completed");
         }
-    };
+    }, [handleCaseClick]);
 
     // Kept for backward compatibility if called directly, but now routed through details
     const fetchFullText = async (id) => {
@@ -1175,7 +1187,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
 
 
 
-    const handleDownloadDigestPDF = async () => {
+    const handleDownloadDigestPDF = useCallback(async () => {
         if (!selectedDecision) return;
 
         const usage = await consumeFreeTierUsage({
@@ -1251,9 +1263,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         addTextSection("RATIO DECIDENDI", selectedDecision.digest_ratio);
 
         doc.save(`${selectedDecision.case_number || selectedDecision.gr_number}_Digest.pdf`);
-    };
+    }, [selectedDecision, getToken, isSignedIn, canAccess, subscriptionLoading, authLoaded, openUpgradeModal]);
 
-    const handleDownloadFullTextPDF = () => {
+    const handleDownloadFullTextPDF = useCallback(() => {
         if (!fullText) return;
         const doc = new jsPDF();
         const splitText = doc.splitTextToSize(fullText, 170);
@@ -1269,7 +1281,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         });
 
         doc.save(`${selectedDecision.case_number}_full_text.pdf`);
-    };
+    }, [fullText, selectedDecision]);
 
     return (
         <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-1 font-sans text-gray-900 dark:text-gray-100">
@@ -1290,7 +1302,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                             <div className="flex min-w-0 shrink-0 flex-col sm:w-[min(100%,14rem)] md:w-44">
                                 <button
                                     type="button"
-                                    onClick={() => setShowCustomFilters((v) => !v)}
+                                    onClick={handleToggleFilters}
                                     className={FILTER_TOGGLE_BUTTON}
                                     aria-expanded={showCustomFilters}
                                     aria-label={showCustomFilters ? 'Hide case digest filters' : 'Show case digest filters'}
@@ -1356,7 +1368,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                         <Sparkles
                                             strokeWidth={1.5}
                                             className={`lexify-sparkle-wink h-3.5 w-3.5 shrink-0 transition-colors ${
-                                                isNaturalLanguageQuery(searchTerm)
+                                                isNaturalQuery
                                                     ? 'text-violet-500 dark:text-violet-400'
                                                     : 'text-neutral-300 dark:text-zinc-600'
                                             }`}
@@ -1374,7 +1386,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                         <select
                                             className={FILTER_SELECT}
                                             value={selectedYear}
-                                            onChange={(e) => { setSelectedYear(e.target.value); setCurrentPage(1); }}
+                                            onChange={handleYearChange}
                                         >
                                             <option value="">All Years</option>
                                             {availableYears.map(year => (
@@ -1387,7 +1399,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                         <select
                                             className={FILTER_SELECT}
                                             value={selectedPonente}
-                                            onChange={(e) => { setSelectedPonente(e.target.value); setCurrentPage(1); }}
+                                            onChange={handlePonenteChange}
                                         >
                                             <option value="">All Ponentes</option>
                                             {availablePonentes.map((ponente, idx) => (
@@ -1400,7 +1412,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                         <select
                                             className={FILTER_SELECT}
                                             value={selectedSubject}
-                                            onChange={(e) => { setSelectedSubject(e.target.value); setCurrentPage(1); }}
+                                            onChange={handleSubjectChange}
                                         >
                                             <option value="" style={{ color: '#6B7280' }}>All Subjects</option>
                                             <option value="Civil Law" style={{ color: '#3B82F6', fontWeight: '600' }}>Civil Law</option>
@@ -1418,7 +1430,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                         <select
                                             className={FILTER_SELECT}
                                             value={selectedSignificance}
-                                            onChange={(e) => { setSelectedSignificance(e.target.value); setCurrentPage(1); }}
+                                            onChange={handleSignificanceChange}
                                         >
                                             <option value="">All Classifications</option>
                                             <option value="NEW DOCTRINE">New Doctrine</option>
@@ -1434,7 +1446,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                         <select
                                             className={FILTER_SELECT}
                                             value={selectedDivision}
-                                            onChange={(e) => { setSelectedDivision(e.target.value); setCurrentPage(1); }}
+                                            onChange={handleDivisionChange}
                                         >
                                             <option value="">All Court Bodies</option>
                                             {availableDivisions.map((division, idx) => (
@@ -1573,7 +1585,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                         ))
                     ) : (
                         <>
-                            {hasInitialLoaded && !fetchError && searchResults.length === 0 && !isNaturalLanguageQuery(searchTerm) && (
+                            {hasInitialLoaded && !fetchError && searchResults.length === 0 && !isNaturalQuery && (
                                 <div className="text-center py-8 text-gray-500 md:col-span-2">
                                     <FileText className="h-10 w-10 mx-auto text-gray-300 mb-2" />
                                     {/^\d+$/.test(searchTerm.trim()) ? (

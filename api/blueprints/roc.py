@@ -24,7 +24,8 @@ def clean_roman_rules(text):
                 else:
                     int_val += rom_val[s[i]]
             return int_val
-        except:
+        except Exception as e:
+            logging.warning("roman_to_int: invalid Roman numeral %r: %s", s, e)
             return None
             
     def replace_match(m):

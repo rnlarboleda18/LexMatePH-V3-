@@ -69,7 +69,7 @@ const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
     );
 };
 
-const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, subscriptionTier, codalOptions = [], selectedCodal, onCodalChange }) => {
+const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, codalOptions = [], selectedCodal, onCodalChange }) => {
     const { canAccess, openUpgradeModal } = useSubscription();
 
     // Title mapping (mirrors CodalStream — keep in sync)

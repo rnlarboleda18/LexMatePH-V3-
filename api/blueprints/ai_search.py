@@ -20,6 +20,7 @@ import azure.functions as func
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 
+import config
 log = logging.getLogger(__name__)
 ai_search_bp = func.Blueprint()
 
@@ -186,12 +187,15 @@ def _search_cases_db(query: str, limit: int = 3) -> list[dict]:
     return cases
 
 
+_FRONTEND_ORIGIN = config.FRONTEND_URL
+
+
 def _json(data: dict, status: int = 200) -> func.HttpResponse:
     return func.HttpResponse(
         json.dumps(data, default=str),
         status_code=status,
         mimetype="application/json",
-        headers={"Access-Control-Allow-Origin": "*"},
+        headers={"Access-Control-Allow-Origin": _FRONTEND_ORIGIN},
     )
 
 
@@ -202,7 +206,7 @@ def ai_search(req: func.HttpRequest) -> func.HttpResponse:
         return func.HttpResponse(
             status_code=204,
             headers={
-                "Access-Control-Allow-Origin": "*",
+                "Access-Control-Allow-Origin": _FRONTEND_ORIGIN,
                 "Access-Control-Allow-Methods": "POST",
                 "Access-Control-Allow-Headers": "Content-Type,Authorization",
             },

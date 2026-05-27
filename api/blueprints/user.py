@@ -12,11 +12,11 @@ user_bp = func.Blueprint()
 def get_user_history(req: func.HttpRequest) -> func.HttpResponse:
     try:
         # Get User ID from Clerk Auth Helper
-        user_id = get_authenticated_user_id(req)
+        clerk_id, error = get_authenticated_user_id(req)
         
-        if not user_id:
+        if error or not clerk_id:
              return func.HttpResponse(
-                body=json.dumps({"error": "Unauthorized"}),
+                body=json.dumps({"error": "Unauthorized", "detail": error}),
                 mimetype="application/json",
                 status_code=401
             )
@@ -45,7 +45,7 @@ def get_user_history(req: func.HttpRequest) -> func.HttpResponse:
                         FROM user_mock_scores 
                         WHERE user_id = %s 
                         ORDER BY created_at DESC
-                    """, (user_id,))
+                    """, (clerk_id,))
                     
                     rows = cur.fetchall()
                     for row in rows:

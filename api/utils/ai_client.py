@@ -1,46 +1,52 @@
 """
-ai_client.py — Google AI Studio REST client (API key only).
+ai_client.py — Google GenAI client (Vertex AI).
 
-Auth: GOOGLE_API_KEY (or GEMINI_API_KEY) from api/local.settings.json → Values.
-Model: GEMINI_VERTEX_MODEL env var (reused for naming compat), default gemini-3-flash-preview.
+Auth: Vertex AI service account (GOOGLE_APPLICATION_CREDENTIALS or GCP_SA_JSON_B64).
+      Falls back to Application Default Credentials (ADC) in production on GCP.
+
+Project/location pulled from config.py (GCP_PROJECT, GCP_LOCATION).
+
+Model: GEMINI_VERTEX_MODEL env var, default gemini-2.5-flash.
 Fallback model: GEMINI_DIGEST_FALLBACK_MODEL, default gemini-2.5-flash.
 """
 import json
 import logging
 import os
+import threading
 import time
 from typing import Any, Dict, List, Optional, Union
 
-import requests
-
 logger = logging.getLogger(__name__)
 
-_AI_STUDIO_BASE = "https://generativelanguage.googleapis.com/v1beta/models"
+DEFAULT_MODEL  = os.environ.get("GEMINI_VERTEX_MODEL") or os.environ.get("GEMINI_DIGEST_MODEL") or "gemini-2.5-flash"
+FALLBACK_MODEL = os.environ.get("GEMINI_DIGEST_FALLBACK_MODEL") or "gemini-2.5-flash"
 
-DEFAULT_MODEL    = os.environ.get("GEMINI_VERTEX_MODEL") or os.environ.get("GEMINI_DIGEST_MODEL") or "gemini-3-flash-preview"
-FALLBACK_MODEL   = os.environ.get("GEMINI_DIGEST_FALLBACK_MODEL") or "gemini-2.5-flash"
-
-_http_session: Optional[requests.Session] = None
-
-
-def _session() -> requests.Session:
-    global _http_session
-    if _http_session is None:
-        s = requests.Session()
-        s.headers.update({"Content-Type": "application/json", "Connection": "keep-alive"})
-        _http_session = s
-    return _http_session
+_client = None
+_client_lock = threading.Lock()
 
 
-def _api_key() -> str:
-    for var in ("GOOGLE_API_KEY", "GEMINI_API_KEY", "GOOGLE_GENAI_API_KEY"):
-        v = (os.environ.get(var) or "").strip()
-        if v:
-            return v
-    raise ValueError(
-        "No Google AI Studio API key found. "
-        "Set GOOGLE_API_KEY in api/local.settings.json → Values."
-    )
+def _get_client():
+    """Return a lazily-initialised Vertex AI GenAI client (shared, thread-safe)."""
+    global _client
+    if _client is not None:
+        return _client
+    with _client_lock:
+        if _client is not None:
+            return _client
+        import config
+        from google import genai
+        from google.genai import types as genai_types
+        _client = genai.Client(
+            vertexai=True,
+            project=config.GCP_PROJECT,
+            location=config.GCP_LOCATION,
+            http_options=genai_types.HttpOptions(timeout=120_000),
+        )
+        logger.info(
+            "Vertex AI GenAI client initialised — project=%s location=%s",
+            config.GCP_PROJECT, config.GCP_LOCATION,
+        )
+    return _client
 
 
 def call_vertex_ai(
@@ -53,55 +59,48 @@ def call_vertex_ai(
     retries: int = 3,
     backoff_factor: float = 1.5,
 ) -> str:
-    """Generate content via Google AI Studio REST API (API key auth).
+    """Generate content via Vertex AI using the google-genai SDK."""
+    from google import genai
+    from google.api_core.exceptions import ResourceExhausted, ServiceUnavailable
 
-    Function name kept as call_vertex_ai for backward compatibility with all callers.
-    """
-    key = _api_key()
     if isinstance(prompt, str):
-        contents: List[Dict[str, Any]] = [{"role": "user", "parts": [{"text": prompt}]}]
+        contents = prompt
     else:
         contents = prompt
 
-    payload: Dict[str, Any] = {
-        "contents": contents,
-        "generationConfig": {
-            "temperature": temperature,
-            "maxOutputTokens": max_tokens,
-            "responseMimeType": response_mime_type,
-        },
-    }
-    if system_instruction:
-        payload["systemInstruction"] = {"parts": [{"text": system_instruction}]}
+    cfg = genai.types.GenerateContentConfig(
+        response_mime_type=response_mime_type,
+        temperature=temperature,
+        max_output_tokens=max_tokens,
+        system_instruction=system_instruction or None,
+    )
 
-    url = f"{_AI_STUDIO_BASE}/{model}:generateContent?key={key}"
-    session = _session()
+    client = _get_client()
     last_error: Optional[str] = None
 
     for attempt in range(retries):
         try:
-            resp = session.post(url, data=json.dumps(payload), timeout=60)
-            if resp.status_code == 200:
-                data = resp.json()
-                try:
-                    return data["candidates"][0]["content"]["parts"][0]["text"]
-                except (KeyError, IndexError):
-                    raise ValueError(f"Unexpected AI Studio response structure: {data}")
-
-            if resp.status_code in (429, 500, 502, 503, 504):
-                last_error = f"HTTP {resp.status_code}: {resp.text[:200]}"
-                wait = backoff_factor ** attempt
-                logger.warning("AI Studio retry %s/%s in %ss: %s", attempt + 1, retries, wait, last_error)
-                time.sleep(wait)
-                continue
-
-            raise ValueError(f"AI Studio error {resp.status_code}: {resp.text[:300]}")
-
-        except requests.RequestException as e:
+            resp = client.models.generate_content(
+                model=model,
+                contents=contents,
+                config=cfg,
+            )
+            return resp.text or ""
+        except (ResourceExhausted, ServiceUnavailable) as e:
             last_error = str(e)
-            time.sleep(backoff_factor ** attempt)
+            wait = backoff_factor ** attempt
+            logger.warning("Vertex AI retry %s/%s in %.1fs: %s", attempt + 1, retries, wait, e)
+            time.sleep(wait)
+        except Exception as e:
+            if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e) or "503" in str(e):
+                last_error = str(e)
+                wait = backoff_factor ** attempt
+                logger.warning("Vertex AI retry %s/%s in %.1fs: %s", attempt + 1, retries, wait, e)
+                time.sleep(wait)
+            else:
+                raise
 
-    raise ValueError(f"AI Studio failed after {retries} attempts. Last: {last_error}")
+    raise RuntimeError(f"Vertex AI failed after {retries} attempts. Last error: {last_error}")
 
 
 def call_vertex_ai_json(
@@ -128,5 +127,5 @@ def call_vertex_ai_json(
     try:
         return json.loads(cleaned)
     except json.JSONDecodeError as e:
-        logger.error("AI Studio returned invalid JSON: %s", text)
-        raise ValueError(f"AI Studio returned invalid JSON: {e}") from e
+        logger.error("Vertex AI returned invalid JSON: %s", text)
+        raise ValueError(f"Vertex AI returned invalid JSON: {e}") from e

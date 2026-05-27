@@ -2,6 +2,7 @@
 import json
 import logging
 import os
+import time
 from typing import Any, Dict, Optional
 
 import requests
@@ -9,6 +10,10 @@ import requests
 GEMINI_GENERATE_URL = (
     "https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
 )
+
+_RETRYABLE_STATUSES = (429, 500, 502, 503)
+_MAX_ATTEMPTS = 3
+_BASE_DELAY = 1.0
 
 
 def gemini_generate_text(
@@ -33,23 +38,50 @@ def gemini_generate_text(
     if gen_cfg:
         body["generationConfig"] = gen_cfg
 
-    resp = requests.post(
-        url,
-        params={"key": api_key},
-        json=body,
-        timeout=timeout,
-    )
-    if not resp.ok:
-        logging.error("Gemini REST error %s: %s", resp.status_code, resp.text[:2000])
-        resp.raise_for_status()
+    last_exc: Exception = RuntimeError("Gemini request failed before any attempt")
 
-    data = resp.json()
-    candidates = data.get("candidates") or []
-    if not candidates:
-        raise RuntimeError(f"Gemini returned no candidates: {json.dumps(data)[:1500]}")
+    for attempt in range(_MAX_ATTEMPTS):
+        try:
+            resp = requests.post(
+                url,
+                params={"key": api_key},
+                json=body,
+                timeout=timeout,
+            )
+        except (requests.Timeout, requests.ConnectionError) as exc:
+            last_exc = exc
+            if attempt < _MAX_ATTEMPTS - 1:
+                delay = _BASE_DELAY * (2 ** attempt)
+                logging.warning(
+                    "Gemini network error (attempt %d/%d): %s — retrying in %.1fs",
+                    attempt + 1, _MAX_ATTEMPTS, exc, delay,
+                )
+                time.sleep(delay)
+            continue
 
-    parts = (candidates[0].get("content") or {}).get("parts") or []
-    if not parts or "text" not in parts[0]:
-        raise RuntimeError(f"Gemini response missing text: {json.dumps(data)[:1500]}")
+        if resp.status_code in _RETRYABLE_STATUSES and attempt < _MAX_ATTEMPTS - 1:
+            delay = _BASE_DELAY * (2 ** attempt)
+            logging.warning(
+                "Gemini HTTP %s (attempt %d/%d) — retrying in %.1fs",
+                resp.status_code, attempt + 1, _MAX_ATTEMPTS, delay,
+            )
+            last_exc = RuntimeError(f"Gemini HTTP {resp.status_code}")
+            time.sleep(delay)
+            continue
 
-    return parts[0]["text"]
+        if not resp.ok:
+            logging.error("Gemini REST error %s: %s", resp.status_code, resp.text[:2000])
+            resp.raise_for_status()
+
+        data = resp.json()
+        candidates = data.get("candidates") or []
+        if not candidates:
+            raise RuntimeError(f"Gemini returned no candidates: {json.dumps(data)[:1500]}")
+
+        parts = (candidates[0].get("content") or {}).get("parts") or []
+        if not parts or "text" not in parts[0]:
+            raise RuntimeError(f"Gemini response missing text: {json.dumps(data)[:1500]}")
+
+        return parts[0]["text"]
+
+    raise last_exc

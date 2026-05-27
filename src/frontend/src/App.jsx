@@ -22,11 +22,13 @@ import { LexPlayer, useLexPlay } from './features/lexplay';
 const LexMateApp = lazy(() => import('./features/lexmate/LexMateApp'));
 import { useSubscription } from './context/SubscriptionContext';
 import { normalizeBarQuestionSubject, normalizeBarSubject } from './utils/subjectNormalize';
-import { consumeFreeTierUsage, notifyUsageBlocked, GUEST_WINDOW_MS, isInGuestWindow } from './utils/freeTierUsage';
+import { GUEST_WINDOW_MS, isInGuestWindow } from './utils/freeTierUsage';
 import { GUEST_GATE_GRACE_MS, startGuestGateGrace, clearGuestGateGrace } from './utils/guestGateGrace';
 import { useBarQuestions } from './hooks/useBarQuestions';
 import { useFlashcardConcepts } from './hooks/useFlashcardConcepts';
 import { useGlobalCaseModal } from './hooks/useGlobalCaseModal';
+import { useGatedFeature } from './hooks/useGatedFeature';
+import { UpgradeModal, BillingModal } from './components/SubscriptionModals';
 import {
   FILTER_CHROME_SURFACE,
   FILTER_SELECT,
@@ -78,8 +80,6 @@ const FlashcardSetup = lazy(() => import('./components/FlashcardSetup'));
 const Flashcard = lazy(() => import('./components/Flashcard'));
 const CaseDecisionModal = lazy(() => import('./components/CaseDecisionModal'));
 const QuestionDetailModal = lazy(() => import('./components/QuestionDetailModal'));
-const SubscriptionModal = lazy(() => import('./components/SubscriptionModal'));
-const AccountBillingModal = lazy(() => import('./components/AccountBillingModal'));
 const FoundingPromoModal = lazy(() => import('./components/FoundingPromoModal'));
 const PwaInstallModal = lazy(() => import('./components/PwaInstallModal'));
 const UpgradeWall = lazy(() => import('./components/UpgradeWall'));
@@ -136,19 +136,21 @@ function barQuestionYearIdSort(a, b) {
 
 function App() {
   const { isDrawerOpen, setIsDrawerOpen, isOffline } = useLexPlay();
-  const {
-    showUpgradeModal,
-    closeUpgradeModal,
-    showAccountBillingModal,
-    closeAccountBillingModal,
-    tier,
-    canAccess,
-    openUpgradeModal,
-    loading: subscriptionLoading,
-    isAdmin,
-  } = useSubscription();
+  // Only the values that App.jsx itself needs — modal state and gated-action
+  // callbacks are handled by UpgradeModal / BillingModal / useGatedFeature.
+  // canAccess is kept for the render-time Lexify tier gate (pure read, no setState).
+  const { loading: subscriptionLoading, isAdmin, canAccess } = useSubscription();
+
+  // Hooks declared here so their stable references are available to data hooks below.
   const { user } = useUser();
   const { getToken, isSignedIn, isLoaded: authLoaded } = useAuth();
+
+  // Gated-feature hooks — each returns an async fn that meters usage and opens the
+  // upgrade modal on block. consumeFreeTierUsage / notifyUsageBlocked internals live
+  // in useGatedFeature; App.jsx no longer touches canAccess / openUpgradeModal directly.
+  const checkCaseDigest  = useGatedFeature('case_digest',  'case_digest_unlimited');
+  const checkBarQuestion = useGatedFeature('bar_question', 'bar_question_unlimited');
+  const checkFlashcard   = useGatedFeature('flashcard',    'flashcard_unlimited');
 
   // mode must be declared before the data hooks so barQuestionsNeeded/flashcardsNeeded
   // can reference it without hitting a Temporal Dead Zone error.
@@ -238,22 +240,11 @@ function App() {
         return;
       }
       void (async () => {
-        const usage = await consumeFreeTierUsage({
-          feature: 'case_digest',
-          getToken,
-          isSignedIn,
-          canAccess,
-          subscriptionLoading,
-          authLoaded,
-        });
-        if (!usage.allowed) {
-          notifyUsageBlocked(usage, openUpgradeModal, 'case_digest_unlimited');
-          return;
-        }
+        if (!await checkCaseDigest()) return;
         selectGlobalCase(next);
       })();
     },
-    [selectGlobalCase, getToken, isSignedIn, openUpgradeModal, canAccess, subscriptionLoading, authLoaded],
+    [selectGlobalCase, checkCaseDigest],
   );
 
   /**
@@ -277,22 +268,11 @@ function App() {
   const tryOpenBarQuestion = useCallback(
     (q) => {
       void (async () => {
-        const usage = await consumeFreeTierUsage({
-          feature: 'bar_question',
-          getToken,
-          isSignedIn,
-          canAccess,
-          subscriptionLoading,
-          authLoaded,
-        });
-        if (!usage.allowed) {
-          notifyUsageBlocked(usage, openUpgradeModal, 'bar_question_unlimited');
-          return;
-        }
+        if (!await checkBarQuestion()) return;
         setSelectedQuestion(q);
       })();
     },
-    [getToken, isSignedIn, openUpgradeModal, canAccess, subscriptionLoading, authLoaded],
+    [checkBarQuestion],
   );
 
   // --- URL ↔ mode mapping ---
@@ -832,18 +812,7 @@ function App() {
     }
 
     void (async () => {
-      const usage = await consumeFreeTierUsage({
-        feature: 'flashcard',
-        getToken,
-        isSignedIn,
-        canAccess,
-        subscriptionLoading,
-        authLoaded,
-      });
-      if (!usage.allowed) {
-        notifyUsageBlocked(usage, openUpgradeModal, 'flashcard_unlimited');
-        return;
-      }
+      if (!await checkFlashcard()) return;
       setFlashcardQuestions(selected);
       setFlashcardIndex(0);
       setFlashcardState('active');
@@ -858,16 +827,7 @@ function App() {
   const handleNextFlashcard = () => {
     if (flashcardIndex < flashcardQuestions.length - 1) {
       void (async () => {
-        const usage = await consumeFreeTierUsage({
-          feature: 'flashcard',
-          getToken,
-          isSignedIn,
-          canAccess,
-          subscriptionLoading,
-          authLoaded,
-        });
-        if (!usage.allowed) {
-          notifyUsageBlocked(usage, openUpgradeModal, 'flashcard_unlimited');
+        if (!await checkFlashcard()) {
           setFlashcardState('setup');
           return;
         }
@@ -1036,7 +996,6 @@ function App() {
                           }}
                           onCaseSelect={selectGlobalCaseGuarded}
                           onCaseDetailMerge={patchGlobalCase}
-                          subscriptionTier={tier}
                         />
                       </Suspense>
                     </PurpleGlassAmbient>
@@ -1446,17 +1405,9 @@ function App() {
           </Suspense>
         );
       })()}
-      {/* Global Subscription Upgrade Modal */}
-      {showUpgradeModal && (
-        <Suspense fallback={null}>
-          <SubscriptionModal onClose={closeUpgradeModal} />
-        </Suspense>
-      )}
-      {showAccountBillingModal && (
-        <Suspense fallback={null}>
-          <AccountBillingModal onClose={closeAccountBillingModal} />
-        </Suspense>
-      )}
+      {/* Global modals — controlled via SubscriptionContext; no props needed here */}
+      <UpgradeModal />
+      <BillingModal />
       {showGuestModal === 'founding_promo' && (
         <Suspense fallback={null}>
           <FoundingPromoModal

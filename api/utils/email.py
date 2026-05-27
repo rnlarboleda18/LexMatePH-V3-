@@ -751,3 +751,99 @@ def send_founding_promo_notification(
     except Exception as e:
         logger.error("send_founding_promo_notification failed for %s: %s", user_email, e)
         return False
+
+
+# ─── Cancellation failure admin notification ──────────────────────────────────
+
+def _cancellation_failed_notify_html(user_email: str, plan_id: str, error_details: str) -> str:
+    now_str = datetime.now(timezone.utc).strftime("%B %d, %Y at %H:%M UTC")
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8" /><title>Cancellation Failed</title></head>
+<body style="margin:0;padding:0;background:#f4f4f5;font-family:'Segoe UI',Arial,sans-serif;">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f5;padding:32px 0;">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:16px;overflow:hidden;box-shadow:0 4px 24px rgba(0,0,0,0.08);max-width:600px;width:100%;">
+        <tr>
+          <td style="background:linear-gradient(135deg,#e11d48 0%,#be123c 100%);padding:32px 40px;text-align:center;">
+            <h1 style="margin:0;font-size:26px;font-weight:800;color:#ffffff;letter-spacing:-0.5px;">LexMate<span style="color:#fbbf24;">PH</span></h1>
+            <p style="margin:6px 0 0;font-size:13px;color:rgba(255,255,255,0.8);letter-spacing:0.08em;text-transform:uppercase;font-weight:600;">Admin Alert</p>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:36px 40px 28px;">
+            <h2 style="margin:0 0 16px;font-size:20px;font-weight:700;color:#1e1b4b;">Xendit Cancellation Failed</h2>
+            <p style="margin:0 0 16px;font-size:15px;color:#374151;">A user's subscription was cancelled locally, but the API request to deactivate the plan in Xendit failed. The plan may still be active in Xendit and must be verified.</p>
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#fff1f2;border:1.5px solid #fecdd3;border-radius:12px;margin-bottom:24px;">
+              <tr><td style="padding:20px 24px;">
+                <p style="margin:0 0 4px;font-size:13px;color:#9f1239;font-weight:600;">User Email</p>
+                <p style="margin:0 0 12px;font-size:15px;color:#111827;">{user_email}</p>
+                <p style="margin:0 0 4px;font-size:13px;color:#9f1239;font-weight:600;">Xendit Plan ID</p>
+                <p style="margin:0 0 12px;font-size:15px;color:#111827;">{plan_id}</p>
+                <p style="margin:0 0 4px;font-size:13px;color:#9f1239;font-weight:600;">Error Details</p>
+                <p style="margin:0 0 12px;font-size:13px;color:#4b5563;white-space:pre-wrap;">{error_details}</p>
+                <p style="margin:0 0 4px;font-size:13px;color:#9f1239;font-weight:600;">Time</p>
+                <p style="margin:0;font-size:15px;color:#111827;">{now_str}</p>
+              </td></tr>
+            </table>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#f9fafb;border-top:1px solid #e5e7eb;padding:20px 40px;text-align:center;">
+            <p style="margin:0;font-size:12px;color:#9ca3af;line-height:1.6;">LexMatePH Admin &bull; Automated notification</p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>"""
+
+
+def _cancellation_failed_notify_text(user_email: str, plan_id: str, error_details: str) -> str:
+    now_str = datetime.now(timezone.utc).strftime("%B %d, %Y at %H:%M UTC")
+    return f"""[LexMatePH] ACTION REQUIRED: Xendit Cancellation Failed
+
+A user's subscription was cancelled locally, but the API request to deactivate the plan in Xendit failed.
+Please review the plan in the Xendit dashboard to prevent phantom charges.
+
+User Email:    {user_email}
+Plan ID:       {plan_id}
+Time:          {now_str}
+
+Error Details:
+{error_details}
+
+— LexMatePH Admin Alert
+"""
+
+
+def send_cancellation_failed_admin_alert(user_email: str, plan_id: str, error_details: str) -> bool:
+    """Notify the admin when a Xendit cancellation API call fails. Non-blocking."""
+    client = _get_client()
+    sender = _sender()
+    if not client or not sender:
+        return False
+
+    try:
+        message = {
+            "senderAddress": sender,
+            "recipients": {"to": [{"address": _ADMIN_NOTIFY_EMAIL}]},
+            "content": {
+                "subject": f"[LexMatePH Alert] Xendit Cancellation Failed for {user_email}",
+                "html": _cancellation_failed_notify_html(user_email, plan_id, error_details),
+                "plainText": _cancellation_failed_notify_text(user_email, plan_id, error_details),
+            },
+        }
+        poller = client.begin_send(message)
+        result = poller.result()
+        logger.info(
+            "Cancellation failed alert sent to admin for %s plan=%s — messageId=%s",
+            user_email,
+            plan_id,
+            result.get("id") if isinstance(result, dict) else result,
+        )
+        return True
+    except Exception as e:
+        logger.error("send_cancellation_failed_admin_alert failed for %s: %s", user_email, e)
+        return False
+

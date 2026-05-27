@@ -4,10 +4,20 @@ import os
 import logging
 import time
 import uuid
-import base64
+import hmac
 import psycopg
 import requests
 from datetime import datetime, timezone, timedelta
+
+import config
+from utils.xendit_client import (
+    XENDIT_BASE_URL,
+    _xendit_headers,
+    _with_retry,
+    xendit_post,
+    xendit_get,
+    xendit_delete,
+)
 
 from utils.clerk_auth import get_authenticated_user_id
 from utils.founding_promo import expire_founding_promo_for_user, try_grant_founding_promo
@@ -24,26 +34,26 @@ from utils.email import (
     send_cancellation_email,
     send_subscription_payment_past_due_email,
     send_trial_ending_reminder_email,
+    send_cancellation_failed_admin_alert,
 )
 
 xendit_bp = func.Blueprint()
 
 # ── Config ────────────────────────────────────────────────────────────────────
-# Read XENDIT_API_KEY at request time in _xendit_headers() so cold starts and
-# app setting updates are picked up reliably; do not cache at import.
-XENDIT_WEBHOOK_TOKEN = os.environ.get("XENDIT_WEBHOOK_TOKEN", "")
-XENDIT_BASE_URL     = "https://api.xendit.co"
+# All env vars are centralised in config.py; import from there.
+# XENDIT_API_KEY is also read fresh inside _xendit_headers() so hot app-setting
+# updates are picked up without a cold start.
+XENDIT_WEBHOOK_TOKEN = config.XENDIT_WEBHOOK_TOKEN
+# XENDIT_BASE_URL, _xendit_headers, _with_retry imported from utils.xendit_client
 
-FRONTEND_URL = os.environ.get("FRONTEND_URL", "https://lexmateph.com").rstrip("/")
+FRONTEND_URL = config.FRONTEND_URL
 
-ADMIN_EMAILS = [
-    "rnlarboleda@gmail.com",
-    "rnlarboleda18@gmail.com",
-]
+# Admin email list — only used when auto-creating a user row before Clerk webhook fires.
+_ADMIN_EMAILS_ENV = config.ADMIN_EMAILS_ENV
 
-# ── Bypass mode (same as old PayMongo bypass — skip payment, grant tier) ─────
+# ── Bypass mode ───────────────────────────────────────────────────────────────
 # Set XENDIT_BYPASS=true in local.settings.json for local dev without real payments.
-XENDIT_BYPASS = os.environ.get("XENDIT_BYPASS", "").lower() in ("true", "1", "yes")
+XENDIT_BYPASS = config.XENDIT_BYPASS
 
 # ── Plan definitions ──────────────────────────────────────────────────────────
 # amount is in PHP (whole number, not centavos — Xendit PHP uses whole amounts)
@@ -65,35 +75,41 @@ FREE_TIER_DAILY_LIMITS = {
     "case_digest_download": 5,
 }
 
+# Xendit customer ID format: "cust-" (5) + UUID-v4 (36) = 41 characters.
+_XENDIT_CUSTOMER_ID_LEN = 41
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
+# _xendit_headers, _with_retry, XENDIT_BASE_URL, xendit_post, xendit_get,
+# xendit_delete are imported from utils.xendit_client above.
 
-def _xendit_headers(api_version: str | None = None) -> dict:
-    key = (os.environ.get("XENDIT_API_KEY") or "").strip()
-    if not key:
-        raise RuntimeError("XENDIT_API_KEY is not set")
-    encoded = base64.b64encode(f"{key}:".encode()).decode()
-    headers = {
-        "Authorization": f"Basic {encoded}",
-        "Content-Type": "application/json",
-    }
-    if api_version:
-        headers["api-version"] = api_version
-    return headers
 
+_db_pool = None
 
 def _get_db():
-    conn_string = os.environ.get("DB_CONNECTION_STRING")
-    if not conn_string:
-        raise RuntimeError("DB_CONNECTION_STRING not configured")
-    return psycopg.connect(conn_string)
+    """Open and return a psycopg connection from the pool (use as context manager)."""
+    global _db_pool
+    if _db_pool is None:
+        conn_string = config.DB_CONNECTION_STRING
+        if not conn_string:
+            raise RuntimeError("DB_CONNECTION_STRING not configured")
+        from psycopg_pool import ConnectionPool
+        _db_pool = ConnectionPool(conn_string, min_size=1, max_size=15, open=True)
+    return _db_pool.connection()
 
 
 def _request_has_auth_header(req: func.HttpRequest) -> bool:
+    """Return True if the request carries a Clerk or standard Authorization header."""
     h = (req.headers.get("X-Clerk-Authorization") or req.headers.get("Authorization") or "").strip()
     return bool(h)
 
 
 def _read_json_body(req: func.HttpRequest) -> dict:
+    """Parse the request body as JSON, tolerating Azure Functions quirks.
+
+    Azure Functions sometimes fails ``get_json()`` on valid payloads; this
+    helper falls back to reading the raw bytes and decoding manually.  Always
+    returns a dict (empty dict on failure).
+    """
     body = None
     try:
         body = req.get_json()
@@ -108,12 +124,13 @@ def _read_json_body(req: func.HttpRequest) -> dict:
             parsed = json.loads(text)
             if isinstance(parsed, dict):
                 return parsed
-        except Exception:
-            pass
+        except Exception as e:
+            logging.debug("_read_json_body: could not decode body: %s", e)
     return body if isinstance(body, dict) else {}
 
 
 def _normalize_anonymous_usage_id(raw) -> str | None:
+    """Normalise an anonymous client ID to a lowercase UUID string, or return None if invalid."""
     if raw is None:
         return None
     s = str(raw).strip()
@@ -141,6 +158,7 @@ def _next_anchor_date(interval: str) -> str:
 
 
 def _subscription_tier_label(tier: str | None) -> str:
+    """Return a human-readable label for a subscription tier key (e.g. 'amicus' → 'Amicus')."""
     return {
         "amicus": "Amicus",
         "juris": "Juris",
@@ -189,7 +207,7 @@ def _ensure_user_exists(clerk_id: str, req: func.HttpRequest):
 
     # User missing — fetch details from Clerk API
     try:
-        clerk_secret = os.environ.get("CLERK_SECRET_KEY", "")
+        clerk_secret = config.CLERK_SECRET_KEY
         if not clerk_secret:
             logging.warning("_ensure_user_exists: CLERK_SECRET_KEY not set, cannot auto-create user")
             return
@@ -216,8 +234,7 @@ def _ensure_user_exists(clerk_id: str, req: func.HttpRequest):
             return
         first_name = (u.get("first_name") or "").strip() or None
         last_name  = (u.get("last_name")  or "").strip() or None
-        ADMIN_EMAILS = ["rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"]
-        is_admin = email.lower() in [e.lower() for e in ADMIN_EMAILS]
+        is_admin = email.lower() in _ADMIN_EMAILS_ENV
 
         with _get_db() as conn:
             with conn.cursor() as cur:
@@ -270,13 +287,13 @@ def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, payment_token
         },
         "description": f"LexMatePH {cfg['label']} subscription",
     }
-    # Recurring plans API requires api-version: 2026-01-01
-    recurring_headers = _xendit_headers(api_version="2026-01-01")
-    resp = requests.post(
-        f"{XENDIT_BASE_URL}/recurring/plans",
-        json=payload,
-        headers=recurring_headers,
-        timeout=20,
+    # Recurring plans API requires api-version: 2026-01-01.
+    # retry=False: creating a plan is non-idempotent — a retry could create duplicates.
+    resp = xendit_post(
+        "/recurring/plans",
+        payload,
+        api_version="2026-01-01",
+        retry=False,
     )
     if resp.status_code not in (200, 201, 202):
         raise RuntimeError(f"Xendit recurring plan creation failed ({resp.status_code}): {resp.text}")
@@ -303,6 +320,11 @@ def _create_xendit_recurring_plan(clerk_id: str, customer_id: str, payment_token
 # ─────────────────────────────────────────────────────────────────────────────
 @xendit_bp.route(route="subscription-status", methods=["GET"])
 def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
+    """Return the current user's subscription tier, admin flag, and related metadata.
+
+    Called on every authenticated page load. Auto-creates a DB row if the Clerk
+    webhook missed this user (fallback path). Returns a 401 for missing/invalid JWTs.
+    """
     clerk_id, error = get_authenticated_user_id(req)
     if error:
         return func.HttpResponse(
@@ -326,10 +348,8 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     )
                     urow = cur.fetchone()
                     if urow:
-                        db_admin, email = urow[0], urow[1]
-                        em = (email or "").strip().lower()
-                        admin_list = [e.strip().lower() for e in ADMIN_EMAILS]
-                        is_admin_flag = bool(db_admin) or (em in admin_list)
+                        db_admin = urow[0]
+                        is_admin_flag = bool(db_admin)
                         try_grant_founding_promo(cur, clerk_id, is_admin_flag)
                     trial_reminder_claim = claim_trial_ending_reminder(cur, clerk_id)
                     conn.commit()
@@ -395,15 +415,6 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                     from utils.founding_promo import get_promo_duration_days
                     expires_at = founding_granted_at + timedelta(days=get_promo_duration_days())
 
-                if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
-                    is_admin = True
-                    try:
-                        if not row[3]:
-                            cur.execute("UPDATE users SET is_admin = TRUE WHERE clerk_id = %s", (clerk_id,))
-                            conn.commit()
-                    except Exception:
-                        conn.rollback()
-
                 is_admin_eff = bool(is_admin)
                 tier_norm = (tier or "free")
                 sub_low = (sub_source or "").strip().lower()
@@ -431,7 +442,7 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
                 )
 
     except Exception as e:
-        logging.error(f"subscription_status error: {e}")
+        logging.error(f"subscription_status error (clerk_id={clerk_id}): {e}")
         return func.HttpResponse(
             json.dumps({"error": "Internal server error"}),
             mimetype="application/json", status_code=500,
@@ -445,6 +456,12 @@ def subscription_status(req: func.HttpRequest) -> func.HttpResponse:
 # ─────────────────────────────────────────────────────────────────────────────
 @xendit_bp.route(route="create-checkout", methods=["POST"])
 def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
+    """Initiate a Xendit hosted-checkout session for a subscription plan.
+
+    Returns a checkout URL the frontend redirects the user to. On payment success,
+    Xendit fires the xendit_webhook handler which grants the tier and stores the
+    customer ID for future sessions.
+    """
     clerk_id, error = get_authenticated_user_id(req)
     if error:
         return func.HttpResponse(
@@ -474,7 +491,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                     cur.execute(
                         """UPDATE users
                            SET subscription_tier = %s, subscription_status = 'active',
-                               subscription_source = 'xendit'
+                               subscription_source = 'xendit_bypass'
                            WHERE clerk_id = %s""",
                         (tier, clerk_id),
                     )
@@ -487,7 +504,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
             )
         # ─────────────────────────────────────────────────────────────────────
 
-        if not (os.environ.get("XENDIT_API_KEY") or "").strip():
+        if not config.XENDIT_API_KEY.strip():
             logging.error("create-checkout: XENDIT_API_KEY is empty in app settings")
             return func.HttpResponse(
                 json.dumps({
@@ -527,7 +544,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
         # - Otherwise, pass an inline customer object. Use a UUID reference_id so it
         #   never conflicts with previous attempts.
         valid_stored = (stored_customer_id or "").strip()
-        has_valid_customer = valid_stored.startswith("cust-") and len(valid_stored) == 41
+        has_valid_customer = valid_stored.startswith("cust-") and len(valid_stored) == _XENDIT_CUSTOMER_ID_LEN
 
         # Store pending plan key — the payment_token.activated webhook handler reads this
         with _get_db() as conn:
@@ -575,12 +592,7 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
                     "surname": (last_name or ".")[:50],
                 },
             }
-        resp = requests.post(
-            f"{XENDIT_BASE_URL}/sessions",
-            json=payload,
-            headers=_xendit_headers(),
-            timeout=20,
-        )
+        resp = xendit_post("/sessions", payload)
         resp_data = resp.json()
 
         if resp.status_code not in (200, 201):
@@ -613,12 +625,12 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
         logging.error(f"create_checkout error: {e}\n{detail}")
         if "XENDIT_API_KEY" in str(e):
             return func.HttpResponse(
-                json.dumps({"error": "Payment provider is not configured", "detail": str(e)}),
+                json.dumps({"error": "Payment provider is not configured"}),
                 mimetype="application/json",
                 status_code=503,
             )
         return func.HttpResponse(
-            json.dumps({"error": str(e) or "Unknown internal error", "trace": detail[-600:]}),
+            json.dumps({"error": "Could not create checkout session"}),
             mimetype="application/json",
             status_code=422,
         )
@@ -629,6 +641,11 @@ def create_checkout(req: func.HttpRequest) -> func.HttpResponse:
 # ─────────────────────────────────────────────────────────────────────────────
 @xendit_bp.route(route="cancel-subscription", methods=["POST"])
 def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
+    """Cancel the user's active Xendit recurring plan.
+
+    Marks the subscription as 'cancelled' and deactivates the plan in Xendit.
+    Access remains active until the end of the current billing period.
+    """
     clerk_id, error = get_authenticated_user_id(req)
     if error:
         return func.HttpResponse(
@@ -658,9 +675,10 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
 
         if plan_id:
             # Step 1: deactivate at Xendit — this stops all future billing cycles.
-            cancel_resp = requests.post(
-                f"{XENDIT_BASE_URL}/recurring/plans/{plan_id}/deactivate",
-                headers=_xendit_headers(api_version="2026-01-01"),
+            cancel_resp = xendit_post(
+                f"/recurring/plans/{plan_id}/deactivate",
+                {},
+                api_version="2026-01-01",
                 timeout=15,
             )
             if cancel_resp.status_code in (200, 201):
@@ -670,6 +688,8 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
                     plan_id, clerk_id,
                 )
             else:
+                error_details = f"HTTP {cancel_resp.status_code}\n{cancel_resp.text}"
+                send_cancellation_failed_admin_alert(user_email, plan_id, error_details)
                 logging.warning(
                     "cancel_subscription: Xendit deactivate returned %s for plan %s — "
                     "proceeding with local cancellation; review plan in Xendit dashboard",
@@ -704,9 +724,9 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
         if expires_at_value is None and plan_id:
             # Query Xendit for the plan to find its schedule anchor / interval.
             try:
-                plan_resp = requests.get(
-                    f"{XENDIT_BASE_URL}/recurring/plans/{plan_id}",
-                    headers=_xendit_headers(api_version="2026-01-01"),
+                plan_resp = xendit_get(
+                    f"/recurring/plans/{plan_id}",
+                    api_version="2026-01-01",
                     timeout=10,
                 )
                 if plan_resp.status_code == 200:
@@ -728,10 +748,25 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
                 logging.warning("cancel_subscription: could not query Xendit plan: %s", ex)
 
         if expires_at_value is None:
-            # Last resort: grant 30 days from now (covers one monthly cycle)
-            expires_at_value = datetime.now(timezone.utc) + timedelta(days=30)
+            # Last resort: infer duration from the plan_key so yearly subscribers
+            # are not incorrectly capped at 30 days.
+            try:
+                with _get_db() as conn:
+                    with conn.cursor() as cur:
+                        cur.execute(
+                            "SELECT xendit_pending_plan_key FROM users WHERE clerk_id = %s",
+                            (clerk_id,),
+                        )
+                        pk_row = cur.fetchone()
+                fallback_plan_key = (pk_row[0] or "") if pk_row else ""
+            except Exception:
+                fallback_plan_key = ""
+            is_yearly = "yearly" in fallback_plan_key
+            fallback_days = 365 if is_yearly else 30
+            expires_at_value = datetime.now(timezone.utc) + timedelta(days=fallback_days)
             logging.info(
-                "cancel_subscription: expires_at fallback to +30d for clerk_id=%s", clerk_id
+                "cancel_subscription: expires_at fallback to +%dd for clerk_id=%s (plan_key=%r)",
+                fallback_days, clerk_id, fallback_plan_key,
             )
 
         # Step 3: mark as cancelled in DB but keep tier until expires_at.
@@ -778,7 +813,7 @@ def cancel_subscription(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"cancel_subscription error: {e}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": "Could not cancel subscription"}),
             mimetype="application/json", status_code=500,
         )
 
@@ -879,7 +914,7 @@ def track_usage(req: func.HttpRequest) -> func.HttpResponse:
                         first_seen = first_row[0] if first_row else None
 
                         # Determine if the 24-hour guest window is still active
-                        guest_window_hours = int(os.environ.get("GUEST_FULL_ACCESS_HOURS", "24"))
+                        guest_window_hours = config.GUEST_FULL_ACCESS_HOURS
                         in_guest_window = False
                         if first_seen is None:
                             # First ever request — window starts now
@@ -979,8 +1014,8 @@ def available_plans(req: func.HttpRequest) -> func.HttpResponse:
                         remaining = max(0, limit - row[0])
                         founding_promo_available = remaining > 0
                         founding_promo_slots_remaining = remaining
-    except Exception:
-        pass  # Default to unavailable on any DB error
+    except Exception as e:
+        logging.warning("available_plans: DB error fetching promo slots: %s", e)
 
     return func.HttpResponse(
         json.dumps({
@@ -1004,9 +1039,24 @@ def available_plans(req: func.HttpRequest) -> func.HttpResponse:
 # ─────────────────────────────────────────────────────────────────────────────
 @xendit_bp.route(route="xendit-webhook", methods=["POST"])
 def xendit_webhook(req: func.HttpRequest) -> func.HttpResponse:
-    # Verify token
+    """Handle all inbound Xendit webhook events.
+
+    Authenticates via x-callback-token, deduplicates using the webhook_events
+    table, and dispatches to the appropriate handler based on event type.
+    Returns 200 for all processed and duplicate events so Xendit does not retry.
+    """
+    # Verify token — XENDIT_WEBHOOK_TOKEN must always be set in production.
+    # Using hmac.compare_digest for constant-time comparison to prevent
+    # timing-oracle attacks.
     callback_token = req.headers.get("x-callback-token", "")
-    if XENDIT_WEBHOOK_TOKEN and callback_token != XENDIT_WEBHOOK_TOKEN:
+    if not XENDIT_WEBHOOK_TOKEN:
+        # Token not configured: reject all requests rather than allowing bypass.
+        logging.error(
+            "Xendit webhook: XENDIT_WEBHOOK_TOKEN is not set — rejecting call. "
+            "Set this in Azure App Settings or local.settings.json."
+        )
+        return func.HttpResponse("Webhook token not configured", status_code=403)
+    if not hmac.compare_digest(callback_token, XENDIT_WEBHOOK_TOKEN):
         logging.warning("Xendit webhook: invalid callback token")
         return func.HttpResponse("Invalid token", status_code=401)
 
@@ -1222,9 +1272,10 @@ def _handle_payment_succeeded(data: dict):
                 # Upgrade path: deactivate the old recurring plan so the user
                 # isn't charged at the old rate on the next billing cycle.
                 try:
-                    deact_resp = requests.post(
-                        f"{XENDIT_BASE_URL}/recurring/plans/{existing_plan_id}/deactivate",
-                        headers=_xendit_headers(api_version="2026-01-01"),
+                    deact_resp = xendit_post(
+                        f"/recurring/plans/{existing_plan_id}/deactivate",
+                        {},
+                        api_version="2026-01-01",
                         timeout=15,
                     )
                     if deact_resp.status_code in (200, 201):

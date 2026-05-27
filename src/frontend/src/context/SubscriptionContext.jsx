@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef, startTransition } from 'react';
 import { useAuth, useUser } from '@clerk/clerk-react';
 import { isInGuestWindow } from '../utils/freeTierUsage';
 
@@ -41,18 +41,6 @@ const TIER_LABELS = {
   juris: 'Juris',
   barrister: 'Barrister',
 };
-
-// ─── Hardcoded admin emails (purely frontend, no DB needed) ───────────────────
-const ADMIN_EMAILS = [
-  'rnlarboleda18@gmail.com',
-];
-
-function isAdminEmail(emailAddresses = []) {
-  return emailAddresses.some((ea) => {
-    const addr = (ea.emailAddress || ea || '').trim().toLowerCase();
-    return ADMIN_EMAILS.includes(addr);
-  });
-}
 
 // ─── Test/Dev tier override ───────────────────────────────────────────────────
 // To test a tier, open your browser console and run:
@@ -109,19 +97,6 @@ export function SubscriptionProvider({ children }) {
       return null;
     }
 
-    const emails = u.emailAddresses || [];
-    const clerkAdmin = isAdminEmail(emails);
-    if (clerkAdmin) {
-      console.log('[Subscription] 🔑 Admin access granted for:', u.primaryEmailAddress?.emailAddress);
-      setIsAdmin(true);
-      setTier('barrister');
-      setStatus('active');
-      setCanCancelXendit(false);
-      setPastDueGraceDays(5);
-      setLoading(false);
-      return 'barrister';
-    }
-
     setIsAdmin(false);
 
     try {
@@ -166,7 +141,6 @@ export function SubscriptionProvider({ children }) {
         const g = data.past_due_grace_days;
         if (typeof g === 'number' && g > 0) setPastDueGraceDays(g);
         setTokenRetry(0);
-        console.log(`[Subscription] Tier: ${effectiveTier}, Admin: ${backendAdmin}, Email: ${data.email || 'N/A'}`);
         return effectiveTier;
       } else {
         console.warn(`[Subscription] Backend API failed (${res.status}). Using test tier: ${testTier || 'free'}`);
@@ -275,8 +249,14 @@ export function SubscriptionProvider({ children }) {
   const requireAccess = (feature) => {
     if (canAccess(feature)) return true;
     const required = FEATURE_REQUIREMENTS[feature];
-    setUpgradeContext({ feature, requiredTier: required });
-    setShowUpgradeModal(true);
+    // Defer the state updates so this function is safe to call from any
+    // context (event handler, effect, or inadvertently during render).
+    // startTransition marks them as non-urgent and keeps them out of the
+    // current render cycle, eliminating the React "setState during render" warning.
+    startTransition(() => {
+      setUpgradeContext({ feature, requiredTier: required });
+      setShowUpgradeModal(true);
+    });
     return false;
   };
 

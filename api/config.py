@@ -122,6 +122,38 @@ BUDGET_CAUTION_PCT   = int(os.getenv("BUDGET_CAUTION_PCT", "80"))
 BUDGET_EMERGENCY_PCT = int(os.getenv("BUDGET_EMERGENCY_PCT", "95"))
 CREDIT_TOTAL_EUR     = float(os.getenv("CREDIT_TOTAL_EUR", "855.05"))
 
+# ── Payments / Xendit ─────────────────────────────────────────────────────────
+# Note: XENDIT_API_KEY is also read at request time inside xendit._xendit_headers()
+# to pick up hot app-setting updates without a cold start; the module-level
+# constant below is for config auditing and the pre-flight guard in create_checkout.
+XENDIT_API_KEY       = os.getenv("XENDIT_API_KEY", "")
+XENDIT_WEBHOOK_TOKEN = os.getenv("XENDIT_WEBHOOK_TOKEN", "")
+XENDIT_BYPASS        = os.getenv("XENDIT_BYPASS", "").lower() in ("true", "1", "yes")
+
+# ── Frontend / CORS ───────────────────────────────────────────────────────────
+FRONTEND_URL = os.getenv("FRONTEND_URL", "https://lexmateph.com").rstrip("/")
+
+# ── Admin bootstrap ───────────────────────────────────────────────────────────
+# Fallback email list used only when auto-creating a user row before the Clerk
+# webhook has fired. DB is_admin column is the authoritative source after sync.
+ADMIN_EMAILS_ENV = [
+    e.strip().lower()
+    for e in os.getenv("ADMIN_EMAILS", "").split(",")
+    if e.strip()
+]
+
+# ── Guest access ──────────────────────────────────────────────────────────────
+GUEST_FULL_ACCESS_HOURS = int(os.getenv("GUEST_FULL_ACCESS_HOURS", "24"))
+
+# ── Clerk ─────────────────────────────────────────────────────────────────────
+CLERK_SECRET_KEY = os.getenv("CLERK_SECRET_KEY", "")
+
+# ── Azure Speech / LexPlay TTS ────────────────────────────────────────────────
+SPEECH_KEY                       = os.getenv("SPEECH_KEY", "")
+SPEECH_REGION                    = os.getenv("SPEECH_REGION", "japaneast")
+LEXPLAY_USE_AZURE_SPEECH         = os.getenv("LEXPLAY_USE_AZURE_SPEECH", "").lower() in ("1", "true", "yes")
+AZURE_STORAGE_CONNECTION_STRING  = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "UseDevelopmentStorage=true")
+
 # Logging
 import logging
 logging.info(f"Environment: {'LOCAL' if IS_LOCAL_DEV else 'PRODUCTION'}")

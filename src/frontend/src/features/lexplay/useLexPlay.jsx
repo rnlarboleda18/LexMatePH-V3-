@@ -390,8 +390,6 @@ export const LexPlayProvider = ({ children }) => {
             const res = await fetch('/api/lexplay/state', { headers });
             if (res.ok) {
                 const state = await res.json();
-                console.log("Loaded playback state:", state);
-                
                 if (state.playlist_id) {
                     // 1. Load the playlist
                     const itemsRes = await fetch(`/api/playlists/${state.playlist_id}/items`, { headers });
@@ -812,7 +810,6 @@ export const LexPlayProvider = ({ children }) => {
 
         try {
             const fetchUrl = buildAudioFetchPath(track, PLAYBACK_RATE);
-            console.log(`LEXPLAY AUDIO: Load attempt ${attempt}/${MAX_RETRIES}:`, fetchUrl);
 
             // --- Cache-First Retrieval ---
             if (audioRef.current) {
@@ -826,7 +823,6 @@ export const LexPlayProvider = ({ children }) => {
                         const cache = await caches.open('audio-cache');
                         const matchedResponse = await cache.match(fetchUrl);
                         if (matchedResponse) {
-                            console.log("LEXPLAY CACHE: 🚀 Instant Play (Cache Hit)");
                             const blob = await matchedResponse.blob();
                             finalSource = URL.createObjectURL(blob);
                         }
@@ -868,7 +864,6 @@ export const LexPlayProvider = ({ children }) => {
             // Auto-retry with exponential backoff
             if (attempt < MAX_RETRIES) {
                 const delay = Math.pow(2, attempt) * 800; // 1.6s, 3.2s
-                console.log(`Retrying in ${delay}ms...`);
                 setError(`Audio load failed. Retrying... (${attempt}/${MAX_RETRIES})`);
                 await new Promise(r => setTimeout(r, delay));
                 return playTrack(index, trackOverride, attempt + 1);

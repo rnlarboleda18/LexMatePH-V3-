@@ -35,7 +35,7 @@ def get_questions(req: func.HttpRequest) -> func.HttpResponse:
     try:
         year = req.params.get('year')
         subject = req.params.get('subject')
-        limit = req.params.get('limit', '10000')
+        limit = min(int(req.params.get('limit', '500')), 500)
 
         query = """
             SELECT q.id, q.year, q.subject, q.sub_topic, q.text, q.source_label, a.text as answer
@@ -52,7 +52,7 @@ def get_questions(req: func.HttpRequest) -> func.HttpResponse:
             params.append(subject)
 
         query += " ORDER BY q.year DESC, q.subject, q.id ASC LIMIT %s"
-        params.append(int(limit))
+        params.append(limit)
 
         conn = get_db_connection()
         cur = conn.cursor(cursor_factory=RealDictCursor)
@@ -63,7 +63,7 @@ def get_questions(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Error getting questions: {e}")
         return func.HttpResponse(
-            body=json.dumps({"error": str(e)}),
+            body=json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )
@@ -161,50 +161,60 @@ def get_lexify_questions(req: func.HttpRequest) -> func.HttpResponse:
         config = EXAM_CONFIG[exam_id]
         conn = get_db_connection()
 
-        all_questions = []
+        # Single query: ROW_NUMBER() per sub_topic with random ordering, then
+        # filter each partition to its configured count via a slot_limits CTE.
+        # Replaces the previous per-slot loop (N queries → 1 query).
+        sub_topics = [s["sub_topic"] for s in config["slots"]]
+        counts     = [s["count"]     for s in config["slots"]]
+        slot_map   = {s["sub_topic"]: s["count"] for s in config["slots"]}
 
-        for slot in config["slots"]:
-            sub_topic = slot["sub_topic"]
-            count = slot["count"]
-
-            cur = conn.cursor(cursor_factory=RealDictCursor)
-
-            # Build weighted randomized query
-            query = """
-                SELECT q.id, q.year, q.subject, q.sub_topic, q.text, q.source_label, 
-                       a.text as answer, a.text as suggested_answer
+        year_clause = "AND q.year = %s" if year_filter else ""
+        batch_query = f"""
+            WITH slot_limits(sub_topic, max_count) AS (
+                SELECT unnest(%s::text[]), unnest(%s::int[])
+            ),
+            ranked AS (
+                SELECT q.id, q.year, q.subject, q.sub_topic, q.text, q.source_label,
+                       a.text AS answer, a.text AS suggested_answer,
+                       ROW_NUMBER() OVER (PARTITION BY q.sub_topic ORDER BY RANDOM()) AS rn
                 FROM questions q
                 LEFT JOIN answers a ON a.question_id = q.id
-                WHERE q.sub_topic = %s
+                WHERE q.sub_topic = ANY(%s::text[])
                   AND a.text IS NOT NULL
                   AND trim(a.text) != ''
                   AND q.text !~* '\\([a-d]\\)|\\b[a-d]\\.'
-            """
-            params = [sub_topic]
+                  {year_clause}
+            )
+            SELECT r.id, r.year, r.subject, r.sub_topic, r.text, r.source_label,
+                   r.answer, r.suggested_answer
+            FROM ranked r
+            JOIN slot_limits sl ON r.sub_topic = sl.sub_topic AND r.rn <= sl.max_count
+        """
+        params = [sub_topics, counts, sub_topics]
+        if year_filter:
+            params.append(int(year_filter))
 
-            if year_filter:
-                query += " AND q.year = %s"
-                params.append(int(year_filter))
+        cur = conn.cursor(cursor_factory=RealDictCursor)
+        cur.execute(batch_query, params)
+        rows = cur.fetchall()
+        cur.close()
 
-            query += " ORDER BY RANDOM() LIMIT %s"
-            params.append(count)
-
-            cur.execute(query, params)
-            rows = cur.fetchall()
-            cur.close()
-
-            # If not enough questions with sub_topic (batch not done yet), fallback
-            if len(rows) < count:
+        # Warn if any slot came back short (classifier may not be complete)
+        by_sub_topic = {}
+        for row in rows:
+            by_sub_topic.setdefault(row["sub_topic"], []).append(row)
+        for sub_topic, needed in slot_map.items():
+            got = len(by_sub_topic.get(sub_topic, []))
+            if got < needed:
                 logging.warning(
-                    f"Sub-topic '{sub_topic}' only has {len(rows)} questions "
-                    f"(needed {count}). Check if batch classifier has been run."
+                    "Sub-topic '%s' only has %d questions (needed %d). "
+                    "Check if batch classifier has been run.", sub_topic, got, needed
                 )
 
-            for row in rows:
-                row["exam_id"]    = exam_id
-                row["exam_label"] = config["label"]
-                row["sub_topic"]  = sub_topic
-            all_questions.extend(rows)
+        all_questions = list(rows)
+        for row in all_questions:
+            row["exam_id"]    = exam_id
+            row["exam_label"] = config["label"]
 
         # Shuffle final set so questions from same sub-topic aren't bunched
         random.shuffle(all_questions)
@@ -229,7 +239,7 @@ def get_lexify_questions(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"lexify_questions error: {e}")
         return func.HttpResponse(
-            body=json.dumps({"error": str(e)}),
+            body=json.dumps({"error": "Internal server error"}),
             mimetype="application/json",
             status_code=500
         )

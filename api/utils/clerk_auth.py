@@ -3,10 +3,11 @@ import jwt
 import logging
 from jwt import PyJWKClient
 
-# Clerk publishable key is needed for the JWKS URL if we want to be dynamic, 
-# but usually it's cleaner to just use the secret key for backend actions.
-# However, for JWT validation, we need the JWKS.
-CLERK_SECRET_KEY = (os.environ.get("CLERK_SECRET_KEY") or "").strip().strip("'").strip('"')
+import config
+
+# All env-var reads are centralised in config.py; keep a module-level alias here
+# so the rest of this file reads cleanly.
+CLERK_SECRET_KEY = config.CLERK_SECRET_KEY.strip("'").strip('"')
 
 # Optional env override; otherwise JWKS is derived from JWT `iss` (see _jwks_url_for_token).
 _DEFAULT_JWKS = "https://capital-ghost-60.clerk.accounts.dev/.well-known/jwks.json"
@@ -28,6 +29,11 @@ def _jwks_url_for_token(token):
 
 
 def get_jwks_client(jwks_url=None):
+    """Return (and cache) a PyJWKClient for the given JWKS URL.
+
+    Caches clients per URL so JWKS keys are fetched once per cold start
+    rather than on every request.
+    """
     url = jwks_url or CLERK_JWKS_URL
     if url not in _jwks_clients:
         _jwks_clients[url] = PyJWKClient(url)

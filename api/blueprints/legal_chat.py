@@ -21,6 +21,7 @@ from config import (
     RAG_CORPUS_NAME, GCP_PROJECT, GCP_LOCATION,
     CACHE_SEMANTIC_THRESHOLD, CREDIT_TOTAL_EUR,
     GEMINI_PRO_MODEL, GEMINI_FLASH_MODEL,
+    FRONTEND_URL,
 )
 
 log = logging.getLogger(__name__)
@@ -100,12 +101,15 @@ def _get_user_plan(user_id: str | None) -> str:
 
 
 
+_FRONTEND_ORIGIN = FRONTEND_URL
+
+
 def _json_response(data: dict, status: int = 200) -> func.HttpResponse:
     return func.HttpResponse(
         json.dumps(data, default=str),
         status_code=status,
         mimetype="application/json",
-        headers={"Access-Control-Allow-Origin": "*"},
+        headers={"Access-Control-Allow-Origin": _FRONTEND_ORIGIN},
     )
 
 
@@ -120,7 +124,7 @@ def _error(msg: str, status: int = 400) -> func.HttpResponse:
 def legal_chat(req: func.HttpRequest) -> func.HttpResponse:
     if req.method == "OPTIONS":
         return func.HttpResponse(status_code=204,
-                                 headers={"Access-Control-Allow-Origin": "*",
+                                 headers={"Access-Control-Allow-Origin": _FRONTEND_ORIGIN,
                                           "Access-Control-Allow-Methods": "POST",
                                           "Access-Control-Allow-Headers": "Content-Type,Authorization"})
 

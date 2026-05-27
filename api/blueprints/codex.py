@@ -58,7 +58,8 @@ def int_to_roman(num):
             while num >= val[i]:
                 result += syms[i]
                 num -= val[i]
-    except:
+    except Exception as e:
+        logging.warning("int_to_roman: could not convert %r: %s", num, e)
         return str(num)
     return result
 
@@ -108,16 +109,10 @@ def _attach_link_counts(cur, articles, statute_id):
              if art not in link_map: link_map[art] = {}
              link_map[art][idx] = r['link_count']
              
-         # with open("C:/tmp/codex_debug.txt", "a") as f:
-         #      f.write(f"[_attach_link_counts] Statute: {statute_id} | Articles: {len(articles)} | ArticleNums_Sample: {article_nums[:3]} | FetchedRows: {len(fetched_rows)} | LinkMapKeys: {len(link_map)}\n")
-              
          for art in articles:
              anum = str(art.get('key_id') or art.get('article_number') or "").strip()
              art['paragraph_links'] = link_map.get(anum, {})
     except Exception as e:
-         # import traceback
-         # with open("C:/tmp/codex_debug.txt", "a") as f:
-         #      f.write(f"--- ERROR IN ATTACH_LINK_COUNTS ---\n{traceback.format_exc()}\n")
          logging.error(f"Error attaching link counts in codex.py: {e}")
          for art in articles: art['paragraph_links'] = {}
 

@@ -73,7 +73,7 @@ def register_user(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Registration error: {e}")
         return func.HttpResponse(
-            body=json.dumps({"error": str(e)}),
+            body=json.dumps({"error": "Registration failed"}),
             mimetype="application/json",
             status_code=500
         )
@@ -148,7 +148,7 @@ def login_user(req: func.HttpRequest) -> func.HttpResponse:
     except Exception as e:
         logging.error(f"Login error: {e}")
         return func.HttpResponse(
-            body=json.dumps({"error": str(e)}),
+            body=json.dumps({"error": "Login failed"}),
             mimetype="application/json",
             status_code=500
         )

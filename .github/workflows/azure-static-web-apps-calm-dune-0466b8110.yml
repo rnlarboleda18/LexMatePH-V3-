@@ -63,6 +63,11 @@ jobs:
         working-directory: api
         run: python -c "import function_app; print('function_app import ok')"
 
+      - name: Backend unit tests (pytest)
+        run: |
+          pip install pytest
+          cd api && python -m pytest tests/ -v --tb=short
+
       - name: Python lint (Ruff)
         run: |
           pip install ruff

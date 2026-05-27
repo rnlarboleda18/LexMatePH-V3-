@@ -8,6 +8,8 @@ import threading
 import uuid
 from datetime import datetime, timedelta
 
+import config
+
 # Removed local file logging as it causes permission errors in production
 import azure.functions as func
 
@@ -39,7 +41,7 @@ from azure.storage.blob import BlobServiceClient, generate_blob_sas, BlobSasPerm
 
 # Azure Speech via REST only (no Speech SDK — smaller Linux deploy for SWA Free tier).
 def _azure_speech_configured():
-    k = (os.environ.get("SPEECH_KEY") or "").strip()
+    k = (config.SPEECH_KEY or "").strip()
     return bool(k and "<insert" not in k.lower())
 
 
@@ -56,7 +58,7 @@ _TTS_LOCK = threading.Lock()
 _TTS_LOCK_TIMEOUT = 30  # seconds to wait before giving up and using gTTS
 
 # Default: Edge TTS. Set LEXPLAY_USE_AZURE_SPEECH=true for Azure Speech only (no Edge fallback if Azure fails).
-_USE_AZURE_SPEECH = os.environ.get("LEXPLAY_USE_AZURE_SPEECH", "").lower() in ("1", "true", "yes")
+_USE_AZURE_SPEECH = config.LEXPLAY_USE_AZURE_SPEECH
 
 # Reuse one BlobServiceClient + container client per instance (fewer storage API calls).
 _BLOB_INIT_LOCK = threading.Lock()
@@ -291,7 +293,7 @@ def _get_blob_client(blob_name):
     """Return a BlobClient for blob_name; reuse account/container clients per process."""
     global _BLOB_SERVICE_CLIENT, _CONTAINER_READY
     try:
-        conn_str = os.environ.get("AZURE_STORAGE_CONNECTION_STRING", "UseDevelopmentStorage=true")
+        conn_str = config.AZURE_STORAGE_CONNECTION_STRING
         if conn_str == "UseDevelopmentStorage=true":
             logging.warning("AZURE_STORAGE_CONNECTION_STRING not configured, blob cache disabled.")
             return None
@@ -609,6 +611,413 @@ def _rpc_article_num_regex_pattern(cid_str: str):
     return rf"^([Aa]rticle[[:space:]]+|[Aa]rt\.[[:space:]]*)?{esc}[[:space:]]*$"
 
 
+# ── Module-level codal lookup constants ───────────────────────────────────────
+
+_LEGACY_TABLES = {
+    'rpc': 'rpc_codal',
+    'civ': 'civ_codal',
+    'rcc': 'rcc_codal',
+    'labor': 'labor_codal',
+    'const': 'consti_codal',
+    'fc': 'fc_codal',
+    'roc': 'roc_codal',
+}
+
+# SC issuance codals stored in sc_issuances_codal (not legacy codal tables / article_versions)
+_SC_ISSUANCE_IDS = {
+    'am-07-9-12-sc', 'am-08-1-16-sc', 'am-09-6-8-sc', 'am-01-7-01-sc',
+    'cpra', 'am-02-8-13-sc', 'ncjc', 'ra-11642',
+}
+
+
+def _tts_sc_issuance(content_id, code_id, cur, conn):
+    """Generate TTS text for SC Issuance sections (sc_issuances_codal table).
+
+    Args:
+        content_id: Section ID — either a UUID (matched against sc_issuances_codal.id)
+                    or a section_num string (plain number match).
+        code_id:    Statute identifier (e.g. 'cpra', 'ncjc').
+        cur:        psycopg2 cursor (RealDictCursor).
+        conn:       psycopg2 connection (for rollback on exception).
+
+    Returns:
+        (full_text, None) on success, or (None, error_str) if not found.
+    """
+    statute_id_upper = code_id.upper()
+    row = None
+    # Primary: match by UUID id (sent by ArticleNode via article.id / version_id)
+    if _looks_like_uuid(str(content_id)):
+        try:
+            cur.execute(
+                """SELECT id, statute_id, statute_label, group_type, group_num, group_label,
+                          part_num, part_label, section_num, section_title, content_md
+                   FROM sc_issuances_codal
+                   WHERE id::text = %s AND statute_id = %s LIMIT 1""",
+                (str(content_id), statute_id_upper)
+            )
+            row = cur.fetchone()
+        except Exception:
+            conn.rollback()
+    # Fallback: match by section_num (plain number string)
+    if not row:
+        try:
+            cur.execute(
+                """SELECT id, statute_id, statute_label, group_type, group_num, group_label,
+                          part_num, part_label, section_num, section_title, content_md
+                   FROM sc_issuances_codal
+                   WHERE statute_id = %s AND section_num::text = %s LIMIT 1""",
+                (statute_id_upper, str(content_id))
+            )
+            row = cur.fetchone()
+        except Exception:
+            conn.rollback()
+
+    if not row:
+        return None, f"Issuance section '{content_id}' not found for '{code_id}'"
+
+    group_type  = (row.get('group_type') or '').strip().upper()
+    group_num   = row.get('group_num') or ''
+    group_label = (row.get('group_label') or '').strip()
+    sec_num     = str(row.get('section_num') or '').strip()
+    sec_title   = (row.get('section_title') or '').strip()
+    content_md  = (row.get('content_md') or '').strip()
+
+    # Build TTS header:  "Canon I — Propriety. Section 3. Title."
+    header_parts = []
+
+    # Group-level label (Canon, Rule, Chapter, Part, etc.)
+    if group_type and group_num:
+        gtype_cap = group_type.capitalize()  # "Canon", "Rule", "Chapter" …
+        if group_label:
+            header_parts.append(f"{gtype_cap} {group_num}. {group_label}")
+        else:
+            header_parts.append(f"{gtype_cap} {group_num}")
+
+    # Section-level label
+    if sec_num and sec_num != '0':
+        if sec_title:
+            header_parts.append(f"Section {sec_num}. {sec_title}")
+        else:
+            header_parts.append(f"Section {sec_num}")
+    elif sec_num == '0' and sec_title:
+        # Preamble / group intro
+        header_parts.append(sec_title)
+
+    # Flatten body markdown → plain TTS text
+    clean = tts_flatten_codal_body(content_md)
+    clean = _apply_custom_pronunciations(clean)
+
+    # Dedupe: if clean already opens with the section header, skip prepending
+    header = '. '.join(header_parts)
+    if header:
+        header, _ = dedupe_codal_header_prefix(clean, header, sec_num)
+
+    full_text = f"{header}. {clean}" if header and clean else (header or clean)
+    full_text = _apply_custom_pronunciations(full_text)
+    return full_text, None
+
+
+def _build_legacy_tts_header(row, table, code_id, art_num, art_title, group_header,
+                              clean, content, is_redundant, clean_num):
+    """Build TTS header string for a legacy codal row.
+
+    All preprocessing (content cleaning, is_redundant, clean_num) must be done
+    by the caller before invoking this function.
+
+    Note: for the Constitution branch this function may strip a leading
+    "SECTION N." from ``clean`` to prevent it appearing twice in the output.
+    The (possibly mutated) ``clean`` is therefore returned alongside the header.
+
+    Args:
+        row:          psycopg2 RealDictCursor row dict.
+        table:        DB table name (e.g. 'rpc_codal', 'fc_codal').
+        code_id:      Code identifier passed by the caller (e.g. 'rpc', 'const').
+        art_num:      Raw article_num value from the DB row.
+        art_title:    Cleaned article title (citation tail stripped).
+        group_header: Row's group_header value (stripped).
+        clean:        Flattened TTS body text.
+        content:      Raw content_md (used for article-identifier detection).
+        is_redundant: Whether art_title duplicates group_header or body.
+        clean_num:    Display-safe article number (FC dash prefix removed).
+
+    Returns:
+        (header, clean) — header string and (possibly mutated) clean body.
+    """
+    header = ''
+
+    if code_id and code_id.lower() == 'const':
+        # Use article_num (DB value) for routing logic
+        art_num_db = str(art_num).strip()
+        s_label = (row.get('section_label') or '').strip().rstrip('.')
+
+        if "PREAMBLE" in art_num_db.upper() or "PREAMBLE" in s_label.upper():
+            # Preamble row: prepend Codal name
+            header = "1987 Constitution of the Republic of the Philippines. Preamble"
+
+        else:
+            # Section row: article_num like 'I-0', 'II-1', 'IX-A-1', 'XVIII-5'
+            parts = art_num_db.split('-')
+            sect_num = parts[-1]  # Always the last segment (e.g. '0', '1', '5')
+
+            # Build article identifier - always top-level Roman numeral only.
+            # Sub-chapter letters (A/B/C/D in Art. IX) are announced via
+            # group_header; including them in art_roman causes the letter
+            # to be spoken twice ("Article IX-A … A. Common Provisions").
+            art_roman = parts[0]  # e.g. 'IX' for IX-A-1, 'II' for II-5
+
+            # Handle special Article I (has body but no sections, encoded as I-0)
+            if sect_num == '0':
+                art_label = f"Article {art_roman}"
+                if art_title and not is_redundant:
+                    art_label += f'. {art_title}'
+                header = art_label
+            else:
+                # Integrated Boundary Detection (Handles sub-headers like "Principles", "State Policies")
+                group_val = row.get('group_header')
+                section_id = row.get('id')
+
+                # Use boundary map to determine if we should announce a header update
+                boundaries = get_codal_boundaries(table)
+                is_group_start = False
+                if group_val and boundaries and 'group_header' in boundaries:
+                    g_lower = group_val.lower()
+                    if g_lower in boundaries['group_header'] and str(boundaries['group_header'][g_lower]) == str(section_id):
+                        is_group_start = True
+
+                # Is this a sub-chapter article? (e.g. IX-A-1 has 3 parts, middle is a letter)
+                is_sub_chapter = len(parts) == 3 and not parts[1].isdigit()
+                # Include the article name only for the very first sub-chapter (A)
+                # or for plain articles (no sub-chapter letter). B/C/D sub-chapters
+                # only announce their group header — the article was already introduced by A.
+                include_art_name = not is_sub_chapter or parts[1] == 'A'
+
+                if is_group_start:
+                    if sect_num == '1' and include_art_name:
+                        art_label = f"Article {art_roman}"
+                        if art_title and not is_redundant:
+                            art_label += f'. {art_title}'
+                        header = f"{art_label}. {group_val}. Section 1"
+                    else:
+                        header = f"{group_val}. Section {sect_num}"
+                elif sect_num == '1':
+                    # Standard Section 1 (no mid-section group header)
+                    art_label = f"Article {art_roman}"
+                    if art_title and not is_redundant:
+                        art_label += f'. {art_title}'
+                    header = f"{art_label}. Section 1"
+                else:
+                    # Normal section
+                    header = f"Section {sect_num}"
+
+            # FIX: Strip leading "SECTION N." from clean to avoid double-mention
+            # e.g. header="...Section 1" and clean starts with "SECTION 1, The Philippines..."
+            clean = re.sub(r'^SECTION\s+\d+[\.,]?\s*', '', clean, flags=re.IGNORECASE).strip()
+    else:
+        if code_id and code_id.lower() == 'roc':
+            # ROC: art_num looks like "Rule 2, Section 1" or "Rule 2, Section 8"
+            roc_rule_m = re.search(r'(Rule\s+\d+)', str(clean_num), re.IGNORECASE)
+            roc_sect_m = re.search(r'Section\s+(\d+)', str(clean_num), re.IGNORECASE)
+            rule_label = roc_rule_m.group(1) if roc_rule_m else str(clean_num)
+            sect_num_roc = roc_sect_m.group(1) if roc_sect_m else '1'
+
+            rule_num_int = 0
+            if roc_rule_m:
+                try:
+                    rule_num_int = int(re.search(r'\d+', rule_label).group())
+                except Exception as e:
+                    logging.debug("audio_provider: could not parse rule number from %r: %s", rule_label, e)
+
+            hdr_parts = []
+            starts = get_codal_boundaries('roc_codal')
+            curr_id = row.get('id')
+
+            # 0. Codal Title & Part - Only on first rule of a Part (always sect 1)
+            if sect_num_roc == '1' and rule_num_int in [1, 72, 110, 128]:
+                hdr_parts.append("Rules of Court of the Philippines")
+                p_num = row.get('part_num')
+                p_title = (row.get('part_title') or '').title()
+                if p_num and p_title:
+                    hdr_parts.append(f"Part {p_num}. {p_title}")
+
+            # 1. Group 1 Title
+            g1 = (row.get('group_1_title') or '').strip()
+            if g1 and starts['g1'].get(g1.lower()) == str(curr_id):
+                hdr_parts.append(g1.title())
+
+            # 2. Group 2 Title
+            g2 = (row.get('group_2_title') or '').strip()
+            if g2 and starts['g2'].get(g2.lower()) == str(curr_id):
+                hdr_parts.append(g2.title())
+
+            if sect_num_roc == '1':
+                # 3. Rule Number
+                hdr_parts.append(rule_label)
+
+                # 4. Rule Title
+                g_hdr = (row.get('group_header') or '').strip()
+                if g_hdr:
+                    # Strip artifact 'RULE N' prefix if somehow still present
+                    clean_g_hdr = re.sub(r'^RULE\s+\d+\s+', '', g_hdr, flags=re.IGNORECASE).strip()
+                    if clean_g_hdr: hdr_parts.append(clean_g_hdr.title())
+
+                roc_hdr = '. '.join(hdr_parts)
+                header = f"{roc_hdr}. Section 1"
+            else:
+                if hdr_parts:
+                    header = f"{'. '.join(hdr_parts)}. Section {sect_num_roc}"
+                else:
+                    header = f"Section {sect_num_roc}"
+
+            if art_title and not is_redundant:
+                header += f". {art_title}"
+        elif table in ['rpc_codal', 'civ_codal', 'rcc_codal', 'labor_codal']:
+            # Structural lines only on the first article in *codal order* where each
+            # division starts (not MIN(uuid), which does not follow article sequence).
+            hdr_parts = []
+            starts = get_codal_boundaries(table)
+            curr_id_str = str(row.get('id')) if row.get('id') is not None else ''
+            is_rcc_table = table == 'rcc_codal'
+
+            bk = row.get('book')
+            # RCC (RA 11232) has no Books; legacy book_num=1 must not be spoken.
+            if not is_rcc_table and bk is not None:
+                bstart = starts.get('book_start', {}).get(str(bk).strip())
+                if bstart and bstart == curr_id_str:
+                    book_line = tts_book_heading_line(dict(row))
+                    if book_line:
+                        hdr_parts.append(book_line)
+
+            t_lbl = (row.get('title_label') or '').strip()
+            c_lbl = (row.get('chapter_label') or '').strip()
+            s_lbl = (row.get('section_label') or '').strip()
+            if is_rcc_table:
+                t_lbl = fix_rcc_structural_heading_glue(t_lbl)
+                c_lbl = fix_rcc_structural_heading_glue(c_lbl)
+                s_lbl = fix_rcc_structural_heading_glue(s_lbl)
+            chapter_num = row.get('chapter_num')  # None for rpc_codal (not fetched)
+
+            bk_s2 = "" if row.get("book") is None else str(row.get("book")).strip()
+            tn_s2 = "" if row.get("title_num") is None else str(row.get("title_num")).strip()
+            clk_s2 = normalize_codal_label_key(c_lbl) if c_lbl else ""
+
+            # Title: only announce when title_num is set (articles without title_num,
+            # e.g. 266-A–D amendments, must not treat their title_label as a structural header).
+            tbmap = starts.get("title_start_book_num") or {}
+            tn = row.get("title_num")
+            if t_lbl and tn is not None:
+                tkey = f"{bk_s2}|{str(tn).strip()}"
+                if tbmap.get(tkey) == curr_id_str:
+                    hdr_parts.append(tts_format_structural_label(t_lbl, tn, "Title"))
+                elif tkey not in tbmap:
+                    nk_t = normalize_codal_label_key(t_lbl)
+                    if nk_t and starts.get("title_label", {}).get(nk_t) == curr_id_str:
+                        hdr_parts.append(tts_format_structural_label(t_lbl, tn, "Title"))
+
+            # Chapter: compound key (book|title_num|chapter_label_key) prevents
+            # duplicate labels like "General Provisions" from colliding across titles.
+            if c_lbl and clk_s2:
+                ch_compound = f"{bk_s2}|{tn_s2}|{clk_s2}"
+                ch_map = starts.get('chapter_start', {})
+                if ch_map.get(ch_compound) == curr_id_str:
+                    hdr_parts.append(tts_format_structural_label(c_lbl, chapter_num, "Chapter"))
+                elif not ch_map:
+                    # Fallback: legacy single-key map (older cache entries)
+                    if starts.get('chapter_label', {}).get(clk_s2) == curr_id_str:
+                        hdr_parts.append(tts_format_structural_label(c_lbl, chapter_num, "Chapter"))
+
+            # Section: compound key (book|title_num|chapter_label_key|section_label_key)
+            if s_lbl and not body_embeds_rpc_section(content, clean, s_lbl):
+                slk_s2 = normalize_codal_label_key(s_lbl)
+                if slk_s2:
+                    sec_compound = f"{bk_s2}|{tn_s2}|{clk_s2}|{slk_s2}"
+                    sec_map = starts.get('section_start', {})
+                    if sec_map.get(sec_compound) == curr_id_str:
+                        hdr_parts.append(strip_codal_citation_tail(s_lbl).title())
+                    elif not sec_map:
+                        # Fallback: legacy single-key map
+                        if starts.get('section_label', {}).get(slk_s2) == curr_id_str:
+                            hdr_parts.append(strip_codal_citation_tail(s_lbl).title())
+
+            art_title = strip_codal_citation_tail(art_title)
+            if is_rcc_table and art_title:
+                art_title = fix_rcc_structural_heading_glue(art_title)
+            if is_rcc_table:
+                rcc_disp = rcc_section_number_from_article_num(str(clean_num))
+                cn0 = str(clean_num).strip() == "0" or rcc_disp == "0"
+                art_name = "Preliminary Section" if cn0 else f"Section {rcc_disp}."
+            else:
+                art_name = 'Preliminary Article' if clean_num == '0' else f'Article {clean_num}'
+            if art_title and not is_redundant:
+                if is_rcc_table and art_name.endswith("."):
+                    art_name = f"{art_name} {art_title}"
+                else:
+                    art_name += f". {art_title}"
+
+            struct_text = '. '.join(hdr_parts)
+            body_already_has_article = body_starts_with_article_identifier(
+                clean,
+                str(clean_num),
+                art_title if not is_redundant else None,
+            ) or raw_markdown_opens_with_article_line(content, str(clean_num))
+            if body_already_has_article:
+                header = struct_text
+            else:
+                header = f"{struct_text}. {art_name}" if struct_text else art_name
+
+        elif table == 'fc_codal':
+            hdr_parts = []
+            starts = get_codal_boundaries('fc_codal')
+            curr_id_str = str(row.get('id')) if row.get('id') is not None else ''
+
+            # Title header — group_header holds "FAMILY CODE\nTITLE N description"
+            g_hdr = (row.get('group_header') or '').strip()
+            if g_hdr:
+                gnk = normalize_codal_label_key(g_hdr)
+                if gnk and starts['group_header'].get(gnk) == curr_id_str:
+                    lines = [l.strip() for l in g_hdr.splitlines() if l.strip()]
+                    # Take the "TITLE N description" line (second line); fall back to full header
+                    title_line = lines[1] if len(lines) >= 2 else (lines[0] if lines else g_hdr)
+                    # FC format: "TITLE III RIGHTS AND OBLIGATIONS..." (space separator, no dash)
+                    mt = re.match(r'^TITLE\s+([IVX]+|\d+)\s+(.+)$', title_line, re.IGNORECASE)
+                    if mt:
+                        raw_num = mt.group(1).lower()
+                        title_desc = mt.group(2).strip().title()
+                        arabic_num = _ROMAN_TO_ARABIC.get(raw_num, raw_num)
+                        hdr_parts.append(f"Title {arabic_num}. {title_desc}")
+                    else:
+                        hdr_parts.append(tts_format_structural_label(title_line, None, "Title"))
+
+            # Chapter header — section_label holds "Chapter N. Description"
+            s_lbl = (row.get('section_label') or '').strip()
+            if s_lbl:
+                snk = normalize_codal_label_key(s_lbl)
+                if snk and starts.get('section_label', {}).get(snk) == curr_id_str:
+                    hdr_parts.append(strip_codal_citation_tail(s_lbl))
+
+            art_title = strip_codal_citation_tail(art_title)
+            art_name = str(clean_num) if re.match(r'^(article|preamble|section|rule)\b', str(clean_num), re.IGNORECASE) else f'Article {clean_num}'
+            if art_title and not is_redundant:
+                art_name += f'. {art_title}'
+
+            hdr_parts.append(art_name)
+            header = '. '.join(hdr_parts)
+
+        elif re.match(r'^(article|preamble|section|rule)\b', str(clean_num), re.IGNORECASE):
+            header = str(clean_num)
+            if art_title and not is_redundant:
+                header += f'. {art_title}'
+        else:
+            header = 'Preliminary Article' if clean_num == '0' else f'Article {clean_num}'
+            if art_title and not is_redundant:
+                header += f'. {art_title}'
+
+    # Dedupe: RPC/CIV/Labor already drop only the article line when the body repeats it,
+    # keeping Book/Title/Section. Other codals use full-header dedupe.
+    if table not in ['rpc_codal', 'civ_codal', 'rcc_codal', 'labor_codal']:
+        header, _ = dedupe_codal_header_prefix(clean, header, str(clean_num))
+    return header, clean
+
+
 def _get_text_for_codal(content_id, code_id=None):
     """
     Fetch article text for TTS.
@@ -621,99 +1030,13 @@ def _get_text_for_codal(content_id, code_id=None):
     """
     conn = get_db_connection()
     cur = conn.cursor(cursor_factory=RealDictCursor)
-    LEGACY_TABLES = {
-        'rpc': 'rpc_codal',
-        'civ': 'civ_codal',
-        'rcc': 'rcc_codal',
-        'labor': 'labor_codal',
-        'const': 'consti_codal',
-        'fc': 'fc_codal',
-        'roc': 'roc_codal',
-    }
-    # SC issuance codals stored in sc_issuances_codal (not legacy codal tables / article_versions)
-    _SC_ISSUANCE_IDS = {
-        'am-07-9-12-sc', 'am-08-1-16-sc', 'am-09-6-8-sc', 'am-01-7-01-sc',
-        'cpra', 'am-02-8-13-sc', 'ncjc', 'ra-11642',
-    }
     try:
         # ---- Strategy A′: SC Issuances (sc_issuances_codal) ----
         if code_id and code_id.lower() in _SC_ISSUANCE_IDS:
-            statute_id_upper = code_id.upper()
-            row = None
-            # Primary: match by UUID id (sent by ArticleNode via article.id / version_id)
-            if _looks_like_uuid(str(content_id)):
-                try:
-                    cur.execute(
-                        """SELECT id, statute_id, statute_label, group_type, group_num, group_label,
-                                  part_num, part_label, section_num, section_title, content_md
-                           FROM sc_issuances_codal
-                           WHERE id::text = %s AND statute_id = %s LIMIT 1""",
-                        (str(content_id), statute_id_upper)
-                    )
-                    row = cur.fetchone()
-                except Exception:
-                    conn.rollback()
-            # Fallback: match by section_num (plain number string)
-            if not row:
-                try:
-                    cur.execute(
-                        """SELECT id, statute_id, statute_label, group_type, group_num, group_label,
-                                  part_num, part_label, section_num, section_title, content_md
-                           FROM sc_issuances_codal
-                           WHERE statute_id = %s AND section_num::text = %s LIMIT 1""",
-                        (statute_id_upper, str(content_id))
-                    )
-                    row = cur.fetchone()
-                except Exception:
-                    conn.rollback()
+            return _tts_sc_issuance(content_id, code_id, cur, conn)
 
-            if not row:
-                return None, f"Issuance section '{content_id}' not found for '{code_id}'"
-
-            statute_label = (row.get('statute_label') or code_id).strip()
-            group_type    = (row.get('group_type') or '').strip().upper()
-            group_num     = row.get('group_num') or ''
-            group_label   = (row.get('group_label') or '').strip()
-            sec_num       = str(row.get('section_num') or '').strip()
-            sec_title     = (row.get('section_title') or '').strip()
-            content_md    = (row.get('content_md') or '').strip()
-
-            # Build TTS header:  "Canon I — Propriety. Section 3. Title."
-            header_parts = []
-
-            # Group-level label (Canon, Rule, Chapter, Part, etc.)
-            if group_type and group_num:
-                gtype_cap = group_type.capitalize()  # "Canon", "Rule", "Chapter" …
-                if group_label:
-                    header_parts.append(f"{gtype_cap} {group_num}. {group_label}")
-                else:
-                    header_parts.append(f"{gtype_cap} {group_num}")
-
-            # Section-level label
-            if sec_num and sec_num != '0':
-                if sec_title:
-                    header_parts.append(f"Section {sec_num}. {sec_title}")
-                else:
-                    header_parts.append(f"Section {sec_num}")
-            elif sec_num == '0' and sec_title:
-                # Preamble / group intro
-                header_parts.append(sec_title)
-
-            # Flatten body markdown → plain TTS text
-            clean = tts_flatten_codal_body(content_md)
-            clean = _apply_custom_pronunciations(clean)
-
-            # Dedupe: if clean already opens with the section header, skip prepending
-            header = '. '.join(header_parts)
-            if header:
-                header, _ = dedupe_codal_header_prefix(clean, header, sec_num)
-
-            full_text = f"{header}. {clean}" if header and clean else (header or clean)
-            full_text = _apply_custom_pronunciations(full_text)
-            return full_text, None
-
-        if code_id and code_id.lower() in LEGACY_TABLES:
-            table = LEGACY_TABLES[code_id.lower()]
+        if code_id and code_id.lower() in _LEGACY_TABLES:
+            table = _LEGACY_TABLES[code_id.lower()]
             cols = "id, article_num, article_title, content_md"
             if table in ["consti_codal", "const_codal"]:
                 cols = "id, article_num, article_title, group_header, content_md, section_label"
@@ -869,7 +1192,7 @@ def _get_text_for_codal(content_id, code_id=None):
                 clean = tts_flatten_codal_body(content)
                 if table == "rcc_codal":
                     clean = tts_strip_rcc_spurious_book_from_flat(clean)
-                
+
                 # Deduplication logic (for Family Code mostly):
                 is_redundant = False
                 if code_id and code_id.lower() == 'fc':
@@ -881,283 +1204,16 @@ def _get_text_for_codal(content_id, code_id=None):
                         is_redundant = True
                     elif clean.lower().startswith(art_title.lower()):
                         is_redundant = True
-                
+
                 # Format Header - only strip dash prefix for FC-style articles (FC-I-36), NOT RPC (266-A)
                 clean_num = art_num
                 if '-' in art_num and not art_num[0].isdigit() and (code_id and code_id.lower() not in ['rpc']):
                     clean_num = art_num.split('-')[-1]
-                
-                if code_id and code_id.lower() == 'const':
-                    # Use article_num (DB value) for routing logic
-                    art_num_db = str(art_num).strip()
-                    s_label = (row.get('section_label') or '').strip().rstrip('.')
 
-                    if "PREAMBLE" in art_num_db.upper() or "PREAMBLE" in s_label.upper():
-                        # Preamble row: prepend Codal name
-                        header = "1987 Constitution of the Republic of the Philippines. Preamble"
-
-                    else:
-                        # Section row: article_num like 'I-0', 'II-1', 'IX-A-1', 'XVIII-5'
-                        parts = art_num_db.split('-')
-                        sect_num = parts[-1]  # Always the last segment (e.g. '0', '1', '5')
-
-                        # Build article identifier - always top-level Roman numeral only.
-                        # Sub-chapter letters (A/B/C/D in Art. IX) are announced via
-                        # group_header; including them in art_roman causes the letter
-                        # to be spoken twice ("Article IX-A … A. Common Provisions").
-                        art_roman = parts[0]  # e.g. 'IX' for IX-A-1, 'II' for II-5
-
-                        # Handle special Article I (has body but no sections, encoded as I-0)
-                        if sect_num == '0':
-                            art_label = f"Article {art_roman}"
-                            if art_title and not is_redundant:
-                                art_label += f'. {art_title}'
-                            header = art_label
-                        else:
-                            # Integrated Boundary Detection (Handles sub-headers like "Principles", "State Policies")
-                            group_val = row.get('group_header')
-                            section_id = row.get('id')
-                            
-                            # Use boundary map to determine if we should announce a header update
-                            boundaries = get_codal_boundaries(table)
-                            is_group_start = False
-                            if group_val and boundaries and 'group_header' in boundaries:
-                                g_lower = group_val.lower()
-                                if g_lower in boundaries['group_header'] and str(boundaries['group_header'][g_lower]) == str(section_id):
-                                    is_group_start = True
-
-                            # Is this a sub-chapter article? (e.g. IX-A-1 has 3 parts, middle is a letter)
-                            is_sub_chapter = len(parts) == 3 and not parts[1].isdigit()
-                            # Include the article name only for the very first sub-chapter (A)
-                            # or for plain articles (no sub-chapter letter). B/C/D sub-chapters
-                            # only announce their group header — the article was already introduced by A.
-                            include_art_name = not is_sub_chapter or parts[1] == 'A'
-
-                            if is_group_start:
-                                if sect_num == '1' and include_art_name:
-                                    art_label = f"Article {art_roman}"
-                                    if art_title and not is_redundant:
-                                        art_label += f'. {art_title}'
-                                    header = f"{art_label}. {group_val}. Section 1"
-                                else:
-                                    header = f"{group_val}. Section {sect_num}"
-                            elif sect_num == '1':
-                                # Standard Section 1 (no mid-section group header)
-                                art_label = f"Article {art_roman}"
-                                if art_title and not is_redundant:
-                                    art_label += f'. {art_title}'
-                                header = f"{art_label}. Section 1"
-                            else:
-                                # Normal section
-                                header = f"Section {sect_num}"
-
-                        # FIX: Strip leading "SECTION N." from clean to avoid double-mention
-                        # e.g. header="...Section 1" and clean starts with "SECTION 1, The Philippines..."
-                        import re as _re
-                        clean = _re.sub(r'^SECTION\s+\d+[\.,]?\s*', '', clean, flags=_re.IGNORECASE).strip()
-                else:
-                    if code_id and code_id.lower() == 'roc':
-                        # ROC: art_num looks like "Rule 2, Section 1" or "Rule 2, Section 8"
-                        roc_rule_m = re.search(r'(Rule\s+\d+)', str(clean_num), re.IGNORECASE)
-                        roc_sect_m = re.search(r'Section\s+(\d+)', str(clean_num), re.IGNORECASE)
-                        rule_label = roc_rule_m.group(1) if roc_rule_m else str(clean_num)
-                        sect_num_roc = roc_sect_m.group(1) if roc_sect_m else '1'
-                        
-                        rule_num_int = 0
-                        if roc_rule_m:
-                            try:
-                                rule_num_int = int(re.search(r'\d+', rule_label).group())
-                            except:
-                                pass
-
-                        hdr_parts = []
-                        starts = get_codal_boundaries('roc_codal')
-                        curr_id = row.get('id')
-                        
-                        # 0. Codal Title & Part - Only on first rule of a Part (always sect 1)
-                        if sect_num_roc == '1' and rule_num_int in [1, 72, 110, 128]:
-                            hdr_parts.append("Rules of Court of the Philippines")
-                            p_num = row.get('part_num')
-                            p_title = (row.get('part_title') or '').title()
-                            if p_num and p_title:
-                                hdr_parts.append(f"Part {p_num}. {p_title}")
-                        
-                        # 1. Group 1 Title
-                        g1 = (row.get('group_1_title') or '').strip()
-                        if g1 and starts['g1'].get(g1.lower()) == str(curr_id):
-                            hdr_parts.append(g1.title())
-                        
-                        # 2. Group 2 Title
-                        g2 = (row.get('group_2_title') or '').strip()
-                        if g2 and starts['g2'].get(g2.lower()) == str(curr_id):
-                            hdr_parts.append(g2.title())
-
-                        if sect_num_roc == '1':
-                            # 3. Rule Number
-                            hdr_parts.append(rule_label)
-                            
-                            # 4. Rule Title
-                            g_hdr = (row.get('group_header') or '').strip()
-                            if g_hdr:
-                                # Strip artifact 'RULE N' prefix if somehow still present
-                                clean_g_hdr = re.sub(r'^RULE\s+\d+\s+', '', g_hdr, flags=re.IGNORECASE).strip()
-                                if clean_g_hdr: hdr_parts.append(clean_g_hdr.title())
-                            
-                            roc_hdr = '. '.join(hdr_parts)
-                            header = f"{roc_hdr}. Section 1"
-                        else:
-                            if hdr_parts:
-                                header = f"{'. '.join(hdr_parts)}. Section {sect_num_roc}"
-                            else:
-                                header = f"Section {sect_num_roc}"
-                            
-                        if art_title and not is_redundant:
-                            header += f". {art_title}"
-                    elif table in ['rpc_codal', 'civ_codal', 'rcc_codal', 'labor_codal']:
-                        # Structural lines only on the first article in *codal order* where each
-                        # division starts (not MIN(uuid), which does not follow article sequence).
-                        hdr_parts = []
-                        starts = get_codal_boundaries(table)
-                        curr_id_str = str(row.get('id')) if row.get('id') is not None else ''
-                        is_rcc_table = table == 'rcc_codal'
-
-                        bk = row.get('book')
-                        # RCC (RA 11232) has no Books; legacy book_num=1 must not be spoken.
-                        if not is_rcc_table and bk is not None:
-                            bstart = starts.get('book_start', {}).get(str(bk).strip())
-                            if bstart and bstart == curr_id_str:
-                                book_line = tts_book_heading_line(dict(row))
-                                if book_line:
-                                    hdr_parts.append(book_line)
-
-                        t_lbl = (row.get('title_label') or '').strip()
-                        c_lbl = (row.get('chapter_label') or '').strip()
-                        s_lbl = (row.get('section_label') or '').strip()
-                        if is_rcc_table:
-                            t_lbl = fix_rcc_structural_heading_glue(t_lbl)
-                            c_lbl = fix_rcc_structural_heading_glue(c_lbl)
-                            s_lbl = fix_rcc_structural_heading_glue(s_lbl)
-                        chapter_num = row.get('chapter_num')  # None for rpc_codal (not fetched)
-
-                        bk_s2 = "" if row.get("book") is None else str(row.get("book")).strip()
-                        tn_s2 = "" if row.get("title_num") is None else str(row.get("title_num")).strip()
-                        clk_s2 = normalize_codal_label_key(c_lbl) if c_lbl else ""
-
-                        # Title: only announce when title_num is set (articles without title_num,
-                        # e.g. 266-A–D amendments, must not treat their title_label as a structural header).
-                        tbmap = starts.get("title_start_book_num") or {}
-                        tn = row.get("title_num")
-                        if t_lbl and tn is not None:
-                            tkey = f"{bk_s2}|{str(tn).strip()}"
-                            if tbmap.get(tkey) == curr_id_str:
-                                hdr_parts.append(tts_format_structural_label(t_lbl, tn, "Title"))
-                            elif tkey not in tbmap:
-                                nk_t = normalize_codal_label_key(t_lbl)
-                                if nk_t and starts.get("title_label", {}).get(nk_t) == curr_id_str:
-                                    hdr_parts.append(tts_format_structural_label(t_lbl, tn, "Title"))
-
-                        # Chapter: compound key (book|title_num|chapter_label_key) prevents
-                        # duplicate labels like "General Provisions" from colliding across titles.
-                        if c_lbl and clk_s2:
-                            ch_compound = f"{bk_s2}|{tn_s2}|{clk_s2}"
-                            ch_map = starts.get('chapter_start', {})
-                            if ch_map.get(ch_compound) == curr_id_str:
-                                hdr_parts.append(tts_format_structural_label(c_lbl, chapter_num, "Chapter"))
-                            elif not ch_map:
-                                # Fallback: legacy single-key map (older cache entries)
-                                if starts.get('chapter_label', {}).get(clk_s2) == curr_id_str:
-                                    hdr_parts.append(tts_format_structural_label(c_lbl, chapter_num, "Chapter"))
-
-                        # Section: compound key (book|title_num|chapter_label_key|section_label_key)
-                        if s_lbl and not body_embeds_rpc_section(content, clean, s_lbl):
-                            slk_s2 = normalize_codal_label_key(s_lbl)
-                            if slk_s2:
-                                sec_compound = f"{bk_s2}|{tn_s2}|{clk_s2}|{slk_s2}"
-                                sec_map = starts.get('section_start', {})
-                                if sec_map.get(sec_compound) == curr_id_str:
-                                    hdr_parts.append(strip_codal_citation_tail(s_lbl).title())
-                                elif not sec_map:
-                                    # Fallback: legacy single-key map
-                                    if starts.get('section_label', {}).get(slk_s2) == curr_id_str:
-                                        hdr_parts.append(strip_codal_citation_tail(s_lbl).title())
-
-                        art_title = strip_codal_citation_tail(art_title)
-                        if is_rcc_table and art_title:
-                            art_title = fix_rcc_structural_heading_glue(art_title)
-                        if is_rcc_table:
-                            rcc_disp = rcc_section_number_from_article_num(str(clean_num))
-                            cn0 = str(clean_num).strip() == "0" or rcc_disp == "0"
-                            art_name = "Preliminary Section" if cn0 else f"Section {rcc_disp}."
-                        else:
-                            art_name = 'Preliminary Article' if clean_num == '0' else f'Article {clean_num}'
-                        if art_title and not is_redundant:
-                            if is_rcc_table and art_name.endswith("."):
-                                art_name = f"{art_name} {art_title}"
-                            else:
-                                art_name += f". {art_title}"
-
-                        struct_text = '. '.join(hdr_parts)
-                        body_already_has_article = body_starts_with_article_identifier(
-                            clean,
-                            str(clean_num),
-                            art_title if not is_redundant else None,
-                        ) or raw_markdown_opens_with_article_line(content, str(clean_num))
-                        if body_already_has_article:
-                            header = struct_text
-                        else:
-                            header = f"{struct_text}. {art_name}" if struct_text else art_name
-                        
-                    elif table == 'fc_codal':
-                        hdr_parts = []
-                        starts = get_codal_boundaries('fc_codal')
-                        curr_id_str = str(row.get('id')) if row.get('id') is not None else ''
-
-                        # Title header — group_header holds "FAMILY CODE\nTITLE N description"
-                        g_hdr = (row.get('group_header') or '').strip()
-                        if g_hdr:
-                            gnk = normalize_codal_label_key(g_hdr)
-                            if gnk and starts['group_header'].get(gnk) == curr_id_str:
-                                lines = [l.strip() for l in g_hdr.splitlines() if l.strip()]
-                                # Take the "TITLE N description" line (second line); fall back to full header
-                                title_line = lines[1] if len(lines) >= 2 else (lines[0] if lines else g_hdr)
-                                # FC format: "TITLE III RIGHTS AND OBLIGATIONS..." (space separator, no dash)
-                                mt = re.match(r'^TITLE\s+([IVX]+|\d+)\s+(.+)$', title_line, re.IGNORECASE)
-                                if mt:
-                                    raw_num = mt.group(1).lower()
-                                    title_desc = mt.group(2).strip().title()
-                                    arabic_num = _ROMAN_TO_ARABIC.get(raw_num, raw_num)
-                                    hdr_parts.append(f"Title {arabic_num}. {title_desc}")
-                                else:
-                                    hdr_parts.append(tts_format_structural_label(title_line, None, "Title"))
-
-                        # Chapter header — section_label holds "Chapter N. Description"
-                        s_lbl = (row.get('section_label') or '').strip()
-                        if s_lbl:
-                            snk = normalize_codal_label_key(s_lbl)
-                            if snk and starts.get('section_label', {}).get(snk) == curr_id_str:
-                                hdr_parts.append(strip_codal_citation_tail(s_lbl))
-
-                        art_title = strip_codal_citation_tail(art_title)
-                        art_name = str(clean_num) if re.match(r'^(article|preamble|section|rule)\b', str(clean_num), re.IGNORECASE) else f'Article {clean_num}'
-                        if art_title and not is_redundant:
-                            art_name += f'. {art_title}'
-
-                        hdr_parts.append(art_name)
-                        header = '. '.join(hdr_parts)
-                        
-                    elif re.match(r'^(article|preamble|section|rule)\b', str(clean_num), re.IGNORECASE):
-                        header = str(clean_num)
-                        if art_title and not is_redundant: 
-                            header += f'. {art_title}'
-                    else:
-                        header = 'Preliminary Article' if clean_num == '0' else f'Article {clean_num}'
-                        if art_title and not is_redundant: 
-                            header += f'. {art_title}'
-                    
-                # Dedupe: RPC/CIV/Labor already drop only the article line when the body repeats it,
-                # keeping Book/Title/Section. Other codals use full-header dedupe.
-                if table not in ['rpc_codal', 'civ_codal', 'rcc_codal', 'labor_codal']:
-                    header, _ = dedupe_codal_header_prefix(clean, header, str(clean_num))
+                header, clean = _build_legacy_tts_header(
+                    row, table, code_id, art_num, art_title, group_header,
+                    clean, content, is_redundant, clean_num,
+                )
                 full_text = f"{header}. {clean}" if header else clean
                 full_text = _apply_custom_pronunciations(full_text)
                 return full_text, None
@@ -1365,8 +1421,8 @@ def _generate_audio_azure(text, voice_name="en-PH-RosaNeural", rate=1.0):
     """
     import requests as _requests
 
-    speech_key = os.environ.get("SPEECH_KEY", "")
-    speech_region = os.environ.get("SPEECH_REGION", "japaneast")
+    speech_key = config.SPEECH_KEY
+    speech_region = config.SPEECH_REGION
     if not speech_key or "<insert" in speech_key:
         raise ValueError("Azure Speech key not configured")
 

@@ -19,12 +19,6 @@ LEXIFY_BATCH_MAX_ITEMS = 40
 
 
 
-ADMIN_EMAILS = [
-    "rnlarboleda@gmail.com",
-    "rnlarboleda18@gmail.com"
-]
-
-
 def _get_user_info(clerk_id: str) -> tuple[str, bool]:
     """Return (subscription_tier, is_admin) for the given clerk_id. Defaults to ('free', False)."""
     try:
@@ -33,23 +27,13 @@ def _get_user_info(clerk_id: str) -> tuple[str, bool]:
             return "free", False
         with psycopg.connect(conn_string) as conn:
             with conn.cursor() as cur:
-                cur.execute("SELECT subscription_tier, is_admin, email FROM users WHERE clerk_id = %s", (clerk_id,))
+                cur.execute("SELECT subscription_tier, is_admin FROM users WHERE clerk_id = %s", (clerk_id,))
                 row = cur.fetchone()
                 if not row:
                     logging.info(f"[lexify._get_user_info] clerk_id {clerk_id} not found in DB")
                     return "free", False
-                tier, is_admin, email = row
-
-                # Cross-check with hardcoded admin list
-                if email and email.strip().lower() in [e.strip().lower() for e in ADMIN_EMAILS]:
-                    is_admin = True
-                    # Self-heal DB
-                    if not row[1]:
-                        logging.info(f"[lexify._get_user_info] Self-healing admin status for {email}")
-                        cur.execute("UPDATE users SET is_admin = TRUE WHERE clerk_id = %s", (clerk_id,))
-                        conn.commit()
-
-                return (tier or "free"), (is_admin or False)
+                tier, is_admin = row
+                return (tier or "free"), bool(is_admin)
     except Exception as e:
         logging.error(f"_get_user_info error: {e}")
         return "free", False

@@ -1,6 +1,6 @@
 """
-Founding promo: first N eligible signups get Barrister without PayMongo.
-After FOUNDING_PROMO_DURATION_DAYS (default 30), they revert to Free unless they have an active PayMongo subscription.
+Founding promo: first N eligible signups get Barrister without Xendit.
+After FOUNDING_PROMO_DURATION_DAYS (default 30), they revert to Free unless they have an active Xendit subscription.
 """
 import logging
 import os
@@ -21,7 +21,7 @@ def get_promo_slot_limit() -> int:
     try:
         return max(0, int(os.environ.get("FOUNDING_PROMO_LIMIT", "30")))
     except ValueError:
-        return 20
+        return 30  # matches the hardcoded max_slots=30 in try_grant_founding_promo INSERT
 
 
 def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:

@@ -78,9 +78,16 @@ except Exception as e:
     import_error = f"Error during import/registration: {str(e)}\n{traceback.format_exc()}"
 
 try:
+    # admin_bp must be registered first — sub-blueprints import _check_admin from blueprints.admin
     from blueprints.admin import admin_bp
+    from blueprints.admin_backup import backup_bp
+    from blueprints.admin_pipeline import pipeline_bp
+    from blueprints.admin_metrics import metrics_bp
 
     app.register_functions(admin_bp)
+    app.register_functions(backup_bp)
+    app.register_functions(pipeline_bp)
+    app.register_functions(metrics_bp)
 except Exception as e:
     admin_import_error = f"Admin blueprint failed to import/register: {str(e)}\n{traceback.format_exc()}"
     logging.error(admin_import_error)
