@@ -796,19 +796,14 @@ export default function Bar2026({ onCaseClick }) {
         </div>
       </div>
 
-      {/* ── Annotation mode toggle button (always visible when topic selected) ── */}
-      {selectedTopic && (
+      {/* ── Annotation mode toggle button — left side, hidden when toolbar is active ── */}
+      {selectedTopic && !isAnnotating && (
         <button
-          onClick={() => setIsAnnotating(v => !v)}
-          title={isAnnotating ? 'Exit annotation mode' : 'Annotate this page (S Pen / touch)'}
-          className={`fixed bottom-6 right-6 z-20 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-all ${
-            isAnnotating
-              ? 'bg-violet-600 text-white shadow-violet-900/40 hover:bg-violet-700'
-              : 'border border-violet-200 bg-white text-violet-600 shadow-gray-300/60 hover:bg-violet-50 dark:border-violet-700 dark:bg-zinc-800 dark:text-violet-400 dark:hover:bg-zinc-700'
-          }`}
-          style={{ bottom: isAnnotating ? '5rem' : '1.5rem' }} // shift up to make room for toolbar
+          onClick={() => setIsAnnotating(true)}
+          title="Annotate this page (S Pen / touch)"
+          className="fixed left-2 top-1/2 -translate-y-1/2 z-20 flex h-12 w-12 items-center justify-center rounded-full border border-violet-200 bg-white text-violet-600 shadow-lg shadow-gray-300/60 hover:bg-violet-50 dark:border-violet-700 dark:bg-zinc-800 dark:text-violet-400 dark:hover:bg-zinc-700"
         >
-          {isAnnotating ? <PenOff size={20} /> : <PenLine size={20} />}
+          <PenLine size={20} />
         </button>
       )}
 

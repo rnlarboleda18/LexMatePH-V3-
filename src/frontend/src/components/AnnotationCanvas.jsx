@@ -201,8 +201,16 @@ export default function AnnotationCanvas({
           ctx.lineWidth                = stroke.width;
           ctx.beginPath();
           ctx.moveTo(pts[0][0], pts[0][1] - scrollPx);
-          for (let i = 1; i < pts.length; i++) {
-            ctx.lineTo(pts[i][0], pts[i][1] - scrollPx);
+          if (pts.length === 2) {
+            ctx.lineTo(pts[1][0], pts[1][1] - scrollPx);
+          } else {
+            for (let i = 1; i < pts.length - 1; i++) {
+              const mx = (pts[i][0] + pts[i + 1][0]) / 2;
+              const my = (pts[i][1] + pts[i + 1][1]) / 2;
+              ctx.quadraticCurveTo(pts[i][0], pts[i][1] - scrollPx, mx, my - scrollPx);
+            }
+            const last = pts[pts.length - 1];
+            ctx.lineTo(last[0], last[1] - scrollPx);
           }
           ctx.stroke();
           ctx.restore();
@@ -291,8 +299,20 @@ export default function AnnotationCanvas({
         ctx.strokeStyle              = stroke.tool === 'eraser' ? 'rgba(0,0,0,1)' : stroke.color;
         ctx.lineWidth                = stroke.width * (0.5 + pressure * 1.5);
         ctx.beginPath();
-        ctx.moveTo(prev[0], prev[1] - scrollPx);
-        ctx.lineTo(cx,      cy      - scrollPx);
+        // Midpoint quadratic Bézier: smoother curves on fast movements
+        const n = pts.length;
+        if (n >= 3) {
+          const p0 = pts[n - 3];
+          const mx0 = (p0[0] + prev[0]) / 2;
+          const my0 = (p0[1] + prev[1]) / 2;
+          const mx1 = (prev[0] + cx) / 2;
+          const my1 = (prev[1] + cy) / 2;
+          ctx.moveTo(mx0, my0 - scrollPx);
+          ctx.quadraticCurveTo(prev[0], prev[1] - scrollPx, mx1, my1 - scrollPx);
+        } else {
+          ctx.moveTo(prev[0], prev[1] - scrollPx);
+          ctx.lineTo(cx, cy - scrollPx);
+        }
         ctx.stroke();
         ctx.globalAlpha              = 1;
         ctx.globalCompositeOperation = 'source-over';
@@ -433,17 +453,37 @@ function drawStroke(ctx, stroke, scrollPx) {
     ctx.lineWidth = stroke.width ?? 2;
     ctx.beginPath();
     ctx.moveTo(pts[0][0], pts[0][1] - scrollPx);
-    for (let i = 1; i < pts.length; i++) {
-      ctx.lineTo(pts[i][0], pts[i][1] - scrollPx);
+    if (pts.length === 2) {
+      ctx.lineTo(pts[1][0], pts[1][1] - scrollPx);
+    } else {
+      for (let i = 1; i < pts.length - 1; i++) {
+        const mx = (pts[i][0] + pts[i + 1][0]) / 2;
+        const my = (pts[i][1] + pts[i + 1][1]) / 2;
+        ctx.quadraticCurveTo(pts[i][0], pts[i][1] - scrollPx, mx, my - scrollPx);
+      }
+      const last = pts[pts.length - 1];
+      ctx.lineTo(last[0], last[1] - scrollPx);
     }
     ctx.stroke();
   } else {
+    // Per-segment with midpoint quadratic Bézier for smooth pressure-varying curves
     for (let i = 1; i < pts.length; i++) {
       const pressure = pts[i][2] ?? 0.5;
       ctx.lineWidth  = (stroke.width ?? 2) * (0.5 + pressure * 1.5);
       ctx.beginPath();
-      ctx.moveTo(pts[i - 1][0], pts[i - 1][1] - scrollPx);
-      ctx.lineTo(pts[i][0],     pts[i][1]      - scrollPx);
+      if (i === 1 || pts.length === 2) {
+        ctx.moveTo(pts[i - 1][0], pts[i - 1][1] - scrollPx);
+        const ex = i < pts.length - 1 ? (pts[i][0] + pts[i + 1][0]) / 2 : pts[i][0];
+        const ey = i < pts.length - 1 ? (pts[i][1] + pts[i + 1][1]) / 2 : pts[i][1];
+        ctx.lineTo(ex, ey - scrollPx);
+      } else {
+        const pmx = (pts[i - 2][0] + pts[i - 1][0]) / 2;
+        const pmy = (pts[i - 2][1] + pts[i - 1][1]) / 2;
+        const ex  = i < pts.length - 1 ? (pts[i][0] + pts[i + 1][0]) / 2 : pts[i][0];
+        const ey  = i < pts.length - 1 ? (pts[i][1] + pts[i + 1][1]) / 2 : pts[i][1];
+        ctx.moveTo(pmx, pmy - scrollPx);
+        ctx.quadraticCurveTo(pts[i - 1][0], pts[i - 1][1] - scrollPx, ex, ey - scrollPx);
+      }
       ctx.stroke();
     }
   }

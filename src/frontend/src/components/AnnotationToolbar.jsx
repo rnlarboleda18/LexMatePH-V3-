@@ -27,15 +27,9 @@ const HIGHLIGHTER_COLORS = [
   { hex: '#f472b6', label: 'Pink'        },
 ];
 
-const WIDTH_STEPS = [1, 2, 4, 6, 8];
+const WIDTH_STEPS   = [1, 2, 4, 6, 8];
 const ERASER_WIDTHS = [4, 8, 16, 24, 32];
 
-/**
- * AnnotationToolbar — floating palette shown when annotation mode is active.
- *
- * Pen and highlighter each have their own color palette.
- * Clicking a tool button selects it AND opens its color picker inline.
- */
 export default function AnnotationToolbar({
   isAnnotating,
   currentTool,
@@ -64,12 +58,12 @@ export default function AnnotationToolbar({
 
   if (!isAnnotating) return null;
 
-  const isEraser      = currentTool === 'eraser';
-  const activeSteps   = isEraser ? ERASER_WIDTHS : WIDTH_STEPS;
-  const activeWidth   = isEraser ? eraserWidth   : currentWidth;
+  const isEraser       = currentTool === 'eraser';
+  const activeSteps    = isEraser ? ERASER_WIDTHS : WIDTH_STEPS;
+  const activeWidth    = isEraser ? eraserWidth   : currentWidth;
   const activeSetWidth = isEraser ? onEraserWidthChange : onWidthChange;
-  const widthIdx      = activeSteps.indexOf(activeWidth);
-  const nextWidth     = () => activeSetWidth(activeSteps[(widthIdx < 0 ? 0 : (widthIdx + 1)) % activeSteps.length]);
+  const widthIdx       = activeSteps.indexOf(activeWidth);
+  const nextWidth      = () => activeSetWidth(activeSteps[(widthIdx < 0 ? 0 : (widthIdx + 1)) % activeSteps.length]);
 
   const handleToolClick = (tool) => {
     onToolChange(tool);
@@ -90,53 +84,20 @@ export default function AnnotationToolbar({
     }
   };
 
-  const currentColor    = currentTool === 'highlighter' ? highlighterColor : penColor;
-  const pickerColors    = openPicker === 'highlighter' ? HIGHLIGHTER_COLORS : PEN_COLORS;
-  const pickerOnChange  = openPicker === 'highlighter' ? onHighlighterColorChange : onPenColorChange;
+  const currentColor   = currentTool === 'highlighter' ? highlighterColor : penColor;
+  const pickerColors   = openPicker === 'highlighter' ? HIGHLIGHTER_COLORS : PEN_COLORS;
+  const pickerOnChange = openPicker === 'highlighter' ? onHighlighterColorChange : onPenColorChange;
 
   return (
+    // Fixed to left side, vertically centered — flex-row so color picker opens to the right
     <div
-      className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-2"
+      className="fixed left-2 top-1/2 -translate-y-1/2 z-30 flex flex-row items-start gap-2"
       style={{ touchAction: 'none' }}
     >
-      {/* Color picker popup — opens above toolbar */}
-      {openPicker && (
-        <div className="flex flex-wrap justify-end gap-2 rounded-2xl border border-gray-200 bg-white/95 p-3 shadow-xl backdrop-blur-sm dark:border-zinc-600 dark:bg-zinc-800/95"
-          style={{ maxWidth: 220 }}
-        >
-          <p className="w-full text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">
-            {openPicker === 'highlighter' ? 'Highlighter color' : 'Pen color'}
-          </p>
-          {pickerColors.map(({ hex, label }) => (
-            <button
-              key={hex}
-              title={label}
-              onClick={() => { pickerOnChange(hex); }}
-              className="relative h-8 w-8 rounded-full border-2 border-white shadow-md transition-transform hover:scale-110 dark:border-zinc-700"
-              style={{ backgroundColor: hex }}
-            >
-              {currentColor === hex && (
-                <span className="absolute inset-0 flex items-center justify-center">
-                  <Check
-                    size={14}
-                    className={
-                      // Light colors need a dark check; dark colors need a white check
-                      ['#ffffff','#facc15','#86efac','#fed7aa','#a5f3fc','#ddd6fe','#fda4af'].includes(hex)
-                        ? 'text-gray-600'
-                        : 'text-white'
-                    }
-                  />
-                </span>
-              )}
-            </button>
-          ))}
-        </div>
-      )}
+      {/* Main toolbar pill — vertical column of buttons */}
+      <div className="flex flex-col items-center gap-1 rounded-2xl border border-gray-200 bg-white/95 px-1.5 py-2 shadow-xl backdrop-blur-sm dark:border-zinc-600 dark:bg-zinc-800/95">
 
-      {/* Main toolbar pill */}
-      <div className="flex items-center gap-1 rounded-2xl border border-gray-200 bg-white/95 px-2 py-1.5 shadow-xl backdrop-blur-sm dark:border-zinc-600 dark:bg-zinc-800/95">
-
-        {/* Pen tool — shows its color dot */}
+        {/* Pen */}
         <button
           onClick={() => handleToolClick('pen')}
           title="Pen"
@@ -148,14 +109,13 @@ export default function AnnotationToolbar({
           style={currentTool === 'pen' ? { color: penColor } : undefined}
         >
           <Pencil size={15} />
-          {/* Color dot indicator */}
           <span
             className="absolute bottom-0.5 right-0.5 h-2.5 w-2.5 rounded-full border border-white dark:border-zinc-800 shadow-sm"
             style={{ backgroundColor: penColor }}
           />
         </button>
 
-        {/* Highlighter tool — shows its color dot */}
+        {/* Highlighter */}
         <button
           onClick={() => handleToolClick('highlighter')}
           title="Highlighter"
@@ -167,7 +127,6 @@ export default function AnnotationToolbar({
           style={currentTool === 'highlighter' ? { color: highlighterColor } : undefined}
         >
           <Highlighter size={15} />
-          {/* Color dot indicator */}
           <span
             className="absolute bottom-0.5 right-0.5 h-2.5 w-2.5 rounded-full border border-white dark:border-zinc-800 shadow-sm"
             style={{ backgroundColor: highlighterColor }}
@@ -198,7 +157,6 @@ export default function AnnotationToolbar({
           className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-zinc-700"
         >
           {isEraser ? (
-            // Square eraser indicator
             <span
               className="rounded-sm border border-gray-400 bg-gray-200 dark:border-gray-500 dark:bg-gray-500"
               style={{
@@ -207,7 +165,6 @@ export default function AnnotationToolbar({
               }}
             />
           ) : (
-            // Circular pen/highlighter dot indicator
             <span
               className="rounded-full"
               style={{
@@ -284,10 +241,43 @@ export default function AnnotationToolbar({
         </button>
       </div>
 
+      {/* Color picker popup — opens to the right of the toolbar pill */}
+      {openPicker && (
+        <div className="flex flex-wrap gap-2 rounded-2xl border border-gray-200 bg-white/95 p-3 shadow-xl backdrop-blur-sm dark:border-zinc-600 dark:bg-zinc-800/95"
+          style={{ maxWidth: 180 }}
+        >
+          <p className="w-full text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">
+            {openPicker === 'highlighter' ? 'Highlighter' : 'Pen color'}
+          </p>
+          {pickerColors.map(({ hex, label }) => (
+            <button
+              key={hex}
+              title={label}
+              onClick={() => { pickerOnChange(hex); }}
+              className="relative h-8 w-8 rounded-full border-2 border-white shadow-md transition-transform hover:scale-110 dark:border-zinc-700"
+              style={{ backgroundColor: hex }}
+            >
+              {currentColor === hex && (
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <Check
+                    size={14}
+                    className={
+                      ['#ffffff','#facc15','#86efac','#fed7aa','#a5f3fc','#ddd6fe','#fda4af'].includes(hex)
+                        ? 'text-gray-600'
+                        : 'text-white'
+                    }
+                  />
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
       {/* Auth hint */}
       {!canSave && (
-        <p className="rounded-lg bg-amber-50 px-2 py-1 text-[10px] text-amber-700 shadow dark:bg-amber-900/30 dark:text-amber-300">
-          Log in to save annotations
+        <p className="self-end rounded-lg bg-amber-50 px-2 py-1 text-[10px] text-amber-700 shadow dark:bg-amber-900/30 dark:text-amber-300">
+          Log in to save
         </p>
       )}
     </div>
@@ -312,5 +302,5 @@ function ToolBtn({ onClick, disabled, title, children }) {
 }
 
 function Divider() {
-  return <div className="mx-0.5 h-4 w-px bg-gray-200 dark:bg-zinc-600" />;
+  return <div className="my-0.5 h-px w-4 bg-gray-200 dark:bg-zinc-600" />;
 }
