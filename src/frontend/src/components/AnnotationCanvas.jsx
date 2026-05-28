@@ -276,76 +276,84 @@ export default function AnnotationCanvas({
       };
     }
 
-    function onPointerMove(e) {
-      if (!isDrawing.current)           return;
-      if (!isAnnotatingRef.current)     return;
-      if (e.pointerType === 'touch'
-        && !allowTouchDrawRef.current)  return;
-
-      e.preventDefault();
-      e.stopPropagation();
-
+    // ── Single-event draw ─────────────────────────────────────────────────────
+    // Shared by pointerrawupdate (fast path) and pointermove fallback.
+    // Processes exactly one pointer position.
+    function drawOneEvent(evt) {
       const stroke = currentPath.current;
-      const pts    = stroke.points;
-      const ctx    = ctxRef.current;
+      if (!stroke) return;
+      const ctx  = ctxRef.current;
+      const rect = cachedRectRef.current;
+      if (!ctx || !rect) return;
 
-      // getCoalescedEvents recovers full 120 Hz S Pen sub-frame input
-      const events = (typeof e.getCoalescedEvents === 'function')
-        ? e.getCoalescedEvents()
-        : [e];
-
-      // Compute DPR and scrollTop ONCE outside the coalesced-events loop
+      const pts       = stroke.points;
       const dpr       = getDpr();
       const scrollTop = scrollTopRef.current;
-      const rect      = cachedRectRef.current;
-      if (!rect || !ctx) return;
+      const pressure  = evt.pressure || 0.5;
+      const cx = (evt.clientX - rect.left)            * dpr;
+      const cy = (evt.clientY - rect.top + scrollTop) * dpr;
+      const prev = pts[pts.length - 1];
+      pts.push([cx, cy, pressure]);
 
       if (stroke.tool === 'highlighter') {
-        // ── Highlighter: accumulate into rAF batch ─────────────────────────
-        // Full redraw is needed to prevent opacity stacking, so we batch via
-        // rAF to avoid running redrawAll on every single pointermove event.
-        for (const evt of events) {
-          const pressure = evt.pressure || 0.5;
-          const cx = (evt.clientX - rect.left)             * dpr;
-          const cy = (evt.clientY - rect.top + scrollTop)  * dpr;
-          const prev = pts[pts.length - 1];
-          pts.push([cx, cy, pressure]);
-          pendingSegsRef.current.push({ x0: prev[0], y0: prev[1], x1: cx, y1: cy, pressure });
-        }
+        pendingSegsRef.current.push({ x0: prev[0], y0: prev[1], x1: cx, y1: cy, pressure });
         if (!drawRafRef.current) {
           drawRafRef.current = requestAnimationFrame(flushPending);
         }
       } else {
-        // ── Pen / eraser: draw IMMEDIATELY — zero rAF latency ──────────────
-        // rAF adds up to one full display frame (8–16 ms) of lag between the
-        // S Pen movement and the rendered stroke. Drawing directly in the
-        // event handler matches what Samsung Notes / Procreate do.
-        // Set ctx state ONCE for the whole coalesced-events batch.
+        const scrollPx = scrollTop * dpr;
         ctx.globalAlpha              = stroke.opacity;
         ctx.lineCap                  = 'round';
         ctx.lineJoin                 = 'round';
         ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
         ctx.strokeStyle              = stroke.tool === 'eraser' ? 'rgba(0,0,0,1)' : stroke.color;
-
-        const scrollPx = scrollTop * dpr;
-
-        for (const evt of events) {
-          const pressure = evt.pressure || 0.5;
-          const cx = (evt.clientX - rect.left)             * dpr;
-          const cy = (evt.clientY - rect.top + scrollTop)  * dpr;
-          const prev = pts[pts.length - 1];
-          pts.push([cx, cy, pressure]);
-
-          ctx.lineWidth = stroke.width * (0.5 + pressure * 1.5);
-          ctx.beginPath();
-          ctx.moveTo(prev[0], prev[1] - scrollPx);
-          ctx.lineTo(cx,      cy      - scrollPx);
-          ctx.stroke();
-        }
-
+        ctx.lineWidth                = stroke.width * (0.5 + pressure * 1.5);
+        ctx.beginPath();
+        ctx.moveTo(prev[0], prev[1] - scrollPx);
+        ctx.lineTo(cx,      cy      - scrollPx);
+        ctx.stroke();
         ctx.globalAlpha              = 1;
         ctx.globalCompositeOperation = 'source-over';
       }
+    }
+
+    // ── pointerrawupdate: fires BEFORE browser event coalescing ───────────────
+    // On Chrome / Samsung Internet this fires at the S Pen hardware scan rate
+    // (~240 Hz) BEFORE pointermove coalescing — the earliest point in the
+    // browser pipeline where JS can see stylus input. Registering this handler
+    // is the web equivalent of reading from the Android Stylus API directly.
+    // pointerrawupdate is non-cancelable so we keep pointermove registered
+    // separately purely to call preventDefault (to block scroll steal).
+    const supportsRawUpdate = 'onpointerrawupdate' in canvas;
+
+    function onPointerRawUpdate(e) {
+      if (!isDrawing.current)                        return;
+      if (!isAnnotatingRef.current)                  return;
+      if (e.pointerType === 'touch'
+        && !allowTouchDrawRef.current)               return;
+      drawOneEvent(e);
+    }
+
+    function onPointerMove(e) {
+      if (!isDrawing.current)                        return;
+      if (!isAnnotatingRef.current)                  return;
+      if (e.pointerType === 'touch'
+        && !allowTouchDrawRef.current)               return;
+
+      e.preventDefault();   // non-passive: blocks Android scroll steal
+      e.stopPropagation();
+
+      if (supportsRawUpdate) {
+        // Drawing is handled by onPointerRawUpdate above.
+        // This handler exists only to call preventDefault.
+        return;
+      }
+
+      // Fallback (Safari / Firefox): draw using coalesced events
+      const events = typeof e.getCoalescedEvents === 'function'
+        ? e.getCoalescedEvents()
+        : [e];
+      for (const evt of events) drawOneEvent(evt);
     }
 
     function onPointerUp() {
@@ -389,6 +397,10 @@ export default function AnnotationCanvas({
     }
 
     const pOpts = { passive: false };
+    if (supportsRawUpdate) {
+      // passive:true is fine — pointerrawupdate is non-cancelable anyway
+      canvas.addEventListener('pointerrawupdate', onPointerRawUpdate, { passive: true });
+    }
     canvas.addEventListener('pointerdown',   onPointerDown,   pOpts);
     canvas.addEventListener('pointermove',   onPointerMove,   pOpts);
     canvas.addEventListener('pointerup',     onPointerUp,     pOpts);
@@ -396,6 +408,9 @@ export default function AnnotationCanvas({
     container.addEventListener('scroll',     onScroll,        { passive: true });
 
     return () => {
+      if (supportsRawUpdate) {
+        canvas.removeEventListener('pointerrawupdate', onPointerRawUpdate);
+      }
       canvas.removeEventListener('pointerdown',   onPointerDown);
       canvas.removeEventListener('pointermove',   onPointerMove);
       canvas.removeEventListener('pointerup',     onPointerUp);
