@@ -201,16 +201,16 @@ export default function AnnotationCanvas({
           ctx.lineWidth                = stroke.width;
           ctx.beginPath();
           ctx.moveTo(pts[0][0], pts[0][1] - scrollPx);
-          if (pts.length === 2) {
-            ctx.lineTo(pts[1][0], pts[1][1] - scrollPx);
-          } else {
-            for (let i = 1; i < pts.length - 1; i++) {
-              const mx = (pts[i][0] + pts[i + 1][0]) / 2;
-              const my = (pts[i][1] + pts[i + 1][1]) / 2;
-              ctx.quadraticCurveTo(pts[i][0], pts[i][1] - scrollPx, mx, my - scrollPx);
-            }
-            const last = pts[pts.length - 1];
-            ctx.lineTo(last[0], last[1] - scrollPx);
+          for (let i = 1; i < pts.length; i++) {
+            const p0 = pts[Math.max(0, i - 2)];
+            const p1 = pts[i - 1];
+            const p2 = pts[i];
+            const p3 = pts[Math.min(pts.length - 1, i + 1)];
+            const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+            const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+            const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+            const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
+            ctx.bezierCurveTo(cp1x, cp1y - scrollPx, cp2x, cp2y - scrollPx, p2[0], p2[1] - scrollPx);
           }
           ctx.stroke();
           ctx.restore();
@@ -280,9 +280,13 @@ export default function AnnotationCanvas({
       const dpr       = getDpr();
       const scrollTop = scrollTopRef.current;
       const pressure  = evt.pressure || 0.5;
-      const cx = (evt.clientX - rect.left)            * dpr;
-      const cy = (evt.clientY - rect.top + scrollTop) * dpr;
-      const prev = pts[pts.length - 1];
+      const rawCx = (evt.clientX - rect.left)            * dpr;
+      const rawCy = (evt.clientY - rect.top + scrollTop) * dpr;
+      const prev  = pts[pts.length - 1];
+      // EMA input smoothing — moves 50% toward raw position each sample.
+      // Eliminates hardware-level jitter while remaining imperceptible at 240 Hz.
+      const cx = (rawCx + prev[0]) / 2;
+      const cy = (rawCy + prev[1]) / 2;
       pts.push([cx, cy, pressure]);
 
       if (stroke.tool === 'highlighter') {
@@ -297,19 +301,25 @@ export default function AnnotationCanvas({
         ctx.lineJoin                 = 'round';
         ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
         ctx.strokeStyle              = stroke.tool === 'eraser' ? 'rgba(0,0,0,1)' : stroke.color;
-        ctx.lineWidth                = stroke.width * (0.5 + pressure * 1.5);
-        ctx.beginPath();
-        // Midpoint quadratic Bézier: smoother curves on fast movements
+        // Catmull-Rom live rendering: draw the "confirmed" segment (one step behind)
+        // so both flanking context points are available — gives C1 smooth cubic curves.
         const n = pts.length;
         if (n >= 3) {
-          const p0 = pts[n - 3];
-          const mx0 = (p0[0] + prev[0]) / 2;
-          const my0 = (p0[1] + prev[1]) / 2;
-          const mx1 = (prev[0] + cx) / 2;
-          const my1 = (prev[1] + cy) / 2;
-          ctx.moveTo(mx0, my0 - scrollPx);
-          ctx.quadraticCurveTo(prev[0], prev[1] - scrollPx, mx1, my1 - scrollPx);
+          const p0 = pts[Math.max(0, n - 4)];
+          const p1 = pts[n - 3];
+          const p2 = pts[n - 2];
+          const p3 = pts[n - 1];
+          const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+          const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+          const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+          const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
+          ctx.lineWidth = stroke.width * (0.5 + (p2[2] ?? 0.5) * 1.5);
+          ctx.beginPath();
+          ctx.moveTo(p1[0], p1[1] - scrollPx);
+          ctx.bezierCurveTo(cp1x, cp1y - scrollPx, cp2x, cp2y - scrollPx, p2[0], p2[1] - scrollPx);
         } else {
+          ctx.lineWidth = stroke.width * (0.5 + pressure * 1.5);
+          ctx.beginPath();
           ctx.moveTo(prev[0], prev[1] - scrollPx);
           ctx.lineTo(cx, cy - scrollPx);
         }
@@ -453,37 +463,35 @@ function drawStroke(ctx, stroke, scrollPx) {
     ctx.lineWidth = stroke.width ?? 2;
     ctx.beginPath();
     ctx.moveTo(pts[0][0], pts[0][1] - scrollPx);
-    if (pts.length === 2) {
-      ctx.lineTo(pts[1][0], pts[1][1] - scrollPx);
-    } else {
-      for (let i = 1; i < pts.length - 1; i++) {
-        const mx = (pts[i][0] + pts[i + 1][0]) / 2;
-        const my = (pts[i][1] + pts[i + 1][1]) / 2;
-        ctx.quadraticCurveTo(pts[i][0], pts[i][1] - scrollPx, mx, my - scrollPx);
-      }
-      const last = pts[pts.length - 1];
-      ctx.lineTo(last[0], last[1] - scrollPx);
+    for (let i = 1; i < pts.length; i++) {
+      const p0 = pts[Math.max(0, i - 2)];
+      const p1 = pts[i - 1];
+      const p2 = pts[i];
+      const p3 = pts[Math.min(pts.length - 1, i + 1)];
+      const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+      const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+      const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+      const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
+      ctx.bezierCurveTo(cp1x, cp1y - scrollPx, cp2x, cp2y - scrollPx, p2[0], p2[1] - scrollPx);
     }
     ctx.stroke();
   } else {
-    // Per-segment with midpoint quadratic Bézier for smooth pressure-varying curves
-    for (let i = 1; i < pts.length; i++) {
-      const pressure = pts[i][2] ?? 0.5;
-      ctx.lineWidth  = (stroke.width ?? 2) * (0.5 + pressure * 1.5);
+    // Per-segment Catmull-Rom cubic Bézier with pressure-varying width
+    const n = pts.length;
+    for (let i = 0; i < n - 1; i++) {
+      const p0 = pts[Math.max(0, i - 1)];
+      const p1 = pts[i];
+      const p2 = pts[i + 1];
+      const p3 = pts[Math.min(n - 1, i + 2)];
+      const pressure = p2[2] ?? 0.5;
+      ctx.lineWidth = (stroke.width ?? 2) * (0.5 + pressure * 1.5);
+      const cp1x = p1[0] + (p2[0] - p0[0]) / 6;
+      const cp1y = p1[1] + (p2[1] - p0[1]) / 6;
+      const cp2x = p2[0] - (p3[0] - p1[0]) / 6;
+      const cp2y = p2[1] - (p3[1] - p1[1]) / 6;
       ctx.beginPath();
-      if (i === 1 || pts.length === 2) {
-        ctx.moveTo(pts[i - 1][0], pts[i - 1][1] - scrollPx);
-        const ex = i < pts.length - 1 ? (pts[i][0] + pts[i + 1][0]) / 2 : pts[i][0];
-        const ey = i < pts.length - 1 ? (pts[i][1] + pts[i + 1][1]) / 2 : pts[i][1];
-        ctx.lineTo(ex, ey - scrollPx);
-      } else {
-        const pmx = (pts[i - 2][0] + pts[i - 1][0]) / 2;
-        const pmy = (pts[i - 2][1] + pts[i - 1][1]) / 2;
-        const ex  = i < pts.length - 1 ? (pts[i][0] + pts[i + 1][0]) / 2 : pts[i][0];
-        const ey  = i < pts.length - 1 ? (pts[i][1] + pts[i + 1][1]) / 2 : pts[i][1];
-        ctx.moveTo(pmx, pmy - scrollPx);
-        ctx.quadraticCurveTo(pts[i - 1][0], pts[i - 1][1] - scrollPx, ex, ey - scrollPx);
-      }
+      ctx.moveTo(p1[0], p1[1] - scrollPx);
+      ctx.bezierCurveTo(cp1x, cp1y - scrollPx, cp2x, cp2y - scrollPx, p2[0], p2[1] - scrollPx);
       ctx.stroke();
     }
   }
