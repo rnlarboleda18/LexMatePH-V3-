@@ -276,17 +276,19 @@ export default function AnnotationCanvas({
       const rect = cachedRectRef.current;
       if (!ctx || !rect) return;
 
-      const pts       = stroke.points;
-      const dpr       = getDpr();
-      const scrollTop = scrollTopRef.current;
-      const pressure  = evt.pressure || 0.5;
+      const pts        = stroke.points;
+      const dpr        = getDpr();
+      const scrollTop  = scrollTopRef.current;
+      const rawPressure = evt.pressure || 0.5;
       const rawCx = (evt.clientX - rect.left)            * dpr;
       const rawCy = (evt.clientY - rect.top + scrollTop) * dpr;
       const prev  = pts[pts.length - 1];
-      // EMA input smoothing — moves 50% toward raw position each sample.
-      // Eliminates hardware-level jitter while remaining imperceptible at 240 Hz.
-      const cx = (rawCx + prev[0]) / 2;
-      const cy = (rawCy + prev[1]) / 2;
+      // Light EMA: 70% toward raw position, 30% from previous.
+      // Removes hardware jitter without adding noticeable lag at 240 Hz.
+      const cx       = rawCx * 0.7 + prev[0] * 0.3;
+      const cy       = rawCy * 0.7 + prev[1] * 0.3;
+      // Smooth pressure too — prevents bumpy width jumps between samples.
+      const pressure = rawPressure * 0.7 + (prev[2] ?? 0.5) * 0.3;
       pts.push([cx, cy, pressure]);
 
       if (stroke.tool === 'highlighter') {
@@ -301,10 +303,10 @@ export default function AnnotationCanvas({
         ctx.lineJoin                 = 'round';
         ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
         ctx.strokeStyle              = stroke.tool === 'eraser' ? 'rgba(0,0,0,1)' : stroke.color;
-        // Catmull-Rom live rendering: draw the "confirmed" segment (one step behind)
-        // so both flanking context points are available — gives C1 smooth cubic curves.
+
         const n = pts.length;
         if (n >= 3) {
+          // Draw confirmed segment (one step behind) with full Catmull-Rom context.
           const p0 = pts[Math.max(0, n - 4)];
           const p1 = pts[n - 3];
           const p2 = pts[n - 2];
@@ -317,13 +319,20 @@ export default function AnnotationCanvas({
           ctx.beginPath();
           ctx.moveTo(p1[0], p1[1] - scrollPx);
           ctx.bezierCurveTo(cp1x, cp1y - scrollPx, cp2x, cp2y - scrollPx, p2[0], p2[1] - scrollPx);
-        } else {
-          ctx.lineWidth = stroke.width * (0.5 + pressure * 1.5);
-          ctx.beginPath();
-          ctx.moveTo(prev[0], prev[1] - scrollPx);
-          ctx.lineTo(cx, cy - scrollPx);
+          ctx.stroke();
         }
+
+        // Always draw a straight tip from the second-to-last to current point.
+        // At 240 Hz this segment is <5 ms stale and gets retroactively replaced by
+        // the Catmull-Rom draw on the next event — closes the visual gap at the pen tip.
+        const tipA = pts[Math.max(0, n - 2)];
+        const tipB = pts[n - 1];
+        ctx.lineWidth = stroke.width * (0.5 + (tipB[2] ?? 0.5) * 1.5);
+        ctx.beginPath();
+        ctx.moveTo(tipA[0], tipA[1] - scrollPx);
+        ctx.lineTo(tipB[0], tipB[1] - scrollPx);
         ctx.stroke();
+
         ctx.globalAlpha              = 1;
         ctx.globalCompositeOperation = 'source-over';
       }
