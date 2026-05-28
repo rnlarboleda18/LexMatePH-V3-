@@ -4,12 +4,12 @@
 
 | Layer | Technology | Path |
 |-------|-----------|------|
-| Frontend SPA + PWA | React 18, Vite, Tailwind | `src/frontend/` |
+| Frontend SPA + PWA | React 19, Vite, Tailwind CSS 4 | `src/frontend/` |
 | API | Azure Functions v2 (Python 3.11) | `api/` |
 | Database | PostgreSQL on Azure (cloud by default) | `DB_CONNECTION_STRING` |
 | Cache | Redis (Azure Cache for Redis) | `REDIS_URL` |
 | Auth | Clerk | `CLERK_*` env vars |
-| Payments | PayMongo | `PAYMONGO_*` env vars |
+| Payments | Xendit | `XENDIT_*` env vars |
 | Hosting | Azure Static Web Apps | `.github/workflows/` |
 
 ---
@@ -86,6 +86,20 @@ Documentation:
 - **`docs/adr/005-admin-case-digest-pipeline.md`** — architecture (subprocess, progress JSON, `adminApiUrl`, Windows quirks).
 - **`scripts/README.md`** — table of pipeline / scan scripts and env hints.
 - **`docs/RUNBOOK.md` § Admin Digest Pipeline** — 404 on ops routes, missing modules, **`WinError 5`** on progress file, **`list_cases_added_today.py`**.
+
+---
+
+## BAR 2026 Reviewer pipeline
+
+The BAR 2026 Reviewer content (subjects, topics, linked SC cases) is built by a multi-stage pipeline run from **Admin → Digest Pipeline**:
+
+1. **eLib scraper** — `scripts/elib_digest_pipeline.py` ingests SC decisions into `sc_decided_cases`.
+2. **Case linker** — `api/brain/` runs Gemini-based semantic linking between codal provisions and cases.
+3. **Syllabus alignment** — `LexCode/pipelines/` scripts map topics to BAR 2026 TOS subjects.
+
+Run from **Admin → Digest Pipeline** (local `func start` + cloud DB). See `docs/features/bar2026-reviewer.md` for architecture details.
+
+**Annotation canvas** — S Pen / stylus page annotations are stored per-page in `sc_annotation_strokes` (PostgreSQL). The canvas lives in `src/frontend/src/components/Bar2026.jsx` and renders via `src/frontend/src/components/AnnotationCanvas.jsx`.
 
 ---
 
