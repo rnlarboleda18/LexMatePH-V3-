@@ -40,6 +40,16 @@
 3. Scroll the list; use **pagination** if your screen shows page controls.
 4. Open a question card to read the prompt and suggested answer.
 
+### BAR 2026 Reviewer
+
+1. Sidebar → **BAR 2026**.
+2. Choose a **subject** tile (e.g. Civil Law, Criminal Law, Remedial Law).
+3. Browse the **topic list** aligned to the 2026 Bar syllabus.
+4. Open a topic to read the outline and see **linked SC cases**.
+5. Tap any case to open the case digest.
+
+**Annotation:** While on a reviewer page, use the **toolbar on the left** to draw, highlight, or erase directly on the page using a stylus or finger. Annotations are saved per-page and persist across sessions.
+
 ### LexCode (codals & statutes)
 
 1. Sidebar → **LexCode**.
@@ -91,6 +101,7 @@
 | **SC Decisions** | Browse **Supreme Court** case digests (search, open cases, read content). |
 | **LexCode** | Read **codals and statutes** (e.g. RPC, Civil Code, Rules of Court, Constitution, Labor Code) in a reader built for law study. |
 | **Bar Questions** | Browse **past bar exam questions** with suggested answers; filter by subject. |
+| **BAR 2026** | Syllabus-aligned BAR 2026 reviewer with linked SC cases and page annotation. |
 
 On **desktop**, the sidebar stays visible. On **small screens**, open it with the **menu** icon in the top bar.
 
@@ -111,7 +122,7 @@ On **desktop**, the sidebar stays visible. On **small screens**, open it with th
 - Choose a paper or flow from the **Lexify** dashboard and start a session.
 - During an **active exam simulation**, the main app **header and sidebar hide** so you get a focused, full-area exam experience (like a secure browser window).
 - After you submit, you can see **results** and return to the dashboard.
-- **Subscription:** full Lexify access is tied to the **Barrister**-level plan (see Plans below).
+- **Subscription:** full Lexify access is included in the **Amicus** plan (see Plans below).
 
 ### Flashcards
 
@@ -137,18 +148,16 @@ On **desktop**, the sidebar stays visible. On **small screens**, open it with th
 
 ---
 
-## Plans and access (summary)
+## Plans and access
 
-Plans are labeled in the app (e.g. **Free**, **Amicus**, **Juris**, **Barrister**). Typical pattern:
+LexMatePH offers a free tier and a single paid plan:
 
-| Capability | Typical minimum plan |
-|------------|----------------------|
-| Stronger limits on digests, bar questions, flashcards, LexCode case links | **Amicus** and up |
-| LexPlay listening and related extras | **Juris** and up (wording may vary in-app) |
-| Case digest **download** (where offered) | **Juris** and up |
-| **Lexify** mock exams | **Barrister** |
+| Plan | Price | Access |
+|------|-------|--------|
+| **Free** | Free | Limited digests, bar questions, and flashcards per day |
+| **Amicus** | PHP 299/month | Unlimited access to all features including Lexify mock exams, LexPlay, and the BAR 2026 Reviewer |
 
-Exact rules and paywalls are enforced in the app when you try an action; the **Upgrade** flow explains current pricing and benefits.
+Subscribe via **Upgrade** in the sidebar. Payments via GCash, Maya, or card through Xendit. Paid access continues to the end of the billing period after cancellation.
 
 ---
 
