@@ -101,9 +101,7 @@ export default function AnnotationCanvas({
       // CSS size matches the visible viewport
       canvas.style.width  = cssW + 'px';
       canvas.style.height = cssH + 'px';
-      // desynchronized:true lets the browser paint canvas updates without
-      // waiting for the main thread — reduces perceived S Pen input lag.
-      ctxRef.current = canvas.getContext('2d', { desynchronized: true });
+      ctxRef.current = canvas.getContext('2d');
       cachedRectRef.current = canvas.getBoundingClientRect();
       redrawAll(ctxRef.current, canvas, strokesRef.current, scrollTopRef.current);
     };
