@@ -90,14 +90,42 @@ function ProvisionList({ provisions }) {
   );
 }
 
+// ── Case digest prefetch cache ─────────────────────────────────────────────────
+// Keyed by case id. Stores the Promise so concurrent hovers on the same card
+// don't fire duplicate requests.
+const _digestPrefetch = new Map();
+
+function prefetchCaseDigest(id) {
+  if (!id || _digestPrefetch.has(id)) return;
+  _digestPrefetch.set(
+    id,
+    fetch(apiUrl(`/api/sc_decisions/${id}?digest_only=true`))
+      .then((r) => r.json())
+      .then((d) => { if (d && !d.error) _digestPrefetch.set(id, d); })
+      .catch(() => { _digestPrefetch.delete(id); }),
+  );
+}
+
 // ── Case card ─────────────────────────────────────────────────────────────────
 
 function CaseCard({ c, onCaseClick }) {
   const isEnBanc = c.division === 'En Banc';
+
+  const handleClick = () => {
+    const cached = _digestPrefetch.get(c.id);
+    // If prefetch already resolved to the full object, pass it; otherwise pass
+    // the minimal card data and let App.jsx's fetch-patch flow fill in the rest.
+    const payload = (cached && typeof cached === 'object' && cached.digest_facts)
+      ? { ...c, ...cached }
+      : c;
+    onCaseClick?.(payload);
+  };
+
   return (
     <div
       className="group cursor-pointer rounded-lg border border-lex bg-white/40 px-3 py-2.5 transition-colors hover:bg-white/70 dark:bg-zinc-800/40 dark:hover:bg-zinc-800/70"
-      onClick={() => onCaseClick?.(c)}
+      onPointerEnter={() => prefetchCaseDigest(c.id)}
+      onClick={handleClick}
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
