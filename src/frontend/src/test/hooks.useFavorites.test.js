@@ -43,13 +43,13 @@ describe('useFavorites', () => {
 
   it('isFavorited is true for a returned id', async () => {
     const { result } = renderHook(() => useFavorites('case', '42'));
-    await waitFor(() => !result.current.loading);
+    await waitFor(() => expect(result.current.loading).toBe(false));
     expect(result.current.isFavorited).toBe(true);
   });
 
   it('isFavorited is false for an unknown id', async () => {
     const { result } = renderHook(() => useFavorites('case', '999'));
-    await waitFor(() => !result.current.loading);
+    await waitFor(() => expect(result.current.loading).toBe(false));
     expect(result.current.isFavorited).toBe(false);
   });
 
@@ -59,7 +59,7 @@ describe('useFavorites', () => {
       .mockResolvedValueOnce({ ok: true, json: async () => ({}) }); // POST → ok
 
     const { result } = renderHook(() => useFavorites('case', '10'));
-    await waitFor(() => !result.current.loading);
+    await waitFor(() => expect(result.current.loading).toBe(false));
     expect(result.current.isFavorited).toBe(false);
 
     await act(() => result.current.toggleFavorite('My Case', 'GR 12345'));
@@ -83,7 +83,7 @@ describe('useFavorites', () => {
     vi.spyOn(window, 'alert').mockImplementation(() => {});
 
     const { result } = renderHook(() => useFavorites('case', '10'));
-    await waitFor(() => !result.current.loading);
+    await waitFor(() => expect(result.current.loading).toBe(false));
     expect(result.current.isFavorited).toBe(true);
 
     await act(() => result.current.toggleFavorite());
