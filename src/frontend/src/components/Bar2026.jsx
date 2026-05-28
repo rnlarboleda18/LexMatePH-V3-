@@ -550,8 +550,8 @@ export default function Bar2026({ onCaseClick }) {
   const contentScrollRef      = useRef(null);
   const [isAnnotating,        setIsAnnotating]        = useState(false);
   const [annotationTool,      setAnnotationTool]      = useState('pen');
-  const [penColor,            setPenColor]            = useState('#5b21b6');
-  const [highlighterColor,    setHighlighterColor]    = useState('#facc15');
+  const [penColor,            setPenColor]            = useState('#2563eb');
+  const [highlighterColor,    setHighlighterColor]    = useState('#4ade80');
   const [annotationWidth,     setAnnotationWidth]     = useState(2);
   const [eraserWidth,         setEraserWidth]         = useState(8);
   const [allowTouchDraw,      setAllowTouchDraw]      = useState(false);
