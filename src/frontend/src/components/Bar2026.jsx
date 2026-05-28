@@ -6,11 +6,12 @@ import {
   Scale, Globe, Briefcase, FileText, Users, Sword, BookOpen,
   ChevronRight, ChevronDown, ChevronLeft, BookMarked, Brain, AlertTriangle,
   Gavel, Lightbulb, Star, Clock, CheckCircle2, Circle,
-  ExternalLink, Tag, AlertCircle,
+  ExternalLink, Tag, AlertCircle, List, ScrollText,
 } from 'lucide-react';
 import PurpleGlassAmbient from './PurpleGlassAmbient';
 import CardVioletInnerWash from './CardVioletInnerWash';
 import { apiUrl } from '../utils/apiUrl';
+import { BAR_SYLLABUS } from '../data/bar2026Syllabus';
 
 // ── Subject definitions ────────────────────────────────────────────────────────
 
@@ -452,6 +453,79 @@ function TopicTree({ topics, selectedId, onSelect, subjectColor }) {
   );
 }
 
+// ── Syllabus Panel ────────────────────────────────────────────────────────────
+
+function SyllabusPanel({ subjectId, subjectColor }) {
+  const syllabus = BAR_SYLLABUS[subjectId];
+  if (!syllabus) return (
+    <div className="py-8 text-center text-xs text-gray-400">Syllabus not available.</div>
+  );
+
+  return (
+    <div className="space-y-4 px-1.5 py-2">
+      {/* Weight badge */}
+      <div className="flex items-center gap-2">
+        <span className={`text-[10px] font-black uppercase tracking-wider ${subjectColor}`}>
+          {syllabus.weight} of exam
+        </span>
+      </div>
+
+      {/* Topics */}
+      <div>
+        <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+          Topics
+        </p>
+        <ol className="space-y-1">
+          {syllabus.topics.map((topic, i) => (
+            <li key={i} className="flex gap-2 text-xs leading-snug text-gray-700 dark:text-gray-300">
+              <span className={`shrink-0 text-[10px] font-black ${subjectColor}`}>{i + 1}.</span>
+              <span>{topic}</span>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      {/* Key Statutes */}
+      {syllabus.keyStatutes?.length > 0 && (
+        <div>
+          <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+            Key Statutes
+          </p>
+          <ul className="space-y-0.5">
+            {syllabus.keyStatutes.map((s, i) => (
+              <li key={i} className="flex items-start gap-1.5 text-[11px] leading-snug text-gray-600 dark:text-gray-400">
+                <span className="mt-0.5 shrink-0 text-violet-400">▪</span>
+                {s}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Landmark Cases */}
+      {syllabus.landmarkCases?.length > 0 && (
+        <div>
+          <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
+            Landmark Cases
+          </p>
+          <ul className="space-y-1">
+            {syllabus.landmarkCases.map((c, i) => (
+              <li key={i} className="flex items-start gap-1.5 text-[11px] leading-snug text-gray-600 dark:text-gray-400">
+                <Star size={9} className="mt-0.5 shrink-0 text-amber-400" />
+                {c}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <p className="text-[9px] text-gray-400 dark:text-gray-600">
+        Source: SC/PHILJA BAR 2026 · Cutoff: June 30, 2025
+      </p>
+    </div>
+  );
+}
+
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export default function Bar2026({ onCaseClick }) {
@@ -464,6 +538,7 @@ export default function Bar2026({ onCaseClick }) {
   const [publishing, setPublishing] = useState(false);
   const [publishMsg, setPublishMsg] = useState(null);
   const [showTopicTree, setShowTopicTree] = useState(true);
+  const [sidebarView, setSidebarView] = useState('topics'); // 'topics' | 'syllabus'
 
   const active = SUBJECTS.find(s => s.id === activeTab) ?? SUBJECTS[0];
 
@@ -477,6 +552,7 @@ export default function Bar2026({ onCaseClick }) {
     setTopicsLoading(true);
     setPublishMsg(null);
     setShowTopicTree(true);
+    setSidebarView('topics');
 
     fetch(apiUrl(`/api/reviewer/${activeTab}?all=1`))
       .then(r => {
@@ -598,6 +674,30 @@ export default function Bar2026({ onCaseClick }) {
                     }
                   </span>
                 </button>
+
+                {/* Topics / Syllabus toggle */}
+                <div className="mt-2 flex gap-0.5 rounded-lg border border-lex bg-gray-100/60 p-0.5 dark:bg-zinc-800/60">
+                  <button
+                    onClick={() => setSidebarView('topics')}
+                    className={`flex flex-1 items-center justify-center gap-1 rounded-md py-1 text-[10px] font-bold uppercase tracking-wide transition-all ${
+                      sidebarView === 'topics'
+                        ? 'bg-white shadow-sm text-violet-700 dark:bg-zinc-700 dark:text-violet-300'
+                        : 'text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'
+                    }`}
+                  >
+                    <List size={10} /> Topics
+                  </button>
+                  <button
+                    onClick={() => setSidebarView('syllabus')}
+                    className={`flex flex-1 items-center justify-center gap-1 rounded-md py-1 text-[10px] font-bold uppercase tracking-wide transition-all ${
+                      sidebarView === 'syllabus'
+                        ? 'bg-white shadow-sm text-violet-700 dark:bg-zinc-700 dark:text-violet-300'
+                        : 'text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300'
+                    }`}
+                  >
+                    <ScrollText size={10} /> Syllabus
+                  </button>
+                </div>
                 {isAdmin && draftCount > 0 && (
                   <div className="mt-2 flex flex-col gap-1">
                     <button
@@ -613,20 +713,26 @@ export default function Bar2026({ onCaseClick }) {
                   </div>
                 )}
               </div>
-              <div className={`overflow-y-auto px-1.5 py-2 max-h-72 md:max-h-[calc(100vh-260px)] ${showTopicTree ? '' : 'hidden md:block'}`}>
-                {topicsLoading && (
-                  <div className="py-6 text-center text-xs text-gray-400">Loading topics…</div>
-                )}
-                {topicsError && (
-                  <div className="py-4 px-2 text-center text-xs text-rose-500">{topicsError}</div>
-                )}
-                {!topicsLoading && (
-                  <TopicTree
-                    topics={topics}
-                    selectedId={selectedTopic?.id}
-                    onSelect={handleSelectTopic}
-                    subjectColor={active.color}
-                  />
+              <div className={`overflow-y-auto px-1.5 py-2 max-h-72 md:max-h-[calc(100vh-290px)] ${showTopicTree ? '' : 'hidden md:block'}`}>
+                {sidebarView === 'syllabus' ? (
+                  <SyllabusPanel subjectId={activeTab} subjectColor={active.color} />
+                ) : (
+                  <>
+                    {topicsLoading && (
+                      <div className="py-6 text-center text-xs text-gray-400">Loading topics…</div>
+                    )}
+                    {topicsError && (
+                      <div className="py-4 px-2 text-center text-xs text-rose-500">{topicsError}</div>
+                    )}
+                    {!topicsLoading && (
+                      <TopicTree
+                        topics={topics}
+                        selectedId={selectedTopic?.id}
+                        onSelect={handleSelectTopic}
+                        subjectColor={active.color}
+                      />
+                    )}
+                  </>
                 )}
               </div>
             </div>

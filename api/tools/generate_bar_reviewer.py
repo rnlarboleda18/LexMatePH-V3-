@@ -7,6 +7,7 @@ Run from the api/ directory:
     python tools/generate_bar_reviewer.py --subject criminal
     python tools/generate_bar_reviewer.py --subject criminal --dry-run
     python tools/generate_bar_reviewer.py --subject criminal --only I
+    python tools/generate_bar_reviewer.py --subject criminal --only-sub I.C
     python tools/generate_bar_reviewer.py --subject criminal --retry-failed
     python tools/generate_bar_reviewer.py --subject criminal --case-cutoff 2024-12-31
 
@@ -152,13 +153,25 @@ def get_conn():
     cs = os.environ.get("DB_CONNECTION_STRING", "")
     if not cs:
         raise RuntimeError("DB_CONNECTION_STRING not set")
-    return psycopg2.connect(cs)
+    # TCP keepalives prevent Azure PostgreSQL from silently dropping idle
+    # connections during long AI generation calls (which can take 10-40 min).
+    # keepalives_idle=60  → send first probe after 60 s of inactivity
+    # keepalives_interval=10 → resend every 10 s if no ACK
+    # keepalives_count=5  → drop connection after 5 consecutive failures
+    return psycopg2.connect(
+        cs,
+        keepalives=1,
+        keepalives_idle=60,
+        keepalives_interval=10,
+        keepalives_count=5,
+    )
 
 
 def _ensure_conn(conn):
     """Return a live connection, reconnecting if needed."""
     try:
-        conn.cursor().execute("SELECT 1")
+        with conn.cursor() as cur:
+            cur.execute("SELECT 1")
         return conn
     except Exception:
         log.warning("DB connection lost -- reconnecting")
@@ -385,13 +398,38 @@ Return ONLY valid JSON:
             temperature=0.1,
             max_output_tokens=4096,
         )
-        resp = client.models.generate_content(model=BAR_MODEL, contents=prompt, config=cfg)
-        raw = resp.text or ""
+        raw = ""
+        for _attempt in range(3):
+            resp = client.models.generate_content(model=BAR_MODEL, contents=prompt, config=cfg)
+            # gemini-2.5-pro is a thinking model. When Google Search AFC is
+            # active, resp.text can return "" even on a valid response because
+            # the actual JSON lives in the non-thought content parts while
+            # resp.text may omit them. Extract text parts explicitly.
+            raw = resp.text or ""
+            if not raw:
+                try:
+                    raw = "".join(
+                        p.text
+                        for p in resp.candidates[0].content.parts
+                        if hasattr(p, "text") and p.text and not getattr(p, "thought", False)
+                    )
+                except Exception:
+                    pass
+            raw = raw.strip()
+            if raw:
+                break
+            log.warning(
+                "  Search-grounded synthesis: empty response for %s %s (attempt %s/3)",
+                statute_id, article_or_section, _attempt + 1,
+            )
+            time.sleep(2 ** _attempt)  # 1s, 2s, 4s back-off
+
         # Strip markdown fences if model wraps the JSON
-        raw = raw.strip()
         if raw.startswith("```"):
             raw = raw.split("```")[-2] if raw.count("```") >= 2 else raw
             raw = raw.lstrip("json").strip()
+        if not raw:
+            raise ValueError("Model returned empty response after 3 attempts")
         data = json.loads(raw)
         text     = data.get("text", "")
         note_out = data.get("source_note", "search-grounded")
@@ -419,11 +457,13 @@ def fetch_cases_for_topic(
     Falls back to keyword search on sub_heading if no linked provisions.
     """
     # Collect DB provision pairs that have codal_case_links
+    # Include both "db" and "inline" sources — inline provisions have real
+    # statute/provision IDs and may have codal_case_links inserted manually.
     linked_pairs = [
         (p["statute_id"], p["provision_id"])
         for p in provisions
-        if p.get("source") == "db"
-        and p.get("statute_id") in ("RPC", "CONST", "ROC", "CIV", "FC", "LABOR", "RCC")
+        if p.get("source") in ("db", "inline")
+        and p.get("statute_id") in ("RPC", "CONST", "ROC", "CIV", "FC", "LABOR", "RCC", "LGC")
         and p.get("provision_id")
     ]
 
@@ -581,6 +621,24 @@ OUTPUT RULES:
    - Case-derived rules: use only the exact main_doctrine text supplied for each case above.
      You MAY cite a case by name ONLY if it appears in the LINKED CASES list above.
      NEVER cite a case not in that list — do not add cases from your training knowledge.
+   - PHANTOM CASE BLOCKLIST — these titles are known hallucinations or are real cases whose
+     doctrines are UNRELATED to Remedial Law. If any of them appear in your draft, DELETE them:
+       * Suyat v. Court of Appeals — real doctrine: Ombudsman/COA jurisdiction; NOT certiorari, disbarment, or remedial rules
+       * Gonzales v. Geronimo — frequently fabricated citation; NO reliable Remedial Law doctrine
+       * Bernasconi v. Demaisip — frequently fabricated citation; NO reliable Remedial Law doctrine
+       * Amad v. Commission on Elections — real doctrine: nuisance candidates; NOT contempt, injunctions, or procedure
+       * Development Bank v. Commission on Audit — real doctrine: GFI salary authority; NOT speedy disposition or procedural rules
+       * Mangudadatu v. Commission on Elections — real doctrine: election protest procedure; NOT succession or civil procedure
+       * Yap v. Gonzales — frequently fabricated; verify before use; if not in LINKED CASES above, delete
+       * OCA v. Reyes / Office of the Court Administrator v. Reyes — frequently fabricated; delete if not in LINKED CASES above
+       * Comamo v. People — frequently fabricated; delete if not in LINKED CASES above
+       * OCA v. Villavicencio-Olan — frequently fabricated; delete if not in LINKED CASES above
+       * Roque v. De Villa — frequently fabricated; delete if not in LINKED CASES above
+       * Docena-Caspe v. Bugtas — frequently fabricated; delete if not in LINKED CASES above
+       * Garcia v. Tehano-Ang — frequently fabricated; delete if not in LINKED CASES above
+       * Usama v. Tomarong — frequently fabricated; delete if not in LINKED CASES above
+       * Almonte v. People — frequently fabricated; delete if not in LINKED CASES above
+     Any case in your draft that is NOT in the LINKED CASES section above must be removed entirely.
    - DO NOT write any principle, exception, qualification, or rule not explicitly present in the
      materials above. If it is not in the texts, do not write it.
    - If source material is sparse, write shorter doctrine — do not pad with invented rules.
@@ -650,7 +708,7 @@ def build_verification_prompt(
     topic: dict, doctrine_md: str, cases: list, subject_id: str
 ) -> str:
     cases_block = "\n".join(
-        f"- {c['short_title']} ({c.get('case_number','')}) | {c['main_doctrine'][:180]}"
+        f"- {c['short_title']} ({c.get('case_number','')}) | {c['main_doctrine'][:350]}"
         for c in cases
     ) or "None"
     return f"""You are a Philippine legal scholar reviewing AI-generated bar reviewer content.
@@ -664,10 +722,31 @@ GENERATED DOCTRINE:
 VERIFIED CASES (short_title | first 180 chars of main_doctrine):
 {cases_block}
 
+KNOWN PHANTOM CASES — these real cases are frequently misused with wrong doctrines.
+Treat any citation to these as hallucinated UNLESS the verified doctrine in the list
+above EXACTLY matches the principle being cited:
+- "Suyat v. Court of Appeals" — real doctrine: Ombudsman/COA jurisdiction, NOT certiorari or disbarment rules
+- "Amad v. Commission on Elections" — real doctrine: nuisance candidates, NOT contempt or injunctions
+- "Development Bank v. Commission on Audit" — real doctrine: GFI salary authority, NOT speedy disposition
+- "Mangudadatu v. Commission on Elections" — real doctrine: election protest procedure, NOT succession rules
+- "Gonzales v. Geronimo" — frequently fabricated; verify against the list before accepting
+- "Bernasconi v. Demaisip" — frequently fabricated; verify against the list before accepting
+- "Yap v. Gonzales" — frequently fabricated; treat as hallucinated if not in VERIFIED CASES
+- "OCA v. Reyes" / "Office of the Court Administrator v. Reyes" — frequently fabricated; treat as hallucinated if not in VERIFIED CASES
+- "Comamo v. People" — frequently fabricated; treat as hallucinated if not in VERIFIED CASES
+- "OCA v. Villavicencio-Olan" — frequently fabricated; treat as hallucinated if not in VERIFIED CASES
+- "Roque v. De Villa" — frequently fabricated; treat as hallucinated if not in VERIFIED CASES
+- "Docena-Caspe v. Bugtas" — frequently fabricated; treat as hallucinated if not in VERIFIED CASES
+- "Garcia v. Tehano-Ang" — frequently fabricated; treat as hallucinated if not in VERIFIED CASES
+- "Usama v. Tomarong" — frequently fabricated; treat as hallucinated if not in VERIFIED CASES
+- "Almonte v. People" — frequently fabricated; treat as hallucinated if not in VERIFIED CASES
+
 TASK:
 1. Find every case cited by name in the doctrine.
 2. For each cited case, check if its short_title appears in the VERIFIED CASES list.
-   - If it DOES appear → it is valid, leave it as-is.
+   - If it DOES appear → verify the cited principle matches the provided doctrine snippet.
+     If the principle does not match what the verified doctrine says, treat it as misused
+     (hallucinated). Otherwise leave it as-is.
    - If it does NOT appear → it is hallucinated. Try to find a VERIFIED CASE above whose
      doctrine covers the same legal principle. If found, replace the hallucinated name with
      the verified case's short_title. If no verified case covers that principle, remove the
@@ -788,6 +867,14 @@ def generate_topic(
                 if confidence == "db-sourced":
                     confidence = "mixed"
 
+        elif source == "inline":
+            # Pre-supplied statutory text — use directly, no DB or AI call needed.
+            # The map entry must have a "text" field with the actual provision text.
+            label = prov.get("label") or prov.get("note", "")
+            text  = prov.get("text", "")
+            db_hit_count += 1
+            enriched_provisions.append({**prov, "label": label, "text": text})
+
         elif source in ("roc", "statute", "lawphil", "scrape", "ai"):
             # All non-DB sources → AI synthesis (no scraping)
             statute_id = prov.get("statute_id", source.upper())
@@ -796,7 +883,12 @@ def generate_topic(
             label      = prov.get("label") or note or article
 
             if source == "ai":
-                synth = f"[AI synthesis note: {note}]"
+                # Use search-grounded synthesis (Gemini 2.5 Pro + Google Search)
+                # so these provisions get real statutory text rather than a placeholder.
+                if not dry_run:
+                    synth = _ai_synthesize_provision(statute_id, article or label, note)
+                else:
+                    synth = f"[dry-run AI synthesis: {statute_id} {article}]"
                 confidence = "ai-synthesized"
             else:
                 if not dry_run:
@@ -860,7 +952,32 @@ def generate_topic(
                     response_mime_type="application/json",
                     max_tokens=8192,
                 )
-                chunk_data = json.loads(raw)
+                # Primary parse
+                try:
+                    chunk_data = json.loads(raw)
+                except json.JSONDecodeError:
+                    # Repair: truncate to the last complete object in the array
+                    last_brace = raw.rfind("},")
+                    if last_brace != -1:
+                        repaired = raw[:last_brace + 1] + "]"
+                        try:
+                            chunk_data = json.loads(repaired)
+                            log.warning(
+                                "  Batch connector JSON repaired (cases %d-%d): truncated to %d items",
+                                chunk_start, chunk_start + len(chunk) - 1, len(chunk_data),
+                            )
+                        except json.JSONDecodeError:
+                            chunk_data = []
+                            log.warning(
+                                "  Batch connector JSON unrecoverable (cases %d-%d) -- using empty relevance",
+                                chunk_start, chunk_start + len(chunk) - 1,
+                            )
+                    else:
+                        chunk_data = []
+                        log.warning(
+                            "  Batch connector JSON unrecoverable (cases %d-%d) -- using empty relevance",
+                            chunk_start, chunk_start + len(chunk) - 1,
+                        )
                 for d in chunk_data:
                     if isinstance(d, dict) and "idx" in d:
                         connector_map[chunk_start + d["idx"]] = d
@@ -1035,6 +1152,9 @@ VALUES
     (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s)
 ON CONFLICT (subject_id, roman_num, COALESCE(sub_letter, ''))
 DO UPDATE SET
+    topic_heading    = EXCLUDED.topic_heading,
+    sub_heading      = EXCLUDED.sub_heading,
+    sort_order       = EXCLUDED.sort_order,
     doctrine_md      = EXCLUDED.doctrine_md,
     distinctions_md  = EXCLUDED.distinctions_md,
     memory_aid       = EXCLUDED.memory_aid,
@@ -1086,6 +1206,8 @@ def main():
                         help="Skip AI calls; write placeholder content for schema testing")
     parser.add_argument("--only", metavar="ROMAN",
                         help="Generate only this roman numeral section (e.g. --only I)")
+    parser.add_argument("--only-sub", metavar="TOPIC",
+                        help="Generate only this specific sub-topic (e.g. --only-sub I.C or --only-sub VIII.F)")
     parser.add_argument("--draft", action="store_true",
                         help="Save as draft instead of publishing automatically")
     parser.add_argument("--case-cutoff", default=DEFAULT_CASE_CUTOFF,
@@ -1093,6 +1215,8 @@ def main():
                         help=f"Cutoff date for cases (default: {DEFAULT_CASE_CUTOFF})")
     parser.add_argument("--retry-failed", action="store_true",
                         help="Only regenerate topics listed in logs/failures.json")
+    parser.add_argument("--skip-published", action="store_true",
+                        help="Skip topics that already have a published record in the DB")
     args = parser.parse_args()
 
     load_settings()
@@ -1105,6 +1229,23 @@ def main():
         topic_map = [t for t in topic_map if t["roman_num"] == args.only]
         if not topic_map:
             log.error("No topics found for roman numeral %s", args.only)
+            sys.exit(1)
+
+    if args.only_sub:
+        # Accept formats: "I.C", "VIII.F", "XII" (no sub-letter)
+        raw = args.only_sub.strip().upper()
+        if "." in raw:
+            parts = raw.split(".", 1)
+            filter_roman, filter_sub = parts[0], parts[1]
+        else:
+            filter_roman, filter_sub = raw, None
+        topic_map = [
+            t for t in topic_map
+            if t["roman_num"] == filter_roman
+            and (filter_sub is None or (t.get("sub_letter") or "").upper() == filter_sub)
+        ]
+        if not topic_map:
+            log.error("No topic found for --only-sub %s", args.only_sub)
             sys.exit(1)
 
     # --retry-failed: load failures.json and filter topic_map
@@ -1136,6 +1277,31 @@ def main():
     )
 
     conn        = get_conn()
+
+    # --skip-published: remove topics that already have a published record in the DB
+    if args.skip_published:
+        cur = conn.cursor()
+        cur.execute(
+            """
+            SELECT roman_num, COALESCE(sub_letter, '') AS sub_letter
+            FROM bar_reviewer_topics
+            WHERE subject_id = %s AND status = 'published'
+            """,
+            (args.subject,),
+        )
+        already_published = {(row[0], row[1]) for row in cur.fetchall()}
+        cur.close()
+        before = len(topic_map)
+        topic_map = [
+            t for t in topic_map
+            if (t["roman_num"], t.get("sub_letter") or "") not in already_published
+        ]
+        skipped = before - len(topic_map)
+        log.info("--skip-published: skipping %d already-published topics, %d remaining", skipped, len(topic_map))
+        if not topic_map:
+            log.info("All topics already published for %s", args.subject)
+            conn.close()
+            sys.exit(0)
     success     = 0
     failed      = 0
     failure_log = []
@@ -1148,6 +1314,8 @@ def main():
                 conn, topic, args.subject, case_cutoff,
                 dry_run=args.dry_run, publish=publish,
             )
+            # Reconnect if the connection died during the long AI calls above
+            conn = _ensure_conn(conn)
             upsert_topic(conn, record)
             status_word = "Published" if publish else "Saved (draft)"
             log.info("  %s: %s.%s", status_word, topic["roman_num"], topic.get("sub_letter", ""))
