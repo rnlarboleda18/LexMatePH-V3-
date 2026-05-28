@@ -242,9 +242,17 @@ function App() {
       void (async () => {
         if (!await checkCaseDigest()) return;
         selectGlobalCase(next);
+        // If the case object lacks digest content (e.g. from Bar2026 key_cases),
+        // fetch the full digest and patch it in so all sections render correctly.
+        if (!next.digest_ruling && !next.digest_facts && next.id) {
+          fetch(apiUrl(`/api/sc_decisions/${next.id}?digest_only=true`))
+            .then((r) => r.json())
+            .then((data) => { if (data && !data.error) patchGlobalCase(next.id, data); })
+            .catch(() => {});
+        }
       })();
     },
-    [selectGlobalCase, checkCaseDigest],
+    [selectGlobalCase, checkCaseDigest, patchGlobalCase],
   );
 
   /**
