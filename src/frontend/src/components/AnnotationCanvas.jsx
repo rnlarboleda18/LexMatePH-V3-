@@ -3,20 +3,17 @@ import { useRef, useEffect } from 'react';
 /**
  * AnnotationCanvas — transparent ink layer over topic content.
  *
- * KEY DESIGN:
- * - Native addEventListener({ passive: false }) so preventDefault() actually
- *   blocks Samsung/Android scroll stealing — React synthetic events are passive
- *   by default in React 17+ and cannot preventDefault() reliably.
- * - getBoundingClientRect-based coords (more reliable than offsetX/Y on Android).
- * - devicePixelRatio scaling so strokes are sharp on high-DPI screens (Samsung Tab).
- * - Canvas positioned inside the scroll container → scrolls with content,
- *   no coordinate math needed.
- *
- * Supports:
- *   S Pen / Apple Pencil : pointerType === 'pen', pressure 0–1
- *   Mouse                : always (desktop + testing)
- *   Finger               : only when allowTouchDraw = true (palm rejection default)
- *   S Pen eraser barrel  : buttons === 32 on Samsung devices
+ * PERFORMANCE DESIGN:
+ * - getBoundingClientRect() cached at pointerdown (NOT per-move — layout reflow
+ *   on every event is the #1 lag cause on Android/Samsung).
+ * - requestAnimationFrame batching: pointer events accumulate in a ref and
+ *   are flushed once per display frame → smooth even at 120 Hz S Pen rate.
+ * - e.getCoalescedEvents(): recovers full 120 Hz S Pen sub-frame events that
+ *   the browser would otherwise merge into one slower event.
+ * - Canvas context state (composite op, strokeStyle, etc.) set once per frame
+ *   batch, not per segment.
+ * - devicePixelRatio scaling for crisp strokes on high-DPI screens.
+ * - Non-passive native listeners so e.preventDefault() blocks Android scroll steal.
  */
 export default function AnnotationCanvas({
   topicId,
@@ -35,8 +32,14 @@ export default function AnnotationCanvas({
   const isDrawing   = useRef(false);
   const currentPath = useRef(null);
 
-  // ── Keep ALL mutable props in refs so the native event listeners (registered
-  //    once, deps=[]) always read the latest values without stale closures. ───
+  // Cached canvas rect — updated at pointerdown + resize, NEVER in pointermove.
+  const cachedRectRef     = useRef(null);
+
+  // rAF batching
+  const pendingSegsRef    = useRef([]);   // [{x0,y0,x1,y1,pressure}]
+  const rafIdRef          = useRef(null);
+
+  // ── All mutable props as refs (native listeners registered once, deps=[]) ───
   const isAnnotatingRef     = useRef(isAnnotating);
   const currentToolRef      = useRef(currentTool);
   const penColorRef         = useRef(penColor);
@@ -55,22 +58,21 @@ export default function AnnotationCanvas({
   useEffect(() => { onStrokeCompleteRef.current = onStrokeComplete; }, [onStrokeComplete]);
   useEffect(() => { strokesRef.current          = strokes;          }, [strokes]);
 
-  // ── Canvas sizing: match scroll container full height, scaled for DPR ───────
-  // devicePixelRatio (e.g. 2 on Samsung Tab) means CSS pixels ≠ physical pixels.
-  // We multiply canvas attribute dimensions by DPR so each CSS pixel maps to
-  // DPR×DPR physical pixels — this is what makes strokes sharp instead of blurry.
+  // ── Canvas sizing ────────────────────────────────────────────────────────────
   useEffect(() => {
     const canvas    = canvasRef.current;
     const container = scrollContainerRef?.current;
     if (!canvas || !container) return;
 
     const resize = () => {
-      const dpr = window.devicePixelRatio || 1;
+      const dpr  = Math.min(window.devicePixelRatio || 1, 3);
       const cssW = container.scrollWidth  || 300;
       const cssH = Math.min(container.scrollHeight || 150, 8000);
-      canvas.width  = cssW * dpr;   // physical pixels
+      canvas.width  = cssW * dpr;
       canvas.height = cssH * dpr;
       ctxRef.current = canvas.getContext('2d');
+      // Refresh cached rect after resize
+      cachedRectRef.current = canvas.getBoundingClientRect();
       redrawAll(ctxRef.current, canvas, strokesRef.current);
     };
 
@@ -80,7 +82,7 @@ export default function AnnotationCanvas({
     return () => ro.disconnect();
   }, [scrollContainerRef]);
 
-  // ── Full redraw when strokes prop changes (undo / redo / load) ─────────────
+  // ── Redraw when strokes change (undo / redo / load) ─────────────────────────
   useEffect(() => {
     const ctx    = ctxRef.current;
     const canvas = canvasRef.current;
@@ -88,24 +90,28 @@ export default function AnnotationCanvas({
     redrawAll(ctx, canvas, strokes);
   }, [strokes]);
 
-  // ── Clear canvas when topic changes ────────────────────────────────────────
+  // ── Clear on topic change ────────────────────────────────────────────────────
   useEffect(() => {
     const ctx    = ctxRef.current;
     const canvas = canvasRef.current;
     if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
     isDrawing.current   = false;
     currentPath.current = null;
+    if (rafIdRef.current) { cancelAnimationFrame(rafIdRef.current); rafIdRef.current = null; }
+    pendingSegsRef.current = [];
   }, [topicId]);
 
-  // ── Stop stroke when annotation mode turns off ─────────────────────────────
+  // ── Stop stroke when mode turns off ─────────────────────────────────────────
   useEffect(() => {
     if (!isAnnotating) {
       isDrawing.current   = false;
       currentPath.current = null;
+      if (rafIdRef.current) { cancelAnimationFrame(rafIdRef.current); rafIdRef.current = null; }
+      pendingSegsRef.current = [];
     }
   }, [isAnnotating]);
 
-  // ── Non-passive native event listeners (the critical Samsung fix) ──────────
+  // ── Non-passive native event listeners ──────────────────────────────────────
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -117,16 +123,58 @@ export default function AnnotationCanvas({
       return false;
     }
 
-    // Translate client coords → canvas physical pixel coords.
-    // scaleX = canvas.width (physical) / rect.width (CSS) = devicePixelRatio.
-    function getCoords(e) {
-      const rect   = canvas.getBoundingClientRect();
+    // Translate clientX/Y → canvas physical-pixel coords using the cached rect.
+    // scaleX = canvas.width (physical) / rect.width (CSS) ≈ devicePixelRatio.
+    // Called ONLY from pointerdown (to update pts[0]) and from the rAF flush;
+    // the rect itself is only read from cache — no reflow.
+    function clientToCanvas(clientX, clientY) {
+      const rect   = cachedRectRef.current;
+      if (!rect) return [0, 0];
       const scaleX = canvas.width  / (rect.width  || 1);
       const scaleY = canvas.height / (rect.height || 1);
       return [
-        (e.clientX - rect.left) * scaleX,
-        (e.clientY - rect.top)  * scaleY,
+        (clientX - rect.left) * scaleX,
+        (clientY - rect.top)  * scaleY,
       ];
+    }
+
+    // rAF flush — draws all accumulated segments in one go.
+    function flushPending() {
+      rafIdRef.current = null;
+      const segs   = pendingSegsRef.current;
+      if (!segs.length || !isDrawing.current) return;
+      pendingSegsRef.current = [];
+
+      const ctx    = ctxRef.current;
+      const stroke = currentPath.current;
+      if (!ctx || !stroke) return;
+
+      // Set context state ONCE per batch (not per segment — saves many API calls)
+      ctx.globalAlpha = stroke.opacity;
+      ctx.lineCap     = 'round';
+      ctx.lineJoin    = 'round';
+      if (stroke.tool === 'eraser') {
+        ctx.globalCompositeOperation = 'destination-out';
+        ctx.strokeStyle = 'rgba(0,0,0,1)';
+      } else if (stroke.tool === 'highlighter') {
+        ctx.globalCompositeOperation = 'multiply';
+        ctx.strokeStyle = stroke.color;
+      } else {
+        ctx.globalCompositeOperation = 'source-over';
+        ctx.strokeStyle = stroke.color;
+      }
+
+      for (const seg of segs) {
+        ctx.lineWidth = stroke.width * (0.5 + seg.pressure * 1.5);
+        ctx.beginPath();
+        ctx.moveTo(seg.x0, seg.y0);
+        ctx.lineTo(seg.x1, seg.y1);
+        ctx.stroke();
+      }
+
+      // Reset blending state so redrawAll works cleanly
+      ctx.globalAlpha = 1;
+      ctx.globalCompositeOperation = 'source-over';
     }
 
     function onPointerDown(e) {
@@ -139,79 +187,71 @@ export default function AnnotationCanvas({
 
       try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
 
+      // Refresh cached rect once at stroke start (cheap, only here)
+      cachedRectRef.current = canvas.getBoundingClientRect();
+
       const isSPenEraser = e.pointerType === 'pen'
         && e.buttons === 32
         && /samsung/i.test(navigator.userAgent);
       const tool = isSPenEraser ? 'eraser' : currentToolRef.current;
+      const dpr  = canvas.width / ((cachedRectRef.current?.width) || canvas.width);
+      const baseW = currentWidthRef.current;
 
-      const dpr     = window.devicePixelRatio || 1;
-      const [x, y]  = getCoords(e);
-      const baseW   = currentWidthRef.current;
-
+      const [x, y] = clientToCanvas(e.clientX, e.clientY);
       isDrawing.current   = true;
       currentPath.current = {
         id:      crypto.randomUUID(),
         tool,
-        // Stroke color comes from the per-tool color ref
-        color:   tool === 'pen'
-                   ? penColorRef.current
-                   : tool === 'highlighter'
-                     ? highlighterColorRef.current
-                     : '#000000',
-        // Store width in physical pixels so DPR is baked in once
-        width:   tool === 'highlighter'
-                   ? baseW * 5 * dpr
-                   : baseW * dpr,
+        color:   tool === 'pen'         ? penColorRef.current
+               : tool === 'highlighter' ? highlighterColorRef.current
+               : '#000000',
+        width:   (tool === 'highlighter' ? baseW * 5 : baseW) * dpr,
         opacity: tool === 'highlighter' ? 0.35 : 1.0,
         points:  [[x, y, e.pressure || 0.5]],
       };
     }
 
     function onPointerMove(e) {
-      if (!isDrawing.current)           return;
-      if (!isAnnotatingRef.current)     return;
+      if (!isDrawing.current)          return;
+      if (!isAnnotatingRef.current)    return;
       if (e.pointerType === 'touch'
-        && !allowTouchDrawRef.current)  return;
-      if (!ctxRef.current)              return;
+        && !allowTouchDrawRef.current) return;
 
       e.preventDefault();
       e.stopPropagation();
 
-      const ctx      = ctxRef.current;
-      const pts      = currentPath.current.points;
-      const prev     = pts[pts.length - 1];
-      const pressure = e.pressure || 0.5;
-      const [x, y]   = getCoords(e);
-      pts.push([x, y, pressure]);
+      // getCoalescedEvents() recovers all sub-frame events at full pen rate
+      // (e.g. 120 Hz S Pen → up to 2 events per 60 Hz display frame).
+      const events = (typeof e.getCoalescedEvents === 'function')
+        ? e.getCoalescedEvents()
+        : [e];
 
-      const stroke = currentPath.current;
-      ctx.save();
-      ctx.globalAlpha = stroke.opacity;
-      if (stroke.tool === 'eraser') {
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.strokeStyle = 'rgba(0,0,0,1)';
-      } else if (stroke.tool === 'highlighter') {
-        ctx.globalCompositeOperation = 'multiply';
-        ctx.strokeStyle = stroke.color;
-      } else {
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.strokeStyle = stroke.color;
+      const pts = currentPath.current.points;
+      for (const evt of events) {
+        const pressure = evt.pressure || 0.5;
+        const [x, y]   = clientToCanvas(evt.clientX, evt.clientY);
+        const prev      = pts[pts.length - 1];
+        pts.push([x, y, pressure]);
+        pendingSegsRef.current.push({ x0: prev[0], y0: prev[1], x1: x, y1: y, pressure });
       }
-      ctx.lineCap   = 'round';
-      ctx.lineJoin  = 'round';
-      // stroke.width is already in physical pixels (baked with DPR on pointerdown)
-      ctx.lineWidth = stroke.width * (0.5 + pressure * 1.5);
-      ctx.beginPath();
-      ctx.moveTo(prev[0], prev[1]);
-      ctx.lineTo(x, y);
-      ctx.stroke();
-      ctx.restore();
+
+      // Schedule exactly one draw per animation frame
+      if (!rafIdRef.current) {
+        rafIdRef.current = requestAnimationFrame(flushPending);
+      }
     }
 
     function onPointerUp() {
       if (!isDrawing.current) return;
-      isDrawing.current = false;
 
+      // Flush any remaining segments before finalising
+      if (rafIdRef.current) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
+      flushPending();
+
+      isDrawing.current = false;
       const stroke        = currentPath.current;
       currentPath.current = null;
 
@@ -223,6 +263,8 @@ export default function AnnotationCanvas({
     function onPointerCancel() {
       isDrawing.current   = false;
       currentPath.current = null;
+      if (rafIdRef.current) { cancelAnimationFrame(rafIdRef.current); rafIdRef.current = null; }
+      pendingSegsRef.current = [];
     }
 
     const opts = { passive: false };
@@ -267,7 +309,6 @@ function drawStroke(ctx, stroke) {
   const pts = stroke.points;
   if (!pts || pts.length < 2) return;
 
-  ctx.save();
   ctx.globalAlpha = stroke.opacity ?? 1.0;
   ctx.lineCap     = 'round';
   ctx.lineJoin    = 'round';
@@ -285,7 +326,6 @@ function drawStroke(ctx, stroke) {
 
   for (let i = 1; i < pts.length; i++) {
     const pressure = pts[i][2] ?? 0.5;
-    // stroke.width is stored in physical pixels (DPR already baked in at creation time)
     ctx.lineWidth  = (stroke.width ?? 2) * (0.5 + pressure * 1.5);
     ctx.beginPath();
     ctx.moveTo(pts[i - 1][0], pts[i - 1][1]);
@@ -293,5 +333,7 @@ function drawStroke(ctx, stroke) {
     ctx.stroke();
   }
 
-  ctx.restore();
+  // Reset
+  ctx.globalAlpha = 1;
+  ctx.globalCompositeOperation = 'source-over';
 }
