@@ -1,6 +1,6 @@
 # ADR 004: PayMongo for Subscription Payments
 
-**Status:** Accepted  
+**Status:** Superseded by [ADR 006](006-xendit-for-payments.md)  
 **Date:** 2024
 
 ## Context
