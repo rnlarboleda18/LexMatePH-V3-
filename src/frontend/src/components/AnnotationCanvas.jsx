@@ -285,26 +285,66 @@ export default function AnnotationCanvas({
       e.preventDefault();
       e.stopPropagation();
 
-      const pts    = currentPath.current.points;
+      const stroke = currentPath.current;
+      const pts    = stroke.points;
+      const ctx    = ctxRef.current;
+
       // getCoalescedEvents recovers full 120 Hz S Pen sub-frame input
       const events = (typeof e.getCoalescedEvents === 'function')
         ? e.getCoalescedEvents()
         : [e];
 
-      for (const evt of events) {
-        const pressure     = evt.pressure || 0.5;
-        const [cx, cy]     = clientToContent(evt.clientX, evt.clientY);
-        const prev         = pts[pts.length - 1];
-        pts.push([cx, cy, pressure]);
-        pendingSegsRef.current.push({
-          x0: prev[0], y0: prev[1],
-          x1: cx,      y1: cy,
-          pressure,
-        });
-      }
+      // Compute DPR and scrollTop ONCE outside the coalesced-events loop
+      const dpr       = getDpr();
+      const scrollTop = scrollTopRef.current;
+      const rect      = cachedRectRef.current;
+      if (!rect || !ctx) return;
 
-      if (!drawRafRef.current) {
-        drawRafRef.current = requestAnimationFrame(flushPending);
+      if (stroke.tool === 'highlighter') {
+        // ── Highlighter: accumulate into rAF batch ─────────────────────────
+        // Full redraw is needed to prevent opacity stacking, so we batch via
+        // rAF to avoid running redrawAll on every single pointermove event.
+        for (const evt of events) {
+          const pressure = evt.pressure || 0.5;
+          const cx = (evt.clientX - rect.left)             * dpr;
+          const cy = (evt.clientY - rect.top + scrollTop)  * dpr;
+          const prev = pts[pts.length - 1];
+          pts.push([cx, cy, pressure]);
+          pendingSegsRef.current.push({ x0: prev[0], y0: prev[1], x1: cx, y1: cy, pressure });
+        }
+        if (!drawRafRef.current) {
+          drawRafRef.current = requestAnimationFrame(flushPending);
+        }
+      } else {
+        // ── Pen / eraser: draw IMMEDIATELY — zero rAF latency ──────────────
+        // rAF adds up to one full display frame (8–16 ms) of lag between the
+        // S Pen movement and the rendered stroke. Drawing directly in the
+        // event handler matches what Samsung Notes / Procreate do.
+        // Set ctx state ONCE for the whole coalesced-events batch.
+        ctx.globalAlpha              = stroke.opacity;
+        ctx.lineCap                  = 'round';
+        ctx.lineJoin                 = 'round';
+        ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
+        ctx.strokeStyle              = stroke.tool === 'eraser' ? 'rgba(0,0,0,1)' : stroke.color;
+
+        const scrollPx = scrollTop * dpr;
+
+        for (const evt of events) {
+          const pressure = evt.pressure || 0.5;
+          const cx = (evt.clientX - rect.left)             * dpr;
+          const cy = (evt.clientY - rect.top + scrollTop)  * dpr;
+          const prev = pts[pts.length - 1];
+          pts.push([cx, cy, pressure]);
+
+          ctx.lineWidth = stroke.width * (0.5 + pressure * 1.5);
+          ctx.beginPath();
+          ctx.moveTo(prev[0], prev[1] - scrollPx);
+          ctx.lineTo(cx,      cy      - scrollPx);
+          ctx.stroke();
+        }
+
+        ctx.globalAlpha              = 1;
+        ctx.globalCompositeOperation = 'source-over';
       }
     }
 
