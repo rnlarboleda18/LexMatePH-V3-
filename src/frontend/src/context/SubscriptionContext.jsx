@@ -7,6 +7,7 @@ const SubscriptionContext = createContext(null);
 const TIER_ORDER = ['free', 'amicus', 'juris', 'barrister'];
 
 const FEATURE_REQUIREMENTS = {
+  favorites: 'amicus',
   // Amicus unlocks unlimited daily usage (see TRACK_USAGE_FEATURE_TO_UNLIMITED)
   case_digest_unlimited: 'amicus',
   bar_question_unlimited: 'amicus',
