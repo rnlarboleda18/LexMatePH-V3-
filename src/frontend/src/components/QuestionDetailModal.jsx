@@ -1,6 +1,6 @@
 import React, { useState, useCallback, useRef } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Headphones, ListMusic, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
+import { X, Star, Headphones, ListMusic, Plus, ChevronLeft, ChevronRight } from 'lucide-react';
 import { getSubjectColorForBarQuestion } from '../utils/colors';
 import { normalizeBarQuestionSubject } from '../utils/subjectNormalize';
 import { HighlightText } from '../utils/highlight';
@@ -9,6 +9,7 @@ import { useSubscription } from '../context/SubscriptionContext';
 import { closeModalAbsorbingGhostTap } from '../utils/modalClose';
 import FontSizeControl from './FontSizeControl';
 import { useFontSize } from '../hooks/useFontSize';
+import { useFavorites } from '../hooks/useFavorites';
 
 const QuestionDetailModal = ({ 
     question, 
@@ -40,7 +41,15 @@ const QuestionDetailModal = ({
 
     const { canAccess, openUpgradeModal } = useSubscription();
     const canLexPlay = canAccess('lexplay_bar');
+    const canFavorite = canAccess('favorites');
     const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize();
+    const { isFavorited, toggleFavorite } = useFavorites('bar_question', question?.id);
+    const handleToggleFavorite = useCallback(() => {
+        toggleFavorite(
+            `${question.year} Bar Exam`,
+            question.subject
+        );
+    }, [toggleFavorite, question]);
 
     const handleAddToPlaylist = useCallback(async (playlistId) => {
         try {
@@ -125,6 +134,21 @@ const QuestionDetailModal = ({
                         </span>
                     </div>
                     <div className="flex shrink-0 items-center gap-1.5 sm:gap-2">
+                        {canFavorite && (
+                            <button
+                                type="button"
+                                onClick={handleToggleFavorite}
+                                className={`touch-manipulation flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-all hover:scale-110 active:scale-95 ${
+                                    isFavorited
+                                        ? 'border-yellow-300/80 bg-yellow-50/90 text-yellow-500 dark:border-yellow-600/60 dark:bg-yellow-900/40 dark:text-yellow-400'
+                                        : 'border-gray-200/80 bg-white/80 text-gray-400 hover:text-yellow-400 dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-500'
+                                }`}
+                                title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                                aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                            >
+                                <Star className="h-3.5 w-3.5" strokeWidth={2} fill={isFavorited ? 'currentColor' : 'none'} />
+                            </button>
+                        )}
                         <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} />
                         <span className="tabular-nums text-[15px] font-medium leading-snug text-gray-900 dark:text-white md:text-[17px]">
                             {question.year}
