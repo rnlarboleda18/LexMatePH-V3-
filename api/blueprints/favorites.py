@@ -90,7 +90,7 @@ def _check_access(req):
             if not row:
                 return None, _json({"error": "Forbidden"}, 403)
             is_admin, sub_status = row
-            if not is_admin and sub_status != 'active':
+            if not is_admin and sub_status not in ('active', 'trialing'):
                 return None, _json({"error": "Forbidden", "detail": "Subscription required"}, 403)
     except Exception as exc:
         logging.error("_check_access DB error: %s", exc)
