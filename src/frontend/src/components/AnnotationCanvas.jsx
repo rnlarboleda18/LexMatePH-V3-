@@ -3,17 +3,30 @@ import { useRef, useEffect } from 'react';
 /**
  * AnnotationCanvas — transparent ink layer over topic content.
  *
- * PERFORMANCE DESIGN:
- * - getBoundingClientRect() cached at pointerdown (NOT per-move — layout reflow
- *   on every event is the #1 lag cause on Android/Samsung).
- * - requestAnimationFrame batching: pointer events accumulate in a ref and
- *   are flushed once per display frame → smooth even at 120 Hz S Pen rate.
- * - e.getCoalescedEvents(): recovers full 120 Hz S Pen sub-frame events that
- *   the browser would otherwise merge into one slower event.
- * - Canvas context state (composite op, strokeStyle, etc.) set once per frame
- *   batch, not per segment.
- * - devicePixelRatio scaling for crisp strokes on high-DPI screens.
- * - Non-passive native listeners so e.preventDefault() blocks Android scroll steal.
+ * ARCHITECTURE (viewport canvas):
+ * Canvas covers only the VISIBLE area of the scroll container (clientHeight),
+ * not the full scrollable content (scrollHeight). This keeps the canvas small
+ * so DPR × 2 doesn't balloon to 16 000 physical px tall and cause GPU lag.
+ *
+ * Strokes are stored in CONTENT-ABSOLUTE coordinates:
+ *   contentY = (clientY − containerTop + scrollTop) × dpr
+ *
+ * On render, we translate back to canvas-viewport coordinates:
+ *   canvasY = contentY − scrollTop × dpr
+ *
+ * On scroll the canvas `style.top` is nudged to scrollTop so it always
+ * overlays the visible area, and a rAF re-render is scheduled.
+ *
+ * HIGHLIGHTER: uses globalAlpha + source-over (NOT multiply).
+ * multiply on a transparent canvas multiplies against (0,0,0,0) and
+ * produces wrong colours. source-over at 0.35 opacity is correct.
+ *
+ * PERFORMANCE:
+ * - getBoundingClientRect cached at pointerdown (no layout reflow per-move)
+ * - requestAnimationFrame batches all pointermove segments into one draw call
+ * - e.getCoalescedEvents() recovers full 120 Hz S Pen sub-frame events
+ * - Non-passive listeners so e.preventDefault() blocks Android scroll steal
+ * - devicePixelRatio applied for crisp strokes on high-DPI (Samsung Tab)
  */
 export default function AnnotationCanvas({
   topicId,
@@ -32,14 +45,17 @@ export default function AnnotationCanvas({
   const isDrawing   = useRef(false);
   const currentPath = useRef(null);
 
-  // Cached canvas rect — updated at pointerdown + resize, NEVER in pointermove.
-  const cachedRectRef     = useRef(null);
+  // Cached rect (only updated at pointerdown + resize, never in pointermove)
+  const cachedRectRef  = useRef(null);
+  // Current scroll offset in CSS pixels — updated by scroll handler
+  const scrollTopRef   = useRef(0);
 
-  // rAF batching
-  const pendingSegsRef    = useRef([]);   // [{x0,y0,x1,y1,pressure}]
-  const rafIdRef          = useRef(null);
+  // rAF handles
+  const drawRafRef     = useRef(null);  // for live drawing batches
+  const scrollRafRef   = useRef(null);  // for scroll re-renders
+  const pendingSegsRef = useRef([]);
 
-  // ── All mutable props as refs (native listeners registered once, deps=[]) ───
+  // ── All mutable props as refs so native listeners (deps=[]) stay fresh ──────
   const isAnnotatingRef     = useRef(isAnnotating);
   const currentToolRef      = useRef(currentTool);
   const penColorRef         = useRef(penColor);
@@ -58,7 +74,7 @@ export default function AnnotationCanvas({
   useEffect(() => { onStrokeCompleteRef.current = onStrokeComplete; }, [onStrokeComplete]);
   useEffect(() => { strokesRef.current          = strokes;          }, [strokes]);
 
-  // ── Canvas sizing ────────────────────────────────────────────────────────────
+  // ── Canvas sizing — VIEWPORT height only (not scrollHeight) ─────────────────
   useEffect(() => {
     const canvas    = canvasRef.current;
     const container = scrollContainerRef?.current;
@@ -66,14 +82,16 @@ export default function AnnotationCanvas({
 
     const resize = () => {
       const dpr  = Math.min(window.devicePixelRatio || 1, 3);
-      const cssW = container.scrollWidth  || 300;
-      const cssH = Math.min(container.scrollHeight || 150, 8000);
+      const cssW = container.clientWidth  || 300;
+      const cssH = container.clientHeight || 300;   // ← clientHeight, NOT scrollHeight
       canvas.width  = cssW * dpr;
       canvas.height = cssH * dpr;
+      // CSS size matches the visible viewport
+      canvas.style.width  = cssW + 'px';
+      canvas.style.height = cssH + 'px';
       ctxRef.current = canvas.getContext('2d');
-      // Refresh cached rect after resize
       cachedRectRef.current = canvas.getBoundingClientRect();
-      redrawAll(ctxRef.current, canvas, strokesRef.current);
+      redrawAll(ctxRef.current, canvas, strokesRef.current, scrollTopRef.current);
     };
 
     const ro = new ResizeObserver(resize);
@@ -87,7 +105,7 @@ export default function AnnotationCanvas({
     const ctx    = ctxRef.current;
     const canvas = canvasRef.current;
     if (!ctx || !canvas) return;
-    redrawAll(ctx, canvas, strokes);
+    redrawAll(ctx, canvas, strokes, scrollTopRef.current);
   }, [strokes]);
 
   // ── Clear on topic change ────────────────────────────────────────────────────
@@ -97,8 +115,9 @@ export default function AnnotationCanvas({
     if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
     isDrawing.current   = false;
     currentPath.current = null;
-    if (rafIdRef.current) { cancelAnimationFrame(rafIdRef.current); rafIdRef.current = null; }
     pendingSegsRef.current = [];
+    if (drawRafRef.current)   { cancelAnimationFrame(drawRafRef.current);   drawRafRef.current   = null; }
+    if (scrollRafRef.current) { cancelAnimationFrame(scrollRafRef.current); scrollRafRef.current = null; }
   }, [topicId]);
 
   // ── Stop stroke when mode turns off ─────────────────────────────────────────
@@ -106,15 +125,18 @@ export default function AnnotationCanvas({
     if (!isAnnotating) {
       isDrawing.current   = false;
       currentPath.current = null;
-      if (rafIdRef.current) { cancelAnimationFrame(rafIdRef.current); rafIdRef.current = null; }
       pendingSegsRef.current = [];
+      if (drawRafRef.current) { cancelAnimationFrame(drawRafRef.current); drawRafRef.current = null; }
     }
   }, [isAnnotating]);
 
-  // ── Non-passive native event listeners ──────────────────────────────────────
+  // ── Native event listeners (non-passive) + scroll handler ───────────────────
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const canvas    = canvasRef.current;
+    const container = scrollContainerRef?.current;
+    if (!canvas || !container) return;
+
+    // ── Helpers ────────────────────────────────────────────────────────────────
 
     function shouldDraw(e) {
       if (e.pointerType === 'pen')   return true;
@@ -123,25 +145,34 @@ export default function AnnotationCanvas({
       return false;
     }
 
-    // Translate clientX/Y → canvas physical-pixel coords using the cached rect.
-    // scaleX = canvas.width (physical) / rect.width (CSS) ≈ devicePixelRatio.
-    // Called ONLY from pointerdown (to update pts[0]) and from the rAF flush;
-    // the rect itself is only read from cache — no reflow.
-    function clientToCanvas(clientX, clientY) {
-      const rect   = cachedRectRef.current;
+    // Effective DPR: ratio of physical canvas width to CSS width
+    function getDpr() {
+      const rect = cachedRectRef.current;
+      return rect ? canvas.width / (rect.width || 1) : (window.devicePixelRatio || 1);
+    }
+
+    // Convert client coords → CONTENT-ABSOLUTE physical-pixel coords.
+    // contentY includes scrollTop so strokes retain their position as user scrolls.
+    function clientToContent(clientX, clientY) {
+      const rect    = cachedRectRef.current;
       if (!rect) return [0, 0];
-      const scaleX = canvas.width  / (rect.width  || 1);
-      const scaleY = canvas.height / (rect.height || 1);
+      const dpr     = getDpr();
+      const scrollTop = scrollTopRef.current;
       return [
-        (clientX - rect.left) * scaleX,
-        (clientY - rect.top)  * scaleY,
+        (clientX - rect.left)                  * dpr,
+        (clientY - rect.top  + scrollTop) * dpr,
       ];
     }
 
-    // rAF flush — draws all accumulated segments in one go.
+    // Convert content-absolute Y → canvas-viewport Y for rendering.
+    function contentToCanvasY(contentY) {
+      return contentY - scrollTopRef.current * getDpr();
+    }
+
+    // ── rAF flush: draw all pending segments in one go ─────────────────────────
     function flushPending() {
-      rafIdRef.current = null;
-      const segs   = pendingSegsRef.current;
+      drawRafRef.current = null;
+      const segs  = pendingSegsRef.current;
       if (!segs.length || !isDrawing.current) return;
       pendingSegsRef.current = [];
 
@@ -149,33 +180,25 @@ export default function AnnotationCanvas({
       const stroke = currentPath.current;
       if (!ctx || !stroke) return;
 
-      // Set context state ONCE per batch (not per segment — saves many API calls)
+      // Set context state ONCE per batch
       ctx.globalAlpha = stroke.opacity;
       ctx.lineCap     = 'round';
       ctx.lineJoin    = 'round';
-      if (stroke.tool === 'eraser') {
-        ctx.globalCompositeOperation = 'destination-out';
-        ctx.strokeStyle = 'rgba(0,0,0,1)';
-      } else if (stroke.tool === 'highlighter') {
-        ctx.globalCompositeOperation = 'multiply';
-        ctx.strokeStyle = stroke.color;
-      } else {
-        ctx.globalCompositeOperation = 'source-over';
-        ctx.strokeStyle = stroke.color;
-      }
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.strokeStyle = stroke.color;
 
       for (const seg of segs) {
         ctx.lineWidth = stroke.width * (0.5 + seg.pressure * 1.5);
         ctx.beginPath();
-        ctx.moveTo(seg.x0, seg.y0);
-        ctx.lineTo(seg.x1, seg.y1);
+        ctx.moveTo(seg.x0, contentToCanvasY(seg.y0));
+        ctx.lineTo(seg.x1, contentToCanvasY(seg.y1));
         ctx.stroke();
       }
 
-      // Reset blending state so redrawAll works cleanly
       ctx.globalAlpha = 1;
-      ctx.globalCompositeOperation = 'source-over';
     }
+
+    // ── Pointer handlers ───────────────────────────────────────────────────────
 
     function onPointerDown(e) {
       if (!isAnnotatingRef.current) return;
@@ -184,20 +207,19 @@ export default function AnnotationCanvas({
 
       e.preventDefault();
       e.stopPropagation();
-
       try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
 
-      // Refresh cached rect once at stroke start (cheap, only here)
+      // Refresh rect once per stroke (the only getBoundingClientRect call per stroke)
       cachedRectRef.current = canvas.getBoundingClientRect();
 
       const isSPenEraser = e.pointerType === 'pen'
         && e.buttons === 32
         && /samsung/i.test(navigator.userAgent);
-      const tool = isSPenEraser ? 'eraser' : currentToolRef.current;
-      const dpr  = canvas.width / ((cachedRectRef.current?.width) || canvas.width);
+      const tool  = isSPenEraser ? 'eraser' : currentToolRef.current;
+      const dpr   = getDpr();
       const baseW = currentWidthRef.current;
+      const [cx, cy] = clientToContent(e.clientX, e.clientY);
 
-      const [x, y] = clientToCanvas(e.clientX, e.clientY);
       isDrawing.current   = true;
       currentPath.current = {
         id:      crypto.randomUUID(),
@@ -205,50 +227,51 @@ export default function AnnotationCanvas({
         color:   tool === 'pen'         ? penColorRef.current
                : tool === 'highlighter' ? highlighterColorRef.current
                : '#000000',
+        // Width baked with DPR; highlighter is wider
         width:   (tool === 'highlighter' ? baseW * 5 : baseW) * dpr,
-        opacity: tool === 'highlighter' ? 0.35 : 1.0,
-        points:  [[x, y, e.pressure || 0.5]],
+        // Highlighter uses partial opacity (source-over, not multiply)
+        opacity: tool === 'highlighter' ? 0.4 : 1.0,
+        points:  [[cx, cy, e.pressure || 0.5]],
       };
     }
 
     function onPointerMove(e) {
-      if (!isDrawing.current)          return;
-      if (!isAnnotatingRef.current)    return;
+      if (!isDrawing.current)           return;
+      if (!isAnnotatingRef.current)     return;
       if (e.pointerType === 'touch'
-        && !allowTouchDrawRef.current) return;
+        && !allowTouchDrawRef.current)  return;
 
       e.preventDefault();
       e.stopPropagation();
 
-      // getCoalescedEvents() recovers all sub-frame events at full pen rate
-      // (e.g. 120 Hz S Pen → up to 2 events per 60 Hz display frame).
+      const pts    = currentPath.current.points;
+      // getCoalescedEvents recovers full 120 Hz S Pen sub-frame input
       const events = (typeof e.getCoalescedEvents === 'function')
         ? e.getCoalescedEvents()
         : [e];
 
-      const pts = currentPath.current.points;
       for (const evt of events) {
-        const pressure = evt.pressure || 0.5;
-        const [x, y]   = clientToCanvas(evt.clientX, evt.clientY);
-        const prev      = pts[pts.length - 1];
-        pts.push([x, y, pressure]);
-        pendingSegsRef.current.push({ x0: prev[0], y0: prev[1], x1: x, y1: y, pressure });
+        const pressure     = evt.pressure || 0.5;
+        const [cx, cy]     = clientToContent(evt.clientX, evt.clientY);
+        const prev         = pts[pts.length - 1];
+        pts.push([cx, cy, pressure]);
+        pendingSegsRef.current.push({
+          x0: prev[0], y0: prev[1],
+          x1: cx,      y1: cy,
+          pressure,
+        });
       }
 
-      // Schedule exactly one draw per animation frame
-      if (!rafIdRef.current) {
-        rafIdRef.current = requestAnimationFrame(flushPending);
+      if (!drawRafRef.current) {
+        drawRafRef.current = requestAnimationFrame(flushPending);
       }
     }
 
     function onPointerUp() {
       if (!isDrawing.current) return;
 
-      // Flush any remaining segments before finalising
-      if (rafIdRef.current) {
-        cancelAnimationFrame(rafIdRef.current);
-        rafIdRef.current = null;
-      }
+      // Flush remaining segments before committing
+      if (drawRafRef.current) { cancelAnimationFrame(drawRafRef.current); drawRafRef.current = null; }
       flushPending();
 
       isDrawing.current = false;
@@ -263,32 +286,48 @@ export default function AnnotationCanvas({
     function onPointerCancel() {
       isDrawing.current   = false;
       currentPath.current = null;
-      if (rafIdRef.current) { cancelAnimationFrame(rafIdRef.current); rafIdRef.current = null; }
       pendingSegsRef.current = [];
+      if (drawRafRef.current) { cancelAnimationFrame(drawRafRef.current); drawRafRef.current = null; }
     }
 
-    const opts = { passive: false };
-    canvas.addEventListener('pointerdown',   onPointerDown,   opts);
-    canvas.addEventListener('pointermove',   onPointerMove,   opts);
-    canvas.addEventListener('pointerup',     onPointerUp,     opts);
-    canvas.addEventListener('pointercancel', onPointerCancel, opts);
+    // ── Scroll handler: reposition canvas + re-render visible strokes ──────────
+    function onScroll() {
+      scrollTopRef.current = container.scrollTop;
+      // Move the canvas to keep it aligned with the viewport
+      canvas.style.top = container.scrollTop + 'px';
+
+      if (!scrollRafRef.current) {
+        scrollRafRef.current = requestAnimationFrame(() => {
+          scrollRafRef.current = null;
+          redrawAll(ctxRef.current, canvasRef.current, strokesRef.current, scrollTopRef.current);
+        });
+      }
+    }
+
+    const pOpts = { passive: false };
+    canvas.addEventListener('pointerdown',   onPointerDown,   pOpts);
+    canvas.addEventListener('pointermove',   onPointerMove,   pOpts);
+    canvas.addEventListener('pointerup',     onPointerUp,     pOpts);
+    canvas.addEventListener('pointercancel', onPointerCancel, pOpts);
+    container.addEventListener('scroll',     onScroll,        { passive: true });
 
     return () => {
       canvas.removeEventListener('pointerdown',   onPointerDown);
       canvas.removeEventListener('pointermove',   onPointerMove);
       canvas.removeEventListener('pointerup',     onPointerUp);
       canvas.removeEventListener('pointercancel', onPointerCancel);
+      container.removeEventListener('scroll',     onScroll);
     };
-  }, []);
+  }, [scrollContainerRef]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <canvas
       ref={canvasRef}
       style={{
         position:      'absolute',
-        top:           0,
+        top:           0,       // updated dynamically to scrollTop by scroll handler
         left:          0,
-        width:         '100%',
+        // width + height set dynamically by resize effect
         pointerEvents: isAnnotating ? 'auto' : 'none',
         zIndex:        10,
         cursor:        isAnnotating ? 'crosshair' : 'default',
@@ -298,42 +337,43 @@ export default function AnnotationCanvas({
   );
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
+// ── Rendering helpers ─────────────────────────────────────────────────────────
 
-function redrawAll(ctx, canvas, strokes) {
+/**
+ * Redraws all strokes onto the canvas, translating content-absolute Y coords
+ * to canvas-viewport Y coords by subtracting scrollTop × dpr.
+ */
+function redrawAll(ctx, canvas, strokes, scrollTopCSS) {
+  if (!ctx || !canvas) return;
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-  (strokes || []).forEach(s => drawStroke(ctx, s));
+
+  const dpr        = canvas.width / (parseFloat(canvas.style.width) || canvas.width) || 1;
+  const scrollPx   = (scrollTopCSS || 0) * dpr;   // scroll offset in physical pixels
+
+  for (const stroke of (strokes || [])) {
+    drawStroke(ctx, stroke, scrollPx);
+  }
 }
 
-function drawStroke(ctx, stroke) {
+function drawStroke(ctx, stroke, scrollPx) {
   const pts = stroke.points;
   if (!pts || pts.length < 2) return;
 
-  ctx.globalAlpha = stroke.opacity ?? 1.0;
-  ctx.lineCap     = 'round';
-  ctx.lineJoin    = 'round';
-
-  if (stroke.tool === 'eraser') {
-    ctx.globalCompositeOperation = 'destination-out';
-    ctx.strokeStyle = 'rgba(0,0,0,1)';
-  } else if (stroke.tool === 'highlighter') {
-    ctx.globalCompositeOperation = 'multiply';
-    ctx.strokeStyle = stroke.color ?? '#facc15';
-  } else {
-    ctx.globalCompositeOperation = 'source-over';
-    ctx.strokeStyle = stroke.color ?? '#5b21b6';
-  }
+  ctx.globalAlpha              = stroke.opacity ?? 1.0;
+  ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
+  ctx.strokeStyle              = stroke.tool === 'eraser' ? 'rgba(0,0,0,1)' : (stroke.color ?? '#5b21b6');
+  ctx.lineCap                  = 'round';
+  ctx.lineJoin                 = 'round';
 
   for (let i = 1; i < pts.length; i++) {
     const pressure = pts[i][2] ?? 0.5;
     ctx.lineWidth  = (stroke.width ?? 2) * (0.5 + pressure * 1.5);
     ctx.beginPath();
-    ctx.moveTo(pts[i - 1][0], pts[i - 1][1]);
-    ctx.lineTo(pts[i][0],     pts[i][1]);
+    ctx.moveTo(pts[i - 1][0],  pts[i - 1][1] - scrollPx);
+    ctx.lineTo(pts[i][0],      pts[i][1]      - scrollPx);
     ctx.stroke();
   }
 
-  // Reset
-  ctx.globalAlpha = 1;
+  ctx.globalAlpha              = 1;
   ctx.globalCompositeOperation = 'source-over';
 }
