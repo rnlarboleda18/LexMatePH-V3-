@@ -4,7 +4,7 @@
 
 | Layer | Technology | Path |
 |-------|-----------|------|
-| Frontend SPA + PWA | React 19, Vite, Tailwind CSS 4 | `src/frontend/` |
+| Frontend SPA + PWA | React 18, Vite 5, Tailwind CSS 4 | `src/frontend/` |
 | API | Azure Functions v2 (Python 3.11) | `api/` |
 | Database | PostgreSQL on Azure (cloud by default) | `DB_CONNECTION_STRING` |
 | Cache | Redis (Azure Cache for Redis) | `REDIS_URL` |

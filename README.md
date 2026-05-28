@@ -18,7 +18,7 @@ AI-powered Philippine legal research and bar review platform. Search statutes, b
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | React 19, Next.js 16, TypeScript, Tailwind CSS 4 |
+| Frontend | React 18, Vite 5, Tailwind CSS 4 |
 | Backend API | Python (Flask blueprints), Azure Functions v2 |
 | Database | PostgreSQL (Azure Flexible Server) |
 | Cache | Azure Cache for Redis |
