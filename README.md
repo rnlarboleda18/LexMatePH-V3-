@@ -1,64 +1,86 @@
-# Codex Philippines: AI-Powered Legal Research Platform
+# LexMatePH
 
-Codex Philippines is a next-generation legal research tool designed to modernize access to Philippine laws and jurisprudence. It combines a high-performance React frontend with a Python-based backend and advanced AI data pipelines to deliver a seamless, interlinked legal database.
+AI-powered Philippine legal research and bar review platform. Search statutes, browse Supreme Court jurisprudence, study with flashcards and mock exams, and listen to legal text as audio — all in one place.
 
-## 🚀 Key Features
+## Features
 
-*   **LexCode**: A dedicated, distraction-free interface for reading Codals (e.g., Revised Penal Code, Civil Code) with integrated case references.
-*   **AI-Driven Linking**: Automatically discovers semantic connections between specific legal provisions and Supreme Court decisions using Gemini AI.
-*   **Smart Search**: Full-text search across thousands of cases and statutes.
-*   **Responsive Design**: Modern UI built with React and Tailwind CSS.
+| Feature | Description |
+|---------|-------------|
+| **LexCode** | Read codals and statutes (RPC, Civil Code, Rules of Court, Constitution, Labor Code) in a distraction-free reader with AI-linked case references |
+| **SC Decisions** | Browse and search Supreme Court case digests; AI-generated doctrine summaries |
+| **Bar Questions** | Past Philippine Bar exam questions with suggested answers, filterable by subject |
+| **Flashcards** | Study decks built from key legal concepts drawn from SC digests, aligned to BAR 2026 subjects |
+| **Lexify** | Timed mock Bar exam simulator with AI grading |
+| **LexPlay** | Text-to-speech audio of codal provisions and case digests; offline caching, playlist support |
+| **BAR 2026 Reviewer** | Syllabus-aligned topic browser with linked SC cases and S Pen page annotation |
 
-## 📂 Project Structure
+## Stack
 
-The project is organized into three main components:
+| Layer | Technology |
+|-------|-----------|
+| Frontend | React 19, Next.js 16, TypeScript, Tailwind CSS 4 |
+| Backend API | Python (Flask blueprints), Azure Functions v2 |
+| Database | PostgreSQL (Azure Flexible Server) |
+| Cache | Azure Cache for Redis |
+| AI Engine | Google Gemini API (Vertex AI) — legal linking, digest generation, grading |
+| Auth | Clerk |
+| Payments | Xendit (PHP subscriptions — GCash, Maya, cards) |
+| Hosting | Azure Static Web Apps (SWA-managed Functions in `api/`) |
+| Dev tooling | swa-cli (local SWA emulation), Azure Functions Core Tools |
 
-### 1. Frontend (`src/frontend`)
-*   **Tech Stack**: React, Vite, Tailwind CSS.
-*   **Role**: Delivers the user interface, including LexCode, Case Reader, and Search.
-*   **Key Components**: `LexCodeViewer.jsx`, `CaseReader.jsx`, `LexCodeStream.jsx`.
-
-### 2. Backend API (`api/`)
-*   **Tech Stack**: Python (Azure Functions model).
-*   **Role**: Serves data to the frontend.
-*   **Key Endpoints**:
-    *   `/api/codex/rpc`: Fetches Revised Penal Code data.
-    *   `/api/cases`: Search and retrieve Supreme Court decisions.
-
-### 3. Data Pipeline (`LexCode/`)
-*   **Tech Stack**: Python, PostgreSQL, Gemini AI.
-*   **Role**: The engine room for data ingestion and processing.
-*   **Key Pipelines**:
-    *   **Ingestion**: Scrapes, parses, and structures raw legal text (`LexCode/pipelines/`).
-    *   **Linking**: `scripts/unified_codal_linker.py` orchestrates AI linking (codal provisions ↔ cases).
-
-## 🛠️ Getting Started
+## Quick start
 
 ### Prerequisites
-*   Python 3.10+
-*   Node.js 18+
-*   PostgreSQL (Local or Cloud)
-*   Google Gemini API Key
 
-### Running the Application
+- Node.js LTS
+- Python 3.10+
+- Azure Functions Core Tools (`npm install -g azure-functions-core-tools@4`)
 
-The project includes a master script to start both the frontend and backend services:
+### Setup
 
 ```powershell
+git clone <repo>
+cd "LexMatePH v3"
+
+# Backend
+cd api
+python -m venv .venv
+.venv\Scripts\Activate
+pip install -r requirements.txt
+cp local.settings.sample.json local.settings.json
+# Edit local.settings.json — add DB_CONNECTION_STRING (cloud Postgres) and VITE_CLERK_PUBLISHABLE_KEY
+
+# Frontend
+cd ..\src\frontend
+npm install
+cp .env.example .env.local
+# Edit .env.local — add VITE_CLERK_PUBLISHABLE_KEY
+```
+
+### Run
+
+```powershell
+# From repo root — starts API (port 7071) + Vite (port 5173)
 ./start_all.ps1
 ```
 
-This will:
-1.  Start the Python Backend API (Port 7071).
-2.  Start the React Frontend (Port 5300).
-3.  Launch the application in your default browser.
+Open: http://localhost:5173
 
-## 📖 Developer Documentation
+## Documentation
 
-For detailed instructions on adding new legal codes or managing the data pipeline, refer to the **[Codex Ingestion Blueprint](file:///c:/Users/rnlar/.gemini/antigravity/brain/118b2014-cc53-449a-971e-116bbcc9f742/codex_ingestion_blueprint.md)**.
+| Document | Audience |
+|----------|---------|
+| [CONTRIBUTING.md](CONTRIBUTING.md) | New contributors — setup, conventions, PR flow |
+| [docs/INDEX.md](docs/INDEX.md) | Navigation index by reader role |
+| [docs/ENV_VARS.md](docs/ENV_VARS.md) | All environment variables reference |
+| [docs/API_ROUTES.md](docs/API_ROUTES.md) | Full API route map |
+| [docs/RUNBOOK.md](docs/RUNBOOK.md) | Production incident playbook |
+| [docs/USER_GUIDE.md](docs/USER_GUIDE.md) | End-user feature guide |
 
-## 🧹 Maintenance
+## Subscription
 
-The project structure is kept clean by concentrating active development logic in specific directories. 
-*   **Core Scripts**: Found in `LexCode/` (pipelines) and `scripts/` (e.g. `unified_codal_linker.py`).
-*   **Cleanup**: Use `scripts/cleanup_clutter.py` (if available) or manual removal for temporary debug scripts.
+Single plan: **Amicus** at PHP 299/month. Payments via Xendit (GCash, Maya, or card). Free tier available with usage limits.
+
+## Disclaimer
+
+Study tools are for educational purposes only. Not legal advice. Not affiliated with the Supreme Court of the Philippines or the Office of the Bar Confidant.
