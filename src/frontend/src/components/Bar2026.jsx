@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useAuth } from '@clerk/clerk-react';
 import ReactMarkdown from 'react-markdown';
 import FontSizeControl from './FontSizeControl';
 import { useFontSize } from '../hooks/useFontSize';
@@ -533,6 +534,7 @@ function SyllabusPanel({ subjectId, subjectColor }) {
 // ── Main component ─────────────────────────────────────────────────────────────
 
 export default function Bar2026({ onCaseClick }) {
+  const { getToken } = useAuth();
   const [activeTab, setActiveTab] = useState('criminal');
   const [topics, setTopics] = useState([]);
   const [topicsLoading, setTopicsLoading] = useState(false);
@@ -557,7 +559,7 @@ export default function Bar2026({ onCaseClick }) {
   const {
     strokes, pushStroke, undo, redo, clearAll,
     isSaving, canSave, undoStack, redoStack,
-  } = useAnnotations(activeTab, selectedTopic?.id);
+  } = useAnnotations(activeTab, selectedTopic?.id, getToken);
 
   const active = SUBJECTS.find(s => s.id === activeTab) ?? SUBJECTS[0];
 

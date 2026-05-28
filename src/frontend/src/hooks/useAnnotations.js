@@ -8,10 +8,11 @@ const MAX_UNDO = 50;
  *
  * @param {string} subject   - e.g. 'criminal', 'civil'
  * @param {string} topicId   - UUID of the selected topic (or null)
+ * @param {Function} getToken - Clerk's getToken() from useAuth()
  *
  * Returns: { strokes, pushStroke, undo, redo, clearAll, isSaving, canSave, undoStack, redoStack }
  */
-export function useAnnotations(subject, topicId) {
+export function useAnnotations(subject, topicId, getToken) {
   const [strokes, setStrokes]         = useState([]);
   const [undoStack, setUndoStack]     = useState([]);
   const [redoStack, setRedoStack]     = useState([]);
@@ -22,22 +23,34 @@ export function useAnnotations(subject, topicId) {
   const strokesRef      = useRef([]);
   const topicIdRef      = useRef(topicId);
   const subjectRef      = useRef(subject);
+  const getTokenRef     = useRef(getToken);
   const canSaveRef      = useRef(true);
   const skipSaveRef     = useRef(false); // true right after loading from API
   const saveTimerRef    = useRef(null);
   const pendingSaveRef  = useRef(false); // true when strokes changed but save hasn't fired
 
-  useEffect(() => { strokesRef.current = strokes; }, [strokes]);
-  useEffect(() => { topicIdRef.current = topicId; }, [topicId]);
-  useEffect(() => { subjectRef.current = subject; }, [subject]);
-  useEffect(() => { canSaveRef.current = canSave; }, [canSave]);
+  useEffect(() => { strokesRef.current  = strokes;    }, [strokes]);
+  useEffect(() => { topicIdRef.current  = topicId;    }, [topicId]);
+  useEffect(() => { subjectRef.current  = subject;    }, [subject]);
+  useEffect(() => { getTokenRef.current = getToken;   }, [getToken]);
+  useEffect(() => { canSaveRef.current  = canSave;    }, [canSave]);
+
+  // Build auth headers using Clerk token, falling back to unauthenticated if none
+  async function authHeaders() {
+    try {
+      const token = getTokenRef.current ? await getTokenRef.current() : null;
+      if (token) return { 'X-Clerk-Authorization': `Bearer ${token}` };
+    } catch (_) { /* ignore — treat as unauthenticated */ }
+    return {};
+  }
 
   // Fire a save immediately (used when we'd otherwise lose the pending debounce)
-  function flushSave(sid, tid, snapshot) {
+  async function flushSave(sid, tid, snapshot) {
     if (!sid || !tid || !canSaveRef.current) return;
+    const headers = await authHeaders();
     fetch(apiUrl(`/api/reviewer/${sid}/${tid}/annotations`), {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', ...headers },
       credentials: 'include',
       body: JSON.stringify({ strokes: snapshot }),
     }).catch(() => {});
@@ -74,26 +87,28 @@ export function useAnnotations(subject, topicId) {
 
     if (!topicId || !subject) return;
 
-    fetch(apiUrl(`/api/reviewer/${subject}/${topicId}/annotations`), {
-      credentials: 'include',
-    })
-      .then(r => {
-        if (r.status === 401 || r.status === 403) {
-          setCanSave(false);
-          return { strokes: [] };
-        }
-        setCanSave(true);
-        return r.json();
+    (async () => {
+      const headers = await authHeaders();
+      fetch(apiUrl(`/api/reviewer/${subject}/${topicId}/annotations`), {
+        credentials: 'include',
+        headers,
       })
-      .then(data => {
-        // skipSaveRef is still true — setting strokes here won't trigger save
-        setStrokes(Array.isArray(data.strokes) ? data.strokes : []);
-        // After this render cycle, allow saving again
-        requestAnimationFrame(() => { skipSaveRef.current = false; });
-      })
-      .catch(() => {
-        skipSaveRef.current = false;
-      });
+        .then(r => {
+          if (r.status === 401 || r.status === 403) {
+            setCanSave(false);
+            return { strokes: [] };
+          }
+          setCanSave(true);
+          return r.json();
+        })
+        .then(data => {
+          setStrokes(Array.isArray(data.strokes) ? data.strokes : []);
+          requestAnimationFrame(() => { skipSaveRef.current = false; });
+        })
+        .catch(() => {
+          skipSaveRef.current = false;
+        });
+    })();
   }, [topicId, subject]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Debounced save whenever strokes change ─────────────────────────────────
@@ -110,12 +125,13 @@ export function useAnnotations(subject, topicId) {
     const tid      = topicIdRef.current;
     const snapshot = strokesRef.current;
 
-    saveTimerRef.current = setTimeout(() => {
+    saveTimerRef.current = setTimeout(async () => {
       saveTimerRef.current   = null;
       pendingSaveRef.current = false;
+      const headers = await authHeaders();
       fetch(apiUrl(`/api/reviewer/${sid}/${tid}/annotations`), {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 'Content-Type': 'application/json', ...headers },
         credentials: 'include',
         body: JSON.stringify({ strokes: snapshot }),
       })
@@ -171,10 +187,14 @@ export function useAnnotations(subject, topicId) {
     setRedoStack([]);
 
     if (canSaveRef.current) {
-      fetch(apiUrl(`/api/reviewer/${sid}/${tid}/annotations`), {
-        method: 'DELETE',
-        credentials: 'include',
-      }).catch(() => {});
+      (async () => {
+        const headers = await authHeaders();
+        fetch(apiUrl(`/api/reviewer/${sid}/${tid}/annotations`), {
+          method: 'DELETE',
+          headers,
+          credentials: 'include',
+        }).catch(() => {});
+      })();
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
