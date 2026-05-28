@@ -77,18 +77,19 @@ In `api/blueprints/audio_provider.py`, increment `CACHE_VERSION` (e.g. `"v23"` �
 
 ---
 
-## 4. Subscription not activating after payment
+## 4. Subscription not activating after payment (Xendit)
 
-**Symptoms:** User paid on PayMongo but their account still shows Free tier.
+**Symptoms:** User paid via Xendit but account still shows Free tier.
 
 **Steps:**
 
-1. Check PayMongo Dashboard → Webhooks → delivery logs for the event.
-2. If webhook delivery failed, manually re-trigger from PayMongo Dashboard.
-3. Check Azure Functions logs for the `paymongo-webhook` route — look for signature verification failures.
-4. Check `PAYMONGO_WEBHOOK_SECRET` in Application Settings — it must match the webhook signing secret in PayMongo Dashboard.
-5. The idempotency check: re-delivered events with the same `event_id` are safe to re-process (the handler is idempotent on subscription status).
-6. Manual tier grant (admin only):
+1. Check Xendit Dashboard → Webhooks → delivery logs for the `payment_session.completed` event.
+2. If webhook delivery failed, manually re-trigger from Xendit Dashboard.
+3. Check Azure Functions logs for the `xendit-webhook` route — look for token verification failures or JSON parse errors.
+4. Check `XENDIT_WEBHOOK_TOKEN` in Application Settings — it must match the callback token configured in Xendit Dashboard → Settings → Webhooks.
+5. **Recurring plan not created:** The recurring plan is created inside the `payment_session.completed` handler in `api/blueprints/xendit.py`. If a user paid but has no recurring plan, check the Functions log for errors in that handler.
+6. The webhook handler is idempotent — re-delivered events with the same session ID are safe to re-process.
+7. Manual tier grant (admin only):
 
 ```sql
 UPDATE users
