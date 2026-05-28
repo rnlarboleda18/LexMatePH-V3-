@@ -22,8 +22,10 @@ function FavoriteCard({ item, onClick, onRemove }) {
   const handleRemove = useCallback(
     async (e) => {
       e.stopPropagation();
-      await toggleFavorite();
-      onRemove(item.content_id);
+      const succeeded = await toggleFavorite();
+      // Only remove from list if the API call succeeded;
+      // toggleFavorite rolls back cache on failure so isFavorited stays true.
+      if (succeeded) onRemove(item.content_id);
     },
     [toggleFavorite, onRemove, item.content_id]
   );
@@ -110,17 +112,29 @@ export default function Favorites({ onCaseSelect }) {
         onCaseSelect?.({ id: item.content_id });
       } else if (item.content_type === 'bar_question') {
         const q = questions.find((q) => String(q.id) === String(item.content_id));
-        if (q) setOpenQuestion(q);
+        if (q) {
+          setOpenQuestion(q);
+        } else {
+          alert('Question data is still loading. Please try again in a moment.');
+        }
       } else if (item.content_type === 'flashcard') {
         const isBar = /^\d+$/.test(item.content_id);
         if (isBar) {
           const q = questions.find((q) => String(q.id) === String(item.content_id));
-          if (q) setOpenFlashcard({ card: q, variant: 'bar' });
+          if (q) {
+            setOpenFlashcard({ card: q, variant: 'bar' });
+          } else {
+            alert('Flashcard data is still loading. Please try again in a moment.');
+          }
         } else {
           const c = conceptPool.find(
             (c) => encodeURIComponent(c.term || '') === item.content_id
           );
-          if (c) setOpenFlashcard({ card: c, variant: 'concepts' });
+          if (c) {
+            setOpenFlashcard({ card: c, variant: 'concepts' });
+          } else {
+            alert('Flashcard data is still loading. Please try again in a moment.');
+          }
         }
       }
     },

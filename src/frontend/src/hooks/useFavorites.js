@@ -101,6 +101,7 @@ export function useFavorites(contentType, contentId) {
           body: JSON.stringify(body),
         });
         if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return true; // success
       } catch {
         // Rollback
         const rollback = new Set(_idCache.get(contentType) || []);
@@ -109,6 +110,7 @@ export function useFavorites(contentType, contentId) {
         _idCache.set(contentType, rollback);
         forceUpdate();
         alert('Failed to update favorite. Please try again.');
+        return false; // failure
       }
     },
     [isSignedIn, contentType, contentId, getToken, forceUpdate]
