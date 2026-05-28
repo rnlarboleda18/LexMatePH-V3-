@@ -18,13 +18,17 @@ const PEN_COLORS = [
 const HIGHLIGHTER_COLORS = [
   { hex: '#facc15', label: 'Yellow'      },
   { hex: '#86efac', label: 'Mint'        },
+  { hex: '#4ade80', label: 'Green'       },
   { hex: '#fed7aa', label: 'Peach'       },
   { hex: '#a5f3fc', label: 'Sky blue'    },
+  { hex: '#60a5fa', label: 'Blue'        },
   { hex: '#ddd6fe', label: 'Lavender'    },
   { hex: '#fda4af', label: 'Rose'        },
+  { hex: '#f472b6', label: 'Pink'        },
 ];
 
 const WIDTH_STEPS = [1, 2, 4, 6, 8];
+const ERASER_WIDTHS = [4, 8, 16, 24, 32];
 
 /**
  * AnnotationToolbar — floating palette shown when annotation mode is active.
@@ -42,6 +46,8 @@ export default function AnnotationToolbar({
   onHighlighterColorChange,
   currentWidth,
   onWidthChange,
+  eraserWidth,
+  onEraserWidthChange,
   allowTouchDraw,
   onToggleTouchDraw,
   onUndo,
@@ -58,8 +64,12 @@ export default function AnnotationToolbar({
 
   if (!isAnnotating) return null;
 
-  const widthIdx  = WIDTH_STEPS.indexOf(currentWidth);
-  const nextWidth = () => onWidthChange(WIDTH_STEPS[(widthIdx + 1) % WIDTH_STEPS.length]);
+  const isEraser      = currentTool === 'eraser';
+  const activeSteps   = isEraser ? ERASER_WIDTHS : WIDTH_STEPS;
+  const activeWidth   = isEraser ? eraserWidth   : currentWidth;
+  const activeSetWidth = isEraser ? onEraserWidthChange : onWidthChange;
+  const widthIdx      = activeSteps.indexOf(activeWidth);
+  const nextWidth     = () => activeSetWidth(activeSteps[(widthIdx < 0 ? 0 : (widthIdx + 1)) % activeSteps.length]);
 
   const handleToolClick = (tool) => {
     onToolChange(tool);
@@ -109,9 +119,12 @@ export default function AnnotationToolbar({
                 <span className="absolute inset-0 flex items-center justify-center">
                   <Check
                     size={14}
-                    className={hex === '#ffffff' || hex === '#facc15' || hex === '#86efac' || hex === '#fed7aa' || hex === '#a5f3fc' || hex === '#ddd6fe' || hex === '#fda4af'
-                      ? 'text-gray-600'
-                      : 'text-white'}
+                    className={
+                      // Light colors need a dark check; dark colors need a white check
+                      ['#ffffff','#facc15','#86efac','#fed7aa','#a5f3fc','#ddd6fe','#fda4af'].includes(hex)
+                        ? 'text-gray-600'
+                        : 'text-white'
+                    }
                   />
                 </span>
               )}
@@ -176,21 +189,34 @@ export default function AnnotationToolbar({
 
         <Divider />
 
-        {/* Stroke width */}
+        {/* Stroke / eraser width */}
         <button
           onClick={nextWidth}
-          title={`Stroke width: ${currentWidth}px (tap to cycle)`}
+          title={isEraser
+            ? `Eraser size: ${eraserWidth}px (tap to cycle)`
+            : `Stroke width: ${currentWidth}px (tap to cycle)`}
           className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-zinc-700"
         >
-          <span
-            className="rounded-full"
-            style={{
-              backgroundColor: currentTool === 'highlighter' ? highlighterColor : penColor,
-              width:  `${Math.min(Math.max(currentWidth + 2, 4), 12)}px`,
-              height: `${Math.min(Math.max(currentWidth + 2, 4), 12)}px`,
-              opacity: currentTool === 'eraser' ? 0.3 : 1,
-            }}
-          />
+          {isEraser ? (
+            // Square eraser indicator
+            <span
+              className="rounded-sm border border-gray-400 bg-gray-200 dark:border-gray-500 dark:bg-gray-500"
+              style={{
+                width:  `${Math.min(Math.max(eraserWidth / 2.5, 4), 16)}px`,
+                height: `${Math.min(Math.max(eraserWidth / 2.5, 4), 16)}px`,
+              }}
+            />
+          ) : (
+            // Circular pen/highlighter dot indicator
+            <span
+              className="rounded-full"
+              style={{
+                backgroundColor: currentTool === 'highlighter' ? highlighterColor : penColor,
+                width:  `${Math.min(Math.max(currentWidth + 2, 4), 12)}px`,
+                height: `${Math.min(Math.max(currentWidth + 2, 4), 12)}px`,
+              }}
+            />
+          )}
         </button>
 
         <Divider />

@@ -44,6 +44,7 @@ export default function AnnotationCanvas({
   penColor,
   highlighterColor,
   currentWidth,
+  eraserWidth,
   allowTouchDraw,
   strokes,
   onStrokeComplete,
@@ -70,6 +71,7 @@ export default function AnnotationCanvas({
   const penColorRef         = useRef(penColor);
   const highlighterColorRef = useRef(highlighterColor);
   const currentWidthRef     = useRef(currentWidth);
+  const eraserWidthRef      = useRef(eraserWidth);
   const allowTouchDrawRef   = useRef(allowTouchDraw);
   const onStrokeCompleteRef = useRef(onStrokeComplete);
   const strokesRef          = useRef(strokes);
@@ -79,6 +81,7 @@ export default function AnnotationCanvas({
   useEffect(() => { penColorRef.current         = penColor;         }, [penColor]);
   useEffect(() => { highlighterColorRef.current = highlighterColor; }, [highlighterColor]);
   useEffect(() => { currentWidthRef.current     = currentWidth;     }, [currentWidth]);
+  useEffect(() => { eraserWidthRef.current      = eraserWidth;      }, [eraserWidth]);
   useEffect(() => { allowTouchDrawRef.current   = allowTouchDraw;   }, [allowTouchDraw]);
   useEffect(() => { onStrokeCompleteRef.current = onStrokeComplete; }, [onStrokeComplete]);
   useEffect(() => { strokesRef.current          = strokes;          }, [strokes]);
@@ -98,7 +101,9 @@ export default function AnnotationCanvas({
       // CSS size matches the visible viewport
       canvas.style.width  = cssW + 'px';
       canvas.style.height = cssH + 'px';
-      ctxRef.current = canvas.getContext('2d');
+      // desynchronized:true lets the browser paint canvas updates without
+      // waiting for the main thread — reduces perceived S Pen input lag.
+      ctxRef.current = canvas.getContext('2d', { desynchronized: true });
       cachedRectRef.current = canvas.getBoundingClientRect();
       redrawAll(ctxRef.current, canvas, strokesRef.current, scrollTopRef.current);
     };
@@ -254,7 +259,8 @@ export default function AnnotationCanvas({
         && /samsung/i.test(navigator.userAgent);
       const tool  = isSPenEraser ? 'eraser' : currentToolRef.current;
       const dpr   = getDpr();
-      const baseW = currentWidthRef.current;
+      // Eraser uses its own independent size setting
+      const baseW = tool === 'eraser' ? eraserWidthRef.current : currentWidthRef.current;
       const [cx, cy] = clientToContent(e.clientX, e.clientY);
 
       isDrawing.current   = true;
@@ -367,7 +373,6 @@ export default function AnnotationCanvas({
         position:      'absolute',
         top:           0,       // static; scroll offset applied via transform
         left:          0,
-        willChange:    'transform',  // promotes canvas to its own GPU compositing layer
         // width + height set dynamically by resize effect
         pointerEvents: isAnnotating ? 'auto' : 'none',
         zIndex:        10,

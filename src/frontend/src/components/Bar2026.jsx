@@ -550,6 +550,7 @@ export default function Bar2026({ onCaseClick }) {
   const [penColor,            setPenColor]            = useState('#5b21b6');
   const [highlighterColor,    setHighlighterColor]    = useState('#facc15');
   const [annotationWidth,     setAnnotationWidth]     = useState(2);
+  const [eraserWidth,         setEraserWidth]         = useState(8);
   const [allowTouchDraw,      setAllowTouchDraw]      = useState(false);
 
   const {
@@ -783,6 +784,7 @@ export default function Bar2026({ onCaseClick }) {
                 penColor={penColor}
                 highlighterColor={highlighterColor}
                 currentWidth={annotationWidth}
+                eraserWidth={eraserWidth}
                 allowTouchDraw={allowTouchDraw}
                 strokes={strokes}
                 onStrokeComplete={pushStroke}
@@ -821,6 +823,8 @@ export default function Bar2026({ onCaseClick }) {
         onHighlighterColorChange={setHighlighterColor}
         currentWidth={annotationWidth}
         onWidthChange={setAnnotationWidth}
+        eraserWidth={eraserWidth}
+        onEraserWidthChange={setEraserWidth}
         allowTouchDraw={allowTouchDraw}
         onToggleTouchDraw={() => setAllowTouchDraw(v => !v)}
         onUndo={undo}
