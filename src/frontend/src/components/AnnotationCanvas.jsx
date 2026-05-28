@@ -3,39 +3,28 @@ import { useRef, useEffect } from 'react';
 /**
  * AnnotationCanvas — transparent ink layer over topic content.
  *
- * ARCHITECTURE (viewport canvas):
- * Canvas covers only the VISIBLE area of the scroll container (clientHeight),
- * not the full scrollable content (scrollHeight). This keeps the canvas small
- * so DPR × 2 doesn't balloon to 16 000 physical px tall and cause GPU lag.
+ * ARCHITECTURE: OffscreenCanvas + Web Worker
+ * All canvas drawing runs on a dedicated Worker thread (drawing-worker.js),
+ * completely isolated from React, garbage collection, and other main-thread
+ * work. The main thread only handles:
+ *   - Pointer event receipt + coordinate math
+ *   - postMessage to worker (draw, scroll, resize, undo/redo sync)
+ *   - CSS positioning of the canvas element
  *
- * Strokes are stored in CONTENT-ABSOLUTE coordinates:
- *   contentY = (clientY − containerTop + scrollTop) × dpr
+ * This means GC pauses and React re-renders cannot jank stroke rendering.
+ * Combined with pointerrawupdate (fires before Chrome's event coalescing),
+ * this gives the minimum achievable latency for a web-based canvas app.
  *
- * On render, we translate back to canvas-viewport coordinates:
+ * COORDINATE SYSTEM:
+ * Strokes are stored in CONTENT-ABSOLUTE physical-pixel coordinates:
+ *   cx = (clientX − rect.left)             × dpr
+ *   cy = (clientY − rect.top + scrollTop)  × dpr
+ *
+ * The worker translates back to canvas-viewport coords on render:
  *   canvasY = contentY − scrollTop × dpr
  *
- * On scroll the canvas `style.transform` is nudged via translateY(scrollTop)
- * so it always overlays the visible area. Using CSS transform instead of
- * style.top means repositioning happens on the compositor thread with zero
- * layout cost, and will-change:transform keeps the canvas on its own GPU
- * compositing layer for fast 2D drawing.
- *
- * HIGHLIGHTER — single-path rendering (critical):
- * Drawing each segment separately at globalAlpha=0.4 causes overlapping
- * segments to compound opacity and cover text. We fix this by drawing the
- * entire highlight stroke as ONE beginPath…stroke() call so the opacity is
- * applied exactly once across the full stroke extent.
- * During live drawing this means doing a full redrawAll + current stroke
- * on every rAF frame instead of incremental segment drawing.
- *
- * PERFORMANCE:
- * - getBoundingClientRect cached at pointerdown (no layout reflow per-move)
- * - requestAnimationFrame batches all pointermove segments into one draw call
- * - e.getCoalescedEvents() recovers full 120 Hz S Pen sub-frame events
- * - Non-passive listeners so e.preventDefault() blocks Android scroll steal
- * - devicePixelRatio applied for crisp strokes on high-DPI (Samsung Tab)
- * - CSS transform for scroll repositioning (compositor thread, no layout)
- * - will-change:transform promotes canvas to dedicated GPU compositing layer
+ * SCROLL: canvas.style.transform = translateY(scrollTop) keeps the canvas
+ * aligned with the visible area without triggering layout.
  */
 export default function AnnotationCanvas({
   topicId,
@@ -50,22 +39,20 @@ export default function AnnotationCanvas({
   onStrokeComplete,
   scrollContainerRef,
 }) {
-  const canvasRef   = useRef(null);
-  const ctxRef      = useRef(null);
-  const isDrawing   = useRef(false);
-  const currentPath = useRef(null);
+  const canvasRef    = useRef(null);
+  const workerRef    = useRef(null);
+  const isDrawing    = useRef(false);
 
-  // Cached rect (only updated at pointerdown + resize, never in pointermove)
-  const cachedRectRef  = useRef(null);
-  // Current scroll offset in CSS pixels — updated by scroll handler
-  const scrollTopRef   = useRef(0);
+  // Cached canvas rect (updated at pointerdown + resize, never in move handler)
+  const cachedRectRef = useRef(null);
+  // Current scroll offset in CSS pixels
+  const scrollTopRef  = useRef(0);
+  // rAF handle for batching scroll redraws
+  const scrollRafRef  = useRef(null);
+  // Current DPR (updated on resize, read in event handlers)
+  const dprRef        = useRef(Math.min(window.devicePixelRatio || 1, 3));
 
-  // rAF handles
-  const drawRafRef     = useRef(null);  // for live drawing batches
-  const scrollRafRef   = useRef(null);  // for scroll re-renders
-  const pendingSegsRef = useRef([]);
-
-  // ── All mutable props as refs so native listeners (deps=[]) stay fresh ──────
+  // ── All mutable props mirrored to refs (event listeners registered once) ───
   const isAnnotatingRef     = useRef(isAnnotating);
   const currentToolRef      = useRef(currentTool);
   const penColorRef         = useRef(penColor);
@@ -74,7 +61,6 @@ export default function AnnotationCanvas({
   const eraserWidthRef      = useRef(eraserWidth);
   const allowTouchDrawRef   = useRef(allowTouchDraw);
   const onStrokeCompleteRef = useRef(onStrokeComplete);
-  const strokesRef          = useRef(strokes);
 
   useEffect(() => { isAnnotatingRef.current     = isAnnotating;     }, [isAnnotating]);
   useEffect(() => { currentToolRef.current      = currentTool;      }, [currentTool]);
@@ -84,71 +70,102 @@ export default function AnnotationCanvas({
   useEffect(() => { eraserWidthRef.current      = eraserWidth;      }, [eraserWidth]);
   useEffect(() => { allowTouchDrawRef.current   = allowTouchDraw;   }, [allowTouchDraw]);
   useEffect(() => { onStrokeCompleteRef.current = onStrokeComplete; }, [onStrokeComplete]);
-  useEffect(() => { strokesRef.current          = strokes;          }, [strokes]);
 
-  // ── Canvas sizing — VIEWPORT height only (not scrollHeight) ─────────────────
+  // ── Worker creation + OffscreenCanvas transfer ───────────────────────────
   useEffect(() => {
     const canvas    = canvasRef.current;
     const container = scrollContainerRef?.current;
     if (!canvas || !container) return;
 
-    const resize = () => {
-      const dpr  = Math.min(window.devicePixelRatio || 1, 3);
-      const cssW = container.clientWidth  || 300;
-      const cssH = container.clientHeight || 300;   // ← clientHeight, NOT scrollHeight
-      canvas.width  = cssW * dpr;
-      canvas.height = cssH * dpr;
-      // CSS size matches the visible viewport
-      canvas.style.width  = cssW + 'px';
-      canvas.style.height = cssH + 'px';
-      ctxRef.current = canvas.getContext('2d');
-      cachedRectRef.current = canvas.getBoundingClientRect();
-      redrawAll(ctxRef.current, canvas, strokesRef.current, scrollTopRef.current);
+    // Spin up the drawing worker
+    const worker = new Worker(
+      new URL('../workers/drawing-worker.js', import.meta.url),
+      { type: 'module' },
+    );
+    workerRef.current = worker;
+
+    // Completed strokes come back from the worker
+    worker.onmessage = ({ data }) => {
+      if (data.type === 'stroke_complete') {
+        onStrokeCompleteRef.current?.(data.stroke);
+      }
     };
 
-    const ro = new ResizeObserver(resize);
+    // Transfer canvas pixel control to the worker — from this point the main
+    // thread can still read/write canvas.style.* and getBoundingClientRect()
+    // but canvas drawing APIs are exclusively owned by the worker.
+    const dpr  = Math.min(window.devicePixelRatio || 1, 3);
+    dprRef.current = dpr;
+    const cssW = container.clientWidth  || 300;
+    const cssH = container.clientHeight || 300;
+    canvas.style.width  = cssW + 'px';
+    canvas.style.height = cssH + 'px';
+    cachedRectRef.current = canvas.getBoundingClientRect();
+
+    const offscreen = canvas.transferControlToOffscreen();
+    worker.postMessage(
+      { type: 'init', canvas: offscreen,
+        physicalWidth: cssW * dpr, physicalHeight: cssH * dpr, cssWidth: cssW },
+      [offscreen],
+    );
+
+    // ResizeObserver keeps CSS dimensions and worker canvas in sync
+    const sendResize = () => {
+      const d = Math.min(window.devicePixelRatio || 1, 3);
+      dprRef.current = d;
+      const w = container.clientWidth  || 300;
+      const h = container.clientHeight || 300;
+      canvas.style.width  = w + 'px';
+      canvas.style.height = h + 'px';
+      cachedRectRef.current = canvas.getBoundingClientRect();
+      worker.postMessage({ type: 'resize',
+        physicalWidth: w * d, physicalHeight: h * d, cssWidth: w });
+    };
+
+    const ro = new ResizeObserver(sendResize);
     ro.observe(container);
-    resize();
-    return () => ro.disconnect();
+
+    return () => {
+      ro.disconnect();
+      worker.terminate();
+      workerRef.current = null;
+    };
   }, [scrollContainerRef]);
 
-  // ── Redraw when strokes change (undo / redo / load) ─────────────────────────
+  // ── Sync strokes to worker (undo / redo / load) ──────────────────────────
   useEffect(() => {
-    const ctx    = ctxRef.current;
-    const canvas = canvasRef.current;
-    if (!ctx || !canvas) return;
-    redrawAll(ctx, canvas, strokes, scrollTopRef.current);
+    workerRef.current?.postMessage({
+      type: 'redraw', strokes, scrollTop: scrollTopRef.current,
+    });
   }, [strokes]);
 
-  // ── Clear on topic change ────────────────────────────────────────────────────
+  // ── Clear on topic change ────────────────────────────────────────────────
   useEffect(() => {
-    const ctx    = ctxRef.current;
-    const canvas = canvasRef.current;
-    if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
-    isDrawing.current   = false;
-    currentPath.current = null;
-    pendingSegsRef.current = [];
-    if (drawRafRef.current)   { cancelAnimationFrame(drawRafRef.current);   drawRafRef.current   = null; }
-    if (scrollRafRef.current) { cancelAnimationFrame(scrollRafRef.current); scrollRafRef.current = null; }
+    isDrawing.current = false;
+    workerRef.current?.postMessage({ type: 'clear' });
+    if (scrollRafRef.current) {
+      cancelAnimationFrame(scrollRafRef.current);
+      scrollRafRef.current = null;
+    }
   }, [topicId]);
 
-  // ── Stop stroke when mode turns off ─────────────────────────────────────────
+  // ── Cancel in-progress stroke when annotation mode turns off ────────────
   useEffect(() => {
     if (!isAnnotating) {
-      isDrawing.current   = false;
-      currentPath.current = null;
-      pendingSegsRef.current = [];
-      if (drawRafRef.current) { cancelAnimationFrame(drawRafRef.current); drawRafRef.current = null; }
+      isDrawing.current = false;
+      workerRef.current?.postMessage({ type: 'stroke_cancel' });
+      if (scrollRafRef.current) {
+        cancelAnimationFrame(scrollRafRef.current);
+        scrollRafRef.current = null;
+      }
     }
   }, [isAnnotating]);
 
-  // ── Native event listeners (non-passive) + scroll handler ───────────────────
+  // ── Pointer + scroll event listeners ────────────────────────────────────
   useEffect(() => {
     const canvas    = canvasRef.current;
     const container = scrollContainerRef?.current;
     if (!canvas || !container) return;
-
-    // ── Helpers ────────────────────────────────────────────────────────────────
 
     function shouldDraw(e) {
       if (e.pointerType === 'pen')   return true;
@@ -157,248 +174,131 @@ export default function AnnotationCanvas({
       return false;
     }
 
-    // Effective DPR: ratio of physical canvas width to CSS width
-    function getDpr() {
+    // Convert client coords → content-absolute physical-pixel coords.
+    // All arithmetic runs on the main thread; the result is posted to the worker.
+    function toContent(clientX, clientY) {
       const rect = cachedRectRef.current;
-      return rect ? canvas.width / (rect.width || 1) : (window.devicePixelRatio || 1);
-    }
-
-    // Convert client coords → CONTENT-ABSOLUTE physical-pixel coords.
-    // contentY includes scrollTop so strokes retain their position as user scrolls.
-    function clientToContent(clientX, clientY) {
-      const rect    = cachedRectRef.current;
       if (!rect) return [0, 0];
-      const dpr     = getDpr();
-      const scrollTop = scrollTopRef.current;
+      const dpr = dprRef.current;
       return [
-        (clientX - rect.left)                  * dpr,
-        (clientY - rect.top  + scrollTop) * dpr,
+        (clientX - rect.left)                       * dpr,
+        (clientY - rect.top + scrollTopRef.current) * dpr,
       ];
     }
 
-    // Convert content-absolute Y → canvas-viewport Y for rendering.
-    function contentToCanvasY(contentY) {
-      return contentY - scrollTopRef.current * getDpr();
-    }
-
-    // ── rAF flush: draw all pending segments in one go ─────────────────────────
-    function flushPending() {
-      drawRafRef.current = null;
-      const segs  = pendingSegsRef.current;
-      if (!segs.length || !isDrawing.current) return;
-      pendingSegsRef.current = [];
-
-      const ctx    = ctxRef.current;
-      const stroke = currentPath.current;
-      if (!ctx || !stroke) return;
-
-      if (stroke.tool === 'highlighter') {
-        // ── Highlighter: full redraw + single-path to prevent opacity stacking ─
-        // Drawing segments at globalAlpha=0.4 individually compounds at overlaps
-        // and makes the stroke fully opaque, covering text. Drawing as one path
-        // applies the opacity only once across the entire stroke extent.
-        redrawAll(ctx, canvas, strokesRef.current, scrollTopRef.current);
-        const pts = stroke.points;
-        if (pts.length >= 2) {
-          const scrollPx = scrollTopRef.current * getDpr();
-          ctx.save();
-          ctx.globalAlpha              = stroke.opacity;
-          ctx.globalCompositeOperation = 'source-over';
-          ctx.strokeStyle              = stroke.color;
-          ctx.lineCap                  = 'round';
-          ctx.lineJoin                 = 'round';
-          ctx.lineWidth                = stroke.width;  // fixed width; no pressure for highlighter
-          ctx.beginPath();
-          ctx.moveTo(pts[0][0], pts[0][1] - scrollPx);
-          for (let i = 1; i < pts.length; i++) {
-            ctx.lineTo(pts[i][0], pts[i][1] - scrollPx);
-          }
-          ctx.stroke();
-          ctx.restore();
-        }
-      } else {
-        // ── Pen / eraser: incremental segment draw (opacity = 1, no stacking) ─
-        ctx.globalAlpha = stroke.opacity;
-        ctx.lineCap     = 'round';
-        ctx.lineJoin    = 'round';
-        // Eraser must use destination-out to erase, not source-over
-        ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
-        ctx.strokeStyle = stroke.tool === 'eraser' ? 'rgba(0,0,0,1)' : stroke.color;
-
-        for (const seg of segs) {
-          ctx.lineWidth = stroke.width * (0.5 + seg.pressure * 1.5);
-          ctx.beginPath();
-          ctx.moveTo(seg.x0, contentToCanvasY(seg.y0));
-          ctx.lineTo(seg.x1, contentToCanvasY(seg.y1));
-          ctx.stroke();
-        }
-
-        ctx.globalAlpha              = 1;
-        ctx.globalCompositeOperation = 'source-over';
-      }
-    }
-
-    // ── Pointer handlers ───────────────────────────────────────────────────────
-
+    // ── pointerdown ────────────────────────────────────────────────────────
     function onPointerDown(e) {
       if (!isAnnotatingRef.current) return;
       if (!shouldDraw(e))           return;
-      if (!ctxRef.current)          return;
+      if (!workerRef.current)       return;
 
       e.preventDefault();
       e.stopPropagation();
       try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
 
-      // Refresh rect once per stroke (the only getBoundingClientRect call per stroke)
+      // Refresh rect once per stroke — the only getBoundingClientRect per stroke
       cachedRectRef.current = canvas.getBoundingClientRect();
 
       const isSPenEraser = e.pointerType === 'pen'
         && e.buttons === 32
         && /samsung/i.test(navigator.userAgent);
-      const tool  = isSPenEraser ? 'eraser' : currentToolRef.current;
-      const dpr   = getDpr();
-      // Eraser uses its own independent size setting
-      const baseW = tool === 'eraser' ? eraserWidthRef.current : currentWidthRef.current;
-      const [cx, cy] = clientToContent(e.clientX, e.clientY);
+      const tool    = isSPenEraser ? 'eraser' : currentToolRef.current;
+      const dpr     = dprRef.current;
+      const baseW   = tool === 'eraser' ? eraserWidthRef.current : currentWidthRef.current;
+      const width   = (tool === 'highlighter' ? baseW * 5 : baseW) * dpr;
+      const opacity = tool === 'highlighter' ? 0.4 : 1.0;
+      const color   = tool === 'pen'         ? penColorRef.current
+                    : tool === 'highlighter' ? highlighterColorRef.current
+                    : '#000000';
+      const [cx, cy] = toContent(e.clientX, e.clientY);
 
-      isDrawing.current   = true;
-      currentPath.current = {
-        id:      crypto.randomUUID(),
-        tool,
-        color:   tool === 'pen'         ? penColorRef.current
-               : tool === 'highlighter' ? highlighterColorRef.current
-               : '#000000',
-        // Width baked with DPR; highlighter is wider
-        width:   (tool === 'highlighter' ? baseW * 5 : baseW) * dpr,
-        // Highlighter uses partial opacity (source-over, NOT multiply)
-        opacity: tool === 'highlighter' ? 0.4 : 1.0,
-        points:  [[cx, cy, e.pressure || 0.5]],
-      };
+      isDrawing.current = true;
+      workerRef.current.postMessage({
+        type: 'stroke_begin',
+        id: crypto.randomUUID(),
+        tool, color, width, opacity,
+        cx, cy, pressure: e.pressure || 0.5,
+      });
     }
 
-    // ── Single-event draw ─────────────────────────────────────────────────────
-    // Shared by pointerrawupdate (fast path) and pointermove fallback.
-    // Processes exactly one pointer position.
+    // ── Single-event draw — posts one position to the worker ──────────────
     function drawOneEvent(evt) {
-      const stroke = currentPath.current;
-      if (!stroke) return;
-      const ctx  = ctxRef.current;
+      if (!workerRef.current) return;
       const rect = cachedRectRef.current;
-      if (!ctx || !rect) return;
-
-      const pts       = stroke.points;
-      const dpr       = getDpr();
-      const scrollTop = scrollTopRef.current;
-      const pressure  = evt.pressure || 0.5;
-      const cx = (evt.clientX - rect.left)            * dpr;
-      const cy = (evt.clientY - rect.top + scrollTop) * dpr;
-      const prev = pts[pts.length - 1];
-      pts.push([cx, cy, pressure]);
-
-      if (stroke.tool === 'highlighter') {
-        pendingSegsRef.current.push({ x0: prev[0], y0: prev[1], x1: cx, y1: cy, pressure });
-        if (!drawRafRef.current) {
-          drawRafRef.current = requestAnimationFrame(flushPending);
-        }
-      } else {
-        const scrollPx = scrollTop * dpr;
-        ctx.globalAlpha              = stroke.opacity;
-        ctx.lineCap                  = 'round';
-        ctx.lineJoin                 = 'round';
-        ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
-        ctx.strokeStyle              = stroke.tool === 'eraser' ? 'rgba(0,0,0,1)' : stroke.color;
-        ctx.lineWidth                = stroke.width * (0.5 + pressure * 1.5);
-        ctx.beginPath();
-        ctx.moveTo(prev[0], prev[1] - scrollPx);
-        ctx.lineTo(cx,      cy      - scrollPx);
-        ctx.stroke();
-        ctx.globalAlpha              = 1;
-        ctx.globalCompositeOperation = 'source-over';
-      }
+      if (!rect) return;
+      const dpr = dprRef.current;
+      const st  = scrollTopRef.current;
+      workerRef.current.postMessage({
+        type: 'draw',
+        cx:       (evt.clientX - rect.left)      * dpr,
+        cy:       (evt.clientY - rect.top + st)  * dpr,
+        pressure: evt.pressure || 0.5,
+      });
     }
 
-    // ── pointerrawupdate: fires BEFORE browser event coalescing ───────────────
-    // On Chrome / Samsung Internet this fires at the S Pen hardware scan rate
-    // (~240 Hz) BEFORE pointermove coalescing — the earliest point in the
-    // browser pipeline where JS can see stylus input. Registering this handler
-    // is the web equivalent of reading from the Android Stylus API directly.
-    // pointerrawupdate is non-cancelable so we keep pointermove registered
-    // separately purely to call preventDefault (to block scroll steal).
+    // ── pointerrawupdate: pre-coalescing hardware-rate events ─────────────
+    // On Chrome / Samsung Internet fires at S Pen hardware rate (~240 Hz)
+    // BEFORE pointermove coalescing — earliest possible JS input latency.
     const supportsRawUpdate = 'onpointerrawupdate' in canvas;
 
     function onPointerRawUpdate(e) {
-      if (!isDrawing.current)                        return;
-      if (!isAnnotatingRef.current)                  return;
+      if (!isDrawing.current)                  return;
+      if (!isAnnotatingRef.current)            return;
       if (e.pointerType === 'touch'
-        && !allowTouchDrawRef.current)               return;
+        && !allowTouchDrawRef.current)         return;
       drawOneEvent(e);
     }
 
+    // ── pointermove: kept for preventDefault (blocks Android scroll steal) ─
+    // pointerrawupdate is non-cancelable, so pointermove is still needed here.
+    // When pointerrawupdate is unavailable, also handles drawing as fallback.
     function onPointerMove(e) {
-      if (!isDrawing.current)                        return;
-      if (!isAnnotatingRef.current)                  return;
+      if (!isDrawing.current)                  return;
+      if (!isAnnotatingRef.current)            return;
       if (e.pointerType === 'touch'
-        && !allowTouchDrawRef.current)               return;
+        && !allowTouchDrawRef.current)         return;
 
-      e.preventDefault();   // non-passive: blocks Android scroll steal
+      e.preventDefault();
       e.stopPropagation();
 
-      if (supportsRawUpdate) {
-        // Drawing is handled by onPointerRawUpdate above.
-        // This handler exists only to call preventDefault.
-        return;
-      }
+      if (supportsRawUpdate) return;
 
-      // Fallback (Safari / Firefox): draw using coalesced events
+      // Fallback (Safari / Firefox)
       const events = typeof e.getCoalescedEvents === 'function'
-        ? e.getCoalescedEvents()
-        : [e];
+        ? e.getCoalescedEvents() : [e];
       for (const evt of events) drawOneEvent(evt);
     }
 
+    // ── pointerup ─────────────────────────────────────────────────────────
     function onPointerUp() {
       if (!isDrawing.current) return;
-
-      // Flush remaining segments before committing
-      if (drawRafRef.current) { cancelAnimationFrame(drawRafRef.current); drawRafRef.current = null; }
-      flushPending();
-
       isDrawing.current = false;
-      const stroke        = currentPath.current;
-      currentPath.current = null;
-
-      if (stroke && stroke.points.length > 1) {
-        onStrokeCompleteRef.current?.(stroke);
-      }
+      workerRef.current?.postMessage({ type: 'stroke_end' });
+      // Worker sends back { type:'stroke_complete', stroke } → onStrokeCompleteRef
     }
 
     function onPointerCancel() {
-      isDrawing.current   = false;
-      currentPath.current = null;
-      pendingSegsRef.current = [];
-      if (drawRafRef.current) { cancelAnimationFrame(drawRafRef.current); drawRafRef.current = null; }
+      isDrawing.current = false;
+      workerRef.current?.postMessage({ type: 'stroke_cancel' });
     }
 
-    // ── Scroll handler: reposition canvas via transform + re-render ────────────
-    // Using CSS transform instead of style.top means repositioning happens on
-    // the compositor thread with zero layout cost.
+    // ── Scroll: reposition canvas via transform, redraw via worker ─────────
     function onScroll() {
       const st = container.scrollTop;
       scrollTopRef.current = st;
-      // translateY keeps the canvas viewport-aligned without triggering layout
+      // CSS transform: compositor thread only, zero layout cost
       canvas.style.transform = `translateY(${st}px)`;
-
+      // Batch redraws — avoid flooding the worker during fast scroll
       if (!scrollRafRef.current) {
         scrollRafRef.current = requestAnimationFrame(() => {
           scrollRafRef.current = null;
-          redrawAll(ctxRef.current, canvasRef.current, strokesRef.current, scrollTopRef.current);
+          workerRef.current?.postMessage({ type: 'scroll', scrollTop: st });
         });
       }
     }
 
     const pOpts = { passive: false };
     if (supportsRawUpdate) {
-      // passive:true is fine — pointerrawupdate is non-cancelable anyway
       canvas.addEventListener('pointerrawupdate', onPointerRawUpdate, { passive: true });
     }
     canvas.addEventListener('pointerdown',   onPointerDown,   pOpts);
@@ -424,9 +324,8 @@ export default function AnnotationCanvas({
       ref={canvasRef}
       style={{
         position:      'absolute',
-        top:           0,       // static; scroll offset applied via transform
+        top:           0,       // static; scroll offset applied via CSS transform
         left:          0,
-        // width + height set dynamically by resize effect
         pointerEvents: isAnnotating ? 'auto' : 'none',
         zIndex:        10,
         cursor:        isAnnotating ? 'crosshair' : 'default',
@@ -434,61 +333,4 @@ export default function AnnotationCanvas({
       }}
     />
   );
-}
-
-// ── Rendering helpers ─────────────────────────────────────────────────────────
-
-/**
- * Redraws all strokes onto the canvas, translating content-absolute Y coords
- * to canvas-viewport Y coords by subtracting scrollTop × dpr.
- */
-function redrawAll(ctx, canvas, strokes, scrollTopCSS) {
-  if (!ctx || !canvas) return;
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  const dpr        = canvas.width / (parseFloat(canvas.style.width) || canvas.width) || 1;
-  const scrollPx   = (scrollTopCSS || 0) * dpr;   // scroll offset in physical pixels
-
-  for (const stroke of (strokes || [])) {
-    drawStroke(ctx, stroke, scrollPx);
-  }
-}
-
-function drawStroke(ctx, stroke, scrollPx) {
-  const pts = stroke.points;
-  if (!pts || pts.length < 2) return;
-
-  ctx.globalAlpha              = stroke.opacity ?? 1.0;
-  ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
-  ctx.strokeStyle              = stroke.tool === 'eraser' ? 'rgba(0,0,0,1)' : (stroke.color ?? '#5b21b6');
-  ctx.lineCap                  = 'round';
-  ctx.lineJoin                 = 'round';
-
-  if (stroke.tool === 'highlighter') {
-    // ── Single path for the ENTIRE highlight stroke ────────────────────────
-    // If we draw segment-by-segment at globalAlpha=0.4, every overlapping
-    // endpoint compounds the opacity (0.4 + 0.4×0.6 + … → 1.0 after ~3 segs)
-    // and the highlight becomes a solid, text-covering block.
-    // Drawing as one continuous path applies globalAlpha exactly once.
-    ctx.lineWidth = stroke.width ?? 2;
-    ctx.beginPath();
-    ctx.moveTo(pts[0][0], pts[0][1] - scrollPx);
-    for (let i = 1; i < pts.length; i++) {
-      ctx.lineTo(pts[i][0], pts[i][1] - scrollPx);
-    }
-    ctx.stroke();
-  } else {
-    // ── Pen / eraser: per-segment for pressure-sensitive width variation ───
-    for (let i = 1; i < pts.length; i++) {
-      const pressure = pts[i][2] ?? 0.5;
-      ctx.lineWidth  = (stroke.width ?? 2) * (0.5 + pressure * 1.5);
-      ctx.beginPath();
-      ctx.moveTo(pts[i - 1][0],  pts[i - 1][1] - scrollPx);
-      ctx.lineTo(pts[i][0],      pts[i][1]      - scrollPx);
-      ctx.stroke();
-    }
-  }
-
-  ctx.globalAlpha              = 1;
-  ctx.globalCompositeOperation = 'source-over';
 }
