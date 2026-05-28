@@ -14,12 +14,19 @@ import { useRef, useEffect } from 'react';
  * On render, we translate back to canvas-viewport coordinates:
  *   canvasY = contentY − scrollTop × dpr
  *
- * On scroll the canvas `style.top` is nudged to scrollTop so it always
- * overlays the visible area, and a rAF re-render is scheduled.
+ * On scroll the canvas `style.transform` is nudged via translateY(scrollTop)
+ * so it always overlays the visible area. Using CSS transform instead of
+ * style.top means repositioning happens on the compositor thread with zero
+ * layout cost, and will-change:transform keeps the canvas on its own GPU
+ * compositing layer for fast 2D drawing.
  *
- * HIGHLIGHTER: uses globalAlpha + source-over (NOT multiply).
- * multiply on a transparent canvas multiplies against (0,0,0,0) and
- * produces wrong colours. source-over at 0.35 opacity is correct.
+ * HIGHLIGHTER — single-path rendering (critical):
+ * Drawing each segment separately at globalAlpha=0.4 causes overlapping
+ * segments to compound opacity and cover text. We fix this by drawing the
+ * entire highlight stroke as ONE beginPath…stroke() call so the opacity is
+ * applied exactly once across the full stroke extent.
+ * During live drawing this means doing a full redrawAll + current stroke
+ * on every rAF frame instead of incremental segment drawing.
  *
  * PERFORMANCE:
  * - getBoundingClientRect cached at pointerdown (no layout reflow per-move)
@@ -27,6 +34,8 @@ import { useRef, useEffect } from 'react';
  * - e.getCoalescedEvents() recovers full 120 Hz S Pen sub-frame events
  * - Non-passive listeners so e.preventDefault() blocks Android scroll steal
  * - devicePixelRatio applied for crisp strokes on high-DPI (Samsung Tab)
+ * - CSS transform for scroll repositioning (compositor thread, no layout)
+ * - will-change:transform promotes canvas to dedicated GPU compositing layer
  */
 export default function AnnotationCanvas({
   topicId,
@@ -180,22 +189,50 @@ export default function AnnotationCanvas({
       const stroke = currentPath.current;
       if (!ctx || !stroke) return;
 
-      // Set context state ONCE per batch
-      ctx.globalAlpha = stroke.opacity;
-      ctx.lineCap     = 'round';
-      ctx.lineJoin    = 'round';
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.strokeStyle = stroke.color;
+      if (stroke.tool === 'highlighter') {
+        // ── Highlighter: full redraw + single-path to prevent opacity stacking ─
+        // Drawing segments at globalAlpha=0.4 individually compounds at overlaps
+        // and makes the stroke fully opaque, covering text. Drawing as one path
+        // applies the opacity only once across the entire stroke extent.
+        redrawAll(ctx, canvas, strokesRef.current, scrollTopRef.current);
+        const pts = stroke.points;
+        if (pts.length >= 2) {
+          const scrollPx = scrollTopRef.current * getDpr();
+          ctx.save();
+          ctx.globalAlpha              = stroke.opacity;
+          ctx.globalCompositeOperation = 'source-over';
+          ctx.strokeStyle              = stroke.color;
+          ctx.lineCap                  = 'round';
+          ctx.lineJoin                 = 'round';
+          ctx.lineWidth                = stroke.width;  // fixed width; no pressure for highlighter
+          ctx.beginPath();
+          ctx.moveTo(pts[0][0], pts[0][1] - scrollPx);
+          for (let i = 1; i < pts.length; i++) {
+            ctx.lineTo(pts[i][0], pts[i][1] - scrollPx);
+          }
+          ctx.stroke();
+          ctx.restore();
+        }
+      } else {
+        // ── Pen / eraser: incremental segment draw (opacity = 1, no stacking) ─
+        ctx.globalAlpha = stroke.opacity;
+        ctx.lineCap     = 'round';
+        ctx.lineJoin    = 'round';
+        // Eraser must use destination-out to erase, not source-over
+        ctx.globalCompositeOperation = stroke.tool === 'eraser' ? 'destination-out' : 'source-over';
+        ctx.strokeStyle = stroke.tool === 'eraser' ? 'rgba(0,0,0,1)' : stroke.color;
 
-      for (const seg of segs) {
-        ctx.lineWidth = stroke.width * (0.5 + seg.pressure * 1.5);
-        ctx.beginPath();
-        ctx.moveTo(seg.x0, contentToCanvasY(seg.y0));
-        ctx.lineTo(seg.x1, contentToCanvasY(seg.y1));
-        ctx.stroke();
+        for (const seg of segs) {
+          ctx.lineWidth = stroke.width * (0.5 + seg.pressure * 1.5);
+          ctx.beginPath();
+          ctx.moveTo(seg.x0, contentToCanvasY(seg.y0));
+          ctx.lineTo(seg.x1, contentToCanvasY(seg.y1));
+          ctx.stroke();
+        }
+
+        ctx.globalAlpha              = 1;
+        ctx.globalCompositeOperation = 'source-over';
       }
-
-      ctx.globalAlpha = 1;
     }
 
     // ── Pointer handlers ───────────────────────────────────────────────────────
@@ -229,7 +266,7 @@ export default function AnnotationCanvas({
                : '#000000',
         // Width baked with DPR; highlighter is wider
         width:   (tool === 'highlighter' ? baseW * 5 : baseW) * dpr,
-        // Highlighter uses partial opacity (source-over, not multiply)
+        // Highlighter uses partial opacity (source-over, NOT multiply)
         opacity: tool === 'highlighter' ? 0.4 : 1.0,
         points:  [[cx, cy, e.pressure || 0.5]],
       };
@@ -290,11 +327,14 @@ export default function AnnotationCanvas({
       if (drawRafRef.current) { cancelAnimationFrame(drawRafRef.current); drawRafRef.current = null; }
     }
 
-    // ── Scroll handler: reposition canvas + re-render visible strokes ──────────
+    // ── Scroll handler: reposition canvas via transform + re-render ────────────
+    // Using CSS transform instead of style.top means repositioning happens on
+    // the compositor thread with zero layout cost.
     function onScroll() {
-      scrollTopRef.current = container.scrollTop;
-      // Move the canvas to keep it aligned with the viewport
-      canvas.style.top = container.scrollTop + 'px';
+      const st = container.scrollTop;
+      scrollTopRef.current = st;
+      // translateY keeps the canvas viewport-aligned without triggering layout
+      canvas.style.transform = `translateY(${st}px)`;
 
       if (!scrollRafRef.current) {
         scrollRafRef.current = requestAnimationFrame(() => {
@@ -325,8 +365,9 @@ export default function AnnotationCanvas({
       ref={canvasRef}
       style={{
         position:      'absolute',
-        top:           0,       // updated dynamically to scrollTop by scroll handler
+        top:           0,       // static; scroll offset applied via transform
         left:          0,
+        willChange:    'transform',  // promotes canvas to its own GPU compositing layer
         // width + height set dynamically by resize effect
         pointerEvents: isAnnotating ? 'auto' : 'none',
         zIndex:        10,
@@ -365,13 +406,29 @@ function drawStroke(ctx, stroke, scrollPx) {
   ctx.lineCap                  = 'round';
   ctx.lineJoin                 = 'round';
 
-  for (let i = 1; i < pts.length; i++) {
-    const pressure = pts[i][2] ?? 0.5;
-    ctx.lineWidth  = (stroke.width ?? 2) * (0.5 + pressure * 1.5);
+  if (stroke.tool === 'highlighter') {
+    // ── Single path for the ENTIRE highlight stroke ────────────────────────
+    // If we draw segment-by-segment at globalAlpha=0.4, every overlapping
+    // endpoint compounds the opacity (0.4 + 0.4×0.6 + … → 1.0 after ~3 segs)
+    // and the highlight becomes a solid, text-covering block.
+    // Drawing as one continuous path applies globalAlpha exactly once.
+    ctx.lineWidth = stroke.width ?? 2;
     ctx.beginPath();
-    ctx.moveTo(pts[i - 1][0],  pts[i - 1][1] - scrollPx);
-    ctx.lineTo(pts[i][0],      pts[i][1]      - scrollPx);
+    ctx.moveTo(pts[0][0], pts[0][1] - scrollPx);
+    for (let i = 1; i < pts.length; i++) {
+      ctx.lineTo(pts[i][0], pts[i][1] - scrollPx);
+    }
     ctx.stroke();
+  } else {
+    // ── Pen / eraser: per-segment for pressure-sensitive width variation ───
+    for (let i = 1; i < pts.length; i++) {
+      const pressure = pts[i][2] ?? 0.5;
+      ctx.lineWidth  = (stroke.width ?? 2) * (0.5 + pressure * 1.5);
+      ctx.beginPath();
+      ctx.moveTo(pts[i - 1][0],  pts[i - 1][1] - scrollPx);
+      ctx.lineTo(pts[i][0],      pts[i][1]      - scrollPx);
+      ctx.stroke();
+    }
   }
 
   ctx.globalAlpha              = 1;
