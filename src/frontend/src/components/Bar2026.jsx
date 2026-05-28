@@ -544,12 +544,13 @@ export default function Bar2026({ onCaseClick }) {
   const [sidebarView, setSidebarView] = useState('topics'); // 'topics' | 'syllabus'
 
   // ── Annotation state ───────────────────────────────────────────────────────
-  const contentScrollRef  = useRef(null);
-  const [isAnnotating,    setIsAnnotating]    = useState(false);
-  const [annotationTool,  setAnnotationTool]  = useState('pen');
-  const [annotationColor, setAnnotationColor] = useState('#5b21b6');
-  const [annotationWidth, setAnnotationWidth] = useState(2);
-  const [allowTouchDraw,  setAllowTouchDraw]  = useState(false);
+  const contentScrollRef      = useRef(null);
+  const [isAnnotating,        setIsAnnotating]        = useState(false);
+  const [annotationTool,      setAnnotationTool]      = useState('pen');
+  const [penColor,            setPenColor]            = useState('#5b21b6');
+  const [highlighterColor,    setHighlighterColor]    = useState('#facc15');
+  const [annotationWidth,     setAnnotationWidth]     = useState(2);
+  const [allowTouchDraw,      setAllowTouchDraw]      = useState(false);
 
   const {
     strokes, pushStroke, undo, redo, clearAll,
@@ -779,7 +780,8 @@ export default function Bar2026({ onCaseClick }) {
                 topicId={selectedTopic?.id}
                 isAnnotating={isAnnotating}
                 currentTool={annotationTool}
-                currentColor={annotationColor}
+                penColor={penColor}
+                highlighterColor={highlighterColor}
                 currentWidth={annotationWidth}
                 allowTouchDraw={allowTouchDraw}
                 strokes={strokes}
@@ -813,8 +815,10 @@ export default function Bar2026({ onCaseClick }) {
         isAnnotating={isAnnotating}
         currentTool={annotationTool}
         onToolChange={setAnnotationTool}
-        currentColor={annotationColor}
-        onColorChange={setAnnotationColor}
+        penColor={penColor}
+        onPenColorChange={setPenColor}
+        highlighterColor={highlighterColor}
+        onHighlighterColorChange={setHighlighterColor}
         currentWidth={annotationWidth}
         onWidthChange={setAnnotationWidth}
         allowTouchDraw={allowTouchDraw}

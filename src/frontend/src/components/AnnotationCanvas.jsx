@@ -8,6 +8,7 @@ import { useRef, useEffect } from 'react';
  *   blocks Samsung/Android scroll stealing — React synthetic events are passive
  *   by default in React 17+ and cannot preventDefault() reliably.
  * - getBoundingClientRect-based coords (more reliable than offsetX/Y on Android).
+ * - devicePixelRatio scaling so strokes are sharp on high-DPI screens (Samsung Tab).
  * - Canvas positioned inside the scroll container → scrolls with content,
  *   no coordinate math needed.
  *
@@ -21,7 +22,8 @@ export default function AnnotationCanvas({
   topicId,
   isAnnotating,
   currentTool,
-  currentColor,
+  penColor,
+  highlighterColor,
   currentWidth,
   allowTouchDraw,
   strokes,
@@ -35,33 +37,39 @@ export default function AnnotationCanvas({
 
   // ── Keep ALL mutable props in refs so the native event listeners (registered
   //    once, deps=[]) always read the latest values without stale closures. ───
-  const isAnnotatingRef      = useRef(isAnnotating);
-  const currentToolRef       = useRef(currentTool);
-  const currentColorRef      = useRef(currentColor);
-  const currentWidthRef      = useRef(currentWidth);
-  const allowTouchDrawRef    = useRef(allowTouchDraw);
-  const onStrokeCompleteRef  = useRef(onStrokeComplete);
-  const strokesRef           = useRef(strokes);
+  const isAnnotatingRef     = useRef(isAnnotating);
+  const currentToolRef      = useRef(currentTool);
+  const penColorRef         = useRef(penColor);
+  const highlighterColorRef = useRef(highlighterColor);
+  const currentWidthRef     = useRef(currentWidth);
+  const allowTouchDrawRef   = useRef(allowTouchDraw);
+  const onStrokeCompleteRef = useRef(onStrokeComplete);
+  const strokesRef          = useRef(strokes);
 
   useEffect(() => { isAnnotatingRef.current     = isAnnotating;     }, [isAnnotating]);
   useEffect(() => { currentToolRef.current      = currentTool;      }, [currentTool]);
-  useEffect(() => { currentColorRef.current     = currentColor;     }, [currentColor]);
+  useEffect(() => { penColorRef.current         = penColor;         }, [penColor]);
+  useEffect(() => { highlighterColorRef.current = highlighterColor; }, [highlighterColor]);
   useEffect(() => { currentWidthRef.current     = currentWidth;     }, [currentWidth]);
   useEffect(() => { allowTouchDrawRef.current   = allowTouchDraw;   }, [allowTouchDraw]);
   useEffect(() => { onStrokeCompleteRef.current = onStrokeComplete; }, [onStrokeComplete]);
   useEffect(() => { strokesRef.current          = strokes;          }, [strokes]);
 
-  // ── Canvas sizing: ResizeObserver matches full scrollable content height ────
+  // ── Canvas sizing: match scroll container full height, scaled for DPR ───────
+  // devicePixelRatio (e.g. 2 on Samsung Tab) means CSS pixels ≠ physical pixels.
+  // We multiply canvas attribute dimensions by DPR so each CSS pixel maps to
+  // DPR×DPR physical pixels — this is what makes strokes sharp instead of blurry.
   useEffect(() => {
     const canvas    = canvasRef.current;
     const container = scrollContainerRef?.current;
     if (!canvas || !container) return;
 
     const resize = () => {
-      const w = container.scrollWidth  || 300;
-      const h = Math.min(container.scrollHeight || 150, 8000);
-      canvas.width  = w;
-      canvas.height = h;
+      const dpr = window.devicePixelRatio || 1;
+      const cssW = container.scrollWidth  || 300;
+      const cssH = Math.min(container.scrollHeight || 150, 8000);
+      canvas.width  = cssW * dpr;   // physical pixels
+      canvas.height = cssH * dpr;
       ctxRef.current = canvas.getContext('2d');
       redrawAll(ctxRef.current, canvas, strokesRef.current);
     };
@@ -103,12 +111,14 @@ export default function AnnotationCanvas({
     if (!canvas) return;
 
     function shouldDraw(e) {
-      if (e.pointerType === 'pen')   return true;   // S Pen / Apple Pencil
-      if (e.pointerType === 'mouse') return true;   // desktop / testing
-      if (e.pointerType === 'touch') return allowTouchDrawRef.current; // finger opt-in
+      if (e.pointerType === 'pen')   return true;
+      if (e.pointerType === 'mouse') return true;
+      if (e.pointerType === 'touch') return allowTouchDrawRef.current;
       return false;
     }
 
+    // Translate client coords → canvas physical pixel coords.
+    // scaleX = canvas.width (physical) / rect.width (CSS) = devicePixelRatio.
     function getCoords(e) {
       const rect   = canvas.getBoundingClientRect();
       const scaleX = canvas.width  / (rect.width  || 1);
@@ -129,32 +139,40 @@ export default function AnnotationCanvas({
 
       try { canvas.setPointerCapture(e.pointerId); } catch (_) {}
 
-      // Samsung S Pen eraser barrel
       const isSPenEraser = e.pointerType === 'pen'
         && e.buttons === 32
         && /samsung/i.test(navigator.userAgent);
       const tool = isSPenEraser ? 'eraser' : currentToolRef.current;
 
-      const [x, y] = getCoords(e);
+      const dpr     = window.devicePixelRatio || 1;
+      const [x, y]  = getCoords(e);
+      const baseW   = currentWidthRef.current;
+
       isDrawing.current   = true;
       currentPath.current = {
         id:      crypto.randomUUID(),
         tool,
-        color:   tool === 'eraser' ? '#000000' : currentColorRef.current,
+        // Stroke color comes from the per-tool color ref
+        color:   tool === 'pen'
+                   ? penColorRef.current
+                   : tool === 'highlighter'
+                     ? highlighterColorRef.current
+                     : '#000000',
+        // Store width in physical pixels so DPR is baked in once
         width:   tool === 'highlighter'
-                   ? currentWidthRef.current * 5
-                   : currentWidthRef.current,
+                   ? baseW * 5 * dpr
+                   : baseW * dpr,
         opacity: tool === 'highlighter' ? 0.35 : 1.0,
         points:  [[x, y, e.pressure || 0.5]],
       };
     }
 
     function onPointerMove(e) {
-      if (!isDrawing.current)             return;
-      if (!isAnnotatingRef.current)       return;
+      if (!isDrawing.current)           return;
+      if (!isAnnotatingRef.current)     return;
       if (e.pointerType === 'touch'
-          && !allowTouchDrawRef.current)  return; // palm rejection
-      if (!ctxRef.current)                return;
+        && !allowTouchDrawRef.current)  return;
+      if (!ctxRef.current)              return;
 
       e.preventDefault();
       e.stopPropagation();
@@ -166,7 +184,6 @@ export default function AnnotationCanvas({
       const [x, y]   = getCoords(e);
       pts.push([x, y, pressure]);
 
-      // Draw only the new segment live
       const stroke = currentPath.current;
       ctx.save();
       ctx.globalAlpha = stroke.opacity;
@@ -182,6 +199,7 @@ export default function AnnotationCanvas({
       }
       ctx.lineCap   = 'round';
       ctx.lineJoin  = 'round';
+      // stroke.width is already in physical pixels (baked with DPR on pointerdown)
       ctx.lineWidth = stroke.width * (0.5 + pressure * 1.5);
       ctx.beginPath();
       ctx.moveTo(prev[0], prev[1]);
@@ -190,7 +208,7 @@ export default function AnnotationCanvas({
       ctx.restore();
     }
 
-    function onPointerUp(e) {
+    function onPointerUp() {
       if (!isDrawing.current) return;
       isDrawing.current = false;
 
@@ -219,7 +237,7 @@ export default function AnnotationCanvas({
       canvas.removeEventListener('pointerup',     onPointerUp);
       canvas.removeEventListener('pointercancel', onPointerCancel);
     };
-  }, []); // empty deps — refs keep all values fresh
+  }, []);
 
   return (
     <canvas
@@ -232,7 +250,7 @@ export default function AnnotationCanvas({
         pointerEvents: isAnnotating ? 'auto' : 'none',
         zIndex:        10,
         cursor:        isAnnotating ? 'crosshair' : 'default',
-        touchAction:   'none', // always none — lets pointer events fire uninterrupted
+        touchAction:   'none',
       }}
     />
   );
@@ -259,7 +277,7 @@ function drawStroke(ctx, stroke) {
     ctx.strokeStyle = 'rgba(0,0,0,1)';
   } else if (stroke.tool === 'highlighter') {
     ctx.globalCompositeOperation = 'multiply';
-    ctx.strokeStyle = stroke.color ?? '#ffff00';
+    ctx.strokeStyle = stroke.color ?? '#facc15';
   } else {
     ctx.globalCompositeOperation = 'source-over';
     ctx.strokeStyle = stroke.color ?? '#5b21b6';
@@ -267,6 +285,7 @@ function drawStroke(ctx, stroke) {
 
   for (let i = 1; i < pts.length; i++) {
     const pressure = pts[i][2] ?? 0.5;
+    // stroke.width is stored in physical pixels (DPR already baked in at creation time)
     ctx.lineWidth  = (stroke.width ?? 2) * (0.5 + pressure * 1.5);
     ctx.beginPath();
     ctx.moveTo(pts[i - 1][0], pts[i - 1][1]);

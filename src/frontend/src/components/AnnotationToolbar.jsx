@@ -4,14 +4,24 @@ import {
   X, Cloud, Check, Fingerprint,
 } from 'lucide-react';
 
-const COLOR_PRESETS = [
+const PEN_COLORS = [
   { hex: '#5b21b6', label: 'Violet'  },
   { hex: '#dc2626', label: 'Red'     },
   { hex: '#2563eb', label: 'Blue'    },
   { hex: '#16a34a', label: 'Green'   },
   { hex: '#d97706', label: 'Amber'   },
   { hex: '#000000', label: 'Black'   },
-  { hex: '#facc15', label: 'Yellow'  }, // good for highlighter
+  { hex: '#6b7280', label: 'Gray'    },
+  { hex: '#ffffff', label: 'White'   },
+];
+
+const HIGHLIGHTER_COLORS = [
+  { hex: '#facc15', label: 'Yellow'      },
+  { hex: '#86efac', label: 'Mint'        },
+  { hex: '#fed7aa', label: 'Peach'       },
+  { hex: '#a5f3fc', label: 'Sky blue'    },
+  { hex: '#ddd6fe', label: 'Lavender'    },
+  { hex: '#fda4af', label: 'Rose'        },
 ];
 
 const WIDTH_STEPS = [1, 2, 4, 6, 8];
@@ -19,14 +29,17 @@ const WIDTH_STEPS = [1, 2, 4, 6, 8];
 /**
  * AnnotationToolbar — floating palette shown when annotation mode is active.
  *
- * Positioned fixed (bottom-right), stays visible while annotating.
+ * Pen and highlighter each have their own color palette.
+ * Clicking a tool button selects it AND opens its color picker inline.
  */
 export default function AnnotationToolbar({
   isAnnotating,
   currentTool,
   onToolChange,
-  currentColor,
-  onColorChange,
+  penColor,
+  onPenColorChange,
+  highlighterColor,
+  onHighlighterColorChange,
   currentWidth,
   onWidthChange,
   allowTouchDraw,
@@ -40,13 +53,22 @@ export default function AnnotationToolbar({
   onClear,
   onExit,
 }) {
-  const [showColors,    setShowColors]    = useState(false);
-  const [confirmClear,  setConfirmClear]  = useState(false);
+  const [openPicker,   setOpenPicker]   = useState(null); // null | 'pen' | 'highlighter'
+  const [confirmClear, setConfirmClear] = useState(false);
 
   if (!isAnnotating) return null;
 
-  const widthIdx   = WIDTH_STEPS.indexOf(currentWidth);
-  const nextWidth  = () => onWidthChange(WIDTH_STEPS[(widthIdx + 1) % WIDTH_STEPS.length]);
+  const widthIdx  = WIDTH_STEPS.indexOf(currentWidth);
+  const nextWidth = () => onWidthChange(WIDTH_STEPS[(widthIdx + 1) % WIDTH_STEPS.length]);
+
+  const handleToolClick = (tool) => {
+    onToolChange(tool);
+    if (tool === 'pen' || tool === 'highlighter') {
+      setOpenPicker(prev => (prev === tool ? null : tool));
+    } else {
+      setOpenPicker(null);
+    }
+  };
 
   const handleClear = () => {
     if (confirmClear) {
@@ -54,28 +76,46 @@ export default function AnnotationToolbar({
       setConfirmClear(false);
     } else {
       setConfirmClear(true);
-      setTimeout(() => setConfirmClear(false), 3000); // auto-cancel after 3s
+      setTimeout(() => setConfirmClear(false), 3000);
     }
   };
+
+  const currentColor    = currentTool === 'highlighter' ? highlighterColor : penColor;
+  const pickerColors    = openPicker === 'highlighter' ? HIGHLIGHTER_COLORS : PEN_COLORS;
+  const pickerOnChange  = openPicker === 'highlighter' ? onHighlighterColorChange : onPenColorChange;
 
   return (
     <div
       className="fixed bottom-6 right-6 z-30 flex flex-col items-end gap-2"
-      style={{ touchAction: 'none' }} // prevent inadvertent scroll-on-touch
+      style={{ touchAction: 'none' }}
     >
-      {/* Color picker popup */}
-      {showColors && (
-        <div className="flex gap-1.5 rounded-2xl border border-gray-200 bg-white/95 px-3 py-2 shadow-xl backdrop-blur-sm dark:border-zinc-600 dark:bg-zinc-800/95">
-          {COLOR_PRESETS.map(({ hex, label }) => (
+      {/* Color picker popup — opens above toolbar */}
+      {openPicker && (
+        <div className="flex flex-wrap justify-end gap-2 rounded-2xl border border-gray-200 bg-white/95 p-3 shadow-xl backdrop-blur-sm dark:border-zinc-600 dark:bg-zinc-800/95"
+          style={{ maxWidth: 220 }}
+        >
+          <p className="w-full text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500 mb-1">
+            {openPicker === 'highlighter' ? 'Highlighter color' : 'Pen color'}
+          </p>
+          {pickerColors.map(({ hex, label }) => (
             <button
               key={hex}
               title={label}
-              onClick={() => { onColorChange(hex); setShowColors(false); }}
-              className={`h-6 w-6 rounded-full transition-transform hover:scale-110 ${
-                currentColor === hex ? 'ring-2 ring-offset-1 ring-violet-500 scale-110' : ''
-              }`}
+              onClick={() => { pickerOnChange(hex); }}
+              className="relative h-8 w-8 rounded-full border-2 border-white shadow-md transition-transform hover:scale-110 dark:border-zinc-700"
               style={{ backgroundColor: hex }}
-            />
+            >
+              {currentColor === hex && (
+                <span className="absolute inset-0 flex items-center justify-center">
+                  <Check
+                    size={14}
+                    className={hex === '#ffffff' || hex === '#facc15' || hex === '#86efac' || hex === '#fed7aa' || hex === '#a5f3fc' || hex === '#ddd6fe' || hex === '#fda4af'
+                      ? 'text-gray-600'
+                      : 'text-white'}
+                  />
+                </span>
+              )}
+            </button>
           ))}
         </div>
       )}
@@ -83,59 +123,80 @@ export default function AnnotationToolbar({
       {/* Main toolbar pill */}
       <div className="flex items-center gap-1 rounded-2xl border border-gray-200 bg-white/95 px-2 py-1.5 shadow-xl backdrop-blur-sm dark:border-zinc-600 dark:bg-zinc-800/95">
 
-        {/* Tool buttons */}
-        <ToolBtn
-          active={currentTool === 'pen'}
-          onClick={() => onToolChange('pen')}
+        {/* Pen tool — shows its color dot */}
+        <button
+          onClick={() => handleToolClick('pen')}
           title="Pen"
-          color={currentColor}
+          className={`relative flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
+            currentTool === 'pen'
+              ? 'bg-violet-100 dark:bg-violet-900/40'
+              : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-zinc-700'
+          }`}
+          style={currentTool === 'pen' ? { color: penColor } : undefined}
         >
           <Pencil size={15} />
-        </ToolBtn>
+          {/* Color dot indicator */}
+          <span
+            className="absolute bottom-0.5 right-0.5 h-2.5 w-2.5 rounded-full border border-white dark:border-zinc-800 shadow-sm"
+            style={{ backgroundColor: penColor }}
+          />
+        </button>
 
-        <ToolBtn
-          active={currentTool === 'highlighter'}
-          onClick={() => onToolChange('highlighter')}
+        {/* Highlighter tool — shows its color dot */}
+        <button
+          onClick={() => handleToolClick('highlighter')}
           title="Highlighter"
-          color={currentColor}
+          className={`relative flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
+            currentTool === 'highlighter'
+              ? 'bg-amber-50 dark:bg-amber-900/20'
+              : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-zinc-700'
+          }`}
+          style={currentTool === 'highlighter' ? { color: highlighterColor } : undefined}
         >
           <Highlighter size={15} />
-        </ToolBtn>
+          {/* Color dot indicator */}
+          <span
+            className="absolute bottom-0.5 right-0.5 h-2.5 w-2.5 rounded-full border border-white dark:border-zinc-800 shadow-sm"
+            style={{ backgroundColor: highlighterColor }}
+          />
+        </button>
 
-        <ToolBtn
-          active={currentTool === 'eraser'}
-          onClick={() => onToolChange('eraser')}
+        {/* Eraser */}
+        <button
+          onClick={() => handleToolClick('eraser')}
           title="Eraser"
+          className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
+            currentTool === 'eraser'
+              ? 'bg-gray-100 text-gray-700 dark:bg-zinc-700 dark:text-gray-200'
+              : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-zinc-700'
+          }`}
         >
           <Eraser size={15} />
-        </ToolBtn>
+        </button>
 
         <Divider />
-
-        {/* Color swatch */}
-        <button
-          onClick={() => setShowColors(v => !v)}
-          title="Pick color"
-          className="h-6 w-6 rounded-full border-2 border-white shadow-sm transition-transform hover:scale-110 dark:border-zinc-600"
-          style={{ backgroundColor: currentColor }}
-        />
 
         {/* Stroke width */}
         <button
           onClick={nextWidth}
-          title={`Stroke width: ${currentWidth}px (click to cycle)`}
-          className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-zinc-700"
+          title={`Stroke width: ${currentWidth}px (tap to cycle)`}
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-500 transition-colors hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-zinc-700"
         >
           <span
-            className="rounded-full bg-gray-700 dark:bg-gray-200"
-            style={{ width: `${Math.max(3, currentWidth + 2)}px`, height: `${Math.max(3, currentWidth + 2)}px` }}
+            className="rounded-full"
+            style={{
+              backgroundColor: currentTool === 'highlighter' ? highlighterColor : penColor,
+              width:  `${Math.min(Math.max(currentWidth + 2, 4), 12)}px`,
+              height: `${Math.min(Math.max(currentWidth + 2, 4), 12)}px`,
+              opacity: currentTool === 'eraser' ? 0.3 : 1,
+            }}
           />
         </button>
 
         <Divider />
 
         {/* Undo / Redo */}
-        <ToolBtn onClick={onUndo} disabled={!canUndo} title="Undo (Ctrl+Z)">
+        <ToolBtn onClick={onUndo} disabled={!canUndo} title="Undo">
           <RotateCcw size={14} />
         </ToolBtn>
         <ToolBtn onClick={onRedo} disabled={!canRedo} title="Redo">
@@ -148,7 +209,7 @@ export default function AnnotationToolbar({
         <button
           onClick={onToggleTouchDraw}
           title={allowTouchDraw ? 'Finger drawing ON (tap to disable)' : 'Enable finger drawing'}
-          className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${
+          className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
             allowTouchDraw
               ? 'bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-300'
               : 'text-gray-400 hover:bg-gray-100 dark:text-gray-500 dark:hover:bg-zinc-700'
@@ -163,7 +224,7 @@ export default function AnnotationToolbar({
         <button
           onClick={handleClear}
           title={confirmClear ? 'Tap again to confirm clear' : 'Clear all annotations'}
-          className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${
+          className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
             confirmClear
               ? 'bg-rose-100 text-rose-600 dark:bg-rose-900/40 dark:text-rose-400'
               : 'text-gray-400 hover:bg-gray-100 dark:text-gray-500 dark:hover:bg-zinc-700'
@@ -175,14 +236,15 @@ export default function AnnotationToolbar({
         <Divider />
 
         {/* Save status */}
-        <div className="flex h-7 w-7 items-center justify-center text-[10px]" title={
-          !canSave ? 'Login to save annotations' : isSaving ? 'Saving…' : 'Saved'
-        }>
+        <div
+          className="flex h-8 w-8 items-center justify-center"
+          title={!canSave ? 'Login to save annotations' : isSaving ? 'Saving…' : 'Saved'}
+        >
           {!canSave
-            ? <span className="text-gray-300 dark:text-gray-600"><Cloud size={13} /></span>
+            ? <Cloud    size={13} className="text-gray-300 dark:text-gray-600" />
             : isSaving
-              ? <span className="animate-pulse text-violet-400"><Cloud size={13} /></span>
-              : <span className="text-emerald-500"><Check size={13} /></span>
+              ? <Cloud  size={13} className="animate-pulse text-violet-400" />
+              : <Check  size={13} className="text-emerald-500" />
           }
         </div>
 
@@ -190,7 +252,7 @@ export default function AnnotationToolbar({
         <button
           onClick={onExit}
           title="Exit annotation mode"
-          className="flex h-7 w-7 items-center justify-center rounded-lg text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-500 dark:hover:bg-zinc-700 dark:hover:text-gray-300"
+          className="flex h-8 w-8 items-center justify-center rounded-lg text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-700 dark:text-gray-500 dark:hover:bg-zinc-700 dark:hover:text-gray-300"
         >
           <X size={14} />
         </button>
@@ -206,20 +268,17 @@ export default function AnnotationToolbar({
   );
 }
 
-function ToolBtn({ active, onClick, disabled, title, color, children }) {
+function ToolBtn({ onClick, disabled, title, children }) {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
       title={title}
-      className={`flex h-7 w-7 items-center justify-center rounded-lg transition-colors ${
-        active
-          ? 'bg-violet-100 text-violet-600 dark:bg-violet-900/40 dark:text-violet-300'
-          : disabled
-            ? 'cursor-not-allowed text-gray-200 dark:text-gray-700'
-            : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-zinc-700'
+      className={`flex h-8 w-8 items-center justify-center rounded-lg transition-colors ${
+        disabled
+          ? 'cursor-not-allowed text-gray-200 dark:text-gray-700'
+          : 'text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-zinc-700'
       }`}
-      style={active && color ? { color } : undefined}
     >
       {children}
     </button>
