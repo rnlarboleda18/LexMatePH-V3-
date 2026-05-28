@@ -19,25 +19,51 @@ export function useAnnotations(subject, topicId) {
   const [canSave, setCanSave]         = useState(true);
 
   // Refs so callbacks always see fresh values without recreating on every stroke
-  const strokesRef    = useRef([]);
-  const topicIdRef    = useRef(topicId);
-  const subjectRef    = useRef(subject);
-  const canSaveRef    = useRef(true);
-  const skipSaveRef   = useRef(false); // true right after loading from API
-  const saveTimerRef  = useRef(null);
+  const strokesRef      = useRef([]);
+  const topicIdRef      = useRef(topicId);
+  const subjectRef      = useRef(subject);
+  const canSaveRef      = useRef(true);
+  const skipSaveRef     = useRef(false); // true right after loading from API
+  const saveTimerRef    = useRef(null);
+  const pendingSaveRef  = useRef(false); // true when strokes changed but save hasn't fired
 
   useEffect(() => { strokesRef.current = strokes; }, [strokes]);
   useEffect(() => { topicIdRef.current = topicId; }, [topicId]);
   useEffect(() => { subjectRef.current = subject; }, [subject]);
   useEffect(() => { canSaveRef.current = canSave; }, [canSave]);
 
-  // ── Load annotations when topic changes ───────────────────────────────────
-  useEffect(() => {
-    // Cancel any pending save for the old topic
+  // Fire a save immediately (used when we'd otherwise lose the pending debounce)
+  function flushSave(sid, tid, snapshot) {
+    if (!sid || !tid || !canSaveRef.current) return;
+    fetch(apiUrl(`/api/reviewer/${sid}/${tid}/annotations`), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ strokes: snapshot }),
+    }).catch(() => {});
+  }
+
+  // ── Flush + cancel any pending debounce ──────────────────────────────────
+  function cancelOrFlush(flush) {
     if (saveTimerRef.current) {
       clearTimeout(saveTimerRef.current);
       saveTimerRef.current = null;
     }
+    if (flush && pendingSaveRef.current) {
+      flushSave(subjectRef.current, topicIdRef.current, strokesRef.current);
+    }
+    pendingSaveRef.current = false;
+  }
+
+  // ── Flush on unmount so navigating away never loses strokes ─────────────
+  useEffect(() => {
+    return () => cancelOrFlush(true);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Load annotations when topic changes ───────────────────────────────────
+  useEffect(() => {
+    // Flush any unsaved strokes for the previous topic before switching
+    cancelOrFlush(true);
 
     // Reset state for new topic
     skipSaveRef.current = true;
@@ -63,13 +89,12 @@ export function useAnnotations(subject, topicId) {
         // skipSaveRef is still true — setting strokes here won't trigger save
         setStrokes(Array.isArray(data.strokes) ? data.strokes : []);
         // After this render cycle, allow saving again
-        // (we set to false AFTER this tick so the save effect sees it during re-render)
         requestAnimationFrame(() => { skipSaveRef.current = false; });
       })
       .catch(() => {
         skipSaveRef.current = false;
       });
-  }, [topicId, subject]);
+  }, [topicId, subject]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Debounced save whenever strokes change ─────────────────────────────────
   useEffect(() => {
@@ -78,13 +103,16 @@ export function useAnnotations(subject, topicId) {
     if (!canSaveRef.current) return;
 
     setIsSaving(true);
+    pendingSaveRef.current = true;
     if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
 
-    const sid = subjectRef.current;
-    const tid = topicIdRef.current;
+    const sid      = subjectRef.current;
+    const tid      = topicIdRef.current;
     const snapshot = strokesRef.current;
 
     saveTimerRef.current = setTimeout(() => {
+      saveTimerRef.current   = null;
+      pendingSaveRef.current = false;
       fetch(apiUrl(`/api/reviewer/${sid}/${tid}/annotations`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
@@ -93,11 +121,7 @@ export function useAnnotations(subject, topicId) {
       })
         .then(() => setIsSaving(false))
         .catch(() => setIsSaving(false));
-    }, 1500);
-
-    return () => {
-      if (saveTimerRef.current) clearTimeout(saveTimerRef.current);
-    };
+    }, 800);
   }, [strokes]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── pushStroke ─────────────────────────────────────────────────────────────
@@ -138,6 +162,7 @@ export function useAnnotations(subject, topicId) {
     const sid = subjectRef.current;
     if (!tid) return;
 
+    cancelOrFlush(false); // discard pending save — we're about to DELETE
     setUndoStack(prev => {
       const next = [...prev, strokesRef.current];
       return next.length > MAX_UNDO ? next.slice(1) : next;
@@ -151,7 +176,7 @@ export function useAnnotations(subject, topicId) {
         credentials: 'include',
       }).catch(() => {});
     }
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return {
     strokes,
