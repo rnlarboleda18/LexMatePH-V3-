@@ -354,9 +354,10 @@ function ContentPanel({ subject, topic, onCaseClick }) {
               <section>
                 <SectionHeader icon={Gavel} label={`Key Cases (${data.key_cases.length})`} />
                 <div className="space-y-2">
-                  {data.key_cases.map((c, i) => (
-                    <CaseCard key={c.id ?? c.gr_number ?? i} c={c} onCaseClick={onCaseClick} />
-                  ))}
+                  {data.key_cases.map((c, i) => {
+                    const nc = c.id != null ? c : { ...c, id: c.case_id };
+                    return <CaseCard key={nc.id ?? nc.gr_number ?? i} c={nc} onCaseClick={onCaseClick} />;
+                  })}
                 </div>
               </section>
             )}
