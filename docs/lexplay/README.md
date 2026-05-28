@@ -32,7 +32,7 @@
 | Azure TTS (en-PH-RosaNeural voice) | ✅ Implemented (needs key) |
 | gTTS fallback (Google TTS, free) | ✅ Implemented |
 | Azure Blob Storage audio caching | ✅ Implemented (needs Azurite) |
-| Audio plays successfully end-to-end | ⚠️ Partially working — see Known Issues |
+| Audio plays successfully end-to-end | ✅ Implemented |
 
 ---
 
@@ -267,34 +267,6 @@ The first call per article will take **5–20 seconds** while gTTS generates aud
 
 ## 8. Known Issues & Future Work
 
-### 🔴 Current Blocker: Audio not playing end-to-end
-The audio pipeline generates audio on the backend (gTTS confirmed working in isolation), but audio playback in the browser is failing. Likely causes to investigate:
-
-1. **CORS on the Azure Functions local host** — The Function might not be sending CORS headers for `localhost:5173`. Check `host.json` for CORS configuration.
-   ```json
-   // api/host.json — add this:
-   "cors": {
-     "allowedOrigins": ["http://localhost:5173"],
-     "supportCredentials": false
-   }
-   ```
-
-2. **Content-Type header mismatch** — Ensure the backend returns `Content-Type: audio/mpeg` (not `audio/wav`) when using gTTS. The browser's Audio API is strict about this.
-
-3. **gTTS network timeout** — gTTS calls Google's servers. If there's a proxy or firewall in the dev environment, it may time out silently. Try running:
-   ```python
-   from gtts import gTTS
-   import io
-   tts = gTTS("Hello world", lang='en')
-   fp = io.BytesIO()
-   tts.write_to_fp(fp)
-   print(f"Success: {len(fp.getvalue())} bytes")
-   ```
-
-4. **Azure Functions streaming** — Verify the Function is correctly setting the `body=audio_data` bytes (not a string). `func.HttpResponse(body=<bytes>)` should work.
-
-5. **Azurite not running** — If Azurite isn't running, the cache check+write both fail and the code falls through. Confirm `start_all.ps1` starts Azurite successfully.
-
 ### 🟡 Future Enhancements
 
 | Enhancement | Notes |
@@ -334,4 +306,4 @@ Set in `api/local.settings.json` for local development:
 
 ---
 
-*Last updated: March 2026*
+*Last updated: May 2026*
