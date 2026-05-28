@@ -32,9 +32,10 @@ AI-powered Philippine legal research and bar review platform. Search statutes, b
 
 ### Prerequisites
 
-- Node.js LTS
+- Node.js LTS (20+ recommended)
 - Python 3.10+
 - Azure Functions Core Tools (`npm install -g azure-functions-core-tools@4`)
+- SWA CLI (`npm install -g @azure/static-web-apps-cli`) — used by `start_all.ps1`
 
 ### Setup
 
@@ -48,7 +49,7 @@ python -m venv .venv
 .venv\Scripts\Activate
 pip install -r requirements.txt
 cp local.settings.sample.json local.settings.json
-# Edit local.settings.json — add DB_CONNECTION_STRING (cloud Postgres) and VITE_CLERK_PUBLISHABLE_KEY
+# Edit local.settings.json — add DB_CONNECTION_STRING (cloud Postgres connection string)
 
 # Frontend
 cd ..\src\frontend
