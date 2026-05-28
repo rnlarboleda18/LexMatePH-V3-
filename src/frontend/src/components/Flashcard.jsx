@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { ChevronRight, RotateCcw, X, Headphones, Lock } from 'lucide-react';
+import { ChevronRight, RotateCcw, X, Headphones, Lock, Star } from 'lucide-react';
 import FontSizeControl from './FontSizeControl';
 import { useFontSize } from '../hooks/useFontSize';
 import { getSubjectColor } from '../utils/colors';
@@ -8,6 +8,7 @@ import { getFlashcardConceptPrimarySubject } from '../utils/flashcardPrimarySubj
 import { SubjectIcon } from '../utils/subjectIcons';
 import { useLexPlayApi } from '../features/lexplay/useLexPlay';
 import { useSubscription } from '../context/SubscriptionContext';
+import { useFavorites } from '../hooks/useFavorites';
 
 const FLIP_MS = 650;
 const FLIP_EASE = 'cubic-bezier(0.4, 0.2, 0.2, 1)';
@@ -19,7 +20,28 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
     const { playNow } = useLexPlayApi();
     const { canAccess, openUpgradeModal } = useSubscription();
     const canLexPlay = canAccess('lexplay_flashcard');
+    const canFavorite = canAccess('favorites');
     const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize();
+
+    // Derive isBar from props (not card) so it's available before the null guard
+    const isBar = variant === 'bar';
+    const favoriteId = isBar
+        ? String(card?.id ?? '')
+        : encodeURIComponent(card?.term || '');
+    const { isFavorited, toggleFavorite } = useFavorites('flashcard', favoriteId || null);
+    const handleToggleFavorite = useCallback(
+        (e) => {
+            e?.stopPropagation?.();
+            const subjectLabel = isBar
+                ? String(card?.subject || '').trim() || '—'
+                : String(getFlashcardConceptPrimarySubject(card) || '').trim() || '—';
+            const title = isBar
+                ? `${card?.year} Bar — ${subjectLabel}`
+                : (card?.term || 'Flashcard');
+            toggleFavorite(title, subjectLabel);
+        },
+        [toggleFavorite, isBar, card]
+    );
 
     useEffect(() => {
         setIsFlipped(false);
@@ -28,7 +50,7 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
 
     if (!card) return null;
 
-    const isBar = variant === 'bar';
+    // isBar is already computed above
 
     const sources = card.sources || [];
     const rawSubjectLabel = isBar
@@ -107,6 +129,21 @@ const Flashcard = ({ variant = 'concepts', card, onNext, currentIndex, total, on
                 </p>
             </div>
             <div className="flex shrink-0 items-center gap-1">
+                {canFavorite && card && (
+                    <button
+                        type="button"
+                        onClick={handleToggleFavorite}
+                        className={`touch-manipulation -mr-0.5 -mt-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full border transition-all hover:scale-110 active:scale-95 ${
+                            isFavorited
+                                ? 'border-yellow-300/80 bg-yellow-50/90 text-yellow-500 dark:border-yellow-600/60 dark:bg-yellow-900/40 dark:text-yellow-400'
+                                : 'border-gray-200/80 bg-white/80 text-gray-400 hover:text-yellow-400 dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-500'
+                        }`}
+                        title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                        aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                    >
+                        <Star className="h-3.5 w-3.5" strokeWidth={2} fill={isFavorited ? 'currentColor' : 'none'} />
+                    </button>
+                )}
                 <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} />
                 <button
                     type="button"
