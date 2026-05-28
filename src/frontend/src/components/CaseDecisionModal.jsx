@@ -17,6 +17,7 @@ import { consumeFreeTierUsage, notifyUsageBlocked } from '../utils/freeTierUsage
 import { CaseFullTextMarkdown, DigestMarkdownText, SmartLink } from './CaseDigestMarkdown';
 import FontSizeControl from './FontSizeControl';
 import { useFontSize } from '../hooks/useFontSize';
+import { useFavorites } from '../hooks/useFavorites';
 
 // --- HELPER COMPONENTS ---
 
@@ -345,6 +346,17 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const [headerVisible, setHeaderVisible] = useState(true);
     const lastScrollYRef = useRef(0);
     const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize();
+    const canFavorite = canAccess('favorites');
+    const { isFavorited, toggleFavorite } = useFavorites(
+        'case',
+        fullDecision?.id
+    );
+    const handleToggleFavorite = useCallback(() => {
+        toggleFavorite(
+            fullDecision?.short_title || fullDecision?.title || fullDecision?.case_number,
+            fullDecision?.case_number
+        );
+    }, [toggleFavorite, fullDecision]);
     const ratioRef = useRef(null);
 
     const { 
@@ -809,6 +821,25 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         <div className="flex-1" />
 
                         {/* Right cluster: A-/A+ · close */}
+                        {canFavorite && (
+                            <button
+                                type="button"
+                                onClick={handleToggleFavorite}
+                                className={`touch-manipulation flex h-6 w-6 shrink-0 items-center justify-center rounded-full border transition-all hover:scale-110 active:scale-95 sm:h-7 sm:w-7 ${
+                                    isFavorited
+                                        ? 'border-yellow-300/80 bg-yellow-50/90 text-yellow-500 dark:border-yellow-600/60 dark:bg-yellow-900/40 dark:text-yellow-400'
+                                        : 'border-gray-200/80 bg-white/80 text-gray-400 hover:text-yellow-400 dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-500'
+                                }`}
+                                title={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                                aria-label={isFavorited ? 'Remove from favorites' : 'Add to favorites'}
+                            >
+                                <Star
+                                    className="h-3 w-3"
+                                    strokeWidth={2}
+                                    fill={isFavorited ? 'currentColor' : 'none'}
+                                />
+                            </button>
+                        )}
                         <FontSizeControl fontSize={fontSize} onIncrease={increaseFontSize} onDecrease={decreaseFontSize} />
                         <button
                             type="button"
