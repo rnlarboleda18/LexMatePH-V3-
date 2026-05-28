@@ -653,10 +653,11 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
     const doctrinePanel = getSubjectMainDoctrinePanelClasses(fullDecision.subject);
 
-    const decisionYear = fullDecision.date_str
+    const _decisionDateRaw = fullDecision.date_str || fullDecision.date;
+    const decisionYear = _decisionDateRaw
         ? (() => {
               try {
-                  const y = new Date(fullDecision.date_str).getFullYear();
+                  const y = new Date(_decisionDateRaw).getFullYear();
                   return Number.isNaN(y) ? '' : y;
               } catch {
                   return '';
@@ -861,7 +862,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                     </div>
                                 </div>
 
-                                {fullDecision.date_str && (
+                                {_decisionDateRaw && (
                                     <div className="flex gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
                                         <Clock
                                             className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
@@ -873,7 +874,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                                 Date Decided
                                             </dt>
                                             <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
-                                                {formatDate(fullDecision.date_str)}
+                                                {formatDate(_decisionDateRaw)}
                                             </dd>
                                         </div>
                                     </div>
@@ -927,11 +928,11 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             <h2 className="text-[22px] font-black leading-tight tracking-tight text-gray-900 dark:text-white sm:text-[26px]">
                                 {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
                             </h2>
-                            {(fullDecision.case_number || fullDecision.date_str) && (
+                            {(fullDecision.case_number || _decisionDateRaw) && (
                                 <p className="mt-2 font-mono text-[12px] text-gray-400 dark:text-gray-500">
                                     {fullDecision.case_number}
-                                    {fullDecision.case_number && fullDecision.date_str && <span className="mx-2">|</span>}
-                                    {fullDecision.date_str && formatDate(fullDecision.date_str)}
+                                    {fullDecision.case_number && _decisionDateRaw && <span className="mx-2">|</span>}
+                                    {_decisionDateRaw && formatDate(_decisionDateRaw)}
                                 </p>
                             )}
                         </div>
