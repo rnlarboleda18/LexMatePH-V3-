@@ -8,7 +8,8 @@ import React, { useRef, useEffect, useCallback } from 'react';
  *
  * S Pen / Apple Pencil:  pointerType === 'pen', pressure 0–1
  * S Pen eraser barrel:   buttons === 32  (Samsung only)
- * Palm rejection:         pointerType === 'touch' ignored by default
+ * Palm rejection:        pointerType === 'touch' ignored unless allowTouchDraw
+ * Mouse:                 always allowed (desktop / testing)
  */
 export default function AnnotationCanvas({
   topicId,
@@ -21,73 +22,97 @@ export default function AnnotationCanvas({
   onStrokeComplete,   // fn(stroke) called when pointer is lifted
   scrollContainerRef, // ref to the scrollable wrapper div
 }) {
-  const canvasRef    = useRef(null);
-  const ctxRef       = useRef(null);
-  const isDrawing    = useRef(false);
-  const currentPath  = useRef(null);
+  const canvasRef   = useRef(null);
+  const ctxRef      = useRef(null);
+  const isDrawing   = useRef(false);
+  const currentPath = useRef(null);
+  // Always-fresh reference to the latest redraw function (avoids stale closure in ResizeObserver)
+  const redrawRef   = useRef(null);
+
+  // ── Keep redrawRef pointing at the latest strokes ─────────────────────────
+  useEffect(() => {
+    redrawRef.current = () => {
+      const ctx    = ctxRef.current;
+      const canvas = canvasRef.current;
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      strokes.forEach(s => drawStroke(ctx, s));
+    };
+  });                             // runs every render — intentionally no dep array
 
   // ── Canvas sizing: match scroll container's full content height ─────────────
   useEffect(() => {
-    const canvas = canvasRef.current;
+    const canvas    = canvasRef.current;
     const container = scrollContainerRef?.current;
     if (!canvas || !container) return;
 
-    const resize = () => {
-      const w = container.scrollWidth;
-      const h = Math.min(container.scrollHeight, 8000); // iOS canvas limit guard
-      if (canvas.width !== w || canvas.height !== h) {
-        // Save current content before resize (resize clears canvas)
-        canvas.width  = w;
-        canvas.height = h;
-        ctxRef.current = canvas.getContext('2d');
-        redrawAll();
-      }
+    const init = () => {
+      const w = container.scrollWidth  || 300;
+      const h = Math.min(container.scrollHeight || 150, 8000); // iOS canvas limit guard
+      canvas.width  = w;
+      canvas.height = h;
+      ctxRef.current = canvas.getContext('2d');
+      redrawRef.current?.();
     };
 
-    const ro = new ResizeObserver(resize);
+    const ro = new ResizeObserver(init);
     ro.observe(container);
-    resize(); // initial size
+    init();                         // run immediately on mount
 
     return () => ro.disconnect();
-  }, [scrollContainerRef, strokes]); // re-init when strokes change (for redraw after undo)
+  }, [scrollContainerRef]);         // only re-run if the container ref itself changes
 
   // ── Full redraw whenever strokes prop changes (undo/redo/load) ──────────────
-  const redrawAll = useCallback(() => {
-    const ctx = ctxRef.current;
-    const canvas = canvasRef.current;
-    if (!ctx || !canvas) return;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    strokes.forEach(s => drawStroke(ctx, s));
-  }, [strokes]);
-
   useEffect(() => {
-    redrawAll();
+    redrawRef.current?.();
   }, [strokes]);
 
-  // ── Pointer event handlers ──────────────────────────────────────────────────
-  const getEffectiveTool = (e) => {
-    // Samsung S Pen eraser barrel: buttons === 32
+  // ── Reset canvas when topic changes ────────────────────────────────────────
+  useEffect(() => {
+    const ctx    = ctxRef.current;
+    const canvas = canvasRef.current;
+    if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
+    isDrawing.current   = false;
+    currentPath.current = null;
+  }, [topicId]);
+
+  // ── Stop active stroke when leaving annotation mode ────────────────────────
+  useEffect(() => {
+    if (!isAnnotating) {
+      isDrawing.current   = false;
+      currentPath.current = null;
+    }
+  }, [isAnnotating]);
+
+  // ── Determine whether this pointer event should draw ───────────────────────
+  // Mouse: always (desktop / testing)
+  // Pen:   always (S Pen / Apple Pencil)
+  // Touch: only when allowTouchDraw is on (palm rejection default-off)
+  const shouldDraw = useCallback((e) => {
+    if (e.pointerType === 'pen')   return true;
+    if (e.pointerType === 'mouse') return true;
+    if (e.pointerType === 'touch' && allowTouchDraw) return true;
+    return false;
+  }, [allowTouchDraw]);
+
+  // ── Resolve effective tool (S Pen eraser barrel = buttons 32) ─────────────
+  const getEffectiveTool = useCallback((e) => {
     const isSPenEraser = e.pointerType === 'pen'
       && e.buttons === 32
       && /samsung/i.test(navigator.userAgent);
     return isSPenEraser ? 'eraser' : currentTool;
-  };
+  }, [currentTool]);
 
-  const shouldDraw = (e) => {
-    if (e.pointerType === 'pen') return true;
-    if (allowTouchDraw && e.pointerType === 'touch') return true;
-    return false;
-  };
-
+  // ── Pointer down ───────────────────────────────────────────────────────────
   const handlePointerDown = useCallback((e) => {
-    if (!isAnnotating) return;
-    if (!shouldDraw(e)) return;
+    if (!isAnnotating)    return;
+    if (!shouldDraw(e))   return;
+    if (!ctxRef.current)  return;
 
-    const canvas = canvasRef.current;
-    canvas.setPointerCapture(e.pointerId);
+    canvasRef.current?.setPointerCapture(e.pointerId);
 
     const tool = getEffectiveTool(e);
-    isDrawing.current = true;
+    isDrawing.current   = true;
     currentPath.current = {
       id:      crypto.randomUUID(),
       tool,
@@ -97,21 +122,23 @@ export default function AnnotationCanvas({
       points:  [[e.offsetX, e.offsetY, e.pressure || 0.5]],
     };
     e.preventDefault();
-  }, [isAnnotating, currentTool, currentColor, currentWidth, allowTouchDraw]);
+  }, [isAnnotating, shouldDraw, getEffectiveTool, currentColor, currentWidth]);
 
+  // ── Pointer move ───────────────────────────────────────────────────────────
   const handlePointerMove = useCallback((e) => {
     if (!isDrawing.current || !isAnnotating) return;
-    if (!shouldDraw(e)) return;
+    // Reject touch if palm rejection is on (mouse and pen always continue)
+    if (e.pointerType === 'touch' && !allowTouchDraw) return;
 
     const ctx = ctxRef.current;
     if (!ctx) return;
 
-    const pts = currentPath.current.points;
-    const prev = pts[pts.length - 1];
+    const pts      = currentPath.current.points;
+    const prev     = pts[pts.length - 1];
     const pressure = e.pressure || 0.5;
     pts.push([e.offsetX, e.offsetY, pressure]);
 
-    // Draw just the new segment live (fast, no full redraw)
+    // Draw only the new segment live — fast, no full redraw
     const stroke = currentPath.current;
     ctx.save();
     ctx.globalAlpha = stroke.opacity;
@@ -133,43 +160,28 @@ export default function AnnotationCanvas({
     ctx.lineTo(e.offsetX, e.offsetY);
     ctx.stroke();
     ctx.restore();
+
     e.preventDefault();
   }, [isAnnotating, allowTouchDraw]);
 
+  // ── Pointer up ─────────────────────────────────────────────────────────────
   const handlePointerUp = useCallback((e) => {
     if (!isDrawing.current) return;
     isDrawing.current = false;
 
-    const stroke = currentPath.current;
+    const stroke        = currentPath.current;
     currentPath.current = null;
 
     if (stroke && stroke.points.length > 1) {
       onStrokeComplete?.(stroke);
-      // onStrokeComplete triggers strokes prop update → redrawAll via useEffect
+      // pushStroke → strokes prop updates → useEffect([strokes]) → full redraw
     }
   }, [onStrokeComplete]);
 
   const handlePointerCancel = useCallback(() => {
-    isDrawing.current = false;
+    isDrawing.current   = false;
     currentPath.current = null;
   }, []);
-
-  // ── When annotation mode turns off, stop any active stroke ─────────────────
-  useEffect(() => {
-    if (!isAnnotating) {
-      isDrawing.current = false;
-      currentPath.current = null;
-    }
-  }, [isAnnotating]);
-
-  // ── Reset canvas when topic changes ────────────────────────────────────────
-  useEffect(() => {
-    const ctx = ctxRef.current;
-    const canvas = canvasRef.current;
-    if (ctx && canvas) ctx.clearRect(0, 0, canvas.width, canvas.height);
-    isDrawing.current = false;
-    currentPath.current = null;
-  }, [topicId]);
 
   return (
     <canvas
@@ -183,7 +195,8 @@ export default function AnnotationCanvas({
         top:           0,
         left:          0,
         width:         '100%',
-        pointerEvents: isAnnotating ? 'all' : 'none',
+        // height is driven by canvas.height attribute (set by ResizeObserver)
+        pointerEvents: isAnnotating ? 'auto' : 'none',
         zIndex:        10,
         cursor:        isAnnotating ? 'crosshair' : 'default',
         touchAction:   isAnnotating ? 'none' : 'auto',
@@ -199,9 +212,9 @@ function drawStroke(ctx, stroke) {
   if (!pts || pts.length < 2) return;
 
   ctx.save();
-  ctx.globalAlpha  = stroke.opacity ?? 1.0;
-  ctx.lineCap      = 'round';
-  ctx.lineJoin     = 'round';
+  ctx.globalAlpha = stroke.opacity ?? 1.0;
+  ctx.lineCap     = 'round';
+  ctx.lineJoin    = 'round';
 
   if (stroke.tool === 'eraser') {
     ctx.globalCompositeOperation = 'destination-out';
