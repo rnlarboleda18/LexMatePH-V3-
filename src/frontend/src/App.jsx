@@ -78,6 +78,7 @@ const LexCodeViewer = lazy(() => import('./components/LexCodeViewer'));
 const LexifyApp = lazy(() => import('./features/lexify/LexifyApp'));
 const FlashcardSetup = lazy(() => import('./components/FlashcardSetup'));
 const Flashcard = lazy(() => import('./components/Flashcard'));
+const Favorites = lazy(() => import('./components/Favorites'));
 const CaseDecisionModal = lazy(() => import('./components/CaseDecisionModal'));
 const QuestionDetailModal = lazy(() => import('./components/QuestionDetailModal'));
 const FoundingPromoModal = lazy(() => import('./components/FoundingPromoModal'));
@@ -120,6 +121,7 @@ const MODE_TO_PATH = {
   lexplay: '/lexplay',
   admin_tools: '/admin',
   bar_2026: '/bar-2026',
+  favorites: '/favorites',
 };
 
 const PATH_TO_MODE = Object.fromEntries(
@@ -914,6 +916,7 @@ function App() {
           onToggleLexMate={() => navigateToTab('lexmate')}
           onToggleAdminTools={() => navigateToTab('admin_tools')}
           onToggleBar2026={handleToggleBar2026}
+          onToggleFavorites={() => navigateToTab('favorites')}
           onSelectCodal={handleSelectCodal}
           selectedCodalCode={selectedCodalCode}
           mode={mode}
@@ -981,6 +984,11 @@ function App() {
                   )}
                   {effectiveMode === 'about' && (
                     <About />
+                  )}
+                  {effectiveMode === 'favorites' && (
+                    <Suspense fallback={<PageLoadingFallback label="Loading Favorites…" />}>
+                      <Favorites onCaseSelect={selectGlobalCaseGuarded} />
+                    </Suspense>
                   )}
                   {effectiveMode === 'updates' && (
                     <Suspense fallback={<PageLoadingFallback label="Loading Updates…" />}>

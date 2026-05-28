@@ -77,6 +77,7 @@ const TIER_BG = {
 const Sidebar = ({
   onToggleQuiz,
   onToggleAbout,
+  onToggleFavorites,
   onToggleUpdates,
   onToggleSupremeDecisions,
   onToggleLexCode,
@@ -428,6 +429,21 @@ const Sidebar = ({
                 <Book size={18} className={`${mode === 'browse_bar' ? 'text-amber-700 dark:text-amber-400' : 'text-amber-600 dark:text-amber-500'} group-hover:scale-110 transition-all duration-200`} />
                 Bar Questions
             </button>
+
+            {/* FAVORITES — subscribers only */}
+            <SignedIn>
+              <button
+                onClick={() => { if (onToggleFavorites) onToggleFavorites(); }}
+                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-base font-medium transition-colors
+                ${mode === 'favorites'
+                    ? SIDEBAR_NAV_ACTIVE
+                    : SIDEBAR_NAV_IDLE
+                }`}
+              >
+                <Star size={18} className={`${mode === 'favorites' ? 'text-yellow-500 dark:text-yellow-400' : 'text-yellow-500/70 dark:text-yellow-500/60'} group-hover:scale-110 transition-all duration-200`} fill={mode === 'favorites' ? 'currentColor' : 'none'} />
+                Favorites
+              </button>
+            </SignedIn>
 
             {/* BAR 2026 */}
             <button
