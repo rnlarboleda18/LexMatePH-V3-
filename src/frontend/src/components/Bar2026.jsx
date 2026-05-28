@@ -768,6 +768,7 @@ export default function Bar2026({ onCaseClick }) {
             <div
               ref={contentScrollRef}
               className="relative md:overflow-y-auto md:max-h-[calc(100vh-220px)]"
+              style={isAnnotating ? { touchAction: 'none' } : undefined}
             >
               <ContentPanel
                 subject={activeTab}
