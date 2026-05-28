@@ -441,6 +441,87 @@ def get_generation_log(req: func.HttpRequest) -> func.HttpResponse:
         return _json({"error": str(exc)}, 500)
 
 
+# ── GET / PUT / DELETE /api/reviewer/{subject}/{topic_id}/annotations ─────────
+
+@bar_reviewer_bp.route(
+    route="reviewer/{subject}/{topic_id}/annotations",
+    methods=["GET", "PUT", "DELETE"],
+    auth_level=func.AuthLevel.ANONYMOUS,
+)
+def reviewer_annotations(req: func.HttpRequest) -> func.HttpResponse:
+    """
+    Per-user per-topic ink annotations (S Pen / Apple Pencil).
+
+    GET    — load strokes for the authenticated user
+    PUT    — upsert strokes  body: { "strokes": [...] }
+    DELETE — clear all strokes for this user+topic
+    """
+    clerk_id, err = get_authenticated_user_id(req)
+    if err or not clerk_id:
+        return _json({"error": "Login required to access annotations"}, 401)
+
+    topic_id = req.route_params.get("topic_id", "").strip()
+    if not topic_id:
+        return _json({"error": "topic_id required"}, 400)
+
+    conn = None
+    try:
+        conn = get_db_connection()
+        cur  = conn.cursor(cursor_factory=RealDictCursor)
+
+        if req.method == "GET":
+            cur.execute(
+                "SELECT strokes FROM bar_topic_annotations "
+                "WHERE topic_id = %s AND user_id = %s",
+                (topic_id, clerk_id),
+            )
+            row = cur.fetchone()
+            return _json({"strokes": row["strokes"] if row else []})
+
+        elif req.method == "PUT":
+            try:
+                body = req.get_json() or {}
+            except Exception:
+                body = {}
+            strokes = body.get("strokes", [])
+            if not isinstance(strokes, list):
+                return _json({"error": "strokes must be an array"}, 400)
+            strokes_json = json.dumps(strokes)
+            cur.execute(
+                """
+                INSERT INTO bar_topic_annotations (topic_id, user_id, strokes, updated_at)
+                VALUES (%s, %s, %s::jsonb, NOW())
+                ON CONFLICT (topic_id, user_id)
+                DO UPDATE SET strokes = EXCLUDED.strokes, updated_at = NOW()
+                RETURNING updated_at
+                """,
+                (topic_id, clerk_id, strokes_json),
+            )
+            updated = cur.fetchone()
+            conn.commit()
+            return _json({"saved": True, "updated_at": str(updated["updated_at"]) if updated else None})
+
+        elif req.method == "DELETE":
+            cur.execute(
+                "DELETE FROM bar_topic_annotations WHERE topic_id = %s AND user_id = %s",
+                (topic_id, clerk_id),
+            )
+            conn.commit()
+            return _json({"cleared": True})
+
+        else:
+            return _json({"error": "Method not allowed"}, 405)
+
+    except Exception as exc:
+        if conn:
+            conn.rollback()
+        logging.error("reviewer_annotations error: %s", exc)
+        return _json({"error": str(exc)}, 500)
+    finally:
+        if conn:
+            put_db_connection(conn)
+
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def _resolve_python() -> str:

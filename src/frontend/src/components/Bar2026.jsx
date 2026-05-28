@@ -6,12 +6,15 @@ import {
   Scale, Globe, Briefcase, FileText, Users, Sword, BookOpen,
   ChevronRight, ChevronDown, ChevronLeft, BookMarked, Brain, AlertTriangle,
   Gavel, Lightbulb, Star, Clock, CheckCircle2, Circle,
-  ExternalLink, Tag, AlertCircle, List, ScrollText,
+  ExternalLink, Tag, AlertCircle, List, ScrollText, PenLine, PenOff,
 } from 'lucide-react';
 import PurpleGlassAmbient from './PurpleGlassAmbient';
 import CardVioletInnerWash from './CardVioletInnerWash';
 import { apiUrl } from '../utils/apiUrl';
 import { BAR_SYLLABUS } from '../data/bar2026Syllabus';
+import AnnotationCanvas from './AnnotationCanvas';
+import AnnotationToolbar from './AnnotationToolbar';
+import { useAnnotations } from '../hooks/useAnnotations';
 
 // ── Subject definitions ────────────────────────────────────────────────────────
 
@@ -540,6 +543,19 @@ export default function Bar2026({ onCaseClick }) {
   const [showTopicTree, setShowTopicTree] = useState(true);
   const [sidebarView, setSidebarView] = useState('topics'); // 'topics' | 'syllabus'
 
+  // ── Annotation state ───────────────────────────────────────────────────────
+  const contentScrollRef  = useRef(null);
+  const [isAnnotating,    setIsAnnotating]    = useState(false);
+  const [annotationTool,  setAnnotationTool]  = useState('pen');
+  const [annotationColor, setAnnotationColor] = useState('#5b21b6');
+  const [annotationWidth, setAnnotationWidth] = useState(2);
+  const [allowTouchDraw,  setAllowTouchDraw]  = useState(false);
+
+  const {
+    strokes, pushStroke, undo, redo, clearAll,
+    isSaving, canSave, undoStack, redoStack,
+  } = useAnnotations(activeTab, selectedTopic?.id);
+
   const active = SUBJECTS.find(s => s.id === activeTab) ?? SUBJECTS[0];
 
   const draftCount = topics.filter(t => t.status === 'draft').length;
@@ -739,7 +755,7 @@ export default function Bar2026({ onCaseClick }) {
           </div>
 
           {/* Content panel — right */}
-          <div className={`min-w-0 flex-1 md:overflow-y-auto md:max-h-[calc(100vh-220px)] ${showTopicTree ? 'hidden md:block' : 'block'}`}>
+          <div className={`min-w-0 flex-1 ${showTopicTree ? 'hidden md:block' : 'block'}`}>
             {/* Back to topics — mobile only */}
             <button
               className="mb-3 flex items-center gap-1 text-xs font-semibold text-violet-600 hover:underline dark:text-violet-400 md:hidden"
@@ -747,15 +763,71 @@ export default function Bar2026({ onCaseClick }) {
             >
               <ChevronLeft size={14} /> All Topics
             </button>
-            <ContentPanel
-              subject={activeTab}
-              topic={selectedTopic}
-              onCaseClick={onCaseClick}
-            />
+
+            {/* Scrollable content + annotation canvas layer */}
+            <div
+              ref={contentScrollRef}
+              className="relative md:overflow-y-auto md:max-h-[calc(100vh-220px)]"
+            >
+              <ContentPanel
+                subject={activeTab}
+                topic={selectedTopic}
+                onCaseClick={onCaseClick}
+              />
+              <AnnotationCanvas
+                topicId={selectedTopic?.id}
+                isAnnotating={isAnnotating}
+                currentTool={annotationTool}
+                currentColor={annotationColor}
+                currentWidth={annotationWidth}
+                allowTouchDraw={allowTouchDraw}
+                strokes={strokes}
+                onStrokeComplete={pushStroke}
+                scrollContainerRef={contentScrollRef}
+              />
+            </div>
           </div>
 
         </div>
       </div>
+
+      {/* ── Annotation mode toggle button (always visible when topic selected) ── */}
+      {selectedTopic && (
+        <button
+          onClick={() => setIsAnnotating(v => !v)}
+          title={isAnnotating ? 'Exit annotation mode' : 'Annotate this page (S Pen / touch)'}
+          className={`fixed bottom-6 right-6 z-20 flex h-12 w-12 items-center justify-center rounded-full shadow-lg transition-all ${
+            isAnnotating
+              ? 'bg-violet-600 text-white shadow-violet-900/40 hover:bg-violet-700'
+              : 'border border-violet-200 bg-white text-violet-600 shadow-gray-300/60 hover:bg-violet-50 dark:border-violet-700 dark:bg-zinc-800 dark:text-violet-400 dark:hover:bg-zinc-700'
+          }`}
+          style={{ bottom: isAnnotating ? '5rem' : '1.5rem' }} // shift up to make room for toolbar
+        >
+          {isAnnotating ? <PenOff size={20} /> : <PenLine size={20} />}
+        </button>
+      )}
+
+      {/* ── Annotation toolbar (floating, shown when annotating) ── */}
+      <AnnotationToolbar
+        isAnnotating={isAnnotating}
+        currentTool={annotationTool}
+        onToolChange={setAnnotationTool}
+        currentColor={annotationColor}
+        onColorChange={setAnnotationColor}
+        currentWidth={annotationWidth}
+        onWidthChange={setAnnotationWidth}
+        allowTouchDraw={allowTouchDraw}
+        onToggleTouchDraw={() => setAllowTouchDraw(v => !v)}
+        onUndo={undo}
+        onRedo={redo}
+        canUndo={undoStack.length > 0}
+        canRedo={redoStack.length > 0}
+        isSaving={isSaving}
+        canSave={canSave}
+        onClear={() => clearAll()}
+        onExit={() => setIsAnnotating(false)}
+      />
+
     </PurpleGlassAmbient>
   );
 }
