@@ -575,7 +575,7 @@ export default function Bar2026({ onCaseClick }) {
   const { getToken } = useAuth();
   const [activeTab, setActiveTab] = useState('criminal');
   
-  const { topics, tree, loading: topicsLoading, error: topicsError, refresh } = useTopics(activeTab);
+  const { topics, tree, loading: topicsLoading, error: topicsError, refresh } = useTopics(activeTab, { isAdmin });
   
   const [selectedTopic, setSelectedTopic] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);

@@ -3,8 +3,9 @@ import { apiUrl } from '../utils/apiUrl';
 
 /**
  * Hook to fetch and hierarchically structure bar reviewer topics for a subject.
+ * Pass isAdmin=true to include draft topics (requires admin auth).
  */
-export function useTopics(subject) {
+export function useTopics(subject, { isAdmin = false } = {}) {
   const [topics, setTopics] = useState([]);
   const [tree, setTree] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -20,7 +21,10 @@ export function useTopics(subject) {
     setLoading(true);
     setError(null);
 
-    fetch(apiUrl(`/api/reviewer/${subject}?all=true`))
+    const url = isAdmin
+      ? apiUrl(`/api/reviewer/${subject}?all=true`)
+      : apiUrl(`/api/reviewer/${subject}`);
+    fetch(url)
       .then(r => {
         if (!r.ok) throw new Error(`Failed to fetch topics: ${r.statusText}`);
         return r.json();
@@ -36,7 +40,7 @@ export function useTopics(subject) {
         setError(err.message);
         setLoading(false);
       });
-  }, [subject]);
+  }, [subject, isAdmin]);
 
   useEffect(() => {
     fetchTopics();
