@@ -574,11 +574,11 @@ function SyllabusPanel({ subjectId, subjectColor }) {
 export default function Bar2026({ onCaseClick }) {
   const { getToken } = useAuth();
   const [activeTab, setActiveTab] = useState('criminal');
-  
-  const { topics, tree, loading: topicsLoading, error: topicsError, refresh } = useTopics(activeTab, { isAdmin });
-  
-  const [selectedTopic, setSelectedTopic] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+
+  const { topics, tree, loading: topicsLoading, error: topicsError, refresh } = useTopics(activeTab, { isAdmin });
+
+  const [selectedTopic, setSelectedTopic] = useState(null);
   const [publishing, setPublishing] = useState(false);
   const [publishMsg, setPublishMsg] = useState(null);
   const [showTopicTree, setShowTopicTree] = useState(true);
