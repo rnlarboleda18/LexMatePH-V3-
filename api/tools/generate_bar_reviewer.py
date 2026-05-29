@@ -1236,6 +1236,16 @@ def main():
 
     load_settings()
 
+    gcp_project = (
+        os.environ.get("GOOGLE_CLOUD_PROJECT")
+        or os.environ.get("GCP_PROJECT")
+        or ""
+    ).strip()
+    if not gcp_project:
+        log.error("GCP_PROJECT is not set — cannot charge Vertex AI calls to a billing account. Set GCP_PROJECT in api/local.settings.json.")
+        sys.exit(1)
+    log.info("Vertex AI billing project: %s", gcp_project)
+
     case_cutoff = args.case_cutoff
     publish     = not args.draft
     topic_map   = list(SUBJECT_MAPS[args.subject])
