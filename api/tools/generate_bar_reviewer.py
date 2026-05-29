@@ -465,6 +465,104 @@ Return ONLY valid JSON:
     return f"[Provision text not found in DB or via search: {statute_id} {article_or_section}]"
 
 
+# ── SC eLib supplemental case search ──────────────────────────────────────────
+
+ELIB_MIN_CASES = 5   # trigger eLib search when DB returns fewer than this many cases
+
+def search_elib_cases(sub_heading: str, subject_label: str, case_cutoff: str) -> list:
+    """Search SC E-Library for relevant jurisprudence not yet in the DB.
+
+    Uses Gemini Flash + Google Search grounded on elibrary.judiciary.gov.ph.
+    Returns a list of dicts compatible with the cases_with_relevance format.
+    Only called when the DB returns fewer than ELIB_MIN_CASES linked cases.
+    """
+    prompt = f"""You are a Philippine legal research assistant.
+
+TASK: Search the Supreme Court E-Library (https://elibrary.judiciary.gov.ph) and find
+the most important and relevant Supreme Court decisions for the following bar exam topic:
+
+TOPIC: {sub_heading}
+SUBJECT: {subject_label}
+JURISPRUDENCE CUTOFF: {case_cutoff} (only cases decided on or before this date)
+
+Search elibrary.judiciary.gov.ph for decisions directly on point for this topic.
+Focus on:
+1. Recent decisions (2015–{case_cutoff[:4]}) that set or refine doctrine
+2. En Banc decisions
+3. Cases that have been cited in bar examinations
+
+Return ONLY valid JSON — an array of up to 8 cases:
+[
+  {{
+    "case_id": null,
+    "gr_number": "G.R. No. 12345",
+    "short_title": "Surname v. Surname",
+    "date": "YYYY-MM-DD",
+    "ponente": "Justice Name",
+    "division": "En Banc or Division",
+    "main_doctrine": "One to two sentences stating the exact legal doctrine.",
+    "bar_trap": "Common exam misconception this case clarifies.",
+    "significance_category": "NEW DOCTRINE or MODIFICATION or AFFIRMATION",
+    "relevance_to_topic": "One sentence why this is relevant to {sub_heading}.",
+    "separate_opinions": [],
+    "source": "elib"
+  }},
+  ...
+]
+
+If you cannot find reliable cases with verifiable GR numbers, return an empty array: []
+Do NOT invent or hallucinate cases. Only include cases you can verify exist on eLib."""
+
+    try:
+        from google import genai
+        from google.genai import types as genai_types
+        client = get_linker_genai_client()
+        search_tool = genai_types.Tool(google_search=genai_types.GoogleSearch())
+        cfg = genai.types.GenerateContentConfig(
+            tools=[search_tool],
+            temperature=0.1,
+            max_output_tokens=4096,
+        )
+        raw = ""
+        for attempt in range(3):
+            resp = client.models.generate_content(
+                model=BAR_MODEL_FLASH, contents=prompt, config=cfg
+            )
+            raw = resp.text or ""
+            if not raw:
+                try:
+                    raw = "".join(
+                        p.text for p in resp.candidates[0].content.parts
+                        if hasattr(p, "text") and p.text and not getattr(p, "thought", False)
+                    )
+                except Exception:
+                    pass
+            raw = raw.strip()
+            if raw:
+                break
+            time.sleep(2 ** attempt)
+
+        if raw.startswith("```"):
+            raw = raw.split("```")[-2] if raw.count("```") >= 2 else raw
+            raw = raw.lstrip("json").strip()
+
+        cases = json.loads(raw)
+        if not isinstance(cases, list):
+            return []
+        # Validate minimal fields to reject hallucinated entries
+        valid = []
+        for c in cases:
+            gr = c.get("gr_number", "")
+            if gr and re.search(r'G\.R\.\s*No\.?\s*\d+', gr, re.IGNORECASE):
+                valid.append(c)
+        log.info("  eLib search: found %d verified cases for '%s'", len(valid), sub_heading[:50])
+        return valid
+
+    except Exception as e:
+        log.warning("  eLib search failed for '%s': %s", sub_heading[:50], e)
+        return []
+
+
 # ── Case fetcher ───────────────────────────────────────────────────────────────
 
 def fetch_cases_for_topic(
@@ -605,6 +703,7 @@ def build_doctrine_prompt(
     enriched_provisions: list,
     cases: list,
     subject_id: str,
+    elib_cases: list | None = None,
 ) -> str:
     provisions_block = "\n\n---\n\n".join(
         f"[{p.get('label') or p.get('note') or p.get('provision_id') or p.get('url', 'provision')}]\n"
@@ -612,7 +711,7 @@ def build_doctrine_prompt(
         for p in enriched_provisions
     ) or "No statutory provisions available."
 
-    cases_block = "\n\n".join(
+    db_cases_block = "\n\n".join(
         f"CASE: {c['short_title']} | {c['case_number']} | {c['date']} | {c['division']}\n"
         f"PONENTE: {c['ponente']}\n"
         f"DOCTRINE: {c['main_doctrine']}\n"
@@ -620,6 +719,20 @@ def build_doctrine_prompt(
         f"BAR TRAP: {c.get('digest_significance', '')}"
         for c in cases
     ) or "No linked cases available for this topic."
+
+    elib_block = ""
+    if elib_cases:
+        elib_lines = "\n\n".join(
+            f"ELIB CASE: {c.get('short_title', '')} | {c.get('gr_number', '')} | "
+            f"{c.get('date', '')} | {c.get('division', '')}\n"
+            f"PONENTE: {c.get('ponente', '')}\n"
+            f"DOCTRINE: {c.get('main_doctrine', '')}\n"
+            f"RELEVANCE: {c.get('relevance_to_topic', '')}"
+            for c in elib_cases
+        )
+        elib_block = f"\n\nSUPPLEMENTAL CASES FROM SC ELIB (search-verified):\n{elib_lines}"
+
+    cases_block = db_cases_block + elib_block
 
     subject_label = SUBJECT_LABELS.get(subject_id, subject_id.title())
     detail_block  = topic.get("detail", "").strip()
@@ -647,8 +760,9 @@ OUTPUT RULES:
    and case doctrines provided above. Strict constraints:
    - Statutory rules: paraphrase or quote the provision text; cite the article/section number.
    - Case-derived rules: use only the exact main_doctrine text supplied for each case above.
-     You MAY cite a case by name ONLY if it appears in the LINKED CASES list above.
-     NEVER cite a case not in that list — do not add cases from your training knowledge.
+     You MAY cite a case by name ONLY if it appears in the LINKED CASES or SUPPLEMENTAL
+     CASES FROM SC ELIB lists above.
+     NEVER cite a case not in those lists — do not add cases from your training knowledge.
    - PHANTOM CASE BLOCKLIST — these titles are known hallucinations or are real cases whose
      doctrines are UNRELATED to Remedial Law. If any of them appear in your draft, DELETE them:
        * Suyat v. Court of Appeals — real doctrine: Ombudsman/COA jurisdiction; NOT certiorari, disbarment, or remedial rules
@@ -958,7 +1072,21 @@ def generate_topic(
                 cases.insert(0, specific)
                 existing_ids.add(specific["id"])
 
-    log.info("  Cases found: %d", len(cases))
+    log.info("  Cases found: %d (DB)", len(cases))
+
+    # ── Step 2b: SC eLib supplemental search when DB cases are sparse ───────────
+    elib_cases = []
+    if not dry_run and len(cases) < ELIB_MIN_CASES:
+        log.info(
+            "  DB returned only %d case(s) — supplementing with SC eLib search",
+            len(cases),
+        )
+        subject_label = SUBJECT_LABELS.get(subject_id, subject_id.title())
+        elib_cases = search_elib_cases(sub_heading, subject_label, case_cutoff)
+        if elib_cases:
+            log.info("  eLib added %d supplemental case(s)", len(elib_cases))
+
+    log.info("  Cases total: %d (DB: %d  eLib: %d)", len(cases) + len(elib_cases), len(cases), len(elib_cases))
 
     # Top cases used for AI prompts (capped so prompts stay manageable).
     # ALL cases are still stored in key_cases for display — only the AI calls
@@ -1041,6 +1169,23 @@ def generate_topic(
             "separate_opinions":     sep_ops or [],
         })
 
+    # Append eLib-sourced supplemental cases (already have relevance from the search)
+    for elib_case in elib_cases:
+        cases_with_relevance.append({
+            "case_id":               None,
+            "gr_number":             elib_case.get("gr_number", ""),
+            "short_title":           elib_case.get("short_title", ""),
+            "date":                  elib_case.get("date", ""),
+            "ponente":               elib_case.get("ponente", ""),
+            "division":              elib_case.get("division", ""),
+            "main_doctrine":         elib_case.get("main_doctrine", ""),
+            "bar_trap":              elib_case.get("bar_trap", ""),
+            "significance_category": elib_case.get("significance_category", ""),
+            "relevance_to_topic":    elib_case.get("relevance_to_topic", ""),
+            "separate_opinions":     [],
+            "source":                "elib",
+        })
+
     # ── Step 4: Fetch past bar questions + prepare synthetic fallback ──────────
     questions = fetch_bar_questions(cur, subject_id, sub_heading)
     bar_questions = [
@@ -1061,7 +1206,10 @@ def generate_topic(
         key_statutes    = []
         synthetic_q     = None
     else:
-        prompt = build_doctrine_prompt(topic, enriched_provisions, cases_for_prompt, subject_id)
+        prompt = build_doctrine_prompt(
+            topic, enriched_provisions, cases_for_prompt, subject_id,
+            elib_cases=elib_cases,
+        )
         try:
             raw  = _ai_generate(
                 prompt,
