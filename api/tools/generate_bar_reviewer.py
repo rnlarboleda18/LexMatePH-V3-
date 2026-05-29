@@ -47,7 +47,9 @@ log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 
 DEFAULT_CASE_CUTOFF = "2025-06-30"
-BAR_MODEL           = "gemini-2.5-pro"
+BAR_MODEL_PRO       = "gemini-3.1-pro-preview"   # doctrine generation + verification
+BAR_MODEL_FLASH     = "gemini-3-flash-preview"    # batch connectors + provision synthesis
+BAR_MODEL           = BAR_MODEL_PRO               # legacy alias used in logging / DB
 
 # Adaptive pacing — starts at BASE_PACE seconds between topics; increases on 429s
 BASE_PACE    = 12.0
@@ -87,12 +89,17 @@ def _ai_generate(
     temperature: float = 0.2,
     max_tokens: int = 8192,
     retries: int = 6,
+    model: str | None = None,
 ) -> str:
-    """Generate via Vertex AI with adaptive exponential backoff on 429/503."""
+    """Generate via Vertex AI with adaptive exponential backoff on 429/503.
+
+    model defaults to BAR_MODEL_PRO. Pass model=BAR_MODEL_FLASH for lighter calls.
+    """
     global _pace
     from google import genai
     from google.api_core.exceptions import ResourceExhausted, ServiceUnavailable
     client = get_linker_genai_client()
+    use_model = model or BAR_MODEL_PRO
     cfg = genai.types.GenerateContentConfig(
         response_mime_type=response_mime_type,
         temperature=temperature,
@@ -101,7 +108,7 @@ def _ai_generate(
     for attempt in range(retries):
         try:
             resp = client.models.generate_content(
-                model=BAR_MODEL, contents=prompt, config=cfg
+                model=use_model, contents=prompt, config=cfg
             )
             # Success — gradually ease pacing back toward base
             _pace = max(BASE_PACE, _pace * 0.9)
@@ -400,7 +407,7 @@ Return ONLY valid JSON:
         )
         raw = ""
         for _attempt in range(3):
-            resp = client.models.generate_content(model=BAR_MODEL, contents=prompt, config=cfg)
+            resp = client.models.generate_content(model=BAR_MODEL_FLASH, contents=prompt, config=cfg)
             # gemini-2.5-pro is a thinking model. When Google Search AFC is
             # active, resp.text can return "" even on a valid response because
             # the actual JSON lives in the non-thought content parts while
@@ -958,6 +965,7 @@ def generate_topic(
                     build_batch_connector_prompt(chunk, sub_heading),
                     response_mime_type="application/json",
                     max_tokens=8192,
+                    model=BAR_MODEL_FLASH,
                 )
                 # Primary parse
                 try:
@@ -1143,7 +1151,7 @@ def generate_topic(
         "case_cutoff":      case_cutoff,
         "status":           "published" if publish else "draft",
         "confidence":       confidence,
-        "generation_model": BAR_MODEL,
+        "generation_model": f"{BAR_MODEL_PRO}+{BAR_MODEL_FLASH}",
     }
 
 
@@ -1278,8 +1286,8 @@ def main():
             sys.exit(0)
 
     log.info(
-        "Subject: %s | Topics: %d | Model: %s | Cutoff: %s | Publish: %s | Dry-run: %s",
-        args.subject.upper(), len(topic_map), BAR_MODEL,
+        "Subject: %s | Topics: %d | Pro: %s | Flash: %s | Cutoff: %s | Publish: %s | Dry-run: %s",
+        args.subject.upper(), len(topic_map), BAR_MODEL_PRO, BAR_MODEL_FLASH,
         case_cutoff, publish, args.dry_run,
     )
 
