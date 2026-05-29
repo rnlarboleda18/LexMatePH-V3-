@@ -106,8 +106,11 @@ def merge_local_settings_into_env() -> None:
         return
     if not isinstance(vals, dict):
         return
+    # Always override GCP project keys — session env vars must not shadow local.settings.json.
+    FORCE_KEYS = {"GOOGLE_CLOUD_PROJECT", "GCP_PROJECT", "GOOGLE_CLOUD_LOCATION",
+                  "GCP_LOCATION", "GEMINI_LINKER_VERTEX_PROJECT"}
     for k, v in vals.items():
-        if k not in os.environ or not str(os.environ.get(k, "")).strip():
+        if k in FORCE_KEYS or not str(os.environ.get(k, "")).strip():
             os.environ[str(k)] = str(v) if v is not None else ""
 
 
