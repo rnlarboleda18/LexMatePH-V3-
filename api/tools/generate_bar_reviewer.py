@@ -1419,6 +1419,51 @@ def main():
         success, failed, "published" if publish else "draft",
     )
 
+    # ── Automatic post-generation verification ────────────────────────────────
+    if not args.dry_run and success > 0:
+        log.info("=" * 60)
+        log.info("Running automatic verification...")
+        try:
+            from tools.verify_reviewer import (
+                fetch_generated, verify_subject, print_report, get_conn as _vc
+            )
+            vconn    = _vc()
+            generated = fetch_generated(vconn, args.subject)
+            only_sub  = getattr(args, 'only_sub', '') or ''
+            results   = verify_subject(
+                args.subject, topic_map, generated,
+                use_ai=False,        # keyword-only for speed; run --ai manually for deep check
+                only_sub=only_sub,
+            )
+            vconn.close()
+            print_report(args.subject, results)
+
+            # Write verify report alongside failures.json
+            report_path = API_DIR / "logs" / f"verify_{args.subject}.json"
+            report_path.parent.mkdir(exist_ok=True)
+            import datetime as _dt
+            with open(report_path, "w", encoding="utf-8") as f:
+                json.dump({
+                    "generated_at": _dt.datetime.utcnow().isoformat(),
+                    "subject":      args.subject,
+                    "results": [
+                        {k: v for k, v in r.items() if k not in ("covered",)}
+                        for r in results
+                    ],
+                }, f, indent=2, ensure_ascii=False, default=str)
+            log.info("Verification report saved to %s", report_path)
+
+            # Flag thin/fail topics so they appear in the summary
+            thin_fail = [r for r in results if r["status"] in ("THIN", "FAIL", "MISSING", "EMPTY")]
+            if thin_fail:
+                log.warning(
+                    "%d topic(s) need attention (THIN/FAIL/MISSING). "
+                    "Run: python tools/verify_reviewer.py --subject %s --ai",
+                    len(thin_fail), args.subject,
+                )
+        except Exception as e:
+            log.warning("Verification step failed (non-fatal): %s", e)
+
 
 if __name__ == "__main__":
     main()
