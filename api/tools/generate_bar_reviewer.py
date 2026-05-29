@@ -54,6 +54,7 @@ BAR_MODEL           = BAR_MODEL_PRO               # legacy alias used in logging
 # Adaptive pacing — starts at BASE_PACE seconds between topics; increases on 429s
 BASE_PACE    = 12.0
 _pace        = BASE_PACE
+_vertex_project_override: str | None = None  # set by --vertex-project CLI arg
 
 SUBJECT_MAPS = {
     "criminal":    CRIMINAL_MAP,
@@ -98,7 +99,7 @@ def _ai_generate(
     global _pace
     from google import genai
     from google.api_core.exceptions import ResourceExhausted, ServiceUnavailable
-    client = get_linker_genai_client()
+    client = get_linker_genai_client(vertex_project=_vertex_project_override or None)
     use_model = model or BAR_MODEL_PRO
     cfg = genai.types.GenerateContentConfig(
         response_mime_type=response_mime_type,
@@ -412,7 +413,7 @@ Return ONLY valid JSON:
     try:
         from google import genai
         from google.genai import types as genai_types
-        client = get_linker_genai_client()
+        client = get_linker_genai_client(vertex_project=_vertex_project_override or None)
         search_tool = genai_types.Tool(google_search=genai_types.GoogleSearch())
         cfg = genai.types.GenerateContentConfig(
             tools=[search_tool],
@@ -516,7 +517,7 @@ Do NOT invent or hallucinate cases. Only include cases you can verify exist on e
     try:
         from google import genai
         from google.genai import types as genai_types
-        client = get_linker_genai_client()
+        client = get_linker_genai_client(vertex_project=_vertex_project_override or None)
         search_tool = genai_types.Tool(google_search=genai_types.GoogleSearch())
         cfg = genai.types.GenerateContentConfig(
             tools=[search_tool],
@@ -1398,9 +1399,18 @@ def main():
                         help="Only regenerate topics listed in logs/failures.json")
     parser.add_argument("--skip-published", action="store_true",
                         help="Skip topics that already have a published record in the DB")
+    parser.add_argument("--vertex-project", metavar="PROJECT_ID",
+                        help="Override GCP billing project for Vertex AI (takes precedence over local.settings.json)")
     args = parser.parse_args()
 
     load_settings()
+
+    global _vertex_project_override
+    if args.vertex_project:
+        _vertex_project_override = args.vertex_project.strip()
+        os.environ["GOOGLE_CLOUD_PROJECT"] = _vertex_project_override
+        os.environ["GCP_PROJECT"]          = _vertex_project_override
+        os.environ["GEMINI_LINKER_VERTEX_PROJECT"] = _vertex_project_override
 
     gcp_project = (
         os.environ.get("GOOGLE_CLOUD_PROJECT")

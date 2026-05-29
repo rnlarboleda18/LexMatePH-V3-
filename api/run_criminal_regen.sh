@@ -14,7 +14,7 @@ export GCP_PROJECT="arcane-mason-497813-s6"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG"; }
 
-TOPICS=(I.A I.B I.C I.D I.E II.A II.B II.C II.D II.E III.A III.B III.C III.D III.E III.F III.G III.H III.I III.J III.K III.L III.M III.N)
+TOPICS=(III.A III.B III.C III.D III.E III.F III.G III.H III.I III.J III.K III.L III.M III.N)
 TOTAL=${#TOPICS[@]}
 
 log "=== Criminal law regen: $TOTAL topics | project: $GOOGLE_CLOUD_PROJECT ==="
@@ -25,7 +25,7 @@ FAILED=0
 
 for TOPIC in "${TOPICS[@]}"; do
     log "--- [$((DONE+FAILED+1))/$TOTAL] Starting $TOPIC ---"
-    python tools/generate_bar_reviewer.py --subject criminal --only-sub "$TOPIC" 2>&1 | tee -a "$LOG"
+    python tools/generate_bar_reviewer.py --subject criminal --only-sub "$TOPIC" --vertex-project "$GOOGLE_CLOUD_PROJECT" 2>&1 | tee -a "$LOG"
     EXIT=${PIPESTATUS[0]}
     if [[ $EXIT -ne 0 ]]; then
         log "WARN: $TOPIC exited $EXIT"
