@@ -315,19 +315,38 @@ REMEDIAL_MAP = [
         ),
         "sort_order": 17,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "14-1", "label": "Rule 14, Sec. 1 \u2013 Clerk to issue summons", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-6", "label": "Rule 14, Sec. 6 \u2013 Service in person on defendant", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-7", "label": "Rule 14, Sec. 7 \u2013 Substituted service", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-12", "label": "Rule 14, Sec. 12 \u2013 Service upon foreign private juridical entity", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-16", "label": "Rule 14, Sec. 16 \u2013 Service by publication", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "13-5", "label": "Rule 13, Sec. 5 \u2013 Modes of service", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "13-9", "label": "Rule 13, Sec. 9 \u2013 Service by electronic means", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "9-1", "label": "Rule 9, Sec. 1 \u2013 Defenses and objections not pleaded; waiver", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "9-3", "label": "Rule 9, Sec. 3 \u2013 Default; declaration of", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "15-4", "label": "Rule 15, Sec. 4 \u2013 Non-litigious motions", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "15-5", "label": "Rule 15, Sec. 5 \u2013 Litigious motions", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "17-1", "label": "Rule 17, Sec. 1 \u2013 Dismissal upon notice by plaintiff", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "17-3", "label": "Rule 17, Sec. 3 \u2013 Dismissal due to fault of plaintiff", "source": "db"},
+            # \u2500\u2500 Issuance and Contents \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+            {"statute_id": "ROC", "provision_id": "14-1", "label": "Rule 14, Sec. 1 \u2014 Clerk to issue summons", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-2", "label": "Rule 14, Sec. 2 \u2014 Contents", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-4", "label": "Rule 14, Sec. 4 \u2014 Validity of summons and issuance of alias summons", "source": "db"},
+            # \u2500\u2500 By Whom Served \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+            {"statute_id": "ROC", "provision_id": "14-3", "label": "Rule 14, Sec. 3 \u2014 By whom served", "source": "db"},
+            # \u2500\u2500 Modes of Service \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+            {"statute_id": "ROC", "provision_id": "14-5", "label": "Rule 14, Sec. 5 \u2014 Service in person on defendant", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-6", "label": "Rule 14, Sec. 6 \u2014 Substituted service", "source": "db"},
+            # \u2500\u2500 Service upon Specific Persons and Entities \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+            {"statute_id": "ROC", "provision_id": "14-7",  "label": "Rule 14, Sec. 7 \u2014 Service upon entity without juridical personality", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-8",  "label": "Rule 14, Sec. 8 \u2014 Service upon prisoners", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-10", "label": "Rule 14, Sec. 10 \u2014 Service upon minors and incompetents", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-11", "label": "Rule 14, Sec. 11 \u2014 Service upon spouses (relate to Rule 3, Sec. 4)", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-12", "label": "Rule 14, Sec. 12 \u2014 Service upon domestic private juridical entity", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-14", "label": "Rule 14, Sec. 14 \u2014 Service upon foreign private juridical entities", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-15", "label": "Rule 14, Sec. 15 \u2014 Service upon public corporations", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-16", "label": "Rule 14, Sec. 16 \u2014 Service upon defendant whose identity or whereabouts are unknown", "source": "db"},
+            # \u2500\u2500 Extraterritorial and International \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+            {"statute_id": "ROC", "provision_id": "14-9",  "label": "Rule 14, Sec. 9 \u2014 Service consistent with international conventions (Hague Service Convention \u2014 A.O. No. 251-2020)", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-17", "label": "Rule 14, Sec. 17 \u2014 Extraterritorial service", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-18", "label": "Rule 14, Sec. 18 \u2014 Residents temporarily out of the Philippines", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-19", "label": "Rule 14, Sec. 19 \u2014 Leave of court", "source": "db"},
+            # \u2500\u2500 Return, Proof, Voluntary Appearance, Duty of Counsel \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+            {"statute_id": "ROC", "provision_id": "14-20", "label": "Rule 14, Sec. 20 \u2014 Return", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-21", "label": "Rule 14, Sec. 21 \u2014 Proof of service", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-22", "label": "Rule 14, Sec. 22 \u2014 Proof of service by publication", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-23", "label": "Rule 14, Sec. 23 \u2014 Voluntary appearance", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-13", "label": "Rule 14, Sec. 13 \u2014 Duty of counsel of record", "source": "db"},
+            # \u2500\u2500 Related provisions \u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500\u2500
+            {"statute_id": "ROC", "provision_id": "3-4",  "label": "Rule 3, Sec. 4 \u2014 Spouses as parties (cross-reference for Sec. 11)", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "9-3",  "label": "Rule 9, Sec. 3 \u2014 Default; declaration of", "source": "db"},
         ]
     },
     {
