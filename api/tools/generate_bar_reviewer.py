@@ -347,15 +347,29 @@ def fetch_sc_issuance(cur, statute_id: str, provision_id: str = "general") -> Op
 
 
 def _parse_const_provision_id(provision_id: str) -> str:
-    """Convert 'art-3-sec-1' → 'III-1' for consti_codal lookup."""
-    parts = provision_id.replace("art-", "").split("-sec-")
-    if len(parts) == 2:
-        try:
-            art_roman = _INT_TO_ROMAN.get(int(parts[0]), parts[0].upper())
-        except Exception:
-            art_roman = parts[0].upper()
-        return f"{art_roman}-{parts[1]}"
-    return provision_id
+    """Convert map provision_id to consti_codal article_num format.
+
+    Examples:
+      'art-3-sec-1'   → 'III-1'
+      'art-17-sec-1'  → 'XVII-1'
+      'art-9-b-sec-1' → 'IX-B-1'   (sub-article: Art. IX-B)
+      'art-9-c-sec-2' → 'IX-C-2'
+    """
+    if not provision_id.lower().startswith("art-"):
+        return provision_id
+    remainder = provision_id[4:]          # strip "art-"
+    if "-sec-" not in remainder:
+        return provision_id
+    art_part, sec_num = remainder.split("-sec-", 1)
+    # art_part may be "3", "17", or "9-b" (article + sub-article letter)
+    sub_parts    = art_part.split("-", 1)
+    art_num_str  = sub_parts[0]
+    sub_letter   = sub_parts[1].upper() if len(sub_parts) > 1 else None
+    try:
+        roman = _INT_TO_ROMAN.get(int(art_num_str), art_num_str.upper())
+    except ValueError:
+        roman = art_num_str.upper()
+    return f"{roman}-{sub_letter}-{sec_num}" if sub_letter else f"{roman}-{sec_num}"
 
 
 # ── AI synthesis for provisions without DB text ────────────────────────────────

@@ -634,8 +634,8 @@ COMMERCIAL_MAP = [
         ),
         "sort_order": 32,
         "provisions": [
-            {"source": "const", "provision_id": "art-vi-sec-28"},
-            {"source": "const", "provision_id": "art-iii-sec-1"},
+            {"source": "const", "provision_id": "art-vi-sec-28", "label": "Art. VI, Sec. 28"},
+            {"source": "const", "provision_id": "art-iii-sec-1", "label": "Art. III, Sec. 1"},
             {"source": "ai", "note": "Art. VI Sec. 28: Congress taxing power; uniformity and equity; progressive system; charitable institutions tax exemption; religious/educational exemption. Art. III Sec. 1: due process (substantive — rationally related to public purpose; procedural — notice and hearing for assessment). Equal protection: uniform application to similarly situated taxpayers. Non-delegation doctrine — exception: local government units (Art. X Sec. 5)."},
         ]
     },

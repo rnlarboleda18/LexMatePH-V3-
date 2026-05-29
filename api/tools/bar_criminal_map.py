@@ -32,8 +32,8 @@ CRIMINAL_MAP = [
         "detail": "B. Nullum Crimen, Nulla Poena Sine Lege",
         "sort_order": 2,
         "provisions": [
-            {"statute_id": "RPC", "provision_id": "1", "label": "Art. 1 – No crime without law", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "21", "label": "Art. 21 – No felony without a law penalizing it", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "1", "label": "Art. 1, RPC — Time when Act takes effect", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "21", "label": "Art. 21, RPC — Penalties that may be imposed", "source": "db"},
         ]
     },
     {
@@ -44,8 +44,8 @@ CRIMINAL_MAP = [
         "detail": "C. Mala In Se and Mala Prohibita",
         "sort_order": 3,
         "provisions": [
-            {"statute_id": "RPC", "provision_id": "3", "label": "Art. 3 – Felonies (dolo vs culpa)", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "10", "label": "Art. 10 – Suppletory application to special laws", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "3", "label": "Art. 3, RPC — Definition", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "10", "label": "Art. 10, RPC — Offenses not subject to the provisions of this Code", "source": "db"},
         ]
     },
     {
@@ -61,7 +61,7 @@ CRIMINAL_MAP = [
         ),
         "sort_order": 4,
         "provisions": [
-            {"statute_id": "RPC", "provision_id": "2", "label": "Art. 2 – Territoriality and exceptions", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "2", "label": "Art. 2, RPC — Application of its provisions", "source": "db"},
             {"statute_id": "RPC", "provision_id": "22", "label": "Art. 22 – Prospectivity; retroactive effect when favorable", "source": "db"},
         ]
     },
@@ -113,11 +113,11 @@ CRIMINAL_MAP = [
         ),
         "sort_order": 6,
         "provisions": [
-            {"statute_id": "RPC", "provision_id": "3", "label": "Art. 3 – Felonies defined; dolo and culpa", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "3", "label": "Art. 3, RPC — Definition", "source": "db"},
             {"statute_id": "RPC", "provision_id": "4", "label": "Art. 4 – Criminal liability; proximate cause", "source": "db"},
             {"statute_id": "RPC", "provision_id": "6", "label": "Art. 6 – Stages of execution (consummated, frustrated, attempted)", "source": "db"},
             {"statute_id": "RPC", "provision_id": "7", "label": "Art. 7 – When light felonies are punishable", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "48", "label": "Art. 48 – Complex crimes (compound and complex proper)", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "48", "label": "Art. 48, RPC — Penalty for complex crimes", "source": "db"},
         ]
     },
     {
@@ -166,7 +166,7 @@ CRIMINAL_MAP = [
             {"statute_id": "RPC", "provision_id": "89", "label": "Art. 89 – How criminal liability is totally extinguished", "source": "db"},
             {"statute_id": "RPC", "provision_id": "90", "label": "Art. 90 – Prescription of crimes", "source": "db"},
             {"statute_id": "RPC", "provision_id": "91", "label": "Art. 91 – Computation of prescription of offenses", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "92", "label": "Art. 92 – Prescription of penalties", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "92", "label": "Art. 92, RPC — When and how penalties prescribe", "source": "db"},
             {"statute_id": "RPC", "provision_id": "94", "label": "Art. 94 – Partial extinction of criminal liability", "source": "db"},
             {"statute_id": "ACT-3326", "provision_id": "general", "label": "Act No. 3326 – Prescription of offenses under special laws", "source": "scrape", "scrape_url": "https://lawphil.net/statutes/acts/act_3326.html"},
             {"statute_id": "RA-10592", "provision_id": "general", "label": "R.A. 10592 – GCTA; partial extinction", "source": "scrape", "scrape_url": "https://lawphil.net/repacts/ra2013/ra_10592_2013.html"},
@@ -196,15 +196,15 @@ CRIMINAL_MAP = [
         ),
         "sort_order": 8,
         "provisions": [
-            {"statute_id": "RPC", "provision_id": "21", "label": "Art. 21 – Penalties; no felony without a law", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "25", "label": "Art. 25 – Classification of penalties", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "21", "label": "Art. 21, RPC — Penalties that may be imposed", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "25", "label": "Art. 25, RPC — Penalties which may be imposed", "source": "db"},
             {"statute_id": "RPC", "provision_id": "27", "label": "Art. 27 – Reclusion perpetua", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "29", "label": "Art. 29 – Preventive imprisonment", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "36", "label": "Art. 36 – Pardon; effects", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "29", "label": "Art. 29, RPC — Period of preventive imprisonment deducted from term of imprisonment", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "36", "label": "Art. 36, RPC — Pardon; its effects", "source": "db"},
             {"statute_id": "RPC", "provision_id": "39", "label": "Art. 39 – Subsidiary penalty", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "47", "label": "Art. 47 – Three-fold rule / successive service", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "63", "label": "Art. 63 – Rules for application of indivisible penalties", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "64", "label": "Art. 64 – Rules for divisible penalties with mitigating/aggravating", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "47", "label": "Art. 47, RPC — In what cases the death penalty shall not be imposed", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "63", "label": "Art. 63, RPC — Rules for the application of indivisible penalties", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "64", "label": "Art. 64, RPC — Rules for the application of penalties which contain three periods", "source": "db"},
             {"statute_id": "ACT-4103", "provision_id": "general", "label": "Act No. 4103 – Indeterminate Sentence Law", "source": "scrape", "scrape_url": "https://lawphil.net/statutes/acts/act_4103.html"},
             {"statute_id": "PD-968", "provision_id": "general", "label": "P.D. 968 – Probation Law, as amended", "source": "scrape", "scrape_url": "https://lawphil.net/statutes/presdecs/pd1976/pd_968_1976.html"},
             {"statute_id": "RA-10389", "provision_id": "general", "label": "R.A. 10389 – Recognizance Act", "source": "scrape", "scrape_url": "https://lawphil.net/repacts/ra2013/ra_10389_2013.html"},
@@ -241,7 +241,7 @@ CRIMINAL_MAP = [
             {"statute_id": "RPC", "provision_id": "89", "label": "Art. 89 – How criminal liability is totally extinguished", "source": "db"},
             {"statute_id": "RPC", "provision_id": "90", "label": "Art. 90 – Prescription of crimes", "source": "db"},
             {"statute_id": "RPC", "provision_id": "91", "label": "Art. 91 – Computation of prescription of offenses", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "92", "label": "Art. 92 – Prescription of penalties", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "92", "label": "Art. 92, RPC — When and how penalties prescribe", "source": "db"},
             {"statute_id": "RPC", "provision_id": "94", "label": "Art. 94 – Partial extinction of criminal liability", "source": "db"},
             {"statute_id": "ACT-3326", "provision_id": "general", "label": "Act No. 3326 – Prescription of offenses under special laws", "source": "scrape", "scrape_url": "https://lawphil.net/statutes/acts/act_3326.html"},
             {"statute_id": "RA-10592", "provision_id": "general", "label": "R.A. 10592 – GCTA; partial extinction", "source": "scrape", "scrape_url": "https://lawphil.net/repacts/ra2013/ra_10592_2013.html"},
@@ -264,10 +264,10 @@ CRIMINAL_MAP = [
         "sort_order": 10,
         "provisions": [
             {"statute_id": "RPC", "provision_id": "100", "label": "Art. 100 – Civil liability of persons guilty of felony", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "101", "label": "Art. 101 – Rules on civil liability when felony not punishable", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "101", "label": "Art. 101, RPC — Rules regarding civil liability in certain cases", "source": "db"},
             {"statute_id": "RPC", "provision_id": "102", "label": "Art. 102 – Subsidiary civil liability of innkeepers and tavern-keepers", "source": "db"},
             {"statute_id": "RPC", "provision_id": "103", "label": "Art. 103 – Subsidiary civil liability of employers", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "104", "label": "Art. 104 – What civil liability includes", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "104", "label": "Art. 104, RPC — What is included in civil liability", "source": "db"},
             {"statute_id": "RPC", "provision_id": "112", "label": "Art. 112 – Extinction of civil liability", "source": "db"},
             {"statute_id": "RPC", "provision_id": "113", "label": "Art. 113 – Obligation to satisfy civil liability", "source": "db"},
         ]
@@ -373,7 +373,7 @@ CRIMINAL_MAP = [
         "sort_order": 16,
         "provisions": [
             {"statute_id": "PD-1602", "provision_id": "general", "label": "P.D. 1602 as amended by R.A. 9287 – Anti-Gambling Law", "source": "scrape", "scrape_url": "https://lawphil.net/repacts/ra2004/ra_9287_2004.html"},
-            {"statute_id": "RPC", "provision_id": "133", "label": "Art. 133 – Offending religious feelings", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "133", "label": "Art. 133, RPC — Offending the religious feelings", "source": "db"},
             {"statute_id": "RPC", "provision_id": "201", "label": "Art. 201 – Immoral doctrines, obscene publications", "source": "db"},
         ]
     },
@@ -506,9 +506,9 @@ CRIMINAL_MAP = [
         "sort_order": 22,
         "provisions": [
             {"statute_id": "CA-148", "provision_id": "general", "label": "C.A. 148 as amended by R.A. 6805 – Anti-Alias Law", "source": "scrape", "scrape_url": "https://lawphil.net/statutes/comacts/ca_148_1936.html"},
-            {"statute_id": "RPC", "provision_id": "177", "label": "Art. 177 – Usurpation of authority or official functions", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "177", "label": "Art. 177, RPC — Usurpation of official functions", "source": "db"},
             {"statute_id": "RPC", "provision_id": "178", "label": "Art. 178 – Using fictitious name and concealing true name", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "348", "label": "Art. 348 – Simulation of births; substitution of one child for another", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "348", "label": "Art. 348, RPC — Usurpation of civil status", "source": "db"},
         ]
     },
     {
@@ -523,7 +523,7 @@ CRIMINAL_MAP = [
         "sort_order": 23,
         "provisions": [
             {"statute_id": "RPC", "provision_id": "353", "label": "Art. 353 – Definition of libel", "source": "db"},
-            {"statute_id": "RPC", "provision_id": "354", "label": "Art. 354 – Requirement of publicity", "source": "db"},
+            {"statute_id": "RPC", "provision_id": "354", "label": "Art. 354, RPC — Requirement for publicity", "source": "db"},
             {"statute_id": "RPC", "provision_id": "355", "label": "Art. 355 – Libel by means of writing", "source": "db"},
             {"statute_id": "RA-10175", "provision_id": "4c4", "label": "R.A. 10175, Sec. 4(c)(4) – Cyber Libel", "source": "scrape", "scrape_url": "https://lawphil.net/repacts/ra2012/ra_10175_2012.html", "specific_sections": "Sec. 4(c)(4)"},
         ]

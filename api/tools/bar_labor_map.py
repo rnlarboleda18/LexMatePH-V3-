@@ -19,9 +19,9 @@ LABOR_MAP = [
         ),
         "sort_order": 1,
         "provisions": [
-            {"source": "const", "provision_id": "art-13-sec-1"},
-            {"source": "const", "provision_id": "art-13-sec-2"},
-            {"source": "const", "provision_id": "art-13-sec-3"},
+            {"source": "const", "provision_id": "art-13-sec-1", "label": "Art. XIII, Sec. 1"},
+            {"source": "const", "provision_id": "art-13-sec-2", "label": "Art. XIII, Sec. 2"},
+            {"source": "const", "provision_id": "art-13-sec-3", "label": "Art. XIII, Sec. 3"},
             {"source": "ai", "note": "Article XIII of the 1987 Constitution mandates the State to afford full protection to labor, local and overseas, organized and unorganized, and promote full employment and equality of employment opportunities. Sec. 3 guarantees workers' rights to self-organization, collective bargaining, peaceful concerted activities including the right to strike, security of tenure, humane conditions of work, and living wages."},
         ]
     },
@@ -42,9 +42,9 @@ LABOR_MAP = [
         ),
         "sort_order": 2,
         "provisions": [
-            {"source": "const", "provision_id": "art-13-sec-1"},
-            {"source": "const", "provision_id": "art-13-sec-2"},
-            {"source": "const", "provision_id": "art-13-sec-3"},
+            {"source": "const", "provision_id": "art-13-sec-1", "label": "Art. XIII, Sec. 1"},
+            {"source": "const", "provision_id": "art-13-sec-2", "label": "Art. XIII, Sec. 2"},
+            {"source": "const", "provision_id": "art-13-sec-3", "label": "Art. XIII, Sec. 3"},
             {"source": "ai", "note": "Article XIII of the 1987 Constitution mandates the State to afford full protection to labor, local and overseas, organized and unorganized, and promote full employment and equality of employment opportunities. Sec. 3 guarantees workers' rights to self-organization, collective bargaining, peaceful concerted activities including the right to strike, security of tenure, humane conditions of work, and living wages."},
         ]
     },
@@ -240,7 +240,7 @@ LABOR_MAP = [
         "sort_order": 10,
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
-            {"source": "db", "statute_id": "LABOR", "provision_id": "100", "label": "Art. 100, Labor Code", "note": "Art. 100 of the Labor Code prohibits the elimination or diminution of existing benefits already enjoyed by employees. The non-diminution rule applies to benefits that have ripened into company practice — i.e., given over a long period of time, consistently and deliberately, such that employees have come to rely on it as part of their compensation. A mistake in giving a benefit does not necessarily give rise to a practice. Benefits may be reduced if done with the express consent of the employees through a valid CBA."},
+            {"source": "db", "statute_id": "LABOR", "provision_id": "100", "label": "Art. 100, Labor Code — Prohibition Against Elimination or Diminution of Benefits", "note": "Art. 100 of the Labor Code prohibits the elimination or diminution of existing benefits already enjoyed by employees. The non-diminution rule applies to benefits that have ripened into company practice — i.e., given over a long period of time, consistently and deliberately, such that employees have come to rely on it as part of their compensation. A mistake in giving a benefit does not necessarily give rise to a practice. Benefits may be reduced if done with the express consent of the employees through a valid CBA."},
         ]
     },
     {
@@ -329,9 +329,9 @@ LABOR_MAP = [
         ),
         "sort_order": 14,
         "provisions": [
-            {"source": "const", "provision_id": "art-13-sec-1"},
-            {"source": "const", "provision_id": "art-13-sec-2"},
-            {"source": "const", "provision_id": "art-13-sec-3"},
+            {"source": "const", "provision_id": "art-13-sec-1", "label": "Art. XIII, Sec. 1"},
+            {"source": "const", "provision_id": "art-13-sec-2", "label": "Art. XIII, Sec. 2"},
+            {"source": "const", "provision_id": "art-13-sec-3", "label": "Art. XIII, Sec. 3"},
             {"source": "ai", "note": "Article XIII of the 1987 Constitution mandates the State to afford full protection to labor, local and overseas, organized and unorganized, and promote full employment and equality of employment opportunities. Sec. 3 guarantees workers' rights to self-organization, collective bargaining, peaceful concerted activities including the right to strike, security of tenure, humane conditions of work, and living wages."},
         ]
     },
@@ -361,9 +361,9 @@ LABOR_MAP = [
         ),
         "sort_order": 15,
         "provisions": [
-            {"source": "const", "provision_id": "art-13-sec-1"},
-            {"source": "const", "provision_id": "art-13-sec-2"},
-            {"source": "const", "provision_id": "art-13-sec-3"},
+            {"source": "const", "provision_id": "art-13-sec-1", "label": "Art. XIII, Sec. 1"},
+            {"source": "const", "provision_id": "art-13-sec-2", "label": "Art. XIII, Sec. 2"},
+            {"source": "const", "provision_id": "art-13-sec-3", "label": "Art. XIII, Sec. 3"},
             {"source": "ai", "note": "Article XIII of the 1987 Constitution mandates the State to afford full protection to labor, local and overseas, organized and unorganized, and promote full employment and equality of employment opportunities. Sec. 3 guarantees workers' rights to self-organization, collective bargaining, peaceful concerted activities including the right to strike, security of tenure, humane conditions of work, and living wages."},
         ]
     },
@@ -433,9 +433,9 @@ LABOR_MAP = [
         "sort_order": 18,
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
-            {"source": "const", "provision_id": "art-13-sec-3"},
+            {"source": "const", "provision_id": "art-13-sec-3", "label": "Art. XIII, Sec. 3"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/presdecs/pd1974/pd_442_1974.html"},
-            {"source": "db", "statute_id": "LABOR", "provision_id": "255", "label": "Art. 255, Labor Code", "note": "Book V of the Labor Code governs labor relations. Art. 243 (now Art. 255) guarantees the right to self-organization for all persons employed in commercial, industrial, and agricultural enterprises. DOLE Department Order No. 40-03 (series 2003) and its amendments govern registration of unions. A legitimate labor organization acquires legal personality upon registration with the DOLE Bureau of Labor Relations (BLR). Minimum membership: 20% of all employees in the bargaining unit for enterprise unions. Independent unions register with the Regional Office; federations and national unions register with the BLR."},
+            {"source": "db", "statute_id": "LABOR", "provision_id": "255", "label": "Art. 255, Labor Code — Ineligibility of Managerial Employees to Join any Labor Organization; Right of Supervisory Employees", "note": "Book V of the Labor Code governs labor relations. Art. 243 (now Art. 255) guarantees the right to self-organization for all persons employed in commercial, industrial, and agricultural enterprises. DOLE Department Order No. 40-03 (series 2003) and its amendments govern registration of unions. A legitimate labor organization acquires legal personality upon registration with the DOLE Bureau of Labor Relations (BLR). Minimum membership: 20% of all employees in the bargaining unit for enterprise unions. Independent unions register with the Regional Office; federations and national unions register with the BLR."},
         ]
     },
     {
@@ -522,9 +522,9 @@ LABOR_MAP = [
         "sort_order": 23,
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
-            {"source": "const", "provision_id": "art-13-sec-3"},
+            {"source": "const", "provision_id": "art-13-sec-3", "label": "Art. XIII, Sec. 3"},
             {"source": "lawphil", "url": "https://lawphil.net/statutes/presdecs/pd1974/pd_442_1974.html"},
-            {"source": "db", "statute_id": "LABOR", "provision_id": "255", "label": "Art. 255, Labor Code", "note": "Book V of the Labor Code governs labor relations. Art. 243 (now Art. 255) guarantees the right to self-organization for all persons employed in commercial, industrial, and agricultural enterprises. DOLE Department Order No. 40-03 (series 2003) and its amendments govern registration of unions. A legitimate labor organization acquires legal personality upon registration with the DOLE Bureau of Labor Relations (BLR). Minimum membership: 20% of all employees in the bargaining unit for enterprise unions. Independent unions register with the Regional Office; federations and national unions register with the BLR."},
+            {"source": "db", "statute_id": "LABOR", "provision_id": "255", "label": "Art. 255, Labor Code — Ineligibility of Managerial Employees to Join any Labor Organization; Right of Supervisory Employees", "note": "Book V of the Labor Code governs labor relations. Art. 243 (now Art. 255) guarantees the right to self-organization for all persons employed in commercial, industrial, and agricultural enterprises. DOLE Department Order No. 40-03 (series 2003) and its amendments govern registration of unions. A legitimate labor organization acquires legal personality upon registration with the DOLE Bureau of Labor Relations (BLR). Minimum membership: 20% of all employees in the bargaining unit for enterprise unions. Independent unions register with the Regional Office; federations and national unions register with the BLR."},
         ]
     },
     {
@@ -590,7 +590,7 @@ LABOR_MAP = [
         "sort_order": 26,
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
-            {"source": "db", "statute_id": "LABOR", "provision_id": "261", "label": "Art. 261, Labor Code", "note": "Arts. 261-272 (renumbered) of the Labor Code impose a mutual duty on the employer and the exclusive bargaining agent to bargain collectively in good faith. The CBA is effective for five years; the representation aspect is renegotiable every five years while economic provisions may be renegotiated every three years. Surface bargaining and blue-sky bargaining constitute bad-faith bargaining. The duty to bargain includes the duty to execute a contract if agreement is reached. Violation of the duty to bargain is an unfair labor practice (ULP)."},
+            {"source": "db", "statute_id": "LABOR", "provision_id": "261", "label": "Art. 261, Labor Code — Procedure in Collective Bargaining", "note": "Arts. 261-272 (renumbered) of the Labor Code impose a mutual duty on the employer and the exclusive bargaining agent to bargain collectively in good faith. The CBA is effective for five years; the representation aspect is renegotiable every five years while economic provisions may be renegotiated every three years. Surface bargaining and blue-sky bargaining constitute bad-faith bargaining. The duty to bargain includes the duty to execute a contract if agreement is reached. Violation of the duty to bargain is an unfair labor practice (ULP)."},
         ]
     },
     {
@@ -631,7 +631,7 @@ LABOR_MAP = [
         "sort_order": 28,
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
-            {"source": "db", "statute_id": "LABOR", "provision_id": "224", "label": "Art. 224, Labor Code", "note": "Labor Arbiters have original and exclusive jurisdiction (Art. 224, formerly Art. 217) over: unfair labor practice cases; termination disputes; money claims exceeding PHP 5,000 per claim arising from employer-employee relations; claims for actual, moral, exemplary, and other forms of damages arising from employer-employee relations; cases arising from RA 6727 (wage rationalization). Claims not exceeding PHP 5,000 with no reinstatement claim are within DOLE Regional Director's jurisdiction under Art. 129. Labor Arbiters may award reinstatement pending appeal (immediately executory). OFW illegal dismissal: Labor Arbiter jurisdiction; monetary award limited to the unexpired portion of the contract or 3 months salary per year, whichever is less (RA 8042, as clarified by Sameer Overseas v. Cabiles)."},
+            {"source": "db", "statute_id": "LABOR", "provision_id": "224", "label": "Art. 224, Labor Code — Jurisdiction of the Labor Arbiters and the Commission", "note": "Labor Arbiters have original and exclusive jurisdiction (Art. 224, formerly Art. 217) over: unfair labor practice cases; termination disputes; money claims exceeding PHP 5,000 per claim arising from employer-employee relations; claims for actual, moral, exemplary, and other forms of damages arising from employer-employee relations; cases arising from RA 6727 (wage rationalization). Claims not exceeding PHP 5,000 with no reinstatement claim are within DOLE Regional Director's jurisdiction under Art. 129. Labor Arbiters may award reinstatement pending appeal (immediately executory). OFW illegal dismissal: Labor Arbiter jurisdiction; monetary award limited to the unexpired portion of the contract or 3 months salary per year, whichever is less (RA 8042, as clarified by Sameer Overseas v. Cabiles)."},
         ]
     },
     {
@@ -696,7 +696,7 @@ LABOR_MAP = [
         "sort_order": 32,
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
-            {"source": "db", "statute_id": "LABOR", "provision_id": "229", "label": "Art. 229, Labor Code", "note": "The National Labor Relations Commission (NLRC) is a quasi-judicial body that exercises appellate jurisdiction over decisions of Labor Arbiters (Art. 229, formerly Art. 223). Appeals to NLRC must be filed within 10 calendar days from receipt of the Labor Arbiter's decision. A cash bond or surety bond in the amount of the monetary award is required for appeals involving monetary awards. NLRC decisions become final and executory 10 calendar days from receipt if not appealed. Further review: Rule 65 certiorari to the Court of Appeals (St. Martin Funeral Homes doctrine), then to the Supreme Court. NLRC has original jurisdiction over inter-union and intra-union disputes through its Med-Arbitration units."},
+            {"source": "db", "statute_id": "LABOR", "provision_id": "229", "label": "Art. 229, Labor Code — Appeal", "note": "The National Labor Relations Commission (NLRC) is a quasi-judicial body that exercises appellate jurisdiction over decisions of Labor Arbiters (Art. 229, formerly Art. 223). Appeals to NLRC must be filed within 10 calendar days from receipt of the Labor Arbiter's decision. A cash bond or surety bond in the amount of the monetary award is required for appeals involving monetary awards. NLRC decisions become final and executory 10 calendar days from receipt if not appealed. Further review: Rule 65 certiorari to the Court of Appeals (St. Martin Funeral Homes doctrine), then to the Supreme Court. NLRC has original jurisdiction over inter-union and intra-union disputes through its Med-Arbitration units."},
         ]
     },
     {
@@ -752,7 +752,7 @@ LABOR_MAP = [
         "sort_order": 34,
         "provisions": [
             {"source": "statute", "provision_id": "pd-442"},
-            {"source": "db", "statute_id": "LABOR", "provision_id": "224", "label": "Art. 224, Labor Code", "note": "Labor Arbiters have original and exclusive jurisdiction (Art. 224, formerly Art. 217) over: unfair labor practice cases; termination disputes; money claims exceeding PHP 5,000 per claim arising from employer-employee relations; claims for actual, moral, exemplary, and other forms of damages arising from employer-employee relations; cases arising from RA 6727 (wage rationalization). Claims not exceeding PHP 5,000 with no reinstatement claim are within DOLE Regional Director's jurisdiction under Art. 129. Labor Arbiters may award reinstatement pending appeal (immediately executory). OFW illegal dismissal: Labor Arbiter jurisdiction; monetary award limited to the unexpired portion of the contract or 3 months salary per year, whichever is less (RA 8042, as clarified by Sameer Overseas v. Cabiles)."},
+            {"source": "db", "statute_id": "LABOR", "provision_id": "224", "label": "Art. 224, Labor Code — Jurisdiction of the Labor Arbiters and the Commission", "note": "Labor Arbiters have original and exclusive jurisdiction (Art. 224, formerly Art. 217) over: unfair labor practice cases; termination disputes; money claims exceeding PHP 5,000 per claim arising from employer-employee relations; claims for actual, moral, exemplary, and other forms of damages arising from employer-employee relations; cases arising from RA 6727 (wage rationalization). Claims not exceeding PHP 5,000 with no reinstatement claim are within DOLE Regional Director's jurisdiction under Art. 129. Labor Arbiters may award reinstatement pending appeal (immediately executory). OFW illegal dismissal: Labor Arbiter jurisdiction; monetary award limited to the unexpired portion of the contract or 3 months salary per year, whichever is less (RA 8042, as clarified by Sameer Overseas v. Cabiles)."},
         ]
     },
     {

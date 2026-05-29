@@ -34,7 +34,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "2-5", "label": "Rule 2, Sec. 5 \u2013 Joinder of causes of action", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-1", "label": "Rule 4, Sec. 1 \u2013 Venue of real actions", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-2", "label": "Rule 4, Sec. 2 \u2013 Venue of personal actions", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "4-3", "label": "Rule 4, Sec. 3 \u2013 Venue; actions against nonresidents", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "4-3", "label": "Rule 4, Sec. 3 — Venue of actions against nonresidents", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-4", "label": "Rule 4, Sec. 4 \u2013 When Rule not applicable", "source": "db"},
         ]
     },
@@ -198,7 +198,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "2-5", "label": "Rule 2, Sec. 5 \u2013 Joinder of causes of action", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-1", "label": "Rule 4, Sec. 1 \u2013 Venue of real actions", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-2", "label": "Rule 4, Sec. 2 \u2013 Venue of personal actions", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "4-3", "label": "Rule 4, Sec. 3 \u2013 Venue; actions against nonresidents", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "4-3", "label": "Rule 4, Sec. 3 — Venue of actions against nonresidents", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-4", "label": "Rule 4, Sec. 4 \u2013 When Rule not applicable", "source": "db"},
         ]
     },
@@ -219,7 +219,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "2-5", "label": "Rule 2, Sec. 5 \u2013 Joinder of causes of action", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-1", "label": "Rule 4, Sec. 1 \u2013 Venue of real actions", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-2", "label": "Rule 4, Sec. 2 \u2013 Venue of personal actions", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "4-3", "label": "Rule 4, Sec. 3 \u2013 Venue; actions against nonresidents", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "4-3", "label": "Rule 4, Sec. 3 — Venue of actions against nonresidents", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-4", "label": "Rule 4, Sec. 4 \u2013 When Rule not applicable", "source": "db"},
         ]
     },
@@ -243,7 +243,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "6-8", "label": "Rule 6, Sec. 8 \u2013 Cross-claim", "source": "db"},
             {"statute_id": "ROC", "provision_id": "7-4", "label": "Rule 7, Sec. 4 \u2013 Verification", "source": "db"},
             {"statute_id": "ROC", "provision_id": "7-5", "label": "Rule 7, Sec. 5 \u2013 Certification against forum shopping", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "8-1", "label": "Rule 8, Sec. 1 \u2013 Manner of making allegations", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "8-1", "label": "Rule 8, Sec. 1 — In general", "source": "db"},
             {"statute_id": "ROC", "provision_id": "10-2", "label": "Rule 10, Sec. 2 \u2013 Amendments as a matter of right", "source": "db"},
             {"statute_id": "ROC", "provision_id": "10-3", "label": "Rule 10, Sec. 3 \u2013 Amendments by leave of court", "source": "db"},
         ]
@@ -265,7 +265,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "2-5", "label": "Rule 2, Sec. 5 \u2013 Joinder of causes of action", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-1", "label": "Rule 4, Sec. 1 \u2013 Venue of real actions", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-2", "label": "Rule 4, Sec. 2 \u2013 Venue of personal actions", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "4-3", "label": "Rule 4, Sec. 3 \u2013 Venue; actions against nonresidents", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "4-3", "label": "Rule 4, Sec. 3 — Venue of actions against nonresidents", "source": "db"},
             {"statute_id": "ROC", "provision_id": "4-4", "label": "Rule 4, Sec. 4 \u2013 When Rule not applicable", "source": "db"},
         ]
     },
@@ -296,7 +296,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "6-8", "label": "Rule 6, Sec. 8 \u2013 Cross-claim", "source": "db"},
             {"statute_id": "ROC", "provision_id": "7-4", "label": "Rule 7, Sec. 4 \u2013 Verification", "source": "db"},
             {"statute_id": "ROC", "provision_id": "7-5", "label": "Rule 7, Sec. 5 \u2013 Certification against forum shopping", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "8-1", "label": "Rule 8, Sec. 1 \u2013 Manner of making allegations", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "8-1", "label": "Rule 8, Sec. 1 — In general", "source": "db"},
             {"statute_id": "ROC", "provision_id": "10-2", "label": "Rule 10, Sec. 2 \u2013 Amendments as a matter of right", "source": "db"},
             {"statute_id": "ROC", "provision_id": "10-3", "label": "Rule 10, Sec. 3 \u2013 Amendments by leave of court", "source": "db"},
         ]
@@ -362,10 +362,10 @@ REMEDIAL_MAP = [
         "sort_order": 18,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "14-1", "label": "Rule 14, Sec. 1 \u2013 Clerk to issue summons", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-6", "label": "Rule 14, Sec. 6 \u2013 Service in person on defendant", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-7", "label": "Rule 14, Sec. 7 \u2013 Substituted service", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-12", "label": "Rule 14, Sec. 12 \u2013 Service upon foreign private juridical entity", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-16", "label": "Rule 14, Sec. 16 \u2013 Service by publication", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-6", "label": "Rule 14, Sec. 6 — Substituted service", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-7", "label": "Rule 14, Sec. 7 — Service upon entity without juridical personality", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-12", "label": "Rule 14, Sec. 12 — Service upon domestic private juridical entity", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-16", "label": "Rule 14, Sec. 16 — Service upon defendant whose identity or whereabouts are unknown", "source": "db"},
             {"statute_id": "ROC", "provision_id": "13-5", "label": "Rule 13, Sec. 5 \u2013 Modes of service", "source": "db"},
             {"statute_id": "ROC", "provision_id": "13-9", "label": "Rule 13, Sec. 9 \u2013 Service by electronic means", "source": "db"},
             {"statute_id": "ROC", "provision_id": "9-1", "label": "Rule 9, Sec. 1 \u2013 Defenses and objections not pleaded; waiver", "source": "db"},
@@ -390,10 +390,10 @@ REMEDIAL_MAP = [
         "sort_order": 19,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "14-1", "label": "Rule 14, Sec. 1 \u2013 Clerk to issue summons", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-6", "label": "Rule 14, Sec. 6 \u2013 Service in person on defendant", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-7", "label": "Rule 14, Sec. 7 \u2013 Substituted service", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-12", "label": "Rule 14, Sec. 12 \u2013 Service upon foreign private juridical entity", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "14-16", "label": "Rule 14, Sec. 16 \u2013 Service by publication", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-6", "label": "Rule 14, Sec. 6 — Substituted service", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-7", "label": "Rule 14, Sec. 7 — Service upon entity without juridical personality", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-12", "label": "Rule 14, Sec. 12 — Service upon domestic private juridical entity", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "14-16", "label": "Rule 14, Sec. 16 — Service upon defendant whose identity or whereabouts are unknown", "source": "db"},
             {"statute_id": "ROC", "provision_id": "13-5", "label": "Rule 13, Sec. 5 \u2013 Modes of service", "source": "db"},
             {"statute_id": "ROC", "provision_id": "13-9", "label": "Rule 13, Sec. 9 \u2013 Service by electronic means", "source": "db"},
             {"statute_id": "ROC", "provision_id": "9-1", "label": "Rule 9, Sec. 1 \u2013 Defenses and objections not pleaded; waiver", "source": "db"},
@@ -416,8 +416,8 @@ REMEDIAL_MAP = [
         "sort_order": 20,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "18-1", "label": "Rule 18, Sec. 1 \u2013 When conducted", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "18-2", "label": "Rule 18, Sec. 2 \u2013 Pre-trial conference", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "18-6", "label": "Rule 18, Sec. 6 \u2013 Pre-trial order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "18-2", "label": "Rule 18, Sec. 2 — Nature and purpose", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "18-6", "label": "Rule 18, Sec. 6 — Pre-trial brief", "source": "db"},
         ]
     },
     {
@@ -429,8 +429,8 @@ REMEDIAL_MAP = [
         "sort_order": 21,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "18-1", "label": "Rule 18, Sec. 1 \u2013 When conducted", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "18-2", "label": "Rule 18, Sec. 2 \u2013 Pre-trial conference", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "18-6", "label": "Rule 18, Sec. 6 \u2013 Pre-trial order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "18-2", "label": "Rule 18, Sec. 2 — Nature and purpose", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "18-6", "label": "Rule 18, Sec. 6 — Pre-trial brief", "source": "db"},
         ]
     },
     {
@@ -445,8 +445,8 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "23-4", "label": "Rule 23, Sec. 4 \u2013 Use of depositions", "source": "db"},
             {"statute_id": "ROC", "provision_id": "25-1", "label": "Rule 25, Sec. 1 \u2013 Interrogatories to parties", "source": "db"},
             {"statute_id": "ROC", "provision_id": "26-1", "label": "Rule 26, Sec. 1 \u2013 Request for admission", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 \u2013 Production or inspection of documents", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 \u2013 Physical and mental examination of persons", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 — Motion for production or inspection; order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 — When examination may be ordered", "source": "db"},
             {"statute_id": "ROC", "provision_id": "29-1", "label": "Rule 29, Sec. 1 \u2013 Refusal to answer; consequences", "source": "db"},
         ]
     },
@@ -462,8 +462,8 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "23-4", "label": "Rule 23, Sec. 4 \u2013 Use of depositions", "source": "db"},
             {"statute_id": "ROC", "provision_id": "25-1", "label": "Rule 25, Sec. 1 \u2013 Interrogatories to parties", "source": "db"},
             {"statute_id": "ROC", "provision_id": "26-1", "label": "Rule 26, Sec. 1 \u2013 Request for admission", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 \u2013 Production or inspection of documents", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 \u2013 Physical and mental examination of persons", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 — Motion for production or inspection; order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 — When examination may be ordered", "source": "db"},
             {"statute_id": "ROC", "provision_id": "29-1", "label": "Rule 29, Sec. 1 \u2013 Refusal to answer; consequences", "source": "db"},
         ]
     },
@@ -479,8 +479,8 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "23-4", "label": "Rule 23, Sec. 4 \u2013 Use of depositions", "source": "db"},
             {"statute_id": "ROC", "provision_id": "25-1", "label": "Rule 25, Sec. 1 \u2013 Interrogatories to parties", "source": "db"},
             {"statute_id": "ROC", "provision_id": "26-1", "label": "Rule 26, Sec. 1 \u2013 Request for admission", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 \u2013 Production or inspection of documents", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 \u2013 Physical and mental examination of persons", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 — Motion for production or inspection; order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 — When examination may be ordered", "source": "db"},
             {"statute_id": "ROC", "provision_id": "29-1", "label": "Rule 29, Sec. 1 \u2013 Refusal to answer; consequences", "source": "db"},
         ]
     },
@@ -496,8 +496,8 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "23-4", "label": "Rule 23, Sec. 4 \u2013 Use of depositions", "source": "db"},
             {"statute_id": "ROC", "provision_id": "25-1", "label": "Rule 25, Sec. 1 \u2013 Interrogatories to parties", "source": "db"},
             {"statute_id": "ROC", "provision_id": "26-1", "label": "Rule 26, Sec. 1 \u2013 Request for admission", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 \u2013 Production or inspection of documents", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 \u2013 Physical and mental examination of persons", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 — Motion for production or inspection; order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 — When examination may be ordered", "source": "db"},
             {"statute_id": "ROC", "provision_id": "29-1", "label": "Rule 29, Sec. 1 \u2013 Refusal to answer; consequences", "source": "db"},
         ]
     },
@@ -510,8 +510,8 @@ REMEDIAL_MAP = [
         "sort_order": 26,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "18-1", "label": "Rule 18, Sec. 1 \u2013 When conducted", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "18-2", "label": "Rule 18, Sec. 2 \u2013 Pre-trial conference", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "18-6", "label": "Rule 18, Sec. 6 \u2013 Pre-trial order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "18-2", "label": "Rule 18, Sec. 2 — Nature and purpose", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "18-6", "label": "Rule 18, Sec. 6 — Pre-trial brief", "source": "db"},
         ]
     },
     {
@@ -534,7 +534,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "6-8", "label": "Rule 6, Sec. 8 \u2013 Cross-claim", "source": "db"},
             {"statute_id": "ROC", "provision_id": "7-4", "label": "Rule 7, Sec. 4 \u2013 Verification", "source": "db"},
             {"statute_id": "ROC", "provision_id": "7-5", "label": "Rule 7, Sec. 5 \u2013 Certification against forum shopping", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "8-1", "label": "Rule 8, Sec. 1 \u2013 Manner of making allegations", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "8-1", "label": "Rule 8, Sec. 1 — In general", "source": "db"},
             {"statute_id": "ROC", "provision_id": "10-2", "label": "Rule 10, Sec. 2 \u2013 Amendments as a matter of right", "source": "db"},
             {"statute_id": "ROC", "provision_id": "10-3", "label": "Rule 10, Sec. 3 \u2013 Amendments by leave of court", "source": "db"},
         ]
@@ -555,8 +555,8 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "23-4", "label": "Rule 23, Sec. 4 \u2013 Use of depositions", "source": "db"},
             {"statute_id": "ROC", "provision_id": "25-1", "label": "Rule 25, Sec. 1 \u2013 Interrogatories to parties", "source": "db"},
             {"statute_id": "ROC", "provision_id": "26-1", "label": "Rule 26, Sec. 1 \u2013 Request for admission", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 \u2013 Production or inspection of documents", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 \u2013 Physical and mental examination of persons", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "27-1", "label": "Rule 27, Sec. 1 — Motion for production or inspection; order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "28-1", "label": "Rule 28, Sec. 1 — When examination may be ordered", "source": "db"},
             {"statute_id": "ROC", "provision_id": "29-1", "label": "Rule 29, Sec. 1 \u2013 Refusal to answer; consequences", "source": "db"},
         ]
     },
@@ -572,7 +572,7 @@ REMEDIAL_MAP = [
         ),
         "sort_order": 29,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "30-1", "label": "Rule 30, Sec. 1 \u2013 Notice of trial", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "30-1", "label": "Rule 30, Sec. 1 — Schedule of trial", "source": "db"},
             {"statute_id": "ROC", "provision_id": "35-1", "label": "Rule 35, Sec. 1 \u2013 Summary judgment for claimant", "source": "db"},
             {"statute_id": "ROC", "provision_id": "35-2", "label": "Rule 35, Sec. 2 \u2013 Summary judgment for defending party", "source": "db"},
             {"statute_id": "ROC", "provision_id": "36-1", "label": "Rule 36, Sec. 1 \u2013 Rendition of judgments and final orders", "source": "db"},
@@ -630,7 +630,7 @@ REMEDIAL_MAP = [
         "sort_order": 32,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "59-1", "label": "Rule 59, Sec. 1 \u2013 Appointment of receiver", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "60-1", "label": "Rule 60, Sec. 1 \u2013 Replevin; when may be issued", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "60-1", "label": "Rule 60, Sec. 1 — Application", "source": "db"},
         ]
     },
     {
@@ -645,7 +645,7 @@ REMEDIAL_MAP = [
         ),
         "sort_order": 33,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "57-1", "label": "Rule 57, Sec. 1 \u2013 Grounds for preliminary attachment", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "57-1", "label": "Rule 57, Sec. 1 — Grounds upon which attachment may issue", "source": "db"},
             {"statute_id": "ROC", "provision_id": "57-5", "label": "Rule 57, Sec. 5 \u2013 Manner of attaching property", "source": "db"},
             {"statute_id": "ROC", "provision_id": "57-13", "label": "Rule 57, Sec. 13 \u2013 Discharge of attachment", "source": "db"},
         ]
@@ -664,7 +664,7 @@ REMEDIAL_MAP = [
         "provisions": [
             {"statute_id": "ROC", "provision_id": "58-1", "label": "Rule 58, Sec. 1 \u2013 Preliminary injunction defined", "source": "db"},
             {"statute_id": "ROC", "provision_id": "58-3", "label": "Rule 58, Sec. 3 \u2013 Grounds for issuance", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "58-5", "label": "Rule 58, Sec. 5 \u2013 Injunction not granted without hearing", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "58-5", "label": "Rule 58, Sec. 5 — Preliminary injunction not granted without notice; exception", "source": "db"},
         ]
     },
     {
@@ -676,7 +676,7 @@ REMEDIAL_MAP = [
         "sort_order": 35,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "59-1", "label": "Rule 59, Sec. 1 \u2013 Appointment of receiver", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "60-1", "label": "Rule 60, Sec. 1 \u2013 Replevin; when may be issued", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "60-1", "label": "Rule 60, Sec. 1 — Application", "source": "db"},
         ]
     },
     {
@@ -688,7 +688,7 @@ REMEDIAL_MAP = [
         "sort_order": 36,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "59-1", "label": "Rule 59, Sec. 1 \u2013 Appointment of receiver", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "60-1", "label": "Rule 60, Sec. 1 \u2013 Replevin; when may be issued", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "60-1", "label": "Rule 60, Sec. 1 — Application", "source": "db"},
         ]
     },
     {
@@ -718,7 +718,7 @@ REMEDIAL_MAP = [
         "sort_order": 38,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "59-1", "label": "Rule 59, Sec. 1 \u2013 Appointment of receiver", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "60-1", "label": "Rule 60, Sec. 1 \u2013 Replevin; when may be issued", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "60-1", "label": "Rule 60, Sec. 1 — Application", "source": "db"},
         ]
     },
     {
@@ -730,7 +730,7 @@ REMEDIAL_MAP = [
         "sort_order": 39,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "66-1", "label": "Rule 66, Sec. 1 \u2013 Action by government", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "66-5", "label": "Rule 66, Sec. 5 \u2013 When individual may commence action", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "66-5", "label": "Rule 66, Sec. 5 — When an individual may commence such an action", "source": "db"},
         ]
     },
     {
@@ -783,7 +783,7 @@ REMEDIAL_MAP = [
         "sort_order": 43,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "66-1", "label": "Rule 66, Sec. 1 \u2013 Action by government", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "66-5", "label": "Rule 66, Sec. 5 \u2013 When individual may commence action", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "66-5", "label": "Rule 66, Sec. 5 — When an individual may commence such an action", "source": "db"},
         ]
     },
     {
@@ -798,11 +798,11 @@ REMEDIAL_MAP = [
         ),
         "sort_order": 44,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "67-1", "label": "Rule 67, Sec. 1 \u2013 Complaint for expropriation", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "67-1", "label": "Rule 67, Sec. 1 — The complaint", "source": "db"},
             {"statute_id": "ROC", "provision_id": "67-4", "label": "Rule 67, Sec. 4 \u2013 Order of expropriation", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "68-1", "label": "Rule 68, Sec. 1 \u2013 Complaint for foreclosure of mortgage", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "68-1", "label": "Rule 68, Sec. 1 — Complaint in action for foreclosure", "source": "db"},
             {"statute_id": "ROC", "provision_id": "68-3", "label": "Rule 68, Sec. 3 \u2013 Sale of mortgaged property", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "69-1", "label": "Rule 69, Sec. 1 \u2013 Complaint for partition; order thereon", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "69-1", "label": "Rule 69, Sec. 1 — Complaint in action for partition of real estate", "source": "db"},
         ]
     },
     {
@@ -816,11 +816,11 @@ REMEDIAL_MAP = [
         ),
         "sort_order": 45,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "67-1", "label": "Rule 67, Sec. 1 \u2013 Complaint for expropriation", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "67-1", "label": "Rule 67, Sec. 1 — The complaint", "source": "db"},
             {"statute_id": "ROC", "provision_id": "67-4", "label": "Rule 67, Sec. 4 \u2013 Order of expropriation", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "68-1", "label": "Rule 68, Sec. 1 \u2013 Complaint for foreclosure of mortgage", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "68-1", "label": "Rule 68, Sec. 1 — Complaint in action for foreclosure", "source": "db"},
             {"statute_id": "ROC", "provision_id": "68-3", "label": "Rule 68, Sec. 3 \u2013 Sale of mortgaged property", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "69-1", "label": "Rule 69, Sec. 1 \u2013 Complaint for partition; order thereon", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "69-1", "label": "Rule 69, Sec. 1 — Complaint in action for partition of real estate", "source": "db"},
         ]
     },
     {
@@ -831,11 +831,11 @@ REMEDIAL_MAP = [
         "detail": "H. Partition — Rule 69",
         "sort_order": 46,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "67-1", "label": "Rule 67, Sec. 1 \u2013 Complaint for expropriation", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "67-1", "label": "Rule 67, Sec. 1 — The complaint", "source": "db"},
             {"statute_id": "ROC", "provision_id": "67-4", "label": "Rule 67, Sec. 4 \u2013 Order of expropriation", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "68-1", "label": "Rule 68, Sec. 1 \u2013 Complaint for foreclosure of mortgage", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "68-1", "label": "Rule 68, Sec. 1 — Complaint in action for foreclosure", "source": "db"},
             {"statute_id": "ROC", "provision_id": "68-3", "label": "Rule 68, Sec. 3 \u2013 Sale of mortgaged property", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "69-1", "label": "Rule 69, Sec. 1 \u2013 Complaint for partition; order thereon", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "69-1", "label": "Rule 69, Sec. 1 — Complaint in action for partition of real estate", "source": "db"},
         ]
     },
     {
@@ -846,7 +846,7 @@ REMEDIAL_MAP = [
         "detail": "I. Forcible Entry and Unlawful Detainer — Rule 70",
         "sort_order": 47,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "70-1", "label": "Rule 70, Sec. 1 \u2013 Forcible entry and unlawful detainer", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "70-1", "label": "Rule 70, Sec. 1 — Who may institute proceedings, and when", "source": "db"},
             {"statute_id": "ROC", "provision_id": "71-1", "label": "Rule 71, Sec. 1 \u2013 Direct contempt of court", "source": "db"},
             {"statute_id": "ROC", "provision_id": "71-3", "label": "Rule 71, Sec. 3 \u2013 Indirect contempt", "source": "db"},
         ]
@@ -859,7 +859,7 @@ REMEDIAL_MAP = [
         "detail": "J. Contempt — Rule 71",
         "sort_order": 48,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "70-1", "label": "Rule 70, Sec. 1 \u2013 Forcible entry and unlawful detainer", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "70-1", "label": "Rule 70, Sec. 1 — Who may institute proceedings, and when", "source": "db"},
             {"statute_id": "ROC", "provision_id": "71-1", "label": "Rule 71, Sec. 1 \u2013 Direct contempt of court", "source": "db"},
             {"statute_id": "ROC", "provision_id": "71-3", "label": "Rule 71, Sec. 3 \u2013 Indirect contempt", "source": "db"},
         ]
@@ -883,11 +883,11 @@ REMEDIAL_MAP = [
         ),
         "sort_order": 49,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "73-1", "label": "Rule 73, Sec. 1 \u2013 Venue for settlement of estate", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "73-1", "label": "Rule 73, Sec. 1 — Where estate of deceased persons settled", "source": "db"},
             {"statute_id": "ROC", "provision_id": "74-1", "label": "Rule 74, Sec. 1 \u2013 Extrajudicial settlement by agreement", "source": "db"},
             {"statute_id": "ROC", "provision_id": "74-2", "label": "Rule 74, Sec. 2 \u2013 Two or more heirs; summary settlement", "source": "db"},
             {"statute_id": "ROC", "provision_id": "79-1", "label": "Rule 79, Sec. 1 \u2013 Opposition to issuance of letters testamentary", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "90-1", "label": "Rule 90, Sec. 1 \u2013 Distribution and partition of estate", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "90-1", "label": "Rule 90, Sec. 1 — When order for distribution of reside made", "source": "db"},
         ]
     },
     {
@@ -898,7 +898,7 @@ REMEDIAL_MAP = [
         "detail": "B. Guardianship — Rules 92-97",
         "sort_order": 50,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "93-1", "label": "Rule 93, Sec. 1 \u2013 Venue for guardianship proceedings", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "93-1", "label": "Rule 93, Sec. 1 — Who may petition for appointment of guardian for resident", "source": "db"},
             {"statute_id": "RA-11642", "provision_id": "general", "label": "R.A. 11642 \u2013 Domestic Administrative Adoption and Alternative Child Care Act", "source": "db"},
         ]
     },
@@ -970,11 +970,11 @@ REMEDIAL_MAP = [
         "detail": "H. Cancellation or Correction of Entries in the Civil Registry — Rule 108",
         "sort_order": 56,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "67-1", "label": "Rule 67, Sec. 1 \u2013 Complaint for expropriation", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "67-1", "label": "Rule 67, Sec. 1 — The complaint", "source": "db"},
             {"statute_id": "ROC", "provision_id": "67-4", "label": "Rule 67, Sec. 4 \u2013 Order of expropriation", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "68-1", "label": "Rule 68, Sec. 1 \u2013 Complaint for foreclosure of mortgage", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "68-1", "label": "Rule 68, Sec. 1 — Complaint in action for foreclosure", "source": "db"},
             {"statute_id": "ROC", "provision_id": "68-3", "label": "Rule 68, Sec. 3 \u2013 Sale of mortgaged property", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "69-1", "label": "Rule 69, Sec. 1 \u2013 Complaint for partition; order thereon", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "69-1", "label": "Rule 69, Sec. 1 — Complaint in action for partition of real estate", "source": "db"},
         ]
     },
     {
@@ -1042,7 +1042,7 @@ REMEDIAL_MAP = [
         "sort_order": 60,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "110-1", "label": "Rule 110, Sec. 1 \u2013 Institution of criminal actions", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "110-2", "label": "Rule 110, Sec. 2 \u2013 Control of prosecution", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "110-2", "label": "Rule 110, Sec. 2 — The complaint or information", "source": "db"},
             {"statute_id": "ROC", "provision_id": "110-3", "label": "Rule 110, Sec. 3 \u2013 Complaint defined", "source": "db"},
             {"statute_id": "ROC", "provision_id": "110-4", "label": "Rule 110, Sec. 4 \u2013 Information defined", "source": "db"},
             {"statute_id": "ROC", "provision_id": "111-1", "label": "Rule 111, Sec. 1 \u2013 Institution of criminal and civil actions", "source": "db"},
@@ -1064,7 +1064,7 @@ REMEDIAL_MAP = [
         "sort_order": 61,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "110-1", "label": "Rule 110, Sec. 1 \u2013 Institution of criminal actions", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "110-2", "label": "Rule 110, Sec. 2 \u2013 Control of prosecution", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "110-2", "label": "Rule 110, Sec. 2 — The complaint or information", "source": "db"},
             {"statute_id": "ROC", "provision_id": "110-3", "label": "Rule 110, Sec. 3 \u2013 Complaint defined", "source": "db"},
             {"statute_id": "ROC", "provision_id": "110-4", "label": "Rule 110, Sec. 4 \u2013 Information defined", "source": "db"},
             {"statute_id": "ROC", "provision_id": "111-1", "label": "Rule 111, Sec. 1 \u2013 Institution of criminal and civil actions", "source": "db"},
@@ -1108,11 +1108,11 @@ REMEDIAL_MAP = [
         ),
         "sort_order": 63,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "113-1", "label": "Rule 113, Sec. 1 \u2013 Arrest; how made", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "113-1", "label": "Rule 113, Sec. 1 — Definition of arrest", "source": "db"},
             {"statute_id": "ROC", "provision_id": "113-5", "label": "Rule 113, Sec. 5 \u2013 Arrest without warrant; when lawful", "source": "db"},
             {"statute_id": "ROC", "provision_id": "114-1", "label": "Rule 114, Sec. 1 \u2013 Bail defined", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "114-5", "label": "Rule 114, Sec. 5 \u2013 Bail discretionary", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "114-8", "label": "Rule 114, Sec. 8 \u2013 Capital offense or offense punishable by reclusion perpetua \u2014 no bail", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "114-5", "label": "Rule 114, Sec. 5 — Bail, when discretionary", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "114-8", "label": "Rule 114, Sec. 8 — Burden of proof in bail application", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-13", "label": "Art. III, Sec. 13 \u2013 Right to bail", "source": "db"},
             {"statute_id": "AM-21-06-08", "provision_id": "general", "label": "A.M. No. 21-06-08 \u2013 Rules on Body-Worn Cameras in Execution of Warrants", "source": "ai"},
         ]
@@ -1131,11 +1131,11 @@ REMEDIAL_MAP = [
         ),
         "sort_order": 64,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "113-1", "label": "Rule 113, Sec. 1 \u2013 Arrest; how made", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "113-1", "label": "Rule 113, Sec. 1 — Definition of arrest", "source": "db"},
             {"statute_id": "ROC", "provision_id": "113-5", "label": "Rule 113, Sec. 5 \u2013 Arrest without warrant; when lawful", "source": "db"},
             {"statute_id": "ROC", "provision_id": "114-1", "label": "Rule 114, Sec. 1 \u2013 Bail defined", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "114-5", "label": "Rule 114, Sec. 5 \u2013 Bail discretionary", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "114-8", "label": "Rule 114, Sec. 8 \u2013 Capital offense or offense punishable by reclusion perpetua \u2014 no bail", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "114-5", "label": "Rule 114, Sec. 5 — Bail, when discretionary", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "114-8", "label": "Rule 114, Sec. 8 — Burden of proof in bail application", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-13", "label": "Art. III, Sec. 13 \u2013 Right to bail", "source": "db"},
             {"statute_id": "AM-21-06-08", "provision_id": "general", "label": "A.M. No. 21-06-08 \u2013 Rules on Body-Worn Cameras in Execution of Warrants", "source": "ai"},
         ]
@@ -1204,8 +1204,8 @@ REMEDIAL_MAP = [
         "sort_order": 68,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "18-1", "label": "Rule 18, Sec. 1 \u2013 When conducted", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "18-2", "label": "Rule 18, Sec. 2 \u2013 Pre-trial conference", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "18-6", "label": "Rule 18, Sec. 6 \u2013 Pre-trial order", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "18-2", "label": "Rule 18, Sec. 2 — Nature and purpose", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "18-6", "label": "Rule 18, Sec. 6 — Pre-trial brief", "source": "db"},
         ]
     },
     {
@@ -1227,7 +1227,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "118-1", "label": "Rule 118, Sec. 1 \u2013 Pre-trial; mandatory in criminal cases", "source": "db"},
             {"statute_id": "ROC", "provision_id": "119-17", "label": "Rule 119, Sec. 17 \u2013 Discharge of accused to be state witness", "source": "db"},
             {"statute_id": "ROC", "provision_id": "119-23", "label": "Rule 119, Sec. 23 \u2013 Demurrer to evidence", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "120-1", "label": "Rule 120, Sec. 1 \u2013 Judgment defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "120-1", "label": "Rule 120, Sec. 1 — Judgment; definition and form", "source": "db"},
             {"statute_id": "ROC", "provision_id": "120-4", "label": "Rule 120, Sec. 4 \u2013 Judgment in case of variance", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-21", "label": "Art. III, Sec. 21 \u2013 Double jeopardy", "source": "db"},
         ]
@@ -1262,7 +1262,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "118-1", "label": "Rule 118, Sec. 1 \u2013 Pre-trial; mandatory in criminal cases", "source": "db"},
             {"statute_id": "ROC", "provision_id": "119-17", "label": "Rule 119, Sec. 17 \u2013 Discharge of accused to be state witness", "source": "db"},
             {"statute_id": "ROC", "provision_id": "119-23", "label": "Rule 119, Sec. 23 \u2013 Demurrer to evidence", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "120-1", "label": "Rule 120, Sec. 1 \u2013 Judgment defined", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "120-1", "label": "Rule 120, Sec. 1 — Judgment; definition and form", "source": "db"},
             {"statute_id": "ROC", "provision_id": "120-4", "label": "Rule 120, Sec. 4 \u2013 Judgment in case of variance", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-21", "label": "Art. III, Sec. 21 \u2013 Double jeopardy", "source": "db"},
         ]
@@ -1275,7 +1275,7 @@ REMEDIAL_MAP = [
         "detail": "N. New Trial or Reconsideration — Rule 121",
         "sort_order": 72,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "37-1", "label": "Rule 37, Sec. 1 \u2013 Grounds for new trial or reconsideration", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "37-1", "label": "Rule 37, Sec. 1 — Grounds of and period for filing motion for new trial or reconsideration", "source": "db"},
             {"statute_id": "ROC", "provision_id": "37-2", "label": "Rule 37, Sec. 2 \u2013 Contents of motion for new trial", "source": "db"},
         ]
     },
@@ -1287,11 +1287,11 @@ REMEDIAL_MAP = [
         "detail": "O. Appeal — Rule 122",
         "sort_order": 73,
         "provisions": [
-            {"statute_id": "ROC", "provision_id": "113-1", "label": "Rule 113, Sec. 1 \u2013 Arrest; how made", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "113-1", "label": "Rule 113, Sec. 1 — Definition of arrest", "source": "db"},
             {"statute_id": "ROC", "provision_id": "113-5", "label": "Rule 113, Sec. 5 \u2013 Arrest without warrant; when lawful", "source": "db"},
             {"statute_id": "ROC", "provision_id": "114-1", "label": "Rule 114, Sec. 1 \u2013 Bail defined", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "114-5", "label": "Rule 114, Sec. 5 \u2013 Bail discretionary", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "114-8", "label": "Rule 114, Sec. 8 \u2013 Capital offense or offense punishable by reclusion perpetua \u2014 no bail", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "114-5", "label": "Rule 114, Sec. 5 — Bail, when discretionary", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "114-8", "label": "Rule 114, Sec. 8 — Burden of proof in bail application", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-13", "label": "Art. III, Sec. 13 \u2013 Right to bail", "source": "db"},
             {"statute_id": "AM-21-06-08", "provision_id": "general", "label": "A.M. No. 21-06-08 \u2013 Rules on Body-Worn Cameras in Execution of Warrants", "source": "ai"},
         ]
@@ -1315,8 +1315,8 @@ REMEDIAL_MAP = [
         "sort_order": 74,
         "provisions": [
             {"statute_id": "ROC", "provision_id": "126-1", "label": "Rule 126, Sec. 1 \u2013 Search warrant defined", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "126-3", "label": "Rule 126, Sec. 3 \u2013 Requisites for issuing search warrant", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "126-5", "label": "Rule 126, Sec. 5 \u2013 Validity of search warrant", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "126-3", "label": "Rule 126, Sec. 3 — Personal property to be seized", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "126-5", "label": "Rule 126, Sec. 5 — Examination of complainant; record", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-2", "label": "Art. III, Sec. 2 \u2013 Right against unreasonable searches and seizures", "source": "db"},
             {"statute_id": "CONST", "provision_id": "III-3", "label": "Art. III, Sec. 3(2) \u2013 Exclusionary rule; fruit of the poisonous tree", "source": "db"},
             {"statute_id": "AM-17-11-03-SC", "provision_id": "general", "label": "A.M. No. 17-11-03-SC \u2013 Rule on Cybercrime Warrants", "source": "ai"},
@@ -1352,7 +1352,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "128-3", "label": "Rule 128, Sec. 3 \u2013 Admissibility of evidence", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-1", "label": "Rule 129, Sec. 1 \u2013 Mandatory judicial notice", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-2", "label": "Rule 129, Sec. 2 \u2013 Discretionary judicial notice", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 \u2013 Judicial admissions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 — Judicial notice, when hearing necessary", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-1", "label": "Rule 131, Sec. 1 \u2013 Burden of proof; onus probandi", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-3", "label": "Rule 131, Sec. 3 \u2013 Disputable presumptions", "source": "db"},
         ]
@@ -1369,7 +1369,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "128-3", "label": "Rule 128, Sec. 3 \u2013 Admissibility of evidence", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-1", "label": "Rule 129, Sec. 1 \u2013 Mandatory judicial notice", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-2", "label": "Rule 129, Sec. 2 \u2013 Discretionary judicial notice", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 \u2013 Judicial admissions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 — Judicial notice, when hearing necessary", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-1", "label": "Rule 131, Sec. 1 \u2013 Burden of proof; onus probandi", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-3", "label": "Rule 131, Sec. 3 \u2013 Disputable presumptions", "source": "db"},
         ]
@@ -1386,7 +1386,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "128-3", "label": "Rule 128, Sec. 3 \u2013 Admissibility of evidence", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-1", "label": "Rule 129, Sec. 1 \u2013 Mandatory judicial notice", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-2", "label": "Rule 129, Sec. 2 \u2013 Discretionary judicial notice", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 \u2013 Judicial admissions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 — Judicial notice, when hearing necessary", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-1", "label": "Rule 131, Sec. 1 \u2013 Burden of proof; onus probandi", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-3", "label": "Rule 131, Sec. 3 \u2013 Disputable presumptions", "source": "db"},
         ]
@@ -1403,7 +1403,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "128-3", "label": "Rule 128, Sec. 3 \u2013 Admissibility of evidence", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-1", "label": "Rule 129, Sec. 1 \u2013 Mandatory judicial notice", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-2", "label": "Rule 129, Sec. 2 \u2013 Discretionary judicial notice", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 \u2013 Judicial admissions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 — Judicial notice, when hearing necessary", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-1", "label": "Rule 131, Sec. 1 \u2013 Burden of proof; onus probandi", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-3", "label": "Rule 131, Sec. 3 \u2013 Disputable presumptions", "source": "db"},
         ]
@@ -1424,7 +1424,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "128-3", "label": "Rule 128, Sec. 3 \u2013 Admissibility of evidence", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-1", "label": "Rule 129, Sec. 1 \u2013 Mandatory judicial notice", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-2", "label": "Rule 129, Sec. 2 \u2013 Discretionary judicial notice", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 \u2013 Judicial admissions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 — Judicial notice, when hearing necessary", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-1", "label": "Rule 131, Sec. 1 \u2013 Burden of proof; onus probandi", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-3", "label": "Rule 131, Sec. 3 \u2013 Disputable presumptions", "source": "db"},
         ]
@@ -1447,8 +1447,8 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "130-37", "label": "Rule 130, Sec. 37 \u2013 Hearsay rule", "source": "db"},
             {"statute_id": "ROC", "provision_id": "130-38", "label": "Rule 130, Sec. 38 \u2013 Dying declaration", "source": "db"},
             {"statute_id": "ROC", "provision_id": "130-40", "label": "Rule 130, Sec. 40 \u2013 Declaration against interest", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "130-49", "label": "Rule 130, Sec. 49 \u2013 Opinion of expert witnesses (Opinion Rule)", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "130-50", "label": "Rule 130, Sec. 50 \u2013 Opinion of ordinary witnesses", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "130-49", "label": "Rule 130, Sec. 49 — Testimony or deposition at a former proceeding", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "130-50", "label": "Rule 130, Sec. 50 — Residual exception", "source": "db"},
         ]
     },
     {
@@ -1498,9 +1498,9 @@ REMEDIAL_MAP = [
         "sort_order": 83,
         "provisions": [
             {"statute_id": "AM-19-08-15-SC", "provision_id": "general", "label": "A.M. No. 19-08-15-SC \u2013 2019 Revised Rules on Evidence (Object, Documentary, Original Document Rule)", "source": "scrape", "scrape_url": "https://lawphil.net/courts/supreme/am/am_19_08_15_sc_2019.html"},
-            {"statute_id": "ROC", "provision_id": "130-1", "label": "Rule 130, Sec. 1 \u2013 Object (real) evidence", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "130-3", "label": "Rule 130, Sec. 3 \u2013 Secondary evidence when original is unavailable", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "130-9", "label": "Rule 130, Sec. 9 \u2013 Parol evidence rule", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "130-1", "label": "Rule 130, Sec. 1 — Object as evidence", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "130-3", "label": "Rule 130, Sec. 3 — Original document must be produced; exceptions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "130-9", "label": "Rule 130, Sec. 9 — Party who calls for document not bound to offer it", "source": "db"},
         ]
     },
     {
@@ -1515,7 +1515,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "128-3", "label": "Rule 128, Sec. 3 \u2013 Admissibility of evidence", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-1", "label": "Rule 129, Sec. 1 \u2013 Mandatory judicial notice", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-2", "label": "Rule 129, Sec. 2 \u2013 Discretionary judicial notice", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 \u2013 Judicial admissions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 — Judicial notice, when hearing necessary", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-1", "label": "Rule 131, Sec. 1 \u2013 Burden of proof; onus probandi", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-3", "label": "Rule 131, Sec. 3 \u2013 Disputable presumptions", "source": "db"},
         ]
@@ -1537,7 +1537,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "128-3", "label": "Rule 128, Sec. 3 \u2013 Admissibility of evidence", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-1", "label": "Rule 129, Sec. 1 \u2013 Mandatory judicial notice", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-2", "label": "Rule 129, Sec. 2 \u2013 Discretionary judicial notice", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 \u2013 Judicial admissions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 — Judicial notice, when hearing necessary", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-1", "label": "Rule 131, Sec. 1 \u2013 Burden of proof; onus probandi", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-3", "label": "Rule 131, Sec. 3 \u2013 Disputable presumptions", "source": "db"},
         ]
@@ -1558,7 +1558,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "128-3", "label": "Rule 128, Sec. 3 \u2013 Admissibility of evidence", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-1", "label": "Rule 129, Sec. 1 \u2013 Mandatory judicial notice", "source": "db"},
             {"statute_id": "ROC", "provision_id": "129-2", "label": "Rule 129, Sec. 2 \u2013 Discretionary judicial notice", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 \u2013 Judicial admissions", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "129-3", "label": "Rule 129, Sec. 3 — Judicial notice, when hearing necessary", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-1", "label": "Rule 131, Sec. 1 \u2013 Burden of proof; onus probandi", "source": "db"},
             {"statute_id": "ROC", "provision_id": "131-3", "label": "Rule 131, Sec. 3 \u2013 Disputable presumptions", "source": "db"},
         ]
@@ -1692,7 +1692,7 @@ REMEDIAL_MAP = [
             {"statute_id": "ROC", "provision_id": "6-8", "label": "Rule 6, Sec. 8 \u2013 Cross-claim", "source": "db"},
             {"statute_id": "ROC", "provision_id": "7-4", "label": "Rule 7, Sec. 4 \u2013 Verification", "source": "db"},
             {"statute_id": "ROC", "provision_id": "7-5", "label": "Rule 7, Sec. 5 \u2013 Certification against forum shopping", "source": "db"},
-            {"statute_id": "ROC", "provision_id": "8-1", "label": "Rule 8, Sec. 1 \u2013 Manner of making allegations", "source": "db"},
+            {"statute_id": "ROC", "provision_id": "8-1", "label": "Rule 8, Sec. 1 — In general", "source": "db"},
             {"statute_id": "ROC", "provision_id": "10-2", "label": "Rule 10, Sec. 2 \u2013 Amendments as a matter of right", "source": "db"},
             {"statute_id": "ROC", "provision_id": "10-3", "label": "Rule 10, Sec. 3 \u2013 Amendments by leave of court", "source": "db"},
         ]
