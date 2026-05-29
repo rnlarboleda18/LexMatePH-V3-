@@ -47,8 +47,8 @@ log = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s: %(message)s")
 
 DEFAULT_CASE_CUTOFF = "2025-06-30"
-BAR_MODEL_PRO       = "gemini-3.1-pro-preview"   # doctrine generation + verification
-BAR_MODEL_FLASH     = "gemini-3-flash-preview"    # batch connectors + provision synthesis
+BAR_MODEL_PRO       = "gemini-2.5-pro"    # doctrine generation + verification
+BAR_MODEL_FLASH     = "gemini-2.5-flash"  # batch connectors + provision synthesis
 BAR_MODEL           = BAR_MODEL_PRO               # legacy alias used in logging / DB
 
 # Adaptive pacing — starts at BASE_PACE seconds between topics; increases on 429s
@@ -1134,12 +1134,15 @@ def generate_topic(
         for p in enriched_provisions
     ]
 
+    topic_path = f"{subject_id}/{roman}/{sub_letter or ''}".rstrip("/")
+
     return {
         "subject_id":       subject_id,
         "roman_num":        roman,
         "topic_heading":    topic_heading,
         "sub_letter":       sub_letter,
         "sub_heading":      sub_heading,
+        "topic_path":       topic_path,
         "sort_order":       topic.get("sort_order", 0),
         "doctrine_md":      doctrine_md,
         "distinctions_md":  distinctions_md,
@@ -1160,12 +1163,12 @@ def generate_topic(
 UPSERT_SQL = """
 INSERT INTO bar_reviewer_topics
     (id, subject_id, roman_num, topic_heading, sub_letter, sub_heading,
-     sort_order, doctrine_md, distinctions_md, memory_aid,
+     topic_path, sort_order, doctrine_md, distinctions_md, memory_aid,
      key_provisions, key_cases, bar_questions, key_statutes,
      case_cutoff, status, confidence, generated_at, generation_model)
 VALUES
-    (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s)
-ON CONFLICT (subject_id, roman_num, COALESCE(sub_letter, ''))
+    (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, NOW(), %s)
+ON CONFLICT (subject_id, topic_path)
 DO UPDATE SET
     topic_heading    = EXCLUDED.topic_heading,
     sub_heading      = EXCLUDED.sub_heading,
@@ -1195,6 +1198,7 @@ def upsert_topic(conn, record: dict):
             record["topic_heading"],
             record["sub_letter"],
             record["sub_heading"],
+            record["topic_path"],
             record["sort_order"],
             record["doctrine_md"],
             record["distinctions_md"],
