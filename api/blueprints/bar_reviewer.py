@@ -107,22 +107,24 @@ def get_reviewer_subject(req: func.HttpRequest) -> func.HttpResponse:
                 SELECT
                     id, subject_id, roman_num, topic_heading,
                     sub_letter, sub_heading, sort_order,
+                    topic_path, parent_path, level,
                     status, confidence, generated_at, generation_model,
                     case_cutoff
                 FROM bar_reviewer_topics
                 WHERE subject_id = %s
-                ORDER BY sort_order ASC, roman_num ASC, sub_letter ASC NULLS FIRST
+                ORDER BY sort_order ASC
             """, (subject,))
         else:
             cur.execute("""
                 SELECT
                     id, subject_id, roman_num, topic_heading,
                     sub_letter, sub_heading, sort_order,
+                    topic_path, parent_path, level,
                     status, confidence, generated_at, generation_model,
                     case_cutoff
                 FROM bar_reviewer_topics
                 WHERE subject_id = %s AND status = %s
-                ORDER BY sort_order ASC, roman_num ASC, sub_letter ASC NULLS FIRST
+                ORDER BY sort_order ASC
             """, (subject, status_filter))
 
         rows = cur.fetchall()
@@ -162,6 +164,7 @@ def get_reviewer_topic(req: func.HttpRequest) -> func.HttpResponse:
             SELECT
                 id, subject_id, roman_num, topic_heading,
                 sub_letter, sub_heading, sort_order,
+                topic_path, parent_path, level,
                 doctrine_md, distinctions_md, memory_aid,
                 key_provisions,
                 CASE
