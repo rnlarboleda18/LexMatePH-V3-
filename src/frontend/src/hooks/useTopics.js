@@ -50,37 +50,60 @@ export function useTopics(subject, { isAdmin = false } = {}) {
 }
 
 /**
- * Transforms a flat list of topics with topic_path and parent_path 
- * into a nested tree structure.
+ * Transforms a flat list of topics into a nested tree.
+ * When parent_path is null (new path format), groups by roman_num automatically.
  */
 function buildTopicTree(flatTopics) {
   const map = {};
   const roots = [];
 
-  // Initialize map
   flatTopics.forEach(t => {
     map[t.topic_path] = { ...t, children: [] };
   });
 
-  // Build tree
-  flatTopics.forEach(t => {
-    const node = map[t.topic_path];
-    if (t.parent_path && map[t.parent_path]) {
-      map[t.parent_path].children.push(node);
-    } else {
-      // It's a root (Roman numeral level or similar)
-      roots.push(node);
-    }
-  });
+  // Check if any topic has a resolvable parent_path
+  const hasExplicitParents = flatTopics.some(
+    t => t.parent_path && map[t.parent_path]
+  );
 
-  // Sort children by sort_order
-  const sortRecursive = (nodes) => {
-    nodes.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
-    nodes.forEach(n => {
-      if (n.children.length > 0) {
-        sortRecursive(n.children);
+  if (hasExplicitParents) {
+    // Original behaviour: use parent_path links
+    flatTopics.forEach(t => {
+      const node = map[t.topic_path];
+      if (t.parent_path && map[t.parent_path]) {
+        map[t.parent_path].children.push(node);
+      } else {
+        roots.push(node);
       }
     });
+  } else {
+    // New path format (parent_path is null): group by roman_num
+    const sections = {};
+    const sectionOrder = [];
+
+    flatTopics.forEach(t => {
+      if (!sections[t.roman_num]) {
+        const virtualPath = `__section__${t.roman_num}`;
+        sections[t.roman_num] = {
+          topic_path: virtualPath,
+          roman_num: t.roman_num,
+          topic_heading: t.topic_heading,
+          sub_letter: null,
+          id: null,
+          status: null,
+          sort_order: t.sort_order,
+          children: [],
+        };
+        sectionOrder.push(t.roman_num);
+        roots.push(sections[t.roman_num]);
+      }
+      sections[t.roman_num].children.push(map[t.topic_path]);
+    });
+  }
+
+  const sortRecursive = (nodes) => {
+    nodes.sort((a, b) => (a.sort_order || 0) - (b.sort_order || 0));
+    nodes.forEach(n => { if (n.children.length > 0) sortRecursive(n.children); });
   };
 
   sortRecursive(roots);
