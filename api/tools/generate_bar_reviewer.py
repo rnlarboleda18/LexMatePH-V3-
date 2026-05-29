@@ -574,7 +574,9 @@ def fetch_bar_questions(cur, subject_id: str, sub_heading: str) -> list:
 
 def _topic_display(topic: dict) -> str:
     heading = topic.get("sub_heading") or topic.get("heading") or topic.get("topic_heading", "")
-    return f"{topic['roman_num']}.{topic.get('sub_letter') or ''} -- {heading}"
+    detail  = topic.get("detail", "")
+    base    = f"{topic['roman_num']}.{topic.get('sub_letter') or ''} -- {heading}"
+    return f"{base}\n{detail}" if detail else base
 
 
 def build_doctrine_prompt(
@@ -599,14 +601,19 @@ def build_doctrine_prompt(
     ) or "No linked cases available for this topic."
 
     subject_label = SUBJECT_LABELS.get(subject_id, subject_id.title())
+    detail_block  = topic.get("detail", "").strip()
+    syllabus_section = (
+        f"\nSYLLABUS COVERAGE (every sub-item below MUST be addressed in your doctrine):\n{detail_block}\n"
+        if detail_block else ""
+    )
 
     return f"""You are a Senior Bar Review Lecturer and Philippine legal scholar.
 
 TASK: Write a comprehensive, exam-ready reviewer section for the 2026 Philippine Bar Exam.
 
-TOPIC: {_topic_display(topic)}
+TOPIC: {topic['roman_num']}.{topic.get('sub_letter') or ''} -- {topic.get('sub_heading') or topic.get('heading') or topic.get('topic_heading', '')}
 SUBJECT: {subject_label}
-CASE CUTOFF: {DEFAULT_CASE_CUTOFF}
+CASE CUTOFF: {DEFAULT_CASE_CUTOFF}{syllabus_section}
 
 STATUTORY BASIS (use ONLY the following; do not introduce other provisions):
 {provisions_block}
