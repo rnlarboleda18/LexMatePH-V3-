@@ -499,7 +499,7 @@ function TopicTree({ tree, selectedId, onSelect, subjectColor }) {
 // ── Syllabus PDF Panel ────────────────────────────────────────────────────────
 
 function SyllabusPanel({ subjectId }) {
-  const pdfUrl = `/assets/syllabus/${subjectId}.pdf`;
+  const pdfUrl = `/api/syllabus/${subjectId}`;
   return (
     <div className="flex flex-col h-full min-h-[500px]">
       <iframe

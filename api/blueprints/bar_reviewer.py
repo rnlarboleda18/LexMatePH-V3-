@@ -525,6 +525,29 @@ def reviewer_annotations(req: func.HttpRequest) -> func.HttpResponse:
             put_db_connection(conn)
 
 
+# ── Syllabus PDF endpoint ─────────────────────────────────────────────────────
+
+_VALID_SUBJECTS = {"political", "commercial", "civil", "labor", "criminal", "remedial"}
+
+@bar_reviewer_bp.route(route="syllabus/{subject}", methods=["GET"], auth_level=func.AuthLevel.ANONYMOUS)
+def get_syllabus_pdf(req: func.HttpRequest) -> func.HttpResponse:
+    subject = req.route_params.get("subject", "").lower().replace(".pdf", "")
+    if subject not in _VALID_SUBJECTS:
+        return func.HttpResponse("Not found", status_code=404)
+    pdf_path = Path(__file__).resolve().parent.parent / "syllabus" / f"{subject}.pdf"
+    if not pdf_path.exists():
+        return func.HttpResponse("PDF not found", status_code=404)
+    return func.HttpResponse(
+        body=pdf_path.read_bytes(),
+        status_code=200,
+        headers={
+            "Content-Type": "application/pdf",
+            "Content-Disposition": f"inline; filename={subject}-syllabus.pdf",
+            "Cache-Control": "public, max-age=86400",
+        },
+    )
+
+
 # ── Helpers ───────────────────────────────────────────────────────────────────
 
 def _resolve_python() -> str:
