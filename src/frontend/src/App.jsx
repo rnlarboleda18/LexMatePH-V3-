@@ -1346,14 +1346,16 @@ function App() {
       })()}
 
 
-      {/* In-app tab bar — portaled to body; only visible when >= 2 tabs are open */}
-      <TabBar
-        tabs={openTabs}
-        activeMode={mode}
-        onSwitch={navigateToTab}
-        onClose={closeTab}
-        isDarkMode={isDarkMode}
-      />
+      {/* In-app tab bar — portaled to body; only visible when >= 2 tabs are open; hidden during Lexify exam simulation */}
+      {!lexifyExamSimulationActive && (
+        <TabBar
+          tabs={openTabs}
+          activeMode={mode}
+          onSwitch={navigateToTab}
+          onClose={closeTab}
+          isDarkMode={isDarkMode}
+        />
+      )}
 
       {/* Doctrinal Detail Modal */}
 
