@@ -63,7 +63,9 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
     const { getToken } = useAuth();
     const [groupedLinks, setGroupedLinks] = useState([]);
     const [availablePonentes, setAvailablePonentes] = useState([]);
+    const [availableDivisions, setAvailableDivisions] = useState([]);
     const [ponenteFilter, setPonenteFilter] = useState('');
+    const [divisionFilter, setDivisionFilter] = useState('');
     /** Start true: first paint must not show the empty state before useEffect runs (fetch is async). */
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -79,6 +81,7 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
         if (cached) {
             setGroupedLinks(cached.sortedGroups);
             setAvailablePonentes(cached.pentes);
+            setAvailableDivisions(cached.divs ?? []);
             setLoading(false);
             setError(null);
             return () => ctrl.abort();
@@ -88,6 +91,7 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
         setError(null);
         setGroupedLinks([]);
         setAvailablePonentes([]);
+        setAvailableDivisions([]);
 
         const fetchLinks = async () => {
             try {
@@ -119,6 +123,7 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                             shortTitle: link.short_title,
                             date: link.case_date,
                             ponente: link.ponente,
+                            division: link.division,
                             ratios: []
                         };
                     }
@@ -140,9 +145,22 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                 // Extract unique ponentes, filtering out falsy values
                 const ponentes = [...new Set(sortedGroups.map(g => g.ponente).filter(Boolean))].sort();
 
+                // Extract unique deciding bodies with canonical sort order
+                const DIVISION_ORDER = ['En Banc', 'First Division', 'Second Division', 'Third Division', 'Fourth Division', 'Fifth Division', 'Sixth Division'];
+                const rawDivisions = [...new Set(sortedGroups.map(g => g.division).filter(Boolean))];
+                const divisions = rawDivisions.sort((a, b) => {
+                    const ia = DIVISION_ORDER.indexOf(a);
+                    const ib = DIVISION_ORDER.indexOf(b);
+                    if (ia !== -1 && ib !== -1) return ia - ib;
+                    if (ia !== -1) return -1;
+                    if (ib !== -1) return 1;
+                    return a.localeCompare(b);
+                });
+
                 setGroupedLinks(sortedGroups);
                 setAvailablePonentes(ponentes);
-                _jurisSidebarCacheSet(cacheKey, { sortedGroups, pentes: ponentes });
+                setAvailableDivisions(divisions);
+                _jurisSidebarCacheSet(cacheKey, { sortedGroups, pentes: ponentes, divs: divisions });
             } catch (err) {
                 if (err?.name === 'AbortError') return;
                 console.error(err);
@@ -180,6 +198,19 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                         ✕
                     </button>
                 </div>
+                {/* Deciding Body Filter */}
+                {availableDivisions.length > 0 && (
+                    <select
+                        value={divisionFilter}
+                        onChange={(e) => setDivisionFilter(e.target.value)}
+                        className="w-full mt-1 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 text-xs rounded-lg px-2 py-1.5 outline-none shadow-sm cursor-pointer"
+                    >
+                        <option value="">All Deciding Bodies</option>
+                        {availableDivisions.map(d => (
+                            <option key={d} value={d}>{d}</option>
+                        ))}
+                    </select>
+                )}
                 {/* Ponente Filter */}
                 {availablePonentes.length > 0 && (
                     <select
@@ -225,7 +256,7 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                 )}
 
                 {groupedLinks
-                    .filter(group => !ponenteFilter || group.ponente === ponenteFilter)
+                    .filter(group => (!divisionFilter || group.division === divisionFilter) && (!ponenteFilter || group.ponente === ponenteFilter))
                     .map((group) => {
                     const firstLink = group.ratios[0];
                     const year = scLinkedCaseYear(group.date);
@@ -254,13 +285,19 @@ const LexCodeJurisSidebar = ({ articleNum, statuteId = 'RPC', subject, onClose, 
                                     {year != null && (
                                         <span className="font-semibold text-slate-600 dark:text-slate-300">{year}</span>
                                     )}
+                                    {group.division && (
+                                        <>
+                                            {year != null && <span>•</span>}
+                                            <span className="font-medium text-indigo-600 dark:text-indigo-400 truncate max-w-[110px]">{group.division}</span>
+                                        </>
+                                    )}
                                     {group.ponente && (
                                         <>
-                                            {(year != null) && <span>•</span>}
+                                            {(year != null || group.division) && <span>•</span>}
                                             <span className="font-medium text-slate-600 dark:text-slate-300 truncate max-w-[120px]">{group.ponente}</span>
                                         </>
                                     )}
-                                    {(year != null || group.ponente) && <span>•</span>}
+                                    {(year != null || group.division || group.ponente) && <span>•</span>}
                                     <span className="truncate flex-1">{firstLink.subject_area}</span>
                                 </div>
                             </div>
