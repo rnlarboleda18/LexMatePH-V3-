@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 import { Calendar, Clock, Loader2, Sparkles } from 'lucide-react';
 import FeaturePageShell from '../../components/FeaturePageShell';
 import PurpleGlassAmbient from '../../components/PurpleGlassAmbient';
@@ -49,6 +50,8 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
     };
     const [showMenu, setShowMenu] = useState(false);
     const [showSampleSubmenu, setShowSampleSubmenu] = useState(false); // Holds Sample Q&A toggle status
+    const menuBtnRef = useRef(null);
+    const [menuBtnRect, setMenuBtnRect] = useState(null);
     const [attempts, setAttempts] = useState({ current: 1, history: {} });
     const [activeTab, setActiveTab] = useState('exams'); // 'exams' | 'history'
 
@@ -143,11 +146,11 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                 <div className="relative mx-auto w-full max-w-7xl space-y-tile">
             <div className="flex h-12 shrink-0 select-none items-center justify-between rounded-lg border border-lex bg-gradient-to-br from-white via-white to-slate-50/60 px-4 sm:px-6 shadow-sm backdrop-blur-sm dark:border-lex dark:from-zinc-900 dark:via-zinc-900 dark:to-zinc-950 dark:shadow-[0_24px_80px_-28px_rgba(0,0,0,0.45)]">
                 <div className="relative z-50 flex items-center gap-3">
-                    <button type="button" onClick={() => setShowMenu(!showMenu)} className="flex flex-col gap-1 rounded-lg p-2 transition hover:bg-white/70 dark:hover:bg-white/10">
+                    <button ref={menuBtnRef} type="button" onClick={() => { const r = menuBtnRef.current?.getBoundingClientRect(); setMenuBtnRect(r ?? null); setShowMenu(!showMenu); }} className="flex flex-col gap-1 rounded-lg p-2 transition hover:bg-white/70 dark:hover:bg-white/10">
                         <span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" />
                     </button>
-                    {showMenu && (
-                        <div className="absolute left-0 top-full z-[200] mt-1 w-56 overflow-hidden rounded-xl border border-lex bg-white py-2 shadow-lg dark:border-lex dark:bg-zinc-900">
+                    {showMenu && menuBtnRect && typeof document !== 'undefined' && createPortal(
+                        <div className="fixed z-[9999] w-56 overflow-hidden rounded-xl border border-lex bg-white py-2 shadow-lg dark:border-lex dark:bg-zinc-900" style={{ top: menuBtnRect.bottom + 4, left: menuBtnRect.left }}>
                             <button type="button" onClick={() => { setShowPrefsModal(true); setShowMenu(false); }} className="w-full px-4 py-2.5 text-left text-sm text-slate-800 transition hover:bg-violet-50 dark:text-slate-100 dark:hover:bg-white/10">Preferences</button>
                             <button type="button" onClick={handleStartNewAttempt} className="w-full px-4 py-2.5 text-left text-sm text-emerald-700 transition hover:bg-emerald-50/80 dark:text-emerald-400 dark:hover:bg-white/10">Start new attempt</button>
                             
@@ -183,7 +186,8 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
 
                             <hr className="my-1 border-0 border-t border-lex" />
                             <button onClick={onClose} className="w-full px-4 py-2.5 text-left text-sm text-rose-600 transition hover:bg-rose-50 dark:text-rose-400 dark:hover:bg-white/10">✕ Exit to LexMatePH</button>
-                        </div>
+                        </div>,
+                        document.body
                     )}
                     <span className="hidden text-xs font-semibold uppercase tracking-widest text-gray-500 dark:text-gray-400 sm:inline">Bar exam simulator</span>
                 </div>
