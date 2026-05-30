@@ -716,7 +716,7 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
             sql = f"""
             SELECT l.id as link_id, l.case_id,
             CASE WHEN l.specific_ruling = 'General' OR l.specific_ruling IS NULL OR l.specific_ruling = '' THEN COALESCE(s.main_doctrine, s.digest_ruling, s.digest_ratio, 'View full case for details.') ELSE l.specific_ruling END as specific_ruling,
-            l.ratio_index, l.citation_rank, l.subject_area, l.is_resolved, l.target_paragraph_index, l.version_id, s.short_title, s.date as case_date, s.sc_url, s.ponente
+            l.ratio_index, l.citation_rank, l.subject_area, l.is_resolved, l.target_paragraph_index, l.version_id, s.short_title, s.date as case_date, s.sc_url, s.ponente, s.division
             FROM codal_case_links l JOIN sc_decided_cases s ON l.case_id = s.id
             WHERE {statute_clause} AND ({where_clause})
             {'AND l.subject_area = %s' if subject_filter else ''}
@@ -727,7 +727,7 @@ def get_codex_jurisprudence(req: func.HttpRequest) -> func.HttpResponse:
             sql = f"""
             SELECT l.id as link_id, l.case_id,
             CASE WHEN l.specific_ruling = 'General' OR l.specific_ruling IS NULL OR l.specific_ruling = '' THEN COALESCE(s.main_doctrine, s.digest_ruling, s.digest_ratio, 'View full case for details.') ELSE l.specific_ruling END as specific_ruling,
-            l.ratio_index, l.citation_rank, l.subject_area, l.is_resolved, l.target_paragraph_index, l.version_id, s.short_title, s.date as case_date, s.sc_url, s.ponente
+            l.ratio_index, l.citation_rank, l.subject_area, l.is_resolved, l.target_paragraph_index, l.version_id, s.short_title, s.date as case_date, s.sc_url, s.ponente, s.division
             FROM codal_case_links l JOIN sc_decided_cases s ON l.case_id = s.id
             WHERE l.statute_id = %s AND ({where_clause})
             {'AND l.subject_area = %s' if subject_filter else ''}
