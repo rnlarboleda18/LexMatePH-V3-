@@ -73,13 +73,11 @@ _gemini_client = None
 
 
 def _get_gemini_client():
-    """Return a cached Vertex AI client (one-time init per worker process)."""
+    """Return a cached Vertex AI GenAI client (one-time init per worker)."""
     global _gemini_client
     if _gemini_client is None:
         import config
         from google import genai
-        if config.GCP_CREDENTIALS_FILE and os.path.exists(config.GCP_CREDENTIALS_FILE):
-            os.environ.setdefault("GOOGLE_APPLICATION_CREDENTIALS", config.GCP_CREDENTIALS_FILE)
         _gemini_client = genai.Client(
             vertexai=True,
             project=config.GCP_PROJECT,

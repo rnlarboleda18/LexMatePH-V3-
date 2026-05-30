@@ -1,13 +1,13 @@
 """
 ai_client.py — Google GenAI client (Vertex AI).
 
-Auth: Vertex AI service account (GOOGLE_APPLICATION_CREDENTIALS or GCP_SA_JSON_B64).
-      Falls back to Application Default Credentials (ADC) in production on GCP.
+Auth: Application Default Credentials (ADC).
+  Local dev:  run `gcloud auth application-default login` with rnlarboleda18@gmail.com
+  Production: set GCP_SA_JSON_B64 or GCP_SA_JSON in Azure App Settings,
+              OR rely on the managed identity / ADC on the host.
 
-Project/location pulled from config.py (GCP_PROJECT, GCP_LOCATION).
-
-Model: GEMINI_VERTEX_MODEL env var, default gemini-2.5-flash.
-Fallback model: GEMINI_DIGEST_FALLBACK_MODEL, default gemini-2.5-flash.
+Default model : gemini-2.5-pro   (override: GEMINI_DEFAULT_MODEL)
+Fallback model: gemini-2.5-flash  (override: GEMINI_FALLBACK_MODEL)
 """
 import json
 import logging
@@ -18,8 +18,8 @@ from typing import Any, Dict, List, Optional, Union
 
 logger = logging.getLogger(__name__)
 
-DEFAULT_MODEL  = os.environ.get("GEMINI_VERTEX_MODEL") or os.environ.get("GEMINI_DIGEST_MODEL") or "gemini-2.5-flash"
-FALLBACK_MODEL = os.environ.get("GEMINI_DIGEST_FALLBACK_MODEL") or "gemini-2.5-flash"
+DEFAULT_MODEL  = os.environ.get("GEMINI_DEFAULT_MODEL",  "").strip() or "gemini-2.5-pro"
+FALLBACK_MODEL = os.environ.get("GEMINI_FALLBACK_MODEL", "").strip() or "gemini-2.5-flash"
 
 _client = None
 _client_lock = threading.Lock()
@@ -36,6 +36,7 @@ def _get_client():
         import config
         from google import genai
         from google.genai import types as genai_types
+
         _client = genai.Client(
             vertexai=True,
             project=config.GCP_PROJECT,
@@ -43,8 +44,8 @@ def _get_client():
             http_options=genai_types.HttpOptions(timeout=120_000),
         )
         logger.info(
-            "Vertex AI GenAI client initialised — project=%s location=%s",
-            config.GCP_PROJECT, config.GCP_LOCATION,
+            "Vertex AI client initialised — project=%s location=%s default=%s fallback=%s",
+            config.GCP_PROJECT, config.GCP_LOCATION, DEFAULT_MODEL, FALLBACK_MODEL,
         )
     return _client
 
@@ -59,14 +60,8 @@ def call_vertex_ai(
     retries: int = 3,
     backoff_factor: float = 1.5,
 ) -> str:
-    """Generate content via Vertex AI using the google-genai SDK."""
+    """Generate content via Vertex AI."""
     from google import genai
-    from google.api_core.exceptions import ResourceExhausted, ServiceUnavailable
-
-    if isinstance(prompt, str):
-        contents = prompt
-    else:
-        contents = prompt
 
     cfg = genai.types.GenerateContentConfig(
         response_mime_type=response_mime_type,
@@ -82,25 +77,21 @@ def call_vertex_ai(
         try:
             resp = client.models.generate_content(
                 model=model,
-                contents=contents,
+                contents=prompt,
                 config=cfg,
             )
             return resp.text or ""
-        except (ResourceExhausted, ServiceUnavailable) as e:
-            last_error = str(e)
-            wait = backoff_factor ** attempt
-            logger.warning("Vertex AI retry %s/%s in %.1fs: %s", attempt + 1, retries, wait, e)
-            time.sleep(wait)
         except Exception as e:
-            if "429" in str(e) or "RESOURCE_EXHAUSTED" in str(e) or "503" in str(e):
-                last_error = str(e)
+            err = str(e)
+            if "429" in err or "RESOURCE_EXHAUSTED" in err or "503" in err or "502" in err:
+                last_error = err
                 wait = backoff_factor ** attempt
-                logger.warning("Vertex AI retry %s/%s in %.1fs: %s", attempt + 1, retries, wait, e)
+                logger.warning("Vertex AI retry %s/%s (model=%s) in %.1fs: %s", attempt + 1, retries, model, wait, e)
                 time.sleep(wait)
             else:
                 raise
 
-    raise RuntimeError(f"Vertex AI failed after {retries} attempts. Last error: {last_error}")
+    raise RuntimeError(f"Vertex AI failed after {retries} attempts (model={model}). Last error: {last_error}")
 
 
 def call_vertex_ai_json(
@@ -110,15 +101,23 @@ def call_vertex_ai_json(
     max_tokens: int = 4096,
     model: str = DEFAULT_MODEL,
 ) -> Dict[str, Any]:
-    """JSON-mode wrapper around call_vertex_ai."""
-    text = call_vertex_ai(
-        prompt=prompt,
-        system_instruction=system_instruction,
-        temperature=temperature,
-        max_tokens=max_tokens,
-        response_mime_type="application/json",
-        model=model,
-    )
+    """JSON-mode Vertex AI call — tries DEFAULT_MODEL, falls back to FALLBACK_MODEL."""
+    def _try(m: str) -> str:
+        return call_vertex_ai(
+            prompt=prompt,
+            system_instruction=system_instruction,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            response_mime_type="application/json",
+            model=m,
+        )
+
+    try:
+        text = _try(DEFAULT_MODEL)
+    except Exception as primary_err:
+        logger.warning("Primary model %s failed (%s); trying fallback %s", DEFAULT_MODEL, primary_err, FALLBACK_MODEL)
+        text = _try(FALLBACK_MODEL)
+
     cleaned = text.strip()
     if cleaned.startswith("```json"):
         cleaned = cleaned[7:-3].strip()

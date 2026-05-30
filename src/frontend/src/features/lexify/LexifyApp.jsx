@@ -188,9 +188,9 @@ const LexifyApp = ({ questions: propQuestions, onClose, onExamSimulationChange }
                     });
                     if (!res.ok) {
                         const errData = await res.json().catch(() => ({}));
+                        const detail = errData.detail ? ` — ${errData.detail}` : '';
                         firstApiError =
-                            errData.error ||
-                            errData.detail ||
+                            (errData.error ? `${errData.error}${detail}` : null) ||
                             `Grading failed (Status ${res.status})`;
                     } else {
                         const data = await res.json();
