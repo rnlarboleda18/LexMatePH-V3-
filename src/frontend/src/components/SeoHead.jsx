@@ -143,26 +143,6 @@ const ROUTE_META = {
       inLanguage: 'en-PH',
     },
   },
-  lexmate: {
-    path: '/lexmate',
-    title: 'LexMate AI · LexMatePH',
-    description:
-      'Ask legal questions and get AI-powered answers grounded in Philippine law with LexMate.',
-    keywords:
-      'Philippine law AI, legal assistant Philippines, AI lawyer Philippines, LexMate, ask Philippine law',
-    schema: {
-      '@context': 'https://schema.org',
-      '@type': 'SoftwareApplication',
-      name: 'LexMate AI Legal Assistant',
-      description:
-        'AI-powered legal assistant grounded in Philippine law. Ask questions and get accurate, sourced answers.',
-      url: `${BASE_URL}/lexmate`,
-      applicationCategory: 'EducationApplication',
-      operatingSystem: 'Web',
-      publisher: { '@type': 'Organization', name: 'LexMatePH', url: BASE_URL },
-      inLanguage: 'en-PH',
-    },
-  },
   updates: {
     path: '/updates',
     title: 'Updates · LexMatePH',
