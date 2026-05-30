@@ -4,6 +4,7 @@ import azure.functions as func
 import json
 import os
 import logging
+import traceback
 import requests
 import psycopg
 
@@ -169,9 +170,10 @@ async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     except Exception as e:
-        logging.error(f"Lexify grading error: {e}")
+        tb = traceback.format_exc()
+        logging.error(f"Lexify grading error: {e}\n{tb}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": str(e) or type(e).__name__, "detail": tb[-1000:]}),
             mimetype="application/json",
             status_code=500
         )
@@ -321,9 +323,10 @@ async def lexify_grade_batch(req: func.HttpRequest) -> func.HttpResponse:
         )
 
     except Exception as e:
-        logging.error(f"Lexify batch grading error: {e}")
+        tb = traceback.format_exc()
+        logging.error(f"Lexify batch grading error: {e}\n{tb}")
         return func.HttpResponse(
-            json.dumps({"error": str(e)}),
+            json.dumps({"error": str(e) or type(e).__name__, "detail": tb[-1000:]}),
             mimetype="application/json",
             status_code=500,
         )
