@@ -147,7 +147,7 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                         <span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" /><span className="block h-0.5 w-5 bg-gray-600 dark:bg-white/70" />
                     </button>
                     {showMenu && (
-                        <div className="absolute left-0 top-full z-50 mt-1 w-56 overflow-hidden rounded-xl border border-lex bg-white py-2 shadow-lg dark:border-lex dark:bg-zinc-900">
+                        <div className="absolute left-0 top-full z-[200] mt-1 w-56 overflow-hidden rounded-xl border border-lex bg-white py-2 shadow-lg dark:border-lex dark:bg-zinc-900">
                             <button type="button" onClick={() => { setShowPrefsModal(true); setShowMenu(false); }} className="w-full px-4 py-2.5 text-left text-sm text-slate-800 transition hover:bg-violet-50 dark:text-slate-100 dark:hover:bg-white/10">Preferences</button>
                             <button type="button" onClick={handleStartNewAttempt} className="w-full px-4 py-2.5 text-left text-sm text-emerald-700 transition hover:bg-emerald-50/80 dark:text-emerald-400 dark:hover:bg-white/10">Start new attempt</button>
                             
