@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# run_civil_regen.sh — full civil law regen using Fluxion GCP project
-# Run from api/ directory: bash run_civil_regen.sh
+# run_commercial_regen.sh — full commercial law regen using Fluxion GCP project
+# Run from api/ directory: bash run_commercial_regen.sh
 
 set -uo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-LOG="$SCRIPT_DIR/logs/civil_regen_$(date +%Y%m%d_%H%M%S).log"
+LOG="$SCRIPT_DIR/logs/commercial_regen_$(date +%Y%m%d_%H%M%S).log"
 mkdir -p "$SCRIPT_DIR/logs"
 
 export CLOUDSDK_CORE_ACCOUNT="fluxiontechinc@gmail.com"
@@ -14,10 +14,10 @@ export GCP_PROJECT="arcane-mason-497813-s6"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG"; }
 
-TOPICS=(I.C I.D I.E I.F I.G I.H I.I I.J II.A II.B III.A III.B IV.A IV.B V.A V.B V.C VI.A VI.B VI.C VI.D VI.E VI.F VI.G VI.H VI.I VI.J VI.K VII.A VII.B VII.C VII.D VII.E VII.F VIII.A VIII.B IX.A IX.B IX.C IX.D X.A X.B X.C XI.A XI.B XI.C XI.D XI.E XI.F XI.G XII.A XII.B XII.C XII.D)
+TOPICS=(I.A I.B II.A II.B II.C II.D II.E II.F II.G II.H II.I II.J II.K II.L III.A III.B III.C IV.A IV.B IV.C IV.D IV.E V.A V.B V.C VI.A VI.B VI.C VI.D VIII.A VIII.B VIII.C VIII.D)
 TOTAL=${#TOPICS[@]}
 
-log "=== Civil law regen: $TOTAL topics from I.C | project: $GOOGLE_CLOUD_PROJECT ==="
+log "=== Commercial law regen: $TOTAL topics | project: $GOOGLE_CLOUD_PROJECT ==="
 log "Log: $LOG"
 
 DONE=0
@@ -25,7 +25,7 @@ FAILED=0
 
 for TOPIC in "${TOPICS[@]}"; do
     log "--- [$((DONE+FAILED+1))/$TOTAL] Starting $TOPIC ---"
-    python tools/generate_bar_reviewer.py --subject civil --only-sub "$TOPIC" --vertex-project "$GOOGLE_CLOUD_PROJECT" 2>&1 | tee -a "$LOG"
+    python tools/generate_bar_reviewer.py --subject commercial --only-sub "$TOPIC" --vertex-project "$GOOGLE_CLOUD_PROJECT" 2>&1 | tee -a "$LOG"
     EXIT=${PIPESTATUS[0]}
     if [[ $EXIT -ne 0 ]]; then
         log "WARN: $TOPIC exited $EXIT — continuing"

@@ -496,75 +496,27 @@ function TopicTree({ tree, selectedId, onSelect, subjectColor }) {
   );
 }
 
-// ── Syllabus Panel ────────────────────────────────────────────────────────────
+// ── Syllabus PDF Panel ────────────────────────────────────────────────────────
 
-function SyllabusPanel({ subjectId, subjectColor }) {
-  const syllabus = BAR_SYLLABUS[subjectId];
-  if (!syllabus) return (
-    <div className="py-8 text-center text-xs text-gray-400">Syllabus not available.</div>
-  );
-
+function SyllabusPanel({ subjectId }) {
+  const pdfUrl = `/syllabus/${subjectId}.pdf`;
   return (
-    <div className="space-y-4 px-1.5 py-2">
-      {/* Weight badge */}
-      <div className="flex items-center gap-2">
-        <span className={`text-[10px] font-black uppercase tracking-wider ${subjectColor}`}>
-          {syllabus.weight} of exam
-        </span>
-      </div>
-
-      {/* Topics */}
-      <div>
-        <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-          Topics
-        </p>
-        <ol className="space-y-1">
-          {syllabus.topics.map((topic, i) => (
-            <li key={i} className="flex gap-2 text-xs leading-snug text-gray-700 dark:text-gray-300">
-              <span className={`shrink-0 text-[10px] font-black ${subjectColor}`}>{i + 1}.</span>
-              <span>{topic}</span>
-            </li>
-          ))}
-        </ol>
-      </div>
-
-      {/* Key Statutes */}
-      {syllabus.keyStatutes?.length > 0 && (
-        <div>
-          <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-            Key Statutes
-          </p>
-          <ul className="space-y-0.5">
-            {syllabus.keyStatutes.map((s, i) => (
-              <li key={i} className="flex items-start gap-1.5 text-[11px] leading-snug text-gray-600 dark:text-gray-400">
-                <span className="mt-0.5 shrink-0 text-violet-400">▪</span>
-                {s}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* Landmark Cases */}
-      {syllabus.landmarkCases?.length > 0 && (
-        <div>
-          <p className="mb-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 dark:text-gray-500">
-            Landmark Cases
-          </p>
-          <ul className="space-y-1">
-            {syllabus.landmarkCases.map((c, i) => (
-              <li key={i} className="flex items-start gap-1.5 text-[11px] leading-snug text-gray-600 dark:text-gray-400">
-                <Star size={9} className="mt-0.5 shrink-0 text-amber-400" />
-                {c}
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      <p className="text-[9px] text-gray-400 dark:text-gray-600">
-        Source: SC/PHILJA BAR 2026 · Cutoff: June 30, 2025
-      </p>
+    <div className="flex flex-col h-full min-h-[500px]">
+      <iframe
+        key={pdfUrl}
+        src={pdfUrl}
+        title={`${subjectId} syllabus`}
+        className="w-full flex-1 rounded-lg border border-lex"
+        style={{ minHeight: '500px', height: 'calc(100vh - 280px)' }}
+      />
+      <a
+        href={pdfUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="mt-1.5 flex items-center justify-center gap-1 text-[10px] text-violet-500 hover:underline"
+      >
+        <ExternalLink size={10} /> Open in new tab
+      </a>
     </div>
   );
 }
@@ -760,7 +712,9 @@ export default function Bar2026({ onCaseClick }) {
               </div>
               <div className={`overflow-y-auto px-1.5 py-2 max-h-72 md:max-h-[calc(100vh-290px)] ${showTopicTree ? '' : 'hidden md:block'}`}>
                 {sidebarView === 'syllabus' ? (
-                  <SyllabusPanel subjectId={activeTab} subjectColor={active.color} />
+                  <p className="px-2 py-4 text-center text-[11px] text-gray-400 dark:text-gray-500">
+                    PDF viewer open →
+                  </p>
                 ) : (
                   <>
                     {topicsLoading && (
@@ -785,39 +739,46 @@ export default function Bar2026({ onCaseClick }) {
 
           {/* Content panel — right */}
           <div className={`min-w-0 flex-1 ${showTopicTree ? 'hidden md:block' : 'block'}`}>
-            {/* Back to topics — mobile only */}
-            <button
-              className="mb-3 flex items-center gap-1 text-xs font-semibold text-violet-600 hover:underline dark:text-violet-400 md:hidden"
-              onClick={() => setShowTopicTree(true)}
-            >
-              <ChevronLeft size={14} /> All Topics
-            </button>
+            {sidebarView === 'syllabus' ? (
+              /* ── PDF Syllabus viewer ── */
+              <SyllabusPanel subjectId={activeTab} />
+            ) : (
+              <>
+                {/* Back to topics — mobile only */}
+                <button
+                  className="mb-3 flex items-center gap-1 text-xs font-semibold text-violet-600 hover:underline dark:text-violet-400 md:hidden"
+                  onClick={() => setShowTopicTree(true)}
+                >
+                  <ChevronLeft size={14} /> All Topics
+                </button>
 
-            {/* Scrollable content + annotation canvas layer */}
-            <div
-              ref={contentScrollRef}
-              className="relative md:overflow-y-auto md:max-h-[calc(100vh-220px)]"
-              style={isAnnotating ? { touchAction: 'none' } : undefined}
-            >
-              <ContentPanel
-                subject={activeTab}
-                topic={selectedTopic}
-                onCaseClick={onCaseClick}
-              />
-              <AnnotationCanvas
-                topicId={selectedTopic?.id}
-                isAnnotating={isAnnotating}
-                currentTool={annotationTool}
-                penColor={penColor}
-                highlighterColor={highlighterColor}
-                currentWidth={annotationWidth}
-                eraserWidth={eraserWidth}
-                allowTouchDraw={allowTouchDraw}
-                strokes={strokes}
-                onStrokeComplete={pushStroke}
-                scrollContainerRef={contentScrollRef}
-              />
-            </div>
+                {/* Scrollable content + annotation canvas layer */}
+                <div
+                  ref={contentScrollRef}
+                  className="relative md:overflow-y-auto md:max-h-[calc(100vh-220px)]"
+                  style={isAnnotating ? { touchAction: 'none' } : undefined}
+                >
+                  <ContentPanel
+                    subject={activeTab}
+                    topic={selectedTopic}
+                    onCaseClick={onCaseClick}
+                  />
+                  <AnnotationCanvas
+                    topicId={selectedTopic?.id}
+                    isAnnotating={isAnnotating}
+                    currentTool={annotationTool}
+                    penColor={penColor}
+                    highlighterColor={highlighterColor}
+                    currentWidth={annotationWidth}
+                    eraserWidth={eraserWidth}
+                    allowTouchDraw={allowTouchDraw}
+                    strokes={strokes}
+                    onStrokeComplete={pushStroke}
+                    scrollContainerRef={contentScrollRef}
+                  />
+                </div>
+              </>
+            )}
           </div>
 
         </div>
