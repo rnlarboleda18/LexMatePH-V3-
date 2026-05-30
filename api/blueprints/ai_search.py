@@ -99,7 +99,7 @@ def _get_ai_answer(query: str) -> str:
             system_instruction=AI_SEARCH_SYSTEM_PROMPT,
         )
         resp = _get_gemini_client().models.generate_content(
-            model=config.GEMINI_PRO_MODEL,
+            model=config.GEMINI_FLASH_MODEL,
             contents=query,
             config=cfg,
         )

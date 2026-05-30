@@ -19,7 +19,6 @@ import PurpleGlassAmbient from './components/PurpleGlassAmbient';
 import CardVioletInnerWash from './components/CardVioletInnerWash';
 import PublicLayout from './components/PublicLayout';
 import { LexPlayer, useLexPlay } from './features/lexplay';
-const LexMateApp = lazy(() => import('./features/lexmate/LexMateApp'));
 import { useSubscription } from './context/SubscriptionContext';
 import { normalizeBarQuestionSubject, normalizeBarSubject } from './utils/subjectNormalize';
 import { GUEST_WINDOW_MS, isInGuestWindow } from './utils/freeTierUsage';
@@ -113,7 +112,6 @@ const MODE_TO_PATH = {
   codex: '/lexcode',
   flashcard: '/flashcards',
   quiz: '/lexify',
-  lexmate: '/lexmate',
   about: '/about',
   legal: '/legal',
   updates: '/updates',
@@ -913,7 +911,6 @@ function App() {
             navigateToTab('lexplay');
           }}
           onToggleLexCode={handleToggleLexCode}
-          onToggleLexMate={() => navigateToTab('lexmate')}
           onToggleAdminTools={() => navigateToTab('admin_tools')}
           onToggleBar2026={handleToggleBar2026}
           onToggleFavorites={() => navigateToTab('favorites')}
@@ -1082,11 +1079,6 @@ function App() {
                         </div>
                       </FeaturePageShell>
                     )
-                  )}
-                  {effectiveMode === 'lexmate' && (
-                    <Suspense fallback={<PageLoadingFallback label="Loading LexMate…" />}>
-                      <LexMateApp onClose={() => setMode('supreme_decisions')} />
-                    </Suspense>
                   )}
                   {effectiveMode === 'browse_bar' && (
                     <PurpleGlassAmbient showAmbient className="min-h-screen w-full min-w-0 pb-6 font-sans text-gray-900 dark:text-gray-100">

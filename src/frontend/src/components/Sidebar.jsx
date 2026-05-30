@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, Terminal, Scale, MessageSquare, ChevronDown, ChevronRight } from 'lucide-react';
+import { SquareStack, Info, Newspaper, Gavel, Library, Headphones, LogIn, UserPlus, Brain, Zap, Crown, Star, Shield, Book, Terminal, Scale, ChevronDown, ChevronRight } from 'lucide-react';
 import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
 import { useSubscription } from '../context/SubscriptionContext';
 import { SIDEBAR_NAV_ACTIVE, SIDEBAR_NAV_IDLE, SIDEBAR_MOBILE_AUTH_CARD } from '../utils/filterChromeClasses';
@@ -81,7 +81,6 @@ const Sidebar = ({
   onToggleUpdates,
   onToggleSupremeDecisions,
   onToggleLexCode,
-  onToggleLexMate,
   mode,
   onToggleLexPlay,
   onToggleFlashcard,
@@ -302,21 +301,6 @@ const Sidebar = ({
                 <SquareStack size={18} className={`${mode === 'flashcard' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
                 Flashcards
             </button>
-
-            {/* LexMate Button — admin only */}
-            {isAdmin && (
-            <button
-                onClick={() => { if (onToggleLexMate) onToggleLexMate(); }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-base font-medium transition-colors
-                ${mode === 'lexmate'
-                        ? SIDEBAR_NAV_ACTIVE
-                        : SIDEBAR_NAV_IDLE
-                    }`}
-            >
-                <MessageSquare size={18} className={`${mode === 'lexmate' ? 'text-indigo-700 dark:text-indigo-400' : 'text-indigo-600 dark:text-indigo-400'} group-hover:scale-110 transition-all duration-200`} />
-                LexMate AI
-            </button>
-            )}
 
             {/* LexPlay Button */}
             <button

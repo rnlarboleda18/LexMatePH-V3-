@@ -1,6 +1,6 @@
 import React, { useLayoutEffect } from 'react';
 import { createPortal } from 'react-dom';
-import { X, Info, Gavel, Library, Book, Brain, SquareStack, Headphones, Newspaper, MessageSquare, Terminal, Scale } from 'lucide-react';
+import { X, Info, Gavel, Library, Book, Brain, SquareStack, Headphones, Newspaper, Terminal, Scale } from 'lucide-react';
 import { APP_HEADER_SURFACE } from '../utils/filterChromeClasses';
 
 const TAB_CONFIG = {
@@ -13,7 +13,6 @@ const TAB_CONFIG = {
   flashcard:         { label: 'Flashcards',    Icon: SquareStack },
   lexplay:           { label: 'LexPlay',       Icon: Headphones },
   updates:           { label: 'Updates',       Icon: Newspaper },
-  lexmate:           { label: 'LexMate AI',    Icon: MessageSquare },
   admin_tools:       { label: 'Admin',         Icon: Terminal },
 };
 

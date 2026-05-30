@@ -70,9 +70,6 @@ try:
     app.register_functions(sitemap_bp)
     app.register_functions(decision_page_bp)
 
-    from blueprints.legal_chat import legal_chat_bp
-    app.register_functions(legal_chat_bp)
-
     from blueprints.ai_search import ai_search_bp
     app.register_functions(ai_search_bp)
 
