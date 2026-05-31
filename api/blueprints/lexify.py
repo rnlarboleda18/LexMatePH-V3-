@@ -251,8 +251,7 @@ async def lexify_grade_batch(req: func.HttpRequest) -> func.HttpResponse:
         expected_indices = {it["index"] for it in normalized}
 
         try:
-            # thinking_budget=0 disables thinking on gemini-3.5-flash so the
-            # 20-item batch completes within the SWA Free 60s function timeout.
+            # Enable thinking on the batch model to test response speeds on 20 questions
             from utils.ai_client import BATCH_MODEL
             parsed = call_lexify_ai_json(
                 prompt=user_prompt,
@@ -260,7 +259,6 @@ async def lexify_grade_batch(req: func.HttpRequest) -> func.HttpResponse:
                 temperature=0.1,
                 max_tokens=16384,
                 model=BATCH_MODEL,
-                thinking_budget=0,
             )
 
             # Robust extraction of the results list
