@@ -102,6 +102,20 @@ export function useGlobalCaseModal() {
     return () => window.removeEventListener('popstate', onPopState);
   }, []);
 
+  /**
+   * Clear the modal state without touching browser history.
+   * Use this when the caller is already handling navigation (e.g. tab switch),
+   * so history.back() doesn't race with the caller's navigate() call.
+   */
+  const clearCase = useCallback(() => {
+    if (selectedCase?.id != null) {
+      lastClosedIdRef.current = selectedCase.id;
+      suppressUntilRef.current = Date.now() + 750;
+    }
+    didPushStateRef.current = false;
+    setSelectedCase(null);
+  }, [selectedCase]);
+
   /** Merge fields into the open case (e.g. full text loaded after digest-only open). */
   const patchSelectedCase = useCallback((id, patch) => {
     if (id == null || patch == null) return;
@@ -111,5 +125,5 @@ export function useGlobalCaseModal() {
     });
   }, []);
 
-  return { selectedCase, selectCase, closeModal, patchSelectedCase };
+  return { selectedCase, selectCase, closeModal, clearCase, patchSelectedCase };
 }

@@ -230,6 +230,7 @@ function App() {
     selectedCase: globalSelectedCase,
     selectCase: selectGlobalCase,
     closeModal: closeGlobalCaseModal,
+    clearCase: clearGlobalCase,
     patchSelectedCase: patchGlobalCase,
   } = useGlobalCaseModal();
 
@@ -1352,7 +1353,7 @@ function App() {
           tabs={openTabs}
           activeMode={mode}
           onSwitch={(newMode) => {
-            closeGlobalCaseModal();
+            clearGlobalCase();
             setSelectedQuestion(null);
             navigateToTab(newMode);
           }}
