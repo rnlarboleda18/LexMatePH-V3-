@@ -9,7 +9,7 @@ import requests
 import psycopg
 
 from utils.clerk_auth import get_authenticated_user_id
-from utils.ai_client import call_vertex_ai_json
+from utils.ai_client import call_lexify_ai_json
 
 lexify_bp = func.Blueprint()
 
@@ -141,8 +141,8 @@ async def lexify_grade(req: func.HttpRequest) -> func.HttpResponse:
         user_content = "\n\n".join(user_content_parts)
 
         try:
-            # Vertex AI only (ADC / service account). See utils/ai_client.py.
-            parsed_json = call_vertex_ai_json(
+            # Google AI Studio only (using GEMINI_API_KEY). See utils/ai_client.py.
+            parsed_json = call_lexify_ai_json(
                 prompt=user_content,
                 system_instruction=GRADING_SYSTEM_PROMPT,
                 temperature=0.1,
@@ -254,7 +254,7 @@ async def lexify_grade_batch(req: func.HttpRequest) -> func.HttpResponse:
             # thinking_budget=0 disables thinking on gemini-3.5-flash so the
             # 20-item batch completes within the SWA Free 60s function timeout.
             from utils.ai_client import BATCH_MODEL
-            parsed = call_vertex_ai_json(
+            parsed = call_lexify_ai_json(
                 prompt=user_prompt,
                 system_instruction=GRADING_BATCH_SYSTEM_PROMPT,
                 temperature=0.1,
@@ -262,77 +262,108 @@ async def lexify_grade_batch(req: func.HttpRequest) -> func.HttpResponse:
                 model=BATCH_MODEL,
                 thinking_budget=0,
             )
+
+            # Robust extraction of the results list
+            if isinstance(parsed, list):
+                results_list = parsed
+            elif isinstance(parsed, dict):
+                results_list = parsed.get("results")
+                # Fallback check for variations in response keys
+                if not isinstance(results_list, list):
+                    if isinstance(parsed.get("results_list"), list):
+                        results_list = parsed.get("results_list")
+                    else:
+                        # Find the first key that holds a list
+                        for k, v in parsed.items():
+                            if isinstance(v, list):
+                                results_list = v
+                                break
+            else:
+                results_list = None
+
+            if not isinstance(results_list, list):
+                return func.HttpResponse(
+                    json.dumps({
+                        "error": "Unexpected AI response format",
+                        "detail": f"Could not locate a results array in parsed response of type {type(parsed).__name__}. Content: {str(parsed)[:1000]}"
+                    }),
+                    mimetype="application/json",
+                    status_code=502,
+                )
+
+            out: list[dict] = []
+            seen: set[int] = set()
+            for row in results_list:
+                if not isinstance(row, dict):
+                    continue
+                try:
+                    idx = int(row.get("index"))
+                except (TypeError, ValueError):
+                    continue
+                if idx not in expected_indices or idx in seen:
+                    continue
+                if "score" not in row:
+                    continue
+                try:
+                    score = max(0.0, min(5.0, float(row.get("score"))))
+                except (TypeError, ValueError):
+                    continue
+                
+                # Exception-safe casting to string before stripping
+                feedback = str(row.get("feedback") or "").strip()
+                comparison_highlight = str(row.get("comparison_highlight") or "").strip()
+                
+                seen.add(idx)
+                out.append({
+                    "index": idx,
+                    "score": score,
+                    "feedback": feedback,
+                    "comparison_highlight": comparison_highlight,
+                })
+
+            if not out:
+                return func.HttpResponse(
+                    json.dumps({
+                        "error": "No valid grading results",
+                        "detail": "AI response was found but none of the graded items could be successfully parsed.",
+                    }),
+                    mimetype="application/json",
+                    status_code=502,
+                )
+
+            # Log a warning instead of hard 502 error if some indices are missing
+            if len(out) != len(expected_indices):
+                missing = expected_indices - seen
+                logging.warning(
+                    "Batch grade incomplete: expected %s got %s missing=%s",
+                    len(expected_indices),
+                    len(out),
+                    missing,
+                )
+
+            out.sort(key=lambda r: r["index"])
+            return func.HttpResponse(
+                json.dumps({"results": out}),
+                mimetype="application/json",
+                status_code=200,
+            )
+
         except Exception as e:
-            logging.error(f"Vertex AI batch grading error: {e}")
+            logging.error("Vertex AI batch grading parsing/service error: %s", e, exc_info=True)
             return func.HttpResponse(
                 json.dumps({"error": "AI Grading service error", "detail": str(e)}),
                 mimetype="application/json",
                 status_code=502,
             )
 
-        results_list = parsed.get("results")
-        if not isinstance(results_list, list):
-            return func.HttpResponse(
-                json.dumps({"error": "Unexpected AI response: 'results' is not an array", "detail": str(parsed)[:2000]}),
-                mimetype="application/json",
-                status_code=502,
-            )
-
-        out: list[dict] = []
-        seen: set[int] = set()
-        for row in results_list:
-            if not isinstance(row, dict):
-                continue
-            try:
-                idx = int(row.get("index"))
-            except (TypeError, ValueError):
-                continue
-            if idx not in expected_indices or idx in seen:
-                continue
-            if "score" not in row:
-                continue
-            try:
-                score = max(0.0, min(5.0, float(row.get("score"))))
-            except (TypeError, ValueError):
-                continue
-            seen.add(idx)
-            out.append({
-                "index": idx,
-                "score": score,
-                "feedback": (row.get("feedback") or "").strip(),
-                "comparison_highlight": (row.get("comparison_highlight") or "").strip(),
-            })
-
-        if len(out) != len(expected_indices):
-            missing = expected_indices - seen
-            logging.error(
-                "Batch grade incomplete: expected %s got %s missing=%s",
-                len(expected_indices),
-                len(out),
-                missing,
-            )
-            return func.HttpResponse(
-                json.dumps({
-                    "error": "AI returned incomplete grading results",
-                    "detail": f"Expected {len(expected_indices)} scores, got {len(out)}",
-                    "missing_indices": sorted(missing),
-                }),
-                mimetype="application/json",
-                status_code=502,
-            )
-
-        out.sort(key=lambda r: r["index"])
-        return func.HttpResponse(
-            json.dumps({"results": out}),
-            mimetype="application/json",
-            status_code=200,
-        )
-
     except Exception as e:
         tb = traceback.format_exc()
-        logging.error(f"Lexify batch grading error: {e}\n{tb}")
+        logging.error("Lexify batch grading global route error: %s", e, exc_info=True)
+        # Safe encoding of exception messages to prevent encoding errors on standard output
+        err_msg_safe = str(e).encode('utf-8', 'ignore').decode('utf-8') or type(e).__name__
+        err_detail_safe = tb[-1000:].encode('utf-8', 'ignore').decode('utf-8')
         return func.HttpResponse(
-            json.dumps({"error": str(e) or type(e).__name__, "detail": tb[-1000:]}),
+            json.dumps({"error": err_msg_safe, "detail": err_detail_safe}),
             mimetype="application/json",
             status_code=500,
         )

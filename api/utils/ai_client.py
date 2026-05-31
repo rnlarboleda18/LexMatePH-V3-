@@ -35,8 +35,9 @@ _client_lock = threading.Lock()
 def _get_client():
     """Return a lazily-initialised GenAI client (shared, thread-safe).
 
-    Uses AI Studio (GEMINI_API_KEY) when the env var is set; falls back to
-    Vertex AI via ADC otherwise.
+    Uses Vertex AI if GOOGLE_GENAI_USE_VERTEXAI is 'true'.
+    Otherwise, uses AI Studio if GEMINI_API_KEY is set.
+    Falls back to Vertex AI otherwise.
     """
     global _client
     if _client is not None:
@@ -47,10 +48,24 @@ def _get_client():
         from google import genai
         from google.genai import types as genai_types
 
-        if GEMINI_API_KEY:
-            _client = genai.Client(api_key=GEMINI_API_KEY)
+        use_vertex = os.environ.get("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in ("1", "true", "yes")
+
+        if use_vertex:
+            import config
+            _client = genai.Client(
+                vertexai=True,
+                project=config.GCP_PROJECT,
+                location=config.GCP_LOCATION,
+                http_options=genai_types.HttpOptions(timeout=120_000),
+            )
             logger.info(
-                "AI Studio client initialised (API key) — default=%s fallback=%s",
+                "Vertex AI client initialised (forced via env) — project=%s location=%s default=%s fallback=%s",
+                config.GCP_PROJECT, config.GCP_LOCATION, DEFAULT_MODEL, FALLBACK_MODEL,
+            )
+        elif GEMINI_API_KEY:
+            _client = genai.Client(api_key=GEMINI_API_KEY, vertexai=False)
+            logger.info(
+                "AI Studio client initialised (API key, vertexai=False) — default=%s fallback=%s",
                 DEFAULT_MODEL, FALLBACK_MODEL,
             )
         else:
@@ -62,7 +77,7 @@ def _get_client():
                 http_options=genai_types.HttpOptions(timeout=120_000),
             )
             logger.info(
-                "Vertex AI client initialised — project=%s location=%s default=%s fallback=%s",
+                "Vertex AI client initialised (fallback) — project=%s location=%s default=%s fallback=%s",
                 config.GCP_PROJECT, config.GCP_LOCATION, DEFAULT_MODEL, FALLBACK_MODEL,
             )
     return _client
@@ -154,3 +169,113 @@ def call_vertex_ai_json(
     except json.JSONDecodeError as e:
         logger.error("Vertex AI returned invalid JSON: %s", text)
         raise ValueError(f"Vertex AI returned invalid JSON: {e}") from e
+
+
+_studio_client = None
+_studio_client_lock = threading.Lock()
+
+
+def _get_ai_studio_client():
+    """Return a lazily-initialised AI Studio GenAI client specifically for Lexify."""
+    global _studio_client
+    if _studio_client is not None:
+        return _studio_client
+    with _studio_client_lock:
+        if _studio_client is not None:
+            return _studio_client
+        from google import genai
+        key = os.environ.get("GEMINI_API_KEY", "").strip()
+        if not key:
+            raise ValueError("GEMINI_API_KEY is not configured in environment variables.")
+        _studio_client = genai.Client(api_key=key, vertexai=False)
+        logger.info("Lexify AI Studio client initialised successfully (using GEMINI_API_KEY).")
+    return _studio_client
+
+
+def call_lexify_ai(
+    prompt: Union[str, List[Dict[str, Any]]],
+    system_instruction: Optional[str] = None,
+    temperature: float = 0.2,
+    max_tokens: int = 4096,
+    response_mime_type: str = "text/plain",
+    model: str = DEFAULT_MODEL,
+    retries: int = 3,
+    backoff_factor: float = 1.5,
+    thinking_budget: Optional[int] = None,
+) -> str:
+    """Generate content exclusively via Google AI Studio for Lexify."""
+    from google import genai
+    from google.genai import types as genai_types
+
+    cfg_kwargs = dict(
+        response_mime_type=response_mime_type,
+        temperature=temperature,
+        max_output_tokens=max_tokens,
+        system_instruction=system_instruction or None,
+    )
+    if thinking_budget is not None:
+        cfg_kwargs["thinking_config"] = genai_types.ThinkingConfig(thinking_budget=thinking_budget)
+    cfg = genai.types.GenerateContentConfig(**cfg_kwargs)
+
+    client = _get_ai_studio_client()
+    last_error: Optional[str] = None
+
+    for attempt in range(retries):
+        try:
+            resp = client.models.generate_content(
+                model=model,
+                contents=prompt,
+                config=cfg,
+            )
+            return resp.text or ""
+        except Exception as e:
+            err = str(e)
+            if "429" in err or "RESOURCE_EXHAUSTED" in err or "503" in err or "502" in err:
+                last_error = err
+                wait = backoff_factor ** attempt
+                logger.warning("Lexify AI Studio retry %s/%s (model=%s) in %.1fs: %s", attempt + 1, retries, model, wait, e)
+                time.sleep(wait)
+            else:
+                raise
+
+    raise RuntimeError(f"Lexify AI Studio failed after {retries} attempts (model={model}). Last error: {last_error}")
+
+
+def call_lexify_ai_json(
+    prompt: str,
+    system_instruction: Optional[str] = None,
+    temperature: float = 0.2,
+    max_tokens: int = 4096,
+    model: str = DEFAULT_MODEL,
+    thinking_budget: Optional[int] = None,
+) -> Dict[str, Any]:
+    """JSON-mode call for Lexify — tries the given model via AI Studio, falls back to FALLBACK_MODEL."""
+    def _try(m: str) -> str:
+        return call_lexify_ai(
+            prompt=prompt,
+            system_instruction=system_instruction,
+            temperature=temperature,
+            max_tokens=max_tokens,
+            response_mime_type="application/json",
+            model=m,
+            thinking_budget=thinking_budget,
+        )
+
+    fallback = FALLBACK_MODEL if model != FALLBACK_MODEL else DEFAULT_MODEL
+    try:
+        text = _try(model)
+    except Exception as primary_err:
+        logger.warning("Lexify primary AI Studio model %s failed (%s); trying fallback %s", model, primary_err, fallback)
+        text = _try(fallback)
+
+    cleaned = text.strip()
+    if cleaned.startswith("```json"):
+        cleaned = cleaned[7:-3].strip()
+    elif cleaned.startswith("```"):
+        cleaned = cleaned[3:-3].strip()
+    try:
+        return json.loads(cleaned)
+    except json.JSONDecodeError as e:
+        logger.error("Lexify AI Studio returned invalid JSON: %s", text)
+        raise ValueError(f"Lexify AI Studio returned invalid JSON: {e}") from e
+
