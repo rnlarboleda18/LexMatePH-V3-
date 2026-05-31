@@ -1,10 +1,13 @@
 """
-ai_client.py — Google GenAI client (Vertex AI).
+ai_client.py — Google GenAI client (Vertex AI or AI Studio API key).
 
-Auth: Application Default Credentials (ADC).
-  Local dev:  run `gcloud auth application-default login` with rnlarboleda18@gmail.com
-  Production: set GCP_SA_JSON_B64 or GCP_SA_JSON in Azure App Settings,
-              OR rely on the managed identity / ADC on the host.
+Auth priority:
+  1. GEMINI_API_KEY set → Google AI Studio (api_key mode, no GCP project needed)
+  2. No API key        → Vertex AI via Application Default Credentials (ADC)
+
+Local dev with AI Studio: set GEMINI_API_KEY in api/local.settings.json.
+Production (Vertex AI):   set GCP_SA_JSON_B64 or GCP_SA_JSON in Azure App Settings,
+                          OR rely on the managed identity / ADC on the host.
 
 Default model : gemini-2.5-pro   (override: GEMINI_DEFAULT_MODEL)
 Fallback model: gemini-2.5-flash  (override: GEMINI_FALLBACK_MODEL)
@@ -20,33 +23,45 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_MODEL  = os.environ.get("GEMINI_DEFAULT_MODEL",  "").strip() or "gemini-2.5-pro"
 FALLBACK_MODEL = os.environ.get("GEMINI_FALLBACK_MODEL", "").strip() or "gemini-2.5-flash"
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 
 _client = None
 _client_lock = threading.Lock()
 
 
 def _get_client():
-    """Return a lazily-initialised Vertex AI GenAI client (shared, thread-safe)."""
+    """Return a lazily-initialised GenAI client (shared, thread-safe).
+
+    Uses AI Studio (GEMINI_API_KEY) when the env var is set; falls back to
+    Vertex AI via ADC otherwise.
+    """
     global _client
     if _client is not None:
         return _client
     with _client_lock:
         if _client is not None:
             return _client
-        import config
         from google import genai
         from google.genai import types as genai_types
 
-        _client = genai.Client(
-            vertexai=True,
-            project=config.GCP_PROJECT,
-            location=config.GCP_LOCATION,
-            http_options=genai_types.HttpOptions(timeout=120_000),
-        )
-        logger.info(
-            "Vertex AI client initialised — project=%s location=%s default=%s fallback=%s",
-            config.GCP_PROJECT, config.GCP_LOCATION, DEFAULT_MODEL, FALLBACK_MODEL,
-        )
+        if GEMINI_API_KEY:
+            _client = genai.Client(api_key=GEMINI_API_KEY)
+            logger.info(
+                "AI Studio client initialised (API key) — default=%s fallback=%s",
+                DEFAULT_MODEL, FALLBACK_MODEL,
+            )
+        else:
+            import config
+            _client = genai.Client(
+                vertexai=True,
+                project=config.GCP_PROJECT,
+                location=config.GCP_LOCATION,
+                http_options=genai_types.HttpOptions(timeout=120_000),
+            )
+            logger.info(
+                "Vertex AI client initialised — project=%s location=%s default=%s fallback=%s",
+                config.GCP_PROJECT, config.GCP_LOCATION, DEFAULT_MODEL, FALLBACK_MODEL,
+            )
     return _client
 
 

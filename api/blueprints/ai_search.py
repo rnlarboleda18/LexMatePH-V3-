@@ -69,21 +69,9 @@ def _looks_like_question(query: str) -> bool:
     return any(q.startswith(w) for w in _QUESTION_WORDS)
 
 
-_gemini_client = None
-
-
 def _get_gemini_client():
-    """Return a cached Vertex AI GenAI client (one-time init per worker)."""
-    global _gemini_client
-    if _gemini_client is None:
-        import config
-        from google import genai
-        _gemini_client = genai.Client(
-            vertexai=True,
-            project=config.GCP_PROJECT,
-            location=config.GCP_LOCATION,
-        )
-    return _gemini_client
+    from utils.ai_client import _get_client
+    return _get_client()
 
 
 def _get_ai_answer(query: str) -> str:
