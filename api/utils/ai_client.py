@@ -23,6 +23,9 @@ logger = logging.getLogger(__name__)
 
 DEFAULT_MODEL  = os.environ.get("GEMINI_DEFAULT_MODEL",  "").strip() or "gemini-2.5-pro"
 FALLBACK_MODEL = os.environ.get("GEMINI_FALLBACK_MODEL", "").strip() or "gemini-2.5-flash"
+# Non-thinking fast model for time-sensitive batch calls (e.g. lexify_grade_batch).
+# Must complete 20-item grading within the SWA Free tier 60s timeout.
+BATCH_MODEL    = os.environ.get("GEMINI_BATCH_MODEL",    "").strip() or "gemini-2.5-flash"
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 
 _client = None

@@ -251,16 +251,16 @@ async def lexify_grade_batch(req: func.HttpRequest) -> func.HttpResponse:
         expected_indices = {it["index"] for it in normalized}
 
         try:
-            # Use flash for batch grading — SWA Free tier has a 60s function timeout;
-            # gemini-2.5-pro takes 60-90s for 20 items and gets killed.
-            # Flash completes the same batch in ~15-20s.
-            from utils.ai_client import FALLBACK_MODEL
+            # Use BATCH_MODEL (non-thinking, fast) — SWA Free tier has a 60s timeout.
+            # Thinking models (e.g. gemini-3.5-flash) add ~600 thinking tokens/item
+            # and exceed the limit on 20-item batches.
+            from utils.ai_client import BATCH_MODEL
             parsed = call_vertex_ai_json(
                 prompt=user_prompt,
                 system_instruction=GRADING_BATCH_SYSTEM_PROMPT,
                 temperature=0.1,
                 max_tokens=16384,
-                model=FALLBACK_MODEL,
+                model=BATCH_MODEL,
             )
         except Exception as e:
             logging.error(f"Vertex AI batch grading error: {e}")
