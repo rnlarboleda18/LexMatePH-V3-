@@ -77,16 +77,21 @@ def call_vertex_ai(
     model: str = DEFAULT_MODEL,
     retries: int = 3,
     backoff_factor: float = 1.5,
+    thinking_budget: Optional[int] = None,
 ) -> str:
-    """Generate content via Vertex AI."""
+    """Generate content via Vertex AI or AI Studio."""
     from google import genai
+    from google.genai import types as genai_types
 
-    cfg = genai.types.GenerateContentConfig(
+    cfg_kwargs = dict(
         response_mime_type=response_mime_type,
         temperature=temperature,
         max_output_tokens=max_tokens,
         system_instruction=system_instruction or None,
     )
+    if thinking_budget is not None:
+        cfg_kwargs["thinking_config"] = genai_types.ThinkingConfig(thinking_budget=thinking_budget)
+    cfg = genai.types.GenerateContentConfig(**cfg_kwargs)
 
     client = _get_client()
     last_error: Optional[str] = None
@@ -118,8 +123,9 @@ def call_vertex_ai_json(
     temperature: float = 0.2,
     max_tokens: int = 4096,
     model: str = DEFAULT_MODEL,
+    thinking_budget: Optional[int] = None,
 ) -> Dict[str, Any]:
-    """JSON-mode Vertex AI call — tries DEFAULT_MODEL, falls back to FALLBACK_MODEL."""
+    """JSON-mode call — tries the given model, falls back to FALLBACK_MODEL."""
     def _try(m: str) -> str:
         return call_vertex_ai(
             prompt=prompt,
@@ -128,6 +134,7 @@ def call_vertex_ai_json(
             max_tokens=max_tokens,
             response_mime_type="application/json",
             model=m,
+            thinking_budget=thinking_budget,
         )
 
     fallback = FALLBACK_MODEL if model != FALLBACK_MODEL else DEFAULT_MODEL
