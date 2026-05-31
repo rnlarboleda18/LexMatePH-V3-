@@ -183,6 +183,11 @@ function App() {
     setMode(newMode);
   }, []);
 
+  // Ref so closeTab (defined before useGlobalCaseModal) can call clearGlobalCase
+  // without it appearing in the useCallback dependency array — which would cause
+  // a TDZ error because clearGlobalCase is declared later in the component.
+  const clearGlobalCaseRef = React.useRef(null);
+
   const closeTab = useCallback((tabMode) => {
     // Clear modal state when a tab that owns it is closed.
     // Case modal: clear when the last case-capable tab is closed.
@@ -190,7 +195,7 @@ function App() {
       const remainingCaseTabs = openTabsRef.current.filter(
         (t) => t !== tabMode && CASE_TABS.includes(t)
       );
-      if (remainingCaseTabs.length === 0) clearGlobalCase();
+      if (remainingCaseTabs.length === 0) clearGlobalCaseRef.current?.();
     }
     if (tabMode === 'browse_bar') setSelectedQuestion(null);
     if (tabMode === 'flashcard') setFlashcardState('setup');
@@ -204,7 +209,7 @@ function App() {
       const idx = current.indexOf(tabMode);
       return safeNext[Math.max(0, idx - 1)] ?? safeNext[0] ?? 'about';
     });
-  }, [clearGlobalCase]);
+  }, []);
 
   /**
    * Numeric case ID extracted from a deep-link URL on initial load
@@ -247,6 +252,8 @@ function App() {
     clearCase: clearGlobalCase,
     patchSelectedCase: patchGlobalCase,
   } = useGlobalCaseModal();
+  // Keep the ref current so closeTab always calls the latest clearGlobalCase.
+  clearGlobalCaseRef.current = clearGlobalCase;
 
   const selectGlobalCaseGuarded = useCallback(
     (next) => {
