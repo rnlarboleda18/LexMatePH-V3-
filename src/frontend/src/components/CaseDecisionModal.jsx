@@ -960,11 +960,20 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
                             </h2>
                             {(fullDecision.case_number || _decisionDateRaw) && (
-                                <p className="mt-2 font-mono text-[12px] text-gray-400 dark:text-gray-500">
-                                    {fullDecision.case_number}
-                                    {fullDecision.case_number && _decisionDateRaw && <span className="mx-2">|</span>}
-                                    {_decisionDateRaw && formatDate(_decisionDateRaw)}
-                                </p>
+                                <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
+                                    {fullDecision.case_number && (
+                                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide font-sans bg-indigo-50/90 text-indigo-700 border border-indigo-100 dark:bg-indigo-950/40 dark:text-indigo-300 dark:border-indigo-900/50 shadow-sm transition-all duration-200 hover:scale-[1.03] hover:shadow-md">
+                                            <Scale className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" strokeWidth={2.25} />
+                                            {fullDecision.case_number}
+                                        </span>
+                                    )}
+                                    {_decisionDateRaw && (
+                                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide font-sans bg-emerald-50/90 text-emerald-700 border border-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900/50 shadow-sm transition-all duration-200 hover:scale-[1.03] hover:shadow-md">
+                                            <Clock className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" strokeWidth={2.25} />
+                                            {formatDate(_decisionDateRaw)}
+                                        </span>
+                                    )}
+                                </div>
                             )}
                         </div>
                     )}

@@ -66,6 +66,11 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
     }, []);
 
     const handleBeginClick = (exam) => {
+        const isTaken = attempts.history[attempts.current]?.[exam.id];
+        if (isTaken) {
+            const proceed = window.confirm(`You already completed ${exam.label} for Attempt ${attempts.current} with a score of ${isTaken.score}%. Retaking will overwrite your previous score. Do you want to proceed?`);
+            if (!proceed) return;
+        }
         setSelectedExam(exam);
         setShowPasswordModal(true);
         // password stays pre-filled with PROCTOR_PASSWORD — user just clicks Confirm
@@ -234,7 +239,40 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                             </div>
                             <h1 className="relative mt-4 text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">My Exams</h1>
                             <p className="relative mt-2 text-sm leading-relaxed text-slate-600 dark:text-slate-400">6 core bar subjects · 20 questions each</p>
-                            <p className="relative mt-3 text-xs font-bold uppercase tracking-wider text-violet-700 dark:text-violet-300">Mock bar attempt no. {attempts.current}</p>
+                            {(() => {
+                                const maxAttempt = Math.max(attempts.current || 1, ...Object.keys(attempts.history || {}).map(Number), 1);
+                                const attemptNumbers = Array.from({ length: maxAttempt }, (_, i) => i + 1);
+                                return (
+                                    <div className="relative mt-4 flex flex-wrap items-center justify-center gap-3">
+                                        <span className="text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400">Mock Bar Attempt:</span>
+                                        <div className="flex items-center gap-2">
+                                            <select
+                                                value={attempts.current}
+                                                onChange={(e) => {
+                                                    const selected = Number(e.target.value);
+                                                    const updated = { ...attempts, current: selected };
+                                                    if (!updated.history[selected]) updated.history[selected] = {};
+                                                    setAttempts(updated);
+                                                    localStorage.setItem('lexify_attempts', JSON.stringify(updated));
+                                                }}
+                                                className="rounded-xl border border-lex bg-white px-3 py-1.5 text-xs font-bold text-violet-700 focus:outline-none dark:border-lex dark:bg-zinc-800 dark:text-violet-300 shadow-sm"
+                                            >
+                                                {attemptNumbers.map((num) => (
+                                                    <option key={num} value={num}>Attempt {num}</option>
+                                                ))}
+                                            </select>
+                                            <button
+                                                type="button"
+                                                onClick={handleStartNewAttempt}
+                                                className="inline-flex items-center gap-1 rounded-xl border border-emerald-500/20 bg-emerald-50 px-3 py-1.5 text-xs font-bold text-emerald-700 transition hover:bg-emerald-100 dark:bg-emerald-950/30 dark:text-emerald-400 shadow-sm active:scale-95"
+                                                title="Create a fresh attempt where all subjects are reset"
+                                            >
+                                                + New Attempt
+                                            </button>
+                                        </div>
+                                    </div>
+                                );
+                            })()}
                         </div>
 
                         {/* Final Average Banner */}
@@ -315,11 +353,14 @@ const LexifyDashboard = ({ onBeginExam, onClose }) => {
                                             </div>
                                             <button
                                                 type="button"
-                                                onClick={() => !isTaken && handleBeginClick(exam)}
-                                                disabled={isTaken}
-                                                className={`rounded-xl px-5 py-1.5 text-sm font-bold shadow-sm transition-all ${isTaken ? 'cursor-not-allowed border border-slate-200/80 bg-slate-100 text-slate-400 dark:border-white/10 dark:bg-white/5 dark:text-slate-500' : 'border border-violet-500/30 bg-gradient-to-r from-violet-600 to-purple-600 text-white hover:from-violet-500 hover:to-fuchsia-600 active:scale-[0.98]'}`}
+                                                onClick={() => handleBeginClick(exam)}
+                                                className={`rounded-xl px-5 py-1.5 text-sm font-bold shadow-sm transition-all active:scale-[0.98] ${
+                                                    isTaken
+                                                        ? 'border border-violet-500/30 bg-violet-50 text-violet-700 hover:bg-violet-100 dark:border-white/10 dark:bg-white/5 dark:text-violet-300 dark:hover:bg-white/10'
+                                                        : 'border border-violet-500/30 bg-gradient-to-r from-violet-600 to-purple-600 text-white hover:from-violet-500 hover:to-fuchsia-600'
+                                                }`}
                                             >
-                                                {isTaken ? 'Already taken' : 'Begin →'}
+                                                {isTaken ? 'Retake →' : 'Begin →'}
                                             </button>
                                         </div>
                                     </div>
