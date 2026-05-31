@@ -1351,7 +1351,11 @@ function App() {
         <TabBar
           tabs={openTabs}
           activeMode={mode}
-          onSwitch={navigateToTab}
+          onSwitch={(newMode) => {
+            closeGlobalCaseModal();
+            setSelectedQuestion(null);
+            navigateToTab(newMode);
+          }}
           onClose={closeTab}
           isDarkMode={isDarkMode}
         />
