@@ -103,7 +103,8 @@ Return ONLY valid JSON with this exact shape:
   ]
 }
 
-You MUST include exactly one object in "results" for each ### Item block, with the matching "index". Do not omit or duplicate indices."""
+You MUST include exactly one object in "results" for each ### Item block, with the matching "index". Do not omit or duplicate indices.
+Keep "feedback" to 2–3 sentences maximum."""
 
 
 @lexify_bp.route(route="lexify_grade", methods=["POST"])
