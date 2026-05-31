@@ -255,6 +255,12 @@ function App() {
   // Keep the ref current so closeTab always calls the latest clearGlobalCase.
   clearGlobalCaseRef.current = clearGlobalCase;
 
+  // Track which tab opened the case modal so it only shows on that tab.
+  const [caseSourceMode, setCaseSourceMode] = useState(null);
+  useEffect(() => {
+    if (!globalSelectedCase) setCaseSourceMode(null);
+  }, [globalSelectedCase]);
+
   const selectGlobalCaseGuarded = useCallback(
     (next) => {
       if (next == null) {
@@ -264,6 +270,7 @@ function App() {
       void (async () => {
         if (!await checkCaseDigest()) return;
         selectGlobalCase(next);
+        setCaseSourceMode(mode);
         // If the case object lacks digest content (e.g. from Bar2026 key_cases),
         // fetch the full digest and patch it in so all sections render correctly.
         if (!next.digest_ruling && !next.digest_facts && next.id) {
@@ -274,7 +281,7 @@ function App() {
         }
       })();
     },
-    [selectGlobalCase, checkCaseDigest, patchGlobalCase],
+    [selectGlobalCase, checkCaseDigest, patchGlobalCase, mode],
   );
 
   /**
@@ -1385,8 +1392,8 @@ function App() {
 
       {/* Doctrinal Detail Modal */}
 
-      {/* Global Case Decision Modal — only show on tabs where cases can be opened */}
-      {globalSelectedCase && CASE_TABS.includes(mode) && (
+      {/* Global Case Decision Modal — only show on the tab that opened it */}
+      {globalSelectedCase && mode === caseSourceMode && (
         <Suspense fallback={null}>
           <CaseDecisionModal
             key={globalSelectedCase.id}
