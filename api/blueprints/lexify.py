@@ -258,7 +258,7 @@ async def lexify_grade_batch(req: func.HttpRequest) -> func.HttpResponse:
                 prompt=user_prompt,
                 system_instruction=GRADING_BATCH_SYSTEM_PROMPT,
                 temperature=0.1,
-                max_tokens=8192,
+                max_tokens=16384,
                 model=FALLBACK_MODEL,
             )
         except Exception as e:
