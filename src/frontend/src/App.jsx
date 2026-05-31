@@ -199,6 +199,7 @@ function App() {
     }
     if (tabMode === 'browse_bar') setSelectedQuestion(null);
     if (tabMode === 'flashcard') setFlashcardState('setup');
+    if (tabMode === 'codex') codexScrollRef.current = 0;
 
     const current = openTabsRef.current;
     const next = current.filter((t) => t !== tabMode);
@@ -402,6 +403,10 @@ function App() {
   ];
 
 
+  // Persists the codex tab's scroll position across tab switches.
+  const codexScrollRef = React.useRef(0);
+  const prevModeRef = React.useRef(mode);
+
   // Sync mode → URL.
   // We read window.location.pathname instead of location from useLocation so that
   // the navigate() call below does NOT trigger a React Router context update that
@@ -409,7 +414,21 @@ function App() {
   useEffect(() => {
     const path = MODE_TO_PATH[mode] ?? '/';
     if (window.location.pathname !== path) navigate(path, { replace: true });
-    document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'instant' });
+
+    const scrollRoot = document.getElementById('lex-scroll-root');
+    if (prevModeRef.current === 'codex' && mode !== 'codex') {
+      // Leaving codex: save current scroll so we can restore it on return.
+      codexScrollRef.current = scrollRoot?.scrollTop ?? 0;
+    }
+
+    if (mode === 'codex') {
+      // Returning to codex: restore saved position (avoids jarring reset to top).
+      if (scrollRoot) scrollRoot.scrollTop = codexScrollRef.current;
+    } else {
+      scrollRoot?.scrollTo({ top: 0, behavior: 'instant' });
+    }
+
+    prevModeRef.current = mode;
   // navigate is stable (React Router guarantee); MODE_TO_PATH is a module constant.
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mode]);
@@ -889,6 +908,7 @@ function App() {
 
   const handleSelectCodal = useCallback((codalId) => {
     setSelectedCodalCode(codalId);
+    codexScrollRef.current = 0;
     navigateToTab('codex');
     document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'instant' });
   }, [navigateToTab]);
@@ -1037,6 +1057,7 @@ function App() {
                             selectedCodal={selectedCodalCode}
                             onCodalChange={(id) => {
                               setSelectedCodalCode(id);
+                              codexScrollRef.current = 0;
                               document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'instant' });
                             }}
                             onCaseSelect={selectGlobalCaseGuarded}
