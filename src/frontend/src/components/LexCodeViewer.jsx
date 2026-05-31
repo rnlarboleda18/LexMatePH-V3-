@@ -69,7 +69,7 @@ const TocNode = ({ node, expanded, onToggle, onArticleClick }) => {
     );
 };
 
-const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, codalOptions = [], selectedCodal, onCodalChange }) => {
+const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, codalOptions = [], selectedCodal, onCodalChange, isVisible = true }) => {
     const { canAccess, openUpgradeModal } = useSubscription();
 
     // Title mapping (mirrors CodalStream — keep in sync)
@@ -786,6 +786,7 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, codalOptions 
 
     /** Fixed panels (portals): `position:fixed` avoids sticky breaking from `html,body{overflow-x:hidden}` and other ancestors. */
     const desktopTocPortal =
+        isVisible &&
         typeof document !== 'undefined' &&
         tocFixedLeft != null &&
         isSidebarOpen &&
@@ -829,6 +830,7 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, codalOptions 
         );
 
     const desktopJurisPortal =
+        isVisible &&
         typeof document !== 'undefined' &&
         jurisFixedLeft != null &&
         (activeJurisArticle || activeAmendmentArticle) &&
@@ -910,6 +912,7 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, codalOptions 
         );
 
     const mobileTocModalPortal =
+        isVisible &&
         typeof document !== 'undefined' &&
         isMobileViewport &&
         isSidebarOpen &&
@@ -1051,7 +1054,8 @@ const CodexViewer = ({ shortName, onCaseSelect, onCaseDetailMerge, codalOptions 
 
             {desktopJurisPortal}
 
-            {typeof document !== 'undefined' &&
+            {isVisible &&
+                typeof document !== 'undefined' &&
                 tocFabPos != null &&
                 !isSidebarOpen &&
                 createPortal(

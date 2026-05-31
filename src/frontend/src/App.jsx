@@ -1055,6 +1055,7 @@ function App() {
                             shortName={selectedCodalCode ? selectedCodalCode.toUpperCase() : ''}
                             codalOptions={CODAL_FILTER_OPTIONS}
                             selectedCodal={selectedCodalCode}
+                            isVisible={effectiveMode === 'codex'}
                             onCodalChange={(id) => {
                               setSelectedCodalCode(id);
                               codexScrollRef.current = 0;
