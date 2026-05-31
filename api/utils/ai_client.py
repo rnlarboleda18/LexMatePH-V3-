@@ -112,11 +112,12 @@ def call_vertex_ai_json(
             model=m,
         )
 
+    fallback = FALLBACK_MODEL if model != FALLBACK_MODEL else DEFAULT_MODEL
     try:
-        text = _try(DEFAULT_MODEL)
+        text = _try(model)
     except Exception as primary_err:
-        logger.warning("Primary model %s failed (%s); trying fallback %s", DEFAULT_MODEL, primary_err, FALLBACK_MODEL)
-        text = _try(FALLBACK_MODEL)
+        logger.warning("Primary model %s failed (%s); trying fallback %s", model, primary_err, fallback)
+        text = _try(fallback)
 
     cleaned = text.strip()
     if cleaned.startswith("```json"):
