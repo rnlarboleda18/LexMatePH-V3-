@@ -1023,26 +1023,28 @@ function App() {
                       <Updates isDarkMode={isDarkMode} />
                     </Suspense>
                   )}
-                  {effectiveMode === 'codex' && (
-                    <PurpleGlassAmbient showAmbient className="flex flex-col bg-transparent text-gray-900 dark:text-gray-100 font-sans">
-                      <Suspense
-                        fallback={
-                          <PageLoadingFallback label="Loading LexCode…" labelVisibility="lgAndUp" />
-                        }
-                      >
-                        <LexCodeViewer
-                          shortName={selectedCodalCode ? selectedCodalCode.toUpperCase() : ''}
-                          codalOptions={CODAL_FILTER_OPTIONS}
-                          selectedCodal={selectedCodalCode}
-                          onCodalChange={(id) => {
-                            setSelectedCodalCode(id);
-                            document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'instant' });
-                          }}
-                          onCaseSelect={selectGlobalCaseGuarded}
-                          onCaseDetailMerge={patchGlobalCase}
-                        />
-                      </Suspense>
-                    </PurpleGlassAmbient>
+                  {openTabs.includes('codex') && (
+                    <div style={{ display: effectiveMode === 'codex' ? undefined : 'none' }}>
+                      <PurpleGlassAmbient showAmbient className="flex flex-col bg-transparent text-gray-900 dark:text-gray-100 font-sans">
+                        <Suspense
+                          fallback={
+                            <PageLoadingFallback label="Loading LexCode…" labelVisibility="lgAndUp" />
+                          }
+                        >
+                          <LexCodeViewer
+                            shortName={selectedCodalCode ? selectedCodalCode.toUpperCase() : ''}
+                            codalOptions={CODAL_FILTER_OPTIONS}
+                            selectedCodal={selectedCodalCode}
+                            onCodalChange={(id) => {
+                              setSelectedCodalCode(id);
+                              document.getElementById('lex-scroll-root')?.scrollTo({ top: 0, behavior: 'instant' });
+                            }}
+                            onCaseSelect={selectGlobalCaseGuarded}
+                            onCaseDetailMerge={patchGlobalCase}
+                          />
+                        </Suspense>
+                      </PurpleGlassAmbient>
+                    </div>
                   )}
                   {effectiveMode === 'flashcard' && flashcardState === 'setup' && (
                     <PurpleGlassAmbient showAmbient className="min-h-screen w-full bg-transparent pb-28 font-sans text-gray-900 dark:text-gray-100 sm:pb-32">
