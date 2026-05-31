@@ -126,6 +126,9 @@ const PATH_TO_MODE = Object.fromEntries(
   Object.entries(MODE_TO_PATH).map(([m, p]) => [p, m])
 );
 
+/** Modes where the case decision modal can be shown (tabs that can open cases). */
+const CASE_TABS = ['supreme_decisions', 'codex', 'favorites', 'bar_2026'];
+
 /** Newest Bar year first, then stable id (interleaved load order is not chronological). */
 function barQuestionYearIdSort(a, b) {
   const yb = Number(b.year) || 0;
@@ -181,6 +184,17 @@ function App() {
   }, []);
 
   const closeTab = useCallback((tabMode) => {
+    // Clear modal state when a tab that owns it is closed.
+    // Case modal: clear when the last case-capable tab is closed.
+    if (CASE_TABS.includes(tabMode)) {
+      const remainingCaseTabs = openTabsRef.current.filter(
+        (t) => t !== tabMode && CASE_TABS.includes(t)
+      );
+      if (remainingCaseTabs.length === 0) clearGlobalCase();
+    }
+    if (tabMode === 'browse_bar') setSelectedQuestion(null);
+    if (tabMode === 'flashcard') setFlashcardState('setup');
+
     const current = openTabsRef.current;
     const next = current.filter((t) => t !== tabMode);
     const safeNext = next.length === 0 ? ['about'] : next;
@@ -190,7 +204,7 @@ function App() {
       const idx = current.indexOf(tabMode);
       return safeNext[Math.max(0, idx - 1)] ?? safeNext[0] ?? 'about';
     });
-  }, []);
+  }, [clearGlobalCase]);
 
   /**
    * Numeric case ID extracted from a deep-link URL on initial load
@@ -849,8 +863,10 @@ function App() {
 
   const handleToggleFlashcard = () => {
     navigateToTab('flashcard');
-    setFlashcardState('setup');
-    setFlashcardDeckError(null);
+    if (flashcardState !== 'active') {
+      setFlashcardState('setup');
+      setFlashcardDeckError(null);
+    }
   };
 
   const handleToggleLexCode = useCallback(() => {
@@ -1353,8 +1369,6 @@ function App() {
           tabs={openTabs}
           activeMode={mode}
           onSwitch={(newMode) => {
-            clearGlobalCase();
-            setSelectedQuestion(null);
             navigateToTab(newMode);
           }}
           onClose={closeTab}
@@ -1364,8 +1378,8 @@ function App() {
 
       {/* Doctrinal Detail Modal */}
 
-      {/* Global Case Decision Modal */}
-      {globalSelectedCase && (
+      {/* Global Case Decision Modal — only show on tabs where cases can be opened */}
+      {globalSelectedCase && CASE_TABS.includes(mode) && (
         <Suspense fallback={null}>
           <CaseDecisionModal
             key={globalSelectedCase.id}
@@ -1392,8 +1406,8 @@ function App() {
         </ErrorBoundary>
       )}
 
-      {/* Question Detail Modal */}
-      {selectedQuestion && (() => {
+      {/* Question Detail Modal — only show on the bar questions tab */}
+      {selectedQuestion && mode === 'browse_bar' && (() => {
         let currentList = questions.filter(
           (q) => !currentSubject || normalizeBarQuestionSubject(q) === currentSubject
         );
