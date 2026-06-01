@@ -306,14 +306,15 @@ function PostgreSQLPanel({ data, skus, billing, costData, authHdr }) {
   const memSeries = extractSeries(metrics, 'memory_percent');
 
   // API / Functions (same Azure Monitor series as Function App tab) — shown here to relate traffic to DB load.
-  const funcSku     = skus?.function_app;
-  const funcMetrics = data?.resources?.function_app?.metrics || [];
-  const execCount   = extractSum(funcMetrics, 'FunctionExecutionCount');
-  const execUnits   = extractSum(funcMetrics, 'FunctionExecutionUnits');
-  const http5xx     = extractSum(funcMetrics, 'Http5xx');
-  const http4xx     = extractSum(funcMetrics, 'Http4xx');
-  const avgResp     = extractLatest(funcMetrics, 'AverageResponseTime');
-  const apiErrRate  = execCount && (http5xx != null)
+  const funcSku      = skus?.function_app;
+  const hasFuncData  = !!data?.resources?.function_app;
+  const funcMetrics  = data?.resources?.function_app?.metrics || [];
+  const execCount    = extractSum(funcMetrics, 'FunctionExecutionCount');
+  const execUnits    = extractSum(funcMetrics, 'FunctionExecutionUnits');
+  const http5xx      = extractSum(funcMetrics, 'Http5xx');
+  const http4xx      = extractSum(funcMetrics, 'Http4xx');
+  const avgResp      = extractLatest(funcMetrics, 'AverageResponseTime');
+  const apiErrRate   = execCount && (http5xx != null)
     ? ((http5xx / execCount) * 100).toFixed(2)
     : null;
 
@@ -355,24 +356,30 @@ function PostgreSQLPanel({ data, skus, billing, costData, authHdr }) {
         <p className="mb-4 text-xs text-gray-500 dark:text-zinc-400">
           Function executions and HTTP errors from your backend — most requests drive PostgreSQL work.
         </p>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
-          <MetricCard label="API executions (24h)" value={execCount != null ? Math.round(execCount).toLocaleString() : null}
-            sub={funcSku ? `~${(funcSku.free_executions_per_month / 1e6).toFixed(0)}M free/month cap` : undefined}
-            tooltip="Each count is an invocation of your HTTP API (Azure Functions). This is the closest measure to overall API call volume in this dashboard." />
-          <MetricCard label="GB-seconds (24h)" value={execUnits != null ? (execUnits / 1e6).toFixed(2) : null}
-            tooltip="Compute time used by the API over 24 hours — heavier handlers use more." />
-          <MetricCard label="API 5xx (24h)" value={http5xx != null ? Math.round(http5xx).toLocaleString() : null}
-            highlight={http5xx > 10 ? 'warn' : undefined}
-            tooltip="Server errors returned by the API. These often correlate with database timeouts or connection limits." />
-          <MetricCard label="API 4xx (24h)" value={http4xx != null ? Math.round(http4xx).toLocaleString() : null}
-            tooltip="Client errors (auth, not found, validation). Not always database-related but useful alongside traffic volume." />
-          <MetricCard label="Avg API response" value={avgResp != null ? avgResp.toFixed(0) : null} unit="ms"
-            showBar barPct={avgResp != null ? Math.min(100, (avgResp / 3000) * 100) : null} warn={50} crit={80}
-            tooltip="Average API latency. Slow responses often mean slow queries or connection pressure on PostgreSQL." />
-          <MetricCard label="API 5xx rate" value={apiErrRate} unit="%"
-            showBar warn={1} crit={5}
-            tooltip="Share of executions that ended in a 5xx response in this window." />
-        </div>
+        {hasFuncData ? (
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 xl:grid-cols-4">
+            <MetricCard label="API executions (24h)" value={execCount != null ? Math.round(execCount).toLocaleString() : null}
+              sub={funcSku ? `~${(funcSku.free_executions_per_month / 1e6).toFixed(0)}M free/month cap` : undefined}
+              tooltip="Each count is an invocation of your HTTP API (Azure Functions). This is the closest measure to overall API call volume in this dashboard." />
+            <MetricCard label="GB-seconds (24h)" value={execUnits != null ? (execUnits / 1e6).toFixed(2) : null}
+              tooltip="Compute time used by the API over 24 hours — heavier handlers use more." />
+            <MetricCard label="API 5xx (24h)" value={http5xx != null ? Math.round(http5xx).toLocaleString() : null}
+              highlight={http5xx > 10 ? 'warn' : undefined}
+              tooltip="Server errors returned by the API. These often correlate with database timeouts or connection limits." />
+            <MetricCard label="API 4xx (24h)" value={http4xx != null ? Math.round(http4xx).toLocaleString() : null}
+              tooltip="Client errors (auth, not found, validation). Not always database-related but useful alongside traffic volume." />
+            <MetricCard label="Avg API response" value={avgResp != null ? avgResp.toFixed(0) : null} unit="ms"
+              showBar barPct={avgResp != null ? Math.min(100, (avgResp / 3000) * 100) : null} warn={50} crit={80}
+              tooltip="Average API latency. Slow responses often mean slow queries or connection pressure on PostgreSQL." />
+            <MetricCard label="API 5xx rate" value={apiErrRate} unit="%"
+              showBar warn={1} crit={5}
+              tooltip="Share of executions that ended in a 5xx response in this window." />
+          </div>
+        ) : (
+          <p className="rounded-lg border border-lex bg-gray-50 px-4 py-3 text-xs text-gray-500 dark:border-zinc-700 dark:bg-zinc-800/50 dark:text-zinc-400">
+            Function App metrics unavailable — set <code className="font-mono font-semibold">AZURE_FUNCTION_APP_NAME</code> in your Application Settings to enable API traffic tracking.
+          </p>
+        )}
       </div>
 
       <CostCard billing={billing} costData={costData} />

@@ -364,7 +364,15 @@ def admin_azure_metrics(req: func.HttpRequest) -> func.HttpResponse:
             },
             timeout=20,
         )
-        cost_data = r.json() if r.ok else {"error": r.text[:300]}
+        if r.ok:
+            cost_data = r.json()
+        else:
+            try:
+                err_body = r.json()
+                err_msg = (err_body.get("error") or {}).get("message") or f"HTTP {r.status_code}"
+            except Exception:
+                err_msg = r.text[:200] or f"HTTP {r.status_code}"
+            cost_data = {"error": f"Azure Cost API ({r.status_code}): {err_msg}"}
     except Exception as exc:
         cost_data = {"error": str(exc)}
 
