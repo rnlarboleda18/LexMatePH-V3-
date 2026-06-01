@@ -66,9 +66,10 @@ def _case_digest_pipeline_store() -> Path:
     root = _pipeline_scripts_root()
     if (root / "admin-tools").is_dir():
         return root / "admin-tools" / "case-digest-pipeline"
-    # wwwroot is read-only on Azure; /home is the writable persistent mount
+    # wwwroot is read-only on Azure; /tmp is always writable on all Azure compute tiers
     if _running_on_azure_host():
-        return Path("/home") / "pipeline_runtime" / "case-digest-pipeline"
+        tmp = Path(os.environ.get("TEMP") or os.environ.get("TMP") or "/tmp")
+        return tmp / "pipeline_runtime" / "case-digest-pipeline"
     return root / "pipeline_runtime" / "case-digest-pipeline"
 
 
