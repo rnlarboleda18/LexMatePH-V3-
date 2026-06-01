@@ -140,7 +140,7 @@ def _start_pipeline(
     if vertex_project:
         vertex_flags = ["--vertex-project", vertex_project, "--vertex-location", vertex_location or "global"]
 
-    _model = (digest_model or "").strip() or (os.environ.get("PIPELINE_DIGEST_MODEL") or "").strip() or "gemini-3-flash-preview"
+    _model = (digest_model or "").strip() or (os.environ.get("PIPELINE_DIGEST_MODEL") or "").strip() or "gemini-3.5-flash"
 
     if mode == "full":
         script = root / "scripts" / "elib_digest_pipeline.py"

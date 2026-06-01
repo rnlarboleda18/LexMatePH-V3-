@@ -91,7 +91,7 @@ export default function PipelineTab() {
   const [actionLoading, setActionLoading] = useState(false);
 
   // AI platform selection
-  const [aiPlatform, setAiPlatform] = useState('vertex');
+  const [aiPlatform, setAiPlatform] = useState('studio');
 
   // Scan state
   const [scanState,   setScanState]   = useState(null);
