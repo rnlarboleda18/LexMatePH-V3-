@@ -21,11 +21,11 @@ export default function FoundingPromoModal({
 
   return createPortal(
     <div
-      className="fixed inset-0 z-[540] flex items-center justify-center bg-black/60 backdrop-blur-md animate-in fade-in duration-200 p-4"
+      className="fixed inset-0 z-[540] flex items-center justify-center overflow-y-auto sm:overflow-hidden bg-black/60 backdrop-blur-md animate-in fade-in duration-200 p-4"
       onClick={onClose}
     >
       <div
-        className="relative w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-[0_24px_64px_-12px_rgba(245,158,11,0.4)] animate-in zoom-in-95 duration-300 dark:bg-slate-900 dark:shadow-[0_24px_64px_-12px_rgba(180,83,9,0.45)]"
+        className="relative w-full max-w-md max-h-[90vh] sm:max-h-none overflow-y-auto sm:overflow-hidden rounded-2xl bg-white shadow-[0_24px_64px_-12px_rgba(245,158,11,0.4)] animate-in zoom-in-95 duration-300 dark:bg-slate-900 dark:shadow-[0_24px_64px_-12px_rgba(180,83,9,0.45)]"
         role="dialog"
         aria-modal="true"
         aria-labelledby="founding-promo-modal-title"
