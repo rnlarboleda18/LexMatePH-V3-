@@ -429,21 +429,23 @@ const Sidebar = ({
               </button>
             </SignedIn>
 
-            {/* BAR 2026 */}
-            <button
-                onClick={() => {
-                    if (onToggleBar2026) onToggleBar2026();
-                }}
-                className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-base font-medium transition-colors
-                ${mode === 'bar_2026'
-                        ? SIDEBAR_NAV_ACTIVE
-                        : SIDEBAR_NAV_IDLE
-                    }`}
-            >
-                <Scale size={18} className={`${mode === 'bar_2026' ? 'text-violet-700 dark:text-violet-400' : 'text-violet-600 dark:text-violet-400'} group-hover:scale-110 transition-all duration-200`} />
-                <span className="flex-1">BAR 2026</span>
-                <span className="shrink-0 rounded-full bg-violet-100 px-1.5 py-0.5 text-[10px] font-bold text-violet-700 dark:bg-violet-900/40 dark:text-violet-300">NEW</span>
-            </button>
+            {/* BAR 2026 — admin only */}
+            {isAdmin && (
+                <button
+                    onClick={() => {
+                        if (onToggleBar2026) onToggleBar2026();
+                    }}
+                    className={`group flex w-full items-center gap-3 rounded-xl border-l-[3px] px-2 py-2 text-left text-base font-medium transition-colors
+                    ${mode === 'bar_2026'
+                            ? SIDEBAR_NAV_ACTIVE
+                            : SIDEBAR_NAV_IDLE
+                        }`}
+                >
+                    <Scale size={18} className={`${mode === 'bar_2026' ? 'text-violet-700 dark:text-violet-400' : 'text-violet-600 dark:text-violet-400'} group-hover:scale-110 transition-all duration-200`} />
+                    <span className="flex-1">BAR 2026</span>
+                    <span className="shrink-0 rounded-full bg-violet-100 px-1.5 py-0.5 text-[10px] font-bold text-violet-700 dark:bg-violet-900/40 dark:text-violet-300">NEW</span>
+                </button>
+            )}
 
 
 
