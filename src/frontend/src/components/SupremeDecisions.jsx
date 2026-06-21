@@ -1663,6 +1663,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                             {decision.date_str ? (
                                                 <span className="text-gray-500 dark:text-gray-500"> · {formatDate(decision.date_str)}</span>
                                             ) : null}
+                                            {decision.document_type ? (
+                                                <span className="text-gray-500 dark:text-gray-500"> · {formatTitleCase(decision.document_type.toString().trim())}</span>
+                                            ) : null}
                                         </p>
                                     </div>
                                 </div>
@@ -1927,6 +1930,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                             </span>
                                             <span className="font-mono text-xs text-gray-400 dark:text-gray-500">
                                                 {r.case_number}
+                                                {r.date_str ? ` · ${formatDate(r.date_str)}` : null}
+                                                {r.document_type ? ` · ${formatTitleCase(r.document_type.toString().trim())}` : null}
                                             </span>
                                         </button>
                                     ))}

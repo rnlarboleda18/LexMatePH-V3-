@@ -675,10 +675,32 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                - **Flashcards:** Create 3 cards (Concept, Distinction, Scenario). Do NOT ask "What is the doctrine?".
 
             7. **SECONDARY/COLLATERAL RULINGS (MANDATORY EXTRACTION):**
-                - Populate the `secondary_rulings` array with any and all secondary or collateral rulings settled by the Court that are highly relevant to Bar Exam preparation (such as procedural anomalies, quantum of proof, prospective applications, civil liability adjustments, or laches).
-                - For each entry, provide:
-                  - **topic**: The specific legal topic (e.g., 'Procedural Due Process', 'Locus Standi', 'Double Jeopardy', 'Civil Liability in Rape').
-                  - **ruling**: A detailed 5-8 sentence explanation of the Court's specific pronouncement on this collateral matter, written strictly as a single, coherent paragraph of natural, flowing prose sentences. Do NOT use any numbering, sub-bullet points, or explicit labels (such as (a), (b), (c)). Ensure it is precise, authoritative, and uses the exact language of the law. If there are no secondary or collateral rulings settled by the Court, return an empty array `[]`—do not invent data.
+               You are acting as a Philippine Bar Exam coach. Scan the ENTIRE decision text with forensic precision and extract EVERY secondary, collateral, or incidental legal ruling that the Court settled beyond the primary issues.
+
+               **MANDATORY SCAN CHECKLIST** — actively check whether the Court ruled on each of the following. If it did, it MUST appear as a separate entry:
+               - Quantum or standard of proof (proof beyond reasonable doubt, substantial evidence, clear and convincing evidence, preponderance)
+               - Civil liability, indemnity, or damages — amounts, legal basis, adjustments
+               - Legal interest rates and the Nacar v. Gallery Frames guidelines
+               - Procedural due process — notice, hearing, right to be heard
+               - Prescription, laches, or estoppel
+               - Jurisdiction — subject matter, appellate, ancillary, or concurrent
+               - Standing / locus standi / real-party-in-interest
+               - Mootness doctrine or its recognized exceptions
+               - Proper remedy or mode of review (Rule 45 vs. Rule 65, appeal vs. certiorari, etc.)
+               - Good faith or bad faith of officers or parties and its legal consequences
+               - Retroactivity or prospective application of rulings or statutes
+               - Definition or first-impression clarification of a legal term or concept
+               - Evidentiary rules — admissibility, weight, presumptions, or burden of proof
+               - Solidary vs. joint liability; individual vs. collective or vicarious liability
+               - Constitutional provisions applied only incidentally
+               - Remedial or procedural anomalies settled by the Court motu proprio
+
+               **STRICT RULES:**
+               - Extract EVERY collateral ruling that satisfies the checklist above. Do NOT limit yourself — if 7 exist, list all 7.
+               - If there are genuinely no secondary rulings, return `[]`. Do NOT invent data.
+               - Each object MUST have exactly these two keys:
+                 - **topic**: A precise, specific label — never generic. Bad: 'Procedural Due Process'. Good: 'Right to Be Heard — Waiver by Failure to Object'. Bad: 'Civil Liability'. Good: 'Solidary Liability of Approving Officers — Gross Negligence Standard'.
+                 - **ruling**: Write this EXACTLY like a ratio decidendi entry — a minimum of 8-10 sentences of deep, flowing, forensic legal analysis in a single coherent prose paragraph. DO NOT summarize. DO NOT write in telegraphic style. Follow the Court's own chain of reasoning from premise to conclusion: begin with the legal principle or doctrinal anchor, develop it through the specific statutory provisions and landmark precedents the Court cited (name them explicitly — e.g., "Applying the doctrine in *Tan-Andal v. Andal*...", "Under Article 2154 of the Civil Code..."), trace the Court's application of that reasoning to the facts of this case, address any qualifications or exceptions the Court recognized, and close with the precise legal consequence or holding. Use natural academic transitions (e.g., "Consequently," "However," "Moreover," "In this regard," "Thus,"). Every sentence must add substantive legal content — no filler, no restatement, no circular reasoning.
 
             **OUTPUT FORMAT:**
             Return ONLY valid JSON:

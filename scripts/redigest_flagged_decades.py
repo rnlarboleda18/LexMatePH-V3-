@@ -47,6 +47,7 @@ load_api_local_settings_into_environ(Path(__file__).resolve().parent.parent)
 MODEL            = "publishers/google/models/gemini-3.5-flash"
 DEFAULT_PROJECT  = "gen-lang-client-0813708151"
 DEFAULT_LOCATION = "us"
+DEFAULT_THREADS  = 5
 _TIMEOUT_MS      = 270_000
 _RETRY_LIMIT     = 3
 _RETRY_DELAY     = 8
@@ -92,11 +93,32 @@ STRICT INSTRUCTIONS FOR EACH FIELD:
    - Explicitly name referenced cases and statutory/constitutional provisions.
 
 4. **secondary_rulings**:
-   - Return a JSON array of objects representing collateral or secondary rulings settled by the Court that are highly relevant to Bar Exam preparation (such as procedural anomalies, quantum of proof, prospective applications, civil liability adjustments, or laches).
-   - If there are no secondary or collateral rulings settled by the Court, return an empty array `[]`—do NOT invent data.
-   - Each object in the array MUST have exactly these two keys:
-     - **topic**: The specific legal topic (e.g., 'Procedural Due Process', 'Locus Standi', 'Double Jeopardy', 'Civil Liability in Rape').
-     - **ruling**: A detailed 5-8 sentence explanation of the Court's specific pronouncement on this collateral matter, written strictly as a single, coherent paragraph of natural, flowing prose sentences. Do NOT use any numbering, sub-bullet points, or explicit labels (such as (a), (b), (c)). Ensure it is precise, authoritative, and uses the exact language of the law.
+   You are acting as a Philippine Bar Exam coach. Scan the ENTIRE decision text with forensic precision and extract EVERY secondary, collateral, or incidental legal ruling that the Court settled beyond the primary issues.
+
+   **MANDATORY SCAN CHECKLIST** — actively check whether the Court ruled on each of the following. If it did, it MUST appear as a separate entry:
+   - Quantum or standard of proof (proof beyond reasonable doubt, substantial evidence, clear and convincing evidence, preponderance)
+   - Civil liability, indemnity, or damages — amounts, legal basis, adjustments
+   - Legal interest rates and the Nacar v. Gallery Frames guidelines
+   - Procedural due process — notice, hearing, right to be heard
+   - Prescription, laches, or estoppel
+   - Jurisdiction — subject matter, appellate, ancillary, or concurrent
+   - Standing / locus standi / real-party-in-interest
+   - Mootness doctrine or its recognized exceptions
+   - Proper remedy or mode of review (Rule 45 vs. Rule 65, appeal vs. certiorari, etc.)
+   - Good faith or bad faith of officers or parties and its legal consequences
+   - Retroactivity or prospective application of rulings or statutes
+   - Definition or first-impression clarification of a legal term or concept
+   - Evidentiary rules — admissibility, weight, presumptions, or burden of proof
+   - Solidary vs. joint liability; individual vs. collective or vicarious liability
+   - Constitutional provisions applied only incidentally
+   - Remedial or procedural anomalies settled by the Court motu proprio
+
+   **STRICT RULES:**
+   - Extract EVERY collateral ruling that satisfies the checklist above. Do NOT limit yourself — if 7 exist, list all 7.
+   - If there are genuinely no secondary rulings, return `[]`. Do NOT invent data.
+   - Each object MUST have exactly these two keys:
+     - **topic**: A precise, specific label — never generic. Bad: 'Procedural Due Process'. Good: 'Right to Be Heard — Waiver by Failure to Object'. Bad: 'Civil Liability'. Good: 'Solidary Liability of Approving Officers — Gross Negligence Standard'.
+     - **ruling**: Write this EXACTLY like a ratio decidendi entry — a minimum of 8-10 sentences of deep, flowing, forensic legal analysis in a single coherent prose paragraph. DO NOT summarize. DO NOT write in telegraphic style. Follow the Court's own chain of reasoning from premise to conclusion: begin with the legal principle or doctrinal anchor, develop it through the specific statutory provisions and landmark precedents the Court cited (name them explicitly — e.g., "Applying the doctrine in *Tan-Andal v. Andal*...", "Under Article 2154 of the Civil Code..."), trace the Court's application of that reasoning to the facts of this case, address any qualifications or exceptions the Court recognized, and close with the precise legal consequence or holding. Use natural academic transitions (e.g., "Consequently," "However," "Moreover," "In this regard," "Thus,"). Every sentence must add substantive legal content — no filler, no restatement, no circular reasoning.
 
 OUTPUT FORMAT:
 You MUST return ONLY a valid JSON object with the following schema:
@@ -226,10 +248,32 @@ def clean_json_text(text: str) -> str:
     return text.strip()
 
 
+def validate_secondary_rulings(raw) -> list:
+    """Coerce secondary_rulings to a clean list of {topic, ruling} dicts.
+
+    Handles: nested JSON string, non-list, missing keys, wrong types.
+    Returns an empty list rather than raising on bad input.
+    """
+    if isinstance(raw, str):
+        try:
+            raw = json.loads(raw)
+        except json.JSONDecodeError:
+            return []
+    if not isinstance(raw, list):
+        return []
+    result = []
+    for item in raw:
+        if not isinstance(item, dict):
+            continue
+        topic = item.get("topic")
+        ruling = item.get("ruling")
+        if isinstance(topic, str) and topic.strip() and isinstance(ruling, str) and ruling.strip():
+            result.append({"topic": topic.strip(), "ruling": ruling.strip()})
+    return result
+
+
 def generate_digest_data(client: genai.Client, case: dict, model_name: str) -> dict | None:
     full_text = case["full_text_md"] or ""
-    # Truncation disabled by user request — processing full untruncated text natively
-    pass
 
     prompt = REDIGEST_PROMPT.format(
         case_number=case["case_number"],
@@ -276,6 +320,7 @@ def generate_digest_data(client: genai.Client, case: dict, model_name: str) -> d
                     # Verify required fields
                     required_keys = {"main_doctrine", "digest_issues", "digest_ratio", "secondary_rulings"}
                     if all(k in data for k in required_keys):
+                        data["secondary_rulings"] = validate_secondary_rulings(data["secondary_rulings"])
                         return data
                     log.warning("Missing keys in JSON for id=%s on attempt %d: %s", case["id"], attempt, data.keys())
                 except json.JSONDecodeError as jde:
@@ -344,52 +389,149 @@ def process_case(
             return False
 
 
-# ── Decadal Runner ───────────────────────────────────────────────────────────
+# ── Checkpoint ───────────────────────────────────────────────────────────────
 
-def load_case_list(decadal_split_path: Path) -> list[int]:
-    """Loads all IDs descending by decade and En Banc first within each decade."""
+_CHECKPOINT_PATH = _SCRIPTS / "redigest_checkpoint.json"
+
+
+def load_checkpoint(path: Path) -> set[str]:
+    if path.is_file():
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                return set(json.load(f))
+        except Exception:
+            return set()
+    return set()
+
+
+def save_checkpoint(path: Path, completed: set[str]) -> None:
+    with open(path, "w", encoding="utf-8") as f:
+        json.dump(sorted(completed), f, indent=2)
+
+
+# ── Progress Reporter ─────────────────────────────────────────────────────────
+
+class ProgressReporter:
+    """Background thread that logs batch progress every 5 minutes."""
+
+    INTERVAL = 300  # seconds
+
+    def __init__(self, batch_name: str, total: int) -> None:
+        self._batch  = batch_name
+        self._total  = total
+        self._done   = 0
+        self._lock   = threading.Lock()
+        self._start  = time.monotonic()
+        self._stop   = threading.Event()
+        self._thread = threading.Thread(target=self._loop, daemon=True, name="progress")
+
+    def increment(self) -> None:
+        with self._lock:
+            self._done += 1
+
+    def _report(self) -> None:
+        with self._lock:
+            done    = self._done
+            total   = self._total
+            elapsed = time.monotonic() - self._start
+        rate    = done / elapsed * 60 if elapsed > 0 else 0
+        pct     = done / total * 100 if total else 0
+        eta_min = (total - done) / rate if rate > 0 else float("inf")
+        log.info(
+            "[PROGRESS] %s | %d/%d (%.1f%%) | %.1f cases/min | ETA ~%.0f min",
+            self._batch, done, total, pct, rate, eta_min,
+        )
+
+    def _loop(self) -> None:
+        while not self._stop.wait(self.INTERVAL):
+            self._report()
+
+    def start(self) -> "ProgressReporter":
+        self._thread.start()
+        return self
+
+    def stop(self) -> None:
+        self._stop.set()
+        self._thread.join(timeout=2)
+        self._report()
+
+
+# ── Batch Builder ─────────────────────────────────────────────────────────────
+
+def build_batches(decadal_split_path: Path, conn) -> list[tuple[str, list[int]]]:
+    """Returns ordered batches: 4 En Banc (by decade DESC), then N Division (by year DESC)."""
+    from collections import defaultdict
+
     with open(decadal_split_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
-    ordered_ids = []
-    # Order of decades descending
     decades = ["2020-2026", "2010-2019", "2000-2009", "1987-1999"]
+    batches: list[tuple[str, list[int]]] = []
+    all_div: list[int] = []
+
     for dec in decades:
-        if dec in data:
-            group = data[dec]
-            eb_ids = group.get("eb_ids", [])
-            div_ids = group.get("div_ids", [])
-            log.info("Decade %s: Found %d En Banc, %d Division cases", dec, len(eb_ids), len(div_ids))
-            ordered_ids.extend(eb_ids)
-            ordered_ids.extend(div_ids)
+        if dec not in data:
+            continue
+        eb_ids  = data[dec].get("eb_ids", [])
+        div_ids = data[dec].get("div_ids", [])
+        if eb_ids:
+            batches.append((f"eb_{dec}", eb_ids))
+            log.info("En Banc batch 'eb_%s': %d cases", dec, len(eb_ids))
+        all_div.extend(div_ids)
 
-    return ordered_ids
+    # Fetch case years from DB, then group division IDs per year
+    if all_div:
+        cur = conn.cursor()
+        cur.execute(
+            "SELECT id, EXTRACT(YEAR FROM date)::int "
+            "FROM sc_decided_cases WHERE id = ANY(%s)",
+            (all_div,),
+        )
+        year_map: dict[int, int] = {row[0]: row[1] or 0 for row in cur.fetchall()}
+        cur.close()
 
+        by_year: dict[int, list[int]] = defaultdict(list)
+        for cid in all_div:
+            by_year[year_map.get(cid, 0)].append(cid)
+
+        for yr in sorted(by_year, reverse=True):
+            ids = by_year[yr]
+            batches.append((f"div_{yr}", ids))
+            log.info("Division batch 'div_%s': %d cases", yr, len(ids))
+
+    total = sum(len(ids) for _, ids in batches)
+    log.info("Total batches: %d | Total cases: %d", len(batches), total)
+    return batches
+
+
+# ── Main ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Redigest core case fields post-1987 in decadal-descending order.")
-    parser.add_index = parser.add_argument  # convenience
-    parser.add_argument("--id", type=int, help="Run only on a specific case ID")
-    parser.add_argument("--limit", type=int, help="Max cases to process")
-    parser.add_argument("--threads", type=int, default=5, help="Number of worker threads")
-    parser.add_argument("--rpm", type=int, default=200, help="Vertex AI RPM rate limit")
-    parser.add_argument("--dry-run", action="store_true", help="Print updates, do not write to DB")
-    parser.add_argument("--model", default=MODEL, help="Vertex AI Gemini model")
-    parser.add_argument("--vertex-project", default=DEFAULT_PROJECT, help="Vertex AI project name")
-    parser.add_argument("--vertex-location", default=DEFAULT_LOCATION, help="Vertex AI location")
-    parser.add_argument("--split-file", help="Path to decadal_split.json")
+    parser = argparse.ArgumentParser(
+        description="Redigest core case fields post-1987. Processes one batch per run; "
+                    "resumes from checkpoint on the next run."
+    )
+    parser.add_argument("--id",               type=int,  help="Run only on a specific case ID (bypasses batch logic)")
+    parser.add_argument("--limit",            type=int,  help="Cap cases within the current batch")
+    parser.add_argument("--threads",          type=int,  default=DEFAULT_THREADS, help="Worker threads per batch")
+    parser.add_argument("--rpm",              type=int,  default=200,    help="Vertex AI RPM rate limit")
+    parser.add_argument("--dry-run",          action="store_true",       help="Print updates without writing to DB or checkpoint")
+    parser.add_argument("--model",            default=MODEL,             help="Vertex AI Gemini model")
+    parser.add_argument("--vertex-project",   default=DEFAULT_PROJECT,   help="Vertex AI project")
+    parser.add_argument("--vertex-location",  default=DEFAULT_LOCATION,  help="Vertex AI location")
+    parser.add_argument("--split-file",       help="Path to decadal_split.json")
+    parser.add_argument("--checkpoint-file",  help="Path to checkpoint JSON (default: redigest_checkpoint.json)")
     args = parser.parse_args()
 
-    # Find split file path
+    # ── Resolve split file ────────────────────────────────────────────────────
     split_path = None
     if args.split_file:
         split_path = Path(args.split_file)
     else:
-        # Check standard locations
         possible_paths = [
             _SCRIPTS.parent / "scratch" / "decadal_split.json",
             Path("C:/Users/rnlar/.gemini/antigravity/brain/ac8796fd-0d6a-4d86-bb3e-30e75fc2ba03/scratch/decadal_split.json"),
-            _SCRIPTS / "decadal_split.json"
+            _SCRIPTS / "decadal_split.json",
         ]
         for p in possible_paths:
             if p.is_file():
@@ -397,13 +539,17 @@ def main() -> None:
                 break
 
     if not args.id and (not split_path or not split_path.is_file()):
-        print(f"Error: decadal_split.json not found. Looked in {[str(p) for p in possible_paths]}", file=sys.stderr)
+        print(f"Error: decadal_split.json not found. Searched: {[str(p) for p in possible_paths]}", file=sys.stderr)
         sys.exit(1)
 
-    print(f"Database URL: {DB_URL.split('@')[-1] if '@' in DB_URL else DB_URL}")
-    print(f"Vertex Project: {args.vertex_project}")
-    print(f"Vertex Model: {args.model}")
+    checkpoint_path = Path(args.checkpoint_file) if args.checkpoint_file else _CHECKPOINT_PATH
 
+    print(f"Database : {DB_URL.split('@')[-1] if '@' in DB_URL else DB_URL}")
+    print(f"Model    : {args.model}")
+    print(f"Project  : {args.vertex_project}")
+    print(f"Checkpoint: {checkpoint_path}")
+
+    # ── DB connection ─────────────────────────────────────────────────────────
     try:
         conn = psycopg2.connect(DB_URL)
     except Exception as e:
@@ -411,67 +557,85 @@ def main() -> None:
         sys.exit(1)
 
     db_lock = threading.Lock()
-    limiter = RateLimiter(args.rpm) if args.rpm > 0 else None
+    limiter  = RateLimiter(args.rpm) if args.rpm > 0 else None
 
-    # Load targets
-    if args.id:
-        targets = [args.id]
-        print(f"Targeting specific Case ID: {args.id}")
-    else:
-        print(f"Loading cases from {split_path}")
-        targets = load_case_list(split_path)
-        print(f"Total targeted cases: {len(targets)}")
-
-    if args.limit:
-        targets = targets[:args.limit]
-        print(f"Limited to first {args.limit} cases")
-
-    if not targets:
-        print("No cases to process. Exiting.")
-        sys.exit(0)
-
-    # Initialize client
+    # ── Vertex AI client ──────────────────────────────────────────────────────
     try:
         client = _build_client(args.vertex_project, args.vertex_location)
     except Exception as e:
         print(f"Failed to build Vertex AI client: {e}", file=sys.stderr)
         sys.exit(1)
 
-    print(f"Processing with {args.threads} threads...")
-    success_count = 0
-    failure_count = 0
+    # ── Single-case mode ──────────────────────────────────────────────────────
+    if args.id:
+        print(f"Single-case mode: ID {args.id}")
+        ok = process_case(client, conn, db_lock, args.id, args.dry_run, args.model, limiter)
+        conn.close()
+        sys.exit(0 if ok else 1)
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=args.threads) as executor:
-        futures = {
-            executor.submit(
-                process_case,
-                client,
-                conn,
-                db_lock,
-                case_id,
-                args.dry_run,
-                args.model,
-                limiter
-            ): case_id
-            for case_id in targets
-        }
+    # ── Batch mode ────────────────────────────────────────────────────────────
+    completed_batches = load_checkpoint(checkpoint_path)
+    print(f"Checkpoint: {len(completed_batches)} batch(es) already done")
 
-        for fut in concurrent.futures.as_completed(futures):
-            case_id = futures[fut]
-            try:
-                success = fut.result()
-                if success:
-                    success_count += 1
-                else:
+    batches = build_batches(split_path, conn)
+
+    for batch_name, batch_ids in batches:
+        if batch_name in completed_batches:
+            log.info("SKIP (done): %s  (%d cases)", batch_name, len(batch_ids))
+            continue
+
+        if args.limit:
+            batch_ids = batch_ids[: args.limit]
+            log.info("Batch capped to %d cases by --limit", args.limit)
+
+        log.info("=" * 60)
+        log.info("BATCH START: %s  |  %d cases  |  %d threads", batch_name, len(batch_ids), args.threads)
+        log.info("=" * 60)
+
+        reporter     = ProgressReporter(batch_name, len(batch_ids)).start()
+        success_count = 0
+        failure_count = 0
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=args.threads) as executor:
+            futures = {
+                executor.submit(
+                    process_case, client, conn, db_lock,
+                    cid, args.dry_run, args.model, limiter
+                ): cid
+                for cid in batch_ids
+            }
+            for fut in concurrent.futures.as_completed(futures):
+                cid = futures[fut]
+                try:
+                    if fut.result():
+                        success_count += 1
+                    else:
+                        failure_count += 1
+                except Exception as e:
+                    log.exception("Unexpected error for Case ID %d: %s", cid, e)
                     failure_count += 1
-            except Exception as e:
-                log.exception("Unexpected exception processing Case ID %d: %s", case_id, e)
-                failure_count += 1
+                reporter.increment()
+
+        reporter.stop()
+
+        log.info("=" * 60)
+        log.info("BATCH DONE : %s  |  ✓ %d  |  ✗ %d", batch_name, success_count, failure_count)
+        log.info("=" * 60)
+
+        if not args.dry_run:
+            completed_batches.add(batch_name)
+            save_checkpoint(checkpoint_path, completed_batches)
+            log.info("Checkpoint saved → %s", checkpoint_path)
+            log.info("Re-run to continue with the next batch.")
+        else:
+            log.info("Dry run — checkpoint not updated.")
+
+        break  # one batch per run
+
+    else:
+        log.info("All %d batches completed.", len(batches))
 
     conn.close()
-    print("\n--- RUN COMPLETE ---")
-    print(f"Successful digests: {success_count}")
-    print(f"Failed digests: {failure_count}")
 
 
 if __name__ == "__main__":

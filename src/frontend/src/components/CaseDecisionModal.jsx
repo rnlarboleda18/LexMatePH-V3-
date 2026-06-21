@@ -854,6 +854,17 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 <FileText className="h-3.5 w-3.5" strokeWidth={2} />
                             )}
                         </button>
+                        {viewMode === 'digest' && (
+                            <button
+                                type="button"
+                                onClick={handleViewHtmlViewer}
+                                className="touch-manipulation hidden md:flex h-6 w-6 shrink-0 items-center justify-center rounded-md border border-lex bg-white text-gray-600 transition-all hover:bg-neutral-100 hover:text-gray-900 active:scale-95 sm:h-7 sm:w-7 dark:border-lex dark:bg-zinc-800 dark:text-gray-300 dark:hover:bg-zinc-700"
+                                title="View / download case digest PDF"
+                                aria-label="View / download case digest PDF"
+                            >
+                                <Download className="h-3.5 w-3.5" strokeWidth={2} />
+                            </button>
+                        )}
                         {viewMode === 'full' && fullDecision.sc_url && (
                             <a
                                 href={fullDecision.sc_url}
@@ -1005,7 +1016,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                     {viewMode === 'digest' && (
                         <div className="w-full max-w-3xl mx-auto mb-6 text-center">
-                            <h2 className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white text-balance mb-1">
+                            <h2 className="text-lg sm:text-xl font-black leading-tight tracking-tight text-gray-900 dark:text-white text-balance mb-1">
                                 {(fullDecision.short_title && fullDecision.short_title.trim()) || (fullDecision.title && fullDecision.title.trim()) || fullDecision.case_number}
                             </h2>
                             <p className="text-sm font-medium text-gray-500 dark:text-gray-400 leading-relaxed">
@@ -1101,7 +1112,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                             {/* SECONDARY RULINGS */}
                             {secondaryRulings && secondaryRulings.length > 0 && (
-                                <section className="mb-6 sm:mb-10">
+                                <section className="mb-2">
                                     <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
                                         <span className="rounded-xl border border-lex bg-white p-2 shadow-sm dark:border-lex dark:bg-zinc-800/90">
                                             <Layers className="w-5 h-5 text-teal-500 dark:text-teal-400" />
@@ -1109,18 +1120,18 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         <span className="text-[15px] uppercase tracking-wide">Secondary Rulings</span>
                                         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
                                     </h4>
-                                    <div className="space-y-6">
+                                    <div className="relative overflow-hidden rounded-xl border border-gray-100 bg-gray-50/50 px-4 pt-4 dark:border-zinc-800 dark:bg-zinc-900/30">
                                         {secondaryRulings.map((r, idx) => {
                                             if (!r || typeof r !== 'object') return null;
                                             const topic = r.topic || r.issue || 'Ruling';
                                             const rulingContent = r.ruling || r.content || '';
                                             if (!rulingContent) return null;
                                             return (
-                                                <div key={idx} className="relative overflow-hidden rounded-xl border border-gray-100 bg-gray-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/30">
-                                                    <h5 className="mb-2 font-bold text-gray-800 dark:text-zinc-200 text-[14px]">
+                                                <div key={idx} className={idx > 0 ? 'pt-4 mt-4' : ''}>
+                                                    <h5 className="mb-2 font-bold text-gray-800 dark:text-zinc-200">
                                                         {topic}
                                                     </h5>
-                                                    <div className="text-gray-600 dark:text-gray-400 leading-relaxed text-[13.5px]">
+                                                    <div className="text-gray-700 dark:text-gray-300 leading-relaxed">
                                                         <DigestMarkdownText content={rulingContent} fontSize={fontSize} />
                                                     </div>
                                                 </div>

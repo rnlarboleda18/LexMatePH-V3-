@@ -213,8 +213,6 @@ def save_ratio(conn, case_id: int, ratio: str, model: str) -> None:
 
 def generate_ratio(client: genai.Client, case: dict, model_name: str) -> str | None:
     full_text = case["full_text_md"]
-    # Truncation disabled by user request — processing full untruncated text natively
-    pass
 
     prompt = RATIO_PROMPT.format(
         case_number=case["case_number"],

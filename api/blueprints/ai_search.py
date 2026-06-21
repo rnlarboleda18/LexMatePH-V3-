@@ -122,7 +122,7 @@ def _search_cases_db(query: str, limit: int = 3) -> list[dict]:
         select_cols = """
             id, short_title, case_number,
             TO_CHAR(date, 'YYYY-MM-DD') AS date_str,
-            main_doctrine, subject, significance_category
+            document_type, main_doctrine, subject, significance_category
         """
 
         # Tier A: any keyword appears in short_title OR full_title
@@ -158,6 +158,7 @@ def _search_cases_db(query: str, limit: int = 3) -> list[dict]:
                 "short_title":           row["short_title"] or "",
                 "case_number":           row["case_number"] or "",
                 "date_str":              row["date_str"] or "",
+                "document_type":         row["document_type"] or "",
                 "main_doctrine":         (row["main_doctrine"] or "")[:200],
                 "subject":               row["subject"] or "",
                 "significance_category": row["significance_category"] or "",
