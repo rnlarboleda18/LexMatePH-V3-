@@ -75,6 +75,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Optional
 
 import requests
 
@@ -318,6 +319,7 @@ def _write_results(
     total_empty: int,
     missed_cases: list[dict],
     stopped_reason: str,
+    last_probed_id: Optional[int] = None,
 ) -> None:
     payload = {
         "scanned_at":      scanned_at,
@@ -329,6 +331,7 @@ def _write_results(
         "total_non_gr":    total_non_gr,
         "total_empty":     total_empty,
         "stopped_reason":  stopped_reason,
+        "last_probed_id":  last_probed_id,
         "missed_cases":    missed_cases,
     }
     tmp = path.with_suffix(".tmp")
@@ -379,34 +382,37 @@ def main() -> int:
     args = parser.parse_args()
 
     load_api_local_settings_into_environ(_REPO_ROOT)
-    db_url = os.environ.get("DB_CONNECTION_STRING")
+    db_url = (
+        os.environ.get("DB_CONNECTION_STRING_AZURE")
+        or os.environ.get("DB_CONNECTION_STRING")
+        or "postgres://bar_admin:RABpass021819!@lexmateph-ea-db.postgres.database.azure.com:5432/lexmateph-ea-db?sslmode=require"
+    )
     if not db_url:
-        log.error("DB_CONNECTION_STRING is not set.")
+        log.error("DB_CONNECTION_STRING_AZURE / DB_CONNECTION_STRING is not set.")
         return 2
 
     output_path = Path(args.output)
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
     # ── Load previous results if resuming ────────────────────────────────────
-    already_probed: set[int] = set()
     existing_missed: list[dict] = []
     existing_non_gr = 0
     existing_empty  = 0
+    resume_last_probed_id: Optional[int] = None  # highest gap ID probed in prior run
 
     if args.resume and output_path.exists():
         try:
             prev = json.loads(output_path.read_text(encoding="utf-8"))
-            for c in prev.get("missed_cases", []):
-                already_probed.add(int(c["elib_id"]))
-                existing_missed.append(c)
+            existing_missed = list(prev.get("missed_cases", []))
             existing_non_gr = prev.get("total_non_gr", 0)
             existing_empty  = prev.get("total_empty",  0)
-            # Rebuild already_probed from total_probed count isn't possible,
-            # so we track via missed_cases + a separate probed_ids file if needed.
-            # For simplicity, resume skips IDs in missed_cases only.
+            # last_probed_id is written by this script; may be absent in older result files.
+            lp = prev.get("last_probed_id")
+            if lp is not None:
+                resume_last_probed_id = int(lp)
             log.info(
-                "Resuming: %s missed cases already recorded from previous run.",
-                len(existing_missed),
+                "Resuming: %s missed cases from previous run; last_probed_id=%s.",
+                len(existing_missed), resume_last_probed_id,
             )
         except Exception as exc:
             log.warning("Could not load previous results for resume: %s", exc)
@@ -440,10 +446,21 @@ def main() -> int:
     total_gaps  = len(gap_ids)
 
     if args.resume:
-        gap_ids = [i for i in gap_ids if i not in already_probed]
+        before = len(gap_ids)
+        if resume_last_probed_id is not None:
+            # Skip every gap ID we already visited in the previous run.
+            # Gap IDs are sorted ascending; all IDs ≤ last_probed_id were probed.
+            gap_ids = [i for i in gap_ids if i > resume_last_probed_id]
+        else:
+            # Fallback for result files written before last_probed_id was added:
+            # skip only IDs recorded as missed (non-GR/empty probed IDs are
+            # unknown so we cannot avoid re-probing them, but counts are still
+            # accumulated correctly from existing_non_gr / existing_empty).
+            missed_set = {int(c["elib_id"]) for c in existing_missed}
+            gap_ids = [i for i in gap_ids if i not in missed_set]
         log.info(
             "After resume filter: %s gap IDs remaining to probe (%s already done).",
-            len(gap_ids), total_gaps - len(gap_ids),
+            len(gap_ids), before - len(gap_ids),
         )
 
     if args.max_probe is not None:
@@ -467,6 +484,7 @@ def main() -> int:
         _write_results(
             output_path, datetime.now(timezone.utc).isoformat(),
             db_min, db_max, total_gaps, 0, 0, 0, existing_missed, "complete",
+            last_probed_id=resume_last_probed_id,
         )
         return 0
 
@@ -478,9 +496,11 @@ def main() -> int:
     total_empty  = existing_empty
     stopped_reason = "complete"
     consecutive_misses = 0
+    last_probed_id: Optional[int] = resume_last_probed_id  # carry forward from resume
 
     for elib_id in gap_ids:
         total_probed += 1
+        last_probed_id = elib_id
 
         time.sleep(args.request_delay)
         status, snippet = _probe_page(session, elib_id)
@@ -532,6 +552,7 @@ def main() -> int:
                 output_path, scanned_at, db_min, db_max,
                 total_gaps, total_probed + (total_gaps - len(gap_ids) if args.resume else 0),
                 total_non_gr, total_empty, missed_cases, "scanning",
+                last_probed_id=last_probed_id,
             )
             log.info(
                 "Progress: %s/%s probed | %s G.R. missed | %s non-G.R. | %s empty",
@@ -547,6 +568,7 @@ def main() -> int:
         total_gaps,
         total_probed + (total_gaps - len(gap_ids) if args.resume else 0),
         total_non_gr, total_empty, missed_cases, stopped_reason,
+        last_probed_id=last_probed_id,
     )
 
     new_missed = len(missed_cases) - len(existing_missed)

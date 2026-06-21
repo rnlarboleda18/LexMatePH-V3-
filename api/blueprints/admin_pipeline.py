@@ -57,6 +57,7 @@ _pipeline_state: dict = {
 _scan_lock = threading.Lock()
 _scan_proc: Optional[subprocess.Popen] = None
 _scan_log_path: Optional[Path] = None
+_scan_log_fp: Optional[object] = None   # kept open while subprocess is alive; closed on finish
 _scan_state: dict = {
     "status": "idle",   # idle | running | done | failed
     "started_at": None,
@@ -74,6 +75,7 @@ _gap_scan_state: dict = {
     "last_exit_code": None,
 }
 _gap_scan_log_path: Optional[Path] = None
+_gap_scan_log_fp: Optional[object] = None   # kept open while subprocess is alive; closed on finish
 
 
 # ── Pipeline helpers ──────────────────────────────────────────────────────────
@@ -112,6 +114,9 @@ def _pipeline_snapshot() -> dict:
             "progress_path": str(_pipeline_progress_path()),
             "subprocess_log_path": str(_pipeline_subprocess_log_path()),
         }
+        # Read log path inside the lock so we don't race with _start_pipeline
+        # which updates _pipeline_log_path under the same lock.
+        _snap_log_path = _pipeline_log_path
 
     prog = _pipeline_progress_read_safe()
     if prog:
@@ -119,7 +124,7 @@ def _pipeline_snapshot() -> dict:
         snap["phase"] = prog.get("phase")
         snap["progress_message"] = prog.get("message")
         snap["overall_percent"] = prog.get("overall_percent")
-    snap["log_tail"] = _pipeline_log_tail(path=_pipeline_log_path)
+    snap["log_tail"] = _pipeline_log_tail(path=_snap_log_path)
     return snap
 
 
@@ -207,12 +212,8 @@ def _start_pipeline(
             return None, str(exc)
 
 
-def _platform_vertex_args(req: func.HttpRequest) -> Tuple[Optional[str], Optional[str]]:
-    """Extract vertex_project and vertex_location from the request body platform field."""
-    try:
-        body = req.get_json() or {}
-    except Exception:
-        body = {}
+def _platform_vertex_args(body: dict) -> Tuple[Optional[str], Optional[str]]:
+    """Extract vertex_project and vertex_location from a pre-parsed request body dict."""
     platform = body.get("platform", "vertex")
     if platform == "vertex":
         return "gen-lang-client-0176283199", "global"
@@ -223,7 +224,7 @@ def _platform_vertex_args(req: func.HttpRequest) -> Tuple[Optional[str], Optiona
 
 def _refresh_scan_state_locked() -> None:
     """Poll scan subprocess and update _scan_state (lock must be held)."""
-    global _scan_proc
+    global _scan_proc, _scan_log_fp
     if _scan_proc is None:
         return
     rc = _scan_proc.poll()
@@ -233,6 +234,13 @@ def _refresh_scan_state_locked() -> None:
     _scan_state["finished_at"] = datetime.now(timezone.utc).isoformat()
     _scan_state["last_exit_code"] = int(rc)
     _scan_proc = None
+    if _scan_log_fp is not None:
+        try:
+            _scan_log_fp.flush()
+            _scan_log_fp.close()
+        except Exception:
+            pass
+        _scan_log_fp = None
 
 
 def _scan_snapshot() -> dict:
@@ -251,7 +259,7 @@ def _scan_snapshot() -> dict:
 
 def _refresh_gap_scan_state_locked() -> None:
     """Poll gap scan subprocess and update _gap_scan_state (lock must be held)."""
-    global _gap_scan_proc
+    global _gap_scan_proc, _gap_scan_log_fp
     if _gap_scan_proc is None:
         return
     rc = _gap_scan_proc.poll()
@@ -261,6 +269,13 @@ def _refresh_gap_scan_state_locked() -> None:
     _gap_scan_state["finished_at"] = datetime.now(timezone.utc).isoformat()
     _gap_scan_state["last_exit_code"] = int(rc)
     _gap_scan_proc = None
+    if _gap_scan_log_fp is not None:
+        try:
+            _gap_scan_log_fp.flush()
+            _gap_scan_log_fp.close()
+        except Exception:
+            pass
+        _gap_scan_log_fp = None
 
 
 def _gap_scan_snapshot() -> dict:
@@ -419,7 +434,7 @@ def admin_pipeline_start(req: func.HttpRequest) -> func.HttpResponse:
         body = req.get_json(silent=True) or {}
     except Exception:
         body = {}
-    v_project, v_location = _platform_vertex_args(req)
+    v_project, v_location = _platform_vertex_args(body)
     digest_model = (body.get("digest_model") or "").strip() or None
     result, start_err = _start_pipeline("full", vertex_project=v_project, vertex_location=v_location, digest_model=digest_model)
     if start_err:
@@ -433,7 +448,11 @@ def admin_pipeline_resume(req: func.HttpRequest) -> func.HttpResponse:
     _, err = _check_admin(req)
     if err:
         return err
-    v_project, v_location = _platform_vertex_args(req)
+    try:
+        body = req.get_json(silent=True) or {}
+    except Exception:
+        body = {}
+    v_project, v_location = _platform_vertex_args(body)
     result, start_err = _start_pipeline("resume", vertex_project=v_project, vertex_location=v_location)
     if start_err:
         status = 409 if "already running" in start_err.lower() else 500
@@ -500,11 +519,12 @@ def admin_pipeline_scan(req: func.HttpRequest) -> func.HttpResponse:
         _refresh_scan_state_locked()
         if _scan_proc is not None:
             return _json({"error": "Scan is already running"}, 409)
-        global _scan_log_path
+        global _scan_log_path, _scan_log_fp
         try:
             _SCAN_RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
             _scan_log_path = _scan_subprocess_log_path()
             scan_log_fp = open(_scan_log_path, "w", encoding="utf-8", buffering=1)
+            _scan_log_fp = scan_log_fp
             _scan_proc = subprocess.Popen(
                 cmd,
                 cwd=str(root),
@@ -599,11 +619,12 @@ def admin_pipeline_scan_gaps(req: func.HttpRequest) -> func.HttpResponse:
                 _GAP_RESULTS_PATH.unlink()
             except Exception:
                 pass
-        global _gap_scan_log_path
+        global _gap_scan_log_path, _gap_scan_log_fp
         try:
             _GAP_RESULTS_PATH.parent.mkdir(parents=True, exist_ok=True)
             _gap_scan_log_path = _gap_scan_subprocess_log_path()
             gap_log_fp = open(_gap_scan_log_path, "w", encoding="utf-8", buffering=1)
+            _gap_scan_log_fp = gap_log_fp
             _gap_scan_proc = subprocess.Popen(
                 cmd,
                 cwd=str(root),
