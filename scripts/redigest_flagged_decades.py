@@ -45,7 +45,7 @@ load_api_local_settings_into_environ(Path(__file__).resolve().parent.parent)
 # ── Constants ────────────────────────────────────────────────────────────────
 
 MODEL            = "publishers/google/models/gemini-3.5-flash"
-DEFAULT_PROJECT  = "gen-lang-client-0813708151"
+DEFAULT_PROJECT  = "gen-lang-client-0545071081"
 DEFAULT_LOCATION = "us"
 DEFAULT_THREADS  = 5
 _TIMEOUT_MS      = 270_000
@@ -180,7 +180,7 @@ logging.basicConfig(
     level=logging.INFO,
     format="%(asctime)s [%(levelname)s] %(message)s",
     handlers=[
-        logging.FileHandler("redigest_flagged_decades.log"),
+        logging.FileHandler("redigest_flagged_decades.log", encoding="utf-8"),
         logging.StreamHandler(sys.stdout),
     ],
 )
@@ -512,6 +512,7 @@ def main() -> None:
                     "resumes from checkpoint on the next run."
     )
     parser.add_argument("--id",               type=int,  help="Run only on a specific case ID (bypasses batch logic)")
+    parser.add_argument("--retry-ids",        nargs="+", type=int, help="Retry a specific list of case IDs (bypasses batch/checkpoint logic)")
     parser.add_argument("--limit",            type=int,  help="Cap cases within the current batch")
     parser.add_argument("--threads",          type=int,  default=DEFAULT_THREADS, help="Worker threads per batch")
     parser.add_argument("--rpm",              type=int,  default=200,    help="Vertex AI RPM rate limit")
@@ -572,6 +573,38 @@ def main() -> None:
         ok = process_case(client, conn, db_lock, args.id, args.dry_run, args.model, limiter)
         conn.close()
         sys.exit(0 if ok else 1)
+
+    # ── Retry-IDs mode ────────────────────────────────────────────────────────
+    if args.retry_ids:
+        ids = args.retry_ids
+        log.info("=" * 60)
+        log.info("RETRY MODE: %d case IDs | %d threads", len(ids), args.threads)
+        log.info("=" * 60)
+        reporter = ProgressReporter("retry", len(ids)).start()
+        success_count = failure_count = 0
+        with concurrent.futures.ThreadPoolExecutor(max_workers=args.threads) as executor:
+            futures = {
+                executor.submit(
+                    process_case, client, conn, db_lock,
+                    cid, args.dry_run, args.model, limiter
+                ): cid
+                for cid in ids
+            }
+            for fut in concurrent.futures.as_completed(futures):
+                cid = futures[fut]
+                try:
+                    if fut.result():
+                        success_count += 1
+                    else:
+                        failure_count += 1
+                except Exception as e:
+                    log.exception("Unexpected error for Case ID %d: %s", cid, e)
+                    failure_count += 1
+                reporter.increment()
+        reporter.stop()
+        log.info("RETRY DONE | ✓ %d | ✗ %d", success_count, failure_count)
+        conn.close()
+        sys.exit(0 if failure_count == 0 else 1)
 
     # ── Batch mode ────────────────────────────────────────────────────────────
     completed_batches = load_checkpoint(checkpoint_path)

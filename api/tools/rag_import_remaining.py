@@ -18,8 +18,8 @@ from vertexai.preview import rag
 
 sys.path.insert(0, ".")
 
-REGION  = "europe-west4"
-PROJECT = "gen-lang-client-0176283199"
+REGION  = "us-central1"
+PROJECT = "gen-lang-client-0545071081"
 CORPUS  = f"projects/{PROJECT}/locations/{REGION}/ragCorpora/6917529027641081856"
 
 vertexai.init(project=PROJECT, location=REGION)

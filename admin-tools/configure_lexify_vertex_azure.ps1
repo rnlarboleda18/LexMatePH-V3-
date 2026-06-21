@@ -52,7 +52,7 @@ param(
     [string] $ServiceAccountJsonPath,
 
     [Parameter(Mandatory = $false)]
-    [string] $GoogleCloudProject = "gen-lang-client-0565960161",
+    [string] $GoogleCloudProject = "gen-lang-client-0545071081",
 
     [switch] $DryRun
 )

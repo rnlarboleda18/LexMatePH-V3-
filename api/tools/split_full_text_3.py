@@ -6,7 +6,7 @@ import time, sys
 sys.path.insert(0, ".")
 from google.cloud import storage
 
-PROJECT = "gen-lang-client-0176283199"
+PROJECT = "gen-lang-client-0545071081"
 BUCKET = "lexmateph-legal-corpus"
 SRC_PREFIX = "cases/full-text-3/"
 DEST_PREFIX = "cases/full-text-5/"

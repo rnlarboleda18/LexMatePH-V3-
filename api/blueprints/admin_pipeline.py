@@ -216,7 +216,7 @@ def _platform_vertex_args(body: dict) -> Tuple[Optional[str], Optional[str]]:
     """Extract vertex_project and vertex_location from a pre-parsed request body dict."""
     platform = body.get("platform", "vertex")
     if platform == "vertex":
-        return "gen-lang-client-0176283199", "global"
+        return "gen-lang-client-0545071081", "us"
     return None, None
 
 

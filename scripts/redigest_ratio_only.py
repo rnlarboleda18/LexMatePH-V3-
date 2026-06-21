@@ -22,7 +22,7 @@ Usage:
     python scripts/redigest_ratio_only.py --from-csv scripts/ratio_style_classification.csv
 
     # Vertex project override
-    python scripts/redigest_ratio_only.py --case-number "G.R. No. 218543" --vertex-project gen-lang-client-0813708151
+    python scripts/redigest_ratio_only.py --case-number "G.R. No. 218543" --vertex-project gen-lang-client-0545071081
 """
 
 from __future__ import annotations
@@ -52,8 +52,8 @@ load_api_local_settings_into_environ(Path(__file__).resolve().parent.parent)
 # ── Constants ────────────────────────────────────────────────────────────────
 
 MODEL            = "gemini-2.5-flash"
-DEFAULT_PROJECT  = "gen-lang-client-0813708151"
-DEFAULT_LOCATION = "us-central1"
+DEFAULT_PROJECT  = "gen-lang-client-0545071081"
+DEFAULT_LOCATION = "us"
 _TIMEOUT_MS      = 270_000
 _RETRY_LIMIT     = 3
 _RETRY_DELAY     = 8

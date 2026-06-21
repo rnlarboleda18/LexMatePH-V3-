@@ -3,8 +3,8 @@ import vertexai
 from vertexai.preview import rag
 import json
 
-vertexai.init(project="gen-lang-client-0176283199", location="europe-west4")
-CORPUS = "projects/gen-lang-client-0176283199/locations/europe-west4/ragCorpora/6917529027641081856"
+vertexai.init(project="gen-lang-client-0545071081", location="us-central1")
+CORPUS = "projects/gen-lang-client-0545071081/locations/us-central1/ragCorpora/6917529027641081856"
 
 print("Importing statutes/provisions/ ...")
 result = rag.import_files(

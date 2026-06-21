@@ -35,7 +35,7 @@ def get_questions(req: func.HttpRequest) -> func.HttpResponse:
     try:
         year = req.params.get('year')
         subject = req.params.get('subject')
-        limit = min(int(req.params.get('limit', '500')), 500)
+        limit = min(int(req.params.get('limit', '500')), 5000)
 
         query = """
             SELECT q.id, q.year, q.subject, q.sub_topic, q.text, q.source_label, a.text as answer

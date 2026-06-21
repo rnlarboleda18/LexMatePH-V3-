@@ -11,8 +11,8 @@ if str(_SCRIPTS) not in sys.path:
 from load_local_settings_env import load_api_local_settings_into_environ
 load_api_local_settings_into_environ(_SCRIPTS.parent)
 
-PROJECT = "gen-lang-client-0813708151"
-LOCATION = "us-central1"
+PROJECT = "gen-lang-client-0545071081"
+LOCATION = "us"
 
 # Strip any AI Studio env vars to prevent SDK from silently rerouting
 for var in ("GOOGLE_API_KEY", "GEMINI_API_KEY", "GOOGLE_GENAI_USE_VERTEXAI"):

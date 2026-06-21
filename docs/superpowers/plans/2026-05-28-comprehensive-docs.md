@@ -375,7 +375,7 @@ Frontend:
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `GCP_PROJECT` | **Yes** (AI features) | `gen-lang-client-0176283199` | Google Cloud project ID for Vertex AI calls. |
+| `GCP_PROJECT` | **Yes** (AI features) | `gen-lang-client-0545071081` | Google Cloud project ID for Vertex AI calls. |
 | `GCP_LOCATION` | No | `us-central1` | GCP region for Gemini model calls. |
 | `RAG_REGION` | No | `europe-west4` | GCP region for RAG Engine corpus (avoids Spanner capacity limits). |
 | `GCP_SA_JSON_B64` | **Yes** (production AI) | — | Base64-encoded service account JSON. Preferred over `GCP_SA_JSON` — survives shell escaping in Azure Application Settings. |
