@@ -1004,21 +1004,16 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 <div onScroll={handleContentScroll} className="relative z-0 flex-1 min-h-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent" style={{ fontSize: `${fontSize}px` }}>
 
                     {viewMode === 'digest' && (
-                        <div className="w-full max-w-3xl mx-auto mb-8">
-                            <div className="relative overflow-hidden rounded-xl border border-lex bg-white dark:bg-zinc-900 shadow-sm w-full">
-                                <CardVioletInnerWash />
-                                <div className="relative z-[1] p-5 sm:p-6 text-center">
-                                    <h2 className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white text-balance mb-2">
-                                        {(fullDecision.short_title && fullDecision.short_title.trim()) || (fullDecision.title && fullDecision.title.trim()) || fullDecision.case_number}
-                                    </h2>
-                                    <p className="text-center text-[11px] sm:text-xs font-mono text-gray-600 dark:text-gray-400 leading-snug">
-                                        {fullDecision.case_number}
-                                        {_decisionDateRaw ? (
-                                            <span className="text-gray-500 dark:text-gray-500"> · {formatDate(_decisionDateRaw)}</span>
-                                        ) : null}
-                                    </p>
-                                </div>
-                            </div>
+                        <div className="w-full max-w-3xl mx-auto mb-6 text-center">
+                            <h2 className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white text-balance mb-1">
+                                {(fullDecision.short_title && fullDecision.short_title.trim()) || (fullDecision.title && fullDecision.title.trim()) || fullDecision.case_number}
+                            </h2>
+                            <p className="text-[11px] sm:text-xs font-mono text-gray-500 dark:text-gray-400">
+                                {fullDecision.case_number}
+                                {_decisionDateRaw ? (
+                                    <span> · {formatDate(_decisionDateRaw)}</span>
+                                ) : null}
+                            </p>
                         </div>
                     )}
 
