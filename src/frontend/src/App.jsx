@@ -1407,6 +1407,8 @@ function App() {
           tabs={openTabs}
           activeMode={mode}
           onSwitch={(newMode) => {
+            closeGlobalCaseModal();
+            setSelectedQuestion(null);
             navigateToTab(newMode);
           }}
           onClose={closeTab}

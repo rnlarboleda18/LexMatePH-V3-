@@ -618,7 +618,7 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                - **Subject:** Identify the primary and secondary subjects. Choose from: [Political, Civil, Commercial, Labor, Criminal, Taxation, Ethics, Remedial]. Provide as "Primary: [Subject]; Secondary: [Subject1, Subject2]". If only one applies, just list it as Primary.
                - **Keywords:** Extract 5-10 specific legal keywords.
                - **Statutes Involved:** Scan for specific laws cited (e.g., "Article 36, Family Code"). Limit to the **Top 5 most relevant** statutes.
-               - **Main Doctrine (ELABORATE):** Provide a **comprehensive 3-5 sentence explanation** of the primary legal doctrine established or applied by this case. Explain the rule, its rationale, and its significance for Philippine jurisprudence. Do NOT just state the doctrine—elaborate on its meaning and application.
+               - **Main Doctrine (ELABORATE):** Provide a **comprehensive explanation of 5-8 sentences** detailing the **primary legal doctrine** established or applied by the Court, written strictly as a single, coherent paragraph of natural, flowing prose sentences. Do NOT use any numbering, sub-bullet points, or explicit labels (such as (a), (b), (c)). Clearly convey the core legal rule or holding, the constitutional, statutory, or jurisprudential rationale behind it, and its exact impact or significance for Philippine law. **IMPORTANT:** If—and only if—the Court settled any **collateral or procedural issues** of major jurisprudential value in this case, you MUST explicitly mention them in a concluding sentence of this prose paragraph (e.g., 'In addition, the Court settled collateral matters concerning [issue], ruling that...'). Do not invent or hallucinate collateral issues if there are none. Do not leave the doctrine block as a simple or lazy summary—make it forensic, deep, and fully illustrative of the decision's doctrinal weight.
 
             2. **JURISPRUDENCE MAPPING (Contextual):**
                - Identify Supreme Court cases cited in the text.
@@ -641,12 +641,12 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                  * **The Antecedents:** The underlying events/dispute.
                  * **Procedural History:** The path through lower courts/agencies.
                  * **The Petition** (or **The Appeal**): Specifically describe the procedural vehicle (e.g., Rule 45 petition) and the main arguments raised by the petitioner/appellant to the Supreme Court.
-               - **Issues:** Provide a list of ALL issues (Procedural & Substantive) using **BULLET POINTS**.
+               - **Issues:** Provide a comprehensive, exhaustive list of **ALL issues** discussed, addressed, or settled by the Court in this case. This MUST include not only the primary substantive issues but also **any and all procedural, secondary, or collateral issues** raised by the parties or motu proprio addressed by the Court (such as standing, mootness, proper remedy, quantum of evidence, or procedural due process). List every single issue using a structured markdown bullet point format.
                - **Ruling:** Final Verdict and Dispositive Portion.
                - **Ratio (POINT-BY-POINT):**
-                 - Address every issue using the bullet points from the Issues section.
-                 - **Reasoning Requirement:** For each issue, elaborate clearly how the Supreme Court reasoned. Provide a **MINIMUM of 5 sentences** per issue.
-                 - **Citation Rule:** Explicitly name referenced cases (e.g., "Applying *Tan-Andal*...").
+                 - Address every single issue listed in the Issues section (both primary and collateral/procedural) using a corresponding and clearly labeled bullet point in a point-by-point manner (e.g., '* **On Issue 1:** ...', '* **On Issue 2:** ...').
+                 - **Reasoning Requirement:** For each issue, write a thorough, forensic, and logically complete explanation of how the Supreme Court reasoned and arrived at its decision. Provide a **MINIMUM of 5-8 sentences** of rigorous legal reasoning for each issue, with **NO upper limit** on sentence length or count to avoid truncating complex arguments. Avoid sparse outlines, short summaries, or telegraphic bullet points.
+                 - **Citation Rule:** Explicitly name referenced cases (e.g., "Applying the doctrine in *Tan-Andal v. Andal*...") and statutory/constitutional provisions.
 
             5. **SIGNIFICANCE (THE "BAR TRAPS"):**
 
@@ -673,6 +673,12 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                  - **Rule:** Use EXACT wording from the case for the definition.
                  - **Citations:** Cite the source case AND the specific provision of the law (e.g., "Article 3, Section 1, 1987 Constitution").
                - **Flashcards:** Create 3 cards (Concept, Distinction, Scenario). Do NOT ask "What is the doctrine?".
+
+            7. **SECONDARY/COLLATERAL RULINGS (MANDATORY EXTRACTION):**
+                - Populate the `secondary_rulings` array with any and all secondary or collateral rulings settled by the Court that are highly relevant to Bar Exam preparation (such as procedural anomalies, quantum of proof, prospective applications, civil liability adjustments, or laches).
+                - For each entry, provide:
+                  - **topic**: The specific legal topic (e.g., 'Procedural Due Process', 'Locus Standi', 'Double Jeopardy', 'Civil Liability in Rape').
+                  - **ruling**: A detailed 5-8 sentence explanation of the Court's specific pronouncement on this collateral matter, written strictly as a single, coherent paragraph of natural, flowing prose sentences. Do NOT use any numbering, sub-bullet points, or explicit labels (such as (a), (b), (c)). Ensure it is precise, authoritative, and uses the exact language of the law. If there are no secondary or collateral rulings settled by the Court, return an empty array `[]`—do not invent data.
 
             **OUTPUT FORMAT:**
             Return ONLY valid JSON:

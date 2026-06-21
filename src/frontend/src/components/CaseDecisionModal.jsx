@@ -955,26 +955,36 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
 
                     {/* Case title — only shown in digest mode; full text has its own header in the document body */}
                     {viewMode === 'digest' && (
-                        <div className="mb-8 text-center">
-                            <h2 className="text-[22px] font-black leading-tight tracking-tight text-gray-900 dark:text-white sm:text-[26px]">
-                                {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
-                            </h2>
+                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 border-b border-slate-200/80 dark:border-zinc-800/80 pb-6 mb-8 text-left">
+                            
+                            {/* Left Side: Title Block */}
+                            <div className="flex-1 min-w-0">
+                                <div className="text-[10px] sm:text-xs font-bold tracking-[0.2em] text-indigo-600/90 dark:text-indigo-400/90 uppercase mb-1.5 select-none">
+                                    Supreme Court Decision
+                                </div>
+                                <h2 className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white text-balance max-w-2xl">
+                                    {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
+                                </h2>
+                            </div>
+
+                            {/* Right Side: Stacked Metadata with Responsive Divider */}
                             {(fullDecision.case_number || _decisionDateRaw) && (
-                                <div className="mt-4 flex flex-wrap items-center justify-center gap-2.5">
+                                <div className="flex flex-row md:flex-col items-start gap-4 md:gap-2.5 pl-0 md:pl-6 border-t md:border-t-0 md:border-l border-slate-200/80 dark:border-zinc-800/80 pt-4 md:pt-0 shrink-0 select-none">
                                     {fullDecision.case_number && (
-                                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide font-sans bg-indigo-50/90 text-indigo-700 border border-indigo-100 dark:bg-indigo-950/40 dark:text-indigo-300 dark:border-indigo-900/50 shadow-sm transition-all duration-200 hover:scale-[1.03] hover:shadow-md">
-                                            <Scale className="h-3.5 w-3.5 text-indigo-500 dark:text-indigo-400" strokeWidth={2.25} />
-                                            {fullDecision.case_number}
-                                        </span>
+                                        <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-slate-600 dark:text-zinc-300 font-sans hover:text-slate-800 dark:hover:text-zinc-100 transition-colors">
+                                            <Scale className="h-4 w-4 text-indigo-500 dark:text-indigo-400 shrink-0" strokeWidth={2} />
+                                            <span>{fullDecision.case_number}</span>
+                                        </div>
                                     )}
                                     {_decisionDateRaw && (
-                                        <span className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold tracking-wide font-sans bg-emerald-50/90 text-emerald-700 border border-emerald-100 dark:bg-emerald-950/40 dark:text-emerald-300 dark:border-emerald-900/50 shadow-sm transition-all duration-200 hover:scale-[1.03] hover:shadow-md">
-                                            <Clock className="h-3.5 w-3.5 text-emerald-500 dark:text-emerald-400" strokeWidth={2.25} />
-                                            {formatDate(_decisionDateRaw)}
-                                        </span>
+                                        <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-slate-600 dark:text-zinc-300 font-sans hover:text-slate-800 dark:hover:text-zinc-100 transition-colors">
+                                            <Clock className="h-4 w-4 text-emerald-500 dark:text-emerald-400 shrink-0" strokeWidth={2} />
+                                            <span>{formatDate(_decisionDateRaw)}</span>
+                                        </div>
                                     )}
                                 </div>
                             )}
+
                         </div>
                     )}
 
