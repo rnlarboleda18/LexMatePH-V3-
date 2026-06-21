@@ -1299,7 +1299,7 @@ function App() {
                         )
                       }
 
-                      <div className="grid grid-cols-1 gap-tile md:grid-cols-2">
+                      <div className="grid grid-cols-1 gap-tile">
                         {filteredBarQuestions
                           .slice(
                             (barCurrentPage - 1) * BAR_ITEMS_PER_PAGE,

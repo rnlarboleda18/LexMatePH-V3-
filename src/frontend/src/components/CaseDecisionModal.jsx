@@ -18,6 +18,17 @@ import { CaseFullTextMarkdown, DigestMarkdownText, SmartLink } from './CaseDiges
 import FontSizeControl from './FontSizeControl';
 import { useFontSize } from '../hooks/useFontSize';
 import { useFavorites } from '../hooks/useFavorites';
+import CardVioletInnerWash from './CardVioletInnerWash';
+
+const formatTitleCase = (str) => {
+    if (!str) return '';
+    if (/[a-z]/.test(str)) {
+        return str;
+    }
+    return str
+        .toLowerCase()
+        .replace(/(?:^|\s|-|\/)\S/g, (m) => m.toUpperCase());
+};
 
 // --- HELPER COMPONENTS ---
 
@@ -658,10 +669,34 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
         addTextSection("RULING", fullDecision.digest_ruling);
         addTextSection("RATIO DECIDENDI", fullDecision.digest_ratio);
 
+        if (secondaryRulings && secondaryRulings.length > 0) {
+            const secondaryText = secondaryRulings
+                .map(r => `**${r.topic || r.issue || 'Ruling'}**\n${r.ruling || r.content || ''}`)
+                .filter(Boolean)
+                .join("\n\n");
+            if (secondaryText) {
+                addTextSection("SECONDARY RULINGS", secondaryText);
+            }
+        }
+
         doc.save(`${fullDecision.case_number || fullDecision.gr_number}_Digest.pdf`);
     };
 
     if (!fullDecision) return null;
+
+    let secondaryRulings = [];
+    if (fullDecision && fullDecision.secondary_rulings) {
+        try {
+            secondaryRulings = typeof fullDecision.secondary_rulings === 'string'
+                ? JSON.parse(fullDecision.secondary_rulings)
+                : fullDecision.secondary_rulings;
+        } catch (e) {
+            console.error("Error parsing secondary_rulings:", e);
+        }
+    }
+    if (!Array.isArray(secondaryRulings)) {
+        secondaryRulings = [];
+    }
 
     const doctrinePanel = getSubjectMainDoctrinePanelClasses(fullDecision.subject);
 
@@ -676,6 +711,21 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
               }
           })()
         : '';
+
+    let _statutesParsed = null;
+    let _citationsParsed = null;
+    try {
+        if (fullDecision.statutes_involved) {
+            const st = typeof fullDecision.statutes_involved === 'string' ? JSON.parse(fullDecision.statutes_involved) : fullDecision.statutes_involved;
+            if (Array.isArray(st) && st.length > 0) _statutesParsed = st;
+        }
+    } catch (e) { /* ignore */ }
+    try {
+        if (fullDecision.cited_cases) {
+            const c = typeof fullDecision.cited_cases === 'string' ? JSON.parse(fullDecision.cited_cases) : fullDecision.cited_cases;
+            if (Array.isArray(c) && c.length > 0) _citationsParsed = c;
+        }
+    } catch (e) { /* ignore */ }
 
     return createPortal(
         <div
@@ -856,90 +906,90 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         <div className="rounded-lg border border-lex bg-neutral-50 px-3 py-2.5 dark:border-lex dark:bg-zinc-800/90">
                             <dl className="space-y-2.5">
                                 {fullDecision.significance_category && (
-                                    <div className="flex gap-2.5">
+                                    <div className="flex items-center gap-2.5">
                                         <Landmark
-                                            className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400"
+                                            className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400"
                                             strokeWidth={2}
                                             aria-hidden
                                         />
-                                        <div className="min-w-0 flex-1">
-                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                Significance
+                                        <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                            <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                Significance:
                                             </dt>
                                             <dd
-                                                className={`mt-0.5 text-[13px] font-semibold leading-snug ${getCategoryTextClass(fullDecision.significance_category)}`}
+                                                className={`text-[13px] font-semibold leading-snug ${getCategoryTextClass(fullDecision.significance_category)}`}
                                             >
-                                                {fullDecision.significance_category}
+                                                {formatTitleCase(fullDecision.significance_category)}
                                             </dd>
                                         </div>
                                     </div>
                                 )}
 
                                 <div
-                                    className={`flex gap-2.5 ${fullDecision.significance_category ? 'border-t border-lex pt-2.5 dark:border-lex' : ''}`}
+                                    className={`flex items-center gap-2.5 ${fullDecision.significance_category ? 'border-t border-lex pt-2.5 dark:border-lex' : ''}`}
                                 >
                                     <Scale
-                                        className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
+                                        className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
                                         strokeWidth={2}
                                         aria-hidden
                                     />
-                                    <div className="min-w-0 flex-1">
-                                        <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                            Court body
+                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                            Court Body:
                                         </dt>
-                                        <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
-                                            {fullDecision.division?.trim() || '—'}
+                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                            {formatTitleCase(fullDecision.division?.trim()) || '—'}
                                         </dd>
                                     </div>
                                 </div>
 
                                 {_decisionDateRaw && (
-                                    <div className="flex gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
+                                    <div className="flex items-center gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
                                         <Clock
-                                            className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
+                                            className="h-4 w-4 shrink-0 text-emerald-600 dark:text-emerald-400"
                                             strokeWidth={2}
                                             aria-hidden
                                         />
-                                        <div className="min-w-0 flex-1">
-                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                Date Decided
+                                        <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                            <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                Date Decided:
                                             </dt>
-                                            <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
+                                            <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
                                                 {formatDate(_decisionDateRaw)}
                                             </dd>
                                         </div>
                                     </div>
                                 )}
 
-                                <div className="flex gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
+                                <div className="flex items-center gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
                                     <BookOpen
-                                        className="mt-0.5 h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400"
+                                        className="h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400"
                                         strokeWidth={2}
                                         aria-hidden
                                     />
-                                    <div className="min-w-0 flex-1">
-                                        <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                            Subject
+                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                            Subject:
                                         </dt>
-                                        <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
-                                            {fullDecision.subject?.toString().trim() || '—'}
+                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                            {formatTitleCase(fullDecision.subject?.toString().trim()) || '—'}
                                         </dd>
                                     </div>
                                 </div>
 
                                 {fullDecision.ponente && (
-                                    <div className="flex gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
+                                    <div className="flex items-center gap-2.5 border-t border-lex pt-2.5 dark:border-lex">
                                         <User
-                                            className="mt-0.5 h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400"
+                                            className="h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400"
                                             strokeWidth={2}
                                             aria-hidden
                                         />
-                                        <div className="min-w-0 flex-1">
-                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                Ponente
+                                        <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                            <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                Ponente:
                                             </dt>
-                                            <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-800 dark:text-gray-200">
-                                                {fullDecision.ponente}
+                                            <dd className="text-[13px] font-semibold leading-snug text-gray-800 dark:text-gray-200">
+                                                {formatTitleCase(fullDecision.ponente)}
                                             </dd>
                                         </div>
                                     </div>
@@ -953,38 +1003,158 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                 {/* SCROLLABLE MAIN CONTENT */}
                 <div onScroll={handleContentScroll} className="relative z-0 flex-1 min-h-0 overflow-y-auto lex-modal-scroll p-3 sm:p-6 md:p-8 custom-scrollbar bg-transparent" style={{ fontSize: `${fontSize}px` }}>
 
-                    {/* Case title — only shown in digest mode; full text has its own header in the document body */}
                     {viewMode === 'digest' && (
-                        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 border-b border-slate-200/80 dark:border-zinc-800/80 pb-6 mb-8 text-left">
-                            
-                            {/* Left Side: Title Block */}
-                            <div className="flex-1 min-w-0">
-                                <div className="text-[10px] sm:text-xs font-bold tracking-[0.2em] text-indigo-600/90 dark:text-indigo-400/90 uppercase mb-1.5 select-none">
-                                    Supreme Court Decision
+                        <div className="w-full max-w-3xl mx-auto mb-8">
+                            <div className="relative overflow-hidden rounded-xl border border-lex bg-white dark:bg-zinc-900 shadow-sm w-full">
+                                <CardVioletInnerWash />
+                                <div className="relative z-[1] p-5 sm:p-6 text-center">
+                                    <div className="text-[10px] sm:text-xs font-bold tracking-[0.2em] text-indigo-600/90 dark:text-indigo-400/90 uppercase select-none mb-2">
+                                        Supreme Court Decision
+                                    </div>
+                                    <h2 className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white text-balance mb-2">
+                                        {(fullDecision.short_title && fullDecision.short_title.trim()) || (fullDecision.title && fullDecision.title.trim()) || fullDecision.case_number}
+                                    </h2>
+
+                                    <p className="text-center text-[11px] sm:text-xs font-mono text-gray-600 dark:text-gray-400 leading-snug">
+                                        {fullDecision.case_number}
+                                        {_decisionDateRaw ? (
+                                            <span className="text-gray-500 dark:text-gray-500"> · {formatDate(_decisionDateRaw)}</span>
+                                        ) : null}
+                                    </p>
                                 </div>
-                                <h2 className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white text-balance max-w-2xl">
-                                    {fullDecision.short_title || fullDecision.title || fullDecision.case_number}
-                                </h2>
+
+                                <div className="border-t border-lex p-4 sm:p-5">
+                                    <div className="relative overflow-hidden rounded-lg border border-lex bg-neutral-50 px-4 py-3.5 dark:bg-zinc-800/90 shadow-sm">
+                                        <CardVioletInnerWash />
+                                        <dl className="relative z-[1] space-y-3">
+                                            {fullDecision.significance_category && (
+                                                <div className="flex items-center gap-2.5">
+                                                    <Landmark
+                                                        className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400"
+                                                        strokeWidth={2}
+                                                        aria-hidden
+                                                    />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                            Significance:
+                                                        </dt>
+                                                        <dd
+                                                            className={`text-[13px] font-semibold leading-snug ${getCategoryTextClass(fullDecision.significance_category)}`}
+                                                        >
+                                                            {formatTitleCase(fullDecision.significance_category)}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            <div
+                                                className={`flex items-center gap-2.5 ${fullDecision.significance_category ? 'border-t border-lex pt-3 dark:border-lex' : ''}`}
+                                            >
+                                                <FileText
+                                                    className="h-4 w-4 shrink-0 text-slate-600 dark:text-slate-400"
+                                                    strokeWidth={2}
+                                                    aria-hidden
+                                                />
+                                                <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                    <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                        Decision / Resolution:
+                                                    </dt>
+                                                    <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                        {formatTitleCase(fullDecision.document_type?.toString().trim()) || '—'}
+                                                    </dd>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-center gap-2.5 border-t border-lex pt-3 dark:border-lex">
+                                                <Scale
+                                                    className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
+                                                    strokeWidth={2}
+                                                    aria-hidden
+                                                />
+                                                <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                    <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                        Court Body:
+                                                    </dt>
+                                                    <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                        {formatTitleCase(fullDecision.division?.trim()) || '—'}
+                                                    </dd>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-center gap-2.5 border-t border-lex pt-3 dark:border-lex">
+                                                <BookOpen
+                                                    className="h-4 w-4 shrink-0 text-violet-600 dark:text-violet-400"
+                                                    strokeWidth={2}
+                                                    aria-hidden
+                                                />
+                                                <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                    <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                        Subject:
+                                                    </dt>
+                                                    <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                        {formatTitleCase(fullDecision.subject?.toString().trim()) || '—'}
+                                                    </dd>
+                                                </div>
+                                            </div>
+
+                                            {fullDecision.ponente && (
+                                                <div className="flex items-center gap-2.5 border-t border-lex pt-3 dark:border-lex">
+                                                    <User
+                                                        className="h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400"
+                                                        strokeWidth={2}
+                                                        aria-hidden
+                                                    />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                            Ponente:
+                                                        </dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-gray-800 dark:text-gray-200">
+                                                            {formatTitleCase(fullDecision.ponente)}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {_statutesParsed && (
+                                                <div className="flex items-center gap-2.5 border-t border-lex pt-3 dark:border-lex">
+                                                    <Book
+                                                        className="h-4 w-4 shrink-0 text-teal-600 dark:text-teal-400"
+                                                        strokeWidth={2}
+                                                        aria-hidden
+                                                    />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                            Statutes:
+                                                        </dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-teal-800 dark:text-teal-200">
+                                                            {formatTitleCase(_statutesParsed.slice(0, 3).map((i) => i.law).filter(Boolean).join(', '))}
+                                                            {_statutesParsed.length > 3 ? ` (+${_statutesParsed.length - 3} more)` : ''}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {_citationsParsed && (
+                                                <div className="flex items-center gap-2.5 border-t border-lex pt-3 dark:border-lex">
+                                                    <Gavel
+                                                        className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
+                                                        strokeWidth={2}
+                                                        aria-hidden
+                                                    />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                            Citations:
+                                                        </dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                            {_citationsParsed.length} cited case{_citationsParsed.length === 1 ? '' : 's'}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </dl>
+                                    </div>
+                                </div>
                             </div>
-
-                            {/* Right Side: Stacked Metadata with Responsive Divider */}
-                            {(fullDecision.case_number || _decisionDateRaw) && (
-                                <div className="flex flex-row md:flex-col items-start gap-4 md:gap-2.5 pl-0 md:pl-6 border-t md:border-t-0 md:border-l border-slate-200/80 dark:border-zinc-800/80 pt-4 md:pt-0 shrink-0 select-none">
-                                    {fullDecision.case_number && (
-                                        <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-slate-600 dark:text-zinc-300 font-sans hover:text-slate-800 dark:hover:text-zinc-100 transition-colors">
-                                            <Scale className="h-4 w-4 text-indigo-500 dark:text-indigo-400 shrink-0" strokeWidth={2} />
-                                            <span>{fullDecision.case_number}</span>
-                                        </div>
-                                    )}
-                                    {_decisionDateRaw && (
-                                        <div className="flex items-center gap-2 text-xs font-semibold tracking-wide text-slate-600 dark:text-zinc-300 font-sans hover:text-slate-800 dark:hover:text-zinc-100 transition-colors">
-                                            <Clock className="h-4 w-4 text-emerald-500 dark:text-emerald-400 shrink-0" strokeWidth={2} />
-                                            <span>{formatDate(_decisionDateRaw)}</span>
-                                        </div>
-                                    )}
-                                </div>
-                            )}
-
                         </div>
                     )}
 
@@ -1066,6 +1236,37 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                     </h4>
                                     <div className="pl-6 border-l-2 border-purple-200 dark:border-purple-500/30 text-gray-700 dark:text-gray-300 leading-relaxed">
                                         <DigestMarkdownText content={formatRatioToParagraphs(fullDecision.digest_ratio)} contextRef={ratioRef} fontSize={fontSize} />
+                                    </div>
+                                </section>
+                            )}
+
+                            {/* SECONDARY RULINGS */}
+                            {secondaryRulings && secondaryRulings.length > 0 && (
+                                <section className="mb-6 sm:mb-10">
+                                    <h4 className="relative mb-5 flex items-center gap-3 pb-3 font-extrabold text-gray-900 dark:text-white">
+                                        <span className="rounded-xl border border-lex bg-white p-2 shadow-sm dark:border-lex dark:bg-zinc-800/90">
+                                            <Layers className="w-5 h-5 text-teal-500 dark:text-teal-400" />
+                                        </span>
+                                        <span className="text-[15px] uppercase tracking-wide">Secondary Rulings</span>
+                                        <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-gray-300 via-gray-200 to-transparent dark:from-white/20 dark:via-white/5 dark:to-transparent"></div>
+                                    </h4>
+                                    <div className="space-y-6">
+                                        {secondaryRulings.map((r, idx) => {
+                                            if (!r || typeof r !== 'object') return null;
+                                            const topic = r.topic || r.issue || 'Ruling';
+                                            const rulingContent = r.ruling || r.content || '';
+                                            if (!rulingContent) return null;
+                                            return (
+                                                <div key={idx} className="relative overflow-hidden rounded-xl border border-gray-100 bg-gray-50/50 p-4 dark:border-zinc-800 dark:bg-zinc-900/30">
+                                                    <h5 className="mb-2 font-bold text-gray-800 dark:text-zinc-200 text-[14px]">
+                                                        {topic}
+                                                    </h5>
+                                                    <div className="text-gray-600 dark:text-gray-400 leading-relaxed text-[13.5px]">
+                                                        <DigestMarkdownText content={rulingContent} fontSize={fontSize} />
+                                                    </div>
+                                                </div>
+                                            );
+                                        })}
                                     </div>
                                 </section>
                             )}

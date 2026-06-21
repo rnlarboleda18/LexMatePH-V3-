@@ -44,9 +44,9 @@ load_api_local_settings_into_environ(Path(__file__).resolve().parent.parent)
 
 # ── Constants ────────────────────────────────────────────────────────────────
 
-MODEL            = "gemini-2.5-flash"
+MODEL            = "publishers/google/models/gemini-3.5-flash"
 DEFAULT_PROJECT  = "gen-lang-client-0813708151"
-DEFAULT_LOCATION = "us-central1"
+DEFAULT_LOCATION = "us"
 _TIMEOUT_MS      = 270_000
 _RETRY_LIMIT     = 3
 _RETRY_DELAY     = 8
@@ -228,17 +228,8 @@ def clean_json_text(text: str) -> str:
 
 def generate_digest_data(client: genai.Client, case: dict, model_name: str) -> dict | None:
     full_text = case["full_text_md"] or ""
-    # Smart head-tail truncation to stay within context limits safely (~150,000 chars)
-    # while preserving both the facts/history (beginning) and the critical ratio/rulings (end).
-    max_chars = 150_000
-    if len(full_text) > max_chars:
-        head_len = int(max_chars * 0.3)  # 45,000 characters
-        tail_len = max_chars - head_len  # 105,000 characters
-        full_text = (
-            full_text[:head_len]
-            + f"\n\n[...TRUNCATED FOR LENGTH: {len(full_text) - head_len - tail_len} characters omitted between head and tail...]\n\n"
-            + full_text[-tail_len:]
-        )
+    # Truncation disabled by user request — processing full untruncated text natively
+    pass
 
     prompt = REDIGEST_PROMPT.format(
         case_number=case["case_number"],

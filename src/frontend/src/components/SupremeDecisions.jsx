@@ -532,6 +532,16 @@ const extractKeywords = (q) => {
     return words.filter(w => !NL_STOP_WORDS.has(w) && w.length > 2).join(' ');
 };
 
+const formatTitleCase = (str) => {
+    if (!str) return '';
+    if (/[a-z]/.test(str)) {
+        return str;
+    }
+    return str
+        .toLowerCase()
+        .replace(/(?:^|\s|-|\/)\S/g, (m) => m.toUpperCase());
+};
+
 // ─────────────────────────────────────────────────────────────────────────────
 
 const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerge }) => {
@@ -1567,8 +1577,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                     </div>
                 )}
 
-                {/* Results — codal-style compact cards (two columns on md+) */}
-                <div className="grid grid-cols-1 gap-tile md:grid-cols-2">
+                {/* Results — codal-style compact cards (one column) */}
+                <div className="grid grid-cols-1 gap-tile">
                     {loading && !fetchError ? (
                         Array.from({ length: ITEMS_PER_PAGE }, (_, i) => (
                             <div
@@ -1586,7 +1596,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                     ) : (
                         <>
                             {hasInitialLoaded && !fetchError && searchResults.length === 0 && !isNaturalQuery && (
-                                <div className="text-center py-8 text-gray-500 md:col-span-2">
+                                <div className="text-center py-8 text-gray-500">
                                     <FileText className="h-10 w-10 mx-auto text-gray-300 mb-2" />
                                     {/^\d+$/.test(searchTerm.trim()) ? (
                                         <>
@@ -1603,8 +1613,6 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                 </div>
                             )}
                             {searchResults.map((decision) => {
-                        const detailsOpen = !!caseDetailsExpandedById[decision.id];
-
                         let statutesParsed = null;
                         let citationsParsed = null;
                         try {
@@ -1645,12 +1653,12 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                     onTouchStart={() => prefetchDetails(decision.id)}
                                     className="p-3 cursor-pointer hover:bg-neutral-50 dark:hover:bg-zinc-800/80 transition-colors"
                                 >
-                                    <div className="flex flex-col gap-2">
+                                    <div className="flex flex-col gap-2 items-center text-center">
                                         <h3 className="text-base font-bold leading-snug text-black transition-colors group-hover:text-black dark:text-zinc-100 dark:group-hover:text-white">
                                             {(decision.short_title && decision.short_title.trim()) || (decision.title && decision.title.trim()) || decision.case_number}
                                         </h3>
 
-                                        <p className="text-left text-[11px] font-mono text-gray-600 dark:text-gray-400 leading-snug">
+                                        <p className="text-center text-[11px] font-mono text-gray-600 dark:text-gray-400 leading-snug">
                                             {decision.case_number}
                                             {decision.date_str ? (
                                                 <span className="text-gray-500 dark:text-gray-500"> · {formatDate(decision.date_str)}</span>
@@ -1659,160 +1667,138 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                     </div>
                                 </div>
 
-                                <div className="border-t border-lex">
-                                    <button
-                                        type="button"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            setCaseDetailsExpandedById((prev) => ({
-                                                ...prev,
-                                                [decision.id]: !prev[decision.id],
-                                            }));
-                                        }}
-                                        className="w-full flex items-center justify-between gap-2 px-3 py-2 text-left text-[10px] font-semibold uppercase tracking-wider text-neutral-600 dark:text-zinc-400 hover:bg-neutral-50 dark:hover:bg-zinc-800 transition-colors"
-                                        aria-expanded={detailsOpen}
-                                    >
-                                        <span>Case details</span>
-                                        <ChevronDown
-                                            className={`w-4 h-4 text-gray-500 shrink-0 transition-transform ${detailsOpen ? 'rotate-180' : ''}`}
-                                            aria-hidden
-                                        />
-                                    </button>
-                                    {detailsOpen && (
-                                        <div className="border-t border-lex px-3 pb-3">
-                                            <div className="relative mt-2 overflow-hidden rounded-lg border border-lex-strong bg-neutral-50 px-3 py-2.5 dark:bg-zinc-800/90">
-                                                <CardVioletInnerWash />
-                                                <dl className="relative z-[1] space-y-2.5">
-                                                    {decision.significance_category && (
-                                                        <div className="flex gap-2.5">
-                                                            <Landmark
-                                                                className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400"
-                                                                strokeWidth={2}
-                                                                aria-hidden
-                                                            />
-                                                            <div className="min-w-0 flex-1">
-                                                                <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                                    Significance
-                                                                </dt>
-                                                                <dd
-                                                                    className={`mt-0.5 text-[13px] font-semibold leading-snug ${getCategoryTextClass(decision.significance_category)}`}
-                                                                >
-                                                                    {decision.significance_category}
-                                                                </dd>
-                                                            </div>
-                                                        </div>
-                                                    )}
-
-                                                    <div
-                                                        className={`flex gap-2.5 ${decision.significance_category ? 'border-t border-lex-strong pt-2.5' : ''}`}
-                                                    >
-                                                        <FileText
-                                                            className="mt-0.5 h-4 w-4 shrink-0 text-slate-600 dark:text-slate-400"
-                                                            strokeWidth={2}
-                                                            aria-hidden
-                                                        />
-                                                        <div className="min-w-0 flex-1">
-                                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                                Decision / Resolution
-                                                            </dt>
-                                                            <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
-                                                                {decision.document_type?.toString().trim() || '—'}
-                                                            </dd>
-                                                        </div>
+                                <div className="border-t border-lex px-3 py-3">
+                                    <div className="relative overflow-hidden rounded-lg border border-lex-strong bg-neutral-50 px-3 py-2.5 dark:bg-zinc-800/90">
+                                        <CardVioletInnerWash />
+                                        <dl className="relative z-[1] space-y-2.5">
+                                            {decision.significance_category && (
+                                                <div className="flex items-center gap-2.5">
+                                                    <Landmark
+                                                        className="h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400"
+                                                        strokeWidth={2}
+                                                        aria-hidden
+                                                    />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                            Significance:
+                                                        </dt>
+                                                        <dd
+                                                            className={`text-[13px] font-semibold leading-snug ${getCategoryTextClass(decision.significance_category)}`}
+                                                        >
+                                                            {formatTitleCase(decision.significance_category)}
+                                                        </dd>
                                                     </div>
+                                                </div>
+                                            )}
 
-                                                    <div
-                                                        className="flex gap-2.5 border-t border-lex-strong pt-2.5"
-                                                    >
-                                                        <Scale
-                                                            className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
-                                                            strokeWidth={2}
-                                                            aria-hidden
-                                                        />
-                                                        <div className="min-w-0 flex-1">
-                                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                                Court body
-                                                            </dt>
-                                                            <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
-                                                                {decision.division?.trim() || '—'}
-                                                            </dd>
-                                                        </div>
-                                                    </div>
-
-                                                    <div className="flex gap-2.5 border-t border-lex-strong pt-2.5">
-                                                        <BookOpen
-                                                            className="mt-0.5 h-4 w-4 shrink-0 text-neutral-600 dark:text-zinc-400"
-                                                            strokeWidth={2}
-                                                            aria-hidden
-                                                        />
-                                                        <div className="min-w-0 flex-1">
-                                                            <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                                Subject
-                                                            </dt>
-                                                            <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
-                                                                {decision.subject?.toString().trim() || '—'}
-                                                            </dd>
-                                                        </div>
-                                                    </div>
-
-                                                    {decision.ponente && (
-                                                        <div className="flex gap-2.5 border-t border-lex-strong pt-2.5">
-                                                            <User
-                                                                className="mt-0.5 h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400"
-                                                                strokeWidth={2}
-                                                                aria-hidden
-                                                            />
-                                                            <div className="min-w-0 flex-1">
-                                                                <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                                    Ponente
-                                                                </dt>
-                                                                <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-800 dark:text-gray-200">
-                                                                    {decision.ponente}
-                                                                </dd>
-                                                            </div>
-                                                        </div>
-                                                    )}
-
-                                                    {statutesParsed && (
-                                                        <div className="flex gap-2.5 border-t border-lex-strong pt-2.5">
-                                                            <Book
-                                                                className="mt-0.5 h-4 w-4 shrink-0 text-teal-600 dark:text-teal-400"
-                                                                strokeWidth={2}
-                                                                aria-hidden
-                                                            />
-                                                            <div className="min-w-0 flex-1">
-                                                                <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                                    Statutes
-                                                                </dt>
-                                                                <dd className="mt-0.5 text-[12px] font-medium leading-snug text-teal-800 dark:text-teal-200">
-                                                                    {statutesParsed.slice(0, 3).map((i) => i.law).filter(Boolean).join(', ')}
-                                                                    {statutesParsed.length > 3 ? ` (+${statutesParsed.length - 3} more)` : ''}
-                                                                </dd>
-                                                            </div>
-                                                        </div>
-                                                    )}
-
-                                                    {citationsParsed && (
-                                                        <div className="flex gap-2.5 border-t border-lex-strong pt-2.5">
-                                                            <Gavel
-                                                                className="mt-0.5 h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
-                                                                strokeWidth={2}
-                                                                aria-hidden
-                                                            />
-                                                            <div className="min-w-0 flex-1">
-                                                                <dt className="text-[10px] font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-                                                                    Citations
-                                                                </dt>
-                                                                <dd className="mt-0.5 text-[13px] font-medium leading-snug text-gray-900 dark:text-gray-100">
-                                                                    {citationsParsed.length} cited case{citationsParsed.length === 1 ? '' : 's'}
-                                                                </dd>
-                                                            </div>
-                                                        </div>
-                                                    )}
-                                                </dl>
+                                            <div
+                                                className={`flex items-center gap-2.5 ${decision.significance_category ? 'border-t border-lex-strong pt-2.5' : ''}`}
+                                            >
+                                                <FileText
+                                                    className="h-4 w-4 shrink-0 text-slate-600 dark:text-slate-400"
+                                                    strokeWidth={2}
+                                                    aria-hidden
+                                                />
+                                                <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                    <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                        Decision / Resolution:
+                                                    </dt>
+                                                    <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                        {formatTitleCase(decision.document_type?.toString().trim()) || '—'}
+                                                    </dd>
+                                                </div>
                                             </div>
-                                        </div>
-                                    )}
+
+                                            <div
+                                                className="flex items-center gap-2.5 border-t border-lex-strong pt-2.5"
+                                            >
+                                                <Scale
+                                                    className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
+                                                    strokeWidth={2}
+                                                    aria-hidden
+                                                />
+                                                <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                    <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                        Court Body:
+                                                    </dt>
+                                                    <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                        {formatTitleCase(decision.division?.trim()) || '—'}
+                                                    </dd>
+                                                </div>
+                                            </div>
+
+                                            <div className="flex items-center gap-2.5 border-t border-lex-strong pt-2.5">
+                                                <BookOpen
+                                                    className="h-4 w-4 shrink-0 text-neutral-600 dark:text-zinc-400"
+                                                    strokeWidth={2}
+                                                    aria-hidden
+                                                />
+                                                <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                    <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                        Subject:
+                                                    </dt>
+                                                    <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                        {formatTitleCase(decision.subject?.toString().trim()) || '—'}
+                                                    </dd>
+                                                </div>
+                                            </div>
+
+                                            {decision.ponente && (
+                                                <div className="flex items-center gap-2.5 border-t border-lex-strong pt-2.5">
+                                                    <User
+                                                        className="h-4 w-4 shrink-0 text-sky-600 dark:text-sky-400"
+                                                        strokeWidth={2}
+                                                        aria-hidden
+                                                    />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                            Ponente:
+                                                        </dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-gray-800 dark:text-gray-200">
+                                                            {formatTitleCase(decision.ponente)}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {statutesParsed && (
+                                                <div className="flex items-center gap-2.5 border-t border-lex-strong pt-2.5">
+                                                    <Book
+                                                        className="h-4 w-4 shrink-0 text-teal-600 dark:text-teal-400"
+                                                        strokeWidth={2}
+                                                        aria-hidden
+                                                    />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                            Statutes:
+                                                        </dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-teal-800 dark:text-teal-200">
+                                                            {formatTitleCase(statutesParsed.slice(0, 3).map((i) => i.law).filter(Boolean).join(', '))}
+                                                            {statutesParsed.length > 3 ? ` (+${statutesParsed.length - 3} more)` : ''}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            )}
+
+                                            {citationsParsed && (
+                                                <div className="flex items-center gap-2.5 border-t border-lex-strong pt-2.5">
+                                                    <Gavel
+                                                        className="h-4 w-4 shrink-0 text-indigo-600 dark:text-indigo-400"
+                                                        strokeWidth={2}
+                                                        aria-hidden
+                                                    />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">
+                                                            Citations:
+                                                        </dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                            {citationsParsed.length} cited case{citationsParsed.length === 1 ? '' : 's'}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </dl>
+                                    </div>
                                 </div>
 
                                 <div
@@ -1828,7 +1814,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                     className="cursor-pointer border-t border-lex p-3 hover:bg-neutral-50 dark:hover:bg-zinc-800/60 transition-colors"
                                 >
                                     <div
-                                        className={`relative flex h-[15.5rem] max-sm:h-[calc(30rem-1cm)] max-sm:max-h-[calc(30rem-1cm)] max-sm:min-h-[calc(30rem-1cm)] max-sm:shrink-0 flex-col overflow-hidden rounded-xl p-3 shadow-inner sm:p-4 ${subjectSurfaceClasses} border-l-4 border-l-current ${subjectAccentText}`}
+                                        className={`relative flex flex-col overflow-hidden rounded-xl p-3 shadow-inner sm:p-4 ${subjectSurfaceClasses} border-l-4 border-l-current ${subjectAccentText}`}
                                     >
                                         <h4
                                             className={`mb-2 flex shrink-0 items-center gap-2 text-[11px] font-black uppercase tracking-widest sm:text-[12px] ${subjectAccentText}`}
