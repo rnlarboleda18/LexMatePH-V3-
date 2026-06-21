@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 268486 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. NATALIE CALUDUCAN AND TESSIE TUGAOEN (AT LARGE), ACCUSED; NATALIE CALUDUCAN, ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70399' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 268486, February 19, 2026 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. NATALIE CALUDUCAN AND TESSIE TUGAOEN (AT LARGE), ACCUSED;<BR><BR> NATALIE CALUDUCAN, ACCUSED-APPELLANT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is an Appeal,<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 124 of the Rules of Court, from the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated August 30, 2022, of the Court of Appeals (<b>CA</b>) in CA-G.R. CR-HC No. 14441. The CA affirmed the Decision,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated November 18, 2019, of Branch 6 of the Regional Trial Court, Aparri, Cagayan (<b>RTC</b>), in Criminal Case No. 14045, which found accused Natalie Caluducan (<b>Caluducan</b>) guilty of Large-Scale Illegal Recruitment under Republic Act No. 8042, or the Migrant Workers and Overseas Filipinos Act of 1995, as amended by Republic Act No. 10022.<br><br><center><b><i>The Facts</i></b></center><br>In an Information, dated November 15, 2017, Caluducan and Tessie Tugaoen<sup style="COLOR: RGB(255, 0, 0);">*</sup> (<b>Tugaoen</b>) were charged with the crime of Large-Scale Illegal Recruitment, as follows:<blockquote>That sometime in [June] 2012, or thereabout, in the Municipality of Gonzaga, Province of Cagayan, and within the jurisdiction of this Honorable Court, the above-named accused, without any legal authority thereof, conspiring together, helping and confederating with each other, by falsely pretending to possess qualifications [] and [] capacity to deploy [] complainants[] Janel Viloria [<i>y</i> Pajarillo], [Erner] Samortin [<i>y</i> Gonzales], Charles Adrian Vincent Salum [<i>y</i> Cabahug], did then and there willfully, unlawfully[,] and feloniously recruit, enlist[,] and promise overseas [j]obs as "Worm Pickers" in Canada, in consideration of which accused had thereby charged, collected[,] and exacted from each complainant placement, processing[,] and miscellaneous fees, [as follows]: Janel Viloria [<i>y</i>] Pajarillo – [PHP 215,166.44]; Erner Samortin [<i>y</i>] Gonzales – [PHP 212,593.675]; and Charles Adrian Vincent Salum [<i>y</i>] Cabahug – [PHP 125,037.35], which is beyond the schedule of allowable fees prescribed by the Secretary of Labor and Employment (DOLE/POEA), but the accused failed to actually deploy complainants without any fault of theirs, the said accused knowing fully well and aware that it is prohibited for any person to recruit or enlist workers for overseas employment without the necessary permit or license from the DOLE/POEA, before they could engage in recruitment and placement activities, to the damage and prejudice of complainants. That the same constitutes [Large-Scale] Illegal Recruitment involving Economic Sabotage.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup></blockquote>Tugaoen remained at large.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Caluducan, on the other hand, faced the charges against her. Upon arraignment, Caluducan entered a plea of "not guilty."<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br><i>Version of the Prosecution</i><br><br>The prosecution presented as witnesses the private complainants Janel Viloria <i>y</i> Pajarillo (<b>Viloria</b>), Erner Samortin <i>y</i> Gonzales (<b>Samortin</b>), and Charles Adrian Vincent Salum <i>y</i> Cabahug (<b>Salum</b>) (collectively, <b>Viloria et al.</b>).<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Sometime in 2012, Tugaoen, representing that she is a legitimate recruiter who can deploy workers abroad, offered Viloria et al. jobs as worm pickers in Canada. Tugaoen informed Viloria et al. that they will be earning an equivalent of PHP 88,000.00 per month.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Enticed by Tugaoen's offer, Viloria et al. submitted all the requirements for their supposed deployment. They paid Tugaoen placement fees in the following amounts: PHP 215,166.14 from Viloria; PHP 212,593.675 from Samortin; and PHP 125,037.35 from Salum.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Upon Tugaoen's instruction, Viloria et al. met with Caluducan in July 2013 to fill up and sign their purported employment contracts. During their meeting, Caluducan represented that she is Tugaoen's business partner.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>After months of waiting, Viloria et al. asked about the status of their employment abroad, but Caluducan only told them that their applications are still being processed. Viloria et al. were never deployed abroad. Consequently, they went to the Philippine Overseas Employment Administration (<b>POEA</b>) to verify whether Tugaoen and Caluducan are legitimate recruiters. The POEA then issued a certification stating that Tugaoen and Caluducan are not licensed or authorized to recruit workers for overseas employment.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br><i>Version of the defense</i><br><br>The defense presented Caluducan as its lone witness. Caluducan denied the charge against her, claiming that she had nothing to do with Viloria et al., and that she was just doing her job as a social worker and was surprised when elements of the Criminal Investigation and Detection Group (<b>CIDG</b>) came to arrest her.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Caluducan also argued that it was only Tugaoen who committed illegal recruitment since she was the one who promised Viloria et al. overseas jobs and received the placement fees.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>The RTC rendered a Decision finding Caluducan guilty beyond reasonable doubt of Large-Scale Illegal Recruitment, thus:<blockquote><b>WHEREFORE</b>, premises considered, the court finds accused Natalie Caluducan <b>GUILTY</b> beyond reasonable doubt of Illegal Recruitment committed in large scale and hereby sentences her to suffer the penalty of life imprisonment, pay a fine of [PHP 500,000.00] and return the amounts paid as placement fees by the following private complainants: Janel Viloria – [PHP 215,166.14]; Erner Samortin – [PHP 212,593.675]; and Charles Adrian Vincent Salum [– PHP 125,037.35].<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> (Emphasis in the original)</blockquote>The RTC found that conspiracy existed between Tugaoen and Caluducan in the commission of the offense,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> thus it was not anymore necessary for the prosecution to prove that Caluducan also represented herself as a legitimate recruiter and received placement fees from Viloria et al.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Aggrieved, Caluducan appealed to the CA.<br><br><center><b><i>The Ruling of the CA</i></b></center><br>The CA denied Caluducan's appeal and affirmed the RTC Decision, thus:<blockquote>The appeal is DENIED. The [Decision][,] dated [November 18, 2019,] rendered by Branch []6 of the Regional Trial Court, Second Judicial Region, Aparri, Cagayan convicting appellant Natalie Caluducan of [Large-Scale] Illegal Recruitment as defined and penalized under [Republic Act] No. 8042, as amended, and sentencing her to suffer the penalty of life imprisonment is AFFIRMED, with MODIFICATIONS in that: (i) appellant Natalie Caluducan is ordered to pay a fine in the amount of [PHP 2 million]; and (ii) appellant Natalie Caluducan is directed to pay the following, with interest at [6%] per annum computed from finality of this [Decision] until full payment: (a) [PHP 171,004.97] for complainant Janel Viloria [<i>y</i>] Pajarillo; (b) [PHP 44,161.17] for complainant Erner Samortin <i>y</i> Gonzales; and (c) [PHP 80,990.00] for complainant Adrian Vincent Salum <i>y</i> Cabahug.<br><br>The RTC is DIRECTED to issue the appropriate order consistent with this [Decision].<br><br>IT IS SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original)</blockquote>The CA found that Viloria et al.'s testimonies, coupled with the documents offered in evidence, clearly establish that Caluducan dealt with Viloria et al. and gave them the impression that she is capable of sending them abroad for work. Moreover, it was not required that Caluducan expressly represented herself as a licensed recruiter; it was sufficient that she gave the impression that she is capable of processing Viloria et al.'s application for work abroad, or that she had the authority to recruit workers for deployment abroad.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Dissatisfied with the ruling of the CA, Caluducan filed the present appeal before the Court.<br><br><center><b><i>The Issue</i></b></center><br>Is Caluducan guilty beyond reasonable doubt of Large-Scale Illegal Recruitment under Republic Act No. 8042, as amended by Republic Act No. 10022?<br><br><center><b><i>The Ruling of the Court<br><br></i></b></center>The Appeal has no merit.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>A person charged with illegal recruitment may be convicted based on the credible testimony of the complainant</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Preliminarily, it is worthy to note that a person may be convicted of illegal recruitment based on the testimonies of the complainants, if found to be credible and convincing.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Relatedly, the CA and the RTC's assessment of the veracity of the testimonies of the complainants is given the highest degree of respect, especially if there is no fact or circumstance of weight or substance that was overlooked, misunderstood or misapplied, which could affect the result of the case. The trial court had the best opportunity to determine the credibility of the complainants, having evaluated their emotional state, reactions, and overall demeanor in open court.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>In the present case, both the CA and the RTC gave credence to Viloria et al.'s testimonies, finding the same to be categorical.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> The Court finds no sufficient reason to disturb the findings of the CA and the RTC as to the credibility of Viloria et al.'s testimonies.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The prosecution duly established all the elements of Large-Scale Illegal Recruitment</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Large-Scale Illegal Recruitment is defined in Section 6 of Republic Act No. 8042, as amended by Republic Act No. 10022, which broadened the concept of illegal recruitment under the Labor Code, thus:<blockquote>SEC. 6. <i>Definition</i>. — For purposes of this Act illegal recruitment shall mean any act of canvassing, enlisting, contracting, transporting, utilizing, hiring, or procuring workers and includes referring, contract services, promising or advertising for employment abroad, whether for profit or not, when undertaken by a non-licensee or non-holder of authority contemplated under Article 13(f) of Presidential Decree No. 442, as amended, otherwise known as the Labor Code of the Philippines: <i>Provided</i>, That any such non-licensee or non-holder who, in any manner, offers or promises for a fee employment abroad to two or more persons shall be deemed so engaged. It shall likewise include the following acts, whether committed by any person, whether a non-licensee, non-holder, licensee or holder of authority:<br><br>(a) To charge or accept directly or indirectly any amount greater than that specified in the schedule of allowable fees prescribed by the Secretary of Labor and Employment, or to make a worker pay or acknowledge any amount greater than that actually received by him as a loan or advance;<br><br>....<br><br>(n) To allow a non-Filipino citizen to head or manage a licensed recruitment/manning agency.<br><br>Illegal recruitment is deemed committed by a syndicate if carried out by a group of three [] or more persons conspiring or confederating with one another. It is deemed committed in large scale if committed against three [] or more persons individually or as a group.<br><br>In addition to the acts enumerated above, it shall also be unlawful for any person or entity to commit the following prohibited acts:<br><br>(1) Grant a loan to an overseas Filipino worker with interest exceeding eight percent (8%) [per annum], which will be used for payment of legal and allowable placement fees and make the migrant worker issue, either personally or through a guarantor or accommodation party, postdated checks in relation to the said loan;<br><br>....<br><br>(7) For a recruitment/manning agency or a foreign principal/employer to pass on to the overseas Filipino worker or deduct from his or her salary the payment of the cost of insurance fees, premium or other insurance related charges, as provided under the compulsory worker's insurance coverage.</blockquote>Based on its definition, illegal recruitment may be committed by any person, whether or not they are licensed to operate a private employment agency or a holder of authority to engage in recruitment and placement activities.<br><br>In <i>Toston v. People of the Philippines</i>,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> the Court held that there are three modes of committing illegal recruitment: (1) illegal recruitment <i>per se</i>, as defined in the first paragraph of Section 6 of Republic Act No. 8042; (2) illegal recruitment practices, as listed [(a) to (n)] in the same provision; and (3) prohibited practices amounting to illegal recruitment as numerically listed [(1) to (7)], still in Section 6 of Republic Act No. 8042.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Illegal recruitment <i>per se</i> can only be committed by non-licensees or non-holders of authority,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> when they undertake any of the recruitment and placement activities listed in the first paragraph of Section 6 of Republic Act No. 8042, i.e., canvassing, enlisting, contracting, transporting, utilizing, hiring, or procuring workers, and includes referring, contract services, promising, or advertising for employment abroad. On the other hand, illegal recruitment practices and prohibited practices amounting to illegal recruitment may be committed by any person or entity, regardless of recruitment licensing status.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Thus, when committed by a non-licensee or non-holder of authority, the elements of Large-Scale Illegal Recruitment are, as follows:<blockquote>(1) the offender has no valid license or authority required by law to enable them to lawfully engage in recruitment and placement of workers;<br><br>(2) the offender undertakes any of the recruitment and placement activities, illegal recruitment practices, or prohibited practices amounting to illegal recruitment listed in Section 6 of Republic Act No. 8042; and<br><br>(3) the offender commits any of the acts of illegal recruitment against three or more persons, individually, or as a group.</blockquote>The prosecution was able to establish the existence of all the foregoing elements of Large-Scale Illegal Recruitment.<br><br><i>First</i>, it is undisputed that Caluducan had no valid license or authority to engage in recruitment and placement of workers. The POEA issued a certification stating that Tugaoen and Caluducan are not licensed or authorized to recruit workers for overseas employment.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> As correctly held by the RTC, the POEA certification is a public document which is a <i>prima facie</i> evidence of the contents stated therein, pursuant to Rule 130, Section 23 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Moreover, Caluducan did not present any evidence to negate the contents of the POEA certification.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><i>Second</i>, despite not having a valid license or authority, Caluducan engaged in recruitment activities.<br><br>In proving illegal recruitment, it must be shown that the accused gave the complainants the distinct impression that she had the power or ability to deploy the complainants abroad.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>In an attempt to escape liability, Caluducan argued that it was only Tugaoen who recruited Viloria et al. because she was the one who promised them overseas jobs, and it was also Tugaoen who received the placement fees.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>The Court is not convinced.<br><br>While it was Tugaoen who initially promised Viloria et al. overseas jobs, Caluducan later directly participated in the recruitment process by having Viloria et al. sign purported employment contracts. Viloria et al.'s testimonies clearly establish Caluducan's said participation:<blockquote><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify"><br></div></td><td width="95%"><div align="justify"><center><u>Viloria's Testimony</u></center></div></td></tr><tr valign="top"><td><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And what did you do after seeing your name m this list [of applicants]?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">[Nothing else] because I only received [updates] and [in] July 2013, I received a text [message] from [Tugaoen] requiring me to go to Tuguegarao City to meet [Caluducan], ma'am.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And did you proceed to Tuguegarao City?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes, ma'am. [Tugaoen] gave us the cellphone number of [Caluducan] so we went to meet [Caluducan] in Peñablanca. And <i>when we met her, she told us that she is a partner of [Tugaoen], and she [made] us [sign] the employment contract, ma'am</i>.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Do you have a copy of that employment contract, Mr. [W]itness?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">The first copy that she [made] us [sign], we did not [have a] photocopy because <i>[Caluducan did] not want to give us a photocopy, ma'am</i>.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">You mentioned ... that the first contract that you have signed ... you were not able to take a picture, <i>was there a second contract that you signed?</i></div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify"><i>There was[,] ma'am. On March 2, 2014, [Caluducan] sent [it to] us through [e]-mail, ma'am.</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And do you have a copy of that contract[?]</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">I have, ma'am.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And on the last page of the said document[,] dated April 24, 2014, it appears therein that there is a signature above the typewritten name John Zaharis[;] who is this John Zaharis, Mr. [W]itness?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">John Zaharis is supposed to be our employer, ma'am.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Who informed you that, that is the signature of John [Z]aharis?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">[Tugaoen] sent us an [e-mail] showing that the contract is being signed by our supposed employer, ma'am.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">After you have received the [e-mail] from [Tugaoen], what transpired next, if any?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">They sent us Application for Work Permit [M]ade [O]utside of Canada form[s], and we filled-up those form[s] and we sent [them] back to [Tugaoen].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify"><i>You mentioned that you received a communication from [Caluducan] with [regard] to how you will send [those} documents[;] do you have a copy of that mail or communication, Mr. witness?</i></div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify"><i>Yes, ma'am.</i></div></td></tr><tr valign="top"><td><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u><i>Samortin's Testimony</i></u></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify"> How ... did you [come to] know [Caluducan]?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify"><i>[Tugaoen] instructed us to see [Caluducan] at Peñablanca, Cagayan in order to sign the documents, sir.</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify"><i>And were you able to sign those documents?</i></div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify"><i>Yes, sir.</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><center><u>Salum's Testimony</u></center></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">What happened when you went to Peñablanca?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">We signed the first contract, [Sir].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify"><i>And who entertained you when you went to Peñablanca?</i></div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify"><i>[Caluducan], Sir.</i><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> (Emphasis supplied)</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">.... (Emphasis supplied)</div></td></tr></tbody></table></blockquote>In addition to having Viloria et al. sign purported employment contracts, Caluducan likewise gave Viloria et al. further instructions through text messages and e-mail in relation to their application for work abroad, thus:<blockquote>February 22, 2014<br><br>Gud am. Sir me latest nstruksyon c fessie nid poto copy of ur passport.pls scan n cend 2 her email ad.fessie24@yahoo.ca. asap daw tnx.pls relay nfo 2 ur companions.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>(<i>Good morning. Sir, Fessie [Tugaoen] has latest instructions. You need to send a photocopy of your passport to her e-mail address fessie24@yahoo.ca as soon as possible. Thanks. Please relay the information to your companions.</i>)<br><br>....<br><br>March 2, 2014<br><br>Good Afternoon.<br><br>Madam/Sir,<br><br>sending new contract that was send by ms fessie 4 ur signature. As per instruction pls u need to fill up the personal information in page 1 and affix ur signature in page 4 only. Pls dont fil up the date. clam s fessie na daw maglalagay ng date.pls end the signed hard copy THRU LBC to this address: AP MANPOWER INTERNATIONAL AGENCY, C/O NATALIE CALUDUCAN AMADO, PUDTOL, APAYAO 3812. MINSANAN ANG PAGPAPADALA KU SA MGA KONTRAK U SA CANADA. hihintayin N MS FESSIE ANG MGA ITO BAGO XA UMUWI SA PINAS.pls share 2 ur frens HU are also applicants.<br><br>TNX 4 D UNDERSTANDING &amp; COOPERATION.<br><br>NATALIE<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>(<i>Good Afternoon.</i><br><br><i>Madam/Sir,</i><br><br><i>I am sending you the new contract sent by Ms. Fessie [Tugaoen] for your signature. As per instruction, you need to fill up the personal information in page 1 and affix your signature in page 4 only. Please do not fill up the date. Ms. Fessie [Tugaoen] will be the one to put the date. Please send the signed hard copy through LBC to this address: AP MANPOWER INTERNATIONAL AGENCY, C/O NATALIE CALUDUCAN AMADO, PUDTOL, APAYAO 3812. I do not often send contracts to Canada. Ms. Fessie [Tugaoen] will wait for these before she goes back to the Philippines. Please share this to your friends who are also applicants.</i><br><br><i>Thanks for the understanding and cooperation.</i><br><br><i>Natalie</i>)<br><br>....<br><br>Sir, pls tri 2 secure certifkation frm DA dat u have experience of farmworks. Have it notarise also by a legal office. Pls cent 2 dis addres wid d potocopy of ur passport fessi24@yahoo.ca tnx<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>(<i>Sir, please try to secure a certification from the DA that you have experience in farmworks. Also, have it notarized by a legal office. Please send it to this e-mail address together with the photocopy of your passport: fessi24@yahoo.ca. Thanks.</i>)<br><br>....<br><br>Gud pm. Me update c ms fes. Ung nakausap daw nya na embasy consultant required nya na kuha kau certification na me karanasan kau sa farm. And aplikants puro professionals. upang maiwasan ang problema pwde daw tatay o any relative n magcertify sa inyo n me karanasan kau s farm. Panotarise upang wlang problema pgdating s embasy.email s fessie24@yahoo.ca. Pls share 2 ur frens hu also aplikants 4 canada. Maraming salamat<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>(<i>Good afternoon. Ms. Fes [Tugaoen] has an update. According to the embassy consultant she talked to, you required to obtain a certification that you have experience working in a farm. All applicants are professional. In order to avoid any problem, your father or any relative may certify that you have experience working in a farm. Have the certification notarized so that there will be no problem at the embassy. Send it to this e-mail address: fessie24@yahoo.ca. Please share this to your friends who are also applicants for Canada. Thank you very much.</i>)</blockquote>Notably, Caluducan never refuted the foregoing text and e-mail messages she sent to Viloria et al.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Neither did she deny her part in the filling up and processing of the application forms.<br><br>Clearly, Caluducan contracted, or at least participated in contracting workers for employment abroad, which is a recruitment activity under Section 6 of Republic Act No. 8042. Caluducan's act of having Viloria et al. sign the purported employment contracts, and giving them further instructions with regard to their application for work abroad gave Viloria et al. a distinct impression that she has the power and authority to deploy them for employment abroad.<br><br>Moreover, it is clear from the definition of illegal recruitment that it can be committed whether for profit or not. For illegal recruitment to be committed, it is not necessary that the offender receives money from the private complainant as a result of the recruitment activity conducted by the offender. It is sufficient that the offender has given the impression that they have the power to send workers abroad for employment purposes. Thus, Caluducan's claim that she did not undertake any recruitment activity because she did not receive any money from Viloria et al. is untenable.<br><br>In any case, Caluducan is also liable for Tugaoen's wrongful acts since there was conspiracy between them in committing the offense.<br><br>There are two kinds of conspiracy, i.e., express conspiracy and implied conspiracy. Implied conspiracy is proved through the mode and manner of the commission of the offense, or from the acts of the accused before, during and after the commission of the crime indubitably pointing to a joint purpose, a concert of action and a community of interest.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>The Court finds no reason to disturb the trial court's finding of conspiracy between Tugaoen and Caluducan based on the following circumstances: (1) Tugaoen, representing herself as a legitimate recruiter, offered and promised Viloria et al. jobs in Canada and thereafter collected placement fees from them; (2) upon Tugaoen's instruction, Viloria et al. went to meet Caluducan; (3) during their meeting, Caluducan, representing herself as Tugaoen's business partner, directed Viloria et al. fill out and sign their purported employment contracts; (4) thereafter, Caluducan sent Viloria et al. new employment contracts to fill out and sign, the previous purported employment contracts having allegedly expired; (5) Caluducan instructed Viloria et al. to send the documents to her at AP Manpower International Agency; and (6) Tugaoen instructed Viloria et al. to wait for further instructions and for the schedule of their flight.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>The foregoing circumstances clearly show a common purpose, i.e., to supposedly recruit Viloria et al. for employment abroad, wherein Tugaoen and Caluducan each performed a part to achieve their criminal objective.<br><br>Hence, the Court finds that Caluducan undertook recruitment activities as contemplated in Section 6 of Republic Act No. 8042.<br><br><i>Third</i>, there is no doubt that Caluducan committed illegal recruitment against three persons, i.e., Viloria, Samortin, and Salum.<br><br>Considering the foregoing, Caluducan is guilty of Large-Scale Illegal Recruitment.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The defense of denial is inherently weak</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Caluducan denied the charge against her, claiming that she had nothing to do with Viloria et al.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>However, the Court has consistently held that denial is an intrinsically weak defense. To merit credibility, it must be supported by strong evidence of non-culpability. If unsubstantiated by clear and convincing evidence, it is negative and self-serving, deserving no greater value than the testimony of credible witnesses who testify on affirmative matters.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>In the present case, Caluducan was unable to substantiate her bare denial. She merely reasoned that she was only doing her work as a social worker when CIDG personnel arrested her. This does not in any way explain why she could not have committed the offense charged. Caluducan's denial failed to cast reasonable doubt on Viloria et al.'s positive and categorical testimony that Caluducan committed the offense charged.<br><br><i>Proper penalty and civil liability</i><br><br>Finding Caluducan guilty of Large-Scale Illegal Recruitment, the RTC imposed upon her the penalty of life imprisonment and a fine of PHP 500,000.00.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> The CA increased the fine to PHP 2 million.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>It must be noted that the Large-Scale Illegal Recruitment in this case was committed in the year 2012 during the effectivity of Republic Act No. 10022, which took effect on March 8,2010, amending Republic Act No. 8042. Thus, the amendments under Republic Act No. 10022 shall apply in this case.<br><br>Section 7(b) of Republic Act No. 8042, as amended by Republic Act No. 10022, provides that the penalty of life imprisonment and a fine of not less than PHP 2 million nor more than PHP 5 million shall be imposed if illegal recruitment constitutes economic sabotage. Under Section 6(m) of Republic Act No. 8042, illegal recruitment shall be considered as an offense involving economic sabotage when committed by a syndicate or in large scale.<br>&nbsp;<br>Moreover, Section 7(b) of Republic Act No. 8042, as amended, also provides that the maximum penalty shall be imposed if the person illegally recruited is less than 18 years of age or committed by a non-licensee or non-holder of authority.<br><br>Here, Caluducan, a non-licensee and non-holder of authority, committed Large-Scale Illegal Recruitment, which is considered as an offense involving economic sabotage.<br><br>Thus, the Court finds it proper to impose the maximum penalty of life imprisonment and a fine of PHP 5 million.<br><br>Finally, as to civil indemnity, Article 2199 of the Civil Code provides for actual or compensatory damages as adequate compensation for duly proved pecuniary losses. In the present case, evidence shows that the following amounts were paid by Viloria et al. as placement fees: Viloria – PHP 171,004.97; Samortin – PHP 44,161.17; and Salum – PHP 80,990.00.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Fallowing jurisprudence, the liability for co-conspirators in illegal recruitment is solidary in nature, and each may be compelled to pay the entire obligation.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>Here, Caluducan and Tugaoen are co-conspirators. Thus, Caluducan may be required to reimburse the entire amounts paid by Viloria et al. as placement fees even though the same were paid to Tugaoen.<br><br><b>ACCORDINGLY</b>, the Appeal is <b>DENIED</b>. The Decision, dated August 30, 2022, of the Court of Appeals in CA-G.R. CR-HC No. 14441 is <b>AFFIRMED with MODIFICATION</b> in that:<br><br>(1) Natalie Caluducan is found <b>GUILTY</b> beyond reasonable doubt of the crime of Large-Scale Illegal Recruitment defined and penalized under Sections 6 and 7 of Republic Act No. 8042, as amended by Republic Act No. 10022, is <b>SENTENCED</b> to suffer the penalty of life imprisonment, and is <b>ORDERED</b> to <b>PAY</b> a fine of PHP 5 million; and<br><br>(2) Natalie Caluducan is further <b>ORDERED</b> to <b>REIMBURSE</b> the complainants the following respective amounts: (i) PHP 171,004.97 to Janel Viloria <i>y</i> Pajarillo; (ii) PHP 44,161.17 to Erner Samortin <i>y</i> Gonzales; and (iii) PHP 80,990.00 to Charles Adrian Vincent Salum <i>y</i> Cabahug.<br><br>All monetary awards shall earn legal interest at a rate of 6% per annum, computed from the date of finality of this Decision until fully paid.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 8-38. Penned by Associate Justice Walter S. Ong and concurred in by Associate Justices Eduardo B. Peralta, Jr. and Emily L. San Gaspar-Gito of the Twelfth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 41-48. Penned by Judge Neljoe A. Cortes.<br><br><sup style="COLOR: RGB(255, 0, 0);">*</sup> Referred to as "Tessie Tugatoen" and "Fessie" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Rollo</i>, pp. 41-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> CA <i>rollo</i>, pp. 58-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Rollo</i>, p. 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <b>People of the Philippines v. Liwanag</b>, 920 Phil. 438, 449 (2022) [Per J. Hernando, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <b>People of the Philippines v. Begino</b>, 921 Phil. 254, 262 (2022) [Per J.M. Lopez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Rollo</i>, p. 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> 897 Phil. 820 (2021) [Per J. Gaerlan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 835.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Rollo</i>, p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> SEC. 23. <i>Public documents as evidence</i>. – Documents consisting of entries in public records made in the performance of a duty by a public officer are <i>prima facie</i> evidence of the facts therein stated. All other public documents are evidence, even against a third person, of the fact which gave rise to their execution and of the date of the latter.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Rollo</i>, p. 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>People v. Sison</b>, 816 Phil. 8, 22-23 (2017) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> CA <i>rollo</i>, pp. 58-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i>, pp. 22-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>People of the Philippines v. Castillo</b>, 920 Phil. 996, 1012 (2022) [Per J. Gaerlan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i>, p. 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>People v. Pulgo</b>, 813 Phil. 205, 220 (2017) [Per J. Tijam, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>People v. Inovero</b>, 737 Phil. 116, 130 (2014) [Per J. Bersamin, First Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

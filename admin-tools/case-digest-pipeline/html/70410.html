@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 277630 - ATTY. JANUS T. JARDER, PETITIONER, VS. COMMITTEE ON PUBLIC ACCOUNTS OF THE HOUSE OF REPRESENTATIVES, HON. JOSEPH STEPHEN S. PADUANO, HON. ROMEO M. ACOP, HON. GERVILLE LUISTRO, HON. ROGER GUTIERREZ, HON. ZIA ADIONG, COMMITTEE SECRETARIAT JAMES FRANCIS CANCIO, AND HON. FERDINAND MARTIN GOMEZ ROMUALDEZ, SPEAKER OF THE HOUSE, AND PMGEN NAPOLEON C. TAAS (RET.), SERGEANT-AT-ARMS, AND ALL THOSE ACTING FOR AND IN HIS BEHALF, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70410' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 277630, January 28, 2026 ]</H2>
+			<H3>ATTY. JANUS T. JARDER, PETITIONER, VS. COMMITTEE ON PUBLIC ACCOUNTS OF THE HOUSE OF REPRESENTATIVES, HON. JOSEPH STEPHEN S. PADUANO, HON. ROMEO M. ACOP, HON. GERVILLE LUISTRO, HON. ROGER GUTIERREZ, HON. ZIA ADIONG, COMMITTEE SECRETARIAT JAMES FRANCIS CANCIO, AND HON. FERDINAND MARTIN GOMEZ ROMUALDEZ, SPEAKER OF THE HOUSE, AND PMGEN NAPOLEON C. TAAS (RET.), SERGEANT-AT-ARMS, AND ALL THOSE ACTING FOR AND IN HIS BEHALF, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This Court resolves the Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> and Prohibition with application for Temporary Restraining Order (TRO) and/or Writ of Preliminary Injunction filed by Atty. Janus T. Jarder (Atty. Jarder) assailing the two contempt orders both dated December 18, 2024 issued by the Committee on Public Accounts (Committee) of the House of Representatives (House) against him.</p><p align="center"> <b>Facts</b> </p><p> Atty. Jarder is the City Legal Officer of Silay City, Negros Occidental.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> </p><p> On September 4, 2024, Representative Joseph Stephen S. Paduano (Rep. Paduano) was designated as legislative caretaker of the third legislative district of Negros Occidental following the appointment of Representative Francisco B. Benitez as director general of the Technical Education and Skills Development Authority.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> </p><p> Five days later, or on September 9, 2024, Rep. Paduano took the floor and delivered a privilege speech concerning purported anomalies in the utilization of public funds by Silay City officials.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> He disclosed that the local government had obtained a PHP 1.4 billion loan from the Land Bank of the Philippines to finance various infrastructure undertakings, among them the rehabilitation of the public market and the construction of a new city hall. Rep. Paduano alleged that these projects were plagued by irregularities, citing the absence of public consultations for the market renovation and the lack of requisite permits for the installation of temporary stalls within heritage zones.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p><p> The privilege speech was initially referred to the Committee on Rules. Subsequently, the House transmitted the matter to the Committee in accordance with Rule 44 of the Rules of the House of Representatives.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p>On November 11, 2024, the Committee, with Rep. Paduano as Chairperson, convened its initial hearing on the matter.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> During said proceedings, Representative Dale M. Corvera proposed the continuation of the inquiry, a motion that was seconded by Representative Joseph L. Lara and Arnan C. Panaligan.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Various officials from the Silay City government were in attendance as resource persons, including Atty. Jarder.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> After the session, the Committee placed the proceedings in abeyance.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Atty. Jarder was then summoned to appear at the next hearing on December 18, 2024.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> When the Committee reconvened,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Rep. Paduano questioned Atty. Jarder regarding remarks he allegedly made during the November 11, 2024 hearing. Specifically, Atty. Jarder was said to have cautioned fellow resource persons from Silay City against partaking of the refreshments provided by the House, warning them that the said food and beverages might be laced with poison or drugs.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> Dr. Krisna Sharie Barnuevo (Dr. Barnuevo), the City Health Officer who had also served on the Bids and Awards Committee of Silay City, gave testimony before the Committee.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> She corroborated the allegation, stating that Atty. Jarder had indeed warned her and other city officials against consuming the food served at the hearing, suggesting it could be tainted with substances that might lead to them being poisoned. Dr. Barnuevo further disclosed that Atty. Jarder had urged her not to attend the November 11, 2024 proceedings.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> Atty. Jarder categorically denied these accusations, asserting that Dr. Barnuevo was fabricating her account because she owed him money.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> The Committee cited Atty. Jarder in contempt of the Rules of Procedure Governing Inquiries in Aid of Legislation under Section 11, paragraphs (e) and (f).<sup style="COLOR: RGB(255, 0, 0);">[17]</sup></p><p> Atty. Jarder then made an oral motion for reconsideration. He denied that he prevented Dr. Barnuevo from attending the previous hearing. Atty. Jarder also claimed that he was the one who paid for Dr. Barnuevo and her husband's airfare.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> The Committee, dissatisfied with Atty. Jarder's explanation, once again cited Atty. Jarder in contempt, this time under Section 11, paragraph (c) of the Rules of Procedure Governing Inquiries in Aid of Legislation. It then cited Atty. Jarder in contempt for lying.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </p><p> In light of the foregoing, Representative Gerville R. Luistro (Rep. Luistro), who was presiding over the Committee, moved that Atty. Jarder be detained within the plenary hall pending the submission and approval of the Committee Report. The motion was seconded by Representative Ziaur Rahman Alonto Adiong.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> No objection having been interposed, the motion was approved.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> </p><p> After, Rep. Paduano moved that the enforcement of the detention order be held in abeyance until January 5, 2025. Representatives Dale B. Corvera and Ramon Rodrigo L. Gutierrez seconded the motion.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> Accordingly, the Committee issued two contempt orders against Atty. Jarder, both dated December 18, 2024.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> Aggrieved, Atty. Jarder instituted the Petition for <i>Certiorari</i> and Prohibition with prayer for a TRO and/or Writ of Preliminary Injunction.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> He seeks the nullification of the two contempt orders on the ground that they were issued with grave abuse of discretion amounting to lack or excess of jurisdiction. He prays that the Committee be enjoined from conducting further proceedings. Atty. Jarder maintains that the 60-day prescriptive period for legislative inquiries, computed from the date of Rep. Paduano's privilege speech on September 9, 2024, had lapsed by November 8, 2024. In his Petition, Atty. Jarder likewise raises constitutional issues, contending that the Committee violated his right to due process and his right to privacy.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> Meanwhile, on January 6, 2025, the Committee sought the aid of the Philippine National Police (PNP) in Bacolod City to enforce the contempt orders.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> The PNP responded on January 8, 2025, reporting that efforts to serve the orders proved unavailing. According to Estrella Jarder, Atty. Jarder's spouse, he had departed for Manila on January 4, 2025, and his whereabouts remained unknown.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> In a Resolution,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> this Court directed the Committee to submit its comment dated March 4, 2025 within 10 days from notice. </p><p> Through the Office of the Solicitor General (OSG), the Committee filed its Comment<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> dated June 4, 2025 maintaining that the contempt orders were validly issued and rest on solid legal and factual grounds. The OSG posits that the Committee acted squarely within its authority in holding Atty. Jarder in contempt and that the legislative inquiry was conducted in faithful observance of the Rules of Procedure Governing Inquiries in Aid of Legislation. The OSG further opposes the application for injunctive relief.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </p><p> The sole issue for resolution is whether this Court should take cognizance of the instant Petition assailing the contempt orders issued by the Committee. </p><p align="center"> <b>This Court's Ruling</b> </p><p> The Petition must be denied. </p><p> Prefatorily, the power of Congress to inquiries in aid of legislation are expressly laid out by the Constitution in Article VI, Section 21, which reads: </p><blockquote> <p> Section 21. The Senate or the House of Representatives or any of its respective committees may conduct inquiries in aid of legislation in accordance with its duly published rules of procedure. The rights of persons appearing in or affected by such inquiries shall be respected. </p> </blockquote> <p> However, the power to cite a person in contempt is not similarly laid out in express terms. Nevertheless, the legislative power of inquiry in aid of legislation carries with it an implied constitutional authority to punish contempt under the Constitution. While the Constitution expressly confers upon the legislature the power to conduct inquiries in aid of legislation, no explicit provision delineates the procedural mechanisms for enforcing such investigative authority. Nonetheless, the legislature's contempt power exists inherently and by necessary implication, forming an indispensable component of legislative function that enables either House to discharge its duties unimpeded and to legislate with wisdom and efficacy through compelling the production of information requisite to sound legislative policy-making. This power rests fundamentally on the principle of institutional self-preservation, as the constitutional repository of legislative authority possesses the inherent capacity to vindicate its prerogatives and sanction acts of contumacy independently of judicial intervention.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><p> This contempt power, however, is not unlimited. One such limitation is that its validity only lasts until (1) the termination of the legislative inquiry through the approval or disapproval of the relevant Committee Report, or (2) the expiration or <i>sine die</i> adjournment of a Congress.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> </p><p> Particularly, petitioner was cited in contempt under the 19th Congress. </p><p> Further, it bears noting that on June 11, 2025, upon motion of Majority Leader Mannix M. Dalipe, the Third Regular Session of the 19th Congress was declared adjourned <i>sine die</i> at 10:12 p.m.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p> Importantly, a case or issue is considered moot and academic when it ceases to present a justiciable controversy by virtue of supervening events, such that a determination thereof would be without any practical use or value.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> In such instances, there is no longer any actual substantial relief to which the petitioner would be entitled and which would be negated by a dismissal of the petition. Courts generally decline jurisdiction over moot cases, lest the ruling result in a mere advisory opinion.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> </p><p> In <i>Balag v. Senate of the Philippines</i>,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> this Court explained: </p><blockquote> <p> The existence of an actual case or controversy is a necessary condition precedent to the court's exercise of its power of adjudication. An actual case or controversy exists when there is a conflict of legal rights or an assertion of opposite legal claims between the parties that is susceptible or ripe for judicial resolution. In the negative, a justiciable controversy must neither be conjectural nor moot and academic. There must be a definite and concrete dispute touching on the legal relations of parties who have adverse legal interests. The reason is that the issue ceases to be justiciable when a controversy becomes moot and academic; otherwise, the court would engage in rendering an advisory opinion on what the law would be upon a hypothetical state of facts.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> </p> </blockquote> <p> In <i>Balag</i>, the Court resolved the petition by Arvin R. Balag, who was cited in contempt and detained by Senate committees for refusing to answer whether he was the president of the Aegis Juris Fraternity during an inquiry into the death of law student Horacio Tomas T. Castillo III due to hazing. The Court held that while the Senate possesses an inherent power of contempt during inquiries in aid of legislation, this power is not indefinite and must respect the constitutional right to liberty. Specifically, the Court ruled that the period of imprisonment for contempt must only last until the termination of the legislative inquiry, which occurs upon either: (1) the approval or disapproval of the Committee Report; or (2) the expiration or <i>sine die</i> adjournment of a Congress.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </p><p> The Court also explained the rationale for the termination of contempt orders upon adjournment, drawing from the American doctrine:<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><blockquote> <p> The contempt power of the legislature under our Constitution is sourced from the American system. A study of foreign jurisprudence reveals that the Congress' inherent power of contempt must have a limitation. In the 1821 landmark case of <i>Anderson v. Dunn</i>, the Supreme Court of the United States (SCOTUS) held that although the offense committed under the inherent power of contempt by Congress may be undefinable, it is justly contended that the punishment need not be indefinite. It held that <i>as the legislative body ceases to exist from the moment of its adjournment or periodical dissolution, then it follows that imprisonment under the contempt power of Congress must terminate with adjournment</i>.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> (Emphasis supplied) </p> </blockquote> <p> Under the "doctrine of congressional distinctiveness," any unfinished business in the House does not carry over to a new Congress. The fact that each Congress is distinct from one another was espoused in <i>Ang Nars Party List v. The Executive Secretary</i>,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> where this Court explained: </p><blockquote> <p> The Rules of the Senate and the Rules of the House of Representatives can change since a new Congress is not bound to adopt the rules of the previous Congress. In fact, the Senate and the House of Representatives of every Congress can amend their own Rules of Procedure at any time. In <i>Neri v. Senate Committee on Accountability of Public Officers and Investigations</i>, the Court sustained the OSG that "every Senate is distinct from the one before it or after it. Since Senatorial elections are held every three (3) years for one-half of the Senate's membership, the composition of the Senate also changes by the end of each term. Each Senate may thus enact a different set of rules as it may deem fit." Thus, in that case, the Court required the publication of the Rules of Procedure of the Senate Governing the Inquiries in Aid of Legislation for the 14<sup>th</sup> Congress. </p> <p> <i>The same rule applies to the House of Representatives</i>. The House of every Congress must adopt its own rules at the start of its term. <b><i>In particular, the House is admittedly not a continuing body since the terms of all Members of the House end at the same time upon the expiration of every Congress.</i></b> Thus, upon the expiration of every Congress, the Rules of Procedure of the House also expire. That is why Section 1, Rule 1 of the Rules of the House of Representatives of the 17<sup>th</sup> Congress, adopted on [25 July, 2016], provides: "After the oath-taking of the newly-elected Speaker, the body shall proceed to the adoption of the rules of the immediately preceding Congress to govern its proceedings until the approval and adoption of the rules of the current Congress.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> (Emphasis supplied, citation omitted) </p> </blockquote> <p> Notably, the Constitution establishes that each Congress serves a specific three-year term, with the House being completely reconstituted every election cycle. When a new Congress convenes, it essentially starts with a clean slate. <i>Every Congress is, thus, distinct from every other Congress</i>. </p><p> The Court, in <i>Romero II v. Estrada</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> dismissed a petition assailing subpoenas and invitations issued by a Senate committee in the previous Congress on the ground of mootness. The Court reasoned that since the resolutions authorizing the legislative inquiry were passed during the previous Congress, the invitations and subpoenas directing the petitioners to appear and testify in connection with the said resolutions were considered <i>functus officio</i> and the related legislative inquiry conducted was, for all intents and purposes, terminated. </p><p> Moreover, in <i>Ong v. Senate of the Philippines</i>,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> this Court recognized that the termination of the subject legislative inquiry renders the petition moot and academic. The Court noted that on June 30, 2022, the 18th Congress of the Philippines conducted its final session which in effect terminated all proceedings of the House and the Senate, including the Senate committee's inquiry pertinent to the case. </p><p> Applying these doctrines to the present case, the Petition has been rendered moot and academic by the <i>sine die</i> adjournment of the Third Regular Session of the 19th Congress on June 11, 2025. The legislative inquiry conducted by the committee, which gave rise to the issuance of the assailed contempt orders, has been effectively terminated by the adjournment of the 19th Congress. Correlatively, the contempt orders issued pursuant to the inherent contempt power of the committee have likewise ceased to have any force and effect. </p><p> Again, under the doctrine of congressional distinctiveness, all pending matters and proceedings of a particular Congress are considered terminated upon the expiration of that Congress.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> The House is admittedly not a continuing body since the terms of all its Members end at the same time upon the expiration of every Congress. Thus, the contempt orders issued by the committee during the 19th Congress cannot survive the adjournment of that Congress. </p><p> Settled is the rule that for the exercise of judicial review to be proper, the following requisites must concur: (1) there must be an actual case or controversy; (2) the petitioner must possess <i>locus standi</i>; (3) the question of constitutionality must be raised at the earliest opportunity; and (4) the issue of constitutionality must be the very <i>lis mota</i> of the case.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> </p><p> With the termination of the legislative inquiry and the consequent cessation of the contempt orders, there is no longer any actual case or controversy for this Court to adjudicate. A controversy becomes moot when it ceases to present a justiciable controversy, so that a determination of the issue would be without practical use and value.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Indeed, when a case is moot and academic, it ceases to be the <i>lis mota</i> or the controlling issue that this Court must resolve. </p><p> As the Court held in <i>Romero II v. Estrada</i>: </p><blockquote> <p> As a matter of long and sound practice, the Court refrains from touching on the issue of constitutionality except when it is unavoidable and is the very <i>lis mota</i> of the controversy. So it must be here. Indeed, the matter of the constitutionality of the assailed Committee invitations and subpoenas issued <i>vis-à-vis</i> the investigation conducted pursuant to [the Senate] Resolution[s] . . . has ceased to be a justiciable controversy, having been rendered moot and academic by supervening events heretofore indicated. In short, there is no more investigation to be continued by virtue of said resolutions; there is no more investigation the constitutionality of which is subject to a challenge.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup></p> </blockquote> <p> To be sure, this Court is mindful that the moot and academic principle does not automatically dissuade the courts from resolving a case. Courts have taken cognizance of otherwise moot cases under the following instances: (a) there is a grave violation of the Constitution; (b) the situation is of exceptional character and paramount public interest is involved; (c) the constitutional issue raised requires formulation of controlling principles to guide the bench, the bar, and the public; and (d) the case is capable of repetition yet evading review.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> </p><p> None of these exceptions are present in this case. The constitutional issues raised by petitioner regarding the conduct of legislative inquiries and the exercise of contempt power have already been exhaustively addressed by this Court in <i>Balag</i>, <i>Ong</i>, and related cases. The doctrine of congressional distinctiveness, particularly as it applies to the House, has been previously clarified. No new controlling principle needs to be formulated. Moreover, the specific factual circumstances of this case—involving the conduct of a particular legislative inquiry by a particular Committee during the 19th Congress—are not likely to be repeated in the exact same manner. </p><p> In fine, the <i>sine die</i> adjournment of the 19th Congress on June 11, 2025 has rendered the instant Petition moot and academic. The legislative inquiry that spawned the assailed contempt orders has terminated, and the contempt orders themselves have ceased to have any operative effect. There is no longer any actual case or controversy for this Court to resolve, nor any practical relief that can be granted to petitioner.</p><p> <b>ACCORDINGLY</b>, the Petition is <b>DISMISSED</b>. </p><p><b>SO ORDERED."</b></p><p> <i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, Gaerlan, Rosario, Dimaampao, Marquez, Kho, Jr</i>., and <i>Villanueva, JJ</i>., concur. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J.</i>, on leave.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. <p><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 4-71.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 8.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 156.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 156-157. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 157. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 158. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 159. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 4-71. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 7. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 160. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 109. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 155-204. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 160. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Ong v. Senate ofihe Philippines</b>, 938 Phil. 929, 946-947 (2023) [Per J. Inting, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Balag v. Senate of the Philippines</b>, 835 Phil. 451, 471-473 (2018) [Per J. Gesmundo, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Journal No. 39, House 19<sup>th</sup> Congress, 3<sup>rd</sup> session (June 9, 2025), p. 113, available at <a href="https://congress.gov.ph/legislative-documents/house-journals">congress.gov.ph/legislative-documents/house-journals</a> (last accessed on January 22, 2026). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Romero II v. Senator Estrada</b>, 602 Phil. 312, 320 (2009) [Per J. Velasco, Jr., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 835 Phil. 451 (2018) [Per J. Gesmundo, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 461. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 453-473. </p><p><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 464. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> 864 Phil. 607 (2019) [Per J. Carpio, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 643-644. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 602 Phil. 312 (2009) [Per J. Velasco, Jr., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 938 Phil. 929 (2023) [Per J. Inting, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> J. Lopez, Separate Concurring Opinion, <b>Duterte v. House of Representatives, G.R. Nos. 278353 &amp; 278359</b> (2025) [Per SAJ Leonen, <i>En Banc</i>] at 13. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Belgica v. The Hon. Executive Secretary</b>, 864 Phil. 461, 493 (2019) [<i>Per Curiam, En Banc</i>]. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Balag v. Senate of the Philippines</b>, 835 Phil. 451, 463 (2018) [Per J. Gesmundo, <i>En Banc</i>]. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 602 Phil. 312, 324-325 (2009) [Per J. Velasco, Jr., <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Ong v. Senate of the Philippines</b>, 938 Phil. 929, 943-944 (2023) [Per J. Inting, <i>En Banc</i>].&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

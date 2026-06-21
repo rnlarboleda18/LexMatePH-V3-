@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 270856 - HEIRS OF EUSTACIO BULAWIN, NAMELY: LOURDES B. CIMACIO, LUISITA B. CAJILLA, ANTONIA B. CAJILLA, CRISTITA A. ABAO, REPRESENTED HEREIN BY THEIR CO-HEIR: RUEL C. BULAWIN, PETITIONERS, VS. ARNEL LLAGAS AND ERNESTO BULAWIN, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70405' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 270856, January 29, 2026 ]</H2>
+			<H3>HEIRS OF EUSTACIO BULAWIN, NAMELY: LOURDES B. CIMACIO, LUISITA B. CAJILLA, ANTONIA B. CAJILLA, CRISTITA A. ABAO, REPRESENTED HEREIN BY THEIR CO-HEIR: RUEL C. BULAWIN, PETITIONERS, VS. ARNEL LLAGAS AND ERNESTO BULAWIN, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, as amended, assails the March 10, 2023 Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the October 10, 2023 Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) in CA-G.R. CV No. 06366-MIN, which denied the appeal of petitioners Heirs of Eustacio Bulawin (Heirs of Eustacio) from the Decision of Branch 28 of the Regional Trial Court (RTC) of Mambajao, Camiguin, in a quieting of title suit docketed as Civil Case No. 2013-837.<br><br>Protacio Bulawin (Protacio) owned a 19,756-square-meter parcel of rice land identified as Lot No. 60, C-1, Cad. 473, located in Lumad, Poblacion, Mambajao, Camiguin (the disputed parcel, or the parcel). Since 1948, the disputed parcel had been declared in the name of Protacio's son Eustacio for realty taxation purposes.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Protacio died and was survived by his five children, including Eustacio, Manuel, and Concepcion, who claimed shares in the disputed parcel.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Eustacio took over cultivation of the disputed parcel and remitted seven pollard-size sacks of palay each to Manuel and Concepcion as their share in the harvest.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> According to the Heirs of Eustacio, this share was known among their family as<i> patikim</i> or<i> patilaw</i>, and was received not only by Concepcion and Manuel but also by their other two siblings who did not claim ownership shares in the disputed parcel.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> The descendants of Eustacio, Manuel, and Concepcion continued the<i> patikim/patilaw</i> arrangement, with Eustacio's son Vicente, and later, his grandson, herein petitioner Ruel C. Bulawin (Ruel), cultivating the disputed parcel and sharing the harvests with Manuel and Concepcion's heirs, who in turn paid their share in the disputed parcel's realty tax.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> At some point, Ruel entered into a contract of lease with Manuel's heirs over the latter's claimed portion. Accordingly, Manuel's heirs claimed that the seven sacks of rice remitted by Ruel every harvest were actually rental payments and not part of the<i> patikim/patilaw</i> scheme.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Ruel denied the validity of the lease and claimed that he was misled into signing the contract therefor.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Nevertheless, another portion of Manuel's alleged share was also previously leased to Guillermo Cajilla (Guillermo), the father of herein petitioner Luisita B. Cajilla (Luisita), who later waived all of his rights to said portion for the amount of PHP 12,000.00 paid by Manuel's heirs.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>In May 2007, the Heirs of Eustacio, represented by Ruel, applied for and were granted a free patent over the disputed parcel, evidenced by Katibayan ng Orihinal na Titulo Blg. P-14811 (KOT Blg. P-14811).<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Upon the issuance of said title certificate on July 25, 2007, Ruel terminated the <i>patikim/patilaw</i> scheme.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Manuel and Concepcion's heirs demanded the continuation of the<i> patikim/patilaw</i>, but the Heirs of Eustacio insisted that they were not obliged to do so, for the disputed parcel was part of Eustacio's share in Protacio's estate.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The Heirs of Eustacio alleged that the heirs of Manuel and Concepcion promised to show proof of their ownership shares in the disputed parcel but failed to do so.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> The parties failed to amicably resolve the disagreement.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>On October 23, 2009, Manuel's descendant Ernesto Bulawin (Ernesto) and Concepcion's descendant Arnel Llagas (Arnel), both respondents in the present petition, filed separate estafa cases against petitioners Ruel, Luisita, and Cristita A. Abao, for using false pretenses in obtaining the free patent and title certificate over the disputed parcel.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> On May 24, 2013, the Heirs of Eustacio initiated the present quieting of title action, docketed as Civil Case No. 2013-837.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Both cases were raffled to and tried by Branch 28 of the RTC of Mambajao, Camiguin.<br><br>On February 8, 2019, the RTC granted Ruel's demurrer in the estafa case, ruling that the prosecution failed to prove Ruel's use of false pretenses in obtaining the free patent and title certificate.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The RTC pertinently found that:<br><blockquote>[W]hen [Ruel] applied for a free patent title, the tax declaration was already in the name of his predecessor-in-interest, Eustacio Bulawin. Based on the Real Property Historical Ownership, the subject lot was declared in the name of Eustacio Bulawin since 1948 and there was no evidence showing that the accused had unlawful participation in the issuance of the said tax declaration.<br><br>. . . .<br><br>. . . [I]n the absence of actual, public, and adverse possession, the sketch plans and tax receipts presented are not, by themselves, conclusive evidence of ownership of real property. These documents, therefore, cannot serve as basis to claim that accused executed fraud or false pretenses in applying for a free patent title over the subject lot. Prosecution witnesses, during their testimony, admitted that Eustacio Bulawin, predecessor-in-interest of the accused, was in possession of the subject lot and cultivated the same. When he died, his son Vicente and later on his grandson, Ruel Bulawin remain[ed] in possession thereof and continued its cultivation. The evidence submitted by the prosecution, which is the Real Property Historical Ownership even affirms that Eustacio Bulawin, predecessor-in-interest of the accused, was the declared owner of the lot since 1948.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </blockquote>On March 18, 2022, the RTC rendered its Decision in the quieting of title case,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> thus:<br><blockquote>WHEREFORE, foregoing premises considered and pursuant to applicable laws and jurisprudence on the matter and evidence at hand, judgment is hereby rendered:<br><br>1) Declaring Lot No. 60, C-1, Cad. 473 as co-owned in equal proportion by Eustacio Bulawin, Concepcion Bulawin-Macapayad and Manuel Bulawin;<br><br>2) Ordering the Heirs of Eustacio Bulawin, represented by Ruel Bulawin, to reconvey one-third (1/3) each of the property to the Heirs of Concepcion Bulawin Macapayad and to the Heirs of Manuel Bulawin;<br><br>3) Ordering the Heirs of Eustacio Bulawin, Heirs of Concepcion B. Macapayad and Heirs of Manuel Bulawin to conduct a raffle based on the Sketch Plan prepared by Achilles B. Pimentel (Exh. "4") to determine their respective 1/3 shares;<br><br>4) Ordering Ruel Bulawin to account for the proceeds of the harvests from the year 2007 until the present;<br><br>5) Ordering the Heirs of Eustacio Bulawin to pay the costs of this suit.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </blockquote>The RTC found that:<br><blockquote>In this case, plaintiffs [the Heirs of Eustacio] have a certificate of title in their name while [herein respondents] proffered in evidence a contract of lease executed by the Heirs of Manuel Bulawin with plaintiff Ruel Bulawin as a lessee. The subject matter of the lease contract was the share of the Heirs of Manuel Bulawin. (Exh. "8;" p. 460, Volume II Records). By signing the said contract, Ruel Bulawin acknowledged the ownership of the Heirs of Manuel Bulawin over one-third portion of Lot No. 60. This document was never decided nor rebutted by Ruel.<br><br>Moreover, Ruel admitted in his testimony that he knew that Protacio was the survey claimant of Lot No. 60 and that Eustacio inherited the said lot from Protacio, Eustacio's father but there was no document of partition to show that indeed, Lot No. 60 was allocated to Eustacio as his share in the estate, (pp. 9-13, May 6, 2021 TSN).<br><br>Surprisingly, plaintiffs' predecessor-Eustacio gave Manuel and Concepcion seven "pollard-size" bags of palay and when they died, he gave their shares to their respective heirs every harvest. When Eustacio died, Vicente, Eustacio's son, did the same. It was only when Ruel took over the cultivation of [the disputed parcel] that he refused to give the heirs their respective shares. If indeed Lot No. 60 is Eustacio's share of the estate of Protacio, he is not duty bound to give Manuel and Concepcion these cavans of rice every harvest. By doing this every single harvest, it just goes to show that Lot No. 60 is owned in common by Eustacio, Manuel and Concepcion. The defense of Ruel that the giving of seven cavans of "pollard-size" of palay is only "patikim" or "patilaw" is therefore untenable and is not supported by evidence.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></blockquote>On March 25, 2022 the Heirs of Eustacio filed a motion for reconsideration, arguing that: 1) the RTC erroneously disregarded its own findings in the estafa case regarding Eustacio's exclusive possession and ownership of the disputed parcel; 2) the RTC erroneously declared a co-ownership despite the lack of a valid partition or evidence of ownership or possession on the part of Manuel and Concepcion; 3) giving effect to the RTC decision amounts to a reconveyance based on implied trust, which prescribes in 10 years, and KOT Blg. P-14811 was issued 15 years prior to the RTC Decision; and 4) the RTC Decision is a prohibited collateral attack on the validity of KOT Blg. P-14811.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Through an Order dated April 7, 2022,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> the RTC denied the motion for reconsideration. It ruled that Manuel and Concepcion's action for reconveyance is imprescriptible because they have constructive possession over their respective shares as evinced by Vicente and Ruel's continued observance of the<i> patikim/patilaw</i> harvest-sharing scheme.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> The Heirs of Eustacio appealed to the CA.<br><br>The CA denied the appeal. While the Heirs of Eustacio were able to prove their title to the disputed parcel, they failed to dispel the alleged cloud thereon.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> The CA sustained the RTC's declaration of co-ownership, in view of the following evidence: 1) the sketch plan prepared for Protacio showing that he caused the cadastral survey and partition of the disputed parcel into three portions, which supports the allegation that the disputed parcel was passed on to Eustacio, Concepcion, and Manuel in co-ownership; 2) receipts for realty tax payments for the years 1994, 1995, 1996, 1997, 1999, 2000, 2001, 2002, and 2003 for Tax Declaration No. 168 by Benito Aclo and Gloria Aclo, representatives of the heirs of Manuel; 3) receipts for realty tax payments equivalent to 1/3 share for the years 1986 to 1998 for Tax Declaration No. 2982, and for years 1992 to 1993 for Tax Declaration No. 0113, all paid by Felizardo Macapayad, representative of the heirs of Concepcion; 4) Tax Declaration Nos. 168, 2982, and 0113, which correspond to the same tax declaration numbers for Lot 60 paid by the Heirs of Eustacio; 5) the lease contract between Ruel and Manuel's heirs, wherein Ruel acknowledged that Manuel's heirs owned a portion of the land with an area of about 8,000 square meters; 6) the undisputed fact of the<i> patikim/patilaw </i>harvest-sharing scheme, which proves the Heirs of Eustacio's recognition of Manuel and Concepcion's respective shares in the land; and 7) a mortgage executed by an heir of Concepcion over a portion of the land he inherited from Concepcion, which indicates exercise of ownership rights over the same.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Meanwhile, the Heirs of Eustacio failed to submit their own evidence to refute the foregoing indicia of co-ownership. Ruel even implicitly admitted on the witness stand that the tax declarations and the Real Property Historical Ownership lists proved the fact of partition among Eustacio, Concepcion, and Manuel.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The CA also sustained the RTC's ruling regarding the imprescriptibility of the action based on implied trust. As mere trustees of the heirs of Manuel and Concepcion with respect to two-thirds of the disputed parcel, the Heirs of Eustacio cannot repudiate the implied trust by invoking KOT Blg. P-14811.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>On April 17, 2023, the Heirs of Eustacio sought reconsideration, assailing the validity and the probative value of the sketch plan, tax declarations, and the lease contract.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> They insist that the heirs of Manuel and Concepcion only paid taxes for four years, and Ruel was misled into signing the lease contract.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> As for Ruel's alleged implicit admission of the partition, the Heirs of Eustacio argue that he was referring not to the partition of the disputed parcel, but to the partition of Protacio's whole estate, such that the disputed parcel was made part of Eustacio's share therein, as testified to by one of their witnesses.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> The CA rejected these arguments for being unsubstantiated;<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> hence this petition, where the Heirs of Eustacio argue that:<br><br>1) the sketch plan showing the alleged partition among Eustacio, Concepcion, and Manuel cannot be given probative value because it has no stated purpose, is undated, and does not bear the signature of any of Protacio's heirs;<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>2) the sketch plan cannot be used as a substitute for a deed of partition;<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>3) the RTC's findings in the estafa case should be adopted in the present case;<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>4) any action for reconveyance of the disputed parcel based on implied or constructive trust is already barred by prescription, as KOT Blg. P-14811 was issued in 2007;<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>5) the RTC decision amounts to a collateral attack on KOT Blg. P-14811;<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>6) the heirs of Manuel and Concepcion only paid realty taxes on the disputed parcel for four years;<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>7) the lease contract cannot be given probative value because Ruel testified that Manuel' heirs misled him into signing the same;<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> and<br><br>8) the partition admitted by Ruel in his testimony pertains to the whole of Protacio's estate, and not to the disputed parcel, as testified to by the witness Dina Amper (Amper) and proven by Historical Ownership lists of the other lots declared in the name of Manuel and Concepcion.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>The appellate and review jurisdiction of the Supreme Court is limited to questions of law.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Rule 45 petitions "<i>shall raise only questions of law which must be distinctly set forth.</i>"<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Philippine Banking Corp. v. Court of Appeals</i><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> instructs:<br><blockquote>The appellate jurisdiction of this Court in cases brought to it from the Court of Appeals is limited to reviewing and correcting the errors of law committed by the latter, the findings of fact of the Court of Appeals being final and conclusive. In other words, the power of this Court is limited to determining whether the legal conclusions drawn from the findings of fact are correct. Barring a showing that the findings of fact complained of are totally devoid of support in the records, such determination must stand for the Court is neither expected nor required to examine or refute the oral and documentary evidence submitted by the parties <sup style="COLOR: RGB(255, 0, 0);">[46]</sup></blockquote>Thus, factual findings of the CA are given great weight and respect, and will be considered final and binding upon this Court if consistent with the findings of the trial court and supported by the evidence on record.<br><br><i>Evidence of the partition</i><br><br>The first, sixth, seventh, and eighth assignments of error all pertain to the evaluation and assessment of the evidence of the partition. Such evidentiary matters are issues of fact which generally cannot be considered in a Rule 45 petition, as the RTC and the CA were in agreement that the disputed parcel passed on to Eustacio, Concepcion, and Manuel, in equal shares, upon Protacio's demise.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> However, We find that the courts<i> a quo</i> misapprehended and overlooked certain pieces of evidence in reaching such a conclusion <sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>Recently, in<i> Ocampo v. Batara-Sapad</i>,<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> We reversed a city court judgment in an<i> accion reivindicatoria</i> that had been affirmed by the RTC and the CA, because the trial courts failed to consider the full record in light the fact that the actual possessor of the disputed land also held the owner's copy of the title certificate as against the opposing claimants, who were the legal heirs of the registered owner. We held that the foregoing facts made it necessary to delve into the record once more to find out why and how the legal heirs of the registered owner lost possession of both the disputed lot and its title certificate. Conversely, the circumstances of the present case call for a more critical evaluation of the RTC's findings, which went against the presumption of ownership in favor of the Heirs of Eustacio as actual possessors<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> and registered owners<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> of the whole disputed parcel.<br><br>It must be noted that respondents' theory of partition is not based on any deed or document. They claim that Protacio passed on the disputed parcel to Eustacio, Concepcion, and Manuel in equal shares,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> and that the Heirs of Eustacio recognized such distribution through the&nbsp;<i>patikim/patilaw</i> scheme.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> The courts<i> a quo</i> sustained this theory on the strength of the sketch plan, the contracts entered into by Manuel and Concepcion's heirs over their alleged shares in the parcel, the tax declarations submitted by the heirs of Manuel and Concepcion, and the very fact of the<i> patikim/patilaw</i> itself. We consider these pieces of evidence<i> ad seriatim.</i><br><br>As to the sketch plan, We find nothing therein to support respondents' claims that the disputed parcel was passed on to Eustacio, Concepcion, and Manuel in equal shares, and that they, or their heirs, subsequently agreed to a partition to reflect such arrangement. The record contains four sketch plans of the disputed parcel. The first sketch is included in a lot data record of the Department of Environment and Natural Resources regional Land Management Services office in Cagayan de Oro City. This record states that the parcel was surveyed on September 4, 1979, with the survey being approved on November 20, 1981. Protacio is named as the claimant, and the parcel's size was stated as 19,756 square meters.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> This 1979 sketch does not indicate a partition, as it shows the whole parcel without any subdividing lines.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> The same is true for the second sketch plan, dated September 5, 1994,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> and the third sketch plan, dated May 4, 2007.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> The only sign of a partition appears in the fourth sketch plan, which, unlike the other three plans, is undated.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> This undated sketch plan is the primary basis of respondents' partition theory. It subdivides the parcel into three portions (Lots 60-A, 60-B, and 60-C) with the same area of 6,585 square meters. Ernesto testified that said plan was prepared at the request of his sister Jesusa Ramos (Jesusa), who wanted the three portions registered under the names of Eustacio, Manuel, and Concepcion.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> However, the sketch plan itself does not state anything about the distribution of the three portions. The only names on the sketch plan are that of Protacio, the geodetic engineer who prepared the plan, and the notary public who certified that it was a true copy of the original found in his records. There is nothing in Ernesto's testimony regarding the preparation and circumstances of the sketch plan, other than his claim that it was prepared at Jesusa's behest. Given the fourth sketch plan's contents and unclear provenance, the only fact that can be reasonably deduced therefrom this is the existence of a plan to divide the parcel into three equal portions. It does not, and cannot prove anything about the actual division or distribution of those portions among Protacio's children.<br><br>We now turn to the contracts entered into by the respective heirs of Concepcion and Manuel over their claimed portions of the parcel. The undated lease contract between Ruel and Manuel's heirs identifies the object of the contract as<i> "a parcel of rice land situated at Lumad, Mambajao, Camiguin containing an area of more or less 8,000 (eight thousand) sq. meters</i>,"<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> which is 2,585 square meters more than the stated area of the subdivided lots in the fourth sketch plan. This size discrepancy is not explained in the record. Furthermore, if Eustacio, Concepcion, and Manuel had already agreed to the division in the fourth sketch plan, the lease contract should have already specified the particular subdivided lot subject thereof. The ambiguous wording of the contract and the substantial size discrepancy with the fourth sketch plan bolsters Ruel's repudiation of the lease as a mere subterfuge to generate evidence of adverse possession. The same ambiguous wording and significant size discrepancy exists in the 1998 waiver between Guillermo Cajilla (one of Eustacio's heirs) and Jesusa (one of Manuel's heirs), which involved "<i>a parcel of riceland containing an area of more or less 7,000 sq.m. as part of a riceland with an estimated area of more or less 21,000 sq.m.</i>"<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Finally, the 2002 mortgage deed between Felizardo Macapayad (Concepcion's heir) and Hermogenes Lobido does not even name a particular parcel of land, and was not signed by the mortgagee.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>The courts<i> a quo</i> also gave greater weight to the tax declarations presented by the heirs of Concepcion and Manuel. Realty tax receipts and declarations are not conclusive evidence of ownership, but they can be greatly bolstered by proof of actual possession, as it would be absurd to pay taxes on a property not held in possession.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> As found by the CA, the heirs of Concepcion and Manuel were only able to show proof of payment for certain years between 1986 and 2003.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup>&nbsp;When asked about the existence of pre-1986 tax receipts in Manuel's name, Ernesto could not provide a definite answer, only stating that they "<i>are no longer available on files and<b> <u>may</u></b> have been lost or destroyed</i>."<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Likewise, there is no evidence on record for pre-1986 tax receipts in Concepcion's name. There is also no separate tax declaration for Concepcion and Manuel's claimed shares, as their portions were paid for under Eustacio's tax declaration,<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> which is inconsistent with their claim that the parcel had already been divided in accordance with the undated sketch plan.<br><br>As for the<i> patikim/patilaw</i>, the sharing of harvests alone is not sufficient to establish the legal relation of parties with respect to a parcel of land, especially when the rest of the evidence is inconsistent with the claimed relation. Case law has recognized that the "<i>typical and laudable</i> provinciano<i> trait of sharing or</i> patikim,<i> a native way of expressing gratitude for favor received. . . does not automatically make the tiller-sharer a tenant</i>" when the existence of such a relation is negated by other factual circumstances.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> Similarly, the sharing of harvests with Manuel and Concepcion does not necessarily mean that they were given ownership shares in the parcel, considering the undisputed fact that the two other Bulawin siblings who had no claims to the parcel also received the <i>patilaw</i>.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> Furthermore, Ernesto himself admitted that the dispute over the parcel arose only after the Heirs of Eustacio stopped giving the<i> patilaw</i>:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div> <div align="JUSTIFY"></div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Manuel Bulawin and Concepcion Bulawin during their lifetime and during the lifetime of Vicente Bulawin, this Manuel Bulawin and Concepcion Bulawin Macapayad did not file any action or question the ownership of Eustacio Bulawin, am I correct? </div> </td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Because before we still have good relationship. With regards to the share they would get [their] exact share from the house of Eustacio Bulawin.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup></div></td> </tr> </tbody></table></blockquote>Notably, Manuel and Concepcion's heirs failed to produce any documentary proof of ownership of the disputed lot when they were negotiating with the Heirs of Eustacio. In the estafa case against Ruel, Ernesto was asked:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">But you know that the heirs of Eustacio Bulawin ask[ed] proof from the heirs of Manuel and Concepcion Bulawin with respect to their claims of lot 60, am I correct? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">They were not able to present the said document because they themselves they do not know what document is that because during that time I am not a resident of Camiguin, I was a resident of Cagayan de Oro City. And during that time they failed to inform me that the heirs of Eustacio wanted some evidence from the heirs of Manuel and Concepcion about the ownership of the land.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup></div></td> </tr> </tbody></table></blockquote>Under the Civil Code, the properties of the decedent pass to the heirs in co-ownership.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Pending partition, the registration of land in the name of one heir does not prejudice the ownership of the other co-heirs.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> However, the testimonies on record show that Protacio intended to distribute, and actually distributed individual parcels of land to each of his five children before his demise. Ruel testified that in 2007, one of Eustacio's children advised him to register the whole disputed parcel in the name of the Heirs of Eustacio because it constituted Eustacio's exclusive share in the whole of Protacio's estate.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> This was corroborated by the testimony of Amper, who is a granddaughter of Venancio Bulawin, one of the two Bulawin children who did not claim shares in the disputed parcel. Amper testified that Manuel and Concepcion inherited other parcels from Protacio's estate:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q4: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">How about the share of Manuel Macamay Bulawin and Concepcion Bulawin Macapayad from the estate of Protacio Bulawin? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A4: </div></td> <td valign="top"> <div align="JUSTIFY">Their shares are located at Lumad, Yumbing, Naasag and Tangob, all of Mambajao, Camiguin. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q5: </div></td> <td valign="top"> <div align="JUSTIFY">What is your proof of their respective share? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A5: </div> <div align="JUSTIFY"></div></td> <td valign="top"> <div align="JUSTIFY">The Historical Ownership of Lot 6419 previously declared in the name of Protacio Bulawin then to Concepcion Macapayad and presently in the name of Macapayad Felizardo; Lot 1026 in the name of Concepcion Bulawin; Lot 8877 previously in the name of Concepcion Bulawin and now in the name of Macapayad Felizardo; and for Manuel Bulawin, Lot 6537 and Lot 9365 part and the same are hereto respectively attached as Exhibits "H", "I", "J", "K" and " L". And I have likewise personally gone to these lots. </div> </td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q6: </div></td> <td valign="top"> <div align="JUSTIFY">Showing to you these Historical Ownerships, what have these relations to the documents you have mentioned? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A6: </div></td> <td valign="top"> <div align="JUSTIFY">These are the ones.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup></div></td> </tr> </tbody></table></blockquote>Amper further testified that her grandfather Venancio also received a discrete parcel of land from Protacio's estate, instead of an ownership share in the mass of the estate:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q7: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">How about the share of your grandfather Venancio Macamay Bulawin? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A7: </div></td> <td valign="top"> <div align="JUSTIFY">The share of my grandfather is located at Upper Lumad, Mambajao, Camiguin.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup></div></td> </tr> </tbody></table></blockquote>Ernesto admitted as much when he testified that his father's (Manuel) inheritance included, "<b><i><u>among others</u></i></b>,<i> the 1/3 portion of Lot 60, Cad 473, Mambajao, Cadastre</i>."<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> Furthermore, respondents did not adduce any evidence to rebut the testimonies of Ruel and Amper on this point. In effect, Protacio had already partitioned his estate by placing each of his children in possession of discrete parcels of land, instead of leaving them with ownership shares in every parcel.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>Evidence of Eustacio's title and applicability of the findings in the estafa case</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Eustacio and his successors' cultivation of the disputed parcel since 1948 is not in dispute. Both courts<i> a quo</i> also agreed that Eustacio and his successors have been paying realty taxes on the parcel since 1948,<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> 38 years before the earliest extant tax declaration in favor of Manuel or Concepcion. Indeed, it was the heirs of Manuel and Concepcion who submitted the tax declaration history showing payment of taxes by Eustacio and his successors since 1948.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup><br><br>Furthermore, Manuel and Concepcion's successors did not file any objection to Ruel's free patent application. Instead, they charged Ruel with estafa after the fact, claiming that he defrauded them by representing Eustacio as the sole occupant and possessor of the parcel, despite their claims thereto. That case was tried and decided by the same RTC branch (Branch 28) and the same judge who decided the present case. Ruel was acquitted because his<br><blockquote>application does not contain false pretenses for it merely states that the "Heirs of Eustacio Bulawin, represented by Ruel Bulawin" has filed with the office of Provincial Environment and Natural Resources an application for free patent. Also, it is clear from the evidence presented that when [Ruel] applied for a free patent title, the tax declaration was already in the name of his predecessor-in-interest, Eustacio Bulawin. Based on the Real Property Historical Ownership, the subject lot was declared in the name of Eustacio Bulawin since 1948 and there was no evidence showing that [Ruel] had unlawful participation in the issuance of the said tax declaration.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> </blockquote>The trial court went on to rule that<br><blockquote><b>. . . <u>in the absence of actual, public, and adverse possession, the sketch plans and tax receipts presented are not, by themselves, conclusive evidence of ownership of real property. These documents, therefore, cannot serve as basis to claim that [Ruel] executed fraud or false pretenses in applying for a free patent title over the [disputed parcel].</u></b> Prosecution witnesses, during their testimony, admitted that Eustacio Bulawin, predecessor-in-interest of [Ruel], was in possession of the subject lot and cultivated the same. When [Eustacio] died, his son Vicente and later on his grandson, Ruel Bulawin remain in possession thereof and continued its cultivation. The evidence submitted by the prosecution, which is the Real Property Historical Ownership even affirms that Eustacio Bulawin, predecessor-in-interest of the accused, was the declared owner of the lot since 1948.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup></blockquote>In<i> Bongato v. Malvar</i>,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> the spouses Malvar sought to eject Bongato, who had built a house on land they claim to own. To this end, they had Bongato criminally charged for violation of the National Building Code and the old Anti-Squatting Law. They also filed an ejectment suit against her. Bongato was acquitted of both criminal charges during the pendency of the ejectment suit. Bongato then moved to dismiss the ejectment suit, citing her acquittal in the criminal cases. In dismissing the ejectment suit, the Court relied on the findings of fact in the criminal cases:<br><blockquote>[A]s a general rule, courts do not take judicial notice of the evidence presented in other proceedings, even if these have been tried or are pending in the same court or before the same judge. There are exceptions to this rule. Ordinarily, an appellate court cannot refer to the record in another case to ascertain a fact not shown in the record of the case before it, yet, it has been held that it may consult decisions in other proceedings, in order to look for the law that is determinative of or applicable to the case under review. In some instances, courts have also taken judicial notice of proceedings in other cases that are closely connected to the matter in controversy. These cases "may be so closely interwoven, or so clearly interdependent, as to invoke" a rule of judicial notice.<br><br>. . . .<br><br>We agree with respondents that Lot 10-A, covered by Transfer Certificate of Title (TCT) No. RT-16200 and registered under the name of Severo Malvar, is different from Lot 1 which is covered by TCT No. RT-15993 and registered under the name of Severo Malvar also. However, we cannot ignore the Decision dated April 30, 1996 in Criminal Case No. 4659 for violation of PD 772; or the Decision dated November 26, 1997 in Criminal Case No. 5734 for violation of PD 1096. The property involved in these two criminal cases and in the instant case for forcible entry is one and the same — petitioner's house.<br><br>The allegation of petitioner that there is only one house involved in these three cases has not been controverted by respondents. Neither was there evidence presented to prove that, indeed, she had constructed one house on Lot 1 and another on Lot 10-A. On the contrary, she correctly points out that the house involved in these three cases is found on one and the same location. Verily, in his Sworn Statement submitted in Criminal Case No. 4659, Respondent Severo Malvar stated that petitioner's house was "located in front of the Museum and just behind the City Hall." On the other hand, in the Complaint for forcible entry, the subject property was said to be "located along Doongan Road and right in front of the Regional National Museum and not far behind the City Hall of Butuan City." Lastly, the Decision in Criminal Case No. 5734 stated that the building inspector, Engineer Margarita Burias, had "responded to a verbal complaint involving a structure built near the Museum in Upper Doongan, Butuan City."<br><br>Based on these factual antecedents, there is cogent basis for petitioner's contention that the MTCC lacked jurisdiction in this case.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> </blockquote>Similarly, We also adopt the above-quoted findings in the estafa case, as it involves the same parties and the same dispute over the same parcel of land, insofar as the heirs of Manuel and Concepcion were named as the offended parties therein. The undated sketch plan, incomplete tax receipts, and equivocally significant<i> patilaw</i> scheme relied upon by the courts<i> a quo</i> cannot prevail over the evidence of actual possession, payment of taxes since 1948, and the certificate of title presented by the Heirs of Eustacio. All told, the CA committed reversible error when it ruled that the present action "<i>must necessarily fail because the alleged cloud on the appellants' title was not proven to be invalid or inoperative</i>."<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> The pieces of evidence presented by the heirs of Concepcion and Manuel as proof of their claim to the disputed parcel fail to rebut the presumption of ownership enjoyed by the Heirs of Eustacio as actual possessors and registered owners.<br><br><b>ACCORDINGLY</b>, the present Petition for Review is<b> GRANTED</b>. The March 10, 2023 Decision and the October 10, 2023 Resolution of the Court of Appeals in CA-G.R. CV No. 06366-MIN are hereby<b> REVERSED</b> and<b> SET ASIDE</b>. Judgment is hereby rendered<b> DECLARING</b> the Heirs of Eustacio Bulawin the true and lawful owners of the parcel of land denominated as Lot No. 60, C-1, Cad. 473, located in Lumad, Poblacion, Mambajao, Camiguin.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Dimaampao,</i> and <i>Singh, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 32-47. Penned by Associate Justice Richard D. Mordeno and concurred in by Associate Justices Oscar V. Badelles and Jill Rose S. Jaugan-Lo of the Twenty-First Division, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 64-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 8, 67-68. Petition for Review and RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 68. RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 8, 33, 68, 78. Petition for Review, CA Decision, RTC Decision, and Motion for Reconsideration of the RTC Decision, respectively.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 68. RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 34 &amp; 69. CA and RTC Decisions, respectively.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 65. CA Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 34. CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 33 &amp; 68. CA and RTC Decisions, respectively.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 9. Petition for Review.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 9 &amp; 33. Petition for Review and CA Decision, respectively.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 33. CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 68. RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 67-68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 85-87. February 8, 2019 Resolution in Criminal Case No. 1761, penned by Presiding Judge Nannette Michote E. Lao.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 86-87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 67-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 69. RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 73-79. Motion for Reconsideration.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 84.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 40-41. CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 42-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 43-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 45-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 48-52. Motion for Reconsideration of the CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 52-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 54-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 65. October 10, 2023 Resolution in CA-G.R. CV No. 06366-MIN.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 11-13. Petition for Review.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 13-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 17-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 18-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 20-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> CONSTITUTION, Article VIII, sec. 5(2)(e).<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> RULES OF COURT, Rule 45, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> 464 Phil. 76 (2004) [Per J. Corona, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>. at 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Cf.</i> RTC Decision, <i>id</i>. at 68, and CA Decision, <i>id</i>. at 41-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Medina v. Mayor Asistio, Jr.</b>, 269 Phil. 225, 232 (1990) [Per J. Bidin, Third Division], <i>citing</i> <b>Salazar v. Gutierrez</b>, 144 Phil. 233, 239 (1970) [Per J. Makalintal, <i>En Banc</i>] and <b>De La Cruz v. Sosing</b>, 94 Phil. 26, 28 (1953) [Per J. Bautista Angelo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>G.R. No. 256343</b>, April 2, 2025 [Per J. Gaerlan, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> CIVIL CODE, arts. 433, 541. <i>See also</i> <b>Sy v. China Banking Corp.</b>, 874 Phil. 398, 408 (2020) [Per J. Carandang, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Presidential Decree No. 1529 (1978), sec. 31, 2nd paragraph.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> Records, p. 66. Judicial Affidavit of Ernesto Bulawin.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Rollo</i>, p. 110. Comment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Records, p. 453.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>. at 454. Sketch plan dated September 5, 1994.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 455. Sketch plan dated May 4, 2007.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 456. Undated sketch plan.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id</i>. at 66. Judicial Affidavit of Ernesto Bulawin.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at 473. Lease Contract/Agreement.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>. at 474. Waiver of Rights/Agreement.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id</i>. at 475. March 6, 2002 deed signed by Felizardo Macapayad, Sr. The subject of the mortgage is referred to merely as "<i>akong basakan nga nahimutang sa Lumad, Mambajao</i>" (my ricefield located in Lumad, Mambajao).<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>Ponce v. Aldanese</b>, 909 Phil. 578, 586 (2021) [Per J. Hernando, Second Division]; <b>Nabo v. Buenviaje</b>, 887 Phil. 678, 691 (2020) [Per J. Inting, Second Division]; <b>Republic v. Court of Appeals and Plaza</b>, 328 Phil. 238, 248 (1996) [Per J. Torres, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Rollo</i>, p. 42. CA Decision. Manuel's son-in-law Benito Aclo submitted receipts for Manuel's share for the years 1994, 1995, 1996, 1997, 1999, 2000, 2001, 2002 and 2003; while Concepcion's son Felizardo Macapayad Sr. submitted receipts for his mother's share for the years 1986 to 1997. Records, pp. 136, 155, 161-173. Judicial Affidavits of Benito Aclo and Preciosa Macapayad; copies of real property tax receipts.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Records, p. 68. Judicial Affidavit of Ernesto Bulawin.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id</i>. at 161-173. Copies of real property tax receipts.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Caballes v. Department of Agrarian Reform</b>, 250 Phil. 255, 261 (1988) [Per J. Sarmiento, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Rollo</i>, p. 33. CA Decision; Records, p. 105. Judicial Affidavit of Dina B. Amper.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> TSN, Ernesto Bulawin, August 19, 2014, <b>People v. Ruel Bulawin</b>, Criminal Case No. 1761, p. 7. <i>See also</i> pp. 10-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id</i>. at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> CIVIL CODE, art. 1078.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Reyes v. Sps. Garcia</b>, 921 Phil. 323, 331 (2022) [Per J. Hernando, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> Records, p. 116. Judicial Affidavit of Ruel Bulawin.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id</i>. at 105. Judicial Affidavit of Dina B. Amper.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id</i>. at 484. Judicial Affidavit of Ernesto G. Bulawin. Emphasis and underlining supplied.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Rollo</i>, pp. 35, 41, 68. RTC and CA Decisions.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> Records, pp. 449 &amp; 457. Real Property Historical Ownership.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Rollo</i>, pp. 86-87. February 8, 2019 Resolution in <i>People v. Ruel Bulawin</i>, Crim. Case No. 1761, RTC of Mambajao, Camiguin, Branch 28. The Resolution was penned by Presiding Judge Nannette Michote E. Lao.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id</i>. at 87. (Citations omitted; emphasis and underlining supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> 436 Phil. 109 (2002) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id</i>. at 117-120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Rollo</i>, p. 41. CA Decision.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

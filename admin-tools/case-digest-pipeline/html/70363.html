@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 261757 - OFFICE OF THE PRESIDENT, PETITIONER, VS. MELCHOR ARTHUR H. CARANDANG, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70363' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 261757, January 29, 2026 ]</H2>
+			<H3>OFFICE OF THE PRESIDENT, PETITIONER, VS. MELCHOR ARTHUR H. CARANDANG, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">The Court is once again called upon to confront a pivotal constitutional question regarding the limits of executive power and the scope of administrative accountability. At its heart lies the power of the Office of the President over a Deputy Ombudsman, set against the backdrop of jurisprudence which has defined the delicate balance between oversight and independence in public service.<br><br><center><b><i>The Facts</i></b></center><br>Before the Court is a Petition for Review on <i>Certiorari</i> under Rule 45 of the Rules of Court filed by the Office of the President, represented by former Executive Secretary Victor D. Rodriguez, through the Office of the Solicitor General (<b>OSG</b>).<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Said Petition assails the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated November 18, 2021, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated July 5, 2022, of the Court of Appeals (<b>CA</b>) in CA-G.R. SP No. 161245. The CA granted the Verified Petition for Review filed by former Overall Deputy Ombudsman, Melchor Arthur H. Carandang (<b>Carandang</b>),<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and set aside the Decision,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated July 30, 2018, and the Resolution, dated May 28, 2019, of the Office of the President, which found Carandang liable for graft and corruption and betrayal of public trust, imposing upon him the penalty of dismissal from service.<br><br>This case traces its origins to statements made by Carandang during an ambush interview with news anchor Henry Omaga-Diaz and Philippine Daily Inquirer reporter Nikko Dizon at the canteen of the Ombudsman Building.<br><br>When the interview was broadcast on September 27, 2017, Carandang was reported to have claimed that the Office of the Ombudsman possessed documentary proof purportedly exposing the ill-gotten wealth of then President Rodrigo R. Duterte (<b>Duterte</b>) and his family. Among these supposed materials were bank transaction records allegedly transmitted by the Anti-Money Laundering Council (<b>AMLC</b>) to the Ombudsman:<blockquote>We can confirm that we received bank transactions coming from AMLC, bank transactions generated by AMLC.<br><br>. . . .<br><br>[']Yung billions kasi baka add-in na nila itong lahat ng transactions kasi [PHP] 20 million, [PHP] 20 million, [PHP] 20 million, [PHP] 16 million.<br><br>Pag in-add mo siguro 'yan aabot ng billion. Ang dami... [PHP] 40 million, [PHP] 40 million, several [PHP] 40 million, [PHP] 200 million kaagad ito.<br><br>[']Yun[g] iba [PHP] 50 million ..ang dami.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup></blockquote>Carandang supposedly went further, intimating that these documents surfaced in connection with an investigation the Ombudsman had initiated following a complaint lodged by former Senator Antonio F. Trillanes IV (<b>Trillanes</b>) concerning the former President's alleged unexplained assets.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>A year prior, on May 5, 2016, former Senator Trillanes filed a Complaint against then President Duterte with the Office of the Ombudsman on charges of malversation, violation of Republic Act No. 3019 or the Anti-Graft and Corrupt Practices Act, plunder, and alleged unexplained accumulated wealth.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>It must be noted that then Ombudsman, Conchita Carpio-Morales (<b>Carpio-Morales</b>), inhibited herself from all complaints related to former President Duterte considering her relation by affinity to the President's daughter.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Consequently, then Overall Deputy Ombudsman Carandang took over the Complaint filed by former Senator Trillanes.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>On February 21, 2017, former Senator Trillanes requested the AMLC to release all alleged flagged or reported bank transactions of then President Duterte and his family. However, the AMLC denied said request citing the provisions of Republic Act No. 1405 or the Bank Deposit Secrecy Law:<blockquote>We regret to inform (you) that your request, which necessarily includes transactions on President Duterte's bank accounts, is not allowed under Republic Act [ ] No. 1405 or the Bank Deposit Secrecy Law. Under that law, all bank deposits, and all transactions related thereto, are absolutely confidential and may not be inquired into by any person, government official, bureau or office, subject only to a few exceptions not present in this case.<br><br>While [Republic Act] No. 9160 or the Anti-Money Laundering Act of 2001 ("AMLA") has given the Anti-Money Laundering Council (AMLC), by way of exception to [Republic Act] No. 1405, the authority to conduct bank inquiry, this, however, like the other exceptions under the law, is strictly construed and may be exercised only in the presence of very specific circumstances, to wit: investigation of an unlawful activity or a money laundering offense, existence of probable cause[,] etc. Generally, before the AMLC may conduct a bank inquiry, it needs to secure from the Court of Appeals an order allowing such inquiry.<br><br>Absent the foregoing circumstances, the AMLC has neither the power nor authority to conduct a bank inquiry. Without an authorized bank inquiry, the AMLC is in no position to have in its possession the bank records of, or to disclose, the bank transactions of anyone. Whatever reports are in its possession, based as they are on bank transactions, are confidential and may be disclosed only in strict accordance with the requirements and procedures prescribed under the law and jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></blockquote>On August 17, 2017, Carandang sent a letter to the AMLC and requested for the investigation of the accounts identified by former Senator Trillanes.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Immediately after Carandang's interview on September 27, 2017, or on September 28, 2017, the AMLC Secretariat issued a statement declaring that it was not the source of the documents and information which were exposed by former Senator Trillanes:<blockquote>The Anti-Money Laundering Council Secretariat received on [September 6,] 2017 the [August 17, 2017] letter of Overall Deputy Ombudsman Melchor Arthur Carandang, requesting it to initiate investigation on the subject accounts.<br><br>We have categorically stated that the [AMLC] is not the source of the documents and information attached by Senator Antonio F. Trillanes IV in his Complaint, regarding the alleged bank accounts of President Rodrigo Roa Duterte. It has neither provided the Office of the Ombudsman with any report as a consequence of any investigation of subject accounts for any purpose.<br><br>We have yet to evaluate the request, and the initiation of an investigation, as well as the release of any report on the subject will depend on such evaluation. Suffice it to state that in the attachment to the Complaint, the alleged debits and credits representing outflows and inflows were added together, thus, the resulting total amounts are wrong and misleading.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></blockquote>Consequently, two administrative complaints were filed against Carandang before the Office of the President.<br><br>The first Complaint,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated October 3, 2017, was filed by Attys. Manuelito R. Luna and Eligio P. Mallari, while the second Verified Complaint,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> dated August 15, 2018, was filed by Attys. Jacinto V. Paras and Glenn A. Chong. Both charged Carandang with the following: (1) Graft and Corruption under Section 3(e)<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> and (k)<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> of Republic Act No. 3019 or the Anti-Graft and Corrupt Practices Act; (2) Grave Misconduct, Gross Negligence and Serious Dishonesty Constituting Betrayal of Public Trust; and (3) Unauthorized Disclosure of Infonnation under Section 2,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Rule V of Ombudsman Administrative Order No. 7, Republic Act No. 1405, and Section 3,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Rule IV of the Implementing Rules and Regulations (<b>IRR</b>) of Republic Act No. 6713 or the Code of Conduct and Ethical Standards for Public Officials and Employees.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> The complaints essentially allege that Carandang improperly disclosed confidential information and demonstrated manifest partiality during the interview.<br><br>On January 26, 2018, the Office of the President, through then Executive Secretary Salvador C. Medialdea (<b>Medialdea</b>), issued a Formal Charge (with Order of Preventive Suspension)<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> against Carandang (<b>Formal Charge</b>):<blockquote>Based on the foregoing circumstances and after preliminary investigation, this Office finds prima facie case against respondent Carandang for betrayal of public trust, and graft and corruption. Thus, he is hereby FORMALLY CHARGED therefor on account of the following acts:<ol><li>Grave Misconduct and Grave Dishonesty for misuse of confidential information and disclosing false information;<br><br></li><li>Violation of Section 3(e) of [Republic Act] No. 3019 for causing any undue injury to any party, including the Government, or giving any private party any unwarranted benefits, advantage or preference in the discharge of his official administrative or judicial functions through manifest partiality, evident bad faith or gross inexcusable negligence;<br><br></li><li>Violation of Section 3(k) of [Republic Act] No. 3019, in relation to Section 2, Rule V of [Ombudsman] Administrative Order No. 07, for divulging valuable information of a confidential character, acquired by his office or by him on account of his official position to unauthorized persons, or releasing such information m advance of its unauthorized release date; and<br><br></li><li>Violation of Section 7 of [Republic Act] No. 6713, in relation to Section 3(f) and (g) Rule IV of the [IRR] of [Republic Act No.] 6713, for disclosure and/or misuse of confidential information.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></li></ol></blockquote>Carandang was directed to file an answer and present his evidence within ten days from notice. He was also placed under preventive suspension for 90 days from receipt of said Formal Charge.<br><br>Instead of filing an answer, however, Carandang filed a Special Appearance with Manifestation <i>Ex Abundanti Ad Cautelam</i>,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> dated February 9, 2018.<br><br>Carandang explained that Section 8(2) of Republic Act No. 6770 or the Ombudsman Act of 1989, the provision granting the President administrative disciplinary authority over the Deputy Ombudsman, has long been declared unconstitutional by the Court in <i>Gonzales III v. Office of the President</i>.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Thus, Carandang submits that then Executive Secretary Medialdea had no authority to issue the Formal Charge, which ordered his preventive suspension.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Notably, the directive to preventively suspend Carandang was not implemented by then Ombudsman Carpio-Morales.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br><center><b><i>The Findings of the Office of the President</i></b></center><br>On July 30, 2018, the Office of the President issued a Decision<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> finding Carandang administratively liable for Graft and Corruption and Betrayal of Public Trust and, thus, dismissed him from service:<blockquote><b>WHEREFORE</b>, premises considered, this Office hereby finds respondent Melchor Arthur H. Carandang, Overall Deputy Ombudsman of the Office of the Ombudsman, <b>LIABLE for GRAFT AND CORRUPTION, AND BETRAYAL OF PUBLIC TRUST</b> and meted the penalty of <b>DISMISSAL FROM THE SERVICE</b> with the accessory penalties.</blockquote><blockquote>. . . .&nbsp;</blockquote><blockquote><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (Emphasis in the original)</blockquote>As regards <i>Gonzales</i>, the Office of the President maintained that it had disciplinary jurisdiction over a Deputy Ombudsman:<blockquote>The Office maintains that the President has disciplinary jurisdiction over a Deputy Ombudsman. A Deputy Ombudsman is appointed in office by the President, and as a presidential appointee, he is under the disciplinary authority of the President.<br><br>. . . .<br><br>Furthermore, although Article XI, Section 5 of the Constitution created the Office of the Ombudsman as an "independent" office, this independence is not anathema to this Office's disciplinary authority over a Deputy Ombudsman. Surely, such independence includes freedom to effectively. discharge their constitutional duties, which necessarily includes organizational separation and fiscal autonomy. However, the same does not, as it should not, obviate the possibility of having an external disciplining authority over some of its officials pursuant to the checks and balances principle.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></blockquote>Further, the Office of the President proceeded to cite <i>Agustin-Se v. Office of the President</i><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> to posit that the Court has supposedly abandoned its ruling in <i>Gonzales</i>:<blockquote>More significantly, this Office had previously taken cognizance of an administrative disciplinary case against a Deputy Ombudsman, ODO Orlando C. Casimiro (Casimiro). In said case, this Office ruled on the merits of the charges against ODO Casimiro, which ruling was affirmed by the Court of Appeals and, subsequently, the Supreme Court in G.R. No. 207355, entitled <i>Agustin-Se v. Office of the President</i>. In its Decision promulgated 03 February 2016, the Supreme Court even noted the fact that this Office duly considered the evidence submitted by petitioners therein, sufficiently addressed the issues raised in said case, and cited the correct evidence, law, and jurisprudence to support its findings. Clearly, the Supreme Court not only confirmed this Office's assumption of jurisdiction over the case of ODO Casimiro, but also concurred with this Office's ruling. Being a more recent decision in comparison to the Gonzales case, this Office considers the same to be the prevailing case law on the matter of the President's authority to discipline a deputy.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></blockquote>Concerning Carandang's administrative liability, the Office of the President found substantial evidence of Graft and Corruption and Betrayal of Public Trust:&nbsp;<br><blockquote>Respondent Carandang improperly disclosed confidential information acquired in bis official capacity, an act punishable under existing laws.<br><br>. . . .<br><br>Such disclosure runs counter to [Rule V, Section 2] of [Ombudsman Administrative Order] 07, which expressly provides:<blockquote>Section 2. Public disclosure; exemption. – When circumstances so warrant and with due prudence, the Office of the Ombudsman may publicize in a fair and balanced manner the filing of a complaint, grievance, or request for assistance, and the final resolution, decision or action taken thereon; Provided, however, that prior. To such final action, no publicity shall he made of matters which may adversely affect national security or public, interest, prejudice the safety of witnesses or the disposition of the case, or unduly expose persons complained against to ridicule or public censure.</blockquote>It is clear from the above provision that public disclosure is limited to the "filing of a complaint, grievance, or request for assistance, and the "final" resolution, decision, or action taken thereon. It does not refer to the disclosure of information relative to bank records and transactions of a fact-finding investigation, particularly, one that has just commenced. The disclosure allowed by said rules is also qualified by the phrases "when circumstances so warrant and with due prudence" and "unduly expose persons complained against to ridicule or public censure." Thus, the subject information, which respondent Carandang revealed for public consumption to a member of the press, does not pertain to any of the matters which may be disclosed per the above-cited Rule V, but rather to an ongoing investigation of a case, a clear violation of [Ombudsman Administrative Order] 07. Needless to say, at the very least, circumstances warranted utmost circumspection against premature disclosure.<br><br>In addition, the subject information pertains to bank records and transactions which are absolutely confidential pursuant to [Republic Act No.] 1405. Respondent Carandang is therefore liable under Section 3(k) of [Republic Act No.] 3019, which penalizes the act of "divulging valuable information of a confidential character, acquired by his office or by him on account of his official position to unauthorized persons.<br><br>To make matters worse, respondent Carandang's disclosure of his alleged source and the figures he presented were false and misleading. While respondent Carandang claims to have acquired the subject information from the AMLC, evidence on record reveals otherwise.<br><br>. . . .<br><br>Evidently, the AMLC is not the source of the information on the alleged bank accounts of the President, as it has categorically stated that it did not provide either Senator Trillanes or the [Ombudsman] with any information relative thereto. In fact, as early as [March 29,] 2017, the AMLC Secretariat has already relayed to Senator Trillanes that it cannot conduct any bank inquiry without violating [Republic Act No.] 1405. Its official statement further reveals that in a letter dated [August 17,] 2017, respondent Carandang even requested the AMLC to initiate investigation on the subject accounts. These circumstances prove that contrary to his allegations in his interview with Diaz, respondent Carandang did not receive any bank accounts and/ or transactions generated by the AMLC. Worse, the AMLC has declared that the amounts disclosed by respondent Carandang are wrong and misleading. Respondent Carandang's act of publicizing false information reveals his flagrant disregard of existing laws and evident bad faith.<br><br>In addition, respondent Carandang is guilty of manifest partiality towards Senator Trillanes because while he was eager and willing to broadcast misleading information against the President in connection with the aforesaid investigation, he was not as eager to publicize a development that favored the President in the same case. In his letter dated [February 12,] 2018 rejecting the Office of the Solicitor General's request to be furnished a copy of the complaint and its attachments, respondent Carandang stated that the recommendation to terminate the investigation against the President had already been approved by Deputy Ombudsman Cyril E. Ramos on [November 29,] 2017. Considering that more than two [ ] months had lapsed since such termination and nothing was heard from respondent Carandang in the media about such development, he was clearly only interested to broadcast an information adverse to the President. His keeping mum about an infom1ation that was favorable to the President clearly amounted to manifest partiality.<br><br>These reasons support respondent Carandang's liability under Section 3(c) of [Republic Act No.] 3019, which penalizes the act of giving any private party unwarranted benefits, advantage or preference in the discharge of his official administrative or judicial functions through manifest partiality, evident bad faith or gross inexcusable negligence. He likewise violated Section 7(c)(l) of [Republic Act No.] 6713 on disclosure and/or misuse of confidential information in order to give undue advantage to Senator Trillanes.<br><br>In <i>Dela Cruz. V. Malunao</i>, the Supreme Court defined misconduct as "a transgression of some established and definite rule of action, more particularly, unlawful behavior or gross negligence by the public officer. The misconduct is grave if it involves any of the additional elements of corruption, willful intent to violate the law or to disregard established rules. Corruption, as an element of grave misconduct, consists in the act of an official or fiduciary person who unlawfully and wrongfully uses his position or office to procure some benefit for. Himself of for another person, contrary to duty and the rights of others." This Office finds that respondent Carandang is guilty of Grave Misconduct on account of his violations of the following: (1) Section 3(k) of [Republic Act No.] 3019 in relation to [Rule V, Section 2] of OMB AO 07; (2) Section 3(c) of RA 3019; and (3) Section 7(c) (1) of [Republic Act No.] 6713.<br><br>These transgressions of respondent Carandang constitute Graft and Corruption as well as Betrayal of Public Trust, which gravely affect his fitness to remain in public office. He is thus penalized with dismissal from the service, which carries with it cancellation of eligibility, perpetual disqualification from holding public office, bar from taking civil service examinations, and forfeiture of retirement benefits.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></blockquote>On August 15, 2018, Carandang filed a Motion for Reconsideration <i>Ex Abundanti Ad Cautelam</i>,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> seeking the reversal of the Office of the President's Decision on the grounds of lack of jurisdiction and absence of factual basis. However, this was denied through a Resolution,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> dated May 28, 2019:&nbsp;<br><blockquote><b>WHEREFORE</b>, the instant motion is hereby <b>DENIED</b> for lack of merit.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> (Emphasis in the original)</blockquote>Upon the retirement of Ombudsman Carpio-Morales, then President Duterte appointed Samuel Martires (<b>Martires</b>) as the new Ombudsman on July 26, 2018.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Pursuant to the Decision of the Office of the President, Ombudsman Martires issued an Order,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> dated June 14, 2019, directing Carandang to cease and desist from performing his powers and functions as Overall Deputy Ombudsman, and declaring his post vacant:<blockquote>Pursuant to the Decision dated [July 30,] 2018 which found you liable for graft and corruption, as well as betrayal of public trust, and penalized you with dismissal from the service, in observance of the Resolution dated [May 28,] 2019, the Office of the Overall Deputy Ombudsman is hereby deemed vacant.<br><br>In view of the foregoing, you are hereby ordered to cease and desist from performing your functions as Overall Deputy Ombudsman immediately upon receipt of this Order.<br><br>In the exigency of the service, Special Prosecutor EDILBERTO G. SANDOVAL, in a concurrent capacity, is hereby designated as Acting Overall Deputy Ombudsman, with full powers.<br><br>For strict compliance.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></blockquote>On June 20, 2019, Carandang filed a Verified Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> before the CA assailing the Office of the President's Decision and Resolution. Carandang argued that the President has no administrative disciplinary jurisdiction over the Overall Deputy Ombudsman.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Assuming <i>arguendo</i>, Carandang refutes the finding that he betrayed public trust and committed acts amounting to graft and corruption in the televised interview.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> He likewise submitted that the Office of the President's Decision and Resolution were issued in violation of his right to due process.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>In response, the Office of the President, through the OSG, filed its Comment,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> dated December 16, 2019. It argued that Carandang's failure to question the Order, dated June 14, 2019, issued by Ombudsman Martires rendered the Verified Petition before the CA moot.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>Thus, on December 16, 2019, Carandang filed a Reply to Comment<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> arguing that he was not furnished a copy of Ombudsman Martires' Order. He claimed that he learned of the Order only upon receiving the foregoing Comment, and therefore it does not bind him. Nonetheless, Carandang maintained that the validity of the Order remained subordinate to the determination of whether the Office of the President's findings were valid.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>The Office of the President, through the OSG, then filed a Rejoinder,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> dated January 22, 2019, disputing Carandang's alleged non-receipt of Ombudsman Martires' Order:<blockquote>5. A cursory reading of petitioner's Verified Petition for Review dated June 20, 2019 would reveal that he was served a copy of said Order, thus he has full knowledge thereof. In fact, in his Petition, he stated, and the OSG quotes this portion of his Petition <i>in toto</i>, to wit:<blockquote>29. On June 17, 2019, the Order implementing the dismissal WAS SERVED UPON PETITIONER. Copy of the said Order is attached as Annex "H".<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> (Italics in the original)</blockquote></blockquote><center><b><i>The Ruling of the CA</i></b></center><br>On November 18, 2021, the CA issued a Decision<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> granting Carandang's Verified Petition:&nbsp;<br><blockquote><b>WHEREFORE</b>, the instant Petition for Review is <b>GRANTED</b>. The Decision dated [July 30,] 2018 rendered by the Office of the President, through Executive Secretary Salvador C. Medialdea, in OP-DC Case Nos. 17-J-180 and 17-J-181, is <b>SET ASIDE</b>.<br><br>The Complaints both dated [October 3,] 2017 are <b>DISMISSED</b> without prejudice to re-filing the same before the proper forum.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Emphasis in the original)</blockquote>The CA applied the doctrine of <i>stare decisis</i> and held that <i>Gonzales</i> squarely governed the present controversy.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Given that the Court had already declared unconstitutional the President's administrative disciplinary jurisdiction over a Deputy Ombudsman, the CA concluded that the Office of the President's Decision and Resolution were void and without legal effect.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>The CA further emphasized that the power to discipline Carandang lies exclusively with the Ombudsman; thus, any administrative complaint against him should have been initiated before that Office.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>Finally, because the remaining issues in the Verified Petition hinged on the Office of the President's supposed disciplinary authority, the CA found no necessity to address them.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>Aggrieved, the Office of the President filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> dated December 13, 2021, but the same was denied through a Resolution,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> dated July 5, 2022:<blockquote><b>WHEREFORE</b>, the Motion for Reconsideration dated [December 13,] 2021 filed by respondent Office of the President, through the Office of the Solicitor General, is <b>DENIED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> (Emphasis in the original)</blockquote>Thus, the Office of the President, through the OSG, filed this Petition before the Court.<br><br>At its core, the Petition urges the Court to revisit its 2014 ruling in <i>Gonzales</i>, a decision reached only after the Court reversed itself on reconsideration.<br><br>To recall, the Court initially upheld the validity of Section 8(2) of Republic Act No. 6770, or the Ombudsman Act (<b>First <i>Gonzales</i> Decision</b>).<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>Said Decision involved then Deputy Ombudsman Emilio A. Gonzales III (<b>Gonzales</b>), who was dismissed by the Office of the President for Gross Neglect of Duty and Grave Misconduct arising from his supposed mishandling and prolonged inaction on the motion for reconsideration of dismissed police officer Rolando Mendoza, the hostage-taker in the 2010 Manila bus incident, and Special Prosecutor Wendell Barreras-Sulit (<b>Barreras-Sulit</b>), who challenged the Office of the President's initiation of administrative proceedings against him in connection with the plea bargaining agreement with retired General Carlos Garcia. Both Gonzales and Barreras-Sulit assailed the Office of the President's jurisdiction, invoking the constitutional independence of the Office of the Ombudsman and questioning the constitutionality of Section 8(2) of the Ombudsman Act, which authorized the President to remove a Deputy Ombudsman or Special Prosecutor.<br><br>In denying the consolidated Petitions, the Court in the First <i>Gonzales</i> Decision explained:<blockquote>Petitioners cannot insist that they should be solely and directly subject to the disciplinary authority of the Ombudsman. For, while Section 21 declares the Ombudsman's disciplinary authority over all government officials, Section 8(2), on the other hand, grants the President express power of removal over a Deputy Ombudsman and a Special Prosecutor. Thus:<blockquote>Section 8. Removal; Filling of Vacancy. —<br><br>[. . . .]<br><br>(2) <i>A Deputy or the Special Prosecutor, may be removed from office by the President for any of the grounds provided for the removal of the Ombudsman, and after due process.</i></blockquote>It is a basic canon of statutory construction that in interpreting a statute, care should be taken that every part thereof be given effect, on the theory that it was enacted as an integrated measure and not as a hodge-podge of conflicting provisions. A construction that would render a provision inoperative should be avoided; instead, apparently inconsistent provisions should be reconciled whenever possible as parts of a coordinated and harmonious whole. Otherwise stated, the law must not be read in truncated parts. Every part thereof must be considered together with the other parts, and kept subservient to the general intent of the whole enactment.<br><br>A harmonious construction of these two apparently conflicting provisions in R[epublic Act] No. 6770 leads to the inevitable conclusion that Congress had intended the Ombudsman and the President to exercise concurrent disciplinary jurisdiction over petitioners as Deputy Ombudsman and Special Prosecutor, respectively. This sharing of authority goes into the wisdom of the legislature, which prerogative falls beyond the pale of judicial inquiry.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> (Citations omitted; emphasis supplied)</blockquote>Further, the Court in the First <i>Gonzales</i> Decision, explained that Congress merely filled a gap in the law when it granted the President the power to remove a Deputy Ombudsman and a Special Prosecutor:<blockquote>While the removal of the Ombudsman himself is also expressly provided for in the Constitution, which is by impeachment under Section 2 of the same Article, there is, however, no constitutional provision similarly dealing with the removal from office of a Deputy Ombudsman, or a Special Prosecutor, for that matter. By enacting Section 8(2) of R[epublic Act No.] 6770, Congress simply filled a gap in the law without running afoul of any provision in the Constitution or existing statutes. In fact, the Constitution itself, under Section 2, authorizes Congress to provide for the removal of all other public officers, including the Deputy Ombudsman and Special Prosecutor, who are not subject to impeachment.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup></blockquote>The Court further recognized that the President's power of removal is necessarily implied from the power of appointment. At the same time, the Court emphasized that such power does not diminish the constitutionally guaranteed independence of the Office of the Ombudsman.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Upon motion for reconsideration, however, the Court declared Section 8(2) of Republic Act No. 6770 unconstitutional for being in contravention of the independence of the Office of the Ombudsman (<b>Second <i>Gonzales</i> Decision</b>). In particular, the Court decreed that said provision was invalid insofar as it granted the President disciplinary jurisdiction over a Deputy Ombudsman. However, the Court resolved to maintain the validity of the provision as regards the Special Prosecutor, as it did not consider the Office of the Special Prosecutor to be constitutionally within the Office of the Ombudsman and is, hence, not entitled to the independence the latter enjoys under the Constitution.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>The Office of the President cites the First <i>Gonzales</i> Decision and the dissents in the Second <i>Gonzales</i> Decision to argue that the legislative grant unto the President to remove a Deputy Ombudsman in Section 8(2), in relation to Section 21<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> of Republic Act No. 6770, is not unconstitutional, as it was enacted pursuant to Article XI, Section 2 of the 1987 Constitution:<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><blockquote>Section 2. The President, the Vice-President, the Members of the Supreme Court, the Members of the Constitutional Commissions, and the Ombudsman may be removed from office on impeachment for, and conviction of, culpable violation of the Constitution, treason, bribery, graft and corruption, other high crimes, or betrayal of public trust. All other public officers and employees may be removed from office as provided by law, but not by impeachment.</blockquote>The Petition underscores that the provision draws a clear line between public officers and employees who may be removed only through impeachment and those whose removal shall be "as provided by law."<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Because the Constitution specifies that only the President, Vice President, Members of the Court, Members of the Constitutional Commissions, and the Ombudsman are subject to impeachment, the Petition asserts that the Deputy Ombudsman belongs to the category of non-impeachable officers, whose removal must therefore be governed by statute.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>The Petition proceeds to explain that the power of the President to remove the Deputy Ombudsman and the Special Prosecutor is concurrent with the disciplinary authority of the Ombudsman in light of Section 21 of Republic Act No. 6770:<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><blockquote>Section 21. Officials Subject to Disciplinary Authority; Exceptions. — The Office of the Ombudsman shall have disciplinary authority over all elective and appointive officials of the Government and its subdivisions, instrumentalities and agencies, including Members of the Cabinet, local government, government-owned or controlled corporations and their subsidiaries, except over officials who may be removed only by impeachment or over Members of Congress, and the Judiciary.</blockquote>Contrary to the Second <i>Gonzales</i> Decision, the Petition argues that this concurrent power does not undermine the independence of the Office of the Ombudsman, as the President's authority to remove the Deputy Ombudsman and the Special Prosecutor supposedly functions as a measure of check and balance.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> Its exercise of disciplinary authority over Carandang was allegedly even more warranted given then Ombudsman Carpio-Morales' inhibition and unwillingness to implement Carandang's preventive suspension.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>Even if the CA Decision no longer ruled on Carandang's administrative liability, the Petition nonetheless explained that it was correct in finding Carandang liable for Graft and Corruption and Betrayal of Public Trust.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br>On December 27, 2023, Carandang filed a Comment/Opposition to the Petition,<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> echoing much of his earlier submissions during the proceedings before the Office of the President and the CA.<br><br><center><b><i>The Issues</i></b></center><blockquote><ol><li>Was the CA correct in applying the doctrine of <i>stare decisis</i> and in following the Second <i>Gonzales</i> Decision despite the Office of the President's reliance on <i>Agustin-Se</i>?<br><br></li><li>Does the President have the authority to remove a Deputy Ombudsman, or, at least, to exercise administrative disciplinary jurisdiction over them?<br><br></li><li>Is Carandang administratively guilty of Graft and Corruption and Betrayal of Public Trust?</li></ol></blockquote><center><b><i>The Ruling of the Court</i></b></center><br>The Petition is without merit. The CA rightly cited the Second <i>Gonzales</i> Decision in overturning the Office of the former President's removal of former Overall Deputy Ombudsman Carandang. By constitutional design, the President possesses no administrative or disciplinary authority over a Deputy Ombudsman. Moreover, even on the merits, the claims of Carandang's administrative liability are tenuous at best, lacking a firm foundation in fact or law.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The Second Gonzales Decision applies as stare decisis</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The foremost purpose of our judicial system is to resolve disputes and, in doing so, establish precedents that not only resolve the case at hand but also shape the course of justice for generations. Central to this function is the doctrine of <i>stare decisis</i>, meaning "to stand by things decided," which compels courts to adhere to settled decisions of the Court in cases involving similar facts and circumstances. By enforcing consistency in the law, said doctrine prevents the unnecessary relitigation of issues already definitively resolved.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> The policy behind <i>stare decisis</i> rests on the fundamental need for stability, certainty, and integrity in the administration of justice.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> Without it, judicial decisions would be capricious, and the law would lose its guiding force. While courts may interpret legal principles in response to evolving societal needs, the power to depart from an established doctrine resides solely with the Court.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>As cited by the CA,<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> the doctrine of <i>stare decisis</i> finds basis in Article 8 of the Civil Code:<blockquote>Article 8. Judicial decisions applying or interpreting the laws or the Constitution shall form part of the legal system of the Philippines. (n)</blockquote>Accordingly, when the Second <i>Gonzales</i> Decision was promulgated on January 28, 2014, its declaration of the unconstitutionality of Section 8(2) of Republic Act No. 6770 became woven into the fabric of our fundamental law. From that point forward, it has been settled that the President holds no power to remove a Deputy Ombudsman, even on grounds that may constitute an impeachable offense, and even where due process appears to have been observed. That constitutional command remains unchanged. Accordingly, the CA cannot, in any sense, be faulted for applying binding precedent and for nullifying the Office of the President's Decision and Resolution dismissing Carandang.<br><br>Yet, the Office of the President invokes the Court's ruling in <i>Agustin-Se</i> to argue otherwise. In its Decision, dated July 30, 2018, the Office of the President claims that the Court in <i>Agustin-Se</i> "not only confirmed [the Office of the President's] assumption of jurisdiction over the case of [Overall Deputy Ombudsman Orlando C. Casimiro], but also concurred with [its] ruling."<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>This is erroneous.<br><br><i>Agustin-Se</i> involved a complaint filed before the Office of the President in 2010 against then Overall Deputy Ombudsman Orlando C. Casimiro (<b>Casimiro</b>) for allegedly causing delay in the preliminary investigation of a case before the Office of the Ombudsman. In dismissing the complaint, the Office of the President found that the delay could not be validly attributed to Casimiro. This conclusion would be affirmed by the CA and, ultimately, by the Court.<br><br>It is clear that the Office of the President's administrative disciplinary jurisdiction was never put in issue in <i>Agustin-Se</i>, particularly since the Office of the President did not impose any administrative sanction or even broach the possibility of removing Casimiro. After all, the complaint in that case was dismissed. As the CA correctly explained, the Court's power to rule on the constitutionality of Section 8(2) of Republic Act No. 6770 was not triggered, and any opinion on the matter would have been mere <i>obiter</i>.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>Likewise, the promulgation of <i>Agustin-Se</i> on February 3, 2016, without any caveat or acknowledgment of the Second <i>Gonzales</i> Decision, which had been issued nearly two years earlier, cannot imply the abandonment of precedent. It bears noting that <i>Agustin-Se</i> is a Decision of the Court's Third Division. As the CA correctly observed, any doctrine or principle established by the Court, whether rendered <i>en banc</i> or in division, may be overturned only by the Court sitting <i>en banc</i>.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> Accordingly, the Second <i>Gonzales</i> Decision, having been decided <i>en banc</i>, could not be revisited or disturbed by the Court's Third Division in <i>Agustin-Se</i>.<br><br>What the Office of the President now seeks is nothing less than a renewed attempt to secure a reconsideration of the Second <i>Gonzales</i> Decision. The removal of former Overall Deputy Ombudsman Carandang serves as the convenient doorway through which that settled ruling may be reopened. Yet the Court remains unconvinced. There is no compelling reason for such a drastic tum, all the more so when the President's own conduct was in issue, thereby underscoring the enduring need to shield the Office of the Ombudsman from the shifting winds of political influence.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The Office of the Ombudsman is independent by constitutional design, and the Court has already addressed the arguments raised in the Petition in the Second Gonzales Decision</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The Second <i>Gonzales</i> Decision traced the history of the Philippine Ombudsman before Martial Law, during the 1973 Constitution, and its evolution under the present Constitution:<blockquote>Prior to the 1973 Constitution, past presidents established several Ombudsman-like agencies to serve as the people's medium for airing grievances and for direct redress against abuses and misconduct in the government. Ultimately, however, these agencies failed to fully realize their objective for lack of the political independence necessary for the effective performance of their function as government critic.<br><br>It was under the 1973 Constitution that the Office of the Ombudsman became a constitutionally-mandated office to give it political independence and adequate powers to enforce its mandate. Pursuant to the 1973 Constitution, President Ferdinand Marcos enacted Presidential Decree [ ] No. 1487, as amended by P[residential Decree] No. 1607 and P[residential Decree] No. 1630, creating the Office of the Ombudsman to be known as Tanodbayan. It was tasked principally to investigate, on complaint or <i>motu proprio</i>, any administrative act of any administrative agency, including any government-owned or controlled corporation. When the Office of the Tanodbayan was reorganized in 1979, the powers previously vested in the Special Prosecutor were transferred to the Tanodbayan [ ]. [It] was given the exclusive authority to conduct preliminary investigation of all cases cognizable by the Sandiganbayan, file the corresponding information, and control the prosecution of these cases.<br><br>With the advent of the 1987 Constitution, a new Office of the Ombudsman was created by constitutional fiat. Unlike in the 1973 Constitution, its independence was expressly and constitutionally guaranteed. Its objectives are to enforce the state policy in [Article II, Section 27] and the standard of accountability in public service under [Article XI, Section 1] of the 1987 Constitution.<br><br>[. . . .]<br><br>The Ombudsman's broad investigative and disciplinary powers include all acts of malfeasance, misfeasance, and nonfeasance of all public officials, including Members of the Cabinet and key Executive officers, during their tenure. To support these broad powers, the Constitution saw it fit to insulate the Office of the Ombudsman from the pressures and influence of officialdom and partisan politics and from fear of external reprisal by making it an "independent" office. [Article XI, Section 5] of the Constitution expressed this intent, as follows:<blockquote>Section 5. There is hereby created the independent Office of the Ombudsman, composed of the Ombudsman to be known as Tanodbayan, one overall Deputy and at least one Deputy each for Luzon, Visayas, and Mindanao. A separate Deputy for the military establishment may likewise be appointed.</blockquote>Given the scope of its disciplinary authority, the Office of the Ombudsman is a very powerful government constitutional agency that is considered "a notch above other grievance-handling investigative bodies." It has powers, both constitutional and statutory, that are commensurate with its daunting task of enforcing accountability of public officers.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> (Citations omitted)</blockquote>To ensure the enduring existence and effective functioning of the Office of the Ombudsman, the Constitution expressly labeled it as "independent." This independence is shared by the Office of the Ombudsman with the three Constitutional Commissions, namely the Civil Service Commission, the Commission on Elections, and the Commission on Audit. Their independence means that they do not owe their existence to any act of Congress, they enjoy fiscal autonomy, and, most importantly, they are intended to be "insulated from political pressure to the extent that the absence of [said independence] would result in the impairment of their core functions."<sup style="COLOR: RGB(255, 0, 0);">[80]</sup><br><br>By citing previous jurisprudence, the Court, in the Second <i>Gonzales</i> Decision, conceptualized the contours of this independence as being free from executive control, supervision, or any form of political influence:<blockquote>In <i>Brillantes, Jr. v. Yorac</i>, we emphasized that the Constitutional Commissions, which have been characterized under the Constitution as "independent," are not under the control of the President, even if they discharge functions that are executive in nature. The Court declared as unconstitutional the President's act of temporarily appointing the respondent in that case as Acting Chairman of the Comelec "however well-meaning" it might have been.<br><br>In <i>Bautista v. Senator Salonga</i>, the Court categorically stated that the tenure of the commissioners of the independent Commission on Human Rights could not be placed under the discretionary power of the President:<blockquote>Indeed, the Court finds it extremely difficult to conceptualize how an office conceived and created by the Constitution to be independent — as the Commission on Human Rights — and vested with the delicate and vital functions of investigating violations of human rights, pinpointing responsibility and recommending sanctions as well as remedial measures therefor, can truly function with independence and effectiveness, when the tenure in office of its Chairman and Members is made dependent on the pleasure of the President. Executive Order No. 163-A, being antithetical to the constitutional mandate of independence for the Commission on Human Rights has to be declared unconstitutional.</blockquote>Again, in <i>Atty. Macalintal v. [COMELEC]</i>, the Court considered even the mere review of the rules of the Commission on Elections by Congress a "trampling" of the constitutional mandate of independence of this body. Obviously, the mere review of rules places considerably less pressure on a constitutional body than the Executive's power to discipline and remove key officials of the Office of the Ombudsman, yet the Court struck down the law as unconstitutional.<br><br>The kind of independence enjoyed by the Office of the Ombudsman certainly cannot be inferior — but is similar in degree and kind — to the independence similarly guaranteed by the Constitution to the Constitutional Commissions since all these offices fill the political interstices of a republican democracy that are crucial to its existence and proper functioning.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> (Citations omitted)</blockquote>This aversion to executive control is, in large part, an institutional response to the encroachments and excesses experienced by the country under former President Ferdinand Marcos Sr. The 1987 Constitution was a direct response to the abuses of Martial Law, limiting presidential power and strengthening checks and balances through provisions designed to ensure the effective functioning of democratic institutions for the protection of the sovereign people.<br><br>This conception of "independence," however, becomes oversimplified if reduced merely as a reaction to abuse.<br><br>Former Chairperson of the University of the Philippines Department of Political Science, Remigio E. Agpalo, in his paper entitled "<i>The Philippine Pangulo Regime</i>,"<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> characterized the Philippine socio-political landscape as operating on the premise of executive supremacy, with the President as its literal head, or <i>ulo</i>. This culture of executive pre-eminence, he argued, was evident even during the Philippine Revolution against Spain and has presisted into the modem era.<br><br>In contemporary legal scholarship, this phenomenon is often termed as "hyper-presidentialism," referring to the concentration of power in the hands of the President at the expense of other branches of government.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> The President's dominance was found to be most evident in the budgeting process, the exercise of emergency powers, and the politicization of appointments.<br><br>Beyond historical precedent, it appears that the independence granted to the Office of the Ombudsman under the 1987 Constitution was deliberately designed to curb the potential for executive overreach.<br><br>This intention is evidenced by the deliberations of the Constitutional Commission, as quoted and discussed in the Second <i>Gonzales</i> Decision:<blockquote>The deliberations of the Constitutional Commission on the independence of the Ombudsman fully support this position. Commissioner Florenz Regalado of the Constitutional Commission expressed his apprehension that any form of presidential control over the Office of the Ombudsman would diminish its independence. The following exchanges between Commissioners Blas Ople and Christian Monsod further reveal the constitutional intent to keep the Office of the Ombudsman independent from the President:<br><br>MR. OPLE.<blockquote>May I direct a question to the Committee? ... [W]ill the Committee consider later an amendment ..., by way of designating the office of the Ombudsman as a constitutional arm for good government, efficiency of the public service and the integrity of the President of the Philippines, instead of creating another agency in a kind of administrative limbo which would be accountable to no one on the pretext that it is a constitutional body?</blockquote>MR. MONSOD.<blockquote>The Committee discussed that during our committee deliberations and when we prepared the report, it was the opinion of the Committee — and I believe it still is — that it may not contribute to the effectiveness of this office of the Ombudsman precisely because many of the culprits in inefficiency, injustice and impropriety are in the executive department. Therefore, as we saw the wrong implementation of the Tanodbayan which was under the tremendous influence of the President, it was an ineffectual body and was reduced to the function of a special fiscal. The whole purpose of our proposal is precisely to separate those functions and to produce a vehicle that will give true meaning to the concept of Ombudsman. Therefore, we regret that we cannot accept the proposition.</blockquote>The statements made by Commissioner Monsod emphasized a very logical principle: <i>the Executive power to remove and discipline key officials of the Office of the Ombudsman, or to exercise any power over them, would result in an absurd situation wherein the Office of the Ombudsman is given the duty to adjudicate on the integrity and competence of the very persons who can remove or suspend its members</i>.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> (Citations omitted; emphasis supplied)</blockquote>Following the principle of <i>stare decisis</i>, the Court deems it improper to revisit all of the arguments raised in the Petition. The discussions in the Second <i>Gonzales</i> Decision adequately address the contentions outlined in the Petition, particularly regarding Congress' power to determine the manner and cause for the removal of non-impeachable officers, and the argument that the President's power to remove the Deputy Ombudsman supposedly functions as a check on the Office of the Ombudsman.<br><br>Accordingly, the CA was correct in voiding the Office of the President's Decision and Resolution for lack of jurisdiction.<br><br>It is important to emphasize that the inhibition of then Ombudsman Carpio-Morales effectively positioned Carandang as the Acting Ombudsman for cases involving former President Duterte. It would be nothing short of a constitutional paradox, and a direct affront to accountability, if former President Duterte were allowed to sanction Carandang, one of the remaining officials explicitly empowered to hold government actors to account. With Carpio-Morales recused and Carandang removed, the Office of the Ombudsman was left virtually headless with even fewer individuals willing or able to enforce accountability in government, the President, in particular. Surely, this was the very evil the Constitution sought to guard against.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Assuming arguendo, the Office of the President's finding of administrative liability against Carandang rests on a weak foundation</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Even assuming for the sake of argument that the Office of the President possessed administrative disciplinary authority over Carandang, the Court finds that any claim of Carandang's administrative liability rests on tenuous grounds.<br><br>To recall, the Office of the President imposed the ultimate penalty of dismissal on Carandang after the former's interview with members of the press. Carandang relayed the following statements on the supposedly anomalous bank transaction records related to former President Duterte:<blockquote>We can confirm that we received bank transactions coming from AMLC, bank transactions generated by AMLC.<br><br>. . . .<br><br>[']Yung billions kasi baka add-in na nila itong lahat ng transactions kasi [PHP] 20 million, [PHP] 20 million, [PHP] 20 million, [PHP] 16 million.<br>&nbsp;<br>Pag in-add mo siguro 'yan aabot ng billion. Ang dami... [PHP]40 million, [PHP] 40 million, several [PHP] 40 million, [PHP] 200 million kaagad ito.<br><br>Yun iba [PHP] 50 million ..ang dami.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup></blockquote>In the view of the Court, these statements do not meet the threshold required to impose administrative liability, particularly for Graft and Corruption or Betrayal of Public Trust, to justify dismissal from service. Rather, they more closely resemble observations made by an official whose mandate includes initiating investigations against all public officials and employees, including impeachable officers such as the President, for the purpose of pursuing criminal proceedings or filing a verified complaint for impeachment, when warranted.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup><br><br>Notably, Carandang's comments in the televised interview, which referred to the supposed enormity of the amounts involved, were qualified with terms such as "<i>baka</i>" and "<i>siguro</i>," and referenced other individuals through the pronoun "<i>nila</i>" to speculate on the actions of those who allegedly disclosed former President Duterte's unexplained assets. Such uncertainty was understandable, as the figures and documents he was evaluating during the interview were supplied by the reporter and had not been vetted by the Office of the Ombudsman.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> At the very least, these circumstances demonstrate the absence of any wrongful intent on Carandang' s part during the interview.<br><br>In finding Carandang liable under Section 3(e) of Republic Act No. 3019 for allegedly exhibiting manifest partiality in favor of former Senator Trillanes to the prejudice of former President Duterte, the Office of the President reasoned:<blockquote>In addition, respondent Carandang is guilty of manifest partiality towards Senator Trillanes because while he was eager and willing to broadcast misleading information against the President in connection with the aforesaid investigation, he was not as eager to publicize a development that favored the President in the same case. In his letter dated [February 12,] 2018 rejecting the Office of the Solicitor General's request to be furnished a copy of the complaint and its attachments, respondent Carandang stated that the recommendation to terminate the investigation against the President had already been approved by Deputy Ombudsman Cyril E. Ramos on [November 29,] 2017. Considering that more than two [ ] months had lapsed since such termination and nothing was heard from respondent Carandang in the media about such development, he was clearly only interested to broadcast an information adverse to the President. His keeping mum about an information that was favorable to the President clearly amounted to manifest partiality.<br><br>These reasons support respondent Carandang's liability under Section 3(e) of [Republic Act No.] 3019, which penalizes the act of "giving any private party unwarranted benefits, advantage or preference in the discharge of his official administrative or judicial functions through manifest partiality, evident bad faith or gross inexcusable negligence.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup></blockquote>However, Carandang's failure to appear in any media interview regarding the termination of the investigation against former President Duterte does not, by itself, establish manifest partiality. The interview was largely upon the insistence of the press, over which Carandang had no control. In any event, Carandang cannot be expected to grant further interviews on the former President's bank accounts, particularly when administrative complaints involving the same subject matter had already been filed with the Office of the President.<br><br>The text of Carandang' s statements demonstrates neutrality and stressed the preliminary nature of the actions taken by the Office of the Ombudsman. By no stretch of the imagination can any act of graft or corrupt practice be attributed to him. Rather than betraying public trust, Carandang's act of providing information on the status of a pending complaint before his office is consistent with the public's right to information on matters of national interest.<br><br>As to the allegedly false statements made by Carandang, specifically his claim that he received bank transactions from the AMLC despite the AMLC Secretariat's official statement that it did not provide the Office of the Ombudsman with any such report, this matter, by itself, does not justify Carandang's dismissal from service and forfeiture of benefits.<br><br>Through his Comment/Opposition to the Petition, Carandang clarified that he did not make mention of any "investigation report" from the AMLC since the AMLC has not yet responded to his Letter, dated August 17, 2017, requesting the AMLC to initiate investigation on the accounts flagged in Trillanes' complaint. Carandang only mentioned receipt of bank transactions generated by the AMLC.<br><br>What is clear is that Carandang took over the handling of Senator Trillanes' complaint against fonner President Duterte from then Ombudsman Carpio-Morales, and that shortly after the interview, he was charged, preventively suspended, and ultimately dismissed by the very office whose actions he had been investigating.<br><br>This highlights the very reason constitutional and statutory limits on presidential authority exist: to safeguard the rule of law and prevent the concentration of unchecked power. Allowing the President to unilaterally discipline officials charged with investigating potential wrongdoing within the administration invites retaliation, coercion, and the suppression of oversight, conditions fundamentally at odds with transparency and accountability. The attempt to remove Carandang reflects precisely the abuse of power that the Second <i>Gonzales</i> Decision sought to prevent. The rule of law requires that those tasked with scrutinizing authority remain insulated from it, lest oversight become illusory and the constitutional design of checks and balances give way to political expediency.<br><br>The Court notes that the Second <i>Gonzales</i> Decision unequivocally recognized the Ombudsman as the proper disciplinary authority over the Deputy Ombudsman. In the Order dated June 14, 2019, Ombudsman Martires effectively dismissed Carandang by declaring the position of Overall Deputy Ombudsman vacant. However, the Order was issued solely in reliance on the Office of the President's Decision and Resolution. There is no showing that the Ombudsman conducted an independent evaluation of the administrative charges or afforded Carandang the opportunity to be heard and to present evidence. For this reason, the Court likewise finds the said Order infirm.<br><br>However, this does not suggest that Carandang may be reinstated to his former post. Carandang' s term as Overall Deputy Ombudsman expired in 2020, seven years after his appointment on October 14, 2013.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> With the Office of the President's Decision and Resolution being voided, the accessory penalties tied to Carandang's preventive suspension and dismissal, including but not limited to the forfeiture of his retirement benefits, are rendered without force or effect. Accordingly, Carandang is entitled to all of his retirement benefits effective upon the expiration of his term. He is also entitled to receive his salaries corresponding to the period of his preventive suspension and dismissal, but only up to the expiry of his term.<br><br><i>A final note</i><br><br>In resolving this case, the Court confronted not only the legal questions before it, but also the enduring consequences of revisiting settled doctrine. In a nation long vulnerable to governmental overreach, the continued creation and preservation of guardrails against concentrated power remain essential to democratic life. The framers of the 1987 Constitution deliberately insulated the Office of the Ombudsman, aware that accountability cannot thrive where independence is merely aspirational.<br><br>As the Constitution continues to evolve through lived experience, it falls upon the Court to interpret, defend, and breathe life into its promises. The past offers caution, but it is our present collective response, rooted in vigilance, restraint, and fidelity to principle, that ensures that democracy not only survives, but endures.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision, dated November 18, 2021, and the Resolution, dated, July 5, 2022, issued by the Court of Appeals in CA-G.R. SP No. 161245 are <b>AFFIRMED</b>. The Decision, dated July 30, 2018, and the Resolution, dated May 28, 2019, of the Office of the President in OP-DC Case No. 17-J-180 and OP-DC Case No. 17-J-181, are declared <b>VOID</b>. The Order, dated June 14, 2019, of the Office of the Ombudsman directing Melchor Arthur H. Carandang to cease and desist from performing his powers and functions as Overall Deputy Ombudsman, and declaring his post vacant is likewise declared <b>VOID</b>. Carandang is entitled to all retirement benefits effective upon the expiration of his term. He is likewise entitled to receive the salaries corresponding to the period of his preventive suspension and dismissal, but only up to the end of his term.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), J., Inting, Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 14-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 66-96. Penned by Associate Justice Alfredo D. Ampuan, and concurred in by Associate Justices Pedro B. Corales and Emily R. Aliño-Geluz of the Sixteenth Division of the Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 63-65. Penned by Associate Justice Alfredo D. Ampuan, and concurred in by Associate Justices Pedro B. Corales and Emily R. Aliño-Geluz of the Former Sixteenth Division of the Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 113-147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 148-157.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 18-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 322.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 18 &amp; 322.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 322.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 17-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 158-172.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 208-236.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Republic Act No. 3019, sec. 3(e) states:<blockquote>Section 3. Corrupt practices of public officers. – In addition to acts or omissions of public officers already penalized by existing law, the following shall constitute corrupt practices of any public officer and are hereby declared to be unlawful:<br><br>. . . .&nbsp;<br><br>(e) Causing any undue injury to any party, including the Government, or giving any private party any unwarranted benefits, advantage or preference in the discharge of his official administrative or judicial functions through manifest partiality, evident bad faith or gross inexcusable negligence. This provision shall apply to officers and employees of offices or government corporations charged with the grant of licenses or permits or other concessions.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Republic Act No. 3019, sec. 3(k) states:<br><br>(k) Divulging valuable information of a confidential character, acquired by his office or by him on account of his official position to unauthorized persons, or releasing such information in advance of its authorized release date.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Section 2. Public disclosure; exemption. – When circumstances so warrant and with due prudence, the Office of the Ombudsman may publicize in a fair and balanced manner the filing of a complaint, grievance, or request for assistance, and the final resolution, decision or action taken thereon: Provided, however, that prior to such final action, no publicity shall be made of matters which may adversely affect national security or public interest, prejudice the safety of witnesses or the disposition of the case, or unduly expose persons complained against to ridicule or public censure<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Section 3. Every department, office or agency shall provide official information, records or documents to any requesting public, except if: (a) such information, record or document must be kept secret in the interest of national defense or security or the conduct of foreign affairs; (b) such disclosure would put the life and safety of an individual in imminent danger; (c) the information, record or document sought falls within the concepts of established privilege or recognized exceptions as may be provided by law or settled policy or jurisprudence; (d) such information, record or document comprises drafts of decisions, orders, rulings, policy decisions, memoranda, etc.; (e) it would disclose information of a personal nature where disclosure would constitute a clearly unwarranted invasion of personal privacy; (f) it would disclose investigatory records compiled for law enforcement purposes or information which if written would be contained in such records, but only to the extent that the production of such records or information would (i) interfere with enforcement proceedings, (ii) deprive a person of a right to a fair trial or an impartial adjudication, (iii) disclose the identity of a confidential source and in the case of a record compiled by a criminal law enforcement authority in the course of a criminal investigation, or by an agency conducting a lawful national security intelligence investigation, confidential information furnished only by the confidential source, or (iv) unjustifiably disclose investigative techniques and procedures; or (g) it would disclose information the premature disclosure of which would (i) in the case of a department, office or agency which agency regulates currencies, securities, commodities, or financial institutions, be likely to lead to significant financial speculation in currencies, securities, or commodities, or significantly endanger the stability of any financial institution; or (ii) in the case of any department, office or agency be likely or significantly to frustrate implementation of a proposed official action, except that subparagraph (f) (ii) shall not apply in any instance where the department, office or agency has already disclosed to the public the content or nature of its proposed action, or where the department, office or agency is required by law to make such disclosure on its own initiative prior to taking final official action on such proposal.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i>, pp. 67-70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 173-177.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 70-71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 178-184.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 725 Phil. 380 (2014) [Per J. Brion, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Rollo</i>, p. 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 148-157.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 155-156.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 72-73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> 780 Phil. 371 (2016) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i>, pp. 72-73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 73-76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 245-255.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 194-199.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 198.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Philippine News Agency, <i>Martires is new Ombudsman</i>, available at <a href="https://www.pna.gov.ph/articles/1042835">https://www.pna.gov.ph/articles/1042835</a> (last accessed on November 26, 2025). <i>See also</i> Office of the Ombudsman, available at <a href="https://www.ombudsman.gov.ph/previous-ombudsmen-samuel-r-martires/">https://www.ombudsman.gov.ph/previous-ombudsmen-samuel-r-martires/</a> (last accessed on November 26, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Rollo</i>, p. 240.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 240.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 113-147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 119-124.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 124-127.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 127-139.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 256-283.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 263-267.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 285-294.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 288-289.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 295-300.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 296.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 66-96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 81-87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 94-96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 97-107.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 63-65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 64-65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Gonzales III v. Office of the President</b>, 694 Phil. 52 (2012) [Per J. Perlas-Bernabe, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 84-85.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>Gonzales III v. Office of the President</b>, 725 Phil. 380, 424 (2014) [Per J. Brion, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Section 21. Officials Subject to Disciplinary Authority; Exceptions. — The Office of the Ombudsman shall have disciplinary authority over all elective and appointive officials of the Government and its subdivisions, instrumentalities and agencies, including Members of the Cabinet, local government, government-owned or controlled corporations and their subsidiaries, except over officials who may be removed only by impeachment or over Members of Congress, and the Judiciary.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Rollo</i>, pp. 28-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 32-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 34-41.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 44-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 321-349.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>See</i> <b>Chinese Young Men's Christian Association of the Philippine Islands v. Remington Steel Corporation</b>, 573 Phil. 320 (2008) [Per J. Austria-Martinez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>See</i> <b>Tala Realty Services Corp, Inc. v. Banco Filipino</b>, 788 Phil. 19 (2016) [Per J. Jardeleza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>See</i> <b>Office of the Ombudsman v. Malapitan</b>, 901 Phil. 178 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Rollo</i>, p. 81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 72-73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 86-87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> CONST. art VIII, sec. 4(3) states:<blockquote>. . . .<br><br>(3) Cases or matters heard by a division shall be decided or resolved with the concurrence of a majority of the Members who actually took part in the deliberations on the issues in the case and voted thereon, and in no case, without the concurrence of at least three of such Members. When the required number is not obtained, the case shall be decided en banc; Provided, that no doctrine or principle of law laid down by the court in a decision rendered en banc or in division may be modified or reversed except by the court sitting en banc.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>Gonzales, III v. Office of the President</b>, 725 Phil. 380, 395-398 (2014) [Per J. Brion, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 398.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 401-402.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> Remigio E. Agpalo, <i>The Philippine Pangulo Regime</i>, Philippine Political Science Journal v. 20 no. 43 (1999), available at <a href="https://pssc.org.ph/wp-content/pssc-archives/Philippine%20Political%20Science%20Journal/1999/05_The%20Philippine%20Pangulo%20Regime.pdf">https://pssc.org.ph/wp-content/pssc-archives/Philippine%20Political%20Science%20Journal/1999/05_The%20Philippine%20Pangulo%20Regime.pdf</a> (last accessed on November 26, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>See</i> Susan Rose-Ackerman, Diane A. Desierto, and Natalia Volosin, <i>Hyper-Presidentialism: Separation of Powers without Checks and Balances in Argentina and the Philippines</i>, available at <a href="https://scholarspace.manoa.hawaii.edu/server/api/core/bitstreams/1b0b2e6a-8653-4d22-8407-5f4f249b212b/content">https://scholarspace.manoa.hawaii.edu/server/api/core/bitstreams/1b0b2e6a-8653-4d22-8407-5f4f249b212b/content</a> (last accessed on November 26, 2025). <i>See also</i> Ryan Hartzell Carino Balisacan, <i>Hyper-Presidentialism in Philippine Budgeting: Toward a Political Theory of the Budget Using Insights from a Post-Mortem Examination of the Disbursement Acceleration Program (DAP)</i> Philippine Journal of Public Administration, Vol. 59, No. 1, 2015, available at <a href="https://ssrn.com/abstract=3381312">https://ssrn.com/abstract=3381312</a> (last accessed on November 26, 2025.)<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <b>Gonzales III v. Office of the President</b>, 725 Phil. 380, 403-405 (2014) [Per J. Brion, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i> at 18-19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> Republic Act No. 6770, sec. 22 states:<blockquote>Section 22. Investigatory Power. — The Office of the Ombudsman shall have the power to investigate any serious misconduct in office allegedly committed by officials removable by impeachment, for the purpose of filing a verified complaint for impeachment, if warranted.<br><br>In all cases of conspiracy between an officer or employee of the government and a private person, the Ombudsman and his Deputies shall have jurisdiction to include such private person in the investigation and proceed against such private person as the evidence may warrant. The officer or employee and the private person shall be tried jointly and shall be subject to the same penalties and liabilities.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Rollo</i>, p. 323.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Rollo</i>, pp. 73-76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>See</i> Office of the Ombudsman, <i>Team Performance Report for 2011-2018</i>, p. 19, available at <a href="https://www.ombudsman.gov.ph/docs/08%20Resources/TPR/Ombudsman%20Term%20Performance%20Report%20Vol.1%20%282011-2018%29.pdf">https://www.ombudsman.gov.ph/docs/08%20Resources/TPR/Ombudsman%20Term%20Performance%20Report%20Vol.1%20%282011-2018%29.pdf</a> (last accessed on November 26, 2025).</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

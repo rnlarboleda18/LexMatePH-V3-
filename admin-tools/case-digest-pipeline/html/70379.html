@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 267860 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX267860* [FORMERLY CRIMINAL CASE NOS. 3103 AND 3104], ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70379' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 267860, February 03, 2026 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX267860<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> [FORMERLY CRIMINAL CASE NOS. 3103 AND 3104], ACCUSED-APPELLANT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is an Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by XXX267860 [formerly Criminal Case Nos. 3103 and 3104], (accused-appellant) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated February 20, 2023, of the Court of Appeals (CA) in CA-G.R. CR-H.C. No. 15539. The CA affirmed the Judgment<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated March 23, 2021, of Branch <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> Regional Trial Court (RTC), <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> Pampanga in Criminal Case Nos. 3103 and 3104 that found accused-appellant guilty beyond reasonable doubt of two counts of Sexual Abuse under Section 5(b)<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of Republic Act No. 7610.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center><i>The Antecedents</i></center><br>The case stemmed from two Informations<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> charging accused-appellant with two counts of Sexual Abuse under Section 5(b) of Republic Act No. 7610. The crimes were allegedly committed against AAA267860, who was only 14 years old at the time of the incidents. The accusatory portions of the Informations state:<br><blockquote><center>Criminal Case No. 3103</center><br>That on or about the 21<sup>st</sup> day of August 2014, in the Municipality of <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Province of Pampanga, Philippines and within the jurisdiction of this Honorable Court, the above-named accused taking advantage of complainant's minority, willfully, unlawfully and feloniously entice AAA267860[,] a 14 year-old minor being born on <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> to have sexual intercourse with him, by persuading and coercing the latter to have sexual intercourse with him, thereby debasing, degrading and demeaning her intrinsic worth and dignity as a child and as a human being and which is prejudicial to [her] normal growth and development.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br><center>Criminal Case No. 3104</center><br>That on or about the 29<sup>th</sup> day of July 2014, in the Municipality of <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Province of Pampanga, Philippines and within the jurisdiction of this Honorable Court, the above-named accused taking advantage of complainant's minority, willfully, unlawfully and feloniously entice AAA267860[,] a 14 year-old minor being born on <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> to have sexual intercourse with him, by persuading and coercing the latter to have sexual intercourse with him, thereby debasing, degrading and demeaning her intrinsic worth and dignity as a child and as a human being and which is prejudicial to [her] normal growth and development.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </blockquote>Upon arraignment, accused-appellant entered pleas of "Not Guilty" to the charges.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Trial ensued.<br><br><center><i>Version of the Prosecution</i></center><br>In 2012, AAA267860 was a Grade 6 student at <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> in Barangay <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Pampanga, when accused-appellant, a teacher at the school, befriended her.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> They began communicating afterward. When she was in her first year of high school, accused-appellant pursued her. This courtship led to an intimate relationship starting on March 9, 2013.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On July 29, 2014, AAA267860, who was then 14 years old, visited the <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> office in Barangay <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> Pampanga, to participate in a guitar practice session with some of her schoolmates.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> When she arrived at around 1:00 p.m., only accused-appellant was in the office. They then chatted and waited for their companions to arrive. During their conversation, accused-appellant invited her to see the second floor of the building.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> However, upon reaching the second floor, accused-appellant closed the door and unexpectedly kissed her on the lips. Subsequently, accused-appellant directed her towards the bathroom, where he undressed himself and instructed AAA267860 to remove her pants and panty.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> When AAA267860 hesitated, accused-appellant removed them, including her bra. Accused-appellant then positioned himself behind AAA267860,<i> forcibly</i> inserted his penis into the latter's vagina,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> and made a push-and-pull movement.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Thereafter, accused-appellant told her not to worry about getting pregnant and assured her that he loves her.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>On August 21, 2014, AAA267860 did not have classes at school. She went to the&nbsp;<span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"><br></span>&nbsp;office at around 8:30 a.m. to see accused-appellant because she wanted to talk about her personal problems at home.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> At <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, accused-appellant invited her to a room behind the office where they could talk. However, instead of discussing their issues, accused-appellant suddenly kissed her on the lips and removed his and AAA267860's clothes. Feeling AAA267860's anxiety, accused-appellant again reassured her of his love for her before forcibly inserting his penis into her vagina.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>That afternoon, BBB267860, AAA267860's mother, learned that her daughter was not present during preparations for Linggo ng Wika. When she asked her daughter about it, the latter said she went to the&nbsp;<span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"><br></span>&nbsp;office in the nearby barangay.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>On September 27, 2014, AAA267860 tearfully revealed to her mother her relationship with accused-appellant and the incidents that happened in July and August 2014. On September 30, 2014, BBB267860 accompanied AAA267860 to <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> in Pampanga for a medical examination. Dr. Erica Christine M. Baltazar (Dr. Baltazar) examined AAA267860 and found a laceration on AAA267860's hymen at six o'clock position.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>During the trial, the prosecution established that AAA267860 was only 14 years old when the incidents occurred on July 29, 2014, and August 21, 2014, by presenting her Certificate of Live Birth.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br><center><i>Version of the Defense</i></center><br>The defense presented accused-appellant, DDD267860 and EEE267860 as witnesses.<br><br>Accused-appellant raised defenses of denial and alibi. He denied having a romantic relationship with AAA267860. According to him, he first met AAA267860 when she was in Grade 6 because she and her friends often ate lunch with some of his colleagues.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> When AAA267860 entered the first year of high school, he was the teacher for the subjects Music, Arts, Physical Education, and Health (MAPEH). He also testified that he had business transactions with BBB267860 because he used to buy bags from her and sell them to his clients.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Likewise, he stated that he was engaged in a networking business selling supplements at the <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> office.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Moreover, accused-appellant testified that on July 29, 2014, he was at the house of EEE267860 in <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Pampanga, from 11:30 a.m. until 4:00 p.m. because he was selling a supplement to EEE267860.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> On August 21, 2014, he alleged that he was at the house of his<i> kumpare</i>, DDD267860, from morning until noontime because he was inviting the latter to join his networking business. Thus, he averred that it was impossible for him to be with AAA267860 at the&nbsp;<span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"><br></span>&nbsp;office on the purported dates. In addition, he alleged that the <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> office had been closed for business since June 2014.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Further, accused-appellant alleged that AAA267860's grandfather, CCC267860, had ill motive in filing the case because his uncle had previously caused the termination of CCC267860's employment. He insisted that AAA267860's family had an unresolved issue against him.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>On cross-examination, however, accused-appellant admitted that he had a romantic relationship with AAA267860. They used to communicate through Short Message Service (SMS) and Facebook Messenger. He stated they would meet and spend time together. He also acknowledged that he was 32 years old at the time, while AAA267860 was only 14 years old.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>EEE267860 and DDD267860 corroborated accused-appellant's allegation that during the purported dates, he was with them, and not at the <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> office.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>In the Judgment dated March 23, 2021, the RTC found accused-appellant guilty beyond reasonable doubt of two counts of Sexual Abuse under Section 5(b) of Republic Act No. 7610. The dispositive portion of the RTC Judgment reads:<br><blockquote><b>WHEREFORE</b>, judgment is hereby rendered finding the accused, <b>[XXX267860], GUILTY</b> beyond reasonable doubt of<b> Sexual Abuse under Section 5(b) of [Republic Act] No. 7610 in both cases. </b><br><br>Accordingly, he is hereby sentenced to suffer the indeterminate penalty of<b> eight (8) years and one (1) day</b> of<i> prision mayor</i> in its medium period to<i> reclusion temporal</i> in its minimum period, as minimum, to <b>seventeen (17) years, four (4) months, and one (1) day of</b><i> reclusion temporal</i> in its medium period to<i> reclusion perpetua</i>, as maximum,<b> for each case.</b> He is likewise sentenced to pay a fine of Fifteen Thousand Pesos ([PHP] 15,000.00)<b> for each case</b>.<br><br>By way of civil liability, the accused is ordered to pay the private offended party the following sums<b> for each case:</b> (1) Fifty Thousand Pesos ([PHP] 50,000.00) as civil indemnity; (2) Fifty Thousand Pesos ([PHP] 50,000.00) as moral damages; and (3) Fifty Thousand Pesos ([PHP] 50,000.00) as exemplary damages. All such amounts shall earn interest at the rate of six percent (6%) per annum, computed from the finality of this judgment until full payment.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> (Emphasis in the original) </blockquote>The RTC ruled that AAA267860 was a child subjected to other sexual abuse and that accused-appellant used his moral ascendancy to have carnal knowledge of her. In addition, the RTC found that AAA267860 was only 14 years old on the dates when accused-appellant sexually abused her.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Further, it gave credence to the clear and candid testimony of AAA267860 and found accused-appellant's defense weak.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Undaunted, accused-appellant appealed to the CA.<br><br><center><i>The Ruling of the CA</i></center><br>In the assailed Decision dated February 20, 2023, the CA denied the appeal and affirmed the RTC Judgment. The<i> fallo</i> of the CA Decision reads:<br><blockquote><b>WHEREFORE</b>, premises considered, the instant appeal is hereby <b>DENIED</b>. The assailed Judgment dated March 23, 2021 of the Regional Trial Court, Branch <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Pampanga in Criminal Case Nos. 3103-04 is<b> AFFIRMED</b>.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></blockquote>The CA agreed with the RTC that the prosecution proved all the elements of Sexual Abuse under Section 5(b) of Republic Act No. 7610. It likewise gave credence to AAA267860's testimony on how accused-appellant sexually abused her. It ruled that accused-appellant, as AAA267860's teacher, had moral ascendancy over AAA267860 who was then 14 years old. Thus, moral ascendancy substituted for violence and intimidation.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Lastly, the CA sustained the RTC's findings that accused-appellant's defense is weak.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>Aggrieved, accused-appellant filed the instant appeal.<br><br>Both accused-appellant<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> and plaintiff-appellee, through the Office of the Solicitor General,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> manifested that they will no longer file their respective Supplemental Briefs as they already argued the legal and factual issues in their respective Briefs.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br><center><i>The Issue</i></center><br>The core issue to be resolved is whether the CA erred in convicting accused-appellant of two counts of Sexual Abuse under Section 5(b) of Republic Act No. 7610.<br><br><center><i>The Ruling of the Court</i></center><br>The Appeal lacks merit.<br><br>It is settled that the factual findings of the trial court are entitled to great weight and respect, especially when they are affirmed by the appellate court.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> The trial court is in the best position to assess the credibility of the witnesses and their testimonies because of "its unique opportunity to observe the witnesses first hand and to note their demeanor, conduct, and attitude under grueling examination."<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>After a judicious perusal of the records of the case, the Court finds no compelling reason to depart from the uniform factual findings of the RTC and the CA.<br><br>Accused-appellant was indicted for two counts of Sexual Abuse under Section 5(b) of Republic Act No. 7610, which provides as follows:<br><blockquote><b>Section 5.<i> Child Prostitution and Other Sexual Abuse</i></b>. — Children, whether male or female, who for money, profit, or any other consideration or due to the coercion or influence of any adult, syndicate or group, indulge in sexual intercourse or lascivious conduct, are deemed to be children exploited in prostitution and other sexual abuse.<br><br>The penalty of<i> reclusion temporal</i> in its medium period to<i> reclusion perpetua</i> shall be imposed upon the following:<br><br>. . . .<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="TOP"> <td width="5%"><div align="JUSTIFY">(b)</div></td> <td width="95%"><div align="JUSTIFY">Those who commit the act of sexual intercourse or lascivious conduct with a child exploited in prostitution or subjected to other sexual abuse:<i> Provided</i>, That when the victim is under twelve (12) years of age, the perpetrators shall be prosecuted under Article 335, paragraph 3, for rape and Article 336 of Act No. 3815, as amended, the Revised Penal Code, for rape or lascivious conduct as the case may be:<i> Provided</i>, That the penalty for lascivious conduct when the victim is under twelve (12) years of age shall be<i> reclusion temporal</i> in its medium period; and</div></td> </tr> </tbody></table><br>. . . .</blockquote>To secure a conviction under Section 5(b) of Republic Act No. 7610, the following elements must be established: (a) the commission by the accused of the act of sexual intercourse; (b) the act is performed on a child exploited in prostitution or subjected to other sexual abuse; and (c) the child, whether male or female, is below 18 years of age.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>In the case, the Court finds that the prosecution had established all the above-mentioned elements. Accused-appellant, through coercion and influence, had carnal knowledge of AAA267860 on July 29, 2014, and August 21, 2014, subjecting the latter to sexual abuse. At the time of the incidents, AAA267860 was only 14 years old, as evidenced by her Certificate of Live Birth, which indicates she was born on <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>.<br><br>In his attempt to exculpate himself, accused-appellant argues that it was erroneous for the RTC to appreciate moral ascendancy, as it was neither alleged in the Information nor proven during the trial.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Accused-appellant's argument deserves scant consideration.<br><br>The prosecution proved that accused-appellant took advantage of AAA267860's minority by<i> persuading</i> her to have sexual intercourse with him. Accused-appellant admitted in his testimony that he had a romantic relationship with AAA267860 while the latter was a first-year high school student. The Court emphasizes that, despite awareness of AAA267860's minority and the fact that the accused-appellant served as AAA267860's teacher, accused-appellant exerted<i> influence</i> and<i> persuasion</i> to<i> induce</i> her to engage in sexual intercourse with him.<br><br>To recall, during the first incident, accused-appellant persuaded AAA267860 to go to the second floor under the guise of letting her see the upper-level floor. However, upon reaching the second floor, accused-appellant suddenly kissed AAA267860, "<i>persuaded</i>" her to go to the bathroom, removed her clothes, and inserted his penis into her vagina. Considering that they were in an "intimate relationship," accused-appellant persuaded her to have sexual intercourse. In her candid and straightforward testimony, AAA267860 stated:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY"><i>Nasaan ka noong umaga ng</i> July 29, 2014? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Nasa bahay po</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>May pinuntahan ka ba noon</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Opo. Pagkatapos ko po kumain ng tanghalian nagpunta ako sa</i> [<i>Barangay</i> <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Pampanga <i> sa may</i> <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span><i> dahil may practice po kami ng gitara</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"><div align="JUSTIFY">. . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Sinong dinatnan mo noong dumating ka sa</i> <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Si</i> [XXX267860] <i> lang po</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Anong ginagawa niya doon</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Siya po ang tumatao</i> [<i>doon</i>] <i>kasi tindahan po iyon</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Ano nangyari ng dumating ka doon </i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Nagkwentuhan po kami ni</i> [XXX267860]. <i>Maya-maya po niyaya nya po ako sa itaas para ipakita daw po iyong itsura ng itaas kasi</i> first time <i> ko po nakapunta doon</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Nakaakyat ba kayo sa itaas ng</i> <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Opo</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Ano nangyari ng nasa itaas na kayo</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Pumasok po kami sa pinto at tumingin-tingin sa paligid. Tapos bigla po akong hinalikan ni</i> [XXX267860] <i> sa pisngi</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Anong nangyari pagkatapos ka nya hinalikan sa pisngi</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Hinalikan po nya ako sa labi tapos hinubad nya iyong</i> t-shirt <i> ko</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Pagkatapos nyang hubarin ang</i> t-shirt <i> mo, anong ginawa nya</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Sabi nya po punta kami sa banyo</i>. <i>Pagdating</i> [<i>namin</i>] <i>sa banyo, hinubad nya po iyong</i> t-shirt <i> nya tapos binaba nya iyong [pantalon] at</i> brief <i> nya. Pagkatapos po, pinababa nya po sa akin ang pantalon at panty ko. Pagkatapos po noon hinubad nya iyong</i> bra <i> ko</i>. </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">&nbsp;</td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Pagkatapos nya</i> [<i>mahubad ang</i>] bra <i> mo, anong ginawa nya</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Hinalikan nya po ako sa labi pababa sa dibdib. Tapos pinatalikod nya po ako at pinilit pinasok iyong titi niya sa pekpek ko</i>.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></div></td> </tr> </tbody></table></blockquote>Similarly, on August 21, 2014, accused-appellant<i> persuaded </i>AAA267860 to go to the room at the back of the office, removed her clothes, laid her on the bed, and inserted his penis into her vagina, to wit:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY"><i>Naulit ba iyong pangyayari na iyon</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Opo, noong</i> August 21, 2014. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top">. . . </td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Bakit mo naisipan pumunta sa</i> <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Kasi po gusto ko ng kausap dahil may problema po sa bahay. Wala po kasing trabaho noon si</i> Mommy <i> tapos lagi</i> [<i>po ako</i>] <i>napapagalitan dahil tamad daw po ako</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Anong oras ka nagpunta sa</i> <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Mga</i> 8:30 <i> po ng umaga</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY"></div><div align="JUSTIFY">. . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Anong sabi mo sa kanya noong dumating siya</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Sabi ko po gusto ko po syang makausap dahil problemado ako sa bahay</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">[<i>Ano</i>] <i>ang sinabi nya</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Sabi nya po, "tara,</i> [<i>doon</i>] <i>tayo sa likod mag usap." Tapos po dinala nya ko doon sa kwarto sa likod</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Pumasok ba kayo sa kwarto</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Opo</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Anong nangyari noong nasa loob na kayo ng kwarto</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Niyakap po nya</i> [<i>ako</i>] <i>tapos hinalikan sa labi. Naghubad po sya ng lahat ng suot nya tapos hinubad nya po yong t-shit ko</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"><div align="JUSTIFY">Q:</div></td> <td valign="top"> <div align="JUSTIFY"><i>Pagkatapos noon, ano ang nangyari</i>? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Sinabihan nya po ako na hubarin ko lahat ng suot ko. Medyo nagdadalawang isip nga po ako noon kasi nga pinagsisihan ko iyong unang nangyari pero hindi ko na po alam basta napapayag nya ako maghubad</i>. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Ano nangyari pagkatapos mo maghubad?</i> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Pinahiga nya po ako sa papag dun sa loob ng kwarto tapos sabi po nya "ako ang bahala sa iyo."</i> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Ano ginawa nya pagkatapos?</i> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY"><i>Hinalikan nya po ako sa labi pababa sa dibdib pati po sa pekpek. Pagkatapos po noon ipinasok nya po ulit iyong titi nya sa pekpek ko.</i><sup style="COLOR: RGB(255, 0, 0);">[45]</sup></div></td> </tr> </tbody></table></blockquote>Section 5,<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Article III of Republic Act No. 7610 provides that a child, whether male or female, who indulges in sexual intercourse or lascivious conduct due to the coercion<i> or influence</i> of any adult, is considered a child exploited in prostitution<i> or a child</i> subjected to<i> any other sexual abuse</i>.<br><br>Section 2(g) of the Rules and Regulations on the Reporting and Investigation of Child Abuse Cases provides:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">g) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY"><b>Sexual abuse</b> includes the employment, use, <i> persuasion</i>, inducement, <i>enticement</i> or coercion <i> of a child to engage in</i>, or assist another person to engage in, <i> sexual intercourse</i> or lascivious conduct or the molestation, prostitution, or incest with children. (Italics Supplied) </div></td> </tr> </tbody></table></blockquote>In the recent case of<i> XXX260233 v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the Court<i> En Banc</i>, revisited the provisions of Republic Act No. 7610 and extensively discussed the distinctions between Rape under Article 266-A of the Revised Penal Code and Sexual Abuse under Section 5(b) of Republic Act No. 7610. In<i> XXX260233</i>, the Court ratiocinated in this wise:<br><blockquote>Here, a plain and straightforward interpretation of Section 5 of Republic Act No. 7610 provides a clear definition of children subjected to other sexual abuse as those who<b><i> indulge</i></b> in sexual intercourse or lascivious conduct due to the coercion or influence of an adult. Yet, despite extensive jurisprudence on child abuse cases, the word "indulges'" in Section 5 of Republic Act No. 7610 has never been specifically examined or analyzed. The word "indulges" is of significant importance in resolving the issue in the case at bar.<br><br>. . . .<br><br>The different meanings of the word "<i>indulges</i>" in various dictionaries suggest a notion of "consent" or "permission," albeit with some reservations.<br><br>The Court finds that the term "<i>sexual abuse</i>," as defined under Republic Act No. 7610, encompasses situations wherein a minor<i> indulges—</i>or, put differently,<i> consents</i>, albeit defectively—to engage in sexual intercourse or lascivious conduct as a result of coercion or undue influence exerted by an adult.<br><br>The presence—or, at the very least, the semblance—of consent on the part of the minor, which justifies the application of Republic Act No. 7610, is further reinforced by Section 2(g) of the law's Implementing Rules and Regulations (IRR). The IRR defines sexual abuse as including the<b><i> employment, use, persuasion, inducement, enticement, or coercion</i></b> of a child to engage in, or assist another person to engage in, sexual intercourse or lascivious conduct or the molestation, prostitution, or incest with children.<br><br>A review of Section 2(g) leads to the conclusion that the word <b><i>"engage</i></b>" suggests active participation by the child, who is not merely a passive victim of sexual abuse but<i> engages</i> in it precisely due to the "<i>employment, use, persuasion, inducement, enticement, or coercion </i>" exerted by the adult.<br><br>. . . .<br><br>Indeed, the use of the word "<i>engage</i>" clearly indicates the legislature's intent for Republic Act No. 7610 to cover situations where a child consents, albeit with the consent being defective. It is not designed to cover acts where the minor is completely unconscious, overpowered, or unwilling from the outset. (Emphasis Supplied)<br><br>. . . .<br><br>In the present case, the prosecution both alleged and proved that BBB was a child in EPSOSA. The criminal information in Criminal Case No. 15-CR-10797 specifically indicated that BBB "<i>is deemed under the law to be a child exploited in prostitution or other sexual abuse as she indulged in sexual intercourse or lascivious conduct for some consideration</i>." She also candidly testified that she agreed to have sexual intercourse with Gramatica in exchange for<i> shabu</i>....<br><br>. . . .<br><br>Under the circumstances, BBB engaged in sexual intercourse with Gramatica for a consideration. This is precisely the situation contemplated by the law and covered by the definition of prostitution. Unlike rape, <i>consent is immaterial here as the mere act of having sexual intercourse or committing lascivious conduct with a child who is exploited in prostitution or subjected to sexual abuse constitutes a violation of the law</i>. While BBB may have agreed to have sex with Gramatica, the latter is nevertheless criminally liable considering that BBB, then 14 years old, was a minor who <i>engaged</i> in prostitution at the time of their sexual congress.<br><br>. . . .<br><br>Simply stated, sexual intercourse with a victim who is<i> under </i>12 years of age (<i>now under 16 years old, following Republic Act No. 11648</i>) or is demented is<i> always</i> statutory rape and an accused will be prosecuted under Article 266-A, paragraph 1(d), of the Revised Penal Code, as amended by Republic Act No. 8353.<br><br>On the other hand, as in the present case, if the victim is 12 years old (<i>now at least 16 years old, following Republic Act No. 11648</i>) or less than 18 and is deemed to be a child "<i>exploited to prostitution and other sexual abuse</i>" because she agreed to the sexual intercourse "<i>for money, profit or any other consideration<b> or due to coercion or influence of any adult, syndicate or group</b></i><b>,</b>" the crime could not be rape under the Revised Penal Code as there is consent.<i> Instead, the offender should be penalized under Section 5(b) of Republic Act No. 7610</i>. The law, in effect, acknowledges that minors subjected to such circumstances may have consented to the act or the transaction. Still, their consent<i> cannot</i> be deemed free, genuine, and fully informed. Accordingly, the law recognizes the child's inherent vulnerability and the exploitative nature of the situation. (Emphasis supplied) </blockquote>Clearly, the terms "<i>indulge</i>" in Section 5, Article III of Republic Act No. 7610 and "<i>engage</i>" in Section 2(g) of the Rules and Regulations on the Reporting and Investigation of Child Abuse Cases connote<i> consent </i>or<i> permission</i> and that the victim actively participated in the sexual act because of some factors, i.e.,<i> employment, use, persuasion, inducement, enticement, or coercion</i> exerted by the abuser. Thus, to convict an accused under Section 5 of Republic Act No. 7610, the victim must<i> indulge</i> or<i> engage </i>in sexual intercourse or lascivious conduct for money, profit, or any other consideration<i> or due to the coercion or influence of any adult, syndicate or group</i>.<br><br>Thus, if the victim is 12 years old and less than 18 and it is sufficiently alleged and proven that the victim is deemed to be a child "<i>exploited in prostitution or subjected to other sexual abuse</i>" (EPSOSA) because she agreed to the sexual intercourse "<i>for money, profit or any other consideration or due to coercion or influence of any adult, syndicate or group</i>," the accused should be convicted of Sexual Abuse under Section 5(b) of Republic Act No. 7610 as there is consent (albeit defective), and not Rape under Article 266-A of the Revised Penal Code.<br><br>In the case at bench, it is undisputed that accused-appellant's actions towards AAA267860 are within the definition of Sexual Abuse under Section 5(b) of Republic Act No. 7610, considering that he influenced and persuaded AAA267860 (14-year-old minor) to have sexual intercourse with him on two occasions, subjecting her to sexual abuse other than prostitution. The prosecution sufficiently alleged and proved the circumstances of Sexual Abuse under Section 5(b) of Republic Act No. 7610.<br><br>The following statements in the Informations charged against accused-appellant are sufficient allegations of Sexual Abuse under Section 5(b) of Republic Act No. 7610, thus: (1)<i> taking unlawful advantage of complainant's minority</i>; (2)<i> willfully, unlawfully and feloniously entice [AAA267860] a 14-year-old minor to have sexual intercourse with him; (3) by persuading and coercing the latter to have sexual intercourse with him</i>; and (4)<i> thereby debasing, degrading and demeaning her intrinsic worth and dignity as a child and as a human being and which is prejudicial to [her] normal growth and development</i>.<br><br>With regard to the sufficiency of the Information, it must be stressed that the term "moral ascendancy" need not be expressly specified in the subject Information to properly charge the accused-appellant of Sexual Abuse under Section 5(b) of Republic Act No. 7610 considering that Section 2(g) of the Rules and Regulations on the Reporting and Investigation of Child Abuse Cases, expresses the terms, i.e.,<i> persuasion, </i>inducement,<i> enticement</i> or coercion<i> of a child to engage in sexual intercourse</i>. The Court finds that accused-appellant's actuations may be classified as "coercion" and "influence" within the purview of Section 5, Article III of Republic Act No. 7610. Thus, the Informations charging accused-appellant with Sexual Abuse sufficiently alleged the elements of the crime.<br><br>Further, accused-appellant, by taking advantage of his moral ascendancy over AAA267860, was able to<i> persuade</i> and<i> influence</i> the latter to<i> indulge</i> and<i> engage</i> in sexual intercourse, subjecting her to<i> sexual abuse</i> as a consequence. This is precisely the purpose of the legislature in passing Section 5(b) of Republic Act No. 7610: to prevent any adult, syndicate or group from coercing or influencing or enticing through money, profit or consideration, any minor to engage or indulge in sexual intercourse or lascivious conduct exploiting him/her to prostitution or subjecting him/her to other sexual abuse and consequently, debasing, degrading and demeaning his/her intrinsic worth and dignity as a child.<br><br>As regards accused-appellant's defense that AAA267860's demeanor was inconsistent with one who was sexually abused, it is well-settled that rape victims react differently.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> There is no standard form of reaction for a woman when facing a shocking and horrifying experience such as a sexual assault.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>The traumatic crime committed by accused-appellant and considering the fact that he was AAA267860's teacher who had moral ascendancy over her built a climate of extreme psychological terror on the part of AAA267860 which numbed her into temporary silence. Thus, AAA267860's failure to resist and shout during the incidents and her behavior after every sexual abuse are not fatal to the charges.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>In contrast, accused-appellant's denial and alibi must be rejected as it could not prevail over AAA267860's unwavering testimony as well as her positive and firm identification of him as the perpetrator. The Court has consistently held that denial is an intrinsically weak defense that must be supported by strong evidence of non-culpability to merit credibility.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>Thus, in the absence of any ill-motive on the part of AAA267860 that would make her falsely testify against accused-appellant, her candid narration of the incidents deserves full faith and credence. Indeed, when there is no evidence to show any improper motive on the part of the prosecution witness to testify against accused or to falsely implicate him in the commission of the crime, the logical conclusion is that the testimony is worthy of full faith and credence,<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> as in the case.<br><br>Time and again, the Court has held that when the offended party is a young and immature girl, as in the case, courts are inclined to lend credence to her version of what transpired, considering not only her relative vulnerability but also the shame and embarrassment to which she would be exposed if the matter about which she testified were not true.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>As to the proper nomenclature of the crime committed, the Court sustains the ruling of the RTC and the CA that accused-appellant committed Sexual Abuse under Section 5(b) of Republic Act No. 7610. The Court ruled in<i> People v. Tulagan</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> that sexual intercourse of a child exploited in prostitution or subjected to other sexual abuse, who is 12 years old or below 18 or 18 years old under special circumstances,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> through influence or coercion of an adult, is considered Sexual Abuse under Section 5(b) of Republic Act No. 7610.<br><br><center><i>The Penalties</i></center><br>The penalty for Sexual Abuse under Section 5(b), Article III of Republic Act No. 7610 is<i> reclusion temporal</i> in its medium period to<i> reclusion perpetua</i> which ranges from 14 years, eight months and one day to<i> reclusion perpetua</i>. Considering that no aggravating or mitigating circumstance is present, the penalty should be imposed in its medium period.<br><br>Applying the Indeterminate Sentence Law,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> the minimum term shall be within the range of the penalty next lower in degree, which is<i> prision mayor </i>in its medium period to<i> reclusion temporal</i> in its minimum period, or eight years and one day to 14 years and eight months.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> On the other hand, the maximum penalty shall be within the medium period of the prescribed penalty which has a range of 17 years, four months, and one day to 20 years. Thus, the CA correctly imposed the indeterminate penalty of eight years and one day of<i>&nbsp;prision mayor</i>, as minimum, to 17 years, four months, and one day of<i> reclusion temporal</i>, as maximum for each count of Sexual Abuse.<br><br>Moreover, pursuant to prevailing jurisprudence, the Court sustains the award of PHP 50,000.00 as civil indemnity, PHP 50,000.00 as moral damages and PHP 50,000.00 as exemplary damages for each count of Sexual Abuse.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>The lower courts likewise correctly imposed a fine of PHP 15,000.00 for each violation of Republic Act No. 7610 pursuant to Section 31(f)<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> of the same law.<br><br>Except for the fine, all the monetary awards shall earn a legal interest of 6% per annum from the date of the finality of this Decision until fully paid.<br><br>Finally, as part of the government's efforts to provide comprehensive services to meet the needs of rape victims and their families, the Court directs Department of Social Welfare and Development, through Branch <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, RTC, <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Pampanga, to refer AAA267860 to the proper rape crisis center for the provision of necessary assistance in accordance with Republic Act No. 8505, or the Rape Victim Assistance and Protection Act of 1998.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br><b>ACCORDINGLY</b>, the Appeal is<b> DISMISSED</b>. The Decision dated February 20, 2023, of the Court of Appeals in CA-G.R. CR-H.C. No. 15539 is<b> AFFIRMED</b>.<br><br>Accused-appellant XXX267860 is found<b> GUILTY</b> beyond reasonable doubt of two counts of Sexual Abuse under Section 5(b) of Republic Act No. 7610 in Criminal Case Nos. 3103 and 3104 filed with Branch Regional Trial Court, <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Pampanga. He is<b> SENTENCED</b> to suffer the indeterminate penalty of eight years and one day of<i> prision mayor</i>, as minimum, to 17 years, four months, and one day of<i> reclusion temporal</i>, as maximum, for each count. He is<b> ORDERED</b> to<b> PAY</b> a fine of PHP 15,000.00 for each count of Sexual Abuse.<br><br>Accused-appellant XXX267860 is likewise<b> ORDERED</b> to<b> PAY</b> private complainant AAA267860, PHP 50,000.00 as civil indemnity, PHP 50,000.00 as moral damages, and PHP 50,000.00 as exemplary damages for each count.<br><br>Except for the fine, all the monetary awards shall earn legal interest of 6% per annum from the date of the finality of this Decision until fully paid.<br><br>The Department of Social Welfare and Development, through Branch <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Regional Trial Court, <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Pampanga, is<b> DIRECTED</b> to refer AAA267860 to the appropriate rape crisis center for the necessary assistance to be rendered to the victim and her family, in line with Republic Act No. 8505, or the Rape Victim Assistance and Protection Act of 1998.<br><br><b>SO ORDERED. </b><br><br><i>Caguioa (Chairperson), Gaerlan, Dimaampao,</i> and <i>Singh, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> The identity of the victim or any information to establish or compromise her identity, as well as those of her immediate family or household members, shall be withheld pursuant to Republic Act No. (RA) 8505, entitled "Rape Victim Assistance and Protection Act of 1998," approved on February 13, 1998; and Amended Administrative Circular No. 83-2015 dated September 5, 2017, Subject: Protocols and Procedures in the Promulgation, Publication, and Posting on the Websites of Decisions, Final Resolutions, and Final Orders Using Fictitious Names/ Personal Circumstances.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-5. <i>See</i> Notice of Appeal (With Compliance) dated March 10, 2023.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 8-25. Penned by Associate Justice Ramon R. Garcia and concurred in by Associate Justices Gabriel T. Robeniol and Michael P. Ong of the Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 29-38. Penned by Presiding Judge Robert Alexander R. Malig.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Section 5. <i>Child Prostitution and Other Sexual Abuse</i>. – Children, whether male or female, who for money, profit, or any other consideration or due to the coercion or influence of any adult, syndicate or group, indulge in sexual intercourse or lascivious conduct, are deemed to be children exploited in prostitution and other sexual abuse.<br><br>The penalty of <i>reclusion temporal</i> in its medium period to <i>reclusion perpetua</i> shall be imposed upon the following:<blockquote>. . . .<br><br>(b) Those who commit the act of sexual intercourse or lascivious conduct with a child exploited in prostitution or subjected to other sexual abuse: <i>Provided</i>, That when the victims is under twelve (12) years of age, the perpetrators shall be prosecuted under Article 335, paragraph 3, for rape and Article 336 of Act No. 3815, as amended, the Revised Penal Code, for rape or lascivious conduct as the case may be: <i>Provided</i>, That the penalty for lascivious conduct when the victim is under twelve (12) years of age shall be <i>reclusion temporal</i> in its medium period; and<br><br>. . . .<br></blockquote><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> An Act Providing for Stronger Deterrence and Special Protection Against Child Abuse, Exploitation and Discrimination, and For Other Purposes, approved on June 17, 1992.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i>, pp. 9-10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 11, 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 11-12 and 30-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 11-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 12, 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 12. <i>See</i> also Medico-Legal-OB-Gyne dated October 8, 2014, RTC records, p. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Rollo</i>, p. 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 13-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 37-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 34-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 17-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 44-47. <i>See</i> Manifestation (in Lieu of Supplemental Brief) dated June 5, 2024.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 41-43. <i>See</i> Manifestation (In Lieu of Supplemental Brief) dated April 25, 2024.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> CA <i>rollo</i>, pp. 31-51, 76-90. <i>See</i> Brief for the Accused-Appellant and Brief for the Plaintiff-Appellee, respectively.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Villarba v. Court of Appeals</b>, 874 Phil. 84, 108 (2020).<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <b>People v. Manzano</b>, 827 Phil. 113, 126 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Carlos v. AAA</b>, 905 Phil. 1035, 1042-1043 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> CA <i>rollo</i>, pp. 42-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, pp. 17-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 19-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b><i>Section 5. Child Prostitution and Other Sexual Abuse</i>.</b> Children, whether male or female, who for money, profit, or any other consideration or due to the coercion or influence of any adult, syndicate or group, indulge in sexual intercourse or lascivious conduct, are deemed to be children exploited in prostitution and other sexual abuse.<br>. . .&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>G.R. No. 260233</b>, August 12, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>See</i> <b>People v. Palanay</b>, 805 Phil. 116, 127 (2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>See</i> <b>Pendoy v. Court of Appeals</b>, 853 Phil. 242, 261 (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>People v. Regaspi</b>, 768 Phil. 593, 598 (2015).<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>People v. Arellano</b>, 397 Phil. 307, 318 (2000).<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>People v. Deliola</b>, 794 Phil. 194, 208 (2016), <i>citing</i> <b>People v. Suarez</b>, 750 Phil. 858, 868-869 (2015).<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 849 Phil. 197 (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> Section 3 (a) of Republic Act No. 7610 provides:<br><blockquote><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="TOP"> <td width="5%">(a)</td> <td width="95%">"Children" refers to a person below eighteen (18) years of age or those over but are unable to fully take care of themselves or protect themselves from abuse, neglect, cruelty, exploitation or discrimination because of a physical or mental disability or condition.</td> </tr> </tbody></table></blockquote><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Act No. 4103 (effective on December 5, 1933), as amended by Acts No. 4225 (effective August 8, 1935).<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Carlos v. AAA</b>, <i>supra</i> note 42, at 1044.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 1045.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> Sec. 31. Common Penal Provisions. —<br><br>. . . .<br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"><tbody><tr><td width="5%" valign="TOP"><div align="JUSTIFY">(f)</div></td> <td width="95%" valign="TOP"><div align="JUSTIFY">A fine to be determined by the court shall be imposed and administered as a cash fund by the Department of Social Welfare and Development and disbursed for the rehabilitation of each child victim, or any immediate member of his family if the latter is the perpetrator of the offense.</div></td> </tr> </tbody></table><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> Section 3 of Republic Act No. 8505 provides that the assistance to rape victims and their families may include: (1) providing the victims psychological counseling, medical and health services, including medico-legal examination; (2) ensuring their privacy and safety; (3) providing psychological counseling and medical services whenever necessary for their family; and (4) adopting and implementing programs for their recovery.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

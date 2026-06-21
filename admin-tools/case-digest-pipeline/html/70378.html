@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. E-02172 - MARK ANGELO VERANO Y EDEJER, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.R E S O L U T I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70378' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. E-02172, February 09, 2026 ]</H2>
+			<H3>MARK ANGELO VERANO<I> Y </I>EDEJER, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>R E S O L U T I O N</H3>
+			</CENTER>
+			<p><STRONG>ZALAMEDA, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">For Our resolution is the Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by petitioner Mark Angelo Verano <i>y</i> Edejer (Verano) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA), which affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC) finding him guilty beyond reasonable doubt of the crime of attempted trafficking in persons under Section 4(a) of Republic Act No. 9208, as amended by Republic Act No. 10364 or the Expanded Anti-Trafficking in Persons Act of 2012, and acquitting him of a violation of Section 4(b) of Republic Act No. 9995 or the Anti-Photo and Video Voyeurism Act of 2009 and the crime of grave threats under Article 282 of the Revised Penal Code.<br><br><center><i>Antecedents</i> </center><br>Verano was charged with the crime of trafficking in persons under Section 4(a) of Republic Act No. 9208, as amended by Republic Act No. 10364 or the Expanded Anti-Trafficking in Persons Act of 2012, a violation of Section 4(b) of Republic Act No. 9995 or the Anti-Photo and Video Voyeurism Act of 2009, and grave threats under Article 282 of the Revised Penal Code in three separate Informations, which read as follows:<br><blockquote> <center><u>Criminal Case No. R-PSG-19-00417-CR </u><br>For: Trafficking in persons under Section 4(a) of Republic Act No. 9208, as amended </center><br>On or about February 6, 2019, in Pasig City and within the jurisdiction of this Honorable Court, the above-named accused, did then and there [willfully], unlawfully, and feloniously recruit to any [sic] act, transaction, scheme[,] or design involving the use of a person by another, to extort money from complainant AAA, profit or any other consideration, causing said complainant to be sexually exploited against her will, in violation of the above-cited law.<br><br>Contrary to law.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center><u>Criminal Case No. R-PSG-19-00418-CR </u><br>For: violation of Section 4(b) of Republic Act No. 9995 </center><br>On or about February 6, 2019, in Pasig City and within the jurisdiction of this Honorable Court, the above-named accused, did then and there [willfully], unlawfully, and feloniously copy or reproduce the photographs of complainant AAA's private areas, such as the latter's undergarment clad breasts, in which she has a reasonable expectation of privacy, against complainant's will and consent.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br><center><u>Criminal Case No. R-PSG-19-00420-CR </u><br>For: Grave threats </center><br>On or about February 6, 2019, in Pasig City and within the jurisdiction of this Honorable Court, the above-named accused, without any justifiable motive, but with intention to cause dishonor to the complainant [AAA] did then and there [willfully], unlawfully, and feloniously threaten the complainant, with the infliction upon her person of a wrong amounting to a crime, that is, by threatening her to post her nude pictures in the internet if she fails to give money in the amount of [PHP] 1,000.00, thereby causing AAA to be threatened.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </blockquote>During the arraignment, Verano pleaded not guilty to the charges. Thereafter, trial ensued.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br><center><i>Version of the Prosecution</i> </center><br>The prosecution presented complainant AAA, Police Master Sergeant Leonardo Martin, Jr., and Police Inspector Alex Lagarto as witnesses.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>AAA testified that in the evening of February 4, 2019, she received a message from one Christian Madrigal (Christian) offering her a job and telling her to message Keith Sy (Keith) on Facebook if she was interested.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> AAA inquired about the job with Keith who said that it was an "escort job" and that she had to send nude photos of herself so he can check if she was qualified.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Desperate for a job, AAA sent a half-naked photo of herself to Keith.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Afterwards, Keith informed her that she was qualified for "luxury day" which meant earning double the normal fee.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>However, before AAA could start, Keith informed her that she needs to have a "sex training" with one Justine Madrigal (Justine).<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> The sex training will be in a hotel in Sta. Mesa and subject to the payment of a PHP 1,000.00 training fee.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> When AAA realized that the job was to be a sex worker, she backed out but Keith got mad and instructed her to talk to Justine.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> When AAA insisted on backing out, both Keith and Justine threatened her that they will post her nude photos on the internet.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Despite begging them not to, AAA found her photos posted on a Facebook account of one Mary Joy Salazar (Mary Joy).<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>AAA sought help from the authorities and was referred to the Philippine National Police Criminal Investigation and Detection Group (PNP-CIDG).<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Based on the information shared by AAA, PNP-CIDG planned an entrapment operation considering that Justine still kept on threatening AAA.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> During which, Verano was apprehended after he took the marked PHP 1,000.00 bill from AAA supposedly representing the training fee.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>When Verano was brought to the police station, it was discovered that Justine, Keith, and Mary Joy were all fake names of Verano.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br><center><i>Version of the Defense</i> </center><br>In Verano's defense, he alleged that he was suddenly arrested when he was about to board a passenger jeepney by three people wearing civilian clothes.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> He was then brought inside a vehicle where his personal belongings (cell phone, wallet, jacket, and bag) were taken from him and where the unidentified men took photos of some money.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Upon arriving at the police precinct, he saw a woman waiting and who kept pointing at him.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Verano argued that he does not know who AAA is and only saw her when he arrived at the precinct.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Verano denied the charges against him.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br><center><i>Ruling of the RTC</i> </center><br>The RTC convicted Verano for the crime of attempted trafficking in persons under Section 4(a) of Republic Act No. 9208, as amended by Republic Act No. 10364, but acquitted him of the other charges against him.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The dispositive portion of the Decision reads:<br><blockquote>WHEREFORE, in view of the foregoing, the accused<b> MARK ANGELO VERANO [<i>y</i>] EDEJER</b> is hereby found<b> GUILTY BEYOND REASONABLE DOUBT</b> in Criminal Case No. R-PSG-19-00417-CR for the crime of Attempted Trafficking in Persons under Section 4(a) of Republic Act No. 9208, as amended by Republic Act No. 10364. The said accused is thus sentenced to suffer the penalty of<b> IMPRISONMENT</b> for [15] years and to pay a<b> FINE</b> in the amount of [PHP] 750,000.00 without subsidiary imprisonment in case of insolvency. He is likewise ordered to pay the victim AAA<b> MORAL DAMAGES</b> in the amount of [PHP] 200,000.00 and is liable for<b> EXEMPLARY DAMAGES</b> in the amount [PHP] 100,000.00.<br><br>Meanwhile, the same accused is<b> ACQUITTED</b> in Criminal Case Nos. R-PSG-19-00418-CR and R-PSG-19-00420-CR for violation of Section 4(b) of [Republic Act] No. 9995, otherwise known as the Anti-Photo and Video Voyeurism Act of 2009, and the crime of Grave Threats, respectively.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis in the original) </blockquote>The RTC ruled that the acts perpetrated by Verano constitute trafficking in persons.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Verano, under the guise of Keith recruited AAA to engage in prostitution and when she backed out, threatened to post her nude photos online.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> However, since Verano was not able to execute all the elements of the crime in view of AAA's refusal, the crime was committed only in the attempted stage.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>As to the charge of a violation of Section 4(b) of Republic Act No. 9995 or the Anti-Photo and Video Voyeurism Act of 2009, the RTC ruled that there was no evidence that Verano reproduced or copied the nude photos of AAA.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Instead, it was posted online which constituted a different crime specifically a violation of Section 4(d) of Republic Act No. 9995.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Considering that this does not fall under the<i> variance doctrine</i>, Verano cannot be convicted of the crime proven.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Lastly, regarding the charge of grave threats, the RTC found that the Information charged Verano of Article 282(2) of the Revised Penal Code, but what was alleged in the body is a violation of Article 282(1) of the Revised Penal Code.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>However, since the threat was made to induce AAA to undergo a sex training and engage in prostitution, this constituted as a means to commit the offense of trafficking in persons and cannot be regarded as a separate crime from a violation under Republic Act No. 9208, as amended.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Verano appealed his conviction before the CA.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br><center><i>Ruling of the CA</i> </center><br>In the assailed Decision, the CA affirmed Verano's conviction to wit:<br><blockquote><b>WHEREFORE</b>, the appeal is<b> DENIED.</b> The Decision dated June 8, 2023 of the Regional Trial Court of Pasig City, Branch 157, in Criminal Case No. R-PSG-19-00417-CR is<b> AFFIRMED.</b><br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Emphasis in the original) </blockquote>On appeal, Verano argued that AAA's testimony is not credible and not sufficient to prove his guilt beyond reasonable doubt and that the screenshots of the alleged messages between him and AAA were not properly identified or formally offered in evidence.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>The CA upheld the conviction of Verano ruling that AAA's testimony is credible<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> and that contrary to his claims, the screenshots were properly identified and offered in evidence.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>Aggrieved, Verano filed the present petition before the Court.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br><center><i>Issue</i> </center><br>Did the CA err in affirming the conviction of Verano for the crime of attempted trafficking in persons under Section 4(a) of Republic Act No. 9208, as amended by Republic Act No. 10364?<br><br><center><i>Ruling of the Court</i> </center><br>We uphold the conviction of petitioner for attempted trafficking in persons.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The Petition raises factual issues</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>At the onset, it must be pointed out that the petitioner essentially argues that the RTC and CA erred in appreciating the evidence presented by the parties. Specifically, petitioner alleges that AAA's testimony should not have been given credence and that his defense of denial should have been upheld.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>In doing so, petitioner prays that the Court take a second look at the evidence presented by the parties, which is generally proscribed in a Rule 45 petition.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>It is a well-settled principle that factual questions are not proper in a Rule 45 petition because the jurisdiction of the Court under Rule 45 is limited to errors of law.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> While the Petition avers that an exception applies in this case, it is respectfully observed that no exceptions are present.<br><br>In any case, We affirm the conviction of petitioner for attempted trafficking in persons under Section 4(a) of Republic Act No. 9208, as amended.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The CA committed no reversible error in affirming the conviction of the petitioner</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>As explained in<i> People v. Valencia</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the elements of trafficking in persons are the following:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">The act of "recruitment, obtaining, hiring, providing, offering, transportation, transfer, maintaining, harboring, or receipt of persons with or without the victim's consent or knowledge, within or across national borders"; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY">The means used include "by means of threat, or use of force, or other forms of coercion, abduction, fraud, deception, abuse of power or of position, taking advantage of the vulnerability of the person, or, the giving or receiving of payments or benefits to achieve the consent of a person having control over another person"; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(3) </div></td> <td valign="top"> <div align="JUSTIFY">The purpose of trafficking includes "the exploitation or the prostitution of others or other forms of sexual exploitation, forced labor or services, slavery, servitude or the removal or sale of organs."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup></div></td> </tr> </tbody></table></blockquote>As correctly ruled by the CA, the prosecution was able to prove all the elements of the crime beyond reasonable doubt. First, petitioner recruited AAA to work as an "escort" or engage in prostitution. Second, petitioner threatened AAA that he will post her naked photos to convince her to engage in prostitution. Third, the work AAA was being convinced to engage in is prostitution. However, due to a cause other than the voluntary desistance of petitioner, the recruitment to engage in prostitution was not consummated. Hence, the crime was only in its attempted stage.<br><br>As to the other charges, We agree with the CA that petitioner cannot be convicted of the same. For the charge of a violation of Section 4(b) of the Anti-Photo and Video Voyeurism Act of 2009, there was indeed no evidence presented that petitioner reproduced or copied the nude photo sent by the complainant. What was proven was that it was uploaded online which undoubtedly constituted a different crime which is a violation of Section 4(d) of Republic Act No. 9995 that prohibits the act of publishing or broadcasting or showing the photo of a sexual act or similar activity through the internet. Consequently, since petitioner was charged with a violation of Section 4(b) and the elements of Section 4(d) are not included in the elements of Section 4(b), variance doctrine cannot apply.<br><br>Lastly, regarding the charge of grave threats, the act of petitioner in threatening AAA is already subsumed under the charge and conviction for a violation of Section 4(a) of Republic Act No. 9208, as amended, as one of its elements is that the means used in recruiting the victim be by means of threat or other forms of coercion. In executing the acts, which constituted elements of trafficking of persons, petitioner threatened AAA as a means to recruit her.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The penalty imposed is correct</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Republic Act No. 10364 expressly provides for the crime of attempted trafficking in persons "[w]here there are acts to initiate the commission of a trafficking offense but the offender failed to or did not execute all the elements of the crime, by accident or by reason of some cause other than voluntary desistance, such overt acts shall be deemed as an attempt to commit an act of trafficking in persons."<br><br>The same law provides that the penalty for a violation of Section 4(a) is imprisonment of 15 years and a fine of not less than PHP 500,000.00 but not more than PHP 1 million. Hence, the penalty imposed upon petitioner is in accordance with the law.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>The award of damages must be modified</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>In the assailed Decision, AAA was awarded PHP 200,000.00 for moral damages and PHP 100,000.00 for exemplary damages.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>Currently, damages awarded to private complainants in cases of consummated and qualified trafficking in persons have been set by jurisprudence in the amount of PHP 500,000.00 for moral damages and PHP 100,000.00 for exemplary damages.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> In<i> People v. Lalli</i>,<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> the Court explained this grant, to wit:<br><blockquote>The Civil Code describes moral damages in Article 2217:<br><blockquote>Art. 2217. Moral damages include physical suffering, mental anguish, fright, serious anxiety, besmirched reputation, wounded feelings, moral shock, social humiliation, and similar injury. Though incapable of pecuniary computation, moral damages may be recovered if they are the proximate result of the defendant's wrongful act for omission. </blockquote>Exemplary damages, on the other hand, are awarded in addition to the payment of moral damages, by way of example or correction for the public good, as stated in the Civil Code:<br><blockquote>Art. 2229. Exemplary or corrective damages are imposed, by way of example or correction for the public good, in addition to the moral, temperate, liquidated or compensatory damages.<br><br>Art. 2230. In criminal offenses, exemplary damages as a part of the civil liability may be imposed when the crime was committed with one or more aggravating circumstances. Such damages are separate and distinct from fines and shall be paid to the offended party. </blockquote>The payment of [PHP] 500,000 as moral damages and [PHP] 100,000 as exemplary damages for the crime of [t]rafficking in [p]ersons as a [p]rostitute finds basis in Article 2219 of the Civil Code, which states:<br><blockquote>Art. 2219. Moral damages may be recovered in the following and analogous cases:<table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">A criminal offense resulting in physical injuries; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY">Quasi-delicts causing physical injuries; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(3) </div></td> <td valign="top"> <div align="JUSTIFY">Seduction, abduction, rape, or other lascivious acts; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(4) </div></td> <td valign="top"> <div align="JUSTIFY">Adultery or concubinage; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(5) </div></td> <td valign="top"> <div align="JUSTIFY">Illegal or arbitrary detention or arrest; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(6) </div></td> <td valign="top"> <div align="JUSTIFY">Illegal search; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(7) </div></td> <td valign="top"> <div align="JUSTIFY">Libel, slander or any other form of defamation; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(8) </div></td> <td valign="top"> <div align="JUSTIFY">Malicious prosecution; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(9) </div></td> <td valign="top"> <div align="JUSTIFY">Acts mentioned in Article 309; </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(10) </div></td> <td valign="top"> <div align="JUSTIFY">Acts and actions referred to in Articles 21, 26, 27, 28, 29, 30, 32, 34, and 35. </div></td> </tr> </tbody></table><br>The parents of the female seduced, abducted, raped, or abused, referred to in No. 3 of this article, may also recover moral damages.<br><br>The spouse, descendants, ascendants, and brothers and sisters may bring the action mentioned in No. 9 of this article, in the order named. </blockquote>The criminal case of [t]rafficking in [p]ersons as a [p]rostitute is an analogous case to the crimes of seduction, abduction, rape, or other lascivious acts. In fact, it is worse. To be trafficked as a prostitute without one's consent and to be sexually violated four to five times a day by different strangers is horrendous and atrocious. There is no doubt that Lolita experienced physical suffering, mental anguish, fright, serious anxiety, besmirched reputation, wounded feelings, moral shock, and social humiliation when she was trafficked as a prostitute in Malaysia. Since the crime of [t]rafficking in [p]ersons was aggravated, being committed by a syndicate, the award of exemplary damages is likewise justified.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </blockquote>From the foregoing, it is clear that We have already long recognized that moral and exemplary damages are due to victims of trafficking in persons.<br><br>We note, however, that there has been no amount for damages set yet by jurisprudence in cases of attempted trafficking in persons. However, this should not foreclose the Court in granting the same in this case. In<i> Ferrer v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> the Court had the occasion to clarify that attempted trafficking in persons was made a separate crime in Republic Act No. 10364. It explained that:<br><blockquote>As Associate Justice Mario V. Lopez keenly observed during deliberations, [<i>Republic Act No.</i>] <i>10364 criminalized attempted trafficking in persons as a means to fully strengthen and institutionalize the mechanisms and principles behind the protection of rights of trafficked persons.</i> It was not designed to reduce the penalties for consummated offenses, but to proscribe a new crime altogether.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> (Emphasis supplied) </blockquote>Consequently, it was declared as the state policy in enacting Republic Act No. 10364 that the State should protect the people from any threat of violence and exploitation, and eliminate trafficking in persons, among others.<br><br>Hence, to give life to the state policy declared in Republic Act No. 10364, We affirm the grant of damages with modification.<br><br>In<i> Guy v. Tulfo</i>,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> the Court stated that the amount of moral damages depends upon the circumstances of each case and that courts are given the discretion to fix the amount provided that there is sufficient basis for the same.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>In this case, We find that moral damages in the amount of PHP 50,000.00 is due to AAA for the physical and mental suffering she has experienced due to the actions of petitioner in threatening to post her nude photos online, as he in fact did, to compel her to engage in prostitution.<br><br>As to the award of exemplary damages, We note that the amount PHP 100,000.00 has been awarded to victims of either consummated or qualified trafficking in persons. Considering that the case before Us is attempted trafficking in persons, We order its modification to PHP 30,000.00.<br><br><b>FOR THESE REASONS</b>, the Petition is <b>DENIED.</b> The June 28, 2024 Decision and July 30, 2025 Resolution of the Court of Appeals in CA-G.R. CR No. 48808 are <b>AFFIRMED with MODIFICATION. </b><br><br>Petitioner Mark Angelo Verano<i> y</i> Edejer is found <b>GUILTY </b> beyond reasonable doubt of the crime of Attempted Trafficking in Persons under Section 4(a) of Republic Act No. 9208, as amended by Republic Act No. 10364.<br><br>He is <b>SENTENCED </b> to suffer the penalty of imprisonment for 15 years and to pay a fine in the amount of PHP 750,000.00 without subsidiary imprisonment in case of insolvency.<br><br>He is <b>ORDERED </b> to pay private complainant PHP 50,000.00 as moral damages and PHP 30,000.00 as exemplary damages.<br><br>All amounts due shall earn legal interest at the rate of 6% per annum from the finality of this Resolution until full satisfaction.<br><br><b>SO ORDERED. </b><br><br><i>Gesmundo, C.J. (Chairperson), Hernando, Rosario,</i> and <i>Marquez, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 13-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 40-53. The June 28, 2024 Decision in CA-G.R. CR No. 48808 was penned by Associate Justice Edwin D. Sorongon and concurred in by Associate Justices Ruben Reynaldo G. Roxas and Eduardo S. Ramos, Jr. of the Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 56-57. The July 30, 2025 Resolution in CA-G.R. CR No. 48808 was penned by Associate Justice Ruben Reynaldo G. Roxas and concurred in by Associate Justices Zenaida T. Galapate-Laguilles and Eduardo S. Ramos, Jr. of the Special Former Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 88-101. The June 8, 2023 Decision in Criminal Case Nos. R-PSG-19-00417-CR, R-PSG-19-00418-CR, and R-PSG-19-00420-CR was penned by Presiding Judge Ana Teresa T. Cornejo-Tomacruz of Branch 157, Regional Trial Court, Pasig City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 40-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 95.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 95-96.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 98.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 100.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 100-101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 60-84.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 44-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 48-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 13-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 21-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Lopez v. Saludo, Jr.</b>, 910 Phil. 600, 605 (2021) [Per J. Hernando, Second Division], <i>citing</i> <b>Miro v. Vda. de Erederos</b>, 721 Phil. 772, 786 (2013) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 904 Phil. 518 (2021) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>. at 531.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, p. 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>See</i> <b>People v. XXX, G.R. No. 273990</b>, January 22, 2025 [Per J. Hernando, First Division] at 11; <b>People v. XXX, G.R. No. 252606</b>, April 2, 2025 [Per J. Marquez, First Division] at 10. These pinpoint citations refer to the copy of the Decision uploaded to the Supreme Court website. <i>See also</i> <b>People v. Gumba</b>, 942 Phil. 742, 767 (2023) [Per J. Leonen, Second Division]; <b>Santiago, Jr., v. People</b>, 855 Phil. 536, 552 (2019) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 675 Phil. 126 (2011) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 158-159.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> 925 Phil. 97 (2022) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id</i>. at 123.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> 851 Phil. 748 (2019) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>. at 767-768.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

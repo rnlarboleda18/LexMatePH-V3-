@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. Blg. 210480 - MEL V. VELARDE AT ANGELINE L. MACASAET, MGA NAGPETISYON, LABAN SA KAGALANG-GALANG NA HUKUMAN NG PAG-AAPELA SA BUWIS, IKATLONG DIBISYON, KAWANIHAN NG RENTAS INTERNAS, AT KAGAWARAN NG KATARUNGAN, MGA RESPONDENTE.D E S I S Y O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : 'cfa6c2e22e1df2870c2467e683bb93ba' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : 'cfa6c2e22e1df2870c2467e683bb93ba' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70360' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>IKATLONG DIBISYON</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. Blg. 210480, January 29, 2026 ]</H2>
+			<H3>MEL V. VELARDE AT ANGELINE L. MACASAET, MGA NAGPETISYON, LABAN SA KAGALANG-GALANG NA HUKUMAN NG PAG-AAPELA SA BUWIS, IKATLONG DIBISYON, KAWANIHAN NG RENTAS INTERNAS, AT KAGAWARAN NG KATARUNGAN, MGA RESPONDENTE.<br><br>D E S I S Y O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Ang Petisyong ito para sa <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> sa ilalim ng Tuntunin 65 ng <i>Rules of Court</i> ay inihain nina Mel Velarde at Angeline Macasaet (<b>Velarde at mga kasama</b>), para kwestiyunin ang diumano'y pagsantabi, nang di nakasulat na kautusan ng Hukuman ng Pag-aapela sa Buwis (<b>CTA</b>), ng kanilang <i>Motion for Judicial Determination of Probable Cause with Motion to Defer Arraignment</i><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> (<b>Motion for Judicial Determination of Probable Cause</b>), na may petsang Agosto 6, 2013. Iginigiit nina Velarde at mga kasama na ang nasabing pagsantabi ay kinakitaan ng malubhang pag-aabuso sa karapatang magpasya na katumbas ng kawalan o labis na hurisdiksyon.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup></p><p align="center"> <b>Ang mga Pangyayari</b> </p><p> Noong Marso 21, 2013, naghain ang Kawanihan ng Rentas Internas (<b>BIR</b>) ng isang Impormasyon<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> na may petsang Mayo 2, 2011 sa CTA laban kina Velarde at mga kasama para sa kasong <i>tax evasion</i> o pag-iwas sa pagbabayad ng buwis. Ang bahagi ng Impormasyon na naglalahad ng paratang ay nagsasaad: </p><blockquote> <p> That on or about 13 August 2009, in the City of Makati, Metro Manila, within the jurisdiction of this Honorable Court, accused Mel V. Velarde, having bought from Maria Josefina D. Knox a parcel of land containing an area of 999 square meters located at Nasugbu, Batangas, covered by Transfer Certificate of Title No. T-87623, for the sum of US$ [1.2 million] equivalent to [PHP 60 million] at the time, conspiring and confederating with accused Atty. Angeline L. Macasaet, willfully and unlawfully [made] it appear in a deed of absolute sale of even date that the purchase price was only [PHP 16 million] and pay capital gains tax of [PHP] 960,000 (6% x [PHP 16 million]) instead of [PHP 3.6 million] (6% of [PHP 60 million]) and documentary stamp tax of [PHP] 240,000.00 (1.5% x [PHP 16 million]) instead of [PHP] 900,000.00 (1.5% of [PHP 60 milllion]), thereby committing tax evasion and incurring deficiency capital gains tax in the amount of [PHP] 2,640,000.00 ([PHP 3.6 million] - [PHP] 960,000) and deficiency documentary stamp tax in the amount of [PHP] 660,000.00 ([PHP] 900,000.00-[PHP] 240,000), or deficiency taxes in the total amount of [PHP 3.3 million] ([PHP] 2,640,000.00 + [PHP] 660,000.00), exclusive of interest and penalty charges, to the damage and prejudice of the Government. </p> <p> CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p> <p> (Na noong o bandang ika-13 ng Agosto 2009, sa Lungsod ng Makati, Kalakhang Maynila, sakop ng hurisdiksyon ng Kagalang-galang na Hukuman na ito, ang akusadong si Mel V. Velarde, matapos bumili mula kay Maria Josefina D. Knox ng isang bahagi ng lupa na may sukat na 999 metro kuwadrado na matatagpuan sa Nasugbu, Batangas, na nakapaloob sa <i>Transfer Certificate of Title</i> Blg. T-87623, kapalit ng halagang US$ [1.2 milyon] o katumbas ng PHP [60 milyon] noon, ay nakipagsabwatan umano sa akusadong si Atty. Angeline L. Macasaet upang sadya at labag sa batas na palabasin sa isang <i>Deed of Absolute Sale</i> na kaparehong petsa na ang halaga ng pagbili ay PHP [16 milyon] lamang, at nagbayad ng <i>capital gains tax</i> na PHP 960,000.00 (6% ng PHP [16 milyon]) sa halip na PHP [3.6 milyon] (6% ng PHP [60 milyon]), at <i>documentary stamp tax</i> na PHP 240,000.00 (1.5% ng PHP [16 milyon]) sa halip na PHP 900,000.00 (1.5% ng PHP [60 milyon]). Sa gayon ay nagkasala sa pag-iwas sa pagbabayad ng buwis at nagkaroon ng kakulangan sa pagbabayad ng <i>capital gains tax</i> na PHP 2,640,000.00 (PHP [3.6 milyon] – PHP 960,000.00) at kakulangan sa <i>documentary stamp tax</i> na PHP 660,000.00 (PHP 900,000.00 – PHP 240,000.00), o mga kakulangang buwis na may kabuuang halagang PHP [3.3 milyon] (PHP 2,640,000.00 + PHP 660,000.00), bukod pa sa mga interes at mga karampatang multa, na nagdulot ng pinsala at pagkalugi sa Pamahalaan. </p> <p> LABAG SA BATAS.)<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p> </blockquote> <p> Ang sakdal ay nag-ugat sa umano'y kakulangan sa pagbabayad ng <i>capital gains tax</i> na nararapat matanggap mula kay Maria Josefina D. Knox (<b>Josefina</b>), gayundin ng <i>documentary stamp tax</i> na kaugnay ng pagbili ng isang ari-arian sa Punta Fuego ng Verdant Treasures, Inc., isang korporasyon kung saan si Mel Velarde ay nanungkulan bilang Pangulo at si Angeline Macasaet bilang Kalihim ng Korporasyon. Isinasaad sa Impormasyon na nagsabwatan sina Velarde at mga kasama upang makaiwas sa tamang pagbabayad ng buwis sa pamamagitan ng pagpapakita ng diumano'y pinekeng <i>Deed of Absolute Sale</i><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> para sa nasabing ari-arian. Iginiit ng prosekusyon na ang aktuwal na halaga ng bentahan ay US$ 1.2 milyon at hindi [PHP]16 milyon.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup></p><p> Itinakda ang pagbasa ng sakdal o <i>arraignment</i> noong Agosto 7, 2013. Sa parehong araw, naghain sina Velarde at mga kasama ng <i>Motion for Judicial Determination of Probable Cause</i>, na tinalakay ng hukuman. Natukoy sa pagsusuri sa transkripsyon ng mga tala ng istenograpiko ang mga sumusunod: (1) isinampa ang Impormasyon noong Marso 21, 2013; (2) inilabas na ang mga utos ng pagpapadakip o <i>warrant of arrest</i> laban kina Velarde at mga kasama; (3) naghain ng <i>Entry of Appearance</i> ang mga abogado nina Velarde at mga kasama noong Hulyo 11, 2013; (4) isinumite ang <i>Motion for Judicial Determination of Probable Cause</i> sa CTA noong Agosto 7, 2013; at (5) ang prosekusyon ay hindi nabigyan ng kopya ng mosyon sapagkat ito ay ipinadala sa Tanggapan ng Taga-usig Panlahat o <i>Office of the Solicitor General</i>, sa halip na kay Prosekyutor Edwin S. Dayog ng Kagawaran ng Katarungan. Dahil sa hindi wastong paghahain, itinuring ng CTA na hindi naihain ang mosyon. Dahil dito, at sa pagpapahayag ng pagsang-ayon nina Velarde at mga kasama, nagpatuloy ang pagbasa sa sakdal sa parehong araw, kung saan sila ay naghain ng samong "not guilty" o "hindi nagkasala."<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> Sa sumunod na pagdinig noong Oktubre 23, 2013, muling iginiit ng mga abogado nina Velarde at mga kasama ang nakabinbin nilang <i>Motion for Judicial Determination of Probable Cause</i>. Gayunpaman, ipinahayag ng CTA na ang mosyon ay tinanggihan na kaya nagkaroon ng pagbasa ng sakdal o <i>arraignment</i>.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Dahil dito, inakyat nina Velarde at mga kasama sa pamamagitan ng Petisyon para sa <i>Certiorari</i> sa Kataas-taasang Hukuman ang usapin. Iginiit nila na ang umano'y hindi pag-apruba ng CTA sa kanilang mosyon, na inihayag sa hukuman noong Agosto 7, 2013 at muling pinagtibay noong Oktubre 23, 2013, ay hindi kailanman naisulat sa isang pormal na kautusan sa kabila ng mga kahilingan ng kanilang abogado. Kaya naman, iginiit nila na ang CTA ay kumilos nang may malubhang pag-abuso sa pagpapasya na humantong sa kawalan o labis na hurisdiksiyon.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Dagdag pa rito, pinaratangan nila ang CTA ng hayagang pagkiling at di pantay na trato sa pagdinig ng kaso. Kaya naman, hinihiling nina Velarde at mga kasama ang pagpapawalang-bisa sa umano'y hindi pag-apruba ng CTA sa kanilang mosyon, at ang paglabas ng isang resolusyon para isantabi ang kasong kriminal.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> Samantala, habang nakabinbin ang Petisyon para sa <i>Certiorari</i> sa Kataas-taasang Hukuman, ipinagpatuloy ng CTA ang paglilitis at ang pagtanggap ng ebidensiya ng prosekusyon. Matapos ipresenta ng prosekusyon ang kanilang kaso, naghain sina Velarde at mga kasama ng <i>Motion for Leave with Attached Demurrer to Evidence</i> noong Pebrero 5, 2016. Sa isang Kautusan na may petsang Abril 26, 2016, hindi inaprubahan ng CTA ang demurrer at idineklara nitong sapat ang ebidensiya ng prosekusyon upang panindigan ang mga paratang laban kina Velarde at mga kasama. Naghain naman sila ng <i>Motion for Reconsideration</i> noong Mayo 10, 2016, kung saan iginiit nila na: (1) kinakailangan sa isang <i>demurrer</i> ang aktuwal na pagsusuri at pagtitimbang sa katotohanan o kamalian ng ebidensiya ng prosekusyon; (2) nabigo ang prosekusyon na patunayan ang mga mahahalagang elemento ng pag-iwas sa pagbabayad ng buwis; at (3) dahil ang Verdant ay hindi itinakdang tagabayad ng buwis o <i>statutory taxpayer</i>, hindi ito maaaring magkaroon ng pananagutan sa pag-iwas sa pagbabayad ng buwis, at dahil dito, sina Velarde at mga kasama ay hindi rin maaaring papanagutin sa sinasabing krimen.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> Sa isang Resolusyon<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> na may petsang Disyembre 21, 2016, pinaboran ng CTA ang <i>Motion for Reconsideration</i> at isinantabi ang kasong pag-iwas sa pagbabayad ng buwis. Humiling ang prosekusyon na muling isaalang-alang ang kanilang Resolusyon sa pamamagitan ng paghain ng isang mosyon noong Enero 6, 2017, ngunit tinanggihan ito ng CTA sa isang Resolusyon noong Agosto 9, 2017. Kalaunan, nagpalabas na ang CTA ng Resolusyon noong Oktubre 5, 2017 na nagdedeklarang ang Resolusyon nito noong Agosto 9, 2017 ay pinal at maipatutupad na, at kasunod nito ay inilabas ang isang <i>Entry of Judgment</i>. Bunga nito, ang reklamong kriminal laban kina Velarde at mga kasama, ay tuluyang isinantabi.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> </p><p> Sa kabila ng pagsantabi sa kasong kriminal, iginigiit nina Velarde at mga kasama na nararapat pa ring lutasin ng Hukumang ito ang kasalukuyang Petisyon para sa <i>Certiorari</i> batay sa merito. Iginiit nila na ito ay isang kaso ng <i>primae impressionis</i>, na nagbibigay ng pagkakataon sa Kataas-taasang Hukuman na linawin ang mga konstitusyonal na karapatan ng mga inaakusahan sa mga kasong kriminal. Partikular nilang binibigyang-diin ang kanilang pangunahing karapatan na hindi managot sa isang kasong kriminal nang hindi dumadaan sa tamang proseso ng batas o <i>due process</i>, gayundin ang kanilang karapatan sa isang mabilis, walang kinikilingan, at pampublikong paglilitis.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p align="center"> <b><i>Ang Suliranin</i></b> </p><p> Ang pinal na pagsasantabi ba sa kasong pag-iwas sa pagbabayad ng buwis ay dahilan upang mawalan ng saysay ang Petisyon para sa <i>Certiorari</i> na kumukwestiyon sa umano'y hindi pag-apruba ng CTA sa <i>Motion for Judicial Determination of Probable Cause</i> nina Velarde at mga kasama? Kung oo, ang nasabing pagsantabi ng CTA ay maituturing bang isang malubhang pag-abuso sa pagpapasya na katumbas ng kawalan o labis na hurisdiksiyon? Kung gayon, ito ba'y isang batayan para sa hindi pagsunod sa alituntunin ng <i>mootness</i>? </p><p align="center"> <b><i>Ang Pasya ng Hukuman</i></b> </p><p> Matapos ang masusi at maingat na pagsusuri ng mga tala, pinagtitibay ng Hukuman ang pagpawalang-saysay sa Petisyon para sa <i>Certiorari</i> dahil sa pagiging <i>moot</i> o walang saysay at akademiko nito, at nakita ring wala sa mga kinikilalang eksepsiyon sa alituntunin ng <i>mootness</i> ang maaring gamitin sa kasalukuyang kaso. </p><p> Salig sa paggamit ng kapangyarihang hudisyal o <i>judicial power</i> na ang mga hukuman ay magpapasya lamang sa mga aktuwal na kaso o kontrobersiya.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Ang prinsipyong ito ay nag-ugat sa Seksiyon 1, Artikulo VIII ng Saligang Batas ng 1987 na nagsasaad: </p><blockquote> <p> Seksiyon 1. Ang kapangyarihang hudisyal ay ipinagkakaloob sa isang Kataas-taasang Hukuman at sa iba pang mga mababang hukuman na maaaring itatag ng batas. </p> <p> Kabilang sa kapangyarihang hudisyal ang <i>tungkulin ng mga hukuman ng katarungan na lutasin ang mga aktuwal na kontrobersiyang may kinalaman sa mga karapatang maaaring igiit at ipatupad sa ilalim ng batas</i>, at tukuyin kung nagkaroon ng malubhang pag-abuso sa kapangyarihan na katumbas ng kawalan o labis na hurisdiksiyon sa panig ng alinmang sangay o kasangkapan ng Pamahalaan. (Diin idinagdag) </p> </blockquote> <p> Sa <i>Kilusang Mayo Uno v. Aquino III</i>,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> ipinaliwanag ng Hukuman ang kahulugan ng aktuwal na kaso o kontrobersiya: </p><blockquote> <p> There is an actual case or controversy if there is a "conflict of legal right, an opposite legal claims susceptible of judicial resolution." A petitioner bringing a case before this Court must establish that there is a legally demandable and enforceable right under the Constitution. There must be a real and substantial controversy, with definite and concrete issues involving the legal relations of the parties, and admitting of specific relief that courts can grant.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Citations omitted) </p> <p> (May aktuwal na kaso o kontrobersiya kung mayroong "tunggalian ng legal na karapatan, o magkasalungat na legal na pag-aangkin na maaring lutasin ng hukuman." Kailangang maipakita ng nagpetisyon na mayroong karapatang maaaring igiit at ipatupad sa ilalim ng Saligang-Batas. Dapat mayroong tunay at makabuluhang kontrobersiya, may tiyak at kongkretong mga isyu na sangkot ang ugnayang legal ng mga partido, at maaaring pagpasyahan ng hukuman upang magbigay ng tiyak na lunas.)<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Mga sanggunian ay hindi na inilahad) </p> </blockquote> <p> Alinsunod dito, ang Hukuman ay walang kapangyarihan o kagustuhan na lutasin ang mga isyung <i>moot</i> o walang saysay, mga abstraktong proposisyon, o mga teoretikal na pananaw na walang praktikal na epekto sa mga karapatan at interes ng mga partido. Kapag ang isang kaso ay naging <i>moot</i> o walang saysay, nawawala ang aktuwal at tunay na alitang maaaring resolbahin sa pamamagitan ng paghatol ng hukuman, at nawawalan ng saysay ang interbensiyong hudisyal.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Ang isang kaso ay tinuturing na <i>moot</i> o walang saysay kapag ang mga sumunod na pangyayari ay labis nang binago ang aktuwal na kalagayan o legal na sitwasyon kaya't wala nang magiging saysay ang anumang paghatol dito.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Sa mga ganitong pagkakataon, wala nang nalalabing isyu na dapat resolbahin ang Hukuman sapagkat napawi na ang <i>lis mota</i> o ang rason ng paghain ng kaso. </p><p> Gayunman, kinikilala sa hurisprudensiya ang ilang eksepsiyon kung kailan maaaring magpatuloy ang pagtalakay ng Hukuman kahit ang kaso ay <i>moot</i> o wala nang saysay: (1) kung may malubhang paglabag sa Saligang Batas; (2) kung ang pambihirang katangian ng sitwasyon at nakatataas na pampublikong interes ay humihingi ng paglutas; (3) kung ang isyung konstitusyonal na inihaharap ay nangangailangan ng pagbalangkas ng mga prinsipyong gagabay sa hukuman, sa hanay ng mga abogado, at publiko; at (4) kung ang kaso ay maaaring maulit subalit nakaiiwas sa pagsusuri ng hukuman.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> Ang mga eksepsiyong ito, gaya ng nakasaad sa <i>Osmeña III v. Social Security System of the Philippines</i>,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> ay nagbibigay ng balangkas para sa pagpapasya ng Hukuman kung itutuloy ang paglilitis sa kabila ng <i>mootness</i> o kawalan ng saysay ng kontrobersiya: </p><blockquote> <p> A case or issue is considered moot and academic when it ceases to present a justiciable controversy by virtue of supervening events, so that an adjudication of the case or a declaration on the issue would be of no practical value or use. In such instance, there is no actual substantial relief which a petitioner would be entitled to, and which would be negated by the dismissal of the petition. Courts generally decline jurisdiction over such case or dismiss it on the ground of mootness – <i>save when, among others, a compelling constitutional issue raised requires the formulation of controlling principles to guide the bench, the bar and the public; or when the case is capable of repetition yet evading judicial review</i>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> (Emphasis supplied; citations omitted) </p> <p> (Ang isang kaso o isyu ay itinuturing na <i>moot</i> at <i>academic</i> kapag ito ay tumigil nang magharap ng isang kontrobersiyang maaaring litisin sa hukuman dahil sa mga sumunod na pangyayari, kaya't ang paghatol sa kaso o pagpapahayag ukol sa isyu ay wala nang magiging praktikal na pakinabang o silbi. Sa ganitong pagkakataon, wala nang aktuwal at makabuluhang kahilingan na karapat-dapat na makamtan ng mga nagpetisyon ang maaaring igawad, at ang pagsantabi sa petisyon ay hindi na makaaapekto rito. Karaniwan, ang mga hukuman ay hindi nagpapasya sa ganitong mga kaso o kaya'y isinasantabi ito dahil sa pagiging <i>moot</i> o kawalan ng saysay — <i>maliban na lamang kung, bukod sa iba pa, may mahalagang isyung konstitusyonal na kinakailangang resolbahin upang </i>makapagbalangkas<i> ng mga prinsipyo na gagabay sa hukuman, sa hanay ng mga abogado, at sa publiko; o kung ang kaso ay maaaring maulit subalit nakaiiwas sa pagsusuri ng hukuman</i>.)<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> (Diin idinagdag; mga sanggunian ay hindi na inilahad) </p> </blockquote> <p> Gayundin, sa <i>Prof. David v. Pres. Macapagal-Arroyo</i>,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> pinagtibay ng Hukuman ang mga eksepsiyon sa doktrina ng <i>mootness</i> na kinabibilangan ng (a) malubhang paglabag sa Saligang Batas, at (b) kung saan ang pambihirang katangian ng sitwasyon, samahan pa ng mahalagang pampublikong interes, ay nangangailangan ng resolusyon.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </p><p> Sa kasalukuyang kaso, sa pamamagitan ng Resolusyon na may petsang Disyembre 21, 2016, pinaboran ng CTA ang <i>Motion for Reconsideration</i> nina Velarde at mga kasama at isinantabi ang kasong pag-iwas sa pagbabayad ng buwis laban sa kanila. Ang nasabing desisyon ay naging pinal at kaagad na maipapatupad na sa pamamagitan ng Resolusyon ng CTA noong Oktubre 5, 2017, at sinundan ng <i>Entry of Judgment</i>.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Dahil dito, tuluyan nang nawalan ng saysay ang reklamong kriminal laban kina Velarde at mga kasama, at nawala ang anumang aktuwal at tunay na kontrobersiyang maaaring resolbahin sa pamamagitan ng paghatol ng hukuman. </p><p> Sa kabila ng pinal na pagsantabi sa kaso, isinusulong nina Velarde at mga kasama na resolbahin pa rin ng Kataas-taasang Hukuman ang mga isyung nakalatag sa Petisyon dahil sa kakaibang katangian ng mga isyung inilahad at ang kanilang mga pangunahing karapatan sa ilalim ng Saligang Batas. Ipinapalagay nila na ang Petisyon ay magbibigay ng pagkakataon sa Hukuman upang higit pang liwanagin ang mga konstitusyonal na karapatan ng isang nasasakdal sa kasong kriminal, partikular ang karapatan sa angkop na proseso ng batas o <i>due process</i> at ang karapatan sa mabilis, walang kinikilingan, at pampublikong paglilitis.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></p><p> Gayunman, nabigo ang argumentong ito na matugunan ang mahigpit na pamantayan upang maging eksepsiyon sa doktrina ng mootness. </p><p> <i>Walang malubhang paglabag sa <br> Saligang Batas</i> </p><p> Bagama't iginigiit nina Velarde at mga kasama ang kanilang mga karapatang konstitusyonal sa kanilang mosyon, hindi sapat ang simpleng pagbanggit ng mga karapatang ito upang bigyang-katwiran ang pagsuri ng hukuman sa isang kasong <i>moot</i> o walang saysay. Kinakailangan ang patunay ng malubhang paglabag sa Saligang Batas na nangangailangan ng agarang pamamagitan ng Hukuman. </p><p> Sa kasalukuyang kaso, ang mga umano'y paglabag sa karapatan sa angkop na proseso ng batas o <i>due process</i> at sa karapatang magkaroon ng mabilis na paglilitis ay naging <i>moot</i> o nawalan na ng saysay bunsod ng pinal at hindi na mababawing pagwawakas ng mga kasong kriminal laban kina Velarde at mga kasama. Isinara ng pagsantabi sa kaso ang anumang sinasabing paglabag sa kanilang mga karapatan bilang mga akusado, sapagkat wala nang nananatiling aktuwal at tunay na kontrobersiyang maaaring resolbahin sa pamamagitan ng paghatol ng hukuman. </p><p> Matibay na itinataguyod ng hurisprudensiya na ang pagsusuri ng Hukuman ay hindi isang akademikong ehersisyo ng teoretikal na diskurso, kundi isang mekanismo upang resolbahin ang mga aktuwal at kongkretong pagtatalo na may kinalaman sa mga karapatang maaaring igiit at ipatupad alinsunod sa batas. Tulad ng binigyang diin sa <i>Falcis v. Civil Registrar General</i>:<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p><blockquote> <p> This Court's constitutional mandate does not include the duty to answer all of life's questions. No question, no matter how interesting or compelling, can be answered by this Court if it cannot be shown that there is an "actual and an antagonistic assertion of rights by one party against the other in a controversy wherein judicial intervention is unavoidable." </p> <p> This Court does not issue advisory opinions. <i>We do not act to satisfy academic questions or dabble in thought experiments. We do not decide hypothetical, feigned, or abstract disputes, or those collusively arranged by parties without real adverse interests</i>. If this Court were to do otherwise and jump headlong into ruling on every matter brought before us, we may close off avenues for opportune, future litigation. We may forestall proper adjudication for when there are actual, concrete, adversarial positions, rather than mere conjectural posturing: </p> <blockquote> <p> Even the expanded jurisdiction of this Court under Article VIII, Section 1 does not provide license to provide advisory opinions. An advisory opinion is one where the factual setting is conjectural or hypothetical. In such cases, the conflict will not have sufficient concreteness or adversariness so as to constrain the discretion of this Court. After all, legal arguments from concretely lived facts are chosen narrowly by the parties. Those who bring theoretical cases will have no such limits. They can argue up to the level of absurdity. They will bind the future parties who may have more motives to choose specific legal arguments. In other words, for there to be a real conflict between the parties, there must exist actual facts from which courts can properly determine whether there has been a breach of constitutional text. </p> </blockquote> <p> As this Court makes "final and binding construction[s] of law[,]" our opinions cannot be mere counsel for unreal conflicts conjured by enterprising minds. Judicial decisions, as part of the legal system, bind actual persons, places, and things. Rulings based on hypothetical situations weaken the immense power of judicial review.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> (Emphasis supplied; citations omitted) </p> <p> (Ang konstitusyonal na mandato ng Hukuman na ito ay hindi kinabibilangan ng tungkuling sagutin ang lahat ng tanong sa buhay. Walang tanong, gaano man ito kaakit-akit o kahimok-himok, ang maaaring sagutin ng Hukuman kung hindi maipakikita na mayroong "aktuwal at salungatang paggiit ng mga karapatan ng isang panig laban sa isa pa sa isang kontrobersiya kung saan hindi maiiwasan na pumagitan ang hukuman." </p> <p> Ang Hukuman na ito ay hindi nagbibigay ng mga payong opinyon. <i>Hindi kami kumikilos upang sagutin ang mga akademikong tanong o makilahok sa mga palaisipang eksperimento. Hindi kami nagpapasya sa mga haka-haka, gawa-gawa, o abstraktong alitan, o sa mga alitang sinadya at pinagkasunduan ng mga panig na walang tunay na salungat na mga interes</i>. Kapag ang Hukuman ay kumilos nang taliwas dito at basta na lamang nagbigay ng pasya sa bawat usapin na ihaharap sa amin, maaari naming maisara ang mga daan para sa nararapat at napapanahong paglilitis sa hinaharap. Maaari naming hadlangan ang wastong paghatol sa mga pagkakataong mayroon nang aktuwal, tiyak, at magkakasalungat na posisyon, sa halip na mga haka-haka lamang: </p> <blockquote> <p> Maging ang pinalawak na hurisdiksiyon ng Hukumang ito sa ilalim ng Artikulo VIII, Seksyon 1 ng Saligang Batas ay hindi nagbibigay ng pahintulot upang maglabas ng mga payong opinyon. Ang payong opinyon ay isang opinyon na nakabatay sa haka-haka o palaisipang sitwasyon. Sa ganitong mga kaso, ang tunggalian ay kulang sa aktuwalidad o salungatan na pipigil sa diskresyon ng Hukuman. Sapagkat ang mga legal na argumento na nagmumula sa konkretong karanasan ay masinsing pinipili ng mga tunay na partido. Samantalang yaong mga nagdadala ng pawang teoritikal na kaso ay walang ganitong mga limitasyon. Maaari nilang itulak ang mga argumento hanggang sa sukdulang punto ng kawalang-katwiran. Maaari rin nilang malimitahan ang mga hinaharap na partido na maaaring may higit na motibo upang pumili ng tiyak na mga legal na argumento. Sa madaling salita, upang magkaroon ng tunay na salungatan sa pagitan ng mga panig, kailangang may aktuwal na mga pangyayari na magbibigay-daan sa hukuman upang wastong matukoy kung nagkaroon nga ng paglabag sa Saligang Batas. </p> </blockquote> <p> Yamang ang Hukuman na ito ay gumagawa ng "pinal at may bisa na pagpapakahulugan ng batas," ang aming mga opinyon ay hindi maaaring maging payo lamang para sa mga hindi tunay na mga tunggalian na ginawa ng mapanlikhang isipan. Ang mga desisyon ng hukuman, bilang bahagi ng sistemang legal, ay nagbubuklod sa mga tunay na tao, lugar, at bagay. Ang mga pagpapasya batay lamang sa haka-haka ay nagpapahina sa napakalaking kapangyarihan ng pagsusuri ng hukuman.)<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Diin idinagdag; mga sanggunian ay hindi na inilahad) </p> </blockquote> <p> Sa kawalan ng patuloy na pinsala o umiiral na kontrobersiyang nakaaapekto sa mga karapatan ng mga partido, nabigong maglahad ang kasalukuyang Petisyon ng isyu na maaring litisin, kaya't isinasara nito ang anumang karagdagang pamamagitan ng Hukuman. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Walang katangi-tanging pangyayari o napakahalagang pampublikong interes</i> </div></td> </tr> </tbody></table> <p>Hindi rin mapanghahawakan ang paggiit nina Velarde at mga kasama na ang kasong ito ay nagtatanghal ng isang bagong isyu na may napakahalagang interes ng publiko na nangangailangan ng pagresolba. Bagaman ang mga katanungang <i>primae impressionis</i> ay, sa ilang pambihirang pagkakataon, maaaring magbigay-daan sa pagtatangi mula sa doktrina ng <i>mootness</i>, kinakailangan na ang mga naturang katanungan ay may implikasyon na hihigit pa sa pangunahing interes ng mga naglilitis at sumasaklaw sa mas malawak na mga prinsipyo ng batas na may kahalagahan sa publiko. Dito, ang layunin lamang nina Velarde at mga kasama ay makakuha ng resolusyon ukol sa kanilang pansariling karaingan, na nawalan na ng saysay bunsod ng pinal na pagbasura sa mga kasong isinampa laban sa kanila. </p><p> Walang natatanging pangyayari na umiiral upang iangat ang kasong ito bilang isang usapin na may malawak na pampublikong interes. Ang mga isyung iginiit—ang hudisyal na pagtukoy sa pagkakaroon ng <i>probable cause</i>, ang umano'y paglabag sa angkop na proseso ng batas o <i>due process</i>, at ang karapatan ng akusado sa isang mabilis na paglilitis—ay hindi na bago sa kasaysayan ng ating batas upang mangailangan ng pagbuo ng bagong mga doktrinang konstitusyonal. Matagal nang napatibay sa ating mga naunang desisyon ang mga prinsipyong ito, at nabigo sina Velarde at mga kasama na maglahad ng anumang nakahihikayat na katwiran upang itulak ang Hukuman na lumihis mula sa umiiral na mga kautusan o lumikha ng isang bagong doktrina. </p><p> Dapat bigyang-pansin na sina Velarde at mga kasama ay kusang-loob at may kaalaman na sumailalim sa pagbasa ng sakdal. Kung totoong naniniwala sila sa kawalang basehan ng reklamo, dapat ay tinutulan nila ang pagbasa ng kanilang sakdal sa pagkakataong iyon. </p><table width="40%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Walang isyung kayang maulit na makaiiwas sa pagsusuri</i> </div></td> </tr> </tbody></table> <p>Sa huli, nabigong patunayan nina Velarde at mga kasama ang makitid na pagbubukod-tangi upang pahintulutan ang pagsusuri ng Hukuman sa mga kasong <i>moot</i> o walang saysay sa batayan na ang isyu ay may kakayahang maulit subalit nakakaiwas sa pagsusuri. Upang umiral ang pagbubukod-tanging ito, kailangang mapatunayan ang dalawang elemento: (1) ang kinukwestiyong hakbang ay mabilisan kung kaya't nagiging <i>moot</i> o walang saysay bago pa man ito maisailalim sa ganap na pagsusuri ng hukuman; at (2) may makatuwirang inaasahan na ang parehong nagrereklamong partido ay muling masasailalim sa kaparehong hakbang sa hinaharap.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p> Wala sa kasong ito ang alinman sa dalawang elementong nabanggit. Ang pagbasura ng kasong kriminal ay isang tiyak at pinal na hakbang na humahadlang sa anumang posibilidad ng pag-uulit. Dahil ang kasong ito ay kriminal, ang pagsasantabi nito ay hindi nagpapahintulot na ito ay maulit sa hinaharap dahil nagkaroon na ng <i>jeopardy</i>. Bukod pa rito, nabigo sina Velarde at mga kasama na patunayan ang anumang makatuwirang posibilidad na sila ay muling malalagay sa kaparehong kalagayang prosidyural. Ang kawalan ng patuloy na kontrobersiya ay nag-aalis sa kasong ito mula sa saklaw ng nasabing pagbubukod-tangi. </p><p> <i>Konklusyon</i></p><p> Dahil sa sumunod na pangyayaring tumapos sa anumang aktuwal at tunay na kontrobersiyang maaaring resolbahin sa pamamagitan ng paghatol ng hukuman, naging <i>moot</i> o nawalan na ng saysay ang kasalukuyang Petisyon para sa <i>Certiorari</i>. Ang anumang paghatol sa mga hindi pangunahing isyu na inihain dito ay walang kabuluhan sapagkat wala nang mahalagang tulong na maipagkakaloob kina Velarde at mga kasama na hindi naibigay sa pamamagitan ng pinal na pagbasura ng kasong pag-iwas sa pagbabayad ng buwis. Sa kawalan ng anumang kapani-paniwalang pangyayaring pumapaloob sa mga kinikilalang eksepsiyon sa doktrina ng <i>mootness</i>, wala nang makatarungang dahilan para ipagpatuloy pa ng Hukuman ang pagresolba sa nasabing Petisyon. </p><p> <b>ALINSUNOD DITO,</b> ang Petisyon para sa <i>Certiorari</i> ay <b>ISINASANTABI</b> dahil sa pagiging <i>moot</i> <i>and</i> <i>academic</i>. </p><p> <b>ITO AY IPINAG-UTOS.</b> </p><p> <i>Caguioa (Tagapangulo), Inting, Gaerlan</i>, at <i>Dimaampao, JJ</i>., sumasang-ayon.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-75. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> sa 125-156. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> sa 13.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> sa 157-158.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> sa 157.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> sa 657-658.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> sa 16.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> sa 268-269.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> sa 269.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> sa 12-13.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> sa 70. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> sa 1044. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> sa 1052-1063. Ang Resolusyon noong Disyembre 21, 2016 sa CTA<i> Criminal Case</i> Blg. O-325 ay isinulat ni Kasangguning Mahistrado Esperanza R. Fabon-Victorino at sinang-ayunan nila Kasangguning Mahistrado Lovell R. Bautista at Ma. Belen M. Ringpis-Liban ng Ikatlong Dibisyon, Hukuman ng Apelasyon sa Buwis, Lungsod Quezon.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> sa 1044-1045.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> sa 1046.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <b>Evangelista v. Philippine Amusement and Gaming Corporation</b>, 941 Phil. 342, 364-365 (2023) [Ayon kay J. J. Lopez, <i>En Banc</i>].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 850 Phil. 1168 (2019) [Ayon kay J. Leonen, <i>En Banc</i>].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> sa 1188.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <b>Pormento v. Estrada</b>, 643 Phil. 735, 738 (2010) [Ayon kay J. Corona, <i>En Banc</i>].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> sa 739.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <b>Belgica v. Ochoa, Jr.</b>, 721 Phil. 416, 522 (2013) [Ayon kay J. Perlas-Bernabe, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 559 Phil. 723 (2007) [Ayon kay J. Garcia, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> sa 735. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> 522 Phil. 705 (2006) [Ayon kay J. Sandoval-Gutierrez, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> sa 754. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, pp. 1044-1045. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> sa 1046. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> 861 Phil. 388 (2019) [Ayon kay J. Leonen, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> sa 438-439. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>International Service for the Acquisition of Agri-Biotech Applications, Inc. v. Greenpeace Southeast Asia</b>, 791 Phil. 243, 273 (2016) [Ayon kay J. Perlas-Bernabe, <i>En Banc</i>]. </p></div>&nbsp;</p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

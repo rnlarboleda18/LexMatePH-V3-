@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 272170 - ATTYS. TEODORO B. PIS&Oacute;N AND ROSALINA L. PIS&Oacute;N, RIVERSIDE HOLDINGS CORPORATION, AND RIVERSIDE BOARDWALK PROPERTIES, INC., PETITIONERS, VS. CITY OF ILOILO, REPRESENTED BY MAYOR JERRY P. TRE&Ntilde;AS, OFFICE OF THE CITY ASSESSOR OF ILOILO, REPRESENTED BY MR. CESAR JALBUENA, JR., OFFICE OF THE CITY TREASURER OF ILOILO, REPRESENTED BY ENGR. JINNY C. HERMANO, AND THE SANGGUNIANG PANLUNGSOD OF THE CITY OF ILOILO, REPRESENTED BY VICE-MAYOR JEFFREY P. GANZON, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70361' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 272170, January 28, 2026 ]</H2>
+			<H3>ATTYS. TEODORO B. PISÓN AND ROSALINA L. PISÓN, RIVERSIDE HOLDINGS CORPORATION, AND RIVERSIDE BOARDWALK PROPERTIES, INC., PETITIONERS, VS. CITY OF ILOILO, REPRESENTED BY MAYOR JERRY P. TREÑAS, OFFICE OF THE CITY ASSESSOR OF ILOILO, REPRESENTED BY MR. CESAR JALBUENA, JR., OFFICE OF THE CITY TREASURER OF ILOILO, REPRESENTED BY ENGR. JINNY C. HERMANO, AND THE SANGGUNIANG PANLUNGSOD OF THE CITY OF ILOILO, REPRESENTED BY VICE-MAYOR JEFFREY P. GANZON, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GAERLAN, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This is a Petition for <i>Certiorari</i>, Prohibition, and <i>Mandamus</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> against the enactment and enforcement of Tax Ordinance No. 2023-226 (TO 2023-226, or the ordinance).</p><p> TO 2023-226 was passed by respondent Sangguniang Panlungsod (SP) of the City of Iloilo (Iloilo City) on June 27, 2023 and approved by Iloilo City Mayor Jerry P. Treñas on July 5, 2023.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> The measure took effect on January 1, 2024, after posting in two public places and publication in three newspapers of general circulation in the city.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> </p><p> TO 2023-226 adopts and prescribes a new schedule of land values for the assessment of real property tax in Iloilo City,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> as well as the procedure and parameters for such assessment.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> The new land value schedule superseded the previous one prescribed in a 2005 ordinance.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> Petitioners, who own 35 parcels of land in Iloilo City,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> assert that TO 2023-226 is invalid and unconstitutional, for the following reasons: </p><p> <i>First</i>, the assessment value schedule under TO 2023-226 is oppressive, confiscatory, and inequitable, as it increased the base values for residential land by 750%, and those for commercial land by 1,933%,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> causing realty taxes to correspondingly increase. Petitioners submitted computations based on the new schedule showing a 1,000% increase in Riverside Holdings Corporation's (RHC) realty tax liability, a 1,400% increase in Riverside Boardwalk Properties, Inc.'s (RBPI) case, and a 3,143% increase in the case of another corporation owned by relatives of petitioners Teodoro and Rosalina Pisón (spouses Pisón). TO 2023-226 unjustifiably passes on to taxpayers the costs of the Iloilo City Local Government Unit's (LGU) failure to timely update the assessment values, resulting in tax burdens that petitioners are financially incapable of shouldering.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> <i>Second</i>, the assessment value schedule under TO 2023-226 is arbitrary, as the ordinance does not explain the basis for, or the computation, of the new values.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> The Iloilo City LGU failed to prove the inadequacy of its realty tax collections in light of the devolution of additional functions and the increase in LGU's internal revenue allotment shares.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Iloilo City's realty owners should not be forced to bear the consequences of the LGU's negligence in updating assessment values.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> <i>Third</i>, TO 2023-226 violated petitioners' right to procedural due process, as the Iloilo City LGU enacted the ordinance without complying with the following due process regulations: a) Section 2 of Local Assessment Regulation (LAR) No. 1-92 issued by the Department of Finance (DOF), which requires the conduct of a general revision of property assessment every three years and lays down the component activities of the assessment process, the responsible officials for each activity, and the period for conducting said activities;<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> b) Joint Memorandum Circular (JMC) No. 2010-01, which orders all city assessors to require the submission of sworn statements of properties from owners and administrators of all real properties, prior to the preparation of a new schedule of market values;<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> and c) Article 276(b) of the Implementing Rules and Regulations of the Local Government Code (LGC IRR) and DOF Order No. 1-04, which prescribes the manner of public notice and hearing with respect to tax ordinances and revenue measures.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></p><p> Petitioners reject the consultations and hearings conducted by the Iloilo City LGU as sham proceedings that did not elicit actual comments and observations from the city's realty owners.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Petitioners maintain that their objections to TO 2023-226 were never heard, as shown by the LGU's failure to respond to their reconsideration letter.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Petitioners ask this Court to revisit <i>City of Batangas v. Tolentino</i>,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> which held that the notice and hearing requirements for tax ordinances under Sections 186 and 223 of the LGC and Article 276 of the LGC IRR do not apply to ordinances setting property values for real property taxation. Petitioners argue that such distinction is simplistic, being based merely on the location of Sections 186 and 223 within the text of the LGC, and disregards "<i>the broader principles of due process, transparency, and good governance that underpin the requirement of public consultation</i>."<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> There should be no distinction in the notice and hearing requirements for local tax ordinances <i>per se</i> and property value schedule ordinances, because both kinds of ordinances increase tax burdens on the basis of empirical economic data, and therefore require the same checks and balances against arbitrariness and caprice.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></p><p> <i>Fourth</i>, there is no proof that TO 2023-226 was published and posted in accordance with its own rule therefor, i.e., publication for three consecutive days in a newspaper of general circulation in Iloilo City, and posting in at least three conspicuous public places.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></p><p> Petitioners assert that the mere passage of TO 2023-226 into law created the actual controversy needed to properly invoke the power of judicial review. Consequently, they also argue that the immediate aftermath of the ordinance's enactment is the earliest opportunity to assail its constitutionality.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Petitioners justify direct resort to this Court by claiming that the astronomical increase in assessment values and realty tax liabilities under TO 2023-226 creates an issue of transcendental importance that directly implicates the interests of Iloilo City's residents and real property owners. They further claim that the issues raised in the petition are pure questions of law that may be resolved by this Court.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Petitioners claim that they have no other plain, speedy, and adequate remedies against TO 2023-226. Paying the increased taxes under protest is unfair, unreasonable, and impossible as petitioners cannot afford to pay the amounts assessed against them under the new schedule. Appeal to the Secretary of Justice is futile as it will not stop the Iloilo City LGU from collecting and assessing taxes based on the new schedule: something which petitioners claim has already come to pass.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup></p><p> Petitioners finally argue that the Iloilo City LGU may be compelled by <i>mandamus</i> to return all realty tax payments made under TO 2023-226, as the LGU will be unjustly enriched if it is allowed to keep the taxes it collected under a void revenue measure.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup></p><p> The Iloilo City LGU ripostes that petitioners failed to rebut the presumption of validity enjoyed by local ordinances. TO 2023-226 is a valid exercise of the LGU's lawmaking, taxing, and police powers. It was enacted in compliance with state audit recommendations, as Iloilo City's assessment values were already lagging behind those of its neighboring towns.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> The revenue it will generate is necessary in view of the additional functions that were devolved to LGUs in 2021 under Executive Order No. 138.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> </p><p> TO 2023-226 does not violate the procedural due process rights of Iloilo City's taxpayers, as it was enacted in compliance with Articles 275 and 276 of the LGC IRR. The Iloilo City LGU submitted documentary proof of the public consultations and committee hearings conducted, including certifications of posting of copies of the proposed ordinance in three conspicuous places, and certifications of its publication in newspapers of general circulation in the city.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> The Iloilo City LGU also submitted a timeline of the activities leading up to the enactment of TO 2023-226, in compliance with DOF LAR No. 1-92.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </p><p> The new assessment values in TO 2023-226 are not oppressive, confiscatory, inequitable, or arbitrary, as they are based on opinion values obtained from local banks and real estate brokers, and were approved by the DOF's Bureau of Local Government Finance (BLGF).<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The sharp increase in values simply reflects the increased market value of lands in Iloilo City. </p><p> The Iloilo City LGU prays that the petition be dismissed for failure to exhaust the remedies under the LGC, which, it claims, is a necessary condition for the invocation of judicial review against a local tax ordinance.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> It further argues that petitioners failed to: 1) observe the hierarchy of courts;<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> and 2) show the necessity of issuing <i>mandamus</i>.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> </p><p> The Petition fails. </p><p> Judicial review can be exercised only in the presence of: 1) an actual case or controversy; 2) a person with standing to invoke judicial review; 3) a question of constitutionality raised at the earliest possible opportunity; and 4) a question of constitutionality that is the very<i> lis mota</i> of the case.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </p><p> The leading case of <i>Gios-Samar, Inc. v. Department of Transportation and Communications</i><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> instructs that: </p><blockquote> <p> [W]hen a question before the Court involves determination of a factual issue indispensable to the resolution of the legal issue, the Court will refuse to resolve the question regardless of the allegation or invocation of compelling reasons, such as the transcendental or paramount importance of the case. Such question must first be brought before the proper trial courts or the CA, both of which are specially equipped to try and resolve factual questions.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </p> </blockquote> <p> Almost all of petitioners' arguments against TO 2023-226 involve factual issues. Whether the Iloilo City LGU <b><i>actually complied</i></b> with the DOF-prescribed assessment revision procedure in the preparation of the new schedule under TO 2023-226 is a mixed question of fact and law which requires the evaluation, not only of the documentary trail leading to the enacted ordinance, but also the testimonies of the officers who participated in the preparation of the schedule. The same is true for petitioners' allegation of sham hearings conducted by its LGU. Only a trial court with the power to receive and evaluate documentary and testimonial evidence can determine the veracity of such a claim. </p><p> On the economic aspect, the first and second errors raised by petitioners pertain to the economic merits of TO 2023-226, which they argue are unreasonable, oppressive, confiscatory, inequitable, and arbitrary. <i>Lopez v. City of Manila</i><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> holds that the "<i>determination of whether or not [a] tax is excessive, oppressive or confiscatory . . . is essentially a question of fact . . . [which the Supreme Court is precluded] from reviewing</i>."<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> This is exactly why the LGC provides taxpayers with the following administrative remedies against inappropriate, unjust, or illegal exercises of the realty taxation power: 1) the right to appeal the constitutionality or legality of tax ordinances and revenue measures before the Secretary of Justice;<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> 2) the right to appeal property assessments before the assessment appeals tribunals;<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> and 3) the right to protest tax assessments before the local treasurer.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Thus, in realty tax protests, "<i>administrative remedies must first be exhausted before resort to judicial action can prosper, [unless] the controversy <b>does not</b> involve questions of fact but only of law</i>;"<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> furthermore, </p><blockquote> <p> [W]here administrative remedies are available, petitions for the issuance of [the] peremptory writs [of <i>certiorari</i>, prohibition and <i>mandamus</i>] do not lie in order to give the administrative body the opportunity to decide the matter by itself correctly and to prevent unnecessary and premature resort to courts. </p> <p> [S]hould the taxpayer/real property owner question the excessiveness or reasonableness of the assessment, ... the taxpayer should first pay the tax before his protest can be entertained.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> </p> </blockquote> <p> Here, petitioners justify direct resort to this Court by: 1) claiming that their distressed finances render them unable to pay the greatly-increased assessments under TO 2023-226; and 2) invoking the adverse economic impacts of TO 2023-226 on Iloilo City's taxpayers as proof of the transcendental importance of ruling on its validity and constitutionality. Petitioners, however, forget that the power of judicial review through <i>certiorari</i>, prohibition, and <i>mandamus</i> is not vested in this Court alone. <i>Gios-Samar</i> instructs again: </p><blockquote> <p> This doctrine of hierarchy of courts guides litigants as to the proper venue of appeals and/or the appropriate forum for the issuance of extraordinary writs. Thus, although this Court, the CA, and the RTC have concurrent original jurisdiction over petitions for <i>certiorari</i>, prohibition, <i>mandamus</i>, <i>quo warranto</i>, and <i>habeas corpus</i>, parties are directed, as a rule, to file their petitions before the lower-ranked court. Failure to comply is sufficient cause for the dismissal of the petition.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></p> </blockquote> <p> Indeed, the Regional Trial Courts can issue and enforce writs of <i>certiorari</i>, prohibition, <i>mandamus</i>, and injunction within their respective territorial jurisdictions,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> while the CA is empowered to do so without territorial limitation, in exercise of its original jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> The question of whether petitioners' financial situation is dire enough to justify skipping administrative remedies is a question of fact which requires the presentation and evaluation of petitioners' financial and business records. Likewise, judging the economic impact of the new assessment values on Iloilo City's landholders <i>as a class</i> requires the presentation and evaluation of empirical economic data. </p><p> In <i>Aala v. Uy</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the Tagum City Council passed an assessment value schedule ordinance which allegedly increased assessment values by 833%. A group of Tagum residents challenged the ordinance by <i>certiorari</i> directly before this Court. This Court dismissed the petition for "<i>serious procedural errors</i>,"<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> some of which have been repeated here:</p><p> 1) As earlier mentioned, a <i>certiorari</i> action before the Supreme Court which raises mixed issues of fact and law violates the doctrines of hierarchy of courts and exhaustion of administrative remedies. Questions of fact <b><i>should</i></b> be ventilated before a court or tribunal that tries facts, which the Supreme Court does not.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The Court in <i>Aala</i> thus refused to pass upon "<i>the . . . issue of whether respondents committed grave abuse of discretion in preparing, enacting, and approving City Ordinance No. 558, s-2012</i>," as it "<i>requires the presentation of evidence on the procedure undertaken by the City Government of Tagum</i>:"<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> which is the gist of herein petitioners' third assignment of error, and which We must likewise refrain from passing upon. </p><p> 2) Also in Aala the petitioners argued that the increased assessment values were exorbitant. Reiterating <i>Lopez</i>, the Court ruled therein that the exorbitance of an assessment value increase cannot be determined by mere comparison of the old and new values, as this requires reception of evidence and the assistance of technical experts.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></p><p> 3) In the same case, the petitioners also rejected the adequacy of Section 187 of the LGC as a remedy against realty assessment revisions, as the secretary of Justice has no power to enjoin any collection under an appealed assessment.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> The Court maintained that resort to Section 187 is mandatory. As the taxes under the new assessment schedule had not yet accrued and the petitioners therein have not received revised assessments, there was no collection to be enjoined and petitioners had ample time to question the new schedule before the secretary of Justice. Here, the Iloilo City LGU approved TO 2023-226 in July 2023 and thereafter started issuing new assessments based on the increased values therein, with petitioners receiving theirs on December 18, 2023.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Petitioners are silent as to whether they contested their new assessments within the period prescribed in Section 226 of the LGC. Their chosen course of action appears to be a December 19, 2023 letter to the Mayor of Iloilo City praying that their assessments be "<i>walked back and reconsidered</i>."<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> When TO 2023-226 finally took effect in January 2024, petitioners did not file a Section 187 appeal within the reglementary period. Instead, they filed the present Petition directly before this Court on March 11, 2024.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> </p><p> Admittedly, petitioners will remain obliged to pay taxes based on the new assessments even if they timely resorted to the remedies under Sections 187 and 226 of the LGC. However, as Associate Justice Maria Filomena D. Singh (Justice Singh) pointed out during the deliberations of this case, had petitioners availed of these remedies, any decision in their favor would have given them immediate relief from the increased tax burden, either by the cancellation of their assessments or the nullification of TO 2023-226. Given these circumstances, We again agree with Justice Singh that the present Petition appears to be a mere afterthought and an improper substitute for the lost remedy of appeal under Section 187 of the LGC. Worse, petitioners sought their desired remedies from the wrong court. A trial court could have enjoined respondents from collecting taxes under TO 2023-226 after a hearing to determine the factual merits of an injunction.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Even then, direct resort to the courts against local tax ordinances is proper only when <b>the facts are undisputed</b> and <b>only pure questions of law</b> are raised,<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> as in <i>Alta Vista Golf and Country Club v. City of Cebu</i>,<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> where the lack of public hearings was not disputed and the central issue was a matter of statutory construction, i.e., whether the amusement tax under the LGC may be imposed on golf course operators; or in <i>Ty v. Hon. Trampe</i>,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> where the parties agreed that the issue is purely legal, i.e., whether the LGC repealed a law requiring the schedule of market values for real property assessment in Metro Manila to be prepared jointly by all the LGU assessors therein. Since petitioners failed to avail of the remedies under Sections 187 and 226 of the LGC, their remaining recourse is payment under protest under Section 252, which is mandatory where the taxpayer assails the economic merits, i.e., the reasonableness of the increase,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> as in the case at bar. </p><p> The assessment of real property values for taxation purposes is a technical matter which requires the gathering and evaluation of empirical data. This fact is amplified by Republic Act No. 12001, or the Real Property Valuation and Assessment Reform Act (RPVARA), which took effect on July 6, 2024, a few months after the effectivity of TO 2023-226. Section 5 of the RPVARA designates and empowers the BLGF as the lead implementor of the law, in coordination with the LGU assessment offices and other stakeholders. The RPVARA introduces a national system for real property valuation based on a common set of standards denominated as the Philippine Valuation Standards (PVS), which are "<i>aligned with globally accepted principles and definitions in real property valuation with due consideration of the prevailing economic conditions</i>."<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Section 14 of the RPVARA ordains that "<i>all real properties. . . shall be valued or appraised based on prevailing market values in the locality where the property is situated, in conformity with the PVS</i>." Section 19 of the RPVARA also requires all LGU assessment offices to update their schedules of market values within two years from the effectivity thereof. The same provision codifies the three-year cycle for the general revision of property assessments under LAR No. 1-92. As it now stands, LGUs are duty-bound to follow the provisions of the RPVARA and its implementing rules<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> in the conduct of real property valuation and assessment. They can no longer rely merely on opinion values from selected local banks and appraisers, which is what respondents claim to have done; or delay the revision of the schedule of market values, which both parties admit the Iloilo City LGU is guilty of. </p><p> The RPVARA further recognizes that linking real property tax assessments to the market values of real properties can result in significant increases in the tax burden of real property tax. It thus provides for mitigating measures such a 6% cap on all real property tax increases for the first year of its effectivity,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> as well as a real property tax amnesty. Such amnesty covers penalties, surcharges, and interests from all unpaid real property taxes prior to the effectivity of the law, including special education fund levy, idle land tax, and other special levy taxes. The amnesty may be availed within a period of two years after the effectivity of the RPVARA.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> </p><p> Jurisprudence has been consistent in dealing with challenges against increased real property assessment levels. The adjudication of the substantive and procedural merits of real property assessments has been assigned by law to specialized administrative agencies which have the technical expertise to deal with the factual issues and masses of empirical data<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> involved in the fields of land valuation and realty taxation. Following the hierarchy of courts, the adjudication of pure questions of law arising from the real property assessment process has assigned by law to the trial courts, not to the Supreme Court.</p><p> <b>ACCORDINGLY</b>, the Petition is <b>DISMISSED</b>. </p><p><b>SO ORDERED.</b> </p><p> <i>Gesmundo, C.J., Caguioa, Hernando, Inting, Zalameda, Rosario, Lopez, Dimaampao, Marquez, Kho, Jr., </i>and <i>Villanueva, JJ</i>., concur.<br> <i>Leonen, SAJ</i>., see concurring opinion.<br> <i>Lazaro-Javier, J.</i>, with dissent. <i><br> Singh,<sup style="COLOR: RGB(255, 0, 0);">*</sup> J</i>., on leave.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave. <p> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-57.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at. 159, 1397. Certified true machine copy of TO 2023-226; Comment. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 1398, Comment.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 59-110. Certified true machine copy of TO 2023-226.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 127-159.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 18, 268. Petition; Report of the Committee on Ways and Means of the SP of Iloilo City. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 7-10, Petition. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 28. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 20-22, 26-29, 2028-2031. The corporation faced with the 3,143% increase is not a party to the case.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 28.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 2012-2014, Reply.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 2014-2015. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 31-33, Petition. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 32-33.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 34-36.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 2019-2022, Reply. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 2013-2014. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 902 Phil. 120 (2021) [Per J. Leonen, Third Division]. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, p. 2027.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 2024-2027. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 36, 2023-2024, Petition and Reply. </p> <p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 37-38, Petition. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 39, 2032-2036. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 39-40, 2032-2034. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 40-41. </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 1392-1393, 1407-1408, Comment. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 1392, 1399-1400. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 1492-1494, 1830-1877, 1980-2001. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 1411-1413. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 1413-1414. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 1415-1419. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 1419-1422. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 1424-1425. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Bayan Muna Party-List Representatives Ocampo and Casino v. President Macapagal-Arroyo</b>, 932 Phil. 753, 766 (2023) [Per J. Gaerlan, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> 849 Phil. 120 (2019) [Per J. Jardeleza, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 187. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 363 Phil. 68 (1999) [Per J. Quisumbing, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 82. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> LOCAL GOV'T. CODE, sec. 187. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[40]</sup> LOCAL GOV'T. CODE, secs. 226-231. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[41]</sup> LOCAL GOV'T. CODE, sec. 252. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Ty v. Hon. Trampe</b>, 321 Phil. 81, 101 (1995) [Per J. Panganiban, <i>En Banc</i>]. Emphasis and underlining supplied. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Olivares v. Marquez</b>, 482 Phil. 183, 188-189 (2004) [Per J. Austria-Martinez, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Gios-Samar, Inc. v. Department of Transportation and Communications</b>, 849 Phil. 120, 166-167 (2019) [Per J. Jardeleza, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> BATAS PAMBANSA BLG. 129, sec. 21. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> BATAS PAMBANSA BLG. 129, sec. 9(1). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> 803 Phil. 36 (2017) [Per J. Leonen, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 54. </p><p><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 57-59. <i>See also</i> <b>Ty v. Hon. Trampe</b>, 321 Phil. 81 (1995) [Per J. Panganiban, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 58. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 59. </p><p><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 47. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Rollo</i>, pp. 345-363, Notices of Assessment. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 369. Letter from Riverside Group of Companies to Mayor Geronimo P. Treñas. </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 1, 56-57. Processor's checklist and Affidavit of Service. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Courts can issue injunctions against the collection of local taxes because the LGC does not so prohibit. The rule on the non-injunctibility of tax collections is found only in the National Internal Revenue Code and therefore applies only to the collection of national internal revenue taxes. <b>Angeles City v. Angeles Elec. Corp.</b>, 636 Phil. 43, 55-56 (2010) [Per J. Del Castillo, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>Ty v. Hon. Trampe</b>, 321 Phil. 81, 86 (1995) [Per J. Panganiban, <i>En Banc</i>]. Emphasis supplied. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> 778 Phil. 685 (2016) [Per J. Leonardo-De Castro, First Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> 321 Phil. 81 (1995) [Per J. Panganiban, <i>En Banc</i>]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 101-102. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> REPUBLIC ACT No. 12001, secs. 4(j) and 13. </p><p><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> BLGF Memorandum Circular No. 001-2025 (2025), available at <a href="https://blgf.gov.ph/wp-content/uploads/2025/03/BLGF-MC-No.-001.2025-IRR-of-RA-No.-12001-or-the-RPVARA-Reform-Act-6-Jan-2025-Approved-3.pdf">https://blgf.gov.ph/wp-content/uploads/2025/03/BLGF-MC-No.-001.2025-IRR-of-RA-No.-12001-or-the-RPVARA-Reform-Act-6-Jan-2025-Approved-3.pdf</a> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[63]</sup> REPUBLIC ACT NO. 12001, sec. 29, third paragraph. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[64]</sup> REPUBLIC ACT NO. 12001, sec. 30. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>See</i> REPUBLIC ACT NO. 12001, secs 22-24, which mandate the development of a real property transaction information database which will be a future source of data for the refinement of the PVS.<br><br></p><p> </p><hr align="center" width="60%" size="1" noshade="noshade"><p align="center"><b><br>CONCURRING OPINION</b></p> <p> <b>LEONEN, <i>SAJ</i>:</b> </p> <p> I concur in the dismissal of the Petition. </p><p> Attys. Teodoro B. Pison (Teodoro) and Rosalina L. Pison (Rosalina; collectively, Attys. Pison) received the real property tax assessments on December 18, 2023.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> The assessments were based on the new (increased) schedule of land values under Tax Ordinance No. 2023-226, which was passed by the Sangguniang Panlungsod of the City of Iloilo on June 27, 2023, and approved by the Iloilo City Mayor on July 5, 2023.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> </p><p> Without resort to the administrative remedies under the Local Government Code, Attys. Pison filed a petition for <i>certiorari</i>, prohibition and <i>mandamus</i>. They assailed the validity of Tax Ordinance No. 2023-226, mainly on the contention that the land value schedule is arbitrary, oppressive, confiscatory and inequitable. They also raised the issue on non-compliance with public notice and hearing requirements.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> </p><p> The procedure and remedies available to the taxpayer or real property owner depends on the cause and nature of the claim being pursued and the stage at which the local government unit is enforcing its authority to impose real property taxes.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> </p><p> In case of an <i>erroneous assessment</i>, where the question is factual involving the <i>correctness, reasonableness or excessiveness of the amount assessed</i>, exhaustion of administrative remedies under the Local Government Code is necessary.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </p><p> Under Section 226<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of the Local Government Code, if the real property owner is not satisfied with the action of the assessor in the assessment of their property, they may appeal within 60 days from receipt of the notice of assessment to the Local Board of Assessment Appeals. The Local Board is specifically empowered to conduct proceedings to ascertain facts to determine the correctness of the assessment.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Such appeal to the Local Board, however, will not suspend the collection of the corresponding realty taxes on the property involved.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> Alternatively, upon accrual of the real property tax<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> and posting of notices of payment thereof by the local treasurer,<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> the taxpayer/real property owner must first pay the tax and file a protest within 30 days from payment of the tax to the corresponding local treasurer who shall decide it within 60 days from receipt thereof, pursuant to Section 252 of the Local Government Code: </p><blockquote> <p> SECTION 252. <b><i>Payment Under Protest</i></b>. – (a) No protest shall be entertained unless the taxpayer first pays the tax. There shall be annotated on the tax receipts the words 'paid under protest.' The protest in writing must be filed within thirty (30) days from payment of the tax to the local treasurer, in the case of a municipality within Metropolitan Manila Area, who shall decide the protest within sixty (60) days from receipt. </p> <p> (b) The tax or a portion thereof paid under protest, shall be held in trust by the treasurer concerned. </p> <p> (c) In the event that the protest is finally decided in favor of the taxpayer, the amount or portion of the tax protested shall be refunded to the protestant, or applied as tax credit against his existing or future tax liability. </p> <p> (d) In the event that the protest is denied or upon the lapse of the sixty-day period prescribed in subparagraph (a), the taxpayer may avail of the remedies as provided for in Chapter 3, Title II, Book II of this Code. </p> </blockquote> <p> Where the protest is denied or the 60-day period to decide the protest has lapsed, the taxpayer/real property owner may appeal to the Local Board of Assessment Appeals.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup></p><p> If unsatisfied, the taxpayer/real property owner may elevate the Local Board's decision to the Central Board of Assessment Appeals by filing a notice of appeal within 30 days from receipt thereof and posting an appeal bond.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </p><p> The Central Board of Assessment Appeals' decision is then appealable before the Court of Tax Appeals <i>En Banc</i> through a petition for review under Rule 43 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p> In turn, the Court of Tax Appeals' decision may be elevated to this Court through a petition for review on <i>certiorari</i> under Rule 45 of the Rules of Court on pure questions of law.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> </p><p> <i>In case of an illegal assessment</i>, where the question <i>is on the authority of the local assessor to impose the assessment</i>, the taxpayer may directly resort to judicial action without need for exhaustion of administrative remedies. In <i>Ty v. Trampe</i>,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> the Court upheld the propriety of the petition for prohibition directly filed with the Regional Trial Court assailing the real property assessment. The Court explained that the issue raised did not go into the reasonableness of the amount assessed; it did not involve a question of fact but only of law, and therefore had no need to resort to administrative remedies under the Local Government Code.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><blockquote> <p> Respondents argue that this case is premature because petitioners neither appealed the questioned assessments on their properties to the Board of Assessment Appeals, pursuant to Section 226, nor paid the taxes under protest, per Sec. 252. </p> <p> We do not agree. <i>Although as a rule, administrative remedies must first be exhausted before resort to judicial action can prosper, there is a well-settled exception in cases where the controversy does not involve questions of fact but only of law</i>. In the present case, the parties, even during the proceedings in the lower court on 11 April 1994, already agree "that the issues in the petition are legal," and thus, no evidence was presented in court. </p> <p> In laying down the powers of the Local Board of Assessment Appeals, R.A. 7160 provides in Sec. 229 (b) that "(t)he proceedings of the Board shall be conducted solely for the purpose of ascertaining the facts . . ." It follows that appeals to this Board may be fruitful only where questions of fact are involved. Again, the protest contemplated under Sec. 252 of R.A. 7160 is needed where there is a question as to the reasonableness of the amount assessed. Hence, if a taxpayer disputes the reasonableness of an increase in a real estate tax assessment, he is required to "first pay the tax" under protest. Otherwise, the city or municipal treasurer will not act on his protest. <i>In the case at bench however, the petitioners are questioning the very authority and power of the assessor, acting solely and independently, to impose the assessment and of the treasurer to collect the tax. These are not questions merely of amounts of the increase in the tax but attacks on the very validity of any increase</i>.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis supplied, citation omitted) </p> </blockquote> <p> The remedies for assailing an illegal assessment were laid down in <i>City of Lapu-Lapu v. PEZA</i>:<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><blockquote> <p> In case of an illegal assessment where the assessment was issued without authority, exhaustion of administrative remedies is not necessary and the taxpayer may directly resort to judicial action. The taxpayer shall file a complaint for injunction before the Regional Trial Court to enjoin the local government unit from collecting real property taxes. </p> <p> The party unsatisfied with the decision of the Regional Trial Court shall file an appeal, not a petition for <i>certiorari</i>, before the Court of Tax Appeals, the complaint being a local tax case decided by the Regional Trial Court. The appeal shall be filed within fifteen (15) days from notice of the trial court's decision. </p> <p> The Court of Tax Appeals' decision may then be appealed before this court through a petition for review on <i>certiorari</i> under Rule 45 of the Rules of Court raising pure questions of law. </p> <p> In case the local government unit has issued a notice of delinquency, the taxpayer may file a complaint for injunction to enjoin the impending sale of the real property at public auction. In case the local government unit has already sold the property at public auction, the taxpayer must first deposit with the court the amount for which the real property was sold, together with interest of 2% per month from the date of sale to the time of the institution of action. The taxpayer may then file a complaint to assail the validity of the public auction. The decisions of the Regional Trial Court in these cases shall be appealable before the Court of Tax Appeals, and the latter's decisions appealable before this court through a petition for review on <i>certiorari</i> under Rule 45 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Citations omitted)</p> </blockquote> <p> The crux of the present petition for <i>certiorari</i>, prohibition and <i>mandamus</i> is the alleged excessive, arbitrary and confiscatory amounts of real property tax assessments made by the City of Iloilo. The assessments or valuation involved here were conducted by virtue of the 2023 general revision of assessments and property values.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> Section 223<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> of the Local Government Code states that after an assessment has been conducted, the assessor shall within 30 days issue a written notice of such new or revised assessment to the person in whose name the real property is declared; and furnish the local treasurer with the assessment roll containing the list of persons with newly assessed or reassessed properties before the end of the year.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> </p><p> With respect to real property taxes, the obligation to pay arises on the first day of January of the year following the assessment.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> On the same date, the right of the local government to collect said taxes also arises. The Local Government Code provides the procedure for collection of tax: </p><blockquote> <p> SECTION 247. <i>Collection of Tax</i>. — The collection of the real property tax with interest thereon and related expenses, and the enforcement of the remedies provided for in this Title or any applicable laws, shall be the responsibility of the city or municipal treasurer concerned. </p> <p> The city or municipal treasurer may deputize the barangay treasurer to collect all taxes on real property located in the barangay: Provided, That the barangay treasurer is properly bonded for the purpose: Provided, further, That the premium on the bond shall be paid by the city or municipal government concerned. </p> <p> . . . .</p> <p> SECTION 249. <i>Notice of Time for Collection of Tax</i>. — The city or municipal treasurer shall, <i>on or before the thirty-first (31<sup>st</sup>) day of January each year, in the case of the basic real property tax</i> and the additional tax for the Special Education Fund (SEF) or any other date to be prescribed by the sanggunian concerned in the case of any other tax levied under this Title, <i>post the notice of the dates when the tax may be paid without interest</i> at a conspicuous and publicly accessible place at the city or municipal hall. <i>Said notice shall likewise be published</i> in a newspaper of general circulation in the locality once a week for two (2) consecutive weeks. </p> <p> SECTION 250. <i>Payment of Real Property Taxes in Installments</i>. — The owner of the real property or the person having legal interest therein <i>may pay the basic real property tax</i> and the additional tax for Special Education Fund (SEF) due thereon without interest <i>in four (4) equal installments:</i> the first installment to be due and payable <i>on or before March thirty-first (31<sup>st</sup>)</i>; the second installment, <i>on or before June thirty (30);</i> the third installment, <i>on or before September thirty (30) of September;</i> and the last installment <i>on or before December thirty-first (31<sup>st</sup>)</i>, except the special levy the payment of which shall be governed by ordinance of the sanggunian concerned. </p> <p> The date for the payment of any other tax imposed under this Title without interest shall be prescribed by the sanggunian concerned. </p> <p> Payments of real property taxes shall first be applied to prior year's delinquencies, interests, and penalties, if any, and only after said delinquencies are settled may tax payments be credited for the current period. (Emphasis supplied) </p> </blockquote> <p> Petitioners neither filed an appeal before the Local Board of Assessment Appeals after it received the assessment notice on December 18, 2023, nor paid the tax under protest; but instead, resorted to a procedural shortcut by immediately instituting a special civil action before this Court. Consequently, the petition cannot prosper for failure to exhaust administrative remedies. </p><p> <b>ACCORDINGLY</b>, I vote to <b>DISMISS</b> the Petition.<br><br></p><p> </p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Ponencia</i>, p. 8. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 1-2. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 2-3.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <b>City of Lapu-lapu v. Phil. Economic Zone Authority</b>, 748 Phil. 473, 533-536 (2014) [Per J. Leonen, Second Division].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <b>Lopez v. City of Manila</b>, 363 Phil. 68, 81-82 (1999) [Per J. Quisumbing, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> SECTION 226. <i>Local Board of Assessment Appeals</i>. — Any owner or person having legal interest in the property who is not satisfied with the action of the provincial, city, or municipal assessor in the assessment of his property may, within sixty (60) days from the date of receipt of the written notice of assessment, appeal to the Board of Assessment appeals of the province or city by filing a petition under oath in the form prescribed for the purpose, together with copies of the tax declarations and such affidavits or documents submitted in support of the appeal. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> SECTION 229. <i>Action by the Local Board of Assessment Appeals</i>. — (a) The Board shall decide the appeal within one hundred twenty (120) days from the date of receipt of such appeal. The Board, after hearing, shall render its decision based on substantial evidence or such relevant evidence on record as a reasonable mind might accept as adequate to support the conclusion. </p><p> (b) In the exercise of its appellate jurisdiction, the Board shall have the power to summon witnesses, administer oaths, conduct ocular inspection, take depositions, and issue <i>subpoena</i> and <i>subpoena duces tecum</i>. The proceedings of the Board shall be conducted solely for the purpose of ascertaining the facts without necessarily adhering to technical rules applicable in judicial proceedings[.] </p><p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> SECTION 231. <i>Effect of Appeal on the Payment of Real Property Tax</i>. — Appeal on assessments of real property made under the provisions of this Code shall, in no case, suspend the collection of the corresponding realty taxes on the property involved as assessed by the provincial or city assessor, without prejudice to subsequent adjustment depending upon the final outcome of the appeal. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> SECTION 246. <i>Date of Accrual of Tax. — The real property tax for any year shall accrue on the first day of January</i>, and from that date, it shall constitute a lien on the property which shall be superior to any other lien, mortgage, or encumbrance of any kind whatsoever, and shall be extinguished only upon the payment of the delinquent tax. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> SECTION 249. <i>Notice of Time for Collection of Tax</i>. — The city or municipal treasurer shall, <i>on or before the thirty-first (31<sup>st</sup>) day of January each year, in the case of the basic real property tax</i> and the additional tax for the Special Education Fund (SEF) or any other date to be prescribed by the sanggunian concerned in the case of any other tax levied under this Title, <i>post the notice of the dates when the tax may be paid without interest</i> at a conspicuous and publicly accessible place at the city or municipal hall. <i>Said notice shall likewise be published in a newspaper</i> of general circulation in the locality once a week for two (2) consecutive weeks. (Emphasis supplied) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> LOCAL GOV'T. CODE, sec. 226. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> LOCAL GOV'T. CODE, sec. 229(c). </p><p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> CTA RULES, as amended, Rule 8, sec. 4(c). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Republic Act No. 1125, as amended by Republic Act No. 9282, sec. 19. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> 321 Phil. 81 (1995) [Per J. Panganiban, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 101-102. </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> 748 Phil. 473 (2014) [Per J. Leonen, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 534-536. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Ponencia</i>, p. 2. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> SECTION 223. <i>Notification of New or Revised Assessment</i>. — When real property is assessed for the first time or when an existing assessment is increased or decreased, the provincial, city or municipal assessor shall within thirty (30) days give written notice of such new or revised assessment to the person in whose name the property is declared. The notice may be delivered personally or by registered mail or through the assistance of the punong barangay to the last known address of the person to be served. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> LOCAL GOV'T. CODE, sec. 248. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> SECTION 246. <i>Date of Accrual of Tax</i>. — <i>The real property tax for any year shall accrue on the first day of January</i>, and from that date, it shall constitute a lien on the property which shall be superior to any other lien, mortgage, or encumbrance of any kind whatsoever, and shall be extinguished only upon the payment of the delinquent tax. </p><p> SECTION 221. <i>Date of Effectivity of Assessment or Reassessment</i>. — <i>All assessments or reassessments made after the first (1st) day of January of any year shall take effect on the first (1st) day of January of the succeeding year:</i> Provided, however, That the reassessment of real property due to its partial or total destruction, or to a major change in its actual use, or to any great and sudden inflation or deflation of real property values, or to the gross illegality of the assessment when made or to any other abnormal cause, shall be made within ninety (90) days from the date any such cause or causes occurred, and shall take effect at the beginning of the quarter next following the reassessment. (Emphasis supplied)<br><br></p><hr align="center" width="60%" size="1" noshade="noshade"><p align="center"><b><br>DISSENT</b> </p> <p><b>LAZARO-JAVIER, <i>J</i>.:</b></p> <p> Through the present petition for <i>certiorari</i>, prohibition, and mandamus, petitioners Attys. Teodoro and Rosalina Pisón, Riverside Holdings Corporation, and Riverside Boardwalk Properties, Inc. (collectively, Attys. Pisón et al.) assail Tax Ordinance No. 2023-226 (the assailed ordinance), which adopts and prescribes a new schedule of land values for the assessment of real property tax in the City of Iloilo. The land value schedule supersedes the previous schedule prescribed in 2005.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup></p><p> Attys. Pisón et al. claim that the assailed ordinance is unconstitutional as: <i>first</i>, its prescribed assessment value schedule is oppressive, confiscatory, and inequitable; <i>second</i>, such schedule is likewise arbitrary, as the basis for computation thereof was purportedly not explained; and <i>third</i>, it was enacted in violation of their procedural due process.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup></p><p> Without delving into the merits of the petition, the <i>ponencia</i> dismisses the same.</p><p> Citing multiple judicial precedents, the <i>ponencia</i> notes that Attys. Pisón et al. substantially raise factual issues, which are not within the province of the Court to resolve. <i>For one</i>, Attys. Pisón et al. failed to exhaust the administrative remedies provided under the Local Government Code, which notably include an appeal on the constitutionality of a tax ordinance before the Secretary of Justice. <i>For another</i>, regional trial courts also have the power to issue writs of <i>certiorari</i>, prohibition, and mandamus. In fact, even the issue of whether the purported dire financial situation of Attys. Pisón et al. justifies skipping administrative remedies is a factual matter which shall be resolved by the trial courts.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup></p><p> Essentially, therefore, the <i>ponencia</i> holds that the petition for <i>certiorari</i>, prohibition, and mandamus before the Court is improper to assail the constitutionality of the assailed ordinance. </p><p>With due respect and with full recognition of the doctrines of exhaustion of administrative remedies and hierarchy of courts, I submit that there exists strong public interest in this case which justifies the relaxation of these technical rules of procedure.&nbsp;</p><p>In <i>Alliance of Quezon City Homeowners' Association, Inc. v. Quezon City Government</i>,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> the petitioner therein assailed a city ordinance, which approved a revised schedule of fair market values of real property in Quezon City. Petitioner claimed that the increase in the fair market values of up to 500% was arbitrary, unjust, excessive, oppressive, and confiscatory.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Similar to the claims of Attys. Pisón et al. in this case, petitioner in <i>Alliance</i> further posited that there was no real and genuine consultation prior to the enactment of the ordinance. The respondents countered and claimed that the petitioner failed to exhaust the administrative remedies provided under the Local Government Code, violated the hierarchy of courts, and lacked the necessary standing to file the petition. </p><p>While the Court in <i>Alliance</i> dismissed the petition for petitioner's lack of legal capacity to sue, it nonetheless held that there was compelling public interest to warrant dispensing with the doctrines of administrative exhaustion and hierarchy of courts. The Court held, thus: </p><blockquote> <p> Although a petitioner's failure to exhaust the required administrative remedies has been held to bar a petition in court, the Court has relaxed the application of this rule "in view of the more substantive matters," as in this case. <i>In particular, a local government unit's authority to increase the FMVs of properties for purposes of local taxation is a question that indisputably affects the public at large</i>. As for [Quezon City], the widespread effect of the 2016 Ordinance to its constituents is glaringly apparent, considering that [Quezon City], has a land area of 16,112.8 hectares, which is almost one-fourth of the entire Metro Manila. Moreover, [Quezon City] holds 23.3% of Metro Manila's total population. While taxation is an inherent power of the State, the exercise of this power should not be unjust, excessive, oppressive, or confiscatory as explicitly prohibited under the LGC. <i>As Alliance proffers, the alleged exorbitant increase in real property taxes to be paid based on the assailed Ordinance triggers a strong public interest against the imposition of excessive or confiscatory taxes. Courts must therefore guard the public's interest against such government action. Accordingly, the Court exempts this case from the rule on administrative exhaustion</i>.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> (Emphasis supplied) </p> </blockquote> <p> As regards the doctrine of hierarchy of courts, the Court continued, viz.: </p><blockquote> <p> Meanwhile, the hierarchy of courts doctrine prohibits parties from directly resorting to this Court when relief may be obtained before the lower courts. <i>Nevertheless, this doctrine is not an iron-clad rule; it also admits of exceptions, such as when the case involves matters of transcendental importance. In this case, Alliance argues that the implementation of the 2016 Ordinance will directly and adversely affect the property interests of around "3,085,786 million" residents of [Quezon City]</i>.</p> <p> In <i>Ferrer, Jr. v. Bautista (Ferrer, Jr.)</i>, the Court allowed the direct resort to it, noting that the challenged ordinances would "adversely affect the property interests of all paying constituents of [Quezon City]," and that it would serve as a test case for the guidance of other local government units in crafting ordinances. It added that these circumstances allow the Court to set aside the technical defects and take primary jurisdiction over the petition, stressing that "[t]his is in accordance with the well-entrenched principle that rules of procedure are not inflexible tools designed to hinder or delay, but to facilitate and promote the administration of justice. Their strict and rigid application, which would result in technicalities that tend to frustrate, rather than promote substantial justice, must always be eschewed." Considering the circumstances of this case and the pronouncement in <i>Ferrer, Jr</i>., the Court also deems it proper to relax the doctrine of hierarchy of courts.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> (Emphasis supplied; citations omitted)</p> </blockquote> <p> I humbly submit that insofar as the doctrines of hierarchy of courts and exhaustion of administrative remedies are concerned, the Court's pronouncements in <i>Alliance</i> should apply in this case.</p> <p> Attys. Pisón et al. claim that the new assessment value schedule under the assailed ordinance increased the base values for residential land by as high as 750% and for commercial land by 1,933%.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> While this increase in assessed values does not necessarily mean that the assailed ordinance is oppressive, this certainly calls for the Court to become more circumspect in ensuring that such increase does not result in exorbitant, unreasonable, oppressive, and confiscatory real property taxation. </p><p> It bears noting that prior to the enactment of the assailed ordinance, the prevailing schedule of assessment values was that which was formulated in 2005. In other words, it took the City of Iloilo almost two decades to update the schedule of assessed value of lands. But the value of real property certainly does not remain the same over time. This is precisely the reason why the Local Government Code requires city assessors to undertake a general revision of real property assessments every three years.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> As it is, the taxpayers of the City of Iloilo are already expected to bear substantial changes in the real property taxes due on their properties in view of the belated revisions in the properties' valuation. With more reason, therefore, must the Court safeguard their right against exorbitant, unreasonable, confiscatory, and oppressive taxation.</p><p> Given the far-reaching consequences of the assailed ordinance on the real property owners in the City of Iloilo, it is certainly in furtherance of a strong public interest that the validity of said ordinance be scrutinized by the Court.</p><p> True, procedural rules are not to be belittled or simply disregarded for these prescribed procedures insure an orderly and speedy administration of justice. However, it is equally true that litigation is not merely a game of technicalities. Law and jurisprudence grant to courts the prerogative to relax compliance with procedural rules of even the most mandatory character, mindful of the duty to reconcile both the need to put an end to litigation speedily and the parties' right to an opportunity to be heard.<sup style="COLOR: RGB(255, 0, 0);">[10]<br><br></sup></p><p> </p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Ponencia</i>, p. 2. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 2-3. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 5-7. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> 840 Phil. 277, 289 (2018) [Per J. Perlas-Bernabe, <i>En Banc</i>].</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 289.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 289-290.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 290-291.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Ponencia</i>, p. 2.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> LOCAL GOVERNMENT CODE, sec. 219 provides: </p> <blockquote> <p> Sec. 219. <i>General Revision of Assessment and Property Classification</i>. – The provincial, city or municipal assessor shall undertake a general revision of real property assessments within two (2) years after the effectivity of this Code and every three (3) years thereafter. </p> </blockquote><p><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <b>Pimentel v. Adiao, et al.</b>, 842 Phil. 394, 403 (2018) [Per J. Caguioa, Second Division].&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

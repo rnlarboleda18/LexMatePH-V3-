@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 266667 - ENRIQUE C. FERNANDEZ, PETITIONER, VS. JAIME C. FERNANDEZ, ROBERTO C. FERNANDEZ, AND MA. ELENA C. FERNANDEZ, RESPONDENTS. [G.R. No. 266686] JAIME C. FERNANDEZ, ROBERTO C. FERNANDEZ, AND MA. ELENA C. FERNANDEZ, PETITIONERS, VS. ENRIQUE C. FERNANDEZ, RESPONDENT. [G.R. No. 266757] ENRIQUE C. FERNANDEZ, PETITIONER, VS. JAIME C. FERNANDEZ, ROBERTO C. FERNANDEZ, AND MA. ELENA C. FERNANDEZ, RESPONDENTS. [G.R. No. 266762] ENRIQUE C. FERNANDEZ, PETITIONER, VS. JAIME C. FERNANDEZ, ROBERTO C. FERNANDEZ, AND MA. ELENA C. FERNANDEZ, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '6447c37f808ec212b30fa473322ec85f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '6447c37f808ec212b30fa473322ec85f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70404' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 266667, January 29, 2026 ]</H2>
+			<H3>ENRIQUE C. FERNANDEZ, PETITIONER, VS. JAIME C. FERNANDEZ, ROBERTO C. FERNANDEZ, AND MA. ELENA C. FERNANDEZ, RESPONDENTS.<br><br> [G.R. No. 266686]<br><br> JAIME C. FERNANDEZ, ROBERTO C. FERNANDEZ, AND MA. ELENA C. FERNANDEZ, PETITIONERS, VS. ENRIQUE C. FERNANDEZ, RESPONDENT.<br><br> [G.R. No. 266757]<br><br> ENRIQUE C. FERNANDEZ, PETITIONER, VS. JAIME C. FERNANDEZ, ROBERTO C. FERNANDEZ, AND MA. ELENA C. FERNANDEZ, RESPONDENTS.<br><br> [G.R. No. 266762]<br><br> ENRIQUE C. FERNANDEZ, PETITIONER, VS. JAIME C. FERNANDEZ, ROBERTO C. FERNANDEZ, AND MA. ELENA C. FERNANDEZ, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">The rule against forum shopping seeks to prevent conflicting interpretations in different courts on cases involving the same factual considerations and seeking the same reliefs, since an adjudication in one would amount to<i> res judicata</i> in the other. Among the reasons why forum shopping is considered malpractice is the unnecessary clogging of the court's dockets and expenditure of judicial resources.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> Willful and deliberate violation of the rule on forum shopping results in the dismissal of all cases and sometimes even direct contempt or administrative sanctions.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br>This Court resolves the Consolidated Petitions from the Consolidated Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals, finding Enrique C. Fernandez guilty of forum shopping.<br><br>The facts culled from the records are as follows:<br><br>Four siblings vied for custody of their mother and sought her return to their ancestral home located at 1381 Palm Avenue, Dasmariñas Village, Makati City (Dasma House).<br><br>Enrique C. Fernandez (Enrique), Jaime C. Fernandez (Jaime), Roberto C. Fernandez (Roberto), and Ma. Elena C. Fernandez (Ma. Elena) (collectively, siblings), are the children of Ma. Dulce C. Fernandez (Ma. Dulce) and Jose B. Fernandez, Jr. (Jose).<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>Ma. Dulce and Jose co-owned the Dasma House. Sometime in 1993, Jose transferred 50% of the Dasma House in equal shares to the siblings through a Deed of Absolute Sale.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>In 1994, Jose passed away. Enrique, who was then having marital problems with his spouse,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> asked to reside in the Dasma House, seeking assistance from Ma. Dulce in raising his children.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Enrique claimed that Ma. Dulce pleaded with him to stay with her. In any case, Enrique and his children have resided in the Dasma House since then.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>In October 1999, given Enrique and his children's extended stay in the Dasma House, the siblings executed a Contract of Usufruct, naming Ma. Dulce as the Usufructuary.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> The purpose of the contract was to grant Ma. Dulce unrestricted use and access to the Dasma House throughout her lifetime.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>In September 2000, Ma. Dulce distributed her share of the Dasma House equally among the siblings, rendering them co-owners. This transfer was evidenced by a Deed of Absolute Sale,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> later registered as Transfer Certificate of Title No. 217361.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>In December 2000, the siblings executed a Memorandum of Agreement,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> once again prompted by Enrique's prolonged stay in the Dasma House. The Memorandum of Agreement laid out specific provisions, including: (1) Ma. Dulce's retention of full control and possession of the Dasma House during her lifetime;<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> (2) prohibition on any sibling or their respective families occupying the Dasma House indefinitely or more than 24 months without the majority's consent and mutually agreed-upon terms;<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> and (3) obligation for any occupying sibling to cover living expenses, monthly rentals, and other associated costs, while also ensuring the preservation of the Dasma House in good condition.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Over the years, Jaime, Roberto, and Ma. Elena continued to tolerate Enrique and his family's stay in the Dasma House, under the belief that it was mutually beneficial for Enrique and Ma. Dulce.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Sometime in 2016, during a visit to Ma. Dulce, Roberto allegedly noticed her deteriorating health and arranged a medical checkup for her.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The test results indicated that Ma. Dulce had suffered a minor stroke and was also dealing with chronic coughing and a urinary tract infection.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>In October 2016, Ma. Elena flew in from the United States to visit Ma. Dulce and discovered the Dasma House in disarray. She immediately arranged for a deep cleaning to restore it to a condition conducive to Ma. Dulce's deteriorating health.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>On two separate occasions in 2017 and 2018, the siblings convened family meetings, with Ma. Dulce present, to establish new house rules aimed at improving their mother's living conditions.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> However, Enrique and his family allegedly persistently disregarded these rules.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>In February 2018, Jaime, Roberto, and Ma. Elena formally filed a complaint for unlawful detainer (Ejectment Case) against Enrique, demanding him to vacate the Dasma House.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> They argued that his children were no longer minors and asserted Ma. Dulce's right to full and exclusive possession and control of the Dasma House.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Enrique countered that as co-owner, he could not be ejected from the Dasma House.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>In April 2018, Ma. Dulce executed an Irrevocable Special Power of Attorney,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> appointing Jaime, Roberto, and Ma. Elena as her attorneys-in-fact, with the power to, among others, exercise administration, general control, and supervision over Ma. Dulce's usufructuary rights over the Dasma House.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Additionally, Ma. Dulce named them as her guardian in all matters concerning her person and properties.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>In August 2018, Ma. Elena went on vacation to the United States with Ma. Dulce.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Upon their return in February 2019, Ma. Dulce moved out of the Dasma House, took her personal belongings, and communicated her intention to reside elsewhere until Enrique and his children vacated the property.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>Meanwhile, Enrique alleged that Ma. Elena took advantage of his absence and Ma. Dulce's declining condition to forcefully abduct her to an undisclosed location.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>These circumstances prompted Enrique to file several cases before the lower courts: first, a Petition for Guardianship over Ma. Dulce's person and properties (Guardianship Petition);<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> second, a Complaint for Declaration of End/Termination of the Usufructuary Agreement due to Fundamental Repudiatory Breach; Specific Performance; Declaration of Duty to Give Medical, Filial Support and Enforcement of Visitorial Rights; Annulment of Special Power of Attorney and Other Papers/Documents; Accounting and Return of Stolen Articles and Accounting and Return of Bank Accounts and Other Financial Assets, with Application for Preliminary Mandatory Injunction, Cease and Desist Order and/or Any Protective Order, Visitorial Rights<i> Pendente Lite</i> and Damages (Usufruct Case);<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> and third, a<i> Habeas Corpus</i> Petition.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Enrique simultaneously filed the Guardianship Petition and Usufruct Case on July 18, 2019, and manifested the simultaneous filing before the Regional Trial Court where these respective cases were filed.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Both Petitions raised identical or substantially similar factual allegations and sought the same remedies.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>In the Guardianship Petition, Enrique sought appointment as Ma. Dulce's legal guardian and requested her return to the Dasma House under his personal care and attention.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> He claimed that Ma. Dulce is "physically and mentally incompetent,"<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> "of advanced age at 86 years old," and "frail and weak" requiring constant supervision.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Enrique cited his status as the eldest child, his meeting all the qualifications, and his lack of disqualifications under the law to argue that his appointment as guardian would serve Ma. Dulce's best interest.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>Jaime, Roberto, and Ma. Elena opposed the Guardianship Petition and alleged, among others, that Enrique committed willful and deliberate forum shopping by simultaneously filing two cases—the Guardianship Petition and the Usufruct Case—and sought for the same reliefs. They moved for the outright dismissal of the Guardianship Petition.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>In its November 25, 2019 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> the Regional Trial Court dismissed solely the common relief seeking Ma. Dulce's return to the Dasma House for violating the rule on forum shopping.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> It differentiated the Guardianship Petition as a special proceeding from the Usufruct Case, explaining that a ruling in the latter would not preclude the proceedings in the former. Consequently, the Regional Trial Court directed the continuation of the proceedings for the Guardianship Petition.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>Both parties moved for partial reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Pending the resolution of both parties' Motions, Enrique applied to the same court for the issuance of a writ of<i> habeas corpus</i> to secure Ma. Dulce's appearance in court.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> The Regional Trial Court held that the application violated the rule on filing fees and dismissed it, without prejudice to the filing of a separate petition as an initiatory pleading.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> This prompted Enrique to file the third case, a separate <i>Habeas Corpus</i> Petition.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>In its March 2, 2020 Order, the Regional Trial Court dismissed both Motions for Partial Reconsideration.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>Enrique and Jaime, Roberto, and Ma. Elena filed two separate Petitions for<i> Certiorari</i> before the Court of Appeals to appeal the Regional Trial Court's November 25, 2019 Resolution and March 2, 2020 Order on the Guardianship Petition.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>In the Usufruct Case, Enrique alleged 11 alternative causes of action and sought the same remedies against his siblings: (1) declaration of end or termination of the Contract of Usufruct;<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (2) specific performance of the Contract of Usufruct and the Memorandum of Agreement;<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (3) declaration of his legal duty to give love, medical, and filial support to Ma. Dulce;<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> (4) enforcement of his visitorial and filial rights over Ma. Dulce;<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> (5) annulment of the Irrevocable Special Power of Attorney executed by Ma. Dulce in favor of his siblings;<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> (6) accounting of stolen personal properties including paintings, jewelries, among others;<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> (7) accounting and return of Ma. Dulce's local and foreign bank accounts, financial properties, assets, and sundries;<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> (8) actual and compensatory damages;<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> (9) moral damages;<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> (10) exemplary damages;<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> and (11) attorney's fees and litigation expenses.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>In their Joint Answer with Counterclaim,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Jaime, Roberto, and Ma. Elena sought the dismissal of the Usufruct Case for deliberate forum shopping, lack of personality to sue, and failure to state any cause of action.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> They also alleged that Enrique failed to comply with a condition precedent under the Family Code, which required earnest compromise efforts between family members before a suit between them could proceed.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>In its February 10, 2020 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> the Regional Trial Court partially denied the motion to dismiss<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> the Usufruct Case but granted the motion to dismiss with regard to the fourth and seventh causes of action. It held that the fourth cause of action, which sought to enforce Enrique's visitorial and filial rights over Ma. Dulce, including access to her financial records, did not have any support in law.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> On the seventh cause of action, which sought access to Ma. Dulce's local and foreign bank accounts and financial properties, the Regional Trial Court explained that only a legal guardian could access these accounts under the Deposit Secrecy Law.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>Jaime, Roberto, and Ma. Elena moved for partial reconsideration and insisted that the case be dismissed for forum shopping.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Enrique opposed their Motion and argued that while both cases may involve the same incidents, the causes of action, issues, and reliefs were not the same.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br>In its October 6, 2020 Order,<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> the Regional Trial Court partially granted the Motion for Partial Reconsideration insofar as it prayed for the dismissal of the second and third causes of action. It further directed Enrique to implead Ma. Dulce, an indispensable party to the first, fifth, and sixth causes of action and file an Amended Complaint.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><br><br>Enrique moved for partial reconsideration and stated that the dismissal of the second and third causes of action, which should be heard in a full-blown trial, was violative of his right to due process.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> For their part, Jaime, Roberto, and Ma. Elena filed an Opposition to defer compliance in impleading Ma. Dulce.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>In its December 22, 2020 Order,<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> both Motion and Opposition were denied by the Regional Trial Court due to lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> It ordered Enrique to file an Amended Complaint to reflect the dismissal of the second, third, fourth, and seventh causes of action and implead Ma. Dulce as party.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup><br><br>Enrique and Jaime, Roberto, and Ma. Elena again filed two separate Petitions for<i> Certiorari</i> before the Court of Appeals to appeal the Regional Trial Court's October 6, 2020 and December 22, 2020 Orders.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup><br><br>From the Guardianship Petition and the Usufruct Case, four Petitions for<i> Certiorari</i> were filed before the Court of Appeals. In its October 27, 2022 Consolidated Decision,<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> the Court of Appeals found Enrique guilty of willful and deliberate forum shopping.<br><br>First, it noted that the siblings had the common interest of custody over the person and properties of Ma. Dulce.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> Second, it found that the rights asserted, causes of action, and reliefs sought were identical. The Court of Appeals tabulated the allegations of facts from the Guardianship Petition and the Usufruct Case and emphasized that: (1) both cases used similar words or identical phrasing;<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> (2) the evidence presented and defenses raised would be the same in both cases; and (3) the requested reliefs were very similar.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> Third, the Court of Appeals concluded that the judgment in either the Guardianship Petition or the Usufruct Case would amount to<i> res judicata</i> in the other.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup><br><br>The Court of Appeals also found that the forum shopping was both willful and deliberate, since Enrique filed two cases on the same date, only a few minutes apart, and intentionally failed to disclose the Guardianship Petition in his Certificate of Non-Forum Shopping in the Usufruct Case. The Court of Appeals explained that it was evident that Enrique's primary intention to gain control over the person and properties of Ma. Dulce, was tainted with "bad faith and sinister ulterior motive" especially with "his undeniable awareness that he is shopping for a favorable remedy from either court against the same parties, based on the same cause[s] of action ..., and seeking the same reliefs[.]"<sup style="COLOR: RGB(255, 0, 0);">[84]</sup><br><br>The Court of Appeals ultimately ruled to dismiss only the Guardianship Petition and reinstated all the causes of actions stated in the Usufruct Case, as a measure of justice and equity.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup><br><br>Both parties moved for partial reconsideration of the October 27, 2022 Consolidated Decision.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup><br><br>Pending the resolution of their respective motions, Jaime, Roberto, and Ma. Elena filed a Manifestation and Motion before the Regional Trial Court where the Guardianship Petition was pending.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> They informed the Regional Trial Court of the Court of Appeals October 27, 2022 Consolidated Decision and moved for the dismissal of the Guardianship Petition.<sup style="COLOR: RGB(255, 0, 0);">[88]</sup><br><br>In its December 15, 2022 Order,<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> the Regional Trial Court granted the siblings' Motion and dismissed the Guardianship Petition.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> The dispositive portion of the Order reads:<br><blockquote>The Court has not received a copy from the Court of Appeals, however, upon verification the said Decision had already been uploaded to the appellate court's website.<br><br>WHEREFORE, with the promulgation of the appellate court's decision, the motion is hereby GRANTED. The instant petition is hereby DISMISSED as resolved by the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> </blockquote>Enrique then moved for reconsideration and argued, among others, that the dismissal was premature since the Consolidated Decision had not yet attained finality.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup><br><br>The Regional Trial Court denied the Motion for Reconsideration in its March 15, 2023 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> This prompted Enrique to file a Petition for Review on<i> Certiorari</i> directly before this Court, docketed as<b> G.R. No. 266667</b>,<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> to assail the Regional Trial Court's December 15, 2022 Order and March 15, 2023 Resolution.<br><br>Meanwhile, the Court of Appeals issued a Consolidated Resolution on March 30, 2023 denying the parties' Motions for Reconsideration of its October 27, 2022 Consolidated Decision.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup><br><br>Still unsatisfied, Enrique and Jaime, Roberto, and Ma. Elena appealed the Court of Appeals' October 27, 2022 Consolidated Decision and March 30, 2023 Consolidated Resolution through separate Petitions for Review on <i>Certiorari</i> before this Court. Their respective Petitions were docketed as<b> G.R. No. 266757</b><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> and<b> G.R. No. 266686</b>,<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> respectively.<br><br>Enrique's<i> Habeas Corpus</i> Petition sought to secure Ma. Dulce's appearance in court.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> He claimed that Jaime, Roberto, and Ma. Elena had been unlawfully restraining Ma. Dulce against her will.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> He asserted that the issuance of the Writ of<i> Habeas Corpus</i> was the only way to secure Ma. Dulce's safety.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup><br><br>Conversely, Jaime, Roberto, and Ma. Elena moved to dismiss the <i>Habeas Corpus</i> Petition, reiterating the claim of willful and deliberate forum shopping, given the pendency of the Guardianship Petition and Usufruct Case, which sought identical reliefs.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup> They additionally asserted that Ma. Dulce voluntarily chose not to reveal her whereabouts for privacy and security reasons.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup><br><br>In a March 18, 2022 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> the Regional Trial Court, without ruling on the merits of the Petition, issued a preliminary Writ of<i> Habeas Corpus</i> and ordered Jaime, Roberto, and Ma. Elena to produce Ma. Dulce before the court and file a Return on the Writ.<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> It denied the Motion to Dismiss and held that there was no forum shopping since any judgment rendered in the Guardianship Petition and Usufruct Case would not amount to <i>res judicata</i> in the<i> Habeas Corpus</i> Petition.<sup style="COLOR: RGB(255, 0, 0);">[105]</sup><br><br>Jaime, Roberto, and Ma. Elena then filed their Return on the Writ.<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> During one of the hearings of the Return, Jaime, Roberto, and Ma. Elena filed a Motion to Terminate Proceedings and Deny Petition which the Regional Trial Court denied for being premature in its June 17, 2022 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[107]</sup><br><br>Jaime, Roberto, and Ma. Elena moved for reconsideration of the Regional Trial Court's March 18, 2022 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> Enrique opposed the Motion for Reconsideration, with an addendum to attach the Judicial Affidavit of Genelyn Tumabiao, one of their helpers.<sup style="COLOR: RGB(255, 0, 0);">[109]</sup> Jaime, Roberto, and Ma. Elena moved to expunge and disqualify the witness pursuant to the prohibition of privileged communication under the Domestic Workers' Act.<sup style="COLOR: RGB(255, 0, 0);">[110]</sup><br><br>In its September 2, 2022 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[111]</sup> the Regional Trial Court denied the Motion for Reconsideration and the Motion to Expunge. It denied the Motion for Reconsideration due to lack of merit and denied the Motion to Expunge for the premature objection to the evidence.<sup style="COLOR: RGB(255, 0, 0);">[112]</sup><br><br>On September 27, 2022, Jaime, Roberto, and Ma. Elena filed a Motion for Partial Reconsideration of the dismissal of their Motion to Terminate Proceedings and Deny Petition.<sup style="COLOR: RGB(255, 0, 0);">[113]</sup><br><br>On November 22, 2022, the case was re-raffled to another branch upon Enrique's Motion for Inhibition.<sup style="COLOR: RGB(255, 0, 0);">[114]</sup><br><br>On January 25, 2023, Jaime, Roberto, and Ma. Elena filed another Manifestation and Motion before the Regional Trial Court to inform them of the Court of Appeals' October 27, 2022 Consolidated Decision.<sup style="COLOR: RGB(255, 0, 0);">[115]</sup> Consequently, they moved for the dismissal of the<i> Habeas Corpus</i> Petition.<sup style="COLOR: RGB(255, 0, 0);">[116]</sup><br><br>Enrique filed a Counter-Manifestation and Opposition and countered that not only was the Consolidated Decision not yet final and executory, but also that its ruling was not relevant to the<i> Habeas Corpus</i> Petition.<sup style="COLOR: RGB(255, 0, 0);">[117]</sup><br><br>In its February 14, 2023 Omnibus Order,<sup style="COLOR: RGB(255, 0, 0);">[118]</sup> the Regional Trial Court resolved the Motion for Partial Reconsideration and the Manifestation and Motion, and dismissed the<i> Habeas Corpus</i> Petition for forum shopping and lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[119]</sup><br><br>Enrique moved for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[120]</sup> which the Regional Trial Court denied in its April 20, 2023 Order.<sup style="COLOR: RGB(255, 0, 0);">[121]</sup><br><br>Still not satisfied, Enrique filed a Petition for Review on<i> Certiorari </i>before this Court assailing the February 14, 2023 Omnibus Order and April 20, 2023 Order on the dismissal of the<i> Habeas Corpus</i> Petition. The Petition for Review on<i> Certiorari</i> was docketed as<b> G.R. No. 266762</b> before this Court.<sup style="COLOR: RGB(255, 0, 0);">[122]</sup><br><br>Hence, the four Petitions pending before this Court.<br><br>In<b> G.R. Nos. 266757</b><sup style="COLOR: RGB(255, 0, 0);">[123]</sup> and<b> 266686</b>,<sup style="COLOR: RGB(255, 0, 0);">[124]</sup> Enrique C. Fernandez, and Jaime C. Fernandez, Roberto C. Fernandez, and Ma. Elena C. Fernandez, respectively, assail the Court of Appeals' October 27, 2022 Consolidated Decision and March 30, 2023 Consolidated Resolution.<br><br>Enrique contends that he did not violate the rule on forum shopping. He argues that there was no identity of causes of action as the Guardianship Petition was grounded on Ma. Dulce's alleged incompetence, while the Usufruct Case arose from Jaime, Roberto, and Ma. Elena's purported breach of the Usufruct Contract.<sup style="COLOR: RGB(255, 0, 0);">[125]</sup> Furthermore, Enrique asserts that the parties involved in the two cases were different due to the distinct nature of the proceedings—the Guardianship Petition, a special proceeding, was binding to the whole world, while the Usufruct Case, an ordinary action, was binding only to the parties.<sup style="COLOR: RGB(255, 0, 0);">[126]</sup> Lastly, Enrique emphasizes that there was no identity of reliefs sought; the primary relief in the Guardianship Petition was his appointment as legal guardian, whereas in the Usufruct Case, it was the return of Ma. Dulce to the family home through specific performance of a contractual provision.<sup style="COLOR: RGB(255, 0, 0);">[127]</sup><br><br>Jaime, Roberto, and Ma. Elena counter by arguing that the Court of Appeals erred in reinstating the Usufruct Case, as this contravened the twin dismissal rule.<sup style="COLOR: RGB(255, 0, 0);">[128]</sup> They assert that the Court of Appeals' finding of willful and deliberate forum shopping necessitated the dismissal of both Usufruct Case and Guardianship Petition.<sup style="COLOR: RGB(255, 0, 0);">[129]</sup> Additionally, they argue that the Usufruct Case be dismissed for failure to state a cause of action, Enrique's lack of legal standing to sue, and Enrique's non-compliance with the condition precedent under Article 151 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[130]</sup><br><br>In<b> G.R. Nos. 266667</b><sup style="COLOR: RGB(255, 0, 0);">[131]</sup> and<b> 266762</b>,<sup style="COLOR: RGB(255, 0, 0);">[132]</sup> Enrique assails the Regional Trial Court's decisions in the Guardianship Petition (December 15, 2022 Order and March 15, 2023 Resolution) and the<i> Habeas Corpus</i> Petition (Regional Trial Court's February 14, 2023 Omnibus Order and April 20, 2023 Order), respectively. These two cases were dismissed by the Regional Trial Court upon Jaime, Roberto, and Ma. Elena's Motion, which informed the respective trial courts of the Court of Appeals' October 27, 2022 Consolidated Decision.<sup style="COLOR: RGB(255, 0, 0);">[133]</sup> In both Petitions, Enrique argues that the Consolidated Decision has not yet become final and executory, invoking the doctrine of immutability of final judgment.<sup style="COLOR: RGB(255, 0, 0);">[134]</sup><br><br>In<b> G.R. No. 266667</b>, Enrique further argues that the Regional Trial Court's December 15, 2022 Order and March 15, 2023 Resolution run counter to the rule on discretionary execution. He points out that Jaime, Roberto, and Ma. Elena fail to allege "good reasons" for the execution of judgment pending appeal.<sup style="COLOR: RGB(255, 0, 0);">[135]</sup> He contends that the dismissal was "highly premature, arbitrary, and [violative of] due process."<sup style="COLOR: RGB(255, 0, 0);">[136]</sup> He thus seeks for the reversal of the December 15, 2022 Order and March 15, 2023 Resolution and the reinstatement of the Guardianship Petition.<sup style="COLOR: RGB(255, 0, 0);">[137]</sup><br><br>In<b> G.R. No. 266762</b>, Enrique argues that the ruling in the Court of Appeals Consolidated Decision was irrelevant to the<i> Habeas Corpus</i> Petition, as it solely ruled on the Guardianship Petition and the Usufruct Case. Furthermore, Enrique argues that the March 18, 2022 and September 2, 2022 Resolutions, which issued the Preliminary Writ of<i> Habeas Corpus</i>, had attained finality, and were binding on Jaime, Roberto, and Ma. Elena since they did not appeal the ruling.<sup style="COLOR: RGB(255, 0, 0);">[138]</sup> Enrique asserts that "[a]ny court, [more so] a co-equal court, is precluded from modifying an otherwise final and executory judgment."<sup style="COLOR: RGB(255, 0, 0);">[139]</sup><br><br>In its August 30, 2023 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[140]</sup> this Court, upon the recommendation of the Clerk of Court,<sup style="COLOR: RGB(255, 0, 0);">[141]</sup> consolidated G.R. Nos. 266667, 266686, 266757, and 266762, noting that the four Petitions, albeit raising different issues, pertain only to the same facts and circumstances.<br><br>In its January 22, 2024 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[142]</sup> this Court required the parties to file their respective Comments.<br><br>In his March 1, 2024 Comment,<sup style="COLOR: RGB(255, 0, 0);">[143]</sup> Enrique seeks the dismissal of the Petition in G.R. No. 266686.<sup style="COLOR: RGB(255, 0, 0);">[144]</sup> He maintains that the Court of Appeals was correct insofar as it reinstated all his causes of action in the Usufruct Case. He insists that he did not commit forum shopping because there is no<i> litis pendentia</i>, no identity of parties, no identity of causes of action, and no identities in the reliefs sought.<sup style="COLOR: RGB(255, 0, 0);">[145]</sup> He also argues that the two cases are governed by different sets of rules, allowing each case to proceed independently of the other.<sup style="COLOR: RGB(255, 0, 0);">[146]</sup> Thus, he states that both the Usufruct Case and the Guardianship Petition should be reinstated.<sup style="COLOR: RGB(255, 0, 0);">[147]</sup><br><br>Meanwhile, in their March 14, 2024 Consolidated Comment<i> Ad Cautelam</i>,<sup style="COLOR: RGB(255, 0, 0);">[148]</sup> Jaime, Roberto, and Ma. Elena seek the dismissal of G.R. Nos. 266667, 266757, and 266762 on the ground of forum shopping and lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[149]</sup> They assert that the Guardianship Petition, the Usufruct Case, and the<i> Habeas Corpus</i> Petition "raise[d] the same factual allegations comprising [Enrique's] single cause of action" which led them to raise the same defenses in all three cases.<sup style="COLOR: RGB(255, 0, 0);">[150]</sup> While they admit that the cases seek different reliefs, they argue that the cases split a single cause of action, and thus still fall under forum shopping.<sup style="COLOR: RGB(255, 0, 0);">[151]</sup> They maintain, given the willful and deliberate forum shopping, that the twin dismissal rule should apply.<sup style="COLOR: RGB(255, 0, 0);">[152]</sup><br><br>Jaime, Roberto, and Ma. Elena also argue that G.R. No. 266762 should be summarily dismissed for raising questions of fact, for being a wrong mode of appeal, and due to lack of merit.<sup style="COLOR: RGB(255, 0, 0);">[153]</sup> They contend that Enrique failed to justify his direct appeal to this Court without first filing an appeal before the Court of Appeals.<sup style="COLOR: RGB(255, 0, 0);">[154]</sup> Additionally, they argue that Enrique failed to allege whether the case falls under the exceptions where this Court may entertain questions of fact.<sup style="COLOR: RGB(255, 0, 0);">[155]</sup><br><br>Pending resolution of these consolidated cases, this Court, in G.R. No. 266145,<sup style="COLOR: RGB(255, 0, 0);">[156]</sup> resolved the Ejectment Case filed by Jaime, Roberto, and Ma. Elena against Enrique. This Court found that the ejectment complaint sufficiently alleged the jurisdictional facts necessary for an action for unlawful detainer.<sup style="COLOR: RGB(255, 0, 0);">[157]</sup> As usufructuary, Ma. Dulce has the right to enjoy the property during her lifetime. Enrique's continued stay was merely by Ma. Dulce's tolerance, and such tolerance was deemed withdrawn upon demand for Enrique to vacate the property.<sup style="COLOR: RGB(255, 0, 0);">[158]</sup><br><br>The dispositive portion of this Court's August 19, 2024 Decision reads:<br><blockquote><b>ACCORDINGLY</b>, the Petition is<b> GRANTED</b>. The Decision dated September 15, 2022 and Resolution dated March 3, 2023 of the Court of Appeals in CA-G.R. SP No. 169784 are<b> REVERSED</b>. The Decision dated July 7, 2021 of Branch 233, Regional Trial Court, Makati City is <b>REINSTATED with MODIFICATION</b>. Respondent Enrique C. Fernandez is ORDERED to:<br><br>1. <b>COMPLY</b> with his commitments under the Contract of Usufruct dated October 14, 1999 and Memorandum of Agreement 130 dated December 18, 2000; and<br><br>2. <b>PAY</b> attorney's fees of PHP 100,000.00 plus costs of suit amounting to PHP 74,374.50. Legal interest of 6% per annum is imposed on these amounts from finality of this Decision until fully paid.<br><br>The Court<b> NOTES</b> that<b> FULL POSSESSION</b> of the property covered by TCT No. 217361 located at 1381 Palm Avenue, Dasmariñas Village, Makati City has been delivered to Ma. Dulce C. Fernandez and reasonable rent of PHP 325,000.00 per month for the use and occupation of the property reckoned from May 21, 2018 has been paid.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[159]</sup></blockquote>Based on the foregoing, this Court resolves the following issues: (1) whether Enrique C. Fernandez committed willful and deliberate forum shopping. Subsumed in this issue is whether the Court of Appeals, in ruling in the affirmative, correctly dismissed the Guardianship Petition and reinstated all causes of action in the Usufruct Case; and (2) whether the Court of Appeals' October 27, 2022 Consolidated Decision has attained finality.<br><br><center><b>I</b></center><br>Forum shopping, this Court has repeatedly held,<sup style="COLOR: RGB(255, 0, 0);">[160]</sup> is when "[a] party repetitively avails of several judicial remedies in different courts, simultaneously or successively, all substantially founded on the same transactions and the same essential facts and circumstances, and all raising substantially the same issues, either pending in or already resolved adversely by some other court."<sup style="COLOR: RGB(255, 0, 0);">[161]</sup> Forum shopping is prohibited and considered malpractice because it trifles with the courts, abuses their processes, degrades the administration of justice, and adds to the already congested court dockets.<sup style="COLOR: RGB(255, 0, 0);">[162]</sup><br><br>Forum shopping is condemned to avoid the "[r]endition by two competent tribunals of two separate and contradictory decisions."<sup style="COLOR: RGB(255, 0, 0);">[163]</sup> The parties may resort to taking advantage of several different fora until a result favorable to them is reached. Thus, this Court strictly applies the rule against forum shopping to avoid the confusion.<sup style="COLOR: RGB(255, 0, 0);">[164]</sup><br><br>The rule against forum shopping and the corresponding penalty for noncompliance is provided under Rule 7, Section 5 of the Rules on Civil Procedure, as follows:<br><blockquote>Sec. 5.<i> Certification against forum shopping.</i> — The plaintiff or principal party shall certify under oath in the complaint or other initiatory pleading asserting a claim for relief, or in a sworn certification annexed thereto and simultaneously filed therewith: (a) that<i> [he/she] has not theretofore commenced any action or filed any claim involving the same issues in any court, tribunal or quasi-judicial agency</i> and, to the best of [his/her] knowledge, no such other action or claim is pending therein; (b) if there is such other pending action or claim, a complete statement of the present status thereof; and (c) if [he/she] should thereafter learn that the same or similar action or claim has been filed or is pending, he shall report that fact within five (5) days therefrom to the court wherein his/her aforesaid complaint or initiatory pleading has been filed.<br><br>. . . .<br><br>Failure to comply with the foregoing requirements shall not be curable by mere amendment of the complaint or other initiatory pleading but shall be cause for the dismissal of the case without prejudice, unless otherwise provided, upon motion and after hearing. The submission of a false certification or non-compliance with any of the undertakings therein shall constitute indirect contempt of court, without prejudice to the corresponding administrative and criminal actions.<i> If the acts of the party or his counsel clearly constitute willful and deliberate forum shopping, the same shall be ground for summary dismissal with prejudice and shall constitute direct contempt, as well as a cause for administrative sanctions</i>.<sup style="COLOR: RGB(255, 0, 0);">[165]</sup> (Emphasis supplied) </blockquote>Party-litigants are required to certify against forum shopping and failure to comply with this requirement will result in the dismissal of the case without prejudice. Further, if the forum shopping is willful and deliberate, the dismissal is with prejudice and shall bar the refiling of the same action or claim, subject to the right to appeal.<sup style="COLOR: RGB(255, 0, 0);">[166]</sup><br><br>In<i> City of Taguig v. City of Makati</i>,<sup style="COLOR: RGB(255, 0, 0);">[167]</sup> this Court explained the test for determining whether the rule on forum shopping is violated:<br><blockquote>The test for determining forum shopping is settled. In<i> Yap v. Chua, et al.</i>:<br><blockquote>To determine whether a party violated the rule against forum shopping, the most important factor to ask is whether the elements of<i> litis pendentia</i> are present, or whether a final judgment in one case will amount to<i> res judicata</i> in another; otherwise stated, the test for determining forum shopping is whether in the two (or more) cases pending, there is identity of parties, rights or causes of action, and reliefs sought. </blockquote>For its part,<i> litis pendentia</i> "refers to that situation wherein another action is pending between the same parties for the same cause of action, such that the second action becomes unnecessary and vexatious." For<i> litis pendentia</i> to exist, three (3) requisites must concur:<br><blockquote>The requisites of<i> litis pendentia</i> are: (a) the identity of parties, or at least such as representing the same interests in both actions; (b) the identity of rights asserted and relief prayed for, the relief being founded on the same facts; and (c) the identity of the two cases such that judgment in one, regardless of which party is successful, would amount to<i> res judicata</i> in the other. </blockquote>On the other hand,<i> res judicata</i> or prior judgment bars a subsequent case when the following requisites are satisfied:<br><blockquote>(1) the former judgment is final; (2) it is rendered by a court having jurisdiction over the subject matter and the parties; (3) it is a judgment or an order on the merits; (4) there is — between the first and the second actions — identity of parties, of subject matter, and of causes of action.<br><br>These settled tests notwithstanding:<br><br>Ultimately, what is truly important to consider in determining whether forum-shopping exists or not is the vexation caused the courts and parties-litigant by a party who asks different courts and/or administrative agencies to rule on the same or related causes and/or to grant the same or substantially the same reliefs, in the process creating the possibility of conflicting decisions being rendered by the different fora upon the same issue.<sup style="COLOR: RGB(255, 0, 0);">[168]</sup> (Citations omitted) </blockquote></blockquote>Put simply, when either<i> litis pendentia</i> or<i> res judicata</i> exists, forum shopping exists. The test to be applied in this case is<i> litis pendentia</i> since there is no prior final judgment yet. To reiterate, the requisites of<i> litis pendentia</i> are: (a) the identity of parties, or at least such as representing the same interests in both actions; (b) the identity of rights asserted and relief prayed for, the relief being founded on the same facts; and (c) the identity of the two cases such that judgment in one, regardless of which party is successful, would amount to<i> res judicata</i> in the other.<sup style="COLOR: RGB(255, 0, 0);">[169]</sup><br><br><center><b>II</b></center><br>The Court of Appeals correctly found that Enrique committed forum shopping when he simultaneously filed the Guardianship Petition and the Usufruct Case. Both cases involve the same set of parties, heavily rely on the same set of facts, interposed the same evidence and defenses, and prayed for the same reliefs.<sup style="COLOR: RGB(255, 0, 0);">[170]</sup><br><br>First, there is shared identity of interest in the parties involved in this case.<i> Aboitiz Equity Ventures, Inc. v. Chiongbian</i><sup style="COLOR: RGB(255, 0, 0);">[171]</sup> instructs that when absolute identity of parties is not required, shared identity of interest is sufficient.<sup style="COLOR: RGB(255, 0, 0);">[172]</sup> Here, both cases involve the same parties: the siblings and their mother, Ma. Dulce. While the Guardianship Petition did not implead Jaime, Roberto, and Ma. Elena due to the nature of the case, they were directly involved in the case because the prospective ward, Ma. Dulce, was under their custody at the time the Guardianship Petition was filed. Furthermore, in both cases, there is a common interest: the custody over the person and properties of Ma. Dulce.<sup style="COLOR: RGB(255, 0, 0);">[173]</sup><br><br>Second, there is identity of causes of action.<i> Philippine College of Criminology, v. Bautista</i><sup style="COLOR: RGB(255, 0, 0);">[174]</sup> explained that the test in determining whether multiple suits relate to a single cause of action is the possibility that the courts will "[result in] the possibility of diverging interpretations, considering] substantially the same evidence."<sup style="COLOR: RGB(255, 0, 0);">[175]</sup> Similar to<i> Philippine College of Criminology</i>, the Guardianship Petition and the Usufruct Case arose from the same set of facts surrounding the conflict among siblings, Enrique, and Jaime, Roberto and Ma. Elena, regarding the custody of their mother, Ma. Dulce.<br><br>The Court of Appeals tabulated and summarized the comparison of the allegation of facts from the two cases, finding substantial similarities and even identical phrasing.<sup style="COLOR: RGB(255, 0, 0);">[176]</sup> In both cases, Enriquez alleged that: (1) his family cohabited with Ma. Dulce for 24 years; (2) Ma. Dulce's health declined; and (3) Jaime, Roberto, and Ma. Elena assumed control of their ancestral house, took advantage of the situation, and misappropriated Ma. Dulce's personal properties.<sup style="COLOR: RGB(255, 0, 0);">[177]</sup> To substantiate these claims, Enrique would have presented the same evidence while Jaime, Roberto, and Ma. Elena would have relied on similar defenses.<sup style="COLOR: RGB(255, 0, 0);">[178]</sup><br><br>Enrique repeatedly contended that there can be no identity of causes of action since the two cases are governed by different rules, one being a special proceeding and the other an ordinary civil action.<sup style="COLOR: RGB(255, 0, 0);">[179]</sup> He is mistaken. Unlike the case he cited,<i> Pacific Corp. v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[180]</sup> which only differentiated between a special proceeding and an ordinary civil action,<i> Heirs of Sotto v. Palicte</i>,<sup style="COLOR: RGB(255, 0, 0);">[181]</sup> as cited by the Court of Appeals, instructed that there is identity of causes of action even if the cases involved are special proceeding cases—probate in that case, while guardianship in this case— and ordinary civil actions.<sup style="COLOR: RGB(255, 0, 0);">[182]</sup><br><br>Third, in both cases, the reliefs sought in both cases are identical: the return of Ma. Dulce to the ancestral home, jointly occupied by Enrique and his children, with the latter granted physical custody of Ma. Dulce and management of her properties.<sup style="COLOR: RGB(255, 0, 0);">[183]</sup><br><br>Finally, since both cases involve the same factual considerations and seek the same reliefs, a resolution of either the Guardianship Petition and the Usufruct Case would constitute<i> res judicata</i> as to the other, potentially leading to conflicting decisions in different courts, the very danger that the rules against forum shopping seek to prevent. We note the reliefs sought in both cases, as follows:<br><blockquote><table width="100%" border="1" cellpadding="5" cellspacing="0"> <tbody><tr> <td width="50%" valign="top"> <div align="JUSTIFY">WHEREFORE, plaintiff, <i> (sic) </i>respectfully prays for the following:&nbsp;<br><ol><li>Upon filing hereof, plaintiff's joint applications for:<br><br><ol type="i"><li>Preliminary mandatory injunction, cease and desist and/or any protective order</li><li><i><u>Return pendente lite of mother to ancestral home and abode or for visitorial rights</u></i>; duty to give love, material and medical and filial support and full access to all medical and filial support and full access to all medical, dental and health records and to local and foreign bank accounts and financial assets, properties and sundries, of ailing mother Ma. Dulce Cacho Fernandez,&nbsp;</li></ol></li></ol>...</div><div align="JUSTIFY"><ol start="2"><li>After due trial, judgment be rendered as follows:<br><br><ol type="a"><li>...&nbsp;</li><li>Under the <b> Second Cause of Action</b>, to comply in good faith, by the way of specific performance, with their Usufructuary Agreement and MOA by <i><u>immediately returning and restoring the parties aged and ailing mother MDCF to the family ancestral home and abode at 1381 Palm Avenue. Dasmariñas Village. Makati City; jointly with plaintiff and his daughters in accordance with their implied term</u></i>;&nbsp;</li><li>Under the <b> Third Cause of Action</b><i>, ..</i>. <i><u> ordering the defendants, singly or jointly, to return their mother MDCF to he family's ancestral home and abode, under the personal care and attention of plaintiff and his daughters</u></i>;</li><li>...&nbsp;&nbsp;</li><li>...&nbsp;&nbsp;</li><li>...&nbsp;</li><li>...&nbsp;</li><li>...</li><li>...</li><li>...</li><li>...</li><li>... (Emphasis and underscoring supplied) </li></ol></li></ol></div></td> <td width="50%" valign="top"> <div align="JUSTIFY">WHEREFORE, petitioner respectfully prays that this Honorable Court render judgment as follows:&nbsp;&nbsp;</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><ol><li>Upon filing thereof and after due proceedings, appoint petitioner as temporary guardian over the person of MA. DULCE C. FERNANDEZ and such terms and conditions as this Court may fix;&nbsp;&nbsp;<br><br></li><li>After due trial, grant this Petition for Guardianship:<ol type="a"><li>Appointing petitioner as the LEGAL GUARDIAN over the person and properties of MA. DULCE C. FERNANDEZ; and</li><li><i><u>Ordering the return of MA. DULCE C. FERNANDEZ to the family's ancestral home and abode, under the personal care and attention of petitioner and his daughters</u>.</i> (Emphasis and underscoring supplied)</li></ol></li></ol></div> <div align="JUSTIFY"></div></td> </tr> </tbody></table></blockquote>Enrique padded the reliefs he sought with several causes of action, of which a plain reading would reveal only one thing: he seeks the relief of his mother's return to their ancestral home and his appointment as legal guardian. His main argument in the Usufruct Case, in the declaration of the termination of the contract, was a fundamental repudiatory breach, the breach being the taking of Ma. Dulce away from the Dasma House. His request for the return of the personal properties was only incidental to the request for Ma. Dulce's return and his and his children's appointment as her guardian. Echoing the Court of Appeals, in case Enrique was appointed as legal guardian, his powers and duties "already covers, encompasses, includes his prayers in the usufructuary case."<sup style="COLOR: RGB(255, 0, 0);">[184]</sup> Otherwise stated, the reliefs sought in the Usufruct Case are "inherent in his petition for the guardianship over the person and properties of [Ma. Dulce]."<sup style="COLOR: RGB(255, 0, 0);">[185]</sup> Hence, the third requisite is also satisfied.<br><br>This Court holds that Enrique violated the rule against forum shopping. We then determine whether the violation is willful and deliberate and assess the appropriate penalties.<br><br><center><b>III</b></center><br>This Court has previously pronounced that forum shopping is willful and deliberate, because the malicious and ulterior motive "to secure a higher percentage of winning" with no regard whether the filing of different cases in various fora would result to abuse to the courts and the justice system.<sup style="COLOR: RGB(255, 0, 0);">[186]</sup><br><br>In this case, based on the assessment of the case records, we agree with the Court of Appeals that the simultaneous filing—on the same date and only few minutes apart—of both cases indicate that Enrique's violation of the forum shopping rule was willful and deliberate. The Court of Appeals explained:<br><blockquote>Here, petitioner Enrique's bad faith and sinister ulterior motive by filing the Guardianship and the Usufructuary cases despite his undeniable awareness that he is shopping for a favorable remedy from either court against the same parties, based on the same cause of action or right or subject matter and seeking the same reliefs, all point to an indelible conclusion that his violation of the rule on forum shopping is willful and deliberate; his propensity to shop for a favorable remedy, specifically: the power and control over the person and properties of MDCF from either court[.]<sup style="COLOR: RGB(255, 0, 0);">[187]</sup></blockquote>Consequently, both the Usufruct Case and the Guardianship Petition should be dismissed.<sup style="COLOR: RGB(255, 0, 0);">[188]</sup><br><br>The Rules are silent on whether all cases wherein forum shopping has been committed should be dismissed. However, in a long line of cases,<sup style="COLOR: RGB(255, 0, 0);">[189]</sup> this Court applied the multiple dismissal rule. In<i> Zamora v. Quinan, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">[190]</sup> this Court not only dismissed the petition pending before it but also of the other case that is pending in a lower court. This Court has likewise applied this rule in<i> Buan v. Lopez</i>,<sup style="COLOR: RGB(255, 0, 0);">[191]</sup> <i>First Philippine International Bank v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[192]</sup> and<i> Dy v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[193]</sup> among others. This Court has held that "[when] there is a finding of forum shopping, the penalty is dismissal of both cases as a punitive measure to those who trifle with the orderly administration of justice."<sup style="COLOR: RGB(255, 0, 0);">[194]</sup><br><br>In this case, however, in dismissing only the Guardianship Petition, the Court of Appeals explained that its order to reinstate the Usufruct Case is based on equity:<br><blockquote>As a form of penalty for a willful and intentional violation of the rule against forum shopping<i> but tempered with justice and equity</i>, the first case filed by petitioner Enrique which is the Guardianship case . . . is dismissed while the Usufructuary Case . . . will continue its proceedings. Concomitantly, the dismissal of the Guardianship case will necessarily place petitioner Enrique in a position where he no longer violates the rules against forum shopping on account of the absence of identity of parties, causes of action and reliefs prayed for in two cases[.]<sup style="COLOR: RGB(255, 0, 0);">[195]</sup> (Emphasis supplied) </blockquote>In the interest of judicial economy, which "requires the prosecution of cases with the least cost to the parties and to the courts' time, effort, and resources,"<sup style="COLOR: RGB(255, 0, 0);">[196]</sup> we affirm the Court of Appeals Decision.<br><br>In view of the peculiar circumstances presented in this case, this Court deems it proper to dismiss solely the Guardianship Petition and order the continuation of the proceedings for the Usufruct Case. In<i> Malixi et. al. v. Baltazar</i>,<sup style="COLOR: RGB(255, 0, 0);">[197]</sup> this Court held:<br><blockquote><i>Where a rigid application of the rules will result in a manifest failure or miscarriage of justice, technicalities should be disregarded in order to resolve the case.</i> In<i> Aguam v. Court of Appeals</i>, we ruled that:<br><blockquote>The court has [the] discretion to dismiss or not to dismiss an appellant's appeal. It is a power conferred on the court, not a duty. The "discretion must be a sound one, to be exercised in accordance with the tenets of justice and fair play, having in mind the circumstances obtaining in each case." Technicalities, however, must be avoided. The law abhors technicalities that impede the cause of justice. The court's primary duty is to render or dispense justice. "A litigation is not a game of technicalities." "[Lawsuits], unlike duels, are not to be won by a rapier's thrust. Technicality, when it deserts its proper office as an aid to justice and becomes its great hindrance and chief enemy, deserves scant consideration from courts."<sup style="COLOR: RGB(255, 0, 0);">[198]</sup> </blockquote></blockquote>A dismissal of all cases would maintain the status quo, leaving Ma. Dulce's situation unresolved. Such an outcome would not only constitute a wasteful expenditure of judicial resources but would also fail to address the critical issue of Ma. Dulce's welfare. Hence, we affirm the Court of Appeals ruling.<br><br><center><b>IV</b></center><br>In G.R. No. 266667, Enrique sought the reversal of the Regional Trial Court's December 15, 2022 Decision and March 15, 2023 Resolution dismissing the Guardianship Petition. While this Court agrees with the dismissal of the Guardianship Petition, we sternly remind the Regional Trial Court that the dismissal of the Guardianship Petition was premature and against existing rules as the October 27, 2022 Court of Appeals' Consolidated Decision had not yet attained finality at that time.<br><br>The issue requires a reiteration of the fundamental remedies available to parties in cases of dismissal and adverse rulings in the lower courts.<br><br>A judgment becomes final and executory by operation of law. A judgment is final if it disposes of the action or proceeding, so that nothing more can be done with it in the trial court.<sup style="COLOR: RGB(255, 0, 0);">[199]</sup> It is also fundamental that a judgment becomes final when the reglementary period to appeal lapses, and no appeal is perfected within such period.<i> Torres v. Aruego</i><sup style="COLOR: RGB(255, 0, 0);">[200]</sup> explains in detail:<br><blockquote>A judgment becomes 'final and executory' by operation of law. Finality becomes a fact when the reglementary period to appeal lapses and no appeal is perfected within such period. As a consequence, no court (not even this Court) can exercise appellate jurisdiction to review a case or modify a decision that has become final.<br><br>When a final judgment is executory, it becomes immutable and unalterable. It may no longer be modified in any respect either by the court which rendered it or even by this Court. The doctrine is founded on considerations of public policy and sound practice that, at the risk of occasional errors, judgments must become final at some definite point in time.<sup style="COLOR: RGB(255, 0, 0);">[201]</sup> </blockquote>The Rules of Court provide for the reglementary period to appeal. The remedy from an order denying a motion for reconsideration is to appeal the judgment or final order.<sup style="COLOR: RGB(255, 0, 0);">[202]</sup> An adverse party desiring to appeal by<i> certiorari </i>from a judgment or final order or resolution of the Court of Appeals may file a petition with this Court within 15 days from notice of the judgment or final order appealed from, raising only questions of law.<sup style="COLOR: RGB(255, 0, 0);">[203]</sup> The 15-day period may likewise be extended to 30 days for justifiable reasons.<sup style="COLOR: RGB(255, 0, 0);">[204]</sup><br><br>In this case, the dismissal of the Guardianship Petition is based on willful and deliberate forum shopping. To reiterate, a dismissal based on willful and deliberate forum shopping is a dismissal with prejudice, and thus, appealable.<sup style="COLOR: RGB(255, 0, 0);">[205]</sup> Enrique had the remedy to appeal before this Court the adverse ruling of the Court of Appeals.<br><br>Based on the records, the period within which to file the appeal the Court of Appeals March 30, 2023 Resolution has not yet lapsed: (1) The Court of Appeals issued a Consolidated Decision dismissing the Guardianship Petition on October 27, 2022;<sup style="COLOR: RGB(255, 0, 0);">[206]</sup> (2) Both parties timely filed a Motion for Reconsideration;<sup style="COLOR: RGB(255, 0, 0);">[207]</sup> (3) The Court of Appeals required both parties to Comment on their Respective Motions for Reconsideration on December 15, 2022;<sup style="COLOR: RGB(255, 0, 0);">[208]</sup> and (4) The Court of Appeals issued a Consolidated Resolution denying the Motion for Reconsideration on March 30, 2023. Thus, Enrique could have appealed within 15 or 30 days from receipt of the Court of Appeals' March 30, 2023 Consolidated Resolution.<br><br>However, on November 21, 2022, while the Motion for Reconsideration was pending before the Court of Appeals, Jaime, Roberto, and Ma. Elena filed a Manifestation and Motion before the Regional Trial Court where the Guardianship Petition is pending, praying for its dismissal in light of the Court of Appeals' October 27, 2022 Decision.<sup style="COLOR: RGB(255, 0, 0);">[209]</sup><br><br>The Regional Trial Court granted the Manifestation and Motion in its December 15, 2022 Order. The Order reads in full:<br><blockquote>This court is in receipt of the Manifestation and Motion filed by oppositors Jaime C. Fernandez, Roberto C. Fernandez and Ma. Elena C. Fernandez on November 29, 2022. They informed the court that the Court of Appeals on October 27, 2022 rendered a decision on the consolidated cases involving them and their and sibling Enrique Fernandez. The Decision in the said cases had the pending case in this court, dismissed due to forum shopping.<br><br>The court has not received a copy from the Court of Appeals, however, upon verification the said Decision had already been uploaded to the appellate court's website.<br><br>WHEREFORE, with the promulgation of the appellate court's decision, the motion is hereby GRANTED. The instant petition is hereby DISMISSED as resolved by the Court of Appeals.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[210]</sup> </blockquote>Upon Enrique's Motion for Reconsideration, the Regional Trial Court found the Motion without merit and explained:<br><blockquote>The continuation of the proceedings in this case would be deemed as a disobedience to the orders of the higher court. Moreover, there is no deprivation of remedies; in fact, a motion for reconsideration has already been filed by the petitioner herein from the assailed October 27, 2022 Decision of the Court of Appeals. Should the movant be successful, the court herein will order a reinstatement of the case upon receipt of a copy of the resolution granting the same. Until then, in order not to add or to clog in the court's docket, the instant cast is deemed dismissed.<sup style="COLOR: RGB(255, 0, 0);">[211]</sup> </blockquote>Since the reglementary period to file an appeal has not yet lapsed, the Regional Trial Court erroneously dismissed the Guardianship Petition. We deem it proper then to remind the Regional Trial Court that it is bound to abide by procedural rules as these are not mere technicalities that they can circumvent.<br><br><b>ACCORDINGLY</b>, the Consolidated Petitions in<b> G.R. Nos. 266667, 266757, 266762</b> and<b> 266686</b> are hereby<b> DENIED. </b><br><br>The Court of Appeals October 27, 2022 Consolidated Decision and March 30, 2023 Consolidated Resolution are<b> AFFIRMED</b>.<br><br>The Petition for Guardianship pending before the Branch 145, Regional Trial Court of Makati City in Case No. R-MKT-19-03118-SP is<b> DISMISSED</b>.<br><br>The Complaint for Declaration of End/Termination of the Usufructuary Agreement due to Fundamental Repudiatory Breach; Specific Performance; Declaration of Duty to Give Medical, Filial Support and Enforcement of Visitorial Rights; Annulment of Special Power of Attorney and Other Papers/Documents; Accounting and Return of Bank Accounts and Other Financial Assets, with Application for Preliminary Mandatory Injunction, Cease and Desist Order and/or Any Protective Order, Visitorial Rights <i>Pendente Lite</i> and Damages pending before Branch 133, Regional Trial Court, Makati City in Civil Case No. R-MKT-19-03122-CV is<b> REINSTATED</b> and <b>REMANDED</b> for further proceedings.<br><br>All other pending cases relating to the issues in this case are hereby <b>DISMISSED</b>.<br><br><b>SO ORDERED</b>.<br><br><i>Lazaro-Javier, J. Lopez, Kho, Jr.,</i> and <i>Villanueva, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>Heirs of Mampo v. Morada</b>, 888 Phil. 583, 606 (2020) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> RULES OF CIVIL PROCEDURE, Rule 7, sec. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 400-462. The October 27, 2022 Decision in CA-G.R. SP Nos. 165267, 165313, 166995 and 168152 was penned by Associate Justice Lorenza R. Bordios and concurred in by Associate Justices Mariflor P. Punzalan Castillo and Mary Charlene V. Hernandez-Azura of the Special Third Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 403.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 404.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 44-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 1552-1554.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 404, 1562-1564.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 1565-1568.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 1565.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 1566.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 405.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 1480.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 1481, 1571-1574.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 1481.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 1577-1578, 1579-1581.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 1482.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>See</i> <b>Fernandez v. Fernandez</b>, 958 Phil. 397 (2024) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 1594-1595.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 1582.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 1585-1589.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 1585.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 1587.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 1597.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i> <b>(G.R. No. 266686)</b>, p. 285.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, p. 906.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 51-62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 63-79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Rollo</i> <b>(G.R. No. 266762)</b>, pp. 334-346.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 80-84.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 435-440.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 57-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 85-100.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 184-190. The November 25, 2019 Resolution was penned by Pairing Judge Encarnacion Jaja G. Moya.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 190.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 191-198, 199-214.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>. at 148-160.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. at 161-163.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>. at 164-183.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 215-217. The March 2, 2020 Order in Case No. R-MKT-19-03118-SP was penned by Pairing Judge Encarnacion Jaja G. Moya.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>. at 309-367, 368-399.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>. at 66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id</i>. at 68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 68-69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>. at 69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 69-70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>. at 70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Rollo</i> <b>(G.R. No. 266686)</b>, pp. 331-349.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id</i>. at 340.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 296-302. The February 10, 2020 Resolution was penned by Acting Presiding Judge Augusto Jose Y. Arreza.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id</i>. at 302.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id</i>. at 301.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Rollo</i> <b>(G.R. No. 266686)</b>, pp. 675-697.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id</i>. at 700-714.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id</i>. at 732-737. The October 6, 2020 Order in Civil Case No. R-MKT-19-03122-CV was penned by Presiding Judge Maricris B. Pahate-Felix.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id</i>. at 737.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id</i>. at 863-877.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Rollo</i> <b>(G.R. No. 266787)</b>, pp. 470-484.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Rollo</i> <b>(G.R. No. 266686)</b>, pp. 878-880. The December 22, 2020 Order in Civil Case No. R-MKT-19-03122-CV was penned by Presiding Judge Maricris B. Pahate-Felix.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id</i>. at 880.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 309-367, 368-399.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id</i>. at 400-462.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id</i>. at 433.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id</i>. at 435-440.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> Id at 454.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id</i>. at 452.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id</i>. at 454-455.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id</i>. at 457.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id</i>. at 463-464.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id</i>. at 551-554.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id</i>. at 552.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id</i>. at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Id</i>. at 555-560.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id</i>. at 42-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>Id</i>. at 13-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 463-467.<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Rollo</i> <b>(G.R. No. 266757)</b>, pp. 3-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Rollo</i> <b>(G.R. No. 266686)</b>, pp. 80-136.<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Rollo</i> <b>(G.R. No. 266762)</b>, pp. 350-396.<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id</i>. at 364.<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>Id</i>. at 367.<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Id</i>. at 1310-1329.<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <i>Id</i>. at 893-901.<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <i>Id</i>. at 900.<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Id</i>. at 896.<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <i>Id</i>. at 935-937.<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <i>Id</i>. at 970-972. The June 17, 2022 Resolution in Case No. R-MKT-20-00450-SP was penned by Presiding Judge Jonathan Honorato D. Lock.<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> <i>Id</i>. at 904-934.<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Id</i>. at 1132-1161.<br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <i>Id</i>. at 1173-1182.<br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> <i>Id</i>. at 938-941.<br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> <i>Id</i>. at 940-941.<br><br><sup style="COLOR: RGB(255, 0, 0);">[113]</sup> <i>Id</i>. at 1132-1144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[114]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 1758-1767.<br><br><sup style="COLOR: RGB(255, 0, 0);">[115]</sup> <i>Rollo</i> <b>(G.R. No. 266762)</b>, pp. 1193-1202.<br><br><sup style="COLOR: RGB(255, 0, 0);">[116]</sup> <i>Id</i>. at 1200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[117]</sup> <i>Id</i>. at 1205-1238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[118]</sup> <i>Id</i>. at 60-67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[119]</sup> <i>Id</i>. at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[120]</sup> <i>Id</i>. at 1212-1238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[121]</sup> <i>Id</i>. at p. 68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[122]</sup> <i>Id</i>. at 3-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[123]</sup> <i>Rollo</i> <b>(G.R No. 266757)</b>, pp. 3-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[124]</sup> <i>Rollo</i> <b>(G.R. No. 266686)</b>, pp. 80-136.<br><br><sup style="COLOR: RGB(255, 0, 0);">[125]</sup> <i>Rollo</i> <b>(G.R. No. 266757)</b>, pp. 24-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[126]</sup> <i>Id</i>. at 20-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[127]</sup> <i>Id</i>. at 26-27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[128]</sup> <i>Rollo</i> <b>(G.R. No. 266686</b>), pp. 109-114.<br><br><sup style="COLOR: RGB(255, 0, 0);">[129]</sup> <i>Id</i>. at 106.<br><br><sup style="COLOR: RGB(255, 0, 0);">[130]</sup> <i>Id</i>. at 122-125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[131]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 13-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[132]</sup> <i>Rollo</i> <b>(G.R. No. 266762)</b>, pp. 3-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[133]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, p. 6; <i>rollo</i> <b>(G.R. No. 266762)</b>, pp. 60-67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[134]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 26-27; <i>rollo</i> <b>(G.R. No. 266762)</b>, pp. 33-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[135]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 29-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[136]</sup> <i>Id</i>. at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[137]</sup> <i>Id</i>. at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[138]</sup> <i>Rollo</i> <b>(G.R. No. 266762)</b>, pp. 18, 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[139]</sup> <i>Id</i>. at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[140]</sup> <i>Id</i>. at 1627-1629.<br><br><sup style="COLOR: RGB(255, 0, 0);">[141]</sup> <i>Id</i>. at 1536-1540.<br><br><sup style="COLOR: RGB(255, 0, 0);">[142]</sup> <i>Id</i>. at 1716-1718.<br><br><sup style="COLOR: RGB(255, 0, 0);">[143]</sup> Roilo <b>(G.R. No. 266667)</b>, pp. 905-948.<br><br><sup style="COLOR: RGB(255, 0, 0);">[144]</sup> <i>Id</i>. at 945.<br><br><sup style="COLOR: RGB(255, 0, 0);">[145]</sup> <i>Id</i>. at 926.<br><br><sup style="COLOR: RGB(255, 0, 0);">[146]</sup> <i>Id</i>. at 932-933.<br><br><sup style="COLOR: RGB(255, 0, 0);">[147]</sup> <i>Id</i>. at 943.<br><br><sup style="COLOR: RGB(255, 0, 0);">[148]</sup> <i>Id</i>. at 1476-1551.<br><br><sup style="COLOR: RGB(255, 0, 0);">[149]</sup> <i>Id</i>. at 1545.<br><br><sup style="COLOR: RGB(255, 0, 0);">[150]</sup> <i>Id</i>.at 1504.<br><br><sup style="COLOR: RGB(255, 0, 0);">[151]</sup> <i>Id</i>. at 1505.<br><br><sup style="COLOR: RGB(255, 0, 0);">[152]</sup> <i>Id</i>. at 1517.<br><br><sup style="COLOR: RGB(255, 0, 0);">[153]</sup> <i>Id</i>. at 1520-1525.<br><br><sup style="COLOR: RGB(255, 0, 0);">[154]</sup> <i>Id</i>. at 1518-1519.<br><br><sup style="COLOR: RGB(255, 0, 0);">[155]</sup> <i>Id</i>. at 1538-1541.<br><br><sup style="COLOR: RGB(255, 0, 0);">[156]</sup> <b>Fernandez v. Fernandez</b>, 958 Phil. 397 (2024) [Per J. Lazaro-Javier, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[157]</sup> <i>Id</i>. at 418-419.<br><br><sup style="COLOR: RGB(255, 0, 0);">[158]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, p. 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[159]</sup> <i>Id</i>. at 24-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[160]</sup> <b>Philippine College of Criminology v. Bautista</b>, 873 Phil. 1014, 1023-1024 (2020) [Per J. Leonen, Third Division]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[161]</sup> <b>Villamor v. Sogo Realty and Development Corporation</b>, 852 Phil. 371, 380 (2019) [Per J. Peralta, Third Division]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[162]</sup> <b>Sotto v. Palicte</b>, 726 Phil. 651, 654 (2014) [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[163]</sup> <b>Quiambao v. Sumbilla</b>, 935 Phil. 1, 8 (2023) [Per J. Gaerlan, Third Division], <i>citing</i> <b>Dy v. People</b>, 611 Phil. 74, 84 (2009) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[164]</sup> <b>Heirs of Mampo v. Morada</b>, 888 Phil. 583, 594 (2020) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[165]</sup> RULES OF COURT, Rule 7, sec. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[166]</sup> RULES OF COURT, Rule 7, sec. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[167]</sup> 787 Phil. 367 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[168]</sup> <i>Id</i>. at 387-388.<br><br><sup style="COLOR: RGB(255, 0, 0);">[169]</sup> <i>Id</i>. at 388.<br><br><sup style="COLOR: RGB(255, 0, 0);">[170]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 431-432.<br><br><sup style="COLOR: RGB(255, 0, 0);">[171]</sup> 738 Phil. 773 (2014) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[172]</sup> <i>Id</i>. at 797.<br><br><sup style="COLOR: RGB(255, 0, 0);">[173]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 433-434.<br><br><sup style="COLOR: RGB(255, 0, 0);">[174]</sup> 873 Phil. 1014 (2020) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[175]</sup> <i>Id</i>. at 1025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[176]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 435-440.<br><br><sup style="COLOR: RGB(255, 0, 0);">[177]</sup> <i>Id</i>. at 434-435.<br><br><sup style="COLOR: RGB(255, 0, 0);">[178]</sup> <i>Id</i>. at 441.<br><br><sup style="COLOR: RGB(255, 0, 0);">[179]</sup> <i>Id</i>. at 424-427, 429-430.<br><br><sup style="COLOR: RGB(255, 0, 0);">[180]</sup> 312 Phil. 578 (1995) [Per J. Mendoza, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[181]</sup> 726 Phil. 651 (2014) [Per J. Bersamin, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[182]</sup> <i>Id</i>. at 655.<br><br><sup style="COLOR: RGB(255, 0, 0);">[183]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 443-444.<br><br><sup style="COLOR: RGB(255, 0, 0);">[184]</sup> <i>Id</i>. at 442.<br><br><sup style="COLOR: RGB(255, 0, 0);">[185]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[186]</sup> <b>Daswani v. Banco de Oro Universal Bank</b>, 765 Phil. 88, 98 (2015) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[187]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, p. 454.<br><br><sup style="COLOR: RGB(255, 0, 0);">[188]</sup> <i>Id</i>. at 460-461.<br><br><sup style="COLOR: RGB(255, 0, 0);">[189]</sup> <b>Buan v. Lopez, Jr.</b>, 229 Phil. 65 (1986) [Per J. Narvasa, First Division]; <b>Dy v. People</b>, 792 Phil. 672 (2016) [Per J. Jardeleza, Third Division]; <b>Heirs of Mampo v. Morada</b>, 888 Phil. 583 (2020) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[190]</sup> 821 Phil. 1009 (2017) [Per J. Peralta, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[191]</sup> 229 Phil. 65 (1986) [Per J. Narvasa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[192]</sup> 322 Phil. 280 (1996) [Per J. Panganiban, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[193]</sup> 792 Phil. 672 (2016) [Per J. Jardeleza, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[194]</sup> 865 Phil. 952, 961 (2019) [Per J. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[195]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, p. 457.<br><br><sup style="COLOR: RGB(255, 0, 0);">[196]</sup> <b>Malixi v. Baltazar</b>, 821 Phil. 423, 452 (2017) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[197]</sup> 821 Phil. 423 (2017) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[198]</sup> <i>Id</i>. at 439.<br><br><sup style="COLOR: RGB(255, 0, 0);">[199]</sup> RULES OF COURT, Rule 39, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[200]</sup> 818 Phil. 524 (2017) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[201]</sup> <i>Id</i>. at 538.<br><br><sup style="COLOR: RGB(255, 0, 0);">[202]</sup> RULES OF COURT, Rule 37, sec. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[203]</sup> RULES OF COURT, Rule 45, secs. 1, 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[204]</sup> RULES OF COURT, Rule 45, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[205]</sup> RULES OF COURT, Rule 7, sec. 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[206]</sup> <i>Rollo</i> <b>(G.R. No. 266667)</b>, pp. 400-462.<br><br><sup style="COLOR: RGB(255, 0, 0);">[207]</sup> <i>Id</i>. at 466-467.<br><br><sup style="COLOR: RGB(255, 0, 0);">[208]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[209]</sup> <i>Id</i>. at 551-554.<br><br><sup style="COLOR: RGB(255, 0, 0);">[210]</sup> <i>Id</i>. at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[211]</sup> <i>Id</i>. at 43.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

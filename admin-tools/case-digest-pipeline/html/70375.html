@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 267620 - PETRONILO B. LAROCO, PETITIONER, VS. GOVERNMENT SERVICE INSURANCE SYSTEM COMMITTEE ON CLAIMS, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70375' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 267620, February 24, 2026 ]</H2>
+			<H3>PETRONILO B. LAROCO, PETITIONER, VS. GOVERNMENT SERVICE INSURANCE SYSTEM COMMITTEE ON CLAIMS, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (Petition) under Rule 45 of the Rules of Court filed by Petronilo B. Laroco (Petronilo) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated January 25, 2023, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated May 24, 2023, of the Court of Appeals (CA) in CA-G.R. SP No. 163916. The CA affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated July 30, 2019, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated November 26, 2019, of the Board of Trustees (BOT) of the Government Service Insurance System (GSIS) in GSIS Case No. 015-18, which in turn upheld the Decision<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> dated September 4, 2018, of the GSIS Committee on Claims in Case No. 17-06-2018.<br><br><center><i>The Antecedents</i> </center><br>The present case arose from an application<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> for survivorship benefits filed by Petronilo with the GSIS Committee on Claims. Petronilo was the father and sole heir of Cristie C. Laroco (Cristie), who died on October 24, 2017.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> At the time of her death, Cristie was a government employee, particularly a teacher at Camp Crame Elementary School.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> She rendered a total of 13 years in government service and had paid premiums to GSIS for a period of 12 years.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Cristie died single and without issue.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br><center><i>The Ruling of the GSIS Committee on Claims</i> </center><br>In the Decision dated September 4, 2018, the GSIS Committee on Claims denied Petronilo's application for survivorship benefits, viz.:<br><blockquote>WHEREFORE, premises considered, the request of Claimant Petronilo B. Laroco for payment survivorship benefits under R.A. [No.] 8291 as a result of the death of his daughter, the late Cristie C. Laroco is hereby DENIED.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </blockquote>The GSIS Committee on Claims determined that, under Section 24.2<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> of the Revised Implementing Rules and Regulations (Revised IRR) of Republic Act No. 8291,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Petronilo was not qualified to receive survivorship benefits because he was not a primary beneficiary of Cristie. It ruled that a secondary beneficiary such as Petronilo may only receive survivorship benefits if the deceased member had rendered at least 15 years of service in the government. Given that Cristie had only 13 years of government service, the GSIS Committee on Claims held that only her primary beneficiaries may receive survivorship benefits.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Aggrieved, Petronilo appealed the Decision of the GSIS Committee on Claims to the GSIS BOT. In his Petition<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> before the GSIS BOT, Petronilo insisted that he was qualified to receive survivorship benefits pursuant to Section 21<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> of Republic Act No. 8291. He asserted that the Revised IRR of Republic Act No. 8291 was contrary to Section 21 of the law because it improperly excluded the secondary beneficiaries as recipients of survivorship benefits in cases where the deceased member had rendered at least three but less than 15 years of government service.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br><center><i>The Ruling of the GSIS BOT</i> </center><br>After due proceedings, the GSIS BOT rendered its Decision dated July 31, 2019, which denied the appeal and affirmed the ruling of the GSIS Committee on Claims, viz.:<br><blockquote>IN VIEW OF THE FOREGOING, the Petition is DENIED and the Assailed Decision of the Committee on Claims in Case No. 17-06-2018 is hereby AFFIRMED in toto.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> </blockquote>In denying Petronilo's appeal, the GSIS BOT emphasized that Republic Act No. 8291 conferred upon the GSIS the power to administer and protect the Social Insurance Fund (the Fund). The GSIS BOT particularly cited Section 41(a) and (e),<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> as well as Section 43(a) and (b),<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> of Republic Act No. 8291 as the basis for its power to promulgate the Revised IRR governing the use of the Fund. It ruled that the Revised IRR of Republic Act No. 8291 was controlling and, consequently denied Petronilo's application for survivorship benefits.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Petronilo filed a motion for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> but the GSIS BOT denied it in the Resolution<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated September 19, 2019.<br><br>Undaunted, Petronilo appealed the GSIS BOT rulings to the CA by way of a Rule 43 petition for review.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br><center><i>The Ruling of the CA</i> </center><br>In the now-assailed Decision dated January 25, 2023, the CA denied Petronilo's appeal, viz.:<br><blockquote>ACCORDINGLY, the Petition for Review is DENIED. The Decision dated 30 July 2019 of the Board of Trustees of the Government Service Insurance System in GSIS Case No. 015-18 is AFFIRMED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </blockquote>In denying the appeal, the CA agreed with the GSIS BOT that the latter had the power to promulgate the Revised IRR as regards survivorship benefits. Pursuant to the Revised IRR, the CA determined that for government employees who rendered less than 15 years of service, only primary beneficiaries of the deceased are entitled to survivorship benefits. Given that Petronilo was only a secondary beneficiary and not a primary beneficiary, not being the spouse or child of Cristie, the CA ruled that Petronilo was not entitled to survivorship benefits.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Petronilo filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> of the CA Decision, but the CA denied it in the Resolution<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> dated May 24, 2023.<br><br>Thus, the present Petition.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br><center><i>Arguments of the Parties</i> </center><br>Petronilo contends that the Revised IRR of Republic Act No. 8291 unlawfully amended the law. He argues that the GSIS went beyond its powers in promulgating the Revised IRR when it excluded secondary beneficiaries from the list of recipients of survivorship benefits in cases where the deceased member had rendered at least three but less than 15 years in service.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> the GSIS asserts that the Decision of its BOT had already become final and executory because Petronilo failed to timely file his Rule 43 petition for review within the original period of extension that he prayed for. It emphasizes that in Petronilo's motion for extension of time filed with the CA, he requested a period of only until January 18, 2020, a Saturday, within which to file the Petition for Review. However, on January 20, 2020, a Monday, Petronilo filed a second motion for extension of time instead of the Rule 43 petition.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> It points out that a second motion for extension of time is allowable only for the most compelling reason, which Petronilo failed to adduce.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>The GSIS adds that in Petronilo's second motion for extension of time, he requested a period of until February 2, 2020, within which to file the proper pleading before the CA. However, it was only February 3, 2020, when Petronilo's Rule 43 petition was filed with the CA. The GSIS thus insists that the Decision of its BOT should already be deemed final.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>On the merits, the GSIS argues that Republic Act No. 8291 grants it the power to promulgate rules and regulations to implement the law and to maintain and preserve the Fund. In accordance with the power conferred upon it by the enabling statute, the GSIS promulgated the Revised IRR of Republic Act No. 8291, which categorically states that if a member has rendered less than 15 years of government service, only the primary beneficiaries are entitled to survivorship benefits. Given that Petronilo is not a primary but only a secondary beneficiary of Cristie, he is not entitled to survivorship benefits.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>The GSIS asserts that the pertinent provisions of the Revised IRR of Republic Act No. 8291 were intended to address the unequal situation under the law: while Section 13 requires a member to render at least 15 years of service to be entitled to pension benefits, Sections 20 and 21 allow survivorship pension to be paid as long as the deceased member had rendered at least three years of government service and paid 36 monthly contributions within the five-year period immediately preceding their death, or a total of 180 monthly contributions. The GSIS insists that the three-year government service requirement for survivorship benefits under Section 21 is unfair and disadvantageous to other members, who are required to render at least 15 years of government service before qualifying for pension.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>In his Reply,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Petronilo asserts that his Rule 43 petition for review before the CA was timely filed within the period of extension that he prayed for. He explains that his second motion for extension of time was justified because he needed more time to secure certified true copies of the record of the proceedings before the GSIS which had to be attached to the petition.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>On the merits, Petronilo reiterates that the Revised IRR of Republic Act No. 8291 was promulgated<i> ultra vires</i> by the GSIS. He argues that the GSIS' rule-making power does not grant it the authority to amend Republic Act No. 8291.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br><center><i>The Issues</i> </center><br>The issues before the Court are: (1) whether the Rule 43 petition for review before the CA was timely filed by Petronilo; and (2) whether the CA erred in affirming the denial of Petronilo's application for survivorship benefits.<br><br><center><i>The Ruling of the Court </i> </center><br>The Petition is granted.<br><br>The GSIS exceeded its authority in promulgating the Revised IRR of Republic Act No. 8291 by removing the right of secondary beneficiaries to receive survivorship benefits under the conditions expressly recognized by the law.<br><br>On the procedural matters before the Court, there is no merit in the contention of the GSIS that Petronilo's Rule 43 petition for review before the CA was filed out of time. In the first place, the GSIS did not raise this objection before the CA. Nowhere in its Comment<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> on the Rule 43 petition did the GSIS aver that the pleading was filed beyond the reglementary period. As such, the objection must be deemed waived,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> especially considering that the CA had already ruled on the petition's merits.<br><br>At any rate, contrary to the GSIS' assertions, Petronilo filed his Rule 43 petition<i> within</i> the extended period that he prayed for. In his second motion for extension of time, Petronilo requested a period of until February 2, 2020, a Sunday, within which to file the proper pleading. As such, the Rule 43 petition was<i> timely</i> filed on February 3, 2020, the next working day. Verily, pursuant to Rule 22, Section 1<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> of the Rules of Court, when the last day to file a pleading or a motion falls on a Saturday, a Sunday, or a legal holiday, the filing may be made on the next working day.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>Furthermore, as explained by Petronilo, he requested an additional period of time to secure certified true copies of the material portions of the records of the proceedings of the GSIS pertinent to his claims which must be attached to the petition pursuant to Rule 43, Section 6(c)<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> of the Rules of Court.<br><br>To be sure, the grant or denial of a motion for extension of time is addressed to the sound discretion of the court.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> The CA evidently considered the difficulty in securing the required certified true copies a compelling reason, as it resolved Petronilo's petition on the merits without dismissing it for having been filed out of time.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> At the very least, it is implied from the CA's conduct that any procedural defect attendant to the Rule 43 petition did <i>not</i> warrant its outright dismissal.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> In the absence of grave abuse of discretion on the part of the CA, which the GSIS failed to establish, the Court has no basis to conclude that the CA was proscribed from taking cognizance of Petronilo's Rule 43 petition.<br><br>Having resolved the procedural matters, the Court now proceeds to rule on the merits of the case.<br><br>The material facts are undisputed by the parties: (1) Cristie died on October 24, 2017; (2) Cristie was a public school teacher at Camp Crame Elementary School at the time of her death; (3) Cristie's total length of government service is 13.08351 years; (4) Cristie had paid premiums to GSIS for 12.1818955 years; and (5) Petronilo is Cristie's father and sole heir.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Petronilo applied for survivorship benefits from the GSIS as Cristie's secondary beneficiary under Section 21 in relation to Section 2(h) of Republic Act No. 8291, but the GSIS denied his claim based on Section 24.2.2 of the Revised IRR of Republic Act No. 8291.<br><br>As further discussed below, Section 24.2.2 of the Revised IRR of Republic Act No. 8291 is void for being<i> ultra vires</i>, insofar as it excludes secondary beneficiaries as recipients of survivorship benefits in cases of death of a GSIS member who has rendered at least three but less than 15 years of service. Consequently, the GSIS cannot apply the said provision in denying Petronilo's claim for survivorship benefits.<br><br>There is no question that under Section 53<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> of Republic Act No. 8291, the GSIS was granted the power to promulgate rules and regulations to implement the said law. However, it is well-established that when an administrative agency is statutorily conferred with the authority to issue subordinate legislation, such power must be exercised within the confines of the enabling statute and the Constitution.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> The power does not grant the administrative agency the authority to abridge, enlarge, supplant, or modify the enabling statute, for such is the sole function of the Legislature.<br><br>As explained in<i> Executive Secretary v. Southwing Heavy Industries, Inc.</i>:<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><blockquote>To be valid, an administrative issuance must not be<i> ultra vires</i> or beyond the limits of the authority conferred.<i> It must not supplant or modify the Constitution, its enabling statute and other existing laws, for such is the sole function of the legislature</i> which the other branches of the government cannot usurp. As held in<i> United BF Homeowner's Association v. BF Homes, Inc.</i>:<br><blockquote>The rule-making power of a public administrative body is a delegated legislative power,<i> which it may not use either to abridge the authority given it by Congress or the Constitution or to enlarge its power beyond the scope intended</i>. Constitutional and statutory provisions control what rules and regulations may be promulgated by such a body, as well as with respect to what fields are subject to regulation by it.<i> It may not make rules and regulations which are inconsistent with the provisions of the Constitution or a statute</i>, particularly the statute it is administering or which created it, or which are in derogation of, or defeat, the purpose of a statute.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> (Italics supplied; emphases omitted) </blockquote> </blockquote>Thus, rules promulgated by an administrative agency must always be consistent with the law they intend to carry out.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> A regulation that modifies an existing law by abridging, impairing, or enlarging its terms, or by imposing additional requirements that are not contemplated by the statute, is void not only for being<i> ultra vires</i> but also for being unreasonable, and must be struck down by the courts.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>In this regard, Section 20 of Republic Act No. 8291 grants survivorship benefits to the beneficiaries of a deceased member of the GSIS, as follows:<br><blockquote>SECTION 20.<i> Survivorship Benefits</i>. — When a member or pensioner dies, the beneficiaries shall be entitled to survivorship benefits provided in Sections 21 and 22 hereunder subject to the conditions therein provided for. The survivorship pension shall consist of:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">the basic survivorship pension which is fifty percent (50%) of the basic monthly pension; and </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY">the dependent children's pension not exceeding fifty percent (50%) of the basic monthly pension. </div></td> </tr> </tbody></table></blockquote>Primary and secondary beneficiaries are defined in Section 2, paragraphs (g) and (h) in relation to paragraph (f) of Republic Act No. 8291, to wit:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(f) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">Dependents — Dependents shall be the following: (a) the legitimate spouse dependent for support upon the member or pensioner; (b) the legitimate, legitimated, legally adopted child, including the illegitimate child, who is unmarried, not gainfully employed, not over the age of majority, or is over the age of majority but incapacitated and incapable of self-support due to a mental or physical defect acquired prior to age of majority; and (c) <i> the parents dependent upon the member for support</i>; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(g) </div></td> <td valign="top"> <div align="JUSTIFY">Primary beneficiaries — The legal dependent spouse until he/she remarries and the dependent children; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(h) </div></td> <td valign="top"> <div align="JUSTIFY">Secondary beneficiaries — The <i> dependent parents</i> and, subject to the restrictions on dependent children, the legitimate descendants; (Emphasis supplied) </div></td> </tr> </tbody></table></blockquote>Section 21 of Republic Act No. 8291 governs the entitlements of primary and secondary beneficiaries to survivorship benefits when a GSIS member dies in active service. Relatedly, Section 24.2 of the Revised IRR of Republic Act No. 8291 purports to implement Section 21 of the law, as follows:<br><br><table width="100%" border="1" cellpadding="5" cellspacing="0"> <tbody><tr> <td width="50%" valign="top"> <div align="CENTER"><b>R.A. No. 8291, <br> Section 21</b> </div></td> <td width="50%" valign="top"> <div align="CENTER"><b>Revised IRR of R.A. No. 8291, <br> Section 24.2</b> </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">SECTION 21. <i> Death of a Member. —</i>&nbsp;<blockquote>(a) Upon the death of a member, the <b> primary beneficiaries</b> shall be entitled to:&nbsp;<br><br>(1) survivorship pension: <i> Provided</i>, That the&nbsp;&nbsp;deceased:&nbsp;&nbsp;<blockquote>(i) was in the service at the time of his&nbsp; death; or&nbsp;&nbsp;<br><br>(ii) if separated from the service, has at&nbsp; least three (3) years of service at the time&nbsp; of his death and has paid thirty-six&nbsp; (36) monthly contributions within the&nbsp; five-year period immediately preceding&nbsp; his death; or has paid a total of at least&nbsp; one hundred eighty (180) monthly&nbsp; contributions prior to his death; or&nbsp;&nbsp;</blockquote>(2) the survivorship pension plus a cash&nbsp; payment equivalent to one hundred percent&nbsp; (100%) of his average monthly compensation for every year of service: <i> Provided,</i> That the&nbsp; deceased was in the service at the time of his&nbsp; death with at least three (3) years of service; or&nbsp; &nbsp;<br><br>(3) a cash payment equivalent to one hundred&nbsp; percent (100%) of his average monthly&nbsp; compensation for each year of service he paid&nbsp; contributions, but not less than Twelve thousand pesos (P12,000.00): <i> Provided,</i> That&nbsp; the deceased has rendered at least three&nbsp; (3) years of service prior to his death but does&nbsp; not qualify for the benefits under the item&nbsp; (1) or (2) of this paragraph.&nbsp;&nbsp;<br><br>. . . .<br></blockquote></div><div align="JUSTIFY"><br>(c) In the absence of primary beneficiaries, the&nbsp; <b>secondary beneficiaries</b> shall be entitled to:&nbsp;<blockquote>(1) the cash payment equivalent to one&nbsp; hundred percent (100%) of his average&nbsp; monthly compensation for each year of service&nbsp; he paid contributions, but not less than Twelve thousand pesos (P12,000): <b><i> Provided, </i> That the&nbsp; member is in the service at the time of his&nbsp; death and has at least three (3) years of service;</b> or&nbsp;<br><br>&nbsp;(2) in the absence of secondary beneficiaries,&nbsp; the benefits under this paragraph shall be paid&nbsp; to his legal heirs.&nbsp;&nbsp;</blockquote>. . . . (Emphasis supplied) </div></td> <td valign="top"> <div align="JUSTIFY">24.2. Survivorship Benefits of Members in Active Service.&nbsp;</div><div align="JUSTIFY"><br></div><div align="JUSTIFY">24.2.1. If at the time of death, a member was in the service and has rendered <b>at least fifteen (15) years of creditable service:<br><br></b><div align="center">. . .<b>&nbsp;</b></div></div><div align="JUSTIFY"><b><br></b></div><div align="JUSTIFY"><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="TOP"> <td width="5%"><div align="JUSTIFY"></div><br></td> <td width="5%"><div align="JUSTIFY">c.</div></td> <td width="95%"><div align="JUSTIFY">his primary beneficiaries shall receive the&nbsp; survivorship pension and cash payment&nbsp; equivalent to 18 x the [Basic Monthly&nbsp; Pension (BMP)]; or</div></td> </tr> <tr valign="TOP"> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY"></div><br></td> </tr> <tr valign="TOP"> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY">d.</div></td> <td> <div align="JUSTIFY">in the absence of primary beneficiaries, his&nbsp; secondary beneficiaries shall receive the&nbsp; cash payment equivalent to 18 x the BMP;&nbsp; or</div></td> </tr> <tr valign="TOP"> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY"></div><br></td> </tr> <tr valign="TOP"> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY">e.</div></td> <td> <div align="JUSTIFY">in the absence of secondary beneficiaries,&nbsp; the legal heirs shall receive the cash&nbsp; payment equivalent to 18 x the BMP.&nbsp;&nbsp;</div></td> </tr> </tbody></table></div>&nbsp; &nbsp;<div align="JUSTIFY">24.2.2. If at the time of death, the member was in the service <b> with less than fifteen (15) years of</b>&nbsp; <b>creditable service; his primary beneficiaries</b>&nbsp; shall receive the cash payment equivalent to 100%&nbsp; of the [Average Monthly Compensation (AMC)]&nbsp; for every year of creditable service. (Emphasis&nbsp; supplied)&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</div></td> </tr> </tbody></table><br>It is clear from Section 21(c), in relation to Section 2(f) and (h) of Republic Act No. 8291, that a secondary beneficiary is entitled to survivorship benefits provided that: (1) there is no primary beneficiary; (2) the secondary beneficiary meets the dependency requisites under the law; (3) the member was in government service at the time of his or her death; and (4) the member has rendered<i> at least three years of service</i>. In contrast, Section 24.2.2 of the Revised IRR restricts the entitlement of secondary beneficiaries to survivorship benefits to cases where the deceased member has rendered <i>at least 15 years of creditable service</i>.<br><br>Evidently, the Revised IRR of Republic Act No. 8291 impaired Section 21 (c) of the law by failing to recognize the entitlement to survivorship benefits of secondary beneficiaries of GSIS members who died in active service with at least three years of creditable service. That is, while Section 21(c) of Republic Act No. 8291 grants survivorship benefits to secondary beneficiaries under such conditions, Section 24.2.2 of the Revised IRR imposes an additional requirement of least 15 years of creditable service.<br><br>Indubitably, Section 24.2.2 of the Revised IRR of Republic Act No. 8291 is inconsistent with and unduly restricts Section 21(c) of Republic Act No. 8291. Rather than faithfully implementing the enabling statute, it imposes additional requirements on secondary beneficiaries to qualify for survivorship benefits that are not required by law. Accordingly, Section 24.2.2 of the Revised IRR of Republic Act No. 8291 must be struck down for being <i>ultra vires</i>, insofar as it is inconsistent with the enabling statute.<br><br>The GSIS argues that it properly restricted the right of secondary beneficiaries to survivorship benefits only to cases where the deceased member had rendered at least 15 years of government service to "equalize" their situation with other members who could receive their monthly pension only if they have rendered at least 15 years of service. Supposedly, its action is consistent with Section 34<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> of Republic Act No. 8291, which requires the GSIS to administer the Fund and to maintain the required reserves in the law.<br><br>However noble the intentions of GSIS may be, it simply cannot defeat or impair the relevant provisions of Republic Act No. 8291 through a mere administrative issuance. By promulgating Section 24.2.2 of the Revised IRR of Republic Act No. 8291, the GSIS effectively usurped the legislative power that is exclusively vested in the Congress.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Its conduct also runs counter to the fundamental principle that social security statutes, such as Republic Act No. 8291, must be liberally construed in favor of the employee and their beneficiaries precisely because such laws are designed to promote social justice and to protect the workers and their families from contingencies, such as disability and death, that result in loss of income or financial burden.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> If the GSIS sincerely believes that the provisions of Republic Act No. 8291 on survivorship benefits need to be amended or modified, its remedy is to call the attention of the Congress for the latter to act upon the matter.<br><br>Besides, Republic Act No. 8291 itself creates distinctions that render Section 24.2.2 of the Revised IRR<i> unreasonable</i>. Unlike the basic monthly pension due the retired members of the GSIS under Sections 9<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> and 13<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> of the law, the survivorship pension amounts to only 50% or one-half of the basic monthly pension. The survivorship benefits under Section 21(a)(3) and (c), in the form of cash payments, due the beneficiaries of members who have rendered at least three years of government service are likewise<i> pro-rated</i> to each year of service for which the member paid contributions.<br><br>Moreover, it has been held that survivorship benefits are akin to permanent disability benefits because "there is no more permanent or total physical disability than death."<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Notably, Section 16(b) of Republic Act No. 8291 grants to a member who has rendered at least three years of service at the time of permanent total disability benefits in the form of "cash payment equivalent to 100% of [their] average monthly compensation for each year of service [of their] paid contributions, but not less than [PHP 12,000.00] which should have been [their] separation benefit." Section 21(a)(3) and (c)(1) of Republic Act No. 8291 thus provide similar survivorship benefits to the beneficiaries of a deceased member who has rendered at least three years of service.<br><br>Given this statutory framework, there is no reason for the GSIS to unilaterally deny survivorship benefits to the secondary beneficiaries of a deceased member who has rendered at least three but less than 15 years of service for the purpose of "equalizing" their situation with old-age pensioners. The law itself already creates distinctions between beneficiaries who are entitled to survivorship benefits in the form of survivorship<i> pension</i>, on the one hand, and those who are entitled to<i> cash payment equivalent</i>, on the other. To iterate, any additional qualifications or requisites for survivorship benefits under the law is a matter to be decided by the Congress, not by the GSIS.<br><br>It must be emphasized that in a social insurance fund where employee participation is mandated by law, the benefits provided thereby that have accrued are considered as<i> property</i> within the contemplation of the Due Process Clause. The benefits are considered as part of the compensation of the member-employee. Thus, in<i> Government Service Insurance System v. Montesclaros</i>,<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> the survivorship benefit due a qualified beneficiary under the GSIS law was deemed a vested property right that is protected by the Due Process Clause:<br><blockquote>Considering the mandatory salary deductions from the government employee, the government pensions do not constitute mere gratuity but form part of compensation.<br><br><i>In a pension plan where employee participation is mandatory, the prevailing view is that employees have contractual or vested rights in the pension where the pension is part of the terms of employment</i>. The reason for providing retirement benefits is to compensate service to the government. Retirement benefits to government employees are part of emolument to encourage and retain qualified employees in the government service. Retirement benefits to government employees reward them for giving the best years of their lives in the service of their country.<br><br><i>Thus, where the employee retires and meets the eligibility requirements, he acquires a vested right to benefits that is protected by the due process clause</i>. Retirees enjoy a protected property interest whenever they acquire a right to immediate payment under pre-existing law. Thus, a pensioner acquires a vested right to benefits that have become due as provided under the terms of the public employees' pension statute. No law can deprive such person of his pension rights without due process of law, that is, without notice and opportunity to be heard.<br><br><i>In addition to retirement and disability benefits, PD 1146 also provides for benefits to survivors of deceased government employees and pensioners</i>. Under PD 1146, the dependent spouse is one of the beneficiaries of survivorship benefits.<i> A widow's right to receive pension following the demise of her husband is also part of the husband's contractual compensation</i>.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> (Italics supplied) </blockquote>Section 21 of Republic Act No. 8291 precisely recognizes that secondary beneficiaries, such as Petronilo, may be entitled to survivorship benefits under the conditions set forth therein. Once due, the member and their appropriate beneficiaries acquire a vested right to such benefits. Consequently, the GSIS cannot defeat or rescind the benefits through a mere administrative issuance.<br><br>As applied to the present case, Cristie, a government employee, died in active service after rendering 13 years of creditable service. She died without a husband or child and her father, Petronilo, is her sole heir. Clearly, Cristie had rendered at least three years of government service. Consequently, Petronilo, as a dependent parent of Cristie, may qualify as a recipient of survivorship benefits under Section 21(c)(1) of Republic Act No. 8291, <i>provided</i> that he also meets the other qualifications required by law, i.e., Section 2(f) and (h) of Republic Act No. 8291 and Section 24.5<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> of the Revised IRR of Republic Act No. 8291.<br><br>Admittedly, the records before the Court are insufficient to determine whether Petronilo meets the other requisites to receive survivorship benefits as a dependent parent of Cristie under Section 21(c)(1) of Republic Act No. 8291. Still, there is no question that Petronilo is the sole legal heir of Cristie, who died single and without issue. As such, Petronilo qualifies as a recipient of the benefits in question under Section 21(c)(2) of the statute, which reads:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(c) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">In the absence of primary beneficiaries, the secondary beneficiaries shall be entitled to: </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td width="5%" valign="top"> <div align="JUSTIFY"></div><br></td> <td width="90%" valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(1) </div></td> <td valign="top"> <div align="JUSTIFY">the cash payment equivalent to one hundred percent (100%) of his average monthly compensation for each year of service he paid contributions, but not less than Twelve thousand pesos ([PHP] 12,000): Provided, That the member is in the service at the time of his death and has at least three (3) years of service; or </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY"><i>in the absence of secondary beneficiaries, the benefits under this paragraph shall be paid to his legal heirs</i>. (Emphasis supplied) </div></td> </tr> </tbody></table></blockquote>Given that Petronilo's status as the sole legal heir of Cristie is not disputed by the GSIS, he may receive survivorship benefits under Section 21(c)(2) of Republic Act No. 8291. The case should therefore be remanded to the GSIS Committee on Claims to compute the survivorship benefits due to Petronilo in accordance with the applicable law and regulation.<br><br><b>ACCORDINGLY</b>, the Petition for Review on<i> Certiorari</i> is <b>GRANTED</b>. The Decision dated January 25, 2023, and the Resolution dated May 24, 2023, of the Court of Appeals in CA-G.R. SP No. 163916 are <b>SET ASIDE</b>. Section 24.2.2 of the Implementing Rules and Regulations of Republic Act No. 8291 is<b> DECLARED<i> ULTRA VIRES</i></b> and the Government Service Insurance System is<b> ENJOINED</b> from implementing it insofar as it contradicts Section 21(c) of Republic Act No. 8291.<br><br>Petitioner Petronilo B. Laroco may claim survivorship benefits under Section 21(c)(2) of Republic Act No. 8291. The case is<b> REMANDED</b> to the Committee on Claims of the Government Service Insurance System to determine, in accordance with this Decision, the amount of survivorship benefits payable to Petronilo B. Laroco in accordance with the applicable law and regulation.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa Acting C.J. (Chairperson), Gaerlan, Dimaampao,</i> and <i>Singh, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 11-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 33-42. Penned by Associate Justice Louis P. Acosta and concurred in by Associate Justices Ramon A. Cruz and Jaime Fortunato A. Caringal of the Ninth (9<sup>th</sup>) Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 44-46. Penned by Associate Justice Louis P. Acosta and concurred in by Associate Justices Ramon A. Cruz and Jaime Fortunato A. Caringal of the Ninth (9<sup>th</sup>) Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 64-73. Penned by Hearing Officer John Andrew R. Salazar.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 78-79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 101-104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 119, Pre-Hearing Order dated November 29, 2018, Annex "K" of the Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 13, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> 24.2. Survivorship Benefits of Members in Active Service.<br><br>24.2.1. If at the time of death, a member was in the service and has rendered at least fifteen (15) years of creditable service:<br><br><table width="100%"  ="" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="TOP"> <td width="5%"><div align="JUSTIFY"></div><br></td> <td width="5%"><div align="JUSTIFY">c. </div></td> <td width="95%"><div align="JUSTIFY">his primary beneficiaries shall receive the survivorship pension and cash payment equivalent to 18 x the BMP; or</div></td> </tr> <tr valign="TOP"> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY">d.</div></td> <td> <div align="JUSTIFY">in the absence of primary beneficiaries, his secondary beneficiaries shall receive the cash payment equivalent to 18 x the BMP; or</div></td> </tr> <tr valign="TOP"> <td><div align="JUSTIFY"></div><br></td> <td><div align="JUSTIFY">e.</div></td> <td> <div align="JUSTIFY">in the absence of secondary beneficiaries, the legal heirs shall receive the cash payment equivalent to 18 x the BMP.</div></td> </tr> </tbody></table><br>24.2.2. If at the time of death, the member was in the service with less than fifteen (15) years of creditable service; his primary beneficiaries shall receive the cash payment equivalent to 100% of the AMC for every year of creditable service.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> An Act Amending Presidential Decree No. 1146, As Amended, Expanding and Increasing the Coverage and Benefits of the Government Insurance System, Instituting Reforms Therein and for Other Purposes, Otherwise known as "The Government Service Insurance System Act of 1997." Approved on May 30, 1997.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Rollo</i>, pp. 103-104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 106-110.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> SECTION 21. <i>Death of a Member</i>. — (a) Upon the death of a member, the primary beneficiaries shall be entitled to:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY"></div><br></td> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">survivorship pension: <i> Provided,</i> That the deceased: </div></td> </tr> <tr> <td valign="top"><div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td width="5%" valign="top"> <div align="JUSTIFY">(i) </div></td> <td width="85%" valign="top"> <div align="JUSTIFY">was in the service at the time of his death; or </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(ii) </div></td> <td valign="top"> <div align="JUSTIFY">if separated from the service, has at least three (3) years of service at the time of his death and has paid thirty-six (36) monthly contributions within the five-year period immediately preceding his death; or has paid a total of at least one hundred eighty (180) monthly contributions prior to his death; or </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">the survivorship pension plus a cash payment equivalent to one hundred percent (100%) of his average monthly compensation for every year of service: <i> Provided</i>, That the deceased was in the service at the time of his death with at least three (3) years of service; or </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(3) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">a cash payment equivalent to one hundred percent (100%) of his average monthly compensation for each year of service he paid contributions, but not less than Twelve thousand pesos (P12,000.00): <i> Provided,</i> That the deceased has rendered at least three (3) years of service prior to his death but does not qualify for the benefits under the item (1) or (2) of this paragraph. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td colspan="3" valign="top"> <div align="JUSTIFY">The survivorship pension shall be paid as follows: </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(1) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">when the dependent spouse is the only survivor, he/she shall receive the basic survivorship pension for life or until he/she remarries; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">when only dependent children are the survivors, they shall be entitled to the basic survivorship pension for as long as they are qualified, plus the dependent children's pension equivalent to ten percent (10%) of the basic monthly pension for every dependent child not exceeding five (5), counted from the youngest and without substitution; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(3) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">when the survivors are the dependent spouse and the dependent children, the dependent spouse shall receive the basic survivorship pension for life or until he/she remarries, and the dependent children shall receive the dependent children's pension mentioned in the immediately preceding paragraph (2) hereof. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(c) </div></td> <td colspan="3" valign="top"> <div align="JUSTIFY">In the absence of primary beneficiaries, the secondary beneficiaries shall be entitled to: </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY">(1) </div></td> <td colspan="2" valign="top"> <div align="JUSTIFY">the cash payment equivalent to one hundred percent (100%) of his average monthly compensation for each year of service he paid contributions, but not less than Twelve thousand pesos (P12,000): <i> Provided,</i> That the member is in the service at the time of his death and has at least three (3) years of service; or</div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top">(2)</td> <td colspan="2" valign="top"> in the absence of secondary beneficiaries, the benefits under this paragraph shall be paid to his legal heirs. </td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(d) </div></td> <td colspan="3" valign="top"> <div align="JUSTIFY">For purposes of the survivorship benefits, legitimate children shall include legally adopted and legitimate children. </div></td> </tr> </tbody></table></blockquote><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Rollo</i>, pp. 107-109.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> SECTION 41. <i>Powers and Functions of the GSIS</i>. — The GSIS shall exercise the following powers and functions:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">to formulate, adopt, amend and/or rescind such rules and regulations as may be necessary to carry out the provisions and purposes of this Act, as well as the effective exercise of the powers and functions, and the discharge of duties and responsibilities of the GSIS, its officers and employees;</div></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">. . . . </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(e) </div></td> <td valign="top"> <div align="JUSTIFY">to conduct continuing actuarial and statistical studies and valuations to determine the financial condition of the GSIS and taking into consideration such studies and valuations and the limitations herein provided, re-adjust the benefits, contributions, premium rates. Interest rates or the allocation or re-allocation of the funds to the contingencies covered; </div></td> </tr> </tbody></table></blockquote><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> SECTION 43. <i>Powers and Functions of the Board of Trustees</i>. — The Board of Trustees shall have the following powers and functions:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">to formulate the policies, guidelines and programs to effectively carry out the purposes of this Act; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(b) </div></td> <td valign="top"> <div align="JUSTIFY">to promulgate such rules and regulations as may be necessary or proper for the effective exercise of the powers and functions as well as the discharge of the duties and responsibilities of the GSIS, its officers and employees;</div></td> </tr> </tbody></table></blockquote><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Rollo</i>, pp. 67-71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 137-142.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 80-83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 47-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 40-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 186-193.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 44-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 11-28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 22-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 208-232.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 214-216.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 218.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 214-216.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 221-225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 227-229.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 236-246.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Id at 238-239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 240-243.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 146-161.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>See</i> <b>Compagnie Des Messageries Maritimes v. Court of Appeals</b>, 188 Phil. 51 (1980).<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> SECTION 1. <i>How to compute time</i>. — In computing any period of time prescribed or allowed by these Rules, or by order of the court, or by any applicable statute, the day of the act or event from which the designated period of time begins to run is to be excluded and the date of performance included. If the last day of the period, as thus computed, falls on a Saturday a Sunday, or a legal holiday in the place where the court sits, the time shall not run until the next working day.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>De la Cruz v. Maersk Filipinas Crewing, Inc.</b>, 574 Phil. 441, 448-449 (2008).<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> SECTION 6. <i>Contents of the petition</i>. — The petition for review shall . . . .(c) be accompanied by a clearly legible duplicate original or a certified true copy of the award, judgment, final order or resolution appealed from, together with certified true copies of such material portions of the record referred to therein and other supporting papers[.]<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Cañezo v. Rojas</b>, 563 Phil. 551, 562 (2007).<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>See</i> <i>id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>See</i> <b>Gallinero v. Torres</b>, 86 Phil. 607, 611 (1950); <b>Quisumbing v. Guison</b>, 76 Phil. 730, 733 (1946).<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, p. 119, Pre-Hearing Order.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> SECTION 53. <i>Implementing Rules and Regulations</i>. - The implementing rules and regulations to carry out the provisions of this Act shall be adopted and promulgated by the GSIS not later than ninety (90) days after the approval of this Act.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Pharmaceutical and Health Care Association v. Duque III</b>, 561 Phil. 386, 398 (2007).<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> 518 Phil. 103 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <b>Department of Finance v. Asia United Bank</b>, 917 Phil. 271, 282 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>.; <b>Department of Agrarian Reform v. Carriedo</b>, 778 Phil. 656, 679 (2016); <b>Lokin, Jr. v. Commission on Elections</b>, 635 Phil. 372, 393-393 (2010); <b>Commissioner of Internal Revenue v. Central Luzon Drug Corp.</b>, 496 Phil. 307, 333 (2005); <b>Villacorta v. Bernardo</b>, 227 Phil. 437, 439-440 (1986).<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> SECTION 34. <i>Funds</i>. - All contributions payable under Section 5 of this Act together with the earnings and accruals thereon shall constitute the GSIS Social Insurance Fund. The said fund shall be used to finance the benefits administered by the GSIS under this Act. In addition, the GSIS shall administer the optional insurance fund for the insurance coverage described in Section 26 hereof, the Employees' Compensation Insurance Fund created under P.D. 626, as amended, General Insurance Fund created under Act No. 656, as amended, and such other special funds existing or that may be created for special groups or persons rendering services to the government. The GSIS shall maintain the required reserves to guarantee the fulfillment of its obligations under this Act.<br><br>The funds of the GSIS shall not be used for purposes other than what are provided for under this Act. Moreover, no portion of the funds of the GSIS or income thereof shall accrue to the General Fund of the national government and its political subdivisions, instrumentalities and other agencies including government-owned and controlled corporations except as may be allowed under this Act.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>See</i> <b>Manganip v. Republic, G.R. Nos. 222312, et al.</b>, May 20, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Dolera v. Social Security System</b>, 948 Phil. 642, 648 (2023); <b>Government Service Insurance System v. Raoet</b>, 623 Phil. 690, 705 (2009); <b>Mesa v. Social Security System</b>, 602 Phil. 597, 601 (2009).<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> SECTION 9. Computation of the Basic Monthly Pension. — (a) the basic monthly pension is equal to:<br><blockquote>1) thirty-seven and one-half percent (37.5%) of the revalued average monthly compensation; plus<br>2) two and one-half percent (2.5%) of said revalued average monthly compensation for each year of service in excess of fifteen (15) years: Provided, That the basic monthly pension shall not exceed ninety percent (90%) of the average monthly compensation.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> SECTION 13. Retirement Benefits. — (a) Retirement benefit shall be:<br><blockquote>(1) the lump sum payment as defined in this Act payable at the time of retirement plus an old-age pension benefit equal to the basic monthly pension payable monthly for life, starting upon expiration of the five-year (5) guaranteed period covered by the lump sum: or<br>(2) cash payment equivalent to eighteen (18) months of his basic monthly pension plus monthly pension for life payable immediately with no five-year (5) guarantee.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Re: Requests for Survivorship Pension Benefits of Spouses of Justices and Judges Who Died Prior to the Effectivity of Republic Act No. 9946</b>, 818 Phil. 344, 369 (2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> 478 Phil. 573 (2004).<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id</i>. at 583-584.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> 24.5. Conditions for Entitlement to Survivorship Benefits.<br><br>The primary and secondary beneficiaries, except dependent children, shall be entitled to applicable survivorship benefits, subject to the following:<ol type="a"><li>not engaged in any gainful occupation as defined in Sec. 2 (p) of RA 8291;<br></li><li>the surviving spouse and the deceased member were living together as husband and wife;<br></li><li>not gainfully engaged in a business or economic activity (self-employed);<br></li><li>employed/engaged in a business or economic activity but receiving income less than the minimum compensation of government employees;<br></li><li>not receiving any other pension from the GSIS or another local or foreign institution or organization; and<br></li><li>In the case of the dependent spouse, payment of the basic survivorship pension shall discontinue when he remarries, cohabits, or engages in common-law relationship.</li></ol>The foregoing conditions, except the last one, must be present immediately preceding the death of the member or pensioner.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

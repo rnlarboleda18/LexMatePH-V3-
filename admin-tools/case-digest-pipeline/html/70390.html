@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 276986 - REPUBLIC OF THE PHILIPPINES, PETITIONER, VS. MA. THERESA RAMORAN-WONG AND VINCENT L. WONG, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70390' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 276986, February 03, 2026 ]</H2>
+			<H3>REPUBLIC OF THE PHILIPPINES, PETITIONER, VS. MA. THERESA RAMORAN-WONG AND VINCENT L. WONG, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by the Republic of the Philippines (<b>Republic</b>), through the Office of the Solicitor General (<b>OSG</b>), assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 16, 2024, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated October 30, 2024, of the Court of Appeals (<b>CA</b>) in CA-G.R. CV No. 121444. The CA reversed the Decision,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated August 15, 2022, of Branch 19, Regional Trial Court, Bangui, Ilocos Norte (<b>RTC</b>), which found the marriage between Ma. Theresa Ramoran-Wong (<b>Theresa</b>) and Vincent L. Wong (<b>Vincent</b>) valid and subsisting, and instead, declared the marriage void <i>ab initio</i> on the ground of Vincent's psychological incapacity.<br><br><center><b><i>The Facts</i></b></center><br>Sometime in 2010, Theresa and Vincent met at a birthday party of a common friend's child. Vincent obtained Theresa's cellphone number and began courting her, via text, the following day. Although, initially, Theresa did not take Vincent's advances seriously, his personal visits over time led to them officially becoming a couple after four months.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>After a month of dating, Theresa observed that Vincent lacked direction and ambition. He spent most of his time with peers, indulging in various vices. Despite having practical skills in electricity, he resisted seeking employment in his early twenties, claiming that work would interfere with his social life. Additionally, he began requesting money from Theresa to support his habits. Further, Vincent was highly jealous and possessive, forbidding Theresa from interacting with anyone, including female friends. He stalked her and threatened to harm anyone who interfered with their relationship.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Due to these reasons, Theresa attempted to break up with Vincent, but he threatened suicide if she ended the relationship. Fearing for her well-being, Theresa reluctantly stayed.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Theresa eventually came to love Vincent and became pregnant. Upon learning of the pregnancy, Vincent reacted angrily and insisted on abortion. Theresa opposed the idea and sought the support of their parents, who convinced Vincent to marry her. They were married on March 8, 2012.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Three weeks after the wedding, Vincent disappeared for three days. When he returned, Theresa asked where he had been and expressed concern for his well-being. Instead of apologizing, Vincent told her not to worry if he was with his friends, as they were more important than her. He further claimed that she had forced him into marriage and that she alone wanted the child.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Vincent's behavior persisted throughout the marriage. He frequently went on drinking binges with peers, leaving Theresa behind without financial support or knowledge of his whereabouts. When criticized, Vincent responded violently, even throwing kitchenware during one argument. His addictions to cockfighting, alcohol, and gambling further strained the relationship.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Three months into the marriage, Theresa discovered that Vincent had rekindled a relationship with his ex-girlfriend. When confronted, Vincent admitted the affair, claiming the ex-girlfriend provided joy that Theresa could not. This led to their separation, but with parental intervention, they reconciled, and Vincent promised to change.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Unfortunately, Vincent's behavior worsened, and he became increasingly erratic, violent, and emotionally detached from Theresa. Whenever she sought comfort during her pregnancy, he avoided her, dismissing her emotional needs as overdramatic. He also insulted her publicly, even in front of family members. Further, he would come home late, intoxicated, and force Theresa into violent and bizarre forms of sexual intercourse. When she resisted due to her pregnancy, he would threaten her with a <i>balisong</i> and claim he would rekindle his relationship with his ex-girlfriend. To avoid controversy and placate him, Theresa would relent. However, each time, she would be overwhelmed with intense pain, plagued by feelings of low self-esteem and demoralization.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Theresa hoped Vincent would change after the birth of their son, Gian Angelo Wong (<b>Gian</b>), but instead, he became more apathetic and indifferent, remaining insensitive to his family's needs. When she urged him to find work due to their growing financial pressures, he responded with anger. Consequently, Theresa took on the sole responsibility of supporting the family by securing a teaching job. However, she was forced to quit after Vincent publicly slapped her for refusing to give him money for his vices, subjecting her to public humiliation.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Aware of Gian's needs, which Vincent neglected, Theresa went to Hong Kong in 2013 to work as a domestic helper, leaving Gian in the care of her mother. During this time, Vincent neither visited Gian nor provided any support. Eventually, Theresa learned that Vincent was cohabiting with another woman and had fathered an illegitimate child.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>After Theresa returned to the Philippines following the end of her contract in Hong Kong, she and Vincent attempted to reconcile for the sake of Gian. However, their relationship deteriorated further as Vincent continued to subject Theresa to physical, psychological, and economic abuse.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Theresa, having recognized Vincent's inability to fulfill his essential marital duties and unable to tolerate his abuse any longer, filed a Petition for the Declaration of Nullity of their marriage on the basis of psychological incapacity under Article 36 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>On May 10, 2016, the RTC issued a summons, directing Vincent to file his Answer to Theresa's Petition. When Vincent failed to do so, the RTC issued an Order,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> dated August 15, 2016, directing the Provincial Prosecutor to conduct an investigation to determine whether collusion existed between the parties.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>In his Investigation Report/Compliance, dated August 25, 2016, Associate Provincial Prosecutor Sherwin Eria Domingo (<b>APP Domingo</b>) reported that, after careful investigation, he was satisfied that no collusion existed between the parties.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>The RTC subsequently issued a Pre-Trial Order, dated April 3, 2017, after which, the trial on the merits ensued.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>In support of her Petition, Theresa testified on her own behalf, and presented the testimonies and Judicial Affidavits of the following witnesses: (1) Agnes P. Ramoran (<b>Agnes</b>), Theresa's mother; (2) Vicente T, Wong (<b>Vicente</b>), Vincent's father; (3) Shella Wong Albano (<b>Shella</b>), Vincent's cousin; and (4) Dr. Gemma Marie Alhama (<b>Dr. Alhama</b>), the clinical psychologist who conducted the psychological assessment and evaluation on Theresa and Vincent.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Theresa also submitted the Psychological Evaluation Report issued by Dr. Alhama.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>In her testimony, Theresa described her marriage to Vincent as utterly futile, citing his lack of commitment and consistently neglectful, abusive, and destructive behavior. She accused him of physical, psychological, and economic violence, characterizing him as irresponsible, insensitive, unfaithful, and deceitful. Theresa stated that Vincent treated her as disposable property, discarded once used. He offered no moral, psychological, or emotional support to her as his wife or the mother of their child. Worse, he hurt her physically in front of her co-employees, parents, and neighbors.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Theresa's statements were corroborated by her mother, Agnes, who testified that Vincent physically abused Theresa, publicly humiliated her at work, and frequently demeaned her with expletives. Agnes further asserted that Vincent's vices rendered him incapable of fulfilling his responsibilities as a husband and father. Vicente and Shella also attributed the deterioration of the parties' marriage to Vincent's vices.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Further, Dr. Alhama, who administered six psychological tests to both Theresa and Vincent, concluded that they developed a severe Partner Relational Adjustment Disorder, primarily stemming from Vincent's Mixed Personality Disorder, marked by Histrionic, Narcissistic, and Antisocial traits. Vincent's maladaptive behavior extends beyond a mere personality disorder; it is a grave, incurable condition deeply rooted in his personality structure, rendering him incapable of fulfilling the essential obligations of marriage. Dr. Gemma's findings also indicate that Vincent's psychological incapacity existed at the time of the marriage's solemnization,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> shaped, in part, by the early separation of his parents.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> During her interview with Vincent, Dr. Alhama uncovered that his father, Vicente, had been both an irresponsible parent and an unfaithful spouse. Furthermore, it was revealed that Vincent's childhood was marked by significant economic hardship, largely due to Vicente's inability to adequately support the family.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>The trial concluded following the presentation of Theresa's witnesses. Neither Vincent nor the State offered evidence in opposition to the Petition.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>The RTC dismissed Theresa's Petition on the ground of insufficient evidence to establish Vincent's alleged psychological incapacity as a basis for the nullity of their marriage.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The dispositive portion of the RTC Decision reads:<blockquote>WHEREFORE, premises considered, the [P]etition is hereby dismissed for insufficiency of evidence to prove the alleged psychological incapacity as a ground for the nullity of marriage. Accordingly, the marriage between petitioner Ma. Theresa Ramoran-Wong and her husband, respondent Vincent L. Wong, shall remain to be valid and continue to subsist.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></blockquote>In dismissing Theresa's Petition, the RTC found the witnesses' testimonies to be incredible.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> According to the RTC:<blockquote>[T]he Court entertains doubt as to the credibility of the stories pertaining to the portrayed behavior of [Vincent] as a drunkard, womanizer, a gambler, a physical and sexual abuser, a drug addict[,] and a drug pusher. They appear to be exaggerated in casting all sorts of vices and bad behavior upon [Vincent] but none of which was substantiated by clear and convincing evidence other than the bare allegations of the persons who, obviously, are in favor of the dissolution of the couple's marriage.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> (Citations omitted)</blockquote>The RTC held that the actions imputed to Vincent were of a nature that could have been reported to the proper authorities. However, Theresa presented no supporting evidence, leading the RTC to conclude that they were nothing more than unsubstantiated allegations, undeserving of any credibility.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>However, even assuming the truth of Vincent's alleged behavior and vices, the RTC held that these still fell short of the threshold for psychological incapacity under the law. The RTC found no evidence linking these actions to a debilitating psychological condition, nor were they shown to be serious enough to prevent Vincent from fulfilling his essential marital obligations.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Theresa filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> assailing the RTC Decision, but it was denied for lack of merit in the Order,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> dated October 11, 2022.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Undeterred, Theresa filed a Notice of Appeal<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> on February 15, 2023, which was given due course by the RTC in its Order,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> dated February 21, 2023.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>On October 13, 2023, Theresa filed her Appellant's Brief,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> while the Republic, through the OSG, filed its Brief for the Oppositor-Appellee,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> on March 1, 2024.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br><center><b><i>The Ruling of the CA</i></b></center><br>In a Decision,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> dated May 16, 2024, the CA reversed the RTC Decision, and declared that the marriage between Theresa and Vincent is void <i>ab initio</i> on the ground of Vincent's psychological incapacity.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>The CA held that Theresa had established, through clear and convincing evidence, the requisites of incurability, gravity, and juridical antecedence, necessary for a finding of psychological incapacity.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>Unlike the RTC, the CA gave due weight to Dr. Alhama's Psychological Evaluation Report, which found Vincent to be suffering from Narcissistic, Antisocial, and Histrionic Personality Disorders.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> While acknowledging that expert opinion is not essential to establish psychological incapacity, the CA emphasized its value in enabling the court to render an intelligent and judicious ruling regarding the subject.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>The CA noted that Dr. Alhama conducted comprehensive psychological assessments and evaluations of both Theresa and Vincent. To further substantiate her findings, she also interviewed Agnes, Vicente, Shella, and Donnalyn Agustin Cristobal (<b>Donnalyn</b>), Vincent's first cousin.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The pertinent portions of Dr. Alhama's Psychological Evaluation Report provide:<blockquote>[Vincent] met the diagnostic criteria of three Personality Disorders:<br><br>1. Narcissistic Personality Disorder;<br><br>2. Antisocial Personality Disorder; and<br><br>3. Histrionic Personality Disorder[.]<br><br><u>Narcissistic Personality Disorder (NPD) is a personality disorder in which the individual is excessively preoccupied with self-centeredness, personal pleasure and adequacy, power[,] and vanity that incapacitates him to be cognitive of his relationship with people.</u><br><br>Basically, there are divisions of NPD, depending on the psychosocial factors influencing the people's reach and circumstance. In the case of [Vincent], he is an <b>unprincipled and violent type</b>[.] Under [t]his category, <u>[Vincent] has anti-social features. He is deficient of conscience, violent, amoral, deceptive, arrogant, and dominating.</u><br><br>. . . .<br><br>[Vincent] has a <b>grandiose sense of self-centeredness and self-importance</b>. Before and throughout their marriage, he wanted to be the center of everything. All he wanted was to satisfy his wants, vices, and caprices and was never cognizant of his role as a husband and a father. He unilaterally pursued his own brand of happiness, at the expense of his marriage. Moreover, such self-centeredness became the root of his malevolent character. Throughout their marriage, [Vincent] never minded the welfare of [his] wife and their child. He has a unilateral definition of a family — he, himself, being the only and most important element. His egoistic nature stunted the blossoming of a supposed productive family. He never cared to provide the psychological and moral needs of his family. He was very vocal that he is not committed with [Theresa] and their child. He never gave them love, support[,] and care[,] as [he] claims that his attachment to [Theresa] is a "mere accident."<br><br>. . . .<br><br>He has an <b>enduring pattern of social deviance</b>. First, he is an aggressive, undiplomatic[,] anti-social. It is a strand of suggesting dominant feature of malevolence. He is known to be a problem child ever since who chronically violates home-school rules and developed numerous vices as integral parts of his personality structure. Until he entered adulthood at the age of 18 and became violent with others with preponderant criminal tendencies. He is grossly involved in gambling, alcohol, and other forms of vices. He is a womanizer. Second, he has high criminal tendencies[,] especially threats, intimidation[,] and marital infidelity. Such anti-social pattern recurred during their marital consortium. He was so violent and displayed a consistent pattern of abuse, physical[,] and psychological, to his wife and his child.<br><br>. . . .<br><br>[Vincent's] NPD is co-axial with <b>Antisocial Personality Disorder [APD]</b>.<br><br><b>Antisocial Personality Disorder</b> (APD) is a specified type of personality Disorder characterized by a pattern of disregard for, and violation of the rights of other people. It is characterized by a pervasive pattern of disregard for, and violation of the rights of others that begins in childhood or early adolescence and continues into adulthood. It is a very serious personality disorder and a chronic mental condition in which a person's way of thinking, perceiving situations, and relating to others are dysfunctional and destructive[.]<br><br>People who are suffering from APD tend to antagonize, manipulate[,] or treat others either harshly or with callous indifference. They may often be deceitful to others, violates the law, landing in frequent trouble, yet they show no guilt or remorse. They pathologically lie, behave violently or impulsively, and have problems with substance (drug and alcohol) use. These characteristics typically make people with antisocial personality disorder unable to fulfill responsibilities related to family, work[,] or school. They have an impoverished moral sense of conscience and may have a history of crime, legal problems, [and] impulsive and aggressive behavior.<br><br>. . . .<br><br>Prior and after the celebration of the marriage, [Vincent] meets the diagnostic criteria of a <b>profound and incurable strand of APD</b>.<br><br>[Vincent] exhibited <b>failure to conform to social norms with respect to lawful behaviors</b> when he inflicted physical, psychological[,] and economic abuses to his wife and their child, as narrated by [Theresa] and collateral informants. He beats, does not give any support, and patently shows his lack of empathy to his wife and their growing child. He has a high criminal tendency and propensity <b>before and after their marriage</b>, as he exuded juvenile delinquency and propensity of behavioral aberrations as early as his childhood. These acts are also clear manifestations of the diagnostic criteria of his <b>callous unconcern to the feelings of others about his actions</b>.<br><br>. . . .<br><br><u><b>[Vincent's] NPD and APD are also co-axial with his Histrionic Personality Disorder.</b></u><br><br><u><b>Histrionic Personality Disorder</b> (HPD) is a pervasive pattern of excessive emotionality and attention seeking, beginning by early adulthood and present in a variety of contexts[.]</u><br><br>In [Vincent's] case, the manifestations are [his]:<blockquote>1. violent behavior and is highly an attention-seeker;<br><br>2. interaction with others is oftenly characterized by inappropriate provocative behavior;<br><br>3. indications of self-harm;<br><br>4. displays rapidly shifting and shallow expressions of emotions; and<br><br>5. irrational thoughts, pathological lying[,] and apathy[.]<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Emphasis in the original)</blockquote></blockquote>By according due weight to Dr. Alhama's Psychological Evaluation Report and the testimonies of Theresa and the other witnesses she presented, the CA concluded that the requirement of juridical antecedence had been satisfactorily established. The CA held:<blockquote>As stated in the <i>Psychological Evaluation Report</i> detailing Vincent's background, his childhood development was gravely altered by the early separation of his parents. His father, Vicente, was described to be irresponsible, a drunkard, and was unfaithful to his mother[,] Manuela. While Vincent was still in elementary school, his parents separated because Vicente had a mistress, Cristina, who was the third degree cousin of Manuela. Vicente and Cristina lived together for 15 years in a house near the house of Vincent, Manuela, and his siblings. When Cristina died, Vicente reunited with his family. Vincent was already in college at that time. In his interview with Psychologist Alhama, Vincent stated that poverty beset their lives, especially since his father never minded them. He said that his mother Manuela strived for their living because Vicente was a drunkard and could not sustain much of their needs. His elder sibling resorted to marrying early because of extreme poverty and Vicente's maladaptive behaviors.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></blockquote>The CA also held that, based on the records, Vincent's personality disorders became apparent when he and Theresa were still just boyfriend and girlfriend. Vincent's behavior continued after they got married, and even after they had a son. The CA reasoned:<blockquote>From the [testimonies] of Theresa and her witnesses, and the assessment of Psychologist Alhama based on information gathered not only from Theresa, but also from Vincent himself and his father Vicente and cousin Shella who knew Vincent from his childhood, as well as a battery of tests conducted on both spouses, it was clearly and convincingly established that the manifestations of Vincent's personality disorders existed prior to and manifested during and throughout the marriage between the spouses. Contrary to the ruling of the trial court, the requisite of juridical antecedence was established in this case.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></blockquote>Furthermore, the CA ruled that the requisite of gravity was established. According to the CA, Vincent's personality disorders were so grave that they render him incapable of carrying out the ordinary duties in marriage. The CA also held that Vincent's personality disorders were incurable, in the legal sense, citing his lack of commitment, failure to fulfill his duties as husband and father, and his verbal, physical, emotional, and economic abuse of Theresa. This resulted in the inevitable and irreparable breakdown of the parties' marriage.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>The <i>fallo</i> of the CA Decision reads:<blockquote><b>WHEREFORE</b>, the appeal is hereby <b>GRANTED</b>. The <b><i>Decision</i></b>[,] dated 15 August 2022 of the Regional Trial Court of Bangui, Ilocos Norte, Branch 19 in Civil Case No. 2825-19 is <b>REVERSED</b> and <b>SET ASIDE</b>. The marriage between Ma. Theresa Ramoran-Wong and Vincent L. Wong is declared <b>VOID <i>AB INITIO</i></b> on the ground of the latter's psychological incapacity.&nbsp;<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> (Emphasis in the original)</blockquote>The Republic, through the OSG, filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> which the CA denied in its Resolution,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> dated October 30, 2024.<br><br>Hence, the current Petition, where the Republic, through the OSG, argues that Theresa and Vincent colluded to have their marriage declared null and void <i>ab initio</i> under Article 36 of the Family Code. The Republic noted that Vincent allowed his father, Vicente, to testify "for this problem to be solved."<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Further, the Republic emphasized that in his testimony, Vicente admitted that his son is very much willing to have his marriage annulled and is not opposing the Petition for Nullity of Marriage.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Considering that the evidence presented by Theresa was the result of collusion and fabrication with Vincent, the Republic contends that such evidence lacks probative value and cannot possibly overcome the strong presumption in favor of the validity of marriage.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> With a lack of credible evidence, the Republic contends that Theresa did not prove, by clear and convincing evidence, that Vincent suffers from psychological incapacity to perform his marital obligations.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br><center><b><i>The Issues</i></b></center><ol><li>Did collusion exist between Theresa and Vincent, thereby warranting the dismissal of the Petition for the Declaration of Nullity of Marriage?<br><br></li><li>Did the CA commit reversible error in ruling that Theresa had established, through clear and convincing evidence, the requisites of incurability, gravity, and juridical antecedence, necessary for a finding of psychological incapacity?</li></ol><center><b><i>The Ruling of the Court</i></b></center><br>The Petition is bereft of merit.<br><br>Preliminarily, the Court observes that the Petition suffers from several procedural infirmities.<br><br><i>The Verification attached to the Petition<br></i><i>lacks specific attestations</i><br><br>Rule 7, Section 4 of the Rules of Court, as amended, requires that the verification accompanying a pleading contain the following attestations:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">The allegations in the pleading are true and correct based on his personal knowledge, or based on authentic documents;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">The pleading is not filed to harass, cause unnecessary delay, or needlessly increase the cost of litigation; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify">The factual allegations therein have evidentiary support or, if specifically so identified, will likewise have evidentiary support after a reasonable opportunity for discovery.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup></div></td></tr></tbody></table></blockquote>A pleading required to be verified but supported by a verification based merely on "information and belief," or on "knowledge, information and belief," or otherwise lacking a proper verification, shall be treated as an unsigned pleading.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>In this case, the Court notes that the Verification attached to the Petition is defective for failure to include the attestations that the pleading is not filed to harass, cause unnecessary delay, or needlessly increase the cost of litigation, and that the factual allegations therein have evidentiary support.<br><br>Nevertheless, in <i>Quitalig v. Quitalig</i>,<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> the Court clarified that a defective verification does not <i>ipso facto</i> render a pleading fatally defective. The Court may direct the submission or correction of the verification, or proceed to act on the pleading, where the attending circumstances warrant a relaxation of the Rule in the interest of substantial justice.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> A verification is deemed to be in substantial compliance when it is executed by a party with sufficient knowledge to attest to the truth of the allegations, and when such allegations are made in good faith and are true and correct.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>Here, substantial compliance with the verification requirement is evident. The Verification attached to the Petition contains most of the attestations mandated by Rule 7, Section 4 of the Rules of Court, and sufficiently affirms the truthfulness of the allegations based on the authentic records. Moreover, there is no showing that the Petition was filed to harass, cause unnecessary delay, or needlessly increase the cost of litigation. Neither does the record suggest that the matters alleged therein were made in bad faith. In these circumstances, strict adherence to the formal requirements of verification may be dispensed with in favor of a just and equitable resolution of the case.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The Petition raises factual issues generally not cognizable under a Rule 45 Petition; however, it falls within an exception</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Further, the Court deems it worthy to note that the issue of whether psychological incapacity exists in a case for nullity of marriage depends largely on the facts of each case.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> Such factual issues, however, are generally beyond the province of the Court to review. It is not the function of the Court to analyze or weigh all over again the evidence or premises supportive of such factual determination.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>As an exception to the rule, questions of fact may be raised in a Rule 45 Petition if any of the following is present: (1) when there is grave abuse of discretion; (2) when the findings are grounded on speculations; (3) when the inference made is manifestly mistaken; (4) when the judgment of the CA is based on a misapprehension of facts; (5) when the factual findings are conflicting; (6) when the CA went beyond the issues of the case and its findings are contrary to the admissions of the parties; (7) when the CA overlooked undisputed facts which, if properly considered, would justify a different conclusion; (8) when the findings of the CA are contrary to those of the trial court; (9) when the facts set forth by the petitioner are not disputed by the respondent; and (10) when the findings of the CA are premised on the absence of evidence and are contradicted by the evidence on record.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>The Republic, through the OSG, contends that the circumstances of the case squarely fall within the scope of the fourth and eighth exceptions, i.e., that the judgment of the CA is based on a misapprehension of facts, and that the findings of the CA are contrary to those of the trial court.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>While the Court does not find the CA's judgment to be based on a misapprehension of facts, it notes that the CA's findings directly conflict with those of the RTC. Accordingly, the Court finds it proper to act on the Republic's Petition.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>There is no sufficient evidence to conclude that collusion existed between Theresa and Vincent</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Collusion refers to a secret agreement or cooperation, typically for illegal or deceitful purposes, including schemes to defraud or to obtain something prohibited by law.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br>In <i>De Ocampo v. Florenciano</i>,<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> the Court defined collusion, in the context of divorce or legal separation:<blockquote>Collusion...means the agreement between husband and wife for one of them to commit, or to appear to commit, or to be represented in court as having committed, a matrimonial offense, or to suppress evidence of a valid defense, for the purpose of enabling the other to obtain a divorce. This agreement, if not express, may be implied from the acts of the parties. It is a ground for denying the divorce.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> (Citations omitted)</blockquote>To guard against the possibility of collusion between parties, the Family Code mandates the participation of the State in cases of annulment or declaration of absolute nullity of marriage.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> Article 48 of the Family Code states:<blockquote>Article 48. In all cases of annulment or declaration of absolute nullity of marriage, the Court shall order the prosecuting attorney or fiscal assigned to it to appear on behalf of the State to take steps to prevent collusion between the parties and to take care that evidence is not fabricated or suppressed.<br><br>In the cases referred to in the preceding paragraph, no judgment shall be based upon a stipulation of facts or confession of judgment.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup></blockquote>State participation in annulment and nullity cases is further reinforced by A.M. No. 02-11-10-SC,<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> or the Rule on Declaration of Absolute Nullity of Void Marriages and Annulment of Voidable Marriages. The relevant portions of A.M. No. 02-11-10-SC provide:<blockquote><b>Section 8.</b> <i>Answer</i>. –<br><br>. . . .<br><br>(3) Where no answer is filed or if the answer does not tender an issue, the court shall order the public prosecutor to investigate whether collusion exists between the parties.<br><br><b>Section 9.</b> <i>Investigation report of public prosecutor</i>. –<br><br>(1) Within one month after receipt of the court order mentioned in paragraph (3) of Section 8 above, the public prosecutor shall submit a report to the court stating whether the parties are in collusion and serve copies thereof on the parties and their respective counsels, if any.<br><br>(2) If the public prosecutor finds that collusion exists, he shall state the on the finding of collusion within [10] days from receipt of a copy of a report[.] The court shall set the report for hearing and[,] [i]f convinced that the parties are in collusion, it shall dismiss the petition.<br><br>(3) If the public prosecutor reports that no collusion exists, the court shall set the case for pre-trial. It shall be the duty of the public prosecutor to appear for the State at the pre-trial.<br><br>. . . .<br><br><b>Section 13.</b> <i>Effect of failure to appear at the pre-trial</i>. –<br><br>(a) If the petitioner fails to appear personally, the case shall be dismissed unless his counsel or a duly authorized representative appears in court and proves a valid excuse for the non-appearance of the petitioner.<br><br>(b) If the respondent has filed his answer but fails to appear, the court shall proceed with the pre-trial and require the public prosecutor to investigate the non-appearance of the respondent and submit within [15] days thereafter a report to the court stating whether his non-appearance is due to any collusion between the parties. If there [i]s no collusion, the court shall require the public prosecutor to intervene for the State during the trial on the merits to prevent suppression or fabrication of evidence.<br><br><b>Section 15.</b> <i>Pre-trial Order</i>. –<br><br>. . . .<br><br>(c) The pre-trial order shall also contain a directive to the public prosecutor to appear for the State and take steps to prevent collusion between the parties at any stage of the proceedings and fabrication or suppression of evidence during the trial on the merits.</blockquote>Here, the Republic, through the OSG, posits that collusion existed between the parties due to Vincent's knowledge that his father had served as a witness to Theresa's Petition.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> The Republic quoted the Decision of the RTC in supporting its argument:<blockquote>[Vincent's] father and first cousin, Vicente Wong and Shella Wong Albano, respectively, also testified and similarly made a conclusion that [Vincent] is the one at fault with what happened to his marriage with [Theresa], attributing the same to his behavior and vices. Such a conclusion from the close relatives of [Vincent], who are expected to defend him, is unusual and calls for a strict scrutiny in order to dispel the possibility that it is done just to help the couple nullify their marriage. And this intention has been exposed by Vicente Wong's admission during cross-examination that he and his son talked together that he would testify in court regarding his marriage in order for his problem to be solved. This now clearly explains Vicente Wong and Shella Wong Albano's testimony putting the blame on respondent just so their marriage may be annulled. And this appears to be with the consent of [Vincent] himself in view of the admission that he is very much willing to have his marriage annulled and in fact, he is not opposing the petition filed by his wife for the annulment of their marriage. In view thereof, the court likewise finds their testimonies unworthy of full faith and credit.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup></blockquote>The Republic's argument is specious.<br><br>While the RTC declared that Vincent consented to his father and cousin serving as witnesses to Theresa's Petition, it did not categorically state that Vincent and Theresa colluded to have their marriage declared void <i>ab initio</i>. The Court emphasizes that the parties' mutual desire to void their marriage does not necessarily equate to collusion. A lack of objection is not the same as collusion. In the absence of any evidence that the parties conspired to fabricate a matrimonial offense or colluded to obtain a declaration of nullity without valid grounds, a finding of collusion is unwarranted. It should never be discounted that the severity of the spouses' marital conflicts is reason enough to encourage relatives from both sides to come forward and testify.<br><br>Further, Vincent's failure to file his answer and present his evidence does not automatically prove the existence of collusion.<br><br>In <i>Puyat v. Puyat</i>,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> the Court declared the marriage between the parties void <i>ab initio</i>, despite the respondent's failure to appear at her scheduled presentation of evidence. The Court held:<blockquote>Ma. Teresa's alleged failure to testify when she did not appear during her scheduled presentation of evidence should not be automatically equated to the presumption of collusion between the parties[.]<br><br>[M]a. Tereresa's failure to testify is not fatal nor does it undermine the entire proceedings as the petition may be validly resolved even without her testimony. It must be noted that in arriving at its decision, the RTC relied on other pieces of evidence that were presented. Ma. Teresa's counsel was also given the opportunity to cross-examine the witnesses Gil Miguel produced in court.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup></blockquote>In the same case, citing <i>Juliano-Llave v. Republic of the Philippines</i>,<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> the Court stated:<blockquote>In <i>Juliano-Llave v. Rep. of the Phils.</i>, the Court held that the respondent spouse was not deprived of her right to due process when judgment was issued without her answer and without having presented her evidence. The Court reasoned that "[h]er failure to file and answer and her refusal to present her evidence were attributable only to herself and she should not be allowed to benefit from her own dilatory tactics to the prejudice of the other party."<br><br>Although the case of <i>Juliano-Llave</i> is not in all fours as the circumstances surrounding the present case, the Court finds it relevant to the present case. While collusion was not an issue in <i>Juliano-Llave, it is significant to underscore that the Court affirmed the judgment of the trial court declaring the marriage of the parties void ab initio despite the failure of the respondent spouse to file her answer and present her evidence. These factors should not be automatically equated to collusion.</i><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> (Citations omitted, emphasis supplied)</blockquote>Here, not only is there lack of sufficient evidence proving that Theresa and Vincent conspired to have their marriage voided, but APP Domingo also issued an Investigation Report affirming the absence of collusion.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> This official finding is entitled to the presumption of regularity.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The psychological incapacity of Vincent was sufficiently established in compliance with Article 36 of the Family Code</em><br>&nbsp; </div></td><td width="70%">&nbsp;</td></tr></tbody></table>Article 36 of the Family Code governs psychological incapacity as a ground for declaration of nullity of marriage.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> Article 36 provides:<blockquote>Article 36. A marriage contracted by any party who, at the time of the celebration, was psychologically incapacitated to comply with the essential marital obligations of marriage, shall likewise be void even if such incapacity becomes manifest only after its solemnization.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup></blockquote>Psychological incapacity, as a ground to declare the nullity of marriage, is fundamentally characterized by its gravity, juridical antecedence, and incurability.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup><br><br>Initially, the Court, in <i>Republic v. Court of Appeals and Molina</i><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> laid down the following guidelines in the interpretation and application of Article 36 of the Family Code:<blockquote>1. The burden of proof to show the nullity of the marriage belongs to the plaintiff. Any doubt should be resolved in favor of the existence and continuation of the marriage and against its dissolution and nullity. This is rooted in the fact that both our Constitution and our laws cherish the validity of marriage and unity of the family. Thus, our Constitution devotes an entire Article on the Family, recognizing it "as the foundation of the nation." It decrees marriage as legally "inviolable," thereby protecting it from dissolution at the whim of the parties. Both the family and marriage are to be "protected" by the state.<br><br>The Family Code echoes this constitutional edict on marriage and the family and emphasizes their permanence, inviolability[,] and solidarity.<br><br>2. The root cause of the psychological incapacity must be (a) medically or clinically identified, (b) alleged in the complaint, (c) sufficiently proven by experts and (d) clearly explained in the decision. Article 36 of the Family Code requires that the incapacity must be psychological – not physical, although its manifestations and/or symptoms may be physical. The evidence must convince the court that the parties, or one of them, was mentally or psychically ill to such an extent that the person could not have known the obligations he was assuming, or knowing them, could not have given valid assumption thereof. Although no example of such incapacity need be given here so as not to limit the application of the provision under the principle of <i>ejusdem generis</i>, nevertheless such root cause must be identified as a psychological illness and its incapacitating nature fully explained. Expert evidence may be given by qualified psychiatrists and clinical psychologists.<br><br>3. The incapacity must be proven to be existing at "the time of the celebration" of the marriage. The evidence must show that the illness was existing when the parties exchanged their "I do's." The manifestation of the illness need not be perceivable at such time, but the illness itself must have attached at such moment, or prior thereto.<br><br>4. Such incapacity must also be shown to be medically or clinically permanent or incurable. Such incurability may be absolute or even relative only in regard to the other spouse, not necessarily absolutely against everyone of the same sex. Furthermore, such incapacity must be relevant to the assumption of marriage obligations, not necessarily to those not related to marriage, like the exercise of a profession or employment in a job. Hence, a pediatrician may be effective in diagnosing illnesses of children and prescribing medicine to cure them but may not be psychologically capacitated to procreate, bear[,] and raise his/her own children as an essential obligation of marriage.<br><br>5. Such illness must be grave enough to bring about the disability of the party to assume the essential obligations of marriage. Thus, "mild characteriological peculiarities, mood changes, occasional emotional outbursts" cannot be accepted as root causes. The illness must be shown as downright incapacity or inability, not a refusal, neglect[,] or difficulty, much less ill will. In other words, there is a natal or supervening disabling factor in the person, an adverse integral element in the personality structure that effectively incapacitates the person from really accepting and thereby complying with the obligations essential to marriage.<br><br>6. The essential marital obligations must be those embraced by Articles 68 up to 71 of the Family Code as regards the husband and wife as well as Articles 220, 221[,] and 225 of the same Code in regard to parents and their children. Such non-complied marital obligation(s) must also be stated in the petition, proven by evidence[,] and included in the text of the decision.<br><br>7. Interpretations given by the National Appellate Matrimonial Tribunal of the Catholic Church in the Philippines, while not controlling or decisive, should be given great respect by our courts. It is clear that Article 36 was taken by the Family Code Revision Committee from Canon 1095 of the New Code of Canon Law, which became effective in 1983 and which provides:<blockquote>"The following are incapable of contracting marriage: Those who are unable to assume the essential obligations of marriage due to causes of psychological nature."</blockquote>Since the purpose of including such provision in our Family Code is to harmonize our civil laws with the religious faith of our people, it stands to reason that to achieve such harmonization, great persuasive weight should be given to decisions of such appellate tribunal. Ideally — subject to our law on evidence — what is decreed as canonically invalid should also be decreed civilly void.<br><br>This is one instance where, in view of the evident source and purpose of the Family Code provision, contemporaneous religious interpretation is to be given persuasive effect. Here, the State and the Church — while remaining independent, separate[,] and apart from each other — shall walk together in synodal cadence towards the same goal of protecting and cherishing marriage and the family as the inviolable base of the nation.<br><br>8. The trial court must order the prosecuting attorney or fiscal and the Solicitor General to appear as counsel for the state. No decision shall be handed down unless the Solicitor General issues a certification, which will be quoted in the decision, briefly stating therein his reasons for his agreement or opposition, as the case may be, to the petition. The Solicitor General, along with the prosecuting attorney, shall submit to the court such certification within [ ] 15 days from the date the case is deemed submitted for resolution of the court. The Solicitor General shall discharge the equivalent function of the defensor <i>vinculi</i> contemplated under Canon 1095.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup></blockquote>However, the overly rigid interpretation of the <i>Molina</i> guidelines has resulted in the dismissal of petitions for the declaration of nullity of marriage, denying many individuals a fair chance at judicial relief and closure.<br><br>Thus, the Court, in <i>Tan-Andal v. Andal</i>,<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> modified the <i>Molina</i> guidelines and ruled:<blockquote>[The] Court now categorically abandons the second <i>Molina</i> guideline. Psychological incapacity is neither a mental incapacity nor a personality disorder that must be proven through expert opinion. There must be proof, however, of the durable or enduring aspects of a person's personality, called "personality structure," which manifests itself through clear acts of dysfunctionality that undermines the family. The spouse's personality structure must make it impossible for him or her to understand and, more important, to comply with his or her essential marital obligations.<br><br>Proof of these aspects of personality need not be given by an expert. Ordinary witnesses who have been present in the life of the spouses before the latter contracted marriage may testify on behaviors that they have consistently observed from the supposedly incapacitated spouse. From there, the judge will decide if these behaviors are indicative of a true and serious incapacity to assume the essential marital obligations.<br><br>. . . .<br><br>Difficult to prove as it may be, a party to a nullity case is still required to prove juridical antecedence because it is an explicit requirement of the law. Article 36 is clear that the psychological incapacity must be existing "at the time of the celebration" of the marriage, "even if such incapacity becomes manifest only after its solemnization." This distinguishes psychological incapacity from divorce. Divorce severs a marital tie for causes, psychological or otherwise, that may have developed after the marriage celebration.<br><br>. . . .<br><br>[W]e hold that the psychological incapacity contemplated in Article 36 of the Family Code is incurable, not in the medical, but in the legal sense; hence, the third <i>Molina</i> guideline is amended accordingly. This means that the incapacity is so enduring and persistent with respect to a specific partner, and contemplates a situation where the couple's respective personality structures are so incompatible and antagonistic that the only result of the union would be the inevitable and irreparable breakdown of the marriage. "[A]n undeniable pattern of such persisting failure [to be a present, loving, faithful, respectful, and supportive spouse] must be established so as to demonstrate that there is indeed a psychological anomaly or incongruity in the spouse relative to the other."<br><br>With respect to gravity, the requirement is retained, not in the sense that the psychological incapacity must be shown to be a serious or dangerous illness, but that "mild characterological peculiarities, mood changes, occasional emotional outbursts" are excluded. The psychological incapacity cannot be mere "refusal, neglect, or difficulty, much less ill will." In other words, it must be shown that the incapacity is caused by a genuinely serious psychic cause.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> (Citations omitted)</blockquote>The <i>Tan-Andal</i> guidelines were summarized in <i>Georfo v. Republic</i>,<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> as follows:<blockquote>First, <i>Tan-Andal</i> established that the quantum of proof required in nullity cases is clear and convincing evidence based on the presumption of validity of marriage. It requires more than preponderant evidence but less than proof beyond reasonable doubt.<br><br>Second, <i>Tan-Andal</i> abandoned the guideline in <i>Molina </i>requiring the root cause of the psychological incapacity to be medically or clinically identified.<br><br><i>Tan-Andal</i> delved into the history and intent behind Article 36 and found that psychological incapacity is not tantamount to mental incapacity. Rejecting the proposal to include the term "mentally incapacitated," the Family Code Commissioners agreed that psychological incapacity is not a mere vice of consent. Neither is psychological incapacity a personality disorder. It is not a mental disorder identified in the American Psychiatric Association's Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition. Still, psychologists and psychiatrists are compelled "to assign a personality disorder and pathologize the supposedly psychologically incapacitated spouse" to comply with the second <i>Molina</i> guideline.<br><br>This Court now requires a proof of a person's "personality structure" which makes it impossible for them to understand and comply with their marital obligations:<blockquote>There must be proof, however, of the durable or enduring aspects of a person's personality, called "personality structure," which manifests itself through clear acts of dysfunctionality that undermines the family. The spouse's personality structure must make it impossible for him or her to understand and, more important, to comply with his or her essential marital obligations.<br><br>Proof of these aspects of personality need not be given by an expert. Ordinary witnesses who have been present in the life of the spouses before the latter contracted marriage may testify on behaviors that they have consistently observed from the supposedly incapacitated spouse. From there, the judge will decide if these behaviors are indicative of a true and serious incapacity to assume the essential marital obligations.</blockquote>This approach is consistent with the Family Code Commissioners' intent to limit psychological incapacity to "psychic causes." Moreover, it does away with the cruel and dehumanizing exercise of labelling a person as having a mental disorder in order to nullify a marriage.<br><br>Third, in light of the shift in viewing psychological incapacity as a legal concept, the three characteristics of psychological incapacity are restated.<br><br>Juridical antecedence is established by showing that the psychological incapacity exists at the time of the celebration, even if it only manifests during the marriage. It may be proven by "testimonies describing the environment where the supposedly incapacitated spouse lived that may have led to a particular behavior."<br><br>While it is difficult to pinpoint when the psychological incapacity existed, it is enough that the petitioner show that the incapacity, "in all reasonable likelihood," already exists at the time the marriage was celebrated. Since the spouses will only assume marital obligations after the marriage, their psychological capacity to fulfill those obligations will only manifest after the celebration of the marriage.<br><br>Incurability must be viewed in the legal, not medical, sense. Veering away from the medical orientation, the third <i>Molina</i> guideline was amended. Psychological incapacity is not a medical illness which can be cured: it must be "so enduring and persistent with respect to a specific partner, and contemplates a situation where the couple's respective personality structures are so incompatible and antagonistic that the only result of the union would be the inevitable and irreparable breakdown of the marriage."<br><br>To satisfy the requirement of incurability, there must be a showing of an "undeniable pattern of such persisting failure to be a present, loving, faithful, respectful, and supportive spouse [that] must be established so as to demonstrate that there is indeed a psychological anomaly or incongruity in the spouse relative to the other."<br><br>The requirement on the gravity of the psychological incapacity was retained, which must be "caused by a genuinely psychic cause." It must not be mere "mild characterological peculiarities, mood changes, occasional emotional outbursts," nor "mere refusal, neglect, difficulty, much less ill will."<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> (Citations omitted)</blockquote>Here, the Court affirms the CA's finding that Theresa clearly and convincingly established the requisites of juridical antecedence, gravity, and incurability.<br><br><i>Juridical antecedence was established</i><br><br>The Republic, through the OSG, asserts that Theresa failed to establish juridical antecedence. It underscores that the testimonies of Theresa's witnesses concerning Vincent's behavior prior to the marriage is the result of collusion. Consequently, the Republic maintains that such testimonies should not be given probative value in determining the presence of juridical antecedence.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup><br><br>As already discussed, the Court does not agree.<br><br>There is no evidence of collusion between Theresa and Vincent. Therefore, the testimonies of Vincent's father and cousin, who witnessed his childhood, not to mention Vincent's own interview results with Dr. Alhama, should be given credence in determining Vincent's psychological incapacity.<br><br>Vincent's father and cousin testified that the breakdown of the marriage between Theresa and Vincent stemmed from Vincent's long-standing behavioral issues and vices, which had been evident long before he ever met Theresa.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> This conclusion was likewise supported by Dr. Alhama in her Psychological Evaluation Report.<br><br>While it is recognized that a psychological report is not indispensable in a petition for declaration of nullity of marriage, Theresa nonetheless presented Dr. Alhama as a witness to Vincent's psychological condition. Notably, Dr. Alhama was able to conduct a comprehensive psychological assessment and evaluation of both Theresa and Vincent. She administered six psychological tests to both parties, conducted in-depth clinical interviews, and required them to answer self-assessment questionnaires. Additionally, Dr. Alhama gathered collateral information from other sources, which allowed her to submit an informed expert opinion on the matter.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup><br><br>Based on her assessment, Dr. Alhama concluded that the onset of Vincent's personality disorders dates back to early childhood, adolescence, and early adulthood. She attributed their development to the dysfunctional relationship between his parents, particularly Vicente's infidelity and irresponsibility as a father, thus:<blockquote>As with many personality disorders, the root cause of these are a complex mixture of biological vulnerabilities, early childhood experiences, and psychological factors.<br><br>[Vincent's] childhood development was gravely altered by the early separation of his parents. The figure of an irresponsible father, his drunkard and unfaithful personality, drove him to replica[te] of his childhood experiences from his parents. As neglect and poverty ushered their lives, such startling experiences made him a person looking for diversions of his family's fissures. These are psychologically startling experiences that contributed much to his personality disorders. His experience of neglect, exposure to harsh life, cemented a totality of personality structure that made him the person of today.<br><br>In this case, the development of ADP, NPD, and HPD features is a product of his startling experiences and was ingressed by his dealing with other people. His personality disorders are mirrored by his childhood occurrences, like his unconscious attribution of his father's maladaptive behaviors and the psychologically abusive acts he witnessed during his childhood.<br><br>In the interviews conducted, it was fully established that the personality disorders of [Vincent] could be solidly attributed to juridical antecedence tracing back to early life experiences, and magnified by his wrong or incomplete nurture. His antisocial, [n]arcissistic[,] and histrionic nature is a product of his "mirror" psyche frame to his family and social dealings.<br><br>With the foregoing, it is concluded then that his personality disorders speak of ANTECEDENCE as it has an early onset, with an enduring pattern and behavior that deviates markedly from the norm. As shown by testimonies and documents, the narcissistic, histrionic[,] and antisocial manifestations existed before the marriage.<br><br>Conclusively, the root cause then of the personality disorder (APD with strong NPD features) can be attributed to starting experiences during his early childhood years with predisposing psychosocial factors that influenced the development resulting from the absence of parenting direction.<br><br>. . . .<br><br>[Vincent's] maladaptive behaviors show severe personality disorder and such is adversely rooted in his personality structure that effectively incapacitates him from accepting and complying with the obligations essential to his marriage with [Theresa]. By means of vicarious learning, he imitated the disposition of his father and immediate community. He learned uncanny behaviors from an ambivalent place and were not corrected and transcended into a very under discerning behavior until he became an adult. Such ill-disposition was carried out until he got married with [Theresa]. Because of his inability to discern the consequences of his actions, he acted upon his [ill]-driven tendencies and earthly desires while inflicting physical, economic[,] and psychological harm to his wife and his children.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> (Citations omitted)</blockquote>Further, Theresa testified that Vincent was a jealous and possessive partner who stalked her and threatened to kill anyone who came between them. He lacked direction, spent most of his time drinking with friends, and showed no improvement after marriage. He failed to provide for the family and responded with violence to any criticism.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup><br><br>The concept of juridical antecedence includes the ordinary experiences of the spouses not only prior to the marriage itself, but more importantly, during their "lived conjugal life."<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> Theresa's testimony about her experiences with Vincent, both as a girlfriend and a wife, sufficiently demonstrates that his psychological incapacity was already present at the time of their marriage.<br><br><i>Gravity was proven</i><br><br>Vincent's psychological incapacity is grave and rooted in a genuinely psychic cause, thereby rendering him incapable of carrying out the ordinary duties required in a marriage. Dr. Alhama's Psychological Evaluation Report revealed that Vincent suffers from three personality disorders:(1) Narcissistic Personality Disorder; (2) Antisocial Personality Disorder; and (3) Histrionic Personality Disorder.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup><br><br>According to Dr. Alhama's Psychological Evaluation Report, the manifestation of Vincent's Narcissistic Personality Disorder are the following:<blockquote>1. grandiose sense of self-centeredness and self-importance;<br><br>2. too much sense of entitlement;<br><br>3. interpersonally exploitative and abusive;<br><br>4. lacks empathy and care;<br><br>5. shows arrogant, haughty behaviors[,] and attitudes; and<br><br>6. enduring pattern of deviance.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup></blockquote>With respect to Antisocial Personality Disorder, Dr. Alhama found that the common manifestations are:<blockquote>1. failure to conform to social norms with respect to lawful behavior, as indicated by repeatedly performing acts that are grounds for arrest and legal sanctions;<br><br>2. severe and persistent deceitfulness to exploit others;<br><br>3. inherent disregard for right and wrong;<br><br>4. grave irresponsibility and impulsivity[,] and failure to plan ahead;<br><br>5. irritability and aggressiveness, as indicated by repeated physical abuses, fights[,] and assaults;<br><br>6. callous unconcern for the feeling of others towards his actions;<br><br>7. lack of empathy for others and lack of remorse about harming others;<br><br>8. distorted and irrational thoughts.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup></blockquote>As for Vincent's Histrionic Personality Disorder, Dr. Alhama found it is manifested by:<blockquote>1. violent behavior and is highly an attention-seeker;<br><br>2. interaction with others is oftenly characterized by inappropriate provocative behavior;<br><br>3. indications of self-harm;<br><br>4. displays rapidly shifting and shallow expressions of emotions; and<br><br>5. irrational thoughts, pathological lying[,] and apathy.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup></blockquote>The harrowing experiences of Theresa during her marriage with Vincent, as well as their history even as boyfriend and girlfriend, illustrate the gravity of Vincent's psychological incapacity. The most compelling evidence of this is his complete failure to comprehend and fulfill his fundamental responsibilities as a husband and father.<br><br>As the records show, Vincent consistently refused to seek or maintain employment, prioritizing time with his friends over the needs of his family. He failed to provide both moral and financial support to Theresa and their son. Worse still, he demanded money from Theresa to fund his vices.<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> These actions reflect a profound disregard for, and complete lack of understanding of, his responsibilities as a husband and father.<br><br><i>Incurability is demonstrated</i><br><br>As discussed above, <i>Tan-Andal</i> redefined the concept of incurability, shifting its interpretation from a medical to a legal context.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup><br><br>As provided in <i>Tan-Andal</i>, to satisfy the requirement of incurability, there must be a showing of an "undeniable pattern of such persisting failure to be a present, loving, faithful, respectful, and supportive spouse that must be established so as to demonstrate that there is indeed a psychological anomaly or incongruity in the spouse relative to the other."<sup style="COLOR: RGB(255, 0, 0);">[104]</sup><br><br>Here, Vincent's psychological incapacity is incurable, as his maladaptive behaviors have become deeply ingrained and constitute permanent aspects of his personality. These impairments pervade all areas of his life, including his roles as a spouse and father.<br><br>Throughout the marriage, Vincent consistently failed to provide Theresa with any form of emotional support or affection. Notably, just weeks after their wedding, he abruptly disappeared without informing Theresa of his whereabouts. He remained both physically and emotionally absent throughout the duration of her pregnancy. In addition, Vincent demonstrated persistent financial irresponsibility, prioritizing personal vices over the welfare of his family.<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> These actions reflect a consistent and undeniable pattern of failure on the part of Vincent to fulfill the fundamental obligations of a spouse: to be present, loving, faithful, respectful, and supportive. Taken together, these behaviors underscore the incurable nature of Vincent's psychological incapacity.<br><br><i>Conclusion</i><br><br>Given the totality of evidence, the Court finds no reason to overturn the CA Decision finding Vincent psychologically incapacitated to fulfill his essential marital obligations to Theresa. Consequently, their marriage is void under Article 36 of the Family Code.<br><br>A final note. The Court acknowledges that marriage is the foundation of the family and an inviolable social institution<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> that the State is duty-bound to protect. Yet, it cannot turn a blind eye to the lived realities of individuals trapped in unions with psychologically incapacitated spouses. Marriage, in its truest form, must be a sanctuary: a space of mutual respect, care, and emotional safety. It must never become a chain that binds a person to a relationship that is not only fundamentally flawed, but damaging. While the ideal remains that individuals choose wisely in love and commitment, the reality is that human beings make mistakes. When a marriage has become irreparably broken, the spouses so deeply incompatible as to render its continued existence unjust, the Court should not stand in the way.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> filed by petitioner Republic of the Philippines, through the Office of the Solicitor General, is <b>DENIED</b>. The Decision, dated May 16, 2024, and the Resolution, dated October 30, 2024, of the Court of Appeals in CA-G.R. CV No. 121444, are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 59-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 16-56. Penned by Associate Justice Rafael Antonio M. Santos and concurred by Associate Justices Lorenza R. Bordios and Raymond Joseph G. Javier of the Seventeenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 127-130. Penned by Associate Justice Rafael Antonio M. Santos and concurred by Associate Justices Lorenza R. Bordios and Raymond Joseph G. Javier of the Former Seventeenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 192-207. Penned by Presiding Judge Charles Javier M. Calapini.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 88-89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 89-90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 91-92.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Does not appear in the records of the case.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Rollo</i>, p. 152.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 87-88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 153.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 196.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 205.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 93.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 176.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 158.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 207.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 204.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 204-205.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 206-207.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Does not appear in the records of the case.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Rollo</i>, p. 208.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 158.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Does not appear in the records of the case.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Does not appear in the records of the case.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, p. 159.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Does not appear in the records of the case.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Does not appear in the records of the case.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, p. 159.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 16-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 191.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 167.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 165.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 168.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 168-176.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 176.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 183.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 183-187.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 190-191.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 131-135.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 127-130.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 65-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> RULES OF COURT, Rule 7, sec. 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> 909 Phil. 506 (2021) [Per J. Gaerlan, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 513.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Republic of the Philippines v. Dagdag</b>, 404 Phil. 249, 256 (2001) [Per J. Quisumbing, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Gatan v. Vinarao</b>, 820 Phil. 257, 266 (2017) [Per J. Leonardo-De Castro, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <b>Alburo v. People</b>, 792 Phil. 876, 889 (2016) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Rollo</i>, p. 65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Republic of the Philippines v. Ng</b>, 951 Phil. 785, 798 (2024) [Per J. Dimaampao, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> 107 Phil. 35 (1960) [Per J. Bengzon, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>Puyat v. Puyat</b>, 906 Phil. 143, 150 (2021) [Per J. Carandang, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> FAMILY CODE, art. 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> SC Administrative Matter No. 02-11-10-SC, March 4, 2003, Rule on Declaration of Absolute Nullity of Void Marriages and Annulment of Voidable Marriages.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Rollo</i>, p. 67.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 67-68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> 906 Phil. 143 (2021) [Per J. Carandang, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 153.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> 662 Phil. 203 (2011) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <b>Puyat</b>, p. 154.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Rollo</i>, p. 152.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>Puyat</b>, p. 154.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> FAMILY CODE, art. 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <b>Green v. Green, G.R. No. 255706</b>, February 17, 2025 [Per J. Leonen, Second Division] at 6. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> 335 Phil. 664 (1997) [Per J. Panganiban, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> at 676-679.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> 902 Phil. 558 (2021) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id.</i> at 597-600.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> 937 Phil. 518 (2023) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id.</i> at 531-534.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Rollo</i>, p. 76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> <i>Id.</i> at 177.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>Id.</i> at 168.<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <i>Id.</i> at 181-182.<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Id.</i> at 177-178.<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <b>Cayabyab-Navarrosa v. Navarrosa</b>, 922 Phil. 565, 572 (2022) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Rollo</i>, p. 169.<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>Id.</i> at 172.<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Id.</i> at 174.<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>Id.</i> at 183-184.<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <b>Tan-Andal</b>, p. 660.<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <i>Id.</i> at 600.<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Rollo</i>, pp. 89-91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <i>See</i> FAMILY CODE, art. 1.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

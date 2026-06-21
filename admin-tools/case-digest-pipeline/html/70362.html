@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 278545 - LINA MAMAONGPONG SIMPAL, PETITIONER, VS. AMANDA B. PRAXEDES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70362' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 278545, January 29, 2026 ]</H2>
+			<H3>LINA MAMAONGPONG SIMPAL, PETITIONER, VS. AMANDA B. PRAXEDES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (Petition) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated May 9, 2024, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated November 15, 2024, of the Court of Appeals (CA) in CA-G.R. SP No. 179979. The CA partly granted the Rule 65 Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> filed by respondent Amanda B. Praxedes (Amanda) and found probable cause to indict petitioner Lina Mamaongpong Simpal (Lina) for: (<i>1</i>) Falsification of a Public Document under Article 172, paragraph 1<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> in relation to Article 171, paragraph 4<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of the Revised Penal Code; and (<i>2</i>) for Illegal Use of Alias under Commonwealth Act No. 142,<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> as amended by Republic Act No. 6085.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br><center><i>The Antecedents</i></center><br>The present case is an offshoot of several criminal cases that Amanda and Lina filed against each other. Amanda filed the subject criminal complaint against Lina for Perjury, Falsification of a Public Document, and Illegal Use of Alias following an earlier complaint for Estafa that she likewise filed against Lina.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Amanda averred that sometime in December 2017, a certain Dina Gatchalian (Dina) introduced her to Lina, who represented herself as "Beth Mangligot" at that time.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> The two were introduced because Lina wanted to borrow money from Amanda. Their first lending transaction went smoothly. From then on, Lina frequently borrowed money from Amanda and also introduced other borrowers to Amanda.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Later, Lina proposed to Amanda a business scheme wherein Lina shall manage a group of borrowers, with Amanda providing the capital therefor.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Amanda agreed to the proposal and gave PHP 1,459,010.00 to Lina and her common-law husband, Robert Mangligot (Robert), for the lending business.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Amanda asserted that in the course of their relationship, she discovered that Lina was using several names. Particularly, when Amanda attended the wedding of Lina's son, she noticed that the name of the mother indicated in the Certificate of Marriage was "Nenita Dawan Cagunan." When Amanda inquired with Lina as to why her name appeared different in the Certificate, Lina gave vague explanations. Amanda did not pursue the issue any further as it appeared to be personal to Lina. Moreover, in one of their business dealings, Amanda asked Lina to remit PHP 9,860.00 to a ce1iain Rochelle Trinidad. For the cash transfer transaction, Lina used the name "Lina M. Simpal" and provided her Voter's Identification Card (ID) as proof of her identity.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Sometime in February 2019, Dina approached Amanda to borrow money. To Amanda's surprise, Dina did not appear to have any idea about the lending business with Lina. Amanda thus conducted further inquiries and discovered that Lina and Robert misappropriated the PHP 1,459,010.00 that she gave them. Amanda thus demanded the return of the said sum of money, but Lina and Robert could not i1nmediately remit it. Instead, they offered to pay Amanda through other means, including an electric bicycle, a cellphone, the automated teller machine card of Robert, and monthly deductions from Robert's salary.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>The dispute between the parties prompted Amanda to file a complaint for Estafa against Lina before the Office of the City Prosecutor of Santa Rosa, Laguna (OCP Santa Rosa).<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> The OCP Santa Rosa eventually filed an Information with the Municipal Trial Court in Cities (MTCC), Santa Rosa City, charging Lina with Estafa through Misappropriation under Article 315, paragraph 1(b)<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> of the Revised Penal Code (Estafa Case). Later, the MTCC issued warrants of arrest against Lina.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>In support of her application for bail in the Estafa Case, Lina submitted her Certificate of Live Birth, wherein her name appears as "Nenita Dawan Cagunan," as well as a Barangay Certification which states that "Nenita Dawan Cagunan," "Lina Mamaongpong Simpal," and "Beth Mangligot" are one and the same person. It was further revealed in the Estafa Case that Lina used the name "Lina Mamaongpong Simpal" in the Certificates of Live Birth of her two children that were registered with the civil registry in 2007 and 2008.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Amanda then filed against Lina the subject criminal complaint for Perjury, Falsification of a Public Document, and Illegal Use of Alias (Falsification Case) before the OCP Santa Rosa, which docketed the complaint as NPS Docket No. IV-19-INV-19-00638. Amanda alleged that on several occasions, Lina used different names, to wit: <i>(1)</i> Lina used the name "Beth Mangligot" in her interactions with Amanda; <i>(2)</i> in her Certificate of Live Birth and in her son's Certificate of Marriage, Lina's name appeared as "Nenita Dawan Cagunan;" <i>(3)</i> in the Certificates of Live Birth of Lina's children, she identified herself as "'Lina Mamaongpong Simpal;" <i>(4)</i> in her Voter's ID, Lina identified herself as "Lina M. Simpal;" and <i>(5)</i> in her affidavits that she submitted to the OCP Santa Rosa in the Estafa Case, she subscribed to the name of "Lina Mamaongpong Simpal."<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>In her Counter-Affidavit,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Lina denied the allegations against her. She argued that the Falsification Case was merely retaliatory and a form of forum shopping on the part of Amanda, given that the Estafa Case was already pending with the MTCC at that time.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> She added that Amanda was not an injured party who could file the suit for Perjury and Falsification against her. Lina further insisted that she cannot be held liable for Perjury because the name that she used in subscribing to the documents and affidavits before the OCP Santa Rosa is not a material matter in the Estafa Case.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Lina also contended that she acted in good faith in using several names. She explained that she was born a Muslim in Mati, Davao Oriental. When their family transferred to Lupon, Davao Oriental, the people there referred to her as "Lina," but when they returned to Mati, Lina used the name, ''Nenita Dawan Cagunan" until she finished high school. As to the name, "Beth," Lina asserted that it was her nickname, while "Mangligot" was the surname being used by her children.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>As to the name "Lina Mamaongpong Simpal," Lina asserted that she started using it in 2005, after she decided to go abroad to help her family. Supposedly, a certain "Ate Amina Simpal" advised her to revert to her Muslim name and to use her mother's maiden name because it would be advantageous to her in the event that she secures a job in a Muslim State. The Muslim Affairs Office even helped Lina to secure a passport bearing the name "Lina Mamaongpong Simpal," but she ultimately could not travel abroad because of health issues. Thus, for more than 13 years, Lina had been using the name "Lina M. Simpal" in her dealings and transactions and for identification purposes, considering that she has a passport to support it.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>In her Reply-Affidavit,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Amanda asserted that proof of damage on her part was not necessary because the crime charged against Lina was Falsification of a Public Document. She denied the allegation of forum shopping because the charges of Falsification, Perjury, and Illegal Use of Alias against Lina were not included in the Estafa Case.<br><br><center><i>The Ruling of the OCP Santa Rosa</i></center><br>In its Resolution<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> dated November 9, 2020, the OCP Santa Rosa dismissed the charges against Lina for Perjury, Falsification of a Public Document, and Illegal Use of Alias for lack of probable cause, viz.:<blockquote>WHEREFORE, premises considered, it is respectfully recommended that the complaints against the above-named respondent be DISMISSED for lack of probable cause.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup></blockquote>The OCP Santa Rosa determined that the charge of Falsification of a Public Document against Lina cannot prosper due to lack of proof that Lina intended to injure a third person in using names other than the one appearing in her Certificate of Live Birth. It further explained that Falsification prescribes in 10 years from the registration of the public document that was allegedly falsified. It noted that the Certificates of Live Birth of Lina's children were registered in 2007 and 2008, but the Complaint in the Falsification Case was filed only in 2019; thus, the charge of Falsification against Lina had prescribed.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Anent the charge of Perjury against Lina, the OCP Santa Rosa also dismissed it upon finding that the name used by Lina in the affidavits that she submitted in the Estafa Case is not a material matter, which pertains to the main fact that is the subject of the inquiry; or any circumstance that tends to prove that fact; or any fact or circumstance which tends to corroborate or strengthen the testimony relative to the subject of inquiry, or which legitimately affects the credit of any witness who testifies.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>Finally, as to the charge of Illegal Use of Alias, the OCP Santa Rosa dismissed it upon the finding that the names "Lina Mamaongpong Simpal" and "Beth Mangligot" are Lina's registered names. It added that Commonwealth Act No. 142 was enacted primarily to curb the practice of using an alias for business or trade, yet other than Amanda's bare allegations, there was no proof that Lina used her aliases for commercial transactions.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Amanda filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> of the Resolution dated November 9, 2020, but the OCP Santa Rosa denied it in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated December 29, 2020.<br><br>Aggrieved, Amanda filed a Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> with the Office of the Regional State Prosecutor of San Pablo, Laguna (ORSP San Pablo).<br><br><center><i>The Ruling of the ORSP San Pablo</i></center><br>In the Resolution<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> dated August 18, 2022, the ORSP San Pablo denied the Petition for Review on procedural errors, specifically, due to Amanda's failure to attach the affidavits that the parties submitted to the OCP Santa Rosa during preliminary investigation and the non-submission of a verified declaration, contrary to Section 5<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> of Department of Justice (DOJ) Circular No. 70 or the National Prosecution Service Rule on Appeal (NPS Rule on Appeal) and Section 4<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> of the DOJ Rule on Electronic Filing of Petitions for Review.<br><br>Amanda filed a Motion for Reconsideration of the Resolution dated August 18, 2022. She attached to the Motion the affidavits that were submitted to the OCP Santa Rosa during preliminary investigation.<br><br>However, in its Resolution<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> dated May 18, 2023, the ORSP San Pablo denied the Motion for Reconsideration. It ruled that Amanda failed to submit a compact disc (CD) containing electronic copies of the pleadings, motions, and other papers filed on appeal, contrary to Sections 1 and 2<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> of the DOJ Rule on Electronic Filing of Petitions for Review. Further, the Motion failed to state the timeliness of its filing.<br><br>Undaunted, Amanda filed a Rule 65 Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> with the CA to assail the ORSP San Pablo Resolutions. Amanda argued that the ORSP San Pablo committed grave abuse of discretion when: <i>(1)</i> it denied the Motion for Reconsideration on technicalities even though it was timely filed and was substantially compliant with the NPS Rule on Appeal; and <i>(2)</i> it disregarded the affidavits attached to the Motion for Reconsideration even when they support a finding of probable cause to indict Lina for Perjury, Falsification, and Illegal Use of Alias.<br><br><center><i>The Ruling of the CA</i></center><br>In the now-assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> dated May 9, 2024, the CA partly granted the Petition for <i>Certiorari</i> and found probable cause to indict Lina for Falsification of a Public Document and Illegal Use of Alias, to wit:<blockquote><b>ACCORDINGLY</b>, the instant petition for <i>certiorari</i> is <b>PARTLY GRANTED</b>. The August 18, 2022 and May 18, 2023 Resolutions of the Office of the Regional Prosecutor, Region IV, San Pablo City, Laguna in NPS Docket No. IV-19-IV-19-00638 are <b>ANNULED</b> and <b>SET ASIDE</b> insofar as they dismissed the charges against private respondent Lina Mamaongpong Simpal a.k.a. Nenita Dawan Cagunan a.k.a. Beth Mangligot for violating Article 172, paragraph 1 of the Revised Penal Code, in relation to Article 171, paragraph 4 of the same Code and illegal use of <i>alias</i> under Republic Act No. 6805 (<i>sic</i>). The dismissal of the complaint for pe1jury against Lina Mamaongpong Simpal a.k.a. Nenita Dawan Cagunan a.k.a. Beth Mangligot is <b>AFFIRMED</b>.<br><br>The public respondent Office of the Regional Prosecutor, Region IV, San Pablo City is <b>DIRECTED</b> to file before the proper court the necessary Informations for one (1) count of violation of Article 172, paragraph 1, in relation to Article 172, paragraph 4 of the Revised Penal Code and one (1) count of illegal use of <i>alias</i> under Republic Act No. 6085.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[42]</sup>&nbsp;</blockquote>On the procedural matters raised in the Petition for <i>Certiorari</i>, the CA determined that the ORSP San Pablo acted with grave abuse of discretion in holding that Amanda failed to properly assert the timeliness of her Motion for Reconsideration. It held that the ORSP San Pablo disregarded the evidence on record, which showed that Amanda received a copy of the Assailed Resolution on September 12, 2022. Meanwhile, the registry receipt attached to the Motion indicated that it was mailed and filed on September 22, 2022, within the 10-day reglementary period under Section 13<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> of the NPS Rule on Appeal.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>The CA further noted that the affidavits submitted by the parties during the preliminary investigation were attached to the Motion for Reconsideration. Hence, even though the affidavits were not attached to the Petition for Review, the ORSP San Pablo should have considered them in accordance with <i>Ben Line Agencies Philippines, Inc. v. Madson</i>,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> where it was held that "a petition dismissed earlier, due to lack of an essential pleading or part of the case record, may still be given due course or reinstated upon showing that petitioner had later submitted the documents required."<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>On the merits, the CA agreed with the OCP Santa Rosa that there was no probable cause to indict Lina for Perjury. It explained that the name used by Lina in her affidavits in the Estafa Case is not a material matter or a main fact that is the subject of inquiry in the case.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>However, the CA concluded that the OCP Santa Rosa acted with grave abuse of discretion when it ruled that there was no probable cause to indict Lina for Falsification of a Public Document and Illegal Use of Alias. Particularly with regard to the charge of Falsification of a Public Document, the CA emphasized that the evidence on record sufficiently established the presence of all the elements of Falsification, considering that the Voter's ID is a public document, yet Lina falsely represented therein that her name was "Lina Mamaongpong Simpal" and not "Nenita Dawan Cagunan," her true registered name. It pointed out that Lina did not present any judicial decree authorizing her to use the name "Lina Mamaongpong Sirnpal."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>The CA likewise faulted the OCP Santa Rosa in holding that the Falsification charge against Lina cannot prosper in the absence of proof that she intended to injure a third person. It highlighted that Lina was charged with falsification of a public document where specific damage to a private individual is not required. Rather, it is the injury caused to the integrity of public records, such as identity cards issued by the government, that is material in the case.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>Anent the OCP Santa Rosa's finding that the charge of Falsification had prescribed, the CA stressed that the Voter's ID of Lina was signed and issued during the tenure of former Commission on Elections (COMELEC) Commissioner Sixto Brillantes, Jr., whose term of office was from January 16, 2011, until 2015. The CA therefore determined that the charge of Falsification in the Voter's ID was not barred by prescription given that the complaint was filed in 2019, within the 10-year prescriptive period for the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>Nonetheless, the CA agreed with the OCP Santa Rosa that the charge of Falsification of the Certificates of Live Birth of Lina's children had prescribed, given that the said documents were registered sometime in 2007 and 2008. Hence, at the time of the filing of the Complaint in the Falsification Case in 2019, more than 10 years had lapsed from the date of registration of the Certificates of Live Birth.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>Finally, as to the charge of Illegal Use of Alias under Commonwealth Act No. 142, as amended, the CA determined that the OCP Santa Rosa acted with grave abuse of discretion in dismissing it. The CA noted that in her Ce1tificate of Live Birth, the registered name of Lina was "Nenita Dawan Cagunan," which was manifestly different from the other names used by Lina, i.e., "Beth Mangligot" and "Lina Mamaongpong Simpal." The CA stressed that the law prohibits the use of an alias other than the name of the defendant that was registered with the local civil registry. Considering that Lina herself admitted in her affidavits that she had been using the name "Lina Mamaongpong Simpal" for at least 13 years, there was probable cause to indict her for Illegal Use of Alias. The CA ruled that the lack of intent to defraud on the part of Lina was immaterial because the applicable law is <i>mala prohibita</i>. It added that Lina merely alleged that she had sufficient justification to use other names in lieu of her registered name, but such averments lacked support in the records.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>Lina filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> of the CA Decision, but the CA denied it in the now-assailed Resolution<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> dated November 15, 2024.<br><br>Thus, the present Petition.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br><center><i>Petitioners Arguments</i></center><br>Lina imputes error to the CA Decision and Resolution based on the following arguments:<br><br><i>First</i>, there was insufficient evidence to support the conclusion that Lina's assertions in her Voter's ID were absolutely false and were made with the wrongful intent to injure a third person. Lina was able to obtain goven1ment-issued IDs wherein her name appears as "Lina Mamaongpong Simpal;" hence, the statement in the Voter's ID is not absolutely false. The OCP Santa Rosa also correctly pointed out that Amanda merely alleged that Lina used a different name to induce her to enter into lending transactions with Lina, but did not provide corroborating evidence on the matter.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br><i>Second</i>, the charge of Falsification of a Public Document had already prescribed because the Certificates of Live Birth of Lina's children were registered in 2007 and 2008, more than 10 years before the complaint in the Falsification Case was filed in 2019.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br><i>Third</i>, as to the charge of Illegal Use of Alias, Amanda did not present evidence to prove that Lina used an alias, other than her registered name, in trade or business. Hence, Lina cannot be made liable for a violation of Commonwealth Act No. 142, as amended.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br><i>Finally</i>, the executive determination of probable cause is made by the DOJ and not by a judge. Courts are not empowered to substitute their judgment over the Executive Branch of the government in the absence of grave abuse of discretion, which was not established in the case.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br><center><i>The issue</i></center><br>The issue before the Court is whether the CA committed a reversible error in holding that the OCP Santa Rosa committed grave abuse of discretion when it dismissed the charges of Falsification and Illegal Use of Alias against Lina for lack of probable cause.<br><br><center><i>The Ruling of the Court</i></center><br>The Petition is denied.<br><br>No reversible error was committed by the CA in partly granting the Petition for <i>Certiorari</i> and holding that there is probable cause to indict Lina for Falsification of a Public Document under Article 172, paragraph 1 in relation to Article 171, paragraph 4 of the Revised Penal Code; and for Illegal Use of Alias under Commonwealth Act No. 142, as amended by Republic Act No. 6085. The CA properly exercised its jurisdiction to issue writs of <i>certiorari</i> against the <i>final</i><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> ruling of the ORSP San Pablo in an appeal from the resolution of the OCP Santa Rosa over criminal charges within the jurisdiction of first level courts.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>Preliminarily, the Court notes that Lina does not impute any error to the CA when it held that the Motion for Reconsideration of the ORSP San Pablo Resolution dated August 18, 2022, was timely filed and should have been considered by the ORSP San Pablo as substantial compliance with the NPS Rule on Appeal. Notably, Rule 51, Section 8<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> of the Rules of Court provides that the Court shall not consider any matter that is not assigned as an error on appeal, save only in well-recognized exceptions<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> which are not present in the case at hand. Unless assigned as an error on appeal, the conclusions of the CA are rendered final.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Accordingly, the CA's procedural conclusions regarding the Motion for Reconsideration are already final and can no longer be disturbed.<br><br>On the merits of the case, the Court finds it proper to emphasize the policy on non-interference with the executive determination of probable cause, which is rooted in the doctrine of separation of powers between the Executive and the Judicial Branch of the Government.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Thus, as a general rule, courts are not empowered to review the public prosecutor's determination of the existence or non-existence of probable cause to warrant an indictment or the filing of an Information with the courts, <i>unless</i> the findings are tainted with grave abuse of discretion amounting to lack or excess of jurisdiction.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>Case law teaches that grave abuse of discretion refers to: (1) palpable errors of jurisdiction; (2) violation of the Constitution, the laws, jurisprudence, or basic and established rules of procedure; and (3) gross misapprehension of facts.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> There is also grave abuse of discretion when the court or tribunal ignores the evidence adduced by the parties,<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> or when it appreciates evidence that is patently illogical and unnatural.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>Particularly with regard to executive determinations of probable cause, the Court has held that "[t]here is grave abuse of discretion if the public prosecutor blatantly disregards the parameters of probable cause,"<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> as when they apply a standard of evidence that is higher than probable cause during preliminary investigation.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> The public prosecutor's dismissal of a criminal complaint is likewise attended with grave abuse of discretion when it is based on a matter that is irrelevant or immaterial to the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> The Court has also held that the DOJ acted with grave abuse of discretion in finding probable cause against a respondent based only on an affidavit, while ignoring the complainant's <i>admissions</i> and other evidence on record that contradict the statements in the affidavit.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup><br><br>Applying the foregoing, the Court agrees with the CA that the OCP Santa Rosa's dismissal of the complaint against Lina for Falsification of a Public Document and Illegal Use of Alias is tainted with grave abuse of discretion for being contrary to law, jurisprudence, the evidence on record, and the admissions made by Lina.<br><br>Lina was charged with Falsification of a Public Document under Article 172, paragraph 1 in relation to Article 171, paragraph 4 of the Revised Penal Code. The felony under Article 172, paragraph 1 refers to "falsification by a <i>private individual</i> or a public officer or employee, who did not take advantage of his official position, of public, private or commercial document," and has the following elements: (1) that the offender is a private individual or a public officer or employee who did not take advantage of their official position; (2) that they committed any of the acts of falsification enumerated in Article 171 of the Revised Penal Code; and, (3) that the falsification was committed in a public, official, or commercial document.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>Meanwhile, Falsification under Article 171, paragraph 4 of the Revised Penal Code has the following essential elements: (1) the offender makes in a public document untruthful statements in a narration of facts; (2) he or she has a legal obligation to disclose the truth of the facts narrated by him or her; and (3) the facts narrated by him or her are absolutely false.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>In dismissing the Falsification charge, the OCP Santa Rosa determined that Amanda failed to provide adequate proof that in using the name "Lina Mamaongpong Simpal," Lina acted with an intent to injure a third person. It further concluded that the facts narrated in the Voter's ID of Lina are not absolutely false because the name "Lina Mamaongpong Simpal" is indeed Lina's registered name, considering that she possesses government-issued IDs bearing that name.<br><br>The Court agrees with the CA that the foregoing conclusions of the OCP Santa Rosa were attended with grave abuse of discretion.<br><br>In <i>Typoco, Jr. v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> the Court decreed that when the document allegedly falsified is a public or official document, regardless of whether the offender is a public officer or a private individual, intent to gain or to injure a third person is <i>immaterial</i>. Rather, the controlling consideration in such a case is the violation of the public faith and the destruction of the solemn truth in public or official documents, to wit:<blockquote>The law is clear that wrongful intent on the pai1 of the accused to injure a third person is not an essential element of the crime of falsification of public document. It is jurisprudentially settled that <i>in the falsification of public or official documents, whether by public officers or private persons, it is not necessary that there be present the idea of gain or the intent to injure a third person</i> for the reason that, in contradistinction to private documents, the principal thing punished is the violation of the public faith and the destruction of truth as therein solemnly proclaimed. In falsification of public documents, therefore, the controlling consideration is the public character of a document; and the existence of any prejudice caused to third persons or, at least, the intent to cause such damage becomes <i>immaterial</i>.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> (Emphasis supplied)</blockquote>The ruling in Typoco was applied by the Court in <i>Liwanag, Sr. v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> where the accused was charged with Falsification of a Public Document under Article 171, paragraph 4 of the Revised Penal Code. Specifically, the accused made an untruthful narration of facts in a Temporary Operator's Permit by: <i>(1)</i> naming his own son as the permit holder, even though no such permit was in fact issued; <i>(2)</i> providing a different birth date for his son and thus making it appear that he was of legal age when in truth, he was a minor at that time; and <i>(3)</i> altering his (accused's) badge number in the permit. The accused argued for his acquittal on the ground that there was no evidence to prove that he acted with malicious or wrongful intent to injure a third person. However, the Court sustained the verdict of guilt against the accused and held that intent to gain or intent to injure is not an element of the crime of Falsification of a Public Document.<br><br>The factual circumstance in <i>Liwanag, Sr.</i> is similar to the present case. Like a Temporary Operator's Permit, a Voter's ID is a <i>public document</i> that is issued in accordance with Section 25<sup style="COLOR: RGB(255, 0, 0);">[79]</sup> of Republic Act No. 8189.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> The information contained therein, such as the name, birth date, and address of the voter, is a narration of facts, i.e., a recital of things accomplished, deeds, occurrence, or happening.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> Providing a false statement on the foregoing matters to the COMELEC, through the Election Registration Board,<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> may therefore constitute Falsification of a Public Document, regardless of whether the offender acted with a malicious or wrongful intent to injure a third person.<br><br>Given that the Voter's ID is a <i>public</i> document, a false statement of the registrant's true name in the ID may amount to falsification; an intent to gain or injure a third person on the part of the defendant is immaterial. Hence, the dismissal of the Falsification charge for lack of evidence that Lina acted with wrongful or malicious intent to injure a third person in using the name "Lina Mamaongpong Sampal" in her Voter's ID is contrary to jurisprudence and constitutes grave abuse of discretion.<br><br>As to the conclusion of the OCP Santa Rosa that the statement in the Voter's ID, i.e., that Lina's name is "Lina Mamaongpong Simpal," is not absolutely false, it is contrary to law and established jurisprudence. Indeed, in accordance with Sections 1<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> and 4<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> of Commonwealth Act No. 142, as amended by Republic Act No. 6085,<sup style="COLOR: RGB(255, 0, 0);">[85]</sup> a person's <i>true name</i> is the one appearing in their birth certificate—their name registered at birth in the office of the local civil registry.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup><br><br>In relation thereto, the Court has held that "the State has an interest in the names borne by individuals for purposes of identification, and that changing one's name is a privilege arid not a right."<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> Thus, under Section 1<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> of Republic Act No. 9048,<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> as amended by Republic Act No. 10172, a person's name may be changed only through a judicial order, except for clerical or typographical errors and the change of first name or nickname, which can be corrected or changed by the concerned city or municipal civil registrar or consul general. <i>Substantial</i> changes to a person's name appearing in their birth certificate may be allowed only with judicial approval and based on very narrow grounds.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup><br><br>In the case, as correctly pointed out by the CA, Amanda sufficiently established that Lina's true name is the one that was registered with the local civil registry—the name appearing in her Certificate of Live Birth, which is "Nenita Dawan Cagunan." Lina did not present any judicial authority allowing her to use a name different from that registered in her Certificate of Live Birth. Absent such, Lina cannot use the name "Lina Mamaongpong Simpal" in securing a Voter's ID. The CA thus correctly determined that the OCP Santa Rosa's dismissal of the Falsification charge was attended with grave abuse of discretion.<br><br>Lina nonetheless avers that the charge of Falsification against her had prescribed, given that she used the name "Lina Mamaongpong Simpal" in the Certificates of Live Birth of her children that were registered with the local civil registry in 2007 and 2008, yet the complaint in the Falsification Case was filed only in 2019, beyond the 10-year prescriptive period for the crime.<br><br>The Court disagrees.<br><br>Admittedly, the constructive notice rule applies to charges of Falsification of a Public Document.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> Thus, the prescriptive period for the crime begins to run from the moment of the registration of the public document.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> Under Article 90<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> of the Revised Penal Code, the crime of Falsification by Private Individuals, which carries with it a correctional penalty,<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> prescribes in 10 years.<br><br>However, the CA found probable cause against Lina for Falsification of a Public Document <i>only</i> with regard to her Voter's ID. In fact, it affirmed the dismissal of the Falsification charge concerning the Certificates of Live Birth of Lina's children on the ground of prescription. As to the charge of Falsification of the Voter's ID, Lina does not dispute the CA's finding that the ID was issued sometime during the term of office of COMELEC Commissioner Sixto Brillantes, Jr., from January 16, 2011, until 2015. As such, the Voter's ID was registered sometime between 2011 and 2015. Hence, when the complaint for Falsification of the Voter's ID was filed in 2019, prescription had not yet set in.<br><br>At this juncture, the Court finds it proper to reiterate the rule that good faith is a valid defense in a charge of falsification of public documents by making untruthful statements in a narration of facts.<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> In her counter-affidavit, Lina essentially averred that she acted in good faith because she was issued a passport where her name appears as "Lina Mamaongpong Simpal." Supposedly, her other names were used by her since childhood or is her Muslim name; or served as a nickname and in reference to the surname of her children, i.e., Mangligot. Still, it is evident from the records that Lina's name in her Certificate of Live Birth is "Nenita Dawan Cagunan," not "Lina Mamaongpong Simpal" or "Beth Mangligot," and there is no judicial decree on record that authorizes Lina to use the foregoing aliases.<br><br>Good faith, being a matter of defense, is best determined during the trial proper and not during the preliminary investigation, where the task of the public prosecutor is <i>not</i> to ascertain guilt beyond reasonable doubt, but simply to determine "whether there is sufficient ground to engender a well-founded belief that a crime has been committed and that the accused is probably guilty thereof, and should be held for trial."<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> Lina's defense of good faith is better resolved in a full-blown trial on the merits and not during the preliminary investigation.<br><br>As to the dismissal of the charge of Illegal Use of Alias, the Court agrees with the CA that it was likewise attended with grave abuse of discretion for being manifestly contrary to the clear language of Sections 1, 3, and 4 of Commonwealth Act No. 142, as amended by Republic Act No. 6085, to wit:<blockquote>Sec. 1. Except as a pseudonym solely for literary, cinema, television, radio or other entertainment purposes and in athletic events where the use of pseudonym is a normally accepted practice, no person shall use any name different from the one with which he was registered at birth in the office of the local civil registry, or with which he was baptized for the first time, or, in case of an alien, with which he was registered in the bureau of immigration upon entry; or such substitute name as may have been authorized by a competent court: <i>Provided</i>, That persons, whose births have not been registered in any local civil registry and who have not been baptized, have one year from the approval of this act within which to register their names in the civil registry of their residence. The name shall comprise the patronymic name and one or two surnames.<br><br>. . . .<br><br>Sec. 3. No person having been baptized with a name different from that with which he was registered at birth in the local civil registry, or in case of an alien, registered in the bureau of immigration upon entry, or any person who obtained judicial authority to use an alias, or who uses a pseudonym, shall represent himself in any public or private transaction or shall sign or execute any public or private document without stating or affixing his real or original name and all names or aliases or pseudonym he is or may have been authorized to use.<br><br>Sec. 4. Six months from the approval of this act and subject to the provisions of section 1 hereof, all persons who have used any name and/or names and alias or aliases different from those authorized in section one of this act and duly recorded in the local civil registry, shall be prohibited to use such other name or names and/or alias in aliases.</blockquote>The afore-cited provisions of law clearly prohibit Filipinos from using a name other than the one that was registered for them at birth in the office of the local civil registry, or with which they were baptized for the first time, <i>except</i> with judicial authority. Again, the true name of Lina is the one that appears in her Certificate of Live Birth, i.e., "Nenita Dawan Cagunan." It was therefore an egregious error amounting to grave abuse of discretion on the part of the OCP Santa Rosa to hold that the names "Beth Mangligot" and "Lina Mamaongpong Simpal" are the registered names of Lina under the context of Commonwealth Act No. 142, when such aliases are manifestly different from the one appearing in Lina's Certificate of Live Birth.&nbsp;<br><br>The OCP Santa Rosa also dismissed the Illegal Use of Alias charge supposedly because there was insufficient proof that Lina used her aliases for trade or business. However, there is nothing in Commonwealth Act No. 142 which states that the alias must be used in trade or business to make a person liable for a violation of the said law. Although the Court in <i>Limson v. Gonzales</i>,<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> citing the case of <i>Ursua v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> stated that Commonwealth Act No. 142 was enacted "primarily to curb the common practice among the Chinese of adopting scores of different names and aliases which created tremendous confusion in the field of trade," <i>Limson</i> did not introduce the use of the alias in trade or business as an element of a violation of Commonwealth Act No. 142. Rather, the discussion was made only in relation to the origins and history of the statute. In fact, in <i>Limson</i>, the Court explained that Commonwealth Act No. 142 "penalized the act of using an alias name, unless such alias was duly authorized by proper judicial proceedings and recorded in the civil register."<br><br>Importantly, in her own counter-affidavit, Lina <i>admitted</i> that for more than 13 years, she has been using a name other than "Nenita Dawan Cagunan,"<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> yet she did not produce any judicial authority allowing her to do the same. To iterate, Commonwealth Act No. 142 prohibits the use of an alias except with judicial authority. It was therefore a manifest and palpable error on the part of the OCP Santa Rosa to dismiss the charge of Illegal Use of Alias against Lina notwithstanding her admissions on record.<br><br>All told no reversible error was committed by the CA in holding that the OCP Santa Rosa acted with grave abuse of discretion in dismissing the charges of Falsification of a Public Document and Illegal Use of Alias against Lina. The OCP Santa Rosa's findings were contrary to law, jurisprudence, the evidence on record, and the parties' admissions, warranting the issuance of a writ of <i>certiorari</i> to correct such jurisdictional errors.<br>&nbsp;<br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision dated May 9, 2024, and the Resolution dated November 15, 2024, of the Court of Appeals in CA-G.R. SP No. 179979 are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Gaerlan, Dimaampao</i>, and <i>Singh, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 33-57. Penned by Associate Justice Pedro B. Corales and concurred in by Associate Justices Carlito B. Calpatura and Selma Palacio Alaras of the Fourteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 58-59. Penned by Associate Justice Pedro B. Corales and concurred in by Associate Justices Carlito B. Calpatura and Selma Palacio Alaras of the Former Fourteenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 150-189.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> ART. 172. <i>Falsification by private individuals and use of falsified documents</i>.—The penalty of <i>prision correccional</i> in its medium and maximum periods and a fine of not more than 5,000 pesos shall be imposed upon:<blockquote><ol><li>Any private individual who shall commit any of the falsifications enumerated in the next preceding article in any public or official document or letter of exchange or any other kind of commercial document; and</li></ol></blockquote><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> ART. 171. <i>Falsification by public officer, employee or notary or ecclesiastic minister</i>.—The penalty of <i>prision mayor</i> and a fine not to exceed 5,000 pesos shall be imposed upon any public officer, employee, or notary who, taking advantage of his official position, shall falsify a document by committing any of the following acts:<blockquote>. . . .<br><br>4. Making untruthful statements in a narration of facts;</blockquote><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> An Act to Regulate the Use of Aliases.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> An Act Amending Commonwealth Act Numbered One Hundred Forty-Two Regulating the Use of Aliases.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, pp. 34-35, CA Decision. As stated by the CA. Lina filed against Amanda a complaint for physical injury, slander by deed, grave threats, grave coercion, and light coercion, but later on withdrew the first physical injury case. Amanda, thereafter, filed a complaint for estafa against Lina, who then refiled the complaint against Amanda for less serious physical injury, slander, slander by deed, grave threats, grave coercion, light coercion, and robbery. Subsequently, Amanda filed a complaint for perjury, falsification of public documents, and illegal use of alias against Lina.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 35, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 60-70, Complaint-Affidavit dated May 10, 2019.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 35, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 61-62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 34. The OCP Santa Rosa docketed the estafa complaint as NPS Docket No. IV-19-INV-19E-00244.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> ART. 315. <i>Swindling</i> (<i>estafa</i>).—Any person who shall defraud another by any of the means mentioned hereinbelow shall be punished by:<blockquote>. . . .<br><br>1. With unfaithfulness or abuse of confidence, namely:<br><br>. . . .<br><br>b. By misappropriating or converting, to the prejudice of another, money, goods, or any other personal property received by the offender in trust or on commission, or for administration, or under any other obligation involving the duty to make delivery of or to return the same, even though such obligation be totally or partially guaranteed by a bond; or by denying having received such money, goods, or other property.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Rollo</i>, p. 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 71-80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 37-38 and 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 37 and 73-74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 81-89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]&nbsp;</sup><i>Id.</i> at 97-101. Recommended by Prosecutor II Rowena A. Malabanan-Galeon, recommended for approval by Prosecutor III Jose G. De Leon, Jr., and approved by City Prosecutor Cesar D. Calubag.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 98-99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 99-100.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 100-101.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 103-113.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 114-115. Recommended by Prosecutor III Jose G. De Leon, Jr., and approved by City Prosecutor Cesar D. Calubag.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 116-144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 145-147. Penned by Regional Prosecutor Ernesto C. Mendoza.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> SECTION 5. Contents of petition. – . . . .<blockquote>The petition shall be accompanied by legible duplicate original or certified true copy of the resolution appealed from together with legible true copies of the complaint, affidavits/sworn statements and other evidence submitted by the parties during the preliminary investigation/reinvestigation.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Section 4. Declaration of Completeness. — A verified declaration that the pleadings or motions and its annexes submitted electronically are complete and faithful electronic reproductions of the paper-based documents and annexes shall be attached with the Petition for Review. The declaration shall follow the foregoing format:<blockquote>I, [name of petitioner], hereby declare that the documents and annexes thereof hereto submitted electronically, in accordance with the RULE ON ELECTRONIC FILING OF PETITIONS FOR REVIEW, are complete and faithful electronic reproductions thereof filed with the Department of Justice.<br><br>. . . .<br><br>The declaration shall likewise be saved in the CD in PDF format.<br><br>Non-compliance with this provision shall constitute a ground for the dismissal of the petition for review. In the case of comments, other responsive pleadings and motions, the same shall be deemed not filed.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i>, pp. 148-149.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Section 1. Scope. — This Rule shall apply to Petitions for Review filed before the Office of the Secretary and the Offices of Regional Prosecutors, pursuant to Department Circular Nos. 70 and 70-A, s. 2000, as well as comments thereon, other documents filed therefor, and any pleadings or motions thereafter.<br><br>Section 2. Electronic copies. — (a) All Petitions for Review filed pursuant to Section 1 hereof shall have, in addition to its attachments, a compact disc (CD) containing a PDF file of the Petition for Review and all its attachments. No petition shall be docketed and deemed filed without the accompanying CD.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, pp. 150-189.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 33-57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> SECTION 13. Motion for reconsideration. The aggrieved party may file a motion for reconsideration within a non-extendible period of ten (10) days from receipt of the resolution on appeal, furnishing the adverse party and the Prosecution Office concerned with copies thereof and submitting proof of such service. No second or further motion for reconsideration shall be entertained.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, p. 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> 823 Phil. 261 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 271.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, pp. 48-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 51-53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 54-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 201-206.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 58-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 12-27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 19-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 22-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>See</i> DOJ Circular No. 27 dated July 13, 2022, sec. 2, which states:<blockquote>Section 2. Resolutions of the Provincial/City Prosecutors in cases cognizable by the Metropolitan Trial Court, Municipal Circuit Trial Court, Municipal Trial Court, and Municipal Trial Court in Cities shall be reviewed on appeal by the Prosecutor General in his/her capacity as the Regional State Prosecutor in the National Capital Region and by the Regional State Prosecutors with respect to their respective regions. Cases decided on appeal by the Prosecutor General and by the Regional State Prosecutors under this provision shall be considered final and no longer be appealable to the Office of the Secretary of Justice.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>See</i> <b>Porto v. Grant Institute of Trade &amp; Technology, Inc.</b>, 931 Phil. 280 (2022); <b>Mina v. Court of Appeals</b>, 846 Phil. 208 (2019).<br><br>In the case, Lina was charged with Perjury, Falsification of a Public Document, and Illegal Use of Alias in 2019. At that time, Republic Act No. 11594, which was signed into law on October 29, 2021, had not yet taken effect. Thus, the charge of Perjury carried with it the penalty of <i>arresto mayor</i> in its maximum period to <i>prision correccional</i> in its minimum period; the charge of Falsification of Public Document by a Private Individual carried with it the penalty of <i>prision correccional</i> in its medium and maximum periods and a fine of not more than PHP 5,000; and the charge of Illegal Use of Alias carried with it the penalty of imprisonment of from one year to five years and a fine of PHP 5,000 to PHP 10,000, which all fall under the jurisdiction of the first level courts in Laguna. The ruling of the ORSP San Pablo on appeal is therefore final and may be the proper subject of <i>certiorari</i> proceedings before the CA.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Section 8. Questions that may be decided. — No errors which does not affect the jurisdiction over the subject matter or the validity of the judgment appealed from or the proceedings therein will be considered unless stated in the assignment of errors, or closely related to or dependent on an assigned error and properly argued in the brief, save as the court may pass upon plain errors and clerical errors.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> In <b>Spouses Constantino v. Benitez</b>, 896 Phil. 609, 617-618 (2021), and <b>Santos v. Republic</b>, 899 Phil. 158, 164-165 (2021), the Court explained the exceptions as follows:<blockquote>No error which was not assigned and argued may be considered unless such error is: (1) closely related to or dependent on an assigned error; or (2) it affects the jurisdiction over the subject matter on the validity of the judgment. The courts have ample authority to rule on matters not raised by the parties in their pleadings if such issues are indispensable or necessary to the just and final resolution of the pleaded issues.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>Dee Hwa Liong Electronics Corp. v. Papiona</b>, 562 Phil. 451, 456 (2007).<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Alawiya v. Court of Appeals</b>, 603 Phil. 264, 276 (2009).<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Debuque v. Nilson</b>, 902 Phil. 324, 339-340 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Tellez v. Spouses Joson</b>, 960 Phil. 515, 523 (2024); <b>United Coconut Planters Bank v. Looyuko</b>, 560 Phil. 581, 591-592 (2007).<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <b>Lirag Textile Mills, Inc. v. Blanco</b>, 195 Phil. 653, 661 (1981).<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>Catan v. National Labor Relations Commission</b>, 240 Phil. 433, 437 (1987).<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Debuque v. Nilson</b>, <i>supra</i> at 340.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>Buenaflor v. Office of the Secretary of Justice, G.R. No. 277067</b>, May 7, 2025, p. 5. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <b>Navarra v. Office of the Ombudsman</b>, 622 Phil. 376, 385 (2009).<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <b>Preferred Home Specialties Inc. v. Court of Appeals</b>, 514 Phil. 574, 599 (2005).<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>Satuito v. People, G.R. Nos. 239523-33, 239542 &amp; 239554-61 &amp; 239657-68</b>, May 19, 2025, p. 20. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Coun website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>Liwanag, Sr. v People</b>, 858 Phil. 38, 46 (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> 816 Phil. 914 (2017).<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 934-935.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> 858 Phil. 38 (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> SECTION 25. <i>Voter's Identification Card</i>. — The voter's identification card issued to the registered voter shall serve as a document for his identification. In case of loss or destruction no copy thereof may be issued except to the registered voter himself and only upon the authority of the Commission. The Commission shall adopt a design for the voter's identification card which shall be, as much as possible, tamper proof. It shall provide the following: the name and address of the voter, his date of birth, sex, photograph, thumbmark, and the number of precinct where he is registered, the signature of the voter and the chairman of the Election Registration Board and the voter's identification number (VIN).<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> The Voter's Registration Act of 1996.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <b>People v. Tugbang</b>, 273 Phil. 580, 591 (1991).<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> The Voter's Registration Act of 1996, sec. 3(a), provides:<br><br>SECTION 3. <i>Definition of Terms</i>. — As used in this Act:&nbsp;<br><blockquote><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">a)</div></td><td width="95%"><div align="justify"><i>Registration</i> refers to the act of accomplishing and filing of a sworn application for registration by a qualified voter before the election officer of the city or municipality wherein he resides and including the same in the book of registered voters upon approval by the Election Registration Board.</div></td></tr></tbody></table></blockquote><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> Sec. 1. Except as a pseudonym solely for literary, cinema, television, radio or other entertainment purposes and in athletic events where the use of pseudonym is a normally accepted practice, no person shall use any name different from the one with which he was registered at birth in the office of the local civil registry, or with which he was baptized for the first time, or, in case of an alien, with which he was registered in the bureau of immigration upon entry; or such substitute name as may have been authorized by a competent court: <i>Provided</i>, That persons, whose births have not been registered in any local civil registry and who have not been baptized, have one year from the approval of this act within which to register their names in the civil registry of their residence. The name shall comprise the patronymic name and one or two surnames. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> Sec. 4. Six months from the approval of this act and subject to the provisions of section 1 hereof, all persons who have used any name and/or names and alias or aliases different from those authorized in section one of this act and duly recorded in the local civil registry, shall be prohibited to use such other name or names and/or alias or aliases.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> An Act Amending Commonwealth Act Numbered One Hundred Forty-Two Regulating the Use of Aliases, approved on August 4, 1969.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <b>Tan v. Republic</b>, 122 Phil. 103, 106 (1965).<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <b>Republic v. Bolante</b>, 528 Phil. 328, 338 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> Section 1. <i>Authority to Correct Clerical or Typographical Error and Change of First Name or Nickname</i>. – No entry in a civil register shall be changed or corrected without a judicial order, except for clerical or typographical errors and change of first name or nickname, the day and month in the date ofbi1ih or sex of a person where it is patently clear that there was a clerical or typographical error or mistake in the entry, which can be corrected or changed by the concerned city or municipal civil registrar or consul general in accordance with the provisions of this Act and its implementing rules and regulations.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> An Act Authorizing the City or Municipal Civil Registrar or the Consul General to Correct a Clerical or Typographical Error in an Entry and/or Change of First Name or Nickname in the Civil Register Without Need of a Judicial Order, Amending for this Purpose Articles 376 And 412 of the Civil Code of the Philippines.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <b>Republic v. Bolante</b>, <i>supra</i> at 338-339, where the Court held:<blockquote>Accordingly, a person can be authorized to change his name appearing in either his certificate of birth or civil registry upon showing not only of reasonable cause or any compelling reason which may justify such change, but also that he will be prejudiced by the use of his true and official name. Jurisprudence has recognized certain justifying grounds to warrant a change of name. Among these are: (a) when the name is ridiculous, dishonorable or extremely difficult to write or pronounce; (b) when the change will avoid confusion; (c) when one has been continuously used and been known since childhood by a Filipino name, and was unaware of alien parentage; (d) when the surname causes embarrassment and there is no showing that the desired change of name was for a fraudulent purpose or that the change of name will prejudice public interest.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <b>Lim v. People</b>, 830 Phil. 669, 685-686 (2018).<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> ART 90. <i>Prescription of crimes</i>. – Crimes punishable by death, <i>reclusion perpetua</i> or <i>reclusion temporal</i> shall prescribe in twenty years.<br><br>. . .<br><br>Those punishable by a correctional penalty shall prescribed in ten years; with the exception of those punishable by <i>arresto mayor</i>, which shall prescribe in five years.<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> ART. 172. <i>Falsification by private individual and use of falsified documents</i>. – The penalty of <i>prision correccional</i> in its medium and maximum periods and a fine of not more than 5,000 pesos shall be imposed upon.<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> <b>Layno v. People</b>, 288 Phil. 584, 599 (1992).<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <b>Deloso v. Desierto</b>, 372 Phil. 805, 814 (1999).<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> 731 Phil. 17 (2014).<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> 326 Phil. 157 (1996).<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Rollo</i>, p. 74.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

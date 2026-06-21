@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 255900 - COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. SEMIRARA MINING AND POWER CORPORATION, RESPONDENT.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70401' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 255900, January 20, 2026 ]</H2>
+			<H3>COMMISSIONER OF INTERNAL REVENUE, PETITIONER, VS. SEMIRARA MINING AND POWER CORPORATION, RESPONDENT.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (<b>Petition for Review</b>) under Rule 45 of the Rules of Court assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated June 30, 2020, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated March 2, 2021, of the Court of Tax Appeals (<b>CTA</b>) <i>En Banc</i>, in CTA EB No. 2005. The CTA <i>En Banc</i> affirmed the Decision, dated July 27, 2018, and the Resolution, dated January 15, 2019, of the CTA First Division, in CTA Case No. 9133, which granted Semirara Mining and Power Corporation's (<b>SMPC</b>) claim for refund or issuance of tax credit certificate amounting to PHP 27,341,714.00, allegedly representing the Value-Added Tax (<b>VAT</b>) illegally collected from or erroneously paid by SMPC on its importation or partial shipment of diesel.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> </p><p align="center"> <b><i>The Facts</i></b> </p><p> On February 9, 2013, pursuant to Revenue Regulations No. 2-2012,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> the Bureau of Internal Revenue (<b>BIR</b>) assessed and demanded SMPC to pay VAT on importation on its partial shipment of fuel.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> In a letter, dated August 15, 2013, SMPC filed a protest against the said assessment, invoking its tax exemption privilege under Presidential Decree No. 972, otherwise known as "The Coal Development Act of 1976," as well as BIR Ruling No. DA-002-2006, in view of its Coal Operating Contract (<b>COC</b>) with the government.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p> On September 3, 2013, SMPC paid under protest the assessed amount of PHP 27,341,714.00.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> Subsequently, SMPC filed a Petition for Declaratory Relief before the Regional Trial Court of Makati City (<b>RTC</b>) against the respondent Commissioner of Internal Revenue (<b>CIR</b>), the Secretary of Finance, and the Commissioner of Customs. In its petition, SMPC sought a judicial declaration that Revenue Regulations No. 2-2012 does not apply to it and that its direct importation of fuel for its own use and consumption is not subject to VAT and excise tax.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> After trial, the RTC granted SMPC's Petition for Declaratory Relief, ruling that, in light of the tax exemption granted under Presidential Decree No. 972 and the COC, Revenue Regulations No. 2-2012 does not apply to SMPC's direct importation of petroleum and petroleum products.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> Thereafter, on May 29, 2015, SMPC filed a formal claim with the BIR for the refund of the alleged illegally collected VAT.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p> When the CIR failed to act on the refund claim within the reglementary period, SMPC filed a Petition for Review before the CTA on September 1, 2015.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></p><p> In its Answer, the CIR asserted the following as Special and Affirmative Defenses: (1) that Section 16 of Presidential Decree No. 972 has already been repealed, thereby rendering SMPC liable for excise tax and VAT; and (2) that Revenue Regulations No. 2-2012 does not violate the non-impairment clause of the 1987 Constitution.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> </p><p align="center"> <b><i>The Ruling of the CTA First Division</i></b> </p><p> After trial on the merits, and upon submission of the parties' respective memoranda, the CTA First Division rendered a Decision, dated July 27, 2018, granting SMPC's Petition for Review: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the instant Petition for Review is <b>GRANTED</b>. Accordingly, [the CIR] is <b>ORDERED TO REFUND</b> in favor of [SMPC] the amount of [PHP] 27,34[1],714.00, representing the <b>VAT</b> illegally collected from or erroneously paid by [SMPC] on its importation/partial shipment of diesel. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> (Emphasis in the original) </p> </blockquote> <p> Aggrieved, the CIR filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> which was denied by the CTA First Division in its Resolution, dated January 15, 2019.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> </p><p> This prompted the CIR to file a Petition for Review before the CTA <i>En Banc</i>, arguing, among others, that Section 16 of Presidential Decree No. 972 was repealed by Section 534 of Republic Act No. 7160, or the Local Government Code (<b>LGC</b>), and that Section 193 of the LGC withdrew all existing tax exemptions granted prior to its enactment, making SMPC liable for excise tax and VAT on all importations.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p align="center"> <b><i>The Ruling of the CTA En Banc</i></b> </p><p> On June 30, 2020, the CTA <i>En Banc</i> rendered the assailed Decision<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> denying the CIR's Petition for Review for lack of merit, thus: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the Petition for Review[,] dated filed on (<i>sic</i>) February 15, 2019[,] is <b>DENIED for lack of merit</b>. Accordingly, the assailed Decision[,] dated July 27, 2018[,] and Resolution[,] dated January 15, 2019[,] are <b>AFFIRMED</b>. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original) </p> </blockquote> <p> The CTA <i>En Banc</i> concurred with the CTA First Division's ruling that, although Section 16 of Presidential Decree No. 972 was expressly included in the repealing clause of the LGC, only the portions of the decree that are inconsistent with the LGC—specifically, the exemption from local taxes—were repealed, modified, or amended. Upon the effectivity of the LGC, only SMPC's exemption from local taxes under Section 16 of Presidential Decree No. 972 was withdrawn. Consequently, SMPC's exemption from national taxes, including VAT and excise tax, as well as duties and taxes on importation, remains in force.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> </p><p> Hence, this Petition for Review before the Court. </p><p align="center"> <b><i>The Issue</i></b> </p><p> Has SMPC's exemption from VAT and excise tax under Section 16 of Presidential Decree No. 972 been repealed by the LGC? </p><p align="center"> <b><i>The Ruling of the Court</i></b> </p><p> The Petition for Review is denied for lack of merit. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><p align="justify"><i>Section 534(e) of the LGC did not expressly repeal Section 16 of Presidential Decree No. 972 in its entirety</i> </p></td> </tr> </tbody></table> <p>Presidential Decree No. 972, or the Coal Development Act of 1976, promotes an accelerated exploration, development, exploitation, production, and utilization of coal in the Philippines. In order to develop the market for domestic coal production, Section 16 of the statute grants tax exemptions to operators that have coal operating contracts with the government, thus: </p><blockquote> <p> Section 16. <i>Incentives to Operators</i>. The provisions of any law to the contrary notwithstanding, a contract executed under this Decree may provide that the operator shall have the following incentives: </p> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr valign="top"> <td width="5%"><div align="justify">a.</div></td> <td colspan="3"><div align="justify"><b>Exemption from all taxes except income tax</b>;</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td colspan="3">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify">b.</div></td> <td colspan="3"><div align="justify"><b>Exemption from payment of tariff duties and compensating tax on importation of machinery and equipment and spare parts and materials required for the coal operations</b> subject to the following conditions:</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">1.</div></td> <td colspan="2"><div align="justify">that machinery, equipment, spare parts and materials of comparable price and quality are not manufactured in the Philippines; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td width="5%"><div align="justify">2.</div></td> <td colspan="2"> <div align="justify">that the same are directly and actually needed and will be used exclusively by the operator in its operations or in operation for it by a contractor; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">3.</div></td> <td colspan="2"><div align="justify">That they are covered by shipping documents in the name of the operator to whom the shipment will be delivered directly by the customs authorities; and </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify">4.</div></td> <td colspan="2"><div align="justify">that prior approval of the Energy Development Board was obtained by the operator before the importation of such machinery, equipment, spare parts and materials, which approval shall not be unreasonably withheld; Provided, however, that the operator or its contractor may not sell, transfer, or dispose of the machinery, equipment, spare parts and materials without the prior approval of the Energy Development Board and payment of taxes and duties thereon; Provided, further, that should the operator or its contractor sell, transfer, or dispose of these machinery, equipment, spare parts or materials without the prior approval of the Energy Development Board, it shall pay twice the amount of the taxes and duties thereon; Provided, finally, that the Energy Development Board shall allow and approved the sale, transfer or disposition of the said items without tax if made:</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="center">a.</div></td> <td><div align="justify">to another operator under a coal operating contract; </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td><div align="center"></div><br></td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td><div align="center">b.</div></td> <td> <div align="justify">for reasons of technical obsolescence; or</div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td><div align="center"></div><br></td> <td>&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td width="6%"><div align="center">c.</div></td> <td width="84%"> <div align="justify">for purposes of replacement to improve and/or expand the operation under the coal operating contract. </div></td> </tr> <tr valign="top"> <td>&nbsp;</td> <td>&nbsp;</td> <td colspan="2">&nbsp;</td> </tr> <tr valign="top"> <td><div align="justify"></div><br></td> <td><div align="justify"></div><br></td> <td colspan="2"><div align="justify">x x x<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis supplied) </div></td> </tr> </tbody></table> </blockquote> <p> However, the CIR argues that Section 16 of Presidential Decree No. 972 was expressly repealed by Section 534(e) of the LGC,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> which provides: </p><blockquote> <p> Section 534. <i>Repealing Clause</i>. -</p> <p> (e) <b>The following provisions are hereby repealed or amended insofar as they are inconsistent with the provisions of this Code</b>: Sections 2, 16 and 29 of Presidential Decree No. 704; Section 12 of Presidential Decree No. 87, as amended; Section 52, 53, 66, 67, 68, 69, 70, 71, 72, 73, and 74 of Presidential Decree No. 463, as amended; and <b>Section 16 of Presidential Decree No. 972, as amended</b>... (Emphasis supplied) </p> </blockquote> <p> The CIR is mistaken. </p><p> It is worth emphasizing that two distinct legal terms, i.e., "<i>repealed</i>" and "<i>amended</i>," were used by Congress in characterizing the effect of the enactment of the LGC on Section 16 of Presidential Decree No. 972. </p><p> In order to arrive at the correct interpretation of the effect of the enactment of the LGC on Section 16 of Presidential Decree No. 972, there is a need to define and distinguish the terms "repeal" and "amendment." Black's Law Dictionary distinguishes these two terms in the following manner: </p><blockquote> <p> <b>Repeal</b>. The abrogation or annulling of a previously existing law by the enactment of a subsequent statute which declares that the former law shall be revoked and abrogated (which is called "express" repeal), or which contains provisions so contrary to or irreconcilable with those of the earlier law that only one of the two statutes can stand in force (called "implied" repeal). To revoke, abolish, to rescind or abrogate by authority. </p> <p> <i>Amendment distinguished. "Repeal" of a law means its complete abrogation by the enactment of a subsequent statute, whereas the "amendment" of a statute means an alteration in the law already existing, leaving some part of the original still standing</i>.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Emphasis supplied) </p> </blockquote> <p> Notably, the term "repeal" has also been used when specific provisions of a statute are expressly revoked or abrogated by a subsequent law. Examples of these are Section 534(c)<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> and Section 534(e) of the LGC. Thus, there is "repeal" when a prior statute is completely revoked by the enactment of a subsequent law either expressly or impliedly, or when specific statutory provision or provisions are expressly abrogated completely by a subsequent statute. </p><p> Therefore, on its face, Section 534(e) does not necessarily repeal Section 16 of Presidential Decree No. 972 in its entirety. In determining whether Section 16 of Presidential Decree No. 972 has been repealed by the LGC, there is a need to determine whether the entirety of the said provision is inconsistent with the provisions of the LGC. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Section 16 of Presidential Decree No. 972 was only amended insofar as it grants exemption from local taxes, pursuant to Section 534(e) in relation to Section 193 of the LGC</i> </div></td> </tr> </tbody></table> <p>The CIR banks on the strict literal interpretation of Section 193 of the LGC to advance the argument that it is inconsistent with Section 16 of Presidential Decree No. 972. The provision states: </p><blockquote> <p> Section 193. <i>Withdrawal of Tax Exemption Privileges</i>. - <b>Unless otherwise provided in this Code, tax exemptions or incentives granted to, or presently enjoyed by all persons, whether natural or juridical, including government-owned or controlled corporations</b>, except local water districts, cooperatives duly registered under R.A. No. 6938, non-stock and non-profit hospitals and educational institutions, <b>are hereby withdrawn upon the effectivity of this Code</b>. (Emphasis supplied) </p> </blockquote> <p> Since this provision uses the phrase "tax exemptions or incentives," without qualification as to whether it only applies to local taxes, the CIR is of the position that all tax exemptions or incentives prior to the enactment of the LGC, including exemptions from national taxes, have been withdrawn. </p><p> The CIR is grasping at straws. </p><p> It is, indeed, a basic rule in statutory construction that "when the law is clear and unambiguous, the court is left with no alternative but to apply the same according to its clear language."<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> However, the Court finds that, at the very least, there is an ambiguity as to the scope of withdrawal of tax exemption privileges, particularly as to whether it also operates to withdraw prior exemptions from national revenue taxes. This is especially true since, insofar as taxation is concerned, the LGC's scope is limited only to the exercise by local government units (<b>LGUs</b>), i.e., provinces, cities, municipalities, and barangays, of their taxing and other revenue-raising powers.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> </p><p> On this score, the Court also recognizes the rule in statutory construction that a law's provisions must not be interpreted in isolation, but must be construed together with the entirety of the statute. In <i>Taganito Mining Corporation v. Commissioner of Internal Revenue</i>,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> the Court, citing <i>Fort Bonifacio Development Corporation v. Commissioner of Internal Revenue</i>,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> ruled that: </p><blockquote> <p> A law must not be read in truncated parts; its provisions must be read in relation to the whole law. It is the cardinal rule in statutory construction that a statute's clauses and phrases must not be taken as detached and isolated expressions, but the whole and every part thereof must be considered in fixing the meaning of any of its parts in order to produce a harmonious whole. Every part of the statute must be interpreted with reference to the context, [i.e.], that every part of the statute must be considered together with other parts of the statute and kept subservient to the general intent of the whole enactment. </p> <p> In construing a statute, courts have to take the thought conveyed by the statute as a whole; construe the constituent parts together; ascertain the legislative intent from the whole act; consider each and every provision thereof in the light of the general purpose of the statute; and endeavor to make every part effective, harmonious and sensible.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></p> </blockquote> <p> As such, in construing the scope of Section 193 of the LGC, the entirety of the statute needs to be considered. The LGC was enacted to implement the constitutional mandate to provide for a more responsive and accountable local government structure instituted through a system of decentralization. The 1987 Constitution has also delegated the power to tax to the LGUs by authorizing them to create their own sources of income that would make them self-reliant.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Under its Declaration of Policy, the LGC declares: </p><blockquote> <p> It is hereby declared the policy of the State that the territorial and political subdivisions of the State shall enjoy genuine and meaningful local autonomy to enable them to attain their fullest development as self-reliant communities and make them more effective partners in the attainment of national goals. Toward this end, the State shall provide for a more responsive and accountable local government structure instituted through a system of decentralization whereby local government units shall be given more powers, authority, responsibilities, and resources. The process of decentralization shall proceed from the national government to the local government units.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> </p> </blockquote> <p> Additionally, Section 3(d) of the LGC provides one of the operative principles of decentralization, i.e., that LGUs may create or broaden their own sources of revenue: </p><blockquote> <p> The vesting of duty, responsibility, and accountability in local government units shall be accompanied with provision for reasonably adequate resources to discharge their powers and effectively carry out their functions: hence, they shall have the power to create and broaden their own sources of revenue and the right to a just share in national taxes and an equitable share in the proceeds of the utilization and development of the national wealth within their respective areas; </p> </blockquote> <p> Further, Section 193 is under Book II (Local Taxation and Fiscal Matters), Title I (Local Government Taxation) of the LGC. Section 128, Chapter I, Title I, Book II provides the scope of the provisions of the title on Local Government Taxation, thus: </p><blockquote> <p> Section 128. <i>Scope</i>. - The provisions herein shall govern the exercise by provinces, cities, municipalities, and barangays of their taxing and other revenue-raising powers. </p> </blockquote> <p> Also worth noting is the provision immediately preceding Section 193, which expressly authorizes LGUs to grant tax exemption privileges: </p><blockquote> <p> Section 192. <i>Authority to Grant Tax Exemption Privileges</i>. - Local government units may, through ordinances duly approved, grant tax exemptions, incentives or reliefs under such terms and conditions as they may deem necessary. </p> </blockquote> <p> It is clear, therefore, that the withdrawal of tax exemption privileges under Section 193 of the LGC pertains to exemptions from local taxes, intended to broaden the tax base of LGUs and grant them discretion on which persons and transactions may be exempt, consistent with the State policy of ensuring local autonomy. This intent was recognized by the Court in <i>Manila Electric Company v. The City Assessor of Lucena City</i>,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> thus: </p><blockquote> <p> Taking into account the above-mentioned provisions, <i>the evident intent of the [LGC] is to withdraw/repeal all exemptions from local taxes, unless otherwise provided by the Code. The limited and restrictive nature of the tax exemption privileges under the [LGC] is consistent with the State policy to ensure autonomy of local governments and the objective of the [LGC] to grant genuine and meaningful autonomy to enable local government units to attain their fullest development as self-reliant communities and make them effective partners in the attainment of national goals. The obvious intention of the law is to broaden the tax base of local government units to assure them of substantial sources of revenue</i>.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Emphasis supplied) </p> </blockquote> <p> Based on the foregoing, the Court rules that the LGC did not repeal, but merely amended, Section 16 of Presidential Decree No. 972, withdrawing only the exemption from local taxes. Consequently, SMPC's exemption from national taxes, including VAT and excise taxes on its importations under Section 16 of Presidential Decree No. 972, remains effective. </p><p> <b>FOR THESE REASONS,</b> the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision, dated June 30, 2020, and the Resolution, dated March 2, 2021, of the Court of Tax Appeals <i>En Banc</i> in CTA EB No. 2005 are <b>AFFIRMED</b>. </p><p> <b>SO ORDERED</b>. </p><p> <em>Caguioa (Chairperson), Inting, Gaerlan</em>, and<em> Dimaampao, JJ</em>., concur.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 9-26. <p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 32-46. Penned by Associate Justice Ma. Belen M. Ringpis-Liban and concurred in by Presiding Justice Roman G. Del Rosario and Associate Justices Juanito C. Castañeda, Jr., Erlinda P. Uy, Esperanza R. Fabon-Victorino, Catherine T. Manahan, Jean Marie A. Bacorro-Villena, and Maria Rowena Modesto-San Pedro of the Court of Tax Appeals <i>En Banc</i>, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 28-30. Penned by Associate Justice Ma. Belen M. Ringpis-Liban and concurred in by Presiding Justice Roman G. Del Rosario and Associate Justices Juanito C. Castañeda, Jr., Erlinda P. Uy, Catherine T. Manahan, Jean Marie A. Bacorro-Villena, and Maria Rowena Modesto-San Pedro of the Court of Tax Appeals <i>En Banc</i>, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 32. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Entitled "Tax Administration Treatment of Petroleum and Petroleum Products Imported in the Philippines including those coming in through Freeport Zones and Economic Zones and Registration of All Storage Tanks, Facilities, Depots and Terminals".</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i>, p. 33.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 34.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i></p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 35.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 33.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 35.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 33, 35. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 41.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 32-46. </p><p><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 45. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 43. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Presidential Decree No. 972 (1976), sec. 16.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Rollo</i>, p. 14. </p><p><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> BLACK'S LAW DICTIONARY 1299 (Revised 6<sup>th</sup> Ed., 1991). </p><p><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> LOCAL GOV'T. CODE, sec. 534(c) states: </p><blockquote> <p>Section 534. Repealing Clause. - <br> . . . .<br> (c) The provisions of Sections 2, 3, and 4 of Republic Act No. 1939 regarding hospital fund; Section 3, a (3) and b (2) of Republic Act No. 5447 regarding the Special Education Fund; Presidential Decree No. 144 as amended by Presidential Decree Nos. 559 and 1741; Presidential Decree No. 231 as amended; Presidential Decree No. 436 as amended by Presidential Decree No. 558; and Presidential Decree Nos. 381, 436, 464, 477, 526, 632, 752, and 1136 are hereby repealed and rendered of no force and effect.</p> </blockquote> <p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <b>Iloilo I Electric Cooperative, Inc. v. Executive Secretary Bersamin</b>, 956 Phil. 908, 917 (2024) [Per J. Zalameda, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[26]</sup> LOCAL GOV'T CODE, sec. 128. </p><p><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> 900 Phil. 157 (2021) [Per J. Leonen, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> 617 Phil. 358 (2009) [Per J. Leonardo-De Castro, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>Taganito Mining Corporation v. Commissioner of Internal Revenue</b>, 900 Phil. 157, 165-166 (2021) [Per J. Leonen, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>Congressman Mandanas v. Exec. Sec. Ochoa</b>, 835 Phil. 97, 143 (2018) [Per J. Bersamin, <i>En Banc</i>]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[31]</sup> LOCAL GOV'T. CODE, sec. 2 (a). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[32]</sup> 765 Phil. 605 (2015) [Per J. Leonardo-De Castro, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 630.&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

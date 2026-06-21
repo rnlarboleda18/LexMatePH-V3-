@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 272396 - POH TOH BUDDHIST ASSOCIATION OF THE PHILIPPINES, INC., REPRESENTED BY DORIAN L. CHUA, PETITIONER, VS. CRISTINA SY* A.K.A HENG TE OR HENG TI AND MARGIE LIM MACALALAD, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70368' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 272396, April 15, 2026 ]</H2>
+			<H3>POH TOH BUDDHIST ASSOCIATION OF THE PHILIPPINES, INC., REPRESENTED BY DORIAN L. CHUA, PETITIONER, VS. CRISTINA SY<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> A.K.A HENG TE OR HENG TI AND MARGIE LIM MACALALAD, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ZALAMEDA, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This resolves the Petition<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, filed by petitioner Poh Toh Buddhist Association of the Philippines, Inc. (PTBAP, Inc.), which seeks to reverse and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> issued by the Court of Appeals (CA). The CA reversed and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> and Order<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Regional Trial Court (RTC) in a case for unlawful detainer.<br>&nbsp;<br><center><i>Antecedents</i></center><br>PTBAP, Inc. is the registered owner of a parcel of land, covered by Transfer Certificate of Title No. T-6546, located in Baguio City. Erected on said land is a Buddhist temple (subject property). Sometime in 2009,<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> PTBAP, Inc. appointed respondent Cristina Sy (Sy), a resident monk, to oversee the maintenance and operations of the subject property, with full authority to decide and act on all matters concerning the same.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>In 2014, PTBAP, Inc. discovered that Sy had authorized respondent Margie Lim Macalalad (Macalalad) to operate a dormitory on the subject property under the name "Paramita Dormitory." Further, it was revealed that Sy had failed to remit donations collected from temple patrons. Consequently, PTBAP, Inc.'s board of trustees terminated Sy's appointment. It also ordered Sy and all persons claiming title under her to vacate the premises of the subject property.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>Disagreeing, Sy formed a breakaway faction (Sy group) which issued a board resolution, purportedly appointing Sy as officer-in-charge/administrator of the subject property. In turn, PTBAP, Inc., through its current board of trustees that included Benjamin G. Favis (Favis), challenged the legitimacy of the Sy group before the Securities and Exchange Commission (SEC), which ultimately led to the cancellation of the Sy group's registration.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>From then on, PTBAP, Inc., acting through the group led by Favis (Favis group), issued a final demand upon Sy and Macalalad to vacate and surrender possession of the subject property. Despite receipt of the demand, Sy and Macalalad refused to comply. Consequently, PTBAP, Inc., through Favis, instituted a Complaint<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> for unlawful detainer before the Municipal Trial Court in Cities (MTCC).<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Sy and Macalalad, for their part, acknowledged receipt of PTBAP, Inc.'s notice to vacate. However, they refused to comply, asserting that the said notice emanated from the Favis group, which they claim lacks authority over the subject property. Sy and Macalalad insisted that Sy's authority as caretaker was derived not from the Favis group, but from one Conchita Mercader (Mercader) and noted by a certain Master Dao Yuan.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Sy further asserted that she was reappointed as the overall caretaker and manager of the subject property by PTBAP, Inc.'s legitimate board of trustees, as stated in its latest board resolution, signed by the group of Jose Ocampo (Ocampo group). As such, the Favis group had no legal standing to issue the notice to vacate.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>According to Sy and Macalalad, the Favis group falsified documents submitted to the SEC and initiated several unfounded complaints against Sy to harass her. They emphasized that these complaints were ultimately dismissed, thereby reinforcing their claim that the notice to vacate was issued by the Favis group without lawful authority.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br><center><i>Ruling of the MTCC</i></center><br>After hearing, the MTCC rendered its November 28, 2018 Decision,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> the dispositive portion of which reads:<br><blockquote><b>WHEREFORE</b>, judgment is hereby rendered in favour [sic] of the plaintiff PohToh [sic] Buddhist Association of the Philippines, Inc., represented by Benjamin Favis, directing therefore herein defendants Cristina Sy aka "HengTe" or HengTi and Margie Lim Macalalad and all persons claiming possession under them or acting under their authority to completely vacate and surrender to the plaintiff the possession of the subject property Baguio Buddhist Temple.<br><br>Defendants are similarly adjudged to pay the plaintiff [PHP] 4,307.65 as actual damages for litigation expenses.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> (Emphasis in the original)</blockquote>The MTCC ruled that PTBAP, Inc. had sufficiently established a cause of action for unlawful detainer. It found that PTBAP, Inc. proved its status as the owner of the subject property, that it had granted Sy authority to possess the same as a caretaker, and that it subsequently served upon her a notice to vacate and surrender possession of the subject property. The MTCC further noted that the notice was duly received by Sy, yet she unduly refused to comply.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> While it denied PTBAP, Inc.'s prayer for attorney's fees, it nonetheless granted litigation expenses in the amount of PHP 4,307.65.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Both parties appealed from said decision.<br><br><center><i>Ruling of the RTC</i></center><br>Subsequently, the RTC issued a Decision,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> affirming the ruling of the MTCC. The dispositive portion of the decision reads:<blockquote>WHEREFORE, in view of the foregoing, the Decision appealed from is hereby AFFIRMED <i>in toto</i>. The appeals are hereby DISMISSED.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></blockquote>The RTC held that the Favis group submitted evidence of its prior status as the temporarily recognized governing body of PTBAP, Inc. in several cases, notably in a case decided by the Supreme Court. By virtue of this established recognition, the Favis group's authority to represent PTBAP, Inc. in this case must be upheld. Consequently, since the Favis group had already sent a demand to vacate upon Sy, which she duly received, no valid reason remained for her continued occupation and possession of the subject property.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Unconvinced, Sy sought recourse with the CA via a Petition for Review.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br><center><i>Ruling of the CA</i></center><br>The CA issued its assailed Decision,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> the dispositive portion of which reads:<blockquote><b>WHEREFORE</b>, premises considered, the instant Petition for Review is <b>GRANTED</b>. The [January 29, 2021] Decision of the [RTC], Branch 3, Baguio City in Civil Case No. 9247-R is hereby <b>REVERSED and SET ASIDE</b>. The [August 29, 2017] Complaint for Unlawful Detainer is <b>DISMISSED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> (Emphasis in the original)</blockquote>In its Decision, the CA found that Sy's possession of the subject property was initially lawful, having been premised on PTBAP, Inc.'s tolerance. Although PTBAP, Inc. had already manifested its intention to withdraw such tolerance and demand the surrender of possession, the appellate court took note of the existence of rival factions within PTBAP, Inc.'s organization. This internal dispute raised a serious question as to which group constituted the legitimate board of directors with authority to order Sy's ejectment. Consequently, the CA ruled that it was the more prudent course of action to await a definitive pronouncement from the Court resolving the issue of the PTBAP, Inc.'s legitimate board. Pending such determination, Sy's possession of the subject property should be maintained.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>After the CA denied PTBAP, Inc.'s Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> the latter filed the present Petition<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> before this Court.<br><br><center><i>Issue</i></center><br>The issue for Resolution<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> is whether the CA committed reversible error in not finding that petitioner, through the Favis group, successfully proved its right to eject respondent Sy from the subject property summarily.<br><br><center><i>Ruling of the Court</i></center><br>The petition is granted.<br><br>The petitioner's ownership of the subject property is not disputed. However, in countless jurisprudence involving the issue of possession, the Court has emphasized that ownership alone is not determinative of the right of possession. Indeed, in one vein, "[i]t is an elementary principle of civil law that the owner of real property is entitled to the possession thereof as an attribute of his or her ownership. In fact, the holder of a Torrens Title is the rightful owner of the property thereby covered, and is entitled to its possession."<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> In another vein, it is likewise a fundamental rule that "even a legal owner of the subject property cannot simply oust a party who is in peaceable quiet possession thereof through a summary action for ejectment, without having established by a preponderance of evidence the essential requisites of the action."<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>In the instant Petition, the petitioner, through the Favis group, filed a summary case for unlawful detainer. A complaint sufficiently proves a cause of action for unlawful detainer if it satisfies the following elements: (1) initially, possession of the property by the defendant was by contract with or by tolerance of the plaintiff; (2) eventually, such possession became illegal upon notice by plaintiff to defendant of the termination of the latter's right of possession; (3) from then on, the defendant remained in possession of the property and deprived the plaintiff of the enjoyment; and (4) within one year from the last demand on defendant to vacate the property, the plaintiff instituted the complaint for ejectment.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>The records establish that respondent Sy's possession of the subject property was initially allowed by tolerance of the petitioner. Without the petitioner's knowledge and consent, respondent Sy allowed respondent Macalalad to operate a dormitory on the premises. When the petitioner, through the Favis group, sent a demand to vacate, respondents refused to comply. As a result, the Favis group, on behalf of the petitioner, filed an action for unlawful detainer within one year from the date of demand.<br><br>The only question that remains is whether the Favis group possessed the requisite authority to revoke the tolerance previously extended by the petitioner to respondent Sy. To be sure, it is well-settled that a corporation, like petitioner, being a juridical entity, may act only through its board of directors (or trustees, in this case). The board exercises almost all corporate powers, lays down all corporate business policies, and is responsible for the efficiency of management. The general rule is that, in the absence of authority from the board, no person, not even its officers, can validly bind a corporation.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Conversely, an act not authorized by the legitimate board of trustees will not bind the corporation.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>In resolving such issue, it is crucial to point out that, in G.R. No. 233236, <i>Poh Toh Buddhist Association of the Philippines, as represented by Rosa Lim Co v. Hon. Cornejo-Tomacruz</i>,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> the Court had already declared that "[u]nless and until there is a ruling from a proper court that the Go group has been replaced by the Lim group, the authority of the former to represent the PTBA, Inc. in the unlawful detainer case is presumed to continue."<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>For clarity, it bears noting that the Go group referred to in the earlier <i>Poh Toh</i> case, is the same group to which Favis belongs. As explained by the RTC:<blockquote>The record shows that the [Favis group] is led by its Board of Trustees Chairman Dorian Chua [Chua group]. In several suits in the City of Manila, [PTBAP], Inc. brought actions as plaintiff, represented by a group called therein as group of Vicente Go [Go group], which is the same as [Chua group] and the [Favis group] in this case. In said cases, the [Go group] and, therefore, consequently the [Chua group] and the ["Favis group"] in this case, was recognized, even by the Honorable Supreme Court as having lawfully instituted the suits for and on behalf of [PTBAP], Inc. even pending determination of which between the two contending groups constitute the governing Board of Trustees of the association.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> (Citations omitted)</blockquote>In line with this, respondents' contention that the pronouncement in <i>G.R. No. 233236</i> is limited solely to the specific unlawful detainer case therein involved, and thus inapplicable to the present controversy, is untenable. The said ruling cannot be read in isolation but must be understood considering the principle it established concerning representation and authority of the Favis group, pending judicial determination of the legitimate governing board of petitioner. As the Court recently elucidated in <i>Estate of Bueno v. Justice Peralta, Jr.</i>:<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><blockquote>In <i>Tiburcio v. People's Homesite &amp; Housing Corporation</i>, this Court recognized, that in certain circumstances, courts need to take judicial notice of pronouncements in other causes due to its relevance to the matter at hand:<blockquote>In some instance, courts have taken judicial notice of proceedings in other causes, because of their close connection with the matter in controversy. Thus, in a separate civil action against the administrator of an estate arising from an appeal against the report of the committee on claims appointed in the administration proceedings of said estate, to determine whether or not the appeal was taken on time, the court took judicial notice of the record of the administration proceedings. Courts have also taken judicial notice of previous cases to determine whether or not the case pending is a moot one or whether or not a previous ruling is applicable in the case under consideration.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (Citations omitted)</blockquote></blockquote>For this purpose, the Court rules that the Favis group is recognized as the existing board of the petitioner and is thus authorized to terminate respondent Sy's authority to occupy the subject property. Consequently, the CA Decision and Resolution must be reversed and set aside, and the RTC's Decision reinstated.<br><br><b>FOR THESE REASONS</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The February 9, 2023 Decision and February 14, 2024 Resolution of the Court of Appeals in CA-G.R. SP No. 169202 are <b>REVERSED</b> and <b>SET ASIDE</b>.<br><br>The January 29, 2021 Decision and March 5, 2021 Order by Branch 3, Regional Trial Court, Baguio City in Civil Case No. 9247-R, which affirmed the November 28, 2018 Decision of Branch 2, Municipal Trial Court in Cities, Baguio City, in Civil Case No. 14093, are <b>REINSTATED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Hernando, Rosario</i>, and <i>Marquez, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to as "Cristina Ting Sy" and "Sister Cristina Sy" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 244-251. The February 9, 2023 Decision in CA-G.R. SP No. 169202 was penned by Associate Justice Maximo M. De Leon, and concurred in by Associate Justices Marlene B. Gonzales-Sison and Perpetua Susana T. Atal-Paño of the Seventh Division of the Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 274-278. The February 14, 2024 Resolution in CA-G.R. SP No. 169202 was penned by Associate Justice Maximo M. De Leon, and concurred in by Associate Justices Marlene B. Gonzales-Sison and Perpetua Susana T. Atal-Paño of the Former Seventh Division of the Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 208-211. The January 29, 2021 Decision in Civil Case No. 9247-R was penned by Presiding Judge Emmanuel Cacho Rasing of Branch 3, Regional Trial Court, Baguio City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 212. The March 5, 2021 Order in Civil Case No. 9247-R was penned by Presiding Judge Emmanuel Cacho Rasing of Branch 3, Regional Trial Court, Baguio City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 245.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 36-39, Annex "B."<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 245-246.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 246.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 182-188. The November 28, 2018 Decision in Civil Case No. 14093 was penned by Presiding Judge Glenda T. Ortiz-Soriano of Branch 2, Municipal Trial Court in Cities, Baguio City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 188.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 186-187.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 188.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 208-211<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 211.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 209-211.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 213-227.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 244-251.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 250.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 249-250.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 253-266.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 9-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 274-278.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>See</i> <b>Javelosa v. Tapus</b>, 835 Phil. 576, 587 (2018) [Per J. Reyes, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>See</i> <b>Nabo v. Buenviaje</b>, 887 Phil. 678, 694-695 (2020) [Per J. Inting, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 689.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>See</i> <b>Cebu Mactan Members Center, Inc. v. Tsukahara</b>, 610 Phil. 586, 591 (2009) [Per J. Carpio, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See</i> <b>University of Mindanao, Inc. v. Bangko Sentral ng Pilipinas, et al.</b>, 776 Phil. 401, 411 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>G.R. No. 233236</b>, October 9, 2017 [Notice, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Rollo</i>, p. 181.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 210.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 927 Phil. 136 (2022) [Per J. Lopez, J., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 154-155.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

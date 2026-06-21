@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 267588 - OROPHIL SHIPPING INTERNATIONAL CO., INC. AND/OR SANTOKU SENPAKU CO., LTD., PETITIONERS, VS. LEVE LESTER Q. NAVARRA, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70366' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 267588, January 27, 2026 ]</H2>
+			<H3>OROPHIL SHIPPING INTERNATIONAL CO., INC. AND/OR SANTOKU SENPAKU CO., LTD., PETITIONERS, VS. LEVE LESTER Q. NAVARRA, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i> under Rule 45 of the Rules of Court<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Orophil Shipping International Co., Inc. (Orophil Shipping) and/or Santoku Senpaku, Co. Ltd. (Santoku Senpaku; petitioners, collectively) which assails the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated June 16, 2022, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated May 29, 2023, of the Court of Appeals (CA) in CA-G.R. SP No. 166438. The CA affirmed the Decision dated February 10, 2020, and the Resolution dated July 23, 2020, of the Panel of Voluntary Arbitrators (PVA), National Conciliation and Mediation Board (NCMB) in AC-948-RCMB-NCR-MVA-194-02-06-2019 that granted Leve Lester Q. Navarra (respondent) total and permanent disability benefits and attorney's fees, with modification in that the monetary awards due to him shall earn six percent legal interest per annum.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br><center><i>The Antecedents</i></center><br>Santoku Senpaku, is a foreign corporation engaged in the shipping business. It engaged respondent as an Oiler, through its local manning agent Orophil Shipping, to board the vessel M/V Atlantic Erica.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>On May 8, 2018, while the vessel was in transit from Tauranga New Zealand to Shanghai China, the supervisor-in-charge ordered respondent to check and inspect all the tanks using a sounding tape device. While respondent was approaching the lube oil sump tank of the main engine, his sounding tape fell into the tank top. Respondent went down to get the device. However, when he was going up, his left knee hit the frame flooring. The incident caused a deep open wound to his left knee which he reported to the ship captain.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Consequently, the crew supervisor sent respondent to a company doctor in China who immediately dressed his wound with betadine and bandage and gave him an anti-tetanus vaccine.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>On May 10, 2018, petit10ners medically repatriated respondent. Upon his arrival in the Philippines on May 11, 2018, petitioners rushed respondent to Cardinal Santos Medical Center and entrusted him under the care of Dr. Rodolfo P. Bergonio, the company-designated physician. Respondent underwent Magnetic Resonance Imaging of his left knee on May 11, 2018, followed by wound debridement and quadriceps tendon repair on May 28, 2018. Eventually, the company-designated physician referred respondent to the Marine Medical Services.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On June 1, 2018, the company doctor issued a Medical Report which diagnosed respondent to be suffering from "Lacerated Wound, Superior Left Knee; Quadriceps Tendon Tear, Left." Thus, it subjected respondent to sessions of physical therapy, but his left knee remained weak. Respondent could not move without difficulty whenever he lifted or carried moderate to heavy provisions as lifting put pressure on his injured knee.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br>&nbsp;<br>On August 28, 2018, the company doctor issued a Medical Report which stated that respondent underwent wound debridement and quadriceps tendon repair on May 11, 2018; that at the time of the issuance of the Medical Report, respondent was 13 weeks after the operation. The company physician observed that respondent's condition improved. There was already a functional left knee movement and better quadriceps strength. However, respondent still felt some knee pain when going downstairs. Thus, the company doctor advised him to continue his physical therapy and to further undergo functional assessment at his next follow-up on September 11, 2018.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>In the disability assessment dated September 11, 2018,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> the company doctor issued the following disability assessment on respondent:<blockquote>Re: Mr. Leve Lester Q. Navarra<br><br>Mr. Navarra is now 15 weeks out since his left knee surgery. He has normal looking knee, has a full and painless left knee range of motion and has no problems doing deep knee bends and no issues when going up and down the stairs.<br><br>Cleared from an orthopedic standpoint.<br><br>He is fit to work.<br><br>Thank you.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup></blockquote>Dissatisfied with the "fit-to-work" assessment of the company-designated physician, respondent consulted Dr. Renato P. Runas, an orthopedic specialist, to assess his medical condition. In the Medical Evaluation Report dated October 20, 2018, the doctor of choice of respondent declared the latter as "unfit for sea duty in whatever capacity with a permanent disability."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Due to the conflicting medical assessment of the company-designated physician and his doctor of choice, respondent requested for a grievance proceeding before the Associated Marine Officers and Seamen's Union of the Philippines to discuss his medical condition and disability benefits.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>During the grievance proceedings, the parties also explored the possibility of referring the respondent's condition to an independent third doctor, but such did not materialize. In view thereof and the parties' failure to amicably settle, the parties terminated the grievance proceedings.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Thereafter, respondent filed a Notice to Arbitrate (NTA) before the Regional Conciliation and Mediation Board of the Department of Labor and Employment.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>During the NTA conference, the parties agreed to submit the case to Voluntary Arbitration (VA). However, for their failure to amicably settle, the PVA directed them to submit their respective pleadings.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br><center><i>The Ruling of the PVA</i></center><br>In the Decision dated February 10, 2020,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> the PVA ruled in favor of respondent and held that he was entitled to total and permanent disability benefits. The dispositive portion of the PVA Decision states:<blockquote><b>WHEREFORE</b>, premises considered, decision is hereby rendered declaring complainant TOTALLY AND PERMANENTLY DISABLED and therefore, entitled to full disability benefits under the CBA.<br><br>Respondents are hereby ordered to pay to the complainant the amount of US$102,308.00 or its peso equivalent at the time of payment plus 10% attorney's fees computed based on the total award.<br><br>All other claims are DISMISSED for lack of merit.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[19]</sup></blockquote>According to the PVA, the failure of the company-designated physician to issue a final and definitive assessment of the respondent's fitness or unfitness to resume work <i>within the prescribed 120-day period</i> transformed respondent's temporary total disability to total and permanent by operation of law. For such, the PVA ruled that there was no further need to address the issue of the non-referral of the respondent's medical condition to a third doctor.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Aggrieved, petitioners moved for a reconsideration, but the PVA denied their motion for lack of merit in the Resolution dated July 23, 2020.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br><center><i>The Ruling of the CA</i></center><br>In the Decision dated June 16, 2022, the CA affirmed the ruling of the PVA and held that respondent was entitled to total and permanent disability benefits as the company-designated physician failed to issue the required medical assessment <i>within the initial 120-day period</i> and provided no sufficient justification to extend it until September 11, 2018, the 123<sup>rd</sup> day.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> The CA ratiocinated:<blockquote>In retrospect, respondent Leve Lester was repatriated on May 10, 2018 and arrived in the Philippines on May 11, 2018. Upon arrival, the respondent was rushed to Cardinal Santos Medical Center under the care of Dr. Rodolfo P. Bergonio. <i>After a series of treatment and consultations, Dr Bergonio issued the 11<sup>th</sup> and final medical report on September 11, 2018. At the time of its issuance, 123 days had already lapsed since the respondents repatriation. Clearly, the assessment dated September 11, 2018 was issued beyond the mandated 120-day period.</i> While this initial 120-day period may be extended to 240 days, the Court did not encounter concrete and sufficient justification to apply the extended period in this case. Verily, the record of the case was bereft of any indication that such extension was needed, or even intended, to provide respondent further medical treatment. On the contrary, the company-designated physician belatedly gave his final assessment on respondent's medical condition, without any justifiable reason.<br><br>In fact, while the respondent had subsequent follow-up sessions, the company-designated physician still failed to arrive at a definitive assessment within the 120-day period and neither did the doctor indicate the need for further medical treatment. Evidently, without the required final medical assessment anent petitioner's fitness to resume work or the degree of his disability, the characterization of the seafarer's condition after the lapse of the 120-day period became total and pe1manent . . .<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Italics supplied)</blockquote>Petitioners moved for a reconsideration, but the CA denied their motion in the Resolution dated May 29, 2023.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Hence, the instant Petition.&nbsp;<br><br>Petitioners impute error on the part of the CA in agreeing with the PVA's finding that no sufficient justification existed to extend the initial 120-day period to 123 days for the issuance of the respondent's medical assessment. In arguing that the issuance of the medical assessment on the 123<sup>rd</sup> day, or on September 11, 2018, was justified, petitioners cite the company doctor's Medical Report dated August 28, 2018, which advised respondent to <i>continue with his physical therapy, undergo functional assessment on his next medical session, and return to the company-designated physician on September 11, 2018 for re-evaluation</i>.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Further, petitioners contend that as the parties failed to agree on the parameters to govern the third doctor mechanism, the medical evaluation of the company-designated physician should prevail. Petitioners explain that the company doctor was able to render a more accurate diagnosis of the respondent's condition and fitness to work by reason of the extensive medical attention he had provided to respondent.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br><center><i>The Issues</i></center><br>The issue for resolution in the case is whether the CA erred in affirming the ruling of the PVA that the disability of respondent was already deemed total and permanent as the company doctor failed to justify his issuance of the respondent's medical assessment beyond the initial 120-day period.<br><br><center><i>The Ruling of the Court</i></center><br>The Petition is granted.<br><br>Settled is the rule that in a petition for review on <i>certiorari</i> under Rule 45 of the Rules of Court, only questions of law may be put in issue and questions of facts will not be entertained.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> The question of whether the company doctor was justified under the circumstances to issue his final medical assessment beyond the initial 120-day period, or on the 123<sup>rd</sup> day, is a question of law, thus a proper subject of the instant Petition. Its resolution no longer requires a review of the evidence but instead calls for the application of relevant labor laws and jurisprudence based on established facts.<br><br>In <i>Elburg Shipmanagement Phils., Inc. v. Quiogue</i>,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> the Court laid down the procedure to be followed when a seafarer files a claim for total and permanent disability benefits, viz.:&nbsp;&nbsp;<blockquote><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(1)</div></td><td width="95%"><div align="justify">The company-designated physician must issue a final medical assessment on the seafarer's disability grading within a period of 120 days from the time the seafarer reported to him [or her];</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(2)</div></td><td><div align="justify">If the company-designated physician fails to give his [or her] assessment within the period of 120 days, without any justifiable reason, then the seafarer's disability becomes permanent and total;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(3)</div></td><td><div align="justify">If the company-designated physician fails to give his [or her] assessment within the period of 120 days with a sufficient justification (e.g., seafarer required further medical treatment or seafarer was uncooperative), then the period of diagnosis and treatment shall be extended to 240 days. The employer has the burden to prove that the company-designated physician has sufficient justification to extend the period; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(4)</div></td><td><div align="justify">If the company-designated physician still fails to give his [or her] assessment within the extended period of 240 days, then the seafarer's disability becomes permanent and total, regardless of any justification.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup></div></td></tr></tbody></table></blockquote>In the case, both the CA and the PVA acknowledged that the company doctor had issued a final and conclusive assessment on the respondent's condition. Moreover, the question of whether respondent actually received such final assessment never became an issue before the tribunals below. All along, the core issue revolved around whether the company doctor was justified, under the circumstances, in issuing his final medical assessment beyond the initial 120-day period, specifically on the 123<sup>rd</sup> day. The CA affirmed the finding of the PVA that as the company doctor failed to issue a final assessment of the respondent's condition within the initial 120-day period, the latter's disability was already deemed total and permanent.&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The issuance of the final medical assessment of the respondent's condition on the 123<sup>rd</sup> day was justified under the circumstances</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>It bears noting that on August 28, 2018, the company doctor issued a Medical Report which reflects the following remarks:<blockquote>This is a follow-up report on Oiler Leve Lester Q. Navarra who was initially seen and admitted here at Marine Medical Services on May 11, 2018 and was diagnosed to have Lacerated Wound, Superior Left Knee; Quadriceps Tendon Tear, Left; S/P Wound Debridement and Quadriceos Tendon Repair.<br><br>Patient is now 13 weeks post-op.<br><br><i>He claims to have left knee pain when going down the stairs although improved.</i><br><br>He was seen by the Orthopedic Surgeon and Physiatrist.<br><br>There is note of a functional left knee range of motion.<br><br>There is also improving left quadriceps strength.<br><br><i>He was advised to continue his physical therapy.</i><br><br><i>He will undergo Functional Assessment on his next follow-up.</i><br><br><i>He is to come back on September 11, 2018 for re-evaluation.</i><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Italics supplied)</blockquote>As could be gleaned from the foregoing, the Medical Report dated August 28, 2018, of the company doctor stated that respondent's condition improved. His left knee already had functional movement and better quadriceps strength. <i>However, the company physician noted that respondent still felt left knee pain when going downstairs. For such, the company doctor advised him to continue his physical therapy and to further undergo functional assessment at his next medical evaluation on September 11, 2018, the 123<sup>rd</sup> day.</i><br><br>It is apparent that even before the lapse of the initial 120-day period, the company doctor issued the above medical evaluation. This cannot be seen as a mere afterthought designed to bypass the rule requiring the issuance of a final assessment within 120 days from the respondent's repatriation. Rather, it shows that the company physician genuinely found it necessary to extend the period to issue a final assessment to fully address the respondent's disability. There being an ample justification on the part of the company doctor to extend the issuance of the final medical assessment beyond the initial 120-day period, releasing it on the 123<sup>rd</sup> day did not automatically render the respondent's disability as total and permanent.<br><br>Now the Court determines which medical assessment should prevail, the company doctor's medical assessment or that of the respondent's doctor of choice?<br><br>It bears noting that while the parties initially considered referring the respondent's condition to an independent third doctor, the referral did not materialize as petitioners did not agree to a clause imposed by respondent to govern the third doctor mechanism, viz.:<blockquote>1. The referral to a third doctor shall not be construed as a waiver of Complainant's right under the Labor Code specifically on the presumption of law that Complainant, after failing to land gainful occupation beyond 120 or 240 days, as the case may be, is already deemed permanently and totally disabled. <i>The [disability] shall be determined solely by the Voluntary Arbitrator or Panel of Voluntary Arbitrators and shall not, in any way, be affected by the third doctors assessment</i>[.]<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> (Emphasis supplied)</blockquote>The stipulation which respondent imposed in his request undermines <b>the mandatory and binding nature</b> of the third doctor mechanism. By saying that the <i>disability shall be determined solely by the PVA and shall not be affected by the third doctors assessment</i>, respondent is effectively <b>rejecting the rule</b> that the third doctor's findings shall be final and binding. For such, petitioners cannot be faulted for not assenting to the respondent's request.<br><br>Moreover, the Court observes that the records are bereft of any showing as to the nature and extent of the treatment administered by the respondent's doctor of choice from September 14, 2018, until the issuance of the Medical Evaluation dated October 20, 2018. Jurisprudence consistently holds that an incomplete or inconclusive assessment by the seafarer's doctor of choice likewise invalidates a request for referral to a third doctor. To give full effect to the conflict-resolution mechanism under the Philippine Overseas Employment Administration-Standard Employment Contract (POEA-SEC), the seafarer's doctor of choice must be held to the same duty of issuing a final, definite, and conclusive disability assessment.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>A medical opinion which merely declares that the seafarer is no longer fit to resume sea duties, absent any supporting scientific or medical basis, can hardly be considered a "conflicting medical finding." In such a situation, the respondents' request for referral to a third doctor is rendered ineffective, leaving petitioners with sufficient basis to decline thereto.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>In <i>Bunayog</i>, the Court outlined the guidelines to be observed when a seafarer requests for a referral to a third doctor. The relevant portion of the decision states:&nbsp;<br><blockquote><i>Second</i>, the written request must be accompanied by, or at the very least, must indicate the contents of the medical report or medical abstract from his or her doctor, to be considered a valid request. Otherwise, the written request shall be considered invalid and as if none had been requested.<br><br><i>Third</i>, in case where there was no request for a third doctor referral from the seafarer <i>or there was such a request but is deemed invalid, the employer may opt to ignore the request or demand or refuse to assent, either verbal or written, to such request or demand</i> without violating the pertinent provisions of the POEA-SEC. Accordingly, if a complaint is subsequently filed by the seafarer against the employer before the labor tribunal, and the parties, after a directive from the LA pursuant to NLRC <i>En Banc</i> Resolution No. 008-14, fail to secure the services of a third doctor, the labor tribunals shall hold the findings of the company-designated physician final and binding, unless the same is found to be biased, i.e., lacking in scientific basis or unsupported by the medical records of the seafarer. In such a case, the inherent merits of the respective medical findings shall be considered by the tribunals or court.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></blockquote>As could be gleaned from the foregoing, if the seafarer invalidly requests for a third doctor referral, the employer may refuse the request without violating the POEA-SEC. Should the seafarer later file a complaint and the parties fail to appoint a third doctor despite a directive from the Labor Arbiter, the company doctor's assessment becomes final and binding, unless shown to be biased or lacking scientific basis. In such cases, the labor tribunal will evaluate the merits of both doctors' findings.<br><br>In the case, it was the PVA, and not the Labor Arbiter, which assumed jurisdiction over the case. Consequently, the parties did not undergo a mandatory conference where the Labor Arbiter would direct them to obtain the services of a third doctor—such duty being vested in the Labor Arbiter under NLRC <i>En Banc</i> Resolution No. 008-14. In any case, the Court proceeds to evaluate the conflicting findings of the respondent's chosen doctor <i>vis-à-vis</i> that of the company physician on the basis of their respective intrinsic merits and the totality of the evidence.&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The assessment of the company-designated physician is more credible</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>As earlier discussed, the record fails to show the extent of the treatment given by the respondent's doctor of choice from September 14, 2018, until the latter issued his Medical Evaluation on October 20, 2018. In contrast, petitioners were able to show that the company physician had provided respondent with extensive treatment and care since he sustained his left knee injury in May 2018 until September 11, 2018.<br><br>Record shows that on May 11, 2018, the company doctor admitted respondent at Marine Medical Services; diagnosed him with a quadriceps tendon tear and a lacerated wound on the superior aspect of his left knee; and performed surgeries on him, i.e., wound debridement and quadriceps tendon repair. Thereafter, the company doctor regularly monitored his condition through a series of consultations, therapy, and follow-ups. By August 28, 2018, or 13 weeks post-operation, respondent reported persistent but improving knee pain when descending stairs. An orthopedic surgeon and a physiatrist, under the supervision of the company doctor, examined respondent and noted a functional range of motion in his left knee and improved quadriceps strength. Owing to the residual discomfort when walking downstairs, the company doctor advised respondent to continue with his physical therapy and scheduled him for a functional assessment and re-evaluation on his next visit on September 11, 2018, the 123<sup>rd</sup> day. All these underscores the consistent and thorough medical attention that the company doctor and specialists provided throughout the respondent's treatment period.<br><br>Thus, the company doctor's final medical assessment issued on September 11, 2018, which declared respondent as fit to work could not have been biased and lacking in scientific basis. In fact, prior to the issuance of his final assessment, the company doctor even conducted a functional evaluation of the respondent's left knee. As reflected in his final medical report, respondent was already 15 weeks post-surgery. He had a normal-looking knee with full and painless range of motion without difficulty performing deep knee bends or climbing stairs. The functional assessment also showed that respondent managed to do six consecutive rounds of stair climbing and managed to lift up to 80 lbs. while ambulating. On this basis, the company doctor cleared respondent from an orthopedic standpoint and declared him fit to work—an evaluation that is more comprehensive and persuasive than the contrary findings of the respondent's doctor of choice.<br><br>With the foregoing, respondent is bound by the fit-to-work assessment of the company-designated doctor. Consequently, he is not entitled to disability benefits as well as sickness allowance after he was declared fit to work.<br><br>The Court consistently upholds the constitutional mandate to afford full protection to labor and applies with liberality, in favor of seafarers, the provisions of the POEA-SEC. However, such principles do not justify disregarding the evidence on record or departing from the letter and spirit of the law and prevailing jurisprudence, particularly when the seafarer fails to substantiate his or her claim;<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> thus:<blockquote>The Court is wary of the principle that provisions of the POEA-SEC must be applied with liberality in favor of the seafarers, for it is only then that its beneficent provisions can be fully carried into effect. However, on several occasions when disability claims anchored on such contract were based on flimsy grounds and unfounded allegations, the Court never hesitated to deny the same. Claims for compensation based on surmises cannot be allowed; liberal construction is not a license to disregard the evidence on record or to misapply the laws.<br><br>However, We emphasize that the constitutional policy to provide full protection to labor is not meant to be a sword to oppress employers. The commitment of this Court to the cause of labor does not prevent us from sustaining the employer when it is in the right. We should always be mindful that justice is in every case for the deserving, to be dispensed with in the light of established facts, the applicable law, and existing jurisprudence.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup></blockquote><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> filed by Orophil Shipping International Co., Inc. and/or Santoku Senpaku, Co. Ltd. is hereby <b>GRANTED</b>. The Decision dated June 16, 2022, and the Resolution dated May 29, 2023, of the Court of Appeals in CA-G.R. SP No. 166438 are <b>SET ASIDE</b>. Respondent Leve Lester Q. Navarra is bound by the fit-to-work assessment of the company-designated physician. Consequently, he is not entitled to disability benefits as well as to sickness allowance after he was declared fit to work.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Gaerlan, Dimaampao</i>, and <i>Singh, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.&nbsp;</i>at 45-55. Penned by Associate Justice Eduardo B. Peralta, Jr. and concurred in by Associate Justices Walter S. Ong and Emily L. San Gaspar-Gito of the Twelfth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i>&nbsp;at 57-59. Penned by Associate Justice Eduardo B. Peralta, Jr. and concurred in by Associate Justices Walter S. Ong and Emily L. San Gaspar-Gito of the Former Twelfth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i>&nbsp;at 45, 54, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i>&nbsp;at 45-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.&nbsp;</i>at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i>&nbsp;at 46-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i>at 27. Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i>&nbsp;at 53, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i>&nbsp;at 132, respondent's Comment/Opposition before the Supreme Court.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.&nbsp;</i>at 131.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.&nbsp;</i>at 47-48, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.&nbsp;</i>at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i>&nbsp;at 49-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i>&nbsp;at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i>&nbsp;at 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i>&nbsp;at 53-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i>&nbsp;at 57-59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i>&nbsp;at 26-27, Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i>&nbsp;at 20-26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>Coca-Cola Femsa Philippines, Inc. v. Congress of Independent Organization-Iloilo Coca-Cola Sales Force Union, Panay Chapter, G.R. No. 240493</b>, June 19, 2019 [Notice].&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> 765 Phil. 341 (2015).<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i>&nbsp;at 362-363.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, p. 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i>&nbsp;at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>See</i> <b>Bunayog v. Fuscun Shipmanagement, Inc.</b>, 941 Phil. 383, 400 (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i>&nbsp;at 341.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i>&nbsp;at 407.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>See</i> <b>Doehle-Philman Manning Agency, Inc. v. Gatchalian, Jr.</b>, 897 Phil. 297, 312 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>See also</i> <b>C.F. Sharp Crew Management, Inc. v. Castillo</b>, 809 Phil. 180, 205 (2017).</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 262830 - BENITO RAMON V. ARANETA AND BRAND REALTY CORPORATION, PETITIONERS, VS. REPUBLIC OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70364' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 262830, January 15, 2026 ]</H2>
+			<H3>BENITO RAMON V. ARANETA AND BRAND REALTY CORPORATION, PETITIONERS, VS. REPUBLIC OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court, assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated October 29, 2021, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 9, 2022, of the Court of Appeals (<b>CA</b>) in CA-G.R. SP No. 158320. The CA upheld the propriety of the Order,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated April 21, 2016, of Branch 53, Regional Trial Court, Manila (<b>RTC</b>), which granted the motion for issuance of an Asset Preservation Order (<b>APO</b>) filed by the Republic of the Philippines (<b>Republic</b>).<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br>&nbsp;<br><center><b><i>The Facts</i></b></center><br>On September 9, 2011, the Monetary Board of the Bangko Sentral ng Pilipinas issued a resolution closing LBC Development Bank (<b>LBC</b>) and placing it under receivership of the Philippine Deposit Insurance Corporation (<b>PDIC</b>). The PDIC then took over LBC and investigated the latter's affairs.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>PDIC's investigation revealed that on various dates, LBC released loans in favor of several individuals and companies, including Benito Ramon V. Araneta (<b>Araneta</b>) and Brand Realty Corporation (<b>Brand Realty</b>) (collectively, <b>borrowers</b>). Ma. Eliza G. Berenguer (<b>Berenguer</b>), the former President/Chairperson of LBC, then caused the diversion of bank funds to cover the supposed loan payments of the borrowers.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>The PDIC discovered two "work-out" schemes perpetrated by Berenguer, in conspiracy with Araneta, Ma. Lourdes Senn (<b>Senn</b>), Ernesto G. Barrios (<b>Barrios</b>), Charito Zambales (<b>Zambales</b>), and Francisco A. Climent (<b>Climent</b>).<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> One of the "work-out" schemes, which was perpetrated in October 2006, involved the issuance of five checks by Araneta, Barrios, Zambales, and Climent in the total amount of PHP 40,354,951.56 in favor of LBC purportedly as payments for the loans. Upon receipt of the five checks, LBC issued official receipts, extinguishing the loan obligations of the borrowers. According to the PDIC, these checks were never intended to be funded by the borrowers. Instead, Berenguer instructed Ofelia F. Cuevas (<b>Cuevas</b>), former Vice President of LBC's Treasury Department, to use available bank money to fund the said checks.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>The same "work-out" scheme occurred again in January 2008, this time involving eleven checks issued by Araneta, Senn, Zambales, and Climent in the total amount of PHP 189,114,614.54.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>With its findings, the PDIC informed the Anti-Money Laundering Council (<b>AMLC</b>) about the case and requested the filing of a Petition for the Issuance of a Freeze Order against the deposit accounts where LBC's funds were diverted.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> In a Resolution, dated September 23, 2015, in CA-G.R. AMLC Case No. 00145, the CA issued a Freeze Order against the said deposit accounts.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br>&nbsp;<br>On March 18, 2016, the Republic, through the AMLC, filed a Petition for Civil Forfeiture<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> with the RTC, docketed as Civil Case No. 16-002-53, which was later amended,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> with urgent plea for issuance of a Provisional Asset Preservation Order (<b>PAPO</b>) and/or APO covering Araneta, Brand Realty, and other companies, which were among the borrowers (<b>company-borrowers</b>).<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>The RTC found that the allegations in the Petition for Civil Forfeiture are sufficient in form and substance to support that the following bank accounts, certificates of stocks, and insurance policies (<b>monetary instruments</b>) of Araneta, Brand Realty, and the other company-borrowers were related to an unlawful activity or money laundering, particularly <i>estafa</i>:&nbsp;&nbsp;<blockquote><table width="100%"  ="" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="center">Bank Name</div></td><td width="37%"><div align="center">Account Number</div></td><td width="33%"><div align="center">Account Holder</div></td></tr><tr><td rowspan="2" valign="middle">BPI</td><td>03301008588</td><td valign="top">Best Service Motor Corp.</td></tr><tr><td>003765861135</td><td valign="top">Rivara, Inc.</td></tr><tr><td valign="top">Security Bank Corp.</td><td>0061-025910-001</td><td valign="top">Nouveau Mfg. Inc.</td></tr><tr><td rowspan="5" valign="middle">China Bank</td><td>TD 3121012589</td><td valign="top">Benito, Ramon Araneta and/or Cynthia S. Araneta</td></tr><tr><td>103-1789810</td><td rowspan="2" valign="top">Araneta Benito Ramon</td></tr><tr><td>1037220014</td></tr><tr><td>SA 1032677918</td><td valign="top">Brand Realty, Inc.</td></tr><tr><td>SA 1037234819</td><td valign="top">Araneta, Cynthia Serrano and/or Araneta Benito Ramon</td></tr><tr><td rowspan="4" valign="middle">BPI</td><td>3765-8004-03</td><td valign="top">Benito R. Araneta and/or Cynthia S. Araneta</td></tr><tr><td valign="top">3765-8566-89</td><td valign="top">Benito R. Araneta, Ma. Theresa A. Climent, Cecilia A. Manahan, Ma. Lourdes A. Senn</td></tr><tr><td>3301-1014-56</td><td valign="top">Best Service Motor</td></tr><tr><td>0333-3758-69</td><td valign="top"> Rivara, Inc.</td></tr><tr><td rowspan="2" valign="top">ISLA Bank</td><td>1020020467</td><td valign="top">Araneta Benito Ramon</td></tr><tr><td>101-00743-3</td><td valign="top">Araneta Benito R.</td></tr><tr><td valign="top">Bank of Commerce</td><td>CA 900000014118</td><td valign="top">Benito Ramon V. Araneta</td></tr><tr><td valign="top">BDO</td><td>IC-1004110022188</td><td valign="top">Benito Ramon Valdez Araneta</td></tr><tr><td rowspan="4" valign="middle">RCBC</td><td>3000729328 SWAT<br>0000242462</td><td valign="top">Araneta Benito R.</td></tr><tr><td>1216044564</td><td valign="top"> Benito R. Araneta or Cynthia Araneta</td></tr><tr><td>Cert. No. 23758, 9939 Shares with Shang Properties, Inc.</td><td valign="top">Benito R. Araneta, Regina Victoriano</td></tr><tr><td>Cert. No. 2532 – 30 shares<br>Cert. No. 3189 – 42 shares<br>Cert. No. 3817 – 7 shares<br>Cert. No. 4591 – 158 shares<br>Cert. No. 12265 – 40 shares,<br>shares with Philippine Racing Club</td><td valign="top">Benito R. Araneta or Cynthia Araneta</td></tr><tr><td valign="top">Union Bank</td><td>102410025376</td><td valign="top">Benito Araneta</td></tr><tr><td valign="top">Security Bank</td><td>061-025910-001</td><td rowspan="3" valign="middle">Nouveau Mfg.</td></tr><tr><td valign="top">Planters Devt. Bank</td><td>SAVINGS ACCT.</td></tr><tr><td valign="top">Development Bank of the Phils.</td><td>SA 5413704052</td></tr><tr><td rowspan="5" valign="middle">Insular Life</td><td>947658, 20 – Pay Life</td><td rowspan="3" valign="middle">Benito R. Araneta</td></tr><tr><td>947659, Diamond Life</td></tr><tr><td>674577, ordinary whole life</td></tr><tr><td>2076138, Diamond Life</td><td valign="top">Benito R. Araneta</td></tr><tr><td>2233253, Diamond Life</td><td valign="top">Benito R. Araneta<sup style="COLOR: RGB(255, 0, 0);">[16]</sup></td></tr></tbody></table></blockquote>Thus, on March 22, 2016, the RTC issued a PAPO covering Araneta, Brand Realty, and the company-borrowers' monetary instruments, forbidding any transaction, withdrawal, transfer, removal, conversion, concealment, or other disposition therefrom for a period of 20 days from receipt of the PAPO.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Araneta and Brand Realty then filed their Comment/Opposition to the Application for Issuance of APO with Motion to Lift the PAPO,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> alleging that insofar as they are concerned, there are only two bank accounts which are alleged in the Petition for Civil Forfeiture to be in any way related to the alleged unlawful activity of <i>estafa</i> ("work-out" schemes) — China Bank Account No. 103-1789810, under Araneta's name, and Bankwise Account No. 20-0041-00180-6, under Brand Realty's name. The other monetary instruments registered under their names were not alleged in the Republic/AMLC's Amended Petition for Civil Forfeiture to be in any way related to the alleged unlawful activity.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>In its Reply,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> the Republic/AMLC insisted that it is proper to include Araneta and Brand Realty's other monetary instruments in the Petition for Civil Forfeiture, as well as in the application for APO. According to the Republic/AMLC, the law mandates that forfeiture shall include monetary instruments having equivalent value to those related to unlawful activities if the latter cannot be located, has been substantially altered, destroyed, diminished in value or otherwise rendered worthless by an act or omission, removed, or commingled with other monetary instruments belonging to the offender or to a third person, thereby rendering the same difficult to identify or be segregated for purposes of forfeiture.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br><center><b><i>The Ruling of the RTC</i></b></center><br>In an Order,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> dated April 21, 2016, the RTC granted the Motion for issuance of an APO, thus:<blockquote><b>WHEREFORE</b>, in view of the foregoing, <b>the Motion for the Issuance of an Asset Preservation Order (APO) is hereby GRANTED</b>.<br><br>Respondents China Banking Corporation (China Bank), Bank of the Philippine Islands (BPI), Security Bank Corporation (Security Bank), Bank of Commerce, Banco de Oro Universal Bank (BDO), Isla Bank Inc. (Isla Bank), Planters Development Bank (now China Bank Savings), Rizal Commercial Banking Corporation (RCBC), Union Bank of the Philippines (Union Bank), Development Bank of the Philippines (DBP), and Insular Life Assurance Co. Ltd. (Insular Life), and all individuals acting in their behalf, are <b>ORDERED to refrain, effective immediately, from transacting, removing, converting, concealing or through any other mode of disposing each covered bank account, certificate of stocks and insurance policy in the name of Benito Ramon V. Araneta, Brand Realty, Inc.</b>, Best Service Motor Corp., Rivara Inc., and Nouveau Manufacturing, Inc., in accordance with law.<br><br>. . . .<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Emphasis in the original)</blockquote>The RTC ruled that since it has issued a PAPO, the burden of evidence shifted to Araneta and Brand Realty to show why the PAPO should be modified or lifted, or why an APO should not be issued. However, the RTC found that Araneta and Brand Realty failed to discharge the said burden of evidence.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Thus, the RTC resolved to maintain the effects of the PAPO and issued the APO covering several monetary instruments, including those of Araneta and Brand Realty.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Araneta and Brand Realty filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> which was denied by the RTC. Thus, they filed a Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> before the CA, claiming that the RTC committed grave abuse of discretion amounting to lack or excess of jurisdiction in issuing the APO covering Araneta and Brand Realty's monetary instruments which were not alleged in the Amended Petition for Civil Forfeiture to be in any way related to the alleged fraudulent "work-out" schemes.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><center><b><i>The Ruling of the CA</i></b></center><br>In the assailed Decision, the CA dismissed Araneta and Brand Realty's Petition for <i>Certiorari</i>, thus:<blockquote>WHEREFORE, the [P]etition for <i>[C]ertiorari</i> is <b>DISMISSED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis in the original)</blockquote>The CA upheld the RTC's finding of probable cause for the issuance of the PAPO and APO.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The CA also held that civil forfeiture includes not only those monetary instruments related to an unlawful activity, but also those having an equivalent value to that of the monetary instruments found to be related in any way to an unlawful activity.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Araneta and Brand Realty filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> which was denied by the CA.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Hence, the present Petition for Review on <i>Certiorari</i>.<br><br><center><b><i>The Issue</i></b></center><br>Did the CA commit a reversible error in upholding the propriety of the RTC's issuance of the PAPO and APO covering Araneta and Brand Realty's monetary instruments?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Court resolves to deny the Petition for Review on <i>Certiorari</i>.&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Procedure for the issuance of PAPO and APO</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The procedure for the issuance of a PAPO and APO is laid down in A.M. No. 05-11-04-SC, or the "Rules of Procedure in Cases of Civil Forfeiture, Asset Preservation, and Freezing of Monetary Instrument, Property, or Proceeds Representing, Involving, or Relating to an Unlawful Activity or Money Laundering Offense under Republic Act No. 9160, as amended" (<b>Rules of Procedure in Civil Forfeiture</b>), which became effective on December 15, 2005. Specifically, Sections 11 and 12 of the Rules of Procedure in Civil Forfeiture provide:<blockquote>SECTION 11. <i>Ex Parte Issuance of Provisional Asset Preservation Order</i>. — Where the executive judge of the regional trial court or, in his absence, the vice-executive judge or, in their absence, any judge of the regional trial court available in the same station, <i>has determined that probable cause exists</i> on the basis of allegations of a verified petition sufficient in form and substance, with a prayer for the issuance of an asset preservation order, <i>that the monetary instrument</i>, property, or proceeds subject of the petition <i>are in any way related to an unlawful activity</i> as defined in Section 3(i) of Republic Act No. 9160, as amended by Republic Act No. 9194, <i>the court may issue ex parte a provisional asset preservation order effective immediately</i> forbidding any transaction, withdrawal, deposit, transfer, removal, conversion, concealment or other disposition of the subject monetary instrument, property, or proceeds. Such order shall be effective for a period of twenty days from the respective dates of service to respondent or any person acting in his behalf, and upon each covered institution or government agency in accordance with Section 14 of this Rule.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>SECTION 12. <i>Summary Hearing</i>. — The court shall schedule a hearing at a date and time within the [20-day period at which the respondent may for good cause show why the provisional asset preservation order should be lifted. <i>The court shall determine within the same period whether the provisional asset preservation order should be modified or lifted or an asset preservation order should issue</i> and act accordingly.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> (Emphasis supplied)</blockquote>Based on the foregoing provisions, the RTC has the discretion to issue a PAPO upon finding of probable cause, based on the allegations of a verified petition with a prayer for the issuance of an APO, that monetary instruments are in any way related to an unlawful activity under Section 3(i) of the Anti-Money Laundering Act.<br><br>After the issuance of the PAPO, the RTC still has the discretion, after a summary hearing, to lift the PAPO or to issue an APO instead.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup>&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Civil forfeiture and preservation of monetary instruments not related to unlawful activities</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Under Sections 11 and 12 of the Rules of Procedure in Civil Forfeiture, a PAPO or APO may be issued to cover monetary instruments which are subject of a petition for civil forfeiture.<br><br>Relatedly, Section 12(a) of the Anti-Money Laundering Act, as amended by Republic Act No. 10365,<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> provides what may be subjected to a petition for civil forfeiture, thus:<blockquote>SECTION 12. <i>Forfeiture Provisions</i> –<br><br>(a) Upon determination by the AMLC that probable cause exists that any monetary instrument or property is in any way related to an unlawful activity as defined in Section 3(i) or a money laundering offense under Section 4 hereof, the AMLC shall file with the appropriate court through the Office of the Solicitor General, a verified <i>ex parte</i> petition for forfeiture, and the Rules of Court on Civil Forfeiture shall apply.<br><br><i>The forfeiture shall include those other monetary instrument or property having an equivalent value to that of the monetary instrument or property found to be related in any way to an unlawful activity or a money laundering offense, when with due diligence, the former cannot be located, or it has been substantially altered, destroyed, diminished in value or otherwise rendered worthless by any act or omission, or it has been concealed, removed, converted, or otherwise transferred, or it is located outside the Philippines or has been placed or brought outside the jurisdiction of the court, or it has been commingled with other monetary instrument or property belonging to either the offender himself or a third person or entity, thereby rendering the same difficult to identify or be segregated for purposes of forfeiture.</i><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (Emphasis supplied)</blockquote>As a general rule, in order for a monetary instrument to be subjected to a petition for civil forfeiture, there must be probable cause that the said monetary instrument is in any way related to an unlawful activity or a money laundering offense as defined under the Anti-Money Laundering Act. The same requirement must be met in order to subject the said monetary instrument to a PAPO or APO. Thus, Section 17 of the Rules of Procedure in Civil Forfeiture provides that a PAPO or APO may be lifted if the subject monetary instrument is not in any manner related to an unlawful activity:<blockquote>SECTION 17. <i>Grounds for Discharge of Asset Preservation Order</i>. – The respondent or the party, whose personal or real property has been preserved pursuant to an asset preservation order, may raise in a motion or in the comment or opposition the grounds for its discharge.<br><br>. . . .<br><br>The following grounds for the discharge of the asset preservation order may be raised:<blockquote>. . . .<br><br>(c) The specific personal or real property ordered preserved is not in any manner connected with the alleged unlawful activity as defined in Section 3(i) of Republic Act No. 9160, as amended by Republic Act No. 9194.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup></blockquote></blockquote>As an exception to the aforementioned general rule, the second paragraph of Section 12(a) of the Anti-Money Laundering Act, as amended, provides that a petition for civil forfeiture shall include other monetary instruments having an equivalent value to that of the monetary instrument found to be related to any unlawful activity (<b>unlawful monetary instrument</b>) in any of the following instances:&nbsp;<blockquote><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(1)</div></td><td width="95%"><div align="justify">when with due diligence, the unlawful monetary instrument cannot be located;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(2)</div></td><td><div align="justify">the unlawful monetary instrument has been substantially altered, destroyed, diminished in value or otherwise rendered worthless by any act or omission;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(3)</div></td><td><div align="justify">the unlawful monetary instrument has been concealed, removed, converted, or otherwise transferred;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(4)</div></td><td><div align="justify">the unlawful monetary instrument is located outside the Philippines or has been placed or brought outside the jurisdiction of the court; or</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(5)</div></td><td><div align="justify">the unlawful monetary instrument has been commingled with other monetary instrument or property belonging to either the offender himself or a third person or entity, thereby rendering the same difficult to identify or be segregated for purposes of forfeiture.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup></div></td></tr></tbody></table></blockquote>In the present case, the Republic/AMLC found that the following monetary instruments are related to unlawful activities:&nbsp;&nbsp;<blockquote><table width="100%"  ="" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="34%"><div align="center">Bank</div></td><td width="33%"><div align="center">Account No.</div></td><td width="33%"><div align="center">Account Holder</div></td></tr><tr><td rowspan="2" valign="middle">Bank of the Philippine Islands</td><td>03301008588</td><td>Best Service Motor Corp.</td></tr><tr><td>003765861135</td><td>Rivara, Inc.</td></tr><tr><td>Security Bank Corp.</td><td>0061-025910-001</td><td>Nouveau Mfg. Inc.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup></td></tr></tbody></table></blockquote>In addition, the Republic/AMLC included the following monetary instruments (<b>other monetary instruments</b>) in its Amended Petition for Civil Forfeiture in order to compensate for the proceeds of the alleged unlawful activity that have been withdrawn, removed, dissipated, or concealed:&nbsp;&nbsp;<blockquote><table width="100%"  ="" border="1" cellpadding="0" cellspacing="0"><tbody><tr><td width="31%"><div align="center">Bank</div></td><td width="28%"> <div align="center">Account No.</div></td><td width="41%"><div align="center">Account Holder</div></td></tr><tr><td rowspan="5" valign="middle">China Bank</td><td>TD 3121012589</td><td valign="top">Benito Ramon Araneta and/or Cynthia S. Araneta</td></tr><tr><td>103-1789810</td><td rowspan="2" valign="top">Araneta Benito Ramon</td></tr><tr><td>1037220014 </td></tr><tr><td>SA1032677918</td><td valign="top">Brand Realty, Inc.</td></tr><tr><td>SA 1037234819</td><td valign="top">Araneta, Cynthia Serrano and/or Araneta Benito Ramon</td></tr><tr><td rowspan="4" valign="middle">BPI</td><td>3765-8004-03</td><td valign="top">Benito R. Araneta and/or Cynthia S. Araneta</td></tr><tr><td valign="top">3765-8566-89</td><td valign="top">Benito R. Araneta, Ma. Teresa A. Climent, Cecilia A. Manahan, Ma. Lourdes A. Senn</td></tr><tr><td>3301-1014-56</td><td valign="top">Best Service Motor</td></tr><tr><td>0333-3758-69</td><td valign="top">Rivara, Inc.</td></tr><tr><td rowspan="2">ISLA Bank</td><td>1020020467</td><td valign="top">Araneta Benito Ramon</td></tr><tr><td>101-00743-3</td><td valign="top">Araneta Benito R.</td></tr><tr><td>Bank of Commerce</td><td>CA 900000014118</td><td valign="top">Benito Ramon V. Araneta</td></tr><tr><td>BDO</td><td>IC-1004110022188 </td><td valign="top">Benito Ramon Valdez Araneta</td></tr><tr><td rowspan="4" valign="middle">RCBC </td><td>3000729328 SWAT<br>0000242462</td><td valign="top"> Araneta Benito R.</td></tr><tr><td>1216044564</td><td valign="top">Benito R. Araneta or Cynthia Araneta</td></tr><tr><td>Cert. No. 23758, 9939 Shares with Shang Properties, Inc.</td><td valign="top">Benito R. Araneta, Regina Victoriano</td></tr><tr><td>Cert. No. 2532 – 30 shares<br>Cert. No. 3189 – 42 shares<br>Cert. No. 3817 – 7 shares<br>Cert. No. 4591 – 158 shares<br>Cert. No. 12265 – 40 shares,<br>shares with Philippine Racing Club<br></td><td valign="top"> Benito R. Araneta or Cynthia Araneta</td></tr><tr><td>Union Bank</td><td>102410025376</td><td valign="top">Benito Araneta</td></tr><tr><td>Security Bank</td><td>061-025910-001</td><td valign="top">&nbsp;</td></tr><tr><td>Planters Development Bank</td><td>SAVINGS ACCT.</td><td rowspan="2" valign="middle">Nouveau Mfg.</td></tr><tr><td>Development Bank of the Philippines</td><td>SA 5413704052</td></tr><tr><td rowspan="5">Insular Life</td><td>947658, 20 – Pay Life</td><td rowspan="3" valign="middle">Benito R. Araneta</td></tr><tr><td>947659, Diamond Life</td></tr><tr><td>674577, ordinary whole life</td></tr><tr><td>2076138, Diamond Life</td><td valign="top">Benito R. Araneta</td></tr><tr><td>2233253, Diamond Life</td><td valign="top"> Benito R. Araneta<sup style="COLOR: RGB(255, 0, 0);">[42]</sup></td></tr></tbody></table></blockquote>The RTC then issued a PAPO, and later on, an APO, covering both the unlawful and other monetary instruments.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> The CA upheld the propriety of such issuances.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br>&nbsp;<br>In the present Petition for Review on <i>Certiorari</i>, Araneta and Brand Realty insist that the RTC improperly issued the PAPO and APO covering the other monetary instruments, as these were not alleged in the Petition for Civil Forfeiture to be in any way related to the alleged unlawful "work-out" schemes.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>The Court does not agree.<br><br>To reiterate, under the second paragraph of Section 12(a) of the Anti-Money Laundering Act, as amended, a petition for civil forfeiture shall include other monetary instruments with equivalent value to the unlawful monetary instruments, if such unlawful money instruments fall under the instances listed in the second paragraph of Section 12(a).<br><br>Notably, there is no requirement that such other monetary instruments must be alleged to be related to any unlawful activity under the Anti-Money Laundering Act in order that they may be included in a petition for civil forfeiture. This is precisely because monetary instruments alleged to be related to unlawful activities must be included in the petition for civil forfeiture pursuant to the first paragraph of Section 12(a). The other monetary instruments are mere substitutes for the unlawful monetary instruments that fall under the instances listed in the second paragraph of Section 12(a). To require that other monetary instruments be alleged to be related to unlawful activities will render the second paragraph of Section 12(a) without effect.<br><br>It is a basic rule in statutory construction that the provisions of a law shall be interpreted in such a manner that no provision will be rendered ineffective.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>Moreover, in their Petition for Review on <i>Certiorari</i>, Araneta and Brand Realty pointed out that the Republic/AMLC's Amended Petition for Civil Forfeiture did not explain how and when the purported proceeds from the unlawful monetary instruments were withdrawn, removed, dissipated, or concealed.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>Indeed, the prov1s10ns under the Anti-Money Laundering Act, as amended, regarding forfeiture, including Section 12(a), should be construed strictly against the State, as these tend to limit the exercise of property rights by citizens, pursuant to the legal maxim that "statutes in derogation of common rights are in general strictly construed."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br>&nbsp;<br>Thus, in order for other monetary instruments to be included in a petition for civil forfeiture, the Republic/AMLC must allege how the unlawful monetary instruments fall under the instances listed in the second paragraph of Section 12(a), and must show the efforts made in order to locate the unlawful monetary instruments. The Republic/AMLC cannot simply state that "the funds in the monetary instruments have been withdrawn, removed, or dissipated."<br><br>In the present case, contrary to Araneta and Brand Realty's claim, the Republic/AMLC was able to adequately aver in its Amended Petition for Civil Forfeiture how the proceeds from the unlawful monetary instruments were withdrawn or removed. The Republic/AMLC conducted inquiries into the unlawful monetary instruments and described the movement of the funds therein, showing that the said funds have been cleared, cashed, and withdrawn.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> To cite, the Republic/AMLC reported the following findings:<blockquote>[Araneta's China Bank Account No. 1031789810]<br><br><b>i. [January 9,] 2008 Transactions</b><br><br>. . . .<br><br>44. An inquiry into respondent Araneta's <b>China Bank Account No. 103789810</b> showed a check deposit on [January 9,] 2008 in the amount of [PHP] 28,739,231.78. . . .<br><br>. . . .<br><br>46. [T]he three [ ] checks issued by respondent Araneta with the face amounts of [PHP] 3,184,966.94, [PHP] 5,940,514.30[,] and [PHP] 19,613,750.54 were cleared and encashed in favor of LBC [ ] on the same day.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Emphasis in the original)<br><br><b>ii. [January 10,] 2008 Transactions</b><br><br>. . . .<br><br>48. An inquiry into the account revealed that on [January 10,] 2008, the amount of [PHP] 23,724,610.73 was deposited in the account by way of a check....<br><br>. . . .<br><br>49. <b>Check No. 4382544</b> with face amount of [PHP] 23,724,610.73 has now been cleared and encashed in favor of LBC.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> (Emphasis in the original)<br><br>[Brand Realty's Bankwise Account No. 20-0041-00180-6]<br><br><b>iii. January 11, 2008 Transactions</b><br><br>. . . .<br>&nbsp;<br>52. An inquiry into the said account showed that on [January 11,] 2008, cash deposits amounting to [PHP] 7,337,183.02 and [PHP] 5,804,952.23 were made into the account....<br><br>. . . .<br><br>53. [T]he checks earlier issued by respondent Araneta that were drawn against the account of Brand Realty, specifically Check Nos. 1166213 and 1166215 with the same amount of [PHP] 7,337,183.02 and [PHP] 5,804,952.23, respectively, were already cleared and withdrawn on similar date.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (Emphasis in the original)<br><br>. . . .<br><br><b>v. January 17, 2008 Transactions</b><br><br>. . . .<br><br>60. Examination made into the account revealed two cash deposits on [January 17,] 2008 in the amounts of [PHP] 6,716,861.45 and [PHP] 7,500,000.00, or a total of [PHP] 14,216,861.45.<br><br>. . . .<br><br>63. <b>Check No. 116621</b> with face amount of [PHP] 14,216,861.45 has now been cleared and encashed.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> (Emphasis in the original)</blockquote>Thus, the Republic/AMLC properly included the other monetary instruments in its Amended Petition for Civil Forfeiture.&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Determination of probable cause is a factual issue</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>"Probable cause" is defined under Rule 2, Section 1(aaaa) of the 2018 Implementing Rules and Regulations of the Anti-Money Laundering Act as "such facts and circumstances which would lead a reasonably discreet, prudent, or cautious [person] to believe that: (a) any monetary instrument or property sought to be frozen, inquired into[,] or preserved is in any way related to any unlawful activity and/or money laundering offense; or (b) [money laundering/terrorism financing] has been committed and that the respondent is probably guilty thereof." In <i>Republic v. Bolante et al.</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> the Court held that "probable cause refers to the sufficiency of the relation between an unlawful activity and the property or monetary instrument."<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br>&nbsp;<br>The determination of probable cause in a forfeiture proceeding is no different from the determination of probable cause in other proceedings: it is a factual issue that is improper in a petition for review on <i>certiorari</i> under Rule 45.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> While the foregoing rule is subject to exceptions, no such exception is present in this case.<br><br>In their Petition for Review on <i>Certiorari</i>, Araneta and Brand Realty invokes the exception to the foregoing rule that the RTC acted with grave abuse of discretion in issuing the APO, arguing that the money involved in the "work-out" schemes did not go to their pockets, but went back to the coffers of LBC. Thus, they claim that the "work-out" schemes cannot be classified as fraud amounting to <i>estafa</i>.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>The Court does not agree.<br><br>An act of a court or tribunal can only be considered tainted with grave abuse of discretion when such act is done in a capricious or whimsical exercise of judgment as is equivalent to lack of jurisdiction. It is well-settled that the abuse of discretion to be qualified as "grave" must be so patent or gross as to constitute an evasion of a positive duty or a virtual refusal to perform the duty or to act at all in contemplation of law.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Thus, when the trial court's act has sufficient basis in facts, law, and jurisprudence, as in this case, such act is not tainted with grave abuse of discretion.<br><br>As correctly held by the CA, the RTC rightfully found probable cause that the unlawful monetary instruments were in any way related to an unlawful activity, i.e., <i>estafa</i><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> under Article 315, paragraph 1(b) of the Revised Penal Code, which has the following elements:<blockquote>(a) the offender's receipt of money, goods, or other personal property in trust, or on commission, or for administration, or under any other obligation involving the duty to deliver, or to return, the same; (b) misappropriation or conversion by the offender of the money or property received, or denial of receipt of the money or property; (c) the misappropriation, conversion, or denial is to the prejudice of another; and (d) demand by the offended party that the offender return[s] the money or property received.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup></blockquote>In the present case, Araneta, Brand Realty, and the other borrowers received loans from LBC. Thereafter, the "work-out" schemes caused the diversion of bank funds wherein LBC used its own funds to cover the supposed loan payments of Araneta and the other borrowers, resulting in the extinguishment of the loans when in fact there were no actual payments made. These "work-out" schemes were perpetrated upon the instructions of Berenguer to Cuevas, who were the President/Chairperson of LBC and the Vice President of LBC's Treasury Department, respectively.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Being high-ranking officials of LBC, Berenguer and Cuevas were entrusted with the administration of the bank's funds. Consequently, LBC suffered damages to the extent of the amount Araneta and the other borrowers loaned but were not actually paid.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup><br><br>Araneta and the other borrowers' participation in the "work-out" schemes is apparent. As revealed by the PDIC's investigation, Araneta and the other borrowers issued checks as purported payments for the loans they obtained from LBC. However, they never funded the said checks. Upon receipt of the unfunded checks, LBC issued official receipts, extinguishing the borrowers' loan obligation.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup><br><br>Taken altogether, these circumstances indicate that Araneta and the other borrowers were aware of, and have participated in, the "work-out" schemes, i.e., that the checks were to be funded using LBC's own money. Had they not known about the "work-out" schemes, they would have questioned why they were issued official receipts extinguishing their loan obligation, knowing that the checks they issued as payment were unfunded, but they did not do so. Instead, after the first "work-out" scheme in October 2006, the same was again perpetrated in January 2008.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>Considering the foregoing, the Court finds that there is sufficient relation between <i>estafa</i> and the unlawful monetary instruments so as to constitute probable cause.<br><br>Araneta and Brand Realty's argument that the money involved in the "work-out" schemes eventually went back to LBC is inconsequential. Liability for <i>estafa</i> is not affected by payment, indemnification, reimbursement of, or compromise as to the amounts misappropriated.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> Besides, the "work-out" schemes showed that it was LBC's own funds that were used to pay for the loans.<br><br>All told, the Court finds that the RTC, on the basis of a finding of probable cause, properly subjected the other monetary instruments of Araneta, Brand Realty et al. to the PAPO and APO. However, the Court clarifies that the propriety of the RTC's issuance of the PAPO and APO is not based on its finding that the other monetary instruments are related to an unlawful activity. Rather, the issuance of the PAPO and APO was proper pursuant to the second paragraph of Section 12(a) of the Anti-Money Laundering Act, as amended, which the Court has interpreted to provide that even if a monetary instrument is not related to an unlawful activity, it may be the subject of a petition for civil forfeiture, and of a PAPO or APO, in the presence of any of the instances listed in the second paragraph of Section 12(a).<br><br><b>WHEREFORE</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision, dated October 29, 2021, and the Resolution, dated August 9, 2022, of the Court of Appeals in CA-G.R. SP No. 158320 are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 49-61. Penned by Associate Justice Perpetua Susana T. Atal-Paño and concurred in by Associate Justices Edwin D. Sorongon and Raymond Reynold R. Lauigan of the Tenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 63-65. Penned by Associate Justice Perpetua Susana T. Atal-Paño and concurred in by Associate Justices Edwin D. Sorongon and Raymond Reynold R. Lauigan of the Former Tenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 87-91. Issued by Executive Judge Reynaldo A. Alhambra.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 50-51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 96-123.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 125-152.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 49-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 333-334.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 376-385.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 51-52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 388-398.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 87-91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 90-91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 52.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 89-90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 399-413.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 66-85.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 69-80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 527-538.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> A.M. No. 05-11-04-SC, sec. 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> A.M. No. 05-11-04-SC, sec. 12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Republic v. Ng</b>, 904 Phil. 591, 604 (2021) [Per J. Inting, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Republic Act No. 10365 (2013), An Act Further Strengthening the Anti-Money Laundering Law, Amending for the Purpose Republic Act No. 9160, Otherwise Known as the "Anti-Money Laundering Act of 2001", As Amended.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Republic Act No. 10365 (2013), sec. 12(a).<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> A.M. No. 05-11-04-SC, sec. 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Republic Act No. 10365 (2013), sec. 12(a).<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 147.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 147-149.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 89-90.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>Arturo v. Albayalde and Dela Rosa, G.R. No. 250804</b>, February 25, 2025 [Per J.M. Lopez, <i>En Banc</i>] at 10. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, p. 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>See</i> <b>Presidential Commission on Good Government v. Tan</b>, 564 Phil. 426, 433 (2007) [Per J. Sandoval-Gutierrez, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, pp. 139-145.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 140-141.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 141.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 141-142.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 143.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 808 Phil. 601 (2017) [Per C.J. Sereno, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 631, <i>citing</i> <b>Ret. Lt. Gen. Ligot, et al. v. Republic</b>, 705 Phil. 477, 501-502 (2013) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>Republic v. Ng</b>, 904 Phil. 591, 603 (2021) [Per J. Inting, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Rollo</i>, p. 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Subido Pagente Certeza Mendoza and Binay Law Offices v. CA, et al.</b>, 802 Phil. 314, 359 (2016) [Per J. Perez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Rollo</i>, p. 60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Favis-Velasco, et al. v. Gonzales</b>, 874 Phil. 613, 625 (2020) [Per J. Inting, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i>, pp. 50-51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 50-51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Sorongon v. People</b>, 904 Phil. 438, 445 (2021) [Per J. Caguioa, First Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 227602 - CHO HAN CHOON, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '6447c37f808ec212b30fa473322ec85f' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '6447c37f808ec212b30fa473322ec85f' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70397' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 227602, February 12, 2026 ]</H2>
+			<H3>CHO HAN CHOON, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>CAGUIOA, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> dated December 2, 2016 under Rule 45 of the Rules of Court (Petition) filed by petitioner Cho Han Choon (petitioner), seeking to reverse and set aside: (1) the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated March 31, 2016 (Assailed Decision) of the Court of Appeals, Second Division (CA) in CA-G.R. CR No. 37267, which affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated October 8, 2014 of Branch 75, Regional Trial Court (RTC) of Olongapo City convicting petitioner for two counts of <i>estafa</i> defined and penalized respectively under Article 315, (1)(b) and (2)(a) of the Revised Penal Code<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> (RPC), and (2) the Resolution<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated October 6, 2016 (Assailed Resolution) of the CA which denied petitioner's Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> of the Assailed Decision.<br><br><center><b>The Facts and Antecedent Proceedings</b></center><br>Petitioner and his co-accused Cho So Myeong, Kim Myeong Jun, Cho Jae Min and Joy Montehermoso<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> were charged with two (2) counts of <i>estafa</i> under the following Informations:<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><blockquote><center>CRIMINAL CASE NO. 369-13<br>[<i>estafa</i> under Article 315 (2)(a)]</center><br>That on or about and during the period comprising December 2010 up to the first week of January 2013, inside the Subic Bay Freeport Zone, Olongapo City, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, conspiring, confederating together and mutually helping one another by means of false manifestations, false pretenses and fraudulent representation made to one Kang Il Chan prior to or simultaneously with the commission of the fraud that he incorporated Freeport Elite, Inc. with the primary purpose of establishing and managing a tourist inn, restaurant, condotel, resort, commercial space for sub-leasing and a travel agency and subsequently inviting Kang Il Chan to invest in Freeport Elite, Inc. because the corporation is in need of additional funding, and in return of Kang Il Chan (<i>sic</i>) investment, accused Cho Han Choon assured Kang Il Chan 30% of Freeport Elite's stockholdings and 100% profit, accused knowing fully well that his manifestations were only made to induce and convince Kang [II] Chan to part with his money and invest in Freeport Elite Inc. did then and there willfully, unlawfully and feloniously falsely represent to Kang Il Chan 30% of Freeport Elite's Stockholdings and 100% profit and induce Kang Il Chan to invest the amount of Php73 million Pesos, Philippine Currency. Without such fraudulent representation and false pretenses, Kang Il [Chan] would not have part[ed] with his money in the amount of Php73 million Pesos, Philippine Currency and said accused after having in his possession the aforementioned Php73 million Pesos, Philippine Currency and far from his promise and assurance said accused failed to give to Kang Il Chan the 30% stockholdings and 100% profit of Freeport Elite, Inc. and despite repeated demands, said accused fails and refuses and continuous (<i>sic</i>) to fail and refuse to give to Kang Il Chan his shares and documentary proofs representing his shares in the corporation to his damage and prejudice.<br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br><center>CRIMINAL CASE NO. 370-13<br>[<i>estafa</i> under Article 315 (1)(b)]</center><br>That on or about and during the period comprising December 2010 up to the first week of January 2013, inside the Subic Bay Freeport Zone, Olongapo City, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, conspiring, confederating together and mutually helping one another, being then the Incorporators and Director[s] of Freeport Elite, Inc. with intent to defraud one Kang Il Chan and with unfaithfulness and abuse of confidence after having been entrusted with the corporate funds of Freeport Elite, Inc., did then and there willfully, unlawfully and feloniously misapply and convert to their own personal use and benefit the amount of Ten Million Fourteen Thousand and Six Hundred Thirty-Four Pesos and 82/100 (Php10,014,634.82) Philippine Currency which amount forms part of the corporate funds of Freeport Elite[,] [Inc.]; and despite repeated demands made on accused to remit the same, accused failed and refused and continues to fail and refuse to remit to said Kang Il Chan the aforesaid amount to his damage and prejudice.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></blockquote>During arraignment, petitioner and his co-accused, except for Cho Jae Min who remains at large, entered a plea of not guilty to both charges.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Thereafter, pre-trial and trial on the merits ensued.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>The prosecution presented three witnesses: 1) private complainant Kang Il Chan (Kang), 2) Sherlene Mesiano, and 3) Jae Hong Park.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Thereafter, petitioner and his co-accused, through their then counsel Atty. Andrew M. Penullar (Atty. Penullar), opted to waive the presentation of defense evidence.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>The CA adopted the RTC's factual findings, which have been summarized as follows:<blockquote><b><i>KANG IL CHANG</i></b> testified through a duly qualified Korean interpreter. Kang is a Korean businessman and in his testimony adopted the allegations in his Complaint-Affidavit (Exh. AA) as his direct examination. Cho Han Choon told Kang he needed funds to finance his company in the Philippines, Freeport Elite Resorts, Inc., (Freepo1i for brevity) and if Kang would invest, he would receive 30% of the company's total stockholdings and 100% profit. Convinced of the viability of the project, Kang invested $1,000,000.00 remitted through bank transactions and personal cash transactions on various dates from December 29, 2010 until June 2011. Kang visited the Philippines about ten times to inspect the project and to demand his stockholdings from Cho. Kang learned that there were delays in the construction; and the promised stockholdings were not to be forthcoming. Instead, Cho asked for more money or "investments[."] Kang gave another $1,500,000.00 in cash and construction materials coursed through bank deposits and deliveries of materials on site between the periods July 2011 to November 2012. The $2.5 million investment should have represented 50% of the shareholdings of Freeport. But since the second tranche of deliveries, Kang received no more information about the project. When Cho asked for another fund infusion, Kang refused and demanded instead a copy of the Schedule of Expenses &amp; Report of the company and proof of his 50% stock ownership. About the third week of November 2012 Cho handed to Kang a General Information Sheet of Freeport Elite Resort Inc. for the year 2012 showing his ownership of 1,460,000 shares representing 50% of the shareholdings signed by corporate secretary Joy Montehermoso. Also, Cho submitted Expenses incurred since December 2010 amounting to Php 10,014,634.82 broken down as follows:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="10%"><div align="center">-</div></td><td width="15%">Electric bill</td><td width="75%">Php 93,557.53</td></tr><tr><td><div align="center">-</div></td><td>Telephone bill</td><td>Php 31,257.72</td></tr><tr><td><div align="center">-</div></td><td>Helper</td><td>Php 254,968.00</td></tr><tr><td><div align="center">-</div></td><td>TV</td><td>Php 9,990.00</td></tr><tr><td><div align="center">-</div></td><td>Water bill</td><td>Php 77,860.05</td></tr><tr><td><div align="center">-</div></td><td>Cho personal use</td><td>Php 9,547,008.52</td></tr></tbody></table></blockquote>Noticeably, Kang said the expenses submitted to him showed Cho used the company money for his own personal use. Meantime, Kang verified with the Securities and Exchange Commission (SEC) in Manila the records of Freeport and was astounded to find out that per Financial Statement ending December 31, 2010 he was not a stockholder of the company. The General Information Sheet (GIS) for 2012 gives the same conclusion, while there were two GIS for 2012 and the one showing Kang's 50% stockholdings was not actually filed with the SEC but hastily filed on October 29, 2012.<br><br>Kang reiterated that he invested in Freeport because Cho promised him 100% profit in a year's time with or without the completion of the building construction. He did not know if Freeport had profit at this time; and he did not know if there was any demand letter for the return of the Php 73 million or the Php 10 million.<br><br><b><i>SHERLENE MESIANO</i></b> presented to com1 General Information Sheet and Financial statement for the year 2009 to 2013. Except for the year 2013, the name of Kang was never reflected as stockholder of the company.<br><br><b><i>JAE HONG PARK</i></b> is the manager of the Korean company owned by Kang. He witnessed the transaction between Cho and Kang relating to the proposed investment; and transacted with Jeon Min Ja and Cho So Myeong in facilitating the transfer of funds and delivery of construction materials from the Korean company to Freeport Elite. He knew Cho Han Choon, Jeon Min Ja and Cho So Myeong after they were introduced to him by Kang to discuss a business in Subic Bay, Philippines. The three frequented Korea for business talks with Park and Kang. Jeon Min Ja is the wife of Cho, and Cho So Myeong his daughter. After a series of meetings, Kang agreed to invest $1million in cash and construction materials in exchange for 30% of the company stockholdings. Park facilitated the transfer of cash and construction materials from Korea to the Philippines. After the first investment of $1million, Kang again infused another $1.5 million. The remittances and shipment of materials were made between July 2011 to November 2012 after which Kang demanded proof of his stockholdings and a report on how his money was spent. Kang went to the Philippines sometime 2013 and inspected the hotel building and received a report from Cho of the details of his personal expenses covering December 2010 to November 2012. Obviously[,] Cho charged his family expenses from corporate funds. The total sum was Php 10,014,634.82.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis supplied)</blockquote><center><b>The Ruling of the RTC</b></center><br>After hearing, the RTC, in its Decision dated October 8, 2014 in Criminal Case Nos. 369-13 and 370-13, found petitioner guilty of both counts of <i>estafa</i> defined and penalized respectively under Article 315, (1)(b) and (2)(a) of the RPC.<br><br>In convicting petitioner of <i>estafa</i> under Article 315, 2(a) of the RPC, the RTC concluded that it was petitioner's false pretenses to Kang—that the latter would be entitled to 30% of the company shareholdings and 100% "guaranteed"<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> return on investment—which effectively enticed the latter to part with and invest in Freeport Elite Resort Inc. (Freeport) the substantial amount of PHP 73 million.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Although Kang's status as a shareholder of Freeport was eventually reflected in Freeport's General Information Sheet (GIS) filed with the Securities and Exchange Commission (SEC) on October 29, 2012 (2012 amended GIS), the RTC noted that said GIS, having been filed belatedly, nevertheless indicated an "obvious belated attempt to cover up fraud" on the part of petitioner.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Meanwhile, as regards the charge of <i>estafa</i> under Article 315, 1(b) of the RPC, the RTC held that it was clear from the prosecution's Schedule of Expenses Report (Expense Report) that petitioner spent PHP 10,014,634.82 of Kang's money for his personal expenses, although the same was meant for a business purpose.<br><br>The RTC thus disposed the case as follows:<blockquote><b><i>WHEREFORE</i></b>, the court the (<i>sic</i>) renders judgment as follows:<ol start="2"><li>In Criminal Case No. 369-13, the court finds CHO HAN CHOON guilty beyond reasonable doubt of Estafa defined and penalized w1der Article 315, 2(a) of the Revised Penal Code and sentences him to suffer the penalty of imprisonment from six <b>(6) years[,] eight (8) months, and twenty one (21) days as minimum to twenty (20) years as maximum</b>; and</li></ol><ol start="2"><li>In Criminal Case No. 370-13, the court finds CHO HAN CHOON guilty beyond reasonable doubt of Estafa defined and penalized under Article 315, 1(b) of the Revised Penal Code and sentences him to suffer the penalty of imprisonment from six <b>(6) years[,] eight (8) months, and twenty one (21) days as minimum to twenty (20) years as maximum</b>.</li></ol>The accused is also ordered to pay the private complainant <b>73 Million Pesos</b> and to pay it at interest of 12% per annum to be computed from the date of filing of the Information until fully paid; and to pay the cost of suit.<br><br>Kim Myeong Jun, Joy Montehermoso, and Cho So Myeong are acquitted of the charges with cost de oficio.<br><br>Let alias warrant of arrest issue against Cho Jae Min who remains at large.<br><br><b>SO DECIDED.</b><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original)</blockquote><center><b>The Ruling of the CA</b></center><br>On appeal, the CA affirmed petitioner's conviction for both counts of <i>estafa</i>.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> The CA held that the prosecution sufficiently proved the elements of <i>estafa</i> by means of deceit under Article 315 (2)(a) of the RPC, echoing the RTC's findings that it was petitioner's false pretenses which induced Kang to part with his money.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> In so ruling, the CA noted that petitioner's deceit became "more blatant" when Kang was not listed as a stockholder of the company despite his investment in Freeport, which was made in 2010.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> The CA did not give credence to the 2012 amended GIS of Freeport which indicated Kang as a stockholder, as the CA deemed this as "obviously an afterthought and a cover-up for the fraudulent scheme employed by [petitioner]."<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Likewise, the CA held that the prosecution sufficiently established the elements of <i>estafa</i> with abuse of confidence under Article 315 (1)(b) of the RPC.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> The CA rejected petitioner's argument that he was under no obligation to deliver or return the same amount, as Article 315 (1)(b) explicitly includes money in its scope and does not contemplate that exactly the same bills and coins received be returned upon demand.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Finally, while Kang was not aware whether a demand was made, the CA held that demand is a non-issue, as the law does not require demand as a condition precedent to the crime of embezzlement.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Hence, this recourse.<br><br><center><b>The Present Petition</b></center><br>After filing the present Petition, petitioner filed and prayed before this Court for the admission of his Supplement to the Petition for Review on Certiorari (Under Rule 45, Revised Rules of Court)<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> dated March 29, 2017 (Supplement), which included the formal entry of appearance of petitioner's new collaborating counsel.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Thereafter, another law office also entered its appearance before this Court as collaborating counsel for the defense.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Respondent People of the Philippines, through the Office of the Solicitor General (OSG), filed its Comment<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> dated July 25, 2017. Petitioner, represented by new counsel, thereafter filed his Reply<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> dated February 1, 2018.<br><br>In essence, petitioner argues in his Petition that the transaction between petitioner and Kang was primarily one of sale, <i>i.e.</i>, a contract for the sale of petitioner's shares in Freeport—and hence, petitioner became the legal owner of the funds invested by Kang.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Petitioner likewise argues that there was no deceit or fraudulent representation on his part. According to petitioner, not only did Kang ultimately receive all the shares that he purchased,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> but also, the alleged promise of profit was conditioned upon the completion of Freeport's hotel.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>In support of the foregoing, petitioner avers that he and Kang had actually entered into a Contract of Dealing of Stock<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> dated December 4, 2010 (Contract of Dealing of Stock), where Kang obligated himself to pay petitioner One billion Korean Won, or approximately PHP 37,037,037.02, through various installment payments from December 2010 to March 2011, in exchange for petitioner's 30% shareholdings in Freeport.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> This was thereafter revised through a Registry Agreement<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> dated October 5, 2012 (Registry Agreement) where Kang agreed to purchase 50% of Petitioner's shares in Freeport, instead of the original 30%, for an increased sum of PHP 73 million.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> According to petitioner, Kang eventually received all the shares that he purchased on October 2012 pursuant to the parties' agreement.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>Finally, petitioner, in his Reply, also avers that he was deprived of the fair opportunity to present his case,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> and submitted before this Court an <i>Affidavit</i><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> dated January 31, 2018 executed by him while in prison.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Petitioner asserts in his Affidavit that, despite not being able to fully understand either English or Filipino, he was not allowed to have an interpreter to assist him during his arraignment.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Moreover, according to Petitioner, the waiver done by Atty. Penullar of the presentation of defense evidence<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> was done without his knowledge or consent,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> and thus resulted in him not being able to testify and present evidence to support his defense.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br><center><b>Issue</b></center><br>Whether or not the CA erred in convicting petitioner of two counts of <i>estafa</i> under Article 315 (1)(b) and Article 315 (2)(b) of the RPC, respectively.<br><br><center><b>The Court's Ruling</b></center><br>The Court resolves in petitioner's favor.<br><br><b><i>I. Procedural Matters</i></b><br><br>It is well-settled that "in criminal cases, an appeal throws the entire case wide open for review and the reviewing tribunal can correct errors, though unassigned in the appealed judgment, or even reverse the trial court's decision based on grounds other than those that the parties raised as errors. The appeal confers the appellate court full jurisdiction over the case and renders such court competent to examine records, revise the judgment appealed from, increase the penalty, and cite the proper provision of the penal law."<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>While it is the general rule that only questions of law may be raised in petitions filed under Rule 45,<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> there are recognized exceptions, namely:<blockquote>(1) when the findings are grounded entirely on speculation, surmises or conjectures; (2) when the inference made is manifestly mistaken, absurd or impossible; (3) when there is grave abuse of discretion; (4) when the judgment is based on a misapprehension of facts; (5) when the findings of facts are conflicting; (6) when in making its findings the Court of Appeals went beyond the issues of the case, or its findings are contrary to the admissions of both the appellant and the appellee; (7) when the findings are contrary to the trial court; (8) when the findings are conclusions without citation of specific evidence on which they are based; (9) when the facts set forth in the petition as well as in the petitioner's main and reply briefs are not disputed by the respondent; (10) when the findings of fact are premised on the supposed absence of evidence and contradicted by the evidence on record; and (11) when the Court of Appeals manifestly overlooked certain relevant facts not disputed by the parties, which, if properly considered, would justify a different conclusion.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (Citation omitted)</blockquote>Here, petitioner invokes the first, fourth, and eleventh exceptions above.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> Petitioner asserts that the lower courts, in finding him guilty of the crimes charged, committed a serious misapprehension of facts and law,<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> and simply made sweeping conclusions of fact and law.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> He also points out that, worse, the lower courts not only overlooked relevant, undisputed, and exculpatory facts and pieces of evidence that are favorable to petitioner, but the lower courts' conclusion is likewise absolutely contrary to the evidence on record, warranting its immediate reversal.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> He specifically draws attention to the following:<br><br>First, the lower courts considered various pieces of evidence against petitioner—such as the Expense Report—despite not having been properly identified or authenticated;<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><br><br>Second, the lower courts' conclusion that petitioner received Kang's money in trust, notwithstanding the transaction of the parties simply being a contract of sale over Freeport shares,<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> and more importantly, Kang's clear admission of such fact;<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>Third, the lower courts' sweeping conclusion that petitioner misappropriated Kang's money, despite Kang's unqualified admission that he never demanded petitioner for the return of any amount of money;<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> and<br><br>Lastly, the lower courts' undue emphasis on, and finding of fraud from, the circumstance that Kang was not listed as a stockholder in 2010, despite Kang's full payment for the shares only having been made in 2012.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup><br><br>With the backdrop of the foregoing assertions, the Court finds petitioners' invocation of these exceptions to be well-taken, and deems it proper to reevaluate the factual findings and the conclusions reached by both the trial court and the CA. Verily, while the findings of fact of the RTC and CA are accorded weight and respect, the Court will not hesitate to reverse the conclusions reached by the lower courts when there appears to be a misappreciation of facts,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> especially in this case where petitioner stands to lose his liberty upon conviction.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br><b><i>II. Substantive Matters</i></b><br><br>Well-entrenched in jurisprudence is the rule that the conviction of the accused must rest not on the weakness of the defense, but on the strength of the prosecution. The burden is on the prosecution to prove guilt beyond reasonable doubt, not on the accused to prove his or her innocence.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Accordingly, it is a settled doctrinal rule that surmises and conjectures have no place in a judicial inquiry, and are particularly anathema in a criminal prosecution.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> In the present case, however, the lower courts did just that—rely on conjectures and assumptions grounded upon a hasty appraisal of spotty and inconclusive evidence. This will not be permitted by this Court.<br><br>At its core, unlawful abuse of confidence or deceit is the essence of <i>estafa</i>.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Neither of these, however, has been proved by the prosecution beyond reasonable doubt.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em><strong><u>The elements of estafa with abuse of confidence under Article 315 (1)(b) of the RPC were not proven beyond reasonable doubt.</u></strong></em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Under Article 315, paragraph 1(b) of the RPC, the elements of <i>estafa</i> with abuse of confidence are as follows:<blockquote><ol><li>that the money, goods or other personal property is received by the offender in trust or on commission, or for administration, or under any other obligation involving the duty to make delivery of, or to return, the same;<br><br></li><li>that there be misappropriation or conversion of such money or property by the offender, or denial on his or her part of such receipt;<br><br></li><li>that such misappropriation or conversion or denial is to the prejudice of another; and&nbsp;<br><br></li><li>that there is demand by the offended party to the offender.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup></li></ol></blockquote>This Court rules, and so holds, that the prosecution failed to prove the above elements beyond reasonable doubt, contrary to the CA's and RTC's findings.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>(a) The transaction between petitioner and Kang was a contract of sale over Freeport shares.</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Anent the first element of <i>estafa</i> with abuse of confidence under Article 315, paragraph 1(b) of the RPC, it is necessary for the prosecution to establish not only that money, goods or personal property were received by the offender, but also that such were received by offender in trust or on commission, or for administration, or under any other obligation involving the duty to make delivery of, or to return, the same. In other words, mere receipt of the money, goods, or personal property does not satisfy the first element.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> It must further be demonstrated that the character of such receipt must either be in trust, on commission or for administration, or that the accused has the obligation to deliver or return the same money, goods or personal property received. Essentially, it must be established that a fiduciary relationship has been created between the parties.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup><br><br>In its Assailed Decision, the CA made the following findings on the existence of the elements of elements of <i>estafa</i> with abuse of confidence:<blockquote>These elements were amply and clearly established in this case[.] <i>First</i>, [petitioner] admitted having received money from Kang for the particular purpose of investing the same with Freeport Elite, Inc. <i>Second</i>, [petitioner] misappropriated Kang's money as shown by the fact that he failed to return the same despite demand, and more importantly, as listed in the Schedule of Expenses Report, the amount of P10,014,634.82 was misappropriated or used for Cho's personal expenses; and, <i>third</i>, the misappropriation prejudiced Kang.<br><br>....<br><br>With regard to the issue of demand, while indeed Kang testified that he is not aware whether a demand was made to [petitioner] prior to the filing of the case, suffice it to say that demand was properly made when Kang asked for an accounting of the amounts given to [petitioner], who, in turn, complied by giving Kang the Schedule of Expenses Report. The issue of demand however is a non-issue because, after all, the law does not require a demand as a condition precedent to the crime of embezzlement.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup> (Emphasis in the original, citation omitted)</blockquote>Evidently, the foregoing findings are premised on the conclusion that the sums that Kang "invested" were received by petitioner in trust or on commission, or for administration, or under any other obligation involving the duty to make delivery of, or to return, the same. The CA fortified its position by simply dwelling on the apparent impossibility of petitioner returning "the exact bills and coins"<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> to Kang. The CA held:<blockquote>[Petitioner] however contends that his liability is merely civil and not criminal. He asserts that upon receipt of the amount, he was under no obligation or duty to deliver or return the same amount. Of course, this argument is without merit. Article 315 (1)(b) explicitly includes money in its scope. The nature of money, that is, the exact bills and coins received in trust cannot be returned, was already considered by the law. As long as the money was received in trust, on commission, for administration, or under an obligation to return, failure to account for it upon demand is punishable under Article 315 (1)(b).<sup style="COLOR: RGB(255, 0, 0);">[69]</sup></blockquote>The Court finds the CA's inquiry into the subject offense too simplistic and superficial. The essence of the crime of <i>estafa</i> by abuse of confidence is fraudulent conversion. The words "convert" and "misappropriate," as used in Article 315 paragraph 1(b) of the RPC, connote an act of using or disposing of another's property as if it were one's own, or of devoting it to a purpose or use different from that agreed upon. To "misappropriate" a thing of value for one's own use includes not only conversion to one's personal advantage but also every attempt to dispose of the property of another without right.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br>It is thus well-settled that one cannot commit <i>estafa</i> with abuse of confidence when ownership over the money, goods or other personal property received by accused has been transferred to the latter.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> Undoubtedly, one cannot misappropriate, or otherwise dispose of without right, property which one already owns. In <i>Salazar v. People</i><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> and <i>Esguerra v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> the Court has observed that in a contract of sale, payments already made by the vendee to the vendor are "subject to the disposal of the vendor"<sup style="COLOR: RGB(255, 0, 0);">[74]</sup>—hence, "[i]f the transaction fails, the obligation to return the [same] ensues but this obligation is civil and not of criminal nature."<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>Accordingly, petitioner argues that since the transaction between the parties was, in fact, purely one of sale, the amounts given by Kang actually constituted payment for the shares, and had become petitioner's exclusive property upon delivery of the monies.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> As such, petitioner was clearly under no obligation or duty to deliver or return the same to Kang.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> The Court agrees.<br><br>As borne out by the records, the sum of PHP 73 million from Kang was, in fact, given to petitioner as consideration for the sale of petitioner's shares in Freeport. To be sure, Kang unequivocally admitted on the witness stand that said payment was made by him as consideration for the sale of 50% of petitioner's Freeport shares. Portions of the relevant transcript of stenographic records are as follows:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="2"><div align="justify">Atty. Penullar:</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="95%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Mr. Kang you entered into a contract with Mr. Cho regarding the sale of some stocks coming from Freeport Elite is that correct?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And you will agree with me Mr. Kang that at first there was an agreement for you to buy 30% of the shares of stock of Freeport Elite?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">No.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">So what is your first ... agreement?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">I invest 1 million $USD and he will get 30% stock from him.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify"><i>So you are saying that you are going to get 30% of the stock holdings of Mr. Cho in Freeport Elite in exchange of 1 million $USD is that correct?</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify"><i>Yes sir.</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And later on this agreement was changed in such a manner that you are going to buy instead 50% of the share of Mr. Cho in Freeport Elite is that correct?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He didn't want to buy he just invest not buy.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify"><i>Mr. Kang you gave 73 million pesos to Mr. Cho to invest and for you to become a stockholder of Freeport Elite is that correct?</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify"><i>Yes sir.</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify"><i>And with your investment you were able to acquire 50% of the shares of stocks of Mr. Cho in Freeport Elite is that correct?</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify"><i>Yes sir.</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">That stockholdings were acquired by you from Mr. Cho who previously owned the said stockholdings is that correct?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He just invest 1 million $USD and on the condition of that he just get 50% of shares.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify"><i>So you invested to Freeport Elite and became a [stockholder] thereof by acquiring some of the shares of stocks of Mr. Cho which is 50% of his stocks?</i></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He said yes about that.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> (Emphasis supplied)</div></td></tr></tbody></table></blockquote>Eventually, the aim of the parties in the subject transaction was for petitioner and Kang to each become 50% owners of Freeport. This is apparent from Kang's testimony, to wit:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="2"><div align="justify">[ATTY. PENULLAR:]</div></td></tr><tr valign="top"><td width="5%"><div align="justify"></div><br></td><td width="95%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Mr. Kang, you know that Mr. Cho invested money to the Freeport Elite in building the structures in there is that correct?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">On the under construction of building he invest at the time.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And Mr. Kang you will agree with me that the investment of Mr. Cho is more than 73 million pesos which is the amount that you gave him to get 50% of his shares of stocks?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">More or less 73 million pesos and that is actual investment.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">What I am saying Mr. Kang is this if you bought 50% of the shares of Mr. Cho in Freeport Elite ... which is more or less equivalent to what you have paid which is 73 million[,] you are aware that the investment of Mr. Cho in that corporation is more than 73 million?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes sir.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup></div></td></tr></tbody></table></blockquote>Similarly, Jae Hong Park, another witness for the prosecution, testified that Kang agreed to "invest" such sums of money "in exchange for ... the company stockholdings."<sup style="COLOR: RGB(255, 0, 0);">[80]</sup><br><br>It is therefore surprising that the CA, despite the compelling merit in petitioner's argument, coupled with the prosecution witnesses' own admissions, brushed these aside and still concluded that Kang's PHP 73 million was received by petitioner in trust, on commission, for administration, or under an obligation to return—simply because the same was "clearly meant for [a] business purpose."<sup style="COLOR: RGB(255, 0, 0);">[81]</sup><br><br>In this regard, a perfected contract of sale imposes reciprocal obligations on the parties whereby the vendor obligates himself to transfer the ownership of and to deliver a determinate thing to the buyer who, in turn, is obligated to pay a price ce1iain in money or its equivalent.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> In light of Kang's admission, it is clear that the transaction between Kang and petitioner was a reciprocal contract of sale, through which Kang obligated himself to pay petitioner PHP 73 million, while petitioner obligated himself to transfer ownership over 50% shareholdings in Freeport to Kang. Ultimately, as a result, when petitioner received the said money from Kang, ownership over the same transferred <i>ipso jure</i> to petitioner, and petitioner thereby did not have a corresponding obligation to return the same to Kang.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup><br><br>Furthermore, even assuming, as asserted in the Information, that Kang's money instead became part of the corporate funds of Freeport,<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> the fact remains that what transpired between the parties was only a contract of sale of shares. Thus, even if petitioner simply received the funds as an agent of Freeport, no fiduciary relationship was created between petitioner and Kang as a result of the said transaction.<br><br>On point is the Comi's ruling in <i>Legaspi v. People</i><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> (<i>Legaspi</i>), in which the Court made it clear that <b>a contract for the sale of shares does not create a fiduciary relationship</b> as to put the transaction within the scope of Article 315, paragraph 1(b) of the RPC.<br><br>In <i>Legaspi</i>, the two accused were charged with the crime of <i>estafa</i> under Article 315, paragraph 1(b) of the RPC in relation to a transaction involving a sale of shares at a certain company. According to the private complainant in this case, one of the accused proposed to him a "joint venture" involving the purchase of a 10% share of the company. The private complainant, after being presented with the company's income analysis, articles of incorporation, and projected income, agreed to invest accordingly. He eventually remitted the amount of PHP 9.5 million as payment for the 10% shares. However, when he requested for the issuance of a stock certificate, none was given. Instead, the two accused made new proposals which the private complainant turned down.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> Eventually, the company suffered loss of sales which led to its closure.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup><br><br>When the <i>estafa</i> case reached the Court, it acquitted the accused in view of the absence of, among others, the first element of <i>estafa</i>, i.e., abuse of confidence. In so ruling, the Court noted the private complainant's unequivocal admission that his payment was made "into the account of [the company],"<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> hence negating the claim that the funds were actually received by the accused. More impo1iantly, even assuming that the said funds were received by the two accused, the Court ruled that <b>no fiduciary relation was created as a result of the transfer of stocks in exchange of the investment</b>.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup> The Court held in <i>Legaspi</i>, to wit:<blockquote>The Information itself is bereft of any indication that petitioners received private complainant's money in such manner as to create a fiduciary relationship between them. <b><i>On the contrary, the Information reads that private complainant "invested" his money with iGen-Portal.</i></b> It is undisputed that at the time material to the instant case, iGen-Portal was a duly-registered corporation engaged in wholesale and retail business, the existence of which was never denied by private complainant as he himself admitted having scrutinized iGen-Portal's Articles of Incorporation, income analysis and projected income analysis. <b><i>Clearly, by the transfer of stocks in exchange for the amount of P9,500,000.00, no fiduciary relationship was created between petitioners and private complainant.</i></b><br><br>However, as the undisputed facts reveal, the shares of stock of [the accused) were transferred to Balisi, a Filipino, instead of to private complainant. This transaction was duly evidenced by a Deed of Sale of Shares of Stock between [the accused] and Balisi. Accordingly, a stock certificate was issued for the 2,000 shares in the name of Balisi which was recorded in the stock and transfer book of iGen-Portal... If at all, what this circumstance reveals is that there was no abuse of confidence committed by petitioners nor suffered by private complainant; rather, private complainant voluntarily parted with his money after he was made fully aware of foreign ownership restrictions and then, even acquiesced to having Balisi, private complainant's domestic helper, purchase the stocks albeit the funds therefor would come from him.<br><br>It is also revealing that private complainant first demanded for the issuance or transfer of the stock certificate in his name and when said demand was not forthcoming, he demanded for the return of his investment and when that remained unsatisfied, only then did he file the complaint <i>a quo</i> for <i>estafa</i>. <b><i>Private complainant's demand for the issuance of a stock certificate in his name in return for his investment negates the claim that petitioners received the money with the obligation to return the same.</i></b><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> (Emphasis supplied, citations omitted)</blockquote>As borne out by the records, there is no doubt that petitioner and Kang, as in <i>Legaspi</i>, entered into a simple contract of sale for Freeport shares. The following are also not disputed: (1) that Kang paid PHP 73 million for 50% of Freepo1i's shares; (2) that Kang has indeed become the owner of 50% of Freeport's stocks; and (3) that Kang's stock ownership had been duly reflected in Freeport's 2012 amended GIS.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup><br><br>Inevitably therefore, petitioner did not, as he could indeed not, misappropriate or convert the sums that he received from Kang because he did not receive the same in trust or on commission, or for administration, or under any other obligation involving the duty to make delivery of, or to return, the same. In other words, even on the assumption that petitioner, as claimed by the prosecution, used the subject funds for his personal expenses, this circumstance is inconsequential, as ultimately, no fiduciary relationship was created between petitioner and Kang.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><u><em><strong>The elements of estafa by means of deceit under Article 315 (2)(a) of the RPC were not proven beyond reasonable doubt.</strong></em></u></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Under Article 315, paragraph 2(a) of the RPC, the elements of <i>estafa</i> by means of deceit are as follows:<blockquote><ol><li>that there must be a false pretense or fraudulent representation as to his or her power, influence, qualifications, property, credit, agency, business or imaginary transactions;<br><br></li><li>that such false pretense or fraudulent representation was made or executed prior to or simultaneously with the commission of the fraud;<br><br></li><li>that the offended party relied on the false pretense, fraudulent act, or fraudulent means and was induced to part with his or her money or property; and<br><br></li><li>that, as a result thereof, the offended party suffered damage.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup></li></ol></blockquote>In <i>estafa</i> by means of deceit under Article 315, 2(a) of the RPC, there must be evidence not only of the existence of a pretense or representation on the part of the accused, but also of the falsity of the same. In other words, there must be evidence that said pretense or representation is actually false. Otherwise, in the absence of proof that the representation of the accused was actually false, criminal intent to deceive cannot be inferred.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup><br><br>Thus, anent the first, second, and third elements, it must be shown that the accused's representation was false, and that the same was known to be false by the accused, prior to or simultaneous to the making of the representation.<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> Otherwise stated, it is incumbent upon the prosecution to prove that at the onset, the accused's representations were false or that the accused had every intention to renege on said promises. The Court however finds the prosecution's evidence in the present case lacking to elicit such a conclusion.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>(a) Petitioner's representations were not false.</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The Court resolves the threshold question whether petitioner representations were, in the first place, false.<br><br>The Information alleges that, during the period comprising December 2010 up to first week of January 2013,<sup style="COLOR: RGB(255, 0, 0);">[95]</sup> petitioner used two false pretenses to induce Kang to part with his money, namely that Kang will get "30% of Freeport Elite's Stockholdings,"<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> and that by reason of said investment, Kang will receive 100% profit.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> To the CA, these circumstances "strengthens the conclusion that [petitioner] misrepresented facts regarding his capability and the company's profile in order to persuade Kang to part with his money,"<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> thereby resulting in a finding of guilt for <i>estafa</i> by means of false pretenses.<br><br>The CA first grounded its affirmative answer on the alleged circumstance that Kang was not listed as Freeport's stockholder in 2010 and 2011, despite Kang's investment having been made as early as 2010.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup> To be sure, it is not disputed that Kang was eventually reflected as a stockholder in the 2012 amended GIS of Freeport.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> Notwithstanding this, however, the CA still declared that petitioner's promise of stock ownership "never materialized."<sup style="COLOR: RGB(255, 0, 0);">[101]</sup><br><br>The CA likewise held that the 2012 amended GIS cannot exculpate petitioner, as the CA observed that "this [was] obviously an afterthought and a cover-up for the fraudulent scheme employed by [petitioner]."<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> In so ruling, the CA put emphasis on alleged indicators of Cho's deceit,<sup style="COLOR: RGB(255, 0, 0);">[103]</sup> namely: first, the 2012 amended GIS which petitioner furnished Kang indicating the latter as an investor, which was given " [a]bout the third week of November 2012,"<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> "turned out to be fraudulent as the same [as of that time] was not even filed with the SEC;"<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> second, the 2012 amended GIS was filed by petitioner with the SEC only "after Kang verified with the SEC and discovered that he was never listed as a stockholder since 2010;"<sup style="COLOR: RGB(255, 0, 0);">[106]</sup> and third, despite having made his investment starting 2010, Kang was not yet listed as a stockholder in Freeport's Financial Statement ending December 31, 2010.<sup style="COLOR: RGB(255, 0, 0);">[107]</sup><br><br>The crux of the issue then, is whether the 2012 amended GIS was simply a fraudulent ruse on the part of petitioner as the CA impresses.<br><br>The Court rules in the negative.<br><br>The facts speak for themselves. As found by the RTC and the CA, the copy of the amended GIS which reflected Kang as a stockholder was given by petitioner to Kang "[a]bout the third week of <i>November 2012</i>."<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> Meanwhile, the undisputed facts likewise indicate that petitioner filed on <b>October 29, 2012</b> the amended GIS with the SEC<sup style="COLOR: RGB(255, 0, 0);">[109]</sup>—<b>which was around one month prior to the time petitioner gave the 2012 amended GIS to Kang</b>. Yet, in the Assailed Decision, the CA still concluded that it "turned out to be fraudulent as the same [as of that time] was not even filed with the SEC."<sup style="COLOR: RGB(255, 0, 0);">[110]</sup> This conclusion undoubtedly is not supported by the records. Simply put, prior to showing the amended GIS to Kang sometime the third week of November 2012, petitioner had already submitted the amended GIS to the SEC on October 29, 2012.<br><br>The lower courts likewise placed undue emphasis on the circumstance that Kang was not listed as Freeport's stockholder in 2010 and 2011, but was "hastily" listed in 2012, as yet another indicator of petitioner's deceit,<sup style="COLOR: RGB(255, 0, 0);">[111]</sup> as it allegedly showed an "attempt to cover up fraud."<sup style="COLOR: RGB(255, 0, 0);">[112]</sup><br><br>The Court disagrees. On the contrary, petitioner was actually justified in causing the transfer of shares only in 2012. Based on the records, Kang testified that (1) he initially invested USD 1 million on various dates from <b>December 29, 2010 until June 2011</b>, and that, (2) after inspecting the project a number of times, he gave another USD 1.5 million between the periods <b>July 2011 to November 2012</b>.<sup style="COLOR: RGB(255, 0, 0);">[113]</sup> Hence, as Kang himself admitted, his initial payment was made only on <b>December 29, 2010</b>, and he completed his payments only on <b>November 2012</b>.<br><br>Evidently, no deceit could be attributed to petitioner even if Kang's name was not indicated as a stockholder in the Financial Statement ending <b>December 31, 2010</b>, as his initial payment was made only two days prior. In the same light, having paid the full amount only in November 2012, Kang may not claim to have been deceived simply because he was not listed as a stockholder for the years prior to 2012. In fact, Kang's 50% ownership was already indicated in the GIS dated <b>October 29, 2012</b>—even before his full payment on November 2012. These, if at all, indicate petitioner's good faith or, at the very least, lack of bad faith on petitioner's part.<br><br>Finally, the CA also hinged its finding of guilt on petitioner's alleged promise of 100% "return on investment,"<sup style="COLOR: RGB(255, 0, 0);">[114]</sup> which, according to the CA, was not forthcoming<sup style="COLOR: RGB(255, 0, 0);">[115]</sup> and "never materialized."<sup style="COLOR: RGB(255, 0, 0);">[116]</sup><br><br>Once again, the Court disagrees.<br><br>What the record bears out is that the promised 100% profit would accrue only upon the completion of the construction of Freeport's hotel. The relevant portion of Kang's testimony is as follows:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">Q</div></td><td width="95%"><div align="justify">What do you mean by income 100% you mean to say the amount you invested based on the capital you invested 2.5 million $USD after one year you will be receiving another 2.5 million $USD?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">After construction you know the 100%.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">So in short the agreement of the rate of investment in the amount or in the percent or (<i>sic</i>) 100% will only start after the construction of the hotel is finished?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes.<sup style="COLOR: RGB(255, 0, 0);">[117]</sup></div></td></tr></tbody></table></blockquote>As admitted by Kang himself, the 100% profit allegedly promised by petitioner was conditioned upon the completion of the construction of the building. However, there was no allegation, much less proof, that the construction of the said building had already been completed at the time of the complaint. In fact, as Kang alleged in his complaint, he already knew that the building's construction was delayed.<sup style="COLOR: RGB(255, 0, 0);">[118]</sup> Moreover, based on the records, Kang likewise admitted that he did not know whether Freeport already had profit at that time of the complaint.<sup style="COLOR: RGB(255, 0, 0);">[119]</sup> All the foregoing negate the conclusion that on or before Kang made his "investment," petitioner already knew his promises to be false, or that he always intended to renege on the said promises.<br><br>Verily, entering into a contract necessarily carries with it reciprocal promises on the part of the contracting parties to keep each one's end of the bargain. Indeed, there is a chance that such promises may have been fraudulently made, done in bad faith, and with no intention of fulfilling the same—even from the beginning. However, such promises, no matter how enticing, exorbitant, or doubtful, may still have been honestly made, done in good faith, and with a clear intention of fulfilling the same. In the first instance, the party who reneges on his or her obligation may be exposed to civil and criminal prosecution for <i>estafa</i>; in contrast, the second situation may only give rise to a civil action. The present case falls more squarely under the latter.<br><br>Based on the records, petitioner had, in fact, endeavored to make good on his end of the bargain. Undoubtedly, Freeport was not a bogus project—the business was there, petitioner was the president of the company,<sup style="COLOR: RGB(255, 0, 0);">[120]</sup> and the construction of the hotel, as Kang himself admitted, was ongoing, albeit with delays.<sup style="COLOR: RGB(255, 0, 0);">[121]</sup> Moreover, as already discussed above, what transpired between the parties was essentially a contract of sale of petitioner's shares in Freeport—which, as shown indisputably by the records, were received by Kang.<br><br>Anent the promised profit—needless to state, it was presumptuous of Kang to claim to have been defrauded, considering that there has yet to be a determination on whether the construction has been completed, or whether Freeport has recorded profits. More importantly, Kang is a businessman,<sup style="COLOR: RGB(255, 0, 0);">[122]</sup> and is thus presumed to be equipped with the sufficient degree of experience, sense, acumen, judgment, if not shrewdness, so as to protect his business interests.<sup style="COLOR: RGB(255, 0, 0);">[123]</sup> As such, he should have known that there are no guaranteed profits in any investment, and that any potential reward comes with appurtenant risks. This is basic and fundamental in the field of business that the alleged promise of profit could not have been the sole efficient cause which induced Kang to part with his money. To borrow the words of the Court in <i>Paredes v. Calilung</i>,<sup style="COLOR: RGB(255, 0, 0);">[124]</sup> while Kang's qualification as a businessman "may not protect him absolutely,"<sup style="COLOR: RGB(255, 0, 0);">[125]</sup> this nevertheless certainly makes him "less susceptible to deception as compared to an ordinary layperson."<sup style="COLOR: RGB(255, 0, 0);">[126]</sup><br><br><i>(b) No reliable evidence on damage.</i><br><br>Conformably with finding the evidence of guilt unreliable, the Court declares that the disposition by the RTC ordering petitioner to indemnify Kang in the amount of PHP 73 million with interest of 12% per annum until fully paid was not yet shown to be factually founded. Hence, acquittal has to be declared but without prejudice to the filing of a civil action against him for the recovery of any amount that he may owe Kang, if any.<br><br>To stress, to sustain a conviction, the prosecution must prove the guilt of the accused beyond reasonable doubt, relying on the strength of its own evidence and not banking on the weakness of the defense.<sup style="COLOR: RGB(255, 0, 0);">[127]</sup> Thus, it is incumbent upon the State to leave no stone unturned, and to remove every and all possibilities pointing to the innocence of the accused—otherwise, the Court is constrained to acquit.<br><br>Here, the Court may not turn a blind eye to the undeniable cracks in the prosecution's evidence. Conscious of the overwhelming presumption of innocence, petitioner must be acquitted.<br><br><b>ACCORDINGLY</b>, premises considered, the Petition for Review on <i>Certiorari</i> and Supplement to the Petition for Review on <i>Certiorari</i> are hereby <b>GRANTED</b>. The Court <b>SETS ASIDE AND REVERSES</b> the Decision dated March 31, 2016 and Resolution dated October 6, 2016 of the Court of Appeals, Second Division in CA-G.R. CR No. 37267, convicting petitioner <b>CHO HAN CHOON</b> of two counts of <i>estafa</i> as charged, and <b>ACQUITS</b> him for failure of the prosecution to prove his guilt beyond reasonable doubt, without prejudice to a civil action brought against him for the recovery of any civil liability that he may have owing in favor of private complainant <b>KANG IL CHAN</b>.<br><br>Accordingly, petitioner <b>CHO HAN CHOON</b> is <b>ORDERED IMMEDIATELY RELEASED</b> from detention unless he is being lawfully held for another cause. Let an entry of final judgment be issued immediately.<br><br>Let a copy of this Decision be furnished the Director General of the New Bilibid Prison, Muntinlupa City, for immediate implementation. The said Director General is <b>ORDERED</b> to <b>REPORT</b> to this Court within five days from receipt of this Decision the action he has taken.<br><br><b>SO ORDERED.</b><br><br><i>Gaerlan, Rosario</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> and <i>Dimaampao, JJ.</i>, concur.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">**</sup> <i>J.</i>, on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Designated additional Member vice Associate Justice Henri Jean Paul B. Inting per Raffle dated March 21, 2023.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 8-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 26-37. Penned by Associate Justice Socorro B. Inting with Associate Justices Remedios A. Salazar-Fernando and Priscilla J. Baltazar-Padilla concurring.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 40-47. Penned by Judge Raymond C. Viray.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> An Act Revising the Penal Code and Other Penal Laws, Act No. 3815 (1932).<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Rollo</i>, pp. 38-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 48-57.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 11, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> RTC records (Criminal Case No. 369-13), pp. 1-2; RTC records (Criminal Case No. 370-13), pp. 314-315.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> RTC records (Criminal Case No. 369-13), <i>id</i>.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> RTC records (Criminal Case No. 370-13), p. 314.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, pp. 13, Petition, 28, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 13, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 13, Petition, 30, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 41-32, RTC Decision; <i>see also id.</i> at 28-30, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 44, RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 46-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 36, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 35-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 36, <i>citing</i> <b>Salazar v. People</b>, 439 Phil. 762, 775 (2002) [Per J. Puno, Third Division].&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 60-76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> The Supplement dated March 29, 2017 included the formal entry of appearance of Atty. Joseph Nolan H. Jacinto of Jacinto Magtanong Esguerra &amp; Uy Law Offices.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 95. The law firm of Sycip Salazar Hernandez &amp; Gatmaitan filed its Entry of Appearance as collaborating counsel for petitioner on July 10, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 100-117.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 137-179.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 19-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 70, Supplement, 167, Petitioner's Reply dated February 1, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 68, Supplement.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 185-187.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 139-141, Petitioner's Reply dated February 1, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 188-190.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 139-141, Petitioner's Reply dated February 1, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 70, Supplement, 167, Petitioner's Reply dated February 1, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 138.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 180-184.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 138, Petitioner's Reply dated February 1, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 144, Petitioner's Reply dated February 1, 2018, 181, Petitioner's Affidavit dated January 31, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 203, RTC Order dated August 7, 2014.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 144, 149, Petitioner's Reply dated February 1, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 149.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Ramos v. People</b>, 803 Phil. 775, 783 (2017) [Per J. Perlas-Bernabe, First Division]. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> RULES OF COURT, Rule 45, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>De Castro v. Field Investigation Office, Office of the Ombudsman</b>, 810 Phil. 31, 44-45 (2017) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, pp. 147-149, Petitioner's Reply dated February 1, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 68-69, Supplement.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 148, Petitioner's Reply dated February 1, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 155, 157.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 164-168.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 165-166.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 168-169.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 170-171.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <b>Martel v. People of the Philippines</b>, 895 Phil. 270, 286 (2021) [Per J. Caguioa, <i>En Banc</i>]; <b>Cruz v. People</b>, 864 Phil. 832, 855 (2019) [Per J. Caguioa, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Dizon v. People</b>, 524 Phil. 126, 139 (2006) [Per J. Chico-Nazario, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>People v. PO1 Lumikid</b>, 875 Phil. 467, 487 (2020) (Per C. J. Peralta, First Division], <i>citing</i> <b>Daayata v. People</b>, 807 Phil. 102, 118 (2017) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>Franco v. People</b>, 780 Phil. 36, 50 (2016) [Per J. Reyes, Third Division], <i>citing</i> <b>People v. Anabe</b>, 644 Phil. 261, 281 (2010) [Per J. Carpio Morales, Third Division]; <b>People v. Furugganan</b>, 271 Phil. 496, 506 (1991) [Per J. Regalado, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>Legaspi v. People</b>, 842 Phil. 72, 79 (2018) [Per J. Tijam, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>Jandusay v. People</b>, 711 Phil. 305, 310-311 (2013) [Per J. Reyes, First Division], <i>citing</i> <b>Asejo v. People</b>, 555 Phil. 106, 112-113 (2007) [Per J. Velasco, Jr., Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Tan v. People</b>, 542 Phil. 188, 197-198 (2007) [Per J. Corona, First Division]; <b>Legaspi v. People</b>, <i>supra&nbsp;</i>note 63, at 81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <b>Tan v. People</b>, <i>id.</i> at 198.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Rollo</i>, pp. 35-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 35-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>Tria v. People</b>, 743 Phil. 441, 452 (2014) [Per J. Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>United States v. Figueroa</b>, 22 Phil. 269, 271 (1912) [Per J. Mapa, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 480 Phil. 444 (2004) [Per J. Puno, Special Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> 108 Phil. 1078 (1960) [Per J. Barrera, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i> at 1085, <i>citing</i> <b>Abeto v. People of the Philippines</b>, 90 Phil. 581, 583 (1951) [Per J. Jugo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <b>Salazar v. People</b>, <i>supra</i> note 72, at 452.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Rollo</i>, pp. 20, Petition, 51, Petitioner's Motion for Reconsideration dated May 5, 2016.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> TSN, Kang Il Chan, January 30, 2014, pp. 15-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Rollo</i>, pp. 30, CA Decision, 42, RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 32, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <b>Tamayao v. Lacambra</b>, 888 Phil. 910, 924 (2020) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>Salazar v. People</b>, <i>supra</i> note 72 at 452; <b>United States v. Figueroa</b>, <i>supra</i> note 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> RTC records (Criminal Case No. 370-13), p. 314; <i>rollo</i>, pp. 27-28, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Supra</i> note 63, at 81-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> <i>Id.</i> at 76-77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <i>Id.</i> at 77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> <i>Id.</i> at 83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id.</i> at 81-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Rollo</i>, pp. 29, 34-45, CA Decision; TSN, Kang Il Chan, January 30, 2014, pp. 15-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <b>People v. Rios</b>, 871 Phil. 774, 807 (2020) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> LUIS B. REYES, THE REVISED PENAL CODE CRIMINAL LAW 818 (18<sup>th</sup> ed., 2012), <i>citing People v. Urpiano</i>, C.A. 60 O.G. 6009, 6013 (1963), <i>citing further</i> the ruling cases of <b>People v. Lagasca</b>, G.R. No 4230-R, June 5, 1960, and <b>United States v. Adriatico</b>, 7 Phil. 187 (1906) [Per J. Mapa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <b>Lopez v. People</b>, 715 Phil. 839, 847 (2013) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> RTC records (Criminal Case No. 369-13), p. 1; <i>rollo</i>, p. 27, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Rollo, id.</i> at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <i>Id.</i> at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> <i>Id.</i> at 34-35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> Id at 29. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <i>Id.</i> at 35.<br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> <i>Id.</i> at 29, 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> <i>Id.</i> at 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[113]</sup> <i>Id.</i> at 28-29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[114]</sup> <i>Id.</i> at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[115]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[116]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[117]</sup> TSN, Kang Il Chan, January 30, 2014, p. 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[118]</sup> <i>Rollo</i>, p. 34, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[119]</sup> <i>Id.</i> at 29, CA Decision, 51, Petitioner's Motion for Reconsideration dated May 5, 2016.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[120]</sup> <i>Id.</i> at 194, General Information Sheet dated January 16, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[121]</sup> <i>Id.</i> at 34, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[122]</sup> <i>Id.</i> at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[123]</sup> <i>See</i> <b>Paredes v. Calilung</b>, 546 Phil. 198, 236 (2007) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[124]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[125]</sup> <i>Id.</i> at 236.<br><br><sup style="COLOR: RGB(255, 0, 0);">[126]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[127]</sup> <b>Villarosa v. People</b>, 875 Phil. 270, 300 (2020) [Per C. J. Peralta, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

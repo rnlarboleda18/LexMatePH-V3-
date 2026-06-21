@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 275805 - MANOLO P. SAMSON, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70406' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 275805, January 27, 2026 ]</H2>
+			<H3>MANOLO P. SAMSON, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Court resolves a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Manolo P. Samson (Samson) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA) affirming with modification the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC), which found Samson guilty of unfair competition under the Intellectual Property Code.<br><br><center><b>The Antecedents</b></center><br>The instant case stemmed from two Informations charging Samson with violation of Section 168.3(a) in relation to Sections 123.1(e), 131.3, and 170 of Republic Act No. 8293, also known as the Intellectual Property Code of the Philippines. The accusatory portions state:<br><br>Criminal Case No. Q-02-108043-CR<br><blockquote>That on or about the first week of November 1999 and sometime prior or subsequent thereto, in Quezon City, Philippines, and within the jurisdiction of this Honorable Court, above-named accused, owner/proprietor of ITTI Shoes/Mano Shoes Manufacturing Corporation located at Robinson's Galleria, EDSA corner Ortigas Avenue, Quezon City, did then and there willfully, unlawfully and feloniously distribute, sell and/or offer for sale CATERPILLAR products such as footwear, garments, clothing, bags, accessories and paraphernalia which are closely identical to and/or colorable imitations of the authentic Caterpillar products and likewise using trademarks, symbols and/or designs as would cause confusion, mistake or deception on the part of the buying public to the damage and prejudice of CATERPILLAR, INC., the prior adopter, user and owner of the following internationally "CAT", "CATERPILLAR &amp; DESIGN", "CAT AND DESIGN", "WALKING MACHINES" and "TRACK-TYPE TRACTOR &amp; DESIGN".<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> </blockquote>Criminal Case No. Q-02-108044-CR<br><blockquote>That on or about the first week of November 1999 and sometime prior or subsequent thereto, in Cubao, Quezon City, Philippines, and within the jurisdiction of this Honorable Court, the above-named accused, owner/proprietor of ITTI Shoes located at Stalls 28 and 29, Marikina Shoe Expo, General Romulo Street, Cubao, Quezon City, did then and there willfully, unlawfully and feloniously distribute, sell and/or offer for sale CATERPILLAR products such as footwear, garments, clothing, bags, accessories and paraphernalia which are closely identical to and/or colorable imitations of the authentic Caterpillar products and likewise using trademarks, symbols and/or designs as would cause confusion, mistake or deception on the part of the buying public to the damage and prejudice of CATERPILLAR, INC., the prior adopter, user and owner of the following internationally famous marks "CATERPILLAR" "CAT", "CATERPILLAR &amp; DESIGN", CAT AND DESIGN", "WALKING MACHINES" AND "TRACK-TYPE TRACTOR &amp; DESIGN".<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </blockquote>During arraignment, Samson pleaded not guilty to both charges.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>At the pre-trial conference, the following were admitted by the parties:<br><blockquote><ol><li>That the establishment, ITTI Shoes, is located at Robinson's Galleria, EDSA corner Ortigas Avenue, Quezon City;<br></li><li>The issuance of Search Warrant Nos. 00-27 and 00-26, issued by the Regional Trial Court of Makati, Branch 56 on 26 July 2000, in connection with the establishments located at Robinson's Galleria and Marikina Shoe Expo, Cubao, Quezon City;<br></li><li>That at the time the raid was conducted pursuant to Search Warrants Nos. 26 and 27, defendant was distributing products bearing "Caterpillar" trademark;<br></li><li>Private complainant has filed a civil action for cancellation precisely of this "Caterpillar" trademark registered in the name of accused Manolo Samson and pending before the Regional Trial Court, Quezon City, Branch 90.<br></li><li>That complainant sought an Order seeking the issuance of a writ of preliminary injunction and/or temporary restraining order against the selling of these products by the accused.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </li></ol></blockquote>During trial, the prosecution established that Caterpillar, Inc. is a corporation duly organized and existing under the laws of Peoria, Illinois. It operates its retail distribution licensee World Wide, Incorporated to market, sell, and offer its product to the public. Caterpillar, Inc. owns several marks such as "Caterpillar, "CAT," "CAT DESIGN," "WALKING MACHINES" and "TRACK-TYPE TRACTOR and DESIGN" and these marks were registered with different countries.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> To establish that the marks are considered well-known marks, Caterpillar, Inc. presented the following documents:<br><blockquote><ol><li>Certificate of Registrations to various countries;<br></li><li>Summarized details of Caterpillar, Inc.'s worldwide registration;<br></li><li>List of trademarks;<br></li><li>Certificate of Registration No. 575 of Caterpillar Mark in the Philippines;<br></li><li>Certificate of Registration No. 1609 of Cat Mark in the Philippines;<br></li><li>Certificate of Registration No. 16811;<br></li><li>Public Index File in IPO Library;<br></li><li>Caterpillar, Inc.'s Advertisement;<br></li><li>Invoices for purchase of Caterpillar, Inc.'s products and items &amp; bill of lading;<br></li><li>Photos of Caterpillar, Inc.'s stores located in various countries<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></li></ol></blockquote>Initially, Caterpillar, Inc.'s primary core products were heavy equipment. After it established goodwill and became well-known in the industry, it expanded its business and entered into the sale of shoes, clothes, accessories, and other apparel in the year 1960. It averred that since 1955, its products have only been sold to its authorized distributor in the Philippines' Duty Free outlet.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>In its aim to protect its intellectual property rights, Caterpillar, Inc. engaged the services of Poblador, Bautista &amp; Reyes Law Firm (PBR Law) to handle the investigation against persons using the Caterpillar marks in the Philippines without authority. With the help of an investigation agency, Able Research and Consulting Services, it was discovered that several establishments were selling Caterpillar imitation products. Among these establishments were two stores with the name ITTI—later revealed to be owned by Samson—located in Cubao and Robinson's Galleria, Quezon City.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>PBR Law then wrote a letter-complaint to the National Bureau of Investigation (NBI) to report the Caterpillar counterfeits sold in these stores. Acting on the letter complaint, the NBI, in coordination with PBR Law, conducted an investigation and test-buy on June 18, 2000 and purchased a leather belt, a pair of socks, and shoelaces at ITTI-Robinson's Galleria. At the ITTI-Cubao store, they purchased a t-shirt, nubuck cleaner, leather conditioner, pair of socks, wallet, and shoelaces.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>After confirming that the purchased products bore identical marks to the Caterpillar marks, the NBI applied for search warrants before the RTC Makati, which were eventually granted. NBI agents proceeded to the identified ITTI establishments on July 27, 2000, and seized various items which were eventually turned over to the NBI evidence custodian. Caterpillar, Inc. instituted the two criminal complaints for unfair competition based on these seizures.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>For the defense, Samson testified that he is the owner and proprietor of ITTI Shoes Corporation, which is engaged in the business of manufacturing shoes, bags, and other leather products under various marks. He averred that as early as 1992, he started marketing and selling products bearing the trademark "CATERPILLAR AND DESIGN" and "CAT" showing a triangle device beneath the letter "A."<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Samson alleged that he applied for registration on January 24, 1994 with the Bureau of Patents, Trademarks and Technology Transfer (Bureau), now the Intellectual Property Office (IPOPHIL). He lamented that when he applied for the registration of the Caterpillar mark, an opposition was later filed by Caterpillar, Inc. He alleged that this opposition was denied by the Bureau for failure to substantiate its claim. After due notice and hearing, the Bureau issued the registration of the mark "CATERPILLAR" for class 25 goods. In view of the registration, he continued to distribute products under the trademark "CATERPILLAR."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> He stated that he was peacefully conducting his business when, on July 27, 2000, agents of the NBI implemented search warrants issued by the RTC of Makati City. He lamented that he did not unfairly compete with Caterpillar, Inc. considering that it neither sells nor holds any registration in the Philippines. When asked about Caterpillar, Inc., Samson averred that he did not have actual knowledge that Caterpillar, Inc. used and registered the subject marks in the Philippines.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>To establish his claim on the trademark, Samson presented a Registration issued by the IPOPHIL. He manifested that all the designs of his products were made and conceptualized by his shoe pattern maker, Bienvenido Salazar (Salazar).<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>The RTC found that all the elements of unfair competition existed in this case. The dispositive portion of its Decision reads:<br><blockquote>WHEREFORE,<i> premises considered</i>, judgment is hereby rendered finding the accused, Manolo P. Samson:<br><br>1. GUILTY beyond reasonable doubt of the crime Violation of Sec. 168.3(a) in relation to Sees. 123.1(e), 131.3. and 170 of [Republic Act No.] 8293 in Criminal Case No. R-QZN-02-108043-CR. Accordingly, he is hereby sentenced to suffer imprisonment of three (3) years, as minimum to five (5) years, as maximum, and to pay a fine of Two Hundred Thousand Pesos ([PHP] 200,000.00); and<br><br>2. GUILTY beyond reasonable doubt of the crime of Violation of Sec. 168.3(a) in relation to Secs. 123.1(e), 131.3 and 170 of [Republic Act No.] 8293 in Criminal Case No. R-QZN-02-108044-CR. Accordingly, he is hereby sentenced to suffer imprisonment of three (3) years, as minimum to five (5) years, as maximum, and to pay a fine of Two Hundred Thousand Pesos ([PHP] 200,000.00).<br><br>The items recovered from the premises of the accused and subject of these cases, as enumerated in the seized of [sic] inventory of items and items bought for test buy purposes are hereby ordered destroyed, pursuant to existing rules and regulations.<br><br>Pursuant to<i> Rule 20, Section 2 of the Rules of Procedure for Intellectual Property Right cases</i>, the destruction of the pieces of evidence must comply with the following:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">An inventory and photographs of the seized infringing goods should be taken before destruction at the place where the seized infringing goods are stored; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">b) </div></td> <td valign="top"> <div align="JUSTIFY">The taking of the inventory and photographs must be witnessed and attested to by: (1) the accused or counsel or agent, or in their absence, an officer of the barangay where the seized infringing goods are stored; (2) the complainant, his representative or counsel; (3) the public officer who seized the items or a representative of his office; and (4) a court officer authorized by the court to supervise the destruction of the seized infringing goods; and </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">c) </div></td> <td valign="top"> <div align="JUSTIFY">The court officer authorized to supervise the destruction has submitted a report thereon, within five (5) days from the date of destruction, to which is attached (i) the inventory and photographs of the seized infringing goods and (ii) the inventory of the representative samples. </div></td> </tr> </tbody></table><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original) </blockquote>The RTC found that a presentation of the products by Samson would show that these are closely identical to the products of Caterpillar, Inc. It found that except for the wordings, the color, and the background of the tag, the marks used by Samson and Caterpillar, Inc. are extremely identical with one another.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> It held that Samson had the intent to unfairly compete with Caterpillar, Inc. considering that the products bought and seized from Samson bore marks that are closely similar to that of the other core marks of Caterpillar, Inc. The fact that he and his pattern marker have designs close to being replica marks of Caterpillar, Inc. is very unusual. Further, he used the tagline of Caterpillar, Inc. "Licensed Merchandise Caterpillar" when in fact, the name of his business is not Caterpillar, Inc. but Mano Shoes Manufacturing Corp. and ITTI Shoes Corporation.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Aggrieved, Samson filed an appeal to the CA. The CA denied this appeal, holding that there was confusing similarity in the general appearance of the goods and there was an intent to deceive the public and defraud a competitor, meeting the elements of unfair competition. Nevertheless, it modified the nomenclature for the two counts of the crime by removing the phrase "in relation to Secs. 123.1 (e), 131.3 and 170 of Republic Act No. 8293" as the conviction for Samson may already be upheld on the basis of Section 168.3 (a) alone. The dispositive portion stated:<br><blockquote><b>WHEREFORE</b>, premises considered, the appeal is hereby <b>DENIED</b>. The Decision dated 24 February 2020 of the Regional Trial Court, Branch 93, Quezon City is<b> AFFIRMED</b> with<b> MODIFICATION, </b>in that the nomenclature of the offense shall only read as "Violation of Sec. 168.3 (a), in relation to Sec. 170, of R.A. 8293.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> (Emphasis in the original) </blockquote>Samson filed his motion for reconsideration with the CA, but this was denied in its Resolution.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Hence, Samson filed this Petition for Review insisting on his good faith considering that his trademark application for the "CATERPILLAR" mark in 1994 was granted in 1997 and has been renewed since then.<br><br>The Office of the Solicitor General filed its Comment<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> claiming that the instant petition raised questions of fact, which is improper for a petition for review on<i> certiorari</i> under Rule 45 of the Rules of Court, and that the prosecution has sufficiently established the elements of unfair competition.<br><br><center><b>Issue</b></center><br>The sole issue to be resolved in this case is whether the CA erred in ruling that petitioner Manolo P. Samson is guilty of violating Section 168.3 (a) of Republic Act No. 8293, otherwise known as the Intellectual Property Code of the Philippines.<br><br><center><b>This Court's Ruling</b></center><br>The Petition is meritorious.<br><br>The Intellectual Property Code defines unfair competition in the following manner:<br><blockquote><b>Section 168.</b><i> Unfair Competition, Rights, Regulation and Remedies. -<br></i>168.1.<i> </i>A person who has identified in the mind of the public the goods he manufactures or deals in, his business or services from those of others, whether or not a registered mark is employed, has a property right in the goodwill of the said goods, business or services so identified, which will be protected in the same manner as other property rights.<br><br>168.2. Any person who shall employ deception or any other means contrary to good faith by which he shall pass off the goods manufactured by him or in which he deals, or his business, or services for those of the one having established such goodwill, or who shall commit any acts calculated to produce said result, shall be guilty of unfair competition, and shall be subject to an action therefor.<br><br><b>168.3. In particular, and without in any way limiting the scope of protection against unfair competition, the following shall be deemed guilty of unfair competition:<br><br>(a) Any person, who is selling his goods and gives them the general appearance of goods of another manufacturer or dealer, either as to the goods themselves or in the wrapping of the packages in which they are contained, or the devices or words thereon, or in any other feature of their appearance, which would be likely to influence purchasers to believe that the goods offered are those of a manufacturer or dealer, other than the actual manufacturer or dealer, or who otherwise clothes the goods with such appearance as shall deceive the public and defraud another of his legitimate trade, or any subsequent vendor of such goods or any agent of any vendor engaged in selling such goods with a like purpose;</b><br><br>(b) Any person who by any artifice, or device, or who employs any other means calculated to induce the false belief that such person is offering the services of another who has identified such services in the mind of the public; or<br><br>(c) Any person who shall make any false statement in the course of trade or who shall commit any other act contrary to good faith of a nature calculated to discredit the goods, business or services of another.<br><br>168.4. The remedies provided by Sections 156, 157 and 161 shall apply mutatis mutandis. (Sec. 29, R.A. No. 166a) (Emphasis supplied) </blockquote>The elements of unfair competition are: (1) confusing similarity in the general appearance of the goods, and (2) intent to deceive the public and defraud a competitor.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Jurisprudence establishes that the determination of these elements is always a question of fact.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> This Court has been clear on this matter:<br><blockquote>Questions of fact, which would require a re-evaluation of the evidence, are inappropriate under Rule 45 of the Rules of Court. The jurisdiction of the Court under Rule 45, Section 1 is limited only to errors of law as the Court is not a trier of facts. While Rule 45, Section 1 is not absolute, none of the recognized exceptions, which allow the Court to review factual issues, is present in the instant case.<i> Miro v. Vda. de Erederos </i>is particularly instructive on this matter:<br><blockquote><i>Parameters of a judicial review under a Rule 45 petition<br><br>a. Rule 45 petition is limited to questions of law</i><br><br>Before proceeding to the merits of the case, this Court deems it necessary to emphasize that a petition for review under Rule 45 is limited only to questions of law. Factual questions are not the proper subject of an appeal by<i> certiorari</i>. This Court will not review facts, as it is not our function to analyze or weigh all over again evidence already considered in the proceedings below. As held in<i> Diokno v. Hon. Cacdac</i>, a reexamination of factual findings is outside the province of a petition for review on<i> certiorari</i>, to wit:<br><blockquote>It is aphoristic that a re-examination of factual findings cannot be done through a petition for review on<i> certiorari</i> under Rule 45 of the Rules of Court because as earlier stated, this Court is not a trier of facts[.] x x x. The Supreme Court is not duty-bound to analyze and weigh again the evidence considered in the proceedings below. This is already outside the province of the instant Petition for<i> Certiorari</i>.</blockquote>There is a question of law when the doubt or difference arises as to what the law is on a certain set of facts; a question of fact, on the other hand, exists when the doubt or difference arises as to the truth or falsehood of the alleged facts. Unless the case falls under any of the recognized exceptions, we are limited solely to the review of legal questions.<br><br><i>b. Rule 45 petition is limited to errors of the appellate court</i><br><br>Furthermore, the "errors" which we may review in a petition for review on<i> certiorari</i> are those of the CA, and not directly those of the trial court or the quasi-judicial agency, tribunal, or officer which rendered the decision in the first instance. It is imperative that we refrain from conducting further scrutiny of the findings of fact made by trial courts, lest we convert this Court into a trier of facts. As held in<i> Reman Recio v. Heirs of the Spouses Agueda and Maria Altamirano, etc., et al.</i>, our review is limited only to the errors of law committed by the appellate court, to wit:<br><blockquote>Under Rule 45 of the Rules of Court, jurisdiction is generally limited to the review of errors of law committed by the appellate court. The Supreme Court is not obliged to review all over again the evidence which the parties adduced in the court<i> a quo</i>. Of course, the general rule admits of exceptions, such as where the factual findings of the CA and the trial court are conflicting or contradictory.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> (Citations omitted) </blockquote></blockquote></blockquote>Nevertheless, this rule is not absolute and admits of certain exceptions as stated in jurisprudence:<br><blockquote>(1) When the conclusion is a finding grounded entirely on speculation, surmises or conjectures; (2) When the inference made is manifestly mistaken, absurd[,] or impossible; (3) Where there is a grave abuse of discretion; (4) When the judgment is based on a misapprehension of facts; (5) When the findings of fact are conflicting; (6) When the Court of Appeals, in making its findings, went beyond the issues of the case and the same is contrary to the admissions of both appellant and appellee; (7) The findings of the Court of Appeals are contrary to those of the trial court; (8) When the findings of fact are conclusions without citation of specific evidence on which they are based; (9) When the facts set forth in the petition as well as in the petitioner's main and reply briefs are not disputed by the respondents; and (10) The finding of fact of the Court of Appeals is premised on the supposed absence of evidence and is contradicted by the evidence on record.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> </blockquote>We find that the eighth exception applies. While the court<i> a quo</i> was able to justify its conclusion that the first element of unfair competition was present, We find that the prosecution in this case failed to present evidence beyond reasonable doubt as to the presence of the second element, based on the available evidence.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>There is confusing similarity in the general appearance of the goods</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>Here, the CA has already factually determined the presence of confusing similarity between the marks of Caterpillar, Inc. and those of petitioner. The marks are as follows:<br><blockquote><table width="100%"  ="" border="1" cellspacing="0" cellpadding="0"> <tbody><tr valign="TOP"> <td width="50%"><div align="CENTER">(Image supposed to be here)<br><br>Caterpillar, Inc.'s mark</div></td> <td width="50%"><div align="CENTER">(Image supposed to be here)<br><br>Accused's mark </div></td> </tr> </tbody></table></blockquote>We affirm the observations made by the CA regarding this mark:<br><blockquote>The Court finds that the use of the word "CATERPILLAR" with the triangular shape below letter "A" would most likely cause confusion on the part of the buying public. While it appears that the font and size of the wordings used in the mark of the accused is a bit thinner and smaller, to this Court's mind, the dominant feature of the trademark looking at it as a whole definitely resembles that of the private complainant. Further, it can be gleaned from the pieces of evidence presented that although the accused registered the trademark "CATERPILLAR" with thinner font, in his actual products, he uses almost the exact same font that is being used by [Caterpillar, Inc.].<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> </blockquote>Apart from the above mark, petitioner is also accused of unfair competition for the "CAT" mark of Caterpillar, Inc:<br><blockquote><table width="100%"  ="" border="1" cellspacing="0" cellpadding="0"> <tbody><tr valign="TOP"> <td width="50%"><div align="CENTER">(Image supposed to be here)<br><br>Caterpillar, Inc.'s mark</div></td> <td width="50%"><div align="CENTER">(Image supposed to be here)<br><br>Accused's mark </div></td> </tr> </tbody></table></blockquote>As found by the CA when it undertook a side-by-side visual comparison of the "CAT" on the genuine products and as imprinted on the seized items, there are numerous striking similarities;<br><blockquote>The mark "CAT" of Caterpillar, Inc. and that of the accused when put side by side clearly show the striking similarities. The only dissimilarity of said marks is the symbol "®" which is written in the upper right portion of the private complainant's mark while the sign "TM" appears on the upper right portion of the mark of the accused. This dissimilarity cannot be given due importance considering that even the accused is not consistent in writing the sign "TM" in all his products. Records show that not all of the products of the accused bear the above-mentioned sign. Nevertheless, even with the presence of this dissimilarity, the marks showed would likely cause confusion or deceive the ordinary purchaser, exercising ordinary care, into believing that the good bearing the marks are products of one and the same enterprise.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> </blockquote>The CA found that the other marks, such as the "track-type tractor and device," were identically presented in the genuine Caterpillar, Inc. products and in the seized products, being similarly placed in the heel counter of the shoes and similarly using the color combination of yellow and black.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>Jurisprudence dictates that confusing similarity may not just result from a similarity in the marks, but also from external factors such as in the packaging or presentation of the goods.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> The confusion can either be on the product or the source of the product:<br><blockquote>Relative to the issue on confusion of marks and trade names, jurisprudence has noted two types of confusion,<i> viz.</i>: (1) confusion of goods (<i>product confusion</i>), where the ordinarily prudent purchaser would be induced to purchase one product in the belief that he was purchasing the other; and (2) confusion of business (<i>source or origin confusion</i>), where, although the goods of the parties are different, the product, the mark of which registration is applied for by one party, is such as might reasonably be assumed to originate with the registrant of an earlier product; and the public would then be deceived either into that belief or into the belief that there is some connection between the two parties, though inexistent. Thus, while there is confusion of goods when the products are competing, confusion of business exists when the products are non-competing but related enough to produce confusion of affiliation.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Citations omitted) </blockquote>In this case, there is confusion as to the products given that petitioner sells the same products as that of Caterpillar, Inc. such as shoes, clothes, accessories and other apparel. Further, aside from a similarity in marks, the packaging and presentation between Caterpillar, Inc. and petitioner's products are also alike. As found by the CA:<br><blockquote>Anent the presentation of the products by the accused, it can be noticed that the same is closely identical as to that of the private complainant. Pieces of evidence adduced by the prosecution will reveal that even the tag of the private complainant is intimately similar to that of Caterpillar's (used by the accused). Except for the wordings, the color and the background of the tag, it appears that the marks used by the private complainant and the accused are extremely identical with one another. The accused, instead of using "CAT" (utilized by private complainant), he used the word "CATERPILLAR." Even then, the public would most likely be confused considering that the word CAT, which is the core mark of the private complainant forms part of the word "CATERPILLAR" used by the accused in his products.<br><br>. . . .<br><br>In the underside of the tongue of the shoes, there is again that circular logo mentioned where it states, "licensed merchandise, Caterpillar, Inc."<br><br>The foregoing results showing a myriad of similarities in the features of the products of the parties, with both having, as well, been shown to comprise of the same marks in the same locations, erase the dispute that the products being sold by the accused is a close imitation of that of private complainant or that the consuming public would likely be deceived or misled into purchasing the products of the accused under the belief that they are purchasing that (sic) the products of the private complainant.<br><br>The visual appearance of the products with their labels by the contending parties would clearly have the impression on the consumers that the products came from the same company. Thus, the Court is convinced that the similarities are not just a coincidence.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> </blockquote>With these findings, the first element as to confusing similarity in the general appearance of the products was sufficiently proven.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><i>There was no intent to deceive the public and defraud a competitor</i></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>As to the second element, We refer to the Rules of Procedure for Intellectual Property Rights Cases.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Rule 18, pertaining to the evidence in trademark infringement and unfair competition cases, provides that intent to deceive the public and defraud a competitor is presumed under certain circumstances:<br><blockquote>SECTION 7. Intent to defraud or deceive. - In an action for unfair competition, intent to defraud or deceive the public shall be presumed:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">a) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">when the defendant passes off a product as theirs by using imitative devices, signs or marks on the general appearance of the goods, which misleads prospective purchasers into buying their merchandise under the impression that they are buying that of their competitors; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">b) </div></td> <td valign="top"> <div align="JUSTIFY">when the defendant makes any false statement in the course of trade to discredit the goods and business of another; or </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">c) </div></td> <td valign="top"> <div align="JUSTIFY">where the similarity in the appearance of the goods as packed and offered for sale is so striking. </div></td> </tr> </tbody></table></blockquote>The above provision is an instance of the general evidentiary presumptions under Rule 131 of the Rules of Court. This Court has previously discussed the nature of such procedural tool:<br><blockquote>A presumption is "an inference as to the existence of a fact not actually known, arising from its usual connection with another which is known, or a conjecture based on past experience as to what course human affairs ordinarily take." It may either be a presumption<i> juris</i>, or of law, which "is an assumption of fact that the law requires to be made from another fact or group of facts found or otherwise established in the action," or a presumption<i> hominis</i>, or of fact, which is "a reasonable deduction from the facts proved without an express direction of law to that effect." An evidentiary presumption has two components: (1) the<i> basic fact</i>; and (2) the<i> presumed fact</i>, which is inferred from the basic fact because of their usual connection founded on common experience.<br><br>A presumption is an evidentiary tool where the basic fact furnishes a<i> substitute</i> for the presumed fact and<i> relieves</i> the offeror of the burden to produce evidence to prove the fact presumed. It has the effect of<i> shifting the burden</i> to the adverse party to "<i>go forward</i>" with evidence, and unless there is counterproof or positive evidence to the contrary, the presumption "controls [the] decision on the presumed fact."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> </blockquote>Despite the acceptable use of this evidentiary tool in the judgment of cases, this Court has emphasized that the standard of proof beyond reasonable doubt in criminal cases must still be observed:<br><blockquote>Irrefragably, when it comes to the State's use of evidentiary presumptions in criminal cases, special considerations must be given to the constitutional rights of the accused to due process and to be presumed innocent. The Court has factored in this circumstance in several cases that are further discussed below, wherein it limited and qualified the prosecution's use of evidentiary presumptions to establish guilt or prove an element of the crime charged.<br><br>Section 6, Rule 131 of the Rules of Court expresses these limitations and emphasizes that the prosecution must never shift the burden of proof to the accused. Specifically, the rule provides that the prosecution is allowed to use an evidentiary presumption to negate a defense or prove an element of the crime charged only if the following conditions are met: (1) the basic fact is proven by the prosecution beyond reasonable doubt and (2) the presumed fact follows from the basic fact beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> (Citations omitted) </blockquote>In this case, the basic fact may have been proven to exist, that is, there is close resemblance between the devices and marks on the general appearance of the goods by Caterpillar, Inc. and that of petitioner.<br><br>However, We disagree with the CA that the presumed fact of petitioner's intent to deceive the public and defraud Caterpillar, Inc. follows from that basic fact beyond reasonable doubt.<br><br>In justifying its finding of intent on the part of petitioner, the CA ratiocinated as follows:<br><blockquote>The logos/marks appearing in the products of the accused clearly, closely resemble that of the private complainant's products. Considering that the parties are dealing in the same kind of products which satisfy the same human need and which are offered to the same consuming public, the intent of the accused in the choice of marks despite the countless choices available to him became more apparent. It is likely that probably deception and confusion, on the part of the consuming public, will occur.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> </blockquote>The CA also found a lack of good faith on the part of petitioner when he used the other trademarks of Caterpillar, Inc., such as "CAT" and the tractor device, despite only having registered the mark "CATERPILLAR."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>In an attempt to prove good faith, and to disprove any intent to deceive or defraud, petitioner insists that he applied to register his "CATERPILLAR" mark in 1994, and that this application was granted in 1997 and has been renewed since then.<br><br>We find merit in this position.<br><br>This Court would be hard-pressed to punish petitioner who understandably relied on the rights accorded to his registration. To recall, when he applied for the registration of the Caterpillar mark, an opposition was already filed by Caterpillar, Inc., yet this opposition was denied by the Bureau for failure to substantiate its claim. After due notice and hearing, the Bureau issued in petitioner's favor the registration of the mark "CATERPILLAR" for class 25 goods. It was in view of this registration that he continued to distribute products under the trademark "CATERPILLAR."<br><br>To Our mind, petitioner's awareness of the tenets of intellectual property law and the mandated processes in the IPOPHIL casts reasonable doubt on his alleged intent to deceive the public and defraud Caterpillar, Inc.<br><br>This Court in<i> Levi Strauss (Phils.) v. Lim</i><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> has likewise considered registration as a<i> prima facie</i> showing of good faith:<br><blockquote>In finding that probable cause for unfair competition does not exist, the investigating prosecutor and Secretaries Guingona and Cuevas arrived at the same conclusion that there is insufficient evidence to prove all the elements of the crime that would allow them to secure a conviction.<br><br>Secretary Guingona discounted the element of actual intent to deceive by taking into consideration the differences in spelling, meaning, and phonetics between "LIVE'S" and "LEVI'S," as well as the fact that respondent had registered his own mark. While it is true that there may be unfair competition even if the competing mark is registered in the Intellectual Property Office,<b> it is equally true that the same may show prima facie good faith</b>. Indeed, registration does not negate unfair competition where the goods are packed or offered for sale and passed off as those of complainant. However, the mark's registration, coupled with the stark differences between the competing marks, negate the existence of actual intent to deceive, in this particular case.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> (Emphasis in the original) </blockquote>This is not to say, however, that registration is an absolute defense in an action for unfair competition. As fittingly put in<i> R.F. &amp; Alexander &amp; Co. v. Ang</i>,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> "one may be declared unfair competitor even if his competing trade-mark is registered."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> Nevertheless, considering the circumstances by which an opposition was already filed and denied by the Bureau, petitioner's reliance on the act of a government agency that allowed the registration and therefore the continuous use of his mark, should merit consideration, especially in a criminal case that requires proof beyond reasonable doubt to be able to convict.<br><br>By relying on governmental act, doubts linger as to whether petitioner had a malicious intent to deceive the public and make it appear that his products are the same as those produced by Caterpillar, Inc.<br><br>The principles of unfair competition still stand: the gravamen is one's passing off of their goods to the public as the goods of another.<br><br>Nevertheless, criminal actions for unfair competition must be treated with the same gravity as criminal cases, exacting the same standard of proof beyond reasonable doubt. As case law states:<br><blockquote>Before we condemn . . . the crime must first be positively established and that the accused is guilty<i> sans any scintilla</i> of doubt. This is elementary and fundamental in our criminal justice system. Any suspicion or belief that accused is guilty — no matter how strong — cannot substitute for the quantum of evidence that is required to prove his guilt beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> </blockquote>In this particular case, this Court finds that reasonable doubt has been cast on petitioner's intent to deceive the public, considering the lawful steps he took before offering his goods to the public.<br><br><b>ACCORDINGLY,</b> the Petition is<b> GRANTED.</b> The August 17, 2023 Decision and August 27, 2024 Resolution of the Court of Appeals in CA-G.R. CR No. 45208 are <b>REVERSED</b> and <b>SET ASIDE</b>. Petitioner Manolo P. Samson is <b>ACQUITTED</b> for the failure of prosecution to prove his guilt beyond reasonable doubt.<br><br>Let entry of final judgment be issued immediately.<br><br><b>SO ORDERED. </b><br><br><i>Lazaro-Javier, Kho, Jr.,</i> and <i>Villanueva, JJ.</i>, concur.<br><i>Leonen, SAJ. (Chairperson),</i> see concurring opinion.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 9-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 33-48. The August 17, 2023 Decision in CA-G.R. CR No. 45208 was penned by Associate Justice Michael P. Ong and concurred in by Associate Justices Ramon R. Garcia and Selma Palacio Alaras of the Special Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 49-50. The August 27, 2024 Resolution in CA-G.R. CR No. 45208 was penned by Associate Justice Michael P. Ong and concurred in by Associate Justices Selma Palacio Alaras and Perpetua Susana T. Atal-Paño of the Special Former Special Sixth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 53-72. The February 24, 2020 Decision in Criminal Case Nos. R-QZN-02-108043-CR and R-QZN-02-108044-CR was penned by Presiding Judge Arthur O. Malabaguio of Branch 93, Regional Trial Court, National Capital Region, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 53-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Id at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 54-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 59-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 71-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 143-144.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 69-70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>. at 49-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 163-188.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <b>Asia Pacific Resources Int'l. Holdings, LTD v. Paperone, Inc.</b>, 845 Phil. 85, 94 (2019) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <b>Lopez v. Saludo, Jr.</b>, 910 Phil. 600, 605-607 (2021) [Per J. Hernando, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <b>Spouses Miano v. Manila Electric Company</b>, 800 Phil. 118, 123 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, p. 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Asia Pacific Resources Int'l. Holdings, Ltd. v. Paperone</b>, 845 Phil. 85 (2018) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 97.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Rollo</i>, p. 65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> A.M. No. 10-3-10-SC, October 18, 2011.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Genio v. People of the Philippines</b>, 950 Phil. 311, 326 (2024) [Per J. Inting, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>. at 329.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i>, p. 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id</i>. at 66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 593 Phil. 435 (2008) [Per J. R.T. Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id</i>. at 453-454.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> 97 Phil. 157 (1955) [Per J. Bengzon].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>. at 162.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>People v. Dacasin</b>, 366 Phil. 62, 69 (1999) [Per J. Bellosillo, Second Division].</div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><br></div><div align="JUSTIFY"><hr width="60%" size="1" noshade="" align="CENTER"><br><br><center><b>CONCURRING OPINION</b></center><br><b>LEONEN,<i> SAJ</i>:</b><br><br>I agree with the<i> ponencia</i> that the proof so far adduced falls short of proving petitioner Samson's guilt beyond reasonable doubt. Nonetheless, I take this opportunity to reiterate my position that estimates of a likelihood of confusion require basis in "objective, scientific, and economic standards[.]"<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> This requires a process that forwards empirical basis beyond the subjective determination of judges and administrative examiners.<br><br>The Petition for Review questions petitioner's conviction for unfair competition under Section 168.3(a)<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of Republic Act No. 8293 or the Intellectual Property Code. In a criminal conviction for unfair competition, the following must be proved beyond reasonable doubt: (1) confusing similarity between competing products; and (2) the accused's intent to deceive consumers and to defraud their competitor.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>Here, the prosecution alleged that Caterpillar, Inc. owned several well-known marks, which it used in its heavy equipment business. Specifically, Caterpillar, Inc., claimed ownership over the marks "Caterpillar", "CAT", "CAT DESIGN", WALKING MACHINES", and "TRACK-TYPE TRACTOR and DESIGN."<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Having established goodwill with these marks, Caterpillar, Inc. later expanded its business into the sale of "shoes, clothes, accessories, and other apparel[.]"<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> When Caterpillar, Inc. discovered that petitioner had sold products bearing marks identical to Caterpillar, Inc.'s, the former pursued criminal action against petitioner.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>In his defense, petitioner argued that his business of manufacturing "shoes, bags, and other leather products" had marketed and sold products with the "CATERPILLAR AND DESIGN" and "CAT" since 1992.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Samson also claimed to have procured registration for "CATERPILLAR" with the Bureau of Patents, Trademarks and Technology, which later became the Philippine Intellectual Property Office, despite Caterpillar, Inc. opposing his application. Further, petitioner argued that Caterpillar, Inc. neither sold nor held any trademark registration for "CATERPILLAR" in the Philippines. Thus, he continued to sell his products using the "CATERPILLAR" mark.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>The Regional Trial Court found that the products sold by petitioner and Caterpillar, Inc. were "closely identical" and that aside from minor differences in wording, color, and composition, their respective marks were nearly identical.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Further, it held that petitioner exhibited clear intent to deceive the consuming public by using marks that were confusingly similar with Caterpillar, Inc.'s other trademarks, despite having a registration only for the "CATERPILLAR" mark. Specifically, the prosecution points to petitioner's use of the "[b]ulldozer, walking machine, and truck tractor" marks.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Finally, the Regional Trial Court ruled that prior registration did not negate the crime of unfair competition, since the crime's essence involves passing off one's goods as those of another.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>In affirming the Regional Trial Court's ruling, the Court of Appeals likewise found that the prosecution had established the elements of unfair competition.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> By its definition, unfair competition involved "the passing off, or attempt at passing off, upon the public by one person of the goods or business of another with the end, and probable effect of, deceiving the public."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Thus, the Court of Appeals found confusing similarity between the marks used by petitioner and those claimed by Caterpillar, Inc. given the identical visual impressions and uses in trade.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Likewise, the Court of Appeals found the existence of intent to deceive the public and defraud a competitor, given petitioner's deceptive representations of his products as "goods . . . actually licensed by Caterpillar, Inc."<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Based on these, it is apparent that the methods employed by the prosecution and the lower courts to determine the existence of confusing similarity or likelihood of confusion between the products were inherently subjective and wholly unscientific.<br><br>The likelihood of confusion between petitioner's and Caterpillar, Inc.'s goods may be proven empirically and with evidence that provides an objective view of what market confusion actually entails. Instead, the lower courts were satisfied with proof of confusing similarity based only on their own subjective assessments of the competing marks' overall impressions, as used in petitioner's goods. I respectfully submit that this case provides a valuable opportunity to reexamine the criteria for proving the likelihood of confusion between goods in trade using "objective, scientific, and economic standards."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>I have consistently expressed the need for more objective basis in determining the likelihood of confusion between competing trademarks. In <i>Asia Pacific International Holdings, Ltd. v. Paperone, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> this Court upheld the finding that respondent Paperone, Inc. was liable for unfair competition because the relatedness of the parties' paper products might lead consumers to conclude that "PAPER ONE products are manufactured by or are products of Paperone, Inc."<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Despite my concurrence with the main opinion, I cautioned against overreliance on the subjective assessments of confusion made by courts and administrative agencies.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><blockquote><i>My discomfort with the prevailing doctrine is that determining whether goods or services are related is left solely to the subjective evaluation of the Philippine Intellectual Properly Office or the judgment of the court. It is based on ad hoc inferences of similarity in class, physical attributes or descriptive properties, purpose, or points of sale of the goods or services</i>. Here, the Bureau of Legal Affairs of the Intellectual Property Office, as affirmed by the Director-General, found that respondent committed unfair competition based on a simplistic conclusion that "[b]oth Complainant APRIL and Respondent's main business product is paper[;] both offer papers for sale to the public."<i> We should improve on the standard by which likelihood of confusion is measured, considering the advances in the study of competition and economics in general.<br><br>There should be objective, scientific, and economic standards to determine whether goods or services offered by two parties are so related that there is a likelihood of confusion</i>. In a market, the relatedness of goods or services may be determined by consumer preferences. When two goods are proved to be perfect substitutes, where the marginal rate of substitution, or the "consumer's willingness to substitute one good for another while maintaining the same level of satisfaction" is constant, then it may be concluded that the goods are related for the purposes of determining likelihood of confusion. Even goods or services, which superficially appear unrelated, may be proved related if evidence is presented showing that these have significant cross-elasticity of demand, such that changes of price in one party's goods or services change the price of the other party's goods and services. Should it be proved that goods or services belong to the same relevant market, they may be found related even if their classes, physical attributes, or purposes are different.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis supplied, citations omitted) </blockquote><i>Shell Company of the Philippines, Ltd. v. Insular Petroleum Refining Co. Ltd.</i><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> provides viable basis for adopting a more objective approach to evaluating the likelihood of confusion or of alleged detriment to a party's business interests.<br><blockquote>We can build on past jurisprudence of this Court. In<i> Shell Co. of the Philippines, Ltd. v. Ins. Petroleum Refining Co., Ltd. and CA</i>, this Court did not give credence to a complainant's claim that the entry into the market of the defendant's products, which were allegedly sold in complainant's drums, caused a decrease in complainant's sales. Thus, no unfair competition could be imputed to the defendant:<br><blockquote>Petitioner contends that there had been a marked decrease in the volume of sales of low-grade oil of the company, for which reason it argues that the sale of respondent's low-grade oil in Shell containers was the cause. We are reluctant to share the logic of the argument. We are more inclined to believe that several factors contributed to the decrease of such sales. But let us assume, for purposes of argument, that the presence of respondent's low-grade oil in the market contributed to such decrease. May such eventuality make respondent liable for unfair competition? There is no prohibition for respondent to sell its goods, even in places where the goods of petitioner had long been sold or extensively advertised. Respondent should not be blamed if some of petitioner's dealers buy Insoil oil, as long as respondent does not deceive said dealers. If petitioner's dealers pass off Insoil oil as Shell oil, that is their responsibility. If there was any such effort to deceive the public, the dealers to whom the defendant (respondent) sold its products and not the latter, were legally responsible for such deception. The passing of said oil, therefore, as product of Shell was not performed by the respondent or its agent, but petitioner's dealers, which act respondent had no control whatsoever. </blockquote>These cases illustrate the many ways by which specialized agencies and courts may objectively evaluate the relatedness of allegedly competing goods and services. An analysis that ends in a mere finding of confusing similarity in the general appearance of the goods should not suffice.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> (Citations omitted) </blockquote>Thus, my opinion in<i> Asia Pacific International Holdings</i> emphasized that the method for determining the existence of confusion in unfair competition cases required more objective basis. A ruling by courts and administrative agencies that a likelihood of confusion exists based solely on a good's general appearance is insufficient.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Later, the main opinion in<i> Prosel Phamaceuticals &amp; Distributors, Inc., v. Tynor Drug House, Inc. </i><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> adopted my opinion in<i> Asia Pacific International Holdings</i><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> and called for "objective, scientific, and economic standards"<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> in determining the likelihood of confusion between related goods and services. However, the main opinion ruled on the existence of trademark infringement, as follows:<br><blockquote>This Court is aware that countless products circulate around the market today which may be viewed as strikingly similar and may bring forth a likelihood of confusion to its target market.<i> With increasing product and service competition, the determination of a likelihood of confusion becomes more complex</i>. While jurisprudence has developed the Dominancy Test and Holistic/Totality Test to determine whether there is a likelihood of confusion between competing marks, the application of such tests is normally left to the subjective judgment of the IPO or the courts.<i> Albeit this Court recognizes the expertise of the IPO on matters involving trademark and copyright infringement, the fact remains that the products are aimed at a particular target market outside of the individual personalities of those in the IPO and the courts. Therefore, there may be underlying factors in a mark that are discernible by a product's target market which the IPO or the courts might not observe. Conversely, there may be factors which the IPO or the courts may deem considerable but are immaterial to the target market. Thus, the ponencia adopts the observations of Justice Leonen in Asia Pacific Resources International Holdings, Ltd. v. Paperone, Inc. that there should be "objective, scientific, and economic standards to determine whether goods or services offered by two parties are so related that there is a likelihood of confusion."<br><br>Notwithstanding such standards, CEEGEEFER's use of its brand name and packaging undeniably creates a likelihood of confusion with CHERIFER</i>. The similarities are apparent: (1) CHERIFER and CEEGEEFER are phonetically alike; (2) the pictures on CHERIFER and CEEGEEFER's packages are practically indistinguishable—both depicting the right profile or side of a boy wearing a basketball jersey and a baseball cap shooting a basketball on a hoop with their knees slightly bent; (3) both phrases on top of CHERIFER and CEEGEEFER's picture start with the letters "H" and "M" in an arc that both have a different colored line in the middle; (4) the packages have a drawing of a ribbon; and (5) the packages use the colors orange and yellow. More importantly, CHERIFER and CEEGEEFER are both over-the-counter vitamin supplements promoting growth for children by including the CGF component. The addition of its star ingredient, CGF, is what separates CEEGEEFER and CHERIFER from other children's vitamin supplements sold in the market. The reason for CHERIFER's and CEEGEEFER's focus on a child's growth is simple: it addresses one of a parent's main concerns for their early childhood and pre-adolescent children. With CHERIFER and CEEGEEFER targeting the same relevant market (i.e., over-the-counter children's growth vitamin supplement) and given their glaring similarities, CHERIFER and CEEGEEFER are reasonably interchangeable and are almost perfect substitutes of each other. Note, too, that since CHERIFER and CEEGEEFER are over-the-counter products (and were, in fact even sold side-by-side in some establishments), the propensity to mistakenly purchase one for the other is high.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> (Emphasis supplied, citations omitted) </blockquote>Thus, my separate opinion<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> in<i> Prosel</i> disagreed with the main opinion's analysis and insisted that a more objective basis, other than the isolated perspective of a judge or administrative officer, would be required to render such a finding.<br><blockquote>Evidence-based standards for determining "likelihood of confusion" are imperative, lest courts and administrative agencies succumb to<i> ad hoc </i>reasoning and this Court promulgate essentially<i> pro hac vice</i> decisions without coherent and consistent precedents to guide the bench and bar:<br><br>. . . .<br><br><i>In this case, there is insufficient factual basis to justify the conclusion that a likelihood of confusion had arisen, such that the relevant market for petitioner and respondent's goods have been misled into buying the other's products due to the packaging or marks used. </i><br><br>According to respondent, it had discovered that petitioner's CEEGEEFER products were sold alongside its own CHERIFER products beside or near each other in drugstores in Metro Manila and Valenzuela. <i>However, it does not appear to have proffered evidence in the trial court that the alleged target market for CEEGEEFER—"mothers, fathers and people with small children"—had actually or likely mistaken one product from another. </i><br><br>Thus, respondent had not shown that the introduction of CEEGEEFER products in the brand name and packaging complained of had adversely affected the sales of CHERIFER products.<i> It has not even shown that goodwill had been built up on the CHERIFER brand—which it claims to have been "ahead in the market for more than 10 years"—to such an extent that CEEGEEFER would have consciously emulated the brand name and packaging to benefit from it.</i><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis supplied, citations omitted) </blockquote>My separate concurring opinion in<i> Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> again emphasized the need to improve our standards for assessing the likelihood of confusion:<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><blockquote>While the<i> ponencia</i> has laudably sought to bring jurisprudential stability through the unequivocal abandonment of the holistic test, I urge this Court to also seriously refine the existing standards for determining the likelihood of confusion of goods and business.<i> Admittedly, likelihood of confusion is highly fact-specific based on the circumstances of each case. Yet, considering the advances in the fields of competition and economics, this Court should improve the standards by which likelihood of confusion is measured.<br><br>Evaluations of likelihood of confusion cannot be left to the subjective determination by the Intellectual Property Office or the courts, which may often rely on ad hoc inferences of similarity in class, physical attributes or descriptive properties, purpose, or points of sale of the goods or services</i>. Often, this Court has resorted to unsubstantiated assumptions and generalizations about consumers and their behavior, arbitrary categorizations of goods and services, and even outright derogatory classist stereotypes. In this case, the<i> ponencia</i> describes a distinction between "sophisticated" and "ordinary" buyers without any real basis for the respective consumption and commercial habits assigned to each sector, resulting in broad caricatures about both the goods covered by the marks and their markets.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> (Emphasis supplied, citations omitted) </blockquote>Here, the<i> ponencia</i> affirmed the lower court's rulings that petitioner's goods bore marks that were confusingly similar to those owned by Caterpillar, Inc. and that petitioner had showed an intent to pass off his products as those of Caterpillar, Inc.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> I respectfully submit that this assessment continues to rely on a judge's singular assessment of the competing marks' and goods' visual impressions without necessary context. It does not take into account possible data and information that may be gleaned from more objective evidence, such as reports and market surveys. As I discussed in my separate opinion in<i> Kolin</i>, the Rules of Procedure for Intellectual Property Rights Cases enumerates possible sources of objective evidence of confusing similarity, with specific reference to market surveys:<br><blockquote>Rule 18, Section 5 of A.M. No. 10-3-10-SC, or the 2020 Revised Rules of Procedure for Intellectual Property Rights Cases, enumerates several factors to be considered as evidence of likelihood of confusion in trademark and unfair competition cases:<br><blockquote>SECTION 5.<i> Likelihood of confusion in other cases. </i>— In determining whether one trademark is confusingly similar to or is a colorable imitation of another,<i> the court must consider the general impression of the ordinary purchaser, buying under the normally prevalent conditions in trade, and giving the attention such purchasers usually give in buying that class of goods</i>. Visual, aural, connotative comparisons and overall impressions engendered by the marks in controversy as they are encountered in the realities of the marketplace must be taken into account. Where there are both similarities and differences in the marks, these must be weighed against one another to determine which predominates.<dl><dt>In determining likelihood of confusion between marks used on nonidentical goods or services, several factors may be taken into account, such as, but not limited to:<br><br></dt><dd>a) the strength of plaintiffs mark;<br>b) the degree of similarity between the plaintiffs and the defendant's marks;<br>c) the proximity of the products or services;<br>d) the likelihood that the plaintiff will bridge the gap;<br>e) evidence of actual confusion;<br>f) the defendant's good faith in adopting the mark;<br>g) the quality of defendant's product or service; and/or<br>h) the sophistication of the buyer.</dd></dl>"Colorable imitation" denotes such a close or ingenious imitation as to be calculated to deceive ordinary persons, or such a resemblance to the original as to deceive an ordinary purchaser giving such attention as a purchaser usually gives, as to cause him or her to purchase the one supposing it to be the other.<br><br>Absolute certainty of confusion or even actual confusion is not required to accord protection to trademarks already registered with the IPO. </blockquote><i>Among other pieces of evidence, these factors must be proven by testimonies of witnesses stringently qualified to show their knowledge, skill, experience, or training on the subject matter of their testimony; or by the presentation of scientific surveys, conducted with the appropriate methodology and with the proper sampling and scope, of the relevant market or trade conditions, as stated in Rule 18, Section 9 of the 2020 Revised Rules of Procedure for Intellectual Property Rights Cases</i>:<br><blockquote>SECTION 9.<i> Market Survey</i>. — A market survey is a scientific market or consumer survey which a party may offer in evidence to prove (a) the primary significance of a mark to the relevant public, including its distinctiveness, its descriptive or generic status, its strength or well-known status and/or (b) likelihood of confusion. </blockquote>Admittedly, market-based evidence on likelihood of confusion may be more difficult to obtain if one of the marks is still undergoing the registration process and has not yet actually been introduced to the public. However, Section 147 of the Intellectual Property Code may guide oppositors who assert their ownership of registered marks. If the mark applied for is found identical to the registered mark and the use is for identical goods or services, the oppositor has in their favor a presumption of likelihood of confusion. The applicant then bears the burden of overcoming the presumption by sufficient evidence.<br><br>In other instances—such as similar signs for similar goods or services; identical signs for similar goods or services; or similar signs for identical goods or services—the likelihood of confusion must be proved with evidence by owner of the registered mark. One such instance is the present case, where the Bureau of Legal Affairs evaluated e-mails from Kolin Electronics Co., Inc.'s customers asking about Kolin Philippines International, Inc.'s goods, implying confusion of origin or their respective items for sale. As for "any person" not an owner of a registered mark, the damage must be proven in other ways—what that contemplates is outside the scope of this case.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> (Emphasis supplied, citations omitted) </blockquote>A judicial determination of confusing similarity should reflect a discernible appreciation of empirical and objective facts given the complexity involved in making an accurate determination of such confusion. Moreover, a conviction for unfair competition requires the prosecution to adduce proof beyond reasonable doubt of all elements of the crime. Thus, I respectfully submit that evidence such as testimonies of expert witnesses or the presentation of market surveys,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> which employ the necessary scientific, statistical, or otherwise empirical methods of ensuring objectivity in proving their offered purpose, are indispensable in this regard. The prosecution's failure to forward objective evidence of confusing similarity further casts reasonable doubt upon petitioner's guilt.<br><br>Depth and discernment in judicial analysis benefits the bench and bar, as well as the parties that expect court judgments to be updated of the latest developments in relevant disciplines. Recognizing the importance and applicability of technical and cross-sectoral tools bolsters the Judiciary's ability to fulfill its duty of adjudicating disputes and giving meaning to fundamental rights. As legal issues continue to grow in complexity, we must keep pace with these complications as part of our constitutional duty and purpose. The Judiciary is more than capable of adopting available tools, such as surveys and technical analyses, not only in determining the confusing similarity in trademark cases, but also in other cases of similar technical complexity. In doing so, this Court can enhance the development of "coherent and consistent precedents[.]"<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br><b>ACCORDINGLY</b>, I vote to <b>GRANT</b> the Petition.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> J. Leonen, Separate Concurring Opinion in <b>Asia Pacific International Holdings Ltd. v. Paperone, Inc.</b>, 845 Phil. 85, 98 (2018) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> Republic Act No. 8293 (1997), sec. 168.3(a) provides:<br><blockquote>SECTION 168. <i>Unfair Competition, Rights, Regulation and Remedies</i>. – . . .<br><br>168.3. In particular, and without in any way limiting the scope of protection against unfair competition, the following shall be deemed guilty of unfair competition:<br><blockquote>(a) Any person, who is selling his goods and gives them the general appearance of goods of another manufacturer or dealer, either as to the goods themselves or in the wrapping of the packages in which they are contained, or the devices or words thereon, or in any other feature of their appearance, which would be likely to influence purchasers to believe that the goods offered are those of a manufacturer or dealer, other than the actual manufacturer or dealer, or who otherwise clothes the goods with such appearance as shall deceive the public and defraud another of his legitimate trade, or any subsequent vendor of such goods or any agent of any vendor engaged in selling such goods with a like purpose[.]</blockquote></blockquote><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <b>Asia Pacific International Holdings Ltd. v. Paperone, Inc.</b>, 845 Phil. 85, 94 (2018) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Ponencia</i>, p. 3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 4.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 4-5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Rollo</i>, p. 65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 65-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 39-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 41-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> J. Leonen, Separate Concurring Opinion in <b>Asia Pacific International Holdings Ltd. v. Paperone, Inc.</b>, 845 Phil. 85, 104 (2018) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> 845 Phil. 85 (2018) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 98.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> J. Leonen, Separate Concurring Opinion in <b>Asia Pacific International Holdings Ltd. v. Paperone, Inc.</b>, 845 Phil. 85, 102-108 (2018) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 103-104.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> 120 Phil. 434 (1964) [Per J. Paredes, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> J. Leonen, Separate Concurring Opinion in <b>Asia Pacific International Holdings Ltd. v. Paperone, Inc.</b>, 845 Phil. 85, 106-107 (2018) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> 886 Phil. 916 (2020) [Per J. Carandang, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> J. Leonen, Separate Concurring Opinion in <b>Asia Pacific International Holdings Ltd. v. Paperone, Inc.</b>, 845 Phil. 85, 102-108 (2018) [Per J. Gesmundo, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <b>Prosel Phamaceuticals &amp; Distributors, Inc., v. Tynor Drug House, Inc.</b>, 886 Phil. 916, 934 (2020) [Per J. Carandang, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 933-935.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> J. Leonen, Dissenting Opinion in <b>Prosel Phamaceuticals &amp; Distributors, Inc., v. Tynor Drug House, Inc.</b>, 886 Phil. 916, 936-952 (2020) [Per J. Carandang, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 949-951.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> 896 Phil. 190 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> J. Leonen, Separate Concurring Opinion in <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 263-300 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 293-294.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Ponencia</i>, pp. 12-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> J. Leonen, Separate Concurring Opinion in <b>Kolin Electronics Co., Inc. v. Kolin Philippines International, Inc.</b>, 896 Phil. 190, 296-299 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 298.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> J. Leonen, Dissenting Opinion, <b>Prosel Phamaceuticals &amp; Distributors, Inc., v. Tynor Drug House, Inc.</b>, 886 Phil. 916, 949 (2020) [Per J. Carandang, Third Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

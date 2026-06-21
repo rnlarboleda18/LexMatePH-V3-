@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 233512 - MA. FE IMELDA LAPIRA Y TUNGOL,&bull; PETITIONER, VS. JIMMY FARISCAL AND PEOPLE OF THE PHILIPPINES, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70376' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 233512, February 26, 2026 ]</H2>
+			<H3>MA. FE IMELDA LAPIRA <I>Y</I> TUNGOL,<SUP STYLE="COLOR: RGB(255, 0, 0);">•</SUP> PETITIONER, VS. JIMMY FARISCAL AND PEOPLE OF THE PHILIPPINES, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>CAGUIOA, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a petition for review on<i> certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (Petition) filed by petitioner Ma. Fe Imelda Lapira <i>y</i> Tungol (Imelda), assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated January 16, 2017 and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated August 10, 2017 of the Court of Appeals (CA) in CA-G.R. CR No. 38253, which affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated October 26, 2015 of Branch 51, Regional Trial Court (RTC) of Guagua, Pampanga in Criminal Case No. G-7713, finding Imelda guilty beyond reasonable doubt of Bigamy, defined and penalized under Article 349<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Revised Penal Code.<br><br><center><b>The Facts and Antecedent Proceedings</b></center><br>The present case stemmed from an Information<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> filed against Imelda, charging her with Bigamy under Article 349 of the Revised Penal Code. The accusatory portion of the Information reads:<br><blockquote>That on or about the 17th day of April, 2001[,] in the municipality of Guagua, province of Pampanga, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, Ma. Fe Imelda Tungol Lapira, [a.k.a.] Ma. Fe Imelda Lapira-Fariscal and [a.k.a.] Ma. Fe Tungol-Sato, while then being married to Takahiko Sato, a Japanese National, which marriage was celebrated on August 3, 2000 at Meycauayan, Bulacan and while said marriage was still valid and subsisting and it has not been legally dissolved, did then and there wil[l]fully, unlawfully and feloniously contract [a] second marriage and the subsequent marriage contains all the elements or has all the essential requisites of a valid marriage.<br><br>Contrary to law.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> </blockquote>During the arraignment, Imelda pleaded not guilty. Pre-trial and trial thereafter ensued.<br><br>The prosecution presented as witnesses the following: (1) Jimmy Fariscal (Jimmy), the private complainant and husband of Imelda; and (2) Rev. Remigio C. Cabading (Rev. Cabading), the person who solemnized the alleged first marriage of Imelda with Takahiko Sato (Takahiko). However, the testimony of Rev. Cabading was stricken off the record for his failure to appear during cross-examination.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> The prosecution's version of the facts is summarized in the CA Decision as follows:<br><blockquote>On April 17, 2001, [Jimmy] and [Imelda] entered into the solemn contract of marriage in a civil ceremony officiated by the Municipal Mayor of Guagua, Pampanga. Their marital union was blessed with one (1) child who was born just a year after their marriage. Their relationship went on smoothly until sometime in November 2004 when [Imelda] went to Japan to work. According to [Jimmy], he lost communication with [Imelda] after [she] left for Japan. In July 2006, however, [Imelda] suddenly appeared at their doorstep which eventually led to a bitter dispute between them over the custody of their child.<br><br>Later on, upon verification with the Office of the Civil Registrar General, [Jimmy] found that [Imelda] was previously married to a Japanese national named Takahiko Sato. The Certificate of Marriage [Jimmy] obtained from the Office of the Civil Registrar General shows that [Imelda] had contracted marriage with Takahiko Sato on August 3, 2000 in Meycauayan, Bulacan, before [Rev. Cabading].<br><br>Eventually, [Jimmy] filed a complaint for bigamy against [Imelda] before the Office of the Provincial Prosecutor of Pampanga which, after finding probable cause to indict [Imelda], filed on May 15, 2008, an Information for Bigamy before the Regional Trial Court of Guagua, Pampanga[.]<sup style="COLOR: RGB(255, 0, 0);">[9]</sup></blockquote>After the prosecution rested its case, Imelda filed a<i> Motion for Leave to File Demurrer to Evidence</i><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> with attached<i> Demurrer to Evidence</i><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (Demurrer) dated July 12, 2012. The RTC denied the Demurrer in its Order<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated October 11, 2012. As such, Imelda proceeded with the presentation of her witnesses, namely: (1) the Local Civil Registrar of Imus, Cavite, Violeta P. Sañez; (2) Imelda; and (3) Imelda's sister, Olivia Kanazashi. The defense's version of the facts is summarized in the CA Decision as follows:<br><blockquote>[Imelda] insisted that she did not commit bigamy. [She] asserted that her marriage with Takahiko Sato was a sham as it was merely resorted to in order for her to legally and expeditiously enter Japan. She claimed that no marriage had taken place between her and Takahiko Sato since what she signed was not a marriage contract but a blank piece of bond paper. When she affixed her signature [o]n a piece of blank bond paper somewhere in Makati City, neither Takahi[k]o Sato nor Rev. Cabading, the solemnizing officer, were present. The persons who were with her then were her sister Oliv[i]a Kana[zas]hi, the latter's husband Kenneth Kana[z]ashi, [Jimmy] himself, and a certain Jo who was the one facilitating her travel documents to Japan. It was Jo who told her to sign the piece of paper. [Imelda] claimed that she only saw Rev. Cabading when he testified in court while she met Takahiko Sato only once at the Manila Hotel. When she was already in Japan she lived with her sister and never cohabited with Takahi[k]o although they sometimes see each other during occasions. After [Imelda] had signed the blank piece [of] paper, her sister Oliv[i]a brought the paper to Japan where Takahi[k]o Sato also affixed his signature there[o]n. One year thereafter, [Imelda] was able to travel and work in Japan.<br><br>[Imelda] likewise insisted that she never applied for marriage license. The alleged marriage license indicated in her certificate of marriage with Takahiko Sato did not exist in the records of the Office of the Civil Registry of Imus, Cavite. To prove this fact, she presented Violeta P. Sañez, the Local Civil Registrar of Imus, Cavite, who during her testimony confirmed that their "[O]ffice has no record of the application for marriage license of TAKAHI[K]O SATO and MA. FE IMELDA LAPI[R]A."<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></blockquote><center><b>Ruling of the RTC</b></center><br>In its Decision dated October 26, 2015, the RTC found Imelda guilty beyond reasonable doubt of the crime of Bigamy, under Article 349 of the Revised Penal Code. The RTC based Imelda's conviction on its finding that she was still married to Takahiko when she married Jimmy. The RTC held that there was no evidence or claim suggesting that Imelda's marriage to Takahiko had been legally dissolved before her marriage to Jimmy. Finally, the RTC concluded that Imelda could not unilaterally declare her first marriage invalid to avoid prosecution for Bigamy.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Aggrieved by the RTC's Decision, Imelda filed an appeal with the CA.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br><center><b>Ruling of the CA</b></center><br>In its Decision dated January 16, 2017, the CA affirmed the RTC's conviction.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> It held that all the elements of the crime of Bigamy were proven by the prosecution.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> The CA also denied Imelda's argument that she cannot be convicted of Bigamy due to her first marriage being void<i> ab initio</i> due to lack of marriage license and ceremony.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> In ruling such, the CA relied on the case of<i> Vitangcol v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> "where accused-appellant therein also interposed the defense that his first marriage was void because of lack of marriage license, it was held that accused therein was still criminally liable for bigamy because her [sic] first marriage has not been judicially declared void prior to the celebration of his second marriage[.]"<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Imelda sought reconsideration of the CA Decision. However, the CA denied the motion for reconsideration for lack of merit through a Resolution dated August 10, 2017.<br><br>Hence, this Petition.<br><br><center><b>The Present Petition</b></center><br>Imelda contends that the CA refused or failed to address her defense of lack of intent to commit Bigamy.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> She argues that the "alleged marriage contract with [Takahiko] existed for the sake of argument not because she is taking the Japanese as her lawful husband but only to facilitate her entry in Japan."<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Imelda asserts that the CA erred in convicting her of Bigamy due to the fact that her first marriage to Takahiko was void due to a lack of marriage license.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>The People, through the Office of the Solicitor General (OSG), filed a Comment<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated September 5, 2018. The People asserts that the Petition should be dismissed outright for raising questions of fact, such as Imelda's lack of intent to commit Bigamy.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Further, the OSG argues that the prosecution was able to prove beyond reasonable doubt that Imelda committed the crime of Bigamy,<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> maintaining that Imelda committed Bigamy as soon as she entered into a second marriage without first obtaining a judicial declaration of nullity for her marriage to Takahiko.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Jimmy, for his part, filed a Letter (Comment)<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> dated February 16, 2021. Jimmy manifested that he was not able to file a comment to the Petition due to his limited understanding of the English language and that he cannot afford the services of a lawyer.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Imelda filed a Reply<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> dated September 28, 2018, alleging that while the Petition raises questions of fact, these fall within the jurisprudential exceptions, such as "presence of grave abuse of discretion and when the facts set forth in the petition as well as in the petitioner's main and reply briefs are not disputed by respondents[.]"<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>On March 27, 2023, the Court issued a move in the premises Resolution,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> requiring the parties to manifest to the Court any pertinent subsequent developments that may help the Court in the disposition of the case. The OSG filed a Manifestation and Motion<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> dated September 4, 2023, stating that its Comment is sufficient in assisting the Court in resolving the Petition.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Meanwhile, Imelda submitted a Compliance<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> dated September 8, 2023, wherein Imelda reiterated her defense, asserting that her first marriage to Takahiko is null and void due to the absence of a marriage license, a fact confirmed by the local civil registrar. Additionally, Imelda referenced the case of<i> Pulido v. People</i><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> (<i>Pulido</i>), arguing that this precedent supports her claim for acquittal.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> For his part, Jimmy filed a Letter<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> dated October 13, 2023, informing the Court that due process was observed in this case.<br><br><center><b>Issue</b></center><br>For resolution of the Court is whether Imelda is guilty of the crime of Bigamy under Article 349 of the Revised Penal Code.<br><br><center><b>The Court's Ruling</b></center><br>The Court finds the present Petition meritorious.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>Imelda may raise the defense that the first marriage is void ab initio in a criminal case for Bigamy</i></b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>As correctly raised by Imelda in her Compliance, the Court<i> En Banc's </i>recent ruling in<i> Pulido</i> should be appreciated in her favor. In<i> Pulido</i>, the Court abandoned the precedent that a judicial declaration of nullity is necessary to prove a void<i> ab initio</i> marriage in a Bigamy case:<br><blockquote><b>After a careful consideration, this Court is constrained to abandon our earlier rulings that a judicial declaration of absolute nullity of the first and/or second marriages cannot be raised as a defense by the accused in a criminal prosecution for bigamy. <u>We hold that a judicial declaration of absolute nullity is not necessary to prove a void<i> ab initio</i> prior and subsequent marriages in a bigamy case. Consequently, a judicial declaration of absolute nullity of the first and/or second marriages presented by the accused in the prosecution for bigamy is a valid defense, irrespective of the time within which they are secured.</u></b><br><br>. . . .<br><br>To summarize and for future guidance,<b> the parties are not required to obtain a judicial declaration of absolute nullity of a void<i> ab initio</i> first and subsequent marriages in order to raise it as a defense in a bigamy case.</b> The same rule now applies to all marriages celebrated under the Civil Code and the Family Code. Article 40 of the Family Code did not amend Article 349 of the RPC, and thus, did not deny the accused the right to collaterally attack the validity of a void<i> ab initio</i> marriage in the criminal prosecution for bigamy.<br><br>However, if the<b> first marriage</b> is merely<b> voidable</b>, the accused cannot interpose an annulment decree as a defense in the criminal prosecution for bigamy since the voidable first marriage is considered valid and subsisting when the second marriage was contracted. The crime of bigamy, therefore, is consummated when the second marriage was celebrated during the subsistence of the voidable first marriage. The same rule applies if the<b> second marriage</b> is merely considered as voidable.<br><br>To our mind, it is time to abandon the earlier precedents and adopt a more liberal view that a void<i> ab initio</i> marriage can be used as a defense in bigamy even without a separate judicial declaration of absolute nullity.<br><br>The accused may present testimonial or documentary evidence such as the judicial declaration of absolute nullity of the first [and/or] subsequent void<i> ab initio</i> marriages in the criminal prosecution for bigamy. The said view is more in accord with the retroactive effects of a void<i> ab initio</i> marriage, the purpose of and legislative intent behind Article 40 of the Family Code, and the rule on statutory construction of penal laws. Therefore, the absence of a "prior valid marriage" and the subsequent judicial declaration of absolute nullity of his first marriage, Pulido is hereby acquitted from the crime of Bigamy charged against him.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Emphasis in the original) </blockquote>Under Article 349 of the Revised Penal Code, the elements of Bigamy are: (1) the offender has been legally married; (2) the first marriage has not been legally dissolved, or in case his or her spouse is absent, the absent spouse has not been judicially declared presumptively dead; (3) he contracts a subsequent marriage; and (4) the subsequent marriage would have been valid had it not been for the existence of the first.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Stated otherwise, one of the essential elements of Bigamy is a prior valid marriage. If the supposed "first marriage" was void <i>ab initio</i>, it is inexistent from the beginning, and thus, an element of the felony would be lacking. In which case, the acquittal of the accused for the felony of Bigamy is warranted. Applying the foregoing to this case, Imelda has assailed the validity of her prior marriage to Takahiko on the absence of a valid marriage license. As proof, Imelda submitted the Certification<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> dated January 14, 2009 issued by the Office of the Civil Registrar of Imus, Cavite (January 14, 2009 Certification), which states that:<br><blockquote>We certify that this Office has no record of application for marriage license of TAKAHIKO SATO and [IMELDA] who are alleged to have applied on June 2000 in this municipality. Hence, we cannot issue, as requested, a true copy of the Application for Marriage License or transcription from the Register of Applications for Marriage License.<br><br>We also certify that the records of applications for marriage license for the year 2000 are still intact in the archives of this office.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> </blockquote>According to Article 3 of the Family Code, a valid marriage license is a formal requisite of marriage. In connection with this, Article 4 of the Family Code provides that, "[t]he absence of any of the essential or formal requisites shall render the marriage void<i> ab initio</i>, except as stated in Article 35(2)."<br><br>Moreover, in<i> Cariaga v. Republic</i><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (<i>Cariaga</i>), the Court held that "[f]or a marriage to be considered void due to the lack of a marriage license, the absence of such license must be apparent on the marriage contract,<b> or at the very least, supported by a certification from the local civil registrar that no such marriage license was issued to the parties</b>."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> In this case, Imelda's claim that her first marriage was void due to the absence of a marriage license is supported by the January 14, 2009 Certification, which provides that there is no record for application of marriage license of Takahiko and Imelda. Thus, there is compliance with the evidentiary requirements laid down in<i> Cariaga</i>.<br><br><table width="100%" cellpadding="0" cellspacing="0"> <tbody><tr> <td valign="top"><div align="JUSTIFY"><b><i>Imelda sufficiently rebutted the presumed regularity of the alleged marriage certificate between her and Takahiko</i></b></div></td> <td width="50%" valign="top">&nbsp;</td> </tr> </tbody></table><br>In arguing against Imelda's defense, the OSG claims that the prosecution was able to prove that based on official records, Imelda has an existing marriage with Takahiko when she married Jimmy on April 17, 2001.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> The OSG supports its claim with the evidentiary presumption stating that documents consisting of entries in public records are<i> prima facie</i> evidence of the facts therein stated.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Finally, the OSG asserts that the January 14, 2009 Certification is not enough to dispute the official record that there is an existing marriage between Imelda and Takahiko.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>The Court is not persuaded by such arguments.<br><br>In<i> Genio v. People</i><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> (<i>Genio</i>), the Court reversed the conviction of an accused in a criminal case for Bigamy. One of the main issues in<i> Genio</i> was founded on the prosecution's use of an evidentiary presumption against accused, i.e., that a marriage certificate, being a public record, is<i> prima facie</i> evidence of its contents, and may therefore serve as proof of one of the elements of Bigamy. In acquitting the accused, the Court held that the accused was able to present substantial evidence sufficient to rebut the presumed regularity of the marriage certificate. Moreover, the Court held that the rebuttal of the presumption leads to the conclusion that the State failed to overcome the burden to prove, beyond reasonable doubt, each element of Bigamy:<br><blockquote>Because the presumption in favor of the Marriage Certificate has been rebutted, its contents cannot be presumed to be true, especially those matters which were denied by the defense witnesses. Following<i> Mullaney, </i>the rebuttal of the presumption has the effect of generating an issue on the presumed facts. That is, the Marriage Certificate is no longer a substitute to the requirement for the prosecution to prove the existence of the essential and formal requisites of the second marriage; instead, the latter continues to be a<i> triable fact in issue</i>, and<i> the burden shifts back to the prosecution</i> to prove it with evidence beyond reasonable doubt.<br><br>This raises the question of whether the prosecution was able to discharge the burden of proving, beyond reasonable doubt, that the second marriage between Rommel and Maricar has all the essential and formal requisites for its validity.<br><br>The Court rules in the negative and finds the evidence insufficient to support Rommel's conviction for Bigamy.<br><br>. . . .<br><br>Clearly, to prove the fourth element of Bigamy, the prosecution hinged its case<i> solely</i> on the Marriage Certificate between Rommel and Maricar, and the rule that it is<i> prima facie</i> evidence of its contents. As discussed earlier, the presumption in favor of the Marriage Certificate has been overthrown; thus, its contents are no longer presumed to be correct.<br><br>. . . .<br><br>The foregoing situation left the prosecution with only the Marriage Certificate, a private document, as its<i> sole</i> evidence to prove the fourth element of Bigamy against Rommel. Pertinently, the State opted<i> not</i> to present additional evidence on rebuttal. When the prosecution's evidence is measured against the testimonies of Maricar, Myra, and Gloria, it is undeniable that the State did not muster enough evidence to prove that the second marriage has all the essential and formal requisites for its validity.<br><br>The inescapable conclusion is that the State failed to overcome the burden to prove,<i> beyond reasonable doubt</i>, each element of Bigamy against Rommel. Perforce, a finding of guilt against Rommel for the crime of Bigamy is unwarranted.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (Emphasis in the original; citations omitted) </blockquote>Applying the foregoing to this case, the prosecution relied primarily on the marriage certificate<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> between Takahiko and Imelda in order to prove the first element of Bigamy that the offender had been legally married. However, the presumption of such marriage certificate has been overthrown, particularly, by the defense's submission of the Certification dated January 14, 2009.<br><br>There being no other proof of the validity of the marriage between Takahiko and Imelda, then there is reasonable doubt as to the existence of a prior marriage, which is one of the elements of Bigamy.<br><br>The Court reiterates, as it did in<i> Pulido</i>, the time-honored principle that penal statutes are construed strictly against the State and liberally in favor of the accused.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Thus, "to hold that a judicial declaration of absolute nullity is a necessity before an accused in criminal prosecution for bigamy may invoke his void<i> ab initio</i> marriage as a valid defense interprets Article 349 too liberally in favor of the State and too strictly against the accused, in violation of the rule of lenity and the rule on strict construction of penal laws."<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>Based on the foregoing, the Court finds that the prosecution failed to prove the existence of all the elements of the crime of Bigamy. Therefore, the acquittal of Imelda on the basis of reasonable doubt is warranted.<br><br><b>ACCORDINGLY</b>, the petition for review on<i> certiorari</i> is hereby<b> GRANTED</b>. The Decision dated January 16, 2017 and Resolution dated August 10, 2017 of the Court of Appeals in CA-G.R. CR No. 38253, which affirmed the Decision dated October 26, 2015 of Branch 51, Regional Trial Court of Guagua, Pampanga in Criminal Case No. G-7713, are<b> REVERSED and SET ASIDE</b>.<br><br>Accordingly, petitioner<b> MA. FE IMELDA LAPIRA<i> y</i> TUNGOL</b> is <b>ACQUITTED</b>.<br><br>Let entry of judgment be issued immediately.<br><br><b>SO ORDERED.</b><br><br><i>Inting, Gaerlan, Dimaampao,</i> and <i>Singh, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">•</sup> Also referred to as "Ma. Fe Imelda Lapira-Fariscal," "Ma. Fe Tungol-Sato," and "Maria Fe Lapira" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 13-29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 44-53. Penned by Associate Justice Rosmari D. Carandang and concurred in by Associate Justices Mario V. Lopez and Myra V. Garcia-Fernandez of the Third Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 67-69. Penned by Associate Justice Rosmari D. Carandang and concurred in by Associate Justices Mario V. Lopez and Myra V. Garcia-Fernandez of the Former Third Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 31-39. Penned by Presiding Judge Merideth D. Delos Santos-Malig.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> ARTICLE 349. <i>Bigamy</i>. — The penalty of <i>prisión mayor</i> shall be imposed upon any person who shall contract a second or subsequent marriage before the former marriage has been legally dissolved, or before the absent spouse has been declared presumptively dead by means of a judgment rendered in the proper proceedings.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>. at 41-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>. at 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>See</i> <i>id</i>. at 31-33, RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 44-45, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 85-86.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 87-91.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 96-107.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>. at 46-47, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 37-39, RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 110-111.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 52, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 49-50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> 778 Phil. 326 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i>, p. 50, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 18, Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 19.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>See</i> <i>id</i>. at 20-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 175-192.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 181-182.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 182-183.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>. at 187.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 199-200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 199.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id</i>. at 170-173.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>. at 170.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 204.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 205-208.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 206.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 209-210.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 908 Phil. 573 (2021) [Per J. Hernando, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Rollo</i>, p. 209.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 212.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <b>Pulido v. People</b>, <i>supra</i> note 36, at 599, 618-619.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>See</i> <b>Capili v. People</b>, 713 Phil. 256, 262 (2013) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 160.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 918-A Phil. 770 (2021) [Per J. Caguioa, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 778-779. (Emphasis supplied)<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i>, p. 183, Comment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. at 184.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> 950 Phil. 311 (2024) [Per J. Inting, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 345-347.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Rollo</i>, p. 80.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>Pulido v. People</b>, <i>supra</i> note 36, at 612.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 613.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

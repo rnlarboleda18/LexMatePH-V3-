@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 265374 - DOMINADOR PARAN, JR., JULIE ABING,* ANTONIO UNTAL, BERTO LABOR, LEONARDO NIERVAS, JACINTO RABUSA, JR., CATALINO PARAN, DANILO ALFORQUE, ALBERT SINGWA, RODELIO ENTERA, AND HALSEY RABUSA, PETITIONERS, VS. PEOPLE OF THE PHILIPPINES AND EXEQUIEL CANENCIA [DECEASED], SUBSTITUTED BY HIS HEIRS, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70388' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 265374, February 05, 2026 ]</H2>
+			<H3>DOMINADOR PARAN, JR., JULIE ABING,<sup style="COLOR: RGB(255, 0, 0);">*</sup> ANTONIO UNTAL, BERTO LABOR, LEONARDO NIERVAS, JACINTO RABUSA, JR., CATALINO PARAN, DANILO ALFORQUE, ALBERT SINGWA, RODELIO ENTERA, AND HALSEY RABUSA, PETITIONERS, VS. PEOPLE OF THE PHILIPPINES AND EXEQUIEL CANENCIA [DECEASED], SUBSTITUTED BY HIS HEIRS, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>INTING, J.:</STRONG></p>
+			
+			<p><div align="justify">Before the Court is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by Dominador Paran, Jr., Julie Abing, Antonio Untal, Berto Labor, Leonardo Niervas, Jacinto Rabusa, Jr., Catalino Paran, Danilo Alforque, Albert Singwa, Rodelio Entera, and Halsey Rabusa (collectively, petitioners), assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated November 17, 2022, of the Court of Appeals (CA) in CA-G.R. CR No. 01964-MIN that affirmed, with modification as to the penalty imposed, the Decision<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated December 19, 2018, of Branch 61, Regional Trial Court (RTC), Digos City, Davao del Sur in Criminal Case No. 208 (2018). The RTC, in turn, affirmed <i>in toto</i> the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated March 28, 2017, of the Municipal Trial Court in Cities (MTCC), Digos City, Davao del Sur, in Criminal Case No. 12294 (98) that found petitioners as well as Cosme Niervas (Cosme), Rogelio Sanchez, Eulogio Rosales (Eulogio), and Rosalio Sanchez (Rosalio) (collectively, accused), guilty beyond reasonable doubt of Grave Coercion under Article 286<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Revised Penal Code, as amended by Republic Act No. 7890.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br><center><i>The Antecedents</i></center><br>The case stemmed from an Information charging petitioners, accused, Rufo Agapay (Rufo), one Rolando Ruiz (Rolando), the Municipal Agrarian Reform Officer (MARO) of the then Municipality of Digos, Davao del Sur, and one Maria Concepcion Alferez (Maria), with Grave Coercion under Article 286 of the Revised Penal Code, as amended. The accusatory portion of the Information reads:<blockquote>That on or about the 16<sup>th</sup> day of September 1998 at about 1:00 o'clock in the morning at Sitio Napan, Barangay Goma, in the Municipality of Digos, Province of Davao del Sur, Philippines and within the jurisdiction of this Honorable Court, the above-named accused, conniving, confederating and mutually helping one another, without the authority of the law, and by means of force and intimidation, did, then and there willfully, feloniously and unlawfully prevent Exequiel Canencia, the herein offended party, from taking control or possession of his farm and private property, to the damage and prejudice of the aforesaid offended party.<br><br>CONTRARY TO LAW.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></blockquote>Upon arraignment, all accused entered their pleas of "Not Guilty" to the charge.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>After the pre-trial, trial ensued.<br><br>The facts of the case as summarized by the CA are as follows:<br><br>Petitioners are 11 of the 18 individuals who were accused of Grave Coercion before the MTCC in Digos City, Davao del Sur. They are all beneficiaries of the Comprehensive Agrarian Reform Program (CARP) who entered the property owned by the family of private complainant Exequiel Canencia (Exequiel) in Barangay Goma, Digos City, Davao del Sur. They allegedly entered the property upon the instruction of Rolando.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Records reveal that on October 8, 1985, Exequiel and his family bought several parcels of agricultural land from the <i>Estate of Federico Alferez</i> represented by their Administratrix, Maria, and registered as follows: (1) Original Certificate of Title (OCT) No. 6029-1518 containing an area of 240,000 square meters; (2) Transfer Certificate of Title (TCT) No. T (173)-29 containing an area of 23.2607 hectares; and (3) OCT No. P-6028 containing an area of 240,000 square meters.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>Pursuant to Republic Act No. 6657 or the CARP, TCT No. T (173)-29 (subject land) was transferred in the name of the Republic of the Philippines. Later, they discovered that there was an erroneous identification of title, considering that the area of land which was actually covered by the Mandatory Land Acquisition was registered as OCT No. P-1517 (P-6028) and not TCT No. T (173)-29. Consequently, Rolando wrote a letter dated March 17, 1998, to Exequiel requesting the assistance in the conduct of field inspection to correct the error. The error was not immediately rectified.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>On September 16, 1998, at around 1:00 a.m., petitioners, together with their co-accused, as beneficiaries of the CARP, entered the subject land and cleared the area using farming tools such as <i>bolos</i> and <i>lagaraw</i>. They went to the area upon the instructions of Rolando and Maria.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Upon learning of the occupation made by petitioners and their co-accused, Exequiel, together with his brother-in-law Carlos Alforque (Carlos), went to the subject land and asked them to vacate it. The occupants ignored Exequiel's plea, insisting that they are legitimate CARP beneficiaries. One of the petitioners told Exequiel that something bad might happen to him if he will force them to leave the land. Out of fear, Exequiel and Carlos did not enter the property and instead sought the assistance of the barangay captain.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>After a week, petitioners and their co-accused voluntarily and peacefully vacated the subject land when they discovered that there was a mistake in the documents regarding the identification of the exact land covered by the CARP.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On September 22, 1998, Exequiel filed a complaint for Grave Coercion against petitioners, accused: Rufo, Rolando, and Maria, before the MTCC, Digos City.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Rufo died during the pendency of the case before the trial court. The case was dismissed as against him.<br><br>Maria filed a Demurrer to Evidence, which the MTCC granted. Thus, the MTCC dismissed the criminal case as against her.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br><center><i>The Ruling of the MTCC</i></center><br>In the Decision dated March 28, 2017, the MTCC convicted petitioners and their co-accused but acquitted Rolando for failure of the prosecution to prove that the latter ordered the petitioners and their co-accused to forcibly take possession of the subject land.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Also, the MTCC declared the extinguishment of Rufo's criminal liability on the ground of his death. The dispositive portion of the Decision states:<blockquote>Accordingly and in view of all the foregoing, the Court finds accused DOMINADOR PARAN JR., JULIO ABING, ANTONIO UNTAL, BERTO LABOR, COSME NIERVAS, LEONARDO NIERVAS, JACINTO RABUSA JR., RODELIO ENTERA, HALSEY RABUSA, ROGELIO SANCHEZ, CATALINO PARAN, EULOGIO ROSALES, DANILO ALFORQUE, ALBERT SINGWA and ROSALIO SANCHEZ guilty beyond reasonable doubt of the crime of Grave Coercion as defined and penalized under Article 286 of the Revised Penal Code and hereby sentences the above-named to a penalty of <i>Prision Correccional</i> (6 months and 1 day to 6 years) and a Fine of Six Thousand Pesos (PHP 6,000.00) each with subsidiary imprisonment in case of insolvency.&nbsp;<br><br>Accused RUFO AGAPAY who is deceased extinguished (sic) his criminal liability but not his civil liability. The heirs are liable to pay the Fine in the amount of Six Thousand Pesos (PHP 6,000.00).<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup></blockquote>The MTCC found that petitioners and their co-accused occupied a portion of the subject land in the belief that they already acquired full ownership thereof which was supposedly awarded to them by the Department of Agrarian Reform (DAR) under the CARP. However, it ruled that petitioners and their co-accused's act of preventing Exequiel from entering the subject land and refusing to vacate it was effected through threat and intimidation. Thus, the MTCC ruled that their acts are considered Grave Coercion. It ratiocinated that in the commission of Grave Coercion, evidence of threats, intimidation, or even compulsion by moral force will suffice.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Except for accused Rosalia who was granted probation, the rest of the accused appealed to the RTC. Accused Cosme and Eulogio died while the case was pending with the RTC.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>In the Decision dated December 19, 2018, the RTC affirmed <i>in toto</i> the MTCC Decision. The dispositive portion of the Decision states:<blockquote>WHEREFORE, premises considered, finding no reversible error in the appealed Decision dated March 28, 2017, the same is hereby AFFIRMED in toto.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup></blockquote>The RTC found that the elements of Grave Coercion are present. It ruled that petitioners and their co-accused employed threats and intimidation when they refused to vacate the property.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>Aggrieved, petitioners appealed to the CA.<br><br><center><i>The Ruling of the CA</i></center><br>In the assailed Decision dated November 17, 2022, the CA affirmed with modifications the RTC Decision; thus:<blockquote>WHEREFORE, premises considered, the 19 December 2018 Decision of the RTC, Branch 61, Digos City is AFFIRMED with the following MODIFICATIONS:<ol><li>Applying the Indeterminate Sentence Law, the petitioners are to suffer the indeterminate penalty of six (6) months of arresto mayor as minimum, to three (3) years and six (6) months of prision correccional medium, as maximum; and<br><br></li><li>Imposing the legal interest rate of six percent (6%) of the total monetary award from finality of this Decision until fully paid.</li></ol>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup></blockquote>The CA affirmed the findings of the RTC that the prosecution established all the elements of Grave Coercion. It likewise sustained the RTC's finding of conspiracy between petitioners and their co-accused.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> The CA pointed out that petitioners and their co-accused were all present at the subject land and acted in concert in warning Exequiel that something bad might happen to him if he will insist on entering the land.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Hence, petitioners filed the present Petition.<br><br>Petitioners argue: (1) that the Court is not precluded from reviewing questions of facts where the trial court manifestly overlooked or misapplied material facts; (2) that the prosecution failed to prove that petitioners and their co-accused acted in conspiracy to commit the crime of Grave Coercion; (3) that there is no evidence that all petitioners stopped clearing the subject land, approached Exequiel, and uttered any threatening statement; (4) that petitioners' <i>bolos</i> and <i>lagaraws</i> cannot be considered weapons and were merely brought to the subject land to clear the area considering that they thought that it was the exact land awarded by the DAR; and (5) that petitioners' entry to the subject land does not constitute an offense considering that they believed in good faith that the prope1iy was awarded to them by the government.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>In its Comment<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> dated April 11, 2024. the People, through the Office of the Solicitor General, contends that: (1) questions of fact are outside the ambit of a petition for review on <i>certiorari</i>; (2) petitioners are liable for Grave Coercion considering the proof of conspiracy; (3) Exequiel had legal right to prevent any person from entering and occupying the subject land.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br><center><i>The Issue</i></center><br>The issue to be resolved in the present case is whether the CA correctly ruled that petitioners are guilty of Grave Coercion.<br><br><center><i>The Ruling of the Court</i></center><br>The Court grants the Petition.<br><br>At the outset, the Court notes that private respondent Exequiel died pending resolution of the present petition. Hence, his heirs properly substituted him for purposes of the present petition.<br><br>It is well settled that in petitions under Rule 45 of the Rules of Court, only questions of law may be raised, not questions of fact.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> The Court's role in Rule 45 proceedings is limited to reviewing errors of law allegedly committed by the CA.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> It is not obliged to further scrutinize the findings of facts made by trial court.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> The Court generally defers to the trial courts as to the factual findings because of the opportunity enjoyed by the trial court to observe the demeanor of the witnesses on the stand and assess their testimony.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>However, this is not an ironclad rule. Some of the exceptions are when the judgment is based on a misapprehension of facts and when the CA manifestly overlooked certain relevant and undisputed facts that, if properly considered, would justify a different conclusion.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>Here, the petition hinges on the claim that petitioners had no intention to commit the crime as they believed in <i>good faith</i> that the land they occupied had been awarded to them by the DAR. Admittedly, petitioners' claim necessitates the examination of the factual evidence presented by both parties during trial. It is beyond doubt, that it is a question of fact which is not within the ambit of a petition under Rule 45 of the Rules of Court. However, a closer scrutiny of the records of the case reveals that a review is warranted considering that the judgment of the courts <i>a quo</i> is based on gross misapprehension of facts; and that they manifestly overlooked certain relevant and undisputed facts that, if properly considered, would justify a different conclusion.<br><br>Crimes have been divided into two categories: (1) acts which are wrong in themselves called acts <i>mala in se</i>; and (2) and acts which would not be wrong but for the fact that positive law forbids them, called acts <i>mala prohibita</i>.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> In <i>Dungo v. People</i>, the Court discussed the difference between crimes <i>mala in se</i> and crimes <i>mala prohibita</i>, thus:<blockquote>The rule on the subject is that in acts <i>mala in se</i>, the intent governs; but in acts <i>mala prohibita</i>, the only inquiry is, has the law been violated? When an act is illegal, the intent of the offender is immaterial. When the doing of an act is prohibited by law, it is considered injurious to public welfare, and the doing of the prohibited act is the crime itself.<br><br>A common misconception is that all <i>mala in se</i> crimes are found in the Revised Penal Code (RPC), while all <i>mala prohibita</i> crimes are provided by special penal laws. In reality, however, there may be <i>mala in se</i> crimes under special laws, such as plunder under R.A. No. 7080, as amended. Similarly, there may be <i>mala prohibita</i> crimes defined in the RPC, such as teclmical malversation.<br><br>The better approach to distinguish between <i>mala in se</i> and <i>mala prohibita</i> crimes is the determination of the inherent immorality or vileness of the penalized act. If the punishable act or omission is immoral in itself, then it is a crime <i>mala in se</i>; on the contrary, if it is not immoral in itself, but there is a statute prohibiting its commission by reasons of public policy, then it is <i>mala prohibita</i>. In the final analysis, whether or not a crime involves moral turpitude is ultimately a question of fact and frequently depends on all the circumstances surrounding the violation of the statute. (Citations Omitted)<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></blockquote>It is settled that in <i>mala in se</i> offenses, evil intent must unite with an unlawful act for it to be a felony.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> "<i>Actus non facit reum, nisi mens sit rea.</i>" ("an act does not make a person guilty unless the mind is also guilty").<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>In <i>Villareal v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> the Court judiciously ratiocinated the terms "<i>intent</i>," "<i>dolo</i>," and "<i>malice</i>," in the commission of a crime to wit:<blockquote>The term "<i>dolo</i>" or "malice" is a complex idea involving the elements of <i>freedom, intelligence</i>, and <i>intent</i>. The first element, <i>freedom</i>, refers to an act done with deliberation and with power to choose between two things. The second element, <i>intelligence</i>, concerns the ability to detern1ine the morality of human acts, as well as the capacity to distinguish between a licit and an illicit act. The last element, <i>intent</i>, involves an aim or a determination to do a certain act.<br><br>The element of <i>intent</i> — on which this Court shall focus — is described as the state of mind accompanying an act, especially a forbidden act. It refers to the purpose of the mind and the resolve with which a person proceeds. It does not refer to mere <i>will</i>, for the latter pertains to the act, while <i>intent</i> concerns the result of the act. While motive is the "moving power" that impels one to action for a definite result, intent is the "purpose" of using a pai1icular means to produce the result. On the other hand, the term "felonious" means, <i>inter alia</i>, malicious, villainous, and/or proceeding from an evil heart or purpose. With these elements taken together, the requirement of intent in intentional felony must refer to malicious intent, which is a vicious and malevolent state of mind accompanying a forbidden act. Stated otherwise, intentional felony requires the existence of <i>dolus malus</i> — that the act or omission be done "willfully," "maliciously," "with deliberate evil intent," and "with malice aforethought." The maxim is <i>actus non facit reum, nisi mens sit rea</i> — a crime is not committed if the mind of the person performing the act complained of is innocent. As is required of the other elements of a felony, the existence of malicious intent must be proven beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Citation omitted)</blockquote>Related to the term <i>mala in se</i> is the concept of <i>mens rea</i> defined as the nonphysical element which, combined with the act of the accused, makes up the crime charged.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Mens rea</i> is the criminal intent or the guilty mind.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>In other words, in felonies by <i>dolo</i> (such as Grave Coercion), <i>good faith</i> is a defense because it negates malice.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> In the absence of a guilty mind, a person should not be held liable for a felony by <i>dolo</i>. In a <i>malum prohibitum</i>, crime, good faith or motive is not a defense because the law punishes the prohibited act itself.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>One of the elements of Grave Coercion is that the prevention or compulsion is effected by violence, threats or intimidation.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> The prosecution must prove the malicious intent of the accused by showing that he/she intentionally prevented or compelled another person through violence, threats or intimidation. Hence, Grave Coercion is a felony which falls under the category of <i>mala in se</i> that requires the attendance of criminal intent.<br><br>The question now that confronts the Court is whether the petitioners and their co-accused <b><i>intentionally and unlawfully</i></b> restrained the late Exequiel from controlling the land?<br><br>The Court answers in the negative.<br><br>Records do not show that the prosecution proved the existence of malicious intent on the part of petitioners and their co-accused when they occupied the subject land and prevented Exequiel and any other person from possessing it.<br><br><i>First</i>, both parties admitted that the petitioners and their co-accused possessed the land under a color of lawful authority/right considering that they are registered beneficiaries of the CARP of the government.<br><br>From the decisions of the courts <i>a quo</i>, as well as the admissions of both parties, it is undisputed that petitioners are beneficiaries of parcels of land under the CARP.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Records reveal that on September 16, 1998, petitioners and their co-accused entered the subject land upon the instructions of Rolando, the MARO of the then Municipality of Digos, Davao del Sur.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> Upon entering the land, they immediately cleared the area using their farm tools. While petitioners and their co-accused were clearing the area, Exequiel arrived and asked them to leave. Thinking that they were lawfully occupying the subject land as CARP beneficiaries, they did not vacate the property. At the outset of their occupation, they were not aware that there was an erroneous identification of the subject land and the title thereof that was supposedly awarded to them.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>Upon discovering the mistake in the identification of the subject land, Rolando as the MARO, requested Exequiel for his assistance in conducting ocular inspection of the properties including the subject land to rectify the error.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>It is apparent from the facts that petitioners and their co-accused were not immediately informed regarding the mistake when they occupied the subject land. All the while, they occupied the land thinking that it was the same land awarded to them by the government under the CARP. Further, the good faith of the petitioners and their co-accused in occupying the subject land is apparent when after being informed of the mistake in the documents pertaining to the land covered by the CARP, they voluntarily and peacefully vacated the land.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup><br><br>It is settled that the possession or occupation of agrarian reform beneficiaries under the CARP, such as the petitioners and their co-accused, in the land awarded to them, can be considered a lawful one. Being lawful occupants, the farm workers as CARP beneficiaries have all the authority to guard the land and to protect their rights as against any other intruders.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>In the present case, petitioners and their co-accused could not be faulted in entering and occupying the subject land. Neither can they be condemned for excluding any person from the enjoyment or control of the property that they thought was lawfully awarded to them by the government. The act of petitioners and their co-accused in restraining Exequiel is based on a lawful right as they assumed that the land they occupied was the awarded land covered by the CARP. Article 429 of the Civil Code provides:<blockquote>Art. 429. The owner or lawful possessor of a thing has the right to exclude any person from the enjoyment and disposal thereof. For this purpose, he may use such force as may be reasonable necessary to repel or prevent an actual or threatened unlawful physical invasion or usurpation of his property.</blockquote>Moreover, the late Exequiel admitted that petitioners and their co-accused are CARP beneficiaries and that there was an error in identifying the lot that was supposedly to be awarded to the latter. Exequiel testified as follows:<blockquote><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">Q:</div></td><td width="95%"><div align="justify">Okay. Is it correct that it was 173 that was transferred to the Republic of the Philippines?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">According to the letter of Rolando Ruiz that 173 was transferred to the Republic of the Philippines but the one they entered is not 173[,] Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify"> To your knowledge, what particular property was transferred to the Republic of the Philippines?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">That 173[,] Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And ultimately, this property which was transferred to the Republic of the Philippines was also transferred in the name of Agrarian Reform Beneficiaries which includes the present accused, is that correct?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. NESTOR FERNANDEZ</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">Can we admonish the witness Your Honor to answer responsively.... (interrupted)</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. SUARIO</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">He is answering Your Honor, he is referring to the detail of Mr. Ruiz Your Honor. I would like to ask counsel to read the letter of Mr. Ruiz Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. NESTOR FERNANDEZ</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">Okay. Can we stipulate that this 173 was the one transferred to the Republic in the name of the beneficiaries? That simple.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. SUARIO</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">According to the witness Your Honor, we can stipulate because that has been repeatedly answered by the witness.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>COURT</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">Yes.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. NESTOR FERNANDEZ</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">Okay.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>COURT</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">Yes. There was an error. There was an error committed.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. NESTOR FERNANDEZ</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">Yes.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">...</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>COURT</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">Clarify.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">When you said that the defendants entered to the area you mean only the defendants who are beneficiaries of the DAR correct?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes[,] Madam.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">...</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And then, a week later you said that 'Sir Rolando Ruiz and others vacated the area'. By 'others' you also exclude Mary Alferez, correct?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Physically she is not in the area[,] Madam.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">So, you also said that 'the defendants entered under the instruction of Rolando Ruiz', Mr. Rolando Ruiz was the MARO at that time or Municipal Agrarian Officer?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. SUARIO</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">May we ask counsel to read the correct Your Honor. Page thirteen (13) this is only the instruction of Ruiz or there is another person?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. FERNANDEZ</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">There is another person, but I am asking as to the position of Mr. Ruiz. I will go to Mary Alferez later[,] Sir.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">So, Rolando Ruiz was the MARO at that time?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Yes, Madam.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And it is under the official capacity of the MARO to take possessions of lands covered by CARP, correct?</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. SUARIO</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">It is a legal question Your Honor. The witness would be incompetent.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. FERNANDEZ</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">I will withdraw the question Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>COURT</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">Reform.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify"><u>ATTY. FERNANDEZ</u>:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">I will withdraw that Your Honor.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">Then you also testified that there was an erroneous identification of title which was discovered after Miss Alferez filed a petition. What petition is this?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Petition to correct the entry of title Madam to change the entry number 6028 with 173.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">So, there was this petition and it was Mary Alferez who file this petition correct?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">It is Rolando Ruiz who filed the petition Madam and I am not really sure because of the length of time.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup></div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">...</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">And when you arrived was MARO Rolando Ruiz there?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">No Madam, he is not in the area.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">So, only beneficiaries?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">Only beneficiaries[,] Madam.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q:</div></td><td><div align="justify">How many beneficiaries did you see?</div></td></tr><tr valign="top"><td><div align="justify">A:</div></td><td><div align="justify">It was the beneficiaries told me that there are sixteen (16) of them[,] Madam.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></div></td></tr></tbody></table></blockquote>In addition, the prosecution failed to prove that petitioners and their co-accused, used the alleged <i>bolos</i> and <i>lagaraws</i><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> in prohibiting Exequiel to enter the land. While petitioners admitted that they possessed <i>bolos</i> and <i>lagaraws</i>, the prosecution failed to prove that that they used them to harm or threaten any person. As explained by the petitioners and their co-accused, just like any other CARP beneficiaries, they had the right to clear and enjoy the use of the awarded land with farming tools such as <i>bolos</i> and <i>lagaraws</i>.<br><br>Hence, the Court finds that the prosecution failed to prove the elements of Grave Coercion against petitioners and their co-accused. The controversy arose from a miscommunication among petitioners and their co-accused, Exequiel, and Rolando of the MARO.<br><br>As a consequence of the absence of criminal intent, it follows that no conspiracy can be attributed to petitioners and their co-accused in allegedly committing the crime. Article 8 of the Revised Penal Code states that "conspiracy exists when two or more persons come to an agreement concerning the commission of a <i>felony</i> and decide to commit it."<br><br>Here, there is no evidence that any of the petitioners or their co-accused executed an overt act which directly or indirectly contributed to the commission of the alleged Grave Coercion.<br><br>Finally, the Court rules that the finding of reasonable doubt exculpates not only the petitioners but also to the other accused who failed to appeal.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> Section 11(a), Rule 122 of the Rules of Court provides:<blockquote><b>Section 11.</b> <i>Effect of appeal by any of several accused</i>. —&nbsp;&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">An appeal taken by one or more of several accused shall not affect those who did not appeal, except insofar as the judgment of the appellate court is favorable and applicable to the latter[.]</div></td></tr></tbody></table><br>....</blockquote>Considering the above-mentioned rule, the finding of reasonable doubt in favor of petitioners shall benefit all the other accused who did not appeal. Although only petitioners filed the present Petition, the Court may rule on the criminal liability of all surviving accused, especially because the evidence and arguments against and the conviction of petitioners, on the one hand, and their co-accused, on the other, are inextricably linked.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> The charge against petitioners is based on the same allegation that they, together with their co-accused, unlawfully prevented Exequiel from entering the subject land. Hence, both petitioners and all the other accused should be acquitted.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>GRANTED</b>. The Decision dated November 17, 2022, of the Court of Appeals in CA-G.R. CR No. 01964-MIN is <b>REVERSED</b> and <b>SET ASIDE</b>.<br><br>In Criminal Case No. 12294 (98) filed before Municipal Trial Court in Cities, Digos City, Davao del Sur, petitioners Dominador Paran, Jr., Julie Abing, Antonio Untal, Berto Labor, Leonardo Niervas, Jacinto Rabusa, Jr., Catalino Paran, Danilo Alforque, Albert Singwa, Rodelio Entera, Halsey Rabusa and the other accused: Rogelio Sanchez and Rosalio Sanchez, are hereby <b>ACQUITTED</b> of Grave Coercion under Article 286 of the Revised Penal Code, as amended, for failure of the prosecution to prove their guilt beyond reasonable doubt.<br><br>They are <b>ORDERED IMMEDIATELY RELEASED</b> from detention, unless they are confined for any other lawful cause.<br><br>In case they posted a bail bond for their provisional liberty, the same are <b>ORDERED CANCELLED</b> and should be <b>RETURNED</b> to them within five days from notice.<br><br>Let entry of judgment be issued immediately.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson),&nbsp; Gaerlan, Dimaampao</i>, and <i>Singh, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to as "Julio Abing" and "Duly Abing" in some parts of the <i>rollo</i> (pp. 58, 79, and 87).<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Id.</i> at 19-54, <i>see</i> Petition for Review on <i>Certiorari</i> under Rule 45, dated January 25, 2023.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 58-77. Penned by Associate Justice Lily V. Biton and concurred in by Associate Justices Oscar V. Badelles and Ana Marie T. Mas of the Twenty-First Division, Court of Appeals, Cagayan de Oro City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 87-89. Penned by Presiding Judge Carfelita B. Cadiente-Flores.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 79-84. Penned by Presiding Judge Norma Ruste-Calatrava.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Article 286. <i>Grave coercions</i>. – The penalty of <i>prision correccional</i> and a fine not exceeding Six thousand pesos shall be imposed upon any person who, without any authority of law, shall, by means of violence, threats or intimidation, prevent another from doing something not prohibited by law, or compel him to do something against his will whether it be right or wrong.<br><br>If the coercion be committed in violation of the exercise of the right of suffrage, or for the purpose of compel ling another to perform any religions act, or to prevent him from exercising such right or from so doing such act, the penalty next higher in degree shall be imposed.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> An Act Amending Article 286, Section three, Chapter Two, Title Nine of Act No. 3815, As Amended, otherwise known as The Revised Penal Code, approved on February 20, 1995.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Rollo</i>, p. 79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 59.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 22 and 60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 84.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 88-89.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 69-73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 29-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 239-262.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 243-255.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <b>Buenaflor v. Office of the Secretary of Justice, G.R. No. 277067</b>, May 7, 2025.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <b>Saulo v. People, G.R. No. 242900</b>, June 8, 2020 [Resolution].<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Miro v. Vda. de Erederos</b>, 721 Phil. 772, 786 (2013).<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>See</i> <b>Torres v. People, G.R. No. 255262</b>, January 18, 2023 [Notice].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>Land Bank of the Philippines v. Quilit</b>, 896 Phil. 338, 352-353 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Dungo v. People</b>, 762 Phil. 630, 658 (2015).<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 658-659.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <b>Khitri v. People</b>, 789 Phil. 109, 121 (2016).<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> 680 Phil. 527 (2012).<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 564-566.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <b>Dungo v. People</b>, <i>supra</i> note 34 at 658.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 662-663.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>See</i> <b>Maderazo v. People</b>, 534 Phil. 338, 353 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Dungo v. People</b>, <i>supra</i> at 670.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Sy v. Secretary of Justice</b>, 540 Phil. 111, 117 (2006).<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i>, pp. 22, 60, 79, 83, 88, and 254.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> TSN, Exequiel Canencia, February 16, 2010, pp. 12-13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Rollo</i>, p. 60, CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i><br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>See</i> <b>Diamond Farms, Inc. v. Diamond Farm Workers Multi-Purpose Cooperative</b>, 691 Phil. 498, 503-504 (2012).<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> TSN, Exequiel Canencia, February 16, 2010, pp. 22-23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> TSN, Exequiel Canencia, June 8, 2010, p. 11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 13-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> at 17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> "Sickle or Scythes" in the Philippines used as a farm tool.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>See</i> <b>Sama v. People</b>, 892 Phil. 614, 673 (2021).<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

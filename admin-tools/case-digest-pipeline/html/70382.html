@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 260447 - LOPEZ SUGAR CORPORATION, PETITIONER, VS. ROMEO PERRIN, JR., EDUARDO CANDELARIO, LEONITO FRANCO, ROGELIO PABALAN, AND SOCIAL SECURITY SYSTEM, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70382' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 260447, February 05, 2026 ]</H2>
+			<H3>LOPEZ SUGAR CORPORATION, PETITIONER, VS. ROMEO PERRIN, JR., EDUARDO CANDELARIO, LEONITO FRANCO, ROGELIO PABALAN, AND SOCIAL SECURITY SYSTEM, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assailing the Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated October 14, 2020, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated April 26, 2022, of the Court of Appeals (<b>CA</b>) in CA-G.R. SP No. 158759. The CA affirmed the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated October 5, 2016, and the Order,<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated July 4, 2018, of the Social Security Commission (<b>SSC</b>) in SSC Case No. 4-19391-11, directing Lopez Sugar Corporation (<b>LSC</b>) to pay the Social Security System (<b>SSS</b>) the social security contributions of Romeo Perrin,&nbsp; Jr. (<b>Perrin</b>),&nbsp; Eduardo&nbsp; Candelario&nbsp; (<b>Candelario</b>),&nbsp; Leonito Franco (<b>Franco</b>), and Rogelio Pabalan (<b>Pabalan</b>) (collectively, <b>Perrin et al.</b>) for the period October 1995 to November 2005.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br><center><b><i>The Facts</i></b></center><br>Perrin et al. were employees of LSC who were dismissed on September 25, 1995.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> When they filed a Complaint for Illegal Dismissal, the Labor Arbiter dismissed the same. However, the National Labor Relations Commission (<b>NLRC</b>) reversed the Labor Arbiter's Decision,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> and ruled that Perrin et al. were illegally dismissed.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> The NLRC directed LSC to reinstate Perrin et al. to their former positions with backwages. The NLRC Decision was affirmed by the CA and eventually, by the Court.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>The Labor Arbiter implemented the NLRC Decision and ordered LSC to pay Perrin et al. backwages and separation pay in lieu of reinstatement, among others. After the Labor Arbiter's order was implemented, Perrin et al. demanded from LSC the payment of their social security contributions during the period covered by the award of backwages, but LSC refused.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Perrin et al. referred their claims to the Member's Assistance Center of SSS Sagay City, Negros Occidental Branch.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> In a Letter,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> dated April 1, 2011, the Branch Head of SSS Sagay City, Negros Occidental Branch informed Perrin et al.'s counsel that their office sent a billing letter to LSC for the unpaid social contributions. However, LSC questioned the propriety of requiring it to pay the said social security contributions. Thus, the Cluster Legal Unit of SSS Sagay City, Negros Occidental Branch recommended that in order to settle the issues raised by Perrin et al. and LSC, they should be raised before and decided by the SSC.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>Perrin et al. filed a Petition<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> before the SSC to compel LSC to remit to SSS their social security contributions for the period for which they were awarded backwages, so that they may also avail of their retirement benefits based on social security contributions paid for the said period.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>LSC filed a Motion to Dismiss<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Perrin et al.'s Petition based on the following grounds: (1) the SSC has no jurisdiction over the case; (2) the Petition is barred by <i>res judicata</i>; and (3) the Petition failed to state a cause of action and, in fact, lacks a cause of action.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>SSS filed a Petition in Intervention,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> praying that LSC be ordered to pay SSS all the premium contributions due on behalf of Perrin et al., plus 3% penalty imposed thereon for late payment of such contributions.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>In an Order, dated April 1, 2013,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> the SSC denied LSC's Motion to Dismiss for lack of merit, and required LSC to file its Answer.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>LSC filed an Omnibus Motion for Reconsideration and Suspension of Period to File Answer,<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> seeking the reversal of the SSC's April 1, 2013 Order and the dismissal of Perrin et al.'s Petition and SSS' Petition in Intervention.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>LSC insisted that it had no obligation to contribute SSS premiums during the period when Perrin et al.'s illegal dismissal case was pending, citing Section 11 of, Republic Act No. 8282, or the Social Security Act of 1997, which provides that "when an employee under compulsory coverage is separated from employment, his employer's contribution on his account and his obligation to pay contributions arising from that employment shall cease at the end of the month of separation. . ."<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> According to LSC, Section 11 of the Social Security Act of 1997 does not qualify that the separation must be legal in order for the employer's obligation to likewise cease.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> LSC also argued that premium contributions for purposes of the Social Security Act of 1997 are based on "compensation" and not on "backwages."<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Furthermore, LSC claimed that the SSC had no jurisdiction over Perrin et al. since the case involved the determination of the amount of full backwages, which falls under the exclusive jurisdiction of the Labor Arbiter, pursuant to Article 217 of the Labor Code.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>Lastly, LSC argued that Perrin et al.'s failure to raise before the Labor Arbiter the claim that their backwages should include the social security contributions for the period that they were dismissed, barred them from raising the same issue by filing another case. Moreover, according to LSC, since Perrin et al. knowingly and voluntarily executed a Satisfaction of Judgment, wherein they released LSC from all claims arising from their employment, they are already barred from asking for any relief in connection with their employment with LSC.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br><center><b><i>The Ruling of the SSC</i></b></center><br>In its Resolution, dated October 5, 2016, the SSC ruled in favor of Perrin et al. and ordered LSC to pay SSS the social security contributions of Perrin et al., thus:<blockquote><b>WHEREFORE, PREMISES CONSIDERED</b>, respondent Lopez Sugar Corporation is directed to pay intervenor [Social Security System], within [30] days from receipt hereof, the [social security] contributions of petitioners Romeo Perrin, Jr., Eduardo Candelario, Leonito Franco[,] and Rogelio Pabalan for the period October 1995 to November 2005 amounting to [PHP] 248,174.00 and the 3% per month penalty imposed thereon amounting to [PHP] 1,302,702.75, computed as of July 31, 2015, without prejudice to the right of [Social Security System] to collect additional penalties that accrued thereafter.<br><br>Meanwhile, intervenor [Social Security System] is directed to adjust the retirement benefits of the petitioners, if warranted, subject to its existing rules and regulations, and inform the [Social Security Commission] of its compliance herewith.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Emphasis in the original)</blockquote>The SSC held that LSC had the obligation to remit Perrin et al.'s social security contributions to SSS, considering the continued existence of the employer-employee relationship during the period that Perrin et al. were prevented from working on account of their illegal dismissal.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>LSC filed a Motion for Reconsideration, seeking the reversal of the SSC Resolution, but it was denied by the SSC in an Order, dated July 4, 2018.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Dissatisfied with the SSC's ruling, LSC filed a Petition for Review before the CA.<br><br><center><b><i>The Ruling of the CA</i></b></center><br>In the assailed Decision, dated October 14, 2020, the CA denied LSC's Petition for Review and affirmed the SSC Resolution and Order, thus:<blockquote>The <i>Petition for Review</i>[,] dated [December 7, 2018,] is DENIED. The assailed <i>Resolution</i>[,] dated [October 5, 2016,] and <i>Order</i>[,] dated [July 4, 2018,] rendered in SSC Case No. 4-19391-11 are AFFIRMED.<br><br>IT IS SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> (Emphasis in the original)</blockquote>The CA held that in contemplation of the law, an illegally dismissed employee is deemed to have never left his office. Thus, LSC was still obligated to remit Perrin et al.'s social security contributions corresponding to the period during which they were illegally dismissed.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>LSC filed a Motion for Reconsideration, which was denied by the CA in a Resolution, dated April 26, 2022.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Hence, the present Petition.<br><br><center><b><i>The Issue</i></b></center><br>Did the CA err in upholding LSC's liability to remit Perrin et al.'s social security contributions to the SSS corresponding to the period during which they were illegally dismissed?<br><br><center><b><i>The Ruling of the Court</i></b></center><br>The Petition has no merit.&nbsp;&nbsp;<br>&nbsp; <br><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The SSC has jurisdiction over claims for social security contributions</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>In the present Petition, LSC argues that since the computation of social security contributions in this case are based on the backwages awarded to Perrin et al., the issue of whether LSC had the obligation to remit Perrin et al.'s social security contributions should have been resolved by the Labor Arbiter, and not by the SSC, since the SSC does not have the jurisdiction to rule on the issue of what constitutes backwages.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>The Court does not agree.<br><br>Section 5(a) of Republic Act No. 1161, as amended by Republic Act No. 8282, or the Social Security Act of 1997, provides that the SSC has jurisdiction over disputes involving benefits and contributions under the Social Security Act of 1997, thus:<blockquote>SECTION 5. <i>Settlement of Disputes</i>. — (a) <i>Any dispute arising under this Act with respect to <b>coverage, benefits, contributions[,] and penalties</b> thereon or any other matter related thereto, shall be cognizable by the [Social Security] Commission</i>, and any case filed with respect thereto shall be heard by the [Social Security] Commission, or any of its members, or by hearing officers duly authorized by the [Social Security] Commission and decided within the mandatory period of [20] days after the submission of the evidence. The filing, determination and settlement of disputes shall be governed by the rules and regulations promulgated by the [Social Security] Commission. (Emphasis supplied)</blockquote>Similarly, Rule III, Section 1 of the 1997 SSS Revised Rules of Procedure provides:<blockquote>Section 1. <i>Jurisdiction</i>. — <i>Any dispute arising under the Social Security Act with respect to <b>coverage, entitlement of benefits, collection and settlement of contributions and penalties thereon</b>, or any other matter&nbsp;related&nbsp; thereto,&nbsp; shall&nbsp; be&nbsp; cognizable&nbsp; by&nbsp; the&nbsp; [Social&nbsp; Security] Commission</i> after the SSS through its President, Manager[,] or Officer-in-charge of the Department/Branch/Representative Office concerned had first taken action thereon in writing.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> (Emphasis supplied)</blockquote>In <i>Social Security Commission v. Alba</i>,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> the Court recognized the jurisdiction of the SSC in cases involving unremitted social security contributions, thus:<blockquote>Having established Far Alba's accountability to the SSS for Lamboso's unremitted contributions from 1960 to 1970, a discussion on the propriety of filing a claim of such nature against the estate proceedings of Arturo Alba, Sr. becomes unnecessary. In any event, the Court sustains the jurisdiction of the Commission over disputes under the Social Security Act "with respect to coverage, benefits, contributions and penalties thereon or any other matter related thereto."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> (Citations omitted)</blockquote>In the present case, the Petition filed by Perrin et al. before the SSC involve their claims for their social security contributions to be remitted to SSS.&nbsp; Contrary to LSC's argument, Perrin et al.'s Petition did not raise the issue on what should be included in their backwages. Rather, the Petition simply alleged that LSC is legally bound to pay Perrin et al.'s social security contributions for the period during which they were illegally dismissed.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>SSS, through the Branch Head of its Sagay City, Negros Occidental Branch, acted on Perrin et al.'s claim for social security contributions by sending a billing letter to LSC for the unpaid social contributions. However, LSC refused to pay. Thus, the Cluster Legal Unit of SSS Sagay City, Negros Occidental Branch recommended that the matter be raised before the SSC.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>Considering the foregoing, the SSC had jurisdiction over the case arising from the Petition filed before it by Perrin et al.&nbsp;&nbsp;<br>&nbsp; <br><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Perrin et al.'s claim for social security contributions is not barred by res judicata or by the Satisfaction of Judgment</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>LSC argues that Perrin et al.'s claim for social security contributions is already barred by NLRC's prior judgment declaring them as illegally dismissed and awarding backwages in their favor. According to LSC, the illegal dismissal case before the NLRC and Perrin et al.'s Petition before the SSC both involve the amount of backwages awarded.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>LSC is mistaken.<br><br>In order for <i>res judicata</i> in the concept of bar by prior judgment to apply, the following elements must be present: (1) finality of the former judgment; (2) the court which rendered it had jurisdiction over the subject matter and the parties; (3) it must be a judgment on the merits; and (4) there must be, between the first and second actions, identity of parties, subject matter, and causes of action.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup><br><br>Particularly in issue in the present case is the presence of the fourth element. While the illegal dismissal case before the NLRC and claim for social security contributions before the SSC involve the same parties, they do not involve the same subject matter and causes of action.<br><br>The subject matter of the case before the NLRC was Perrin et al.'s illegal dismissal, while the subject matter of the case before the SSC was LSC's obligation to remit Perrin et al.'s social security contributions to SSS. The cause of action in the case before the NLRC was Perrin et al.'s dismissal from employment, while the cause of action in the case before the SSC was LSC's refusal to remit Perin et al.'s social security contributions to SSS.<br><br>Thus, Perrin et al.'s claim for social security contributions is not barred by NLRC's prior judgment on the illegal dismissal case.<br><br>Furthermore, LSC argues that Perrin et al. are already barred from claiming social security contributions since they executed a Satisfaction of Judgment<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> before the Labor Arbiter, which, according to LSC, constitutes a waiver of future actions arising from Perrin et al.'s employment with LSC.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>The Satisfaction of Judgment states:<blockquote>We, [Perrin et al.], hereby declare that we received from [LSC] the amount of [PHP 2,507,798.60] in full and complete satisfaction of the award pursuant to the <i>Order</i> of [the Labor Arbiter,] dated [June 7, 2006,] exclusive of the applicable withholding taxes thereon in the total amount of [PHP 126,574.70].<br><br>Thus, we hereby freely and voluntarily release and forever discharge [LSC], its stockholders, officers, directors[,] and agents, and their respective heirs, successors[,] or assigns from any and all manner of action in law or in equity which we or our heirs, successors[,] and assigns had, now have, or shall have against [LSC], its stockholders, officers, directors[,] and agents and their respective heirs, successors[,] and/or assigns, arising wholly or partially from our employment with [LSC].<sup style="COLOR: RGB(255, 0, 0);">[46]</sup></blockquote>It is a settled rule that for a waiver to be valid, the waiver must be clear and unequivocal.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> For the waiver to be clear and unequivocal, the person waiving the right should understand what she is waiving and the effect of such waiver.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>Waivers or quitclaims should be carefully examined and strictly scrutinized with regard not only to the words and terms used, but also to the factual circumstances under which they have been executed.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> The phrase "any and all manner of action in law or in equity" is a general and standard clause in most employee quitclaims that cannot be construed in its strict literal sense.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>Here, the circumstances under which the Satisfaction of Judgment was executed show that Perrin et al. did not intend to waive their right to have their social security contributions remitted to the SSS. Perrin et al. executed the Satisfaction of Judgment after receiving from LSC their backwages awarded by the NLRC. Notably, it is the employer's duty to remit both the employees' and the employer's contributions to SSS.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>From the foregoing, it can be reasonably concluded that upon receipt of their backwages, Perrin et al. expected that LSC would comply with its mandate to remit their social security contributions to the SSS. Thus, Perrin et al. could not have intended to waive their right to have their social security contributions remitted to SSS. The Satisfaction of Judgment pertained only to the receipt of backwages.&nbsp;<br>&nbsp; <br><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>LSC has the duty to remit Perrin et al.'s social security contributions for the period covered by the award of backwages</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Under Sections 18, 19, and 22 of the Social Security Act of 1997, an employer has an obligation to deduct and withhold from its employees' wages and salaries the employees' share of the social security contributions and remit them, together with the employer's share, to the SSS, thus:<blockquote>SECTION 18. <i>Employee's Contribution</i>. — (a) Beginning as of the last day of the calendar month when an employee's compulsory coverage takes effect and every month thereafter during his [or her] employment, the employer shall deduct and withhold from such employee's monthly salary, wage, compensation or earnings, the employee's contribution in an amount corresponding to his [or her] salary, wage, compensation or earnings during the month in accordance with the following schedule:<br><br>[. . . .]<br><br>SECTION 19. <i>Employer's Contributions</i>. — (a) Beginning as of the last day of the month when an employee's compulsory coverage takes effect and every month thereafter during his [or her] employment, his [or her] employer shall pay, with respect to such covered employee, the employer's contribution in accordance with the schedule indicated in Section [18] of this Act. Notwithstanding any contract to the contrary, an employer shall not deduct, directly or indirectly, from the compensation of his [or her] employees covered by the SSS or otherwise recover from them the employer's contributions with respect to such employees.<br><br>[. . . .]<br><br>SECTION 22. <i>Remittance of Contributions</i>. — (a) The contribution imposed in the preceding section shall be remitted to the SSS within the first [10] days of each calendar month following the month for which they are applicable or within such time as the Commission may prescribe. <i>Every employer required to deduct and to remit such contributions shall be liable for their payment</i> and if any contribution is not paid to the SSS as herein prescribed, he [or she] shall pay besides the contribution a penalty thereon of [3%] per month from the date the contribution falls due until paid. If deemed expedient and advisable by the Commission, the collection and remittance of contributions shall be made quarterly or semi-annually in advance, the contributions payable by the employees to be advanced by their respective employers: <i>Provided</i>, That upon separation of an employee, any contribution so paid in advance but not due shall be credited or refunded to his [or her] employer. (Emphasis supplied)</blockquote>In the present Petition, LSC argues that the employer's obligation to remit social security contributions ceases when the employee is separated from service.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> LSC cites Section 11 of the Social Security Act of 1997, which provides:<blockquote>SECTION 11. <i>Effect of Separation from Employment</i>. — When an employee under compulsory coverage is separated from employment, his [or her] employer's contribution on his [or her] account and his [or her] obligation to pay contributions arising from that employment shall cease at the end of the month of separation, but said employee shall be credited with all contributions paid on his [or her] behalf and entitled to benefits according to the provisions of this Act. He [or She] may, however, continue to pay the total contributions to maintain his right to full benefit.</blockquote>According to LSC, there is no qualification that the separation from employment must be legal in order before the obligation to remit social security contributions should cease.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>The Court does not agree.<br><br>Under Article 294 of the Labor Code, an employee who is illegally dismissed from employment is entitled to full backwages and other benefits, thus:<blockquote>ARTICLE 294. [279]&nbsp;<i>Security of Tenure</i>. — In cases of regular employment, the employer shall not terminate the services of an employee except for a just cause or when authorized by this Title. <i>An employee who is unjustly dismissed from work shall be entitled to reinstatement without loss of seniority rights and other privileges and to his full backwages, inclusive of allowances, and to his [or her] other benefits</i> or their monetary equivalent computed from the time his [or her] compensation was withheld from him up to the time of his actual reinstatement. (Emphasis supplied)</blockquote>In <i>Escario v. NLRC</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> the Court held that illegally dismissed employees are deemed to have not left their employment. Thus, they are entitled to all rights and privileges that accrue to them from the said employment.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>In <i>Dumapis v. Lepanto Consolidated Mining Co.</i>,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> the Court emphasized that illegally dismissed employees are entitled to their salaries and benefits that they would have received had they not been illegally dismissed.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>Here, there is no dispute that Perrin et al. were illegally dismissed, as ruled by the NLRC and affirmed by the CA and the Court.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Thus, they are deemed to have never left their employment. Consequently, LSC's obligation to remit Perrin et al.'s social security contributions did not cease with respect to the period during which Perrin et al. were illegally dismissed.<br><br>Since LSC failed to remit Perin et al.'s social security contributions, LSC is liable to pay a penalty thereon of three percent (3%) per month from the date the contribution falls due until paid, pursuant to Section 22 of the Social Security Act of 1997.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The Decision, dated October 14, 2020, and the Resolution, dated April 26, 2022, of the Court of Appeals in CA-G.R. SP No. 158759 are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa (Chairperson), Lazaro-Javier</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>Inting</i>, and <i>Gaerlan, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Designated additional Member, per Raffle dated September 6, 2022.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 10-54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 56-79. Penned by Associate Justice Walter S. Ong and concurred in by Associate Justices Japar B. Dimaampao (now a Member of this Court) and Tita Marilyn Payoyo-Villordon of the Special Third Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 81-86. Penned by Associate Justice Walter S. Ong and concurred in by Associate Justices Tita Marilyn Payoyo-Villordon and Jennifer Joy C. Ong of the Special Former Special Third Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 125-136. Penned by Commissioner Diana Pardo Aguilar.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 148-157. Penned by Commissioner Diana Pardo Aguilar.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 135. SSC Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 125. SSC Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 58. CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 182-184. NLRC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 58. CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 194-197.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 198.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 170-173.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 57. CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 199-213.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 199. LSC's Motion to Dismiss.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 226-229.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 229. SSS' Petition in Intervention.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 268-271.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 271. SSC Order, dated April 1, 2013.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 272-288.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 287. LSC's Omnibus Motion for Reconsideration and Suspension of Period to File Answer.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 278. LSC's Omnibus Motion for Reconsideration and Suspension of Period to File Answer.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 280. LSC's Omnibus Motion for Reconsideration and Suspension of Period to File Answer.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 283. LSC's Omnibus Motion for Reconsideration and Suspension of Period to File Answer.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 129-130. SSC Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 135-136. SSC Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 134. SSC Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 156. SSC Order.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 76. CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 74. CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 86. CA Resolution.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 28. LSC's Petition for Review on <i>Certiorari</i> filed before the Court.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>See</i> <b>Rep. of the Phils. v. Asiapro Cooperative</b>, 563 Phil. 979, 993 (2007) [Per J. Chico-Nazario, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> 581 Phil. 446 (2008) [Per J. Tinga, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 460.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Rollo</i>, p. 171. Perrin et al.'s Petition filed before the SSC.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 198. SSS Sagay City, Negros Occidental Branch Head's Letter to Perrin et al.'s counsel.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 37. LSC Petition for Review on <i>Certiorari</i> filed before the Court.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <b>Aguila v. Perfect Dimension Corporation, G.R. No. 243317</b>, August 4, 2025 [Per J. Hernando, First Division] at 17. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Rollo</i>, pp. 166-167.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 40-41. LSC Petition for Review on <i>Certiorari</i> filed before the Court.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 166. Satisfaction of Judgment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>Roxaco-Asia Hospitality Corporation v. Gulf Canary Construction and Development, Inc., G.R. Nos. 246250-51</b>, September 29, 2025 [Per J. Rosario, First Division] at 18. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>Sanico v. Colipano</b>, 818 Phil. 981, 994 (2017) [Per J. Caguioa, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>F.F. Cruz &amp; Co., Inc. v. Galandez</b>, 856 Phil. 150, 164 (2019) [Per J. Perlas-Bernabe, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>See</i> Republic Act No. 8282 (Social Security Act of 1997), sec. 18, 19, &amp; 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Rollo</i>, p. 24. LSC Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 25. LSC Petition for Review on <i>Certiorari</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 645 Phil. 503 (2010) [Per J. Bersamin, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 514.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> 884 Phil. 156 (2020) [Per J. Lazaro-Javier, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 180.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i>, p. 58. CA Decision.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

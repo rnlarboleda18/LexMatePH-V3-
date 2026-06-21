@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 278240 - PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX278240,* ACCUSED-APPELLANT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70398' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 278240, February 19, 2026 ]</H2>
+			<H3>PEOPLE OF THE PHILIPPINES, PLAINTIFF-APPELLEE, VS. XXX278240,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> ACCUSED-APPELLANT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LOPEZ, J., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Court resolves the Appeal<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> filed by XXX278240 a.k.a. "<span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>" (XXX278240) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> of the Court of Appeals (CA). The CA affirmed with modification the Joint Judgment<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Regional Trial Court (RTC) which found him guilty beyond reasonable doubt for two counts of rape through sexual intercourse and two counts of rape by sexual assault.<br><br>In four separate Informations, XXX278240 was charged as follows:<blockquote><center>Criminal Case No. U-17467</center><br>That on or about 9 o'clock in the morning of October 16, 2010, at Brgy. <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> and within the jurisdiction of this Honorable Court, the above-named accused, by means of fraudulent machination, grave abuse of authority, did then and there, willfully, unlawfully[,] and feloniously have sexual intercourse with [AAA278240], 15 years old, minor, against her will and without her consent, to her damage and prejudice, which acts degrade and demean the intrinsic worth and dignity of said minor as a human being.<br><br>CONTRARY to Art. 266-A, par. 1(c), in relation to Art. 266-B, as amended by [Republic Act No.] 8353[,] in relation to [Republic Act No.] 7610.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br><center>Criminal Case No. U-17468</center><br>That on or about 9 o'clock in the morning of October 13, 2010, at Brgy. <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> and within the jurisdiction of this Honorable Court, the above-named accused, by means of fraudulent machination, grave abuse of authority, did then and there, willfully, unlawfully[,] and feloniously have sexual intercourse with [AAA278240], 15 years old, minor, against her will and without her consent, to her damage and prejudice, which acts degrade and demean the intrinsic worth and dignity of said minor as a human being.<br><br>CONTRARY to Art. 266-A, par. 1(c), in relation to Art. 266-B, as amended by [Republic Act No.] 8353[,] in relation to [Republic Act No.] 7610.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center>Criminal Case No. U-17469</center><br>That on or about 9 o'clock in the morning of October 13, 2010, at Brgy. <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> and within the jurisdiction of this Honorable Court, the above-named accused, by means of fraudulent machination, grave abuse of authority, did then and there, willfully, unlawfully[,] and feloniously insert his finger into the vagina of [AAA278240], 15 years old, minor, against her will and without her consent, to her damage and prejudice, which acts degrade and demean the intrinsic worth and dignity of said minor as a human being.<br><br>CONTRARY to Article 266-A, par. 2 of the Revised Penal Code[,] as amended by [Republic Act No.] 8353[,] in relation to Article 266-B and [Republic Act No.) 7610.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br><center>Criminal Case No. U-17470</center><br>That on or about 9 o'clock in the morning of October 16, 2010, at Brgy. <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> and within the jurisdiction of this Honorable Court, the above-named accused, by means of fraudulent machination, grave abuse of authority, did then and there, willfully, unlawfully[,] and feloniously insert his finger into the vagina of [AAA278240], 15 years old, minor, against her will and without her consent, to her damage and prejudice, which acts degrade and demean the intrinsic worth and dignity of said minor as a human being.<br><br>CONTRARY to Article 266-A, par. 2 of the Revised Penal Code[,] as amended by [Republic Act No.] 8353[,] in relation to Article 266-B and [Republic Act No.] 7610.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>CONTRARY TO LAW.</blockquote>Upon arraignment, XXX278240 pleaded not guilty to the crimes charged.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>During the pre-trial, the prosecution and defense stipulated the existence of private complainant AAA278240's Certificate of Live Birth,<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> which showed that she was only 15 years old at the time of the alleged incidents. They also stipulated on XXX278240's identity, on the fact that he is an albularyo or a quack doctor, and that he went to AAA278240's house on October 13 and 16, 2010 to treat her illness.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>After the termination of the pre-trial, trial on the merits ensued.<br><br>To establish XXX278240's guilt, the prosecution presented the testimonies of AAA278240; her uncle, BBB278240; her grandmother, CCC278240; and her aunt, DDD278240, as well as documentary evidence, including <i>Sinumpaang Salaysay</i><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> from AAA278240 and CCC278240; AAA278240's Medico-Legal Certificate;<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> her Certificate of Live Birth; and the extract from Police Blotter Entry No. 10-732.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>AAA278240 was 15 years old when she testified. She narrated that sometime in September 2010, she told her grandmother, CCC278240, that she had <i>almuranas</i> or hernia. CCC278240 then decided to consult with XXX278240, being a well-known <i>albularyo</i> in their place.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>At around 8:30 a.m. of October 13, 2010, XXX278240 came to AAA278240's house to treat her hernia. AAA278240 was eating with her siblings and grandmother when XXX278240 arrived, and he immediately directed AAA278240 to take a bath and go to her room for treatment, which AAA278240 complied with.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Inside the room, XXX278240 ordered AAA278240 to remove her shorts and underwear, and made her lie down on the bed and spread her legs. Despite her reluctance, AAA278240 followed his orders. However, she was surprised when XXX278240 applied oil on her vagina and inserted the index and middle fingers of his right hand.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>XXX278240 told AAA278240 that considering her hernia was already severe, he will be pushing it with his penis. Consequently, he removed his fingers from her vagina and forcibly inserted his penis. When he finished, XXX278240 told AAA278240 to dress herself and gave her oil to apply on her genitalia. He also warned her not to tell anyone that he used his penis in treating her before leaving.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>At around 9:00 a.m. of October 16, 2010, XXX278240 returned to the house under the guise of a follow up check-up. AAA278240 agreed out of fear of dying and because she wanted to be healed. XXX278240 assured her that the treatment would be quicker because it was their last session.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Again, XXX278240 told AAA278240 to take a bath and go to her room. She then again was made to lie down naked on the papag with her legs spread. XXX278240 applied oil to her vagina and inserted his two fingers. For a minute, he moved his fingers sideways inside her vagina and then told her that he will be closing her hernia.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>XXX278240 removed his fingers and blew on AAA278240's vagina. He then pulled down his shorts and inserted his penis while he mashed her breasts. AAA278240 attempted to push him away, but XXX278240 just laughed at her. After ravishing her, he declared that she was cured and hurriedly left the house.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Out of fear, AAA278240 never mentioned her ordeal. However, she drastically felt pain, and her vagina bled due to penetration. The following day, she confided the incident to her sister, who immediately told their grandmother, CCC278240.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>On October 28, 2010, CCC278240 accompanied AAA278240 to the police station to report the incidents. On the same day, AAA278240 was examined by Dr. Brenda Tumacder (Dr. Tumacder) of Region 1 Medical Center.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> In her medico-legal report, Dr. Tumacder found that AAA278240 was sexually abused as evidenced by her healed hymenal lacerations at the 5 o'clock, 6 o'clock, and 7 o'clock positions.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>For the defense, XXX278240 and Joel Soriano (Joel) served as witnesses and offered their testimonies and Judicial Affidavits in evidence.<br><br>XXX278240 admitted that he is an <i>albularyo</i> in their community. He narrated that on October 13, 2010, at around 8:00 a.m., he was in his home when CCC278240 called him to treat AAA278240's stomach pain.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Consequently, XXX278240 went to AAA278240's house and treated her for about ten minutes in their nipa hut, which had no rooms. Thus, he argued that he could see that AAA278240's relatives were all present and about half a meter away from where he was treating her. Afterward, the family thanked him for his service, and he went home.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>XXX278240 admitted that on October 13, 2010, he came to AAA278240's house again. However, he claimed that his visit was only to massage her stomach and that he never lifted her shirt. He also prescribed her to drink <i>sambong</i> for two days. Thus, he was blindsided when he was accused by AAA278240 of sexual abuse when she was always seated during their alleged healing sessions with her relatives in close proximity.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>On October 28, 2010, a barangay kagawad invited XXX278240 to the barangay hall. However, instead of going to the barangay hall, he went to AAA278240's house, where CCC278240 told him that it was nothing.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>For his part, Joel corroborated the testimony of XXX278240. He narrated that on October 13, 2010, at around 8:00 a.m., they were in another person's house for a different healing session when CCC278240 called them to treat AAA278240.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> He claimed that he often acted as XXX278240's assistant.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Thus, he went with him to AAA278240's house and that he was present during the healing sessions. He described the house as a <i>nipa</i> hut with two windows, an open door, and one <i>papag</i>.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br>&nbsp;<br>In its Joint Judgment,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the RTC found that all the elements of rape through sexual intercourse and sexual assault under Article 266-A of the Revised Penal Code, as amended by Republic Act No. 8353, in relation to Section 5(b) of Republic Act No. 7610, are present in this case. The dispositive portion of the RTC Joint Judgment reads:<blockquote>WHEREFORE, premises considered, in CRIM. CASE Nos. U-17469 and U-17470, this court finds accused [XXX278240] a.k.a. "<span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>" GUILTY beyond reasonable doubt of the crime of Rape through sexual assault defined and penalized under Art. 266-A[,] par. 2 or the Revised Penal Code, in relation to Art. 266-B of the Revised Penal Code[,] as amended by [Republic Act No.] 8353 and [Republic Act No.] 7610, and imposes upon him the indeterminate penalty of imprisonment [six] years of <i>prision correccional</i>, as minimum, to [10] years of [<i>prision mayor</i>][,] as maximum[,] in each case. He is ordered to pay the victim [PHP] 30,000.00 as civil liability, [PHP] 30,000.00 as moral damages[,] and [PHP] 25,000.00 as exemplary damages in each case. The civil indemnity and damages so imposed are subject to interest at the rate of [6%] per annum from the date of finality of this decision until fully paid.<br><br>In CRIM. CASE Nos. U-17468 and U-17467, this court finds accused [XXX278240] a.k.a. "<span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>" GUILTY beyond reasonable doubt of the crime of Rape defined and penalized under Art. 266-A[,] par. 1(c) of the Revised Penal Code[,] in relation to Art. 266-B, of the Revised Penal Code[,] as amended by [Republic Act No.] 8353 and [Republic Act No.] 7610 and imposes upon him the penalty of <i>reclusion perpetua</i> in each case. He is further ordered to pay the victim civil indemnity, moral damages[,] and exemplary damages each in the amount of [PHP] 100,000.00, pursuant to the ruling in [<i>People vs. Jugueta</i>], G.R. No. 202124, April 15, 2016. The civil indemnity and damages so imposed are subject to interest at the rate of [6%] per annum from the date of finality of this decision until fully paid.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup></blockquote>Aggrieved, XXX278240 appealed to the CA.<br><br>In his Appellant's Brief,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> XXX278240 contended that the prosecution failed to establish his guilt beyond reasonable doubt. First, he asserted that the testimonies of the prosecution witnesses are inherently unreliable, as their respective narratives are replete with inconsistencies and contradictions on material and substantial points. According to XXX278240, these discrepancies are not merely trivial lapses but strike at the very core of the prosecution's version of events, thereby engendering reasonable doubt as to his alleged culpability.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>Further, XXX278240 anchored his claim of innocence on the purported absence of resistance on the part of the victim. He argued that such circumstance undermines the credibility of the charge and lends support to his assertion that no crime was committed.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Finally, XXX278240 maintained that his defenses of denial and alibi deserve greater weight than the prosecution's evidence. He insisted that, when measured against the alleged inconsistencies in the prosecution's case, his defenses appear more plausible and sufficient to overcome the presumption of guilt.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br>On the other hand, the Office of the Solicitor General (OSG), on behalf of the People of the Philippines, countered in its Appellee's Brief<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> that the prosecution successfully established XXX278240's guilt beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>The OSG argued that XXX278240 deliberately exploited his reputation as an <i>albularyo</i> in their community to induce and deceive the victim, AAA278240, into believing that he possessed the ability to cure her illness. By capitalizing on this position of trust and influence, XXX278240 was able to place the victim in a vulnerable situation.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>The OSG further asserted that there is no dispute that the victim initially submitted herself to XXX278240 under the false belief that his acts were part of a legitimate healing process. However, such submission was not the product of free and voluntary consent, but was instead the result of deceit and abuse of authority. AAA278240 failed to resist XXX278240's advances, as he persistently represented his sexual acts as necessary components of her treatment.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>Moreover, the OSG maintained that the victim's testimony was affirmative, clear, and candid, bearing the hallmarks of truth and credibility. The alleged inconsistencies pointed out by the defense are, according to the OSG, minor and immaterial, relating only to collateral matters and not to the essential elements of the crime. As such, these purported discrepancies do not diminish the credibility of AAA278240's narration.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>Accordingly, the OSG submitted that the victim's testimony, which is coherent, consistent on material points, and intrinsically believable, deserves full faith and credit, as correctly found by the RTC. ln contrast, XXX278240's defense of denial cannot prevail over the prosecution's positive and convincing evidence.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>In its Decision,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> the CA denied XXX278240's appeal and affirmed with modification the RTC's ruling. The dispositive portion of the CA Decision reads:<blockquote>WHEREFORE, the foregoing considered, the appeal is DENIED. The appealed Joint Judgment dated July 14, 2022, of the Regional Trial Court, Branch <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, is hereby AFFIRMED WITH MODIFICATION only insofar as Criminal Case Nos. U-17469-70 in that We find the accused-appellant [XXX278240] a.k.a. <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> GUILTY beyond reasonable doubt of rape through sexual assault under Article 266-A[,] Paragraph 2 of the Revised Penal Code, as amended by [Republic Act No.] 8353[,] in relation to [Republic Act No.] 7610, for which he is sentenced to suffer the indeterminate penalty of [14 years] and [eight] months of [<i>reclusion temporal</i>], as minimum, to [17] years, [four] months, and [one] day of [<i>reclusion temporal</i>], as maximum, in each case, and he is ordered to pay [PHP] 50,000.00 as civil liability, [PHP] 50,000.00 as moral damages, and [PHP] 50,000.00 as exemplary damages for each case; and the rest of the RTC's [D]ecision stands[,] it being in conformity with the recent laws and jurisprudence.<br><br>All monetary awards shall be earned at the rate or [6%] per annum from the finality of this Decision until foll payment thereof.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></blockquote>Hence, XXX278240 filed this Appeal.<br><br>In compliance with this Court's Resolution,<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> XXX278240 and the OSG filed separate Manifestations that they would no longer file supplemental briefs as they would be adopting the arguments in their respective Briefs filed before the CA.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>The sole issue for this Court's resolution is whether the prosecution was able to prove beyond reasonable doubt accused-appellant XXX278240's guilt for the crimes charged.<br><br><center><b>This Court's Ruling</b></center><br>The appeal has no merit.<br><br>The elements of rape are enumerated under Article 266-A of the Revised Penal Code, as amended:<blockquote>ARTICLE 266-A. Rape; When And How Committed—Rape is committed:&nbsp; &nbsp;&nbsp;<br>&nbsp; <br><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">1)</div></td><td colspan="3"><div align="justify"><i>By a man who shall have a carnal knowledge of a woman</i> under any of the following circumstances:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td width="5%"><div align="justify"></div><br></td><td width="75%"><div align="justify"></div><br></td><td width="15%"><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">a)</div></td><td><div align="justify">Through force, threat, or intimidation;</div></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">b)</div></td><td><div align="justify">When the offended party is deprived of reason or otherwise unconscious;</div></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">c)</div></td><td><div align="justify"><i>By means of fraudulent machination</i> or grave abuse of authority; and</div></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">d)</div></td><td><div align="justify">When the offended party is under twelve (12) years of age or is demented, even though none of the circumstances mentioned above be present.</div></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">2)</div></td><td colspan="3"><div align="justify"><i>By any person</i> who, under any of the circumstances mentioned in paragraph 1 hereof, shall <i>commit an act of sexual assault by inserting</i> his penis into another person's mouth or anal orifice, or <i>any instrument or object, into the genital or anal orifice of another person</i>. (Emphasis supplied)</div></td></tr></tbody></table></blockquote>Rape can be committed in two ways: (1) rape through sexual intercourse, otherwise known as organ rape or penile rape under Article 266-A, paragraph 1 of the Revised Penal Code; and (2) rape by sexual assault, otherwise known as instrument or object rape or gender-free rape under Article 266-A, paragraph 2 of the Revised Penal Code.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>In reviewing rape cases, this Court is guided by three principles:<blockquote>(1) an accusation of rape can be made with facility and while the accusation is difficult to prove, it is even more difficult for the person accused, though innocent, to disprove; (2) considering the intrinsic nature of the crime of rape, only two persons being usually involved, the testimony of the complainant should be scrutinized with extreme caution; and (3) the evidence for the prosecution must stand or fall on its own merits, and cannot be allowed to draw strength from the weakness of the evidence for the defense.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup>&nbsp;</blockquote>To exculpate himself from liability, accused-appellant argues that the prosecution failed to prove his guilt beyond reasonable doubt. He vehemently denies committing the crimes imputed against him and asserts that the alleged incidents were highly improbable and not supported by adequate evidence.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Accused-appellant centers his defense on the contradictory and inconsistent statements of the prosecution's witnesses on seemingly material and substantial matters, which supposedly erode their credibility and create doubt as to his culpability in the crimes charged.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>It should be emphasized that central to rape cases is the credibility of the victim. It is a well-settled rule that "primordial is the credibility of the victim's testimony because the accused may be convicted solely on said testimony provided it is credible, natural, convincing, and consistent with human nature and the normal course of things."<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>On this note, this Court held that issues of credibility are best resolved by the trial court, as it is in the best position to hear, see, and observe the witnesses firsthand, thus:<blockquote>The observance of the witnesses' demeanor during an oral direct examination, cross-examination, and during the entire period that he or she is present during trial is indispensable especially in rape cases because it helps establish the moral conviction that an accused is guilty beyond reasonable doubt of the crime charged. Trial provides judges with the opportunity to detect, consciously or unconsciously, observable cues and micro expressions that could, more than the words said and taken as a whole, suggest sincerity or betray lies and ill will. These important aspects can never be reflected or reproduced in documents and objects used as evidence.<br><br>Hence, "the evaluation of the witnesses' credibility is a matter best left to the trial court because it had the opportunity to observe the witnesses and their demeanor during the trial. Thus, the Court accords great respect to the trial court's findings," more so when the Court of Appeals affirmed such findings.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (Citations omitted)</blockquote>This Court generally defers to the findings of the trial court, which had the firsthand opportunity to hear the testimonies of witnesses and observe their demeanor, conduct, and attitude during their presentation. The factual findings of the RTC, especially when affirmed by the CA, are accorded the highest degree of respect, and are conclusive and binding on this Court.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>In Criminal Case Nos. U-17468 and U-17469, AAA278240 clearly narrated the events on October 13, 2010 during her examination as a witness, which illustrate the credibility of her testimony. The pertinent parts of her examination read:<blockquote><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td colspan="2"><div align="justify">(<i>Direct Examination of AAA278240</i>)</div></td></tr><tr valign="top"><td colspan="2"><div align="justify">Prosecutor Dulay:</div></td></tr><tr valign="top"><td width="5%"><div align="justify">Q</div></td><td width="95%"><div align="justify">Madam Witness, on October 13, 2010[,] at around 8:30 in the morning, do you recall where you were?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Where were you on that time and date?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">I was inside my house, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">While you and the accused [were] inside the bedroom, what happened next Madam Witness?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He told me to [lie] down.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Did you abide[,] Madam Witness[,] with the order of the accused for you to [lie] down?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">Yes, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And where did you [lie] down?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">In our bamboo bed, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">What happened next after you [laid] down on the bamboo bed?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He told me to remove my [short pants], [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And after that[,] what did he do?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He got an oil and then he applied it in my vagina.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And after applying oil on your vagina[,] Madam Witness[,] what did he do next?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">And then he inserted his fingers.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And how many fingers did he [insert in] your vagina, Madam Witness?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">[Two] fingers, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And which fingers did he [insert in] your vagina, Madam Witness?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">[Two] fingers, the [pointer] and middle finger of his right hand, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And what did you feel when he inserted his two fingers[,] Madam Witness?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td> <div align="justify">It was painful, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Aside from inserting his two fingers into your vagina[,] Madam Witness, what else did the accused do?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">After inserting his finger[,] he removed his fingers and inserted his penis inside my vagina, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And after he had inserted his penis [in] your vagina, Madam Witness, what else did the accused do?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He told me that he will just push up my <i>loslos</i>.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Madam Witness, before the accused inserted his penis into your vagina, do you recall of any utterance from him?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He told me that, "I will treat your illness because it is already [acute], otherwise, you will die."</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And what was your reaction[,] Madam Witness[,] when the accused inserted his penis into your vagina?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">It was painful and I was afraid. I felt fear.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">After [six] minutes Madam Witness [t]hat the penis of the accused was inside your vagina, what happened next, Madam Witness?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He removed his penis from my vagina, and then something came out from his penis.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And after that, Madam Witness, what else did the accused do?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">And then he told me to wear my [short pants], and then he gave me oil.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And what was that oil for, Madam Witness?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">[I] will use that in applying it to my vagina after taking a bath.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And after giving you that oil, Madam Witness, in which you will apply after taking a bath, where did the accused go?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He went out from our house, and he was rushing, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td> <div align="justify">And how about you Madam Witness, what did you do after he left?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">I went to the toilet and washed myself.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And what happened when you were washing yourself, Madam Witness?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">I felt pain in my vagina and blood came out from my vagina, [Ma'am].<sup style="COLOR: RGB(255, 0, 0);">[54]</sup></div></td></tr></tbody></table></blockquote>For Criminal Case Nos. U-17467 and U-17470, AAA278240 was also able to clearly narrate the act committed by accused-appellant against her on October 16, 2010, <i>viz</i>.:&nbsp;<blockquote><table width="100%"  ="" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">Q</div></td><td width="95%"><div align="justify">Madam Witness, on October 16, 2010 [at around 9 o'clock in the morning], do you recall where you were at that time?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">I was inside our house [eating] my breakfast, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">What transpired after you and the accused were inside the bedroom, Madam Witness?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He said that [I] should not be afraid because that would be the last treatment, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">Aside from telling you to [lie] down, Madam Witness, was there any other utterance that he made?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He asked me again to remove my [short pants and] that he is going to check my vagina.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And what did he do after you remove[d] your short pants and your panty while [lying] down on the bed?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He applied [oil again on] the surface of my vagina and then he inserted his finger.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">When he inserted [his] finger into your vagina, Madam Witness, what did you feel?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">It was painful, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And while his fingers were inserted into your vagina and stayed there for about [one] minute, moving it sideways[,] and you said that you felt pain, what did the accused do after you felt pain?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He said that, "I will just do it for a short time."</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And aside from saying that Madam Witness, what else did he do?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">He removed his fingers from my vagina, and then he inserted his penis into my vagina, [Ma'am].</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td colspan="2"><div align="justify">....</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">And aside from inserting his penis into your vagina, what else did the accused do?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">And then he also mashed my breast. And then he was trying to parry my hands, and [I] was trying to push him[,] but he just laugh[ed] at me[,] and then after that[,] he removed his penis from my vagina.</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">Q</div></td><td><div align="justify">What else happened, Madam Witness, after he removed his penis from your vagina?</div></td></tr><tr valign="top"><td><div align="justify">A</div></td><td><div align="justify">And then he said that would be the last treatment[,] and then he blew [on] my vagina.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup></div></td></tr></tbody></table></blockquote>To reiterate, the elements of the crime of rape through sexual intercourse are the following: (1) the accused had carnal knowledge of the victim; and (2) said act was accompanied (a) with the use of force, threat, or intimidation, or (b) when the victim is deprived of reason or otherwise unconscious, or (c) by means of fraudulent machination or grave abuse of authority, or (d) when the victim is under 12 years of age or is demented.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>Meanwhile, the elements of rape by sexual assault are as follows: (1) the offender commits an act of sexual assault (a) by inserting his penis into another person's mouth or anal orifice, or (b) by inserting any instrument or object into the genital or anal orifice of another person; (2) the act of sexual assault is accomplished (a) by using force and intimidation; (b) when the woman is deprived of reason or otherwise unconscious; or (c) by means of fraudulent machination or grave abuse of authority; or (d) when the woman is under 12 years of age or demented.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>In <i>People v. Agao</i>,<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> this Court held that there is consummated rape when the penis penetrates the cleft of the <i>labia majora</i>, also known as the vulval or pudenda! cleft, or the fleshy outer lip of the vagina, even in the slightest degree. As such, We reiterate the jurisprudential guideposts enumerated in <i>Agao</i> in establishing the necessary genital contact:<blockquote>[T]he Court further reiterates the jurisprudential guideposts which provide that when the necessary genital contact is not explicitly described through the testimony of the victim, whether minor or otherwise, courts can anchor their findings and appreciation of the genital contact on other aspects that would similarly depict the occurrence and circumstance of penile penetration. These guideposts which are appreciable in all rape cases may reasonably find sharper import with respect to cases of rape involving minor victims, especially in view of the inherent limitations of the testimony of child witnesses. The courts are, therefore, enjoined to exercise circumspection in their appreciation, with the use of these surrounding or attendant circumstances which can aid the courts in their appreciation of penile penetration: (i) when the victim testifies that she felt pain in her genitals; (ii) when there is bleeding in the same; (iii) when the <i>labia minora</i> was observed to be gaping or has redness or otherwise discolored; (iv) when the hymenal tags are no longer visible; or (v) when the sex organ of the victim has sustained any other type of injury.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> (Citations omitted)</blockquote>On the other hand, as ruled in <i>Lutap v. People</i>,<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> for a charge of rape by sexual assault with the use of one's fingers as the assaulting object to prosper, "there should be evidence of at least the slightest penetration of the sexual organ and not merely a brush or graze of its surface."<sup style="COLOR: RGB(255, 0, 0);">[61]</sup><br><br>In this case, the jurisprudential guideposts to establish rape through sexual intercourse and rape by sexual assault exist. AAA278240 categorically testified that accused-appellant inserted his fingers and penis into her vagina in two separate instances. This allegation was corroborated on material points by the medico-legal report which indicated that "medical evaluation showed evidence of sexual abuse" as she was found to have "healed lacerations at [the 5 o'clock, 6 o'clock], and 7 o'clock positions on her hymen."<br><br>Accused-appellant hinges his innocence on the fact that the medico-legal report has very little probative value and it was not conclusive proof that he was the perpetrator of the crimes charged.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> However, it is well established that a medical examination is corroborative in nature.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> The prime consideration in the prosecution of rape is the victim's testimony and not necessarily the medical findings. Here, AAA278240's testimony alone is sufficient to sustain accused-appellant's conviction.<br><br>To further bolster his defense, accused-appellant insists that AAA278240's testimony should not have been accorded full faith and credence. He avers that AAA278240 never claimed that she resisted, shouted for help, or even attempted to escape during the alleged incidents. Too, accused-appellant asserts that the records are bereft of any evidence that would show that he threatened AAA278240 into submitting to his alleged evil desire, or that he was armed with a weapon when he allegedly molested her.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>Accused-appellant's arguments hold no credence as Article 266-A of the Revised Penal Code does not limit rape to acts involving force, threat, or intimidation. Article 266-A of the Revised Penal Code identifies several other situations in which rape may be committed, such as in this case, when it is accomplished through fraudulent schemes. Thus, Article 266-A recognizes that rape may occur even in the absence of force, threat, or intimidation, and even in the absence of resistance on the part of the victim.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup><br><br>Contrary to accused-appellant's claim, resistance is not necessary to establish rape, especially when the victim is manipulated. Here, AAA278240 was induced to submit to accused-appellant due to the false pretense that it would cure her illness. In <i>People v. Quintos</i>,<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> this Court ruled that when a person becomes a victim of fraudulent machination or manipulation, she does not have full control over her decisions. Her actions are grounded on incomplete or deceptive information regarding the circumstances. Consequently, any consent she appears to give is invalid or not truly her own, and her lack of resistance cannot be construed as voluntary participation. In other words, consent obtained through deceit or misrepresentation vitiates voluntariness and cannot serve as a defense.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br>&nbsp;<br>Accused-appellant further asserts that it would have been impossible for him to commit the alleged sexual abuses at AAA278240's house because her relatives were just outside the bedroom. He insisted that the high probability of being caught and reported to the authorities would have deterred him from executing the alleged crimes.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup><br><br>However, it is a repeated rule that rape does not only occur in seclusion as lust is no respecter of time and place.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> Thus, neither the presence of other people nor the high risk of being caught has been held sufficient and effective obstacle to deter the commission of rape.<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> The presence of people nearby, as argued by accused-appellant, is no guarantee that rape will not be committed and deserves scant consideration.<br><br>Accused-appellant further contends that his denial and alibi are more plausible in comparison to the prosecution's evidence.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup> However, denial and alibi are inherently weak defenses, which cannot prevail over the victim's positive and credible testimony that the accused committed the crime. This Court held in <i>People v. Moreno</i>:<sup style="COLOR: RGB(255, 0, 0);">[72]</sup><blockquote>Denial is inherently a weak defense which cannot outweigh positive testimony. A categorical statement that has the earmarks of truth prevails over a bare denial which can easily be fabricated and is inherently unreliable. For the defense of alibi to prosper, the accused must prove that he was at some other place at the time of the commission of the crime and it was physically impossible for him to be at the <i>locus delicti</i> or within its immediate vicinity. These requirements of time and place must be strictly met.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> (Citations omitted)</blockquote>To reiterate, the prime consideration in the prosecution of rape is the victim's testimony. In this case, AAA278240's testimony was clear and unequivocal. She positively identified accused-appellant as the man who raped her and her recollection of the material details of her harrowing experience was consistent. Thus, AAA278240's direct, positive, and straightforward narration of the incidents is sufficient to sustain accused-appellant's conviction and prevails over accused-appellant's bare denial.<br><br>Considering the foregoing, this Court affirms accused-appellant's guilt for two counts of rape by sexual assault and two counts of rape through sexual intercourse.<br><br>However, this Court finds that the CA's application of Republic Act No. 7610, or the Special Protection of Children Against Abuse, Exploitation, and Discrimination Act, does not conform with recent jurisprudence. In <i>People v. Gramatica</i>,<sup style="COLOR: RGB(255, 0, 0);">[74]</sup> this Court clarified the proper scope of Section 5(b) of Republic Act No. 7610 and ruled that the said provision applies only when the child actively participates or indulges in sexual intercourse or lascivious conduct due to money, profit, any other consideration, or the coercion or influence of an adult.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br>The Court emphasized that the statutory term "indulges" necessarily connotes participation, awareness, and a degree of volition on the part of the minor, albeit one that is legally defective due to the child's age and the surrounding circumstances of exploitation. Republic Act No. 7610 was, thus, intended to penalize acts of sexual exploitation where the child, though a minor, is induced to engage in sexual activity as a consequence of consideration or undue influence, and not instances where the child is entirely passive, unconscious, asleep, or otherwise unaware of the sexual act at the time of its commission.<br><br>Here, We find that AAA278240 yielded to accused-appellant's acts under the mistaken belief that they formed part of a legitimate healing procedure. Such submission, however, cannot be equated with legally defective consent, as it was procured through fraudulent machination and deceit. Accused-appellant consciously took advantage of his standing in the community as an <i>albularyo</i> when he persistently portrayed his sexual acts as indispensable to her treatment and misled AAA278240 into believing that he had the capacity to cure her illness.<br><br>Accordingly, where the evidence shows that AAA278240 did not actively participate in, consent to, or indulge in the sexual act, the application of Section 5(b) of Republic Act No. 7610 was improper in this case. The crime, as well as the corresponding penalty and civil liabilities, must be determined under the appropriate provisions of the Revised Penal Code. Hence, the imposition of penalties and damages pursuant to Republic Act No. 7610, absent a finding of the child's participation or indulgence as contemplated by law and jurisprudence, cannot be sustained.<br><br>All told, this Court finds that in Criminal Case Nos. U-17469 and U-17470, accused-appellant is guilty of rape by sexual assault under Article 266-A(2) of the Revised Penal Code.<br><br>Absent any modifying circumstance, the maximum term of the indeterminate sentence must be within the medium period of the prescribed penalty, which is <i>prision mayor</i>, or eight years and one day to ten years. The minimum term of the indeterminate sentence must be within the penalty next lower in degree than that prescribed, or <i>prision correccional</i>, which ranges from six months and one day to six years. Thus, the proper penalty for each count of rape by sexual assault is four years of <i>prision correccional</i>, as minimum, to nine years of <i>prision mayor</i>, as maximum.<br><br>As for the award of damages, in conformity with <i>Tulagan</i>, accused-appellant is liable to pay AAA278240 the amounts of PHP 30,000.00 as civil indemnity, PHP 30,000.00 as moral damages, and PHP 30,000.00 as exemplary damages for each count.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br>In Criminal Case Nos. U-17467 and U-17468, this Court affirms accused-appellant's conviction for rape under Article 266-A(1), in relation to Article 266-B, of the Revised Penal Code, and the imposition of the penalty of <i>reclusion perpetua</i> for both counts.<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> In line with <i>People v. Jugueta</i>,<sup style="COLOR: RGB(255, 0, 0);">[78]</sup> this Court also affirms the award of damages in the amounts of PHP 75,000.00 as civil indemnity, PHP 75,000.00 as moral damages, and PHP 75,000.00 as exemplary damages for each count.<br><br>All monetary awards shall earn 6% per annum legal interest, to be reckoned from the date of finality of this Decision until fully paid.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br><b>ACCORDINGLY</b>, the Appeal is <b>DENIED</b>. The May 30, 2024 Decision of the Court of Appeals in CA-G.R. CR-HC No. 17093 is <b>AFFIRMED with MODIFICATION</b>.<br><br>1. In Criminal Case No. U-17467, accused-appellant XXX278240 a.k.a. "<span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>" is <b>GUILTY</b> beyond reasonable doubt of rape under Article 266-A(1), in relation to Article 266-B of the Revised Penal Code, for which he is sentenced to suffer the penalty of <i>reclusion perpetua</i>. He is <b>ORDERED to PAY</b> the victim, AAA278240, the amounts of PHP 75,000.00 as civil indemnity, PHP 75,000.00 as moral damages, and PHP 75,000.00 as exemplary damages.<br><br>2. In Criminal Case No. U-17468, accused-appellant XXX278240 a.k.a. "<span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>" is <b>GUILTY</b> beyond reasonable doubt of rape under Article 266-A(1), in relation to Article 266-B, of the Revised Penal Code, for which he is sentenced to suffer the penalty of <i>reclusion perpetua</i>. He is <b>ORDERED to PAY</b> the victim, AAA278240, the amounts of PHP 75,000.00 as civil indemnity, PHP 75,000.00 as moral damages, and PHP 75,000.00 as exemplary damages.<br><br>3. In Criminal Case No. U-17469, accused-appellant XXX278240 a.k.a. "<span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>" is <b>GUILTY</b> beyond reasonable doubt of rape under Article 266-A(2), in relation to Article 266-B of the Revised Penal Code, for which is sentenced to an indeterminate penalty of four years of <i>prision correccional</i>, as minimum, to nine years of <i>prision mayor</i>, as maximum. He is <b>ORDERED to PAY</b> the victim, AAA278240, the amounts of PHP 30,000.00 as civil indemnity, PHP 30,000.00 as moral damages, and PHP 30,000.00 as exemplary damages.<br><br>4. In Criminal Case No. U-17470, accused-appellant XXX278240 a.k.a. "<span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>" is <b>GUILTY</b> beyond reasonable doubt of rape under Article 266-A(2), in relation to Article 266-B of the Revised Penal Code, for which is sentenced to an indeterminate penalty of four years of <i>prision correccional</i>, as minimum, to nine years of <i>prision mayor</i>, as maximum. He is <b>ORDERED to PAY</b> the victim, AAA278240, the amounts of PHP 30,000.00 as civil indemnity, PHP 30,000.00 as moral damages, and PHP 30,000.00 as exemplary damages.<br><br>The civil liabilities awarded shall earn interest at the rate of 6% per annum from the finality of this Decision until fully paid.<br><br>Branch <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Regional Trial Court, <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, shall <b>INFORM</b> the Department of Social Welfare and Development (DSWD) of a decision rendered involving a sexual abuse case. It is the duty of the DSWD to <b>REFER</b> the private complainant AAA278240 to the appropriate rape crisis center for the necessary assistance to be rendered to her and her family, in line with Republic Act No. 8505, otherwise known as the Rape Victim Assistance and Protection Act of 1998. It is further <b>DIRECTED to REPORT</b> compliance within IO days from notice of finality of this Decision.<br><br><b>SO ORDERED.</b><br><br><i>Leonen, SAJ. (Chairperson), Lazaro-Javier, Kho, Jr.</i>, and <i>Villanueva, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> In line with Amended Administrative Circular No. 83-2015, as mandated by the Revised Penal Code, Article 266-A, the names of the private offended parties, along with all other personal circumstances that may tend to establish their identities, are made confidential to protect their privacy and dignity.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 8-31. The May 30, 2024 Decision in CA-G.R. CR-HC No. 17093 was penned by Associate Justice Roberto P. Quiroz and concurred in by Presiding Justice Mariflor P. Punzalan Castillo and Associate Justice Germano Francisco D. Legaspi of the First Division, Court of Appeals, Manila City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 34-58. The July 14, 2022 Joint Judgment in Criminal Case Nos. U-17467, U-17468, U-17469, and U-17470 was penned by Acting Presiding Judge Caridad V. Galvez of Branch <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Regional Trial Court, <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> RTC records (Criminal Case No. U-17467), p. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> RTC records (Criminal Case No. U-17468), p. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> RTC records (Criminal Case No. U-17469), p. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> RTC records (Criminal Case No. U-17470), p. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> RTC records (Criminal Case No. U-17467), p. 31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 37-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 6-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> TSN, AAA278240, April 11, 2018, pp. 4-5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 6-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 8-9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 10-11.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 11-13.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 13-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 14.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> RTC records (Criminal Case No. U-17467), p. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> TSN, XXX278240, April 22, 2019, pp. 3-5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 6-8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 13-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 8-9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> TSN, Joel Soriano, March 16, 2021, pp. 4-5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 2-3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> RTC records (Criminal Case No. U-17467), pp. 132-133.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Rollo</i>, pp. 34-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> CA <i>rollo</i>, pp. 42-65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 54-56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 57-58.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 61-62.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 99-127.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 119.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 119-120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, pp. 8-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 29-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 59-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 61-68.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <b>People v. Caoili</b>, 815 Phil. 839, 878-879 (2017) [Per J. Tijam, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <b>People v. Amper</b>, 908 Phil. 610, 617 (2021) [Per J. J. Lopez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> CA <i>rollo</i>, pp. 53-64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 53-55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <b>People v. Marmol</b>, 800 Phil. 813, 825 (2016) [Per J. Perez, Third Division]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>People v. ZZZ</b>, 854 Phil. 481, 495-496 (2019) [Per J. Leonen, Third Division]<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>People v. Bermas</b>, 854 Phil. 556, 564-565 (2019) [Per J. Caguioa, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> TSN, AAA278240, April 11, 2018, pp. 4-10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 10-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <b>People v. Arraz</b>, 925 Phil. 462, 484 (2022) [Per J.M. Lopez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <b>People v. ABC260708</b>, 950 Phil. 199, 237 (2024) [Per J.M. Lopez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> 930 Phil. 559 (2022) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 595-596.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> 825 Phil. 10 (2018) [Per J. Tijam, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 23. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> CA <i>rollo</i>, pp. 62-63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <b>People v. Manaligod</b>, 831 Phil. 204, 213 (2018) [Per J. Martires, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> CA <i>rollo</i>, pp. 58-60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>People v. Quintos</b>, 146 Phil. 809, 828-829 (2014) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> 746 Phil. 809 (2014) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 829.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> CA <i>rollo</i>, p. 60.<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <b>People v. Regalado</b>, 793 Phil. 493, 503 (2016) [Per J. Perez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <b>People v. Panes</b>, 817 Phil. 1096, 1103 (2017) [Per J. Del Castillo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> CA <i>rollo</i>, pp. 64-65.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 872 Phil. 17 (2020) [Per J. Hernando, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 28.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <b>G.R. No. 260233</b>, August 12, 2025 [Per J. Inting, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 4. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <b>People v. Tulagan</b>, 849 Phil. 197, 287-288 (2019) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 238.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> 783 Phil. 806, 848-849 (2003) [Per J. Peralta, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <b>Lara's Gifts &amp; Decors, Inc. v. Midtown Industrial Sales, Inc.</b>, 929 Phil. 754, 784 (2022) (Per ACJ. Leonen, <i>En Banc</i>] and <b>Nacar v. Gallery Frames, Inc.</b>, 716 Phil. 267, 282-283 (2013) [Per J. Peralta, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

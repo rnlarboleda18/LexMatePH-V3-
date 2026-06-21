@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 236333 - BELINDA E. SORIANO, CHRISTINE EVANGELISTA,* MICHELLE NICOLE SORIANO, JOSE ENRIQUE ROXAS III, AND BERNARDINA FELICIANO, PETITIONERS, VS. ANTONIO V. ESTRELLA, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70370' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 236333, April 20, 2026 ]</H2>
+			<H3>BELINDA E. SORIANO, CHRISTINE EVANGELISTA,<SUP STYLE="COLOR: RGB(255, 0, 0);">*</SUP> MICHELLE NICOLE SORIANO, JOSE ENRIQUE ROXAS III, AND BERNARDINA FELICIANO, PETITIONERS, VS. ANTONIO V. ESTRELLA, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>GESMUNDO, C.J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Courts may validly pass upon the issue of the fact of death of the plaintiff in an ejectment suit where the same is necessary for the resolution of the issue of possession. Any such finding as to the fact of death of the plaintiff is merely provisional in nature and will not bar a subsequent action involving the same.<br><br>This is an Appeal by <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> seeking to reverse and set aside the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals (CA), which reversed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC). The RTC affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> of the Metropolitan Trial Court (MeTC), which dismissed the Complaint for unlawful detainer for lack of merit.<br><br><center><i>The Antecedents</i></center><br>On January 30, 2014, respondent Antonio V. Estrella (Antonio) filed a Complaint for ejectment against petitioners Belinda Soriano (Belinda), Christine Evangelista (Christine), Michelle Nicole Soriano (Michelle), Jose Enrique Roxas III (Jose), and Bernardina Feliciano (Bernardina; collectively, Belinda et al.). This was docketed as Civil Case No. 14-00796 and raffled off to the MeTC.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>In his Complaint, Antonio alleged that he is the registered owner of a real property located at No. 64 South Maya Street, PhilAm Homes, Quezon City, particularly described under Transfer Certificate of Title (TCT) No. RT-5674 (89911)<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> (subject property).<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> He alleged that the subject property was conveyed to him by his parents.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>With Antonio's consent, Maria Teresa<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Estrella (Teresa), Belinda et al.'s mother, occupied the basement of the house constructed on the subject property. Upon the demise of Teresa on February 21, 2004, Belinda, Christine, and Jose begged Antonio to allow them to stay on the premises with the promise to leave the same once they find a suitable place to reside. As they were his nieces and nephew, Antonio acceded to their request and allowed them to use the basement, and to introduce improvements on the property without payment of rent.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Sometime in September 2012, Antonio informed Belinda et al. of his plan to renovate the basement. Subsequently, he demanded that they should vacate the premises. Belinda et al. refused to leave. Antonio then filed a complaint before the Office of the Punong Barangay. However, the barangay conciliation failed, and the Office of the Punong Barangay issued a Certification to File Action.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Antonio sent a demand letter to vacate<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> dated July 1, 2013, which Belinda et al. received on July 19, 2013, where he reiterated his demand for the latter to vacate his property. Such demand went unheeded. Thus, Antonio filed the instant Complaint for ejectment.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>On the other hand, Belinda et al. averred that their grandparents titled the subject property in the name of Antonio. Meanwhile, the lot and improvements made on the same were declared for tax purposes in the name of their mother, Teresa.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Their mother and Antonio lived in the same house. Antonio occupied the upper portion, while Teresa and Belinda et al. lived in the lower portion of the house. Belinda et al. maintained that they were in peaceful, continuous, and notorious possession of the subject property even after the title of the property was transferred to Antonio.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Further, Belinda et al. claimed that Antonio was declared dead on November 14, 1990. As it happened, Antonio's wife, Maria Rosario Castro-Estrella (Rosario), executed a notarized Authorization Letter<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> dated March 12, 2014. In said letter, Rosario allowed Belinda et al. to continue occupying the lower portion of the house constructed on the property in dispute without paying any rent. Thus, Belinda et al. argued that the suit should be dismissed because the facts, as alleged in the complaint, demonstrated neither a case of unlawful detainer nor of forcible entry.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br><center><i>The MeTC Ruling</i></center><br>In its August 7, 2014 Decision, the MeTC dismissed the complaint for lack of merit. The <i>fallo</i> reads:<blockquote><b>WHEREFORE</b>, based on the foregoing discussions, judgment is rendered DISMISSING the complaint for lack of merit.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original)</blockquote>The MeTC held that Antonio failed to show that he is entitled to absolute possession of the subject property to the exclusion of Belinda et al. It found that the subject property is a conjugal property, as stated in the title, since there is no showing that it is the paraphernal or exclusive property of Antonio. While Antonio would want to eject Belinda et al., his wife, a co-owner, countermanded the ejectment by expressly allowing Belinda et al. to continue their occupancy of the subject property.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Further, the MeTC declared that Antonio was not able to establish his rightful ownership of the subject property. It held that Belinda et al. had duly proved the fact of death of the owner of the subject property through the presentation of the Certificate of Death,<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> which was not contravened by Antonio. According to the MeTC, the certificate of death is "a document duly issued by the government agency which states of a fact of inability of a dead person to transact[,] more so to file an action for ejectment."<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Thus, the MeTC concluded that such fact of death removed from Antonio the right to file the action. All his civil rights have been removed from him. The MeTC further declared that it cannot ascertain if Antonio is really the owner of the subject property since the certificate of death, a document issued by the government, prevails over any assertion of an individual. The MeTC held that due to the fact of death, Rosario is the one authorized to transact for and on behalf of the estate of Antonio. Thus, the authorization given by Rosario is more credible than the allegation of someone declared dead by competent evidence. Accordingly, Antonio's demand to vacate did not convert Belinda et al.'s possession of the subject property from legal to illegal. Lastly, the MeTC ruled that none of the parties are entitled to their money claims.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Dissatisfied, Antonio appealed the foregoing judgment of the MeTC before the RTC.<br><br><center><i>The RTC Ruling</i></center><br>In its July 29, 2015 Decision, the RTC affirmed the MeTC Decision and dismissed the ejectment suit for lack of cause of action. The <i>fallo</i> reads:<blockquote>WHEREFORE, premises considered, the instant Appeal by the plaintiff-appellant is DENIED and the Judgment of the Metropolitan Trial Court of Quezon City, Branch 38, dated August 7, 2014 is hereby AFFIRMED. Accordingly, the instant summary ejectment suit is DISMISSED for lack of cause of action.<br><br>SO ORDERED.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup></blockquote>The RTC held that there is no legal basis to reverse the MeTC decision which dismissed the Complaint for ejectment. It declared that the ultimate facts alleged in the Complaint for unlawful detainer did not satisfy all the elements required by law. It agreed with the conclusion of the MeTC about the absence of any showing that the possession of the subject property by Belinda et al. had become illegal or that their right of possession had terminated. It ruled that Belinda et al. have established by sufficient evidence that they are in actual, continuous, and lawful possession of part of the subject property as shown by the receipts indicating their payment of real property taxes and utilities, as well as the notarized authorization letter from Rosario. It noted that Rosario is a part-owner of the subject property and that she authorized Belinda et al. and their respective families to continue living in the said property without any rental payment.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Further, the RTC declared that Belinda et al. did not deprive Antonio of the enjoyment of his possessory right over the subject property. It pointed out that Antonio failed to contravene the authenticity and genuineness of the certificate of death of the registered owner of the subject property and that he is the same person as the deceased. The certificate of death is <i>prima facie</i> evidence of the facts stated in said public document, and the courts must recognize the same until it is properly cancelled. Thus, due to the record of death of Antonio, the latter has lost his legal capacity. The RTC held that Antonio's property rights, and the exercise thereof, were properly transferred to his wife and/or his heirs at the moment of his recorded death on November 14, 1990, and hence, they have the right to authorize or allow Belinda et al. to stay in the subject property.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>Finally, the RTC found that Antonio failed to substantiate the allegations in his complaint that he absolutely has the right of possession over the subject property to the exclusion of Belinda et al. It agreed with the MeTC that the demand to vacate made by Antonio did not convert Belinda et al. into illegal occupants of the subject property. It also echoed the MeTC's finding as to the lack of basis for the money claims of both parties.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>Undaunted, Antonio filed a Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> before the CA assailing the findings and conclusions reached by the RTC in its July 29, 2015 Decision.<br><br><center><i>The CA Ruling</i></center><br>In its July 17, 2017 Decision, the CA reversed and set aside the RTC Decision. The dispositive portion provides:<blockquote><b>WHEREFORE</b>, the <i>Petition for Review</i> is hereby <b>GRANTED</b>. The assailed <i>Decision</i> dated [July 29, 2015] of the Regional Trial Court of Quezon City, Branch 222, in Civil Case No. R-QZN-14-10888-CV, is <b>REVERSED and SET ASIDE</b>. Accordingly, respondents and all persons claiming rights under them, are <b>ORDERED</b> to peacefully vacate the property located at No. 64 South Maya Street, PhilAm Homes, Quezon City and turn over possession thereof to petitioner Antonio Estrella.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis in the original)</blockquote>The CA held that all elements of unlawful detainer are present in the instant case. According to the CA, the records of the case disclosed that Antonio, the registered owner of the subject property, merely tolerated Belinda et al.'s possession of the said property. In a letter dated July 1, 2013, which was received by Belinda et al. on July 19, 2013, Antonio demanded that they should vacate the premises. Belinda et al. refused to do so, and remained in possession of the subject property. This constrained Antonio to institute the complaint for unlawful detainer on January 30, 2014, within the one-year period from the unlawful deprivation or withholding of possession.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>The CA found that the certificate of death of Antonio pales into insignificance when juxtaposed with his indubitable living presence. The <i>prima facie</i> evidence of the fact of Antonio's death is rebutted by the countervailing evidence on record. <i>First</i>, during the preliminary conference, Belinda et al. themselves admitted that Antonio is the absolute and registered owner of the subject property, only with the qualification that the same was not absolutely owned by him as he was married to Rosario. <i>Second</i>, Antonio was duly issued a driver's license, which expired on March 14, 2016. <i>Third</i>, on July 8, 2013, Belinda and Christine filed a criminal complaint against Antonio. Thus, the certificate of death loses its efficacy.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>The CA did not give any credit to the supposed letter issued by Antonio's wife authorizing Belinda et al. to stay in the subject property. It observed that since Antonio and his wife were married on July 13 1962, their property relations are governed by the Civil Code, which provides that each spouse retains exclusive ownership of property acquired during the marriage by lucrative title that includes those acquired gratuitously or by inheritance, devise, legacy, or donation. The CA concluded that the subject property is exclusively owned by Antonio since he acquired the same from his parents. Considering that he is still alive, no successional rights were ever transmitted to his wife or heirs. Consequently, the supposed authorization letter conveyed no rights to Belinda et al.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Belinda et al. filed a Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> which the CA denied in its December 18, 2017 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> Hence, Belinda et al. filed the present Petition before the Court.<br><br><center><i>The Petition</i></center><br>Petitioners assail the CA decision on the following grounds:<br><br><i>First</i>, petitioners argue that respondent failed to contravene the authenticity and genuineness of his certificate of death. They stress that the certificate of death is a public document and the courts must recognize the same unless it is properly cancelled by proving the contrary in accordance with law. The record of death and its legal consequences must be recognized. Petitioners theorize that respondent lost his legal capacity upon his recorded death on November 14, 1990. They add that the certificate of death is <i>prima facie</i> evidence of the facts stated in it, and any party assailing its authenticity and due execution is required to present clear and convincing evidence to substantiate his or her proposition.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br><i>Second</i>, petitioners claim that the letter of respondent's wife, Rosario, granted them the authority to occupy the subject property. They aver that Rosario, a part owner of the subject property as shown on the face of the certified true copy of the corresponding title, authorized them and their respective families to continue living in the said property for as long as they wish without rental payment whatsoever. Further, respondent lost his legal capacity upon his recorded death on November 14, 1990. The exercise of his property rights was legally transferred to his wife and/or his heirs at the moment of his recorded death. Thus, the heirs of respondent, particularly his wife, has the right to transact for and on behalf of the estate of the deceased, and to authorize petitioners to stay in the subject property.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup><br><br><i>Third</i>, petitioners contend that the elements of unlawful detainer are not present in the instant case. They argue that there is no showing that petitioners' possession of the subject property had become illegal or that their right of possession had terminated. They insist that they are in actual, continuous, and lawful possession of a part of the subject property as shown by the receipts proving payments of real property taxes and utilities, as well as the notarized authorization letter dated March 12, 2014 from Rosario. They add that respondent failed to show that petitioners' possession was based on his alleged tolerance. Also, they posit that there is no mention in the Complaint and in the pleadings filed by respondent on how entry by petitioners was effected and as to how and when dispossession started.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>In his October 9, 2019 Comment/Opposition,<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> respondent contends that while the certificate of death is <i>prima facie</i> evidence of the facts stated in such public document, he was able to produce clear, strong, and convincing evidence to overcome the positive value of said document. He cites the circumstances relied upon by the CA which constituted proof controverting the record of death in the certificate.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> Respondent also claims that the CA did not err when it found that Rosario has no authority to allow petitioners to stay in the subject property.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> Finally, respondent quotes the CA disposition concerning the presence of the elements of unlawful detainer in the instant case.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>In their February 8, 2021 Reply,<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> petitioners reiterated their claims in amplification of the arguments they posited in their appeal by <i>certiorari</i>.<br><br><center><i>The Issues<br><br></i></center><div align="left">Petitioners raised the following issues:&nbsp;</div><blockquote><center>I.</center><br>The Honorable [CA] has decided a question of substance in a way not in accord with [Rule 132, Section 23] of the Revised Rules on Evidence of the Rules of Court, by adjudging that [p]etitioners deprive[d] [r]espondent of the enjoyment of the possessory right over the contentious property even [after] [r]espondent failed to contest the authenticity of his [c]ertificate of [d]eath;<br><br><center>II.</center><br>The Honorable [CA] has departed from the accepted and usual course of judicial proceedings when it find [sic] the letter of [respondent's] wife[,] Maria Rosario Castro-Estrella[,] allowing the [p]etitioners to stay in the subject property[,] inefficacious; and<br><br><center>III.</center><br>The Honorable [CA] has decided a question of substance in a way not in accord with the applicable decisions of this Honorable Court[,] [s]pecifically, in adjudging that the elements of [u]nlawful [d]etainer are present in this case.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup></blockquote><center><i>The Courts Ruling</i></center><br>The appeal is denied for lack of merit.<br><br>The instant case poses a question of first impression to the Court: may the trial court pass upon the fact of death of the plaintiff in an ejectment suit?<br><br>The Court answers in the affirmative.<br><br>The issue of the fact of death of the registered owner of the subject property may be provisionally passed upon in an ejectment suit for the sole purpose of determining plaintiff's entitlement to possession <i>de facto</i> of the prope1iy subject of the suit.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The Court may validly review questions of fact in this case despite the instant appeal being brought under Rule 45</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The instant appeal by <i>certiorari</i> raises mixed questions of fact and law. It requires the Court to determine whether the registered owner of the subject property is, in fact, deceased. This is indubitably a question of fact.<br>&nbsp;<br>It is well-established that in an appeal by <i>certiorari</i>, the Court may only consider pure questions of law and not questions of fact. The reason behind the rule is that the Court is not a trier of facts and it is not its duty to review, evaluate, and weigh the probative value of the evidence adduced before the lower courts.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> The principle of bar on factual issues admits of certain reasonable deviations, which includes, though not limited to, when the judgment is based on misappreciation of facts or when the findings of fact of the CA are conflicting or contrary to those of the trial court.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>In the case at bench, the findings of fact of the CA are conflicting with those of the MeTC and RTC. Hence, a review of the factual issues involved may be undertaken by the Court.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The issue of the fact of death of the registered owner of the subject property may be provisionally passed upon in an ejectment suit</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The instant case arose out of a complaint for unlawful detainer. As borne out from the pleadings filed before the Court, petitioners' principal defense rests on the supposed lack of legal capacity of respondent to bring the ejectment suit due to the fact of his death. This "death" is evidenced by the certificate of death in the name of Antonio V. Estrella, herein respondent. Further, they argue that since respondent is legally deceased, his heirs, including his wife Rosario, are the ones who have the power to authorize the use of the subject property. Here, Rosario has authorized petitioners to use the subject property for as long as they wish without the payment of rent.<br><br>To properly resolve the contentions of petitioners, the Court must determine whether the fact of death of Antonio V. Estrella, as recorded in the certificate of death, may be controverted in the instant action for ejectment.<br><br>The Court answers in the affirmative. The fact of death of the plaintiff may be controverted and passed upon in the proceedings of an action for ejectment. However, any finding as to such fact is merely provisional and is in no manner conclusive of such fact.<br><br>Article 408<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> of the Civil Code of the Philippines provides that deaths shall be entered in the civil register. To this end, Article 410 of the Civil Code further provides that "[t]he books making up the civil register and <b><i>all documents relating thereto shall be considered public documents</i></b> and shall be <i>prima facie</i> evidence of the facts therein contained."<sup style="COLOR: RGB(255, 0, 0);">[47]</sup><br><br>Further, pursuant to Rule 132, Section 23 of the Revised Rules on Evidence, documents consisting of entries in public records made in the performance of a duty by a public officer are <i>prima facie</i> evidence of the facts stated therein, thus:<blockquote>Section 23. <i>Public documents as evidence</i>.—Documents consisting of entries in public records made in the performance of a duty by a public officer are <i>prima facie</i> evidence of the facts therein stated. All other public documents are evidence, even against a third person, of the fact which gave rise to their execution and of the date of the latter.</blockquote>The certificate of death is a public document. It is <i>prima facie</i> evidence of the facts stated in it. In this case, the certificate of death of Antonio V. Estrella is <i>prima facie</i> evidence of the fact of death of the latter.<br><br>Petitioners contend that since the certificate of death is <i>prima facie</i> evidence of the fact of death of respondent, it must be recognized by the courts until it is cancelled in accordance with law.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> This was also the position of the RTC.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Thus, in essence, both petitioners and the RTC are of the view that the certificate of death is conclusive as to the fact of death of Antonio V. Estrella until such certificate is cancelled. The Court imagines that, by cancellation, petitioners and the RTC are referring to a petition filed under Rule 108 of the Rules of Court for the cancellation or correction of entries in the civil registry.<br><br>Petitioners and the RTC are both mistaken.<br><br>It is true that Rule 108 of the Rules of Court provides for the remedy of cancellation or correction of entries in the civil registry.<br>&nbsp;<br>Section 1 thereof provides that "[a]ny person interested in any act, event, or decree concerning the civil status of persons which has been recorded in the civil register, may file a verified petition for the cancellation or correction of any entry relating thereto, with the Court of First Instance of the province where the corresponding civil registry is located." Meanwhile, Section 2<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> of Rule 108 enumerates the entries in the civil register that may be subject to cancellation or correction. Among them is the entry concerning deaths.<br><br>Considering the foregoing, it is evident that to cancel a certificate of death, the proper recourse is a petition for cancellation under Rule 108.<br><br>This begs the question of whether the existence of Rule 108, as a remedy, will prevent the courts from passing upon the issue pertaining to the fact of death of the plaintiff in an ejectment suit.<br><br>The Court answers in the negative.<br><br><i>First</i>, the very nature of an ejectment suit allows the courts to pass upon the issue of death of the plaintiff in an ejectment suit.<br><br><i>Philippine Long Distance Telephone Company v. Citi Appliance M.C. Corporation</i><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> is instructive on the nature of an ejectment suit:<blockquote><b><i>An action for ejectment is a summary proceeding meant "to provide an expeditious means of protecting actual possession or right of possession of property."</i></b> In this special civil action, the title to the property is not involved. The only matter resolved is the question as to "who is entitled to the physical or material possession of the premises or possession <i>de facto</i>."<br><br>Ejectment suits are designed "to prevent breach of the peace and criminal disorder and to compel the party out of possession to respect and resort to the law alone to obtain what he claims is his." They discourage the parties deprived of possession of property to take the law into their own hands. Thus, <b><i>ejectment proceedings are summary in nature to provide for a speedy settlement and action to recover possession, and quell social disturbances</i></b>.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (Emphasis supplied, citations omitted)</blockquote>An ejectment suit is summary in nature. Its goal is to provide for a speedy settlement and action to recover possession of the property subject of the ejectment suit. The nature and objective of an ejectment suit would be defeated if the court will rule that a plaintiff must first secure the cancellation of his/her certificate of death prior to filing an ejectment suit to recover possession of a property he/she alleges to be entitled to possession of.<br><br>Rather, in keeping with the summary nature of an ejectment suit, the more prudent course of action is to allow the courts to pass upon the issue of death, but solely for purposes of determining who among the parties is entitled to the physical or material possession of the premises subject of the ejectment suit. In short, courts are allowed to pass upon such issue merely to determine who is entitled to possession <i>de facto</i>. The court's ruling as to the fact of death of the plaintiff will then be provisional in nature inasmuch as it is only for the purpose of determining entitlement to possession <i>de facto</i> over the property subject of the action.<br><br>This treatment is akin to the manner by which the issue of ownership is treated in an ejectment suit. To recall, Rule 70, Section 16 of the Rules of Court provides that "[w]hen the defendant raises the defense of ownership in his pleadings and the question of possession cannot be resolved without deciding the issue of ownership, <b><i>the issue of ownership shall be resolved only to determine the issue of possession</i></b>."<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> The ruling on the issue of ownership in an ejectment suit is provisional in nature, as the Court explained in <i>Co v. Militar</i>:<sup style="COLOR: RGB(255, 0, 0);">[54]</sup><blockquote>In forcible entry and unlawful detainer cases, even if the defendant raises the question of ownership in his pleadings and the question of possession cannot be resolved without deciding the issue of ownership, the lower courts and the Court of Appeals, nonetheless, have the <b><i>undoubted competence to provisionally resolve the issue of ownership for the sole purpose of determining the issue of possession</i></b>.<br><br><b><i>Such decision, however, does not bind the title or affect the ownership of the land nor is conclusive of the facts therein found in a case between the same parties upon a different cause of action involving possession.</i></b><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> (Emphasis supplied, citation omitted)</blockquote>By reason of parity, the Court holds that the issue of the fact of death of the plaintiff in an ejectment suit may also be passed upon provisionally by the courts. Such decision is not conclusive as to the actual fact of death of the plaintiff, as recorded in the certificate of death, and will not prevent another action involving such fact of death.<br><br><i>Second</i>, in passing upon the issue of the fact of death of the plaintiff in an ejectment suit, the objective of the court is to determine whether said plaintiff has the legal capacity to bring said civil suit. The purpose of passing upon such issue is not to cancel the entry of death as it appears in the civil registry, but only to determine the legal capacity of the plaintiff. Such a finding in the ejectment suit will not cause the cancellation of the certificate of death because an ejectment suit is not the remedy contemplated by the Rules of Court for the cancellation of entries in the civil registry.<br><br>To the mind of the Court, passing upon such issue in the ejectment suit is proper because it is merely akin to the trial court's determination of the legal capacity of a plaintiff to bring suit.<br><br>Rule 3, Section 1 of the 2019 Rules of Civil Procedure provides that "[o]nly natural or juridical persons, or entities authorized by law may be parties in a civil action." Meanwhile, Article 42 of the Civil Code provides that "[c]ivil personality is extinguished by death. The effect of death upon the rights and obligations of the deceased is determined by law, by contract and by will."<br><br>Accordingly, the fact of death of a plaintiff necessarily affects his/her legal capacity to bring suit. Courts must determine the fact of the plaintiff's death in order to settle whether he has legal capacity to bring suit.<br><br>In <i>Pasricha v. Don Luis Dison Realty, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> which involved a complaint for ejectment, the Court resolved the issue of whether respondent company in that case had standing to sue as a juridical person in view of the suspension and eventual revocation of its certificate of registration.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup><br><br>In the case at bench, the resolution of the issue of the fact of death of respondent in the instant case is merely akin to the determination made by the Court in the aforestated case on the legal capacity of the respondent company to sue. Verily, courts may squarely pass upon the same in order to properly address and resolve the issue of possession <i>de facto</i>.<br><br><i>Third</i>, both Article 410 of the Civil Code and Rule 132, Section 23 of the Revised Rules on Evidence provide that documents evidencing entries in the civil registry are merely <i>prima facie</i> evidence of the facts stated in said public documents. Article 410 and Section 23 do not state that such facts are conclusive on the courts until the public document is cancelled by way of the appropriate remedy under law. Rather, the public document is merely <i>prima facie</i> evidence of the facts stated in it.<br><br>The Court previously defined <i>prima facie</i> evidence in the following manner:<blockquote><i>Prima facie</i> evidence is defined as:<br><br>Evidence good and sufficient on its face. Such <b><i>evidence as, in the judgment of the law, is sufficient to establish a given fact, or the group or chain of facts constituting the party's claim or defense, and which if not rebutted or contradicted, will remain sufficient</i></b>. Evidence which, if unexplained or uncontradicted, is sufficient to sustain a judgment in favor of the issue it supports, but which may be contradicted by other evidence.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> (Emphasis supplied, citation omitted)</blockquote>From the very definition, it may be surmised that <i>prima facie</i> evidence may be controverted. As to the kind of evidence required to controvert the <i>prima facie</i> character of the facts stated in the public document, the Court held in <i>Heirs of Cabais v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> where the public document involved was a birth certificate, that strong, complete, and conclusive proof of its falsity or nullity is necessary to controvert the same.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>Viewed from this premise, the Court cannot subscribe to the position of petitioners that the certificate of death is conclusive as to the fact of death of the person named in it until the same is cancelled by way of a Rule 108 proceeding. Said public document is merely <i>prima facie</i> evidence of such fact of death and may be controverted by evidence.<br><br>Courts are empowered to pass upon the truth or falsity of such entry because it is necessary to determine the plaintiff's legal capacity to institute the ejectment suit. Nonetheless, it must be stressed that any finding as to the fact of death of the plaintiff in an ejectment suit is merely provisional in character, and only when necessary to determine the issue of possession <i>de facto</i>. It does not bar any subsequent action brought under Rule 108 and cannot be used as basis or proof in such action.&nbsp;&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>Respondent has legal capacity to bring the complaint for unlawful detainer since he was able to controvert the fact of his death as it appears in the certificate of death</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Having settled the propriety of passing upon the fact of death of the plaintiff in an ejectment suit, the Court must now determine whether respondent was able to controvert the fact of his death as it appears in the certificate of death.<br><br>The Court answers in the affirmative.<br><br>In the instant case, it is undisputed that respondent is the Antonio V. Estrella who was declared as deceased in the certificate of death. There is also no question that respondent is the same Antonio V. Estrella indicated in TCT No. RT-5674 (89911) as the registered owner of the subject property.<br><br>In fact, petitioners and respondent stipulated before the MeTC that respondent is the registered owner of "a parcel of land situated at No. 64 South Maya Street, PhilAm Homes, Quezon City with an area of 454 sqm covered by TCT No. RT-5674 (89911)."<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> The only qualification of petitioners as regards this stipulation is that respondent is not the absolute owner of said property since the title indicates that he is married to Rosario.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Evidently, petitioners do not question respondent's identity as the registered owner in said title.<br><br>Petitioners are bound by their stipulation. Further, the parties are related to each other. Petitioners have sufficient personal knowledge to contest respondent's identity as their uncle or the brother of their mother. However, they did not do so. Clearly, this is not a case of respondent being an impostor.<br><br>There is no question that respondent is still alive. Petitioners merely rely on the existence of the certificate of death to assert respondent's fact of death and his supposed lack of legal capacity to bring the suit for ejectment.<br><br>The Court cannot countenance this stance. The very living presence of respondent constitutes strong, complete, and conclusive proof of his being alive.<br>&nbsp;<br>At this juncture, it is interesting to note that, in a foreign jurisdiction such as the United States of America, a computer showing digital photographs of an alleged deceased, taken after the date of his supposed death, constituted basis for said person's arrest and extradition in relation to a charge that he faked his own death for an insurance claim.<sup style="COLOR: RGB(255, 0, 0);">[63]</sup> Similarly, a Florida store owner who faked his death for insurance was apparently caught when he applied for a passport, using someone else's driver's license, and the United States authorities used facial recognition software to determine that it was actually him applying.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup><br><br>In the instant case, respondent's living presence, coupled with petitioners' failure to contest his identity, is sufficient evidence to controvert the fact of his death as recorded in the certificate of death. Nevertheless, it must be emphasized that this finding is merely provisional and only for the sole purpose of resolving the issue of entitlement to possession <i>de facto</i> in this ejectment suit.<br><br>Accordingly, respondent has legal capacity to bring the instant complaint for unlawful detainer.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The complaint for unlawful detainer is meritorious; the CA did not err in reversing the RTC and in granting the complaint for unlawful detainer</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The action for ejectment is provided for under Rule 70, Section 1 of the Rules of Court, which states as follows:<blockquote>Section 1. <i>Who may institute proceedings, and when</i>.—Subject to the provisions of the next succeeding section, a person deprived of the possession of any land or building by force, intimidation, threat, strategy, or stealth, or a lessor, vendor, vendee, or other person against whom the possession of any land or building is unlawfully withheld after the expiration or termination of the right to hold possession, by virtue of any contract, express or implied, or the legal representatives or assigns of any such lessor, vendor, vendee, or other person, may, at any time within [one year] after such unlawful deprivation or withholding of possession, bring an action in the proper Municipal Trial Court against the person or persons unlawfully withholding or depriving of possession, or any person or persons claiming under them, for the restitution of such possession, together with damages and costs.</blockquote>It is settled that a complaint for unlawful detainer must contain the following allegations:<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(1)</div></td><td width="95%"><div align="justify">initially, possession of property by the defendant was by contract with or by tolerance of the plaintiff;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(2)</div></td><td><div align="justify">eventually, such possession became illegal upon notice by plaintiff to defendant of the termination of the latter's right of possession;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(3)</div></td><td><div align="justify">thereafter, the defendant remained in possession of the property and deprived the plaintiff of the enjoyment thereof; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(4)</div></td><td><div align="justify">within one year from the last demand on defendant to vacate the property, the plaintiff instituted the complaint for ejectment.<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> (Citation omitted)</div></td></tr></tbody></table></blockquote>All elements of unlawful detainer are present in this case. As found by the CA, respondent merely tolerated petitioners' possession of the subject property since they are his nieces and nephew. However, in a letter dated July 1, 2013, respondent demanded from petitioners to vacate the subject property. Petitioners refused to do so. At this juncture, petitioners' possession of the subject property, which was originally lawful, became illegal. They deprived respondent of the enjoyment of the subject property. Hence, respondent instituted a complaint for unlawful detainer on January 30, 2014, within the one-year period from the last demand on petitioners to vacate the subject property.<br><br>The Court cannot give any credence to petitioners' reliance on the authorization given to them by Rosario to continue occupying the subject property for as long as they wish without the payment of rentals.<br><br>This reliance of petitioners arises from two theories concerning the supposed ownership of Rosario over the subject property. <i>First</i>, petitioners contend that Rosario is a co-owner of the subject property because the TCT over the subject property provides that the registered owner thereof is "Antonio V. Estrella, of legal age, married to Rosario Castro." <i>Second</i>, petitioners asseverate that Rosario has capacity to authorize them to continue occupying the subject property because respondent's death, as provided for in the certificate of death, transmitted to Rosario the respondent's legal rights over the subject property.<br>&nbsp;<br>As to the first contention, the Court finds that the CA erred in holding that Rosario is not a co-owner of the subject property. Nevertheless, petitioners still cannot rely on the authorization given to them by Rosario.<br><br>The CA is correct that the property relations of respondent and Rosario are governed by the Civil Code since they were married on July 13, 1962, as stated in their Marriage Contract.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> The celebration of their marriage occurred prior to the effectivity of the Family Code on August 3, 1988.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>In <i>Spouses Go v. Yamane</i>,<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> the Court elucidated on the property relations of spouses married prior to the effectivity of the Family Code, thus:<blockquote>Article 160 of the New Civil Code provides that "all property of the marriage is presumed to belong to the conjugal partnership, unless it be proved that it pertains exclusively to the husband or to the wife." As a condition <i>sine qua non</i> for the operation of this article in favor of the conjugal partnership, the party who invokes the presumption must first prove that the property was acquired during the marriage.<br><br>In other words, the presumption in favor of conjugality does not operate if there is no showing of when the property alleged to be conjugal was acquired. Moreover, the presumption may be rebutted only with strong, clear, categorical and convincing evidence. There must be strict proof of the exclusive ownership of one of the spouses, and the burden of proof rests upon the party asserting it.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup> (Citations omitted)</blockquote>In the instant case, it appears that the CA merely assumed that respondent acquired the subject property by inheritance during the marriage. However, not a scintilla of proof was adduced to support such pronouncement.<br><br>It must be emphasized that the TCT over the subject property was issued on March 4, 1965. This was during the marriage of respondent and Rosario. Thus, there is a presumption that the subject property belongs to the conjugal partnership of gains. The presumption of conjugality may only be rebutted by strong, clear, categorical, and convincing evidence.<br><br>Unfortunately, respondent failed to present such evidence. He did not present any evidence showing the manner by which he acquired the subject property. There is no strong, clear, categorical, and convincing evidence to prove that the subject property is his exclusive property. In fact, the Court seriously doubts that respondent acquired the subject property by way of inheritance because his parents, Benjamin F. Estrella and Felicidad V. Estrella, appear to have still been alive at the time the subject property was registered in the name of respondent since spouses Estrella executed a Joint Affidavit<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> on September 5, 1981. Only living persons could have executed said joint affidavit. The Court also cannot assume, in the absence of any kind of proof, that respondent acquired it by means of a devise, legacy, or donation. Thus, the presumption of conjugality stands.<br><br>The subject property is the conjugal property of respondent and Rosario. It must be emphasized that this finding of ownership is merely provisional, in accordance with Rule 70, Section 16 of the Rules of Court.<br><br>This now raises the question of whether Rosario can validly bind the subject property through the authorization she gave to petitioners to continue occupying the same.<br><br>The answer is no.<br><br>Article 165 of the Civil Code provides that "[t]he husband is the administrator of the conjugal partnership."<br><br>As previously held by the Court, the Civil Code, which governs the conjugal partnership of gains of respondent and Rosario, provides that "a wife may bind the conjugal partnership only when she purchases things necessary for the support of the family, or when she borrows money for that purpose upon her husband's failure to deliver the needed sum; when administration of the conjugal partnership is transferred to the wife by the courts or by the husband; or when the wife gives moderate donations for charity."<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>Unfortunately, none of these circumstances are present in the instant case. Respondent is the administrator of the subject property. His wife's authorization allowing petitioners to continue occupying the subject property cannot take precedence over respondent's decision to evict them from the same.<br><br>As to the second contention, the Court already held, albeit provisionally, that respondent has controverted the fact of his death as shown in the certificate of death. Hence, he remains legally capacitated to bring the suit for ejectment seeking the restoration of possession <i>de facto</i> over the subject property.<br><br>At this juncture, it would be remiss of the Court not to address petitioners' version of facts before the MeTC. To recall, petitioners averred that their grandparents titled the subject property in the name of respondent while the lot and improvements thereon were declared for tax purposes in the name of their mother, Teresa. By this averment, it appears that petitioners were alluding to co-ownership between respondent and their mother, Teresa. However, this cannot be given any weight in the instant case, even in a provisional manner, because petitioners admitted before the MeTC that respondent is the registered owner of the subject property.<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> They also failed to advance this theory and have not raised any arguments in support of said contention. Petitioners themselves do not assert any ownership rights over the subject property but only based their supposed authority to occupy the subject property from the authorization granted by Rosario.<br><br>In fine, the Court denies the appeal for lack of merit. Respondent is entitled to the remedy afforded under Rule 70 of the Rules of Court for the ejectment of petitioners due to unlawful detainer.<br><br><b>ACCORDINGLY</b>, the appeal by <i>certiorari</i> is <b>DENIED</b> for lack of merit. The July 17, 2017 Decision and December 18, 2017 Resolution of the Court of Appeals in CA-G.R. SP No. 141886 are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Hernando, Zalameda, Rosario</i>, and <i>Marquez, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> Also referred to as "Christina E. Evangelista" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 8-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 23-31. The July 17, 2017 Decision in CA-G.R. SP No. 141886 was penned by Associate Justice Japar B. Dimaampao (now a Member of the Court) and concurred in by Associate Justices Eduardo B. Peralta, Jr. and Zenaida T. Galapate-Laguilles of the Special Seventh Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 33-34. The December 18, 2017 Resolution in CA-G.R. SP No. 141886 was penned by Associate Justice Japar B. Dimaampao (now a Member of the Court) and concurred in by Associate Justices Eduardo B. Peralta, Jr. and Zenaida T. Galapate-Laguilles of the Former Special Seventh Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 85-88. The July 29, 2015 Decision in Civil Case No. R-QZN-14-10888-CV was penned by Presiding Judge Tita Marilyn Payoyo-Villordon of Branch 224, Regional Trial Court, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 75-84. The August 7, 2014 Decision in Civil Case No. 14-00796 was penned by Acting Presiding Judge Lyn Ebora Cacha of Branch 38, Metropolitan Trial Court, Quezon City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 23-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 41-45.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Also spelled as "Theresa" in some parts of the <i>rollo</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Rollo</i>, p. 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 49.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 78.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 24-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 81-82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 82-83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 88.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 89-102.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 30-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 29.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 129-137.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 33-34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 15-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 16-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 154-157.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 154-155.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 155.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 156.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 168-173.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 13-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Ruiz v. Armada</b>, 903 Phil. 701, 706 (2021) [Per C.J. Gesmundo, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> CIVIL CODE, art. 408 states:<br><br>Art. 408. The following shall be entered in the civil register:<blockquote>(1) Births; (2) marriages; (3) deaths; (4) legal separations; (5) annulments of marriage; (6) judgments declaring marriages void from the beginning; (7) legitimations; (8) adoptions; (9) acknowledgments of natural children; (10) naturalization; (11) loss, or (12) recovery of citizenship; (13) civil interdiction; (14) judicial determination of filiation; (15) voluntary emancipation of a minor; and (16) changes of name.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Emphasis supplied.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Rollo</i>, p. 15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at 87.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> RULES OF COURT, Rule 108, sec. 2 states:<blockquote>Sec. 2. <i>Entries subject to cancellation or correction</i>.—Upon good and valid grounds, the following entries in the civil register may be cancelled or corrected: (a) births: (b) marriages; (c) deaths; (d) legal separations; (e) judgments of annulments of marriage; (f) judgments declaring marriages void from the beginning; (g) legitimations; (h) adoptions; (i) acknowledgments of natural children; (j) naturalization; (k) election, loss or recovery of citizenship; (l) civil interdiction; (m) judicial determination of filiation; (n) voluntary emancipation of a minor; and (o) changes of name.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> 864 Phil. 899 (2019) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 918.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> Emphasis supplied.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 466 Phil. 217 (2004) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 224.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> 572 Phil. 52 (2008) [Per J. Nachura, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <b>Wa-acon v. People</b>, 539 Phil. 485, 494 (2006) [Per J. Velasco, Jr., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> 374 Phil. 681 (1999) [Per J. Purisima, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 688. (Citation omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Rollo</i>, p. 76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> United States Attorney's Office, District of <i>Minnesota, Minnesota Man Found Alive After Allegedly Faking His Death For Insurance Claim</i>, November 20, 2018, <i>available at</i> <a href="https://www.justice.gov/usao-mn/pr/minnesota-man-found-alive-after-allegedly-faking-his-death-insurance-claim">https://www.justice.gov/usao-mn/pr/minnesota-man-found-alive-after-allegedly-faking-his-death-insurance-claim</a> (last accessed on February 13, 2026).<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Florida Store Owner Who Faked Death for Insurance Gets Sentence Commuted</i>, January 14, 2025, <i>available at</i> <a href="https://www.insurancejournal.com/news/southeast/2025/01/14/808151.htm">https://www.insurancejournal.com/news/southeast/2025/01/14/808151.htm</a> (last accessed on February 13, 2026).<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <b>Cabrera v. Getaruela</b>, 604 Phil. 59, 66 (2009) [Per J. Carpio, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Rollo</i>, p. 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Spouses Go v. Yamane</b>, 522 Phil. 653, 662 (2006) [Per C.J. Panganiban, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> 522 Phil. 653 (2006) [Per C.J. Panganiban, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 663.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Rollo</i>, p. 69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <b>Spouses Go v. Yamane</b>, 522 Phil. 653, 670 (2006) [Per C.J. Panganiban, First Division]. (Citations omitted)<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Rollo</i>, p. 76.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

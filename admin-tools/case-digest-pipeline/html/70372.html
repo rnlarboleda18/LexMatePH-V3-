@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 249759 - JUANITO B. SOTO, PETITIONER, VS. CASSANDRA REYES-SOTO AND THE REPUBLIC OF THE PHILIPPINES, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70372' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 249759, April 22, 2026 ]</H2>
+			<H3>JUANITO B. SOTO, PETITIONER, VS. CASSANDRA REYES-SOTO AND THE REPUBLIC OF THE PHILIPPINES, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>ROSARIO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (Petition) filed under Rule 45 of the Rules of Court by petitioner Juanito B. Soto (Soto). Soto seeks the reversal of the Court of Appeals (CA) Amended Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> The CA affirmed the Regional Trial Court (RTC) Decision,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> which declared Soto's marriage to the respondent Cassandra Reyes-Soto (Reyes-Soto) an absolute nullity under Article 36 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center><i>The Facts</i></center><br>Soto and Reyes-Soto met and became friends in 1979 while they were college students at the University of the Philippines, Quezon City. After graduation, they remained in contact and grew closer when they both attended a six-week information technology training program at International Business Machines Corporation.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>They were eventually hired by the Bank of the Philippine Islands (BPI). In May 1981, they officially considered themselves a couple. As officemates, they spent at least 10 hours together each day. Soto also often visited Reyes-Soto at her house and they occasionally attended social gatherings together.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>In July 1983, Reyes-Soto transferred to another bank while Soto remained in BPI and pursued further studies. Around this time, Reyes-Soto learned that she was pregnant. Because of the pregnancy, Soto and Reyes-Soto decided to get married in September 1983 and proceeded with the wedding preparations. During this period, Reyes-Soto noticed that Soto showed little concern for her pregnancy. He did not accompany her to her regular prenatal checkups, prompting her to ask her friends to go with her instead.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> She began to harbor reservations about their relationship, sensing a lack of affection from Soto, who was emotionally never expressive.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Reyes-Soto wondered whether they were marrying out of love or merely because of her pregnancy. Despite these doubts, Reyes-Soto did not express her concerns and ultimately decided to proceed with the wedding.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>After the wedding, the couple lived with Reyes-Soto's parents in Antipolo, Rizal. Reyes-Soto gave birth to their only child, Carmela. The birth of their daughter introduced new challenges to their married life, particularly in their differing approaches to parenting. Soto would often tell Reyes-Soto that she was spoiling Carmela whenever she devoted time and attention to the child.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> On the other hand, Reyes-Soto observed that Soto rarely engaged in any meaningful bonding activities with their daughter and did not even spend time playing with her. They seldom went out together as a family.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Sometime later, the family moved to Pasig City to live with Soto's parents. Reyes-Soto was uncomfortable with the arrangement but accepted it in the belief that it was temporary and necessary for them to save money before living independently. Over time, however, she perceived that Soto made no decisive effort to assert their independence and continued to defer to his mother, on whom he appeared emotionally dependent. Reyes-Soto did not raise her discomfort with Soto, nor did she voice her growing frustration over his indecisiveness.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>Tensions intensified when Soto's mother disciplined Carmela by spanking her whenever the child misbehaved. Reyes-Soto brought this to Soto's attention, and he promised to speak with his mother. However, Soto's mother reacted coldly toward Reyes-Soto and Soto did not intervene to resolve the situation. Reyes-Soto came to believe that Soto's mother exerted considerable influence over him and that he relied on her for emotional support. She felt that Soto would never oppose his mother and that his mother's presence intruded permanently into their married life.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>For his part, Soto acknowledged that Reyes-Soto disagreed with his mother's manner of disciplining Carmela. To avoid further conflict, he told Reyes-Soto that they would move out and live independently after he completed his master's degree.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Soto also admitted that his mother frequently gave him and Reyes-Soto "unending advice," which Reyes-Soto perceived as meddling.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Reyes-Soto further described their life together as monotonous and routine. They would go to work, return home to sleep, and repeat the same cycle the following day. They rarely engaged in family activities and did not share a warm or affectionate relationship. Soto did not show her affection.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> They had not engaged in any intimate relations since 1986.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Reyes-Soto attempted to persuade Soto to move out of his parents' home, suggesting that they sell a lot in Cavite that Soto's parents intended to give them as a gift. When Soto relayed this proposal to his mother, she rejected it, and Soto complied with her decision. Reyes-Soto felt deeply rejected by Soto's continued deference to his mother.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> Despite these mounting issues, neither spouse made meaningful efforts to nurture or repair their relationship. Reyes-Soto instead poured her energies into her career, which became her refuge from marital dissatisfaction, and focused on raising their daughter.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>In 1987, Reyes-Soto finally gathered the resolve to tell Soto that she was unhappy in their marriage and wished to live separately. Soto did not engage her in any meaningful discussion and responded with the same silence Reyes-Soto had experienced from his mother.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>In 1988, Soto decided to seek employment opportunities in the United States. He and Reyes-Soto agreed that she and Carmela would join him once he secured stable work. Reyes-Soto initially agreed. In the meantime, her career in the Philippines continued to progress.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Eventually, she informed Soto that she and Carmela would no longer migrate to the United States to live with him.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Nonetheless, in December 1989, Reyes-Soto and Carmela visited Soto in the United States and spent Christmas together. Soto did not make any effort to reconcile or rekindle the relationship. Their time together in the United States mirrored the routine life they had in the Philippines. There were no romantic moments between them nor any bonding moments between Soto and Carmela. Whenever the spouses had the chance to talk, Reyes-Soto would confess to Soto that "<i>maski kasama kita, hindi ako masaya</i>."<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>Upon returning to the Philippines, Reyes-Soto and Carmela moved out of the home of Soto's parents and returned to the residence of Reyes-Soto's parents. Even then, Reyes-Soto felt that Soto made no genuine effort to persuade her to reconsider. It was Soto's parents and Reyes-Soto's own parents who urged her to join Soto in the United States. Soto himself rarely visited Carmela. Instead, Reyes-Soto brought Carmela to the United States every summer so that the child could spend time with her father. Reyes-Soto observed that Soto showed little enthusiasm during these visits.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> From 1989 to 2005, Soto sent approximately USD 200 to USD 300 to Reyes-Soto for Carmela's educational expenses while Reyes-Soto covered her other needs.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Throughout these years, Soto did not maintain any stable and consistent communication with either Reyes-Soto or their daughter.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>In 1994, Soto filed for divorce in the United States. He admitted that he did so out of frustration and in the hope that it would prompt Reyes-Soto to reconcile. However, Reyes-Soto remained resolute and the divorce was eventually granted.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>In 2007, Soto returned to the Philippines permanently. He occasionally visited Reyes-Soto in her house. He later told her that one of his reasons for returning was to attempt to rekindle their marriage. However, Reyes-Soto refused because she felt that after all those years of separation, there was no marriage left to revive.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> She did not allow Soto to live with her and Carmela.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> In Soto's interview with Dr. Cecilia Villegas (Dr. Villegas), the psychiatrist who testified in this case, he stated that he frequently visited Reyes-Soto but she was "snobbish" and unresponsive, "to the point of '<i>binabastos na ako</i>[.]'"<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> Because of this, he eventually stopped visiting her<sup>.</sup><sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>In 2013, Reyes-Soto filed a petition for declaration of nullity of their marriage under Article 36 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br><center><i>The Ruling of the RTC</i></center><br>The RTC granted the petition despite Soto's opposition.<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> In granting Reyes-Soto's petition, the RTC relied on the testimonies of Reyes-Soto, her sister Celine Claire Maria Reyes (Celine), and Dr. Villegas.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Dr. Villegas also submitted her Psychiatric Report.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup>&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The evidence of Reyes-Soto's psychological incapacity</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Dr. Villegas testified that she conducted personal interviews with both Soto and Reyes-Soto.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Soto also confirmed during his own testimony that he was interviewed by Dr. Villegas regarding their marriage.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>Dr. Villegas concluded that based on her personal interviews with both parties, as well as the results of the psychological test conducted by another clinical psychologist,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> both Soto and Reyes-Soto are psychologically incapacitated. Dr. Villegas diagnosed Reyes-Soto with Passive-Aggressive Personality Disorder<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> and Soto with Inadequate Personality Disorder, along masculine strivings, to the degree of oedipal complex.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>As to her basis for concluding that Reyes-Soto suffered from Passive-Aggressive Personality Disorder, Dr. Villegas explained in her Judicial Affidavit:<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><blockquote>Q: What is your basis for saying so?<br><br>A: Overall psychiatric interview, examination, evaluation[,] and assessment of [p]sychological test results placed [Reyes-Soto] on a superior level of intellectual potentials, but her functioning is not maximized due to some emotional inefficiencies and restrictions. At work, [Reyes-Soto] feels proud of her accomplishments. However, in personal and emotional aspects of her life, [Reyes-Soto] feels emotionally insecure and unsuccessful. Stress situations and emotionally laden conditions tend to slow her down and restrict her in fully utilizing her resources. These factors threaten her integrity. Control over them is being attempted through intellectualization. She can give out a facade of being emotionally warm, but when provoked, she is likely to react. Other projections revealed considerable problems related to relationship with her husband, especially in the sexual aspect and lowering her self-esteem because of this. [Reyes-Soto] is aware of the apparent discrepancy between her inner self and the facade she presents to others which has almost become an obsessional protection of herself that prevented her into drifting into a more fragile adjustment or depression. Her aggression was expressed in a passive or sublimated way that brought her higher to her career path and widened further their professional gap that caused more insecurities to her husband.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup></blockquote>As to the impact of Reyes-Soto's disorder to her marriage, Dr. Villegas said in her Judicial Affidavit:<blockquote>Q: Why did you say that the personality disorder of [Reyes-Soto] disrupted, interfered and hampered her normal functioning related to heterosexual relationship?<br><br>A: When [Reyes-Soto] became uncomfortable with her marital relationship with [Soto] and felt that she was not given sufficient affection and emotional support by [Soto], she just kept quiet and did not do anything about it to correct and understand the situation. She remained passive and expected [Soto] to guess what she wanted. Even her problems with her mother-in-law, [Reyes-Soto] kept it to herself and accepted defeat because she presumed that [Soto] would side with his mother.<br><br>However, underneath [Reyes-Soto]'s passivity was her anger and aggressive stance against [Soto] which unconsciously caused [Reyes-Soto] to drift away from her marital relationship.<br><br>Q: What is the effect of the disorder of [Reyes-Soto] on her marriage or family life in general?<br><br>A: [Reyes-Soto]'s Passive-Aggressive Personality Disorder makes her exhibit obsessive compulsive characteristics such that [Reyes-Soto] thinks that her relationship with [Soto] was never romantic. [Reyes-Soto] married [Soto] simply because the latter was readily and physically available for [Reyes-Soto] when she needed him considering that they went to the same school and had the same employer for several years when they were still sweethearts. Thus, the physical availability of [Soto] made [Reyes-Soto] compulsively decide to engage into pre-marital sex with [Soto] and subsequently marry him. In other words, because of the psychological disorder of the [Reyes-Soto], she unconsciously equated the physical availability of [Soto] with love. As a consequence, the marital relationship of [Reyes-Soto] and [Soto] was not sustained due to lack of intense love for each other which was further not nurtured. [Reyes-Soto] then realized that her married life with [Soto] is monotonous and she became unhappy. She did not feel her husband's love, care, attention, affection and concern. In addition, this dissuaded [Reyes-Soto] from telling her husband about her innermost feelings that resulted in her feeling of emptiness in her life. Simply put, the physical accessibility and availability of [Soto] which [Reyes-Soto] unconsciously equated with love triggered the psychological disorder of [Reyes-Soto] to manifest. Thus, [Reyes-Soto]'s personality disorder sublimated her priority to her daughter and her career.<br><br>. . . .<br><br>Q: Specifically, how does the psychological disorder of [Reyes-Soto] affect her marital obligations to love, respect, observe fidelity[,] and render mutual help to [Soto]?<br><br>A: Instead of attending to her usual duties and responsibilities as a wife to [Soto], [Reyes-Soto] developed anger, hatred, lack of concern, negativism, lack of respect and not wanting to live with [Soto] anymore. In fact, despite repeated invitations by [Soto] to [Reyes-Soto] to follow him in the United States of America, [Reyes-Soto] did not follow [Soto] in the U.S.<br><br>Nonetheless, [Reyes-Soto] accompanied her daughter to the U.S. for the latter to visit and have bonding activities with [Soto]. However, [Reyes-Soto] and [Soto] had no intimate or sexual relationship during those visits in the U.S. In fact, [Reyes-Soto] and [Soto] have not had any sexual relationship since 1988.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup></blockquote>As to the possible cause of Reyes-Soto's Passive-Aggressive Disorder, Dr. Villegas also testified that it is rooted on her childhood. When asked as to why Reyes-Soto developed "anger, hatred, lack of concern, negativism, lack of respect[,] and not wanting to live with [Soto] anymore"<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Dr. Villegas said:<blockquote>A: When [Reyes-Soto] was growing up, her actions were restrained by her mother who is very strict and a disciplinarian. Restrictions on how [Reyes-Soto] should behave or react to a given situation were imposed upon by her mother.<br><br>On the other hand, [Reyes-Soto] grew up longing for her father who worked outside the country for several years. In fact, due to his work, he did not attend the wedding of [Reyes-Soto].<br><br>Thus, [Reyes-Soto] felt that she was deprived of the love of her parents such that when she got married to [Soto], she had high expectations of feeling the love she was deprived of from [Soto]. Unfortunately, [Soto], who is also suffering from a psychological disorder, did not express the love which [Reyes-Soto] expected. Thus, [Reyes-Soto] developed anger, hatred, lack of concern, negativism, lack of respect to [Soto]. However, [Reyes-Soto] expresses these characteristics by being passive.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup></blockquote>During the cross-examination, Dr. Villegas added that Reyes-Soto had an older brother who suffered from juvenile cataracts and that this significantly affected her emotional development.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Dr. Villegas testified that Reyes-Soto's mother was strict when she was growing up and that she developed a form of emotional rejection because her mother focused her attention on her older brother.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Dr. Villegas said:<blockquote>Q: What specific actions were restrained as you concluded Dra.?<br><br>A: Restrained because, firstly, the mother was a very strict and disciplinarian [sic], but she was not as strict as [sic] to the eldest.<br><br>COURT: There is favoritism?<br><br>A: Not really favoritism, but because the eldest brother would craved [sic] more attention and care because of his juvenile ... [cataracts] so much so that she found it quiet [sic] restrained, she has some sort of a feeling of rejection, but despite this, she did not complain, she just stay [sic] quiet and just continue on with what she is [sic] supposed to do, and that is studying very hard.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup></blockquote>Soto's counsel also asked Dr. Villegas certain clarificatory questions regarding the nature of Reyes-Soto's relationship with her mother during her childhood. Dr. Villegas explained during cross-examination:<blockquote>Q: So basically, would you say that the mother of [Reyes-Soto] is different from regular Filipino mother [sic], insofar as when you categorized her as very strict and disciplinarian?<br><br>A: Usually, almost of the same category in terms of being a mother and being a wife, but it is how the children takes it from the mother.<br><br>Q: Because from your report, it was reported that you [sic] that the mother was a loving mother and she took care of [Reyes-Soto] and her siblings?<br><br>A: Yes, sir.<br><br>Q: So basically, there was no statement here that she felt rejection, so just reading not between the lines but the express declaration given to you, the mother would appear to be loving and caring for her children, you will agree with me?<br><br>A: Yes, sir, but the impact on the part of [Reyes-Soto] is different from she had complained [sic]. The impact on [Reyes-Soto] is quiet [sic] different, the expectation of [Reyes-Soto] is quite different.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup></blockquote>Finally, when asked whether she believes that there is a cure for Reyes-Soto's psychological incapacity, Dr. Villegas said that there was none. She testified that because Reyes-Soto's disorder was formed during her psychological development, "it became deeply engrained into her personality structure that no amount of professional assistance or treatment can change or modify them permanently."<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>Celine's testimony, on the other hand, focused on her observations of her sister, Reyes-Soto, and her marriage to Soto. According to Celine, Reyes-Soto initially appeared undecided to marry Soto. However, she ultimately decided to get married because she was pregnant and did not want her child to be born out of wedlock.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> She also stated that when Reyes-Soto and Soto were still together, they regularly attended family events. Soto engaged in conversations with her and the rest of the family but she noted that he never talked about his relationship with Reyes-Soto and their daughter.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>Celine further testified that she accompanied Reyes-Soto and Carmela twice in the United States to visit Soto. She noted that there were instances when Soto would lose his temper and Reyes-Soto would just keep silent.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> Eventually, Reyes-Soto confided to Celine that Soto filed for divorce. She said that Reyes-Soto was unhappy that her marriage failed. After the divorce, Reyes-Soto and Soto lived separate lives. Reyes-Soto focused on raising her daughter and continued to reap success in her career.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup>&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The evidence of Soto's psychological incapacity</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Dr. Villegas testified on her findings as to Soto's psychological incapacity, based on her interview with Soto and the psychological test which was administered. She explained in her judicial affidavit:<blockquote>Q: What was the result of your psychological evaluation on [Soto], if any?<br><br>A: Based on the extensive interviews conducted and psychological test results, [Soto] manifested a clinical pattern of an Inadequate Personality Disorder, along masculine strivings, to the degree of oedipal complex, associated with immaturity that rendered [Soto] psychologically incapacitated to perform his duties and responsibilities of marriage. It was traced to be existing even before they were married but [manifested] only after their marriage.<br><br>. . . .<br><br>Q: What is your basis for saying so?<br><br>A: Psychiatric interviews, examinations, evaluation, assessments[,] and results of the psychological tests conducted revealed that [Soto] is functioning on an above average category. The presence of negative behavior, such as strong mood swings and emotional immaturity prevented him from responding more effectively to crisis situations. Workwise, despite apparent productivity, constriction is a prominent characteristic. His tendency towards pedantry and careful attention to details suggest compulsive features, but which is usually associate with anxiety and self-doubts. This camouflaged his strong feelings of inadequacy related to masculine strivings, as an after effect of his being close to his mother during his psychological development that weakened his masculine attributes. This was exaggerated by his apparent negative identification to his father. His mother's over-protection and over-indulgence did not allow him to grow up emotionally which became arrested at the infantile level, giving rise to immaturity. [Soto]'s inability to perform a satisfactory and sustained sex relationship which offers emotional security and love to his wife, was due to his unconscious guilt feelings to defying his mother's love. At this point, there was also an unconscious difficulty in delineating between the mother and wife. With prolonged contact, he may reveal his insecurities and unmet dependency needs as he is only superficially outgoing and sociable. One prominent area in his personality structure is the presence of emotional hunger. This is not due to absence of psychological gratification in his life, but it reflects primarily in his inability to absorb and assimilate emotional satisfactions, which usually are available to him. This attitude has roots in his feelings of inadequacy and rekindled by his failed marriage.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup></blockquote>This psychological disorder, according to Dr. Villegas, affected Soto's ability to comply with his marital obligations. She stated:<blockquote>Q: How does the personality disorder of [Soto] affect his performance of his marital obligation to love, respect, observe fidelity and render help and support to [Reyes-Soto]?<br><br>A: What [Reyes-Soto] needs are emotional security, love[,] and affection from [Soto]. However, [Soto] was unable to express and demonstrate these due to his inadequate personality and to poor identification with his father. Therefore, [Soto] does not know how to express and satisfy the needs of [Reyes-Soto]. To aggravate matters, [Soto] is sexually inadequate due to his closeness to his mother to an oedipal degree. [Soto] thus treats [Reyes-Soto] as her [sic] mother. [Soto] is unable to delineate between his relationship with his mother and his marital relationship with [Reyes-So1o].<br><br>. . . .<br><br>Q: What is the effect of the disorder of [Soto] on his marriage?<br><br>A: This largely caused [Reyes-Soto] and [Soto]'s separation and the parties' inability to exert any efforts to reconcile their differences in their marriage. Hence, this resulted in a failed marriage since they cannot observe mutual love and respect for one another.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup></blockquote>Dr. Villegas and her Psychiatric Report also dwelled on the causes of Soto's disorder. Moreover, she was cross-examined by Soto's counsel on this point and was able to testify as follows:<blockquote>Witness: The root cause of [Soto] [sic] is due to the fact that he has been very very close to the mother during his growing up and therefore he developed oedipal complex with the mother that renders him psychologically incapacitated and developing an inadequate personality disorders [sic], sir.<br><br>Court: Why? Is he ACDC?<br><br>Witness: No, Your Honor, it is just I would say a very close relationship with the mother but not to the point of being gay or not to the point of being gay or homosexual but it is just that he developed so much attachment to the mother.<br>&nbsp;<br>Court: Are you saying that he is dependent on the mother?<br><br>Witness: It's not dependency but attachment, Your Honor.<br>&nbsp;<br>Atty. Garma: Madam witness, when you say that [Soto] is very attached to his mother, how did this affect his relationship with [Reyes-Soto]?<br><br>A: Yes because of [sic], if he inhibits him to a heterosexual relationship with the wife because when he developed closer relationship to the wife he feels guilty of defying the mother's love.<br><br>Court: You are saying that when they are on the sexual intimacy portion... (interrupted)<br><br>A: Yes, Your Honor.<br><br>Atty Garma: Aside from the sexual intimacy, madam witness, are you telling this Honorable Court that in all aspect of their married life, [Soto] treats or looks at the wife [Reyes-Soto] as his own mother?<br><br>A: Yes in some degree yes, sir.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup></blockquote>The evidence also pointed to the incurability of Soto's disorder. In particular, Dr. Villegas confirmed in her judicial affidavit that because Soto's disorder started in his formative years, it is permanent and incurable.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup><br><br>Significantly, Dr. Villegas's findings in her Psychiatric Report, which she further explained in her judicial affidavit and during her testimony in open court, is based on her personal interviews with both Soto and Reyes-Soto and the result of a psychological test conducted by Mrs. Francianina Sanchez on both parties. During the cross-examination, Dr. Villegas was asked to elaborate the basis of her conclusion to the disorders of Soto and Reyes-Soto. She said:<blockquote>Q: The psychological test Dra., consisted of tests which would require [Reyes-Soto] or [Soto] to answer and for the person giving the test to take down the answers, correct?<br><br>A: Yes, sir, they were given pictures, because this is a sort of clinical testing and they are given pictures, for them to interpret, so they can project their feelings to this kind of tests.<br><br>. . . .<br><br>COURT: The person taking the examination look at it and then the clinical psychologist will evaluate the answer?<br><br>A: She will score it and then evaluate it, according to the guidelines on the interpretation, sir.<br><br>. . . .<br><br>Q: And the result or the interpretations made by the clinical psychologist?<br><br>A: Yes, sir, and this result is submitted to the psychiatrist for association with regards [sic] her interview, and with regards [sic] the interpretation. It means to say, the interview is a conscious thing that the psychiatrist does and that[.]<br><br>COURT: She will collate the two?<br><br>A: She will collate the two, the conscious and unconscious findings, sir.<br><br>. . . .<br><br>Q: So basically, just to simplify. Without the psychological tests your answer would have been different. The answer now to question No. 23 as it appear [sic] in your judicial affidavit, it would be different without the psychological tests result?<br><br>A: It is basically the same, sir, because my findings in my interview and the psychological tests result jibed with each other.<br><br>Q: So what is the point of conducting the psychological test it basically it's not really necessary, Dra.?<br><br>A: Not that it is not necessary, it just so happened that my findings in the interview and in the psychological test jibes. There are cases in which they do not jibe and there is no lying has been sir.<br><br>Q: Lying? What do you mean by lying?<br><br>A: That the data presented is not true, sir.<br><br>COURT: If the interview is not confirmed by the psychological test, then you will detect that [Reyes-Soto] is lying?<br><br>A: Yes, your honor. There are cases like that sir.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup></blockquote>After weighing the evidence, the RTC granted the petition. The dispositive portion of the RTC Decision stated:<blockquote><b>WHEREFORE</b>, premises considered, judgment is hereby rendered declaring the marriage contracted by the herein parties on September 24, 1983, an absolute nullity under Article 36 of the Family Code on the ground of the respective psychological incapacities of both [Reyes-Soto] and [Soto] with all the effects thereof as provided by law.<br><br>The Decree of Absolute Nullity shall be issued by the Court only after Entry of Judgment had been registered with the Local Civil Registrar of the place where the herein parties' marriage was celebrated and with the LCR of Pasig City, conformably with Section 22 of A.M. No. 02-11-10-SC.<br><br>Furnish the Office of the Solicitor General, the Public Prosecutor, and the parties with a copy of this Decision.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> (Emphasis in the original)</blockquote><center><i>The Ruling of the CA</i></center><br>Soto filed an appeal of the RTC Decision in the CA. The CA initially granted the appeal in its Decision<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> (the First CA Decision). The dispositive portion of the CA Decision provided:<blockquote><b>WHEREFORE</b>, premises considered, the Appeal is <b>GRANTED</b>. The assailed <i>Decision</i> dated July 18, 2016 of the Regional Trial Court, Branch 261, of Pasig City in JDRC Case No. 10317 is hereby <b>REVERSED and SET ASIDE</b>. Accordingly, the marriage between herein parties <b>SUBSISTS</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> (Emphasis in the original)</blockquote>Reyes-Soto filed a Motion for Reconsideration of the First CA Decision.<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> The CA granted the motion in the assailed Amended Decision and reversed the First CA Decision. The dispositive portion of the Amended Decision reads:<blockquote><b>WHEREFORE</b>, the present <i>Motion for Reconsideration</i> is <b>GRANTED</b>. This Court's May 29, 2018 <i>Decision</i> is hereby <b>REVERSED</b> and <b>SET ASlDE</b>. Accordingly, the July 18, 2016 <i>Decision</i> of the Regional Trial Court (RTC) Pasig City, Branch 261, in JDRC No. 1031 declaring the marriage between [Reyes-Soto] and [Soto] <b>NULL and VOID</b> under Article 36 of the Family Code is hereby <b>REINSTATED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> (Emphasis in the original)</blockquote>The CA explained in the Amended Decision that, upon a reexamination of the case, it became convinced that Reyes-Soto's evidence, and specifically Dr. Villegas's findings, adequately established the spouses' psychological incapacity. The CA said:<blockquote>Dr. Villegas also underscored that instead of attending to her usual duties and responsibilities to [Soto], [Reyes-Soto] developed anger, hatred, lack of concern, negativism, lack of respect[,] and refusal to live with her husband anymore. In fact, the spouses have not had any sexual relationship since 1986 or more than [30] years now. On the other hand, Dr. Villegas also discovered that [Soto]'s psychological disorder caused the parties' unfortunate inability to exert any efforts to reconcile their differences including their parenting styles. Consequently, it was impossible for them to observe mutual love and respect for one another.<br><br>After a long and hard second look, We consider it improper and unwarranted to give to such expert opinion as merely generalized consideration and treatment, least of all to dismiss its value as inadequate basis for the declaration of the nullity of the marriage. Instead, We hold that Dr. Villegas sufficiently and competently described the psychological incapacity of the parties within the standards of Article 36 of the Family Code. We uphold her conclusion because it was largely drawn from the case records and affidavits, and should not anymore be disputed after the RTC itself had accepted the veracity of the parties' factual premises. Besides, Dr. Villegas'[s] expert opinion should be considered not in isolation but along with the other evidence presented here.<sup style="COLOR: RGB(255, 0, 0);">[66]</sup></blockquote>The CA denied Soto's Motion for Reconsideration in the assailed Resolution.<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>Thus, petitioner filed this instant Petition challenging the assailed Amended Decision and Resolution. He argues that the CA erred when it found that he and respondent suffered from a psychological incapacity that rendered their marriage void. He insists that there was no adequate evidence that either of them had any psychological disorder characterized by juridical antecedence, gravity, and incurability.<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> In particular, he asserts that Dr. Villegas's testimony and Psychiatric Report are not credible because her findings were based on hearsay, and specifically, the result of the psychological tests was conducted by a third person.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>The petitioner adds that there was no sufficient proof that the respondent was psychologically incapacitated. Instead, she "merely fell out of love and grew dissatisfied with her marriage."<sup style="COLOR: RGB(255, 0, 0);">[70]</sup><br><br>Moreover, the petitioner asserts that even assuming that their marriage is indeed void, the CA nonetheless erred in not remanding the case to the RTC for proper inventory, liquidation, dissolution, and proper partition of their properties.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>The Office of the Solicitor General (OSG), as counsel for the Republic, filed a Comment<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> agreeing with the petitioner's position. It argued that there was no proof of either party's psychological incapacity characterized by juridical antecedence, gravity, and incurability.<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> Psychological incapacity, the OSG avers, must be more than "just a 'difficulty,' 'refusal[,]' or 'neglect' in the performance of the marital obligations."<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>In her Comment, the respondent claims that the CA correctly denied the petitioner's appeal and affirmed the RTC Decision.<br><br><i>First</i>, she argues that the petitioner raises questions of fact in his Petition, which are improper in a Rule 45 petition.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup><br><br><i>Second</i>, the parties' respective psychological incapacity was duly established by the petitioner's, Celine's, and Dr. Villegas's testimonies, which were even corroborated by the petitioner himself.<sup style="COLOR: RGB(255, 0, 0);">[76]</sup><br><br><i>Third</i>, with respect to Dr. Villegas's testimony, the respondent avers that the RTC and the CA were correct in ruling that it is credible. Contrary to the petitioner's claim that her findings were merely based on the psychological test conducted by a third person, the records show that "even without the psychological test administered by another psychologist, the findings that the spouses are psychologically incapacitated would still hold true." The psychological tests "merely confirmed and boosted the psychiatric evaluation of Dr. Villegas."<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> She is also a recognized expert in the field and she clearly explained, during her testimony, the processes and tests she relied on to assess the parties' psychological incapacity.<sup style="COLOR: RGB(255, 0, 0);">[78]</sup><br><br>The petitioner reiterated his arguments in his Reply. He also added that he did not raise questions of fact in his Petition. He does not "question the truth or falsity of the facts in the case." Rather, he challenges the legal conclusions which the CA made in the Amended Decision. In particular, he is raising the legal question of whether the parties' psychological conditions fall under Article 36 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br><center><i>Issue</i></center><br>The issue for the Court's resolution is whether the marriage between the petitioner and the respondent is void because of their psychological incapacity under Article 36 of the Family Code.<br><br><center><i>The Ruling of the Court</i></center>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The central issue raised in the Petition is a question of fact</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>We begin with a fundamental procedural issue raised by the parties in their pleadings—whether the questions involved in this Petition are questions of fact, which are improper in a Rule 45 petition for review on <i>certiorari</i>.<br><br>The petitioner argues in his Petition and Reply that there was no adequate evidence to prove that he and the respondent are psychologically incapacitated as the term is understood under Article 36 of the Family Code. Specifically, he contends that Dr. Villegas's testimony and Psychiatric Report are not credible because she purportedly based her conclusions on a psychological test conducted by another person.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup><br><br>The respondent asserts that this is a question of fact as it calls for a weighing of the evidence on record.<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> On the other hand, the petitioner insists that this is a question of law because he does not challenge the veracity of the facts established during trial, but only the CA's legal conclusions in the Amended Decision.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup><br><br>In <i>Roxaco-Asia Hospitality Corp. v. Gulf Canary Construction and Development, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> the Court explained:<blockquote>The differences between a question of fact and a question of law are well established. In <i>New Rural Bank of Guimba Inc. v. Abad</i>, the Court said:<blockquote>We reiterate the distinction between a question of law and a question of fact. A question of law exists when the doubt or controversy concerns the correct application of law or jurisprudence to a certain set of facts; or <i>when the issue does not call for an examination of the probative value of the evidence presented, the truth or falsehood of the facts being admitted</i>. A question of fact exists when a doubt or difference arises as to the truth or falsehood of facts or <i>when the query invites calibration of the whole evidence considering mainly the credibility of the witnesses, the existence and relevancy of specific surrounding circumstances, as well as their relation to each other and to the whole, and the probability of the situation</i>. (Emphasis supplied, citation omitted)</blockquote>Further, in <i>Republic v. Vega</i>, the Court said that when a "petitioner asks for a review of the decisions made by a lower court <i>based on the evidence presented, without delving into their probative value but simply on their sufficiency to support the legal conclusions made, then a question of law is raised</i>." Thus, in <i>Vega</i>, the Court held that the issue of whether the evidence on record is sufficient to support the lower court's conclusion that the subject land is alienable and disposable is a question of law. It did not call for the examination of the probative value or credibility of the evidence but rather required the Court to ascertain if the lower court was justified in its finding as to the nature and character of the subject land. This, the Court concluded, is a question of law because it calls for a resolution of what the applicable law is to a given set of facts.<sup style="COLOR: RGB(255, 0, 0);">[84]</sup> (Emphasis in the original, citations omitted)</blockquote>Here, the issues raised in the Petition ultimately center on whether the evidence on record sufficiently establishes that the parties are psychologically incapacitated under Article 36 of the Family Code. Although the petitioner frames the issue as one of law, his arguments unmistakably require the Court to reweigh the evidence, reassess the credibility of witnesses, and reevaluate the probative value of expert testimony, particularly that of Dr. Villegas because he insists that her findings are based on a psychological test conducted by another person.<br><br>In <i>Roxaco-Asia Hospitality Corp.</i>, the Court reiterated the well-settled distinction between questions of law and questions of fact. A question of fact exists when the issue calls for a calibration of evidence, including the credibility of witnesses and the probability of factual inferences. A question of law, on the other hand, exists when the doubt concerns only the correct application of the law to a given set of facts.<sup style="COLOR: RGB(255, 0, 0);">[85]</sup><br><br>The petitioner does not dispute the existence of the testimonies presented. Rather, he assails their sufficiency, credibility, and weight, insisting that Dr. Villegas's conclusions are unreliable and that the evidence fails to establish juridical antecedence, gravity, and incurability. These issues are clearly questions of fact. The resolution of these questions does not require an analysis of the relevant statute and their application to the facts of the case. Instead, to resolve these questions, the Court must reexamine the evidence, determine if they are admissible and credible, assess their probative value, and make factual conclusions. Certainly, these issues are quintessentially questions of fact. These contentions require a reassessment of evidence. This is an exercise that lies beyond the Court's authority in a petition for review on <i>certiorari</i> under Rule 45.<br><br>Rule 45 of the Rules of Court allows the Court to exercise its discretionary power of review over questions of law only.<sup style="COLOR: RGB(255, 0, 0);">[86]</sup> The Court is not a trier of facts and generally does not review questions of law, especially under a Rule 45 petition. Moreover, the factual findings of the RTC, affirmed by the CA after reconsideration, are binding upon this Court.<sup style="COLOR: RGB(255, 0, 0);">[87]</sup> None of the recognized exceptions to this rule obtain.<br><br>On this ground alone, the Petition should be dismissed.<br><br>Nonetheless, given the importance of the issues raised and the evolving jurisprudence on Article 36, the Court deems it proper to rule on the merits, if only to restate controlling doctrines and guide future litigants and courts.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The doctrinal framework for psychological incapacity under Article 36 of the Family Code</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>Article 36 of the Family Code states:<blockquote>Art. 36. A marriage contracted by any party who, at the time of the celebration, was psychologically incapacitated to comply with the essential marital obligations of marriage, shall likewise be void even if such incapacity becomes manifest only after its solemnization.</blockquote>Significantly, during the pendency of this case, the Court promulgated <i>Tan-Andal v. Andal</i>,<sup style="COLOR: RGB(255, 0, 0);">[88]</sup> which decisively clarified the meaning of psychological incapacity and corrected long-standing misapplications of Article 36.<br><br>The Court said in <i>Tan-Andal</i>:<blockquote>To summarize, psychological incapacity consists of clear acts of dysfunctionality that show a lack of understanding and concomitant compliance with one's essential marital obligations due to psychic causes. It is not a medical illness that has to be medically or clinically identified; hence, expert opinion is not required.<br><br>As an explicit requirement of the law, the psychological incapacity must be shown to have been existing at the time of the celebration of the marriage, and is caused by a durable aspect of one's personality structure, one that was formed before the parties married. Furthermore, it must be shown caused by a genuinely serious psychic cause. To prove psychological incapacity, a party must present clear and convincing evidence of its existence.<sup style="COLOR: RGB(255, 0, 0);">[89]</sup></blockquote>In <i>Tan-Andal</i>, the Court emphasized that psychological, incapacity is a legal, and not a medical, concept. It does not require a clinical diagnosis, nor does it hinge on expert opinion. It refers to enduring aspects of a person's personality structure, formed prior to the marriage, which renders that person truly incapable of understanding and complying with essential marital obligations.<sup style="COLOR: RGB(255, 0, 0);">[90]</sup> The Court expressly recognized that the rigid application of the <i>Molina</i> guidelines had become overly restrictive and could not have been what the framers of the Family Code intended.<sup style="COLOR: RGB(255, 0, 0);">[91]</sup> Marriage, the Court observed, is a human institution. Article 36 exists to address marriages that were doomed from the start, not because of moral fault alone, but because of a genuine psychological incompatibility.<br><br>The Court averred:<blockquote>In light of the foregoing, this-Court now categorically abandons the second Molina guideline. <i>Psychological, incapacity is neither a mental incapacity nor a personality disorder that must be proven through expert opinion. There must be proof, however, of the durable or enduring aspects of a person's personality, called "personality structure," which manifests itself through clear acts of dysfunctionality that undermines the family. The spouse's personality structure must make it impossible for him or her to understand and, more important, to comply with his or her essential marital obligations.</i><br><br>Proof of these aspects of personality need not be given by an expert. Ordinary witnesses who have been present in the life of the spouses before the latter contracted manage may testify on behaviors that they have consistently observed from the supposedly incapacitated spouse. From there, the judge will decide if these behaviors are indicative of a true and serious incapacity to assume the essential marital obligations.<sup style="COLOR: RGB(255, 0, 0);">[92]</sup> (Emphasis supplied)</blockquote>Consistent with this central ruling in <i>Tan-Andal</i>, the Court also clarified the three characteristics of psychological incapacity in the subsequent case <i>Georfo v. Republic</i>.<sup style="COLOR: RGB(255, 0, 0);">[93]</sup> The Court held in <i>Georfo</i>:<blockquote><i>Juridical antecedence is established by showing that the psychological incapacity exists at the time of the celebration, even if it only manifests during the marriage. It may be proven by</i> "<i>testimonies describing the environment where the supposedly incapacitated spouse lived that may have led to a particular behavior.</i>"<br><br>While it is difficult to pinpoint when the psychological incapacity existed, it is enough that the petitioner show that the incapacity, "in all reasonable likelihood," already exists at the time the marriage was celebrated. Since the spouses will only assume marital obligations after the marriage, their psychological capacity to fulfill those obligations will only manifest after, the celebration of the marriage.<br><br><i>Incurability must be viewed in the legal not medical sense.</i> Veering away from the medical orientation, the third <i>Molina</i> guideline was amended. <i>Psychological incapacity is not a medical illness which can be cured: it must be "so enduring and persistent with respect to a specific partner, and contemplates a situation where the couple's respective personality structures are so incompatible and antagonistic that the only result of the union would be the inevitably and irreparable breakdown of the marriage."</i><br><br>To satisfy the requirement of incurability, there must be a showing of an "<i>undeniable pattern of such persisting failure to be a present, loving, faithful, respectful, and supportive spouse [that] must, be established so as to demonstrate that there is indeed a psychological anomaly or incongruity in the spouse relative to the other</i>."<br><br>The requirement on the gravity of the psychological incapacity was retained, which must be "caused by a genuinely psychic cause." <i>It must not be mere, "mild characterological peculiarities, mood changes, occasional emotional outbursts," nor "mere refusal, neglect[,] difficulty, much less ill will.</i>"<sup style="COLOR: RGB(255, 0, 0);">[94]</sup> (Emphasis supplied, citations omitted)</blockquote>Thus, as refined in <i>Tan-Andal</i> and <i>Georfo</i>, psychological incapacity sufficient to declare a marriage void is established when three requisites concur. <i>First</i> the incapacity must be marked by juridical antecedence, in that it existed at the time of the celebration of the marriage, even if it manifested only after. <i>Second</i>, it must be incurable in a legal, not medical, sense, referring to a condition so enduring and persistent, particularly in relation to the specific spouse, that the marriage is renewed beyond repair. <i>Third</i>, the incapacity must be of such gravity that it arises from a genuinely psychic cause, a standard that does not require medical severity but excludes situations where the failure of the marriage is attributable merely to refusal, neglect, or ordinary difficulty in making the marital relationship work. These requisites are not abstract or mechanical standards. They are assessed from the totality of the evidence and considered in the context of the spouses' lived marital realities.<br><br>The Court has further operationalized these concepts in subsequent cases where it applied the doctrine in <i>Tan-Andal</i>. In <i>Estella v. Perez</i><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> the Court explained, in concrete terms, what types of evidence may be presented to prove psychological incapacity. The Court ruled:&nbsp;<blockquote>Indeed, lay persons can testify about <b>dysfunctional acts</b> that <b>undermine the family</b>. The <b>types of evidence</b> that a lay person may adduce for this purpose are: (i) the <b>reputation</b> of the incapacitated spouse being psychologically incapacitated – that is, the viewpoint of reasonable members of the spouses' relevant communities; (ii) the <b>character</b> of the incapacitated spouse relevant to or indicative of such incapacity; (iii) the <b>everyday behavior, acts</b> or <b>conduct</b> of the incapacitated spouse; (iv) the <b>offended spouse's own experience</b> of neglect, abandonment, unrequited love, and infliction of mental distress, among others.<br><br>These <b>types of evidence</b> may establish <b>circumstances</b> probative of due <b>dysfunctional acts inimical to the family</b>. The <b>relevant circumstances</b> would include (i) instances of <b>violence against women and their children as defined in Republic Act No. 9262</b>, (ii) <b>zero probability of reconciliation between the spouses</b>, and (iii) <b>failure of the spouse or the spouses to perform his, her, or their marital duties and obligations that is clearly demonstrative of an utter insensitivity or inability to give meaning and significance to the marriage</b>.<br><br>Of note, the third category of circumstances refers to the characterization, <i>i.e., clearly demonstrative of an utter insensitivity or inability to give meaning and significance to the marriage</i>, that was once used to describe the <i>personality disorder</i> that gave rise to psychological incapacity.<br><br>Since <b><i>Tan-Andal</i></b> has abandoned the focus on personality disorders and expert opinions, this characterization may now be appropriated to capture the essence of the <b>problematic personality structure</b> or <b>psychic causes</b> that spawn psychological incapacity. Embraced in this <b>inclusive circumstance</b> are such facts as (i) forms of addiction demonstrative of such insensitivity or inability, (ii) abandonment by one spouse of the other, or (iii) instances of mutual actual loss of trust, love, and respect for each other. Distinctive of these and other instances is the harsh reality that spouses coerced together in a meaningless marital relationship would only physically or psychological endanger either or both of them as they cannot both move on to more productive relationships but be forced to live double or secret lives.<br><br>By training, lawyers have the competence to assemble the evidence on these matters. They know how to present witnesses who would testify on everyday behavior, acts or conduct, or adduce reputation and character evidence. They know how to question the offended spouse about the latter's own experience of neglect, abandonment, unrequited love, and infliction of mental distress. Similarly, judges – especially family court judges – are already equipped to assess these pieces of evidence. These clarifications allow us to operationalize <b><i>Tan-Andal's</i></b> teaching to reconfigure psychological incapacity as a legal concept and for us to understand and apply this concept within legal parameters.<sup style="COLOR: RGB(255, 0, 0);">[96]</sup> (Emphasis in the original, citations omitted)</blockquote>Accordingly, <i>Estella</i> makes clear that proof of psychological incapacity does not depend on clinical diagnoses or expert testimony.<sup style="COLOR: RGB(255, 0, 0);">[97]</sup> It may be established through competent ordinary evidence that illuminates the spouses' lived marital realities, Testimonies from, ordinary witnesses, the offended spouse, and members of the parties' community may sufficiently demonstrate enduring patterns of behavior, character trails, and relational dynamics that reveal an utter inability to give meaning and substance to the marriage.<sup style="COLOR: RGB(255, 0, 0);">[98]</sup> When taken together, such evidence allows the courts to discern whether the failure of the marital relationship stems from a deeply rooted psychological incongruity and not from transient conflict, poor choices, or a simple unwillingness to make the marriage work.<sup style="COLOR: RGB(255, 0, 0);">[99]</sup><br><br>That said, <i>Tan-Andal</i> equally recognizes that expert evidence may still be admitted and appreciated, not as a controlling determinant, but as an aid to the court's understanding of the parties' personality structures and relational dynamics.<sup style="COLOR: RGB(255, 0, 0);">[100]</sup> When presented, such expert testimony must go beyond mere conclusory diagnoses or the recitation of psychological labels. Its value lies in its ability to connect observed behaviors, life history, and relational patterns to juridical antecedence, incurability, and gravity, in a manner that coherently explains why the marriage was, from its inception, unworkable. Expert opinion that merely repackage martial discord, immaturity, or emotional distance, without demonstrating true incapacity, do not suffice.<sup style="COLOR: RGB(255, 0, 0);">[101]</sup><br><br>Expert evidence, when offered is best appreciated when it is anchored on personal interaction with the parties, corroborated by testimonial and circumstantial evidence, and directed toward, illuminating functional incapacity rather than medical abnormality. The Court's task is not to determine whether a spouse suffers from a diagnosable disorder, but whether the evidence, expert or otherwise, reveals a deeply ingrained psychological condition that made genuine marital life impossible. Properly understood, expert testimony serves to complement, not supplant, the court's independent evaluation of the totality of the evidence.<br><br>When expert testimony is offered, the Court likewise considers the qualifications and expertise of the expert witness so as to determine the weight that may properly be given to the opinion expressed. As underscored in <i>Halog v. Halog</i>,<sup style="COLOR: RGB(255, 0, 0);">[102]</sup> while courts are not bound by expert conclusions, expert testimony is nonetheless persuasive insofar as it is given by a witness of special knowledge, training, or expertise, is grounded on sound methodology, and not based on hearsay.<sup style="COLOR: RGB(255, 0, 0);">[103]</sup><br><br>There is likewise no rule requiring that an expert must personally interview both spouses for the testimony to be admissible or credible.<sup style="COLOR: RGB(255, 0, 0);">[104]</sup> Consistent with <i>Tan-Andal</i> and reaffirmed in <i>Halog</i>, psychological incapacity may be established even without expert testimony at all. Thus, the absence of a personal interview with one spouse does not, by itself, invalidate an expert opinion. What is controlling is whether the expert's conclusions are sufficiently anchored on reliable data, such as testimonial evidence, personal history, and observable patterns of behavior, and whether these are meaningfully correlated to the requisites of juridical antecedence, incurability, and gravity.<br><br>It is nonetheless ideal, though not indispensable, that both parties be personally interviewed.<sup style="COLOR: RGB(255, 0, 0);">[105]</sup> Direct interaction with the spouses enhances the expert's ability to contextualize narratives, assess relational dynamics, and test consistency between self-reported experiences and external accounts. When both spouses are interviewed, the resulting expert testimony may more clearly illuminate the psychological incongruity between them. Nevertheless, the ultimate inquiry remains unchanged—whether the totality of the evidence demonstrates a deeply rooted psychological incapacity that rendered the marriage a nullity from its inception.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The CA and the RTC correctly ruled that psychological incapacity was established with clear and convincing evidence</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>After a careful analysis of the facts of this case within the foregoing doctrinal framework, the Court rules that the CA and the RTC correctly concluded that the respondent established, with clear and convincing evidence, that both she and the petitioner are psychologically incapacitated.<br><br><i>i. Dr. Villegas's testimony is credible and convincing</i><br><br>The Court finds no merit in petitioner's attempt to discredit the testimony of Dr. Villegas. The records clearly establish her qualification as an expert witness, grounded on, her training, experience, and professional practice as a psychiatrist. Her expertise was never seriously controverted during trial. Further, the trial court which observed her demeanor and examined the substance of her testimony, found her competent to assist the court in understanding the parties' psychological conditions. As consistently held, the determination of the competence of a witness, including an expert witness, and the weight to be accorded to testimony rest primarily with the trial court, whose findings are entitled to respect.<sup style="COLOR: RGB(255, 0, 0);">[106]</sup><br><br>Contrary to the petitioner's assertions, Dr. Villegas clearly and candidly explained her methodology. She testified that her conclusions were principally based on her extensive personal interviews with both the petitioner and the respondent, during which she evaluated their life histories, relational dynamics, and patterns of behavior relevant to their capacity to perform marital, obligations. These interviews were not cursory. They were the primary foundation of her psychiatric assessment. As she explained during cross-examination, the interviews allowed her to assess both the conscious narratives and the deeper relational patterns of the parties, from which she independently arrived at her findings.<sup style="COLOR: RGB(255, 0, 0);">[107]</sup><br><br>It is true that the psychological tests were administered by a third person. This circumstance, however, does not diminish the probative value of Dr. Villegas's testimony. As a qualified psychiatrist, she possesses the expertise to interpret, and integrate the test results into her own clinical assessment, More importantly, she unequivocally testified that the psychological tests were corroborative rather than determinative. As she stated in open court, she would have reached "basically the same"<sup style="COLOR: RGB(255, 0, 0);">[108]</sup> conclusions even without the psychological tests, as her findings from the interviews and the test results "jibed with each other."<sup style="COLOR: RGB(255, 0, 0);">[109]</sup> That the test results independently aligned with her own interview-based analysis does not weaken her conclusions. On the contrary, it even further strengthens their reliability.<br><br><i>ii. Juridical antecedence</i><br><br>As earlier explained, juridical antecedence does not require proof that the psychological incapacity was clinically diagnosed at the time of the celebration of the marriage. This requirement is satisfied, when the evidence shows that the roots of the incapacity pre-existed the marriage and merely manifested after.<br><br>Here, it is worth reiterating that both the petitioner and the respondent were interviewed by Dr. Villegas. During these interviews, they both discussed their experiences, specifically with their families, while they were growing up and prior to the marriage. Dr. Villegas demonstrated that both parties' incapacity traces back to their formative years.<br><br>With respect to the respondent Dr. Villegas explained that she grew up under a "very strict and disciplinarian"<sup style="COLOR: RGB(255, 0, 0);">[110]</sup> mother, experienced emotional restraint, and developed a feeling of rejection due to the attention given to an ailing sibling and the prolonged absence of her father.<sup style="COLOR: RGB(255, 0, 0);">[111]</sup> These early experiences, according to Dr. Villegas, resulted in a personality structure marked by emotional passivity and unexpressed anger, such that the respondent kept quiet and did not do anything to correct, or understand the situation,<sup style="COLOR: RGB(255, 0, 0);">[112]</sup> even as resentment accumulated beneath the surface.<br><br>Similarly, as regards to the petitioner, Dr. Villegas traced his condition to his psychological development prior to marriage. She testified that his "very very close relationship with the mother during his growing up,"<sup style="COLOR: RGB(255, 0, 0);">[113]</sup> coupled with, maternal over-protection, arrested his emotional development "at the infantile level."<sup style="COLOR: RGB(255, 0, 0);">[114]</sup> This resulted in an enduring inability to separate filial attachment from marital intimacy—an incapacity that existed long before, the marriage and surfaced only when marital obligations demanded emotional independence.<br><br>Viewed in light of the Court's earlier discussion on how juridical antecedence may be proven through narrative and testimonial evidence, these accounts sufficiently establish that the parties' respective incapacities were already present at the time the marriage was celebrated.<br><br><i>iii. Incurability</i><br><br>An previously clarified, incurability under Article 36 is not understood in a medical sense, nor does it require proof that no form of therapy could theoretically produce change. Incurability refers to a condition that is so enduring and persistent, particularly with respect to the specific spouse, that the marriage is rendered beyond repair.<br><br>Dr. Villegas's testimony situates both parties' incapacity squarely within this legal understanding. As to the respondent, Dr. Villegas stated that her personality structure was "deeply engrained"<sup style="COLOR: RGB(255, 0, 0);">[115]</sup> and that "no amount of professional assistance or treatment can change or modify [it] permanently."<sup style="COLOR: RGB(255, 0, 0);">[116]</sup> This conclusion is corroborated by the undisputed factual record: decades of emotional disengagement, the absence of marital intimacy since the late 1980s, and the respondent's consistent inability to re-establish an emotional bond with the petitioner despite prolonged separation and later attempts at reconnection.<br><br>The same pattern is evident with respect to the petitioner. Dr. Villegas testified that his emotional immaturity and inadequate personality structure, formed during his formative years, were permanent. His inability to provide emotional security and affection persisted throughout the marriage and long after physical separation. As she explained, the petitioner's unconscious guilt in "defying the mother's love"<sup style="COLOR: RGB(255, 0, 0);">[117]</sup> prevented him from forming a mature marital relationship, resulting in a persistent incapacity to assume the emotional obligations of marriage.<br><br>Consistent with the Count's earlier discussion that incurability may be inferred from an undeniable pattern of failed marital functioning over time, the evidence here demonstrates that the parties' incapacity was not situational or remediable. Their incapacity is enduring and legally incurable.<br><br><i>iv. Gravity</i><br><br>Finally, as earlier emphasized, gravity does not require medical severity. It requires a showing that the incapacity arises from a genuinely psychic cause and is not reducible to mere refusal, neglect, difficulty, or ill will.<sup style="COLOR: RGB(255, 0, 0);">[118]</sup> Gravity is established when the evidence reveals an utter inability or insensitivity to give meaning and substance to the marriage.<sup style="COLOR: RGB(255, 0, 0);">[119]</sup><br><br>Dr. Villegas's testimony illustrates this level of gravity with respect to both parties. In the respondent's case, her passive-aggressive personality structure caused her to withdraw emotionally and develop "anger, hatred, lack of concern, negativism, [and] lack of respect"<sup style="COLOR: RGB(255, 0, 0);">[120]</sup> toward the petitioner. Rather than engage in a mutual effort to sustain the marital relationship, she unconsciously disengaged, redirecting her emotional investments toward her career and child, and ultimately rejecting the marital partnership itself.<br><br>As to the petitioner, Dr. Villegas testified that his inadequate personality rendered him incapable of providing emotional intimacy, affection, and security. She explained that the petitioner does not know how to express and satisfy the respondent's needs and that his inability to delineate between his relationship with his mother and his wife gravely impaired his marital role. This incapacity was not episodic as it permeated the marriage and resulted in complete emotional and physical estrangement.<br><br>Read together with the Court's prior clarification that gravity excludes mere marital unhappiness or failure of effort the evidence here demonstrates a profound psychological incongruity between the spouses—one that made it impossible, not merely difficult, for them to comply with the essential obligations of marriage.<br><br>Viewed as a whole, the evidence reveals a marriage impaired at its very core by the parties' incompatible and mutually reinforcing psychological limitations. On the one hand, the petitioner entered the marriage emotionally dependent on his mother, unable to express, affection or reach outward with emotional assurance, and constrained by unresolved emotional conflicts that inhibited intimacy and partnership. His difficulty in separating filial attachment from marital commitment prevented him from becoming emotionally present to his wife and child. On the other hand, the respondent came into the marriage bearing the imprint of emotional deprivation in her formative years, longing for affection and affirmation, yet responding to disappointment not with engagement but with withdrawal, passivity, and unexpressed resentment. Her expectations of love remained unmet, while her manner of coping rendered her unable to bridge the growing emotional distance between them.<br><br>These opposing personality structures left the spouses suspended in a prolonged state of emotional limbo. They remained legally bound but psychologically estranged. Each hoping, in different ways, for the marriage to work, yet equally hoping for its end. Over the years, the marriage existed only in form, not in substance, marked by emotional distance, absence of intimacy, and the quiet resignation of two individuals unable to move forward together or apart. In this sense, the defect of the marriage was not the result of isolated acts or conscious choice but of a fundamental psychological incongruity that rendered genuine marital life impossible from the outset.<br><br>To be sure, the psychological incapacity that undermined this unfortunate union and prevented it from maturing into a genuine and fulfilling marriage is not of the kind that is immediately apparent. There was no violence, no infidelity, and none of the overtly traumatic events often associated with marriages burdened by psychological incapacity. For this reason, the Court has consistently stressed that every Article 36 petition must be examined with particular care. Each determination must rest on the totality of the evidence and not on the presence or absence of dramatic markers of marital failure.<br><br>Every relationship bears its own shape. Some marriages are void from the very beginning, not because of loud or conspicuous dysfunction but because of quiet and deeply rooted tears, anxieties, and limitations that prevent the spouses from understanding and assuming the essential obligations of marriage. The unspoken inability to fully connect with one's partner can be as destructive as conflict that is overt and volatile. Silent dysfunction, manifested in emotional distance, withdrawal, and resignation, can be no less corrosive to the marital bond than more visible forms of incapacity, and it is no less within the contemplation of Article 36 of the Family Code.<br><br>Thus, the Court concludes that this case falls squarely within the precise compass of Article 36 of the Family Code, as understood and refined in jurisprudence. Article 36 recognizes that some unions are void from the beginning not because of moral fault, but because the spouses were never psychologically capable of entering into the kind of partnership that marriage demands. As the Court emphasized in <i>Tan-Andal,</i> the law protects the institution of marriage not by insisting on its preservation at all costs but by distinguishing true marriages from those that, from their inception, lacked the essential psychological foundations for mutual commitment, intimacy, and shared life.<sup style="COLOR: RGB(255, 0, 0);">[121]</sup><br><br>Properly understood, Article 36 of the Family Code is not hostile to marriage. It is, in truth, protective of this institution, it acknowledges that marriage, is among, the most meaningful acts two people can undertake together. To compel individuals to remain bound in a union that, from the start, functioned as a psychological case rather than a shared life of freedom and meaning does not strengthen marriage. It only transforms marriage into a site of quiet misery, erodes its dignity, and risks deterring others from entering it at all. In recognizing and ending marriages that were void from the beginning, Article 36 of the Family Code affirms the social and human value of marriage as an institution meant to elevate, not diminish, the lives of those who enter into it.&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr><td width="30%"><div align="justify"><em>The partition of the co-owned properties is not a prerequisite for the nullity of the marriage</em></div></td><td width="70%">&nbsp;</td></tr></tbody></table><br>The rule is settled that the property relations of the parties in a void marriage is governed by Article 147 or 148 of the Family Code.<sup style="COLOR: RGB(255, 0, 0);">[122]</sup> Article 147 provides:<br><br>Article 147 of the Family Code provides:<blockquote>Article 147. <i>When a man and a woman who are capacitated to marry each other, live exclusively with each other as husband and wife without the benefit of marriage, or under a void marriage, their wages and salaries shall be owned by them in equal shares and the property acquired by both of them through their work or industry shall be governed by the rules on co-ownership.</i><br><br>In the absence of proof to the contrary, properties acquired while they lived together shall be presumed to have been obtained by their joint efforts, work or industry, and shall be owned by them in equal shares. For purposes of this Article, a party who did not participate in the acquisition by the other party of any property shall be deemed to have contributed jointly in the acquisition thereof if the former's efforts consisted in the care and maintenance of the family and of the household.<br><br>Neither party can encumber or dispose by acts <i>inter vivos</i> of his or her share in the property acquired during cohabitation and owned in common, without the consent of the other, until after the termination of their cohabitation.<br><br>When only one of the parties to a void marriage is in good faith, the share of the party in bad faith in the co-ownership shall be forfeited in favor of their common children. In case of default of or waiver by any or all of the common children or their descendants, each vacant share shall belong to the respective surviving descendants. In the absence of descendants, such share shall belong to the innocent party. In all cases, the forfeiture shall take place upon termination of the cohabitation. (Emphasis supplied)</blockquote>In Diño v. Diño,<sup style="COLOR: RGB(255, 0, 0);">[123]</sup> the Court held that Article 147 of the Family Code applies when the following requisites concur: (1) the man and the woman must be capacitated to marry each other; (2) they live exclusively with each other as husband and wife; and (3) their union, is without the benefit of marriage, or their marriage is void.<sup style="COLOR: RGB(255, 0, 0);">[124]</sup> These requisites are present in this case.<br><br>In this regard, Article 496 of the Civil. Code states that the partition of co-owned properties may be made by agreement between the parties or by judicial proceedings. Thus, the Court held in <i>Diño</i> that a court ruling on an Article 36 petition can nullify the marriage, without requiring the liquidation of the properties in the same proceeding.<sup style="COLOR: RGB(255, 0, 0);">[125]</sup><br><br>Thus, the Court finds no reason to reverse the RTG and the CA rulings, which did not order the partition of the co-owned properties as a prerequisite for the nullity of the marriage. The partition of the co-owned properties is not a precondition but is merely incidental to, and is a consequence of, the nullity of the marriage. To reiterate, since the petitioner's and the respondent's properties are governed by the rules on co-ownership, the parties are free to choose whether they intend to partition the properties through agreement or by judicial proceeding. The Court deems it unnecessary to preempt this choice by mandating the partition of the properties in this case.<br><br><center><i>A Final Note</i></center><br>The Court is not unaware of the structural limits of Article 36 of the Family Code as a legal remedy. While indispensable in cases where a marriage is void from the beginning due to genuine psychological incapacity, its application often requires courts to venture into deeply personal terrain. When asked to resolve petitions under Article 36, courts are sometimes drawn, however carefully, into questions that border on normative judgments about intimate life: Is a wife who is unable to engage in sexual relations considered good enough to remain a wife under the law? Is a man who cannot express affection or emotional vulnerability considered as capable of fulfilling his marital obligations under the Family Code? Are spouses deficient if they remain bound by emotional obligations to parents? Should a spouse be compelled to remain in a marriage long after love has quietly departed? Is a marriage considered a legitimate marriage if people are in it not for love but for companionship?<br><br>These inquiries, while framed, in legal terms, are ultimately questions about love, intimacy, and personal fulfillment. They ultimately compel the Court to confront profoundly human questions that resist easy legal answers: What makes a person a good spouse? What makes a good marriage? What reasons are sufficient to enter into, and to remain bound by, a marriage? And when love has faded, is its absence ever, by itself, a sufficient reason to leave?<br><br>These are questions no court should be required to definitively answer. They lie beyond the proper domain of judicial competence, and more importantly, beyond what the law should compel individuals to justify before the State. Thus, the Court reiterates the importance of adhering to the doctrinal tools it has laid out in Article 36 jurisprudence to distinguish true psychological incapacity from mere marital difficulty, refusal, or fading affection. This is the only way through which it can be ensured that the very invocation of Article 36 does not risk drawing the judiciary into adjudicating the quality and meaning of personal relationships—an exercise fraught with moral, emotional, and philosophical complexity.<br><br>The Court also emphasizes the duties of government agencies involved in nullity cases under Article 36 of the Family Code to proceed, not only with steadfast respect for the jurisprudence determining the parameters of psychological incapacity, but also, and more importantly, with compassion and understanding in handling these types of cases. While no government can legislate love into a marriage, it can certainly create a humane and accepting legal space, one that allows people who entered into a marriage without the concomitant psychological capacity to live up to their marital obligations, to come to terms with this truth, and with hope and dignity, begin again.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b>. The January 25, 2019 Amended Decision and September 9, 2019 Resolution of the Court of Appeals in CA-G.R. CV No. 107628 are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br>&nbsp;<br><i>Gesmundo, C.J. (Chairperson), Hernando, Zalameda</i>, and <i>Marquez, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 46-52. The January 25, 2019 Amended Decision in CA-G.R. CV No. 107628 was penned by Associate Justice Edwin D. Sorongon and concurred in by Associate Justices Sesinando E. Villon and Maria Filomena D. Singh (now a member of the Court) of the Former Tenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 42-44. The September 9, 2019 Resolution in CA-G.R. CV No. 107628 was penned by Associate Justice Edwin D. Sorongon and concurred in by Associate Justices Ma. Luisa C. Quijano-Padilla and Maria Filomena D. Singh (now a member of the Court) of the Former Tenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 68-84. The July 18, 2016 Decision in JDRC No. 10317 was penned by Presiding Judge Florian Gregory O. Abalajon of Branch 261, Regional Trial Court, Pasig City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]&nbsp;</sup><i>Id.</i> at 84.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 71.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 71-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 79.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 72-73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 73.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 233.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 56.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 84.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 228-242.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 216-226.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 267.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 219.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 223<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id.</i> at 215-227.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i> at 219.<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 221-222.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 222.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 222-223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 212.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 213-214.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 220.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id.</i> at 223-224.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 225.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id.</i> at 243-245.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 224.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id.</i> at 199-208.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <i>Id.</i> at 84.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <i>Id.</i> at 54-67. The May 29, 2018 Decision in CA-G.R. CV No. 107628 was penned by Associate Justice Edwin D. Sorongon and concurred in by Associate Justices Sesinando E. Villon and Maria Filomena D. Singh (now a Member of the Court) of the Tenth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id.</i> at 66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <i>Id.</i> at 46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> <i>Id.</i> at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> <i>Id.</i> at 50.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <i>Id.</i> at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> <i>Id.</i> at 14-23.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id.</i> at 28-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id.</i> at 32-36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> <i>Id.</i> at 294-310.<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id.</i> at 306.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Id.</i> at 112-114.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id.</i> at 114-120.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id.</i> at 128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> <i>Id.</i> at 128-134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Id.</i> at 259.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <i>Id.</i> at 28-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Id.</i> at 113.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id.</i> at 259.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <b>G.R. Nos. 246250-51</b>, September 25, 2025 [Per J. Rosario, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[84]</sup> <i>Id.</i> at 16. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website.<br><br><sup style="COLOR: RGB(255, 0, 0);">[85]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[86]</sup> RULES OF COURT, Rule 45, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[87]</sup> <b>Blemp Commercial of the Philippines, Inc. v. Sandiganbayan</b>, 930 Phil. 821, 889 (2022) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[88]</sup> 902 Phil. 558 (2021) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[89]</sup> <i>Id.</i> at 608.<br><br><sup style="COLOR: RGB(255, 0, 0);">[90]</sup> <i>Id.</i> at 597.<br><br><sup style="COLOR: RGB(255, 0, 0);">[91]</sup> <i>Id.</i> at 587.<br><br><sup style="COLOR: RGB(255, 0, 0);">[92]</sup> <i>Id.</i> at 597.<br><br><sup style="COLOR: RGB(255, 0, 0);">[93]</sup> 937 Phil. 518 (2023) [Per SAJ. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[94]</sup> <i>Id.</i> at 533-534.<br><br><sup style="COLOR: RGB(255, 0, 0);">[95]</sup> 911 Phil. 570 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[96]</sup> <i>Id.</i> at 584-586.<br><br><sup style="COLOR: RGB(255, 0, 0);">[97]</sup> <i>See</i> <b>Estella v. Perez</b>, 911 Phil. 570, 584 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[98]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[99]</sup> <i>Id.</i> at 586.<br><br><sup style="COLOR: RGB(255, 0, 0);">[100]</sup> 902 Phil. 558, 610 (2021) [Per J. Leonen, <i>En Banc</i>]; <i>See</i> <b>Estella v. Perez</b>, 911 Phil. 570, 583 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[101]</sup> <b>Tan-Andal v. Andal</b>, 902 Phil. 558, 597-598 (2021) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[102]</sup> 912 Phil. 662 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[103]</sup> <i>Id.</i> at 686.<br><br><sup style="COLOR: RGB(255, 0, 0);">[104]</sup> <b>Tan-Andal v. Andal</b>, 902 Phil. 558, 616 (2021) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[105]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[106]</sup> 903 Phil. 801, 812 (2021) [Per J. Lopez, J., Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[107]</sup> <i>Rollo</i>, p. 203.<br><br><sup style="COLOR: RGB(255, 0, 0);">[108]</sup> <i>Id.</i> at 208.<br><br><sup style="COLOR: RGB(255, 0, 0);">[109]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[110]</sup> <i>Id.</i> at 222-223.<br><br><sup style="COLOR: RGB(255, 0, 0);">[111]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[112]</sup> <i>Id.</i> at 222.<br><br><sup style="COLOR: RGB(255, 0, 0);">[113]</sup> <i>Id.</i> at 243-244.<br><br><sup style="COLOR: RGB(255, 0, 0);">[114]</sup> <i>Id.</i> at 224.<br>&nbsp;<br><sup style="COLOR: RGB(255, 0, 0);">[115]</sup> <i>Id.</i> at 220.<br><br><sup style="COLOR: RGB(255, 0, 0);">[116]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[117]</sup> <i>Id.</i> at 224.<br><br><sup style="COLOR: RGB(255, 0, 0);">[118]</sup> <b>Halog v. Halog</b>, 912 Phil. 662, 675 (2021) [Per J. Lazaro-Javier, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[119]</sup> <i>Id.</i> at 672.<br><br><sup style="COLOR: RGB(255, 0, 0);">[120]</sup> <i>Id.</i> at 222.<br><br><sup style="COLOR: RGB(255, 0, 0);">[121]</sup> 902 Phil. 558, 593 (2021) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[122]</sup> <b>Valdes v. RTC</b>, 328 Phil. 1289, 1295 (1996) [Per J. Vitug, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[123]</sup> 655 Phil. 175 (2011) [Per J. Carpio, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[124]</sup> <i>Id.</i> at 181-182.<br><br><sup style="COLOR: RGB(255, 0, 0);">[125]</sup> <i>Id.</i> at 184.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

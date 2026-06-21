@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 226945 - COMMISSIONER OF INTERNAL REVENUE AND PERFECTO L. ARANAS, REGIONAL DIRECTOR OF REVENUE REGION NO. 19, DAVAO CITY, PETITIONERS, VS. ELRIC AUXILIARY SERVICES CORPORATION/SACRED HEART GAS STATION, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70412' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 226945, February 19, 2026 ]</H2>
+			<H3>COMMISSIONER OF INTERNAL REVENUE AND PERFECTO L. ARANAS, REGIONAL DIRECTOR OF REVENUE REGION NO. 19, DAVAO CITY, PETITIONERS, VS. ELRIC AUXILIARY SERVICES CORPORATION/SACRED HEART GAS STATION, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> seeks to reverse the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Tax Appeals (CTA) <i>En Banc</i> in CTA EB No. 1174. In the assailed Decision, the CTA <i>En Banc</i> affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the CTA Second Division, which declared void the 48-hour notice and the 5-Day Value-Added Tax (VAT) compliance notice issued against respondent Elric Auxiliary Services Corporation/Sacred Heart Gas Station (Elric Auxiliary). The challenged Resolution, on the other hand, denied for lack of merit the bid for reconsideration filed by petitioner Commissioner of Internal Revenue (CIR).<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br><center><b>Antecedents</b></center><br>On June 1, 2011, Elric Auxiliary received a 48-hour notice signed by Bureau of Internal Revenue (BIR) Regional Director Perfecto L. Aranas (Director Aranas) of Revenue Region No. 19, Davao City. The notice informed Elric Auxiliary that after a 10-day surveillance conducted of its gas station located in Cogon, Digos City, Davao del Sur, from April 16 to 25, 2010, it was shown to be liable for deficiency VAT in the amount of PHP 1,196,583.13.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>Elric Auxiliary submitted its explanation addressing the findings of the BIR regional officers who conducted the surveillance and insisted that it was not liable for the alleged VAT deficiency.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> On June 21, 2011, Elric Auxiliary received a 5-day VAT compliance notice, wherein the demand for payment of the alleged deficiency tax was reiterated.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Three days after, or on June 24, 2011, its counsel sent a follow-up letter requesting a response to the explanation previously submitted. Elric Auxiliary received a response on July 5, 2011, denying its plea and holding it liable for the alleged VAT deficiency of PHP 1,196,583.13.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Aggrieved, Elric Auxiliary filed a petition for review before the CTA.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br><center><b>Ruling of the CTA Second Division</b></center><br>Resolving the case in favor of Elric Auxiliary, the CTA Second Division disposed of the petition in this wise:<blockquote><b>WHEREFORE</b>, finding merit, the instant Petition for Review is hereby <b>GRANTED</b>. The 48-Hour Notice and the 5-Day [VAT Compliance Notice][] dated May 26, 2011 and June 9, 2011, respectively, are hereby declared <b>NULL</b> and <b>VOID</b>. Respondents are hereby enjoined from enforcing the same.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> (Emphasis in the original)</blockquote>The CTA Second Division held that it had jurisdiction over the controversy as it falls within other matters arising under the Tax Code or other law administered by the BIR.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Further, it determined that the 48-hour notice and the 5-day VAT compliance notice failed to sufficiently inform Elric Auxiliary of the issues or violations that should be rectified or the basis for the assessment of its VAT liability.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Considering further that the factual basis of the surveillance conducted was not explained, Elric Auxiliary was prevented from properly responding to or specifically refuting the alleged deficiency.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Finally, the CTA Second Division noted that fluctuations in daily sales rebutted the extrapolation made by the revenue officers, as there were peak and non-peak sales periods during the year and petroleum prices would have varied over time.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Following the denial of the CIR's motion for reconsideration, the case was elevated to the CTA <i>En Banc</i> via a Petition for Review.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br><center><b>Ruling of the CTA <i>En Banc</i></b></center><br>In the challenged Decision, the CTA <i>En Banc</i> affirmed the judgment of the CTA Second Division and found no reason to depart from the conclusions arrived at, thusly:<blockquote><b>WHEREFORE</b>, premises considered, the petition is <b>DENIED</b> for lack of merit. The Decision of the Second Division of this Court in CTA Case No. 8315, promulgated on February 17, 2014, and its Resolution promulgated on April 30, 2014, are hereby <b>AFFIRMED</b>. No pronouncement as to costs.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original)</blockquote>The CTA <i>En Banc</i> stressed that its jurisdiction is not limited to decisions, rulings, or inaction of the CIR on disputed assessments. It is likewise veiled with jurisdiction to determine the validity of the 48-hour notice and the 5-Day VAT compliance notice issued by the BIR.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> Moreover, the CTA <i>En Banc</i> found that the notices lacked factual bases, as they merely stated that the surveillance resulted in a VAT liability, sans any further explanation.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br><center><b>Issues</b></center><br>Left with no recourse after the denial of its motion for reconsideration in the equally questioned Resolution, the CIR is now before the Court, raising the following issues—<blockquote><ol><li>Does the CTA have jurisdiction over the instant Petition?<br><br></li><li>Were the 48-hour notice and the 5-day VAT compliance notice valid?</li></ol></blockquote>The CIR insists that the CTA had no jurisdiction over the case as Elric Auxiliary did not assail any assessment.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> What was being challenged was the denial of its protest letter. The next step—recommendation for the closure of the establishment, subject to the CIR's approval—was yet to be performed.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Moreover, the 48-hour notice and the 5-day VAT compliance notice were issued in accordance with law. The CIR cites that the violations committed by Elric Auxiliary had factual and legal bases,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> and asserts that Elric Auxiliary was afforded due process.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Conversely, Elric Auxiliary argues that the CIR's denial of its protest against the 48-hour notice and the 5-day VAT compliance notice, which are assessments, constituted a decision within the jurisdiction of the CTA.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> The notices merely contained a computation of the alleged tax deficiency and a demand for payment, which failed to comply with the mandatory requirements under Section 228 of the Tax Code.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> Elric Auxiliary also contends that this Court is confined to questions of law and should not disturb the factual findings of the CTA absent a showing that such findings are unsupported by substantial evidence.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><br>The CIR's Reply<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> and Memorandum<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> merely reiterate the arguments raised in the Petition.<br><br><center><b>Ruling of the Court</b></center><br><b><i>The Petition is devoid of merit.</i></b><br><br>Section 7(a)(l) of Republic Act No. 1125,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> as amended by Republic Act No. 9282,<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> sets forth the jurisdiction of the CTA, viz.:&nbsp;<br><blockquote>SEC. 7. <i>Jurisdiction</i>. – The CTA shall exercise:&nbsp;<br>&nbsp;<br><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td colspan="5"><div align="justify">Exclusive appellate jurisdiction to review by appeal, as herein provided:</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td width="5%"><div align="justify"></div><br></td><td width="5%"><div align="justify">(1)</div></td><td width="85%"><div align="justify">Decisions of the Commissioner of Internal Revenue in cases involving disputed assessments, refunds of internal revenue taxes, fees or other charges, penalties in relation thereto, or <i>other matters arising under the National Internal Revenue Code or other laws administered by the Bureau of Internal Revenue</i>.</div></td></tr></tbody></table></blockquote>From the foregoing, it is clear that the CTA has jurisdiction over the decisions of the CIR not only in cases involving disputed assessments or claims for refunds of internal revenue taxes. The clause "other matters arising under the [Tax Code] or other laws administered by the [Bureau]" is broad and residual in character. It covers cases that arise from the Tax Code and other laws administered by the BIR,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> even if they do not directly involve a disputed assessment or a claim of refund.<br><br>The Court has consistently upheld this doctrine. In the case of <i>Philippine Journalists, Inc. v. Commissioner of Internal Revenue</i>,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> it ruled that the CTA has jurisdiction to determine the validity of a warrant of distraint and levy issued by the BIR, as this falls under the second part of Section 7(a)(l).<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> Similarly, in <i>Commissioner of Internal Revenue v. Hambrecht &amp; Quist Philippines, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> the Court recognized the CTA's jurisdiction over the issue of prescription of the BIR's right to collect taxes, and clarified that "the CTA's jurisdiction over disputed assessments and over [']other matters['] [are] separate and independent of each other."<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>The Court confronted the same issue in <i>Commissioner of Internal Revenue v. Lancaster Phils., Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> when it resolved whether revenue officers exceeded their authority in conducting an examination. The Court held that the authority to examine or assess, being a matter governed by the Tax Code, falls within the exclusive appellate jurisdiction of the CTA and is covered by the phrase "other matters" under Section 7.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> This clarification was reiterated in the more recent cases of <i>St. Marys Academy of Caloocan City, Inc. v. Commissioner Henares</i><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> and <i>Commissioner of Internal Revenue v. Manila Medical Services, Inc.</i><sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>In the case at bench, the CTA <i>En Banc</i> noted that the 48-hour notice and the 5-day VAT compliance notice were issued pursuant to the CIR's power under Section 115<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> of the Tax Code, as implemented by Revenue Memorandum Order No. 3-2009.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> In resolving the question of the CTA's jurisdiction, the Court need not resolve whether these notices constitute a decision of the CIR as the issuance of the notices already falls within the scope of the "other matters" clause of Section 7(a)(l). Such being the case, the CTA Second Division correctly exercised jurisdiction over Elric Auxiliary's petition.<br><br>The Court now turns to the validity of the 48-hour notice and the 5-day VAT compliance notice.<br><br>The resolution of the issue requires a re-examination of the evidence already considered by the CTA. As a rule, only questions of law may be raised in a petition under Rule 45, since the resolution of factual issues is within the province of lower courts.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> This rule applies with greater force to factual findings of specialized courts such as the CTA. Given the CTA's expertise and its exclusive focus on the resolution of tax problems, its conclusions are not lightly set aside.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> The Court may disturb these findings only when they are not supported by substantial evidence, or when there is a showing of gross error or abuse on the part of the tax court.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> All the same, none of these recognized grounds obtain in this case.<br>&nbsp;<br>The CTA <i>En Banc</i> sustained the factual findings of its Second Division that the 48-hour notice and the 5-day VAT compliance notice were void for lack of factual bases.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> A sedulous review of the CTA Second Division's ruling evinces that its findings are adequately supported by substantial evidence. Thus, the Court adopts and affirms the CTA <i>En Banc</i>'s discussion, which reads in part:<blockquote>As to the issue of whether the Court in Division was correct in declaring null and void the 48-Hour Notice and 5-Day VAT Compliance notice, petitioners claim that respondent has been afforded due process having given the opportunity to refute the findings of the revenue officers. Furthermore[,] petitioners maintain that the 48-Hour Notice and 5-Day VAT Compliance Notice have factual and legal bases as they contain details and computations as well as provisions of law on which they are based.<br><br>On the contrary, We find that the 48-Hour Notice and 5-Day VAT Compliance Notice have no factual bases. Other than a statement that the result of the surveillance resulted in a VAT liability, the basis thereof must likewise be disclosed. Petitioners[,] in their 48-Hour Notice and 5-Day VAT Compliance Notice, claimed that the surveillance resulted in sales in various dates and amounts but failed to indicate the basis thereof. Thus, We find that the Court's Division did not err and aptly ruled as follows:<blockquote>. . . .<br><br><i>Admittedly, respondents may use the findings of the surveillance as basis for assessing the taxes for the other months or quarters of the same or taxable years. Indeed, it is accepted that even an assessment based on estimates is prima facie valid and lawful where it does not appear to have been arrived at arbitrarily or capriciously.</i><br><br><i>Unfortunately, in the instant case, this Court cannot determine the basis of respondents findings regarding the sales amounts during the surveillance period. Respondents did not describe how the surveillance was conducted nor did they explain the methods used in arriving at their estimates. There is no way for this Court to determine the factual basis used by respondents, and whether the same gives rise to a reasonable estimate. Without such information, the sales amounts used by respondent cannot be considered as prima facie valid as they appear to have been arrived at without any basis.</i><br><br><i>Absent any explanation regarding the factual basis of the results of the surveillance, the taxpayer cannot be deemed to be sufficiently informed about the basis for the assessment of the VAT liability, in order to adequately respond to or specifically refute the computed VAT liability.</i><br>&nbsp;<br><i>Furthermore, We agree with petitioner[s] that the results of surveillance cannot be the basis of the assessment for the other quarters of different taxable years. It is true that Section 6(C) of the NIRC of 1997, as amended, specifically states that the "findings may be used as the basis for assessing the taxes for the other months or quarters of the same or different taxable years. " However, such assessment must still comply with the test of reasonableness, and must not be arbitrary and capricious.</i> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> (Emphasis in the original)</blockquote></blockquote>In any event, the 48-hour notice and the 5-day VAT compliance notice must likewise be invalidated for failure to comply with Section 228<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> of the Tax Code. These notices were issued as part of the BIR's attempt to collect alleged deficiency VAT. Without a formal assessment, such action violates Elric Auxiliary's right to due process.<br><br>Section 115 of the Tax Code authorizes the CIR to suspend the business operations of a VAT-registered taxpayer when the taxpayer: (1) fails to issue receipts or invoices; (2) fails to file a VAT return; or (3) understates taxable sales or receipts by 30% in a given taxable quarter. Under Revenue Memorandum Order No. 3-2009, tax authorities determine the existence of grounds for closure through surveillance activities. If the surveillance reveals grounds for closure, the authorized revenue official issues a 48-hour notice requiring the taxpayer to explain under oath why administrative or criminal action should not be taken.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup><br><br>If the explanation is found unmeritorious and there is basis to pursue administrative or criminal action, a 5-day VAT compliance notice shall be issued.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> This notice must contain the details of the findings<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> and the provisions of the Tax Code allegedly violated.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Thereafter, the taxpayer may again refute the findings of the BIR.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>If the taxpayer fails or refuses to respond, submits an insufficient response, or does not comply with the 5-day VAT compliance notice, the authorized BIR official shall recommend the closure of the establishment. Upon the CIR's approval, this recommendation becomes the basis for the issuance of a closure order.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>Section 228 of the Tax, on the other hand, governs the due process requirements for tax assessments. In <i>Commissioner of Internal Revenue v. Pilipinas Shell Petroleum Corp.</i>,<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> the Court summarized the procedure as follows:<blockquote>In the normal course of tax administration and enforcement, the BIR must first make an <b>assessment</b> then enforce the <b>collection</b> of the amounts so assessed. "An assessment is not an action or proceeding for the collection of taxes. [...] It is <b>a step preliminary, but essential</b> to warrant distraint, if still feasible, and, also, to establish a cause for judicial action." The BIR may summarily enforce collection only when it has accorded the taxpayer <b>administrative due process</b>, which vitally includes the issuance of a valid assessment. A valid assessment sufficiently informs the taxpayer in writing of the legal and factual bases of the said assessment, thereby allowing the taxpayer to effectively protest the assessment and adduce supporting evidence in its behalf.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup> (Emphasis in the original, citations omitted)</blockquote>Section 228 expressly requires that the taxpayer be informed in writing of both the legal basis and the factual grounds for any assessment; otherwise, the assessment is void. More importantly, while the BIR may summarily enforce collection, the taxpayer must be accorded administrative due process which vitally includes the issuance of a valid assessment.<sup style="COLOR: RGB(255, 0, 0);">[56]</sup><br><br>Clearly, Sections 115 and 228 of the Tax Code swirl around different matters.<br>&nbsp;<br>In the instant case, the CIR or its authorized representative was not merely exercising the powers under Section 115. The 5-day VAT compliance notice included a demand for payment of alleged deficiency VAT amounting to PHP 1,196,583.13.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> This demand reasonably led Elric Auxiliary to believe that payment of the full amount was the only means to avoid closure. Although it was given an opportunity to explain its alleged violations, the only practical way to comply and lift the threatened closure was to pay the supposed deficiency VAT.<br><br>Without a doubt, the CIR's act constituted an attempt to collect deficiency taxes without a valid assessment. This Court rules and so holds that it cannot bypass the requirements of a valid assessment by invoking Section 115 to surreptitiously collect taxes from a taxpayer. Due process requires that after the 5-day VAT compliance notice had served its purpose, the CIR should have issued a letter of authority to Elric Auxiliary and followed the assessment procedures under Section 228 before holding it liable for any deficiency VAT. Ineluctably, the 48-hour notice and the 5-day VAT compliance notice, when used as substitutes for a valid assessment, are void for being issued in clear disregard of statutory requirements and due process.<br><br><b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b> for lack of merit. The March 3, 2016 Decision and the September 9, 2016 Resolution of the Court of Tax Appeals <i>En Banc</i> in CTA EB No. 1174 are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Caguioa, (Chairperson), Inting, Gaerlan</i>, and <i>Singh, JJ.</i>, concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 10-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 35-48. The March 3, 2016 Decision was penned by Associate Justice Cielito N. Mindaro-Grulla, with the concurrence of Associate Justices Juanito C. Castañeda, Jr., Lovell R. Bautista, Caesar A. Casanova, Esperanza R. Fabon-Victorino, Amelia R. Cotangco-Manalastas and Ma. Belen M. Ringpis-Liban of the Court of Tax Appeals <i>En Banc</i>, Quezon City. Presiding Justice Roman G. Del Rosario rendered a Dissenting Opinion while Associate Justice Erlinda P. Uy was on leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 58-62. The September 9, 2016 Resolution was penned by Associate Justice Cielito N. Mindaro-Grulla, with the concurrence of Associate Justices Juanito C. Castañeda, Jr., Lovell R. Bautista, Caesar A. Casanova, Amelia R. Cotangco-Manalastas, and Ma. Belen M. Ringpis-Liban of the Court of Tax Appeals En Banc, Quezon City. Presiding Justice Roman G. Del Rosario maintained his Dissenting Opinion, Associate Erlinda P. Uy took no part in the Decision, and Associate Justice Esperanza R. Fabon-Victorino was on official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 64-87. The February 17, 2024 Decision in CTA Case No. 8315 was penned by Associate Justice Amelia R. Cotangco-Manalastas, with the concurrence of Associate Justices Juanito C. Castañeda, Jr. and Caesar A. Casanova.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 128-145, Motion for Reconsideration (Re: Decision Promulgated 03 March 2016).<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 146.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 68-69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 73-74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 74-77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 82-106.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 40-43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 43-46.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 15-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 17-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 20-25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 179-181, Comment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 128.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 129-134.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id.</i> at 222-227.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id.</i> at 240-262.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> Republic Act No. 1125 (1954), An Act Creating the Court of Tax Appeals.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> Republic Act No. 9282 (2004), An Act Expanding the Jurisdiction of the Court of Tax Appeals (CTA), Elevating its Rank to the Level of a Collegiate Court with Special Jurisdiction and Enlarging its Membership, Amending for the Purpose Certain Sections or Republic Act No. 1125, as Amended, Otherwise Known as the Law Creating the Court of Tax Appeals.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>See</i> <b>Philippine Journalists, Inc. v. Commissioner of Internal Revenue</b>, 488 Phil. 218, 228-229 (2004) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> 488 Phil. 218 (2004) [Per J. Ynares-Santiago, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>See id.</i> at 228-229.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> 649 Phil. 446 (2010) [Per J. Leonardo-De Castro, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id.</i> at 456.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> 813 Phil. 622 (2017) [Per J. Martires, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id.</i> at 638.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> 893 Phil. 798 (2021) [Per J. Leonen, Third Division]. The Court settled the rule that the CTA has exclusive jurisdiction to determine the constitutionality or validity of tax laws, rules and regulations, and other administrative issuances of the Commissioner of Internal Revenue pursuant to Section 7(a)(l) of Republic Act No. 1125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> 935 Phil. 1007 (2023) [Per J. Singh, Third Division]. The Court upheld the jurisdiction of the CTA to determine the validity of the warrant of distraint and levy.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> SEC. 115. <b>Power of the Commissioner to Suspend the Business Operations of a Taxpayer.</b> — The Commissioner or his authorized representative is hereby empowered to suspend the business operations and temporarily close the business establishment of any person for any of the following violations:&nbsp;<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td colspan="2"><div align="justify">In the case of a VAT-registered Person. –</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td width="5%"><div align="justify">(1)</div></td><td width="90%"><div align="justify">Failure to issue receipts or invoices;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">(2)</div></td><td><div align="justify">Failure to file a value-added tax return as required under Section 114; or</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify">(3)</div></td><td><div align="justify">Understatement of taxable sales or receipts by thirty percent (30%) or more of his correct taxable sales or receipts for the taxable quarter.</div></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td colspan="2"><div align="justify">Failure of any Person to Register as Required under Section 236.</div></td></tr><tr valign="top"><td colspan="3"><div align="justify">The temporary closure of the establishment shall be for the duration of not less than five (5) days and shall be lifted only upon compliance with whatever requirements prescribed by the Commissioner in the closure order.</div></td></tr></tbody></table></blockquote><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Revenue Memorandum Order No. 3 (2009), Amendment and Consolidation of the Guidelines in the Conduct of Surveillance and Stock-Taking Activities, and the Implementation of the Administrative Sanction of Suspension and Temporary Closure of Business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>See</i> <b>Commissioner of Internal Revenue v. Philippine Airlines, Inc.</b>, 952 Phil. 1, 9 (2024) [Per J. Dimaampao, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <b>Mannasoft Technology Corporation v. Commissioner of Internal Revenue</b>, 943 Phil. 633, 643 (2023) [Per J. Dimaampao, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Rollo</i>, pp. 43-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> SEC. 228. <b>Protesting of Assessment.</b> — When the Commissioner or his duly authorized representative finds that proper taxes should be assessed, he shall first notify the taxpayer of his findings: <i>Provided, however</i>, That a preassessment notice shall not be required in the following cases:<blockquote>(a) When the finding for any deficiency tax is the result of mathematical error in the computation of the tax as appearing on the face of the return; or<br><br>(b) When a discrepancy has been determined between the tax withheld and the amount actually remitted by the withholding agent; or<br><br>(c) When a taxpayer who opted to claim a refund or tax credit of excess creditable withholding tax for a taxable period was determined to have carried over and automatically applied the same amount claimed against the estimated tax liabilities for the taxable quarter or quarters of the succeeding taxable year; or<br><br>(d) When the excise tax due on excisable articles has not been paid; or<br><br>(e) When an article locally purchased or imp01ted by an exempt person, such as, but not limited to, vehicles, capital equipment, machineries and spare parts, has been sold, traded or transferred to non-exempt persons.</blockquote>The taxpayers shall be informed in writing of the law and he facts on which the assessment is made; otherwise, the assessment shall be void.<br><br>Within a period to be prescribed by implementing rules and regulations, the taxpayer shall be required to respond to said notice. If the taxpayer fails to respond, the Commissioner or his duly authorized representative shall issue an assessment based on his findings.<br><br>Such assessment may be protested administratively by filing a request for reconsideration or reinvestigation within thirty (30) days from receipt of the assessment in such form and manner as may be prescribed by implementing rules and regulations. Within sixty (60) days from filing of the protest, all relevant supporting documents shall have been submitted; otherwise, the assessment shall become final.<br><br>If the protest is denied in whole or in part, or is not acted upon within one hundred eighty (180) days from submission of documents, the taxpayer adversely affected by the decision or inaction may appeal to the Court of Tax Appeals within thirty (30) days from receipt of the said decision, or from the lapse of the one hundred eighty (180)-day period; otherwise, the decision shall become final, executory and demandable.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Revenue Memorandum Order No. 3 (2009), Part V(B). par. 3.1.3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id.</i> at par. 3.3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at par. 3.3.1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at par. 3.3.2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at par. 3.3.3.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at Part V(C), par. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> 835 Phil. 875 (2018) [Per J. Leonardo-De Castro, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id.</i> at 904.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>See id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 12, 37.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

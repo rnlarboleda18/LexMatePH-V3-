@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 262419* [Formerly Criminal Case No. R-PSY-16-12641-CR] - XXX, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70402' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 262419* [Formerly Criminal Case No. R-PSY-16-12641-CR], November 03, 2025 ]</H2>
+			<H3>XXX, PETITIONER, VS. PEOPLE OF THE PHILIPPINES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>DIMAAMPAO, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This is a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court filed by petitioner XXX, assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup>&nbsp;of the Court of Appeals (CA) in CA-G.R. CR No. 43047. The impugned Decision affirmed the Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> of the Regional Trial Court (RTC), finding XXX guilty beyond reasonable doubt of economic abuse under Section 5(i) of Republic Act No. 9262, otherwise known as the "Anti-Violence Against Women and Their Children Act of 2004." On the other hand, the challenged Resolution denied XXX's bid for reconsideration.<br><br><center><b>The Antecedents</b></center><br>XXX was charged with violation of Section 5(a) of Republic Act No. 9262. The inculpatory portion of the Information<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> dated September 20, 2016 reads:<br><blockquote>That on or about the 15<sup>th</sup> May of 2016, in Pasay City, Metro Manila, Philippines[,] and within the jurisdiction of this Honorable Court, the above-name accused [XXX], being the boyfriend of [AAA], did then and there willfully, unlawfully and feloniously commit acts of violence against complainant by depriving the latter and her child of financial support legally due to them, which caused substantial emotional and psychological distress to herein complainant to her damage and prejudice.<br><br>CONTRARY TO LAW. </blockquote>During arraignment, XXX pled not guilty.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Pre-trial and trial on the merits ensued.<br><br><center><b>Version of the Prosecution</b></center><br>Culled from the testimony of private complainant AAA are the following prevenient facts:<br><br>XXX was the former boyfriend of AAA. After meeting at a high school reunion, they had sexual intercourse twice in September 2015. Consequently, AAA fell pregnant. She informed XXX of the pregnancy, but he denied having fathered the child.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>Eventually, AAA gave birth to BBB on <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>. XXX continuously failed to provide financial assistance to BBB despite AAA's demands from the time she conceived until her daughter's delivery.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>AAA likewise asked XXX for a DNA test to establish paternity. He agreed, provided that both parties would share the expenses due to financial difficulties.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> However, AAA and her father disagreed, stating that she was only willing to have BBB undergo DNA testing if XXX assumed the costs.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> In support of her allegations, AAA presented BBB's Certificate of Live Birth,<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> a copy of a demand letter for support,<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> and photographs of BBB.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br><center><b>Version of the Defense</b></center><br>XXX unequivocally denied fathering a child with AAA. During his brief relationship with AAA, they only had intimate relations once, where XXX performed the withdrawal method as a form of birth control.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Avowedly, their connection immediately soured when XXX found out through social media that AAA lied about not having a boyfriend prior to their romantic involvement.<br><br>XXX later learned from their high school classmates that he had been made to assume responsibility for AAA's pregnancy, which was said to have occurred as early as September 2015.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> AAA then demanded support for the child and that a DNA test be conducted to be shouldered by XXX, but they did not agree on the expenses. Thus, no DNA testing was conducted.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br><center><b>The RTC Ruling</b></center><br>In due course, the RTC convicted XXX, ruling that his denial cannot be given greater evidentiary weight over AAA's declarations. The case was disposed of in this wise:<br><blockquote><b>WHEREFORE</b>, in view of the foregoing and for the prosecution to have proven the guilt of the accused beyond reasonable doubt, accused <b>[XXX]</b> is found <b>GUILTY</b> of economic abuse under Sec. 5(i) of [Republic Act] No. 9262 as stated in the Information and proven during the trial of the case. Thus, sentence is hereby pronounced against him:<ol><li>In applying the Indeterminate Sentence Law, to suffer imprisonment of<i> Prision Correccional</i> (2 years and 4 months) as minimum term[,] to<i> Prision Mayor</i> (6 years and 1 day) as maximum term, in the absence of aggravating and mitigating circumstances;<br><br></li><li>To pay the fine, in the amount of One Hundred Thousand Pesos ([PHP] 100,000.00); and<br><br></li><li>To undergo mandatory psychological counseling or psychiatric treatment and shall report compliance to the Court.</li></ol><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> (Emphasis in the original) </blockquote>Taking umbrage at the foregoing ruling, XXX elevated his case before the CA. On appeal, XXX avouched that the prosecution failed to prove that BBB was his and AAA's child. Therefore, it did not establish all the elements of the crime under Section 5(i) of Republic Act No. 9262.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br><center><b>The CA's Ruling</b></center><br>The CA gave credence to AAA's testimony and held that all the elements of the crime were present. Furthermore, the CA declared that the establishment of paternity is not an element of the crime. It found XXX's refusal to take a DNA test unjustified since he admitted to having sexual relations with AAA.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The<i> fallo</i> of the Decision reads:<br><blockquote><b>WHEREFORE</b>, in view of the foregoing, the appeal is <b>DISMISSED</b>. The Decision dated 25 January 2018 of Branch <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span> Regional Trial Court of [redacted] in Criminal Case No. R-PSY-16-12641-CR is hereby<b> AFFIRMED with MODIFICATIONS</b>. Accused-appellant [XXX] is found <b>GUILTY</b> beyond reasonable doubt of violation of Section 5(i) of Republic Act No. 9262 and is sentenced to suffer the indeterminate penalty of two (2) years and four (4) months of<i> prision correccional</i>, as minimum, to eight (8) years and one (1) day of<i>&nbsp;prision mayor</i>, as maximum. Accused-appellant [XXX] is <b>DIRECTED TO PAY</b> a fine in the amount of [PHP]100,000.00 and <b>DIRECTED to UNDERGO</b> a mandatory psychological counseling and to <b>REPORT</b> his compliance therewith to the court of origin within fifteen days (15) after completion of such counseling.<br><br><b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> (Emphasis in the original) </blockquote><center><b>The Present Petition</b></center><br>Via the instant recourse, XXX intransigently denies fathering BBB as she was born merely eight months after he and AAA copulated. He insists that the prosecution was not able to prove the elements of the crime under Section 5(i) of Republic Act No. 9262. For criminal liability to arise, there should be evidence that the offender willfully or consciously withheld financial support for the purpose of inflicting mental or emotional anguish upon her.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>On the other hand, the People of the Philippines, represented by the Office of the Solicitor General (OSG), argues that the petition should be dismissed for being an improper remedy. The OSG explicated that the questions involving a) BBB's paternity, b) XXX's indigency, and c) XXX's failure to provide financial support, are all factual in nature; thus, they are not subject to review under a petition for review on<i> certiorari</i> under Rule 45 of the Rules of Court. Moreover, XXX's defense that he did not willfully withhold financial support should be struck down for having been raised for the first time in the instant petition. Most importantly, the People contended that the prosecution successfully proved the elements of violation of Section 5(i) of Republic Act No. 9262.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br><center><b>The Issue</b></center><br>The sole issue in this case is whether XXX violated Section 5(i) of Republic Act No. 9262.<br><br><center><b>The Court's Ruling</b></center><br><b><i>The Petition is meritorious</i></b>.<br><br>Incipiently, the determination of guilt of an accused in relation to the Court's appreciation of evidentiary matters is factual in nature. On the other hand, a petition for review<i> on certiorari</i> shall be limited to questions of law. This stems from the well-established rule that the Court is not a trier of facts.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> Nevertheless, the rule is not iron-clad and affords exceptions,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> one of which is when the judgment is based on misapprehension of facts, as in the instant case.<br><br>To successfully prosecute a case for violation of Section 5(i) of Republic Act No. 9262 in relation to denial of financial support, the elements, as enumerated by the Court in<i> Acharon v. People of the Philippines</i>,<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> are as follows:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">The offended party is a woman <i> and/or</i> her child or children; </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(2) </div> <div align="JUSTIFY"></div></td> <td valign="top"> <div align="JUSTIFY">The woman is either the wife or former wife of the offender, or is a woman with whom the offender has or had a sexual or dating relationship, or is a woman with whom such offender has a common child. As for the woman's child or children, they may be legitimate or illegitimate, or living within or without the family abode; </div> </td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(3) </div></td> <td valign="top"> <div align="JUSTIFY">The offender willfully refuses to give or consciously denies the woman and/or her child or children financial support that is legally due her and/or her child or children; and </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">(4) </div></td> <td valign="top"> <div align="JUSTIFY">The offender denied the woman and/or her child or children the financial support for the purpose of causing the woman and/or her child or children mental or emotional anguish.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup></div></td> </tr> </tbody></table></blockquote>After a perspicacious scrutiny of the records, the Court finds that the prosecution failed to establish the second and fourth elements of the crime.<br><br>A perusal of the accusatory portion of the Information shows that the charge is anchored on AAA's firm belief that XXX is BBB's father. It is undisputed that XXX and AAA had sexual relations out of wedlock and the controversy rests on BBB's filiation. Under Article 175 of the Family Code of the Philippines, illegitimate children may establish their illegitimate filiation in the same way and on the same evidence as legitimate children.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> The methods laid down in the Family Code are as follows:<br><blockquote>Article 172. The filiation of legitimate children is established by any of the following:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">The record of birth appearing in the civil register or a final judgment; or </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY">An admission of legitimate filiation in a public document or a private handwritten instrument and signed by the parent concerned. </div></td> </tr> </tbody></table><br>In the absence of the foregoing evidence, the legitimate filiation shall be proved by:<br><br><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td width="5%" valign="top">&nbsp;</td> <td width="5%" valign="top"> <div align="JUSTIFY">(1) </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">The open and continuous possession of the status of a legitimate child; or </div></td> </tr> <tr> <td valign="top">&nbsp;</td> <td valign="top"> <div align="JUSTIFY">(2) </div></td> <td valign="top"> <div align="JUSTIFY">Any other means allowed by the Rules of Court and special laws. </div></td> </tr> </tbody></table></blockquote>Moreover, when a birth certificate is used as proof of filiation, the same should be signed by both the mother and father. In<i> People v. Delantar</i>,<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Simplicio Delantar (Delantar) was convicted for violating Section 5(a) of Republic Act No. 9165. He offered AAA to clients for prostitution and subjected her to physical violence to instill fear. One of the pieces of evidence presented was AAA's birth certificate showing that Delantar was her father. In determining the appropriate penalty, the Court did not give credence to the birth certificate given that it was unsigned by Delantar. The Court ratiocinated in this wise:<br><blockquote>While under the Family Code, filiation can be established by, among others, the record of birth appearing in the civil register, yet the rule is<i> where the birth certificate presented was not signed by the father against whom filiation is asserted, such may not be accepted as evidence of the alleged filiation</i>. In <i>Angeles v. Maglaya</i>, we held:<br><blockquote>Such certificate, albeit considered a public record of a private document is, under Section 23, Rule 132 of the Rules of Court, evidence only of the fact which gave rise to its execution: the fact of birth of a child. Jurisprudence teaches that a birth certificate, to be considered as validating proof of paternity and as an instrument of recognition, must be signed by the father and mother jointly, or by the mother alone if the father refuses[.]</blockquote>In<i> Angeles v. Maglaya</i>, we refused to give evidentiary weight to the birth certificate as proof of filiation in a case for settlement of estate to support a claim of legitimacy because the same was unsigned by the alleged father.<i> With more reason we should not accord value to the birth certificate in this case considering that its effect would be to increase the penalty to be imposed on the appellant This is a criminal case wherein an interpretation unfavorable to the accused is generally unacceptable</i>.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> (Emphasis supplied) </blockquote>In the instant case, apart from AAA's testimony, BBB's Certificate of Live Birth<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> was adduced as evidence. However, it is readily apparent that the space for the father's information indicates "N/A" or "not applicable" and was left unsigned. There is also a dearth of evidence to establish that XXX acknowledged the child as his own. With XXX's liberty at stake, the birth certificate cannot be given weight as proof of paternity. It bears stressing that support follows as a matter of obligation when filiation is beyond question.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> With the prosecution's failure to prove the second element that AAA and XXX share a common child, there is serious doubt on whether financial support is legally due AAA or her child.<br><br>At any rate, even if the Court were to consider AAA's narration, well-settled is the rule that mere failure to provide financial support does not automatically result in criminal liability. The Court elucidated in<i> Acharon</i> that there must be evidence on record that the accused willfully or consciously withheld financial support legally due the woman for the purpose of inflicting mental or emotional anguish upon her.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Here, AAA admitted before the trial court that XXX did not give her financial support due to BBB's uncertain lineage. In fact, she disclosed that XXX offered to divide the expenses should the child be subjected to DNA testing, but it was her and her father who refused to bear a portion thereof,<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> viz.:<br><blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"> <tbody><tr> <td colspan="2" valign="top"> <div align="JUSTIFY">FISCAL CHAN </div></td> </tr> <tr> <td width="5%" valign="top"> <div align="JUSTIFY">Q: </div></td> <td width="95%" valign="top"> <div align="JUSTIFY">So at what particular point in time did the accused denies [sic] fathering your daughter? Was it at the time you give birth or even before you gave birth? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td colspan="2" valign="top"> <div align="JUSTIFY">AAA: </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Since the time I was carrying the baby. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">At the time you discovered you are [sic] pregnant, the accused already denied fathering the fetus inside your womb? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, sir. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">Continuously up to the time you gave birth and until now? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Yes, sir[.]<sup style="COLOR: RGB(255, 0, 0);">[34]</sup></div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">During the cross-examination, you were likewise asked you have no proof of DNA testing. Why did you not insist of [sic] the DNA testing? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">Because according to madam they could not afford the DNA testing. They want that we share but my father does [sic] not want to. </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY"></div><br></td> <td valign="top"> <div align="JUSTIFY"></div><br></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">Q: </div></td> <td valign="top"> <div align="JUSTIFY">But are [sic] you and your daughter willing to undergo DNA testing just to prove the paternity of [XXX]? </div></td> </tr> <tr> <td valign="top"> <div align="JUSTIFY">A: </div></td> <td valign="top"> <div align="JUSTIFY">I want them the one to pay for that.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup></div></td> </tr> </tbody></table></blockquote>Evidently, XXX did not willfully refuse to provide financial support for the purpose of inflicting psychological violence upon AAA or her child. Accordingly, the fourth element of the crime was not successfully established.<br><br>The Court underscores anew a cardinal rule in criminal cases that the prosecution bears the burden of proving each element of the crime beyond reasonable doubt.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> The conviction must rely on the strength of the prosecution's evidence, rather than the weakness of the defense.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Otherwise, any doubt shall be resolved in favor of the accused.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Here, the prosecution was unable to successfully establish that support is legally due AAA and her child and that XXX deliberately withheld the same. Absent the second and fourth elements of Section 5(i) of Republic Act No. 9262, XXX should be exculpated from liability.<br><br><b>FOR THESE REASONS</b>, the Petition for Review on<i> Certiorari</i> is <b>GRANTED</b>. The April 11, 2022 Decision and the July 21, 2022 Resolution of the Court of Appeals in CA-G.R. CR No. 43047 are<b> REVERSED</b> and<b> SET ASIDE</b>. Petitioner XXX is <b>ACQUITTED</b> for failure of the prosecution to prove his guilt beyond reasonable doubt.<br><br>Let entry of judgment be <b>ISSUED IMMEDIATELY. </b><br><br><b>SO ORDERED." </b><br><br><i>Gesmundo,<sup><font color="#ff0000">**</font></sup> C.J., Caguioa (Chairperson), Inting,</i> and <i>Gaerlan, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> The identity of the victims or any information which could establish or compromise their identities, as well as those of their immediate family or household members, shall be withheld pursuant to Amended Administrative Circular No. 83-2015, entitled: Protocols and Procedures in the Promulgation, Publication arid Posting on the Websites of Decisions, Final Resolutions, and Final Orders Using Fictitious Names/Personal Circumstances dated September 5, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">**</sup> Designated additional Member vice Singh, J., per Raffle dated February 8, 2023.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 30-47.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. at 50-66. The April 11, 2022 Decision was penned by Associate Justice Bonifacio S. Pascua, with the concurrence of Associate Justices Fernanda Lampas Peralta and Maria Filomena D. Singh (now a Member of this Court) of the Second Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 69-70. The July 21, 2022 Resolution was penned by Associate Justice Bonifacio S. Pascua, with the concurrence of Associate Justices Fernanda Lampas Peralta and Manuel M. Barrios of the Special Former Second Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 115-118. The January 25, 2018 Decision in Criminal Case No. R-PSY-16-12641-CR was penned by Presiding Judge Tingaraan U. Guiling of Branch <span style="display: inline-block; width: 100px; height: 20px; background-color: black; vertical-align: middle;"></span>, Regional Trial Court, Pasay City.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Rollo</i>, p. 52, <i>see</i> CA Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 86-87, <i>see</i> TSN, AAA, May 30, 2017.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 88 and 99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 99.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> NB: The copy of the demand letter was not appended to the Petition.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Rollo</i>, p. 77.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 108.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>. at 108-109.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 109-110.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 118, RTC Decision.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>. at 55.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 63.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 65-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 35-44, <i>see</i> Petition for Review.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 172-192, <i>see</i> Comment.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>See</i> <b>Lisaca v. People of the Philippines</b>, 907 Phil. 318, 327 (2021) [Per J. Carandang, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 327-328. It is only in exceptional circumstances that this Court admits and reviews questions of fact under Rule 45, which exceptions include: (1) when the conclusion is a finding grounded entirely on speculation, surmises or conjectures; (2) when the inference made is manifestly mistaken, absurd or impossible; (3) where there is a grave abuse of discretion; (4) when the judgment is based on a misapprehension of facts; (5) when the findings of fact are conflicting; (6) when the CA, in making its findings, went beyond the issues of the case and the same is contrary to the admissions of both appellant and appellee; (7) the findings of the CA are contrary to those of the trial court; (8) when the findings of fact are conclusions without citation of specific evidence on which they are based; (9) when the facts set forth in the petition as well as in the petitioner's main and reply briefs are not disputed by the respondents; and (10) the finding of fact of the CA is premised on the supposed absence of evidence and is contradicted by the evidence on record.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> 913 Phil. 731 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 740.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Executive Order No. 209. Approved July 6, 1987.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> 543 Phil. 107 (2007) [Per J. Tinga, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id</i>. at 126-127.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, p. 76.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>See</i> <b>XXX260504 v. AAA260504</b>, 949 Phil. 221, 232 (2023) [Per J. J. Lopez, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> 913 Phil. 731, 739-740 (2021) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> TSN, AAA, May 30, 2017, pp. 20-22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 20-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>See</i> <b>Quijano v. People of the Philippines</b>, 897 Phil. 377, 395 (2021) [Per J. Gaerlan, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>See</i> <b>Robles v. People of the Philippines</b>, 945 Phil. 68, 98 (2023) [Per J. Caguioa, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>See</i> <b>Quijano v. People of the Philippines</b>, 897 Phil. 377, 396 (2021) [Per J. Gaerlan, First Division].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

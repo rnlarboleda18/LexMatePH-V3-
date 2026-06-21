@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 272859 - ALLAN B. RADAZA, AS SUBSTITUTED BY HIS HEIRS LILANE A. RADAZA, RYSAN A. RADAZA, AND GRETHEL A. RADAZA, PETITIONER, VS. ALCATRAZ SECURITY & INVESTIGATION AGENCY, INC., AND ERNESTO CATUNGAL, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70408' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>THIRD DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 272859, February 19, 2026 ]</H2>
+			<H3>ALLAN B. RADAZA, AS SUBSTITUTED BY HIS HEIRS LILANE A. RADAZA, RYSAN A. RADAZA, AND GRETHEL A. RADAZA, PETITIONER, VS. ALCATRAZ SECURITY & INVESTIGATION AGENCY, INC., AND ERNESTO CATUNGAL, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>SINGH, J.:</STRONG></p>
+			
+			<p><div align="justify"><p>This is a Petition for Review on <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 45 of the Rules of Court assailing the Court of Appeals (<b>CA</b>) Decision,<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated June 30, 2023, and the Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated February 29, 2024, in CA-G.R. SP No. 169657. The CA dismissed the Petition for <i>Certiorari</i> filed by petitioner Allan B. Radaza (<b>Allan</b>), as substituted by his heirs Lilane A. Radaza, Rysan A. Radaza and Grethel A. Radaza (collectively, the <b>Heirs of Radaza</b>), and affirmed the National Labor Relations Commission (<b>NLRC</b>) Decision,<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dated July 25, 2019, finding that Allan was not illegally dismissed from employment. </p><p align="center"> <b><i>The Facts</i></b> </p><p> Respondent Alcatraz Security &amp; Investigation Agency, Inc. (<b>ASIAI</b>) is a domestic corporation engaged in the business of security services. Meanwhile, respondent Ernesto Catungal (<b>Catungal</b>) is the President/General Manager of ASIAI.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p><p> Allan alleged that, on March 10, 2009, he began his employment with ASIAI as a security guard. He claimed that throughout his tenure, he was assigned to different client locations, with his final posting at Bonifacio Heights in Taguig City.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> </p><p> In January 2018, Allan suffered a mild stroke and lost consciousness while on duty, leading to his confinement in a hospital. Upon discharge, his physician recommended rest, prompting him to take a sick leave that lasted until March 1, 2018. The following day, March 2, 2018, Allan returned to work as advised by his physician. However, ASIAI has refused to give him an assignment since then. This constrained him to file the subject Complaint for illegal dismissal with money claims, damages and attorney's fees against ASIAI on July 24, 2018.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p> Allan argued that he was constructively dismissed by ASIAI because he was forced to remain without work during his "prolonged floating status." He also claimed that he was underpaid because his daily wage was below the minimum, and that he was not paid his overtime work, 13th month pay, service incentive leave from 2014 to 2017, holiday pay, holiday premium, rest day premium and separation pay. He likewise demanded refund of his cash bond.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> </p><p> For its part, ASIAI denied that Allan was dismissed from service because he was offered an assignment at Monarch Parksuites Condominium upon his return on March 2, 2018. ASIAI deemed it best to assign Allan thereat, considering his mild stroke and the condominium's indoor nature and proximity to his residence. Allan, however, refused, insisting on reassignment to Bonifacio Heights.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> </p><p> Out of concern for Allan's health, ASIAI required a cardiologist's medical certificate before assigning him to Bonifacio Heights. Despite repeated notices, Allan refused to return to work.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup></p><p> Alternatively, ASIAI argued that even if Allan was on floating status, it lasted less than six months since he was reassigned to Monarch Parksuites under the return-to-work orders, dated August 16 and 29, 2018. ASIAI also denied his claims for salary differentials, holiday pay, service incentive leave, ECOLA, and overtime pay, asserting these were fully paid.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> </p><p align="center"> <b><i>The Ruling of the Labor Arbiter</i></b> </p><p> The Labor Arbiter ruled that Allan was illegally dismissed from work on March 2, 2018.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> While placing an employee on floating status for a period not exceeding six months is valid, the Labor Arbiter found that Allan was constructively dismissed because ASIAI, for failing to file its position paper, had failed to prove that there was no available post where Allan could be assigned at the time he reported back for work on March 2, 2018.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> However, since Allan chose not to be reinstated to his former position and considering the state of his health, the Labor Arbiter ordered ASIAI to pay Allan a separation pay equivalent to one-month salary for every year of service, plus backwages. ASIAI was likewise ordered to pay Allan the following: salary differential, holiday pay, service incentive leave, emergency cost of living allowance (<b>ECOLA</b>), overtime pay, and attorney's fees. </p><p> The dispositive portion of the Decision,<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> dated March 19, 2019, states: </p><blockquote> <p> <b>WHEREFORE</b>, in view of the foregoing, this Office finds that [Allan] was illegally dismissed from work. [ASIAI] is ordered to pay [Allan] a separation [sic] equivalent to one-month salary for every year of service, in lieu of reinstatement, plus backwages from March [2], 2018 until the finality of this decision. </p> <p> [ASIAI] is also ordered to pay [Allan] the following: </p> <ol start="" type="a"><li> Salary differential from July 24, 2015;<br><br></li><li> Holiday, SIL and ECOLA; and<br><br></li><li> Overtime of four [] hours a day for six [] days a week, all subject to the three-year prescriptive period whenever applicable. </li></ol> <p> Attorney's fees equivalent to [10%] percent of the monetary award is likewise granted. </p> <p> Other reliefs are dismissed for lack of merit. </p> <p> A computation of the monetary award is attached hereto, and shall form part of this decision. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> (Emphasis in the original) </p> </blockquote> <p> Aggrieved, ASIAI filed an appeal before the NLRC. </p><p align="center"> <b><i>The Ruling of the NLRC</i></b> </p><p> In its July 25, 2019 Decision,<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> the NLRC reversed the Labor Arbiter's ruling and held that Allan was not actually or constructively dismissed by ASIAI. The NLRC explained that since technical rules on evidence are not binding on labor cases, it has considered the documentary evidence submitted by ASIAI on appeal. </p><p> The NLRC agreed with the Labor Arbiter that Allan could not claim constructive dismissal on January 2, 2018 since he was on sick leave until March 1, 2018. However, it held that the Labor Arbiter erred in ruling that Allan was constructively dismissed as there is no basis to support such finding.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> On the contrary, the NLRC gave credence to ASIAI's allegations that Allan was never placed on floating status as evidenced by the return-to-work orders directing him to report back for duty at its headquarters, and their offer to assign him to Monarch Parksuites Condominium located at Asean Business Park, Bradco Avenue corner J.W. Diokno, Paranaque City.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> </p><p> Given that Allan was not illegally dismissed, the awards of backwages, separation pay, and attorney's fees should be reversed. The awards of the other monetary claims were likewise reversed as ASIAI was able to show through the payroll sheets that Allan had been duly paid the same. Nevertheless, while Allan failed to establish his claim of constructive dismissal, the NLRC ruled that his reinstatement without backwages is warranted. </p><p> The <i>fallo</i> of the July 25, 2019 Decision reads: </p><blockquote> <p> <b>WHEREFORE</b>, foregoing premises considered, the instant appeal is <b>GRANTED</b>. The appealed Decision is <b>REVERSED AND SET ASIDE</b>. Accordingly, this case is DISMISSED for lack of merit. However, [ASIAI] is ordered to reinstate complainant without backwages upon finality of this Decision. </p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> (Emphasis in the original) </p> </blockquote> <p> Allan sought reconsideration. In its September 22, 2020 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> the NLRC affirmed the Labor Arbiter's finding that ASIAI failed to justify having placed Allan on floating status. It held that there was no proof that Allan was even given notice that he would have to be placed on such status in the meantime, due to the lack of any vacant post. As regards the return-to-work orders, the NLRC ruled that they were mere afterthought even if sent within the allowable period for "floating status," because they were only sent to Allan after he filed the Complaint. In any case, the NLRC stressed that since ASIAI claimed that Allan was never placed on "floating status," they cannot invoke the six-month maximum period for a valid temporary lay-off. </p><p> The dispositive portion of the September 22, 2020 Resolution states: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, the instant Motion for Reconsideration is <b>PARTLY GRANTED</b>. Our Decision[,] dated July 25, 2019[,] is <b>VACATED and SET ASIDE</b> and a new one entered <b>MODIFYING</b> the Labor Arbiter's Decision, in that, [Allan] is declared to have been illegally dismissed from employment. [ASIAI] is <b>ORDERED TO PAY</b> [Allan] separation pay equivalent to [one]-month salary for every year of service from March 10, 2019 and backwages from March 2, 2018 until the finality of this decision. The other monetary claims however are <b>DENIED</b> for lack of merit. </p> <p> Further, [ASIAI] is <b>ORDERED TO PAY</b> to [Allan] attorney's fees equivalent to [10%] of the total judgment award. </p> <p> The computation of [Allan's] above-mentioned monetary awards shall form an integral part of this Resolution. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> (Emphasis in the original) </p> </blockquote> <p> ASIAI filed a Motion for Partial Reconsideration reiterating that Allan was never placed on "floating status." In its April 16, 2021 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> the NLRC was convinced that there is no ample evidence that Allan was dismissed from employment. Records show that Allan was sent notices to return to work, and that Allan never specifically denied receipt of these letters and merely claimed that he was not given any assignment by ASIAI. The documentary evidence presented by ASIAI was given more credence than Allan's bare denial.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> </p><p> The NLRC explained that although ASIAI made an effort in requiring Allan to return to work, there was neither proof that his failure to comply with the same was for an unjustifiable reason or that his absence amounted to a clear intention to sever his employment. It opined that such failure was only the result of Allan's unsubstantiated conclusion that he was already dismissed.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> Thus, according to the NLRC, the totality of the circumstances led to the conclusion that there was no dismissal nor abandonment of employment. The proper resolution to the situation is to order Allan's reinstatement but without payment of backwages.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> </p><p> The NLRC recognized that Allan does not intend to be reinstated, but prayed for the payment of separation pay instead. Considering that separation pay has no legal basis in cases where there is no illegal dismissal, as in this case, the NLRC cannot award such relief. Since Allan chose not to return to work anymore, he must be considered as having voluntarily resigned from his employment. </p><p> The NLRC thus held: </p><blockquote> <p> <b>WHEREFORE</b>, premises considered, [ASIAI and Ernesto's] Motion for Reconsideration is <b>GRANTED</b>. The [September 22, 2020] Resolution is <b>REVERSED and SET ASIDE</b>. Accordingly, the Decision promulgated on July 25, 2019 is REINSTATED. </p> <p> No further Motion for Reconsideration shall be entertained. </p> <p> Parties and/or their counsels are hereby directed to file their ex-parte manifestation on their receipt of this Resolution within three [] calendar days therefrom either through personal service or private courier, e.g. LBC. </p> <p> <b>SO ORDERED</b>.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> (Emphasis in the original) </p> </blockquote> <p> Unsatisfied with the judgment, Allan filed a Petition for <em>Certiorari</em> with the CA. </p><p align="center"> <b><i>The Ruling of the CA</i></b> </p><p> Records show that Allan passed while the case was pending before the CA. He was then substituted by his heirs, Lilane A. Radaza, Rysan A. Radaza and Grethel A. Radaza. </p><p> The CA affirmed the NLRC's July 25, 2019 Decision, ruling that Allan was not illegally dismissed, whether factually or constructively, as substantiated by ASIAI's documentary evidence. On Allan's monetary claims, the CA, citing <i>Chong Guan Trading v. NLRC</i>,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> held that since Allan failed to establish his dismissal and ASIAI likewise failed to prove abandonment, equity dictates that each party should bear his own loss, thereby placing them on equal footing. Finally, the CA found no basis to award separation pay absent a finding of illegal dismissal. Thus: </p><blockquote> <p> <b>WHEREFORE</b>, the [P]etition for [<i>C</i>]<i>ertiorari</i> is hereby <b>DISMISSED</b>. </p> <p> <b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> (Emphasis in the original) </p> </blockquote> <p> The CA, in the assailed February 29, 2024 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> denied Allan's Motion for Reconsideration. Hence, this present Petition. </p><p align="center"> <b><i>The Issues</i></b> </p><ol><li> Did the CA err in ruling that Allan was not illegally dismissed?<br><br></li><li>Did the CA err in ruling that Allan is not entitled to his monetary claims? </li></ol> <p align="center"> <b><i>The Ruling of the Court</i></b> </p><p> The Heirs of Radaza argue in their Petition that the CA erred in: (1) affirming the NLRC's ruling that Allan was not constructively dismissed despite the substantial evidence proving otherwise; and (2) finding that Allan is not entitled to backwages, separation pay in lieu of reinstatement, moral and exemplary damages, and attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup></p><p> The Petition lacks merit. </p><p> Preliminarily, it is elementary that under Rule 45 of the Rules of Court, only questions of law may be brought by the parties and passed upon by the Court in the exercise of its discretionary power to review. Judicial review by the Court does not extend to a re-evaluation of the sufficiency of evidence upon which the tribunal has based its determination.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> This rule, however, allows for certain exceptions including situations where the factual findings are conflicting, where the findings and conclusions of the CA are contrary to that of the Labor Arbiter, particularly in the instances when the NLRC reconsidered its prior rulings.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Thus, the Court deems it prudent to re-evaluate these findings to determine which of them more accurately conforms to the evidentiary facts. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Allan was not illegally dismissed from employment; the return-to-work orders are not general orders</i> </div></td> </tr> </tbody></table> <p>At the core of this Petition is the Heirs of Radaza's insistence that their late father, Allan, was illegally dismissed. They contend that Allan was placed on floating status on March 2, 2018, when he was relieved of his post at Bonifacio Heights. They assert that ASIAI ignored his queries on his new assignment. For failing to give Allan a new assignment or posting within the allowable six-month period, the Heirs of Radaza assert that ASIAI had <i>constructively dismissed</i> Allan from service. </p><p> Regrettably, the Court finds the arguments unsupported. </p><p> In our jurisdiction, it is recognized that placing security guards on temporary "off-detail" or "floating status" is a valid exercise of management prerogative so long as it does not exceed six months.<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> In security parlance, being placed "off-detail" or on "floating status" means "waiting to be posted."<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> In <i>Tatel v. JLFP Investigation Security Agency, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> the Court expounded on the nature of "floating status": </p><blockquote> <p> Temporary "off-detail" or "floating status" is the period of time when security guards are in between assignments or when they are made to wait after being relieved from a previous post until they are transferred to a new one. It takes place when the security agency's clients decide not to renew their contracts with the agency, resulting in a situation where the available posts under its existing contracts are less than the number of guards in its roster. It also happens in instances where contracts for security services stipulate that the client may request the agency for the replacement of the guards assigned to it even for want of cause, such that the replaced security guard may be placed on temporary "off-detail" if there are no available posts under the agency's existing contracts. During such time, the security guard does not receive any salary or any financial assistance provided by law. It does not constitute a dismissal, as the assignments primarily depend on the contracts entered into by the security agencies with third parties, so long as such status does not continue beyond a reasonable time. <b>When such a "floating status" lasts for more than six [] months, the employee may be considered to have been constructively dismissed</b>.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> (Emphasis in the original) </p> </blockquote> <p> Although our Labor Code does not provide a specific provision for temporary "off-detail" or "floating status," the Court has consistently applied Article 301<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> of the Labor Code to set the period of employees' temporary "off-detail" or "floating status" to a maximum of six months.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup></p><p> It bears recalling that the reason why Allan was relieved from his previous post at Bonifacio Heights was because he suffered a mild stroke in January 2018. His sick leave lasted until March 1, 2018, and he allegedly reported back to work the following day, March 2, 2018, after he was cleared by his physician. The Heirs of Radaza, however, claimed that ASIAI has refused to give him an assignment since then.<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> </p><p> Upon a careful review of the records, the Court finds that Allan failed to present substantial evidence to support his allegation that ASIAI indeed refused to give him an assignment after his return. Interestingly, the Court notes, too, that ASIAI did not present proof that it offered Allan a new assignment between March 2, 2018 and July 24, 2018, when he filed his Complaint for illegal dismissal. This absence of proof was highlighted in Commissioner Erlinda T. Agus' Dissenting Opinion.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup></p><p> Yet, the Court cannot overlook the documentary evidence attached to the records, specifically, the return-to-work orders, dated August 16 and August 29, 2018,<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> issued by ASIAI directing Allan to report back for duty at their headquarters. These official directives, issued within the six-month allowable period for a security guard to be on floating status, when weighed against Allan's bare allegations, carry greater evidentiary weight and deserve more credence. On this basis alone, the Court is constrained to rule that ASIAI had no intention of dismissing Allan from employment. </p><p> Corollary to this, it should be emphasized that in illegal dismissal cases, the general rule is that the employer has the burden of proving that the dismissal was legal. To discharge this burden, the employee must first prove, by substantial evidence, that he or she had been dismissed from employment.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> In this case, Allan failed to discharge that initial burden. Absent proof of dismissal, the claim of illegal dismissal necessarily fails. </p><p> The Court, on this score, echoes the findings of the NLRC in its April 16, 2021 Resolution: </p><blockquote> <p> After a thorough re-evaluation of the facts of the case, We are convinced that there is no ample evidence that [Allan] was dismissed from employment. Record shows that [ASIAI and Catungal] sent [Allan] notices to return to work. In said notices, [Allan] was informed that he will be deployed at Monarch Parksuites Condominium at Asean Business Park, Bradco Avenue cor. J.W. Diokno, Paranaque City. <i>We note that [Allan] never specifically denied receipt of these letters and merely claimed that he was not given any assignment by [ASIAI and Catungal]. As between the documentary evidence presented by [ASIAI and Catungal] and the bare denial of [Allan], We find the former far more credible</i>. </p> <p> The letters sent by [ASIAI and Catungal] cannot be considered mere afterthoughts simply because they were sent after the instant case had been filed by [Allan]. This is especially true since there is no evidence that [Allan] was in the first place dismissed from employment. It is settled that in the absence of any showing of an overt or positive act proving that the employer had dismissed the employee, [Allan's] claim of illegal dismissal cannot be sustained as the same would be self-serving, conjectural and of nor probative value.<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> (Emphasis supplied, citations omitted) </p> </blockquote> <p> The Heirs of Radaza further reiterate in their Petition that these return-to-work orders were mere afterthought since they were issued after Allan had filed his Complaint. They contend that ASIAI sought to evade liability by issuing the orders just days before the expiration of the six-month period.<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> Additionally, they claim that such orders were general return-to-work orders, and therefore insufficient to negate a finding of constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> </p><p> The Court disagrees. </p><p> The pronouncement in <i>Sagrino v. Toplis Solution, Inc</i>.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup> is instructive: </p><blockquote> <p> While a complaint for illegal dismissal filed prior to the lapse of the six-month period and/or the actual dismissal of the employee is generally considered as prematurely filed, nothing precludes the employers from giving the employee/s new assignments during the pendency of the case before the labor arbiter. An employer's failure to offer reinstatement or reassignment to an employee placed on floating status, even during the pendency of the labor dispute constitutes constructive dismissal.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> (Citations omitted) </p> </blockquote> <p> Applying this principle, the Court finds that the return-to-work orders cannot be brushed aside as mere afterthought. These constitute affirmative acts by ASIAI evidencing the company's intent to reinstate Allan to active duty. Far from being perfunctory, they reflect ASIAI's effort to preserve the employment relationship. </p><p> Further, the Court declares that the subject return-to-work orders were not general in nature. In <i>Sagarino</i>, the Court explained what constitutes general return-to-work orders: </p><blockquote> <p> On numerous occasions, the Court has emphasized that<i> a new assignment must be made to a specific client</i>. A general return-to-work order, without such specificity, is insufficient. </p> <p> In <i>Padilla v. Airborne Security Service, Inc</i>., the Court ruled that the letters sent by respondents to petitioners, which required the latter to report to Airborne's head office did not suffice. The Court noted that the letters merely required petitioner to report to work and to explain why he had failed to report to the office. The letters did not identify any specific client to which petitioner was to be reassigned. Thus, the letters were, at best, nothing more than general return-to-work orders. Under the circumstances, the Court concluded that the CA gravely erred in ruling that petitioner was not constructively dismissed. </p> <p> Similarly, in <i>Ador v. Jamila and Company Security Services, Inc.</i>, the Court held that petitioner was constructively dismissed after being placed on floating status from May 12, 2012 to April 11, 2013. The Court ruled that the three notices to report for work sent to petitioner were merely general return-to-work orders which did not specify the required details of his posting assignment. </p> <p> In <i>Hamid v. Gervasio Security and Investigation Agency, Inc</i>., the Court found that the notices to report issued to the petitioner did not state a specific client to which he would be deployed. The notices merely required petitioner to report to the security agency, and were, at best, nothing more than general return-to-work orders which did not toll the running of petitioner's floating status. The Court emphasized that what is required is for the employee to be deployed to a specific client and not merely recalled to the agency's office. </p> <p> Also, in <i>Ibon v. Genghis Khan Security Services</i>, the Court held that respondent's letters, which required petitioner to report back to work and to explain why he failed to report to the office after inquiring about his posting status were insufficient to refute a finding of constructive dismissal. Such notices were not deemed to be specific notices assigning petitioner to a particular client.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> (Emphasis supplied, citations omitted) </p> </blockquote> <p> Guided by the foregoing parameters, the present case is distinguishable. Unlike the general return-to-work orders cited in <i>Sagarino</i>, the orders issued by ASIAI to Allan were specific. They did not merely include a directive to report to its headquarters, but more importantly, they stated with specificity to which client Allan would be deployed, i.e., Monarch Parksuites Condominium. The said return-to-work orders read, as follows: </p><blockquote> <p> Re: Return to Work Order, dated August 16, 2018 </p> <p>Dear SG Radaza, </p> <p> You are hereby directed to report back for duty at the Headquarter Office of ALCATRAZ SECURITY AND INVESTIGATION AGENCY, INC. (ASIAI), upon receipt of this notice. <i>You will be earmarked to complement the guards deployment [sic] at Monarch Parksuites Condo. Corp., located at Asean Business Park, Bradco Avenue Cor., J.W. Diokno, Parañaque, Metro Manila.</i> </p> <p> You will get further instruction regarding your duty from the HR and Operation Departments. </p> <p> For strict compliance.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> (Emphasis supplied) </p> <p> Re: Return to Work Order, dated August 29, 2018</p> <p> Dear SG Radaza, </p> <p> You are hereby directed to report back for duty at the Headquarter Office of ALCATRAZ SECURITY AND INVESTIGATION AGENCY, INC. (ASIAI), upon receipt of this notice. <i>You will be earmarked to complement the guards deployment [sic] at Monarch Parksuites Condo. Corp., located at Asean Business Park, Bradco Avenue Cor., J.W. Diokno, Parañaque, Metro Manila</i>. </p> <p> You will get further instruction regarding your duty from the HR and Operation Departments. </p> <p> For strict compliance.<sup style="COLOR: RGB(255, 0, 0);">[50]</sup> (Emphasis supplied) </p> </blockquote> <p> Verily, these orders further justify the findings of the CA that ASIAI had no intention of severing Allan's employment from their company.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Had ASIAI truly intended to terminate Allan's services, it would not have sent him the orders twice. Stated elsewise, there remains no proof that Allan was constructively or illegally dismissed. </p><table width="50%" border="0" cellspacing="0" cellpadding="0"> <tbody><tr> <td><div align="justify"><i>Allan is not entitled to his monetary claims, damages and attorney's fees</i> </div></td> </tr> </tbody></table> <p>The Court affirms the findings of the CA and the NLRC that Allan is not entitled to his monetary claims. As aptly held by the NLRC in its July 25, 2019 Resolution: </p><blockquote> <p> The awards of salary differentials, overtime pay, holiday pay and [service incentive leave pay] are also reversed and set aside. [ASIAI] submitted the payroll sheets signed by [Allan], and based thereon, he appears to have been paid the minimum wage, ECOLA, overtime pay, holiday pay and [service incentive leave pay]. We note that [Allan] failed to deny the authenticity of the payrolls as he did not file any comment to the appeal.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> </p> </blockquote> <p> Ultimately, having established from the foregoing discussion that Allan was not constructively or illegally dismissed from employment, there is, as ruled by the CA, no basis to award him backwages, separation pay, damages and attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup> </p><p> The Court likewise upholds the ruling of the CA that the parties should bear their own losses in this case: </p><blockquote> <p> Anent the issue regarding petitioner's monetary claims, the case of <i>Chong Guan Trading vs. NLRC</i> is instructive on the matter which states that: where the employee was not dismissed and his failure to work was not due to the employer's fault, the burden of economic loss suffered by the employee should not be shifted to the employer. Similar to the said case, since petitioner failed to prove the fact of his dismissal, while private respondent on the other hand failed to prove petitioner's intent to abandon his job, it is but fair that each party must bear his own loss, thus placing the parties on equal footing.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> </p> </blockquote> <p> This pronouncement in <i>Chong Guan Trading v. NLRC</i><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> finds resonance in <i>Radar Security &amp; Watchman Agency, Inc. v. Castro</i>,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> where the Court declared: </p><blockquote> <p> <i>[I]n a case where the employee's failure to work was occasioned neither by his abandonment nor by a termination, the burden of economic loss is not rightfully shifted to the employer; each party must bear his own loss</i>. Hence, based on the circumstances of this case, the employer should not be made to suffer the consequences of the employee's failure to report for duty. There was no allegation much less proof that the employer intentionally made vague the notices sent to the employee. There was, therefore, no fault on the part of the employer even if it were true that respondent misunderstood the letter which prompted him to believe that he was being demoted. The supposed "misunderstanding" cannot be an excuse for not reporting for work. Indeed there were subsequent notices of his assignment/detail orders. There can be no justification for his claim for separation pay and backwages. </p> <p> By way of reiteration, we declare that in labor cases, <i>where there is neither termination nor abandonment involved, there is no occasion to grant separation pay and backwages, nor to allow collection of any other monetary claims absent evidence to substantiate the same. The employer and the employee do not have any obligation one to the other</i>.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> (Emphasis supplied, citations omitted) </p> </blockquote> <p> In the present case, it is regrettable that, after having perused the records, there is dearth of proof that Allan was dismissed from employment. Consequently, as a result of lack of evidence on his part, his claim of illegal dismissal cannot be sustained. At the same time, the Court agrees with the April 16, 2021 Resolution of the NLRC, which categorically held that Allan did not commit abandonment since that would be inconsistent with the filing of his complaint for illegal dismissal.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> </p><p> The relevant portion of the April 16, 2021 Resolution is also worth reiterating to support the conclusion that the Heirs of Allan are not entitled to any of the monetary claims prayed for: </p><blockquote> <p> The totality of the foregoing circumstances convinces Us that there was no dismissal, much less illegal, and there was also no abandonment of job to speak of in this case. The proper resolution to the situation is to order [Allan's] reinstatement but without payment of backwages. In a case where the employee's failure to work was occasioned neither by his abandonment nor by a termination, the burden of economic loss is not rightfully shifted to the employer; each party must bear his own loss. </p> <p> We are not unaware that [Allan] does not intend to be reinstated. In his pro-forma complaint and Position Paper, he consistently prayed for the payment of separation pay instead of reinstatement. However, separation pay has no legal basis in cases where there is no illegal dismissal as here. Verily, this Commission cannot order a relief which is not founded in law or jurisprudence. Thus, if [Allan] chooses not to return to work anymore[,] he must be considered as having voluntarily resigned from his employment.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> (Citations omitted) </p> </blockquote> <p> Indeed, while the Court remains steadfast in its constitutional duty to protect labor, such protection cannot be applied in a manner that unduly penalizes employers who have not been remiss in their obligations towards their employees. </p><p> <i>A final note</i></p><p> On a final note, it should be underscored that in Rule 45 review of labor cases, the Court examines the CA decision from the prism of whether it correctly determined the presence or absence of grave abuse of discretion in the NLRC decision before it.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup> There is grave abuse of discretion on the part of the NLRC when its findings and conclusions are not supported by substantial evidence, i.e., that amount of relevant evidence which a reasonable mind might accept as adequate to justify a conclusion.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> Here, on the basis of the foregoing discussion, the Court ultimately affirms the ruling of the CA that the NLRC did not commit any abuse of discretion, much less grave, when it reversed the Labor Arbiter's Decision finding that Allan was illegally dismissed. </p><p> <b>ACCORDINGLY</b>, the Petition for Review on <i>Certiorari</i> is <b>DENIED</b> for lack of merit. The Court of Appeals Decision, dated June 30, 2023, and the Resolution, dated February 29, 2024, in CA-G.R. SP No. 169657, are <b>AFFIRMED.</b> </p><p> <b>SO ORDERED.</b></p><p> <i>Caguioa (Chairperson), Inting, Gaerlan</i>, and <i>Dimaampao, JJ</i>., concur.<br><br></p><hr align="LEFT" width="60%" size="1" noshade="noshade"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 12-43. <p><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 44-53. Penned by Associate Justice Roberto P. Quiroz and concurred in by Associate Justices Mariflor P. Punzalan Castillo and Germano Francisco D. Legaspi of the Third Division, Court of Appeals, Manila. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 55-57. Penned by Associate Justice Roberto P. Quiroz and concurred in by Associate Justices Mariflor P. Punzalan Castillo and Germano Francisco D. Legaspi of the Former Third Division, Court of Appeals, Manila.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 94-105. The Decision in NLRC LAC No. 05-001810-19 (NLRC Case No. NCR-07-12290-18) is penned by Commissioner Dominador B. Medroso, Jr. and concurred in by Presiding Commissioner Julia Cecily Coching-Sosito and dissented by Commissioner Erlinda T. Agus of the Second Division, National Labor Relations Commission, Quezon City.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 45. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> </p> <p><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 45, 155. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 45. </p> <p><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 45-46.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 46.</p> <p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> </p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 159. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 97. </p><p><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 155-163. Penned by Labor Arbiter Laudimer I. Samar of the National Labor Relations Commission, Quezon City. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 162-163. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 94-105. </p><p><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 101-102. </p><p><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 102-103. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 104. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 108-115. Penned by Commissioner Erlinda T. Agus and concurred in by Commissioner Mercedes R. Posada-Lacap of the Second Division, National Labor Relations Commission, Quezon City. Presiding Commissioner Julia Cecily Coching-Sosito dissented. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 114. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 117-122. Penned by Commissioner Nicolas B. Nicolas and concurred in by Presiding Commissioner Julia Cecily Coching-Sosito of the Second Division, National Labor Relations Commission, Quezon City. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 118-119. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 120. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 121. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[27]</sup> 254 Phil. 835 (1989) [Per J. Cortes, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Rollo</i>, p. 52. </p><p><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 55-57. </p><p><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 20-21. </p><p><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Department of Justice v. Nuqui</b>, 914 Phil. 177, 184 (2021) [Per J. Leonen, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>See</i> <b>PCL Shipping Philippines, Inc. v. National Labor Relations Commission</b>, 540 Phil. 65 (2006) [Per J. Austria-Martinez, First Division] and <b>Gerlach v. Reuters Limited, Phils.</b>, 489 Phil. 501 (2005) [Per J. Sandoval-Gutierrez, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>Hamid v. Gervasio Security and Investigation Agency, Inc.</b>, 926 Phil. 602, 608 [Per J. Gaerlan, Third Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Tatel v. JLFP Investigation Security Agency, Inc.</b>, 755 Phil. 171, 183 (2015) [Per J. Perlas-Bernabe, First Division]. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[35]</sup> 755 Phil. 171 (2015) [Per J. Perlas-Bernabe, First Division]. (Citation omitted) </p><p> <sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 183. </p><p><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> Art. 301. [286] <i>When Employment Not Deemed Terminated</i>. — The <i>bona fide</i> suspension of the operation of a business or undertaking for a period not exceeding six [] months, or the fulfillment [sic] by the employee of a military or civic duty shall not terminate employment. In all such cases, the employer shall reinstate the employee to his former position without loss of seniority rights if he indicated his desire to resume his work not later than one [] month from the resumption of operations of his employer or from his relief from the military or civic duty. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Ador v. Jamila and Company Security Services, Inc</i>., 876 Phil. 572, 585 (2020) [Per J. Lazaro-Javier, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Rollo</i>, pp. 45, 155. </p><p><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id.</i> at 106. </p><p><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 251, 254. </p><p><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <b>Cabañas v. Luzano Law Office</b>, 834 Phil. 802, 816 (2018) [Per J. Peralta, Second Division]. </p><p><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Rollo</i>, pp. 118-119. </p><p><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id.</i> at 25. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 24-25. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <b>G.R. No. 267379</b>, October 15, 2025 [Per J. Singh, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id.</i> at 15-16. This pinpoint citation refers to the copy of the Decision uploaded to the Supreme Court website. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id.</i> at 17-18.<i> See also</i> <b>Seventh Fleet Security Services, Inc. v. Loque</b>, 869 Phil. 203 (2020) [Per J. Caguioa, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Rollo</i>, p. 251. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id.</i> at 254. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 50. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id.</i> at 104. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id.</i> at 52. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id.</i> </p><p><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> 254 Phil. 835 (1989) [Per J. Cortes, Third Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[56]</sup> 774 Phil. 185 (2015) [Per J. Perez, First Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id.</i> at 197. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Rollo</i>, p. 120. </p><p><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id.</i> at 120-121. </p><p><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <b>Dela Cruz-Cagampan v. One Network Bank, Inc.</b>, 923 Phil. 649, 656 (2022) [Per SAJ. Leonen, Second Division]. </p><p> <sup style="COLOR: RGB(255, 0, 0);">[61]</sup> <b>Ace Navigation Company v. Garcia</b>, 760 Phil. 924, 932 (2015) [Per J. Perlas-Bernabe, First Division].&nbsp;</p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

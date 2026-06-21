@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 279008 - MERSON C. CALUBAG, PETITIONER, VS. COMMISSION ON ELECTIONS AND KIMBERLY P. JOSEPH, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70411' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 279008, April 08, 2026 ]</H2>
+			<H3>MERSON C. CALUBAG, PETITIONER, VS. COMMISSION ON ELECTIONS AND KIMBERLY P. JOSEPH, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>KHO, JR., J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">Before the Court is a Petition for <i>Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> under Rule 64 of the Rules of Court filed by petitioner Merson C. Calubag (Merson), which assails the Resolution<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated October 10, 2023 of public respondent Commission on Elections (COMELEC) Second Division, and the Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated January 24, 2025 of the COMELEC <i>En Banc</i> in SPA No. 23-023 (BRGY). The COMELEC cancelled Merson's certificate of candidacy (COC) for Sangguniang Kabataan (SK) Chairperson on the ground that he misrepresented in his COC that he is not related, within the second degree of consanguinity or affinity, to any incumbent elected regional, provincial, city, municipal, or barangay official in the locality where he seeks to be elected.<br><br><center><b>The Facts</b></center><br>On August 28, 2023, Merson filed his COC<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> for Chairperson of the SK of Barangay Magtangale, San Francisco, Surigao del Norte, in the 2023 Barangay and Sangguniang Kabataan Elections (2023 BSKE).<br><br>On September 2, 2023, private respondent Kimberly P. Joseph (Kimberly) filed a Petition<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> seeking to cancel and deny due course to Merson's COC. According to him, Merson materially misrepresented in his COC that he is not related within the second civil degree of consanguinity or affinity to any incumbent elected national official or to any incumbent elected regional, provincial, city, municipal, or barangay official in the locality where he seeks to be elected. The truth, according to Kimberly is that Merson's mother, Marilyn C. Calubag (Marilyn) is an incumbent member of the Sangguniang Barangay (SB) of Barangay Magtangale.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>To support the Petition, Kimberly attached Marilyn's Panunumpa sa Katungkulan<sup style="COLOR: RGB(255, 0, 0);">[7]</sup> as SB Member dated June 25, 2018, and her Barangay Official Information Sheet,<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> indicating that she is a SB Member for Barangay Magtangale and that one of her beneficiaries is her son, named Merson C. Calubag.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>According to the COMELEC, despite receipt of its summons, Merson did not file an answer or any responsive pleading.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br>&nbsp;<br>Meanwhile, on October 25, 2023, the COMELEC <i>En Banc</i> issued an Omnibus Order<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> administratively suspending the proclamation of several candidates, including Merson, in case they win their respective electoral contests, pending the petitions for cancellation of COC or disqualification pending against them.<br><br><center><b>COMELEC's Ruling</b></center><br>In its Resolution<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> dated October 10, 2023, the COMELEC Second Division granted the Petition. It cancelled and denied due course to Merson's COC. The records of the case were also forwarded to the COMELEC's Law Department for the conduct of a preliminary investigation regarding the election offense aspect of the case.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>The COMELEC Second Division found that the Petition presented substantial evidence that Merson misrepresented a material fact in his COC. On this note, the COMELEC Second Division pointed out that Section 10<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> of Republic Act No. 10742<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> provides that an official of the SK must, among others, <i>not be related within the second civil degree of consanguinity or affinity</i> to any incumbent elected national official or to any incumbent elected regional, provincial, city, municipal, or barangay official, in the locality where they seek to be elected. Here, Merson certified that the facts stated in his COC are true and correct, it included Item No. 10, which states: "I am not related within the 2<sup>nd</sup>&nbsp;civil degree of consanguinity or affinity to any incumbent elected national official or to any incumbent elected regional, provincial, city, municipal, or barangay official, in the locality where I seek to be elected."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> The reverse being true, the COMELEC Second Division found him guilty of misrepresenting a material fact in his COC.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Merson moved for reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> where he first denied receiving the COMELEC's summons, whether personally, by registered mail, or electronic mail. Then, he denied the charge of material misrepresentation. According to him, on August 25, 2023, his mother, Marilyn, resigned from her position as SB Member. To prove this, he attached a copy of Marilyn's resignation letter,<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> ostensibly dated August 25, 2023, which also indicates that the Mayor of San Francisco, Surigao del Norte acknowledged receipt of the letter.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Kimberly opposed<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Merson's Motion for Reconsideration, pointing out that apart from Merson's allegation, he did not present any proof that no copy of the summons was served on him. He also belied Merson's claim that Marilyn had already resigned from her post before Merson filed his COC. To prove this, he attached the logbook<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> of the barangay showing that Marilyn still reported for duty on August 30, 2023, five days after she allegedly resigned. Further, he attached the joint affidavit of the barangay secretary and treasurer, where both officials attested to Marilyn reporting for duty even after her supposed resignation.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> The barangay secretary also attested that on September 1, 2023, Marilyn approached him to seek assistance in drafting her resignation letter; and that it was only on September 6, 2023 that Marilyn handed her resignation letter to the members of the barangay council.<sup style="COLOR: RGB(255, 0, 0);">[24]</sup><br><br>In its Resolution<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> dated January 24, 2025, the COMELEC <i>En Banc</i> denied Merson's Motion for Reconsideration and affirmed the cancellation of his COC.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> In so ruling, the COMELEC <i>En Banc</i> noted that the summons was served, not only personally but also electronically, through the e-mail address that Merson indicated in his COC. The COMELEC <i>En Banc</i> explained that under COMELEC Resolution No. 10924,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> candidates filing their COCs are held responsible for ensuring that the e-mail address or physical address that they provide is accurate and accessible at all times. Thus, the COMELEC <i>En Banc</i> held that Merson's failure to check his e-mail account for any notices from the COMELEC should be taken against him.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>For his failure to file an answer, the COMELEC <i>En Banc</i> held that Merson may not be allowed to submit controverting evidence in his Motion for Reconsideration. At any rate, Kimberly presented substantial evidence that Merson materially misrepresented his qualifications in his COC.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>Hence, this Petition.<br><br><center><b>The Issues Before the Court</b></center><br>The core issues for the Court's resolution are as follows: <i>procedurally</i>, whether the COMELEC gravely abused its discretion in cancelling Merson's COC despite non-receipt of summons; and <i>substantively</i>, whether the COMELEC gravely abused its discretion in cancelling Merson's COC despite Marilyn's resignation from her position.<br><br>Merson argues that the COMELEC gravely abused its discretion in cancelling his COC despite not serving summons on him and the fact that at the time he filed his COC, his mother had already resigned from her position.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>In its Comment,<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> the COMELEC, through the Solicitor General, insists that it committed no grave abuse of discretion in canceling Merson's COC. It also faults him for filing the present petition despite the fact that the assailed Resolutions are based on substantial evidence.<br><br><center><b>The Court's Ruling</b></center><br>The Petition is without merit.<br><br><center><b>I</b></center><br>On the procedural issue, COMELEC Resolution No. 10924 sets out the rules, regulations, and general guidelines for the 2023 BSKE. Its Section 594(8) states:<blockquote>(8.) If the Petition is not summarily dismissed, the [Office of the Clerk of the Commission] (OCOC) shall issue the corresponding summons directly to the respondent or through the appropriate field office having jurisdiction over the party, via E-mail or, in areas where E-mail is inaccessible, through personal service services. The concerned field office shall serve [sic] personally serve a copy of the summons, Petition and annexes to the respondent.<br><br>Within a non-extendible period of three (3) days from receipt of the E-mail, the field office concerned shall send an affidavit of service and/or acknowledgment receipt to the OCOC through E-mail.</blockquote>The same Resolution, particularly Section 169(11), requires that the COC shall be under oath and state, among others, the "[<i>o</i>]<i>fficial e-mail address of the aspirant, for notice and election purposes</i>[.]" Relevantly, Section 594(2) also states:&nbsp;<br><blockquote>(2.) Any <i>notice or document</i> sent to the E-mail address provided in the COC <i>shall be considered received by the candidate</i>, and shall be binding on the candidate as if the notice or document had been personally served. <i>The candidate shall be responsible for ensuring that the E-mail address or physical address provided in the COC is accurate and accessible at all times</i>[.] (Emphasis supplied)</blockquote>The COMELEC's records show that summons was sent to Merson electronically through the e-mail address he himself indicated in his COC, apart from through registered mail. It was thus incumbent upon him to explain and submit evidence that the summons electronically sent to him was not actually received. To note, it is Merson's responsibility to ensure that his e-mail address is always accessible. Thus, even assuming that the summons was not physically served on him, the COMELEC rules allow electronic service of summons.<sup style="COLOR: RGB(255, 0, 0);">[32]</sup><br><br>Notably, Merson merely alleged without proof that he did not receive summons from the COMELEC. This is insufficient. To warrant the extraordinary remedy of <i>certiorari</i>, the party seeking it must prove that the government agency committed grave abuse of discretion.<br><br>Case law defines "grave abuse of discretion" as the "arbitrary or despotic exercise of power due to passion, prejudice or personal hostility; or the whimsical, arbitrary, or capricious exercise of power that amounts to an evasion or refusal to perform a positive duty enjoined by law or to act at all in contemplation of law."<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> This arbitrary or despotic exercise of power manifests in COMELEC resolutions that are issued despite the lack of substantial evidence supporting their legal conclusions;<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> or when the resolution in question violates the Constitution.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>From this standout, the Court is convinced that: <i>first</i>, Merson failed to prove that the summons was not electronically served on him, and <i>second</i>, consequently, the issuance of the COMELEC Resolutions despite the alleged non-receipt of summons was not attended by grave abuse of discretion.<br><br>This procedural issue having been settled, the Court now proceeds to the substantive issue at hand.<br><br><center><b>II</b></center><br>Among other qualifications, Republic Act No. 10742 also requires that a candidate for a position in the SK "<i>must not be related within the second civil degree of consanguinity or aff1nity to any incumbent elected national official, or to any incumbent elected regional, provincial, city municipal, or barangay official, in the locality where</i> [<i>they</i>] <i>seek to be elected</i>."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> During the legislative deliberation of the bills that will eventually become this law, lawmakers referred to this requirement as the "<i>Anti-Dynasty clause</i>."<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Implementing this law, the COMELEC required SK candidates to swear, through Item No. 10 of their COC, that they are not related within the second civil degree of consanguinity or affinity to any incumbent elected national official, or to any incumbent elected regional, provincial, city, municipal, or barangay official, in the locality where they seek to be elected. Merson signed his COC and in doing so, swore that he is not so related to any incumbent official when he filed his COC.<br><br>Substantial evidence, however, contradicts him. As discussed, records show that at the time of the filing of his COC, Merson's mother, Marilyn, was an incumbent SB Member in the same barangay where Merson sought to be elected as SK Chairperson.<br><br>In his Petition before the Court, Merson avoids altogether the evidence presented by respondent Kimberly, which clearly shows that Marilyn reported for duty despite supposedly resigning on August 25, 2023. Further, the barangay secretary even stated in his sworn statement that Marilyn was drafting her resignation as late as September l, 2023, which again Merson neither responded to nor rebutted.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> Instead, he insists, despite evidence to the contrary, that his mother resigned on an earlier date. Thus, Merson clearly misrepresented a material fact in relation to his qualifications in his COC. Following the law,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> his COC must be cancelled.<br><br>As stated earlier, the Court, in reviewing COMELEC's rulings, must determine whether the electoral body issued the assailed resolution with grave abuse of discretion. Anchored as it is on substantial evidence and statute, the COMELEC Resolution cannot be considered as issued with or tainted by grave abuse of discretion. Hence, must be sustained.<br><br><center><b>III</b></center><br>The Court recognizes the legislative framework provided in Republic Act No. 10742 for preventing the creation and expansion of political dynasties in the country as the Legislative's answer to the constitutional call to define political dynasties, at least at the barangay and SK levels.<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> It breathes life to the constitutionally enshrined policy of the sovereign to prohibit political dynasties. In Republic Act No. 10742, the Legislative acted on this policy and prohibited the entry into politics of SK candidates who are related to other incumbent national or local officials within the second civil degree. The Court is also aware that apart from Republic Act No. 10742, no law before or since has provided a workable definition of what constitutes a political dynasty. Furthermore, Republic Act No. 10742 is restricted in its application to those seeking SK election and does not apply to candidates for higher local and national election offices.<br><br>Meanwhile, with the founding of the Fifth Republic came the constitutional prohibition against political dynasties. Despite this, however, these dynasties have been neither prohibited nor curtailed. Quite the opposite, the <i>Philippine Center for Investigative Journalism</i> reports that as of 2024, 216 of the country's 253 legislative districts are represented by "individuals who at least have one other relative previously or currently elected into public office."<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> Local governments fare no better. As of this year, 113 of the country's 149 cities are helmed by mayors who belong to political dynasties.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup><br><br>That 80% of the district seats in the House of Representatives and 75% of the country's cities are "ruled" by political dynasties is an affront to the Constitution. To be clear, the reasons behind the prohibition of political dynasties are not difficult to discern. Time and again, the concentration of political power to a few families or clans, long held to be the aim and effect of political dynasties,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> has been shown to "skew economic and political institutions to favour and protect the private interests of elites."<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> And perhaps more unfortunately, political dynasties and elite interests thrive and become even more predatory the more underdeveloped and farther their localities are from the national capital.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> The Constitution, to say the least, does not countenance this. As a nation, neither should We.<br><br><b>ACCORDINGLY</b>, the Petition is <b>DENIED</b>. The Resolution dated October 10, 2023 of the Commission on Elections Second Division, and the Resolution dated January 24, 2025 of the Commission on Elections <i>En Banc</i> in SPA No. 23-023 (BRGY) are <b>AFFIRMED <i>in toto</i></b>.<br><br>The certificate of candidacy filed by petitioner Merson C. Calubag for the position of chairperson, Sangguniang Kabataan of Barangay Magtangale, San Francisco, Surigao del Norte for the 2023 Barangay and Sangguniang Kabataan Elections is <b>DENIED DUE COURSE</b> and <b>CANCELLED</b>.<br><br>Let a copy of the Decision in this case be furnished to the House of Representatives and the Senate of the Philippines for their reference.<br><br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Leonen, SAJ., Caguioa, Hernando, Lazaro-Javier, Inting, Zalameda, Gaerlan, Rosario, Lopez, Dimaampao, Marquez</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i> on leave.<br>&nbsp;<br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 4-17.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 20-25. Signed by Presiding Commissioner Marlon S. Casquejo and Commissioners Rey E. Bulay and Nelson J. Celis.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 28-33. Signed by Chairperson George Erwin M. Garcia and Commissioners Socorro B. Inting, Marlon S. Casquejo, Aimee P. Ferolino, Rey B. Bulay, Ernesto Ferdinand P. Maceda, Jr., and Nelson J. Celis.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 41-42.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 34-37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 43.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 38-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 69-72.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 20-25. Signed by Presiding Commissioner Marlon S. Casquejo and Commissioners Rey E. Bulay and Nelson J. Celis.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> SECTION 10. <i>Qualifications</i>. — An official of the Sangguniang Kabataan, either elective or appointee, must be a citizen of the Philippines, a qualified voter of the Katipunan ng Kabataan, a resident of the barangay for not less than one (1) year immediately preceding the day of the elections, at least eighteen (18) years but not more than twenty-four (24) years of age on the day of the elections, able to read and write Filipino, English, or the local dialect, must not be related within the second civil degree of consanguinity or affinity to any incumbent elected national official or to any incumbent elected regional, provincial, city, municipal, or barangay official, in the locality where he or she seeks to be elected, and must not have been convicted by final judgment of any crime involving moral turpitude.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> An Act Establishing Reforms in the Sangguniang Kabataan Creating Enabling Mechanisms for Meaningful Youth Participation in Nation-Building, and for other purposes (2015).<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Rollo</i>, p. 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 45-51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 53.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 54.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 59-61.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 63-64.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 65-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 28-33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> General Guidelines and other Related Rules and Regulations for the October 30, 2023 Barangay and Sangguniang Kabataan Elections and All Succeeding BSKEs thereafter (2023).<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Rollo</i>, pp. 30-31.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Id.</i> at 8-10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id.</i> at 82-107.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id.</i> at 31-32.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <b>Beluso v. Commission on Elections</b>, 635 Phil. 436, 443 (2010) [Per J. Peralta, <i>En Banc</i>],<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>De Alban v. Commission on Elections</b>, 921 Phil. 524 (2022) [Per J. M. Lopez, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Atty. Macalintal v. Commission on Elections</b>, 943 Phil. 212 (2023) [Per J. Kho, Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> Republic Act No. 10742 (2015), sec. 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>See</i> II Record, Senate, 16<sup>th</sup> Congress, 2<sup>nd</sup> Session (February 3, 2015); II Record, Senate, 16<sup>th</sup> Congress, 2<sup>nd</sup> Session (February 4, 2015); Bicameral Conference Committee Hearing, l6<sup>th</sup> Session, 3<sup>rd</sup> Regular Session, October 6, 2015.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Rollo</i>, pp. 63-66.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> OMNIBUS ELECTION CODE, sec. 78 in relation to sec. 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> CONST., art. 11, sec. 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>8 in every 10 district rcps belong to dynasties. More than half are reelectionists in 2025</i>, Guinevere Latoza and Maujerie Miranda, <a href="https://pcij.org/2024/10/26/lower-house-district-representatives-political-dynasties-reelection">https://pcij.org/2024/10/26/lower-house-district-representatives-political-dynasties-reelection</a>, (last accessed on September 30, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>113 out of 149 Philippine cities also ruled by political dynasties</i>, Guinevere Latoza, Angela Ballerda, and Gabriel Oliveros, <a href="https://pcij.org/2025/01/26/113-out-of-149-philippine-cities-also-ruled-by-political-dynasties/">https://pcij.org/2025/01/26/113-out-of-149-philippine-cities-also-ruled-by-political-dynasties/</a>, (last accessed on September 30, 2025).<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> J. Carpio, Dissenting Opinion, <b>Navarro v. Ermita</b>, 663 Phil. 546, 623 (2011) [Per J. Nachura, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Structural Inequality in the Philippines: Oligorch, (Im)mobility, and Economic Transformation</i>, Philip Arnold Tuaño and Jerik Cruz, 36 JOURNAL OF SOUTHEAST ASIAN ECONOMICS, 304, 322 (2019).<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Political dynasties, business, and poverty in the Philippines</i>, Ronald U. Mendoza, Jurel K. Yap, Gabrielle Ann S. Mendoza. Leonardo Jaminola III, and Erica Celine Yun, JOURNAL OF GOVERNMENT AND ECONOMICS, <a href="https://doi.org/10.1016/j.jgc.2022.100051">https://doi.org/10.1016/j.jgc.2022.100051</a>, (last accessed October 1, 2025).</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 265114 - LIZZA C. SANTOS, PETITIONER, VS. LOCAL CIVIL REGISTRAR OF MANILA AND THE CIVIL REGISTRAR GENERAL, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70377' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 265114, February 03, 2026 ]</H2>
+			<H3>LIZZA C. SANTOS, PETITIONER, VS. LOCAL CIVIL REGISTRAR OF MANILA AND THE CIVIL REGISTRAR GENERAL, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">An allegation of forgery is never presumed, and it must always be proven by the party making that claim with clear and convincing evidence. Without such clear and convincing evidence, courts cannot assess and determine a signature to be a mere forgery.<br><br>This resolves a Petition for Review on<i> Certiorari</i><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> assailing the Court of Appeals' Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution,<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> affirming the Regional Trial Court's Decision<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> dismissing petitioner's Petition for the Correction of Entries in the Marriage Certificate.<br><br>Lizza C. Santos (Santos) filed a Petition before the Regional Trial Court for the correction of entries in an ostensibly valid marriage certificate that she secured from the Manila Local Civil Registrar.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> The assailed marriage certificate states that Santos married Yoshio Imai (Imai), a Japanese citizen, "on August 7, 2010, at 10:00 a.m. at the Manila City Hall before Rev. Gonzalo O. Rialp."<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> It also bears Santos's signature, "certifying that she appeared" during that marriage ceremony.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>In her Petition, Santos asked the Regional Trial Court to cancel the following parts of the marriage certificate: (1) "the entire wife portion"; (2) the "place and date of marriage"; and (3) her "name and signature...in the place and date of marriage."<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> The Regional Trial Court gave due course to Santos's Petition.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>In her testimony, Santos stated "that, except for the address indicated therein, the entries in the wife portion of the [marriage certificate] bear all her correct information."<sup style="COLOR: RGB(255, 0, 0);">[10]</sup> She said that she did not marry Imai on August 7, 2010 at the Manila City Hall. She claimed, instead, that her signature was forged onto the marriage certificate.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Santos did not present expert testimony from the National Bureau of Investigation to support her allegation of forgery.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> She gave the National Bureau of Investigation a photocopy of the marriage certificate and asked them to examine it for forgery.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> She noted that the National Bureau of Investigation did respond to her request, informing her that they "cannot render a definite opinion on the matter" because she only gave them a photocopy of the marriage certificate "which does not truly and clearly reflect the details of the writing strokes."<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> She further said that the National Bureau of Investigation also told her that "the sample specimen signatures [she] submitted are inappropriate to serve as basis for a scientific comparative examination."<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Santos explained that the National Bureau of Investigation did not examine her signature on the marriage certificate because they "required her to submit documents [showing] her full signature but she failed to do so."<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Santos then maintained that she only discovered her marriage to Imai in 2015, when she tried to get a Certificate of No Marriage.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> According to her, that was when she obtained the marriage certificate from the Manila Local Civil Registrar.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> She said that on August 7, 2010, the date of her marriage to Imai, she was in Sta. Maria, Bulacan, working for Q.C. Styropackaging Corporation (Q.C. Styropackaging).<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Santos then presented other testimonial evidence. She presented her mother, Eugenia Celestino Santos, who said that Santos did not seek her parents' advice on or consent to a marriage with Imai.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Santos also presented her co-worker at Q.C. Styropackaging, Marty Dolores (Dolores), and her neighbor Genalyn Bote (Bote). The two backed Santos's claim that she was working in Bulacan on August 7, 2010. Bote said that at 5:30 a.m. that day, she saw Santos "wearing [her] uniform to report for work" and later at 7:00 p.m. she saw Santos cooking dinner at their house.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Dolores said that on that day Santos was at their workplace from 6:00 a.m. to 6:00 p.m.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Neither Dolores nor Santos presented Santos's daily time record for that date as documentary evidence.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>Meanwhile, the Office of the City Prosecutor of Manila, which the Office of the Solicitor General authorized to appear in this case,<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> manifested that "the respondents will no longer present evidence."<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>The Regional Trial Court, in its March 4, 2019 Decision dismissed Santos's petition:<sup style="COLOR: RGB(255, 0, 0);">[26]</sup><br><blockquote>WHEREFORE, for failure of the petitioner to prove by substantial evidence that it is entitled to the relief prayed for, the instant Petition is hereby DISMISSED.<br><br>SO ORDERED. </blockquote>The Regional Trial Court found that Santos failed to support her claim of forgery with clear and convincing evidence,<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> namely, (1) to support her alibi of being at her Bulacan workplace from 6:00 a.m. to 6:00 p.m. of August 7, 2010, Santos relied solely on her and her witnesses' testimonies; (2) Santos did not address the fact that her Bulacan workplace is close enough to the Manila City Hall for her to have been in both places on the same date; and (3) despite hinging her whole petition on her allegation of her signature's forgery on the assailed marriage certificate, she presented "neither documentary evidence...nor testimony of a handwriting expert" to prove that claim.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup><br><br>The Regional Trial Court also differentiated Santos's case from the <i>Republic v. Olaybar</i>,<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> where the Supreme Court had granted the respondent's prayer for the "cancellation of the wife entry in [an] alleged Certificate of Marriage."<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> The court ruled against applying<i> Olaybar</i> to Santos's case, stating that, unlike the party there, Santos did not "clearly [establish] that the Certificate of Marriage was a forgery."<sup style="COLOR: RGB(255, 0, 0);">[31]</sup><br><br>On appeal, the Court of Appeals, in its June 20, 2022 Decision, affirmed<i> in toto</i> the ruling against Santos,<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> emphasizing that she "failed to prove by substantial evidence that she was not the one who contracted marriage on August 7, 2010 with one Yoshio Imai."<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> The Court of Appeals similarly found<i> Olaybar</i> inapplicable to her case.<br><br>Following the Court of Appeals' denial of her July 18, 2022 Motion for Reconsideration,<sup style="COLOR: RGB(255, 0, 0);">[34]</sup> through its January 4, 2023 Resolution,<sup style="COLOR: RGB(255, 0, 0);">[35]</sup> Santos filed the present Petition.<br><br>In her Petition, petitioner claims that the Court of Appeals erred in affirming the Regional Trial Court's ruling that she failed to substantiate her claim of forgery with clear, positive, and convincing evidence. She says that she is the "best witness to testify that there was no marriage celebrated between her and one Yoshio Imai."<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> She rejects knowing such person and that she only learned of the supposed existence of their marriage when she had tried to secure a certificate of no marriage to marry her fiance.<sup style="COLOR: RGB(255, 0, 0);">[37]</sup><br><br>Petitioner maintains that it was incorrect to dismiss her petition because she failed to present any documentary evidence or expert testimony to show that the signature on the certificate was not hers.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> She cites <i>Mendoza v. Fermin</i>,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> which says that "a finding of forgery does not depend entirely on the testimony of handwriting experts and that the judge still exercises independent judgment on the issue of authenticity of the signatures under scrutiny."<sup style="COLOR: RGB(255, 0, 0);">[40]</sup><br><br>She points to her signatures in the Petition as well as to letters dated July 11, 2016 and July 19, 2016 to show that she is not the same person who contracted marriage with Imai.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup> She argues that she also presented witnesses such as her mother, her co-worker, and her neighbor.<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Petitioner says that she "was able to prove by preponderance of evidence that she did not marry Yoshio Imai on 7 August 2010."<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> She claims that because the opposing party did not object to these pieces of evidence during trial, nor did they refute her claims with their own evidence, then she has sufficiently proven her case <sup style="COLOR: RGB(255, 0, 0);">[44]</sup><br><br>For its part, respondents, through the Office of the Solicitor General, filed their Comment<sup style="COLOR: RGB(255, 0, 0);">[45]</sup> Respondents first argue that the issues raised in the petition are factual in nature and are therefore outside the scope of a Rule 45 review, as this remedy only concerns pure questions of law.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>Respondents also argue that the Court of Appeals correctly affirmed the Regional Trial Court's finding that, based on the totality of petitioner's evidence, she failed to prove that the marriage never took place.<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> Respondents contend that forgery is never presumed, and it must be proven by clear, positive, and convincing evidence.<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> Petitioner could have shown this if she had complied with the National Bureau of Investigation's request to prove it with documents bearing her original signature, but she did not.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> Respondents say that "it was petitioner's failure to present sufficient evidence, and not the lack of a handwriting expert, which led the trial court to dismiss her petition."<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>Moreover, respondents claim that petitioner's argument is essentially an alibi, similar to a criminal defense, but she did not show that it was physically impossible for her to be at the Manila City Hall for the marriage ceremony on August 7, 2010.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup> Her daily time record was not even presented as evidence to show that she was at work during that time.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup><br><br>Finally, according to respondents,<i> Olaybar</i> is inapplicable because the party in<i> Olaybar</i> was able to establish that there was no marriage celebration.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup><br><br>In response, petitioner filed her Reply.<sup style="COLOR: RGB(255, 0, 0);">[54]</sup> She claims that her Petition falls under one of the exceptions to the rule that only questions of law may be raised in a Rule 45 petition. Particularly, she says that the judgment was based on a misapprehension of facts.<sup style="COLOR: RGB(255, 0, 0);">[55]</sup><br><br>As to the substantial issue, petitioner insists that she was able to prove that she did not contract marriage with Yoshio Imai on August 7, 2010. She repeats her argument that she is the best witness to testify to this fact,<sup style="COLOR: RGB(255, 0, 0);">[56]</sup> as well as her testimony during trial.<sup style="COLOR: RGB(255, 0, 0);">[57]</sup> Regarding her signature, she also restates that her signature appeared on the petition as well as to the letters she submitted.<sup style="COLOR: RGB(255, 0, 0);">[58]</sup> Petitioner also reiterates the testimonies of her witnesses, particularly her mother, her co-worker, and her neighbor, to show that it was physically impossible for her to be at the marriage ceremony in Manila since her workplace is located in Bulacan and her schedule was from 6:00 a.m. to 6:00 p.m.<sup style="COLOR: RGB(255, 0, 0);">[59]</sup> She also maintains that<i> Olaybar</i> was applicable, and that the opposing party failed to object to the evidence she presented during trial.<sup style="COLOR: RGB(255, 0, 0);">[60]</sup><br><br>The issues for this Court's resolution are as follows: first, whether the petition should be denied for raising questions of fact; and second, whether the Court of Appeals erred in affirming the dismissal of the Petition for the Correction of Entries in the Marriage Certificate.<br><br><center><b>I</b></center><br>It is well-settled that only questions of law may be raised in petitions for review under Rule 45.<sup style="COLOR: RGB(255, 0, 0);">[61]</sup> This Court will not entertain questions of fact as the factual findings of appellate courts are "final, binding, or conclusive on the parties and upon this court" when supported by substantial evidence. The appellate court's factual findings will not be reviewed nor disturbed by this Court on appeal.<sup style="COLOR: RGB(255, 0, 0);">[62]</sup> Thus, raising issues in a petition for review that are substantially factual in nature is a ground to dismiss the petition. Although exceptions to this rule are recognized in jurisprudence, mere allegation of any of the exceptions does not suffice. Exceptions must be "alleged, substantiated, and proved by the parties so this court may evaluate and review the facts of the case."<sup style="COLOR: RGB(255, 0, 0);">[63]</sup><br><br>In this case, petitioner wants this Court to revisit the factual finding of the lower courts regarding the alleged forgery of her signature. The authenticity of her signature as it appears on the marriage certificate is clearly a question of fact which this Court cannot entertain in a Rule 45 petition. Neither can the court review evidence on whether a marriage ceremony took place on August 7, 2010. This is a ground for the Court to deny the present Petition.<br><br>However, even on the substantive issue, the Petition fails.<br><br><center><b>II</b></center><br>A marriage certificate is "an official record in the custody of the Civil Registrar... [which] enjoys the presumption of regularity and authenticity."<sup style="COLOR: RGB(255, 0, 0);">[64]</sup> Moreover, it is a public document. Under the Revised Rules on Evidence, its entries are "<i>prima facie</i> evidence of the facts therein stated,"<sup style="COLOR: RGB(255, 0, 0);">[65]</sup> and it is in itself "evidence...of the fact which gave rise to [its] execution and of the date of the latter."<sup style="COLOR: RGB(255, 0, 0);">[66]</sup> Therefore, for the marriage certificate to be deemed a forgery, petitioner needed to present no less than "clear, positive[,] and convincing evidence."<sup style="COLOR: RGB(255, 0, 0);">[67]</sup><br><br>This Court, in<i> Tankeh v. Development Bank of the Philippines</i>,<sup style="COLOR: RGB(255, 0, 0);">[68]</sup> defined "clear and convincing evidence" as "less than proof beyond reasonable doubt (for criminal cases) but greater than preponderance of evidence (for civil cases)," such that the "degree of believability is higher than that of an ordinary civil case.<sup style="COLOR: RGB(255, 0, 0);">[69]</sup><br><br>Thus, petitioner should have submitted supporting expert testimony or come up with other evidence—which must be clear, positive, and convincing—that the Regional Trial Court could use to check for forgery.<br><br>Yet petitioner submitted neither documentary evidence nor a testimony of a handwriting expert. To reiterate, while petitioner was not bound or required to present, specifically, expert testimony in support of her allegation of forgery, she still needed to give the court other independent evidence to that effect. She did not.<br><br>Worse, she admits that, with her body of testimonial evidence, she can only lay claim to having "prove[d] by preponderance of evidence that she did not marry Yoshio Imai on 7 August 2010."<sup style="COLOR: RGB(255, 0, 0);">[70]</sup> Rather than provide the requisite clear and convincing evidence in support of her allegation of forgery, petitioner herself says that she showed only a "probability of truth" to her claim.<sup style="COLOR: RGB(255, 0, 0);">[71]</sup><br><br>Since petitioner had neither expert testimony to rely on, nor any other independent evidence to prove the alleged forgery, she did not meet the burden of proof placed upon her. As this Court ruled in<i> Tenio-Obsequio v. Court of Appeals</i>,<sup style="COLOR: RGB(255, 0, 0);">[72]</sup> "[f]orgery cannot be presumed" and "must be proved by clear, positive[,] and convincing evidence," with those who allege it having "the burden of proving it since a mere allegation is not evidence."<sup style="COLOR: RGB(255, 0, 0);">[73]</sup> In other words, petitioner's bare denial does not count as sufficient "evidence against the genuineness of her signature" in the marriage certificate.<sup style="COLOR: RGB(255, 0, 0);">[74]</sup><br><br>She cannot now argue that the Regional Trial Court and the Court of Appeals dismissed her petition only because she had no expert testimony stating that her signature on the marriage certificate was forged.<sup style="COLOR: RGB(255, 0, 0);">[75]</sup> The Regional Trial Court<sup style="COLOR: RGB(255, 0, 0);">[76]</sup> and the Court of Appeals<sup style="COLOR: RGB(255, 0, 0);">[77]</sup> properly ruled against her on the issue of forgery. As respondents point out, it was her failure to present sufficient evidence, and not the lack of a handwriting expert, which led to her petition's dismissal.<br><br>Lastly, this Court sees no reason to diverge from the Court of Appeals' finding that<i> Republic v. Olaybar</i><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> is inapplicable to this case.<sup style="COLOR: RGB(255, 0, 0);">[79]</sup><br><br>The crucial circumstances in<i> Olaybar</i>, which led to this Court's ruling "allowing the correction of the...certificate of marriage by cancelling the wife portion thereof," are as follows:<br><blockquote>Respondent requested from the National Statistics Office (NSO) a Certificate of No Marriage (CENOMAR)...Upon receipt thereof, she discovered that she was already married to a certain Ye Son Sune, a Korean National, on June 24, 2002, at the Office of the Municipal Trial Court in Cities (MTCC), Palace of Justice. She denied having contracted said marriage and claimed that she did not know the alleged husband; she did not appear before the solemnizing officer; and, that the signature appearing in the marriage certificate is not hers. She, thus, filed a Petition for Cancellation of Entries in the Marriage Contract, especially the entries in the wife portion thereof. Respondent impleaded the Local Civil Registrar of Cebu City, as well as her alleged husband, as parties to the case.<br><br>During trial, respondent testified on her behalf and explained that she could not have appeared before Judge Mamerto Califlores, the supposed solemnizing officer, at the time the marriage was allegedly celebrated, because she was then in Makati working as a medical distributor in Hansao Pharma. She completely denied having known the supposed husband, but she revealed that she recognized the named witnesses to the marriage as she had met them while she was working as a receptionist in Tadels Pension House. She believed that her name was used by a certain Johnny Singh, who owned a travel agency, whom she gave her personal circumstances...for her to obtain a passport. Respondent also presented as witness a certain Eufrocina Natinga, an employee of MTCC, Branch 1, who confirmed that the marriage of Ye Son Sune was indeed celebrated in their office, but claimed that the alleged wife who appeared was definitely not respondent. Lastly, a document examiner testified that the signature appearing in the marriage contract was forged.<sup style="COLOR: RGB(255, 0, 0);">[80]</sup> (Citations omitted) </blockquote>None of those controlling circumstances are present here. As the Court of Appeals succinctly explained, unlike the party in<i> Olaybar</i>, petitioner failed to establish the physical impossibility of her having participated in the wedding, on a day where she also went to work. She failed to explain how or why the assailed marriage certificate could have come to bear "all the correct information referring to her," except only her address,<sup style="COLOR: RGB(255, 0, 0);">[81]</sup> and to present witnesses from the wedding who could confirm that she was not the woman who appeared and got married to Imai.<sup style="COLOR: RGB(255, 0, 0);">[82]</sup> Moreover, although the Office of the Solicitor General, through the Office of the City Prosecutor, participated during the trial, the alleged spouse Imai was not impleaded.<br><br>Thus, the Court of Appeals ruled:<br><blockquote>[T]o support her petition, Santos cited... <i>Republic of the Philippines v. Olaybar</i>, whereby the Supreme Court upheld the trial court's decision granting the petition therein and directing the local civil registrar to cancel all the entries in the 'wife' section of the alleged marriage certificate. A careful reading of the above-cited case, however, reveals that the same does not find application in this case. In... <i>Olaybar</i>[, ]petitioner therein was able to establish that no such marriage was celebrated between her and the alleged groom through her own testimony that she could not have appeared before the Judge at the Office of the Municipal Trial Court in Cities (MTCC) in Cebu City because at the time, she was working in Makati, that she recognized the named witnesses therein as she had met them while she was working there as a receptionist at a pension house, and that she believed her name was used by a person who owned a travel agency to whom she gave her personal circumstances in order for her to obtain a passport; the testimony of an employee of the MTCC who confirmed that the marriage of the alleged groom was indeed celebrated in their office but the alleged wife who appeared was definitely not petitioner therein; and, the testimony of a document examiner stating that the signature appearing in the marriage contract was forged. On the contrary,...Santos failed to establish that she did not contract marriage or is not the same person who contracted marriage with Yoshio Imai at the Manila City Hall on August 7, 2010, as evidenced by the marriage certificate. Santos also readily admitted that, except for the address indicated therein, the entries in the wife portion of the certificate of marriage bears all her correct information, without even attempting to explain how all her information ended up in the marriage certificate.<sup style="COLOR: RGB(255, 0, 0);">[83]</sup> </blockquote>As discussed in<i> Olaybar</i>, Rule 108 of the Rules of Court provides the procedure to cancel or correct an entry in the civil registry. It is a special proceeding that may be summary, if the correction is merely clerical, or adversarial, if the entry concerned affects a party's civil status, citizenship, or nationality. In cases involving the correction or cancellation of an entry in a marriage certificate which is not clerical in nature, a proper adversarial proceeding should be held, where both the civil registrar and the supposed spouse, as the person who has interest in the case, shall be impleaded. Moreover, the petitioner shall introduce independent evidence that no marriage involving the petitioner actually took place. When there is an allegation of forgery, such should be proven by clear and convincing evidence; self-serving allegations are not sufficient.<br><br><i>Olaybar</i> also warns against the use of a petition for correction or cancellation of an entry in the marriage certificate as a substitute for a direct action to question the validity of a marriage. Petitioner cannot dissolve her marriage by the mere changing of the entries in the marriage certificate.<br><br>The Court of Appeals properly affirmed the Regional Trial Court's dismissal of the Petition for the Correction of Entries the Marriage Certificate, which states that petitioner married Imai, since petitioner failed to prove that no marriage ceremony took place and that the signature appearing on the marriage certificate was a mere forgery.<br><br><b>ACCORDINGLY</b>, the Petition for Review on<i> Certiorari</i> is <b>DENIED</b>. The Court of Appeals' June 20, 2022 Decision and January 4, 2023 Resolution in CA-G.R. CV No. 114193 are <b>AFFIRMED</b>.<br><br><b>SO ORDERED.</b><br><br><i>Lazaro-Javier, J. Lopez, Kho, Jr.,</i> and <i>Villanueva, JJ.,</i> concur.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 13-30.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id</i>. 32-41. The June 20, 2022 Decision in CA-G.R. CV No. 114193 was penned by Associate Justice Ramon M. Bato, Jr. and concurred in by Associate Justices Germano Francisco D. Legaspi and Roberto P. Quiroz of the Fourth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id</i>. at 43-44. The January 4, 2023 Resolution in CA-G.R. CV No. 114193 was penned by Associate Justice Ramon M. Bato, Jr. and concurred in by Associate Justices Germano Francisco D. Legaspi and Roberto P. Quiroz of the Former Fourth Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id</i>. at 121-126. The March 4, 2019 Decision in SP. Proc. Case No. 16-136613 was penned by Presiding Judge Alma Crispina B. Collado-Lacorte of Branch 21 of the Regional Trial Court, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id</i>. at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id</i>. at 51.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id</i>. at 121.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id</i>. at 40, 123.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id</i>. at 69.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id</i>. at 122-123.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id</i>. at 81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id</i>. at 122-123.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id</i>. at 33.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id</i>. at 122.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id</i>. at 123.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id</i>. at 124.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id</i>. at 123.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id</i>. at 34.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id</i>. at 124.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id</i>. at 126.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Id</i>. at 125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> 726 Phil. 378 (2014) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i>, p. 126.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Id</i>. at 31-41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id</i>. at 40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id</i>. at 142-148.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <i>Id</i>. at 43-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id</i>. at 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id</i>. at 20-21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> 738 Phil. 429 (2014) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> <i>Id</i>. at 441 <i>citing</i> <b>Heirs of Severa P. Gregorio v. Court of Appeals</b>, 360 Phil. 753 (1998) [Per J. Purisima, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Rollo</i>, p. 21.<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>Id</i>. at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> <i>Id</i>. at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id</i>. at 164-181.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id</i>. at 169-171.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Id</i>. at 172.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Id</i>. at 173.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <i>Id</i>. at 174.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id</i>. at 174-175.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <i>Id</i>. at 175.<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <i>Id</i>. at 175-176.<br><br><sup style="COLOR: RGB(255, 0, 0);">[54]</sup> <i>Id</i>. at 197-208.<br><br><sup style="COLOR: RGB(255, 0, 0);">[55]</sup> <i>Id</i>. at 198-199.<br><br><sup style="COLOR: RGB(255, 0, 0);">[56]</sup> <i>Id</i>. at 199.<br><br><sup style="COLOR: RGB(255, 0, 0);">[57]</sup> <i>Id</i>. at 200.<br><br><sup style="COLOR: RGB(255, 0, 0);">[58]</sup> <i>Id</i>.<br><br><sup style="COLOR: RGB(255, 0, 0);">[59]</sup> <i>Id</i>. at 201-202.<br><br><sup style="COLOR: RGB(255, 0, 0);">[60]</sup> <i>Id</i>. at 203-204.<br><br><sup style="COLOR: RGB(255, 0, 0);">[61]</sup> RULES OF COURT, Rule 45, sec. 1.<br><br><sup style="COLOR: RGB(255, 0, 0);">[62]</sup> <b>Pascual v. Burgos</b>, 776 Phil. 167, 182 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[63]</sup> <i>Id</i>. at 169.<br><br><sup style="COLOR: RGB(255, 0, 0);">[64]</sup> <b>Republic v. Harp</b>, 787 Phil. 33, 52 (2016) [Per C.J. Sereno, First Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[65]</sup> RULES OF COURT, Rule 130, sec. 44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[66]</sup> RULES OF COURT, Rule 132, sec. 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[67]</sup> <b>Fernandez v. Fernandez</b>, 416 Phil. 322, 342 (2001) [Per J. Gonzaga-Reyes, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[68]</sup> 720 Phil. 641 (2013) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[69]</sup> <i>Id</i>. at 675-676.<br><br><sup style="COLOR: RGB(255, 0, 0);">[70]</sup> <i>Rollo</i>, p. 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[71]</sup> <i>Id</i>. at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[72]</sup> 300 Phil. 588 (1994) [Per J. Regalado, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[73]</sup> <i>Id</i>. at 599.<br><br><sup style="COLOR: RGB(255, 0, 0);">[74]</sup> <i>See</i> <b>Aloria v. Clemente</b>, 518 Phil. 764, 777 (2006) [Per J. Carpio Morales, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[75]</sup> <i>Rollo</i>, p. 20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[76]</sup> <i>Id</i>. at 125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[77]</sup> <i>Id</i>. at 39.<br><br><sup style="COLOR: RGB(255, 0, 0);">[78]</sup> 726 Phil. 378 (2014) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[79]</sup> <i>Rollo</i>, pp. 39-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[80]</sup> <b>Republic v. Olaybar</b>, 726 Phil. 378, 381-382 (2014) [Per J. Peralta, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[81]</sup> <i>Rollo</i>, p. 125.<br><br><sup style="COLOR: RGB(255, 0, 0);">[82]</sup> <i>Id</i>. at 39-40.<br><br><sup style="COLOR: RGB(255, 0, 0);">[83]</sup> <i>Id</i>.</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

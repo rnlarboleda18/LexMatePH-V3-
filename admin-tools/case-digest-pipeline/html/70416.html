@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 276843 and 276933 - RAFAEL D. CERVANTES, PETITIONER, VS. JEBSEN PTC MARITIME, INC., AS LOCAL MANNING AGENT TO ITS FOREIGN PRINCIPAL, MCL SHIPPING, LTD., RESPONDENT.[G.R. No. 276933]JEBSEN PTC MARITIME, INC., AS LOCAL MANNING AGENT TO ITS FOREIGN PRINCIPAL, MCL SHIPPING, LTD., PETITIONER, VS. RAFAEL D. CERVANTES, RESPONDENT.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70416' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>SECOND DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 276843 and 276933, December 01, 2025 ]</H2>
+			<H3>RAFAEL D. CERVANTES, PETITIONER, VS. JEBSEN PTC MARITIME, INC., AS LOCAL MANNING AGENT TO ITS FOREIGN PRINCIPAL, MCL SHIPPING, LTD., RESPONDENT.<br><br>[G.R. No. 276933]<br><br>JEBSEN PTC MARITIME, INC., AS LOCAL MANNING AGENT TO ITS FOREIGN PRINCIPAL, MCL SHIPPING, LTD., PETITIONER, VS. RAFAEL D. CERVANTES, RESPONDENT.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>LEONEN, SAJ.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">There are three separate and distinct liabilities of an employer under the Philippine Overseas Employment Administration-Standard Employment Contract (POEA-SEC): "(a) payment of medical treatment of the employee; (b) payment of sickness allowance, both until the seafarer is declared fit to work or when his disability rating is determined; and (c) payment of the disability benefit (total or partial), in case the seafarer is not declared fit to work after being treated by the company-designated physician."<sup style="COLOR: RGB(255, 0, 0);">[1]</sup><br><br>This resolves two Petitions for Review assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> of the Court of Appeals, which found that Rafael D. Cervantes (Cervantes) was entitled to total and permanent disability benefits based on the POEA-SEC. However, it deleted the award of sickness allowance as such was never raised as an issue during the arbitration and Cervantes never proved his entitlement thereto. This entails a review of the rules on entitlement to disability benefits and sickness allowances.<br><br>A complaint for monetary compensation, particularly, total and permanent disability benefits, sickness/hospitalization allowance, moral and exemplary damages, attorney's fees as well other reliefs and reparations was filed by Cervantes against Jebsen PTC Maritime, Inc. (Jebsen). Jebsen was the local manning agent to its foreign principal, MCL Shipping, Ltd. (MCL Shipping). The complaint was filed before the Panel of Voluntary Arbitrators of the National Conciliation and Mediation Board (NCMB).<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>Cervantes alleged that he worked for eight years with Jebsen. On September 28, 2020, he signed his last Contract of Employment. He was assigned to fly to Germany and work on the bulk carrier M/V OC Agnes on October 24, 2020.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>On February 20, 2021, while working onboard, Cervantes slipped and fell off a ladder while painting the engine room walls. He experienced back pains and was unable to rise from bed. He asked the ship officers to prepare an accident report and requested for an MRI scan but his request was left unheeded.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>On February 28, 2021, Cervantes alleged that before he could recover from his back injury, he felt severe pain on the lower right side of his stomach. On March 1, 2021, when the ship docked in the United Kingdom, he was rushed to the hospital. However, since the United Kingdom was still reeling from the coronavirus outbreak at that time, Cervantes was repatriated and arrived in Manila on March 4, 2021.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>On March 20, 2021, after his quarantine, Cervantes was examined at Shiphealth, Inc. (Shiphealth). He was diagnosed with "Acute Diverticulitis vs. Appendicitis." Cervantes also repeated his request for an MRI scan for his back pain but this was declined.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup>&nbsp;<br><br>Cervantes was eventually diagnosed with a case of gastritis and was prescribed medication. Cervantes reiterated his request for an MRI scan for his back pain but Shiphealth's physician rejected this and berated him. Due to the physician's attitude, Cervantes refused to sign the Fit to Work diagnosis since he insisted that he needed an MRI scan for his back pain. He was told that if he wanted to get an MRI scan, he should have to wait for company approval.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><br><br>Sometime in April 2021, Cervantes was contacted by a representative of Jebsen who informed him that Jebsen will no longer provide for his treatment and that he was discharged from service.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>On June 17, 2021, Cervantes spent his own money for an MRI scan for his back pain. He was diagnosed to have suffered from lumbar muscular spasm which required three to four months of therapy. Since he was repatriated and then discharged from service, Cervantes could not afford treatment. Cervantes then filed a complaint before the NCMB.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><br><br>Due to the failure of the parties to reach a settlement, a Notice to Arbitrate was issued.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup><br><br>Cervantes alleged that Jebsen failed to issue a valid and timely Fit to Work assessment of his condition. Jebsen evaded its contractual accountability over his back pains which started from his fall while working on board. Jebsen did not heed his repeated requests for an MRI scan. Since the assessment of the company-designated physician was only for his gastritis without taking into account his back pains, Jebsen should be considered not to have issued a Fit to Work assessment at all. Consequently, Cervantes should be considered as totally and permanently disabled after the lapse of 120-days from date of medical repatriation.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>On the other hand, Jebsen and MCL Shipping alleged that according to the Crew Member Illness Injury Report, Cervantes complained of a sharp stabbing pain on his right lower abdomen. He was admitted to a hospital in· the United Kingdom where he was diagnosed and treated for acute appendicitis. Cervantes was then advised to continue treatment upon his repatriation.<sup style="COLOR: RGB(255, 0, 0);">[14]</sup><br><br>According to Jebsen, after several consultations and treatments with the company-designated physicians at Shiphealth, Cervantes completed treatment from a gastroenterology standpoint and was then discharged. Shiphealth issued a Final Medical Assessment declaring Cervantes fit to work and a Certificate of Fitness which Cervantes refused to sign.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup><br><br>Jebsen and MCL Shipping noted that during the conference before the conciliator-mediator, they submitted their proposed parameters for Cervantes' third-doctor referral but Cervantes refused the same.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Jebsen and MCL Shipping argue that the Fit to Work assessment should prevail for Cervantes' failure to contest it. They maintain that the results of Cervantes' MRI scan should not be considered since the results were a product of hasty conclusions and a limited assessment.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>In an April 11, 2023 Decision,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> the Panel of Voluntary Arbitrators of NCMB ruled in favor of Cervantes. It found that the assessment of the company-designated physician was not a valid medical assessment as Cervantes was able to prove that lumbar muscular spasm was his problem and not erosive gastritis. It awarded Cervantes with total and permanent disability benefits in the amount indicated in the Collective Bargaining Agreement (CBA), sickness allowance, and attorney's fees.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> The dispositive portion of the Decision reads:<blockquote><b>WHEREFORE, PREMISES</b> considered and upon finding this Complaint to be meritorious, this Panel of Voluntary Labor Arbitrators hereby Orders that the following monetary compensations be awarded to the herein complainant:<ol><li>Total and permanent disability benefits in the amount of USD 104,866.00 pursuant to the rate of disability pay for seafarers under "ratings" category, as prescribed under the applicable Collective Bargaining Agreement between the parties;<br><br></li><li>Sickness allowance amounting to USD 2,560.00 representing the cumulative wages of the complainant over a period of 120 days;<br><br></li><li>Attorney's fees in the standard 10% rate of the total amount awarded.<br><br></li><li>All other claims or counterclaims by the parties against each other are denied.</li></ol><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[20]</sup></blockquote>Jebsen moved for reconsideration which the Panel denied in a Resolution.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>Undeterred, Jebsen elevated its case to the Court of Appeals, by filing a Petition for Review under Rule 43 of the Rules of Court.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>In the May 21, 2024 Decision, the Court of Appeals partly granted the petition. While the Court of Appeals found that Cervantes was totally and permanently disabled due to the incomplete medical assessment of the company-designated physician, it disagreed with the NCMB 's finding that the amount in the CBA applied. It found that Cervantes failed to prove that the CBA was applicable. Consequently, the POEA-SEC should be the basis of Cervantes' claim. The Court of Appeals also deleted the award of sickness allowance as such was never raised as an issue during the arbitration and Cervantes never proved his entitlement thereto.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> The dispositive portion of the Decision reads:<blockquote><b>WHEREFORE</b>, premises considered, the Petition is <b>PARTLY GRANTED</b>. The Decision dated April 11, 2023 as well as the Resolution dated June 9, 2023 rendered by the Office of the Panel of Voluntary Arbitrators in MVA-045-RCMB-NCR-394-01-10-2022 is <b>AFFIRMED WITH MODIFICATION</b> in that: (1) Jebsen PTC Maritime, Inc. and/or MCL Shipping, Ltd. are hereby <b>ORDERED</b> to pay Rafael D. Cervantes the total and permanent disability benefits in the amount of USD 60,000.00 plus ten percent (10%) thereof as attorney's fees, in Philippine currency, at the prevailing rate of exchange at the time of payment; and (2) the award of Sickness Allowance is <b>DELETED</b>.<br><br><b>SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[24]</sup></blockquote>Both Cervantes and Jebsen filed a Motion for Partial Reconsideration which the Court of Appeals denied in a October 21, 2024 Resolution.<sup style="COLOR: RGB(255, 0, 0);">[25]</sup><br><br>Both parties then filed a Petition for Review on <i>Certiorari</i>.<br><br>In G.R. No. 276843, Cervantes argues that he is entitled to the higher disability benefits based on the CBA as his employment is expressly covered by it. He also argues that he is entitled to sickness allowance as the POEA-SEC clearly provides this.<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> In G.R. No. 276933, Jebsen argues that its company-designated physician issued a valid Certificate of Final Medical Assessment which declared Cervantes to be fit to work. It argues that Cervantes is not entitled to disability benefits and other monetary claims as he only complained of abdominal pain arid not back pain before, during, and after repatriation.<sup style="COLOR: RGB(255, 0, 0);">[27]</sup><br><br>On February 10, 2025, this Court issued a Resolution<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> ordering the consolidation of G.R. No. 276843 and G.R. No. 276933, considering that both petitions involve the same parties and assail the same Court of Appeals Decision and Resolution in CA-G.R. SP No. 179463.<br><br>In its April 30, 2025 Comment, Jebsen argues that Cervantes should not have been awarded disability benefits, whether under the POEA-SEC or the CBA. In any case, the Court of Appeals correctly ruled that Cervantes failed to prove that the CBA exists and applies. Further, the Court of Appeals correctly found that Cervantes did not prove his entitlement to sickness allowance.<sup style="COLOR: RGB(255, 0, 0);">[29]</sup><br><br>In his August 13, 2025 Comment, Cervantes maintains that the Court of Appeals' factual and legal findings should not be disturbed. The Court of Appeals correctly affirmed the grant of total and permanent disability benefits.<sup style="COLOR: RGB(255, 0, 0);">[30]</sup><br><br>The issues for this Court's resolution are: (1) whether Cervantes is entitled to total and permanent disability benefits; (2) whether the amount of the award should be governed by the POEA-SEC or the CBA; and (3) whether Cervantes is entitled to sickness allowance.<br><br>It must be pointed out that the parties presented before the Court factual questions regarding Cervantes' entitlement to disability benefits and sickness allowance. The established rule is that "only questions of law should be raised in petitions filed under Rule 45 [of the Rules of Court]."<sup style="COLOR: RGB(255, 0, 0);">[31]</sup> However, one of the exceptions to this rule is "when the findings of fact are conflicting."<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> Here, the findings of fact of the Panel of Voluntary Arbitrators and the Court of Appeals regarding the basis of Cervantes' entitlement to benefits and sickness allowance are conflicting. This justifies the Court's review of the facts of the case.<br><br>On the issue of disability benefits, the Court of Appeals was correct in finding that Cervantes is entitled to total and permanent disability benefits "due to the incomplete medical assessment of the company-designated physician."<sup style="COLOR: RGB(255, 0, 0);">[33]</sup><br><br>"Disability ratings should be adequately established in a conclusive medical assessment by a company-designated physician. To be conclusive, a medical assessment must be complete and definite to reflect the seafarer's true condition and give the correct corresponding disability benefits."<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br><br>While it may be true that Cervantes has been fully treated for abdominal pain, the medical assessment issued by the company-designated physician is incomplete for omitting any discussion of Cervantes' back pain. Not only did the assessment lack any conclusion as to Cervantes' fitness to work in relation to his back pain, it appears from the records that the company has refused to provide any medical support for Cervantes in this regard.<br><br>Failure of the company-designated physician to issue a complete, final, and definite assessment entitles the seafarer to total and permanent disability benefits by operation of law.<sup style="COLOR: RGB(255, 0, 0);">[35]</sup><br><br>Thus, Cervantes is entitled to total and permanent disability benefits, the computation of which should be based on the POEA-SEC and not the CBA as Cervantes failed to prove the requisites for entitlement to the higher disability benefits under the CBA.<sup style="COLOR: RGB(255, 0, 0);">[36]</sup>&nbsp;<br><br>On the issue of sickness allowance, the Court of Appeals erred in deleting the award. Section 20-A of the POEA-SEC states:<blockquote>SECTION 20. COMPENSATION AND BENEFITS<br><br>A. COMPENSATION AND BENEFITS FOR INJURY OR ILLNESS<br><br>The liabilities of the employer when the seafarer suffers work-related injury or illness during the term of his contract are as follows:<blockquote>1. The employer shall continue to pay the seafarer his wages during the time he is on board the ship;<br><br>2. If the injury or illness requires medical and/or dental treatment in a foreign port, the employer shall be liable for the full cost of such medical, serious dental, surgical and hospital treatment as well as board and lodging until the seafarer is declared fit to work or to be repatriated. However, if after repatriation, the seafarer still requires medical attention arising from said injury or illness, he shall be so provided at cost to the employer until such time he is declared fit or the degree of his disability has been established by the company-designated physician.<br><br>3. In addition to the above obligation of the employer to provide medical attention, the seafarer shall also receive sickness allowance from his employer in an amount equivalent to his basic wage computed from the time he signed off until he is declared fit to work or the degree of disability has been assessed by the company-designated physician. The period within which the seafarer shall be entitled to his sickness allowance shall not exceed 120 days. Payment of the sickness allowance shall be made on a regular basis, but not less than once a month.</blockquote></blockquote>The Court has held that "the POEA contemplates three liabilities of the employer when a seafarer is medically repatriated: (a) payment of medical treatment of the employee, (b) payment of sickness allowance, both until the seafarer is declared fit to work or when his disability rating is determined, and (c) payment of the disability benefit (total or partial), in case the seafarer is not declared fit to work after being treated by the company-designated physician."<sup style="COLOR: RGB(255, 0, 0);">[37]</sup> These are three separate and distinct liabilities of an employer.<sup style="COLOR: RGB(255, 0, 0);">[38]</sup><br><br>As found by the Panel of Voluntary Arbitrators, Cervantes is entitled to sickness allowance as required by the POEA-SEC "in the absence of proof from Jebsen that payment has already been made."<sup style="COLOR: RGB(255, 0, 0);">[39]</sup><br><br>Since petitioners were compelled to litigate to protect their rights and interests, attorney's fees of 10% of the monetary award is justified.<br><br>Pursuant to <i>Nacar v. Gallery Frames</i>,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> monetary awards shall earn 6% legal interest <i>per annum</i> from the finality of this Decision until fully paid.<br><br><b>FOR THESE REASONS</b>, the Petition in G.R. No. 276843 is <b>PARTIALLY GRANTED</b> and the Petition in G.R. No. 276933 is <b>DENIED</b>. The May 21, 2024 Decision and October 21, 2024 Resolution of the Court of Appeals in CA-G.R. SP No. 179463 are <b>AFFIRMED WITH MODIFICATION</b> in that sickness allowance is also awarded to Rafael D. Cervantes.<br>&nbsp;<br>All monetary awards are subject to legal interest of 6% per annum from the finality of this Decision until full payment.<br><br>Let this case be <b>REMANDED</b> to the labor arbiter for a detailed computation of the monetary awards.<br><br><b>SO ORDERED.</b><br><br><i>Lazaro-Javier, J. Lopez</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>Kho, Jr.</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on official business.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On official business.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <b>Cariño vs. Maine Marine Phils., Inc., et al.</b>, 842 Phil. 487, 498-499 (2018) [Per J. Caguioa, Second Division], <i>citing</i> <b>The Late Alberto B. Javier v. Philippine Transmarine Carriers, Inc.</b>, 738 Phil. 374, 388 (2014) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Rollo</i> (<b>G.R. No. 276843</b>), pp. 22-40. The May 21, 2024 Decision in CA-G.R. SP No. 179463 was penned by Associate Justice Ramon A. Cruz and concurred in by Associate Justice Louis P. Acosta and Associate Justice Jaime Fortunato A. Caringal of the Seventh Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 41-44. The October 21, 2024 Resolution in CA-G.R. SP No. 179463 was penned by Associate Justice Ramon A. Cruz and concurred in by Associate Justice Louis P. Acosta and Associate Justice Jaime Fortunato A. Caringal of the Special Former Seventh Division, Court of Appeals, Manila.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 25.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 26.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 27.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Id.</i> at 52-75.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Id.</i> at 27-29, 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 23.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 36-38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 38.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 41-44.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 12, 15-16.<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> <i>Rollo</i> (<b>G.R. No. 276933</b>), pp. 52-70.<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> <i>Rollo</i> (<b>G.R. No. 276843</b>), pp. 223-224.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Id.</i> at 229-239.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> <i>Rollo</i> (<b>G.R. No. 276933</b>), pp. 234-242.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Spouses Miano v. Manila Electric Co.</b>, 800 Phil. 118, 119, 122 (2016) [Per J. Leonen, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <b>Medina v. Mayor Asistio, Jr.</b>, 269 Phil. 225, 232 (1990) [Per J. Bidin, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Rollo</i> (<b>G.R. No. 276843</b>), p. 36.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <b>Toquero v. Crossworld Marine Services, Inc.</b>, 855 Phil. 106, 112 (2019) [Per J. Leonen, Third Division], <i>citing</i> <b>Magsaysay Mol Marine, Inc. v. Atraje</b>, 836 Phil. 1061, 1077-1078 (2018) [Per J. Leonen, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> <b>Reyes v. Magsaysay Mitsui OSK Marine, Inc.</b>, 903 Phil. 458, 471 (2021) [Per J. J. Lopez, Third Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Rollo</i> (<b>G.R. No. 276843</b>), p. 37.<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> <b>Cariño vs. Maine Marine Phils., Inc.</b>, 842 Phil. 487, 498-499 (2018) [Per J. Caguioa, Second Division], <i>citing</i> <b>The Late Alberto B. Javier v. Philippine Transmarine Carriers, Inc.</b>, 738 Phil. 374, 388 (2014) [Per J. Brion, Second Division].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i><br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Rollo</i> (<b>G.R. No. 276843</b>), p. 74.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 716 Phil. 267, 281-233 (2013) [Per J. Peralta, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

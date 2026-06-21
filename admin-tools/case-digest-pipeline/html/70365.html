@@ -1,0 +1,611 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 262969 - PROTECT MANICANI ISLAND SOCIETY INCORPORATED (PROMISI), REPRESENTED BY FIDELINO M. ATREGENIO, COORDINATOR; UNITED MANICANI METRO MANILA RESIDENCE ORGANIZATION, INC. (UMMMROI), REPRESENTED BY ROGELIO P. GAGAP, PRESIDENT; AND HAMORAWON MANILA RESIDENCE ELEMENTARY BATCH ASSOCIATION, INC. (HMREBAI), REPRESENTED BY MYRA F. TORRES, MEMBER, PETITIONERS, VS. HON. MA. ANTONIA YULO-LOYZAGA, IN HER CAPACITY AS SECRETARY OF THE DEPARTMENT OF ENVIRONMENT AND NATURAL RESOURCES, AND HINATUAN MINING CORPORATION, RESPONDENTS.D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : '74d2d6a4cf492efdf8c6e0a3187ce8c7' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/70365' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			
+			<BR><BR>			
+			<CENTER>
+			<H2>EN BANC</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 262969, January 28, 2026 ]</H2>
+			<H3>PROTECT MANICANI ISLAND SOCIETY INCORPORATED (PROMISI), REPRESENTED BY FIDELINO M. ATREGENIO, COORDINATOR; UNITED MANICANI METRO MANILA RESIDENCE ORGANIZATION, INC. (UMMMROI), REPRESENTED BY ROGELIO P. GAGAP, PRESIDENT; AND HAMORAWON MANILA RESIDENCE ELEMENTARY BATCH ASSOCIATION, INC. (HMREBAI), REPRESENTED BY MYRA F. TORRES, MEMBER, PETITIONERS, VS. HON. MA. ANTONIA YULO-LOYZAGA, IN HER CAPACITY AS SECRETARY OF THE DEPARTMENT OF ENVIRONMENT AND NATURAL RESOURCES, AND HINATUAN MINING CORPORATION, RESPONDENTS.<br><br>D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>CAGUIOA, J.:</STRONG></p>
+			
+			<p><div align="JUSTIFY">This is a petition for the issuance of a Writ of <i>Kalikasan</i>, with prayer for the issuance of a Temporary Environmental Protection Order<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (TEPO), seeking to enjoin the resumption of the mining operations of Hinatuan Mining Corporation (HMC), a subsidiary of Nickel Asia Corporation, in the Island of Manicani, Guiuan, Eastern Samar. Petitioners Protect Manicani Island Society Incorporated, United Manicani Metro Manila Residence Organization, Inc., and Hamorawon Manila Residence Elementary Batch Association, Inc. (petitioners) are non-government organizations which are represented by their respective members and which all claim to be composed of concerned citizens who are primarily residents of the Island of Manicani and nearby towns directly affected by the mining operations in the Island of Manicani.<sup style="COLOR: RGB(255, 0, 0);">[2]</sup><br><br><center><b>The Facts and Antecedent Proceedings</b></center><br>Culled from the parties' pleadings, the facts of this case are as follows:<br><br>On October 28, 1992, the government granted Mineral Production Sharing Agreement (MPSA) No. 012-92-VIII to private respondent HMC, authorizing the latter to conduct mining operations in an area of 1,165 hectares in Manicani Island, Guiuan, Eastern Samar for a period of 25 years.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>In 2000, a Complaint was lodged before the Mines and Geosciences Bureau (MGB) Regional Office (RO) No. VIII by barangay officials, residents of Manicani and the Roman Catholic Church Diocese of Borongan, Eastern Samar (RCC Borongan), seeking the closure of the Manicani mines on allegations of irregularities committed by HMC and violations of its MPSA, including: 1) lack of public hearing and social acceptability; 2) non-payment of taxes; and 3) violation of Environmental Compliance Certificate (ECC).<sup style="COLOR: RGB(255, 0, 0);">[4]</sup><br><br>On November 13, 2002, then Department of Environment and Natural Resources (DENR) Secretary Heherson T. Alvarez (Secretary Alvarez) issued a Memorandum to the MGB, ordering it to cause the stoppage of mining operations of BMC in the Island of Manicani, pending the conduct of an investigation. Accordingly, the MGB issued an Order on November 18, 2002&nbsp; enjoining HMC to desist from commencing any form of mining operations, pending the result of the evaluation of its declaration of mining project feasibility and approval of its Environmental Protection and Enhancement Program (EPEP), the conduct of an investigation by a DENR Special Team, and until the DENR has acted upon the recommendation of said special team.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup><br><br>From January 13 to 19, 2003, the DENR Special Team conducted its investigation pursuant to the directive of the DENR secretary. Thereafter, the MGB Central Office forwarded a copy of the investigation report to HMC through a letter dated March 27, 2003 with the following information: (1) the allegations by the RCC Borongan against the mining operations of HMC are mostly general impressions predicated on irresponsible mining; (2) the MGB recognized the concerns of the RCC Borongan as legitimate expression to ensure the wise and efficient use of the resources and the protection of the environment for the sake of the people living in the affected island; and (3) HMC shall strictly comply with the specific recommendations contained in the said report. Notwithstanding the resolution of the issues and recommendations of the special investigating team, the suspension of HMC's operations was not lifted.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup><br><br>On May 27, 2015, HMC submitted a Letter of Intent to Renew MPSA . Denominated as MPSA No. 012-92-VIII dated May 25, 2015 to then MGB Director Leo L. Jasareno, who replied on January 14, 2016 that the application for renewal should be filed with the MGB RO.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><br><br>On May 26, 2016, or about a year before the expiration of MPSA No. 012-92-VIII, HMC filed the Application for Renewal with MGB RO No. VIII.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup><br><br>On October 29, 2018, HMC wrote to MGB RO No. VIII, supplementing its Application for Renewal with an alternative prayer for the extension of the term of MPSA No. 012-92-VIII for a period of 15 years due to <i>force majeure</i>. HMC cited the Order of Suspension of the MGB as the underlying cause of the alleged <i>force majeure</i>.<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Furthermore, according to HMC, its letter application for extension was a continuation of the renewal process of MPSA No. 012-92-VIII, which commenced in May 2015 or more than two years prior to its expiration.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup><br><br>On July 1, 2019, the MGB regional director denied both the Application for Renewal and the alternative prayer for an extension of MPSA No. 012-92-VIII.<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> HMC filed a Motion for Reconsideration, which was denied on August 8, 2019.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Hence, HMC appealed before the DENR on September 6, 2019.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup><br><br>On March 2, 2022, the DENR, through former Acting Secretary Jim O. Sampulna, issued the now assailed Order<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> extending the term of HMC's MPSA No. 012-92-VIII and lifting the suspension of its mining operations under the same MPSA.<br>&nbsp;<br>On March 28, 2022, petitioners filed a motion for reconsideration before the Office of the DENR Secretary,<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> but the latter has yet to resolve the same.<sup style="COLOR: RGB(255, 0, 0);">[16]</sup><br><br>Petitioners now argue before the Court in this present petition that the cause for the suspension of HMC's mining operations is not a <i>force majeure</i>. It points out that the Order of Suspension of MGB was not an adverse action by the government over which HMC had no reasonable control. On the contrary, the reasons for the Order of Suspension were because of violations committed by HMC, its failure to comply with the recommendations of the DENR Special Team, and its failure to comply with the deficiencies listed by DENR before the expiration of the term of the MPSA. In short, the reasons were all attributable to the violations, omissions, and direct actions of HMC, which were all within its control.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup><br><br>Moreover, petitioners posit that even on the assumption that the suspension of the mining operations can be considered <i>force majeure</i>, the extension of MPSA No. 012-92- VIII would still be void because such was granted after the expiration of said MPSA. Petitioners add that under Section 112 of Republic Act No. 7942,<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> otherwise known as the Philippine Mining Act of 1995, the renewal of mining lease contracts is expressly prohibited. Thus, according to petitioners, HMC successfully circumvented this prohibition when it applied for, and was granted, an extension of MPSA No. 012-92-VIII by its invocation of <i>force majeure</i>.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup><br><br>Petitioners also stress that under Section 232 of DENR Administrative Order No. 2010-21, the only effect of an expiration and cancellation, revocation, or termination, of an MPSA is the possibility of the mining operations being undertaken by the government through one of its agencies or through a qualified independent contractor. Nothing in Section 232 would show that the right to extend an MPSA is still available.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup><br><br>Finally, petitioners argue that Presidential Proclamation No. 469, series of 1994 declared the coastal areas of the Municipality of Guiuan, Eastern Samar and neighboring islands as protected landscapes and seascapes. While the proclamation also recognizes private rights, petitioners maintain that any private rights of HMC may raise against the effect of the declaration of Manicani Island as a protected area are now lost upon the expiration of its MPSA.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br>&nbsp;<br>Given the foregoing, petitioners now pray for the application of the precautionary principle and issuance of a TEPO against the full implementation of the DENR Order extending MPSA No. 012-92-VIII. Petitioners allege that HMC is engaged in an ongoing mining activity in the protected area of Manicani Island that results in the continued deterioration of the island and destruction of its environment, in contravention of Presidential Proclamation No. 469, series of 1994. Petitioners maintain that the precautionary principle finds application because they are completely without any information as to what is the actual extent, scope, limitations, and latitude of the mining operations that BMC will eventually conduct. Without such actual extent, the effect of the mining operations will allegedly be difficult to predict. Nonetheless, petitioners posit, there is no question that the resumption of HMC's mining operations will result in serious and irreversible harm to the entire Island of Manicani, its foreshore, its marine and aquatic life, and the surrounding areas.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup><br><br>On February 28, 2023, the Court directed respondents to file their comment to the Petition.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup><br><br>In its Comment<sup style="COLOR: RGB(255, 0, 0);">[24]</sup> dated March 24, 2023, the DENR, through the Office of the Solicitor General (OSG), attacks the legal standing of petitioners to file the present petition for failing to establish either a direct or personal injury arising from acts attributable to the DENR, or a breach of constitutional or statutory prohibition by the DENR in issuing the assailed Order. The DENR also faults petitioners for violating the doctrine of hierarchy courts when they filed the Petition directly before this Court, as well as for failing to exhaust administrative remedies when their Motion for Reconsideration before the DENR is still pending.<br><br>On the substantive issues, the DENR maintains that the issuance of an environmental protection order (EPO) and a writ of continuing <i>mandamus</i> is not warranted because petitioners' general allegations in their Petition fail to show the extreme urgency, or grave injustice and irreparable injury that will be caused to them if an EPO is not issued. Neither is there any showing of any unlawful neglect on the part of the DENR to perform any act that the law specifically enjoins as a duty.<br><br>The DENR further argues that the precautionary principle does not apply because MPSA No. 012-92-VIII provides information on the extent of the agreement between HMC and the government. It likewise clearly defines the contract area within which HMC will conduct its mining operations and sets out limitations through safeguards that are established to protect the environment.<br><br>As regards the assailed Order granting HMC's Application for Extension of MPSA No. 012-92-VIII, the DENR asserts that the approval is justified. It holds that the office's Letter of Injunction to HMC dated November 18, 2002 and the length of time within which its Application for Renewal remained pending before them constitute <i>force majeure</i>. As such, Section 15.3(b) of MPSA No. 12-02-VIII comes into play. It states that if mining operations are delayed, curtailed, or prevented by <i>force majeure</i> causes, and the time for enjoying the rights and carrying out the obligations thereby affected, the term of the Agreement and all rights and obligations thereunder shall be extended for a period equal to the period involved. The acts were appreciated as <i>force majeure</i> because they fit the definition as adverse actions by the government that were not directly attributable to HMC and were beyond its will.<br><br>Finally, DENR contends that restoring the suspended period of the term of MPSA No. 012-92-VIII and lifting the suspension of the mining operations under such MPSA do not violate Presidential Proclamation No. 469. As a consequence of <i>force majeure</i>, the term of HMC under the MPSA has been extended, hence, HMC has an existing private right that is recognized and respected by Presidential Proclamation No. 469.<br><br>HMC also filed its Comment<sup style="COLOR: RGB(255, 0, 0);">[25]</sup> dated March 24, 2023, noting at the outset that petitioners' Motion for Reconsideration before the DENR remains pending. Consequently, HMC argues, petitioners failed to exhaust an administrative remedy, are guilty of willful and deliberate forum shopping, and that the petition should be barred by <i>litis pendentia</i>.<br><br>HMC further argues that the Petition does not raise an actual justiciable controversy because petitioners are unable to show how their right to a balanced and healthful ecology is being violated or threatened by the current activities being undertaken by HMC in Manicani Island, specifically the mere preparations being conducted for the resumption of its mining operations. Relatedly, HMC asserts that the requisites for the issuance of a writ of <i>kalikasan</i> is, therefore, wanting. Petitioners rely on general and bare allegations. Petitioners admit that all that is happening at the moment are "ongoing preparation for a seemingly full-scale mining operation of [HMC] on the island of Manicani which [they] specifically try to abort by the filing of the instant Petition."<sup style="COLOR: RGB(255, 0, 0);">[26]</sup> Yet, they fail to show how the preparation will certainly result in serious and irreversible harm to the entire island of Manicani, its foreshore, its marine and aquatic life, and the surrounding areas.<br><br>HMC points out that the attached pictures of equipment and personnel which purportedly show that HMC is preparing for the resumption of mining operations are not duly authenticated and do not show that they belong to HMC. They also do not show any serious and irreversible harm to Manicani Island and the surrounding areas. There is no environmental damage visible in any of these photographs.<br><br>None of the judicial affidavits of the alleged representatives of petitioners, as well, testify to the commission of any specific act that results in actual or threatened violation of the right to a balanced and healthful ecology. There is also no showing that the affiants have personal knowledge of alleged violations or environmental damage inflicted on Manicani Island and the surrounding areas.<br><br>HMC notes that while petitioners also claim that there are various reports and eyewitness accounts for a seemingly full-scale mining operation of HMC, no judicial affidavits of these supposed eyewitnesses are attached to the Petition.<br><br>Likewise, petitioners fail to show how the alleged actual or threatened violation will lead to environmental damage of such magnitude as to prejudice the life, health, or property of inhabitants in two or more cities or provinces. While petitioners allude to the neighboring islands of Manicani Island, they fail to specify what these islands are.<br><br>HMC further posits that the precautionary principle will not apply since the mining operations will not cause any grave or irreparable damage to the environment, and HMC is currently conducting studies and audit to ensure the environmentally safe operations.<br><br>Similarly with the DENR, HMC maintains that there is legal basis for the extension of the term of its MPSA No. 012-92-VIII corresponding to the number of years that it was not able to conduct mining operations. While HMC acknowledges that there was a Complaint filed by RCC Borongan in 2002 that was used as basis by then DENR Secretary Alvarez to suspend HMC's operations, the issue is the failure of the DENR to lift the suspension despite the absence of any findings that would support the allegations in the complaint. This arbitrary suspension and unwarranted refusal to lift the suspension constituted adverse action by the government that would warrant the invocation of <i>force majeure</i>.<br><br>Moreover, Presidential Proclamation No. 469 would show that what were declared as protected areas were the coastal areas of the Municipality of Guiuan, Eastern Samar, and the islands of Manicani, Candulo, Suluan, Tubabao, Calicoan, and Homonhon. It did not declare the entire Municipality of Guiuan as a marine reservation. "Coastal area" has a technical meaning, defined under Republic Act No. 8550 or the Philippine Fisheries Code of 1998. Following the definition of a coastal area, the vast majority of the mining area of HMC under MPSA No. 012-92-VIII would not form part of the Guiuan Marine Reservation under Presidential Proclamation No. 469. As such, the mining area of HMC does not fall under the coverage of the National Integrated Protected Areas System (NIPAS) Act of 1992<sup style="COLOR: RGB(255, 0, 0);">[27]</sup> or Expanded National Integrated Protected Areas System (ENIPAS) Act of 2018.<sup style="COLOR: RGB(255, 0, 0);">[28]</sup> At any rate, the ENIPAS Act should not prejudice the prior existing rights of HMC. MPSA No. 012-92-VIII was executed in 1992 or prior to the issuance of Presidential Proclamation No. 469 in 1994, and the enactment of the ENIPAS Act in 2018.<br><br>Meanwhile, in their Consolidated Reply<sup style="COLOR: RGB(255, 0, 0);">[29]</sup> dated May 19, 2023, petitioners elaborate that they filed the instant Petition without awaiting the resolution of their Motion for Reconsideration before the DENR in view of the latter's inaction. Petitioners express their concern that waiting for the DENR's response, which remains uncertain, may lead to irreparable harm.<br><br>Petitioners further insist that their Petition has sufficiently shown the requisites for the issuance of a writ of <i>kalikasan</i>. They aver that any form of mining activity on an island as small as Manicani will result in severe and irreparable damage. Manicani Island consists merely of four barangays, thus making it highly susceptible to the adverse impacts of large-scale mining operations, such as the one authorized under MPSA No. 012-92-VIII. These operations not only affect the entirety of the island but also pose a threat to the neighboring coastal communities in the nearby municipalities of Samar and Leyte. Additionally, the extension of MPSA No. 012-92-VIII directly contravenes Presidential Proclamation No. 469, designating the Island of Manicani as part of the Guiuan Marine Reserve.<br><br>Finally, petitioners re-emphasize that the assailed Order illegally extended the term of MPSA No. 012-92-VIII because it was issued after the permit had already expired.<br><br><center><b>Ruling of the Court</b></center><br>After judiciously reviewing the submissions in this case, the Court resolves to dismiss the Petition for being insufficient in form and substance.<br>&nbsp;<br>A writ of <i>kalikasan</i> is a remedy under Section 1, Rule 7 of the Rules of Procedure for Environmental Cases<sup style="COLOR: RGB(255, 0, 0);">[30]</sup> (Rules). It provides:<blockquote>SECTION 1. <i>Nature of the writ</i>.—The writ is a remedy available to a natural or juridical person, entity authorized by law, people's organization, non-governmental organization, or any public interest group accredited by or registered with any government agency, on behalf of persons whose constitutional right to a balanced and healthful ecology is violated, or threatened with violation by an unlawful act or omission of a public official or employee, or private individual or entity, involving environmental damage of such magnitude as to prejudice the life, health or property of inhabitants in two or more cities or provinces.</blockquote>The requisites of a writ of <i>kalikasan</i> are as follows:<blockquote>(1) there is an actual or threatened violation of the constitutional right to a balanced and healthful ecology; (2) the actual or threatened violation arises from an unlawful act or omission of a public official or employee, or private individual or entity; and (3) the actual or threatened violation involves or will lead to an environmental damage of such magnitude as to prejudice the life, health or property of inhabitants in two or more cities or provinces.<sup style="COLOR: RGB(255, 0, 0);">[31]</sup></blockquote>Thus, Section 2, Rule 7 of the Rules prescribes what the contents of a petition for a writ of <i>kalikasan</i> must contain, to wit:<blockquote>SEC. 2. <i>Contents of the petition</i>.—The verified petition shall contain the following:&nbsp;<blockquote><table width="100%" border="0" cellpadding="0" cellspacing="0"><tbody><tr valign="top"><td width="5%"><div align="justify">(a)</div></td><td width="95%"><div align="justify">The personal circumstances of the petitioner;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(b)</div></td><td><div align="justify">The name and personal circumstances of the respondent or if the name and personal circumstances are unknown and uncertain, the respondent may be described by an assumed appellation;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(c)</div></td><td><div align="justify">The environmental law, rule or regulation violated or threatened to be violated, the act or omission complained of, and the environmental damage of such magnitude as to prejudice the life, health or property of inhabitants in two or more cities or provinces;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(d)</div></td><td><div align="justify">All relevant and material evidence consisting of the affidavits of witnesses, documentary evidence, scientific or other expert studies, and if possible, object evidence;</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(e)</div></td><td><div align="justify">The certification of petitioner under oath that: (1) petitioner has not commenced any action or filed any claim involving the same issues in any court, tribunal or quasi-judicial agency, and no such other action or claim is pending therein; (2) if there is such other pending action or claim, a complete statement of its present status; (3) if petitioner should learn that the same or similar action or claim has been filed or is pending, petitioner shall report to the court that fact within five (5) days therefrom; and</div></td></tr><tr valign="top"><td><div align="justify"></div><br></td><td><div align="justify"></div><br></td></tr><tr valign="top"><td><div align="justify">(f)</div></td><td><div align="justify">The reliefs prayed for which may include a prayer for the issuance of a TEPO.</div></td></tr></tbody></table></blockquote></blockquote>Here, the Petition fails to show the presence of all the requisites for the writ to issue. It particularly fails to comply with the foregoing requirements under Section 2, Rule 7 of the Rules.<br><br>For one, while the Petition alleges the environmental laws violated or threatened to be violated and the act or omission complained of, it patently fails to allege the environmental damage of such magnitude as to prejudice the life, health, or property of inhabitants <i>in two or more cities or provinces</i>. The Petition, on the contrary, only makes a general allegation of environmental harm to the surrounding areas of the Island of Manicani, merely banking on the supposed small size of the island and speculating that it is, therefore, highly susceptible to the adverse impacts of large-scale mining operations that HMC's MPSA allegedly allows. Petitioners' other assertion that neighboring coastal communities in the nearby municipalities of Samar and Leyte would likewise be affected is pure speculation.<br><br>In an attempt to bolster their allegations, petitioners attach photos<sup style="COLOR: RGB(255, 0, 0);">[32]</sup> that supposedly show the conduct of ongoing operations of HMC that, if not halted, "will cause irreparable and irreversible damage to the island."<sup style="COLOR: RGB(255, 0, 0);">[33]</sup> These photos, however, simply show several trucks and machines, as well as several people who are presumably employees of HMC. Not a single photo depicts environmental damage, that petitioners allege. At best, one can only surmise that the activities captured in the photos depict "the conduct of ongoing operations of HMC." But as to the extent of these activities or operations that would have shown the requisite magnitude of environmental damage, the same is utterly wanting in both the allegations in the Petition and in the attached photos.<br><br>In the same vein, petitioners also fail to attach "all relevant and material evidence consisting of the affidavits of witnesses, documentary evidence, scientific or other expert studies, and if possible, object evidence," which are required under Section 2, Rule 7 of the Rules. As HMC aptly observes, "[w]hile petitioners also claim that there are 'various reports and eyewitness accounts for a seemingly full-scale mining operation of [HMC] on the island of Manicani,' no judicial affidavits of these supposed eyewitnesses were attached to the petition."<sup style="COLOR: RGB(255, 0, 0);">[34]</sup><br>&nbsp;<br>In sum, therefore, petitioners clearly rely on their mere say-so of a threatened grave environmental damage that HMC's large-scale mining would entail. This cannot stand. The requisite to allege and prove the magnitude of environmental damage in a petition for a writ of <i>kalikasan</i> cannot be downplayed. The Court significantly held in <i>Dela Cruz v. Manila Electric Company</i><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> that "[t]he magnitude of environmental damage is the 'condition <i>sine qua non</i> for the issuance of a [w]rit of <i>[k]alikasan</i>.' The ecological threats addressed by the writ of kalikasan must be of 'potentially exponential nature' and 'large-scale,' which, if not prevented, may result in 'an actual or imminent environmental catastrophe.'"<sup style="COLOR: RGB(255, 0, 0);">[36]</sup> This requisite is neither unreasonable nor inequitable. As the Court in <i>Hon. Paje v. Hon. Casiño</i><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> elucidated:<blockquote>The writ is categorized as a special civil action and was, thus, conceptualized as an <b>extraordinary</b> remedy, which aims to provide judicial relief from threatened or actual violation of the constitutional right to a balanced and healthful ecology of a magnitude or degree of damage that transcends political and territorial boundaries. It is intended "to provide a stronger defense for environmental rights through judicial efforts where institutional arrangements of enforcement, implementation and legislation have fallen short" and seeks "to address the potentially exponential nature of large-scale ecological threats."<sup style="COLOR: RGB(255, 0, 0);">[38]</sup> (Emphasis supplied)</blockquote>While, indeed, the Rules do not define the exact nature or degree of environmental damage, but only that it must be sufficiently grave in terms of the territorial scope of such damage,<sup style="COLOR: RGB(255, 0, 0);">[39]</sup> this is not a license for petitioners to rely on purely broad and generalized averments. As held by the Court in <i>Abogado v. Department of Environment and Natural Resources</i>,<sup style="COLOR: RGB(255, 0, 0);">[40]</sup> the imminence or emergency of an ecological disaster should not be an excuse for litigants to do away with their responsibility of substantiating their petitions before the courts. As with any special civil action for extraordinary writs, parties seeking the writ of <i>kalikasan</i> must be ready with the evidence required to prove their allegations <i>by the time the petition is filed and before proceeding with the case</i>.<sup style="COLOR: RGB(255, 0, 0);">[41]</sup><br><br>By the same token, absent any material evidence, petitioners cannot simply invoke and rely on the precautionary principle.<br>&nbsp;<br>The precautionary principle under Section 4(d), Rule 1 of the Rules provides that "when human activities may lead to threats of serious and irreversible damage to the environment that is scientifically plausible but uncertain, actions shall be taken to avoid or diminish that threat."<sup style="COLOR: RGB(255, 0, 0);">[42]</sup> Rule 20 of the Rules provides further for the applicability and standards for application of the precautionary principle as a rule of evidence:<blockquote><center><b>RULE 20<br>PRECAUTIONARY PRINCIPLE</b></center><br>SECTION 1. <i>Applicability</i>.—When there is a lack of full scientific certainty in establishing a causal link between human activity and environmental effect, the court shall apply the precautionary principle in resolving the case before it.<br><br>The constitutional right of the people to a balanced and healthful ecology is given the benefit of the doubt.<br><br>SECTION. 2. <i>Standards for Application</i>.—In applying the precautionary principle, the following factors, among others, may be considered: (1) threats to human life or health; (2) inequity to present or future generations; or (3) prejudice to the environment without legal consideration of the environmental rights of those affected.</blockquote>In <i>West Tower Condominium Corporation v. First Philippine Industrial Corporation</i>,<sup style="COLOR: RGB(255, 0, 0);">[43]</sup> the Court ruled that the precautionary principle only applies when the link between the cause—the human activity sought to be inhibited—and the effect—the damage to the environment—cannot be established with full scientific certainty. In <i>Mosqueda v. Pilipino Banana Growers &amp; Exporters Association, Inc.</i>,<sup style="COLOR: RGB(255, 0, 0);">[44]</sup> the Court elaborated that the principle shall only be relevant if there is concurrence of three elements, namely: uncertainty, threat of environmental damage, and serious or irreversible harm. In situations where the threat is relatively certain, or that the causal link between an action and environmental damage can be established, or the probability of occurrence can be calculated, only preventive, not precautionary measures, may be taken. The Court further held that <i>the precautionary principle still requires scientific basis</i> and that it <i>will not apply if there is no indication of a threat of environmental harm</i>, or if the threatened harm is trivial or easily reversible.<sup style="COLOR: RGB(255, 0, 0);">[45]</sup><br><br>Thus, the Court in <i>Mosqueda</i> concluded that the precautionary approach should not be applied in sustaining the ban against aerial spraying if little or nothing is known of the exact or potential dangers that aerial spraying may bring to the health of the residents within and near the plantations and to the integrity and balance of the environment. The Court reckoned how dangerous it was to quickly presume that the effects of aerial spraying would be adverse even in the absence of evidence.<sup style="COLOR: RGB(255, 0, 0);">[46]</sup><br><br>As well, in <i>Water for All Refund Movement, Inc. v. Manila Waterworks and Sewerage System</i>,<sup style="COLOR: RGB(255, 0, 0);">[47]</sup> the Court refused to apply the precautionary principle on the ground that the petition therein did not only fail to provide a causal link between an action and environmental damage, it likewise did not provide the scientific basis for its particular objection to the operation of a combined sewerage-drainage system or submit any evidence of a resulting environmental damage.<br><br>Similarly in this case, petitioners' general and speculative averments of environmental harm or damage miserably fail to provide the scientific basis required for the precautionary principle to apply. In short, petitioners cannot simply insist on the application of the precautionary principle by merely positing that "HMC's mining operations will result in serious and irreversible harm to the entire Island of Manicani, its foreshore, its marine and aquatic life, and the surrounding areas."<sup style="COLOR: RGB(255, 0, 0);">[48]</sup> As <i>Mosqueda</i> warns, resort to the principle shall not be based on anxiety or emotion, but from a rational decision rule that is based in ethics.<sup style="COLOR: RGB(255, 0, 0);">[49]</sup> "[P]rotecting the environment is not as simple as applying the precautionary principle at face value. The precautionary principle must not be 'taken for all that it is worth' and paralyze us into inaction by prohibiting 'potentially hazardous activities . . . until they are shown to be safe.'"<sup style="COLOR: RGB(255, 0, 0);">[50]</sup><br><br>As to petitioners' claim that the precautionary principle finds application because they are completely without any information as to what the actual extent, scope, limitations, and latitude of the mining operations that HMC will eventually conduct are, without which, the effect of the mining operations will allegedly be difficult to predict, the DENR aptly counters that MPSA No. 012-92-VIII provides information on the extent of the agreement between HMC and the government. It defines the contract area within which HMC will conduct its mining operations and sets out limitations through safeguards that are established to protect the environment. Clearly, therefore, regulatory precaution has, indeed, taken place by virtue of MPSA No. 012-92-VIII, and the precautionary principle should not apply therefore.<sup style="COLOR: RGB(255, 0, 0);">[51]</sup><br><br>More importantly, at its core, the Petition is essentially challenging the action of the DENR in granting the request for extension of HMC. It bears emphasis that petitioners filed a Motion for Reconsideration of this action, which the DENR has yet to rule upon. Simply put, the reliefs sought under the petition may be addressed by the DENR and not through the issuance of the extraordinary writ of <i>kalikasan</i>. Again, <i>Abogado</i> instructs that a writ of <i>kalikasan</i> cannot and should not substitute other remedies that may be available to the parties, whether legal, administrative, or political. Thus:<blockquote>The writ of <i>kalikasan</i> is not an all-embracing legal remedy to be wielded like a political tool. It is both an extraordinary and equitable remedy which assists to prevent environmental catastrophes. <b>It does not replace other legal remedies similarly motivated by concern for the environment and the community's ecological welfare. Certainly, when the petition itself alleges that remedial and preventive remedies have occurred, the functions of the writ cease to exist. In case of disagreement, parties need to exhaust the political and administrative arena.</b> Only when a concrete cause of action arises out of facts that can be proven with substantial evidence may the proper legal action be entertained.<sup style="COLOR: RGB(255, 0, 0);">[52]</sup> (Emphasis supplied)</blockquote>Correspondingly, petitioners also fail to observe the principle of exhaustion of administrative remedies and its corollary doctrine of primary jurisdiction. As the Court teaches in <i>WARM</i>:<blockquote>The general rule is that before a party may seek the intervention of the court, he should first avail of all the means afforded him by administrative processes. The issues which administrative agencies are authorized to decide should not be summarily taken from them and submitted to a court without first giving such administrative agency the opportunity to dispose of the same after due deliberation.<br><br>Corollary to the doctrine of exhaustion of administrative remedies is the doctrine of primary jurisdiction; that is, courts cannot or will not determine a controversy involving a question which is within the jurisdiction of the administrative tribunal prior to the resolution of that question by the administrative tribunal, where the question demands the exercise of sound administrative discretion requiring the special knowledge, experience[,] and services of the administrative tribunal to determine technical and intricate matters of fact.<sup style="COLOR: RGB(255, 0, 0);">[53]</sup></blockquote><b>ACCORDINGLY</b>, the Petition for Writ of <i>Kalikasan</i> with a Prayer for the Issuance of a Temporary Environmental Protection Order, is <b>DISMISSED</b>.<br><br><b>SO ORDERED.</b><br>&nbsp;<br><b>SO ORDERED.</b><br><br><i>Gesmundo, C.J., Hernando, Lazaro-Javier, Inting, Zalameda, Gaerlan, Rosario, J. Lopez, Dimaampao, Marquez, Kho, Jr.</i>, and <i>Villanueva, JJ.</i>, concur.<br><i>Leonen, J.</i>, concur. See separate opinion.<br><i>Singh</i>,<sup style="COLOR: RGB(255, 0, 0);">*</sup> <i>J.</i>, on leave.<br>&nbsp;<br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">*</sup> On leave.<br><br><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 3-24.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <i>Id.</i> at 4-6.<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> <i>Id.</i> at 312. <i>See also rollo</i>, pp. 6-7, and 232.<br><br><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Id.</i> at 233.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 7.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <i>Id.</i> at 192-193.<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <i>Id.</i> at 235-236. <i>See also rollo</i>, p. 377.<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 236. <i>See also rollo</i>, pp. 381-384.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> <i>Id.</i> at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 236. <i>See also rollo</i>, pp. 388-392.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <i>Id.</i> at 393-396.<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 397-412.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> <i>Id.</i> at 426-444.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> <i>Id.</i> at 445-448.<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 159-171.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> <i>Id.</i> at 8.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Id.</i> at 9-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> An Act Instituting a New System of Mineral Resources Exploration, Development, Utilization, and Conservation, approved on March 3, 1995.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Rollo</i>, pp. 12-14.<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Id.</i> at 14-15.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> <i>Id.</i> at 15-18.<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> <i>Id.</i> at 18-20.<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> <i>Id.</i> at 184-185-D (dorsal page).<br><br><sup style="COLOR: RGB(255, 0, 0);">[24]</sup> <i>Id.</i> at 186-229.<br><br><sup style="COLOR: RGB(255, 0, 0);">[25]</sup> <i>Id.</i> at 230-271.<br><br><sup style="COLOR: RGB(255, 0, 0);">[26]</sup> <i>Id.</i> at 250.&nbsp;<br><br><sup style="COLOR: RGB(255, 0, 0);">[27]</sup> Republic Act No. 7586 (1992).<br><br><sup style="COLOR: RGB(255, 0, 0);">[28]</sup> Republic Act No. 11038 approved on June 22, 2018.<br><br><sup style="COLOR: RGB(255, 0, 0);">[29]</sup> <i>Rollo</i>, pp. 549-554.<br><br><sup style="COLOR: RGB(255, 0, 0);">[30]</sup> A.M. No. 09-6-8-SC effective April 29, 2010.<br><br><sup style="COLOR: RGB(255, 0, 0);">[31]</sup> <b>Concerned Citizens of Sta. Cruz, Zambales v. Secretary Paje</b>, 921 Phil. 503, 521 (2022) [Per J. Inting, <i>En Banc</i>], <i>citing</i> <b>Paje v. Casiño</b>, 752 Phil. 498, 539 (2015) [Per J. Del Castillo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[32]</sup> <i>Rollo</i>, pp. 37-48.<br><br><sup style="COLOR: RGB(255, 0, 0);">[33]</sup> <i>Id.</i> at 5.<br><br><sup style="COLOR: RGB(255, 0, 0);">[34]</sup> <i>Id.</i> at 251.<br><br><sup style="COLOR: RGB(255, 0, 0);">[35]</sup> 889 Phil. 659 (2020) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[36]</sup> <i>Id.</i> at 692, <i>citing</i> <b>LNL Archipelago Minerals, Inc. v. Agham Pary List</b>, 784 Phil. 456, 474 (2016) [Per J. Carpio, <i>En Banc</i>], <b>Hon. Paje v. Hon. Casiño</b>, 752 Phil. 498, 538 (2015) [Per J. Del Castillo, <i>En Banc</i>], <i>further citing</i> the Annotation to the Rules of Procedure for Environmental Cases, pp. 78-79, and J. Leonen's Concurring Opinion in <b>International Service for the Acquisition of Agri-Biotech Applications, Inc. v. Greenpeace Southeast Asia (Philippines)</b>, 774 Phil. 508, 722 (2015) [Per J. Villarama, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[37]</sup> 752 Phil. 498 (2015) [Per J. Del Castillo, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[38]</sup> <i>Id.</i> at 538.<br><br><sup style="COLOR: RGB(255, 0, 0);">[39]</sup> <i>Id.</i> at 539.<br><br><sup style="COLOR: RGB(255, 0, 0);">[40]</sup> 861 Phil. 703 (2019) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[41]</sup> <i>Id.</i> at 733. <i>See</i> <b>Water for All Refund Movement, Inc. v. Manila Waterworks and Sewerage System</b>, 938 Phil. 763 (2023) [Per J. Hernando, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[42]</sup> <i>See</i> <b>Dela Cruz v. Manila Electric Company</b>, <i>supra</i> note 35, at 693.<br><br><sup style="COLOR: RGB(255, 0, 0);">[43]</sup> 760 Phil. 304 (2015) [Per J. Velasco, Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[44]</sup> 793 Phil. 17 (2016) [Per J. Bersamin, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[45]</sup> <i>Id.</i> at 80-81.<br><br><sup style="COLOR: RGB(255, 0, 0);">[46]</sup> <i>Id.</i> at 83.<br><br><sup style="COLOR: RGB(255, 0, 0);">[47]</sup> <i>Supra</i> note 41.<br><br><sup style="COLOR: RGB(255, 0, 0);">[48]</sup> <i>Rollo</i>, pp. 9-12.<br><br><sup style="COLOR: RGB(255, 0, 0);">[49]</sup> <b>Mosqueda v. Pilipino Banana Growers &amp; Exporters Association, Inc.</b>, <i>supra</i> note 44, at 82.<br><br><sup style="COLOR: RGB(255, 0, 0);">[50]</sup> <i>See</i> <b>Dela Cruz v. Manila Electric Company</b>, <i>supra</i> note 35, at 696.<br><br><sup style="COLOR: RGB(255, 0, 0);">[51]</sup> <i>Id.</i> at 697.<br><br><sup style="COLOR: RGB(255, 0, 0);">[52]</sup> <b>Abogado v. Department of Environment and Natural Resources</b>, <i>supra</i> note 40, at 735, <i>citing</i> J. Leonen, Concurring Opinion in <b>Arigo v. Swift</b>, 743 Phil. 8, 71 (2014) [Per J. Villarama, Jr., <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[53]</sup> <b>Water for All Refund Movement, Inc. v. Manila Waterworks and Sewerage System</b>, <i>supra</i> note 41, at 783, <i>citing</i> <b>Smart Communications, Inc. v. Aldecoa</b>, 717 Phil. 577, 598-599 (2013) [Per J. Leonardo-De Castro, First Division].<br><br><hr align="center" width="60%" size="1" noshade=""><br><center><b>CONCURRING OPINION</b></center><br><b>LEONEN, <i>SAJ.</i>:</b><br><br>I concur with the <i>ponente</i>'s well-articulated decision. In accordance with the current Rules of Procedure for Environmental Cases, the Petition for Writ of <i>Kalikasan</i> must be denied. However, I take this opportunity to highlight a critical flaw in our procedural framework and emphasize the urgent need to amend the requisites of the writ of <i>kalikasan</i>.<br><br><center><b>I</b></center><br>The Petition before us seeks the issuance of a writ of <i>kalikasan</i> with a prayer for the issuance of a Temporary Environmental Protection Order (TEPO). Petitioners, who are residents of the Island of Manicani and nearby towns, are seeking to prevent the resumption of mining operations of respondent Hinatuan Mining Corporation (Hinatuan Mining), a subsidiary of Nickel Asia Corporation, located in the Island of Manicani, Municipality of Guiuan, Province of Eastern Samar.<sup style="COLOR: RGB(255, 0, 0);">[1]</sup><br><br>The writ of <i>kalikasan</i> is an "extraordinary remedy covering environmental damage of such magnitude that will prejudice the life, health or property of inhabitants in two or more cities or provinces."<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> As correctly laid down in the <i>ponencia</i>, the essential requisites for the issuance of the writ are:<blockquote>(1) there is an actual or threatened violation of the constitutional right to a balanced and healthful ecology;<br><br>(2) the actual or threatened violation arises from an unlawful act or omission of a public official or employee, or private individual or entity; and<br><br>(3) the actual or threatened violation involves or will lead to an environmental damage of such magnitude as to prejudice the life, health or property of inhabitants in two or more cities or provinces.</blockquote>For a petition of this nature to prosper, the petitioner must establish the presence of the above-mentioned requisites through its allegations contained in the petition and in accordance with Rule 7, Section 2(d) of the Rules of Procedure for Environmental Cases.<sup style="COLOR: RGB(255, 0, 0);">[3]</sup><br><br>The <i>ponencia</i> accurately observed that the petitioners failed to comply with the required contents of a petition. It was evident that the petition lacked the material evidence and judicial affidavits explicitly mandated in the Rules of Procedure for Environmental Cases.<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> The petition solely relied on general allegations that the large-scale mining operations would cause environmental damage to the Island of Manicani and its surrounding areas. The assertion that adjacent coastal communities in the municipalities of Samar and Leyte would also be impacted was not supported by any basis.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Thus, petitioners failed to provide the substantive basis for this Court to intervene.<br><br>While I agree that the procedural lapses in the petition must translate to its dismissal, it is precisely this deficiency that could be rectified if the Rules of Procedure for Environmental Cases allowed a more liberal approach in urgent environmental cases. The frequent denial of petitions on technical grounds indicates a problem not just in interpretation but also with the stringent requirements established by these rules. An examination of this Court's rulings concerning the writ of <i>kalikasan</i> reveals that the dismissal of a petition or denial of the writ mainly arises from the plaintiffs inability to provide evidence of the actual or threatened violation of the right to a balanced and healthful ecology; the unlawful act or omission of a public official or private individual or entity; or of environmental damage of such magnitude as to prejudice the life, health or property of inhabitants in <i>two or more</i> cities or provinces.<br><br>Mere assertions or bare allegations of a violation of one's constitutional right is insufficient for a case to prosper.<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> This Court cannot act on hypotheticals alone. We have consistently stated that plaintiffs must be ready to prove their allegations at the time of the filing of the petition, which is why this Court dismissed the petition in <i>Segovia v. Climate Change Commission</i>:<sup style="COLOR: RGB(255, 0, 0);">[7]</sup><blockquote>In this case, apart from repeated invocation of the constitutional right to health and to a balanced and healthful ecology and bare allegations that their right was violated, the petitioners failed to show that public respondents are guilty of any unlawful act or omission that constitutes a violation of the petitioners' right to a balanced and healthful ecology.<br><br>. . . .<br><br>. . . Notably, apart from bare allegations, petitioners were not able to show that respondents failed to execute any of the laws petitioners cited. In fact, apart from adducing expert testimony on the adverse effects of air pollution on public health, the petitioners did not go beyond mere allegation in establishing the unlawful acts or omissions on the part of the public respondents that have a causal link or reasonable connection to the actual or threatened violation of the constitutional right to a balanced and healthful ecology of the magnitude contemplated under the Rules, as required of petitions of this nature.<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> (Citations omitted)</blockquote><i>LNL Archipelago Minerals, Inc. v AGHAM Party List</i> also ruled that:<sup style="COLOR: RGB(255, 0, 0);">[9]</sup><blockquote>. . . a party claiming the privilege for the issuance of a [w]rit of [<i>kalikasan</i>] has to show that a law, rule[,] or regulation was violated or would be violated. ln the present case, the allegation by Agham that two laws—the Revised Forestry Code, as amended, and the Philippine Mining Act—were violated by LAMI was not adequately substantiated by Agham. Even the facts submitted by Agham to establish environmental damage were mere general allegations.<sup style="COLOR: RGB(255, 0, 0);">[10]</sup>&nbsp;</blockquote>In <i>Confederation for Unity, Recognition and Advancement of Government Employees v. Abad</i>:<sup style="COLOR: RGB(255, 0, 0);">[11]</sup><blockquote>The courts' constitutional duty is "to settle actual controversies involving rights which are legally demandable and enforceable." Courts cannot and will not decide hypothetical issues, render advisory opinions, or engage academic questions. The parties must present concrete facts that demonstrate the problems vis-a-vis a legal provision. The parties represented must show the contradicting considerations as a result of the alleged facts. Absent such actual case anchored on concrete adverseness, no factual basis exists for giving a petition due course.<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> (Citations omitted)</blockquote>Here, petitioners allege that the mining operations of respondent Hinatuan Mining are situated in Manicani, within the protected area of the Guiuan Marine Reserve pursuant to Proclamation No. 469 series of 1994,<sup style="COLOR: RGB(255, 0, 0);">[13]</sup> which prohibits the destruction of terrestrial and marine ecosystems within this zone. However, unsubstantiated assertions of petitioners will not suffice for the issuance of the writ. This was illustrated when the Court denied the petition in <i>Braga v. Abaya</i><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> for relying on the strength of bare allegations:<blockquote>First, the petition failed to identify the particular threats from the Project itself. All it does is cite the negative impacts of operating a port inside a city based on the Synthesis Report. However, these impacts already exist because the Port of Davao has been operating since 1900. The Project is not for the creation of a new port but the modernization of an existing one. At best, the allegations in support of the application for the writ of kalikasan are hazy and speculative.<br><br>. . . .<br><br>Moreover, this Court does not have the technical competence to assess the Project, identify the environmental threats, and weigh the sufficiency or insufficiency of any proposed mitigation measures. This specialized competence is lodged in the DENR, who acts through the EMB in the EIA process. As we have already established, the application of the EIS System is premature until a proponent is selected.<sup style="COLOR: RGB(255, 0, 0);">[15]</sup></blockquote>As in <i>Abaya</i>, the Court also lacks the technical expertise to assess the mining activities in this case. The Court cannot ascertain whether mining activities are occurring within the protected area or if environmental regulations are indeed being violated. Hence, despite allegations of threatened grave environmental damage caused by respondent Hinatuan Mining's large-scale mining, this Court cannot act on the Petition.<br><br>Nevertheless, given that the writ seeks to protect the individual and collective's right to a balanced and healthful ecology<sup style="COLOR: RGB(255, 0, 0);">[16]</sup>—a right intrinsically tied to the right to life—the Rules of Procedure for Environmental Cases must be amended to better accommodate the needs of the ones it seeks to protect. It must take into account how environmental cases are often initiated by individuals or communities who bear the brunt of the environmental degradation but lack the resources and expertise necessary to comply with complex procedural and evidentiary requirements. Indigenous peoples, residents of geographically isolated areas, and environmental advocates often face constraints that place them at a disadvantage in accessing information needed for judicial remedies.<br><br>Thus, the Rules of Procedure for Environmental Cases must be reexamined and recalibrated to better reflect the realities of environmental litigation. A more equitable and effective provision would, for example, permit the submission of affidavits and technical studies after the filing of the petition, once the Court has determined its propriety. This would ensure that the protection of the constitutional right is not forfeited due to rigid procedures.<br><br><center><b>II</b></center><br>Even assuming the Petition successfully substantiated the allegations of violations of environmental laws and the acts or omissions complained of, it would still be dismissed due to its failure to satisfy the third requisite for the writ: the "magnitude" test.<br><br>The subject of the Petition is Manicani Island, located entirely within the Municipality of Guiuan, Province of Eastern Samar. While Manicani Island is part of the Guiuan Marine Reserve, a declared protected area, the reserve itself is situated within a single municipality and province.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> As the <i>ponencia</i> correctly observed, Petitioners fail to demonstrate that the alleged environmental damage transcends the territorial boundaries of Eastern Samar, thereby failing to meet the jurisdictional requirement of "two or more cities or provinces."<sup style="COLOR: RGB(255, 0, 0);">[18]</sup><br><br>Once again, this exposes a dangerous and recurring gap in our environmental protection mechanisms. Although the Rules of Procedure for Environmental Cases does not quantify the exact degree of environmental damage that must take place for the issuance of the writ, the damage sought to be prevented or ceased must span at least two cities or provinces.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup> This geographical requirement has proven to be overly restrictive and divorced from reality.<br><br>By tethering the "magnitude" of environmental damage to the number of political units involved, the writ becomes unavailable even in the face of catastrophic environmental destruction simply because it is geographically contained within a single province. Under this rigid standard, a massive oil spill—or the destruction of a protected seascape, such as in this case—would fail to qualify for the writ. This effectively disenfranchises islands, isolated areas, and remote provinces where extensive environmental damage may occur without physically traversing a political boundary.<br><br>This Court must revisit and amend the Rules of Procedure for Environmental Cases, and consider replacing the "two city or province" requirement with an "ecosystem", defined as "a dynamic complex of plant, animal, and microorganism communities and their non-living environment interacting as a functional unit."<sup style="COLOR: RGB(255, 0, 0);">[20]</sup> This approach is not only grounded in science but is also aligned with international environmental law and the Convention on Biological Diversity.<sup style="COLOR: RGB(255, 0, 0);">[21]</sup><br><br>I reaffirm the position advanced in my opinion in <i>Quezon for Environment v. Medialdea</i><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> that the requirement of harm spanning "two or more cities or provinces" should be superseded by a framework focused on ecological integrity. The use of ecosystem as a measure found support in empirical studies:<blockquote>Justice Amy C. Lazaro-Javier's Dissenting Opinion in <i>Villar v. Alltech Contractors</i>, citing a study made in Malaysia, touched on the biological impacts of reclamation activities on the coastal ecosystem. The study showed that reclamation activities result in the "destruction of ecosystems such as coral reefs, sea grass meadows, and mudflats" leading to a decline in the endemic fauna and the destruction of the habitat of bottom dwellers, which disrupts the food chain. The loss of coastal ecosystems or natural buffer zones like mangroves, seagrasses, and mudflats also leave coastal ecosystems vulnerable to flooding, coastal erosion, and tsunami. Finally, the study warned that "once the ecosystem is disturbed, it will take some time for it to recover to its original state, depending on the ecosystem's resilience."<br><br>Without a doubt, the actual or imminent threat to a particular ecosystem, if sufficiently grave enough and with a wide-reaching effect, should lead to the issuance of a writ of <i>kalikasan</i>, even if the threatened ecosystem can only be found in a single city or province.<sup style="COLOR: RGB(255, 0, 0);">[23]</sup> (Citations omitted)</blockquote>By shifting the focus from rigid political boundaries to clear ecological units, the ecosystem requirement will expand access to the writ of <i>kalikasan</i>, enabling litigants to pursue protection against large-scale environmental damage without being unduly constrained by the two-city or two-province requirement.<br><br><b>ACCORDINGLY</b>, I vote to <b>DISMISS</b> the Petition for Writ of <i>Kalikasan</i> with a Prayer for the Issuance of a Temporary Environmental Protection Order.<br><br><hr align="LEFT" width="60%" size="1" noshade=""><sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Ponencia</i>, pp. 1-2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[2]</sup> <b>Segovia v. Climate Change Commission</b>, 806 Phil. 1019 (2017) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[3]</sup> ENVT'L PROC. RULE, Rule 7, sec. 2 states:<blockquote>Section 2. <i>Contents of the petition</i>. — The verified petition shall contain the following:<br><br>(a) The personal circumstances of the petitioner;<br><br>(b) The name and personal circumstances of the respondent or if the name and personal circumstances are unknown and uncertain, the respondent may be described by an assumed appellation;<br><br>(c) The environmental law, rule or regulation violated or threatened to be violated, the act or omission complained of, and the environmental damage of such magnitude as to prejudice the life, health or property of inhabitants in two or more cities or provinces;<br><br>(d) All relevant and material evidence consisting of the affidavits of witnesses, documentary evidence, scientific or other expert studies, and if possible, object evidence;<br><br>(e) The certification of petitioner under oath that: (1) petitioner has not commenced any action or filed any claim involving the same issues in any court, tribunal or quasi-judicial agency, and no such other action or claim is pending therein; (2) if there is such other pending action or claim, a complete statement of its present status; (3) if petitioner should learn that the same or similar action or claim has been filed or is pending, petitioner shall report to the court that fact within five (5) days therefrom; and (f) The reliefs prayed for which may include a prayer for the issuance of a TEPO.</blockquote><sup style="COLOR: RGB(255, 0, 0);">[4]</sup> <i>Ponencia</i>, pp. 8-10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[5]</sup> <i>Id.</i> at 10.<br><br><sup style="COLOR: RGB(255, 0, 0);">[6]</sup> <b>Lozada v. Commission on Audit</b>, 907 Phil. 808 (2021) [Per J. Inting, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[7]</sup> <b>Segovia v. Climate Change Commission</b>, 806 Phil. 1019 (2017) [Per J. Caguioa, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[8]</sup> <i>Id.</i> at 1034-1035.<br><br><sup style="COLOR: RGB(255, 0, 0);">[9]</sup> 784 Phil. 456 (2016) [Per J. Carpio, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> <i>Id.</i> at 480.<br><br><sup style="COLOR: RGB(255, 0, 0);">[11]</sup> 889 Phil. 699 (2020) [Per J. Leonen, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[12]</sup> <i>Id.</i> at 731.<br><br><sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Proclamation No. 469 (1994), Declaring the Coastal Areas of the Municipality of Guiuan, Province of Eastern Samar, and Neighboring Islands, as Protected Landscapes/Seascapes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[14]</sup> 794 Phil. 662 (2016) [Per J. Brion, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[15]</sup> <i>Id.</i> at 681.<br><br><sup style="COLOR: RGB(255, 0, 0);">[16]</sup> CONST., art. II, sec. 22.<br><br><sup style="COLOR: RGB(255, 0, 0);">[17]</sup> Proclamation No. 469 (1994), Declaring the Coastal Areas of the Municipality of Guiuan, Province of Eastern Samar, and Neighboring Islands, as Protected Landscapes/Seascapes.<br><br><sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Ponencia</i>, p. 9.<br><br><sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <b>Quezon for Environment v. Medialdea</b>, 960 Phil. 253 (2024) [Per J. Singh, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[20]</sup> Convention on Biological Diversity, June 5, 1992, 1760 U.N.T.S. 79, art. 2.<br><br><sup style="COLOR: RGB(255, 0, 0);">[21]</sup> United Nations Environment Program, <i>Ecosystem-based disaster risk reduction, available at</i> <a href="https://www.unep.org/topics/disasters-and-conflicts/disaster-risk-reduction/ecosystem-based-disaster-risk-reduction">https://www.unep.org/topics/disasters-and-conflicts/disaster-risk-reduction/ecosystem-based-disaster-risk-reduction</a> (last accessed on February 13, 2026).<br><br><sup style="COLOR: RGB(255, 0, 0);">[22]</sup> J. Leonen, Concurring Opinion in <b>Quezon for Environment v. Medialdea</b>, 960 Phil. 253, 322 (2024) [Per J. Singh, <i>En Banc</i>].<br><br><sup style="COLOR: RGB(255, 0, 0);">[23]</sup> J. Leonen, Concurring Opinion in <b>Quezon for Environment v. Medialdea</b>, 960 Phil. 253, 327 (2024) [Per J. Singh, <i>En Banc</i>].</div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>
