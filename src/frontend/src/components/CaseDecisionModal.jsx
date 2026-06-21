@@ -1008,7 +1008,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                             <h2 className="text-xl sm:text-2xl font-black leading-tight tracking-tight text-gray-900 dark:text-white text-balance mb-1">
                                 {(fullDecision.short_title && fullDecision.short_title.trim()) || (fullDecision.title && fullDecision.title.trim()) || fullDecision.case_number}
                             </h2>
-                            <p className="text-[11px] sm:text-xs font-mono text-gray-500 dark:text-gray-400">
+                            <p className="text-sm font-medium text-gray-500 dark:text-gray-400 leading-relaxed">
                                 {fullDecision.case_number}
                                 {_decisionDateRaw ? (
                                     <span> · {formatDate(_decisionDateRaw)}</span>
