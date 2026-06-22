@@ -570,11 +570,18 @@ def generate_digest_batch(limit=10, doctrinal_only=False, year=None, force=False
             
             safe_content = content
             
-            # --- PROMPT (UPDATED FOR GROK: FORCE ELABORATION) ---
+            # --- PROMPT (UPDATED FOR GROK: FORCE ELABORATION & ALIGNED WITH GEMINI) ---
             
-            sys_instruction = """ROLE: You are an Expert Legal Analyst and Senior Reporter for the Supreme Court of the Philippines. Your objective is to extract a precise, clinical case digest for a professional Bar Review Database.
-STYLE: Formal, forensic, and objective. Use the exact legal terminology found in Philippine Jurisprudence.
-CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdown blocks like ```json. Just output the raw JSON object."""
+            sys_instruction = """ROLE: You are a highly precise Legal Data Extraction Engine specialized in Philippine Jurisprudence for a Bar Review application. Your task is to transform raw legal text into a structured, clinical analysis for academic use.
+
+TONE & SCOPE: Maintain a neutral, professional, and purely academic tone. Treat all descriptions of events as "Case Facts" or "Testimony" for evidentiary analysis. Do not use sensationalist language. Terminology regarding crimes is strictly for legal classification.
+
+CRITICAL QUALITY GATES & SYSTEM RULES:
+- Style: Formal, forensic, deeply analytical, and academic. Use the exact, sophisticated legal terminology of Philippine Jurisprudence. Never summarize, simplify, or write brief overviews.
+- Ratio Decidendi ("ratio" field): This is the core educational asset. For each and every issue discussed, you MUST write an exhaustive, logically complete, and thorough point-by-point legal analysis. Each issue's bullet point MUST be a minimum of 8 to 12 long, detailed, and legally rich sentences of rigorous reasoning.
+- Cite specific statutory provisions, constitutional sections, and landmark cases in full.
+- Concise bullet points or brief summaries of 2-4 sentences are completely unacceptable and constitute a failure of your task.
+- Output Format: You MUST output strictly VALID JSON without any markdown code block wraps."""
 
             prompt = f"""
             **ROLE:**
@@ -582,13 +589,14 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
             **STYLE:**
             Formal, forensic, and objective. Use the exact legal terminology found in Philippine Jurisprudence. 
             **TASK:**
-            Distill the provided text into a high-yield digest while maintaining the "Language of the Law."
+            Distill the provided text into a high-yield, comprehensive digest while maintaining the sophisticated "Language of the Law."
             **INSTRUCTIONS:**
             1. **Legal Verbatim:** Use the actual words and phrases from the input text (e.g., "treachery," "evident premeditation," "grave abuse of discretion"). Do not sanitize legal terms, as they are essential for Bar Exam preparation.
             2. **Clinical Focus:** Filter out emotional narratives. Retain only the facts necessary to satisfy the elements of the crime or the legal doctrine.
             3. **Safety Protocol:** Only redact or abstract content if it involves the specific names of victims in sensitive cases (e.g., use "AAA" or "The Victim" per RA 9262 protocols), but keep the description of the legal acts intact.
-            4. **Separate Opinions (MINIMAL FORMAT - ALL Justices, NO SUMMARIES):** Identify ALL Justices who filed separate opinions. For each, provide ONLY the Justice name and Type. Types: "Dissenting", "Concurring", "Separate Concurring", "Separate Dissenting". Format example: {{"justice": "Leonardo-De Castro, J.", "type": "Dissenting"}}. **CRITICAL: DO NOT include a summary field** - output should be compact with just name + type for each Justice.
- You MUST identify and summarize **ALL** Concurring, Dissenting, Separate Concurring, and Separate Dissenting Opinions found in the text. En Banc cases often have 10+ separate opinions—scan the ENTIRE document thoroughly, including footnotes and signature blocks, to capture every opinion. For the Ponente, identify if they expressed a personal "Separate View" distinct from the majority. The `summary` field for each opinion MUST be populated with at least 3-4 sentences; it cannot be null.
+            4. **Separate Opinions (MANDATORY EXTRACTION):**
+               Identify and summarize **ALL** Concurring, Dissenting, Separate Concurring, and Separate Dissenting Opinions found in the text. En Banc cases often have 10+ separate opinions—scan the ENTIRE document thoroughly, including footnotes and signature blocks, to capture every opinion. For the Ponente, identify if they expressed a personal "Separate View" distinct from the majority.
+               The `summary` field for each opinion MUST be populated with at least 3-4 sentences; it cannot be null. Under NO circumstances should you omit the summary or text fields in the output JSON.
 
             **INPUT TEXT:**
             {safe_content}
@@ -596,12 +604,12 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
             **YOUR GOAL:**
             Analyze the provided legal text and generate a structured, educational JSON digest for Bar Review students.
 
-            **STRICT DATA INTEGRITY RULES:**
+            **STRICT DATA INTEGRITY & QUALITY RULES:**
             1. **No Hallucinations:** If a specific detail (date, justice, fact) is NOT found in the text, return `null` for strings/dates or an empty array `[]` for lists. Do NOT invent data.
             2. **JSON Safety:** You MUST escape all double quotes (") and control characters (newlines \\n, tabs \\t) within string values to ensure valid JSON parsing.
             3. **Database Compatibility:** Follow ISO formats exactly.
             4. **Structural Alignment:** For every issue listed in "digest_issues", there MUST be a corresponding and clearly labeled bullet point in "digest_ratio" (e.g., "* **On Issue 1:** ...", "* **On Issue 2:** ..."). Do NOT group issues together or skip indices.
-            5. **Acronyms & Abbreviations:** You MUST define all acronyms and abbreviations in full upon their first occurrence in the text (e.g., "Sexual Orientation, Gender Identity and Expression, and Sex Characteristics (SOGIESC)"). Subsequent mentions can use the acronym alone. Do NOT use undefined acronyms.
+            5. **Acronyms & Abbreviations:** You MUST define all acronyms and abbreviations in full upon their first occurrence in the text. Subsequent mentions can use the acronym alone. Do NOT use undefined acronyms.
             6. **No "None" Strings:** If a field has no data, use `null` or `[]`. Do not write the literal string "None" or "N/A".
             7. **Cited-case display strings:** In `cited_cases` entries, never write "No date found", "date not found", or similar. If a cited case's decision date is not in the source text, omit the date from the `title` (keep case name and G.R. No. if stated); do not explain missing dates in the title.
 
@@ -618,7 +626,7 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                - **Subject:** Identify the primary and secondary subjects. Choose from: [Political, Civil, Commercial, Labor, Criminal, Taxation, Ethics, Remedial]. Provide as "Primary: [Subject]; Secondary: [Subject1, Subject2]". If only one applies, just list it as Primary.
                - **Keywords:** Extract 5-10 specific legal keywords.
                - **Statutes Involved:** Scan for specific laws cited (e.g., "Article 36, Family Code"). Limit to the **Top 5 most relevant** statutes.
-               - **Main Doctrine (ELABORATE):** Provide a **comprehensive explanation of 5-8 sentences** detailing the **primary legal doctrine** established or applied by the Court, written strictly as a single, coherent paragraph of natural, flowing prose sentences. Do NOT use any numbering, sub-bullet points, or explicit labels (such as (a), (b), (c)). Clearly convey the core legal rule or holding, the constitutional, statutory, or jurisprudential rationale behind it, and its exact impact or significance for Philippine law. **IMPORTANT:** If—and only if—the Court settled any **collateral or procedural issues** of major jurisprudential value in this case, you MUST explicitly mention them in a concluding sentence of this prose paragraph (e.g., 'In addition, the Court settled collateral matters concerning [issue], ruling that...'). Do not invent or hallucinate collateral issues if there are none. Do not leave the doctrine block as a simple or lazy summary—make it forensic, deep, and fully illustrative of the decision's doctrinal weight.
+               - **Main Doctrine (ELABORATE):** Provide a **comprehensive explanation of 5-8 sentences** detailing the **primary legal doctrine** established or applied by the Court, written strictly as a single, coherent paragraph of natural, flowing prose sentences. Do NOT use any numbering, sub-bullet points, or explicit labels. Clearly convey the core legal rule or holding, the constitutional, statutory, or jurisprudential rationale behind it, and its exact impact or significance for Philippine law. **IMPORTANT:** If—and only if—the Court settled any **collateral or procedural issues** of major jurisprudential value in this case, you MUST explicitly mention them in a concluding sentence of this prose paragraph (e.g., 'In addition, the Court settled collateral matters concerning [issue], ruling that...'). Do not invent or hallucinate collateral issues if there are none. Do not leave the doctrine block as a simple or lazy summary—make it forensic, deep, and fully illustrative of the decision's doctrinal weight.
 
             2. **JURISPRUDENCE MAPPING (Contextual):**
                - Identify Supreme Court cases cited in the text.
@@ -643,9 +651,11 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                  * **The Petition** (or **The Appeal**): Specifically describe the procedural vehicle (e.g., Rule 45 petition) and the main arguments raised by the petitioner/appellant to the Supreme Court.
                - **Issues:** Provide a comprehensive, exhaustive list of **ALL issues** discussed, addressed, or settled by the Court in this case. This MUST include not only the primary substantive issues but also **any and all procedural, secondary, or collateral issues** raised by the parties or motu proprio addressed by the Court (such as standing, mootness, proper remedy, quantum of evidence, or procedural due process). List every single issue using a structured markdown bullet point format.
                - **Ruling:** Final Verdict and Dispositive Portion.
-               - **Ratio (POINT-BY-POINT):**
+               - **Ratio (POINT-BY-POINT - STRICT ELABORATION):**
                  - Address every single issue listed in the Issues section (both primary and collateral/procedural) using a corresponding and clearly labeled bullet point in a point-by-point manner (e.g., '* **On Issue 1:** ...', '* **On Issue 2:** ...').
-                 - **Reasoning Requirement:** For each issue, write a thorough, forensic, and logically complete explanation of how the Supreme Court reasoned and arrived at its decision. Provide a **MINIMUM of 5-8 sentences** of rigorous legal reasoning for each issue, with **NO upper limit** on sentence length or count to avoid truncating complex arguments. Avoid sparse outlines, short summaries, or telegraphic bullet points.
+                 - **STRICT LENGTH & ANALYTICAL DEPTH GATES:** For each and every issue, write a thorough, forensic, and logically complete explanation of how the Supreme Court reasoned.
+                 - **Sentence Count Warning:** Write **at least 8 to 12 long, dense sentences of rigorous legal reasoning for EACH issue's bullet point**. Do NOT write brief summaries or concise outlines. Brief 2-3 sentence entries are a critical failure.
+                 - **Analytical Checklist per Ratio Issue:** For each issue, you must trace: (a) the statutory provision, constitutional section, or legal doctrine serving as the starting premise; (b) the arguments raised by the parties; (c) the Court's logical step-by-step reasoning applying the rules to the facts; (d) references to cited landmark precedents; (e) exceptions or qualifications; (f) the final legal consequence or holding.
                  - **Citation Rule:** Explicitly name referenced cases (e.g., "Applying the doctrine in *Tan-Andal v. Andal*...") and statutory/constitutional provisions.
 
             5. **SIGNIFICANCE (THE "BAR TRAPS"):**
@@ -662,7 +672,7 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                  - **REVERSAL**: This means reversal of the Supreme Court of its own Decision (Not the Supreme Court reversing the lower courts). The Supreme Court in its Resolution reverses its OWN Decision on Motion for Reconsideration of either of the Party regardless of how many motions were filed. This classification (REVERSAL) should be accompanied by any of the other classification eg Modification etc, (depending on the final resolution). SO the Output should be "REVERSAL" and "MODIFICATION" or "REVERSAL" and "ABANDONMENT"
 
                  **Step B: Reasoning & Evidence (Mandatory)**
-                 Provide a **classification_reasoning** sentence. If you classify as NEW DOCTRINE, ABANDONMENT, MODIFICATION, or CLARIFICATION, you MUST quote the specific sentence where the Court indicates this (e.g., "We now abandon the ruling in...", "We clarify that...", "We modify our prior ruling...").
+                 Provide a **classification_reasoning** sentence. If you classify as NEW DOCTRINE, ABANDONMENT, MODIFICATION, or CLARIFICATION, you MUST quote the specific sentence where the Court indicates this.
 
                  **Step C: Collateral Matters (Mandatory Check)**
                  Scan for "Bar Exam Traps": Quantum of Proof changes, Win/Loss paradoxes, Procedural anomalies, Prospective applications, Novel definitions.
@@ -671,7 +681,7 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                - **Legal Concepts:**
                  - Extract 5 concepts: "Concept - Definition".
                  - **Rule:** Use EXACT wording from the case for the definition.
-                 - **Citations:** Cite the source case AND the specific provision of the law (e.g., "Article 3, Section 1, 1987 Constitution").
+                 - **Citations:** Cite the source case AND the specific provision of the law.
                - **Flashcards:** Create 3 cards (Concept, Distinction, Scenario). Do NOT ask "What is the doctrine?".
 
             7. **SECONDARY/COLLATERAL RULINGS (MANDATORY EXTRACTION):**
@@ -699,18 +709,18 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                - Extract EVERY collateral ruling that satisfies the checklist above. Do NOT limit yourself — if 7 exist, list all 7.
                - If there are genuinely no secondary rulings, return `[]`. Do NOT invent data.
                - Each object MUST have exactly these two keys:
-                 - **topic**: A precise, specific label — never generic. Bad: 'Procedural Due Process'. Good: 'Right to Be Heard — Waiver by Failure to Object'. Bad: 'Civil Liability'. Good: 'Solidary Liability of Approving Officers — Gross Negligence Standard'.
-                 - **ruling**: Write this EXACTLY like a ratio decidendi entry — a minimum of 8-10 sentences of deep, flowing, forensic legal analysis in a single coherent prose paragraph. DO NOT summarize. DO NOT write in telegraphic style. Follow the Court's own chain of reasoning from premise to conclusion: begin with the legal principle or doctrinal anchor, develop it through the specific statutory provisions and landmark precedents the Court cited (name them explicitly — e.g., "Applying the doctrine in *Tan-Andal v. Andal*...", "Under Article 2154 of the Civil Code..."), trace the Court's application of that reasoning to the facts of this case, address any qualifications or exceptions the Court recognized, and close with the precise legal consequence or holding. Use natural academic transitions (e.g., "Consequently," "However," "Moreover," "In this regard," "Thus,"). Every sentence must add substantive legal content — no filler, no restatement, no circular reasoning.
+                 - **topic**: A precise, specific label — never generic. Good: 'Right to Be Heard — Waiver by Failure to Object'. Good: 'Solidary Liability of Approving Officers — Gross Negligence Standard'.
+                 - **ruling**: Write this EXACTLY like a ratio decidendi entry — a minimum of 8-10 sentences of deep, flowing, forensic legal analysis in a single coherent prose paragraph. DO NOT summarize. DO NOT write in telegraphic style. Follow the Court's own chain of reasoning from premise to conclusion. Use natural academic transitions. Every sentence must add substantive legal content.
 
             **OUTPUT FORMAT:**
-            Return ONLY valid JSON:
+            Return ONLY valid JSON (no markdown block wrapping):
             {{
                 "full_title": "...",
                 "short_title": "...",
                 "significance_category": "REITERATION | NEW DOCTRINE | CLARIFICATION | MODIFICATION | ABANDONMENT | REVERSAL", 
                 "classification": "REITERATION | NEW DOCTRINE | CLARIFICATION | MODIFICATION | ABANDONMENT | REVERSAL",
-                "classification_reasoning": "Evidence and quote from the text justifying the classification...",
-                "significance_narrative": "Detailed explanation of Bar Traps and significance...",
+                "classification_reasoning": "...",
+                "significance_narrative": "...",
                 "relevant_doctrine": "...",
                 "statutes_involved": [
                     {{"law": "Family Code", "provision": "Article 36"}},
@@ -728,7 +738,7 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                 "digest_facts": "1. **The Antecedents:** ... \\n\\n 2. **Procedural History:** ...",
                 "issue": "* Issue 1\\n* Issue 2 (STRICT: Return as a single Markdown string with bullet points, NOT a JSON array)",
                 "ruling": "...",
-                "ratio": "* **On Issue 1:** [5+ sentences of reasoning...]\\n* **On Issue 2:** [5+ sentences...](STRICT: Return as a single Markdown string with bullet points, NOT a JSON array. **CRITICAL:** All reasoning for a single issue MUST be contained within its corresponding bullet point. DO NOT create separate bullets labeled 'Continued' or 'Incurability' etc. Place ALL analysis for Issue 1 under the '**On Issue 1:**' bullet point.)",
+                "ratio": "* **On Issue 1:** [Write AT LEAST 8-12 long, highly detailed sentences of dense, forensic legal analysis, tracing premises, arguments, precedents, application, and final legal consequence...]\\n* **On Issue 2:** [Write AT LEAST 8-12 long, highly detailed sentences of dense, forensic legal analysis...](STRICT: Return as a single Markdown string with bullet points, NOT a JSON array. Place ALL analysis for each issue under its corresponding bullet point.)",
                 
                 "timeline": [
                     {{"date": "2020-01-01", "event": "Incident occurred..."}},
@@ -748,12 +758,8 @@ CRITICAL INSTRUCTION: You MUST output strictly VALID JSON. Do not include markdo
                     {{"type": "Scenario", "q": "...", "a": "..."}}
                 ],
                 "spoken_script": "A 1-minute script: 'Hi! Today we are discussing [Case]. The main takeaway is...'",
-                "legal_concepts": [
-                    {{"term": "Political Question", "definition": "those questions which... [citing Article X, Section Y]"}},
-                    {{"term": "Buyer in Good Faith", "definition": "... [citing Case Title]"}}
-                ],
                 "separate_opinions": [
-                    {{"justice": "Name", "type": "Concurring", "summary": "...", "text": "..."}}
+                    {{"justice": "Name", "type": "Concurring", "summary": "Detailed summary explaining the separate opinion's core arguments and rationale in at least 3-4 full sentences.", "text": "Detailed legal reasoning of the opinion..."}}
                 ],
                 "secondary_rulings": [
                     {{"topic": "Quantum of Proof", "ruling": "..."}}
@@ -964,7 +970,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--workers",
         type=int,
-        default=5,
+        default=10,
         help="Parallel child processes (each runs with --workers 1). Ignored with --continuous.",
     )
 

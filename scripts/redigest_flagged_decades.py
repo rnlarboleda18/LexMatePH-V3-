@@ -31,6 +31,7 @@ import time
 from pathlib import Path
 
 import psycopg2
+import subprocess
 from google import genai
 from google.genai import types
 
@@ -192,7 +193,7 @@ log = logging.getLogger(__name__)
 def fetch_case(conn, case_id: int) -> dict | None:
     cur = conn.cursor()
     cur.execute(
-        "SELECT id, case_number, short_title, full_text_md "
+        "SELECT id, case_number, short_title, full_text_md, ai_model "
         "FROM sc_decided_cases WHERE id = %s",
         (case_id,),
     )
@@ -205,6 +206,7 @@ def fetch_case(conn, case_id: int) -> dict | None:
         "case_number":  row[1],
         "short_title":  row[2],
         "full_text_md": row[3] or "",
+        "ai_model":     row[4] or "",
     }
 
 
@@ -312,6 +314,13 @@ def generate_digest_data(client: genai.Client, case: dict, model_name: str) -> d
                     response_mime_type="application/json"
                 ),
             )
+            # Instantly intercept Google gateway-level safety / prohibited content blocks
+            if response.prompt_feedback and response.prompt_feedback.block_reason:
+                reason_str = str(response.prompt_feedback.block_reason)
+                if "PROHIBITED_CONTENT" in reason_str:
+                    log.warning("Case ID %s was blocked by Google gateway-level safety: %s. Skipping Gemini retries.", case["id"], reason_str)
+                    return "_SAFETY_BLOCKED"
+
             text = (response.text or "").strip()
             if text:
                 cleaned_text = clean_json_text(text)
@@ -328,6 +337,10 @@ def generate_digest_data(client: genai.Client, case: dict, model_name: str) -> d
             else:
                 log.warning("Empty response on attempt %d for id=%s", attempt, case["id"])
         except Exception as exc:
+            exc_str = str(exc).upper()
+            if "PROHIBITED_CONTENT" in exc_str or "SAFETY" in exc_str or "BLOCKED" in exc_str:
+                log.warning("Case ID %s hit safety block exception: %s. Skipping Gemini retries and falling back.", case["id"], exc)
+                return "_SAFETY_BLOCKED"
             log.warning("Attempt %d failed for id=%s: %s", attempt, case["id"], exc)
             if attempt < _RETRY_LIMIT:
                 time.sleep(_RETRY_DELAY * attempt)
@@ -352,12 +365,51 @@ def process_case(
         log.error("Case id=%s not found in database", case_id)
         return False
 
+    # Skip if already redigested by this exact model
+    if case.get("ai_model") == model_name:
+        log.info("Case ID %d already redigested by %s. Skipping.", case_id, model_name)
+        return True
+
     log.info("Starting Case ID %d: %s — %s (Size: %d chars)", case["id"], case["case_number"], case["short_title"], len(case["full_text_md"]))
 
     if limiter:
         limiter.acquire()
 
     data = generate_digest_data(client, case, model_name)
+    if data == "_SAFETY_BLOCKED":
+        log.warning("Case ID %d was blocked due to prohibited content. Triggering Grok fallback immediately.", case_id)
+        if dry_run:
+            log.info("[DRY RUN] Would invoke Grok fallback for Case ID %d.", case_id)
+            return True
+        
+        grok_script = _SCRIPTS / "generate_sc_digests_grok.py"
+        grok_model = os.environ.get("GROK_DIGEST_MODEL") or "grok-4-1-fast-reasoning"
+        cmd = [
+            sys.executable,
+            str(grok_script),
+            "--force",
+            "--target-ids",
+            str(case_id),
+            "--model",
+            grok_model,
+            "--limit",
+            "1",
+            "--workers",
+            "10",
+        ]
+        log.info("Running Grok fallback subprocess: %s", " ".join(cmd))
+        try:
+            res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
+            if res.returncode == 0:
+                log.info("Grok fallback subprocess completed successfully for Case ID %d", case_id)
+                return True
+            else:
+                log.error("Grok fallback subprocess failed for Case ID %d. Return code: %d. Error:\n%s", case_id, res.returncode, res.stderr)
+                return False
+        except Exception as e:
+            log.error("Failed to run Grok fallback subprocess for Case ID %d: %s", case_id, e)
+            return False
+
     if not data:
         log.error("Generation failed for Case ID %d", case_id)
         return False
@@ -602,7 +654,7 @@ def main() -> None:
                     failure_count += 1
                 reporter.increment()
         reporter.stop()
-        log.info("RETRY DONE | ✓ %d | ✗ %d", success_count, failure_count)
+        log.info("RETRY DONE | OK %d | ERR %d", success_count, failure_count)
         conn.close()
         sys.exit(0 if failure_count == 0 else 1)
 
@@ -652,16 +704,16 @@ def main() -> None:
         reporter.stop()
 
         log.info("=" * 60)
-        log.info("BATCH DONE : %s  |  ✓ %d  |  ✗ %d", batch_name, success_count, failure_count)
+        log.info("BATCH DONE : %s  |  OK %d  |  ERR %d", batch_name, success_count, failure_count)
         log.info("=" * 60)
 
-        if not args.dry_run:
+        if not args.dry_run and not args.limit:
             completed_batches.add(batch_name)
             save_checkpoint(checkpoint_path, completed_batches)
-            log.info("Checkpoint saved → %s", checkpoint_path)
+            log.info("Checkpoint saved -> %s", checkpoint_path)
             log.info("Re-run to continue with the next batch.")
         else:
-            log.info("Dry run — checkpoint not updated.")
+            log.info("Dry run or limited run — checkpoint not updated.")
 
         break  # one batch per run
 

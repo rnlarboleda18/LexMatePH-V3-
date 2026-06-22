@@ -865,7 +865,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 <Download className="h-3.5 w-3.5" strokeWidth={2} />
                             </button>
                         )}
-                        {viewMode === 'full' && fullDecision.sc_url && (
+                        {fullDecision?.sc_url && (
                             <a
                                 href={fullDecision.sc_url}
                                 target="_blank"

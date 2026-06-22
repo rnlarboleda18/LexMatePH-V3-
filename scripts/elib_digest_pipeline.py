@@ -766,7 +766,7 @@ def run_grok_digest_fallback_subprocess(
     case_ids: list[int],
     *,
     model: str,
-    workers: int = 5,
+    workers: int = 10,
     live_bar: _LiveBarProto | None = None,
     progress: DigestPipelineProgressWriter | None = None,
     progress_lock: Any = None,
@@ -888,7 +888,7 @@ def _run_grok_safety_fallback_if_needed(
     db_url: str,
     blocked_ids: list[int],
     *,
-    workers: int = 5,
+    workers: int = 10,
     live_bar: _LiveBarProto | None = None,
     progress: DigestPipelineProgressWriter | None = None,
     progress_lock: Any = None,
@@ -1055,8 +1055,8 @@ def main() -> int:
     parser.add_argument(
         "--workers",
         type=int,
-        default=5,
-        help="Parallel digest worker processes (Gemini + Grok fallback); default 5",
+        default=10,
+        help="Parallel digest worker processes (Gemini + Grok fallback); default 10",
     )
     parser.add_argument(
         "--vertex-project",
