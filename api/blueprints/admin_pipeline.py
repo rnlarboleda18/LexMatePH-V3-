@@ -684,3 +684,37 @@ def admin_pipeline_stop_gap_scan(req: func.HttpRequest) -> func.HttpResponse:
         _gap_scan_state["status"] = "idle"
         _gap_scan_state["finished_at"] = datetime.now(timezone.utc).isoformat()
     return _json({"ok": True, "stopped": True}, 200)
+
+
+@pipeline_bp.route(route="ops/cases/{id}/digest-history", methods=["GET"])
+def admin_case_digest_history(req: func.HttpRequest) -> func.HttpResponse:
+    """Return the digestion audit history for a specific case (Admin only)."""
+    _, err = _check_admin(req)
+    if err:
+        return err
+
+    case_id_str = req.route_params.get('id')
+    try:
+        case_id = int(case_id_str)
+    except (ValueError, TypeError):
+        return _json({"error": "Invalid case ID"}, 400)
+
+    conn = get_db_connection()
+    try:
+        with conn.cursor(cursor_factory=RealDictCursor) as cur:
+            cur.execute("""
+                SELECT id, case_id, ai_model, action, fields_changed, 
+                       TO_CHAR(created_at, 'YYYY-MM-DD HH24:MI:SS OF') as created_at_str,
+                       created_at
+                FROM sc_case_digest_history
+                WHERE case_id = %s
+                ORDER BY created_at DESC
+            """, (case_id,))
+            rows = cur.fetchall()
+            return _json(rows, 200)
+    except Exception as exc:
+        logging.error("Failed to fetch case digest history: %s", exc)
+        return _json({"error": str(exc)}, 500)
+    finally:
+        put_db_connection(conn)
+

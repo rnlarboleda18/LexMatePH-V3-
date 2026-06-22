@@ -599,6 +599,18 @@ def save_digest_result(case_id, full_text, data, significance, conn, model_name=
              logging.info(f"debug: aggressively forcing update of digest_significance for {case_id}")
              cur.execute("UPDATE sc_decided_cases SET digest_significance = %s WHERE id = %s", (significance, case_id))
 
+        # Log history audit entry
+        action = 'smart_backfill' if not do_overwrite else 'digest_pipeline'
+        cur.execute("""
+            INSERT INTO sc_case_digest_history (case_id, ai_model, action, fields_changed)
+            VALUES (%s, %s, %s, %s)
+        """, (
+            case_id,
+            model_name or 'gemini-3-flash-preview',
+            action,
+            ['digest_facts', 'digest_issues', 'digest_ruling', 'digest_ratio', 'main_doctrine', 'keywords', 'timeline', 'legal_concepts', 'flashcards']
+        ))
+
         conn.commit()
     except Exception as e:
         logging.error(f"Error saving digest: {e}")

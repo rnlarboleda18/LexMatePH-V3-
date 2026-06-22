@@ -18,6 +18,7 @@ import { useDebounce } from '../hooks/useDebounce';
 import { HighlightText } from '../utils/highlight';
 import PurpleGlassAmbient from './PurpleGlassAmbient';
 import CardVioletInnerWash from './CardVioletInnerWash';
+import CaseDigestHistory from './CaseDigestHistory';
 import {
     FILTER_CHROME_SURFACE,
     FILTER_SELECT,
@@ -1667,10 +1668,9 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                                 <span className="text-gray-500 dark:text-gray-500"> · {formatTitleCase(decision.document_type.toString().trim())}</span>
                                             ) : null}
                                             {isAdmin && decision.ai_model ? (
-                                                <span className="text-violet-600 dark:text-violet-400 font-bold">
+                                                <span className="text-gray-500 dark:text-gray-500">
                                                     {' · '}
-                                                    <Sparkles size={10} className="inline mr-0.5 align-middle" />
-                                                    {decision.ai_model}
+                                                    <CaseDigestHistory caseId={decision.id} currentModel={decision.ai_model} mode="popover" />
                                                 </span>
                                             ) : null}
                                         </p>

@@ -19,6 +19,7 @@ import FontSizeControl from './FontSizeControl';
 import { useFontSize } from '../hooks/useFontSize';
 import { useFavorites } from '../hooks/useFavorites';
 import CardVioletInnerWash from './CardVioletInnerWash';
+import CaseDigestHistory from './CaseDigestHistory';
 
 const formatTitleCase = (str) => {
     if (!str) return '';
@@ -986,6 +987,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                     </span>
                                 ) : null}
                             </p>
+
+                            {isAdmin && fullDecision.ai_model ? (
+                                <div className="text-left mt-2">
+                                    <CaseDigestHistory caseId={fullDecision.id} currentModel={fullDecision.ai_model} mode="timeline" />
+                                </div>
+                            ) : null}
                         </div>
                     )}
 

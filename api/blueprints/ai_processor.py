@@ -258,6 +258,7 @@ def ai_digest_case(req: func.HttpRequest) -> func.HttpResponse:
                 date = %s,
                 legal_concepts = %s,
                 division = %s,
+                ai_model = %s,
                 updated_at = NOW()
             WHERE id = %s
         """, (
@@ -286,7 +287,19 @@ def ai_digest_case(req: func.HttpRequest) -> func.HttpResponse:
             data.get('date_decided'),
             json.dumps(data.get('legal_concepts', [])),
             data.get('court_division'),
+            'gemini-3-flash-preview',
             case_id
+        ))
+
+        # Log history audit entry
+        cur.execute("""
+            INSERT INTO sc_case_digest_history (case_id, ai_model, action, fields_changed)
+            VALUES (%s, %s, %s, %s)
+        """, (
+            case_id,
+            'gemini-3-flash-preview',
+            'api_digest',
+            ['digest_facts', 'digest_issues', 'digest_ruling', 'digest_ratio', 'main_doctrine', 'keywords', 'timeline', 'legal_concepts', 'flashcards']
         ))
         
         conn.commit()
