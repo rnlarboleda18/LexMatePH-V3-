@@ -546,7 +546,7 @@ const formatTitleCase = (str) => {
 
 const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerge }) => {
     const { getToken, isSignedIn, isLoaded: authLoaded } = useAuth();
-    const { openUpgradeModal, canAccess, loading: subscriptionLoading } = useSubscription();
+    const { openUpgradeModal, canAccess, loading: subscriptionLoading, isAdmin } = useSubscription();
 
     // Seed from ?q= so direct links and page-refreshes restore the search.
     const [searchTerm, setSearchTerm] = useState(() =>
@@ -1665,6 +1665,13 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                             ) : null}
                                             {decision.document_type ? (
                                                 <span className="text-gray-500 dark:text-gray-500"> · {formatTitleCase(decision.document_type.toString().trim())}</span>
+                                            ) : null}
+                                            {isAdmin && decision.ai_model ? (
+                                                <span className="text-violet-600 dark:text-violet-400 font-bold">
+                                                    {' · '}
+                                                    <Sparkles size={10} className="inline mr-0.5 align-middle" />
+                                                    {decision.ai_model}
+                                                </span>
                                             ) : null}
                                         </p>
                                     </div>

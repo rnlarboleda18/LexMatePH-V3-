@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useAuth } from '@clerk/clerk-react';
 import { createPortal } from 'react-dom';
 import { jsPDF } from "jspdf";
-import { Gavel, FileText, X, BookOpen, Clock, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Download, Landmark, Scale, ExternalLink } from 'lucide-react';
+import { Gavel, FileText, X, BookOpen, Clock, AlertTriangle, Lightbulb, Layers, Book, Star, Headphones, Play, Pause, Square, ListMusic, Plus, ChevronDown, User, Download, Landmark, Scale, ExternalLink, Sparkles } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { formatDate } from '../utils/dateUtils';
 import { toTitleCase, normalizeDigestCitationDisplayText } from '../utils/textUtils';
@@ -342,7 +342,7 @@ function drawDigestPdfWatermark(doc) {
 
 const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const { getToken, isSignedIn, isLoaded: authLoaded } = useAuth();
-    const { canAccess, openUpgradeModal, loading: subscriptionLoading } = useSubscription();
+    const { canAccess, openUpgradeModal, loading: subscriptionLoading, isAdmin } = useSubscription();
     const canLexPlay = canAccess('lexplay_case_digest');
     const [fullDecision, setFullDecision] = useState(decision);
     const lastSyncedCaseIdRef = useRef(decision?.id ?? null);
@@ -977,6 +977,13 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 {fullDecision.case_number}
                                 {_decisionDateRaw ? (
                                     <span> · {formatDate(_decisionDateRaw)}</span>
+                                ) : null}
+                                {isAdmin && fullDecision.ai_model ? (
+                                    <span className="text-violet-600 dark:text-violet-400 font-semibold">
+                                        {' · '}
+                                        <Sparkles size={11} className="inline mr-0.5 align-middle" />
+                                        {fullDecision.ai_model}
+                                    </span>
                                 ) : null}
                             </p>
                         </div>
