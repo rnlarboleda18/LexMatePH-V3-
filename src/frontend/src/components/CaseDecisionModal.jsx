@@ -917,47 +917,53 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                     <div className={`border-t border-lex px-4 pb-3 sm:px-6 sm:pb-4 ${headerCollapsed ? 'hidden' : 'block'}`}>
                         <div className="rounded-lg border border-lex bg-neutral-50 px-3 py-2.5 dark:border-lex dark:bg-zinc-800/90">
                             <dl className="grid grid-cols-2 gap-x-4 gap-y-0">
-                                {/* Left upper: Court Body */}
-                                <div className="flex items-start gap-2 pb-2.5">
-                                    <Scale className="h-4 w-4 shrink-0 mt-0.5 text-indigo-600 dark:text-indigo-400" strokeWidth={2} aria-hidden />
-                                    <div className="min-w-0">
-                                        <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Court Body</dt>
-                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100 mt-0.5">
-                                            {formatTitleCase(fullDecision.division?.trim()) || '—'}
-                                        </dd>
+                                {/* Row 1 */}
+                                <div className="col-span-2 grid grid-cols-2 gap-x-4 pb-2.5 border-b border-lex dark:border-lex">
+                                    {/* Left upper: Court Body */}
+                                    <div className="flex items-start gap-2">
+                                        <Scale className="h-4 w-4 shrink-0 mt-0.5 text-indigo-600 dark:text-indigo-400" strokeWidth={2} aria-hidden />
+                                        <div className="min-w-0">
+                                            <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Court Body</dt>
+                                            <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100 mt-0.5">
+                                                {formatTitleCase(fullDecision.division?.trim()) || '—'}
+                                            </dd>
+                                        </div>
+                                    </div>
+
+                                    {/* Right upper: Decision / Resolution date */}
+                                    <div className="flex items-start gap-2 border-l border-lex pl-4 dark:border-lex">
+                                        <Clock className="h-4 w-4 shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" strokeWidth={2} aria-hidden />
+                                        <div className="min-w-0">
+                                            <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Decision / Resolution</dt>
+                                            <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100 mt-0.5">
+                                                {_decisionDateRaw ? formatDate(_decisionDateRaw) : '—'}
+                                            </dd>
+                                        </div>
                                     </div>
                                 </div>
 
-                                {/* Right upper: Decision / Resolution date */}
-                                <div className="flex items-start gap-2 pb-2.5 border-l border-lex pl-4 dark:border-lex">
-                                    <Clock className="h-4 w-4 shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" strokeWidth={2} aria-hidden />
-                                    <div className="min-w-0">
-                                        <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Decision / Resolution</dt>
-                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100 mt-0.5">
-                                            {_decisionDateRaw ? formatDate(_decisionDateRaw) : '—'}
-                                        </dd>
+                                {/* Row 2 */}
+                                <div className="col-span-2 grid grid-cols-2 gap-x-4 pt-2.5">
+                                    {/* Left lower: Ponente */}
+                                    <div className="flex items-start gap-2">
+                                        <User className="h-4 w-4 shrink-0 mt-0.5 text-sky-600 dark:text-sky-400" strokeWidth={2} aria-hidden />
+                                        <div className="min-w-0">
+                                            <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Ponente</dt>
+                                            <dd className="text-[13px] font-semibold leading-snug text-gray-800 dark:text-gray-200 mt-0.5">
+                                                {fullDecision.ponente ? formatTitleCase(fullDecision.ponente) : '—'}
+                                            </dd>
+                                        </div>
                                     </div>
-                                </div>
 
-                                {/* Left lower: Ponente */}
-                                <div className="flex items-start gap-2 pt-2.5 border-t border-lex dark:border-lex">
-                                    <User className="h-4 w-4 shrink-0 mt-0.5 text-sky-600 dark:text-sky-400" strokeWidth={2} aria-hidden />
-                                    <div className="min-w-0">
-                                        <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Ponente</dt>
-                                        <dd className="text-[13px] font-semibold leading-snug text-gray-800 dark:text-gray-200 mt-0.5">
-                                            {fullDecision.ponente ? formatTitleCase(fullDecision.ponente) : '—'}
-                                        </dd>
-                                    </div>
-                                </div>
-
-                                {/* Right lower: Subject */}
-                                <div className="flex items-start gap-2 pt-2.5 border-t border-l border-lex pl-4 dark:border-lex">
-                                    <BookOpen className="h-4 w-4 shrink-0 mt-0.5 text-violet-600 dark:text-violet-400" strokeWidth={2} aria-hidden />
-                                    <div className="min-w-0">
-                                        <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Subject</dt>
-                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100 mt-0.5">
-                                            {formatTitleCase(fullDecision.subject?.toString().trim()) || '—'}
-                                        </dd>
+                                    {/* Right lower: Subject */}
+                                    <div className="flex items-start gap-2 border-l border-lex pl-4 dark:border-lex">
+                                        <BookOpen className="h-4 w-4 shrink-0 mt-0.5 text-violet-600 dark:text-violet-400" strokeWidth={2} aria-hidden />
+                                        <div className="min-w-0">
+                                            <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Subject</dt>
+                                            <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100 mt-0.5">
+                                                {formatTitleCase(fullDecision.subject?.toString().trim()) || '—'}
+                                            </dd>
+                                        </div>
                                     </div>
                                 </div>
                             </dl>

@@ -559,10 +559,11 @@ def sc_decisions(req: func.HttpRequest) -> func.HttpResponse:
                         )
                         final_params = t15_params
 
-            # TIER 2: Full Title Match
+            # TIER 2: Full Title Match — optimize by pre-filtering with the GIN-indexed full-text search
+            # to avoid disastrous full table sequential scans (which take 30s+ on a 1.8GB table).
             if not final_query:
-                t2_where = base_where + " AND full_title ILIKE %s"
-                t2_params = list(base_params) + [f"%{search_term}%"]
+                t2_where = base_where + f" AND ({fts_expr} @@ websearch_to_tsquery('english', %s)) AND full_title ILIKE %s"
+                t2_params = list(base_params) + [search_term, f"%{search_term}%"]
                 if _probe(t2_where, t2_params):
                     logging.info("Search Hit Tier 2 (Full Title)")
                     final_query = (

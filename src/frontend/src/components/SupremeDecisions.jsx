@@ -1681,47 +1681,53 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                     <div className="relative overflow-hidden rounded-lg border border-lex-strong bg-neutral-50 px-3 py-2.5 dark:bg-zinc-800/90">
                                         <CardVioletInnerWash />
                                         <dl className="relative z-[1] grid grid-cols-2 gap-x-4 gap-y-0">
-                                            {/* Left upper: Court Body */}
-                                            <div className="flex items-center gap-2.5 pb-2.5">
-                                                <Scale className="h-5 w-5 shrink-0 text-indigo-600 dark:text-indigo-400" strokeWidth={2} aria-hidden />
-                                                <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
-                                                    <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Court Body:</dt>
-                                                    <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
-                                                        {formatTitleCase(decision.division?.trim()) || '—'}
-                                                    </dd>
+                                            {/* Row 1 */}
+                                            <div className="col-span-2 grid grid-cols-2 gap-x-4 pb-2.5 border-b border-lex-strong">
+                                                {/* Left upper: Court Body */}
+                                                <div className="flex items-center gap-2.5">
+                                                    <Scale className="h-5 w-5 shrink-0 text-indigo-600 dark:text-indigo-400" strokeWidth={2} aria-hidden />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Court Body:</dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                            {formatTitleCase(decision.division?.trim()) || '—'}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+
+                                                {/* Right upper: Decision / Resolution */}
+                                                <div className="flex items-center gap-2.5 border-l border-lex-strong pl-4">
+                                                    <FileText className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" strokeWidth={2} aria-hidden />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Decision / Resolution:</dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                            {formatTitleCase(decision.document_type?.toString().trim()) || '—'}
+                                                        </dd>
+                                                    </div>
                                                 </div>
                                             </div>
 
-                                            {/* Right upper: Decision / Resolution */}
-                                            <div className="flex items-center gap-2.5 pb-2.5 border-l border-lex-strong pl-4">
-                                                <FileText className="h-5 w-5 shrink-0 text-slate-600 dark:text-slate-400" strokeWidth={2} aria-hidden />
-                                                <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
-                                                    <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Decision / Resolution:</dt>
-                                                    <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
-                                                        {formatTitleCase(decision.document_type?.toString().trim()) || '—'}
-                                                    </dd>
+                                            {/* Row 2 */}
+                                            <div className="col-span-2 grid grid-cols-2 gap-x-4 pt-2.5">
+                                                {/* Left lower: Ponente */}
+                                                <div className="flex items-center gap-2.5">
+                                                    <User className="h-5 w-5 shrink-0 text-sky-600 dark:text-sky-400" strokeWidth={2} aria-hidden />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Ponente:</dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-gray-800 dark:text-gray-200">
+                                                            {decision.ponente ? formatTitleCase(decision.ponente) : '—'}
+                                                        </dd>
+                                                    </div>
                                                 </div>
-                                            </div>
 
-                                            {/* Left lower: Ponente */}
-                                            <div className="flex items-center gap-2.5 pt-2.5 border-t border-lex-strong">
-                                                <User className="h-5 w-5 shrink-0 text-sky-600 dark:text-sky-400" strokeWidth={2} aria-hidden />
-                                                <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
-                                                    <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Ponente:</dt>
-                                                    <dd className="text-[13px] font-semibold leading-snug text-gray-800 dark:text-gray-200">
-                                                        {decision.ponente ? formatTitleCase(decision.ponente) : '—'}
-                                                    </dd>
-                                                </div>
-                                            </div>
-
-                                            {/* Right lower: Subject */}
-                                            <div className="flex items-center gap-2.5 pt-2.5 border-t border-l border-lex-strong pl-4">
-                                                <BookOpen className="h-5 w-5 shrink-0 text-neutral-600 dark:text-zinc-400" strokeWidth={2} aria-hidden />
-                                                <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
-                                                    <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Subject:</dt>
-                                                    <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
-                                                        {formatTitleCase(decision.subject?.toString().trim()) || '—'}
-                                                    </dd>
+                                                {/* Right lower: Subject */}
+                                                <div className="flex items-center gap-2.5 border-l border-lex-strong pl-4">
+                                                    <BookOpen className="h-5 w-5 shrink-0 text-violet-600 dark:text-violet-400" strokeWidth={2} aria-hidden />
+                                                    <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Subject:</dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                            {formatTitleCase(decision.subject?.toString().trim()) || '—'}
+                                                        </dd>
+                                                    </div>
                                                 </div>
                                             </div>
 

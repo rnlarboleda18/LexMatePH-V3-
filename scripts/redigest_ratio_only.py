@@ -205,6 +205,19 @@ def save_ratio(conn, case_id: int, ratio: str, model: str) -> None:
         """,
         (ratio, model, case_id),
     )
+    # Log history audit entry
+    cur.execute(
+        """
+        INSERT INTO sc_case_digest_history (case_id, ai_model, action, fields_changed)
+        VALUES (%s, %s, %s, %s)
+        """,
+        (
+            case_id,
+            model,
+            'redigest',
+            ['digest_ratio']
+        )
+    )
     conn.commit()
     cur.close()
 

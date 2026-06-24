@@ -596,7 +596,8 @@ CRITICAL QUALITY GATES & SYSTEM RULES:
             3. **Safety Protocol:** Only redact or abstract content if it involves the specific names of victims in sensitive cases (e.g., use "AAA" or "The Victim" per RA 9262 protocols), but keep the description of the legal acts intact.
             4. **Separate Opinions (MANDATORY EXTRACTION):**
                Identify and summarize **ALL** Concurring, Dissenting, Separate Concurring, and Separate Dissenting Opinions found in the text. En Banc cases often have 10+ separate opinions—scan the ENTIRE document thoroughly, including footnotes and signature blocks, to capture every opinion. For the Ponente, identify if they expressed a personal "Separate View" distinct from the majority.
-               The `summary` field for each opinion MUST be populated with at least 3-4 sentences; it cannot be null. Under NO circumstances should you omit the summary or text fields in the output JSON.
+               The `summary` field for each opinion MUST be populated with at least 3-4 sentences; it cannot be null. Under NO circumstances should you omit the summary or text fields in the output JSON if separate opinions exist.
+               **CRITICAL RULE:** If there are absolutely no separate opinions in the case text, you MUST return an empty array `[]` for `"separate_opinions"`. Under no circumstances should you invent, make up, or hallucinate any separate opinions or justices if none exist. If there is no separate opinion in the text, write nothing (return `[]`) rather than inventing or hallucinating details.
 
             **INPUT TEXT:**
             {safe_content}
@@ -710,7 +711,7 @@ CRITICAL QUALITY GATES & SYSTEM RULES:
                - If there are genuinely no secondary rulings, return `[]`. Do NOT invent data.
                - Each object MUST have exactly these two keys:
                  - **topic**: A precise, specific label — never generic. Good: 'Right to Be Heard — Waiver by Failure to Object'. Good: 'Solidary Liability of Approving Officers — Gross Negligence Standard'.
-                 - **ruling**: Write this EXACTLY like a ratio decidendi entry — a minimum of 8-10 sentences of deep, flowing, forensic legal analysis in a single coherent prose paragraph. DO NOT summarize. DO NOT write in telegraphic style. Follow the Court's own chain of reasoning from premise to conclusion. Use natural academic transitions. Every sentence must add substantive legal content.
+                 - **ruling**: Write this EXACTLY like a ratio decidendi entry — a minimum of 5 sentences of deep, flowing, forensic legal analysis in a single coherent prose paragraph. DO NOT summarize. DO NOT write in telegraphic style. Follow the Court's own chain of reasoning from premise to conclusion. Use natural academic transitions. Every sentence must add substantive legal content.
 
             **OUTPUT FORMAT:**
             Return ONLY valid JSON (no markdown block wrapping):

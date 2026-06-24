@@ -278,6 +278,19 @@ def save_digest(conn, case_id: int, main_doctrine: str, digest_issues: str, dige
             case_id,
         ),
     )
+    # Log history audit entry
+    cur.execute(
+        """
+        INSERT INTO sc_case_digest_history (case_id, ai_model, action, fields_changed)
+        VALUES (%s, %s, %s, %s)
+        """,
+        (
+            case_id,
+            model,
+            'redigest',
+            ['main_doctrine', 'digest_issues', 'digest_ratio', 'secondary_rulings']
+        )
+    )
     conn.commit()
     cur.close()
 
@@ -297,6 +310,19 @@ def save_secondary_rulings_only(conn, case_id: int, secondary_rulings: list | di
             model,
             case_id,
         ),
+    )
+    # Log history audit entry
+    cur.execute(
+        """
+        INSERT INTO sc_case_digest_history (case_id, ai_model, action, fields_changed)
+        VALUES (%s, %s, %s, %s)
+        """,
+        (
+            case_id,
+            model,
+            'redigest',
+            ['secondary_rulings']
+        )
     )
     conn.commit()
     cur.close()
@@ -498,9 +524,9 @@ def process_case(
         log.error("Case id=%s not found in database", case_id)
         return False
 
-    # Skip if already redigested by this exact model
-    if case.get("ai_model") == model_name:
-        log.info("Case ID %d already redigested by %s. Skipping.", case_id, model_name)
+    # Skip if already redigested by this exact model or by Grok fallback
+    if case.get("ai_model") in (model_name, "grok-4-1-fast-reasoning", "grok-2"):
+        log.info("Case ID %d already redigested by %s. Skipping.", case_id, case.get("ai_model"))
         return True
 
     log.info("Starting Case ID %d: %s — %s (Size: %d chars)", case["id"], case["case_number"], case["short_title"], len(case["full_text_md"]))
