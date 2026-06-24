@@ -144,15 +144,16 @@ def get_linker_genai_client(
 
     project = (
         vertex_project
+        or (os.environ.get("GEMINI_LINKER_VERTEX_PROJECT") or "").strip()
         or (os.environ.get("GOOGLE_CLOUD_PROJECT") or "").strip()
         or (os.environ.get("GCP_PROJECT") or "").strip()
-        or None
+        or "project-f3608dc2-59e9-4ff5-95a"
     )
     location = (
         vertex_location
         or (os.environ.get("GOOGLE_CLOUD_LOCATION") or "").strip()
         or (os.environ.get("GCP_LOCATION") or "").strip()
-        or "us-central1"
+        or "us"
     )
 
     if not project:
@@ -195,12 +196,7 @@ def get_linker_model_name(*, fallback: str | None = None) -> str:
 
 def is_linker_configured(vertex_project: str | None = None) -> bool:
     """Return True if a Vertex AI project is available."""
-    merge_local_settings_into_env()
-    return bool(
-        vertex_project
-        or (os.environ.get("GOOGLE_CLOUD_PROJECT") or "").strip()
-        or (os.environ.get("GCP_PROJECT") or "").strip()
-    )
+    return True
 
 
 def probe_linker(vertex_project: str | None = None, vertex_location: str | None = None) -> None:

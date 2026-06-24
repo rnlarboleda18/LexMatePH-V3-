@@ -34,11 +34,22 @@ def load_settings():
 
 load_settings()
 
-DB_CONN_STR = os.environ.get("DB_CONNECTION_STRING") or os.environ.get("DATABASE_URL", "")
-if ":5432/" in DB_CONN_STR:
-    DB_CONN_STR = DB_CONN_STR.replace(":5432/", ":5432/")
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+import config
+from google import genai
+from google.genai import types
 
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY", "")
+DB_CONN_STR = config.DB_CONNECTION_STRING or os.environ.get("DB_CONNECTION_STRING") or ""
+
+def _get_vertex_client():
+    return genai.Client(
+        vertexai=True,
+        project=config.GCP_PROJECT,
+        location=config.GCP_LOCATION,
+    )
+
 MAX_WORKERS = 5
 BATCH_SIZE = 10  # 10 questions per API request
 
@@ -113,30 +124,27 @@ def process_batch(ids_chunk):
             user_content_lines.append(f"Q{i} [{q.get('subject', '')}]: {text}")
         user_content = "\n\n".join(user_content_lines)
 
-        # GEMINI 3.1 FLASH LITE PREVIEW
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key={GEMINI_API_KEY}"
-        payload = {
-            "systemInstruction": {"parts": [{"text": SYSTEM_PROMPT}]},
-            "contents": [{"parts": [{"text": user_content}]}],
-            "generationConfig": {
-                "responseMimeType": "application/json",
-                "temperature": 0.0,
-                "maxOutputTokens": 256,
-            }
-        }
-
-        resp = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=30)
-        if resp.status_code == 429:
-            # Back off slightly if rate limited
-            log.warning("Rate limit (429) hit. Backing off 2s...")
-            time.sleep(2)
+        # Call Vertex AI
+        try:
+            client = _get_vertex_client()
+            cfg = types.GenerateContentConfig(
+                system_instruction=SYSTEM_PROMPT,
+                response_mime_type="application/json",
+                temperature=0.0,
+                max_output_tokens=256,
+            )
+            resp = client.models.generate_content(
+                model="gemini-3.5-flash",
+                contents=user_content,
+                config=cfg,
+            )
+            text_out = resp.text
+            parsed = json.loads(text_out)
+        except Exception as api_err:
+            log.error(f"Vertex AI API error in worker: {api_err}")
             cur.close(); conn.close()
             return 0, len(questions) # Treat items as failed to retry 
 
-        resp.raise_for_status()
-        data = resp.json()
-        text_out = data["candidates"][0]["content"]["parts"][0]["text"]
-        parsed = json.loads(text_out)
 
         # 3. Save updates
         success_count = 0

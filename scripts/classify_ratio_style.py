@@ -43,7 +43,7 @@ load_api_local_settings_into_environ(Path(__file__).resolve().parent.parent)
 
 # ── Constants ────────────────────────────────────────────────────────────────
 
-MODEL        = "gemini-3.1-flash-lite"
+MODEL        = "gemini-3.5-flash"
 OUTPUT_CSV   = _SCRIPTS / "ratio_style_classification.csv"
 CSV_FIELDS   = ["id", "case_number", "year", "style"]
 _TIMEOUT_MS  = 60_000   # 60 s — classification is fast
@@ -113,15 +113,10 @@ class RateLimiter:
 # ── Google AI Studio client builder ─────────────────────────────────────────
 
 def _build_client() -> genai.Client:
-    api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
-    if not api_key:
-        raise ValueError(
-            "Neither GEMINI_API_KEY nor GOOGLE_API_KEY was found in the environment. "
-            "Please check that your api/local.settings.json is properly configured."
-        )
     return genai.Client(
-        vertexai=False,
-        api_key=api_key,
+        vertexai=True,
+        project="project-f3608dc2-59e9-4ff5-95a",
+        location="us",
         http_options={"timeout": _TIMEOUT_MS},
     )
 

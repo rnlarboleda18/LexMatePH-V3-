@@ -35,9 +35,7 @@ _client_lock = threading.Lock()
 def _get_client():
     """Return a lazily-initialised GenAI client (shared, thread-safe).
 
-    Uses Vertex AI if GOOGLE_GENAI_USE_VERTEXAI is 'true'.
-    Otherwise, uses AI Studio if GEMINI_API_KEY is set.
-    Falls back to Vertex AI otherwise.
+    Uses Vertex AI exclusively.
     """
     global _client
     if _client is not None:
@@ -47,39 +45,19 @@ def _get_client():
             return _client
         from google import genai
         from google.genai import types as genai_types
+        import config
 
-        use_vertex = os.environ.get("GOOGLE_GENAI_USE_VERTEXAI", "").lower() in ("1", "true", "yes")
-
-        if use_vertex:
-            import config
-            _client = genai.Client(
-                vertexai=True,
-                project=config.GCP_PROJECT,
-                location=config.GCP_LOCATION,
-                http_options=genai_types.HttpOptions(timeout=120_000),
-            )
-            logger.info(
-                "Vertex AI client initialised (forced via env) — project=%s location=%s default=%s fallback=%s",
-                config.GCP_PROJECT, config.GCP_LOCATION, DEFAULT_MODEL, FALLBACK_MODEL,
-            )
-        elif GEMINI_API_KEY:
-            _client = genai.Client(api_key=GEMINI_API_KEY, vertexai=False)
-            logger.info(
-                "AI Studio client initialised (API key, vertexai=False) — default=%s fallback=%s",
-                DEFAULT_MODEL, FALLBACK_MODEL,
-            )
-        else:
-            import config
-            _client = genai.Client(
-                vertexai=True,
-                project=config.GCP_PROJECT,
-                location=config.GCP_LOCATION,
-                http_options=genai_types.HttpOptions(timeout=120_000),
-            )
-            logger.info(
-                "Vertex AI client initialised (fallback) — project=%s location=%s default=%s fallback=%s",
-                config.GCP_PROJECT, config.GCP_LOCATION, DEFAULT_MODEL, FALLBACK_MODEL,
-            )
+        # Force Vertex AI exclusively
+        _client = genai.Client(
+            vertexai=True,
+            project=config.GCP_PROJECT,
+            location=config.GCP_LOCATION,
+            http_options=genai_types.HttpOptions(timeout=120_000),
+        )
+        logger.info(
+            "Vertex AI client initialised exclusively — project=%s location=%s default=%s fallback=%s",
+            config.GCP_PROJECT, config.GCP_LOCATION, DEFAULT_MODEL, FALLBACK_MODEL,
+        )
     return _client
 
 
@@ -183,12 +161,9 @@ def _get_ai_studio_client():
     with _studio_client_lock:
         if _studio_client is not None:
             return _studio_client
-        from google import genai
-        key = os.environ.get("GEMINI_API_KEY", "").strip()
-        if not key:
-            raise ValueError("GEMINI_API_KEY is not configured in environment variables.")
-        _studio_client = genai.Client(api_key=key, vertexai=False)
-        logger.info("Lexify AI Studio client initialised successfully (using GEMINI_API_KEY).")
+        # Vertex AI exclusive redirect
+        logger.warning("Lexify requested AI Studio client, but Vertex AI is forced. Returning Vertex AI client instead.")
+        _studio_client = _get_client()
     return _studio_client
 
 

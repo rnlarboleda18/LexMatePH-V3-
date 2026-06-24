@@ -67,6 +67,9 @@ Set `DB_CONNECTION_STRING` in your environment or ensure `local.settings.json` i
 | `unique_concepts.py` | List unique concept categories |
 | `count_questions.py` / `count_with_concepts.py` | Row count helpers |
 | `debug_codex_roc.py` | Debug codex RoC content |
+| `check_slots_integrity.py` | Check the integrity of the founding promo slots in use vs claimed |
+| `inspect_users_schema.py` | Inspect users table schema columns and datatypes |
+| `grant_founding_promo_manual.py` | Manually grant founding promo slots to users in production |
 
 ### AI / classification
 

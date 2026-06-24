@@ -74,16 +74,15 @@ INDIRECT_AMENDMENTS = [
     }
 ]
 
-# Configure Gemini
-try:
-    with open('local.settings.json') as f:
-        settings = json.load(f)
-        API_KEY = "REDACTED_API_KEY_HIDDEN" 
-except:
-    API_KEY = "REDACTED_API_KEY_HIDDEN"
+# Configure Gemini / Vertex AI
+from lexcode_genai_client import get_google_cloud_project, get_google_cloud_location
 
 # Initialize Client
-client = genai.Client(api_key=API_KEY)
+client = genai.Client(
+    vertexai=True,
+    project=get_google_cloud_project() or "project-f3608dc2-59e9-4ff5-95a",
+    location=get_google_cloud_location() or "us",
+)
 
 def get_db_connection():
     conn_str = "postgres://postgres:b66398241bfe483ba5b20ca5356a87be@localhost:5432/lexmateph-ea-db"
@@ -105,7 +104,7 @@ def generate_impact_description(article_num, article_content, law_name, law_summ
     """
     try:
         response = client.models.generate_content(
-            model="gemini-3-pro-preview",
+            model="gemini-3.5-flash",
             contents=prompt
         )
         return response.text.strip()

@@ -32,32 +32,23 @@ def _build_client(
     vertex_project: str | None = None,
     vertex_location: str | None = None,
 ) -> "genai.Client":
-    """Return a genai.Client: Vertex AI when a project is available, else AI Studio."""
-    # Explicit --vertex-project arg takes top priority
-    if vertex_project:
-        return genai.Client(
-            vertexai=True,
-            project=vertex_project,
-            location=vertex_location or "us-central1",
-            http_options={"timeout": _TIMEOUT_MS},
-        )
-    # Env-var Vertex: VERTEX_AI_PROJECT or GOOGLE_CLOUD_PROJECT
-    v_project = (os.getenv("VERTEX_AI_PROJECT") or os.getenv("GOOGLE_CLOUD_PROJECT") or "").strip()
-    if v_project:
-        v_loc = (os.getenv("VERTEX_AI_LOCATION") or os.getenv("GOOGLE_CLOUD_LOCATION") or "us-central1").strip()
-        return genai.Client(
-            vertexai=True,
-            project=v_project,
-            location=v_loc,
-            http_options={"timeout": _TIMEOUT_MS},
-        )
-    # AI Studio: explicit arg, then env vars
-    key = api_key or (os.getenv("GOOGLE_API_KEY") or os.getenv("GEMINI_API_KEY") or "").strip()
-    # Strip Vertex-routing env vars so the SDK doesn't silently redirect
-    for _v in ("GOOGLE_GENAI_USE_VERTEXAI", "GOOGLE_CLOUD_PROJECT",
-               "GOOGLE_CLOUD_LOCATION", "VERTEX_AI_PROJECT", "VERTEX_AI_LOCATION"):
-        os.environ.pop(_v, None)
-    return genai.Client(api_key=key or None, http_options={"timeout": _TIMEOUT_MS})
+    """Return a genai.Client: Vertex AI exclusively."""
+    project = (
+        vertex_project
+        or (os.getenv("VERTEX_AI_PROJECT") or os.getenv("GOOGLE_CLOUD_PROJECT") or "").strip()
+        or "project-f3608dc2-59e9-4ff5-95a"
+    )
+    location = (
+        vertex_location
+        or (os.getenv("VERTEX_AI_LOCATION") or os.getenv("GOOGLE_CLOUD_LOCATION") or "").strip()
+        or "us"
+    )
+    return genai.Client(
+        vertexai=True,
+        project=project,
+        location=location,
+        http_options={"timeout": _TIMEOUT_MS},
+    )
 
 
 client = _build_client()

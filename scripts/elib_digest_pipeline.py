@@ -1347,12 +1347,7 @@ def main() -> int:
             )
 
             if new_db_ids:
-                _has_gemini_auth = (
-                    os.environ.get("GOOGLE_API_KEY")
-                    or os.environ.get("GEMINI_API_KEY")
-                    or os.environ.get("GOOGLE_CLOUD_PROJECT")
-                    or getattr(args, "vertex_project", None)
-                )
+                _has_gemini_auth = True
                 if not _has_gemini_auth:
                     rep.fatal_error = (
                         f"No Gemini auth found; set GOOGLE_API_KEY (AI Studio) or "

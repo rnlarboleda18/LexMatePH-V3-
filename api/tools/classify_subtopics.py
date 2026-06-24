@@ -44,10 +44,16 @@ def load_settings():
 
 load_settings()
 
+import sys
+from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parent.parent))
+import config
+from google import genai
+from google.genai import types
+
 DB_CONN_STR = os.environ.get("DB_CONNECTION_STRING") or os.environ.get("DATABASE_URL", "")
 if ":5432/" in DB_CONN_STR:
     DB_CONN_STR = DB_CONN_STR.replace(":5432/", ":5432/")
-GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY", "")
 BATCH_SIZE = 10          # Questions per Gemini call (balance cost vs speed)
 SLEEP_BETWEEN_BATCHES = 1.0   # Seconds between API calls (avoid rate limiting)
 
@@ -123,11 +129,16 @@ Respond ONLY with a JSON array of sub-topic strings, one per question, in the sa
 Example for 3 questions: ["Political Law", "Civil Law", "Remedial Law"]"""
 
 
+def _get_vertex_client():
+    return genai.Client(
+        vertexai=True,
+        project=config.GCP_PROJECT,
+        location=config.GCP_LOCATION,
+    )
+
+
 def classify_batch(questions: list[dict]) -> list[str | None]:
     """Send a batch of questions to Gemini and return sub-topic list."""
-    if not GEMINI_API_KEY:
-        raise RuntimeError("GEMINI_API_KEY not set")
-
     # Build numbered question list
     user_content_lines = []
     for i, q in enumerate(questions, 1):
@@ -135,22 +146,20 @@ def classify_batch(questions: list[dict]) -> list[str | None]:
         user_content_lines.append(f"Q{i} [{q.get('subject', '')}]: {text}")
     user_content = "\n\n".join(user_content_lines)
 
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-lite-preview:generateContent?key={GEMINI_API_KEY}"
-    payload = {
-        "system_instruction": {"parts": [{"text": SYSTEM_PROMPT}]},
-        "contents": [{"parts": [{"text": user_content}]}],
-        "generationConfig": {
-            "response_mime_type": "application/json",
-            "temperature": 0.0,
-            "maxOutputTokens": 256,
-        }
-    }
-
     try:
-        resp = requests.post(url, json=payload, headers={"Content-Type": "application/json"}, timeout=30)
-        resp.raise_for_status()
-        data = resp.json()
-        text_out = data["candidates"][0]["content"]["parts"][0]["text"]
+        client = _get_vertex_client()
+        cfg = types.GenerateContentConfig(
+            system_instruction=SYSTEM_PROMPT,
+            response_mime_type="application/json",
+            temperature=0.0,
+            max_output_tokens=256,
+        )
+        resp = client.models.generate_content(
+            model="gemini-3.5-flash",
+            contents=user_content,
+            config=cfg,
+        )
+        text_out = resp.text
         parsed = json.loads(text_out)
 
         if not isinstance(parsed, list) or len(parsed) != len(questions):
@@ -171,7 +180,7 @@ def classify_batch(questions: list[dict]) -> list[str | None]:
         return validated
 
     except Exception as e:
-        log.error(f"Gemini batch error: {e}")
+        log.error(f"Vertex AI batch error: {e}")
         return [None] * len(questions)
 
 

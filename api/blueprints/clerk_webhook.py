@@ -121,6 +121,13 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
         try:
             with psycopg.connect(conn_string) as conn:
                 with conn.cursor() as cur:
+                    # Check if user existed in DB before this event
+                    cur.execute(
+                        "SELECT 1 FROM users WHERE clerk_id = %s OR LOWER(email) = LOWER(%s)",
+                        (clerk_id, email),
+                    )
+                    exists_before = bool(cur.fetchone())
+
                     # 1. Link or re-link any existing row for this email (covers both
                     #    email-only rows AND re-registrations where the clerk_id changed)
                     cur.execute("""
@@ -152,28 +159,55 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
                                 subscription_source = 'admin_override'
                             WHERE clerk_id = %s;
                         """, (clerk_id,))
-                    elif evt_type == "user.created":
-                        # Explicit "free only" sign-up from pricing modal: skip founding slot + paid trial.
-                        explicit_free = signup_intent == "free"
-                        if not explicit_free:
-                            try:
-                                try_grant_founding_promo(cur, clerk_id, is_admin)
+                    else:
+                        # Determine if we should attempt the promo or trial grant (fallback healer on user.updated).
+                        attempt_grant = (evt_type == "user.created")
+                        if not attempt_grant:
+                            if not exists_before:
+                                # This user.updated is acting as the user's initial registration (e.g. user.created was missed)
+                                attempt_grant = True
+                                logging.info("Fallback healing: clerk_id=%s did not exist prior to this user.updated event. Attempting grant.", clerk_id)
+                            else:
+                                # They existed before. Let's see if they qualify for healing (registered recently, still on free with no source)
                                 cur.execute(
-                                    "SELECT subscription_source, founding_promo_slot FROM users WHERE clerk_id = %s",
+                                    """
+                                    SELECT EXISTS (
+                                        SELECT 1 FROM users 
+                                        WHERE clerk_id = %s 
+                                          AND (subscription_tier = 'free' OR subscription_tier IS NULL)
+                                          AND (subscription_source IS NULL OR subscription_source = '')
+                                          AND founding_promo_slot IS NULL
+                                          AND created_at >= NOW() - INTERVAL '1 hour'
+                                    )
+                                    """,
                                     (clerk_id,),
                                 )
-                                src_row = cur.fetchone()
-                                granted_promo = bool(src_row and src_row[0] == "founding_promo")
-                                promo_slot = src_row[1] if granted_promo else None
-                            except Exception as promo_err:
-                                logging.warning("founding promo grant error: %s", promo_err)
+                                attempt_grant = cur.fetchone()[0]
+                                if attempt_grant:
+                                    logging.info("Fallback healing: clerk_id=%s is on free and was created within the last hour. Attempting grant.", clerk_id)
 
-                        if not granted_promo and not explicit_free:
-                            granted_trial = try_grant_trial(cur, clerk_id, clerk_trial_tier)
+                        if attempt_grant:
+                            # Explicit "free only" sign-up from pricing modal: skip founding slot + paid trial.
+                            explicit_free = signup_intent == "free"
+                            if not explicit_free:
+                                try:
+                                    try_grant_founding_promo(cur, clerk_id, is_admin)
+                                    cur.execute(
+                                        "SELECT subscription_source, founding_promo_slot FROM users WHERE clerk_id = %s",
+                                        (clerk_id,),
+                                    )
+                                    src_row = cur.fetchone()
+                                    granted_promo = bool(src_row and src_row[0] == "founding_promo")
+                                    promo_slot = src_row[1] if granted_promo else None
+                                except Exception as promo_err:
+                                    logging.warning("founding promo grant error: %s", promo_err)
+
+                            if not granted_promo and not explicit_free:
+                                granted_trial = try_grant_trial(cur, clerk_id, clerk_trial_tier)
 
                     conn.commit()
             logging.info(f"Successfully synced Clerk user ({evt_type}): {clerk_id}")
-            if evt_type == "user.created" and not is_admin:
+            if (evt_type == "user.created" or (evt_type == "user.updated" and (granted_promo or granted_trial))) and not is_admin:
                 user_display = f"{first_name or ''} {last_name or ''}".strip() or email
                 signup_source = (
                     "founding_promo" if granted_promo

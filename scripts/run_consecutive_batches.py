@@ -9,11 +9,11 @@ import sys
 import time
 
 def main():
-    # We want to run 6 batches consecutively (Batches 5, 6, 7, 8, 9, 10)
-    num_runs = 6
+    # We want to run consecutive batches until all pending ones are complete
+    num_runs = 25
     print(f"============================================================")
     print(f"Starting consecutive redigestion run for {num_runs} batches...")
-    print(f"Each run will execute 'scripts/redigest_flagged_decades.py'")
+    print(f"Each run will execute 'scripts/redigest_flagged_decades.py --threads 5 --rpm 200'")
     print(f"With default 5 workers for Gemini and 10 workers for Grok.")
     print(f"============================================================")
 
@@ -22,7 +22,7 @@ def main():
         start_time = time.monotonic()
         
         # Invoke the decadal script
-        cmd = [sys.executable, "scripts/redigest_flagged_decades.py"]
+        cmd = [sys.executable, "scripts/redigest_flagged_decades.py", "--threads", "5", "--rpm", "200"]
         print(f"[ORCHESTRATOR] Executing: {' '.join(cmd)}")
         
         # We run it with stdout/stderr passed directly so we see the live output
@@ -36,7 +36,7 @@ def main():
             sys.exit(res.returncode)
 
     print("\n============================================================")
-    print("All 6 batches processed successfully!")
+    print("All 5 batches processed successfully!")
     print("============================================================")
 
 if __name__ == "__main__":

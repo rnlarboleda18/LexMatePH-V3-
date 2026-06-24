@@ -193,3 +193,97 @@ def test_admin_email_user_created_grants_barrister(make_request, mock_conn):
         if "barrister" in str(c)
     ]
     assert len(admin_tier_calls) >= 1
+
+
+def test_user_updated_fallback_healing_for_new_user(make_request, mock_conn):
+    """If a user.updated webhook is received and they do not exist in our DB, we should attempt the grant (fallback healer)."""
+    # Simulate user.updated event
+    event = {
+        "type": "user.updated",
+        "data": {
+            "id": "user_healed_001",
+            "email_addresses": [
+                {"id": "ea_1", "email_address": "healed@example.com"}
+            ],
+            "primary_email_address_id": "ea_1",
+            "first_name": "Healed",
+            "last_name": "User",
+            "unsafe_metadata": {},
+        },
+    }
+    
+    conn, cur = mock_conn
+    # exists_before check: returning None means user didn't exist before, so they should trigger healing grant!
+    cur.fetchone.side_effect = [
+        None,                  # exists_before precheck
+        (1,),                  # UPSERT or link row
+        ("founding_promo", 29) # SELECT subscription_source, founding_promo_slot ...
+    ]
+    cur.rowcount = 0
+
+    headers = _svix_headers()
+    req = make_request(method="POST", body=event, headers=headers)
+
+    with patch.dict(os.environ, ENV), \
+         patch("blueprints.clerk_webhook.Webhook") as MockWebhook, \
+         patch("psycopg.connect", return_value=conn), \
+         patch("blueprints.clerk_webhook.send_new_signup_notification") as mock_notify, \
+         patch("blueprints.clerk_webhook.try_grant_founding_promo") as mock_promo, \
+         patch("blueprints.clerk_webhook.try_grant_trial") as mock_trial:
+
+        mock_wh = MagicMock()
+        MockWebhook.return_value = mock_wh
+        mock_wh.verify.return_value = event
+
+        resp = clerk_webhook_core(req)
+
+    assert resp.status_code == 200
+    mock_promo.assert_called_once_with(cur, "user_healed_001", False)
+
+
+def test_user_updated_fallback_healing_for_recent_free_user(make_request, mock_conn):
+    """If a user.updated webhook is received, they existed before but are still on free and registered recently, they should be healed."""
+    event = {
+        "type": "user.updated",
+        "data": {
+            "id": "user_healed_002",
+            "email_addresses": [
+                {"id": "ea_1", "email_address": "recent_free@example.com"}
+            ],
+            "primary_email_address_id": "ea_1",
+            "first_name": "Recent",
+            "last_name": "Free",
+            "unsafe_metadata": {},
+        },
+    }
+    
+    conn, cur = mock_conn
+    # exists_before returns True (they existed before).
+    # Then the interval check EXISTS query returns True (qualified for healing).
+    cur.fetchone.side_effect = [
+        (1,),                  # exists_before precheck -> True
+        (1,),                  # link or upsert query
+        (True,),               # EXISTS query for healing -> True
+        ("founding_promo", 30) # SELECT subscription_source, founding_promo_slot ...
+    ]
+    cur.rowcount = 0
+
+    headers = _svix_headers()
+    req = make_request(method="POST", body=event, headers=headers)
+
+    with patch.dict(os.environ, ENV), \
+         patch("blueprints.clerk_webhook.Webhook") as MockWebhook, \
+         patch("psycopg.connect", return_value=conn), \
+         patch("blueprints.clerk_webhook.send_new_signup_notification") as mock_notify, \
+         patch("blueprints.clerk_webhook.try_grant_founding_promo") as mock_promo, \
+         patch("blueprints.clerk_webhook.try_grant_trial") as mock_trial:
+
+        mock_wh = MagicMock()
+        MockWebhook.return_value = mock_wh
+        mock_wh.verify.return_value = event
+
+        resp = clerk_webhook_core(req)
+
+    assert resp.status_code == 200
+    mock_promo.assert_called_once_with(cur, "user_healed_002", False)
+

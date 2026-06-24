@@ -46,7 +46,7 @@ load_api_local_settings_into_environ(Path(__file__).resolve().parent.parent)
 # ── Constants ────────────────────────────────────────────────────────────────
 
 MODEL            = "publishers/google/models/gemini-3.5-flash"
-DEFAULT_PROJECT  = "gen-lang-client-0545071081"
+DEFAULT_PROJECT  = "project-f3608dc2-59e9-4ff5-95a"
 DEFAULT_LOCATION = "us"
 DEFAULT_THREADS  = 5
 _TIMEOUT_MS      = 270_000
@@ -131,6 +131,52 @@ You MUST return ONLY a valid JSON object with the following schema:
         {{"topic": "...", "ruling": "..."}}
     ]
 }}
+
+Do NOT wrap the JSON in markdown code blocks like ```json ... ```. Return ONLY the raw JSON string.
+
+---
+CASE: {case_number} — {short_title}
+---
+FULL DECISION TEXT:
+{full_text}
+"""
+
+
+SECONDARY_RULINGS_ONLY_PROMPT = """\
+You are given a Philippine Supreme Court decision.
+
+YOUR TASK: Scan the ENTIRE decision text with forensic precision and extract EVERY secondary, collateral, or incidental legal ruling that the Court settled beyond the primary issues.
+
+You are acting as a Philippine Bar Exam coach. Active checking of whether the Court ruled on each of the following:
+- Quantum or standard of proof (proof beyond reasonable doubt, substantial evidence, clear and convincing evidence, preponderance)
+- Civil liability, indemnity, or damages — amounts, legal basis, adjustments
+- Legal interest rates and the Nacar v. Gallery Frames guidelines
+- Procedural due process — notice, hearing, right to be heard
+- Prescription, laches, or estoppel
+- Jurisdiction — subject matter, appellate, ancillary, or concurrent
+- Standing / locus standi / real-party-in-interest
+- Mootness doctrine or its recognized exceptions
+- Proper remedy or mode of review (Rule 45 vs. Rule 65, appeal vs. certiorari, etc.)
+- Good faith or bad faith of officers or parties and its legal consequences
+- Retroactivity or prospective application of rulings or statutes
+- Definition or first-impression clarification of a legal term or concept
+- Evidentiary rules — admissibility, weight, presumptions, or burden of proof
+- Solidary vs. joint liability; individual vs. collective or vicarious liability
+- Constitutional provisions applied only incidentally
+- Remedial or procedural anomalies settled by the Court motu proprio
+
+STRICT RULES:
+- Extract EVERY collateral ruling that satisfies the checklist above. Do NOT limit yourself — if 7 exist, list all 7.
+- If there are genuinely no secondary rulings, return []. Do NOT invent data.
+- Each object MUST have exactly these two keys:
+  - **topic**: A precise, specific label — never generic. Bad: 'Procedural Due Process'. Good: 'Right to Be Heard — Waiver by Failure to Object'. Bad: 'Civil Liability'. Good: 'Solidary Liability of Approving Officers — Gross Negligence Standard'.
+  - **ruling**: Write this EXACTLY like a ratio decidendi entry — a minimum of 8-10 sentences of deep, flowing, forensic legal analysis in a single coherent prose paragraph. DO NOT summarize. DO NOT write in telegraphic style. Follow the Court's own chain of reasoning from premise to conclusion: begin with the legal principle or doctrinal anchor, develop it through the specific statutory provisions and landmark precedents the Court cited (name them explicitly — e.g., "Applying the doctrine in *Tan-Andal v. Andal*...", "Under Article 2154 of the Civil Code..."), trace the Court's application of that reasoning to the facts of this case, address any qualifications or exceptions the Court recognized, and close with the precise legal consequence or holding. Use natural academic transitions (e.g., "Consequently," "However," "Moreover," "In this regard," "Thus,"). Every sentence must add substantive legal content — no filler, no restatement, no circular reasoning.
+
+OUTPUT FORMAT:
+You MUST return ONLY a valid JSON list of objects with the schema:
+[
+    {{"topic": "...", "ruling": "..."}}
+]
 
 Do NOT wrap the JSON in markdown code blocks like ```json ... ```. Return ONLY the raw JSON string.
 
@@ -227,6 +273,26 @@ def save_digest(conn, case_id: int, main_doctrine: str, digest_issues: str, dige
             main_doctrine,
             digest_issues,
             digest_ratio,
+            json.dumps(secondary_rulings),
+            model,
+            case_id,
+        ),
+    )
+    conn.commit()
+    cur.close()
+
+
+def save_secondary_rulings_only(conn, case_id: int, secondary_rulings: list | dict, model: str) -> None:
+    cur = conn.cursor()
+    cur.execute(
+        """
+        UPDATE sc_decided_cases
+        SET secondary_rulings = %s,
+            ai_model = %s,
+            updated_at = NOW()
+        WHERE id = %s
+        """,
+        (
             json.dumps(secondary_rulings),
             model,
             case_id,
@@ -347,6 +413,73 @@ def generate_digest_data(client: genai.Client, case: dict, model_name: str) -> d
     return None
 
 
+def generate_secondary_rulings_only(client: genai.Client, case: dict, model_name: str) -> list | str | None:
+    full_text = case["full_text_md"] or ""
+
+    prompt = SECONDARY_RULINGS_ONLY_PROMPT.format(
+        case_number=case["case_number"],
+        short_title=case["short_title"] or "",
+        full_text=full_text,
+    )
+
+    safety = [
+        types.SafetySetting(
+            category=types.HarmCategory.HARM_CATEGORY_HARASSMENT,
+            threshold=types.HarmBlockThreshold.BLOCK_NONE,
+        ),
+        types.SafetySetting(
+            category=types.HarmCategory.HARM_CATEGORY_HATE_SPEECH,
+            threshold=types.HarmBlockThreshold.BLOCK_NONE,
+        ),
+        types.SafetySetting(
+            category=types.HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
+            threshold=types.HarmBlockThreshold.BLOCK_NONE,
+        ),
+        types.SafetySetting(
+            category=types.HarmCategory.HARM_CATEGORY_DANGEROUS_CONTENT,
+            threshold=types.HarmBlockThreshold.BLOCK_NONE,
+        ),
+    ]
+
+    for attempt in range(1, _RETRY_LIMIT + 1):
+        try:
+            response = client.models.generate_content(
+                model=model_name,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    system_instruction=SYSTEM_INSTRUCTION,
+                    temperature=0.1,
+                    safety_settings=safety,
+                    response_mime_type="application/json"
+                ),
+            )
+            if response.prompt_feedback and response.prompt_feedback.block_reason:
+                reason_str = str(response.prompt_feedback.block_reason)
+                if "PROHIBITED_CONTENT" in reason_str:
+                    log.warning("Case ID %s was blocked by Google gateway-level safety: %s. Skipping Gemini retries.", case["id"], reason_str)
+                    return "_SAFETY_BLOCKED"
+
+            text = (response.text or "").strip()
+            if text:
+                cleaned_text = clean_json_text(text)
+                try:
+                    data = json.loads(cleaned_text)
+                    return validate_secondary_rulings(data)
+                except json.JSONDecodeError as jde:
+                    log.warning("JSON decode failed for id=%s on attempt %d: %s\nText: %s", case["id"], attempt, jde, text[:200])
+            else:
+                log.warning("Empty response on attempt %d for id=%s", attempt, case["id"])
+        except Exception as exc:
+            exc_str = str(exc).upper()
+            if "PROHIBITED_CONTENT" in exc_str or "SAFETY" in exc_str or "BLOCKED" in exc_str:
+                log.warning("Case ID %s hit safety block exception: %s. Skipping Gemini retries and falling back.", case["id"], exc)
+                return "_SAFETY_BLOCKED"
+            log.warning("Attempt %d failed for id=%s: %s", attempt, case["id"], exc)
+            if attempt < _RETRY_LIMIT:
+                time.sleep(_RETRY_DELAY * attempt)
+    return None
+
+
 # ── Process Case ─────────────────────────────────────────────────────────────
 
 def process_case(
@@ -375,70 +508,128 @@ def process_case(
     if limiter:
         limiter.acquire()
 
-    data = generate_digest_data(client, case, model_name)
-    if data == "_SAFETY_BLOCKED":
-        log.warning("Case ID %d was blocked due to prohibited content. Triggering Grok fallback immediately.", case_id)
-        if dry_run:
-            log.info("[DRY RUN] Would invoke Grok fallback for Case ID %d.", case_id)
-            return True
-        
-        grok_script = _SCRIPTS / "generate_sc_digests_grok.py"
-        grok_model = os.environ.get("GROK_DIGEST_MODEL") or "grok-4-1-fast-reasoning"
-        cmd = [
-            sys.executable,
-            str(grok_script),
-            "--force",
-            "--target-ids",
-            str(case_id),
-            "--model",
-            grok_model,
-            "--limit",
-            "1",
-            "--workers",
-            "10",
-        ]
-        log.info("Running Grok fallback subprocess: %s", " ".join(cmd))
-        try:
-            res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
-            if res.returncode == 0:
-                log.info("Grok fallback subprocess completed successfully for Case ID %d", case_id)
+    is_legacy_gemini = (case.get("ai_model") == "gemini-3.5-flash")
+
+    if is_legacy_gemini:
+        log.info("Case ID %d was digested by legacy gemini-3.5-flash. Redigesting ONLY Secondary Rulings.", case_id)
+        secondary_rulings = generate_secondary_rulings_only(client, case, model_name)
+        if secondary_rulings == "_SAFETY_BLOCKED":
+            log.warning("Case ID %d was blocked due to prohibited content. Triggering Grok fallback immediately.", case_id)
+            if dry_run:
+                log.info("[DRY RUN] Would invoke Grok fallback for Case ID %d.", case_id)
                 return True
-            else:
-                log.error("Grok fallback subprocess failed for Case ID %d. Return code: %d. Error:\n%s", case_id, res.returncode, res.stderr)
+            
+            grok_script = _SCRIPTS / "generate_sc_digests_grok.py"
+            grok_model = os.environ.get("GROK_DIGEST_MODEL") or "grok-4-1-fast-reasoning"
+            cmd = [
+                sys.executable,
+                str(grok_script),
+                "--force",
+                "--target-ids",
+                str(case_id),
+                "--model",
+                grok_model,
+                "--limit",
+                "1",
+                "--workers",
+                "10",
+            ]
+            log.info("Running Grok fallback subprocess: %s", " ".join(cmd))
+            try:
+                res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
+                if res.returncode == 0:
+                    log.info("Grok fallback subprocess completed successfully for Case ID %d", case_id)
+                    return True
+                else:
+                    log.error("Grok fallback subprocess failed for Case ID %d. Return code: %d. Error:\n%s", case_id, res.returncode, res.stderr)
+                    return False
+            except Exception as e:
+                log.error("Failed to run Grok fallback subprocess for Case ID %d: %s", case_id, e)
                 return False
-        except Exception as e:
-            log.error("Failed to run Grok fallback subprocess for Case ID %d: %s", case_id, e)
+
+        if secondary_rulings is None:
+            log.error("Generation failed for Secondary Rulings of Case ID %d", case_id)
             return False
 
-    if not data:
-        log.error("Generation failed for Case ID %d", case_id)
-        return False
-
-    if dry_run:
-        log.info("DRY RUN for Case ID %d. Extracted fields:", case_id)
-        log.info("Main Doctrine:\n%s", data["main_doctrine"])
-        log.info("Digest Issues:\n%s", data["digest_issues"])
-        log.info("Digest Ratio:\n%s", data["digest_ratio"])
-        log.info("Secondary Rulings:\n%s", json.dumps(data["secondary_rulings"], indent=2))
-        return True
-
-    with db_lock:
-        try:
-            save_digest(
-                conn,
-                case_id,
-                data["main_doctrine"],
-                data["digest_issues"],
-                data["digest_ratio"],
-                data["secondary_rulings"],
-                model_name
-            )
-            log.info("Successfully updated Case ID %d", case_id)
+        if dry_run:
+            log.info("DRY RUN for Case ID %d. Extracted Secondary Rulings:\n%s", case_id, json.dumps(secondary_rulings, indent=2))
             return True
-        except Exception as e:
-            log.error("Database save failed for Case ID %d: %s", case_id, e)
-            conn.rollback()
+
+        with db_lock:
+            try:
+                save_secondary_rulings_only(conn, case_id, secondary_rulings, model_name)
+                log.info("Successfully updated Secondary Rulings for Case ID %d", case_id)
+                return True
+            except Exception as e:
+                log.error("Database save failed for Case ID %d: %s", case_id, e)
+                conn.rollback()
+                return False
+
+    else:
+        data = generate_digest_data(client, case, model_name)
+        if data == "_SAFETY_BLOCKED":
+            log.warning("Case ID %d was blocked due to prohibited content. Triggering Grok fallback immediately.", case_id)
+            if dry_run:
+                log.info("[DRY RUN] Would invoke Grok fallback for Case ID %d.", case_id)
+                return True
+            
+            grok_script = _SCRIPTS / "generate_sc_digests_grok.py"
+            grok_model = os.environ.get("GROK_DIGEST_MODEL") or "grok-4-1-fast-reasoning"
+            cmd = [
+                sys.executable,
+                str(grok_script),
+                "--force",
+                "--target-ids",
+                str(case_id),
+                "--model",
+                grok_model,
+                "--limit",
+                "1",
+                "--workers",
+                "10",
+            ]
+            log.info("Running Grok fallback subprocess: %s", " ".join(cmd))
+            try:
+                res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8")
+                if res.returncode == 0:
+                    log.info("Grok fallback subprocess completed successfully for Case ID %d", case_id)
+                    return True
+                else:
+                    log.error("Grok fallback subprocess failed for Case ID %d. Return code: %d. Error:\n%s", case_id, res.returncode, res.stderr)
+                    return False
+            except Exception as e:
+                log.error("Failed to run Grok fallback subprocess for Case ID %d: %s", case_id, e)
+                return False
+
+        if not data:
+            log.error("Generation failed for Case ID %d", case_id)
             return False
+
+        if dry_run:
+            log.info("DRY RUN for Case ID %d. Extracted fields:", case_id)
+            log.info("Main Doctrine:\n%s", data["main_doctrine"])
+            log.info("Digest Issues:\n%s", data["digest_issues"])
+            log.info("Digest Ratio:\n%s", data["digest_ratio"])
+            log.info("Secondary Rulings:\n%s", json.dumps(data["secondary_rulings"], indent=2))
+            return True
+
+        with db_lock:
+            try:
+                save_digest(
+                    conn,
+                    case_id,
+                    data["main_doctrine"],
+                    data["digest_issues"],
+                    data["digest_ratio"],
+                    data["secondary_rulings"],
+                    model_name
+                )
+                log.info("Successfully updated Case ID %d", case_id)
+                return True
+            except Exception as e:
+                log.error("Database save failed for Case ID %d: %s", case_id, e)
+                conn.rollback()
+                return False
 
 
 # ── Checkpoint ───────────────────────────────────────────────────────────────
@@ -511,14 +702,38 @@ class ProgressReporter:
 # ── Batch Builder ─────────────────────────────────────────────────────────────
 
 def build_batches(decadal_split_path: Path, conn) -> list[tuple[str, list[int]]]:
-    """Returns ordered batches: 4 En Banc (by decade DESC), then N Division (by year DESC)."""
+    """Returns ordered batches: 'gaerlan_cases' (first), then 4 En Banc (by decade DESC), then N Division (by year DESC)."""
     from collections import defaultdict
 
     with open(decadal_split_path, "r", encoding="utf-8") as f:
         data = json.load(f)
 
+    # Gather all Gaerlan case IDs from DB
+    cur = conn.cursor()
+    cur.execute("""
+        SELECT id FROM sc_decided_cases
+        WHERE ponente ILIKE '%Gaerlan%'
+    """)
+    gaerlan_ids = [row[0] for row in cur.fetchall()]
+    cur.close()
+
+    # Gather all IDs from decadal_split.json to filter them
+    all_split_ids = set()
+    for dec in data:
+        all_split_ids.update(data[dec].get("eb_ids", []))
+        all_split_ids.update(data[dec].get("div_ids", []))
+
+    # Identify the unmatched Gaerlan case IDs
+    unmatched_gaerlan_ids = [gid for gid in gaerlan_ids if gid not in all_split_ids]
+
     decades = ["2020-2026", "2010-2019", "2000-2009", "1987-1999"]
     batches: list[tuple[str, list[int]]] = []
+
+    # Prepend the Gaerlan Cases batch if there are unmatched cases
+    if unmatched_gaerlan_ids:
+        batches.append(("gaerlan_cases", unmatched_gaerlan_ids))
+        log.info("Gaerlan Cases batch 'gaerlan_cases': %d cases", len(unmatched_gaerlan_ids))
+
     all_div: list[int] = []
 
     for dec in decades:
@@ -554,6 +769,51 @@ def build_batches(decadal_split_path: Path, conn) -> list[tuple[str, list[int]]]
     total = sum(len(ids) for _, ids in batches)
     log.info("Total batches: %d | Total cases: %d", len(batches), total)
     return batches
+
+
+class RobustConnection:
+    def __init__(self, db_url):
+        self.db_url = db_url
+        self.conn = psycopg2.connect(db_url)
+
+    def cursor(self):
+        try:
+            if self.conn.closed:
+                log.warning("Database connection is closed. Reconnecting...")
+                self.conn = psycopg2.connect(self.db_url)
+            else:
+                # Try a quick test query to ensure connection is actually alive
+                cur = self.conn.cursor()
+                cur.execute("SELECT 1")
+                cur.fetchone()
+                cur.close()
+        except Exception as e:
+            log.warning("Database connection test failed (%s). Reconnecting...", e)
+            try:
+                self.conn.close()
+            except Exception:
+                pass
+            self.conn = psycopg2.connect(self.db_url)
+        return self.conn.cursor()
+
+    def commit(self):
+        self.conn.commit()
+
+    def rollback(self):
+        try:
+            self.conn.rollback()
+        except Exception:
+            pass
+
+    def close(self):
+        try:
+            self.conn.close()
+        except Exception:
+            pass
+
+    @property
+    def closed(self):
+        return self.conn.closed
 
 
 # ── Main ──────────────────────────────────────────────────────────────────────
@@ -604,7 +864,7 @@ def main() -> None:
 
     # ── DB connection ─────────────────────────────────────────────────────────
     try:
-        conn = psycopg2.connect(DB_URL)
+        conn = RobustConnection(DB_URL)
     except Exception as e:
         print(f"Failed to connect to database: {e}", file=sys.stderr)
         sys.exit(1)

@@ -256,12 +256,7 @@ def main() -> int:
         log.error("DB_CONNECTION_STRING is not set.")
         resume_finish_ok["ok"] = False
         return 2
-    _has_auth = (
-        os.environ.get("GOOGLE_API_KEY")
-        or os.environ.get("GEMINI_API_KEY")
-        or os.environ.get("GOOGLE_CLOUD_PROJECT")
-        or args.vertex_project
-    )
+    _has_auth = True
     if not args.dry_run and not _has_auth:
         log.error("No Gemini auth: set GOOGLE_API_KEY (AI Studio) or GOOGLE_CLOUD_PROJECT / --vertex-project (Vertex AI).")
         resume_finish_ok["ok"] = False

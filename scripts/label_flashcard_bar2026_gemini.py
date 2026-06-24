@@ -146,7 +146,7 @@ def _strip_json_fence(text: str) -> str:
     return t.strip()
 
 
-def call_gemini(
+def gemini_call(
     model: str,
     api_key: str,
     system_text: str,
@@ -155,72 +155,45 @@ def call_gemini(
     timeout: int,
     use_vertex: bool,
 ) -> str:
-    if use_vertex:
-        # Vertex AI publisher endpoint — camelCase fields per API guide
-        base = f"https://aiplatform.googleapis.com/v1/publishers/google/models/{model}:generateContent"
-        body: Dict[str, Any] = {
-            "systemInstruction": {
-                "role": "user",
-                "parts": [{"text": system_text}],
-            },
-            "contents": [{"role": "user", "parts": [{"text": user_text}]}],
-            "generationConfig": {
-                "temperature": temperature,
-                "responseMimeType": "application/json",
-            },
-        }
+    from google import genai
+    from google.genai import types as genai_types
+    
+    # Force Vertex AI exclusively
+    client = genai.Client(
+        vertexai=True,
+        project="project-f3608dc2-59e9-4ff5-95a",
+        location="us",
+        http_options=genai_types.HttpOptions(timeout=timeout * 1000),
+    )
+    
+    # Map model
+    if "flash" in model:
+        vertex_model = "gemini-3.5-flash"
     else:
-        # Google AI Studio — same shape but snake_case works there too
-        base = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
-        body = {
-            "system_instruction": {"parts": [{"text": system_text}]},
-            "contents": [{"role": "user", "parts": [{"text": user_text}]}],
-            "generationConfig": {
-                "temperature": temperature,
-                "response_mime_type": "application/json",
-            },
-        }
-    url = f"{base}?{urlencode({'key': api_key})}"
+        vertex_model = "gemini-2.5-flash"
+        
+    cfg = genai_types.GenerateContentConfig(
+        system_instruction=system_text,
+        response_mime_type="application/json",
+        temperature=temperature,
+    )
+    
     last_err = None
     for attempt in range(6):
         try:
-            r = requests.post(
-                url,
-                headers={"Content-Type": "application/json"},
-                json=body,
-                timeout=timeout,
+            resp = client.models.generate_content(
+                model=vertex_model,
+                contents=user_text,
+                config=cfg,
             )
-        except (requests.exceptions.ReadTimeout, requests.exceptions.ConnectionError) as e:
+            return resp.text or ""
+        except Exception as e:
             last_err = str(e)
             wait = 10 + attempt * 5
-            print(f"[retry {attempt+1}/6] network/timeout: {e!r} — waiting {wait}s", file=sys.stderr)
+            print(f"[retry {attempt+1}/6] Vertex AI error: {e!r} — waiting {wait}s", file=sys.stderr)
             time.sleep(wait)
-            continue
-        if r.status_code == 429:
-            last_err = r.text[:500]
-            wait = 8 + attempt * 5
-            print(f"[retry {attempt+1}/6] 429 rate limit — waiting {wait}s", file=sys.stderr)
-            time.sleep(wait)
-            continue
-        if r.status_code == 503 or r.status_code == 500:
-            last_err = r.text[:500]
-            wait = 10 + attempt * 5
-            print(f"[retry {attempt+1}/6] HTTP {r.status_code} — waiting {wait}s", file=sys.stderr)
-            time.sleep(wait)
-            continue
-        if r.status_code >= 400:
-            raise RuntimeError(f"Gemini HTTP {r.status_code}: {r.text[:800]}")
-        break
-    else:
-        raise RuntimeError(f"Gemini failed after retries: {last_err}")
-    data = r.json()
-    cands = data.get("candidates") or []
-    if not cands:
-        raise RuntimeError(f"No candidates in response: {json.dumps(data)[:800]}")
-    parts = (cands[0].get("content") or {}).get("parts") or []
-    if not parts:
-        raise RuntimeError(f"No parts in candidate: {json.dumps(cands[0])[:800]}")
-    return parts[0].get("text") or ""
+            
+    raise RuntimeError(f"Vertex AI failed after retries: {last_err}")
 
 
 def parse_alignment_json(raw: str, expected_keys: List[str]) -> Dict[str, bool]:

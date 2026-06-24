@@ -27,6 +27,7 @@ def get_promo_slot_limit() -> int:
 def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
     """Grant Barrister promo if slots remain and user is eligible. Uses row locks; caller must commit."""
     if is_admin or not clerk_id:
+        logger.info("try_grant_founding_promo: skipped because is_admin=%s or clerk_id is empty", is_admin)
         return
     try:
         # Idempotent: migration INSERT may not have run on some environments
@@ -44,9 +45,11 @@ def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
             return
         limit = get_promo_slot_limit()
         if limit <= 0:
+            logger.info("try_grant_founding_promo: skipped because limit is %s", limit)
             return
         claimed = row[0]
         if claimed >= limit:
+            logger.info("try_grant_founding_promo: skipped because claimed (%s) >= limit (%s)", claimed, limit)
             return
 
         cur.execute(
@@ -58,9 +61,14 @@ def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
         )
         u = cur.fetchone()
         if not u:
+            logger.info("try_grant_founding_promo: skipped because user clerk_id=%s not found in DB", clerk_id)
             return
         eligible, existing_slot, db_admin = u
         if db_admin or not eligible or existing_slot is not None:
+            logger.info(
+                "try_grant_founding_promo: skipped for clerk_id=%s (db_admin=%s, eligible=%s, existing_slot=%s)",
+                clerk_id, db_admin, eligible, existing_slot
+            )
             return
 
         cur.execute(
@@ -74,6 +82,7 @@ def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
         )
         slot_row = cur.fetchone()
         if not slot_row:
+            logger.warning("try_grant_founding_promo: failed to increment claimed_count for clerk_id=%s", clerk_id)
             return
         slot = slot_row[0]
 
@@ -93,6 +102,8 @@ def try_grant_founding_promo(cur, clerk_id: str, is_admin: bool) -> None:
         )
         if cur.rowcount:
             logger.info("Founding promo granted slot %s to clerk_id=%s", slot, clerk_id)
+        else:
+            logger.warning("try_grant_founding_promo: user UPDATE returned rowcount=0 for clerk_id=%s", clerk_id)
     except pg_errors.UndefinedColumn:
         logger.warning("Founding promo columns missing; run sql/founding_promo_migration.sql")
     except pg_errors.UndefinedTable:
