@@ -52,6 +52,39 @@ const formatDateTime = (dateStr) => {
     }
 };
 
+const formatModelName = (model) => {
+    if (!model) return '';
+    
+    // Split by slash and take the last segment (e.g., publishers/google/models/gemini-3.5-flash -> gemini-3.5-flash)
+    let cleanModel = model;
+    if (model.includes('/')) {
+        const segments = model.split('/');
+        cleanModel = segments[segments.length - 1];
+    }
+    
+    const lower = cleanModel.toLowerCase();
+    
+    if (lower === 'gemini-3.5-flash' || lower === 'gemini_3.5_flash' || lower === 'gemini 3.5 flash') {
+        return 'Gemini 3.5 Flash';
+    }
+    if (lower === 'grok-4.1' || lower === 'grok_4.1' || lower === 'grok 4.1') {
+        return 'Grok 4.1';
+    }
+    if (lower === 'claude-3-5-sonnet' || lower === 'claude-3.5-sonnet') {
+        return 'Claude 3.5 Sonnet';
+    }
+    if (lower === 'gpt-4o' || lower === 'gpt_4o') {
+        return 'GPT-4o';
+    }
+    if (lower === 'gpt-4-turbo' || lower === 'gpt_4_turbo') {
+        return 'GPT-4 Turbo';
+    }
+
+    return cleanModel
+        .replace(/[-_]/g, ' ')
+        .replace(/\b([a-z])/g, c => c.toUpperCase());
+};
+
 export default function CaseDigestHistory({ caseId, currentModel, mode = 'popover' }) {
     const { getToken } = useAuth();
     const [history, setHistory] = useState([]);
@@ -136,17 +169,37 @@ export default function CaseDigestHistory({ caseId, currentModel, mode = 'popove
         }
     };
 
-    if (mode === 'popover') {
+    if (mode === 'popover' || mode === 'header' || mode === 'badge') {
         return (
             <span className="relative inline-block" ref={popoverRef}>
-                <button
-                    onClick={handlePopoverToggle}
-                    className="inline-flex items-center gap-1 text-violet-600 dark:text-violet-400 font-bold hover:text-violet-800 dark:hover:text-violet-300 hover:underline transition-colors focus:outline-none"
-                    title="Click to view AI Digestion Audit History"
-                >
-                    <Sparkles size={10} className="inline align-middle animate-pulse" />
-                    <span>{currentModel}</span>
-                </button>
+                {mode === 'header' ? (
+                    <button
+                        onClick={handlePopoverToggle}
+                        className="touch-manipulation flex h-6 px-2 sm:px-2.5 sm:h-7 shrink-0 items-center gap-1 sm:gap-1.5 rounded-full border border-violet-200/80 bg-violet-50/90 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-violet-600 transition-all hover:bg-violet-100 active:scale-95 dark:border-violet-800 dark:bg-violet-950/40 dark:text-violet-300 dark:hover:bg-violet-900/60 shadow-sm focus:outline-none"
+                        title="Click to view AI Digestion Audit History"
+                    >
+                        <Sparkles size={11} className="inline align-middle animate-pulse text-violet-500" />
+                        <span>{formatModelName(currentModel)}</span>
+                    </button>
+                ) : mode === 'badge' ? (
+                    <button
+                        onClick={handlePopoverToggle}
+                        className="touch-manipulation flex h-[22px] px-2.5 shrink-0 items-center gap-1.5 rounded-full border border-violet-200/80 bg-violet-50/90 text-[10px] font-extrabold uppercase tracking-wide text-violet-600 dark:border-violet-800 dark:bg-violet-950/40 dark:text-violet-300 transition-all hover:bg-violet-100 active:scale-95 shadow-sm focus:outline-none"
+                        title="Click to view AI Digestion Audit History"
+                    >
+                        <Sparkles size={10} className="inline align-middle animate-pulse text-violet-500 dark:text-violet-400" />
+                        <span>{formatModelName(currentModel)}</span>
+                    </button>
+                ) : (
+                    <button
+                        onClick={handlePopoverToggle}
+                        className="inline-flex items-center gap-1 text-violet-600 dark:text-violet-400 font-bold hover:text-violet-800 dark:hover:text-violet-300 hover:underline transition-colors focus:outline-none"
+                        title="Click to view AI Digestion Audit History"
+                    >
+                        <Sparkles size={10} className="inline align-middle animate-pulse" />
+                        <span>{formatModelName(currentModel)}</span>
+                    </button>
+                )}
 
                 {isOpen && createPortal(
                     <div className="fixed inset-0 z-[9999] flex items-center justify-center p-4">

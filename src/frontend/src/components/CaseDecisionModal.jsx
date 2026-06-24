@@ -882,6 +882,12 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         {/* Spacer */}
                         <div className="flex-1" />
 
+                        {isAdmin && fullDecision.ai_model && (
+                            <div className="mr-1 sm:mr-1.5 shrink-0 flex items-center">
+                                <CaseDigestHistory caseId={fullDecision.id} currentModel={fullDecision.ai_model} mode="header" />
+                            </div>
+                        )}
+
                         {/* Right cluster: A-/A+ · close */}
                         {canFavorite && (
                             <button
@@ -914,7 +920,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                         </button>
                     </div>
 
-                    <div className={`border-t border-lex px-4 pb-3 sm:px-6 sm:pb-4 ${headerCollapsed ? 'hidden' : 'block'}`}>
+                    <div className={`border-t border-lex px-4 pt-3 pb-3 sm:px-6 sm:pt-4 sm:pb-4 ${headerCollapsed ? 'hidden' : 'block'}`}>
                         <div className="rounded-lg border border-lex bg-neutral-50 px-3 py-2.5 dark:border-lex dark:bg-zinc-800/90">
                             <dl className="grid grid-cols-2 gap-x-4 gap-y-0">
                                 {/* Row 1 */}
@@ -930,20 +936,20 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         </div>
                                     </div>
 
-                                    {/* Right upper: Decision / Resolution date */}
+                                    {/* Right upper: Decision / Resolution type */}
                                     <div className="flex items-start gap-2 border-l border-lex pl-4 dark:border-lex">
-                                        <Clock className="h-4 w-4 shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" strokeWidth={2} aria-hidden />
+                                        <FileText className="h-4 w-4 shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" strokeWidth={2} aria-hidden />
                                         <div className="min-w-0">
                                             <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Decision / Resolution</dt>
                                             <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100 mt-0.5">
-                                                {_decisionDateRaw ? formatDate(_decisionDateRaw) : '—'}
+                                                {fullDecision.document_type ? formatTitleCase(fullDecision.document_type.toString().trim()) : '—'}
                                             </dd>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Row 2 */}
-                                <div className="col-span-2 grid grid-cols-2 gap-x-4 pt-2.5">
+                                <div className="col-span-2 grid grid-cols-2 gap-x-4 pt-2.5 pb-2.5 border-b border-lex dark:border-lex">
                                     {/* Left lower: Ponente */}
                                     <div className="flex items-start gap-2">
                                         <User className="h-4 w-4 shrink-0 mt-0.5 text-sky-600 dark:text-sky-400" strokeWidth={2} aria-hidden />
@@ -955,8 +961,22 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                         </div>
                                     </div>
 
-                                    {/* Right lower: Subject */}
+                                    {/* Right lower: Significance Category */}
                                     <div className="flex items-start gap-2 border-l border-lex pl-4 dark:border-lex">
+                                        <Lightbulb className="h-4 w-4 shrink-0 mt-0.5 text-amber-500 dark:text-amber-400" strokeWidth={2} aria-hidden />
+                                        <div className="min-w-0">
+                                            <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Significance Category</dt>
+                                            <dd className={`text-[13px] font-bold leading-snug mt-0.5 ${getCategoryTextClass(fullDecision.significance_category)}`}>
+                                                {formatTitleCase(fullDecision.significance_category?.toString().trim()) || 'Reiteration'}
+                                            </dd>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Row 3 */}
+                                <div className="col-span-2 pt-2.5">
+                                    {/* Subject */}
+                                    <div className="flex items-start gap-2">
                                         <BookOpen className="h-4 w-4 shrink-0 mt-0.5 text-violet-600 dark:text-violet-400" strokeWidth={2} aria-hidden />
                                         <div className="min-w-0">
                                             <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Subject</dt>
@@ -985,20 +1005,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                 {_decisionDateRaw ? (
                                     <span> · {formatDate(_decisionDateRaw)}</span>
                                 ) : null}
-                                {isAdmin && fullDecision.ai_model ? (
-                                    <span className="text-violet-600 dark:text-violet-400 font-semibold">
-                                        {' · '}
-                                        <Sparkles size={11} className="inline mr-0.5 align-middle" />
-                                        {fullDecision.ai_model}
-                                    </span>
-                                ) : null}
                             </p>
-
-                            {isAdmin && fullDecision.ai_model ? (
-                                <div className="text-left mt-2">
-                                    <CaseDigestHistory caseId={fullDecision.id} currentModel={fullDecision.ai_model} mode="timeline" />
-                                </div>
-                            ) : null}
                         </div>
                     )}
 

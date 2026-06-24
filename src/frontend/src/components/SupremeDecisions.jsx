@@ -1640,42 +1640,42 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                             >
                                 <CardVioletInnerWash />
                                 <div className="relative z-[1] min-w-0">
-                                <div
-                                    role="button"
-                                    tabIndex={0}
-                                    onClick={() => handleCaseClick(decision)}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter' || e.key === ' ') {
-                                            e.preventDefault();
-                                            handleCaseClick(decision);
-                                        }
-                                    }}
-                                    onMouseEnter={() => prefetchDetails(decision.id)}
-                                    onTouchStart={() => prefetchDetails(decision.id)}
-                                    className="p-3 cursor-pointer hover:bg-neutral-50 dark:hover:bg-zinc-800/80 transition-colors"
-                                >
-                                    <div className="flex flex-col gap-2 items-center text-center">
-                                        <h3 className="text-base font-bold leading-snug text-black transition-colors group-hover:text-black dark:text-zinc-100 dark:group-hover:text-white">
-                                            {(decision.short_title && decision.short_title.trim()) || (decision.title && decision.title.trim()) || decision.case_number}
-                                        </h3>
+                                    {isAdmin && decision.ai_model ? (
+                                        <div className="absolute top-3 right-3 z-10">
+                                            <CaseDigestHistory caseId={decision.id} currentModel={decision.ai_model} mode="badge" />
+                                        </div>
+                                    ) : null}
 
-                                        <p className="text-center text-[11px] font-mono text-gray-600 dark:text-gray-400 leading-snug">
-                                            {decision.case_number}
-                                            {decision.date_str ? (
-                                                <span className="text-gray-500 dark:text-gray-500"> · {formatDate(decision.date_str)}</span>
-                                            ) : null}
-                                            {decision.document_type ? (
-                                                <span className="text-gray-500 dark:text-gray-500"> · {formatTitleCase(decision.document_type.toString().trim())}</span>
-                                            ) : null}
-                                            {isAdmin && decision.ai_model ? (
-                                                <span className="text-gray-500 dark:text-gray-500">
-                                                    {' · '}
-                                                    <CaseDigestHistory caseId={decision.id} currentModel={decision.ai_model} mode="popover" />
-                                                </span>
-                                            ) : null}
-                                        </p>
+                                    <div
+                                        role="button"
+                                        tabIndex={0}
+                                        onClick={() => handleCaseClick(decision)}
+                                        onKeyDown={(e) => {
+                                            if (e.key === 'Enter' || e.key === ' ') {
+                                                e.preventDefault();
+                                                handleCaseClick(decision);
+                                            }
+                                        }}
+                                        onMouseEnter={() => prefetchDetails(decision.id)}
+                                        onTouchStart={() => prefetchDetails(decision.id)}
+                                        className="p-3 cursor-pointer hover:bg-neutral-50 dark:hover:bg-zinc-800/80 transition-colors"
+                                    >
+                                        <div className="flex flex-col gap-2 items-center text-center px-10 sm:px-14">
+                                            <h3 className="text-base font-bold leading-snug text-black transition-colors group-hover:text-black dark:text-zinc-100 dark:group-hover:text-white">
+                                                {(decision.short_title && decision.short_title.trim()) || (decision.title && decision.title.trim()) || decision.case_number}
+                                            </h3>
+
+                                            <p className="text-center text-[11px] font-mono text-gray-600 dark:text-gray-400 leading-snug">
+                                                {decision.case_number}
+                                                {decision.date_str ? (
+                                                    <span className="text-gray-500 dark:text-gray-500"> · {formatDate(decision.date_str)}</span>
+                                                ) : null}
+                                                {decision.document_type ? (
+                                                    <span className="text-gray-500 dark:text-gray-500"> · {formatTitleCase(decision.document_type.toString().trim())}</span>
+                                                ) : null}
+                                            </p>
+                                        </div>
                                     </div>
-                                </div>
 
                                 <div className="border-t border-lex px-3 py-3">
                                     <div className="relative overflow-hidden rounded-lg border border-lex-strong bg-neutral-50 px-3 py-2.5 dark:bg-zinc-800/90">
@@ -1707,7 +1707,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                             </div>
 
                                             {/* Row 2 */}
-                                            <div className="col-span-2 grid grid-cols-2 gap-x-4 pt-2.5">
+                                            <div className="col-span-2 grid grid-cols-2 gap-x-4 pt-2.5 pb-2.5 border-b border-lex-strong">
                                                 {/* Left lower: Ponente */}
                                                 <div className="flex items-center gap-2.5">
                                                     <User className="h-5 w-5 shrink-0 text-sky-600 dark:text-sky-400" strokeWidth={2} aria-hidden />
@@ -1719,12 +1719,25 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                                     </div>
                                                 </div>
 
-                                                {/* Right lower: Subject */}
+                                                {/* Right lower: Significance */}
                                                 <div className="flex items-center gap-2.5 border-l border-lex-strong pl-4">
-                                                    <BookOpen className="h-5 w-5 shrink-0 text-violet-600 dark:text-violet-400" strokeWidth={2} aria-hidden />
+                                                    <Lightbulb className="h-5 w-5 shrink-0 text-amber-500 dark:text-amber-400" strokeWidth={2} aria-hidden />
                                                     <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
-                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Subject:</dt>
-                                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Significance:</dt>
+                                                        <dd className={`text-[13px] font-extrabold leading-snug ${getCategoryTextClass(decision.significance_category)}`}>
+                                                            {formatTitleCase(decision.significance_category?.toString().trim()) || 'Reiteration'}
+                                                        </dd>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            {/* Row 3: Subject */}
+                                            <div className="col-span-2 pt-2.5">
+                                                <div className="flex items-start gap-2.5">
+                                                    <BookOpen className="h-5 w-5 shrink-0 text-violet-600 dark:text-violet-400 mt-0.5" strokeWidth={2} aria-hidden />
+                                                    <div className="min-w-0 flex-1">
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 inline mr-1.5">Subject:</dt>
+                                                        <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100 inline">
                                                             {formatTitleCase(decision.subject?.toString().trim()) || '—'}
                                                         </dd>
                                                     </div>

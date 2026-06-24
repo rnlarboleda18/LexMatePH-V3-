@@ -426,8 +426,10 @@ def insert_decision(conn, sc_url: str, full_text_md: str) -> int:
 
 def fetch_showdocs_html(session: requests.Session, doc_id: int) -> tuple[str | None, str]:
     url = sc_url_for_elib_id(doc_id)
+    import urllib3
+    urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
     try:
-        r = session.get(url, timeout=45)
+        r = session.get(url, timeout=45, verify=False)
     except requests.RequestException as e:
         log.warning("Request failed for %s: %s", url, e)
         return None, "http_error"

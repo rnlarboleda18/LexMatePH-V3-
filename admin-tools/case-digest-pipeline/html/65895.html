@@ -1,0 +1,615 @@
+ 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="en-US">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>G.R. No. 231639 - THE HEIRS OF MARSELLA T. LUPENA (IN SUBSTITUTION OF MARSELLA T. LUPENA), PETITIONERS, VS. PASTORA MEDINA, JOVITO PAGSISIHAN, CENON PATRICIO, AND BERNARDO DIONISIO, RESPONDENTS.
+
+D E C I S I O N - Supreme Court E-Library</title>
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/style.css" type="text/css" media="screen" />
+    <link rel="alternate" type="application/rss+xml" title="RSS Feed" href="feed/" />
+    <link rel="pingback" href="xmlrpc.php" />
+    <link rel="shortcut icon" href="https://elibrary.judiciary.gov.ph/assets/images/favicon.ico"/>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/superfish.min.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/supersubs.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/cookies.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/fontResizer.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/theme.js"></script>
+    <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/section_menu.js"></script>
+
+    <!-- START DataTable -->
+
+        <!-- START LOAD SCRIPTS -->
+        
+        <!-- ✅ load jQuery ✅ -->
+        <!-- <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.7.1.min.js"></script> -->
+        <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.css" type="text/css" media="screen" />
+        <!-- ✅ load DataTables ✅ -->
+        <script type="text/javascript" src="https://elibrary.judiciary.gov.ph/assets/DataTables/datatables.js"></script>
+
+        <!-- END LOAD SCRIPTS -->
+    
+        <!-- START RA -->
+        <script>
+            jQuery( function ($) {
+                $('#ra').DataTable({
+                    // Options go here
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/republic_acts/fetch_ra",
+                        type: "POST",
+                        data:{  'csrf_test_name' : 'df0b0d1b9c607b2d2f22a4951f6c3860' },
+                    },
+                    "columnDefs":[{
+                        "targets":[0, 2],
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END RA -->
+
+             <!-- START PHILREP -->
+        <script>
+            jQuery( function ($) {
+                $('#volumes').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[[0], "desc"],
+                    "columnDefs":[
+                        {
+							//Targets column 2 (Files column) and prevents from being
+							//orderable
+                            "targets":[2],
+                            "orderable":false,
+                        },
+                        {
+                            // Target column 1 and tells DataTables to order column 1
+							//using data from Column0
+                            "targets": [1],
+                            "orderData": [0],
+                        },
+						
+						{
+							//Hides column 0 and prevents it from being searchable.
+							target: [0],
+							visible: false,
+							searchable: false,
+						},
+                    ],
+                });
+            });
+        </script>
+
+        <!-- START CASE INDEX -->
+        <script>
+            jQuery( function ($) {
+                $('#caseindex').DataTable({
+                    "pagingType": "full_numbers",
+                    "order":[],
+                    "columnDefs":[{
+                        "targets":[0,1],
+                        "orderable":false,
+                    },],
+                });
+            });
+        </script>
+        <!-- END CASEINDEX -->
+
+        <!-- START LAWYERS LIST -->
+        <script>
+            jQuery( function ($) {
+                $('#lawlist').DataTable({
+                    // INITIALIZATION OPTIONS GO HERE.
+                    "processing": true,
+                    //"stateSave": true,
+                    "serverSide": true,
+                    // ORDERING IS ENABLED BUT THERE IS NO DEFAULT ORDER.
+                    "order":[],
+                    "pagingType": "full_numbers",
+                    "ajax": {
+                        url: "https://elibrary.judiciary.gov.ph/lawyers_list/fetch_lawlist",
+                        type: "POST",
+                        data:{  'csrf_test_name' : 'df0b0d1b9c607b2d2f22a4951f6c3860' },
+                    },
+                    "columnDefs":[{
+                        // "targets" ARE THE TABLE COLUMNS THAT ARE TO BE INITIALIZED.
+                        // STARTING WITH 0 AS THE FIRST COLUMN. HERE, TARGETED COLUMNS ARE
+                        // 2, 3, 4.
+                        "targets":[2, 3, 4],
+                        // TARGETED COLUMNS ARE NOT ORDERABLE.
+                        "orderable":false,
+                        /*'targets': [2,],    // this will invoke the below function on all cells
+                        'createdCell': function(td, cellData, rowData, row, col) {
+                            // this will give each cell an ID
+                            $(td).attr('id', 'cms_default_document_title');
+                        },*/
+                    },],
+                });
+            });
+        </script>
+        <!-- END LAWYERS LIST -->
+
+        <!-- START DataTables STYLES -->
+    
+        <!-- START REPUBLIC ACTS STYLES-->
+        <style>
+            table#ra {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            td#cms_default_document_title {
+                text-align: justify;
+            }
+        
+            td#cms_default_document_title:after {
+                content: "";
+                display: inline-block;
+                width: 100%;
+            }
+        </style>
+        <!-- END REPUBLIC ACTS START STYLES -->
+
+        <!-- START PHILREP STYLES -->
+        <style>
+            table#volumes {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END PHILREP STYLES -->
+
+        <!-- START CASEINDEX STYLES -->
+        <style>
+            table#caseindex {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+        </style>
+        <!-- END CASEINDEX STYLES -->
+
+        <!-- START LAWYERS LIST STYLES -->
+        <style>
+            table#lawlist {
+                font-family: calibri, candara, segoe, segoe ui, optima, arial;
+                font-size: 1.2em;
+            }
+            
+        </style>
+        <!-- END LAWYERS LIST STYLES -->
+
+        <!-- END DataTables STYLES -->
+    
+    <!-- END DataTable -->
+
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/mystyle.css" type="text/css" media="screen" />
+
+    
+    
+    <!-- remove 04.29.19 for console search-->
+    <!-- <meta name='robots' content='noindex,nofollow' /> -->
+
+    <link rel='stylesheet' id='wp_sidebarlogin_css_styles-css'  href='https://elibrary.judiciary.gov.ph/assets/css/style_login.css?ver=3.3.1' type='text/css' media='all' />
+
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/all.css">
+    <!-- jquery confirm -->
+    <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/assets/css/jquery-confirm.min.css">
+    <!-- jconfirm modal custom theme -->
+    <style>
+        .jconfirm.jconfirm-custom .jconfirm-bg{
+            background-color: rgba(13,0,45,0.95);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box{
+            color: #ccc;
+            text-align: center;
+            background-color: transparent;
+        }
+
+        /* Exclamation animation start */
+        .jconfirm.jconfirm-custom.jconfirm-open .jconfirm-box .jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transform: scale(1);
+            transform: scale(1);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box div.jconfirm-title-c .jconfirm-icon-c {
+            -webkit-transition: -webkit-transform .5s;
+            transition: -webkit-transform .5s;
+            transition: transform .5s;
+            transition: transform .5s,-webkit-transform .5s;
+            -webkit-transform: scale(0);
+            transform: scale(0);
+            display: block;
+            margin-right: 0;
+            margin-left: 0;
+            margin-bottom: 10px;
+            font-size: 69px;
+            color: #ccc;
+        }
+        /* Exclamation animation end */
+
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button{
+            font-size: 16px;
+            border-radius: 2px;
+            background: rgb(13,0,45);
+            text-shadow: none;
+            border: none;
+            color: #ccc;
+            padding: 10px;
+            min-width: 100px;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-buttons button:hover{
+            background: #ccc;
+            color: rgb(13,0,45);
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-title-c{
+            font-family: Tahoma, Verdana, serif;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content{
+            font-family: Tahoma, Verdana, serif;
+            text-align: justify;
+            font-size: 18px;
+        }
+        /* Targets content list item */
+        .jconfirm.jconfirm-custom .jconfirm-box .jconfirm-content li{
+            margin: 20px;
+        }
+        .jconfirm.jconfirm-my-theme .jconfirm-box .jconfirm-content-pane{
+        }
+    </style>
+
+<!-- FOR DTSEARCH -->
+<!-- START -->
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_help.html">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_pdfhelp.pdf">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.css">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_Utilities.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_SearchResults.js">
+    <META NAME="AddedReference" CONTENT="InsertedForFormBuilder" HREF="https://elibrary.judiciary.gov.ph/assets/searchform/dtSearch_WebSearchForm.js">
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <!-- <link rel="stylesheet" href="https://elibrary.judiciary.gov.ph/searchforms/custom.css"> -->
+
+    <style type='text/css'>
+        body{
+            /*background-image:url(searchforms/images/bg-blue.jpg);*/
+            /*background-size: 100% auto;*/
+            background-position:center top;
+            background-color: #193C74;
+            background-repeat:no-repeat;
+            background-position:fixed;
+            /*font-family: "Trebuchet MS";*/
+            font-size:10px;
+            /*color:#FFFFFF;*/
+            margin:0px 0px 0px 0px;
+        }
+        .forms{
+            font-size:10px;
+            border:1px solid #000000;
+        }
+        #cont_left{
+            width: 250px;
+            height: 400px;
+            background-color: #fff;
+            margin-left: 3%;
+            margin-top: 12%;
+            position: relative;
+        }
+        #cont_main{
+            width: 900px;
+            height: 400px;
+            background-color: #fff;
+            top:153px;
+            left: 300px;
+            position: absolute;
+        }
+        table{
+            position: relative;
+            top: 3px;
+        }
+        #copyright{
+            position: fixed;
+            bottom:-1%;
+            right: 1%;
+            z-index: -10;
+        }
+        #bared{
+            position: fixed;
+            bottom:0px;
+            right: 0px;
+            z-index: -9;
+            background-color: #000;
+            width: 2000px;
+            height: 20px;
+            padding-bottom: 2px;
+            padding-right: 2px;
+        }
+        iframe{
+            display:block;
+        }
+        /*change font size from 60px to 40px*/
+        div#blog-line h1 a {font-family: Georgia, serif; font-size:40px;  color:#fff;} 
+
+        /*change font size from 40px to 14px, letter spacing from -2px to 1px*/
+        div#blog-line h1 {font:14px Arial, serif; padding:20px 0; margin:0; color:#fff; letter-spacing:1px;}
+    </style>
+    <script>
+        // this deletes the cookie when called
+        function Delete_Cookie( name, path, domain ) {
+        if ( Get_Cookie( name ) ) document.cookie = name + "=" +
+        ( ( path ) ? ";path=" + path : "") +
+        ( ( domain ) ? ";domain=" + domain : "" ) +
+        ";expires=Thu, 01-Jan-1970 00:00:01 GMT";
+        }
+    </script>
+<!-- FOR DTSEARCH -->
+<!-- END -->
+<script>
+
+</script>
+
+</head>
+<!-- <body onLoad="Delete_Cookie( name, path, domain )"> -->
+<body>
+
+<div id="outline">
+<div id="blog-line">
+    <!-- blog title and tag line -->
+    <h1><a href="https://elibrary.judiciary.gov.ph/">Supreme Court E-Library</a> <br /> Information At Your Fingertips</h1> 
+</div>
+
+<!-- page navigation -->
+<div id="nav" class="clearfix">
+    <ul class="sf-menu">
+        <!--Comment out to remove Home in the header
+        <li class="page_item "><a href="http://10.10.100.51">Home</a></li>-->
+        <li class="page_item page-item-11 current_page_item"><a href="https://elibrary.judiciary.gov.ph/">HOME</a></li>
+        <!-- <li class=""><a href="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/2023 Bar Passers.pdf">2023 Bar Passers</a></li> -->
+        <!-- <li class="page_item page-item-92"><a href="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main">REGISTER HERE</a></li> -->
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/philippinereports">PHILIPPINE REPORTS E-BOOKS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/republic_acts">REPUBLIC ACTS</a>
+        <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">CHIEF JUSTICES</a> 
+   <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/scjmain">JUDICIARY MEMORABILIA HALL</a> -->
+            <ul class="children">
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/incumbentjusticelist/">Incumbent Justices</a></li>-->
+				 <!--<li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/chiefjusticelist/">Chief Justices</a></li>-->
+                <!-- <li class="page_item page-item-202"><a href="https://elibrary.judiciary.gov.ph/supremecourtjustices/associatejusticelist">Associate Justices</a></li> -->
+            </ul> 
+        </li>
+        <li class="page_item page-item-94"><a href="https://elibrary.judiciary.gov.ph/advisory/newsandadvisories/">NEWS & ADVISORIES</a></li>
+        <!--<li class="page_item page-item-544"><a href="links/">Links</a></li>-->
+        <li class="page_item page-item-546"><a href="https://elibrary.judiciary.gov.ph/sitemap/sitemap_main">SITE MAP</a></li>
+        <!--<li class="page_item page-item-548"><a href="feedback/">Feedback</a></li>-->
+        <li class="page_item page-item-84"><a href="https://elibrary.judiciary.gov.ph/aboutus/aboutus_main">ABOUT US</a>
+            <ul class='children'>
+                <li class="page_item page-item-86"><a href="https://elibrary.judiciary.gov.ph/aboutus/scelibrary">The Supreme Court E-Library</a></li>
+            <!-- <li class="page_item page-item-88"><a href="https://elibrary.judiciary.gov.ph/aboutus/elib_history">History of the E-Library</a></li> -->
+                <li class="page_item page-item-90"><a href="https://elibrary.judiciary.gov.ph/aboutus/elibrary_team">The E-Library Development Team</a></li>
+            </ul>
+        </li>
+        <!-- <li class="page_item page-item-548"><a href="https://elibrary.judiciary.gov.ph/contactus/contactus_main">CONTACT US</a></li> -->
+         
+    </ul>
+    <ul id="mail_rss">
+    <!--<li><a href="feed/">RSS</a></li>-->
+    </ul>           
+    <!-- ending header template -->
+</div>
+
+<div id="content" class="clearfix">
+<div id="right">
+<!-- FOR Toggle posts-->
+<p id="toggle-all"><a href="#" id="toggle" class="hide-all">Toggle posts</a></p>
+<!-- For FONT-SIZE changer  -->
+<p id="font-resize">
+<a id="default" href="#">A </a><a id="larger" href="#">A+ </a><a id="largest" href="#">A++</a>
+</p>
+<!-- widget -->
+
+<!---02/28/2022--->
+<!-- Search button only appears when not in the search page. -->
+<div id="wp_sidebarlogin-3" class="widget">
+    <p>
+        <!-- <STRONG>TO START</STRONG> click <STRONG>E-Library Search</STRONG>. -->
+        <center>
+            <b>CLICK THE IMAGE TO SEARCH</b>
+            <a href="https://elibrary.judiciary.gov.ph/search" target="_self">
+                <img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/search_button.png"  alt="Elibrary Search"  title="E-Library Search" />
+            </a>
+        </center>
+  </p>
+</div>
+
+<!-- For Advisory
+<div id="container_faq">
+
+    <table border='0'>
+    <tr valign='center'>
+        <td>ADVISORY:</td>
+    </tr>
+    <tr valign='center'>
+        <td><div align='justify'>The Supreme Court E-Library will undergo a system
+		maintenance on March 28-31, 2024 and will be inaccessible during this period.<br><br>
+		Thank you for your understanding!<br><br></div></td>
+		
+    </tr>   
+</table>
+</div>
+<br>
+-->
+
+
+<div id="container_faq">
+    <center>
+        <!--[<A HREF="https://elibrary.judiciary.gov.ph/secquestion/secquestion_main"><b>REGISTER</b></A>]  | [<A HREF="https://elibrary.judiciary.gov.ph/aboutus/faq"><b>FAQs</b></A>]
+        <b>CONTACT US</b><br>
+        <STRONG>(02)8524-2706</STRONG>-->
+    </center>
+    <table border='0'>
+    <tr valign='center'>
+        <td>CONTACT:</td>
+    </tr>
+    <tr valign='center'>
+        <td>Supreme Court of the Philippines <br>
+		    Library Services,<br> 
+			Padre Faura, Ermita, Manila, Philippines 1000</td>
+    </tr>
+    <tr valign='center'>
+        <td>(632) 8524-2706</td>
+    </tr>
+    <tr valign='center'>
+        <td>libraryservices.sc@judiciary.gov.ph<br></td>
+    </tr>
+</table>
+</div>
+
+<br>
+<div id="container_seal">
+
+<center><a href="https://npcregistration.privacy.gov.ph/certificate/organizationRegistration/64a7c5e47c2074390ec3ccb5" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia/CORSeal.jpg"/></a></center>
+   
+</div>
+
+<div class="widget_quick">
+    
+<img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/header.png"/></a>
+    
+<a href="http://sc.judiciary.gov.ph/" title="Supreme Court of the Philippines" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sc.png"  alt="Supreme Court of the Philippines"  title="Supreme Court of the Philippines" /></a>
+
+<a href="http://ca.judiciary.gov.ph/" title="Cour of Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/ca.png"  alt="Cour of Appeals"  title="Cour of Appeals" /></a>
+
+<a href="http://sb.judiciary.gov.ph/" title="Sandiganbayan" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/sb.png"  alt="Sandiganbayan"  title="Sandiganbayan" /></a>
+
+<a href="http://cta.judiciary.gov.ph/" title="Court of Tax Appeals" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/cta.png"  alt="Court of Tax Appeals"  title="Court of Tax Appeals" /></a></li>
+
+<a href="http://jbc.judiciary.gov.ph/" title="Judicial and Bar Council" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/jbc.png"  alt="Judicial and Bar Council"  title="Judicial and Bar Council" /></a>
+
+<a href="http://oca.judiciary.gov.ph/" title="Office of the Court Administrator" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/oca.png"  alt="Office of the Court Administrator"  title="Office of the Court Administrator" /></a>
+
+<a href="http://philja.judiciary.gov.ph/" title="Philippine Judicial Academy" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/philja.png"  alt="Philippine Judicial Academy"  title="Philippine Judicial Academy" /></a>
+
+<!--
+<a href="http://pmc.judiciary.gov.ph/" title="Philippine Meditation Center" target="_blank"><img src="https://elibrary.judiciary.gov.ph/assets/images/memorabilia
+/quick_links/pmc.png"  alt="Philippine Meditation Center"  title="Philippine Meditation Center" /></a>
+-->
+
+</div>
+
+<div id="linkcat-5" class="widget"><h4>Foreign Supreme Courts</h4>
+    <ul class='xoxo blogroll'>
+<li><a href="http://www.scourt.go.kr" target="_blank">Korea, South</a></li>
+<li><a href="http://www.kehakiman.gov.my/jugdment/fc/latest.shtml" target="_blank">Malaysia</a></li>
+<li><a href="http://www.supcourt.gov.sg/" target="_blank">Singapore</a></li>
+<li><a href="http://www.supremecourtus.gov/" target="_blank">United States of America</a></li>
+
+    </ul>
+</div>
+</div>
+<div id="left">
+<div class="single_content">
+<br>    
+<div align='right'><img src='https://elibrary.judiciary.gov.ph/assets/images/printer.png'>&nbsp;&nbsp;<a href='https://elibrary.judiciary.gov.ph/thebookshelf/showdocsfriendly/1/65895' target='_blank'>View printer friendly version</a></div>
+<br>
+   
+			869 Phil. 219
+			<BR><BR>			
+			<CENTER>
+			<H2>FIRST DIVISION</H2>
+			<H2 style='background-color:#cccccc;padding-top:10px;padding-bottom:10px;'>[ G.R. No. 231639, January 22, 2020 ]</H2>
+			<H3>THE HEIRS OF MARSELLA T. LUPENA (IN SUBSTITUTION OF MARSELLA T. LUPENA), PETITIONERS, VS. PASTORA MEDINA, JOVITO PAGSISIHAN, CENON PATRICIO, AND BERNARDO DIONISIO, RESPONDENTS.<br><br>
+
+D E C I S I O N</H3>
+			</CENTER>
+			<p><STRONG>CAGUIOA, J:</STRONG></p>
+			
+			<p><div align="justify">Before the Court is a Petition for Review<sup style="COLOR: RGB(255, 0, 0);">[1]</sup> (Petition) under Rule 45 of the Rules of Court filed by the petitioners Heirs of Marsella T. Lupena (petitioners Heirs of Lupena), in substitution of Marsella T. Lupena (Lupena) assailing the Decision<sup style="COLOR: RGB(255, 0, 0);">[2]</sup> dated January 13, 2017 (assailed Decision) and Resolution<sup style="COLOR: RGB(255, 0, 0);">[3]</sup> dated May 11, 2017 (assailed Resolution) rendered by the Court of Appeals (CA) in CA-G.R. CV No. 106794. <p> </p><center><b> The Facts and Antecedent Proceedings </b></center><b> </b><p> As culled from the recital of facts in the assailed Decision, the essential facts and antecedent proceedings of the instant case are as follows: </p><p> </p><blockquote> On 29 August 2001, the original plaintiff, [Lupena], filed a [Complaint<sup style="COLOR: RGB(255, 0, 0);">[4]</sup> for Recovery of Possession of Real Property (Complaint)] against [respondents] Pastor Medina (Medina), Jovita Pagsisihan (Pagsisihan), Cenon Patricio (Patricio) and Bernardo Dionisio (Dionisio) before the [Regional Trial Court of Pasig City, Branch 155 (RTC)].<p> While the case was pending before the RTC, Lupena died but she was substituted by her heirs[, the petitioners Heirs of Lupena], represented by Hermogenes L. Jose.</p><p> <u>[Petitioners Heirs of Lupena's] View</u></p><p> Lupena was the registered owner of a parcel of land with an area of 180 square meters located in Brgy. Bagumbayan, Taguig [(subject property)], covered by Transfer Certificate of Title (TCT) No. 18547. In or about 1985-1986, [respondents Medina, Pagsisihan, Patricio, and Dionisio (respondents)] entered the property of Lupena and unlawfully withheld and deprived the latter of possession over a big portion thereof by force, intimidation, threat, strategy and stealth. Lupena demanded that the [respondents] vacate the premises but they adamantly refused and ignored her plea. Lupena thus hired a licensed surveyor, Engineer Oscar Tenazas (Engr. Tenazas) to determine the extent and exact area of the portion of lot individually encroached by each [respondent]. After the survey, Engr. Tenazas prepared a <i>Relocation Plan</i>, which was duly approved by the Land Management Bureau (LMB), Department of Environment and Natural Resources (DENR) and a <i>Sketch Plan</i>. The [respondents] were found to have encroached on Lupena's lot as follows: 1) [respondent] Medina occupied 34 square meters; 2) [respondent] Pagsisihan occupied 61 square meters; 3) [respondent] Patricio occupied 8 square meters; and 4) [respondent Dionisio] occupied 15 square meters.</p><p> During trial, Francisco Jose and Engr. Oscar Tenazas testified to prove the [petitioners Heirs of Lupena's] cause of action.</p><p> Francisco Jose testified that the property subject of the case was owned by his mother, Lupena, as shown by TCT No. [1]8547. They learned that there was an encroachment on their property only after they had it surveyed by Engr. Tenazas. They brought the matter to the barangay but they failed to settle the same.</p><p> On cross-examination, Francisco Jose testified that he has visited the subject premises daily since 1991 because he had to tend his mother's store. He cannot, however, recall when the [respondents] built their houses. He, however, admitted that as early as 1991, the houses of the [respondents] were already there on the subject property.</p><p> Engr. Tenazas, who is a geodetic and civil engineer, testified, among others, that sometime in July 2000, Lupena, through her son, Francisco Jose, hired him to conduct a relocation survey of their land for P10,000.00. To accomplish his job, he did some research work at the Land Registration Commission and LMB. Thereafter, he conducted the actual survey. He found out that a portion of the land that he was tasked to relocate was actually occupied by four people, namely, [respondents] Pastora Medina, Jovito Pagsisihan, Cenon Patricio and Bernardo Dionisio. After the survey, he prepared a plan and the necessary papers to be submitted to LMB for approval. These papers included the original plan, the resulting completion of the relocation survey, field notes with cover, certified true copy of the land title, transmittal of survey returns and the Geodetic Engineer's report. He was also required by his client to make a sketch of the land in which the houses of the aforementioned occupants were located and what area they occupied on the mentioned lot. He pointed out that in the sketch plan that he prepared, it was shown that [respondent] Pagsisihan occupied an area of 61 square meters; [respondent] Dionisio occupied 15 square meters; [respondent] Medina occupied 34 square meters and [respondent] Patricio occupied 8 square meters. He also testified that the relocation plan that he prepared after he conducted the survey was approved by the LMB on 23 August 2000.</p><p> On cross, Engr. Tenazas testified that since the subject lot was titled, there was no need to notify the four occupants, although he notified [respondent] Pastora because the lot of the latter was adjacent to that of Lupena. When he conducted the survey, the four owners were, however, present.</p><p> </p></blockquote> <blockquote> <u>[Respondents'] View</u><p> For their part, [respondents] Pagsisihan and Dionisio alleged that they were owners of the parcel of land on which their houses were erected. The respective boundaries of their houses were all within the area covered by TCT No. 268143-(701) in the names of Spouses Bernardo Dionisio and Delicia Leuterio and Spouses Victor and Carmen Dionisio. In 1970, [respondents] Pagsisihan and Dionisio, who were relatives, decided to partition the lot among themselves into two portions. [Respondent] Pagsisihan had established and erected his own residence on the former front yard of the lot in the same year.</p><p> [Respondents] Pagsisihan and Dionisio argued that, assuming without admitting, that they had indeed encroached on the property of Lupena, they ought to be considered builders in good faith for way back in 1964, the year in which [respondent] Dionisio erected his family dwelling, Lupena had not informed him that he had encroached on her property, considering that the lot was already enclosed by a wooden fence, which was distinct and made known to the public. Also, the adjoining lot was a pathway which was established and used by the farmers in going to the rice fields as early as 1950.</p><p> On the part of [respondent] Medina, she alleged that she was the owner of the parcel of land on which the family residence was erected. Although she admitted that her family had encroached on a nearby lot, such lot was not the lot allegedly owned by Lupena since the adjoining lot was a public alley which was used by the community way back in the 1950's. It used to be a trail utilized by the farmers. [Respondent] Medina further argued that assuming that the encroached portion was indeed the lot of Lupena, the same cannot be reverted to the latter, since in September 1988, Lupena had ceded and transferred to her an aliquot portion of the lot with an area of 100 square meters for and in consideration of P40,000.00. She had already made a partial payment of P12,000.00, but she had not received from Lupena the 100 square meters of land. She asserted that the partial payment could be applied to the alleged encroached area with reservation on her part to ask for specific performance. Finally, [respondent] Medina argued that she was a builder in good faith because the former lot on which she had erected her family dwelling was owned by Lupena herself and the latter did not warn her that she had allegedly encroached on the subject lot.</p><p> Engr. Ervin Boado testified, among others, that he was a licensed geodetic engineer. He knew about the boundary, dispute between Lupena and the [respondents] Pagsisihan and Dionisio because the Mediation Office referred the survey of their lots to him. On 9 October 2004, he conducted a verification survey of the three lots of Lupena, [respondent] Dionisio and [respondent] Medina in order to identify their boundaries. All adjoining parties witnessed his survey. In the first field survey, the geodetic engineer of Lupena, Engr. Tenazas, was not in the area. But the second time around, when he submitted all the final drawings and results of the survey, Engr. Tenazas appeared. He conducted his survey using the following as reference: TCT-2825 in the name of Melchor Medina and Pastora Medina; TCT No. 268143 in the name of Spouses Bernardo Dionisio and Delicia Leuterio and Spouses Victor Santos and Carmen Dionisio; the approved LRC Subdivision Plan in the name of Regina Gutierrez; and the approved survey relocation plan of the lot of Marsella Lupena, Relocation Survey No. 0000094. He placed his findings in a report dated 12 October 2004. In the body of his report, he stated that as per actual land survey of the properties, it was found out that Lot 1 LRC PSD-56868 of [respondents] Dionisio, <i>et al.</i> did not encroach on Lot 4-D PSD-007607- 026227-D and Lot 3 LRC PCS-24759, but Lot 4-B was totally encroached by [respondent] Medina. He explained that the sketch/special plan did not bear the approval of the LMB because he prepared the same upon the request of the Mediation Office and not for the purpose of submission to the LMB. He also explained that when he used the relocation plan prepared by Engr. Tenazas in his first computation, the tie lines of the approved plans did not conform with each other but rather strayed from the nearest adjacent lot. He told Engr. Tenazas that these tie lines should be corrected.</p><p> On cross-examination, Engr. Boado testified that albeit the verification survey he was tasked to conduct did not include the relocation of the lots, it was, however, necessary to verify the overlapping of lots that were shown to him by the Mediation Office. He submitted the final plan to the Mediation Office, and there he compared the result of his survey with that of the survey done by Engr. Tenazas. Based on his survey, the lot of Regina Gutierrez, the original owner of the lot of [respondents] Dionisio and Pagsisihan, was intact and in good position. According to him, his verification survey need not bear the approval of the LMB because the lots subject thereof were already titled. In fact, he based his verification on the inscriptions on the land titles approved by the LMB and Land Registration Authority (LRA). He actually talked to the Chief of the Survey Division of LMB and inquired about these things and he was told to go on with the survey so that the division can look into his findings because they are the ones who would approve all the plans.</p><p> On redirect examination, Engr. Boado explained that there was a discrepancy in his survey and that of Engr. Tenazas because the LMB and the LRA used different tie lines. In the second paragraph of his report, he recommended that the resurvey of [L]ot 4-B and [L]ot 3 must be made in order to check the technical errors of the lot.</p><p> [Respondent] Pagsisihan x x x identified his judicial affidavit in court which stated, among others, that Lupena's allegation that his property encroached on hers was not true. The lot on which his house stood was covered by TCT No. 268143 in the name of spouses Bernardo and Delicia Leuterio and spouses Victor Santos and Carmen Dionisio, with an area of 241 square meters located at Bagumbayan, Taguig. He and Mrs. Dionisio were relatives and in 1970, they partitioned the 241 square-meter lot. Thus, his home stood on the front portion of the lot. He and Mrs. Dionisio obtained a copy of TCT No. 268143 because there was already an ejectment case filed with the Metropolitan Trial Court, Branch 74, docketed as Civil Case No. 1612 entitled <i>Marcella T. Lupena v. Pastora Medina and Jovito Pagsisihan</i>. The case was dismissed on the ground that the dispossession exceeded one (1) year. Further proof that he rightfully owned the lot where his house stood was the Tax Declaration No. FL-001-012264 issued by the Taguig City Assessor in the name of spouses Victor Santos and Carmen Dionisio and spouses Bernardo and Delicia Leuterio. Moreover, there was a fence in front of his lot which he had maintained since 1964.</p><p> Also for the [respondents], Engr. Macario Cruz identified his judicial affidavit in court which stated, among others, that he was a taxmapper and a consultant at the Office of the City Assessor of Taguig City. Based on the records of the Assessor's Office, the property covered by TCT No. 268143 in the names of Spouses Victor Santos and Delicia Leuterio and Spouses Victor Santos and Carmen Dionisio and that covered by TCT No. 18547 in the name of Lupena, did not overlap each other.</p><p> On cross-examination, Engr. Macario Cruz admitted that he based his conclusion about non-overlapping of the properties on the plotting and tax declaration. He only relied on the tax map, but he did not survey the property from the ground.<sup style="COLOR: RGB(255, 0, 0);">[5]</sup></p><p> </p></blockquote> <b><center> The Ruling of the RTC </center> </b><p> In its Decision<sup style="COLOR: RGB(255, 0, 0);">[6]</sup> dated November 4, 2015, the RTC dismissed the Complaint for lack of merit.</p><p> In sum, the RTC dismissed the Complaint because it found that the evidence presented by the petitioners Heirs of Lupena failed to sufficiently establish that the lots occupied by the respondents were actually part of or overlapped the property covered by TCT No. 18547 registered in the name of Lupena.</p><p> As summarized in the assailed Decision, the RTC's Decision held the following:</p><p> </p><blockquote> x x x According to the RTC, Section 643(e) of the <i>Revised Manual for Land Surveying Regulations in the Philippines</i> dated 12 March 1998, provides that when conducting a relocation survey, the "<i>geodetic engineer as required in verification surveys, shall inform any owner affected by the determination of boundaries and obtain a statement from the owner that he has been informed</i>." In the case under review, the RTC noted that the <i>Relocation Plan</i> and <i>Sketch Plan</i> submitted by the [petitioners Heirs of Lupena] did not contain any indication that the said notice requirement was complied with by Engr. Tenazas, the geodetic engineer who conducted the relocation survey in July 2000. The RTC stressed that while it is true that the <i>Relocation Plan</i> is deemed a public document as it had been approved by the LMB, and hence entitled to be presumed correct as to its contents in accordance with Section 23, Rule 132 of the Rules of Court, the presumption under the cited Rule is not conclusive but merely disputable.<p> The RTC did not uphold the presumption of correctness of the contents of the aforesaid Relocation Plan and Sketch Plan in the light of the information given by Engr. Tenazas during his cross-examination. The RTC noted that albeit Engr. Tenazas claimed to have verbally informed [respondent] Medina about the survey, such claim was not proven by the evidence on hand since there was no written statement from [respondent] Medina that she had been so informed. Furthermore, Eng. Tenazas admitted in his testimony that he only notified the four occupants, after he was already done with his survey. The RTC held that such admission by Engr. Tenazas cannot simply be brushed aside as it clearly revealed that the notice requirement had not been complied with in accordance with the existing land surveying regulations. The RTC cited <i>Spouses Casimiro et al. v. Court of Appeals et al</i>., where it was held that the requirement of notice and representation in survey proceedings is an essential part of administrative due process of law and cannot be dispensed with The RTC thus held that Engr. Tenaza's admitted failure to notify all the defendants-appellees casted a serious cloud of doubt on the veracity of the results of his relocation survey. As a consequence, the RTC did not consider the <i>Relocation Plan</i> and <i>Sketch</i> as competent and conclusive proof of the alleged encroachment of [the petitioners Heirs of Lupena's] property by the [respondents].</p><p> The RTC was thus constrained to dismiss the case since the [petitioners Heirs of Lupena's] evidence did not sufficiently establish that the lot portions occupied by the [respondents] were actually part of the property covered by TCT No. 18547.<sup style="COLOR: RGB(255, 0, 0);">[7]</sup></p><p> </p></blockquote> The petitioners Heirs of Lupena filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[8]</sup> of the RTC's Decision, which was denied by the RTC in its Order<sup style="COLOR: RGB(255, 0, 0);">[9]</sup> dated February 22, 2016. <p> Hence, the petitioners Heirs of Lupena filed an appeal before the CA.</p><p> </p><center><b> The Ruling of the CA </b></center><b> </b> <p> In the assailed Decision, the CA denied the appeal for lack of merit. The dispositive portion of the assailed Decision reads: </p><p> </p><blockquote> <b>WHEREFORE</b>, the appeal is <b>DENIED</b> and the decision on appeal is consequently <b>AFFIRMED</b>.<p> <b>IT IS SO ORDERED.</b><sup style="COLOR: RGB(255, 0, 0);">[10]</sup> </p><p> </p></blockquote> In sum, the CA found that "the RTC did not err in dismissing the complaint for failure of the [petitioners Heirs of Lupena] to sufficiently establish that the lot portions occupied by the [respondents] were actually part of the property of Lupena."<sup style="COLOR: RGB(255, 0, 0);">[11]</sup> <p> While the CA agreed with the petitioners Heirs of Lupena that the failure of the geodetic engineer who conducted the relocation survey, <i>i.e.</i>, Engr. Tenazas, to notify the parties would not cast any serious doubt on the veracity of the results of the said survey, the CA affirmed the RTC's ruling because the Relocation Plan prepared by Engr. Tenazas did not indicate whatsoever that the subject property was encroached by the respondents. </p><p> The CA explained that:</p><p> </p><blockquote> x x x [U]nder paragraph "d" of Section 43 of the <i>Revised Manual for Land Surveying Regulations in the Philippines</i>, a geodetic engineer, in the conduct of relocation survey, must indicate in his plan the positions of buildings, fences wall and other permanent improvements adversely affected by the determination of the boundaries. Hence, had Engr. Tenazas indeed found that there was an encroachment on Lupena's lot, he should have indicated it in his <i>Relocation Plan</i> and not merely in his <i>Sketch Plan</i>, since it was the former that embodied the result of his survey and which he submitted for approval to the LMB. Thus, there being no indication in the <i>Relocation Plan</i> of any encroachment, the same cannot be considered as competent proof that the lot of Lupena was unlawfully occupied by the [respondents].<sup style="COLOR: RGB(255, 0, 0);">[12]</sup> </blockquote> <p> Furthermore, the CA noted that the survey and report carried out by an independent surveyor, Engr. Ervin Boado (Engr. Boado), who was commissioned by the Philippine Mediation Center, showed that there are no overlaps.<sup style="COLOR: RGB(255, 0, 0);">[13]</sup></p><p> The petitioners Heirs of Lupena filed a Motion for Reconsideration<sup style="COLOR: RGB(255, 0, 0);">[14]</sup> of the assailed Decision, which was denied by the CA in the assailed Resolution. </p><p> Hence, the instant Petition before the Court. </p><p> Respondents Pagsisihan and Dionisio filed their Comment<sup style="COLOR: RGB(255, 0, 0);">[15]</sup> to the instant Petition on July 10, 2018, maintaining that the lot being occupied by the respondents did not encroach on the subject property. In response, the petitioners Heirs of Lupena filed a Reply<sup style="COLOR: RGB(255, 0, 0);">[16]</sup> on October 1, 2018, arguing that the Report and Sketch Plan of Engr. Boado was not approved by the LMB.</p><p> </p><center><b> Issue </b></center><b> </b> <p> Stripped to its core, the solitary issue put forward by the instant Petition is whether the CA misappreciated the evidence on record when it found that the Relocation Plan approved by the LMB failed to show that the respondents encroached on the subject property.</p><p> </p><center><b> The Court's Ruling </b></center><b> </b><p> The instant Petition is <i>unmeritorious</i>.</p><p> From a precursory reading of the instant Petition, it becomes readily apparent that the instant Petition puts forward a <i>purely factual issue</i>. In the instant Petition, the petitioners Heirs of Lupena call for the reversal of the assailed Decision and Resolution based on the argument that the Relocation Plan is allegedly competent proof of encroachment. The petitioners Heirs of Lupena argue that the CA misconstrued the Relocation Plan when it ruled that, based on the said document, there was no encroachment of the subject property. </p><p> A question of fact exists when the doubt or difference arises as to the truth or falsehood of facts or when the query invites calibration of the whole evidence considering mainly the credibility of the witnesses, the existence and relevancy of specific surrounding circumstances as well as their relation to each other and to the whole, and the probability of the situation.<sup style="COLOR: RGB(255, 0, 0);">[17]</sup> </p><p> It is unmistakably clear that in the instant Petition, the Court is being asked to re-weigh and re-assess the evidentiary value of the Relocation Plan. A <i>catena</i> of cases has consistently held that questions of fact cannot be raised in an appeal via <i>certiorari </i>before the Court and are not proper for its consideration.<sup style="COLOR: RGB(255, 0, 0);">[18]</sup> The Court is not a trier of facts. It is not the Court's function to examine and weigh all over again the evidence presented in the proceedings below.<sup style="COLOR: RGB(255, 0, 0);">[19]</sup></p><p> In any case, after a careful study of the records of the instant case, the Court finds no cogent reason to reverse the factual finding of the CA that the Relocation Plan presented by the petitioners Heirs of Lupena as their evidence in chief itself showed that the respondents did not encroach on the subject property.</p><p> In the instant Petition, the petitioners Heirs of Lupena maintain that the aforementioned Relocation Plan that they presented during the trial is admissible and competent to show encroachment. However, as stressed by the CA in the assailed Decision, the Relocation Plan heavily relied upon by the petitioners Heirs of Lupena does not indicate whatsoever that the subject property was encroached upon by the respondents. In fact, the petitioners Heirs of Lupena themselves admit that while Section 643(d) of the Revised Manual for Land Surveying Regulations in the Philippines requires geodetic engineers to indicate in the relocation plan the positions of buildings, fences, walls, and other permanent improvements adversely affected by the determination of the boundaries, in the Relocation Plan they offered as evidence, it states therein that there are no such adverse buildings, fences, walls, and other structures put up in the subject property. Curiously, the petitioners Heirs of Lupena even unequivocally admitted that the respondents did not put up any structure on the subject property.<sup style="COLOR: RGB(255, 0, 0);">[20]</sup></p><p> The petitioners Heirs of Lupena argue however that the failure of the Relocation Plan to indicate the fact that the respondents had erected any structure on the subject property does not damage their theory because "should there be any temporary structures, <i>e.g</i>. sheds, shanties, make-shift fences, the same does not need to be indicated in the plan because they are not permanent structures."<sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Simply stated, the petitioners Heirs of Lupena now argue that the respondents encroached on the subject property by erecting temporary structures and not permanent structures.</p><p> The petitioners Heirs of Lupena's new theory that the encroachment committed by the respondents was by way of erecting temporary structures fails to convince. During the trial, the petitioners Heirs of Lupena made it abundantly clear that, in their allegation, the respondents encroached on the subject property by building houses and occupying them.<sup style="COLOR: RGB(255, 0, 0);">[22]</sup></p><p> Hence, with the Relocation Plan submitted into evidence by the petitioners Heirs of Lupena incontrovertibly showing that no buildings, enclosures, and other permanent structures were put up by the respondents on the subject property, the CA did not commit any error in holding that the petitioners Heirs of Lupena failed to sufficiently establish that the respondents encroached upon the subject property.</p><p> <b>WHEREFORE</b>, the instant Petition is <b>DENIED</b>. The assailed Decision dated January 13, 2017 and assailed Resolution dated May 11, 2017 rendered by the Court of Appeals in CA-G.R. CV No. 106794 are <b>AFFIRMED</b>. </p><p> <b>SO ORDERED.</b></p><p> <i>Peralta, C.J., (Chairperson), J. Reyes, Jr., Lazaro-Javier</i>, and <i>Lopez, JJ</i>., concur.<br><br> </p><hr width="60%" size="1" noshade="noshade" align="left"> <sup style="COLOR: RGB(255, 0, 0);">[1]</sup> <i>Rollo</i>, pp. 8-18.<p> <sup style="COLOR: RGB(255, 0, 0);">[2]</sup> Id. at 20-35. Penned by Associate Justice Apolinario D. Bruselas, Jr., with Associate Justices Danton Q. Bueser and Renato C. Francisco, concurring.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[3]</sup> Id. at 36-37.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[4]</sup> Id. at 43-46.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[5]</sup> Id. at 21-28; citations omitted, underscoring and italics in the original.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[6]</sup> Id. at 64-78. Penned by Judge Maria Gracia A. Cadiz-Casaclang.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[7]</sup> Id. at 28-29; italics in the original, citation omitted.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[8]</sup> Id. at 79-84.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[9]</sup> Id. at 85.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[10]</sup> Id. at 34-35.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[11]</sup> Id. at 34.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[12]</sup> Id.; italics in the original.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[13]</sup> Id. at 33-34.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[14]</sup> Id. at 104-108.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[15]</sup> Id. at 114-134.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[16]</sup> Id. at 160-164.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[17]</sup> <i>Caiña v. People</i>, 288 Phil. 177, 182-183 (1992).</p><p> <sup style="COLOR: RGB(255, 0, 0);">[18]</sup> <i>Bautista v. Puyat Vinyl Products, Inc</i>., 416 Phil. 305, 309 (2001), citing <i>Hi-Precision Steel Center, Inc. v. Lim Kim Steel Builders, Inc</i>., 298-A Phil. 361, 372 (1993) and <i>Navarro v. Commission on Elections</i>, 298-A Phil. 588, 593 (1993). </p><p> <sup style="COLOR: RGB(255, 0, 0);">[19]</sup> <i>Republic of the Phils. v. Sandiganbayan</i>, 426 Phil. 104, 110 (2002); citation omitted.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[20]</sup> <i>Rollo</i>, p. 13.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[21]</sup> Id.; italics supplied, emphasis omitted.</p><p> <sup style="COLOR: RGB(255, 0, 0);">[22]</sup> Id. at 22. </p></div></p>
+			  
+
+
+  
+</div>
+</div>
+</div>
+<!-- footer template -->
+<div id="appendix" class="clearfix">
+<div class="app_widget">
+<!-- sidebar_bottom_left -->
+</div>
+
+<!-- Comment out to remove Find Widget in sidebar bottom left-->
+<!--
+<div class="widget">
+<h4>Find it!</h4>
+-->
+
+<div id="credits"><center>&copy; Supreme Court E-Library 2019<br />
+This website was designed and developed, and is maintained, by the E-Library Technical Staff in collaboration with the Management Information Systems Office.</center></div>
+</div>
+
+</div>
+
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-3.3.1.js"></script> -->
+<!-- <script src="https://elibrary.judiciary.gov.ph/assets/js/jquery-confirm.min.js"></script> -->
+
+<!-- <script>
+var jq = jQuery.noConflict();
+    // Checks if first time to visit the site and displays a popup if it is.
+    if(sessionStorage.getItem('firstVisit')){
+        sessionStorage.setItem('firstVisit','1');
+    }else{
+        sessionStorage.setItem('firstVisit','0');
+    }
+    jq(document).ready(function(){
+        if(sessionStorage.getItem('firstVisit') === "0")
+        {
+            jq.alert({
+                icon: 'fas fa-exclamation-triangle',
+                title: 'NOTICE',
+                animation: 'scale',
+                closeAnimation: 'zoom',
+                animationBounce: 2.5,
+                animationSpeed: 500,
+                buttons:{
+                    gotIt: {
+                        text: '<b>Click Here!</b>',
+                    }
+                },
+                boxWidth: '40%',
+                useBootstrap: false,
+                content: ''+
+                '<ol>'+
+                '<li><i>(05-02-2019)</i> Registration for a new E-library account is currently unavailable. However, existing accounts may still be used and accessed. We apologize for any inconvenience.</li>'+						
+                '</ol>',
+                theme: 'custom',
+            });
+        }
+    });
+</script>-->
+
+</body>
+</html>

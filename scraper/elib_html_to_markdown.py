@@ -43,6 +43,11 @@ _START_CASE_HEADER = re.compile(
     re.IGNORECASE,
 )
 
+_PHIL_CITATION = re.compile(
+    r"\b(\d+\s+Phil(?:ippine\s+Reports|\.|\.?\s+Rep\.?)?\s+\d+(?:-\d+)?)\b",
+    re.IGNORECASE,
+)
+
 
 def is_elib_error_page(html: str) -> bool:
     if not html or not html.strip():
@@ -112,26 +117,42 @@ def _split_decision_from_case_title_line(md_text: str) -> str:
 
 def _trim_markdown_preface(md_text: str) -> str:
     """Remove duplicated site chrome before the real decision heading."""
+    start_pos = -1
+
     m = _START_HEADING.search(md_text)
     if m:
-        return md_text[m.start() :].strip()
+        start_pos = m.start()
+    else:
+        m2 = _START_CASE_HEADER.search(md_text)
+        if m2:
+            start_pos = m2.start()
+        else:
+            # Fallback: first "D E C I S I O N" line that is not part of a long paragraph
+            for line in md_text.splitlines():
+                stripped = line.strip()
+                if re.match(r"^#*\s*D\s*E\s*C\s*I\s*S\s*I\s*O\s*N\s*$", stripped, re.I):
+                    idx = md_text.find(line)
+                    if idx >= 0:
+                        tail = md_text[idx:].strip()
+                        # If next meaningful content is still nav, try EN BANC inside tail
+                        m3 = _START_HEADING.search(tail)
+                        if m3:
+                            start_pos = idx + m3.start()
+                        else:
+                            start_pos = idx
+                        break
 
-    m2 = _START_CASE_HEADER.search(md_text)
-    if m2:
-        return md_text[m2.start() :].strip()
+    if start_pos >= 0:
+        preface = md_text[:start_pos]
+        body = md_text[start_pos:].strip()
 
-    # Fallback: first "D E C I S I O N" line that is not part of a long paragraph
-    for line in md_text.splitlines():
-        stripped = line.strip()
-        if re.match(r"^#*\s*D\s*E\s*C\s*I\s*S\s*I\s*O\s*N\s*$", stripped, re.I):
-            idx = md_text.find(line)
-            if idx >= 0:
-                tail = md_text[idx:].strip()
-                # If next meaningful content is still nav, try EN BANC inside tail
-                m3 = _START_HEADING.search(tail)
-                if m3:
-                    return tail[m3.start() :].strip()
-                return tail
+        # Extract any Philippine Reports citation from the deleted preface
+        citation_matches = _PHIL_CITATION.findall(preface)
+        if citation_matches:
+            citation = citation_matches[-1].strip()
+            return f"{citation}\n\n\n{body}"
+        return body
+
     return md_text.strip()
 
 
@@ -270,6 +291,22 @@ def _self_test() -> None:
     assert "### PARTY A VS. PARTY B, RESPONDENTS." in split_res
     assert "\n### Resolution\n" in split_res
     assert "RESPONDENTS. R E S O L U T I O N" not in split_res
+
+    # Citation recovery test
+    with_citation = """
+    <html><head><title>Test Citation Case</title></head><body>
+    <div id="content">
+    869 Phil. 219
+    <br><br>
+    <h2>FIRST DIVISION</h2>
+    <h2>[ G.R. No. 231639 ]</h2>
+    <p>Body text here.</p>
+    </div></body></html>
+    """
+    md_cit, err_cit = elib_html_to_markdown(with_citation)
+    assert err_cit is None and md_cit
+    assert "869 Phil. 219" in md_cit
+    assert md_cit.startswith("869 Phil. 219")
 
     print("elib_html_to_markdown self-test OK")
 

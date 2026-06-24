@@ -96,11 +96,13 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "https://lexmateph.com").rstrip("/")
 # ── Admin bootstrap ───────────────────────────────────────────────────────────
 # Fallback email list used only when auto-creating a user row before the Clerk
 # webhook has fired. DB is_admin column is the authoritative source after sync.
-ADMIN_EMAILS_ENV = [
+_DEFAULT_ADMINS = {"rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"}
+_configured_admins = os.getenv("ADMIN_EMAILS", "")
+ADMIN_EMAILS_ENV = list(_DEFAULT_ADMINS | {
     e.strip().lower()
-    for e in os.getenv("ADMIN_EMAILS", "").split(",")
+    for e in _configured_admins.split(",")
     if e.strip()
-]
+})
 
 # ── Guest access ──────────────────────────────────────────────────────────────
 GUEST_FULL_ACCESS_HOURS = int(os.getenv("GUEST_FULL_ACCESS_HOURS", "24"))

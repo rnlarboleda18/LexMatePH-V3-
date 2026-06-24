@@ -52,6 +52,7 @@ Set `DB_CONNECTION_STRING` in your environment or ensure `local.settings.json` i
 | `check_count_after.py` / `check_count_filtered.py` | Post-migration row counts |
 | `check_deleted_concepts.py` / `check_filtered_concepts.py` | Flashcard concept audit |
 | `check_one_concept.py` | Debug a single concept row |
+| `check_empty_and_duplicate.py` | Check for empty or duplicate cases in sc_decided_cases |
 | `check_overlap.py` | Find duplicate/overlapping rows |
 | `check_progress.py` | Migration progress check |
 | `check_roc_years.py` / `_alt` / `_local` | RoC year range checks |

@@ -35,12 +35,12 @@ def _build_client(
     """Return a genai.Client: Vertex AI exclusively."""
     project = (
         vertex_project
-        or (os.getenv("VERTEX_AI_PROJECT") or os.getenv("GOOGLE_CLOUD_PROJECT") or "").strip()
+        or (os.getenv("GEMINI_LINKER_VERTEX_PROJECT") or os.getenv("VERTEX_AI_PROJECT") or os.getenv("GOOGLE_CLOUD_PROJECT") or "").strip()
         or "project-f3608dc2-59e9-4ff5-95a"
     )
     location = (
         vertex_location
-        or (os.getenv("VERTEX_AI_LOCATION") or os.getenv("GOOGLE_CLOUD_LOCATION") or "").strip()
+        or (os.getenv("GOOGLE_CLOUD_LOCATION") or os.getenv("GOOGLE_CLOUD_LOCATION") or "").strip()
         or "us"
     )
     return genai.Client(
@@ -1184,7 +1184,7 @@ if __name__ == "__main__":
     )
     _auth_mode = (
         "Vertex AI"
-        if (args.vertex_project or os.getenv("VERTEX_AI_PROJECT") or os.getenv("GOOGLE_CLOUD_PROJECT"))
+        if (args.vertex_project or os.getenv("GEMINI_LINKER_VERTEX_PROJECT") or os.getenv("VERTEX_AI_PROJECT") or os.getenv("GOOGLE_CLOUD_PROJECT"))
         else "AI Studio"
     )
     logging.info("Auth: %s | Model: %s", _auth_mode, args.model)

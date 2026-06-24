@@ -110,8 +110,9 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
             )
             return func.HttpResponse("OK", status_code=200)
 
-        raw = os.environ.get("ADMIN_EMAILS", "rnlarboleda@gmail.com,rnlarboleda18@gmail.com")
-        ADMIN_EMAILS = [e.strip().lower() for e in raw.split(",") if e.strip()]
+        _DEFAULT_ADMINS = {"rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"}
+        raw = os.environ.get("ADMIN_EMAILS", "")
+        ADMIN_EMAILS = _DEFAULT_ADMINS | {e.strip().lower() for e in raw.split(",") if e.strip()}
         is_admin = email.lower() in ADMIN_EMAILS if email else False
 
         granted_promo = False
@@ -156,7 +157,8 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
                             UPDATE users SET
                                 subscription_tier   = 'barrister',
                                 subscription_status = 'active',
-                                subscription_source = 'admin_override'
+                                subscription_source = 'admin_override',
+                                is_admin            = TRUE
                             WHERE clerk_id = %s;
                         """, (clerk_id,))
                     else:
