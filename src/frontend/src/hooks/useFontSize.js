@@ -1,12 +1,12 @@
 import { useState, useCallback } from 'react';
 
 const STORAGE_KEY = 'lex-reader-font-size';
-const DEFAULT_SIZE = 15;
+const DEFAULT_SIZE = 14;
 const MIN_SIZE = 11;
 const MAX_SIZE = 24;
 const STEP = 1;
 
-export function useFontSize() {
+export function useFontSize(initialDefault = DEFAULT_SIZE) {
     const [fontSize, setFontSize] = useState(() => {
         try {
             const stored = localStorage.getItem(STORAGE_KEY);
@@ -15,7 +15,7 @@ export function useFontSize() {
                 if (!isNaN(n) && n >= MIN_SIZE && n <= MAX_SIZE) return n;
             }
         } catch {}
-        return DEFAULT_SIZE;
+        return initialDefault;
     });
 
     const increase = useCallback(() => {

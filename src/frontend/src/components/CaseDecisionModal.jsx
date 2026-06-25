@@ -357,7 +357,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
     const [headerCollapsed, setHeaderCollapsed] = useState(true); // metadata panel hidden until user expands (all breakpoints)
     const [headerVisible, setHeaderVisible] = useState(true);
     const lastScrollYRef = useRef(0);
-    const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize();
+    const { fontSize, increase: increaseFontSize, decrease: decreaseFontSize } = useFontSize(14);
     const canFavorite = canAccess('favorites');
     const { isFavorited, toggleFavorite } = useFavorites(
         'case',
