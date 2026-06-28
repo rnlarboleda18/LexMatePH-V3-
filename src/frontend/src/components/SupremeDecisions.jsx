@@ -1421,8 +1421,8 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                         </div>
 
                         {showCustomFilters && (
-                            <div className={`max-h-[38vh] overflow-y-auto ${FILTER_CHROME_DIVIDER}`}>
-                                <div className="grid w-full grid-cols-1 gap-tile sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
+                            <div className={`xl:max-h-[38vh] xl:overflow-y-auto ${FILTER_CHROME_DIVIDER}`}>
+                                <div className={`grid w-full grid-cols-1 gap-tile sm:grid-cols-2 md:grid-cols-3 ${isAdmin ? 'lg:grid-cols-6' : 'lg:grid-cols-5'}`}>
                                     <div className="min-w-0 flex flex-col">
                                         <label className={FILTER_FIELD_LABEL}>Year</label>
                                         <select
