@@ -158,11 +158,12 @@ def gemini_call(
     from google import genai
     from google.genai import types as genai_types
     
-    # Force Vertex AI exclusively
+    project = os.environ.get("GEMINI_LINKER_VERTEX_PROJECT") or os.environ.get("GCP_PROJECT") or os.environ.get("GOOGLE_CLOUD_PROJECT") or "project-0c3350f3-e867-449e-8f7"
+    location = os.environ.get("GCP_LOCATION") or os.environ.get("GOOGLE_CLOUD_LOCATION") or "us"
     client = genai.Client(
         vertexai=True,
-        project="project-f3608dc2-59e9-4ff5-95a",
-        location="us",
+        project=project,
+        location=location,
         http_options=genai_types.HttpOptions(timeout=timeout * 1000),
     )
     

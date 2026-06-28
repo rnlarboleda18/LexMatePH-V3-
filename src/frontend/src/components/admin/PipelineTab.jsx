@@ -355,7 +355,7 @@ export default function PipelineTab() {
           </select>
           {aiPlatform === 'vertex' && (
             <span className="text-[10px] font-medium text-emerald-600 dark:text-emerald-400">
-              Billed to project project-f3608dc2-59e9-4ff5-95a
+              Billed to project project-0c3350f3-e867-449e-8f7
             </span>
           )}
         </div>

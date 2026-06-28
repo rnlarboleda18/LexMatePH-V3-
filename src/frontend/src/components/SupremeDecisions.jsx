@@ -50,6 +50,7 @@ async function parseResponseJson(response) {
 
 const SC_META_PONENTES = 'sc_decisions_ponentes';
 const SC_META_DIVISIONS = 'sc_decisions_divisions';
+const SC_META_MODELS = 'sc_decisions_models';
 /** Client-side cache for filter dropdowns (ponentes / divisions change rarely). */
 const SC_DECISIONS_LIST_CACHE_MS = 7 * 24 * 60 * 60 * 1000;
 
@@ -598,6 +599,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         return () => mq.removeEventListener('change', on);
     }, []);
     const [selectedYear, setSelectedYear] = useState('');
+    const [selectedAiModel, setSelectedAiModel] = useState('');
     const [selectedMonth, setSelectedMonth] = useState('');
     const [selectedPonente, setSelectedPonente] = useState('');
     const [selectedSubject, setSelectedSubject] = useState('');
@@ -609,6 +611,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
 
     // Stable filter-change handlers — setState setters are always stable so deps are empty.
     const handleYearChange       = useCallback((e) => { setSelectedYear(e.target.value);         setCurrentPage(1); }, []);
+    const handleAiModelChange    = useCallback((e) => { setSelectedAiModel(e.target.value);      setCurrentPage(1); }, []);
     const handleMonthChange      = useCallback((e) => { setSelectedMonth(e.target.value);        setCurrentPage(1); }, []);
     const handlePonenteChange    = useCallback((e) => { setSelectedPonente(e.target.value);      setCurrentPage(1); }, []);
     const handleSubjectChange    = useCallback((e) => { setSelectedSubject(e.target.value);      setCurrentPage(1); }, []);
@@ -634,6 +637,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
     const [availableYears, setAvailableYears] = useState([]);
     const [availablePonentes, setAvailablePonentes] = useState([]);
     const [availableDivisions, setAvailableDivisions] = useState([]);
+    const [availableModels, setAvailableModels] = useState([]);
 
 
     useEffect(() => {
@@ -641,6 +645,12 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         fetchPonentes();
         fetchDivisions();
     }, []);
+
+    useEffect(() => {
+        if (isAdmin) {
+            fetchModels();
+        }
+    }, [isAdmin]);
 
     // Keep dropdown anchored when the page scrolls / resizes while it's open.
     useEffect(() => {
@@ -772,7 +782,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                 abortControllerRef.current.abort();
             }
         };
-    }, [searchTerm, selectedYear, selectedMonth, selectedPonente, selectedSubject, selectedDivision, selectedSignificance, isDoctrinal, currentPage]);
+    }, [searchTerm, selectedYear, selectedAiModel, selectedMonth, selectedPonente, selectedSubject, selectedDivision, selectedSignificance, isDoctrinal, currentPage]);
 
     // Persist search term in URL (?q=) using debounce so we don't spam history.
     const debouncedSearchTerm = useDebounce(searchTerm, 400);
@@ -895,7 +905,27 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
         }
     };
 
-
+    const fetchModels = async () => {
+        try {
+            const cached = await lexCache.get('meta', SC_META_MODELS);
+            if (
+                cached?.items &&
+                Array.isArray(cached.items) &&
+                Date.now() - (cached._cachedAt || 0) < SC_DECISIONS_LIST_CACHE_MS
+            ) {
+                setAvailableModels(cached.items);
+                return;
+            }
+            const response = await fetch(apiUrl('/api/sc_decisions/models'));
+            const data = await response.json();
+            if (Array.isArray(data)) {
+                setAvailableModels(data);
+                await lexCache.set('meta', SC_META_MODELS, { items: data });
+            }
+        } catch (error) {
+            console.error('Failed to fetch AI models', error);
+        }
+    };
 
     const fetchAvailableFilters = async () => {
         try {
@@ -923,6 +953,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                 : searchTerm;
             let query = `/api/sc_decisions?search=${encodeURIComponent(effectiveSearch)}&page=${currentPage}&limit=${ITEMS_PER_PAGE}`;
             if (selectedYear) query += `&year=${selectedYear}`;
+            if (selectedAiModel) query += `&model=${encodeURIComponent(selectedAiModel)}`;
             if (selectedMonth) query += `&month=${encodeURIComponent(selectedMonth)}`;
             if (selectedPonente) query += `&ponente=${encodeURIComponent(selectedPonente)}`;
             if (selectedSubject) query += `&subject=${encodeURIComponent(selectedSubject)}`;
@@ -1405,6 +1436,21 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                             ))}
                                         </select>
                                     </div>
+                                    {isAdmin && (
+                                        <div className="min-w-0 flex flex-col">
+                                            <label className={FILTER_FIELD_LABEL}>AI Model</label>
+                                            <select
+                                                className={FILTER_SELECT}
+                                                value={selectedAiModel}
+                                                onChange={handleAiModelChange}
+                                            >
+                                                <option value="">All Models</option>
+                                                {availableModels.map(model => (
+                                                    <option key={model} value={model}>{model}</option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                    )}
                                     <div className="min-w-0 flex flex-col">
                                         <label className={FILTER_FIELD_LABEL}>Ponente</label>
                                         <select

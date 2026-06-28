@@ -216,7 +216,9 @@ def _platform_vertex_args(body: dict) -> Tuple[Optional[str], Optional[str]]:
     """Extract vertex_project and vertex_location from a pre-parsed request body dict."""
     platform = body.get("platform", "vertex")
     if platform == "vertex":
-        return "project-f3608dc2-59e9-4ff5-95a", "us"
+        project = body.get("vertex_project") or os.environ.get("GEMINI_LINKER_VERTEX_PROJECT") or os.environ.get("GCP_PROJECT") or os.environ.get("GOOGLE_CLOUD_PROJECT") or "project-0c3350f3-e867-449e-8f7"
+        location = body.get("vertex_location") or os.environ.get("GCP_LOCATION") or os.environ.get("GOOGLE_CLOUD_LOCATION") or "us"
+        return project, location
     return None, None
 
 

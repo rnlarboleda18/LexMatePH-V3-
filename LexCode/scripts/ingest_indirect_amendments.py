@@ -80,7 +80,7 @@ from lexcode_genai_client import get_google_cloud_project, get_google_cloud_loca
 # Initialize Client
 client = genai.Client(
     vertexai=True,
-    project=get_google_cloud_project() or "project-f3608dc2-59e9-4ff5-95a",
+    project=get_google_cloud_project() or "project-0c3350f3-e867-449e-8f7",
     location=get_google_cloud_location() or "us",
 )
 

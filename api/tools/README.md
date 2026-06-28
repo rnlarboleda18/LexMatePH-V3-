@@ -95,6 +95,8 @@ Set `DB_CONNECTION_STRING` in your environment or ensure `local.settings.json` i
 | `get_sample_subtopic.py` | Sample a subtopic from DB |
 | `dump_pdf_text.py` | Dump PDF text for inspection |
 | `find_exact_article_2_sec_1.py` | Locate specific article row |
+| `merge_lupena_case.py` | Merge G.R. No. 231639 duplicate rows and delete the corrupt legacy row |
+
 
 ### Test / endpoint checks
 

@@ -36,7 +36,7 @@ def _build_client(
     project = (
         vertex_project
         or (os.getenv("GEMINI_LINKER_VERTEX_PROJECT") or os.getenv("VERTEX_AI_PROJECT") or os.getenv("GOOGLE_CLOUD_PROJECT") or "").strip()
-        or "project-f3608dc2-59e9-4ff5-95a"
+        or "project-0c3350f3-e867-449e-8f7"
     )
     location = (
         vertex_location
@@ -546,11 +546,11 @@ def save_digest_result(case_id, full_text, data, significance, conn, model_name=
                     statutes_involved = %s,
                     separate_opinions = %s,
                     document_type = %s,
-                    case_number = %s,
-                    date = %s,
-                    short_title = %s,
-                    division = %s,
-                    ponente = %s,
+                    case_number = COALESCE(case_number, %s),
+                    date = COALESCE(date, %s),
+                    short_title = COALESCE(short_title, %s),
+                    division = COALESCE(division, %s),
+                    ponente = COALESCE(ponente, %s),
                     ai_model = %s,
                     is_doctrinal = %s,
                     updated_at = NOW()

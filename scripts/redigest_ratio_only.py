@@ -52,7 +52,7 @@ load_api_local_settings_into_environ(Path(__file__).resolve().parent.parent)
 # ── Constants ────────────────────────────────────────────────────────────────
 
 MODEL            = "gemini-2.5-flash"
-DEFAULT_PROJECT  = "project-f3608dc2-59e9-4ff5-95a"
+DEFAULT_PROJECT  = "project-0c3350f3-e867-449e-8f7"
 DEFAULT_LOCATION = "us"
 _TIMEOUT_MS      = 270_000
 _RETRY_LIMIT     = 3

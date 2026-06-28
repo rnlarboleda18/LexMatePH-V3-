@@ -147,7 +147,7 @@ def get_linker_genai_client(
         or (os.environ.get("GEMINI_LINKER_VERTEX_PROJECT") or "").strip()
         or (os.environ.get("GOOGLE_CLOUD_PROJECT") or "").strip()
         or (os.environ.get("GCP_PROJECT") or "").strip()
-        or "project-f3608dc2-59e9-4ff5-95a"
+        or "project-0c3350f3-e867-449e-8f7"
     )
     location = (
         vertex_location

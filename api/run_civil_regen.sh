@@ -7,10 +7,10 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 LOG="$SCRIPT_DIR/logs/civil_regen_$(date +%Y%m%d_%H%M%S).log"
 mkdir -p "$SCRIPT_DIR/logs"
 
-export CLOUDSDK_CORE_ACCOUNT="jharboleda1208@gmail.com"
-export GOOGLE_CLOUD_PROJECT="project-f3608dc2-59e9-4ff5-95a"
-export GEMINI_LINKER_VERTEX_PROJECT="project-f3608dc2-59e9-4ff5-95a"
-export GCP_PROJECT="project-f3608dc2-59e9-4ff5-95a"
+export CLOUDSDK_CORE_ACCOUNT="lumindalori@gmail.com"
+export GOOGLE_CLOUD_PROJECT="project-0c3350f3-e867-449e-8f7"
+export GEMINI_LINKER_VERTEX_PROJECT="project-0c3350f3-e867-449e-8f7"
+export GCP_PROJECT="project-0c3350f3-e867-449e-8f7"
 
 log() { echo "[$(date '+%Y-%m-%d %H:%M:%S')] $*" | tee -a "$LOG"; }
 

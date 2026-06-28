@@ -50,7 +50,7 @@ FLASHCARD_BAR_MIN_TOS_SCORE = float(os.getenv("FLASHCARD_BAR_MIN_TOS_SCORE", "0.
 FLASHCARD_BAR_2026_ONLY_DEFAULT = os.getenv("FLASHCARD_BAR_2026_ONLY", "").lower() in ("1", "true", "yes")
 
 # ── Gemini (direct API — ai_search, digest, mock exam) ───────────────────────
-GCP_PROJECT          = os.getenv("GCP_PROJECT", "project-f3608dc2-59e9-4ff5-95a")
+GCP_PROJECT          = os.getenv("GCP_PROJECT", "project-0c3350f3-e867-449e-8f7")
 GCP_LOCATION         = os.getenv("GCP_LOCATION", "us")
 GCP_CREDENTIALS_FILE = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "lexmateph-rag-key.json")
 GEMINI_FLASH_MODEL   = os.getenv("GEMINI_FLASH_MODEL", "gemini-2.5-flash")
