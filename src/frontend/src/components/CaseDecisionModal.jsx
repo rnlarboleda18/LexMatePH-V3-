@@ -940,7 +940,7 @@ const CaseDecisionModal = ({ decision, onClose, onCaseSelect }) => {
                                     <div className="flex items-start gap-2 border-l border-lex pl-4 dark:border-lex">
                                         <FileText className="h-4 w-4 shrink-0 mt-0.5 text-emerald-600 dark:text-emerald-400" strokeWidth={2} aria-hidden />
                                         <div className="min-w-0">
-                                            <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Decision / Resolution</dt>
+                                            <dt className="text-[11px] font-semibold text-neutral-500 dark:text-zinc-400 uppercase tracking-wide">Issuance</dt>
                                             <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100 mt-0.5">
                                                 {fullDecision.document_type ? formatTitleCase(fullDecision.document_type.toString().trim()) : '—'}
                                             </dd>

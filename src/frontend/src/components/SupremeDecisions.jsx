@@ -1716,9 +1716,6 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                                 {decision.date_str ? (
                                                     <span className="text-gray-500 dark:text-gray-500"> · {formatDate(decision.date_str)}</span>
                                                 ) : null}
-                                                {decision.document_type ? (
-                                                    <span className="text-gray-500 dark:text-gray-500"> · {formatTitleCase(decision.document_type.toString().trim())}</span>
-                                                ) : null}
                                             </p>
                                         </div>
                                     </div>
@@ -1744,7 +1741,7 @@ const SupremeDecisions = ({ externalSelectedCase, onCaseSelect, onCaseDetailMerg
                                                 <div className="flex items-center gap-2.5 border-l border-lex-strong pl-4">
                                                     <FileText className="h-5 w-5 shrink-0 text-emerald-600 dark:text-emerald-400" strokeWidth={2} aria-hidden />
                                                     <div className="min-w-0 flex-1 flex flex-wrap items-baseline gap-1.5">
-                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Decision / Resolution:</dt>
+                                                        <dt className="text-[13px] font-semibold text-neutral-500 dark:text-zinc-400 shrink-0">Issuance:</dt>
                                                         <dd className="text-[13px] font-semibold leading-snug text-gray-900 dark:text-gray-100">
                                                             {formatTitleCase(decision.document_type?.toString().trim()) || '—'}
                                                         </dd>

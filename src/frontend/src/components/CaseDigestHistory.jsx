@@ -175,20 +175,20 @@ export default function CaseDigestHistory({ caseId, currentModel, mode = 'popove
                 {mode === 'header' ? (
                     <button
                         onClick={handlePopoverToggle}
-                        className="touch-manipulation flex h-6 px-2 sm:px-2.5 sm:h-7 shrink-0 items-center gap-1 sm:gap-1.5 rounded-full border border-violet-200/80 bg-violet-50/90 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-violet-600 transition-all hover:bg-violet-100 active:scale-95 dark:border-violet-800 dark:bg-violet-950/40 dark:text-violet-300 dark:hover:bg-violet-900/60 shadow-sm focus:outline-none"
+                        className="touch-manipulation flex h-6 w-6 lg:h-7 lg:w-auto lg:px-2.5 shrink-0 items-center justify-center lg:gap-1.5 rounded-full border border-violet-200/80 bg-violet-50/90 text-[10px] sm:text-[11px] font-black uppercase tracking-wider text-violet-600 transition-all hover:bg-violet-100 active:scale-95 dark:border-violet-800 dark:bg-violet-950/40 dark:text-violet-300 dark:hover:bg-violet-900/60 shadow-sm focus:outline-none"
                         title="Click to view AI Digestion Audit History"
                     >
                         <Sparkles size={11} className="inline align-middle animate-pulse text-violet-500" />
-                        <span>{formatModelName(currentModel)}</span>
+                        <span className="hidden lg:inline">{formatModelName(currentModel)}</span>
                     </button>
                 ) : mode === 'badge' ? (
                     <button
                         onClick={handlePopoverToggle}
-                        className="touch-manipulation flex h-[22px] px-2.5 shrink-0 items-center gap-1.5 rounded-full border border-violet-200/80 bg-violet-50/90 text-[10px] font-extrabold uppercase tracking-wide text-violet-600 dark:border-violet-800 dark:bg-violet-950/40 dark:text-violet-300 transition-all hover:bg-violet-100 active:scale-95 shadow-sm focus:outline-none"
+                        className="touch-manipulation flex h-[22px] w-[22px] lg:w-auto lg:px-2.5 shrink-0 items-center justify-center lg:gap-1.5 rounded-full border border-violet-200/80 bg-violet-50/90 text-[10px] font-extrabold uppercase tracking-wide text-violet-600 dark:border-violet-800 dark:bg-violet-950/40 dark:text-violet-300 transition-all hover:bg-violet-100 active:scale-95 shadow-sm focus:outline-none"
                         title="Click to view AI Digestion Audit History"
                     >
                         <Sparkles size={10} className="inline align-middle animate-pulse text-violet-500 dark:text-violet-400" />
-                        <span>{formatModelName(currentModel)}</span>
+                        <span className="hidden lg:inline">{formatModelName(currentModel)}</span>
                     </button>
                 ) : (
                     <button
@@ -197,7 +197,7 @@ export default function CaseDigestHistory({ caseId, currentModel, mode = 'popove
                         title="Click to view AI Digestion Audit History"
                     >
                         <Sparkles size={10} className="inline align-middle animate-pulse" />
-                        <span>{formatModelName(currentModel)}</span>
+                        <span className="hidden lg:inline">{formatModelName(currentModel)}</span>
                     </button>
                 )}
 
