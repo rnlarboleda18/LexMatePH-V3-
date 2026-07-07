@@ -24,7 +24,16 @@ def main():
         print("Missing DB_CONNECTION_STRING")
         return
 
-    emails = ['rnlarboleda@gmail.com', 'rnlarboleda18@gmail.com', 'rnlarboleda@icloud.com', 'fgarboleda28@gmail.com']
+    emails = [
+        'rnlarboleda@gmail.com',
+        'rnlarboleda18@gmail.com',
+        'rnlarboleda28@gmail.com',
+        'rnlarboleda10@gmail.com',
+        'rnlarboleda6@gmail.com',
+        'rnlarboleda11@gmail.com',
+        'rnlarboleda@icloud.com',
+        'fgarboleda28@gmail.com',
+    ]
     
     with psycopg.connect(cs) as conn:
         with conn.cursor() as cur:

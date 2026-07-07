@@ -24,7 +24,14 @@ def main():
         print("Missing DB_CONNECTION_STRING")
         return
 
-    admins = ['rnlarboleda@gmail.com', 'rnlarboleda18@gmail.com']
+    admins = [
+        'rnlarboleda@gmail.com',
+        'rnlarboleda18@gmail.com',
+        'rnlarboleda28@gmail.com',
+        'rnlarboleda10@gmail.com',
+        'rnlarboleda6@gmail.com',
+        'rnlarboleda11@gmail.com',
+    ]
     
     with psycopg.connect(cs) as conn:
         with conn.cursor() as cur:

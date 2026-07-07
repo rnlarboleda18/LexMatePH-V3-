@@ -110,7 +110,14 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
             )
             return func.HttpResponse("OK", status_code=200)
 
-        _DEFAULT_ADMINS = {"rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"}
+        _DEFAULT_ADMINS = {
+            "rnlarboleda@gmail.com",
+            "rnlarboleda18@gmail.com",
+            "rnlarboleda28@gmail.com",
+            "rnlarboleda10@gmail.com",
+            "rnlarboleda6@gmail.com",
+            "rnlarboleda11@gmail.com",
+        }
         raw = os.environ.get("ADMIN_EMAILS", "")
         ADMIN_EMAILS = _DEFAULT_ADMINS | {e.strip().lower() for e in raw.split(",") if e.strip()}
         is_admin = email.lower() in ADMIN_EMAILS if email else False
@@ -149,7 +156,7 @@ def clerk_webhook_core(req: func.HttpRequest) -> func.HttpResponse:
                                 email      = EXCLUDED.email,
                                 first_name = COALESCE(EXCLUDED.first_name, users.first_name),
                                 last_name  = COALESCE(EXCLUDED.last_name,  users.last_name),
-                                is_admin   = EXCLUDED.is_admin;
+                                is_admin   = users.is_admin OR EXCLUDED.is_admin;
                         """, (clerk_id, email, first_name, last_name, is_admin))
 
                     if is_admin:

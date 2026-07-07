@@ -50,7 +50,7 @@ FLASHCARD_BAR_MIN_TOS_SCORE = float(os.getenv("FLASHCARD_BAR_MIN_TOS_SCORE", "0.
 FLASHCARD_BAR_2026_ONLY_DEFAULT = os.getenv("FLASHCARD_BAR_2026_ONLY", "").lower() in ("1", "true", "yes")
 
 # ── Gemini (direct API — ai_search, digest, mock exam) ───────────────────────
-GCP_PROJECT          = os.getenv("GCP_PROJECT", "project-0c3350f3-e867-449e-8f7")
+GCP_PROJECT          = os.getenv("GCP_PROJECT", "project-d6b2ec19-4edd-4c2c-a00")
 GCP_LOCATION         = os.getenv("GCP_LOCATION", "us")
 GCP_CREDENTIALS_FILE = os.getenv("GOOGLE_APPLICATION_CREDENTIALS", "lexmateph-rag-key.json")
 GEMINI_FLASH_MODEL   = os.getenv("GEMINI_FLASH_MODEL", "gemini-2.5-flash")
@@ -96,7 +96,14 @@ FRONTEND_URL = os.getenv("FRONTEND_URL", "https://lexmateph.com").rstrip("/")
 # ── Admin bootstrap ───────────────────────────────────────────────────────────
 # Fallback email list used only when auto-creating a user row before the Clerk
 # webhook has fired. DB is_admin column is the authoritative source after sync.
-_DEFAULT_ADMINS = {"rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"}
+_DEFAULT_ADMINS = {
+    "rnlarboleda@gmail.com",
+    "rnlarboleda18@gmail.com",
+    "rnlarboleda28@gmail.com",
+    "rnlarboleda10@gmail.com",
+    "rnlarboleda6@gmail.com",
+    "rnlarboleda11@gmail.com",
+}
 _configured_admins = os.getenv("ADMIN_EMAILS", "")
 ADMIN_EMAILS_ENV = list(_DEFAULT_ADMINS | {
     e.strip().lower()

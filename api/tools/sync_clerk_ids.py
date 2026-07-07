@@ -98,7 +98,14 @@ def main():
         print(f"\nDone. {updated} clerk_id(s) updated.")
 
         # Also ensure the admin emails have is_admin = true
-        admin_emails = ["rnlarboleda@gmail.com", "rnlarboleda18@gmail.com"]
+        admin_emails = [
+            "rnlarboleda@gmail.com",
+            "rnlarboleda18@gmail.com",
+            "rnlarboleda28@gmail.com",
+            "rnlarboleda10@gmail.com",
+            "rnlarboleda6@gmail.com",
+            "rnlarboleda11@gmail.com",
+        ]
         with conn.cursor() as cur:
             cur.execute(
                 "UPDATE users SET is_admin = TRUE WHERE LOWER(email) = ANY(%s) AND is_admin IS DISTINCT FROM TRUE",
